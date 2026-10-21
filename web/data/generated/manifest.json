@@ -1,0 +1,141 @@
+{
+  "coverage": {
+    "competitions": [
+      {
+        "coverage": "match",
+        "events": 0,
+        "expected_matches": 228,
+        "id": "sco:premiership",
+        "matches": 54,
+        "name": "Scottish Premiership",
+        "player_stats": 0
+      },
+      {
+        "coverage": "match",
+        "events": 0,
+        "expected_matches": 180,
+        "id": "sco:championship",
+        "matches": 53,
+        "name": "Scottish Championship",
+        "player_stats": 0
+      },
+      {
+        "coverage": "match",
+        "events": 0,
+        "expected_matches": 180,
+        "id": "sco:league-one",
+        "matches": 54,
+        "name": "Scottish League One",
+        "player_stats": 0
+      },
+      {
+        "coverage": "match",
+        "events": 0,
+        "expected_matches": 180,
+        "id": "sco:league-two",
+        "matches": 55,
+        "name": "Scottish League Two",
+        "player_stats": 0
+      }
+    ],
+    "season": "2026-27"
+  },
+  "dataset_version": "2026-10-21T12:53:00+00:00-2cb192d",
+  "files": [
+    {
+      "bytes": 5872,
+      "checksum": "sha256:44c944ff072a8dbd60b5178de72c3b3443c9b04a4a45a2ceb2a484bad730fe58",
+      "path": "tables/premiership-2026-27.json"
+    },
+    {
+      "bytes": 5042,
+      "checksum": "sha256:8cb1b5a14ae45030c5c47eb631030db621a71b85f1dbe330cc4450a5a8da0049",
+      "path": "tables/championship-2026-27.json"
+    },
+    {
+      "bytes": 4971,
+      "checksum": "sha256:b268da95861f85f6d79f9505e17318235c7bd479f4892ddeadeae4de156b8e3b",
+      "path": "tables/league-one-2026-27.json"
+    },
+    {
+      "bytes": 4954,
+      "checksum": "sha256:6db967336a986f3e3af599a057fcac6fb897dbb28c9fd3a1466ab5c89cf62bd7",
+      "path": "tables/league-two-2026-27.json"
+    },
+    {
+      "bytes": 6266,
+      "checksum": "sha256:94269a82abe04299ecd28f21511e239372884b22573042d6f409581cebe9ea51",
+      "path": "clubs/aberdeen.json"
+    },
+    {
+      "bytes": 4776,
+      "checksum": "sha256:55339cc2e31f4ed44996e6069e213fff773294fb2fe304517bf0e1c65e923aa0",
+      "path": "search-index.json"
+    },
+    {
+      "bytes": 863,
+      "checksum": "sha256:a1c1abb4b30a41bf6b3d623132ed71ee42154fae56d08e32a562554abea52af6",
+      "path": "coverage.json"
+    },
+    {
+      "bytes": 255,
+      "checksum": "sha256:b7b2fa287522cd8690b77342122396c868b7912ea01226e23c698a8f629c6846",
+      "path": "seasons.json"
+    }
+  ],
+  "generated_at": "2026-10-21T12:53:00+00:00",
+  "marts": [
+    {
+      "checksum": "sha256:44c944ff072a8dbd60b5178de72c3b3443c9b04a4a45a2ceb2a484bad730fe58",
+      "id": "league_table.sco:premiership",
+      "path": "tables/premiership-2026-27.json",
+      "rows": 12,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:8cb1b5a14ae45030c5c47eb631030db621a71b85f1dbe330cc4450a5a8da0049",
+      "id": "league_table.sco:championship",
+      "path": "tables/championship-2026-27.json",
+      "rows": 10,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:b268da95861f85f6d79f9505e17318235c7bd479f4892ddeadeae4de156b8e3b",
+      "id": "league_table.sco:league-one",
+      "path": "tables/league-one-2026-27.json",
+      "rows": 10,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:6db967336a986f3e3af599a057fcac6fb897dbb28c9fd3a1466ab5c89cf62bd7",
+      "id": "league_table.sco:league-two",
+      "path": "tables/league-two-2026-27.json",
+      "rows": 10,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:94269a82abe04299ecd28f21511e239372884b22573042d6f409581cebe9ea51",
+      "id": "club.sco:aberdeen",
+      "path": "clubs/aberdeen.json",
+      "rows": 9,
+      "season": "2026-27"
+    }
+  ],
+  "profile": "public",
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "sources": [
+    {
+      "attribution": "Football-Data.co.uk",
+      "id": "football_data_uk",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "football-data.co.uk",
+      "rows": 216,
+      "status": "ok"
+    }
+  ],
+  "validation": {
+    "status": "not_run"
+  }
+}

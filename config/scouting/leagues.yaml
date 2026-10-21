@@ -1,0 +1,43 @@
+# Scouting universe. `strength_prior` is a 0-100 prior used when ClubElo or
+# another measured strength input is unavailable; it is an assumption, not a
+# fact, and is shown with low confidence in the app.
+# `coverage` is the best available data depth for that league:
+#   event | match | curated | value_only
+pool:
+  - { id: sco:premiership,     name: Scottish Premiership,       country: Scotland, tier: 1, enabled: true, strength_prior: 55, coverage: event }
+  - { id: sco:championship,    name: Scottish Championship,      country: Scotland, tier: 2, enabled: true, strength_prior: 38, coverage: match }
+  - { id: sco:league-one,      name: Scottish League One,        country: Scotland, tier: 3, enabled: true, strength_prior: 30, coverage: curated }
+  - { id: sco:league-two,      name: Scottish League Two,        country: Scotland, tier: 4, enabled: true, strength_prior: 24, coverage: curated }
+
+  - { id: eng:championship,    name: EFL Championship,           country: England,  tier: 2, enabled: true, strength_prior: 68, coverage: match }
+  - { id: eng:league-one,      name: EFL League One,             country: England,  tier: 3, enabled: true, strength_prior: 55, coverage: match }
+
+  - { id: ned:eredivisie,      name: Eredivisie,                  country: Netherlands, tier: 1, enabled: true, strength_prior: 72, coverage: match }
+  - { id: bel:pro-league,      name: Belgian Pro League,          country: Belgium,  tier: 1, enabled: true, strength_prior: 66, coverage: match }
+  - { id: por:primeira-liga,   name: Primeira Liga,               country: Portugal, tier: 1, enabled: true, strength_prior: 72, coverage: match }
+  - { id: sui:super-league,    name: Swiss Super League,          country: Switzerland, tier: 1, enabled: true, strength_prior: 64, coverage: match }
+  - { id: aut:bundesliga,      name: Austrian Bundesliga,         country: Austria,  tier: 1, enabled: true, strength_prior: 63, coverage: match }
+  - { id: den:superliga,       name: Danish Superliga,            country: Denmark,  tier: 1, enabled: true, strength_prior: 62, coverage: match }
+  - { id: nor:eliteserien,     name: Eliteserien,                 country: Norway,   tier: 1, enabled: true, strength_prior: 60, coverage: match }
+  - { id: swe:allsvenskan,     name: Allsvenskan,                 country: Sweden,   tier: 1, enabled: true, strength_prior: 60, coverage: match }
+  - { id: pol:ekstraklasa,     name: Ekstraklasa,                 country: Poland,   tier: 1, enabled: true, strength_prior: 58, coverage: match }
+  - { id: cze:fortuna-liga,    name: Czech First League,          country: Czechia,  tier: 1, enabled: true, strength_prior: 60, coverage: match }
+  - { id: gre:super-league,    name: Super League Greece,         country: Greece,   tier: 1, enabled: true, strength_prior: 62, coverage: match }
+  - { id: cro:hnl,             name: Croatian HNL,                country: Croatia,  tier: 1, enabled: true, strength_prior: 60, coverage: match }
+  - { id: srb:super-liga,      name: Serbian SuperLiga,           country: Serbia,   tier: 1, enabled: true, strength_prior: 57, coverage: match }
+  - { id: rou:liga-i,          name: Liga I,                      country: Romania,  tier: 1, enabled: true, strength_prior: 56, coverage: match }
+  - { id: svk:super-liga,      name: Slovak Super Liga,           country: Slovakia, tier: 1, enabled: true, strength_prior: 54, coverage: match }
+  - { id: bul:parva-liga,      name: First Professional League,   country: Bulgaria, tier: 1, enabled: true, strength_prior: 52, coverage: match }
+  - { id: fin:veikkausliiga,   name: Veikkausliiga,               country: Finland,  tier: 1, enabled: true, strength_prior: 53, coverage: match }
+  - { id: isl:besta-deild,     name: Besta deild,                 country: Iceland,  tier: 1, enabled: true, strength_prior: 50, coverage: match }
+
+  - { id: svn:prvaliga,        name: Slovenian PrvaLiga,          country: Slovenia,   tier: 1, enabled: true, strength_prior: 51, coverage: match }
+  - { id: alb:kategoria,       name: Kategoria Superiore,         country: Albania,    tier: 1, enabled: true, strength_prior: 45, coverage: match }
+  - { id: hun:nb-i,            name: Nemzeti Bajnoksag I,         country: Hungary,    tier: 1, enabled: true, strength_prior: 56, coverage: match }
+  - { id: ukr:premier-liga,    name: Ukrainian Premier League,    country: Ukraine,    tier: 1, enabled: true, strength_prior: 60, coverage: match }
+  - { id: rus:premier-liga,    name: Russian Premier League,      country: Russia,     tier: 1, enabled: true, strength_prior: 62, coverage: match }
+  - { id: tur:super-lig,       name: Super Lig,                   country: Turkiye,    tier: 1, enabled: true, strength_prior: 70, coverage: match }
+
+  - { id: ire:premier-division, name: League of Ireland Premier,  country: Ireland,  tier: 1, enabled: true, strength_prior: 50, coverage: match }
+  - { id: nir:nifl,            name: NIFL Premiership,            country: N. Ireland, tier: 1, enabled: true, strength_prior: 40, coverage: match }
+  - { id: wal:cymru-premier,   name: Cymru Premier,               country: Wales,    tier: 1, enabled: false, strength_prior: 30, coverage: match }

@@ -1,0 +1,46 @@
+# SPFL pyramid. football-data.co.uk codes are used by the results adapter.
+# Playoff matches are not present in the SC0-SC3 league CSVs; keep them out of
+# table marts if a future source adds them.
+competitions:
+  - id: sco:premiership
+    code: SC0
+    name: Scottish Premiership
+    short_name: Premiership
+    tier: 1
+    teams: 12
+    matches_per_season: 228
+    split_after_matches: 33
+  - id: sco:championship
+    code: SC1
+    name: Scottish Championship
+    short_name: Championship
+    tier: 2
+    teams: 10
+    matches_per_season: 180
+  - id: sco:league-one
+    code: SC2
+    name: Scottish League One
+    short_name: League One
+    tier: 3
+    teams: 10
+    matches_per_season: 180
+  - id: sco:league-two
+    code: SC3
+    name: Scottish League Two
+    short_name: League Two
+    tier: 4
+    teams: 10
+    matches_per_season: 180
+
+history:
+  # Top two tiers go back to 1994/95; all four from 1997/98.
+  first_season: 1994-95
+  all_four_from: 1997-98
+  default_backfill_from: 2013-14
+
+validation:
+  # Seasons curtailed by COVID. Match counts are checked as warnings, not
+  # errors, for the listed divisions.
+  curtailed:
+    2019-20: [SC0, SC1, SC2, SC3]
+    2020-21: [SC1, SC2, SC3]

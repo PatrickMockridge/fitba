@@ -1,0 +1,15 @@
+profiles:
+  public:
+    allow_lanes: [open, derived_display]
+    require_publication_flag: true
+    strip_source_fields: true
+    max_file_bytes: 2000000
+    out: web/data/generated
+    notes: >
+      Only derived outputs. Raw payloads, source-shaped tables and full event
+      feeds are never written to this directory.
+  research:
+    allow_lanes: [open, derived_display, prohibited]
+    require_publication_flag: false
+    publish: false
+    notes: Local analysis only; nothing from this profile is committed.

@@ -1,0 +1,30 @@
+name: update-weekly
+
+on:
+  schedule:
+    - cron: "23 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen
+      - name: Probe sources
+        run: uv run python scripts/probe_source.py
+      - name: Backfill history
+        run: uv run fitba ingest --season all
+      - name: Validate all seasons
+        run: uv run fitba validate --season all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-probes
+          path: reports/source-probes/
+          if-no-files-found: ignore

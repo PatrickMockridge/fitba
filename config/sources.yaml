@@ -1,0 +1,163 @@
+# Source registry. `lane` controls what may be published:
+#   open            - raw or derived data may be published
+#   derived_display - only our derived metrics/visuals may be published; never raw
+#   prohibited      - nothing may be published
+# `ingest_allowed` is separate from `publication_allowed` on purpose.
+sources:
+  football_data_uk:
+    name: football-data.co.uk
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    required: true
+    capabilities: [results, team_match_stats, fixtures, odds]
+    base_url: https://www.football-data.co.uk/mmz4281
+    attribution: Football-Data.co.uk
+    notes: >
+      Free Scottish CSVs for SC0-SC3. Team-level only. The site asks for
+      private, non-commercial research use and cautions against automated/AI
+      data products; this project uses it non-commercially with attribution.
+    last_verified: 2026-10-21
+
+  pannadata:
+    name: pannadata (cached Opta)
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    adapter_ready: false  # release verified; event adapter is phase 3
+    required: false
+    capabilities: [events, shots, player_match_stats, lineups]
+    url: https://github.com/peteowen1/pannadata
+    attribution: Opta data cached by pannadata
+    notes: >
+      Verified Scottish Premiership 2019+ with event x/y. No licence stated:
+      raw Parquet never committed; only derived heat maps, percentiles and
+      compact sequences may be published.
+    last_verified: 2026-10-21
+
+  sofascore_datafc:
+    name: Sofascore via datafc
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: true
+    adapter_ready: false
+    required: false
+    capabilities: [heatmaps, average_positions, lineups, player_match_stats]
+    url: https://github.com/urazakgul/datafc
+    attribution: Sofascore
+    notes: >
+      MIT covers the code, not Sofascore data. Sofascore terms prohibit
+      automated access and restrict use to personal, non-commercial purposes.
+      Secondary source only; no raw data published.
+    last_verified: 2026-10-21
+
+  fbref:
+    name: FBref / Sports Reference
+    lane: prohibited
+    ingest_allowed: false
+    publication_allowed: false
+    required: false
+    capabilities: [player_stats, team_stats]
+    url: https://fbref.com
+    notes: >
+      Terms prohibit automated collection and redistribution. Not enabled until
+      written permission exists.
+    last_verified: 2026-10-21
+
+  transfermarkt:
+    name: Transfermarkt
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: true
+    adapter_ready: false
+    required: false
+    capabilities: [market_values, loans, transfers]
+    url: https://www.transfermarkt.com
+    attribution: Transfermarkt
+    notes: >
+      Terms prohibit scraping. Values are cached locally and used only for
+      budget bands and shortlist context; raw values are never published.
+      Curated overrides in reference/market_values.yaml win.
+    last_verified: 2026-10-21
+
+  sportmonks:
+    name: Sportmonks
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: true
+    adapter_ready: false
+    required: false
+    api_key_env: SPORTMONKS_API_KEY
+    capabilities: [fixtures, lineups, player_match_stats, team_match_stats]
+    url: https://docs.sportmonks.com/v3/
+    attribution: Sportmonks
+    notes: >
+      Free tier covers the Scottish Premiership. No player heat maps at any
+      tier (ball coordinates only). Enabled only when SPORTMONKS_API_KEY is set.
+    last_verified: 2026-10-21
+
+  pitchapi:
+    name: PitchAPI
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: false
+    adapter_ready: false
+    required: false
+    api_key_env: PITCHAPI_KEY
+    capabilities: [heatmaps, shots, xg, pass_networks]
+    url: https://pitchapi.dev
+    notes: >
+      Key required. Scottish coverage unverified and no licence published;
+      not enabled for publication until both are confirmed in writing.
+    last_verified: 2026-10-21
+
+  bzzoiro:
+    name: Bzzoiro Sports Data
+    lane: prohibited
+    ingest_allowed: false
+    publication_allowed: false
+    required: false
+    capabilities: [match_stats, shotmaps]
+    url: https://sports.bzzoiro.com/docs/football/
+    notes: >
+      No heat-map endpoint and no documented Scottish coverage. Dropped.
+    last_verified: 2026-10-21
+
+  statsbomb_open:
+    name: StatsBomb Open Data
+    lane: open
+    ingest_allowed: true
+    publication_allowed: false
+    required: false
+    capabilities: [events]
+    url: https://github.com/hudl/open-data
+    attribution: StatsBomb
+    notes: >
+      No Scottish competition. Used only to develop and test the sequence
+      engine on non-Scottish demo matches with required attribution.
+    last_verified: 2026-10-21
+
+  clubelo:
+    name: ClubElo
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: true
+    adapter_ready: false
+    required: false
+    capabilities: [team_elo]
+    url: http://api.clubelo.com
+    attribution: ClubElo
+    notes: Used as a labelled league-strength input where available.
+    last_verified: 2026-10-21
+
+  api_football:
+    name: API-Football
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: false
+    required: false
+    api_key_env: API_FOOTBALL_KEY
+    capabilities: [fixtures, lineups, player_match_stats, transfers]
+    url: https://www.api-football.com
+    notes: Paid option; left disabled for the free baseline.
+    last_verified: 2026-10-21

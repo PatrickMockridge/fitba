@@ -1,0 +1,61 @@
+club_id: sco:aberdeen
+name: Aberdeen
+short_name: Aberdeen
+nickname: The Dons
+stadium: Pittodrie Stadium
+city: Aberdeen
+founded: 1903
+colours:
+  primary: "#E2001A"
+  secondary: "#FFFFFF"
+
+# Budget is user-set. The values are deliberately null until the analyst sets
+# them; the scouting engine runs in fee-only mode and ranks unknown values with
+# lower confidence rather than inventing wages.
+budget:
+  mode: fee_only            # fee_only | fee_plus_wage
+  transfer_fee_ceiling_gbp: null
+  wage_ceiling_weekly_gbp: null
+  age_band: [19, 28]
+  notes: >
+    Set the fee ceiling and age band from the club's actual recruitment
+    envelope. Wage data is not public; do not infer individual wages.
+
+# The analyst sets the intended style. 0-1 values, higher = more of the trait.
+style_intent:
+  possession: 0.55
+  directness: 0.60
+  pressing: 0.70
+  line_height: 0.60
+  width: 0.60
+  tempo: 0.60
+  crossing: 0.50
+  build_up: 0.50
+  transition: 0.70
+  notes: >
+    Used as 0.4 of the recruitment target: 0.6 * current_style + 0.4 * intent.
+    Bump a version note when the manager or intended style changes.
+
+# Squad needs, 0-1. Used as the N component of the fit score.
+squad_needs:
+  GK: 0.20
+  CB: 0.80
+  FB: 0.40
+  DM: 0.60
+  CM: 0.50
+  AM: 0.30
+  W: 0.70
+  ST: 0.50
+
+targets:
+  min_age: 18
+  max_age: 27
+  minimum_effective_minutes: 900
+  watchlist_minutes: 450
+  minimum_fit_confidence: 0.50
+
+penalties:
+  injury_history: 10
+  work_permit_risk: 25
+  discipline_risk: 5
+  position_mismatch: 10

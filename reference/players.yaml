@@ -1,0 +1,5 @@
+# Canonical player overrides. Source player IDs never become canonical.
+# Add entries only when a source mismatch is found or a player needs a manual
+# canonical key. The entity resolver creates provisional players for unmatched
+# rows and reports them; provisional players are excluded from shortlists.
+players: []

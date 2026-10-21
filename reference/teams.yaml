@@ -1,0 +1,54 @@
+# Canonical teams and source aliases. Source names never become canonical IDs.
+# Add a new alias here when a source uses a different spelling; do not silently
+# auto-create a club in a table mart.
+teams:
+  - { id: "sco:aberdeen", name: "Aberdeen", aliases: ["Aberdeen FC"], country: Scotland, city: Aberdeen }
+  - { id: "sco:airdrieonians", name: "Airdrieonians", aliases: ["Airdrie Utd", "Airdrie United", "Airdrie"], country: Scotland, city: Airdrie }
+  - { id: "sco:alloa-athletic", name: "Alloa Athletic", aliases: ["Alloa"], country: Scotland, city: Alloa }
+  - { id: "sco:annan-athletic", name: "Annan Athletic", aliases: ["Annan"], country: Scotland, city: Annan }
+  - { id: "sco:arbroath", name: "Arbroath", aliases: ["Arbroath FC"], country: Scotland, city: Arbroath }
+  - { id: "sco:ayr-united", name: "Ayr United", aliases: ["Ayr"], country: Scotland, city: Ayr }
+  - { id: "sco:celtic", name: "Celtic", aliases: ["Celtic FC"], country: Scotland, city: Glasgow }
+  - { id: "sco:clyde", name: "Clyde", aliases: ["Clyde FC"], country: Scotland, city: Glasgow }
+  - { id: "sco:cove-rangers", name: "Cove Rangers", aliases: ["Cove"], country: Scotland, city: Aberdeen }
+  - { id: "sco:dumbarton", name: "Dumbarton", aliases: ["Dumbarton FC"], country: Scotland, city: Dumbarton }
+  - { id: "sco:dundee", name: "Dundee", aliases: ["Dundee FC"], country: Scotland, city: Dundee }
+  - { id: "sco:dundee-united", name: "Dundee United", aliases: ["Dundee Utd"], country: Scotland, city: Dundee }
+  - { id: "sco:dunfermline-athletic", name: "Dunfermline Athletic", aliases: ["Dunfermline"], country: Scotland, city: Dunfermline }
+  - { id: "sco:east-fife", name: "East Fife", aliases: ["East Fife FC"], country: Scotland, city: Methil }
+  - { id: "sco:east-kilbride", name: "East Kilbride", aliases: ["East Kilbride FC"], country: Scotland, city: East Kilbride }
+  - { id: "sco:edinburgh-city", name: "Edinburgh City", aliases: ["Edinburgh"], country: Scotland, city: Edinburgh }
+  - { id: "sco:elgin-city", name: "Elgin City", aliases: ["Elgin"], country: Scotland, city: Elgin }
+  - { id: "sco:falkirk", name: "Falkirk", aliases: ["Falkirk FC"], country: Scotland, city: Falkirk }
+  - { id: "sco:forfar-athletic", name: "Forfar Athletic", aliases: ["Forfar"], country: Scotland, city: Forfar }
+  - { id: "sco:hamilton-academical", name: "Hamilton Academical", aliases: ["Hamilton"], country: Scotland, city: Hamilton }
+  - { id: "sco:heart-of-midlothian", name: "Heart of Midlothian", aliases: ["Hearts", "Hearts of Midlothian"], country: Scotland, city: Edinburgh }
+  - { id: "sco:hibernian", name: "Hibernian", aliases: ["Hibs"], country: Scotland, city: Edinburgh }
+  - { id: "sco:inverness-caledonian-thistle", name: "Inverness Caledonian Thistle", aliases: ["Inverness C", "Inverness CT", "Inverness"], country: Scotland, city: Inverness }
+  - { id: "sco:kelty-hearts", name: "Kelty Hearts", aliases: ["Kelty"], country: Scotland, city: Kelty }
+  - { id: "sco:kilmarnock", name: "Kilmarnock", aliases: ["Kilmarnock FC"], country: Scotland, city: Kilmarnock }
+  - { id: "sco:livingston", name: "Livingston", aliases: ["Livingston FC"], country: Scotland, city: Livingston }
+  - { id: "sco:montrose", name: "Montrose", aliases: ["Montrose FC"], country: Scotland, city: Montrose }
+  - { id: "sco:greenock-morton", name: "Greenock Morton", aliases: ["Morton"], country: Scotland, city: Greenock }
+  - { id: "sco:motherwell", name: "Motherwell", aliases: ["Motherwell FC"], country: Scotland, city: Motherwell }
+  - { id: "sco:partick-thistle", name: "Partick Thistle", aliases: ["Partick"], country: Scotland, city: Glasgow }
+  - { id: "sco:peterhead", name: "Peterhead", aliases: ["Peterhead FC"], country: Scotland, city: Peterhead }
+  - { id: "sco:queen-of-the-south", name: "Queen of the South", aliases: ["Queen of Sth", "Queens of the South"], country: Scotland, city: Dumfries }
+  - { id: "sco:queens-park", name: "Queen's Park", aliases: ["Queens Park"], country: Scotland, city: Glasgow }
+  - { id: "sco:raith-rovers", name: "Raith Rovers", aliases: ["Raith Rvs"], country: Scotland, city: Kirkcaldy }
+  - { id: "sco:rangers", name: "Rangers", aliases: ["Rangers FC"], country: Scotland, city: Glasgow }
+  - { id: "sco:ross-county", name: "Ross County", aliases: ["Ross County FC"], country: Scotland, city: Dingwall }
+  - { id: "sco:stenhousemuir", name: "Stenhousemuir", aliases: ["Stenhousemuir FC"], country: Scotland, city: Stenhousemuir }
+  - { id: "sco:stirling-albion", name: "Stirling Albion", aliases: ["Stirling"], country: Scotland, city: Stirling }
+  - { id: "sco:st-johnstone", name: "St Johnstone", aliases: ["St. Johnstone"], country: Scotland, city: Perth }
+  - { id: "sco:st-mirren", name: "St Mirren", aliases: ["St. Mirren"], country: Scotland, city: Paisley }
+  - { id: "sco:stranraer", name: "Stranraer", aliases: ["Stranraer FC"], country: Scotland, city: Stranraer }
+  - { id: "sco:the-spartans", name: "The Spartans", aliases: ["Spartans"], country: Scotland, city: Edinburgh }
+
+  # Historical SPFL members that may appear in a deep backfill.
+  - { id: "sco:albion-rovers", name: "Albion Rovers", aliases: ["Albion Rvs"], country: Scotland, city: Coatbridge }
+  - { id: "sco:berwick-rangers", name: "Berwick Rangers", aliases: ["Berwick"], country: Scotland, city: Berwick-upon-Tweed }
+  - { id: "sco:bonnyrigg-rose", name: "Bonnyrigg Rose", aliases: ["Bonnyrigg Rose Athletic"], country: Scotland, city: Bonnyrigg }
+  - { id: "sco:brechin-city", name: "Brechin City", aliases: ["Brechin"], country: Scotland, city: Brechin }
+  - { id: "sco:cowdenbeath", name: "Cowdenbeath", aliases: ["Cowdenbeath FC"], country: Scotland, city: Cowdenbeath }
+  - { id: "sco:east-stirlingshire", name: "East Stirlingshire", aliases: ["East Stirling"], country: Scotland, city: Falkirk }

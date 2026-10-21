@@ -1,0 +1,98 @@
+# Signed feature weights per position group. Absolute values sum to 1.0;
+# missing features are removed and the remaining weights renormalised.
+# If more than 40% of the absolute weight is missing, no composite is produced.
+groups:
+  GK:
+    psxg_minus_ga_p90: 0.30
+    save_pct: 0.20
+    cross_claims_p90: 0.15
+    sweeper_actions_p90: 0.10
+    pass_completion_pct: 0.10
+    long_pass_accuracy_pct: 0.10
+    errors_p90: -0.05
+  CB:
+    aerial_win_pct: 0.17
+    tackles_p90: 0.10
+    interceptions_p90: 0.07
+    blocks_p90: 0.09
+    clearances_p90: 0.07
+    duel_win_pct: 0.10
+    progressive_passes_p90: 0.14
+    pass_completion_pct: 0.10
+    carries_p90: 0.06
+    fouls_p90: -0.05
+    errors_p90: -0.05
+  FB:
+    crosses_p90: 0.12
+    xa_p90: 0.14
+    progressive_passes_p90: 0.14
+    progressive_carries_p90: 0.12
+    tackles_p90: 0.08
+    interceptions_p90: 0.06
+    duel_win_pct: 0.10
+    pass_completion_pct: 0.08
+    touches_attacking_third_p90: 0.08
+    fouls_p90: -0.04
+    errors_p90: -0.04
+  DM:
+    tackles_p90: 0.10
+    interceptions_p90: 0.08
+    pressures_p90: 0.10
+    pass_completion_pct: 0.14
+    progressive_passes_p90: 0.16
+    passes_into_final_third_p90: 0.12
+    aerial_win_pct: 0.08
+    xa_p90: 0.08
+    carries_p90: 0.06
+    fouls_p90: -0.04
+    errors_p90: -0.04
+  CM:
+    progressive_passes_p90: 0.18
+    passes_into_final_third_p90: 0.14
+    xa_p90: 0.12
+    xt_added_p90: 0.10
+    key_passes_p90: 0.08
+    progressive_carries_p90: 0.10
+    dribble_success_pct: 0.08
+    tackles_p90: 0.06
+    interceptions_p90: 0.04
+    pressures_p90: 0.06
+    pass_completion_pct: 0.02
+    fouls_p90: -0.01
+    errors_p90: -0.01
+  AM:
+    xg_p90: 0.12
+    xa_p90: 0.16
+    key_passes_p90: 0.10
+    xt_added_p90: 0.12
+    progressive_carries_p90: 0.12
+    dribble_success_pct: 0.10
+    touches_box_p90: 0.10
+    shots_p90: 0.06
+    pressures_p90: 0.06
+    pass_completion_pct: 0.02
+    fouls_p90: -0.02
+    errors_p90: -0.02
+  W:
+    xg_p90: 0.16
+    xa_p90: 0.14
+    shots_p90: 0.08
+    key_passes_p90: 0.08
+    dribbles_p90: 0.12
+    dribble_success_pct: 0.08
+    progressive_carries_p90: 0.12
+    touches_box_p90: 0.10
+    crosses_p90: 0.06
+    pressures_p90: 0.04
+    pass_completion_pct: 0.02
+  ST:
+    xg_p90: 0.26
+    shots_p90: 0.12
+    touches_box_p90: 0.14
+    xa_p90: 0.08
+    aerial_win_pct: 0.10
+    hold_up_passes_p90: 0.08
+    conversion_pct: 0.08
+    pressures_p90: 0.06
+    offsides_p90: -0.04
+    errors_p90: -0.04

@@ -1,0 +1,40 @@
+# Feature registry. `capability` is the minimum data depth required:
+#   match   - team/match-level stats
+#   event   - player event data (x/y, passes, carries, pressures)
+#   manual  - curated match log
+# `kind` controls shrinkage: rate (per-90 count), pct (binomial), raw.
+features:
+  goals_p90:            { label: Goals,                   kind: rate, capability: match,  direction: positive }
+  assists_p90:          { label: Assists,                 kind: rate, capability: match,  direction: positive }
+  xg_p90:               { label: xG,                      kind: rate, capability: event,  direction: positive }
+  xa_p90:               { label: xA,                      kind: rate, capability: event,  direction: positive }
+  shots_p90:            { label: Shots,                   kind: rate, capability: event,  direction: positive }
+  key_passes_p90:       { label: Key passes,              kind: rate, capability: event,  direction: positive }
+  progressive_passes_p90: { label: Progressive passes,    kind: rate, capability: event,  direction: positive }
+  progressive_carries_p90: { label: Progressive carries,  kind: rate, capability: event,  direction: positive }
+  passes_into_final_third_p90: { label: Passes into final third, kind: rate, capability: event, direction: positive }
+  pass_completion_pct:  { label: Pass completion,         kind: pct,  capability: event,  direction: positive }
+  long_pass_accuracy_pct: { label: Long-pass accuracy,    kind: pct,  capability: event,  direction: positive }
+  tackles_p90:          { label: Tackles,                 kind: rate, capability: event,  direction: positive }
+  interceptions_p90:    { label: Interceptions,           kind: rate, capability: event,  direction: positive }
+  blocks_p90:           { label: Blocks,                  kind: rate, capability: event,  direction: positive }
+  clearances_p90:       { label: Clearances,              kind: rate, capability: event,  direction: positive }
+  aerial_win_pct:       { label: Aerial duels won,        kind: pct,  capability: event,  direction: positive }
+  duel_win_pct:         { label: Duels won,               kind: pct,  capability: event,  direction: positive }
+  pressures_p90:        { label: Pressures,               kind: rate, capability: event,  direction: positive }
+  crosses_p90:          { label: Crosses,                 kind: rate, capability: event,  direction: positive }
+  dribbles_p90:         { label: Dribbles,                kind: rate, capability: event,  direction: positive }
+  dribble_success_pct:  { label: Dribble success,         kind: pct,  capability: event,  direction: positive }
+  touches_box_p90:      { label: Touches in box,          kind: rate, capability: event,  direction: positive }
+  touches_attacking_third_p90: { label: Touches in attacking third, kind: rate, capability: event, direction: positive }
+  carries_p90:          { label: Carries,                 kind: rate, capability: event,  direction: positive }
+  xt_added_p90:         { label: xT added,                kind: rate, capability: event,  direction: positive }
+  hold_up_passes_p90:   { label: Hold-up passes,          kind: rate, capability: event,  direction: positive }
+  conversion_pct:       { label: Conversion,              kind: pct,  capability: event,  direction: positive }
+  save_pct:             { label: Save percentage,         kind: pct,  capability: match,  direction: positive }
+  psxg_minus_ga_p90:    { label: PSxG-GA,                 kind: rate, capability: event,  direction: positive }
+  cross_claims_p90:     { label: Crosses claimed,         kind: rate, capability: event,  direction: positive }
+  sweeper_actions_p90:  { label: Sweeper actions,         kind: rate, capability: event,  direction: positive }
+  fouls_p90:            { label: Fouls,                   kind: rate, capability: match,  direction: negative }
+  errors_p90:           { label: Errors,                  kind: rate, capability: event,  direction: negative }
+  offsides_p90:         { label: Offsides,                kind: rate, capability: event,  direction: negative }

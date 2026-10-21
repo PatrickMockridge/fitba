@@ -1,0 +1,10 @@
+# Curated loan register: the source of truth. Machine suggestions belong in
+# loans.candidates.yaml and are never auto-published.
+#
+# Required fields per loan:
+#   loan_id, player_key, parent_club, loan_club, competition, start, end,
+#   recall_clause, obligation_to_buy, status, source_urls, verified_at
+#
+# League One/Two minutes may also be curated in loan_appearances.csv where no
+# automated lineup source exists.
+loans: []

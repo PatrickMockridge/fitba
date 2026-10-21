@@ -1,0 +1,34 @@
+# Points deductions and awarded matches applied to league tables.
+# Each entry must cite a source and a season; the table validator re-runs after
+# applying them. `points` is the number deducted (positive integer).
+deductions:
+  - season: 2025-26
+    competition_id: sco:league-one
+    team_id: sco:inverness-caledonian-thistle
+    points: 5
+    reason: Entering administration in the previous season
+    source: https://en.wikipedia.org/wiki/2025%E2%80%9326_Scottish_League_One
+    verified_at: 2026-10-21
+  - season: 2025-26
+    competition_id: sco:league-one
+    team_id: sco:hamilton-academical
+    points: 21
+    reason: 6 for amateur-player rule breach, 9 for bronze licence failure, 6 for late wages
+    source: https://en.wikipedia.org/wiki/2025%E2%80%9326_Scottish_League_One
+    verified_at: 2026-10-21
+  - season: 2025-26
+    competition_id: sco:league-two
+    team_id: sco:dumbarton
+    points: 5
+    reason: Administration in the previous season
+    source: https://en.wikipedia.org/wiki/2025%E2%80%9326_Scottish_League_Two
+    verified_at: 2026-10-21
+  - season: 2025-26
+    competition_id: sco:league-two
+    team_id: sco:edinburgh-city
+    points: 15
+    reason: Insolvency event
+    source: https://en.wikipedia.org/wiki/2025%E2%80%9326_Scottish_League_Two
+    verified_at: 2026-10-21
+
+awarded_matches: []

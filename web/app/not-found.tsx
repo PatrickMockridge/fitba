@@ -1,0 +1,14 @@
+import Link from "next/link";
+
+export default function NotFound() {
+  return (
+    <section className="empty-state">
+      <p className="eyebrow">404</p>
+      <h1>That page is off target</h1>
+      <p>The club, tier or match is not in this build.</p>
+      <Link className="button" href="/">
+        Back to the pyramid
+      </Link>
+    </section>
+  );
+}
