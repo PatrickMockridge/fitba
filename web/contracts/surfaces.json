@@ -362,6 +362,68 @@
       }
     },
     {
+      "id": "history",
+      "path": "/history/",
+      "owners": [
+        "web/app/history/page.tsx",
+        "web/components/ManagerRecordTable.tsx",
+        "web/components/HonoursCabinet.tsx"
+      ],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "history.hero", "min": 1},
+            {"id": "history.scorecard", "min": 1},
+            {"id": "history.thesis", "min": 1},
+            {"id": "history.season-table", "min": 1},
+            {"id": "history.people", "min": 1},
+            {"id": "history.baseline", "min": 1},
+            {"id": "history.managers", "min": 1},
+            {"id": "history.honours", "min": 1},
+            {"id": "history.read", "min": 1},
+            {"id": "history.coverage", "min": 1}
+          ],
+          "columns": {
+            "history.season-table": [
+              "Season",
+              "Manager(s)",
+              "League",
+              "Pos",
+              "Pts",
+              "Honours",
+              "Review"
+            ],
+            "history.baseline": ["Season", "Pos", "Pts"],
+            "history.managers": [
+              "Manager",
+              "Dates",
+              "Pld",
+              "W-D-L",
+              "GF",
+              "GA",
+              "Pts",
+              "PPG"
+            ],
+            "history.coverage": [
+              "Season",
+              "League",
+              "Transfers",
+              "Lineups",
+              "Match stats",
+              "Review"
+            ]
+          },
+          "indicators": {"confidence": 1, "source": 1},
+          "links": ["/transfers/", "/sources/", "/methodology/"],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "history.empty", "min": 1}]
+        }
+      }
+    },
+    {
       "id": "about",
       "path": "/about/",
       "owners": ["web/app/about/page.tsx"],

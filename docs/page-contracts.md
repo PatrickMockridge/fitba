@@ -142,6 +142,31 @@ May be disclosed: the coverage prose and long method notes.
 Forbidden: loan cards without terms, a single "terms often unknown" badge with
 no per-card unknown state, removal of the in/out split.
 
+### `/history/` — the Cormack era
+
+Must remain visible:
+
+- The era header and the scorecard: league finishes, major honours, people in
+  charge (with the interim/stint rule), and the estimated-net range with its
+  inferred/confidence/known/modelled labels.
+- The thesis pillars, including the market-edge unknown share.
+- The season-by-season table: Season, Manager(s), League, Pos, Pts, Honours,
+  Review.
+- The current staff and the manager records table: Manager, Dates, Pld, W-D-L,
+  GF, GA, Pts, PPG, with interim spells and pre-era stints labelled.
+- The baseline table, labelled as a chosen comparison window rather than a
+  neutral norm.
+- The honours cabinet, the read block, and the coverage-by-season table.
+- The page's source and method links.
+
+May be disclosed: the full staff timeline and long method notes. The manager
+records and league tables stay visible.
+
+Forbidden: collapsing Europe to an unqualified "Europe"; removing the
+estimated-net confidence or known/modelled split; presenting the baseline as
+neutral; leaving heavy defeats or the European finishing position only in
+prose; deleting position or points.
+
 ### `/about/` — identity and editorial standard
 
 Must remain visible:

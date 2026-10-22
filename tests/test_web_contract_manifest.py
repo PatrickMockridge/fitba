@@ -94,6 +94,18 @@ PINNED_MARKERS = {
         "transfers.card.loan-terms",
         "loans.coverage",
     },
+    "/history/": {
+        "history.hero",
+        "history.scorecard",
+        "history.thesis",
+        "history.season-table",
+        "history.people",
+        "history.baseline",
+        "history.managers",
+        "history.honours",
+        "history.read",
+        "history.coverage",
+    },
     "/about/": {
         "about.hero",
         "about.audience",
@@ -117,6 +129,25 @@ PINNED_COLUMNS = {
         "Availability",
     ],
     "transfers.sell-on": ["Player", "Buyer", "Sale", "Clause", "Confidence", "Source"],
+    "history.season-table": [
+        "Season",
+        "Manager(s)",
+        "League",
+        "Pos",
+        "Pts",
+        "Honours",
+        "Review",
+    ],
+    "history.baseline": ["Season", "Pos", "Pts"],
+    "history.managers": ["Manager", "Dates", "Pld", "W-D-L", "GF", "GA", "Pts", "PPG"],
+    "history.coverage": [
+        "Season",
+        "League",
+        "Transfers",
+        "Lineups",
+        "Match stats",
+        "Review",
+    ],
 }
 
 PINNED_MINIMUMS = {
@@ -151,6 +182,7 @@ PINNED_INDICATORS = {
     },
     "/transfers/": {"confidence": 2, "unknown": 1, "source": 1},
     "/loans/": {"unknown": 1, "source": 1},
+    "/history/": {"confidence": 1, "source": 1},
 }
 
 

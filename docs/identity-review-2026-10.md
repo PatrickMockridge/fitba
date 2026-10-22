@@ -103,8 +103,8 @@ corrections are binding on published copy:
 - `docs/identity.md` is the canonical identity, voice and non-negotiable charter.
   `docs/product-strategy.md` defers identity and voice to it.
 - `docs/page-contracts.md` and `web/contracts/surfaces.json` define the visible
-  evidence for seven routes: `/`, `/matchday/`, `/themes/`, `/recruitment/`,
-  `/transfers/`, `/loans/` and `/about/`.
+  evidence for eight routes: `/`, `/matchday/`, `/themes/`, `/recruitment/`,
+  `/transfers/`, `/loans/`, `/history/` and `/about/`.
 - The theme question now follows the declarative headline as secondary context;
   it no longer leads the card.
 - The needs player table and the "Not considered" list are open by default.
@@ -119,6 +119,11 @@ corrections are binding on published copy:
   heading levels.
 - Themes carry a visible source indicator in addition to the basis, confidence
   and unknown indicators.
+- `/history/` is now contracted: the scorecard, thesis, season table, staff and
+  manager records, baseline, honours, read block and coverage table. The
+  manager tile is "people in charge" with the stint count; the baseline is
+  labelled a chosen comparison; the market-edge unknown share and the two
+  Conference League campaigns are stated on the page.
 
 ## Guardrail design
 
@@ -149,16 +154,15 @@ corrections are binding on published copy:
 | Move register rows behind the default filter | Partly caught: the register declares its rendered count and requires at least 50 cards | 122 of 229 rows are still client-side; full payload cross-check is deferred |
 | Reintroduce a question heading | Caught: `?` headings, the question-word regex, and an exact banned-heading list | A question phrased as a statement without a banned stem can pass; review still needed |
 | Replace the home/About identity line | Caught: exact h1 and copy assertions | Other routes' h1 is not pinned to the identity line; deferred |
-| Delete `/history/` tables or sources | Not caught: `/history/` is outside the seven contracted routes | The central Cormack-era record contract is the top follow-up |
+| Delete `/history/` tables or sources | Caught: the `/history/` contract checks the season, manager, baseline and coverage tables, honours and read block | An unmarked table in a closed disclosure can still hide; deferred |
 | Edit the checker or its tests to pass | CODEOWNERS and the pinned test raise the cost | No mechanical owner signature; branch protection is required |
 | Edit the contract docs to declare a surface optional | Code review catches the diff; the pinned test catches the marker removal | No mechanical owner approval gate beyond CODEOWNERS |
 | Change metadata to a neutral aggregator line | Home and About are pinned; other routes are not | Route-level identity copy assertions are deferred |
 
 ## Deferred, with reasons
 
-- **`/history/`, `/squad/`, `/sources/` and `/methodology/` contracts.** The
-  central Cormack-era record is the highest-value next contract. It was outside
-  this round's approved scope.
+- **`/squad/`, `/sources/` and `/methodology/` contracts.** `/history/` was added
+  after the first review pass; the remaining routes are a later pass.
 - **Computed-style/CSS hiding scan.** The static checker cannot see a bespoke
   stylesheet rule; a Playwright/computed-style pass is the correct fix.
 - **Full payload cross-check.** Compare rendered card/row/player counts with the
@@ -175,9 +179,7 @@ corrections are binding on published copy:
   "working, or just a leaky boat?" remain a later editorial pass.
 - **The 2024-25 "five wins in 27" claim.** It needs a within-season form-split
   table or a non-numeric rewrite.
-- **Market-edge unknown share on the `/history/` index.** The season page shows
-  it; the index does not yet.
-- **Baseline framing.** Label the 2013-14 to 2018-19 window as a chosen
+- **Baseline framing.** Done: the 2013-14 to 2018-19 window is labelled a chosen
   comparison, not a neutral norm.
 - **Transfer id slug.** Replace the colon in `transfer-afc:...` before those
   anchors are contracted.
@@ -191,7 +193,7 @@ corrections are binding on published copy:
 ## Verification
 
 - Root build and `/fitba` build both pass.
-- `uv run python scripts/check_web_contract.py --ci` reports 7 surfaces and 73
+- `uv run python scripts/check_web_contract.py --ci` reports 8 surfaces and 83
   contracted markers; the base-path check reports the same.
 - The full Python suite passes: 233 tests, including the 30 checker/contract
   tests, plus all publication guards (`make check`).
@@ -207,5 +209,5 @@ corrections are binding on published copy:
 
 **Reviewed:** 2026-10-22.
 **Identity line:** ratified by the owner's selection on 2026-10-22.
-**Next review:** when the `/history/` contract, the corrections route or the
-computed-style guard is added, or at the next major UI change.
+**Next review:** when the corrections route, the computed-style guard or the
+next major UI change is added.

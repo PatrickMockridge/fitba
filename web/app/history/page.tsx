@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { HonoursCabinet } from "@/components/HonoursCabinet";
 import { HistoryTimeline } from "@/components/HistoryTimeline";
 import { ManagerRecordTable } from "@/components/ManagerRecordTable";
@@ -46,13 +47,15 @@ export default function HistoryPage() {
   const manifest = getManifest();
   if (!history) {
     return (
-      <section className="empty-state">
-        <h1>No historical record published</h1>
-        <p>
-          Run <code>uv run fitba publish</code> after curating the history
-          register.
-        </p>
-      </section>
+      <ContractPage surface="history" state="empty">
+        <section className="empty-state" data-contract="history.empty">
+          <h1>No historical record published</h1>
+          <p>
+            Run <code>uv run fitba publish</code> after curating the history
+            register.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
   const names = personNames(history);
@@ -60,6 +63,8 @@ export default function HistoryPage() {
     (aberdeen?.history ?? []).map((row) => [row.season, row]),
   );
   const recruitment = (history.scorecard.recruitment ?? {}) as {
+    arrivals?: number;
+    market_unknown_count?: number;
     valuation?: {
       fee_low_gbp?: number | null;
       fee_high_gbp?: number | null;
@@ -67,6 +72,9 @@ export default function HistoryPage() {
       confidence?: string;
     } | null;
   };
+  const managerStints = history.staff.flatMap((person) =>
+    person.stints.filter((stint) => stint.role_group === "manager"),
+  );
   const selection = (history.scorecard.selection ?? {}) as {
     u21_minutes_share?: number | null;
   };
@@ -114,8 +122,8 @@ export default function HistoryPage() {
   const auditedFrom = history.coverage.transfer_coverage.audited_from;
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="history">
+      <section className="page-head" data-contract="history.hero">
         <p className="eyebrow">The record · from 16 December 2019</p>
         <h1>{history.era.label}</h1>
         <p className="lede">
@@ -138,7 +146,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      <section className="stat-row four">
+      <section className="stat-row four" data-contract="history.scorecard">
         <StatTile
           label="League finishes"
           value={
@@ -154,9 +162,9 @@ export default function HistoryPage() {
           note="Cormack era"
         />
         <StatTile
-          label="Managers"
+          label="People in charge"
           value={history.scorecard.manager_count}
-          note="including interim spells"
+          note={`including interim spells · ${managerStints.length} stints`}
         />
         <StatTile
           label="Estimated net"
@@ -168,10 +176,11 @@ export default function HistoryPage() {
             (recruitment.valuation?.counts?.disclosed ?? 0) +
             (recruitment.valuation?.counts?.reported ?? 0)
           } known · ${recruitment.valuation?.counts?.modelled ?? 0} modelled · negative = income`}
+          indicator="confidence"
         />
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="history.thesis">
         <div className="section-head">
           <div>
             <p className="eyebrow">The thesis</p>
@@ -187,13 +196,31 @@ export default function HistoryPage() {
               <p className="fine-print">
                 Evidence: {pillar.evidence.join(" · ")}
               </p>
+              {pillar.id === "market-edge" && recruitment.arrivals ? (
+                <p className="fine-print">
+                  Source market unknown for{" "}
+                  {recruitment.market_unknown_count ?? 0} of{" "}
+                  {recruitment.arrivals} arrivals (
+                  {Math.round(
+                    ((recruitment.market_unknown_count ?? 0) /
+                      recruitment.arrivals) *
+                      100,
+                  )}
+                  %); the pillar is bounded by that unknown share.
+                </p>
+              ) : null}
             </article>
           ))}
         </div>
         <p className="fine-print">{history.era.short_description}</p>
+        <p className="fine-print">
+          Europe: 2023-24 Conference League group stage (third of Group G);
+          2025-26 Conference League league phase (35th of 36). The season pages
+          carry the cup-run detail.
+        </p>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="history.season-table">
         <div className="section-head">
           <div>
             <p className="eyebrow">The record</p>
@@ -264,7 +291,7 @@ export default function HistoryPage() {
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="history.people">
           <div className="section-head">
             <div>
               <p className="eyebrow">The people</p>
@@ -294,11 +321,11 @@ export default function HistoryPage() {
           </p>
         </section>
 
-        <section className="card">
+        <section className="card" data-contract="history.baseline">
           <div className="section-head">
             <div>
               <p className="eyebrow">Before the era</p>
-              <h2>League-only baseline</h2>
+              <h2>League-only baseline · chosen comparison</h2>
             </div>
             <span className="badge badge-neutral">2013-14 to 2018-19</span>
           </div>
@@ -307,6 +334,8 @@ export default function HistoryPage() {
             <strong>{history.baseline.average_position ?? "—"}</strong> · best{" "}
             <strong>{history.baseline.best_position ?? "—"}</strong> · average
             points <strong>{history.baseline.average_points ?? "—"}</strong>.
+            This is the six seasons immediately before the era: a chosen
+            comparison window, not a neutral norm.
           </p>
           <div className="table-wrap">
             <table className="league-table compact">
@@ -332,7 +361,7 @@ export default function HistoryPage() {
         </section>
       </div>
 
-      <section className="section">
+      <section className="section" data-contract="history.managers">
         <div className="section-head">
           <div>
             <p className="eyebrow">The people</p>
@@ -348,7 +377,7 @@ export default function HistoryPage() {
         </p>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="history.honours">
         <div className="section-head">
           <div>
             <p className="eyebrow">Silverware</p>
@@ -364,7 +393,7 @@ export default function HistoryPage() {
         </p>
       </section>
 
-      <section className="card read-block">
+      <section className="card read-block" data-contract="history.read">
         <p className="eyebrow">The read</p>
         <h2>An assessment, not a measurement</h2>
         <p>{history.era.read}</p>
@@ -374,7 +403,7 @@ export default function HistoryPage() {
         </p>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="history.coverage">
         <div className="section-head">
           <div>
             <p className="eyebrow">What is covered</p>
@@ -422,7 +451,14 @@ export default function HistoryPage() {
           {String(selection.u21_minutes_share ?? "—")} U21 minutes share where
           the lineup backfill is available. Manager records are league-only.
         </p>
+        <p className="back-link" data-contract-indicator="source">
+          <Link href="/sources/">Sources</Link>
+          {" · "}
+          <Link href="/methodology/">Method</Link>
+          {" · "}
+          <Link href="/transfers/">Transfer register</Link>
+        </p>
       </section>
-    </>
+    </ContractPage>
   );
 }
