@@ -1,18 +1,22 @@
 # Documentation
 
 The documents below are the source of truth for what fitba is, how it works and
-what it will not claim. Start with the identity; use the product strategy for
-scope, and the methodology and sources when you need to check a number.
+what it will not claim. Start with the specification; use the identity for voice,
+the product strategy for scope, and the metrics and sources when you need to
+check a number.
 
 | Document | Read it for |
 |---|---|
+| [Specification](specification.md) | Intent, canonical audience, essential/conditional/non-essential, number governance and change control. Canonical for intent, audience and number semantics. |
+| [Metrics](metrics.md) | The metric registry, verification modes, audit artifact and metric-change process. Technical companion to the specification. |
+| [Metric changes](metric-changes.md) | Append-only log of metric-definition and parameter changes, with value and audit impact. |
 | [Identity](identity.md) | The public line, reader, editorial stance, voice rules, non-negotiables and the Cormack-era analytical frame. Canonical for identity and voice. |
 | [Page contracts](page-contracts.md) | The evidence each contracted route must keep visible, the marker convention and the contract-change process. Normative for the UI. |
 | [Design foundation](design.md) | The System 7 grammar, the four themes, typography, colour roles, component rules and the design-change process. Canonical for the visual system. |
 | [Identity review, October 2026](identity-review-2026-10.md) | The seven-lens panel record: identity decisions, corrections to the brief, the red-team matrix and the deferred follow-ups. |
 | [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |
-| [The bigger picture](themes.md) | Medium and long-term themes: role-family balance, the wing-back trade-off, defensive cover, the attack-defence balance and the Cormack-era mission context. |
+| [Data analysis](analysis.md) | The owner's view, the chairman's frame and six evidence-led claims connecting the team, the squad and the Cormack-era record. |
 | [Data provenance](provenance.md) | The layer-by-layer source truth table, API-Football coverage, the league migration gate and manifest attribution. |
 | [Injuries and availability](availability.md) | The curated team-news ledger, provider snapshot policy, status taxonomy, staleness and predicted-XI confidence. |
 | [Squad needs](needs.md) | The seven role families, measured depth, cover/replace/strengthen logic, market routes and roster caveats. |
@@ -39,13 +43,20 @@ scope, and the methodology and sources when you need to check a number.
 - Separate **what we know**, **what we infer** and **what we do not know**.
 - Every format or method claim carries a source and a last-reviewed date.
 - No marketing claims and no pretending to be club insiders.
-- Identity, audience and voice are governed by [identity.md](identity.md).
-  Product scope is governed by [product-strategy.md](product-strategy.md).
-  Route visibility is governed by [page-contracts.md](page-contracts.md).
+- Intent, audience, essentiality and number semantics are governed by
+  [specification.md](specification.md). Voice and editorial stance are governed
+  by [identity.md](identity.md). Product scope is governed by
+  [product-strategy.md](product-strategy.md). Route visibility is governed by
+  [page-contracts.md](page-contracts.md). Metric definitions are governed by
+  `config/metrics.yaml` and [metrics.md](metrics.md).
 - Do not use word-count budgets to justify removing evidence. Contracted data is
   visible by default; method and long caveats may be disclosed.
+- Every published number has a registry entry, a home payload and an audit
+  entry. Do not restate volatile counts in docs; link to the register or
+  `/metrics/`.
 - If a fact changes, update the document, the config and the in-app page in the
   same change. `scripts/check_docs.py` guards the links and the key format facts;
+  `scripts/check_metrics.py` guards the registry and audit;
   `scripts/check_web_contract.py` guards the rendered routes.
 
 ## Licence

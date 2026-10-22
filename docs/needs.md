@@ -94,7 +94,7 @@ club budget has no public ceiling. Wages are not public.
 
 - `/recruitment/#squad-needs` — the full board, with every family, evidence,
   availability and roster caveat.
-- `/themes/` — short transfer implications on the theme cards.
+- `/analysis/` — the evidence behind the team and squad claims.
 - `/scouting/#priority-profiles` — role profiles only. The shortlist engine is
   not live; no candidates are ranked or named.
 

@@ -27,9 +27,8 @@ from fitba.analytics.recruitment import era_recruitment_profile, recruitment_pro
 from fitba.analytics.selection import selection_profile
 from fitba.analytics.style import era_style_average, style_profile
 from fitba.analytics.valuation import (
-    calibration_factor,
-    estimate_transfer,
     summarise_valuations,
+    value_transfers,
 )
 from fitba.ingest.history import (
     history_coverage,
@@ -332,7 +331,13 @@ def _selection_era(profiles: dict[str, dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def build_history_payloads(*, generated_at: str, season: str) -> dict[str, Any]:
+def build_history_payloads(
+    *,
+    generated_at: str,
+    season: str,
+    transfers: list[dict[str, Any]] | None = None,
+    valuation: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Build the index and every season document from local data only."""
     policy = history_policy() or {}
     era_doc = (history_era() or {}).get("era") or {}
@@ -362,22 +367,18 @@ def build_history_payloads(*, generated_at: str, season: str) -> dict[str, Any]:
     era_style = era_style_average([style_profiles[current] for current in completed])
     history_data = load_all_history()
     selection_profiles = _selection_profiles(history_data, seasons, club_api_id)
-    transfers = published_transfers()
+    transfers = transfers if transfers is not None else published_transfers()
     markets = (history_markets() or {}).get("markets", [])
-    valuation_policy = policy.get("valuation") or {}
-    fx = valuation_policy.get("fx_to_gbp")
     birth_dates = _birth_dates(history_data)
-    calibration, anchor_count = calibration_factor(
-        transfers, birth_dates=birth_dates, markets=markets, fx=fx
-    )
-    for row in transfers:
-        row["fee_estimate"] = estimate_transfer(
-            row,
+    if valuation is None:
+        valuation = value_transfers(
+            transfers,
             birth_dates=birth_dates,
             markets=markets,
-            calibration=calibration,
-            fx=fx,
+            fx=(policy.get("valuation") or {}).get("fx_to_gbp"),
         )
+    anchor_count = int(valuation.get("anchor_count") or 0)
+    calibration = float(valuation.get("calibration_factor") or 1.0)
     recruitment_profiles: dict[str, dict[str, Any]] = {}
     for current in seasons:
         profile = recruitment_profile(

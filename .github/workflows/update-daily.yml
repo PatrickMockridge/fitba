@@ -91,10 +91,16 @@ jobs:
         run: uv run fitba validate --season current --strict
 
       - name: Publish derived data
-        run: uv run fitba publish --season current --profile public
+        run: uv run fitba publish --season current --profile public --require-validation
 
       - name: Check publication policy
         run: uv run python scripts/check_publication.py
+
+      - name: Check metric registry, audit and numeric coverage
+        run: uv run python scripts/check_metrics.py --strict
+
+      - name: Check transfer register
+        run: uv run python scripts/check_transfers.py
 
       - name: Check club-name capitalisation
         run: uv run python scripts/check_names.py

@@ -48,12 +48,12 @@ logic and its costs visible enough for a fan to reason about them.
 
 ## The confirmed-business register
 
-The first implemented trading-club layer is the transfer/loan register:
-230 curated rows across 2019/20–2026/27, with 4 official-confirmed rows and 2
-disclosed fees at the last check. The recent four windows are audited; earlier
-windows are curated partial. It is built from the licensed API-Football
-candidate feed and curated against official AFC announcements and the Wikipedia
-season tables.
+The first implemented trading-club layer is the transfer/loan register across
+2019/20–2026/27. The live row, confirmation and fee-anchor counts are in
+`/transfers/` and `/metrics/`. The most recent audited windows have been
+reviewed against the seniority rules; earlier windows are curated partial. It is
+built from the licensed API-Football candidate feed and curated against official
+AFC announcements and the Wikipedia season tables.
 
 Only completed business is published. `feed_only`, `reported` and `rejected` rows
 never reach the public payload. Fees are absent from the feed; disclosed and
@@ -66,9 +66,9 @@ unknown unless confirmed. See [transfers.md](transfers.md) and `/transfers/`.
 
 ## The current bridge
 
-[The bigger picture](themes.md) applies the mission to the current squad: the
-role-family balance, the wing-back trade-off, the defensive cover question and
-the attack-defence balance, with a 20% mission-context theme. It is the
+[Data analysis](analysis.md) sets the chairman's approach against the current squad: the
+role-family balance, the three-at-the-back record, the defensive depth and availability and
+the attack-defence balance, with a separate Cormack-era analysis. It is the
 short-horizon companion to the era record below.
 
 ## The era record

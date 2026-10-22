@@ -146,13 +146,16 @@ def _counts(rows: list[dict[str, Any]], field: str) -> dict[str, int]:
 
 
 def rumours_payload(
-    rows: list[dict[str, Any]], season: str, player_index: PlayerLinkIndex
+    rows: list[dict[str, Any]],
+    season: str,
+    player_index: PlayerLinkIndex,
+    generated_at: str | None = None,
 ) -> dict[str, Any]:
     return {
         "club_id": "sco:aberdeen",
         "name": "Aberdeen",
         "season": season,
-        "generated_at": utc_now_iso(),
+        "generated_at": generated_at or utc_now_iso(),
         "rumours": [
             {
                 **row,
@@ -255,7 +258,11 @@ def _narrative(buckets: dict[str, dict[str, float]], total: float, sample: int) 
     return "; ".join(parts) + "."
 
 
-def profile_payload(rows: list[dict[str, Any]], player_index: PlayerLinkIndex) -> dict[str, Any]:
+def profile_payload(
+    rows: list[dict[str, Any]],
+    player_index: PlayerLinkIndex,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
     active = [row for row in rows if row.get("status") == "active"]
 
     def weight_of(row: dict[str, Any]) -> float:
@@ -279,7 +286,7 @@ def profile_payload(rows: list[dict[str, Any]], player_index: PlayerLinkIndex) -
 
     return {
         "club_id": "sco:aberdeen",
-        "generated_at": utc_now_iso(),
+        "generated_at": generated_at or utc_now_iso(),
         "sample_size": len(active),
         "weighted_total": round(total, 2),
         "low_confidence": len(active) < 5,
@@ -339,7 +346,7 @@ def _forum_sentiment() -> dict[str, Any]:
     }
 
 
-def forum_payload(player_index: PlayerLinkIndex) -> dict[str, Any]:
+def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None) -> dict[str, Any]:
     topics = load_forum_topics()
     signals = load_forum_signals()
     posts = load_forum_posts()
@@ -357,7 +364,8 @@ def forum_payload(player_index: PlayerLinkIndex) -> dict[str, Any]:
             "rss": source.get("rss"),
             "content_signal": source.get("content_signal"),
         },
-        "generated_at": generated or utc_now_iso(),
+        "generated_at": generated_at or utc_now_iso(),
+        "sampled_at": generated,
         "coverage": {
             "topics_sampled": len(topic_rows),
             "posts_sampled": posts.height,

@@ -137,8 +137,8 @@ Implemented:
   predicted XIs with contenders, the matchup read and coverage. Opponent
   lineups come from the bounded `data/normalized/matchday/` snapshot; league
   facts join from the tables and club payload at build time.
-- `themes/aberdeen.json` — typed medium/long-term themes: role-family balance,
-  wing-back trade-off, defensive cover, attack-defence balance and the
+- `themes/aberdeen.json` — The case: the owner's view, the chairman's frame and
+  six claims on the team, squad and Cormack-era record.
   Cormack-era mission context. Derived from local match, squad, transfer and
   history payloads; no new network ingest.
 - `provenance.json` — layer-by-layer source truth table, migration gate state
@@ -164,7 +164,7 @@ Implemented:
 web/app/
   page.tsx                 home (two doors + bridge)
   matchday/                upcoming-matchday dashboard
-  themes/                  the bigger picture: medium/long-term themes
+  analysis/                Data analysis: owner view, chairman frame and six claims
   recruitment/             off-the-pitch hub + squad needs board
   scouting/                method + priority role profiles
   sources/                 layer truth table and source policy
@@ -197,7 +197,7 @@ Components: `LeagueTable`, `FixtureList`, `CompetitionStrip`, `NewsGrid`,
 ## File map
 
 ```text
-config/            sources, competitions, cups, matchday, themes, publication, scouting, Aberdeen
+config/            sources, competitions, cups, matchday, themes (Data analysis), publication, scouting, Aberdeen
 reference/         teams, loans, market values, disciplinary
 reference/history/ era, staff, honours, markets and season reviews
 src/fitba/

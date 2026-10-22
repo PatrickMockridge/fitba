@@ -1,0 +1,477 @@
+{
+  "$defs": {
+    "ChangePolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "owner_approval_required": {
+          "title": "Owner Approval Required",
+          "type": "boolean"
+        },
+        "version_scheme": {
+          "title": "Version Scheme",
+          "type": "string"
+        },
+        "changelog": {
+          "title": "Changelog",
+          "type": "string"
+        }
+      },
+      "required": [
+        "owner_approval_required",
+        "version_scheme",
+        "changelog"
+      ],
+      "title": "ChangePolicy",
+      "type": "object"
+    },
+    "Metric": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:\\.[a-z0-9-]+)+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "value_type": {
+          "enum": [
+            "scalar",
+            "object",
+            "table",
+            "series"
+          ],
+          "title": "Value Type",
+          "type": "string"
+        },
+        "fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array"
+        },
+        "formula": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          ],
+          "title": "Formula"
+        },
+        "inputs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "aggregation": {
+          "title": "Aggregation",
+          "type": "string"
+        },
+        "denominator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Denominator"
+        },
+        "rounding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Rounding"
+            },
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/Rounding"
+              },
+              "type": "object"
+            }
+          ],
+          "title": "Rounding"
+        },
+        "basis": {
+          "enum": [
+            "measured",
+            "inferred",
+            "curated",
+            "mixed",
+            "unknown"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "source_layer": {
+          "title": "Source Layer",
+          "type": "string"
+        },
+        "coverage_tier": {
+          "enum": [
+            "event",
+            "match",
+            "curated",
+            "value_only",
+            "derived",
+            "unknown"
+          ],
+          "title": "Coverage Tier",
+          "type": "string"
+        },
+        "confidence_rule": {
+          "title": "Confidence Rule",
+          "type": "string"
+        },
+        "home_payload": {
+          "title": "Home Payload",
+          "type": "string"
+        },
+        "payload_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Payload Paths",
+          "type": "array"
+        },
+        "home_surface": {
+          "title": "Home Surface",
+          "type": "string"
+        },
+        "displayed_surfaces": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Displayed Surfaces",
+          "type": "array"
+        },
+        "verification": {
+          "enum": [
+            "recompute",
+            "cross_surface",
+            "config_match",
+            "source_checksum",
+            "provenance_only"
+          ],
+          "title": "Verification",
+          "type": "string"
+        },
+        "verification_checks": {
+          "default": [],
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Verification Checks",
+          "type": "array"
+        },
+        "implementation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implementation"
+        },
+        "source_paths": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Paths",
+          "type": "array"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "reviewed": {
+          "format": "date",
+          "title": "Reviewed",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "status": {
+          "default": "active",
+          "enum": [
+            "active",
+            "deprecated",
+            "planned"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "description",
+        "value_type",
+        "formula",
+        "inputs",
+        "unit",
+        "aggregation",
+        "rounding",
+        "basis",
+        "source_layer",
+        "coverage_tier",
+        "confidence_rule",
+        "home_payload",
+        "payload_paths",
+        "home_surface",
+        "displayed_surfaces",
+        "verification",
+        "owner",
+        "reviewed",
+        "version"
+      ],
+      "title": "Metric",
+      "type": "object"
+    },
+    "Parameter": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(?:\\.[a-z0-9-]+)+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "scalar",
+            "matrix",
+            "enum"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "used_by": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Used By",
+          "type": "array"
+        },
+        "config_path": {
+          "title": "Config Path",
+          "type": "string"
+        },
+        "config_keys": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Config Keys",
+          "type": "array"
+        },
+        "verification": {
+          "const": "config_match",
+          "title": "Verification",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "reviewed": {
+          "format": "date",
+          "title": "Reviewed",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "kind",
+        "value",
+        "unit",
+        "used_by",
+        "config_path",
+        "verification",
+        "owner",
+        "reviewed",
+        "version"
+      ],
+      "title": "Parameter",
+      "type": "object"
+    },
+    "Rounding": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": [
+            "half_even",
+            "half_up",
+            "floor",
+            "ceil",
+            "integer",
+            "step"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "decimals": {
+          "default": 0,
+          "title": "Decimals",
+          "type": "integer"
+        },
+        "step": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Step"
+        },
+        "display": {
+          "title": "Display",
+          "type": "string"
+        },
+        "scale": {
+          "default": 1.0,
+          "title": "Scale",
+          "type": "number"
+        },
+        "suffix": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suffix"
+        }
+      },
+      "required": [
+        "method",
+        "display"
+      ],
+      "title": "Rounding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "registry_version": {
+      "title": "Registry Version",
+      "type": "string"
+    },
+    "reviewed": {
+      "format": "date",
+      "title": "Reviewed",
+      "type": "string"
+    },
+    "owner": {
+      "title": "Owner",
+      "type": "string"
+    },
+    "change_policy": {
+      "$ref": "#/$defs/ChangePolicy"
+    },
+    "structural_number_patterns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Structural Number Patterns",
+      "type": "array"
+    },
+    "metrics": {
+      "items": {
+        "$ref": "#/$defs/Metric"
+      },
+      "title": "Metrics",
+      "type": "array"
+    },
+    "parameters": {
+      "items": {
+        "$ref": "#/$defs/Parameter"
+      },
+      "title": "Parameters",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "registry_version",
+    "reviewed",
+    "owner",
+    "change_policy",
+    "structural_number_patterns",
+    "metrics",
+    "parameters"
+  ],
+  "title": "MetricRegistry",
+  "type": "object"
+}

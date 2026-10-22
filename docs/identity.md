@@ -40,18 +40,16 @@ basis and links to the evidence that could overturn it.
 
 ## Who it is for
 
-The primary reader is a highly engaged, literate, numerate Aberdeen fan. They
-know the squad, the league and the arguments. They may not be a statistician,
-but they want the numbers, the sources and the uncertainty, and they can tell
-when evidence is being removed to make a page feel lighter.
+The canonical audience definition is in
+[specification.md](specification.md#audience). In short: the primary reader is a
+highly engaged, literate, numerate Aberdeen fan who knows the squad and the
+league and wants the evidence, the sources and the uncertainty. The club, press,
+critics, Scottish football readers, students, journalists and analysts are
+secondary readers of the same public record.
 
-The club, the press, critics and Scottish football readers are secondary readers
-of the same public record. They are not a reason to simplify the primary reader's
-evidence.
-
-**There is no median user to invent.** Do not design for a hypothetical casual
-fan, an "average" reader or a persona assembled from engagement data. Design for
-the reader described above, and make the page navigable for everyone else.
+There is no median user to invent. Do not design for a hypothetical casual fan,
+an “average” reader or a persona assembled from engagement data. The evidence is
+not removed to make a page feel lighter for an imagined reader.
 
 ## Editorial stance: on the club's side, not in its pocket
 
@@ -75,8 +73,9 @@ sources pages carry the correction policy.
 The analytical frame is the Cormack era, from Dave Cormack's chairmanship on 16
 December 2019. At the 2026-10-22 publish the generated record covers seven
 seasons, nine people in charge of at least one league match (including interim
-spells; 13 stints), a best finish of third, a worst finish of tenth, one major
-honour (the Scottish Cup), 103 arrivals and 86 departures
+spells; 13 stints), a best finish of third, a worst finish of tenth and one major
+honour (the Scottish Cup). Arrival, departure and turnover counts are in the
+generated history scorecard and `/metrics/`; this document does not restate them
 (`web/data/generated/history/aberdeen.json`).
 
 The record contains a Scottish Cup, two Conference League campaigns (2023-24
@@ -205,10 +204,12 @@ May not:
 
 ## Relationship to other documents
 
+- [specification.md](specification.md): canonical intent, audience, essentiality
+  and number governance. It defers voice and editorial stance to this document.
 - [design.md](design.md): the System 7 visual grammar, the four themes and the
   design-change process.
 - [product-strategy.md](product-strategy.md): product scope, content pillars and
-  roadmap. It defers identity, audience and voice to this document.
+  roadmap. It defers audience to `specification.md` and voice to this document.
 - [page-contracts.md](page-contracts.md): normative route contracts and the
   marker convention.
 - [history.md](history.md): the Cormack-era record and its coverage rules.

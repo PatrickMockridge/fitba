@@ -35,13 +35,10 @@ disappear from the conversation.
 
 ## Who fitba is for
 
-- **Primary:** highly engaged, literate, numerate Aberdeen fans who want to see
-  the evidence behind the club's trading model, recruitment, inconsistency and
-  the gap between performance and results.
-- **Secondary:** Scottish football fans, students, journalists and analysts who
-  want the same lens applied across the pyramid and to opponents.
-- **Tertiary:** people working in clubs who want a public-facing explanation of
-  the frameworks, not an internal tool.
+Audience is canonical in [specification.md](specification.md#audience): highly
+engaged, literate, numerate Aberdeen fans are the primary readers; the club,
+press, critics, Scottish football readers, students, journalists and analysts
+read the same public record. There is no separate simplified product.
 
 The product is not a club mouthpiece. It is independent, non-commercial and
 correctable.
@@ -134,12 +131,12 @@ The site is organised around the question a fan actually arrives with:
   same player is the destination from matchday, transfers, rumours and news.
 - **News & rumours** (`/news/`) — the editorial bridge: the club's own voice, the
   X timeline and the curated rumour register side by side.
-- **The bigger picture** (`/themes/`) — the analytical bridge between the
-  matchday lookahead, the squad, recruitment and the Cormack-era mission. It
-  turns the recurring fan arguments into evidence: role-family balance, the
-  wing-back trade-off, defensive cover, the attack-defence balance and the
-  trading-club trade-off. Its squad-needs board on `/recruitment/` turns the
-  themes into role profiles and market routes; it names no targets.
+- **Data analysis** (`/analysis/`) — the evidence-led bridge between the matchday
+  lookahead, the squad, recruitment and the Cormack-era record. The owner's view
+  leads, the chairman's approach frames it, and six claims carry the evidence,
+  the status and what would change the view. Its squad-needs board on
+  `/recruitment/` turns the claims into role profiles and market routes; it
+  names no targets.
 
 The rumour mill is a distinct product lane, not a feed of links:
 
@@ -201,10 +198,10 @@ usernames or quotes in the public payload.
 10. **The Cormack era** — a season-by-season historical record of managers,
     backroom and board changes, honours, transfers, style and selection, with a
     labelled assessment. See [history.md](history.md).
-11. **The bigger picture** — medium and long-term themes that connect the
-    matchday lookahead to squad structure, recruitment and the club's mission.
-    Four current-season themes and one mission-context theme, with measured
-    evidence and a labelled read. See [themes.md](themes.md).
+11. **Data analysis** — the owner's view and the chairman's frame, tested through six
+    claims on the team, the squad and the Cormack-era record. Each claim carries
+    a count, a status and what would change the view. See
+    [analysis.md](analysis.md).
 
 ## Editorial policy
 

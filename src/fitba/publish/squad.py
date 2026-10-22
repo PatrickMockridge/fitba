@@ -220,7 +220,7 @@ def _attribute_block(row: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
-def squad_payload(season: str) -> dict[str, Any]:
+def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any]:
     players_frame = load_squad_players()
     stats_frame = load_squad_stats()
     position_frame = load_position_stats()
@@ -438,7 +438,7 @@ def squad_payload(season: str) -> dict[str, Any]:
         "club_id": str(aberdeen_config()["club_id"]),
         "name": "Aberdeen",
         "season": season,
-        "generated_at": utc_now_iso(),
+        "generated_at": generated_at or utc_now_iso(),
         "players": players,
         "summary": {
             **_summary(players),

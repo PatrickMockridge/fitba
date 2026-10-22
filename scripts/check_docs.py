@@ -19,12 +19,15 @@ DOCS = ROOT / "docs"
 REQUIRED = [
     "README.md",
     "identity.md",
+    "specification.md",
+    "metrics.md",
+    "metric-changes.md",
     "design.md",
     "page-contracts.md",
     "identity-review-2026-10.md",
     "product-strategy.md",
     "matchday.md",
-    "themes.md",
+    "analysis.md",
     "provenance.md",
     "availability.md",
     "needs.md",
@@ -57,7 +60,7 @@ IN_APP = [
     "web/app/transfers/page.tsx",
     "web/app/loans/page.tsx",
     "web/app/matchday/page.tsx",
-    "web/app/themes/page.tsx",
+    "web/app/analysis/page.tsx",
     "web/app/recruitment/page.tsx",
     "web/app/scouting/page.tsx",
     "web/app/sources/page.tsx",
@@ -136,18 +139,53 @@ def check_formats() -> list[str]:
     return errors
 
 
+STALE_COUNTS = [
+    "217 of 230",
+    "13 unknowns",
+    "229 published rows",
+    "230 curated rows",
+    "−£21.4m",  # noqa: RUF001 - matches the published text exactly
+    "14 anchors",
+    "103 arrivals and 86 departures",
+]
+
+
+def check_stale_counts() -> list[str]:
+    """Volatile register counts belong in the payload/audit, not the docs."""
+    errors: list[str] = []
+    files = [ROOT / "README.md", *DOCS.glob("*.md")]
+    for path in files:
+        if path.name == "identity-review-2026-10.md":
+            continue
+        text = path.read_text(encoding="utf-8")
+        for phrase in STALE_COUNTS:
+            if phrase in text:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: stale volatile count {phrase!r}; "
+                    "link to the register or /metrics/"
+                )
+    return errors
+
+
 def check_identity() -> list[str]:
     errors: list[str] = []
     identity = DOCS / "identity.md"
     contracts = DOCS / "page-contracts.md"
-    if not identity.exists() or not contracts.exists():
+    specification = DOCS / "specification.md"
+    if not identity.exists() or not contracts.exists() or not specification.exists():
         return errors
     text = identity.read_text(encoding="utf-8")
     if "Aberdeen FC, without the noise." not in text:
         errors.append("docs/identity.md is missing the identity line")
     if "## Non-negotiables" not in text:
         errors.append("docs/identity.md is missing the Non-negotiables section")
-    for target in ("design.md", "page-contracts.md", "product-strategy.md", "history.md"):
+    for target in (
+        "specification.md",
+        "design.md",
+        "page-contracts.md",
+        "product-strategy.md",
+        "history.md",
+    ):
         if f"]({target})" not in text:
             errors.append(f"docs/identity.md does not link {target}")
     if "web/contracts/surfaces.json" not in contracts.read_text(encoding="utf-8"):
@@ -155,6 +193,19 @@ def check_identity() -> list[str]:
     strategy = (DOCS / "product-strategy.md").read_text(encoding="utf-8")
     if "](identity.md)" not in strategy:
         errors.append("docs/product-strategy.md does not defer to identity.md")
+    if "](specification.md" not in strategy:
+        errors.append("docs/product-strategy.md does not defer audience to specification.md")
+    spec_text = specification.read_text(encoding="utf-8")
+    for heading in (
+        "## Audience",
+        "## Essential, conditional and non-essential",
+        "## Number governance",
+        "## Change control",
+    ):
+        if heading not in spec_text:
+            errors.append(f"docs/specification.md is missing {heading}")
+    if "highly engaged, literate, numerate Aberdeen fans" not in spec_text:
+        errors.append("docs/specification.md is missing the canonical audience")
     return errors
 
 
@@ -192,6 +243,7 @@ def main() -> int:
     errors.extend(check_links())
     errors.extend(check_formats())
     errors.extend(check_identity())
+    errors.extend(check_stale_counts())
 
     if errors:
         print("Documentation check failed:")

@@ -194,7 +194,7 @@ export default function RecruitmentPage() {
           {" · "}
           <Link href="/news/">News &amp; rumours, the bridge →</Link>
           {" · "}
-          <Link href="/themes/">The bigger picture →</Link>
+          <Link href="/analysis/">Data analysis →</Link>
         </p>
       </section>
     </ContractPage>

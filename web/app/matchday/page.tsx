@@ -7,11 +7,11 @@ import { MatchupRead } from "@/components/MatchupRead";
 import { PredictedLineupPanel } from "@/components/PredictedLineupPanel";
 import { StrengthComparison } from "@/components/StrengthComparison";
 import { StyleMatchup } from "@/components/StyleMatchup";
-import { ThemeCard } from "@/components/ThemeCard";
+import { CaseClaimCard } from "@/components/CaseClaimCard";
 import {
   formatDate,
   getMatchday,
-  getThemes,
+  getCase,
   type ClubFixture,
   type MatchdayDocument,
 } from "@/lib/data";
@@ -56,7 +56,7 @@ function fixtureList(data: MatchdayDocument): ClubFixture[] {
 
 export default function MatchdayPage() {
   const data = getMatchday();
-  const themes = getThemes();
+  const caseData = getCase();
   if (!data) {
     return (
       <ContractPage surface="matchday" state="empty">
@@ -112,12 +112,9 @@ export default function MatchdayPage() {
   const age = snapshotValue(data, "age_hours");
   const lineupStatus = data.coverage.lineups ?? {};
   const next = fixtureList(data);
-  const seasonThemes = (themes?.themes ?? []).filter(
-    (theme) => theme.horizon === "season",
-  );
-  const missionTheme = (themes?.themes ?? []).find(
-    (theme) => theme.horizon === "mission",
-  );
+  const matchdayClaims = (caseData?.claims ?? [])
+    .filter((claim) => claim.domain === "matchday")
+    .slice(0, 2);
 
   return (
     <ContractPage surface="matchday">
@@ -252,40 +249,29 @@ export default function MatchdayPage() {
         />
       ) : null}
 
-      {themes && (seasonThemes.length || missionTheme) ? (
+      {caseData && matchdayClaims.length ? (
         <section className="section" data-contract="matchday.themes">
           <div className="section-head">
             <div>
-              <p className="eyebrow">The bigger picture · 80% season, 20% mission</p>
+              <p className="eyebrow">Data analysis · the current evidence</p>
               <h2>What backs this matchday</h2>
             </div>
-            <Link className="text-link" href="/themes/">
-              Full evidence →
+            <Link className="text-link" href="/analysis/">
+              Full case →
             </Link>
           </div>
           <div className="theme-strip">
-            {seasonThemes.map((theme) => (
-              <ThemeCard
-                key={theme.theme_id}
-                theme={theme}
-                compact
-                contract="matchday.theme"
-              />
+            {matchdayClaims.map((claim) => (
+              <div key={claim.id} data-contract="matchday.theme">
+                <CaseClaimCard claim={claim} compact />
+              </div>
             ))}
           </div>
-          {missionTheme ? (
-            <ThemeCard
-              theme={missionTheme}
-              compact
-              contract="matchday.theme"
-            />
-          ) : null}
           <p className="fine-print">
-            Four current-season themes and one Cormack-era mission theme.
-            Provider ratings are league-only and never an individual verdict;
-            read the{" "}
-            <Link className="text-link" href="/themes/">
-              full evidence and caveats
+            A selection of the claims about the team. The full case, the counts,
+            the status and what would change the view are on{" "}
+            <Link className="text-link" href="/analysis/">
+              Data analysis
             </Link>
             .
           </p>

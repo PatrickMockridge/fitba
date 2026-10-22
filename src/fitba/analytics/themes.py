@@ -16,10 +16,12 @@ import polars as pl
 
 from fitba.analytics.history import club_match_rows
 from fitba.analytics.matchday import form_block
+from fitba.settings import aberdeen as aberdeen_config
 from fitba.settings import themes as themes_config
+from fitba.util.dates import current_season
 
-TEAM_ID = 252
-SEASON_YEAR = 2026
+TEAM_ID = int(aberdeen_config()["api_football_id"])
+SEASON_YEAR = int(current_season().split("-", 1)[0])
 FAMILY_GROUPS = ("GK", "CB", "FB/WB", "MID", "AM/WM", "W", "ST")
 BENCH_SCOPE = "Premiership only"
 RATING_SCOPE = "Premiership starters"

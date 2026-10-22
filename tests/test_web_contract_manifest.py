@@ -42,19 +42,20 @@ PINNED_MARKERS = {
         "matchday.coverage",
     },
     "/themes/": {
-        "themes.hero",
-        "themes.scope",
-        "themes.season",
-        "themes.theme",
-        "themes.evidence",
-        "themes.mission",
-        "themes.metric-family-balance",
-        "themes.metric-wing-back-tax",
-        "themes.metric-cover-question",
-        "themes.metric-leaky-boat",
-        "themes.metric-mission-check",
-        "themes.coverage",
-        "themes.coverage.missing",
+        "themes.redirect",
+    },
+    "/analysis/": {
+        "case.hero",
+        "case.frame",
+        "case.opinion",
+        "case.claim",
+        "case.claim.status",
+        "case.claim.count",
+        "case.claim.evidence",
+        "case.claim.change",
+        "case.benchmark",
+        "case.coverage",
+        "case.links",
     },
     "/recruitment/": {
         "recruitment.hero",
@@ -147,6 +148,24 @@ PINNED_MARKERS = {
         "about.cormack",
         "about.line",
     },
+    "/metrics/": {
+        "metrics.hero",
+        "metrics.summary",
+        "metrics.registry",
+        "metrics.parameters",
+        "metrics.audit",
+        "metrics.method",
+        "metrics.links",
+    },
+    "/status/": {
+        "status.hero",
+        "status.build",
+        "status.validation",
+        "status.metrics",
+        "status.sources",
+        "status.marts",
+        "status.coverage",
+    },
 }
 
 PINNED_COLUMNS = {
@@ -201,20 +220,39 @@ PINNED_COLUMNS = {
     "sources.layers": ["Layer", "Primary", "Fallback", "Status", "Rows", "Scope"],
     "sources.registry": ["Source", "Lane", "Primary layers", "Rows", "Last checked"],
     "methodology.sources": ["Source", "Publication lane", "Rows", "Last checked"],
+    "metrics.registry": [
+        "Metric",
+        "Definition",
+        "Formula",
+        "Basis",
+        "Source",
+        "Coverage",
+        "Verification",
+        "Status",
+    ],
+    "metrics.parameters": [
+        "Parameter",
+        "Value",
+        "Unit",
+        "Used by",
+        "Config",
+        "Verification",
+        "Status",
+    ],
 }
 
 PINNED_MINIMUMS = {
     "matchday.lineup": 2,
     "matchday.lineup.pitch": 2,
     "transfers.card": 50,
-    "themes.theme": 5,
-    "themes.evidence": 5,
     "recruitment.needs-family": 7,
     "recruitment.needs-priority": 7,
     "recruitment.needs-confidence": 7,
     "recruitment.needs-market-route": 7,
     "recruitment.needs-roster": 7,
     "recruitment.needs-players": 7,
+    "metrics.registry": 52,
+    "metrics.parameters": 14,
 }
 
 PINNED_INDICATORS = {
@@ -226,7 +264,6 @@ PINNED_INDICATORS = {
         "unknown": 1,
         "source": 1,
     },
-    "/themes/": {"basis": 5, "confidence": 5, "unknown": 1, "source": 1},
     "/recruitment/": {
         "confidence": 2,
         "availability": 2,
@@ -249,9 +286,11 @@ def load() -> dict:
 def full_state(document: dict, path: str) -> dict:
     for surface in document["surfaces"]:
         if surface["path"] == path:
-            assert "full" in surface["states"], f"{path} has no full state"
-            assert "full" in surface.get("ci_states", []), f"{path} does not require full in CI"
-            return surface["states"]["full"]
+            ci_states = surface.get("ci_states", [])
+            assert ci_states, f"{path} has no CI state"
+            state = next((name for name in ci_states if name in surface["states"]), None)
+            assert state is not None, f"{path} CI state is not defined"
+            return surface["states"][state]
     raise AssertionError(f"missing surface {path}")
 
 
@@ -316,5 +355,5 @@ def test_removing_full_from_ci_states_fails_the_pinned_contract():
     for surface in document["surfaces"]:
         if surface["path"] == "/transfers/":
             surface["ci_states"] = ["empty"]
-    with pytest.raises(AssertionError, match="full"):
+    with pytest.raises(AssertionError, match=r"lost contracted markers|full"):
         assert_contract(document)

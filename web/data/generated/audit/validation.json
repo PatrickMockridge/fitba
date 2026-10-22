@@ -1,0 +1,237 @@
+{
+  "checks": [
+    {
+      "level": "ok",
+      "message": "required columns present; missing=[]",
+      "name": "matches.columns",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "216 rows for 2026-27",
+      "name": "matches.rows",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "0 duplicate match ids",
+      "name": "matches.unique",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "null key fields: {'home': 0, 'away': 0, 'date': 0}",
+      "name": "matches.keys",
+      "value": {
+        "away": 0,
+        "date": 0,
+        "home": 0
+      }
+    },
+    {
+      "level": "ok",
+      "message": "0 matches use provisional team ids; add aliases to reference/teams.yaml",
+      "name": "matches.teams_resolved",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 dates outside 2026-07-01..2027-06-30",
+      "name": "matches.dates",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 implausible scores",
+      "name": "matches.scores",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "54/228 matches played (partial/curtailed season)",
+      "name": "matches.count.sco:premiership",
+      "value": 54
+    },
+    {
+      "level": "ok",
+      "message": "12/12 teams seen",
+      "name": "matches.teams.sco:premiership",
+      "value": 12
+    },
+    {
+      "level": "ok",
+      "message": "53/180 matches played (partial/curtailed season)",
+      "name": "matches.count.sco:championship",
+      "value": 53
+    },
+    {
+      "level": "ok",
+      "message": "10/10 teams seen",
+      "name": "matches.teams.sco:championship",
+      "value": 10
+    },
+    {
+      "level": "ok",
+      "message": "54/180 matches played (partial/curtailed season)",
+      "name": "matches.count.sco:league-one",
+      "value": 54
+    },
+    {
+      "level": "ok",
+      "message": "10/10 teams seen",
+      "name": "matches.teams.sco:league-one",
+      "value": 10
+    },
+    {
+      "level": "ok",
+      "message": "55/180 matches played (partial/curtailed season)",
+      "name": "matches.count.sco:league-two",
+      "value": 55
+    },
+    {
+      "level": "ok",
+      "message": "10/10 teams seen",
+      "name": "matches.teams.sco:league-two",
+      "value": 10
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with points != 3W+D",
+      "name": "table.sco:premiership.points",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with played != W+D+L",
+      "name": "table.sco:premiership.played",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "sum GF 149 != sum GA 149",
+      "name": "table.sco:premiership.goals_balance",
+      "value": {
+        "ga": 149,
+        "gf": 149
+      }
+    },
+    {
+      "level": "ok",
+      "message": "positions are contiguous from 1",
+      "name": "table.sco:premiership.positions",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with points != 3W+D",
+      "name": "table.sco:championship.points",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with played != W+D+L",
+      "name": "table.sco:championship.played",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "sum GF 107 != sum GA 107",
+      "name": "table.sco:championship.goals_balance",
+      "value": {
+        "ga": 107,
+        "gf": 107
+      }
+    },
+    {
+      "level": "ok",
+      "message": "positions are contiguous from 1",
+      "name": "table.sco:championship.positions",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with points != 3W+D",
+      "name": "table.sco:league-one.points",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with played != W+D+L",
+      "name": "table.sco:league-one.played",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "sum GF 155 != sum GA 155",
+      "name": "table.sco:league-one.goals_balance",
+      "value": {
+        "ga": 155,
+        "gf": 155
+      }
+    },
+    {
+      "level": "ok",
+      "message": "positions are contiguous from 1",
+      "name": "table.sco:league-one.positions",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with points != 3W+D",
+      "name": "table.sco:league-two.points",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "0 teams with played != W+D+L",
+      "name": "table.sco:league-two.played",
+      "value": 0
+    },
+    {
+      "level": "ok",
+      "message": "sum GF 185 != sum GA 185",
+      "name": "table.sco:league-two.goals_balance",
+      "value": {
+        "ga": 185,
+        "gf": 185
+      }
+    },
+    {
+      "level": "ok",
+      "message": "positions are contiguous from 1",
+      "name": "table.sco:league-two.positions",
+      "value": null
+    },
+    {
+      "level": "ok",
+      "message": "69 JSON files",
+      "name": "published.files",
+      "value": 69
+    },
+    {
+      "level": "ok",
+      "message": "files over 2 MB: []",
+      "name": "published.size",
+      "value": []
+    },
+    {
+      "level": "ok",
+      "message": "forbidden tokens: []",
+      "name": "published.provenance",
+      "value": []
+    },
+    {
+      "level": "ok",
+      "message": "sources not allowed for publication: []",
+      "name": "published.sources",
+      "value": []
+    }
+  ],
+  "errors": 0,
+  "generated_at": "2026-10-22T16:29:02+00:00",
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "status": "pass",
+  "strict": true,
+  "warnings": 0
+}

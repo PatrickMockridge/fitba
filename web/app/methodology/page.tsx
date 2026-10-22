@@ -36,6 +36,9 @@ export default function MethodologyPage() {
           <Link className="button button-ghost" href="/about/">
             Product principles
           </Link>
+          <Link className="button button-ghost" href="/metrics/">
+            Metrics &amp; audit
+          </Link>
           <Link className="button button-ghost" href="/sources/">
             Sources &amp; licences
           </Link>
@@ -372,6 +375,13 @@ export default function MethodologyPage() {
           A source can be disabled in <code>config/sources.yaml</code> and the site rebuilt
           from the remaining sources. See <code>docs/sources.md</code> and{" "}
           <code>DATA_LICENSE.md</code>.
+        </p>
+        <p className="fine-print">
+          Every published number has a registry entry, a declared formula, source
+          layer and coverage tier, and an audit result on{" "}
+          <Link href="/metrics/">Metrics and audit</Link>. A number whose mode is{" "}
+          <code>provenance_only</code> is present and source-checked, not
+          independently recomputed.
         </p>
         <Link className="text-link" href="/status/">
           Data status and freshness →

@@ -601,3 +601,397 @@ main {
     position: static;
   }
 }
+
+/* Metrics and audit */
+
+.metric-group {
+  margin-top: 1.5rem;
+}
+
+.metric-group h3 {
+  margin: 0 0 0.5rem;
+  font: 600 11px/1.3 var(--s-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metric-group h3 a {
+  color: var(--s-ink);
+  text-decoration: none;
+}
+
+.metric-group h3 a:hover {
+  text-decoration: underline;
+}
+
+.metric-table {
+  font-size: 0.78rem;
+}
+
+.metric-table td {
+  vertical-align: top;
+}
+
+.metric-table td:first-child {
+  white-space: nowrap;
+}
+
+.metric-table .fine-print {
+  display: block;
+}
+
+.metric-formula {
+  margin: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.metric-formula div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.metric-formula dt {
+  font-family: var(--s-mono);
+  color: var(--s-muted);
+}
+
+.metric-formula dd {
+  margin: 0;
+}
+
+.metric-value {
+  display: block;
+  max-width: 34rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.72rem;
+}
+
+.checksum {
+  word-break: break-all;
+  font-size: 0.7rem;
+}
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+}
+
+.metrics-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.audit-facts {
+  margin: 0;
+  border-top: 1px solid var(--s-rule);
+}
+
+.audit-facts > div {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--s-rule);
+}
+
+.audit-facts dt {
+  font: 600 9px/1.3 var(--s-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--s-muted);
+}
+
+.audit-facts dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.audit-facts .checksum {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .metrics-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .metrics-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .audit-facts > div {
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+  }
+}
+
+/* Analysis */
+
+.analysis-stack {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.analysis-card {
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+  padding: 1rem;
+}
+
+.analysis-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px solid var(--s-rule);
+  padding-bottom: 0.6rem;
+}
+
+.analysis-card-head h3 {
+  margin: 0.15rem 0 0;
+}
+
+.analysis-question,
+.analysis-finding,
+.analysis-interpretation,
+.analysis-next-check {
+  margin: 0.8rem 0;
+}
+
+.analysis-label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font: 600 9px/1.3 var(--s-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--s-muted);
+}
+
+.analysis-finding {
+  border-left: 3px solid var(--s-ink);
+  padding-left: 0.7rem;
+  font-weight: 600;
+}
+
+.analysis-hypothesis {
+  margin: 0.9rem 0;
+  padding: 0.7rem;
+  border: 1px dashed var(--s-rule);
+  background: var(--s-panel, transparent);
+}
+
+.analysis-hypothesis h4,
+.analysis-method h4,
+.analysis-limitations h4,
+.analysis-change h4,
+.analysis-implications h4,
+.analysis-visual h4,
+.analysis-coverage h4 {
+  margin: 0.9rem 0 0.35rem;
+  font: 600 10px/1.3 var(--s-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.analysis-evidence td,
+.analysis-evidence th {
+  font-size: 0.72rem;
+  vertical-align: top;
+}
+
+.analysis-evidence td:first-child {
+  min-width: 10rem;
+}
+
+.analysis-evidence .fine-print {
+  display: block;
+}
+
+.analysis-limitations,
+.analysis-change,
+.analysis-method {
+  border-top: 1px solid var(--s-rule);
+  margin-top: 0.9rem;
+  padding-top: 0.2rem;
+}
+
+.analysis-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.8rem;
+}
+
+.analysis-domain {
+  border-top: 1px solid var(--s-rule);
+  padding-top: 1rem;
+}
+
+.analysis-coverage .stat-row {
+  margin-bottom: 0.8rem;
+}
+
+/* Data analysis */
+
+.case-stack {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.case-claim {
+  background: var(--s-surface);
+  border: 1px solid var(--s-rule);
+  padding: 1rem;
+}
+
+.case-claim-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px solid var(--s-rule);
+  padding-bottom: 0.6rem;
+}
+
+.case-claim-head h2 {
+  margin: 0.15rem 0 0;
+}
+
+.case-claim-sentence {
+  margin: 0.9rem 0 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.case-count {
+  margin: 0.4rem 0;
+}
+
+.case-label {
+  display: block;
+  margin-bottom: 0.15rem;
+  font: 600 9px/1.3 var(--s-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--s-muted);
+}
+
+.case-two-col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  border-top: 1px solid var(--s-rule);
+  margin-top: 0.9rem;
+  padding-top: 0.6rem;
+}
+
+.case-two-col h3,
+.case-benchmark h3,
+.case-coverage h3 {
+  margin: 0.7rem 0 0.3rem;
+  font: 600 10px/1.3 var(--s-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.case-evidence td,
+.case-evidence th {
+  font-size: 0.72rem;
+  vertical-align: top;
+}
+
+.case-evidence .fine-print {
+  display: block;
+}
+
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.9rem;
+}
+
+.case-frame,
+.case-opinion {
+  margin-bottom: 1rem;
+}
+
+.case-howto {
+  margin: 1rem 0;
+}
+
+@media (max-width: 700px) {
+  .case-two-col {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-claim-head {
+    flex-direction: column;
+  }
+}
+
+.case-claim,
+.case-claim-head,
+.case-claim-sentence,
+.case-count,
+.case-two-col {
+  min-width: 0;
+}
+
+.case-claim {
+  overflow: hidden;
+}
+
+.case-claim .table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.case-claim-head {
+  flex-wrap: wrap;
+}
+
+.case-claim-head > * {
+  min-width: 0;
+}
+
+.case-claim-sentence,
+.case-count {
+  overflow-wrap: anywhere;
+}
+
+.case-claim .table-wrap {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.case-stack,
+.case-claim {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.case-claim {
+  min-width: 0;
+}
+
+.case-stack {
+  display: block;
+}
+
+.case-claim + .case-claim {
+  margin-top: 1.25rem;
+}

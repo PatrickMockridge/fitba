@@ -6,9 +6,11 @@ An independent, data-driven record of Aberdeen FC — the numbers, the sources a
 the argument, without the hot takes.
 
 fitba is built for highly engaged, literate, numerate Aberdeen fans who want to
-see the evidence for themselves, and for Scottish football readers, students,
-journalists and analysts who want the same evidence applied across the pyramid.
-It is independent, non-commercial and explicitly not a club mouthpiece.
+see the evidence for themselves, and for the club, press, critics and Scottish
+football readers who want the same evidence applied across the pyramid. It is
+independent, non-commercial and explicitly not a club mouthpiece. The canonical
+audience, essentiality and number rules are in
+[docs/specification.md](docs/specification.md).
 
 The identity and non-negotiables are in [docs/identity.md](docs/identity.md). The
 product scope is in [docs/product-strategy.md](docs/product-strategy.md). The
@@ -23,6 +25,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Design foundation](docs/design.md) | The System 7 grammar, the four themes and the visual rules. |
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
+| [Data analysis](docs/analysis.md) | The owner's view, the chairman's frame and the six claims connecting the team, squad and record. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
 | [Sources](docs/sources.md) | Every source, its licence position, coverage and known gaps. |
@@ -49,7 +52,7 @@ full documentation index is [docs/README.md](docs/README.md).
   head-to-head tiebreaks, form and **points deductions** with citations.
   Verified against the official 2025/26 tables for all four tiers.
 - **Matchday dashboard**: the next fixture, both predicted XIs, form and style,
-  the bigger-picture themes, and a squad-needs board with a fee-only budget
+  a compact case strip, and a squad-needs board with a fee-only budget
   envelope. The old Aberdeen dashboard is a moved notice.
 - **Results & fixtures across all three Scottish competitions**: league results
   and team match stats from Football-Data.co.uk (clearly labelled, with a gated
@@ -80,13 +83,13 @@ full documentation index is [docs/README.md](docs/README.md).
   and the keys to the match. It is explicitly predicted, not team news. The old
   `/clubs/aberdeen/` dashboard is retired to a moved notice. Fixtures, results,
   tables and competitions remain one click away.
-- **The bigger picture**: `/themes/` is the analytical bridge between the
+- **Data analysis**: `/analysis/` is the evidence-led bridge between the
   matchday lookahead, the squad, recruitment and the Cormack-era mission. It
-  carries four current-season themes — role-family balance, the wing-back
-  trade-off, defensive cover and the attack-defence balance — plus a 20%
-  mission-context theme. Provider ratings are one labelled, minutes-weighted
-  signal; there are no individual verdicts, blame narratives or invented
-  availability claims.
+  starts with the owner's view, framed by the chairman's stated approach, then
+  tests six claims about the team, the squad and the Cormack-era record. Each
+  claim has a count, a status, an evidence table and what would change the view.
+  Provider ratings are labelled, minutes-weighted and never an individual
+  verdict; there are no blame narratives or invented availability claims.
 - **Provenance, availability and needs**: `/sources/` publishes a layer
   truth table (API-Football primary for cups, lineups, player stats and squad;
   Football-Data primary for league results/stats until the migration gate
@@ -116,13 +119,16 @@ full documentation index is [docs/README.md](docs/README.md).
   pages for name mentions, cross-reference labels and rule-based sentiment. No
   raw posts or usernames are published. The active links produce an advisory
   recruitment profile; community engagement is a deferred separate project.
-- **Static Next.js app**: the matchday dashboard, the bigger-picture themes,
+- **Static Next.js app**: the matchday dashboard, Data analysis,
   two hub pages, the squad and player profiles, competitions, fixtures,
   transfers, the Cormack-era history and season reviews, rumours, news,
-  pyramid, tier tables, scouting, loans, methodology and data-status pages.
+  pyramid, tier tables, scouting, loans, methodology, metrics/audit and
+  data-status pages.
 - **Validation**: match counts (228/180/180/180), date bounds, unique match keys,
   team resolution, points arithmetic, goal balance, cup group arithmetic,
-  publication-size and provenance guards.
+  publication-size and provenance guards. Every published number is registered
+  in `config/metrics.yaml`; the generated audit and the registry are on
+  `/metrics/`, with the build summary on `/status/`.
 
 ## Next: scouting and the trading-club layer
 

@@ -11,7 +11,8 @@ import calendar
 import hashlib
 import shutil
 import subprocess
-from dataclasses import dataclass, field
+from collections import Counter
+from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -21,9 +22,8 @@ import polars as pl
 
 from fitba.analytics.tables import build_tables
 from fitba.analytics.valuation import (
-    calibration_factor,
-    estimate_transfer,
     summarise_valuations,
+    value_transfers,
 )
 from fitba.ingest.cups import league_cup_summary, scottish_cup_summary
 from fitba.ingest.fixtures import load_club_fixtures
@@ -38,19 +38,23 @@ from fitba.ingest.runner import load_matches
 from fitba.ingest.squad import load_squad_players
 from fitba.ingest.transfer_audit import load_candidates, load_prior_squads
 from fitba.ingest.transfers import published_transfers, withheld_transfers
+from fitba.metrics.audit import (
+    build_audit,
+    build_registry_payload,
+    build_validation_payload,
+    load_corpus,
+)
+from fitba.metrics.registry import load_registry, registry_checksum
 from fitba.normalize.teams import TeamRegistry
 from fitba.normalize.transfer_audit import build_transfer_audit
 from fitba.publish.availability import build_availability_payload
+from fitba.publish.case import build_case_payload, fallback_case_payload
 from fitba.publish.history import build_history_payloads
 from fitba.publish.matchday import (
     build_matchday_payload,
     fallback_matchday_payload,
 )
-from fitba.publish.needs import (
-    attach_theme_implications,
-    build_needs_payload,
-    fallback_needs_payload,
-)
+from fitba.publish.needs import build_needs_payload, fallback_needs_payload
 from fitba.publish.player_page import build_player_page
 from fitba.publish.provenance import build_provenance_payload
 from fitba.publish.rumours import (
@@ -61,11 +65,7 @@ from fitba.publish.rumours import (
 )
 from fitba.publish.shapes import shape_payload
 from fitba.publish.squad import PlayerLinkIndex, squad_payload
-from fitba.publish.themes import (
-    ThemesDocument,
-    build_themes_payload,
-    fallback_themes_payload,
-)
+from fitba.publish.themes import build_themes_payload, fallback_themes_payload
 from fitba.settings import (
     WEB_DATA_DIR,
     ensure_dirs,
@@ -97,6 +97,7 @@ from fitba.settings import (
     transfer_policy as transfer_policy_config,
 )
 from fitba.util.dates import current_season, seasons_between, utc_now_iso
+from fitba.validate.checks import validate_matches, validate_published, validate_tables
 
 SCHEMA_VERSION = "1.0.0"
 MAX_FILE_BYTES = 2_000_000
@@ -869,7 +870,11 @@ def _window_summary(
 
 
 def _transfers_payload(
-    rows: list[dict[str, Any]], season: str, player_index: PlayerLinkIndex
+    rows: list[dict[str, Any]],
+    season: str,
+    player_index: PlayerLinkIndex,
+    *,
+    valuation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     seasons = sorted({row["season"] for row in rows}, reverse=True)
     season_dash = chr(0x2013)
@@ -885,23 +890,14 @@ def _transfers_payload(
 
     policy = transfer_policy_config() or {}
     markets = (history_markets() or {}).get("markets", [])
-    valuation_policy = policy.get("valuation") or {}
-    fx = valuation_policy.get("fx_to_gbp")
-    birth_dates = _valuation_birth_dates()
-    calibration, anchor_count = calibration_factor(
-        rows, birth_dates=birth_dates, markets=markets, fx=fx
-    )
-    for row in rows:
-        row["fee_estimate"] = estimate_transfer(
-            row,
-            birth_dates=birth_dates,
+    if valuation is None:
+        valuation = value_transfers(
+            rows,
+            birth_dates=_valuation_birth_dates(),
             markets=markets,
-            calibration=calibration,
-            fx=fx,
+            fx=(policy.get("valuation") or {}).get("fx_to_gbp"),
         )
-    valuation_summary = summarise_valuations(rows)
-    valuation_summary["calibration_factor"] = round(calibration, 3)
-    valuation_summary["anchor_count"] = anchor_count
+    valuation_summary = dict(valuation)
     valuation_summary["method"] = (
         "Market/position base x age curve, calibrated to reported/disclosed fees"
     )
@@ -1035,6 +1031,7 @@ def publish(
     season: str | None = None,
     out: Path | None = None,
     profile: str = "public",
+    require_validation: bool = False,
 ) -> PublishReport:
     ensure_dirs()
     target = out or WEB_DATA_DIR
@@ -1061,13 +1058,13 @@ def publish(
         except orjson.JSONDecodeError:
             previous_matchday = None
 
-    previous_themes = None
-    previous_themes_path = target / "themes" / "aberdeen.json"
-    if previous_themes_path.exists():
+    previous_case = None
+    previous_case_path = target / "themes" / "aberdeen.json"
+    if previous_case_path.exists():
         try:
-            previous_themes = orjson.loads(previous_themes_path.read_bytes())
+            previous_case = orjson.loads(previous_case_path.read_bytes())
         except orjson.JSONDecodeError:
-            previous_themes = None
+            previous_case = None
 
     previous_needs = None
     previous_needs_path = target / "needs" / "aberdeen.json"
@@ -1103,7 +1100,7 @@ def publish(
             }
         )
 
-    squad_data = squad_payload(target_season)
+    squad_data = squad_payload(target_season, generated_at=generated_at)
     player_index = PlayerLinkIndex.from_payload(squad_data)
     squad_info = _write(temp / "squad" / "aberdeen.json", squad_data)
     written.append(squad_info)
@@ -1187,7 +1184,18 @@ def publish(
     )
 
     transfer_rows = published_transfers()
-    transfers_payload = _transfers_payload(transfer_rows, target_season, player_index)
+    transfer_valuation = value_transfers(
+        transfer_rows,
+        birth_dates=_valuation_birth_dates(),
+        markets=(history_markets() or {}).get("markets", []),
+        fx=((transfer_policy_config() or {}).get("valuation") or {}).get("fx_to_gbp"),
+    )
+    transfers_payload = _transfers_payload(
+        transfer_rows,
+        target_season,
+        player_index,
+        valuation=transfer_valuation,
+    )
     transfer_info = _write(temp / "transfers" / "aberdeen.json", transfers_payload)
     written.append(transfer_info)
     marts.append(
@@ -1224,7 +1232,12 @@ def publish(
         }
     )
 
-    history_payloads = build_history_payloads(generated_at=generated_at, season=target_season)
+    history_payloads = build_history_payloads(
+        generated_at=generated_at,
+        season=target_season,
+        transfers=transfer_rows,
+        valuation=transfer_valuation,
+    )
     history_info = _write(temp / "history" / "aberdeen.json", history_payloads["index"])
     written.append(history_info)
     marts.append(
@@ -1260,9 +1273,9 @@ def publish(
             history_season=history_payloads["seasons"].get(target_season),
             availability=availability_payload,
         )
-    except Exception as error:  # noqa: BLE001 - themes must not fail the publish
+    except Exception as error:  # noqa: BLE001 - internal evidence must not fail the publish
         themes_payload = fallback_themes_payload(
-            previous_themes,
+            None,
             generated_at=generated_at,
             season=target_season,
             reason=f"themes_build_failed:{type(error).__name__}",
@@ -1286,16 +1299,34 @@ def publish(
             season=target_season,
             reason=f"needs_build_failed:{type(error).__name__}",
         )
-    attach_theme_implications(themes_payload, needs_payload)
-    themes_payload = ThemesDocument(**themes_payload).model_dump()
-    themes_info = _write(temp / "themes" / "aberdeen.json", themes_payload)
-    written.append(themes_info)
+    try:
+        case_payload = build_case_payload(
+            season=target_season,
+            generated_at=generated_at,
+            matches=matches,
+            all_matches=all_matches,
+            squad_data=squad_data,
+            transfers_data=transfers_payload,
+            history_index=history_payloads["index"],
+            history_season=history_payloads["seasons"].get(target_season),
+            history_seasons=history_payloads["seasons"],
+            availability=availability_payload,
+        )
+    except Exception as error:  # noqa: BLE001 - the case must not fail the publish
+        case_payload = fallback_case_payload(
+            previous_case,
+            generated_at=generated_at,
+            season=target_season,
+            reason=f"case_build_failed:{type(error).__name__}",
+        )
+    case_info = _write(temp / "themes" / "aberdeen.json", case_payload)
+    written.append(case_info)
     marts.append(
         {
-            "id": "themes.sco:aberdeen",
+            "id": "case.sco:aberdeen",
             "path": "themes/aberdeen.json",
-            "rows": len(themes_payload.get("themes", [])),
-            "checksum": themes_info["checksum"],
+            "rows": len(case_payload.get("claims", [])),
+            "checksum": case_info["checksum"],
             "season": target_season,
         }
     )
@@ -1311,9 +1342,11 @@ def publish(
         }
     )
 
-    rumours_data = rumours_payload(rumour_rows, target_season, player_index)
-    profile_data = profile_payload(rumour_rows, player_index)
-    forum_data = forum_payload(player_index)
+    rumours_data = rumours_payload(
+        rumour_rows, target_season, player_index, generated_at=generated_at
+    )
+    profile_data = profile_payload(rumour_rows, player_index, generated_at=generated_at)
+    forum_data = forum_payload(player_index, generated_at=generated_at)
     for relative, payload, mart_id, rows in (
         ("rumours/aberdeen.json", rumours_data, "rumours.sco:aberdeen", len(rumour_rows)),
         ("rumours/profile.json", profile_data, "rumours.profile", profile_data["sample_size"]),
@@ -1362,6 +1395,35 @@ def publish(
 
     appearances = load_player_appearances()
     player_match_stats = load_player_match_stats()
+
+    # Provenance contributions are real row counts, never placeholders. A
+    # corroborating source is only listed when it contributed rows.
+    transfer_source_counts: Counter[str] = Counter()
+    for row in transfer_rows:
+        urls = " ".join(str(url) for url in row.get("source_urls") or [])
+        if "wikipedia.org" in urls:
+            transfer_source_counts["wikipedia"] += 1
+        if "afc.co.uk" in urls:
+            transfer_source_counts["afc_news"] += 1
+    history_source_counts = Counter(
+        str(source.get("id"))
+        for source in (history_payloads["index"].get("sources") or [])
+        if source.get("id")
+    )
+    availability_official = sum(
+        1
+        for entry in availability_payload.get("entries") or []
+        if entry.get("source_id") == "afc_news"
+    )
+    rumour_official = sum(
+        1
+        for row in rumour_rows
+        if "afc_news" in (row.get("source_types") or [])
+        or any("afc.co.uk" in str(url) for url in row.get("source_urls") or [])
+    )
+    valuation_anchors = int((transfers_payload.get("valuation") or {}).get("anchor_count") or 0)
+    team_stats_rows = matches.filter(pl.col("home_shots").is_not_null()).height
+
     provenance_payload = build_provenance_payload(
         season=target_season,
         generated_at=generated_at,
@@ -1370,7 +1432,7 @@ def publish(
             "league_results_history": {
                 "football_data_uk": max(0, all_matches.height - matches.height)
             },
-            "league_team_stats": {"football_data_uk": 0},
+            "league_team_stats": {"football_data_uk": team_stats_rows},
             "cup_fixtures": {
                 "api_football": len(league_cup_payload["fixtures"])
                 + len(scottish_cup_payload["fixtures"])
@@ -1381,20 +1443,25 @@ def publish(
             },
             "lineups_roles": {"api_football": appearances.height},
             "player_match_stats": {"api_football": player_match_stats.height},
-            "event_layer": {"api_football": 0},
+            "event_layer": {"api_football": appearances.height},
             "squad_identity": {"api_football": len(squad_data["players"])},
             "preferred_foot": {
                 "wikipedia": int(squad_data["summary"].get("attributes_foot_known") or 0)
             },
-            "transfers_candidate": {"api_football": 0},
-            "transfer_register": {"afc_news": 0, "wikipedia": 0},
+            "transfers_candidate": {"api_football": len(load_candidates())},
+            "transfer_register": {
+                "afc_news": transfer_source_counts["afc_news"],
+                "wikipedia": transfer_source_counts["wikipedia"],
+            },
             "news": {"afc_news": len(club_payload.get("news", []))},
-            "availability": {"afc_news": 0},
-            "rumours": {"afc_news": 0},
+            "availability": {"afc_news": availability_official},
+            "rumours": {"afc_news": rumour_official},
             "forum_signal": {"afc_chat": int(forum_data["coverage"]["posts_sampled"])},
-            "history": {"wikipedia": 0},
-            "valuation": {"football_data_uk": 0},
-            "themes": {},
+            "history": {
+                "afc_news": history_source_counts["afc_news"],
+                "wikipedia": history_source_counts["wikipedia"],
+            },
+            "valuation": {"wikipedia": valuation_anchors},
             "needs": {},
         },
         availability={
@@ -1507,15 +1574,34 @@ def publish(
             "href": "/sources/",
         }
     )
-    if themes_payload.get("themes"):
+    search.append(
+        {
+            "type": "page",
+            "id": "metrics",
+            "name": "Metrics and audit",
+            "slug": "metrics",
+            "href": "/metrics/",
+        }
+    )
+    if case_payload.get("claims"):
         search.append(
             {
                 "type": "page",
-                "id": "themes",
-                "name": "The bigger picture",
-                "slug": "themes",
-                "href": "/themes/",
+                "id": "data-analysis",
+                "name": "Data analysis",
+                "slug": "analysis",
+                "href": "/analysis/",
             }
+        )
+        search.extend(
+            {
+                "type": "analysis",
+                "id": claim.get("id"),
+                "name": claim.get("title") or claim.get("id"),
+                "slug": str(claim.get("id") or "claim").replace("_", "-"),
+                "href": "/analysis/#claim-" + str(claim.get("id") or "claim").replace("_", "-"),
+            }
+            for claim in case_payload.get("claims", [])
         )
     if needs_payload.get("families"):
         search.extend(
@@ -1536,17 +1622,18 @@ def publish(
                 },
             ]
         )
-        search.extend(
-            {
-                "type": "theme",
-                "id": theme.get("theme_id"),
-                "name": theme.get("title") or theme.get("theme_id"),
-                "slug": str(theme.get("theme_id") or "theme").replace("_", "-"),
-                "href": "/themes/#" + str(theme.get("theme_id") or "theme").replace("_", "-"),
-            }
-            for theme in themes_payload.get("themes", [])
-        )
-    written.append(_write(temp / "search-index.json", search))
+    search_info = _write(temp / "search-index.json", search)
+    written.append(search_info)
+    marts.append(
+        {
+            "id": "search.index",
+            "path": "search-index.json",
+            "rows": len(search),
+            "checksum": search_info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per indexed page, theme or player",
+        }
+    )
 
     coverage = {
         "season": target_season,
@@ -1663,19 +1750,14 @@ def publish(
             "lineups": (matchday_payload.get("coverage") or {}).get("lineups"),
             "note": (matchday_payload.get("coverage") or {}).get("note"),
         },
-        "themes": {
+        "case": {
             "club": "sco:aberdeen",
             "season": target_season,
-            "state": themes_payload.get("state"),
-            "count": len(themes_payload.get("themes", [])),
-            "season_themes": sum(
-                1 for theme in themes_payload.get("themes", []) if theme.get("horizon") == "season"
-            ),
-            "mission_themes": sum(
-                1 for theme in themes_payload.get("themes", []) if theme.get("horizon") == "mission"
-            ),
-            "provider_ratings": (themes_payload.get("coverage") or {}).get("provider_ratings"),
-            "note": (themes_payload.get("coverage") or {}).get("note"),
+            "state": case_payload.get("state"),
+            "count": len(case_payload.get("claims", [])),
+            "domains": len({claim.get("domain") for claim in case_payload.get("claims", [])}),
+            "benchmark_rows": len((case_payload.get("benchmark") or {}).get("rows") or []),
+            "note": (case_payload.get("coverage") or {}).get("note"),
         },
         "provenance": {
             "layers": len(provenance_payload.get("layers", [])),
@@ -1697,8 +1779,112 @@ def publish(
             "note": needs_payload.get("notes"),
         },
     }
-    written.append(_write(temp / "coverage.json", coverage))
-    written.append(_write(temp / "seasons.json", {"seasons": seasons, "current": target_season}))
+    coverage_info = _write(temp / "coverage.json", coverage)
+    written.append(coverage_info)
+    marts.append(
+        {
+            "id": "coverage",
+            "path": "coverage.json",
+            "rows": 1,
+            "checksum": coverage_info["checksum"],
+            "season": target_season,
+            "row_basis": "one coverage document",
+        }
+    )
+    seasons_payload = {"seasons": seasons, "current": target_season}
+    seasons_info = _write(temp / "seasons.json", seasons_payload)
+    written.append(seasons_info)
+    marts.append(
+        {
+            "id": "seasons",
+            "path": "seasons.json",
+            "rows": len(seasons_payload["seasons"]),
+            "checksum": seasons_info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per published season",
+        }
+    )
+
+    # Validation and audit run against the complete public corpus, before the
+    # manifest. A failed audit blocks the atomic replace below.
+    validation_checks = [
+        asdict(check)
+        for check in (
+            validate_matches(matches, season=target_season)
+            + validate_tables(tables, season=target_season)
+            + validate_published(temp)
+        )
+    ]
+    validation_payload = build_validation_payload(
+        checks=validation_checks,
+        season=target_season,
+        generated_at=generated_at,
+        strict=require_validation,
+    )
+    validation_info = _write(temp / "audit" / "validation.json", validation_payload)
+    written.append(validation_info)
+
+    registry = load_registry()
+    registry_payload = build_registry_payload(registry)
+    registry_info = _write(temp / "metrics" / "registry.json", registry_payload)
+    written.append(registry_info)
+
+    corpus = load_corpus(temp)
+    audit_payload = build_audit(
+        corpus=corpus,
+        registry=registry,
+        dataset_version=dataset_version,
+        generated_at=generated_at,
+        season=target_season,
+    )
+    audit_info = _write(temp / "audit" / "metrics.json", audit_payload)
+    written.append(audit_info)
+    marts.extend(
+        [
+            {
+                "id": "metrics.registry",
+                "path": "metrics/registry.json",
+                "rows": len(registry.metrics),
+                "checksum": registry_info["checksum"],
+                "season": target_season,
+                "row_basis": "one row per registered metric",
+            },
+            {
+                "id": "audit.metrics",
+                "path": "audit/metrics.json",
+                "rows": len(audit_payload["metrics"]),
+                "checksum": audit_info["checksum"],
+                "season": target_season,
+                "row_basis": "one row per audited metric",
+            },
+            {
+                "id": "audit.validation",
+                "path": "audit/validation.json",
+                "rows": len(validation_payload["checks"]),
+                "checksum": validation_info["checksum"],
+                "season": target_season,
+                "row_basis": "one row per validation check",
+            },
+            {
+                "id": "players.sco:aberdeen",
+                "path": "players/",
+                "rows": len(squad_data["players"]),
+                "checksum": None,
+                "season": target_season,
+                "row_basis": "one file per squad player",
+            },
+        ]
+    )
+
+    if audit_payload["status"] != "pass":
+        errors = "; ".join(audit_payload["errors"][:3])
+        raise RuntimeError(f"metric audit failed: {errors}")
+    if require_validation and validation_payload["status"] != "pass":
+        raise RuntimeError(
+            "validation failed: "
+            f"{validation_payload['errors']} error(s), "
+            f"{validation_payload['warnings']} warning(s)"
+        )
 
     sources = [
         {
@@ -1730,7 +1916,36 @@ def publish(
             "availability": provenance_payload.get("availability"),
         },
         "marts": marts,
-        "validation": {"status": "not_run"},
+        "validation": {
+            "status": validation_payload["status"],
+            "report": "audit/validation.json",
+            "checksum": validation_info["checksum"],
+            "generated_at": validation_payload["generated_at"],
+            "season": validation_payload["season"],
+            "strict": validation_payload["strict"],
+            "errors": validation_payload["errors"],
+            "warnings": validation_payload["warnings"],
+            "checks": len(validation_payload["checks"]),
+        },
+        "metrics": {
+            "registry_path": "metrics/registry.json",
+            "registry_checksum": registry_checksum(registry),
+            "registry_version": registry.registry_version,
+            "registry_reviewed": registry.reviewed.isoformat(),
+            "audit_path": "audit/metrics.json",
+            "audit_checksum": audit_info["checksum"],
+            "status": audit_payload["status"],
+            "metrics_total": audit_payload["summary"]["metrics_total"],
+            "metrics_passed": audit_payload["summary"]["metrics_passed"],
+            "metrics_failed": audit_payload["summary"]["metrics_failed"],
+            "parameters_total": audit_payload["summary"]["parameters_total"],
+            "parameters_passed": audit_payload["summary"]["parameters_passed"],
+            "parameters_failed": audit_payload["summary"]["parameters_failed"],
+            "verification_modes": audit_payload["summary"]["verification_modes"],
+            "provenance_only": audit_payload["summary"]["provenance_only"],
+            "audited_at": audit_payload["audited_at"],
+            "allowlist": audit_payload["allowlist"],
+        },
         "coverage": coverage,
         "files": [
             {

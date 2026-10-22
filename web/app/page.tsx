@@ -77,8 +77,8 @@ export default function HomePage() {
           <Link className="button button-ghost" href="/news/">
             News &amp; rumours
           </Link>
-          <Link className="button button-ghost" href="/themes/">
-            The bigger picture
+          <Link className="button button-ghost" href="/analysis/">
+            Data analysis
           </Link>
         </div>
       </section>

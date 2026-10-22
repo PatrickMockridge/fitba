@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav className="nav" aria-label="Main">
               <Link href="/matchday/">Matchday</Link>
-              <Link href="/themes/">Themes</Link>
+              <Link href="/analysis/">Data analysis</Link>
               <Link href="/squad/">Squad</Link>
               <Link href="/recruitment/">Off the pitch</Link>
               <Link href="/history/">The Cormack era</Link>
@@ -55,9 +55,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="footer-meta">
               <ThemeSwitcher />
               <FreshnessBadge manifest={manifest} />
+              <Link href="/analysis/">Data analysis</Link>
               <Link href="/methodology/">Method</Link>
               <Link href="/about/">About</Link>
               <Link href="/sources/">Sources</Link>
+              <Link href="/metrics/">Metrics</Link>
               <Link href="/status/">Data status</Link>
             </div>
           </div>

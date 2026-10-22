@@ -184,9 +184,9 @@ XI available. Opponent API ids live in `reference/source_ids.yaml`; an id is
 never inferred from a club name, and a provider search is a bounded fallback
 recorded as a warning, not written back automatically.
 
-## Themes and provider ratings
+## Data analysis and provider ratings
 
-`/themes/` is derived from the same local data as the rest of the site:
+Data analysis (`/analysis/`) is derived from the same local data as the rest of the site:
 
 - provider per-match ratings and goals from `/fixtures/players` for Aberdeen's
   Premiership fixtures (current season only; the historical player-match-stat
@@ -201,7 +201,7 @@ minutes-weighted, not position-adjusted, and are never published as individual
 verdicts. There is no xG, channel, possession or mid-game shape feed. Injuries
 are a curated team-news special case ([availability.md](availability.md)); the
 provider injury feed is not populated for current-season Scotland. See
-[themes.md](themes.md).
+[analysis.md](analysis.md).
 
 ## Transfers and loans
 

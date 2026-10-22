@@ -132,18 +132,6 @@ def main() -> int:
         ):
             errors.append(f"{family_name}: requires_outgoing without a full roster")
 
-    if THEMES.exists():
-        themes = _load(THEMES)
-        needs_by_family = {row.get("family"): row for row in families}
-        for theme in themes.get("themes") or []:
-            for implication in theme.get("implications") or []:
-                family = needs_by_family.get(implication.get("family"))
-                if not family:
-                    errors.append(f"{theme.get('theme_id')}: implication family not in needs")
-                    continue
-                if implication.get("category") != family.get("category"):
-                    errors.append(f"{theme.get('theme_id')}: implication category mismatch")
-
     for text in _strings(document):
         lowered = text.casefold()
         for phrase in BLAME:

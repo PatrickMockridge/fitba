@@ -1,0 +1,26 @@
+baseline: 44
+files:
+  web/app/design/page.tsx: 2
+  web/app/history/[season]/page.tsx: 2
+  web/app/history/page.tsx: 1
+  web/app/players/[playerId]/page.tsx: 2
+  web/app/status/page.tsx: 1
+  web/app/themes/page.tsx: 1
+  web/components/BalancePanel.tsx: 2
+  web/components/BucketBars.tsx: 1
+  web/components/CareerRoleHeatmap.tsx: 2
+  web/components/ForumSignalPanel.tsx: 6
+  web/components/FreshnessBadge.tsx: 2
+  web/components/ManagerRecordTable.tsx: 1
+  web/components/MissionPanel.tsx: 1
+  web/components/NeedsBoard.tsx: 3
+  web/components/PitchLineup.tsx: 1
+  web/components/PredictedLineupPanel.tsx: 5
+  web/components/RoleInference.tsx: 1
+  web/components/RoleMix.tsx: 2
+  web/components/SquadBoard.tsx: 3
+  web/components/StrengthComparison.tsx: 1
+  web/components/StyleMatchup.tsx: 3
+  web/lib/roles.ts: 1
+note: Direct Math.round/toFixed calls outside web/lib/format.ts. The count may fall
+  but may not grow. Move formatting into web/lib/format.ts before adding a call.

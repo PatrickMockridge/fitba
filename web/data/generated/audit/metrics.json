@@ -1,0 +1,3708 @@
+{
+  "allowlist": {
+    "entries": [],
+    "expires": null,
+    "status": "none"
+  },
+  "audited_at": "2026-10-22T16:29:02+00:00",
+  "dataset_version": "2026-10-22T16:29:02+00:00-8db53cf",
+  "errors": [],
+  "generated_at": "2026-10-22T16:29:02+00:00",
+  "metrics": [
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "4 payload(s) matched tables/*.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "4 location(s), 462 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_standings: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "42 rows checked",
+          "name": "table.record",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Per-team league record and ranking inputs.",
+      "displayed_surfaces": [
+        "/",
+        "/competitions/",
+        "/status/"
+      ],
+      "errors": [],
+      "fields_checked": 672,
+      "home_payload": "tables/*.json",
+      "home_surface": "/competitions/",
+      "id": "table.record",
+      "label": "League table record",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 191,
+          "numeric_leaves": 110,
+          "payload": "tables/championship-2026-27.json",
+          "pointer": "/rows/**"
+        },
+        {
+          "nodes": 191,
+          "numeric_leaves": 110,
+          "payload": "tables/league-one-2026-27.json",
+          "pointer": "/rows/**"
+        },
+        {
+          "nodes": 191,
+          "numeric_leaves": 110,
+          "payload": "tables/league-two-2026-27.json",
+          "pointer": "/rows/**"
+        },
+        {
+          "nodes": 229,
+          "numeric_leaves": 132,
+          "payload": "tables/premiership-2026-27.json",
+          "pointer": "/rows/**"
+        }
+      ],
+      "numeric_leaves": 462,
+      "payloads": 4,
+      "provenance_only": false,
+      "rows_checked": 46,
+      "source_checksums": {},
+      "source_layer": "league_standings",
+      "status": "pass",
+      "value_type": "table",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "4 payload(s) matched tables/*.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "4 location(s), 15 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_standings: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "League positions and cutoff labels.",
+      "displayed_surfaces": [
+        "/competitions/"
+      ],
+      "errors": [],
+      "fields_checked": 15,
+      "home_payload": "tables/*.json",
+      "home_surface": "/competitions/",
+      "id": "table.cutoffs",
+      "label": "League cutoffs",
+      "limitations": [
+        "Cutoff positions are configured; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 21,
+          "numeric_leaves": 4,
+          "payload": "tables/championship-2026-27.json",
+          "pointer": "/cutoffs/**"
+        },
+        {
+          "nodes": 21,
+          "numeric_leaves": 4,
+          "payload": "tables/league-one-2026-27.json",
+          "pointer": "/cutoffs/**"
+        },
+        {
+          "nodes": 16,
+          "numeric_leaves": 3,
+          "payload": "tables/league-two-2026-27.json",
+          "pointer": "/cutoffs/**"
+        },
+        {
+          "nodes": 21,
+          "numeric_leaves": 4,
+          "payload": "tables/premiership-2026-27.json",
+          "pointer": "/cutoffs/**"
+        }
+      ],
+      "numeric_leaves": 15,
+      "payloads": 4,
+      "provenance_only": true,
+      "rows_checked": 4,
+      "source_checksums": {},
+      "source_layer": "league_standings",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched competitions/index.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 14 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_standings: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Competition identity, coverage and match counts.",
+      "displayed_surfaces": [
+        "/competitions/"
+      ],
+      "errors": [],
+      "fields_checked": 14,
+      "home_payload": "competitions/index.json",
+      "home_surface": "/competitions/",
+      "id": "competition.index",
+      "label": "Competition index",
+      "limitations": [
+        "Competition metadata and coverage; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 100,
+          "numeric_leaves": 14,
+          "payload": "competitions/index.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 14,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "league_standings",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched competitions/league-cup.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1435 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "cup_fixtures: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "League Cup groups, rounds, ties and qualifiers.",
+      "displayed_surfaces": [
+        "/competitions/league-cup/"
+      ],
+      "errors": [],
+      "fields_checked": 1435,
+      "home_payload": "competitions/league-cup.json",
+      "home_surface": "/competitions/league-cup/",
+      "id": "cup.league",
+      "label": "League Cup",
+      "limitations": [
+        "Cup structure and results; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 4796,
+          "numeric_leaves": 1435,
+          "payload": "competitions/league-cup.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 1435,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "cup_fixtures",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched competitions/scottish-cup.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 288 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "cup_fixtures: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Scottish Cup rounds, ties and coverage.",
+      "displayed_surfaces": [
+        "/competitions/scottish-cup/"
+      ],
+      "errors": [],
+      "fields_checked": 288,
+      "home_payload": "competitions/scottish-cup.json",
+      "home_surface": "/competitions/scottish-cup/",
+      "id": "cup.scottish",
+      "label": "Scottish Cup",
+      "limitations": [
+        "Cup structure and results; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 2457,
+          "numeric_leaves": 288,
+          "payload": "competitions/scottish-cup.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 288,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "cup_fixtures",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 244 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_results_current: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "8 form records checked",
+          "name": "matchday.form",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Recent and split form for both teams.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 284,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.form",
+      "label": "Matchday form",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 354,
+          "numeric_leaves": 244,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/form_guide/*/**"
+        }
+      ],
+      "numeric_leaves": 244,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 9,
+      "source_checksums": {},
+      "source_layer": "league_results_current",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 43 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_standings: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "2 strength rows checked",
+          "name": "matchday.strength",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "League strength, percentiles and comparison.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 59,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.strength",
+      "label": "Matchday strength",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 62,
+          "numeric_leaves": 40,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/strength/*/**"
+        },
+        {
+          "nodes": 10,
+          "numeric_leaves": 3,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/strength_comparison/**"
+        }
+      ],
+      "numeric_leaves": 43,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 4,
+      "source_checksums": {},
+      "source_layer": "league_standings",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 144 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_team_stats: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Shot profile, approach index and style lean.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 144,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.style",
+      "label": "Matchday style",
+      "limitations": [
+        "Shot-profile derivatives; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 229,
+          "numeric_leaves": 144,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/styles/*/**"
+        }
+      ],
+      "numeric_leaves": 144,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "league_team_stats",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 404 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "lineups_roles: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "event",
+      "description": "Predicted lineups, scores, selection weights and availability.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 404,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.lineup",
+      "label": "Predicted XI",
+      "limitations": [
+        "Selection and formation projections; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 1321,
+          "numeric_leaves": 404,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/predicted_lineups/**"
+        }
+      ],
+      "numeric_leaves": 404,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "lineups_roles",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 4 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_results_current: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "snapshot coverage checked",
+          "name": "matchday.coverage",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Snapshot, lineup and form coverage.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 6,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.coverage",
+      "label": "Matchday coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 17,
+          "numeric_leaves": 4,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 4,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "league_results_current",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 6 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Recent meetings and results.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 6,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.head-to-head",
+      "label": "Head-to-head",
+      "limitations": [
+        "Historical meeting snapshot; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 28,
+          "numeric_leaves": 6,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/head_to_head/**"
+        }
+      ],
+      "numeric_leaves": 6,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched matchday/upcoming.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "club_fixtures: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Upcoming club fixtures.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.next-fixtures",
+      "label": "Next fixtures",
+      "limitations": [
+        "Fixture snapshot; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 35,
+          "numeric_leaves": 0,
+          "payload": "matchday/upcoming.json",
+          "pointer": "/next_fixtures/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "club_fixtures",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched needs/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 5 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "needs: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "7 families checked",
+          "name": "needs.summary",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Family counts and availability summary.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "errors": [],
+      "fields_checked": 10,
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.summary",
+      "label": "Needs summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 9,
+          "numeric_leaves": 5,
+          "payload": "needs/aberdeen.json",
+          "pointer": "/summary/**"
+        }
+      ],
+      "numeric_leaves": 5,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 8,
+      "source_checksums": {},
+      "source_layer": "needs",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched needs/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 306 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "needs: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Per-family depth, quality, availability, market and roster metrics.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "errors": [],
+      "fields_checked": 306,
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.family",
+      "label": "Needs families",
+      "limitations": [
+        "Derived family metrics; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 1094,
+          "numeric_leaves": 306,
+          "payload": "needs/aberdeen.json",
+          "pointer": "/families/**"
+        }
+      ],
+      "numeric_leaves": 306,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "needs",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched needs/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "needs: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Roster current/max and outgoing-first policy.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.roster-space",
+      "label": "Roster space",
+      "limitations": [
+        "Roster policy; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 7,
+          "numeric_leaves": 0,
+          "payload": "needs/aberdeen.json",
+          "pointer": "/roster_space/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "needs",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched needs/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 3 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "needs: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Needs coverage and availability status.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "errors": [],
+      "fields_checked": 3,
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.coverage",
+      "label": "Needs coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 10,
+          "numeric_leaves": 3,
+          "payload": "needs/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 3,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "needs",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 6 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "229 rows checked",
+          "name": "transfers.summary",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Register totals, players and period.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 12,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.summary",
+      "label": "Transfer summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 8,
+          "numeric_leaves": 6,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/summary/**"
+        }
+      ],
+      "numeric_leaves": 6,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 230,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 420 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "20 windows checked",
+          "name": "transfers.window",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Per-window arrival/departure and valuation counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 425,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.window",
+      "label": "Transfer windows",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 621,
+          "numeric_leaves": 420,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/windows/**"
+        }
+      ],
+      "numeric_leaves": 420,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 21,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 792 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Per-move fee, loan and verification values.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 792,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.row",
+      "label": "Transfer rows",
+      "limitations": [
+        "Per-row curated fees and terms; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 10637,
+          "numeric_leaves": 792,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/transfers/**"
+        }
+      ],
+      "numeric_leaves": 792,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 14 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "valuation: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Modelled fee ranges and calibration counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 14,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.valuation",
+      "label": "Transfer valuation",
+      "limitations": [
+        "Modelled valuation; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 20,
+          "numeric_leaves": 14,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/valuation/**"
+        }
+      ],
+      "numeric_leaves": 14,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "valuation",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 19 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Sell-on percentages, basis and summary.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 19,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.sell-on",
+      "label": "Sell-on clauses",
+      "limitations": [
+        "Curated sell-on clauses; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 7,
+          "numeric_leaves": 5,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/sell_on_summary/**"
+        },
+        {
+          "nodes": 92,
+          "numeric_leaves": 14,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/sell_on_clauses/**"
+        }
+      ],
+      "numeric_leaves": 19,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 124 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "loans: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Loan-in and loan-out slices.",
+      "displayed_surfaces": [
+        "/loans/"
+      ],
+      "errors": [],
+      "fields_checked": 124,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/loans/",
+      "id": "transfers.loans",
+      "label": "Transfer loans",
+      "limitations": [
+        "Loan rows; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 1428,
+          "numeric_leaves": 62,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/loans_out/**"
+        },
+        {
+          "nodes": 1427,
+          "numeric_leaves": 62,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/loans_in/**"
+        }
+      ],
+      "numeric_leaves": 124,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "loans",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Withheld suspect rows and plausibility counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.plausibility",
+      "label": "Transfer plausibility",
+      "limitations": [
+        "Plausibility policy; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 3,
+          "numeric_leaves": 1,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/plausibility/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.audit.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 72 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Seniority review, position coverage and gap ledger counts.",
+      "displayed_surfaces": [
+        "/transfers/",
+        "/status/"
+      ],
+      "errors": [],
+      "fields_checked": 72,
+      "home_payload": "transfers/aberdeen.audit.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.audit",
+      "label": "Transfer completeness audit",
+      "limitations": [
+        "Completeness audit is report-only; it does not prove provider completeness."
+      ],
+      "locations": [
+        {
+          "nodes": 300,
+          "numeric_leaves": 72,
+          "payload": "transfers/aberdeen.audit.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 72,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched transfers/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "transfer_register: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "coverage fields present",
+          "name": "transfers.coverage",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Audited/curated window coverage.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "errors": [],
+      "fields_checked": 3,
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.coverage",
+      "label": "Transfer coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 5,
+          "numeric_leaves": 0,
+          "payload": "transfers/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "transfer_register",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched history/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 57 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "7 completed seasons, 1 era honours checked",
+          "name": "history.scorecard",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Era aggregates: seasons, managers, honours and positions.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 62,
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.scorecard",
+      "label": "History scorecard",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 80,
+          "numeric_leaves": 57,
+          "payload": "history/aberdeen.json",
+          "pointer": "/scorecard/**"
+        }
+      ],
+      "numeric_leaves": 57,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 9,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched history/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Season-level history rows.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.season",
+      "label": "History seasons",
+      "limitations": [
+        "Curated season refs; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 91,
+          "numeric_leaves": 0,
+          "payload": "history/aberdeen.json",
+          "pointer": "/seasons/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched history/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 117 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Manager/staff stints and records.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 117,
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.staff",
+      "label": "History staff",
+      "limitations": [
+        "Curated staff stints; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 832,
+          "numeric_leaves": 117,
+          "payload": "history/aberdeen.json",
+          "pointer": "/staff/**"
+        }
+      ],
+      "numeric_leaves": 117,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched history/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 77 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "6 baseline rows checked",
+          "name": "history.baseline",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "League-only baseline window.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 80,
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.baseline",
+      "label": "History baseline",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 130,
+          "numeric_leaves": 77,
+          "payload": "history/aberdeen.json",
+          "pointer": "/baseline/**"
+        }
+      ],
+      "numeric_leaves": 77,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 7,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched history/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 42 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "history coverage checked",
+          "name": "history.coverage",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "History season/backfill coverage.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 44,
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.coverage",
+      "label": "History coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 78,
+          "numeric_leaves": 42,
+          "payload": "history/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 42,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "8 payload(s) matched history/seasons/*.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "8 location(s), 1706 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "history: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Per-season history documents.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "errors": [],
+      "fields_checked": 1706,
+      "home_payload": "history/seasons/*.json",
+      "home_surface": "/history/",
+      "id": "history.season-document",
+      "label": "History season documents",
+      "limitations": [
+        "Curated season documents; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 448,
+          "numeric_leaves": 176,
+          "payload": "history/seasons/2019-20.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 613,
+          "numeric_leaves": 218,
+          "payload": "history/seasons/2020-21.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 597,
+          "numeric_leaves": 224,
+          "payload": "history/seasons/2021-22.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 648,
+          "numeric_leaves": 227,
+          "payload": "history/seasons/2022-23.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 697,
+          "numeric_leaves": 226,
+          "payload": "history/seasons/2023-24.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 515,
+          "numeric_leaves": 193,
+          "payload": "history/seasons/2024-25.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 718,
+          "numeric_leaves": 234,
+          "payload": "history/seasons/2025-26.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 558,
+          "numeric_leaves": 208,
+          "payload": "history/seasons/2026-27.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 1706,
+      "payloads": 8,
+      "provenance_only": true,
+      "rows_checked": 8,
+      "source_checksums": {},
+      "source_layer": "history",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched squad/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 64 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "squad_identity: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "38 players checked",
+          "name": "squad.summary",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "event",
+      "description": "Squad size, loans, role evidence and coverage counts.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "errors": [],
+      "fields_checked": 69,
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.summary",
+      "label": "Squad summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 75,
+          "numeric_leaves": 64,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/summary/**"
+        }
+      ],
+      "numeric_leaves": 64,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 39,
+      "source_checksums": {},
+      "source_layer": "squad_identity",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched squad/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 6237 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "squad_identity: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "event",
+      "description": "Per-player totals, playing time, role and position stats.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "errors": [],
+      "fields_checked": 6237,
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.players",
+      "label": "Squad players",
+      "limitations": [
+        "Per-player rows; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 20385,
+          "numeric_leaves": 6237,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/players/**"
+        }
+      ],
+      "numeric_leaves": 6237,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "squad_identity",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched squad/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "6 location(s), 59 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "squad_identity: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "event",
+      "description": "Role/career/position/attribute coverage metadata.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "errors": [],
+      "fields_checked": 59,
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.meta",
+      "label": "Squad metadata",
+      "limitations": [
+        "Coverage metadata; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 23,
+          "numeric_leaves": 14,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/role_meta/**"
+        },
+        {
+          "nodes": 46,
+          "numeric_leaves": 23,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/career_meta/**"
+        },
+        {
+          "nodes": 7,
+          "numeric_leaves": 2,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/position_stats_meta/**"
+        },
+        {
+          "nodes": 19,
+          "numeric_leaves": 8,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/attributes_meta/**"
+        },
+        {
+          "nodes": 44,
+          "numeric_leaves": 12,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/availability_meta/**"
+        },
+        {
+          "nodes": 3,
+          "numeric_leaves": 0,
+          "payload": "squad/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 59,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 6,
+      "source_checksums": {},
+      "source_layer": "squad_identity",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "38 payload(s) matched players/*.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "38 location(s), 5803 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "player_match_stats: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "event",
+      "description": "Per-player page panels and records.",
+      "displayed_surfaces": [
+        "/players/"
+      ],
+      "errors": [],
+      "fields_checked": 5803,
+      "home_payload": "players/*.json",
+      "home_surface": "/players/",
+      "id": "player.page",
+      "label": "Player pages",
+      "limitations": [
+        "Player page rows; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 871,
+          "numeric_leaves": 242,
+          "payload": "players/108465.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 578,
+          "numeric_leaves": 158,
+          "payload": "players/1141.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 654,
+          "numeric_leaves": 172,
+          "payload": "players/125695.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 511,
+          "numeric_leaves": 104,
+          "payload": "players/14344.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 677,
+          "numeric_leaves": 178,
+          "payload": "players/153645.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 736,
+          "numeric_leaves": 203,
+          "payload": "players/161806.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 326,
+          "numeric_leaves": 65,
+          "payload": "players/163064.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 548,
+          "numeric_leaves": 145,
+          "payload": "players/18068.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 953,
+          "numeric_leaves": 268,
+          "payload": "players/18945.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 729,
+          "numeric_leaves": 175,
+          "payload": "players/20422.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 953,
+          "numeric_leaves": 270,
+          "payload": "players/231195.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 773,
+          "numeric_leaves": 216,
+          "payload": "players/267727.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 635,
+          "numeric_leaves": 165,
+          "payload": "players/271395.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 527,
+          "numeric_leaves": 141,
+          "payload": "players/303519.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 747,
+          "numeric_leaves": 202,
+          "payload": "players/321860.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 682,
+          "numeric_leaves": 154,
+          "payload": "players/340027.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 295,
+          "numeric_leaves": 38,
+          "payload": "players/361406.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 662,
+          "numeric_leaves": 179,
+          "payload": "players/37253.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 534,
+          "numeric_leaves": 141,
+          "payload": "players/379662.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 845,
+          "numeric_leaves": 239,
+          "payload": "players/388510.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 494,
+          "numeric_leaves": 95,
+          "payload": "players/394703.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 876,
+          "numeric_leaves": 233,
+          "payload": "players/395743.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 292,
+          "numeric_leaves": 40,
+          "payload": "players/430030.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 851,
+          "numeric_leaves": 238,
+          "payload": "players/44921.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 638,
+          "numeric_leaves": 174,
+          "payload": "players/44982.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 856,
+          "numeric_leaves": 247,
+          "payload": "players/45010.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 295,
+          "numeric_leaves": 38,
+          "payload": "players/477991.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 326,
+          "numeric_leaves": 50,
+          "payload": "players/496904.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 546,
+          "numeric_leaves": 140,
+          "payload": "players/550363.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 798,
+          "numeric_leaves": 221,
+          "payload": "players/57248.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 879,
+          "numeric_leaves": 261,
+          "payload": "players/61178.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 295,
+          "numeric_leaves": 39,
+          "payload": "players/625768.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 295,
+          "numeric_leaves": 38,
+          "payload": "players/644159.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 365,
+          "numeric_leaves": 83,
+          "payload": "players/670299.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 295,
+          "numeric_leaves": 38,
+          "payload": "players/674621.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 464,
+          "numeric_leaves": 85,
+          "payload": "players/6973.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 480,
+          "numeric_leaves": 122,
+          "payload": "players/84126.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 740,
+          "numeric_leaves": 206,
+          "payload": "players/97896.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 5803,
+      "payloads": 38,
+      "provenance_only": true,
+      "rows_checked": 38,
+      "source_checksums": {},
+      "source_layer": "player_match_stats",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched rumours/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "rumours: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "0 rumours checked",
+          "name": "rumours.summary",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Curated rumour counts and status.",
+      "displayed_surfaces": [
+        "/rumours/"
+      ],
+      "errors": [],
+      "fields_checked": 5,
+      "home_payload": "rumours/aberdeen.json",
+      "home_surface": "/rumours/",
+      "id": "rumours.summary",
+      "label": "Rumour summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 6,
+          "numeric_leaves": 1,
+          "payload": "rumours/aberdeen.json",
+          "pointer": "/summary/**"
+        },
+        {
+          "nodes": 3,
+          "numeric_leaves": 0,
+          "payload": "rumours/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "rumours",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "recompute",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched rumours/profile.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 7 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "rumours: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Advisory recruitment profile weights and buckets.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "errors": [],
+      "fields_checked": 7,
+      "home_payload": "rumours/profile.json",
+      "home_surface": "/recruitment/",
+      "id": "rumours.profile",
+      "label": "Rumour profile",
+      "limitations": [
+        "Advisory profile; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 21,
+          "numeric_leaves": 7,
+          "payload": "rumours/profile.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 7,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "rumours",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched forum/afc_chat.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 396 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "forum_signal: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Fan-signal coverage, sentiment and profile.",
+      "displayed_surfaces": [
+        "/news/"
+      ],
+      "errors": [],
+      "fields_checked": 396,
+      "home_payload": "forum/afc_chat.json",
+      "home_surface": "/news/",
+      "id": "forum.signal",
+      "label": "Forum signal",
+      "limitations": [
+        "Reference fan signal; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 1077,
+          "numeric_leaves": 396,
+          "payload": "forum/afc_chat.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 396,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "forum_signal",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched provenance.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "4 location(s), 28 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Layer/source row counts and truth table.",
+      "displayed_surfaces": [
+        "/sources/"
+      ],
+      "errors": [],
+      "fields_checked": 28,
+      "home_payload": "provenance.json",
+      "home_surface": "/sources/",
+      "id": "provenance.layers",
+      "label": "Provenance layers",
+      "limitations": [
+        "Provenance summary; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 725,
+          "numeric_leaves": 20,
+          "payload": "provenance.json",
+          "pointer": "/layers/**"
+        },
+        {
+          "nodes": 95,
+          "numeric_leaves": 8,
+          "payload": "provenance.json",
+          "pointer": "/sources/**"
+        },
+        {
+          "nodes": 7,
+          "numeric_leaves": 0,
+          "payload": "provenance.json",
+          "pointer": "/migration/**"
+        },
+        {
+          "nodes": 4,
+          "numeric_leaves": 0,
+          "payload": "provenance.json",
+          "pointer": "/availability/**"
+        }
+      ],
+      "numeric_leaves": 28,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 4,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched coverage.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 57 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "coverage cross-surface checks",
+          "name": "coverage.surfaces",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Build coverage counts across surfaces.",
+      "displayed_surfaces": [
+        "/status/"
+      ],
+      "errors": [],
+      "fields_checked": 60,
+      "home_payload": "coverage.json",
+      "home_surface": "/status/",
+      "id": "coverage.surfaces",
+      "label": "Coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 185,
+          "numeric_leaves": 57,
+          "payload": "coverage.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 57,
+      "payloads": 1,
+      "provenance_only": false,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched clubs/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 266 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "league_results_current: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Aberdeen club summary, history and news rows.",
+      "displayed_surfaces": [
+        "/"
+      ],
+      "errors": [],
+      "fields_checked": 266,
+      "home_payload": "clubs/aberdeen.json",
+      "home_surface": "/",
+      "id": "clubs.aberdeen",
+      "label": "Club payload",
+      "limitations": [
+        "Club summary payload; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 818,
+          "numeric_leaves": 266,
+          "payload": "clubs/aberdeen.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 266,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "league_results_current",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "curated",
+      "checks": [
+        {
+          "message": "1 payload(s) matched availability/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 48 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "availability: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Availability ledger coverage and entries.",
+      "displayed_surfaces": [
+        "/status/"
+      ],
+      "errors": [],
+      "fields_checked": 48,
+      "home_payload": "availability/aberdeen.json",
+      "home_surface": "/status/",
+      "id": "availability.ledger",
+      "label": "Availability",
+      "limitations": [
+        "Curated team news; provenance checked, not recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 809,
+          "numeric_leaves": 48,
+          "payload": "availability/aberdeen.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 48,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "availability",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "4 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Owner view, chairman frame, thesis and state.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.document",
+      "label": "The case document",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 4,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/owner_view/**"
+        },
+        {
+          "nodes": 5,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/chairman_frame/**"
+        },
+        {
+          "nodes": 1,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/thesis"
+        },
+        {
+          "nodes": 1,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/state"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 4,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 6 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "The claim register: order, domain, status and counts.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 6,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claims",
+      "label": "The case claims",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 349,
+          "numeric_leaves": 6,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/**"
+        }
+      ],
+      "numeric_leaves": 6,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "The evidence table attached to each claim.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.evidence",
+      "label": "Claim evidence",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 222,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*/evidence/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 39 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "League performance of the other SPFL clubs.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 39,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.benchmark",
+      "label": "Peer benchmark",
+      "limitations": [
+        "League performance only; other clubs transfer and wage models are not in the record."
+      ],
+      "locations": [
+        {
+          "nodes": 67,
+          "numeric_leaves": 39,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/benchmark/**"
+        }
+      ],
+      "numeric_leaves": 39,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 0 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Availability, history and missing data classes.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 0,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.coverage",
+      "label": "Case coverage",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 13,
+          "numeric_leaves": 0,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 0,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "League record and kick-off shape churn.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.team-now",
+      "label": "The team now",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "locations": [
+        {
+          "nodes": 46,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=team_now]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Three-at-the-back record, wide roles and availability.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.defence",
+      "label": "The defence",
+      "limitations": [
+        "Four three-CB matches; association only. Availability is unknown."
+      ],
+      "locations": [
+        {
+          "nodes": 54,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=defence]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Goals, shot share and the set-play/error gap.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.attack",
+      "label": "The attack",
+      "limitations": [
+        "No event data for set-piece goals, errors or penalties."
+      ],
+      "locations": [
+        {
+          "nodes": 62,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=attack]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Manager phases, runs and the cup.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.managers",
+      "label": "The managers",
+      "limitations": [
+        "18 Robinson matches; no pre-declared variance measure."
+      ],
+      "locations": [
+        {
+          "nodes": 62,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=managers]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "Arrivals, departures, age, U21 minutes and the Morris sale.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.squad",
+      "label": "The squad",
+      "limitations": [
+        "Confirmed business only; fees are mostly undisclosed."
+      ],
+      "locations": [
+        {
+          "nodes": 54,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=squad]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched themes/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "themes: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "curated",
+      "description": "The Cormack-era record, managers, honours and transfers.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "errors": [],
+      "fields_checked": 1,
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.chairman-record",
+      "label": "The chairman's record",
+      "limitations": [
+        "The record cannot prove causation or boardroom intent."
+      ],
+      "locations": [
+        {
+          "nodes": 70,
+          "numeric_leaves": 1,
+          "payload": "themes/aberdeen.json",
+          "pointer": "/claims/*[id=chairman_record]/**"
+        }
+      ],
+      "numeric_leaves": 1,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "themes",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    }
+  ],
+  "parameters": [
+    {
+      "actual_checksum": "sha256:b031ee53f48bd19e0cfccfdeffa6fe785f92ecd0253ec05763b4e4abe6802806",
+      "config_keys": [],
+      "config_path": "matchday.style",
+      "errors": [],
+      "expected_checksum": "sha256:b031ee53f48bd19e0cfccfdeffa6fe785f92ecd0253ec05763b4e4abe6802806",
+      "id": "param.matchday.style",
+      "kind": "matrix",
+      "label": "Matchday style policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.style"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:06642572377adb5236e79e067c745d18a4340936c697ff5b8574c930ae37fef0",
+      "config_keys": [],
+      "config_path": "matchday.prediction",
+      "errors": [],
+      "expected_checksum": "sha256:06642572377adb5236e79e067c745d18a4340936c697ff5b8574c930ae37fef0",
+      "id": "param.matchday.prediction",
+      "kind": "matrix",
+      "label": "Matchday prediction policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.lineup"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:0e5ab930c6f6299f394bbf6fce16dbc60cd4af5b8146aab0453cc6a9038c5a04",
+      "config_keys": [
+        "recent_fixtures",
+        "contenders",
+        "max_api_requests",
+        "refresh_after_hours",
+        "stale_after_hours",
+        "min_lineup_matches"
+      ],
+      "config_path": "matchday",
+      "errors": [],
+      "expected_checksum": "sha256:0e5ab930c6f6299f394bbf6fce16dbc60cd4af5b8146aab0453cc6a9038c5a04",
+      "id": "param.matchday.refresh",
+      "kind": "matrix",
+      "label": "Matchday refresh and sample policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.form",
+        "matchday.lineup",
+        "matchday.coverage"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:63696f34acd04ebe826ad98c1aa83559e917b8689c998d2222d05b99074184fb",
+      "config_keys": [],
+      "config_path": "needs.thresholds",
+      "errors": [],
+      "expected_checksum": "sha256:63696f34acd04ebe826ad98c1aa83559e917b8689c998d2222d05b99074184fb",
+      "id": "param.needs.thresholds",
+      "kind": "matrix",
+      "label": "Needs thresholds",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "needs.family",
+        "needs.summary"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:b45cef6cac6f8f2921fbaaa0ac8caadcda05642612d4cc62575265a4f20ffe38",
+      "config_keys": [],
+      "config_path": "needs.families",
+      "errors": [],
+      "expected_checksum": "sha256:b45cef6cac6f8f2921fbaaa0ac8caadcda05642612d4cc62575265a4f20ffe38",
+      "id": "param.needs.families",
+      "kind": "matrix",
+      "label": "Needs family policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "needs.family",
+        "needs.roster-space"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:7609cc2460a9a7a0955c4976e03857136b4ee400df952ed73a9482168629ae2c",
+      "config_keys": [],
+      "config_path": "transfers.audit",
+      "errors": [],
+      "expected_checksum": "sha256:7609cc2460a9a7a0955c4976e03857136b4ee400df952ed73a9482168629ae2c",
+      "id": "param.transfers.audit",
+      "kind": "matrix",
+      "label": "Transfer audit thresholds",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "transfers.row",
+        "transfers.coverage"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:cc5e88ced2dbe9f5358e0265bc318fcbb01ed43fbfeb1dfe2351ba694b63be4b",
+      "config_keys": [],
+      "config_path": "transfers.valuation",
+      "errors": [],
+      "expected_checksum": "sha256:cc5e88ced2dbe9f5358e0265bc318fcbb01ed43fbfeb1dfe2351ba694b63be4b",
+      "id": "param.transfers.valuation",
+      "kind": "matrix",
+      "label": "Transfer valuation policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "transfers.valuation"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:02d59683c05f9442fb67e766e12cfb5ea5fabf2794d3b06398be39a0b15cc0f7",
+      "config_keys": [],
+      "config_path": "availability.policy",
+      "errors": [],
+      "expected_checksum": "sha256:02d59683c05f9442fb67e766e12cfb5ea5fabf2794d3b06398be39a0b15cc0f7",
+      "id": "param.availability.policy",
+      "kind": "matrix",
+      "label": "Availability policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "availability.ledger"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:c56bc0deea53436684bf1c080e08fe177a9ac4a0cff39d8c6157ba97f01368be",
+      "config_keys": [],
+      "config_path": "availability.provider",
+      "errors": [],
+      "expected_checksum": "sha256:c56bc0deea53436684bf1c080e08fe177a9ac4a0cff39d8c6157ba97f01368be",
+      "id": "param.availability.provider",
+      "kind": "matrix",
+      "label": "Availability provider policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "availability.ledger"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:95f56e0605300dbba7150fdc4c201625c4d69546760283e1937bd4c89e988879",
+      "config_keys": [],
+      "config_path": "competitions.competitions",
+      "errors": [],
+      "expected_checksum": "sha256:95f56e0605300dbba7150fdc4c201625c4d69546760283e1937bd4c89e988879",
+      "id": "param.competitions",
+      "kind": "matrix",
+      "label": "Competition policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "table.record",
+        "table.cutoffs",
+        "competition.index"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:3385623392c1f00a7a03f4d40f10c2b2b84524cd5de656ca67d5810e7caab385",
+      "config_keys": [],
+      "config_path": "competitions.history",
+      "errors": [],
+      "expected_checksum": "sha256:3385623392c1f00a7a03f4d40f10c2b2b84524cd5de656ca67d5810e7caab385",
+      "id": "param.competitions.history",
+      "kind": "matrix",
+      "label": "Competition history backfill",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "table.record",
+        "table.cutoffs"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:a3ee651c9a93d896800c68cef3ac15d38bc1720435cc562561f15a51f071b661",
+      "config_keys": [],
+      "config_path": "competitions.validation",
+      "errors": [],
+      "expected_checksum": "sha256:a3ee651c9a93d896800c68cef3ac15d38bc1720435cc562561f15a51f071b661",
+      "id": "param.competitions.validation",
+      "kind": "matrix",
+      "label": "Competition validation policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "table.record"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:8be4cfbb3cd2c7a36f1ea33194d7d7d2b890d3d7f85e3e7988f8d0a2c784c011",
+      "config_keys": [],
+      "config_path": "themes.thresholds",
+      "errors": [],
+      "expected_checksum": "sha256:8be4cfbb3cd2c7a36f1ea33194d7d7d2b890d3d7f85e3e7988f8d0a2c784c011",
+      "id": "param.case.thresholds",
+      "kind": "matrix",
+      "label": "Case thresholds",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "case.claim.defence",
+        "case.claim.attack",
+        "case.claim.managers"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:de95cec03394ed68b018413c1d923dac3f0490f6864ee57e3e961a8b39884fef",
+      "config_keys": [],
+      "config_path": "themes.scope",
+      "errors": [],
+      "expected_checksum": "sha256:de95cec03394ed68b018413c1d923dac3f0490f6864ee57e3e961a8b39884fef",
+      "id": "param.case.scope",
+      "kind": "matrix",
+      "label": "Case scope",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "case.claim.team-now",
+        "case.claim.defence",
+        "case.claim.attack"
+      ],
+      "version": 1
+    }
+  ],
+  "registry_checksum": "sha256:bceaea65c6e37dd961e9095cc42e94ce544dcf93168c6b963a00c56d26511717",
+  "registry_reviewed": "2026-10-22",
+  "registry_version": "2.0.0",
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "status": "pass",
+  "summary": {
+    "fields_checked": 20146,
+    "metrics_failed": 0,
+    "metrics_passed": 53,
+    "metrics_total": 53,
+    "parameters_failed": 0,
+    "parameters_passed": 14,
+    "parameters_total": 14,
+    "provenance_only": 39,
+    "rows_checked": 482,
+    "verification_modes": {
+      "cross_surface": 6,
+      "provenance_only": 39,
+      "recompute": 8
+    }
+  }
+}

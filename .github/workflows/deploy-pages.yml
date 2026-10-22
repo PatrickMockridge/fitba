@@ -44,6 +44,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: cd .. && uv sync --frozen
+      - run: cd .. && uv run python scripts/check_publication.py
+      - run: cd .. && uv run python scripts/check_metrics.py --strict --published-only
       - run: cd .. && uv run python scripts/check_web_contract.py --ci --base-path /fitba
       - run: touch out/.nojekyll
       - uses: actions/configure-pages@v5

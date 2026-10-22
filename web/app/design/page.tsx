@@ -6,7 +6,7 @@ import {
   getManifest,
   getProvenance,
   getTableFiles,
-  getThemes,
+  getCase,
   getTransfers,
   type ProvenanceLayer,
 } from "@/lib/data";
@@ -62,13 +62,13 @@ export default function DesignSpecimenPage() {
     table?.rows.find((row) => row.team_id === "sco:aberdeen") ?? null;
   const transfers = getTransfers();
   const provenance = getProvenance();
-  const themes = getThemes();
+  const caseData = getCase();
 
   const moves = transfers?.transfers.slice(0, 6) ?? [];
   const layers = provenance?.layers.slice(0, 5) ?? [];
-  const theme =
-    themes?.themes.find((item) => item.horizon === "season" && item.read) ??
-    themes?.themes[0] ??
+  const claim =
+    caseData?.claims.find((item) => item.status === "supported") ??
+    caseData?.claims[0] ??
     null;
   const age = dataAgeHours(manifest);
   const freshness =
@@ -687,46 +687,33 @@ export default function DesignSpecimenPage() {
               <h2>A read, labelled</h2>
             </div>
             <div className="ds-section__body">
-              {theme ? (
+              {claim ? (
                 <div className="ds-editorial">
                   <div className="ds-control-row">
-                    <DsBadge
-                      tone={
-                        theme.read_basis === "measured" ? "ok" : "warn"
-                      }
-                    >
-                      {theme.read_basis}
+                    <DsBadge tone={claim.status === "supported" ? "ok" : "warn"}>
+                      {claim.status}
                     </DsBadge>
-                    <DsBadge tone="neutral">{theme.confidence} confidence</DsBadge>
+                    <DsBadge tone="neutral">{claim.count}</DsBadge>
                   </div>
-                  <h3>{theme.headline ?? theme.title}</h3>
-                  <p>{theme.read}</p>
+                  <h3>{claim.title}</h3>
+                  <p>{claim.claim}</p>
                   <dl className="ds-evidence">
-                    {theme.evidence.slice(0, 2).map((item) => (
-                      <div key={`${item.label}-${item.value}`}>
+                    {claim.evidence.slice(0, 2).map((item) => (
+                      <div key={`${item.metric}-${item.count}`}>
                         <dt>
-                          {item.label} · {item.basis}
+                          {item.metric} · {item.status}
                         </dt>
-                        <dd>
-                          {item.value === null || item.value === undefined
-                            ? "—"
-                            : String(item.value)}
-                        </dd>
+                        <dd>{item.count}</dd>
                       </div>
                     ))}
                   </dl>
-                  {theme.caveats[0] ? (
-                    <p className="ds-note">
-                      <strong>Caveat:</strong> {theme.caveats[0]}
-                    </p>
-                  ) : null}
+                  <p className="ds-note">
+                    <strong>Limit:</strong> {claim.status_reason}
+                  </p>
                   <details className="ds-details">
-                    <summary>Method and caveats</summary>
+                    <summary>What would change the view</summary>
                     <div className="ds-details__body">
-                      {theme.method ? <p>{theme.method}</p> : null}
-                      {theme.caveats.map((caveat) => (
-                        <p key={caveat}>{caveat}</p>
-                      ))}
+                      <p>{claim.change_mind}</p>
                     </div>
                   </details>
                 </div>

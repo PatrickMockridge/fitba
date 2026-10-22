@@ -266,6 +266,35 @@ def estimate_transfer(
     }
 
 
+def value_transfers(
+    rows: list[dict[str, Any]],
+    *,
+    birth_dates: dict[str, str],
+    markets: list[dict[str, Any]],
+    fx: dict[str, float] | None = None,
+) -> dict[str, Any]:
+    """Attach one fee estimate per row and return the aggregate summary.
+
+    This is the single production valuation run. Transfers and history consume
+    the same estimated rows and summary; neither recalculates the calibration.
+    """
+    calibration, anchor_count = calibration_factor(
+        rows, birth_dates=birth_dates, markets=markets, fx=fx
+    )
+    for row in rows:
+        row["fee_estimate"] = estimate_transfer(
+            row,
+            birth_dates=birth_dates,
+            markets=markets,
+            calibration=calibration,
+            fx=fx,
+        )
+    summary = summarise_valuations(rows)
+    summary["calibration_factor"] = round(calibration, 3)
+    summary["anchor_count"] = anchor_count
+    return summary
+
+
 def summarise_valuations(rows: list[dict[str, Any]]) -> dict[str, Any]:
     """Aggregate fee ranges for permanent/free moves; loans are separate.
 
@@ -333,4 +362,5 @@ __all__ = [
     "parse_fee",
     "position_group",
     "summarise_valuations",
+    "value_transfers",
 ]

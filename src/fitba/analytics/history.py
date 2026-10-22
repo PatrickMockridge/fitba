@@ -14,6 +14,7 @@ from typing import Any
 
 import polars as pl
 
+from fitba.analytics.records import record_totals
 from fitba.analytics.tables import league_row, playable_matches
 from fitba.util.dates import seasons_between
 
@@ -123,20 +124,16 @@ def club_match_rows(matches: pl.DataFrame, club_id: str) -> pl.DataFrame:
 
 
 def _record(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    played = len(rows)
-    won = sum(1 for row in rows if row["result"] == "W")
-    drawn = sum(1 for row in rows if row["result"] == "D")
-    lost = sum(1 for row in rows if row["result"] == "L")
-    points = sum(int(row["points"]) for row in rows)
+    totals = record_totals(rows)
     return {
-        "played": played,
-        "won": won,
-        "drawn": drawn,
-        "lost": lost,
-        "gf": sum(int(row["gf"]) for row in rows),
-        "ga": sum(int(row["ga"]) for row in rows),
-        "points": points,
-        "ppg": round(points / played, 2) if played else None,
+        "played": totals["played"],
+        "won": totals["won"],
+        "drawn": totals["drawn"],
+        "lost": totals["lost"],
+        "gf": totals["gf"],
+        "ga": totals["ga"],
+        "points": totals["points"],
+        "ppg": totals["ppg"],
         "first_match": rows[0]["date"] if rows else None,
         "last_match": rows[-1]["date"] if rows else None,
     }

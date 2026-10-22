@@ -521,10 +521,18 @@ def publish(
     season: Annotated[str, typer.Option(help="current or a season like 2026-27")] = "current",
     out: Annotated[Path | None, typer.Option(help="Override the output directory")] = None,
     profile: Annotated[str, typer.Option(help="Publication profile")] = "public",
+    require_validation: Annotated[
+        bool, typer.Option(help="Fail the publish if validation reports an error")
+    ] = False,
 ) -> None:
     """Publish derived JSON into web/data/generated."""
     current = _parse_seasons(season)[0]
-    report = publish_data(season=current, out=out, profile=profile)
+    report = publish_data(
+        season=current,
+        out=out,
+        profile=profile,
+        require_validation=require_validation,
+    )
     console.print(
         f"Published {report.files} files, {report.bytes} bytes -> {report.out} "
         f"(dataset {report.dataset_version})"

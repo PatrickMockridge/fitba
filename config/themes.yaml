@@ -1,64 +1,59 @@
-# Medium and long-term theme policy.
-#
-# Themes are hypotheses with evidence, not verdicts. The current-season layer
-# carries four themes; the club-mission layer is one theme and is the long-term
-# 20% context. Thresholds and family groupings live here so the read can be
-# audited without changing code.
-
 version: 1
 club: aberdeen
 season: 2026-27
-
 scope:
   ratings: premiership
   minutes: all_competitive
   shapes: all_competitive
   bench: premiership
-
 themes:
-  - id: family_balance
-    horizon: season
-    order: 1
-    title: The family balance
-    fan_question: Where are Aberdeen strong and weak?
-  - id: wing_back_tax
-    horizon: season
-    order: 2
-    title: The wing-back tax
-    fan_question: What does three at the back cost?
-  - id: cover_question
-    horizon: season
-    order: 3
-    title: The cover question
-    fan_question: Who is actually covering the defence?
-  - id: leaky_boat
-    horizon: season
-    order: 4
-    title: The leaky boat
-    fan_question: Are the forwards covering the defence?
-  - id: mission_check
-    horizon: mission
-    order: 5
-    title: The mission check
-    fan_question: Is the trading model working, or just a leaky boat?
-
+- id: family_balance
+  horizon: season
+  order: 1
+  title: The family balance
+  fan_question: Where are Aberdeen strong and weak?
+- id: wing_back_tax
+  horizon: season
+  order: 2
+  title: The wing-back tax
+  fan_question: What does three at the back cost?
+- id: cover_question
+  horizon: season
+  order: 3
+  title: The cover question
+  fan_question: Who is actually covering the defence?
+- id: leaky_boat
+  horizon: season
+  order: 4
+  title: The leaky boat
+  fan_question: Are the forwards covering the defence?
+- id: mission_check
+  horizon: mission
+  order: 5
+  title: The mission check
+  fan_question: Is the trading model working, or just a leaky boat?
 identity:
-  # Provider duplicate identities recorded in reference/transfer_gaps.yaml.
-  # The current squad uses the canonical id; theme aggregations must not
-  # double-count the duplicate.
   duplicate_player_ids:
-    "668797": 44982   # Lewis Smith
-    "334359": 550363  # Emmanuel Gyamfi
-
+    '668797': 44982
+    '334359': 550363
 family_groups:
-  GK: [goalkeeper]
-  CB: [centre_back]
-  FB/WB: [full_back, wing_back]
-  MID: [defensive_midfield, central_midfield]
-  AM/WM: [attacking_midfield, wide_midfield]
-  W: [wide_forward]
-  ST: [centre_forward]
-
+  GK:
+  - goalkeeper
+  CB:
+  - centre_back
+  FB/WB:
+  - full_back
+  - wing_back
+  MID:
+  - defensive_midfield
+  - central_midfield
+  AM/WM:
+  - attacking_midfield
+  - wide_midfield
+  W:
+  - wide_forward
+  ST:
+  - centre_forward
 thresholds:
   family:
     high_minutes: 900
@@ -77,10 +72,128 @@ thresholds:
     medium_matches: 6
   mission:
     min_arrivals_for_confidence: 5
-
 mission:
   pillars_source: reference/history/era.yaml
-  commercial_context: >
-    Commercial growth and fanbase expansion are part of the public framing of
-    the Cormack era. They are context only: the public football data cannot
+  commercial_context: 'Commercial growth and fanbase expansion are part of the public
+    framing of the Cormack era. They are context only: the public football data cannot
     measure them, so they are not scored.
+
+    '
+case:
+  owner_label: The owner's view
+  owner_attribution: Patrick Mockridge
+  owner_view: 'I think the club is trying to lower its variance and become harder
+    to beat: a high press, a direct and counter-attacking game, balls over the top
+    for Olusanya, and three physical centre-backs at set plays. The cost has been
+    unforced errors, cheap penalties and getting the players to gel. Thelin''s side
+    had a fast start, a long winless run, the Scottish Cup and then a recycled squad;
+    Morris was sold and we lost a main goal threat; injuries and opponents adapting
+    followed. Robinson steadied it. The question is whether the model is now producing
+    a more resilient team, or just a different set of trade-offs.'
+  chairman_label: The chairman's frame
+  chairman_frame: 'Since Dave Cormack took over in December 2019, the club has described
+    a trading model: buy low, develop, sell high, reinvest, and keep the squad and
+    wage bill sustainable. The public record below shows what that approach has produced
+    and what it has cost.'
+  chairman_source: reference/history/era.yaml; docs/history.md
+  chairman_note: A summary of the club's stated approach from the public record; not
+    a direct quotation.
+  thesis: The team on the pitch is the visible edge of a seven-year trading model.
+    The question is what that model buys, what it costs, and what the record can prove.
+claims:
+- id: team_now
+  domain: matchday
+  order: 1
+  title: The team now
+  claim: This is a rebuilt side with an unsettled shape, and the league record is
+    mid-table.
+  better_data: An event feed would separate style from results; it would not change
+    the league record.
+  change_mind: A settled run of results and a stable shape.
+  links:
+  - label: Matchday
+    href: /matchday/
+  - label: Competitions
+    href: /competitions/
+  - label: Fixtures
+    href: /fixtures/
+- id: defence
+  domain: matchday
+  order: 2
+  title: The defence
+  claim: Three at the back is protecting a new defence at the cost of width.
+  better_data: Eight or more matches per shape, opponent strength, official team news
+    and an event feed for set plays and errors would separate shape from personnel.
+  change_mind: A run of three centre-back games with the first-choice centre-backs available
+    and goals conceded at or below the back four.
+  links:
+  - label: Squad
+    href: /squad/
+  - label: Matchday
+    href: /matchday/
+  - label: Transfers
+    href: /transfers/
+- id: attack
+  domain: matchday
+  order: 3
+  title: The attack
+  claim: The attack is keeping the team in games, but the balance is fragile; set
+    plays and errors are part of the problem.
+  better_data: A licensed event feed with set-piece goals, errors leading to shots
+    or goals, and penalties would test the claim directly.
+  change_mind: Event data, or a run of clean sheets and lower goals against.
+  links:
+  - label: Fixtures
+    href: /fixtures/
+  - label: Matchday
+    href: /matchday/
+  - label: Methodology
+    href: /methodology/
+- id: managers
+  domain: chairman
+  order: 4
+  title: The managers
+  claim: Thelin's side had a high ceiling and a low floor; Robinson has steadied it,
+    but 18 league matches is not enough to settle it.
+  better_data: A full season under Robinson, opponent strength and a pre-declared
+    variance measure.
+  change_mind: A full season, or a sustained points and goals-against trend.
+  links:
+  - label: The Cormack era
+    href: /history/
+  - label: Fixtures
+    href: /fixtures/
+  - label: Matchday
+    href: /matchday/
+- id: squad
+  domain: off_pitch
+  order: 5
+  title: The squad
+  claim: The squad was rebuilt, but this window was experienced, not a youth project;
+    Morris was sold and not directly replaced.
+  better_data: Disclosed fees, player output before and after the sale, and an event
+    feed.
+  change_mind: A disclosed fee, a replacement's output, or a full season.
+  links:
+  - label: Transfers
+    href: /transfers/
+  - label: Recruitment
+    href: /recruitment/
+  - label: Squad
+    href: /squad/
+- id: chairman_record
+  domain: chairman
+  order: 6
+  title: The chairman's record
+  claim: The public record is consistent with the chairman's trading-club argument,
+    and the sporting cost is visible; it cannot prove the argument.
+  better_data: Audited accounts, disclosed fees and wages would test the financial
+    side; they are not public.
+  change_mind: Audited accounts, or a sustained league trend under a stable squad.
+  links:
+  - label: The Cormack era
+    href: /history/
+  - label: Transfers
+    href: /transfers/
+  - label: Recruitment
+    href: /recruitment/

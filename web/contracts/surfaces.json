@@ -29,47 +29,105 @@
     ]
   },
   "site": {
-    "markers": ["site.header", "site.footer"],
+    "markers": [
+      "site.header",
+      "site.footer"
+    ],
     "copy": {
-      "site.header": ["Aberdeen FC, without the noise."],
+      "site.header": [
+        "Aberdeen FC, without the noise."
+      ],
       "site.footer": [
         "Aberdeen FC, without the noise.",
         "Not affiliated with Aberdeen FC"
       ]
     },
-    "links": ["/methodology/", "/about/", "/sources/", "/status/"]
+    "links": [
+      "/analysis/",
+      "/methodology/",
+      "/about/",
+      "/sources/",
+      "/metrics/",
+      "/status/"
+    ]
   },
   "surfaces": [
     {
       "id": "home",
       "path": "/",
-      "owners": ["web/app/page.tsx", "web/app/layout.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/page.tsx",
+        "web/app/layout.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "home.hero", "min": 1},
-            {"id": "home.matchday", "min": 1},
-            {"id": "home.off-pitch", "min": 1},
-            {"id": "home.squad", "min": 1},
-            {"id": "home.news-rumours", "min": 1},
-            {"id": "home.competitions", "min": 1},
-            {"id": "home.standings", "min": 1}
+            {
+              "id": "home.hero",
+              "min": 1
+            },
+            {
+              "id": "home.matchday",
+              "min": 1
+            },
+            {
+              "id": "home.off-pitch",
+              "min": 1
+            },
+            {
+              "id": "home.squad",
+              "min": 1
+            },
+            {
+              "id": "home.news-rumours",
+              "min": 1
+            },
+            {
+              "id": "home.competitions",
+              "min": 1
+            },
+            {
+              "id": "home.standings",
+              "min": 1
+            }
           ],
           "columns": {
-            "home.standings": ["#", "Club", "P", "W", "D", "L", "GF", "GA", "GD", "Pts", "Form"]
+            "home.standings": [
+              "#",
+              "Club",
+              "P",
+              "W",
+              "D",
+              "L",
+              "GF",
+              "GA",
+              "GD",
+              "Pts",
+              "Form"
+            ]
           },
-          "indicators": {"unknown": 1, "freshness": 1, "source": 1},
+          "indicators": {
+            "unknown": 1,
+            "freshness": 1,
+            "source": 1
+          },
           "links": [
             "/matchday/",
             "/recruitment/",
-            "/themes/",
+            "/analysis/",
             "/history/",
             "/transfers/",
             "/loans/"
           ],
           "headings": {
-            "forbid_question": ["h1", "h2", "h3"],
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
             "h1": "Aberdeen FC, without the noise."
           },
           "copy": {
@@ -84,7 +142,12 @@
           }
         },
         "empty": {
-          "markers": [{"id": "home.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "home.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
@@ -99,26 +162,77 @@
         "web/components/StrengthComparison.tsx",
         "web/components/PredictedLineupPanel.tsx"
       ],
-      "ci_states": ["full", "no-fixture"],
+      "ci_states": [
+        "full",
+        "no-fixture"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "matchday.fixture", "min": 1},
-            {"id": "matchday.matchup-read", "min": 1},
-            {"id": "matchday.predicted-xis", "min": 1},
-            {"id": "matchday.lineup", "min": 2},
-            {"id": "matchday.lineup.pitch", "min": 2},
-            {"id": "matchday.lineup.formation-confidence", "min": 1},
-            {"id": "matchday.lineup.selection-weights", "min": 1},
-            {"id": "matchday.lineup.availability", "min": 1},
-            {"id": "matchday.lineup.contenders", "min": 1},
-            {"id": "matchday.not-considered", "min": 1},
-            {"id": "matchday.form-guide", "min": 1},
-            {"id": "matchday.style", "min": 1},
-            {"id": "matchday.strength", "min": 1},
-            {"id": "matchday.themes", "min": 1},
-            {"id": "matchday.head-to-head", "min": 1},
-            {"id": "matchday.coverage", "min": 1}
+            {
+              "id": "matchday.fixture",
+              "min": 1
+            },
+            {
+              "id": "matchday.matchup-read",
+              "min": 1
+            },
+            {
+              "id": "matchday.predicted-xis",
+              "min": 1
+            },
+            {
+              "id": "matchday.lineup",
+              "min": 2
+            },
+            {
+              "id": "matchday.lineup.pitch",
+              "min": 2
+            },
+            {
+              "id": "matchday.lineup.formation-confidence",
+              "min": 1
+            },
+            {
+              "id": "matchday.lineup.selection-weights",
+              "min": 1
+            },
+            {
+              "id": "matchday.lineup.availability",
+              "min": 1
+            },
+            {
+              "id": "matchday.lineup.contenders",
+              "min": 1
+            },
+            {
+              "id": "matchday.not-considered",
+              "min": 1
+            },
+            {
+              "id": "matchday.form-guide",
+              "min": 1
+            },
+            {
+              "id": "matchday.style",
+              "min": 1
+            },
+            {
+              "id": "matchday.strength",
+              "min": 1
+            },
+            {
+              "id": "matchday.themes",
+              "min": 1
+            },
+            {
+              "id": "matchday.head-to-head",
+              "min": 1
+            },
+            {
+              "id": "matchday.coverage",
+              "min": 1
+            }
           ],
           "columns": {
             "matchday.form-guide": [
@@ -131,8 +245,18 @@
               "GA",
               "Shots"
             ],
-            "matchday.style": ["Split", "Shots for", "Shots against", "Shot share"],
-            "matchday.head-to-head": ["Date", "Match", "Score", "Aberdeen"]
+            "matchday.style": [
+              "Split",
+              "Shots for",
+              "Shots against",
+              "Shot share"
+            ],
+            "matchday.head-to-head": [
+              "Date",
+              "Match",
+              "Score",
+              "Aberdeen"
+            ]
           },
           "indicators": {
             "basis": 2,
@@ -150,14 +274,34 @@
             "/sources/",
             "/methodology/"
           ],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "no-fixture": {
-          "markers": [{"id": "matchday.no-fixture", "min": 1}],
-          "links": ["/fixtures/", "/competitions/", "/squad/"]
+          "markers": [
+            {
+              "id": "matchday.no-fixture",
+              "min": 1
+            }
+          ],
+          "links": [
+            "/fixtures/",
+            "/competitions/",
+            "/squad/"
+          ]
         },
         "empty": {
-          "markers": [{"id": "matchday.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "matchday.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
@@ -165,83 +309,33 @@
       "id": "themes",
       "path": "/themes/",
       "owners": [
-        "web/app/themes/page.tsx",
-        "web/components/ThemeCard.tsx",
-        "web/components/ThemeMetrics.tsx"
+        "web/app/themes/page.tsx"
       ],
-      "ci_states": ["full"],
+      "ci_states": [
+        "redirect"
+      ],
       "states": {
-        "full": {
+        "redirect": {
           "markers": [
-            {"id": "themes.hero", "min": 1},
-            {"id": "themes.scope", "min": 1},
-            {"id": "themes.season", "min": 1},
-            {"id": "themes.theme", "min": 5},
-            {"id": "themes.evidence", "min": 5},
-            {"id": "themes.mission", "min": 1},
-            {"id": "themes.metric-family-balance", "min": 1},
-            {"id": "themes.metric-wing-back-tax", "min": 1},
-            {"id": "themes.metric-cover-question", "min": 1},
-            {"id": "themes.metric-leaky-boat", "min": 1},
-            {"id": "themes.metric-mission-check", "min": 1},
-            {"id": "themes.coverage", "min": 1},
-            {"id": "themes.coverage.missing", "min": 1}
+            {
+              "id": "themes.redirect",
+              "min": 1
+            }
           ],
-          "columns": {
-            "themes.metric-family-balance": [
-              "Family",
-              "Rating",
-              "Median",
-              "25th",
-              "vs squad",
-              "G",
-              "A",
-              "Starts",
-              "Minutes"
-            ],
-            "themes.metric-wing-back-tax": [
-              "Shape",
-              "P",
-              "Record",
-              "Pts/game",
-              "GF/game",
-              "GA/game",
-              "Saves/game",
-              "CB rating",
-              "WB starts",
-              "W starts",
-              "WF bench"
-            ],
-            "themes.metric-cover-question": [
-              "Role",
-              "Category",
-              "Starts",
-              "Minutes",
-              "Sub apps",
-              "Named bench",
-              "Arrival"
-            ],
-            "themes.metric-mission-check": [
-              "Defensive arrival",
-              "From",
-              "Date",
-              "Kind"
-            ]
-          },
-          "indicators": {"basis": 5, "confidence": 5, "unknown": 1, "source": 1},
           "links": [
-            "/matchday/",
-            "/squad/",
-            "/transfers/",
-            "/recruitment/",
-            "/history/",
-            "/methodology/",
-            "/sources/"
+            "/analysis/"
           ],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
-        },
-        "empty": {
-          "markers": [{"id": "themes.empty", "min": 1}]
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Data analysis"
+          },
+          "metadata": {
+            "title_contains": "Data analysis"
+          }
         }
       }
     },
@@ -252,23 +346,64 @@
         "web/app/recruitment/page.tsx",
         "web/components/NeedsBoard.tsx"
       ],
-      "ci_states": ["full"],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "recruitment.hero", "min": 1},
-            {"id": "recruitment.needs-board", "min": 1},
-            {"id": "recruitment.needs-summary", "min": 1},
-            {"id": "recruitment.needs-family", "min": 7},
-            {"id": "recruitment.needs-priority", "min": 7},
-            {"id": "recruitment.needs-confidence", "min": 7},
-            {"id": "recruitment.needs-market-route", "min": 7},
-            {"id": "recruitment.needs-roster", "min": 7},
-            {"id": "recruitment.needs-players", "min": 7},
-            {"id": "recruitment.transfer-summary", "min": 1},
-            {"id": "recruitment.rumour-summary", "min": 1},
-            {"id": "recruitment.profile", "min": 1},
-            {"id": "recruitment.forum-signals", "min": 1}
+            {
+              "id": "recruitment.hero",
+              "min": 1
+            },
+            {
+              "id": "recruitment.needs-board",
+              "min": 1
+            },
+            {
+              "id": "recruitment.needs-summary",
+              "min": 1
+            },
+            {
+              "id": "recruitment.needs-family",
+              "min": 7
+            },
+            {
+              "id": "recruitment.needs-priority",
+              "min": 7
+            },
+            {
+              "id": "recruitment.needs-confidence",
+              "min": 7
+            },
+            {
+              "id": "recruitment.needs-market-route",
+              "min": 7
+            },
+            {
+              "id": "recruitment.needs-roster",
+              "min": 7
+            },
+            {
+              "id": "recruitment.needs-players",
+              "min": 7
+            },
+            {
+              "id": "recruitment.transfer-summary",
+              "min": 1
+            },
+            {
+              "id": "recruitment.rumour-summary",
+              "min": 1
+            },
+            {
+              "id": "recruitment.profile",
+              "min": 1
+            },
+            {
+              "id": "recruitment.forum-signals",
+              "min": 1
+            }
           ],
           "columns": {
             "recruitment.needs-players": [
@@ -286,8 +421,20 @@
             "unknown": 1,
             "source": 1
           },
-          "links": ["/transfers/", "/rumours/", "/scouting/", "/squad/", "/themes/"],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "links": [
+            "/transfers/",
+            "/rumours/",
+            "/scouting/",
+            "/squad/",
+            "/analysis/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         }
       }
     },
@@ -299,23 +446,64 @@
         "web/components/TransferBoard.tsx",
         "web/components/TransferCard.tsx"
       ],
-      "ci_states": ["full"],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "transfers.hero", "min": 1},
-            {"id": "transfers.board", "min": 1},
-            {"id": "transfers.summary", "min": 1},
-            {"id": "transfers.register", "min": 1},
-            {"id": "transfers.card", "min": 50},
-            {"id": "transfers.card.verification", "min": 1},
-            {"id": "transfers.card.identity", "min": 1},
-            {"id": "transfers.card.fee", "min": 1},
-            {"id": "transfers.card.loan-terms", "min": 1},
-            {"id": "transfers.card.sources", "min": 1},
-            {"id": "transfers.sell-on", "min": 1},
-            {"id": "transfers.audit", "min": 1},
-            {"id": "transfers.coverage", "min": 1}
+            {
+              "id": "transfers.hero",
+              "min": 1
+            },
+            {
+              "id": "transfers.board",
+              "min": 1
+            },
+            {
+              "id": "transfers.summary",
+              "min": 1
+            },
+            {
+              "id": "transfers.register",
+              "min": 1
+            },
+            {
+              "id": "transfers.card",
+              "min": 50
+            },
+            {
+              "id": "transfers.card.verification",
+              "min": 1
+            },
+            {
+              "id": "transfers.card.identity",
+              "min": 1
+            },
+            {
+              "id": "transfers.card.fee",
+              "min": 1
+            },
+            {
+              "id": "transfers.card.loan-terms",
+              "min": 1
+            },
+            {
+              "id": "transfers.card.sources",
+              "min": 1
+            },
+            {
+              "id": "transfers.sell-on",
+              "min": 1
+            },
+            {
+              "id": "transfers.audit",
+              "min": 1
+            },
+            {
+              "id": "transfers.coverage",
+              "min": 1
+            }
           ],
           "columns": {
             "transfers.sell-on": [
@@ -327,37 +515,97 @@
               "Source"
             ]
           },
-          "indicators": {"confidence": 2, "unknown": 1, "source": 1},
-          "links": ["/history/", "/sources/", "/methodology/"],
-          "anchor_patterns": {"^transfer-": 1},
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "indicators": {
+            "confidence": 2,
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/history/",
+            "/sources/",
+            "/methodology/"
+          ],
+          "anchor_patterns": {
+            "^transfer-": 1
+          },
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "transfers.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "transfers.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
     {
       "id": "loans",
       "path": "/loans/",
-      "owners": ["web/app/loans/page.tsx", "web/components/TransferCard.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/loans/page.tsx",
+        "web/components/TransferCard.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "loans.hero", "min": 1},
-            {"id": "loans.out", "min": 1},
-            {"id": "loans.in", "min": 1},
-            {"id": "loans.card", "min": 1},
-            {"id": "transfers.card.loan-terms", "min": 1},
-            {"id": "loans.coverage", "min": 1}
+            {
+              "id": "loans.hero",
+              "min": 1
+            },
+            {
+              "id": "loans.out",
+              "min": 1
+            },
+            {
+              "id": "loans.in",
+              "min": 1
+            },
+            {
+              "id": "loans.card",
+              "min": 1
+            },
+            {
+              "id": "transfers.card.loan-terms",
+              "min": 1
+            },
+            {
+              "id": "loans.coverage",
+              "min": 1
+            }
           ],
-          "indicators": {"unknown": 1, "source": 1},
-          "links": ["/transfers/"],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "indicators": {
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/transfers/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "loans.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "loans.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
@@ -369,20 +617,52 @@
         "web/components/ManagerRecordTable.tsx",
         "web/components/HonoursCabinet.tsx"
       ],
-      "ci_states": ["full"],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "history.hero", "min": 1},
-            {"id": "history.scorecard", "min": 1},
-            {"id": "history.thesis", "min": 1},
-            {"id": "history.season-table", "min": 1},
-            {"id": "history.people", "min": 1},
-            {"id": "history.baseline", "min": 1},
-            {"id": "history.managers", "min": 1},
-            {"id": "history.honours", "min": 1},
-            {"id": "history.read", "min": 1},
-            {"id": "history.coverage", "min": 1}
+            {
+              "id": "history.hero",
+              "min": 1
+            },
+            {
+              "id": "history.scorecard",
+              "min": 1
+            },
+            {
+              "id": "history.thesis",
+              "min": 1
+            },
+            {
+              "id": "history.season-table",
+              "min": 1
+            },
+            {
+              "id": "history.people",
+              "min": 1
+            },
+            {
+              "id": "history.baseline",
+              "min": 1
+            },
+            {
+              "id": "history.managers",
+              "min": 1
+            },
+            {
+              "id": "history.honours",
+              "min": 1
+            },
+            {
+              "id": "history.read",
+              "min": 1
+            },
+            {
+              "id": "history.coverage",
+              "min": 1
+            }
           ],
           "columns": {
             "history.season-table": [
@@ -394,7 +674,11 @@
               "Honours",
               "Review"
             ],
-            "history.baseline": ["Season", "Pos", "Pts"],
+            "history.baseline": [
+              "Season",
+              "Pos",
+              "Pts"
+            ],
             "history.managers": [
               "Manager",
               "Dates",
@@ -414,29 +698,70 @@
               "Review"
             ]
           },
-          "indicators": {"confidence": 1, "source": 1},
-          "links": ["/transfers/", "/sources/", "/methodology/"],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "indicators": {
+            "confidence": 1,
+            "source": 1
+          },
+          "links": [
+            "/transfers/",
+            "/sources/",
+            "/methodology/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "history.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "history.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
     {
       "id": "squad",
       "path": "/squad/",
-      "owners": ["web/app/squad/page.tsx", "web/components/SquadBoard.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/squad/page.tsx",
+        "web/components/SquadBoard.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "squad.hero", "min": 1},
-            {"id": "squad.summary", "min": 1},
-            {"id": "squad.roster", "min": 1},
-            {"id": "squad.coverage", "min": 1},
-            {"id": "squad.role-mix", "min": 1},
-            {"id": "squad.how-to", "min": 1}
+            {
+              "id": "squad.hero",
+              "min": 1
+            },
+            {
+              "id": "squad.summary",
+              "min": 1
+            },
+            {
+              "id": "squad.roster",
+              "min": 1
+            },
+            {
+              "id": "squad.coverage",
+              "min": 1
+            },
+            {
+              "id": "squad.role-mix",
+              "min": 1
+            },
+            {
+              "id": "squad.how-to",
+              "min": 1
+            }
           ],
           "columns": {
             "squad.roster": [
@@ -456,38 +781,80 @@
               "Stats"
             ]
           },
-          "indicators": {"unknown": 1, "source": 1},
+          "indicators": {
+            "unknown": 1,
+            "source": 1
+          },
           "links": [
             "/matchday/",
             "/recruitment/",
             "/transfers/",
             "/loans/",
             "/methodology/",
-            "/themes/"
+            "/analysis/"
           ],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "squad.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "squad.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
     {
       "id": "sources",
       "path": "/sources/",
-      "owners": ["web/app/sources/page.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/sources/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "sources.hero", "min": 1},
-            {"id": "sources.layers", "min": 1},
-            {"id": "sources.registry", "min": 1},
-            {"id": "sources.migration", "min": 1},
-            {"id": "sources.availability", "min": 1},
-            {"id": "sources.excluded", "min": 1},
-            {"id": "sources.derived", "min": 1},
-            {"id": "sources.no-raw", "min": 1}
+            {
+              "id": "sources.hero",
+              "min": 1
+            },
+            {
+              "id": "sources.layers",
+              "min": 1
+            },
+            {
+              "id": "sources.registry",
+              "min": 1
+            },
+            {
+              "id": "sources.migration",
+              "min": 1
+            },
+            {
+              "id": "sources.availability",
+              "min": 1
+            },
+            {
+              "id": "sources.excluded",
+              "min": 1
+            },
+            {
+              "id": "sources.derived",
+              "min": 1
+            },
+            {
+              "id": "sources.no-raw",
+              "min": 1
+            }
           ],
           "columns": {
             "sources.layers": [
@@ -506,37 +873,101 @@
               "Last checked"
             ]
           },
-          "indicators": {"unknown": 1, "source": 1},
-          "links": ["/about/", "/methodology/", "/themes/"],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "indicators": {
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/about/",
+            "/methodology/",
+            "/analysis/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "sources.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "sources.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
     {
       "id": "methodology",
       "path": "/methodology/",
-      "owners": ["web/app/methodology/page.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/methodology/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "methodology.hero", "min": 1},
-            {"id": "methodology.sources", "min": 1},
-            {"id": "methodology.tables", "min": 1},
-            {"id": "methodology.cutoffs", "min": 1},
-            {"id": "methodology.cups", "min": 1},
-            {"id": "methodology.assumptions", "min": 1},
-            {"id": "methodology.coverage", "min": 1},
-            {"id": "methodology.reconstruction", "min": 1},
-            {"id": "methodology.matchday", "min": 1},
-            {"id": "methodology.transfers", "min": 1},
-            {"id": "methodology.history", "min": 1},
-            {"id": "methodology.player-output", "min": 1},
-            {"id": "methodology.registers", "min": 1},
-            {"id": "methodology.policy", "min": 1}
+            {
+              "id": "methodology.hero",
+              "min": 1
+            },
+            {
+              "id": "methodology.sources",
+              "min": 1
+            },
+            {
+              "id": "methodology.tables",
+              "min": 1
+            },
+            {
+              "id": "methodology.cutoffs",
+              "min": 1
+            },
+            {
+              "id": "methodology.cups",
+              "min": 1
+            },
+            {
+              "id": "methodology.assumptions",
+              "min": 1
+            },
+            {
+              "id": "methodology.coverage",
+              "min": 1
+            },
+            {
+              "id": "methodology.reconstruction",
+              "min": 1
+            },
+            {
+              "id": "methodology.matchday",
+              "min": 1
+            },
+            {
+              "id": "methodology.transfers",
+              "min": 1
+            },
+            {
+              "id": "methodology.history",
+              "min": 1
+            },
+            {
+              "id": "methodology.player-output",
+              "min": 1
+            },
+            {
+              "id": "methodology.registers",
+              "min": 1
+            },
+            {
+              "id": "methodology.policy",
+              "min": 1
+            }
           ],
           "columns": {
             "methodology.sources": [
@@ -546,32 +977,79 @@
               "Last checked"
             ]
           },
-          "indicators": {"unknown": 1, "source": 1},
-          "links": ["/about/", "/sources/", "/squad/", "/rumours/", "/status/"],
-          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+          "indicators": {
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/about/",
+            "/sources/",
+            "/squad/",
+            "/rumours/",
+            "/status/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
         },
         "empty": {
-          "markers": [{"id": "methodology.empty", "min": 1}]
+          "markers": [
+            {
+              "id": "methodology.empty",
+              "min": 1
+            }
+          ]
         }
       }
     },
     {
       "id": "about",
       "path": "/about/",
-      "owners": ["web/app/about/page.tsx"],
-      "ci_states": ["full"],
+      "owners": [
+        "web/app/about/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
       "states": {
         "full": {
           "markers": [
-            {"id": "about.hero", "min": 1},
-            {"id": "about.audience", "min": 1},
-            {"id": "about.club-side", "min": 1},
-            {"id": "about.cormack", "min": 1},
-            {"id": "about.line", "min": 1}
+            {
+              "id": "about.hero",
+              "min": 1
+            },
+            {
+              "id": "about.audience",
+              "min": 1
+            },
+            {
+              "id": "about.club-side",
+              "min": 1
+            },
+            {
+              "id": "about.cormack",
+              "min": 1
+            },
+            {
+              "id": "about.line",
+              "min": 1
+            }
           ],
-          "links": ["/history/", "/methodology/", "/sources/"],
+          "links": [
+            "/history/",
+            "/methodology/",
+            "/sources/"
+          ],
           "headings": {
-            "forbid_question": ["h1", "h2", "h3"],
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
             "h1": "Aberdeen FC, without the noise."
           },
           "copy": {
@@ -582,6 +1060,264 @@
           },
           "metadata": {
             "description_contains": "independent, data-driven record"
+          }
+        }
+      }
+    },
+    {
+      "id": "metrics",
+      "path": "/metrics/",
+      "owners": [
+        "web/app/metrics/page.tsx",
+        "web/lib/data.ts"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "empty": {
+          "markers": [
+            {
+              "id": "metrics.hero",
+              "min": 1
+            }
+          ]
+        },
+        "full": {
+          "markers": [
+            {
+              "id": "metrics.hero",
+              "min": 1
+            },
+            {
+              "id": "metrics.summary",
+              "min": 1
+            },
+            {
+              "id": "metrics.registry",
+              "min": 52
+            },
+            {
+              "id": "metrics.parameters",
+              "min": 14
+            },
+            {
+              "id": "metrics.audit",
+              "min": 1
+            },
+            {
+              "id": "metrics.method",
+              "min": 1
+            },
+            {
+              "id": "metrics.links",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "metrics.registry": [
+              "Metric",
+              "Definition",
+              "Formula",
+              "Basis",
+              "Source",
+              "Coverage",
+              "Verification",
+              "Status"
+            ],
+            "metrics.parameters": [
+              "Parameter",
+              "Value",
+              "Unit",
+              "Used by",
+              "Config",
+              "Verification",
+              "Status"
+            ]
+          },
+          "links": [
+            "/status/",
+            "/methodology/",
+            "/sources/",
+            "/about/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Metrics and audit"
+          },
+          "metadata": {
+            "title_contains": "Metrics and audit",
+            "description_contains": "Every published number"
+          }
+        }
+      }
+    },
+    {
+      "id": "status",
+      "path": "/status/",
+      "owners": [
+        "web/app/status/page.tsx",
+        "web/lib/data.ts"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "status.hero",
+              "min": 1
+            },
+            {
+              "id": "status.build",
+              "min": 1
+            },
+            {
+              "id": "status.validation",
+              "min": 1
+            },
+            {
+              "id": "status.metrics",
+              "min": 1
+            },
+            {
+              "id": "status.sources",
+              "min": 1
+            },
+            {
+              "id": "status.marts",
+              "min": 1
+            },
+            {
+              "id": "status.coverage",
+              "min": 1
+            }
+          ],
+          "links": [
+            "/metrics/",
+            "/methodology/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "What is in this build"
+          },
+          "metadata": {
+            "title_contains": "Data status"
+          }
+        }
+      }
+    },
+    {
+      "id": "analysis",
+      "path": "/analysis/",
+      "owners": [
+        "web/app/analysis/page.tsx",
+        "web/components/CaseClaimCard.tsx",
+        "web/components/CaseEvidenceTable.tsx",
+        "web/components/CaseBenchmark.tsx",
+        "web/lib/data.ts"
+      ],
+      "ci_states": [
+        "full",
+        "empty"
+      ],
+      "states": {
+        "empty": {
+          "markers": [
+            {
+              "id": "case.hero",
+              "min": 1
+            }
+          ]
+        },
+        "full": {
+          "markers": [
+            {
+              "id": "case.hero",
+              "min": 1
+            },
+            {
+              "id": "case.frame",
+              "min": 1
+            },
+            {
+              "id": "case.opinion",
+              "min": 1
+            },
+            {
+              "id": "case.claim",
+              "min": 1
+            },
+            {
+              "id": "case.claim.status",
+              "min": 1
+            },
+            {
+              "id": "case.claim.count",
+              "min": 1
+            },
+            {
+              "id": "case.claim.evidence",
+              "min": 1
+            },
+            {
+              "id": "case.claim.change",
+              "min": 1
+            },
+            {
+              "id": "case.benchmark",
+              "min": 1
+            },
+            {
+              "id": "case.coverage",
+              "min": 1
+            },
+            {
+              "id": "case.links",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "case.claim.evidence": [
+              "Claim",
+              "Count",
+              "Sample",
+              "Period",
+              "Status",
+              "Source"
+            ]
+          },
+          "links": [
+            "/matchday/",
+            "/squad/",
+            "/recruitment/",
+            "/transfers/",
+            "/history/",
+            "/methodology/",
+            "/metrics/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Data analysis"
+          },
+          "metadata": {
+            "title_contains": "Data analysis",
+            "description_contains": "Aberdeen"
           }
         }
       }

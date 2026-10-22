@@ -1,0 +1,2665 @@
+schema_version: 1
+registry_version: 2.0.0
+reviewed: '2026-10-22'
+owner: patrickmockridge
+change_policy:
+  owner_approval_required: true
+  version_scheme: semver
+  changelog: docs/metric-changes.md
+structural_number_patterns:
+- '**/player_id'
+- '**/team_id'
+- '**/api_team_id'
+- '**/match_id'
+- '**/fixture_id'
+- '**/shirt_number'
+- '**/order'
+- '**/tier'
+- '**/row'
+- '**/column'
+- '**/bytes'
+- '**/schema_version'
+- '**/version'
+- '**/season'
+- '**/*_at'
+- '**/checksum'
+- '**/after_position'
+- '**/minute'
+- '**/stoppage'
+- '**/shootout_home'
+- '**/shootout_away'
+metrics:
+- id: table.record
+  label: League table record
+  description: Per-team league record and ranking inputs.
+  value_type: table
+  fields:
+  - position
+  - played
+  - won
+  - drawn
+  - lost
+  - gf
+  - ga
+  - gd
+  - raw_points
+  - deduction
+  - points
+  - form
+  formula:
+    played: won + drawn + lost
+    gd: gf - ga
+    raw_points: 3*won + drawn
+    points: raw_points - deduction
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: per_team
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: league_standings
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: tables/*.json
+  payload_paths:
+  - tables/*.json#/rows/**
+  home_surface: /competitions/
+  displayed_surfaces:
+  - /
+  - /competitions/
+  - /status/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_table_record
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: table.cutoffs
+  label: League cutoffs
+  description: League positions and cutoff labels.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: league_standings
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: tables/*.json
+  payload_paths:
+  - tables/*.json#/cutoffs/**
+  home_surface: /competitions/
+  displayed_surfaces:
+  - /competitions/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Cutoff positions are configured; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: competition.index
+  label: Competition index
+  description: Competition identity, coverage and match counts.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: league_standings
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: competitions/index.json
+  payload_paths:
+  - competitions/index.json#/**
+  home_surface: /competitions/
+  displayed_surfaces:
+  - /competitions/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Competition metadata and coverage; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: cup.league
+  label: League Cup
+  description: League Cup groups, rounds, ties and qualifiers.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: cup_fixtures
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: competitions/league-cup.json
+  payload_paths:
+  - competitions/league-cup.json#/**
+  home_surface: /competitions/league-cup/
+  displayed_surfaces:
+  - /competitions/league-cup/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Cup structure and results; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: cup.scottish
+  label: Scottish Cup
+  description: Scottish Cup rounds, ties and coverage.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: cup_fixtures
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: competitions/scottish-cup.json
+  payload_paths:
+  - competitions/scottish-cup.json#/**
+  home_surface: /competitions/scottish-cup/
+  displayed_surfaces:
+  - /competitions/scottish-cup/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Cup structure and results; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.form
+  label: Matchday form
+  description: Recent and split form for both teams.
+  value_type: object
+  fields:
+  - played
+  - won
+  - drawn
+  - lost
+  - points
+  - ppg
+  - gf
+  - ga
+  - gd
+  - shots_for_pm
+  - shots_against_pm
+  - gf_pg
+  - ga_pg
+  - gd_pg
+  formula:
+    played: won + drawn + lost
+    points: 3*won + drawn
+    gd: gf - ga
+    ppg: points / played
+    gf_pg: gf / played
+    ga_pg: ga / played
+    gd_pg: gd / played
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    counts:
+      method: half_even
+      decimals: 0
+      display: '0'
+    rates:
+      method: half_even
+      decimals: 2
+      display: '0.00'
+  basis: measured
+  source_layer: league_results_current
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/teams/*/form/**
+  - matchday/upcoming.json#/form_guide/*/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_matchday_form
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.strength
+  label: Matchday strength
+  description: League strength, percentiles and comparison.
+  value_type: object
+  fields:
+  - ppp
+  - ppg
+  - gf_pg
+  - ga_pg
+  - gd_pg
+  - shots_for_pm
+  - shot_share
+  - position_gap
+  - ppg_gap
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: league_standings
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/teams/*/strength/**
+  - matchday/upcoming.json#/strength/*/**
+  - matchday/upcoming.json#/strength_comparison/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_matchday_strength
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.style
+  label: Matchday style
+  description: Shot profile, approach index and style lean.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: league_team_stats
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/teams/*/style/**
+  - matchday/upcoming.json#/styles/*/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Shot-profile derivatives; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.lineup
+  label: Predicted XI
+  description: Predicted lineups, scores, selection weights and availability.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: lineups_roles
+  coverage_tier: event
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/predicted_lineups/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Selection and formation projections; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.coverage
+  label: Matchday coverage
+  description: Snapshot, lineup and form coverage.
+  value_type: object
+  fields:
+  - age_hours
+  - fixtures
+  - fixtures_with_lineups
+  - lineup_coverage
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: league_results_current
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/coverage/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_matchday_coverage
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.head-to-head
+  label: Head-to-head
+  description: Recent meetings and results.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: history
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/head_to_head/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Historical meeting snapshot; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: matchday.next-fixtures
+  label: Next fixtures
+  description: Upcoming club fixtures.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: club_fixtures
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: matchday/upcoming.json
+  payload_paths:
+  - matchday/upcoming.json#/next_fixtures/**
+  home_surface: /matchday/
+  displayed_surfaces:
+  - /matchday/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Fixture snapshot; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: needs.summary
+  label: Needs summary
+  description: Family counts and availability summary.
+  value_type: object
+  fields:
+  - families
+  - cover
+  - strengthen
+  - replace
+  - availability_known
+  - availability_unknown
+  - counts
+  - top_priority
+  formula:
+    families: len(families)
+    counts: count families by category
+    availability_known: count squad players with availability.status != unknown
+    availability_unknown: squad players - availability_known
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: inferred
+  source_layer: needs
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: needs/aberdeen.json
+  payload_paths:
+  - needs/aberdeen.json#/summary/**
+  home_surface: /recruitment/
+  displayed_surfaces:
+  - /recruitment/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_needs_summary
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: needs.family
+  label: Needs families
+  description: Per-family depth, quality, availability, market and roster metrics.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: needs
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: needs/aberdeen.json
+  payload_paths:
+  - needs/aberdeen.json#/families/**
+  home_surface: /recruitment/
+  displayed_surfaces:
+  - /recruitment/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Derived family metrics; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: needs.roster-space
+  label: Roster space
+  description: Roster current/max and outgoing-first policy.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: needs
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: needs/aberdeen.json
+  payload_paths:
+  - needs/aberdeen.json#/roster_space/**
+  home_surface: /recruitment/
+  displayed_surfaces:
+  - /recruitment/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Roster policy; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: needs.coverage
+  label: Needs coverage
+  description: Needs coverage and availability status.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: needs
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: needs/aberdeen.json
+  payload_paths:
+  - needs/aberdeen.json#/coverage/**
+  home_surface: /recruitment/
+  displayed_surfaces:
+  - /recruitment/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.summary
+  label: Transfer summary
+  description: Register totals, players and period.
+  value_type: object
+  fields:
+  - total
+  - confirmed
+  - curated
+  - players
+  - seasons_covered
+  - windows_covered
+  formula:
+    total: len(transfers)
+    confirmed: count verification_status == confirmed
+    curated: count verification_status == curated
+    players: distinct player_key
+    seasons_covered: distinct season
+    windows_covered: distinct (season, window)
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/summary/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_transfer_summary
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.window
+  label: Transfer windows
+  description: Per-window arrival/departure and valuation counts.
+  value_type: object
+  fields:
+  - arrivals
+  - departures
+  - permanent_in
+  - permanent_out
+  - loans_in
+  - loans_out
+  - free_in
+  - free_out
+  - disclosed_count
+  - undisclosed_count
+  - key
+  - state
+  formula:
+    arrivals: count direction == in
+    departures: count direction == out
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/windows/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_transfer_windows
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.row
+  label: Transfer rows
+  description: Per-move fee, loan and verification values.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/transfers/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Per-row curated fees and terms; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.valuation
+  label: Transfer valuation
+  description: Modelled fee ranges and calibration counts.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: valuation
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/valuation/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Modelled valuation; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.sell-on
+  label: Sell-on clauses
+  description: Sell-on percentages, basis and summary.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/sell_on_summary/**
+  - transfers/aberdeen.json#/sell_on_clauses/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Curated sell-on clauses; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.loans
+  label: Transfer loans
+  description: Loan-in and loan-out slices.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: loans
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/loans_out/**
+  - transfers/aberdeen.json#/loans_in/**
+  home_surface: /loans/
+  displayed_surfaces:
+  - /loans/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Loan rows; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.plausibility
+  label: Transfer plausibility
+  description: Withheld suspect rows and plausibility counts.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/plausibility/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Plausibility policy; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.audit
+  label: Transfer completeness audit
+  description: Seniority review, position coverage and gap ledger counts.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.audit.json
+  payload_paths:
+  - transfers/aberdeen.audit.json#/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  - /status/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Completeness audit is report-only; it does not prove provider completeness.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: transfers.coverage
+  label: Transfer coverage
+  description: Audited/curated window coverage.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: transfer_register
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: transfers/aberdeen.json
+  payload_paths:
+  - transfers/aberdeen.json#/coverage/**
+  home_surface: /transfers/
+  displayed_surfaces:
+  - /transfers/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_transfer_coverage
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.scorecard
+  label: History scorecard
+  description: 'Era aggregates: seasons, managers, honours and positions.'
+  value_type: object
+  fields:
+  - seasons
+  - best_position
+  - worst_position
+  - average_position
+  - average_points
+  - manager_count
+  - honours_total
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: history
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/scorecard/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_history_scorecard
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.season
+  label: History seasons
+  description: Season-level history rows.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: history
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/seasons/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Curated season refs; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.staff
+  label: History staff
+  description: Manager/staff stints and records.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: history
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/staff/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Curated staff stints; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.baseline
+  label: History baseline
+  description: League-only baseline window.
+  value_type: object
+  fields:
+  - count
+  - average_position
+  - best_position
+  - average_points
+  formula:
+    count: len(seasons)
+    average_position: mean(position)
+    average_points: mean(points)
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    counts:
+      method: half_even
+      decimals: 0
+      display: '0'
+    averages:
+      method: half_even
+      decimals: 1
+      display: '0.0'
+  basis: measured
+  source_layer: history
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/baseline/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_history_baseline
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.coverage
+  label: History coverage
+  description: History season/backfill coverage.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: history
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/coverage/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_history_coverage
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: history.season-document
+  label: History season documents
+  description: Per-season history documents.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: history
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: history/seasons/*.json
+  payload_paths:
+  - history/seasons/*.json#/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Curated season documents; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: squad.summary
+  label: Squad summary
+  description: Squad size, loans, role evidence and coverage counts.
+  value_type: object
+  fields:
+  - squad_size
+  - loans_out
+  - loans_in
+  - roles_observed
+  - roles_partial
+  - roles_unknown
+  - stats_unavailable
+  - average_age
+  formula:
+    total_players: len(players)
+    by_status: count players by status
+    loans_out: count status == loan_out
+    loans_in: count status == loan_in
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: measured
+  source_layer: squad_identity
+  coverage_tier: event
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: squad/aberdeen.json
+  payload_paths:
+  - squad/aberdeen.json#/summary/**
+  home_surface: /squad/
+  displayed_surfaces:
+  - /squad/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_squad_summary
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: squad.players
+  label: Squad players
+  description: Per-player totals, playing time, role and position stats.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: squad_identity
+  coverage_tier: event
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: squad/aberdeen.json
+  payload_paths:
+  - squad/aberdeen.json#/players/**
+  home_surface: /squad/
+  displayed_surfaces:
+  - /squad/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Per-player rows; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: squad.meta
+  label: Squad metadata
+  description: Role/career/position/attribute coverage metadata.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: squad_identity
+  coverage_tier: event
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: squad/aberdeen.json
+  payload_paths:
+  - squad/aberdeen.json#/role_meta/**
+  - squad/aberdeen.json#/career_meta/**
+  - squad/aberdeen.json#/position_stats_meta/**
+  - squad/aberdeen.json#/attributes_meta/**
+  - squad/aberdeen.json#/availability_meta/**
+  - squad/aberdeen.json#/coverage/**
+  home_surface: /squad/
+  displayed_surfaces:
+  - /squad/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Coverage metadata; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: player.page
+  label: Player pages
+  description: Per-player page panels and records.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: player_match_stats
+  coverage_tier: event
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: players/*.json
+  payload_paths:
+  - players/*.json#/**
+  home_surface: /players/
+  displayed_surfaces:
+  - /players/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Player page rows; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: rumours.summary
+  label: Rumour summary
+  description: Curated rumour counts and status.
+  value_type: object
+  fields:
+  - total
+  - active
+  - confirmed
+  - by_confidence
+  - by_status
+  - by_direction
+  formula:
+    total: len(rumours)
+    by_status: count rumours by status
+    by_confidence: count rumours by confidence
+    by_direction: count rumours by direction
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: curated
+  source_layer: rumours
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: rumours/aberdeen.json
+  payload_paths:
+  - rumours/aberdeen.json#/summary/**
+  - rumours/aberdeen.json#/coverage/**
+  home_surface: /rumours/
+  displayed_surfaces:
+  - /rumours/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_rumours_summary
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: rumours.profile
+  label: Rumour profile
+  description: Advisory recruitment profile weights and buckets.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: rumours
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: rumours/profile.json
+  payload_paths:
+  - rumours/profile.json#/**
+  home_surface: /recruitment/
+  displayed_surfaces:
+  - /recruitment/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Advisory profile; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: forum.signal
+  label: Forum signal
+  description: Fan-signal coverage, sentiment and profile.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: forum_signal
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: forum/afc_chat.json
+  payload_paths:
+  - forum/afc_chat.json#/**
+  home_surface: /news/
+  displayed_surfaces:
+  - /news/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Reference fan signal; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: provenance.layers
+  label: Provenance layers
+  description: Layer/source row counts and truth table.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: provenance.json
+  payload_paths:
+  - provenance.json#/layers/**
+  - provenance.json#/sources/**
+  - provenance.json#/migration/**
+  - provenance.json#/availability/**
+  home_surface: /sources/
+  displayed_surfaces:
+  - /sources/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Provenance summary; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: coverage.surfaces
+  label: Coverage
+  description: Build coverage counts across surfaces.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: coverage.json
+  payload_paths:
+  - coverage.json#/**
+  home_surface: /status/
+  displayed_surfaces:
+  - /status/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_coverage
+  source_paths: []
+  limitations:
+  - Registered family; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: clubs.aberdeen
+  label: Club payload
+  description: Aberdeen club summary, history and news rows.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: league_results_current
+  coverage_tier: match
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: clubs/aberdeen.json
+  payload_paths:
+  - clubs/aberdeen.json#/**
+  home_surface: /
+  displayed_surfaces:
+  - /
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Club summary payload; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: availability.ledger
+  label: Availability
+  description: Availability ledger coverage and entries.
+  value_type: object
+  fields: []
+  formula: Registered family; see description and fields.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: curated
+  source_layer: availability
+  coverage_tier: curated
+  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  home_payload: availability/aberdeen.json
+  payload_paths:
+  - availability/aberdeen.json#/**
+  home_surface: /status/
+  displayed_surfaces:
+  - /status/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Curated team news; provenance checked, not recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.document
+  label: The case document
+  description: Owner view, chairman frame, thesis and state.
+  value_type: object
+  fields:
+  - schema_version
+  - state
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: derived
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/owner_view/**
+  - themes/aberdeen.json#/chairman_frame/**
+  - themes/aberdeen.json#/thesis
+  - themes/aberdeen.json#/state
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Case claim; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claims
+  label: The case claims
+  description: 'The claim register: order, domain, status and counts.'
+  value_type: object
+  fields:
+  - order
+  - count
+  - status
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: derived
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Case claim; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.evidence
+  label: Claim evidence
+  description: The evidence table attached to each claim.
+  value_type: object
+  fields:
+  - count
+  - sample
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: derived
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*/evidence/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Case claim; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.benchmark
+  label: Peer benchmark
+  description: League performance of the other SPFL clubs.
+  value_type: object
+  fields:
+  - seasons
+  - best
+  - worst
+  - median_points
+  - current
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: measured
+  source_layer: themes
+  coverage_tier: match
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/benchmark/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - League performance only; other clubs transfer and wage models are not in the record.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.coverage
+  label: Case coverage
+  description: Availability, history and missing data classes.
+  value_type: object
+  fields:
+  - known
+  - unknown
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: derived
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/coverage/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Case claim; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.team-now
+  label: The team now
+  description: League record and kick-off shape churn.
+  value_type: object
+  fields:
+  - played
+  - points
+  - gf
+  - ga
+  - form
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: themes
+  coverage_tier: match
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=team_now]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Case claim; provenance checked, not independently recomputed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.defence
+  label: The defence
+  description: Three-at-the-back record, wide roles and availability.
+  value_type: object
+  fields:
+  - matches
+  - points_pg
+  - ga_pm
+  - wb_starts_pm
+  - wf_starts_pm
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: themes
+  coverage_tier: match
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=defence]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Four three-CB matches; association only. Availability is unknown.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.attack
+  label: The attack
+  description: Goals, shot share and the set-play/error gap.
+  value_type: object
+  fields:
+  - gf
+  - ga
+  - shot_share
+  - attack_share
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: themes
+  coverage_tier: match
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=attack]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - No event data for set-piece goals, errors or penalties.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.managers
+  label: The managers
+  description: Manager phases, runs and the cup.
+  value_type: object
+  fields:
+  - played
+  - ppg
+  - winning_run
+  - winless_run
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: themes
+  coverage_tier: match
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=managers]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - 18 Robinson matches; no pre-declared variance measure.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.squad
+  label: The squad
+  description: Arrivals, departures, age, U21 minutes and the Morris sale.
+  value_type: object
+  fields:
+  - arrivals
+  - departures
+  - median_age
+  - u21_minutes_share
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: curated
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=squad]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Confirmed business only; fees are mostly undisclosed.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+- id: case.claim.chairman-record
+  label: The chairman's record
+  description: The Cormack-era record, managers, honours and transfers.
+  value_type: object
+  fields:
+  - seasons
+  - best_position
+  - worst_position
+  - honours
+  - manager_count
+  - europe
+  formula: Registered case family; see the claim text and evidence table.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: themes
+  coverage_tier: curated
+  confidence_rule: Declared by the claim status and the sample in the evidence table.
+  home_payload: themes/aberdeen.json
+  payload_paths:
+  - themes/aberdeen.json#/claims/*[id=chairman_record]/**
+  home_surface: /themes/
+  displayed_surfaces:
+  - /themes/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - The record cannot prove causation or boardroom intent.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+  status: active
+parameters:
+- id: param.matchday.style
+  label: Matchday style policy
+  kind: matrix
+  value:
+    min_matches: 4
+    venue_min_matches: 3
+    venue_weight: 0.6
+    overall_weight: 0.4
+    attack_index: 60
+    counter_index: 40
+    attack_shot_share: 0.5
+    counter_shot_share: 0.48
+    weights:
+      shots_for: 0.4
+      shot_share: 0.25
+      goals_for: 0.2
+      shots_on_target_for: 0.15
+  unit: mixed
+  used_by:
+  - matchday.style
+  config_path: matchday.style
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.matchday.prediction
+  label: Matchday prediction policy
+  kind: matrix
+  value:
+    formation_window: 6
+    recency_weights:
+    - 6
+    - 5
+    - 4
+    - 3
+    - 2
+    - 1
+    min_role_fit: 0.3
+    scoring:
+      start_rate: 0.22
+      recency_start: 0.18
+      minute_share: 0.1
+      role_fit: 0.15
+      form: 0.2
+      recent_rating: 0.15
+    role_adjacency:
+      GK:
+        GK: 1.0
+      CB:
+        CB: 1.0
+        RB: 0.6
+        LB: 0.6
+        DM: 0.3
+      RB:
+        RB: 1.0
+        RWB: 0.9
+        CB: 0.5
+        RM: 0.4
+      LB:
+        LB: 1.0
+        LWB: 0.9
+        CB: 0.5
+        LM: 0.4
+      RWB:
+        RWB: 1.0
+        RB: 0.8
+        RM: 0.5
+        RW: 0.4
+      LWB:
+        LWB: 1.0
+        LB: 0.8
+        LM: 0.5
+        LW: 0.4
+      DM:
+        DM: 1.0
+        CM: 0.7
+        CB: 0.4
+      CM:
+        CM: 1.0
+        DM: 0.8
+        AM: 0.7
+      AM:
+        AM: 1.0
+        CM: 0.7
+        RW: 0.6
+        LW: 0.6
+        ST: 0.5
+      RM:
+        RM: 1.0
+        RW: 0.9
+        RB: 0.5
+        CM: 0.4
+      LM:
+        LM: 1.0
+        LW: 0.9
+        LB: 0.5
+        CM: 0.4
+      RW:
+        RW: 1.0
+        RM: 0.8
+        ST: 0.5
+        AM: 0.5
+      LW:
+        LW: 1.0
+        LM: 0.8
+        ST: 0.5
+        AM: 0.5
+      ST:
+        ST: 1.0
+        RW: 0.5
+        LW: 0.5
+        AM: 0.4
+    position_group_fit:
+      GK:
+        GK: 0.3
+      D:
+        CB: 0.3
+        RB: 0.3
+        LB: 0.3
+        RWB: 0.3
+        LWB: 0.3
+        DM: 0.2
+      M:
+        DM: 0.3
+        CM: 0.3
+        AM: 0.3
+        RM: 0.3
+        LM: 0.3
+      F:
+        RW: 0.3
+        LW: 0.3
+        ST: 0.3
+        AM: 0.2
+  unit: mixed
+  used_by:
+  - matchday.lineup
+  config_path: matchday.prediction
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.matchday.refresh
+  label: Matchday refresh and sample policy
+  kind: matrix
+  value:
+    recent_fixtures: 6
+    contenders: 6
+    max_api_requests: 24
+    refresh_after_hours: 20
+    stale_after_hours: 48
+    min_lineup_matches: 3
+  unit: mixed
+  used_by:
+  - matchday.form
+  - matchday.lineup
+  - matchday.coverage
+  config_path: matchday
+  config_keys:
+  - recent_fixtures
+  - contenders
+  - max_api_requests
+  - refresh_after_hours
+  - stale_after_hours
+  - min_lineup_matches
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.needs.thresholds
+  label: Needs thresholds
+  kind: matrix
+  value:
+    ready_starts: 2
+    ready_minutes: 180
+    starter_starts: 5
+    starter_minutes: 450
+    trusted_starts: 3
+    quality_minutes: 900
+    cover_buffer: 1
+    weak_family_delta: -0.15
+    reliance_top_share: 0.55
+    depth_gap_cover: 0.5
+    availability_risk_cover: 0.25
+    quality_gap_strengthen: 0.35
+    age_risk_strengthen: 0.5
+  unit: mixed
+  used_by:
+  - needs.family
+  - needs.summary
+  config_path: needs.thresholds
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.needs.families
+  label: Needs family policy
+  kind: matrix
+  value:
+    GK:
+      label: Goalkeepers
+      min_available: 2
+      max_squad: 4
+      scouting_groups:
+      - GK
+      market:
+      - loan
+      - free_agent
+      traits:
+      - saves_p90
+      - save_pct
+      - crosses_claimed_p90
+      - pass_completion
+    CB:
+      label: Centre-backs
+      min_available: 4
+      max_squad: 5
+      scouting_groups:
+      - CB
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - aerial_win_pct
+      - duel_win_pct
+      - progressive_passes_p90
+      - clearances_p90
+    FB/WB:
+      label: Full-backs / wing-backs
+      min_available: 4
+      max_squad: 6
+      scouting_groups:
+      - FB
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - crosses_p90
+      - progressive_carries_p90
+      - tackles_p90
+      - duels_won_pct
+    MID:
+      label: Central midfield
+      min_available: 4
+      max_squad: 7
+      scouting_groups:
+      - DM
+      - CM
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - progressive_passes_p90
+      - tackles_p90
+      - interceptions_p90
+      - pass_completion
+    AM/WM:
+      label: Attacking / wide midfield
+      min_available: 3
+      max_squad: 5
+      scouting_groups:
+      - AM
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - key_passes_p90
+      - dribbles_success_pct
+      - shots_p90
+      - progressive_carries_p90
+    W:
+      label: Wide forwards
+      min_available: 3
+      max_squad: 5
+      scouting_groups:
+      - W
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - dribbles_success_pct
+      - crosses_p90
+      - shots_p90
+      - touches_in_box_p90
+    ST:
+      label: Centre-forwards
+      min_available: 2
+      max_squad: 4
+      scouting_groups:
+      - ST
+      market:
+      - loan
+      - free_agent
+      - fee
+      traits:
+      - shots_p90
+      - goals_per_shot
+      - aerial_win_pct
+      - touches_in_box_p90
+  unit: mixed
+  used_by:
+  - needs.family
+  - needs.roster-space
+  config_path: needs.families
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.transfers.audit
+  label: Transfer audit thresholds
+  kind: matrix
+  value:
+    start_season: 2024-25
+    recent_windows: 4
+    seniority:
+      established_min_starts: 5
+      established_min_minutes: 450
+      established_min_career_starts: 10
+      youth_max_age: 20
+      youth_max_appearances: 4
+    manual_finding_aids:
+      allowed: true
+      automated_access: false
+      publication: false
+    prior_seasons:
+    - 2024-25
+    - 2025-26
+  unit: mixed
+  used_by:
+  - transfers.row
+  - transfers.coverage
+  config_path: transfers.audit
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.transfers.valuation
+  label: Transfer valuation policy
+  kind: matrix
+  value:
+    currency: GBP
+    fx_to_gbp:
+      GBP: 1.0
+      EUR: 0.85
+      USD: 0.78
+    range_low: 0.6
+    range_high: 1.6
+    note: 'Manual calibration may use restricted pages as a private sanity check only;
+      no restricted value, URL or scraped table is published. Every inferred output
+      is a range with a confidence label.
+
+      '
+  unit: mixed
+  used_by:
+  - transfers.valuation
+  config_path: transfers.valuation
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.availability.policy
+  label: Availability policy
+  kind: matrix
+  value:
+    max_age_days: 21
+    fresh_days: 7
+    filter_statuses:
+    - out
+    - suspended
+    doubtful_weight: 0.5
+    returned_weight: 0.9
+    unknown_weight: 1.0
+    doubtful_confidence_downgrade: 1
+    stale_confidence_downgrade: 1
+    unknown_confidence_downgrade: 1
+    conflict_confidence_downgrade: 2
+    require_source_url: true
+    allowed_hosts:
+    - afc.co.uk
+    - www.afc.co.uk
+  unit: mixed
+  used_by:
+  - availability.ledger
+  config_path: availability.policy
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.availability.provider
+  label: Availability provider policy
+  kind: matrix
+  value:
+    source: api_football
+    endpoint: /injuries
+    league_id: 179
+    require_league_coverage: true
+    use_player_injured_boolean: false
+    never_sets:
+    - available
+    - returned
+    - suspended
+  unit: mixed
+  used_by:
+  - availability.ledger
+  config_path: availability.provider
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.competitions
+  label: Competition policy
+  kind: matrix
+  value:
+  - id: sco:premiership
+    code: SC0
+    name: Scottish Premiership
+    short_name: Premiership
+    tier: 1
+    teams: 12
+    matches_per_season: 228
+    split_after_matches: 33
+    qualification_note: 'Scotland has four UEFA places for 2027/28: the champions
+      enter the Champions League second qualifying round, the Scottish Cup winner
+      enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference
+      League second qualifying round. 4th only qualifies if the Scottish Cup winner
+      is already in the top three. The League Cup carries no European place. Subject
+      to the final UEFA access list and cup outcomes.
+
+      '
+    cutoffs:
+    - after_position: 3
+      kind: europe
+      label: European places · 1–3
+      note: 4th is conditional on the Scottish Cup winner already being in the top
+        three.
+    - after_position: 6
+      kind: split
+      label: Top-six / bottom-six split
+      note: The league splits after 33 matches; the bottom six cannot finish higher
+        than 7th.
+    - after_position: 10
+      kind: playoff
+      label: Relegation play-off · 11th
+      note: 11th plays the Championship play-off winner over two legs.
+    - after_position: 11
+      kind: relegation
+      label: Relegation · 12th
+      note: 12th is relegated automatically.
+  - id: sco:championship
+    code: SC1
+    name: Scottish Championship
+    short_name: Championship
+    tier: 2
+    teams: 10
+    matches_per_season: 180
+    qualification_note: '1st is promoted automatically. 2nd–4th enter the Premiership
+      play-off with 11th in the Premiership. 9th enters the Championship/League One
+      play-off, and 10th is relegated to League One.
+
+      '
+    cutoffs:
+    - after_position: 1
+      kind: promotion
+      label: Automatic promotion · 1st
+      note: 1st is promoted to the Premiership.
+    - after_position: 4
+      kind: playoff
+      label: Promotion play-off · 2nd–4th
+      note: 2nd–4th enter the Premiership play-off with 11th in the Premiership.
+    - after_position: 8
+      kind: playoff
+      label: Relegation play-off · 9th
+      note: 9th enters the Championship/League One play-off with 2nd–4th in League
+        One.
+    - after_position: 9
+      kind: relegation
+      label: Relegation · 10th
+      note: 10th is relegated to League One.
+  - id: sco:league-one
+    code: SC2
+    name: Scottish League One
+    short_name: League One
+    tier: 3
+    teams: 10
+    matches_per_season: 180
+    qualification_note: '1st is promoted automatically. 2nd–4th enter the Championship
+      play-off with 9th in the Championship. 9th enters the League One/League Two
+      play-off, and 10th is relegated to League Two.
+
+      '
+    cutoffs:
+    - after_position: 1
+      kind: promotion
+      label: Automatic promotion · 1st
+      note: 1st is promoted to the Championship.
+    - after_position: 4
+      kind: playoff
+      label: Promotion play-off · 2nd–4th
+      note: 2nd–4th enter the Championship/League One play-off with 9th in the Championship.
+    - after_position: 8
+      kind: playoff
+      label: Relegation play-off · 9th
+      note: 9th enters the League One/League Two play-off with 2nd–4th in League Two.
+    - after_position: 9
+      kind: relegation
+      label: Relegation · 10th
+      note: 10th is relegated to League Two.
+  - id: sco:league-two
+    code: SC3
+    name: Scottish League Two
+    short_name: League Two
+    tier: 4
+    teams: 10
+    matches_per_season: 180
+    qualification_note: '1st is promoted automatically. 2nd–4th enter the League One
+      play-off with 9th in League One. 10th enters the pyramid play-off against the
+      winner of the Highland / Lowland East / Lowland West champions'' group; there
+      is no automatic relegation, and the League Two club hosts the second leg.
+
+      '
+    cutoffs:
+    - after_position: 1
+      kind: promotion
+      label: Automatic promotion · 1st
+      note: 1st is promoted to League One.
+    - after_position: 4
+      kind: playoff
+      label: Promotion play-off · 2nd–4th
+      note: 2nd–4th enter the League One/League Two play-off with 9th in League One.
+    - after_position: 9
+      kind: pyramid
+      label: Pyramid play-off · 10th
+      note: 10th faces the tier-five group winner; no automatic relegation.
+  unit: mixed
+  used_by:
+  - table.record
+  - table.cutoffs
+  - competition.index
+  config_path: competitions.competitions
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.competitions.history
+  label: Competition history backfill
+  kind: matrix
+  value:
+    first_season: 1994-95
+    all_four_from: 1997-98
+    default_backfill_from: 2013-14
+  unit: mixed
+  used_by:
+  - table.record
+  - table.cutoffs
+  config_path: competitions.history
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.competitions.validation
+  label: Competition validation policy
+  kind: matrix
+  value:
+    curtailed:
+      2019-20:
+      - SC0
+      - SC1
+      - SC2
+      - SC3
+      2020-21:
+      - SC1
+      - SC2
+      - SC3
+  unit: mixed
+  used_by:
+  - table.record
+  config_path: competitions.validation
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.case.thresholds
+  label: Case thresholds
+  kind: matrix
+  value:
+    family:
+      high_minutes: 900
+      high_matches: 6
+      medium_minutes: 450
+      medium_matches: 3
+    depth:
+      starter_starts: 5
+      starter_minutes: 450
+      rotation_minutes: 90
+      concentration_high: 0.55
+      thin_rotation_starts: 3
+    shape:
+      medium_matches: 3
+    balance:
+      medium_matches: 6
+    mission:
+      min_arrivals_for_confidence: 5
+  unit: mixed
+  used_by:
+  - case.claim.defence
+  - case.claim.attack
+  - case.claim.managers
+  config_path: themes.thresholds
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1
+- id: param.case.scope
+  label: Case scope
+  kind: matrix
+  value:
+    ratings: premiership
+    minutes: all_competitive
+    shapes: all_competitive
+    bench: premiership
+  unit: mixed
+  used_by:
+  - case.claim.team-now
+  - case.claim.defence
+  - case.claim.attack
+  config_path: themes.scope
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 1

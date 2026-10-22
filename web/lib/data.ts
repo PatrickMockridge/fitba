@@ -1845,192 +1845,6 @@ export interface MatchdayDocument {
   notes: string;
 }
 
-export interface ThemeEvidence {
-  label: string;
-  value: string | number | null;
-  note?: string | null;
-  basis: "measured" | "inferred" | "curated" | "mixed" | "unknown" | string;
-}
-
-export interface ThemePlayer {
-  player_id?: number | null;
-  name?: string | null;
-  role_family?: string | null;
-  starts?: number | null;
-  minutes?: number | null;
-  sub_apps?: number | null;
-  bench_named?: number | null;
-  category?: string | null;
-  note?: string | null;
-  arrival?: string | null;
-  arrival_kind?: string | null;
-  two_cb_starts?: number | null;
-  three_cb_starts?: number | null;
-  sub_minutes?: number | null;
-  availability_status?: string | null;
-  availability_confidence?: string | null;
-  availability_source?: string | null;
-  availability_verified_at?: string | null;
-  availability_note?: string | null;
-  availability_conflict?: boolean | null;
-}
-
-export interface ThemeLink {
-  label: string;
-  href: string;
-}
-
-export interface ThemeBlock {
-  theme_id: string;
-  horizon: "season" | "mission" | string;
-  order: number;
-  title: string;
-  fan_question: string;
-  status: "available" | "partial" | "unavailable" | string;
-  reason?: string | null;
-  headline?: string | null;
-  read?: string | null;
-  basis: string;
-  read_basis: string;
-  confidence: "high" | "medium" | "low" | "unknown" | string;
-  evidence: ThemeEvidence[];
-  players: ThemePlayer[];
-  metrics: Record<string, unknown>;
-  links: ThemeLink[];
-  caveats: string[];
-  method?: string | null;
-  implications?: ThemeImplication[];
-}
-
-export interface ThemeImplication {
-  family: string;
-  category: string;
-  urgency: string;
-  line: string;
-  href: string;
-  basis: string;
-}
-
-export interface ThemeScope {
-  season: string;
-  season_weight: number;
-  mission_weight: number;
-  mission_label: string;
-  note: string;
-}
-
-export interface ThemesCoverage {
-  status: string;
-  season: string;
-  role_basis: string;
-  provider_ratings: string;
-  fixtures_total?: number | null;
-  fixtures_with_ratings?: number | null;
-  starts_total?: number | null;
-  starts_with_role?: number | null;
-  role_start_coverage?: number | null;
-  minutes_total?: number | null;
-  sub_minutes?: number | null;
-  provider_rating_rows?: number | null;
-  provider_rating_minutes?: number | null;
-  shapes?: string | null;
-  bench?: string | null;
-  availability_feed: Record<string, unknown>;
-  channel_data: boolean;
-  xg: boolean;
-  possession: boolean;
-  midgame_shape: boolean;
-  historical_ratings: boolean;
-  note: string;
-}
-
-export interface ThemesDocument {
-  schema_version: string;
-  generated_at: string;
-  season: string;
-  club_id: string;
-  state: "fresh" | "partial" | "unavailable" | "stale" | string;
-  stale_reason?: string | null;
-  served_generated_at?: string | null;
-  title: string;
-  scope: ThemeScope;
-  summary: {
-    headline?: string;
-    theme_count?: number;
-    season_themes?: number;
-    mission_themes?: number;
-    confidence?: string;
-    note?: string;
-  };
-  coverage: ThemesCoverage;
-  themes: ThemeBlock[];
-  sources: MatchdaySource[];
-  notes: string;
-}
-
-export interface ThemeFamilyGroup {
-  family: string;
-  starts: number;
-  starter_minutes: number;
-  players: number;
-  matches: number;
-  provider_rating: number | null;
-  rating_median: number | null;
-  rating_p25: number | null;
-  rating_sample: {
-    player_matches: number;
-    players: number;
-    minutes: number;
-  };
-  squad_rating_delta: number | null;
-  goals: number;
-  assists: number;
-  confidence: string;
-}
-
-export interface ThemeShapeGroup {
-  group: "two_cb" | "three_cb" | "unknown" | string;
-  matches: number;
-  record: string;
-  points_pg: number | null;
-  gf_pm: number | null;
-  ga_pm: number | null;
-  saves_pm: number | null;
-  cb_rating: number | null;
-  wb_starts_pm: number | null;
-  wf_starts_pm: number | null;
-  fb_starts_pm: number | null;
-  named_bench_wf_pm: number | null;
-  named_bench_fbwb_pm: number | null;
-  wf_sub_minutes_pm: number | null;
-}
-
-export interface ThemeDepthGroup {
-  group: string;
-  players: number;
-  total_minutes: number;
-  top_share: number | null;
-  concentration: string;
-  starters: number;
-  rotation: number;
-  fringe: number;
-  players_with_3_starts: number;
-  thin_rotation: boolean;
-  named_bench: number;
-  arrivals: number;
-  arrival_minutes: number;
-  items: ThemePlayer[];
-}
-
-export interface ThemePillar {
-  id: string;
-  title: string;
-  statement: string;
-  evidence: string[];
-  status: string;
-  basis: string;
-}
-
 export interface ProvenanceSourceRef {
   id: string;
   name: string;
@@ -2212,7 +2026,7 @@ export interface NeedsFamily {
   };
   players: NeedsPlayer[];
   caveats: string[];
-  links: ThemeLink[];
+  links: Array<{ label: string; href: string }>;
 }
 
 export interface NeedsDocument {
@@ -2308,6 +2122,15 @@ export interface Manifest {
     provenance?: Record<string, unknown>;
     availability?: Record<string, unknown>;
     needs?: Record<string, unknown>;
+    case?: {
+      club: string;
+      season: string;
+      state: string;
+      count: number;
+      domains: number;
+      benchmark_rows: number;
+      note?: string | null;
+    };
   };
   provenance?: {
     path: string;
@@ -2317,6 +2140,272 @@ export interface Manifest {
     availability?: Record<string, unknown>;
   };
   files: Array<{ path: string; bytes: number; checksum: string }>;
+  validation?: {
+    status: string;
+    report: string;
+    checksum: string;
+    generated_at: string;
+    season: string;
+    strict: boolean;
+    errors: number;
+    warnings: number;
+    checks: number;
+  };
+  metrics?: {
+    registry_path: string;
+    registry_checksum: string;
+    registry_version: string;
+    registry_reviewed: string;
+    audit_path: string;
+    audit_checksum: string;
+    status: string;
+    metrics_total: number;
+    metrics_passed: number;
+    metrics_failed: number;
+    parameters_total: number;
+    parameters_passed: number;
+    parameters_failed: number;
+    verification_modes: Record<string, number>;
+    provenance_only: number;
+    audited_at: string;
+    allowlist: {
+      status: string;
+      entries: Array<Record<string, unknown>>;
+      expires: string | null;
+    };
+  };
+}
+
+export interface MetricDefinition {
+  id: string;
+  label: string;
+  description: string;
+  value_type: string;
+  fields: string[];
+  formula: string | Record<string, string>;
+  inputs: string[];
+  unit: string;
+  aggregation: string;
+  denominator: string | Record<string, string> | null;
+  rounding: Record<string, unknown> | Record<string, Record<string, unknown>>;
+  basis: string;
+  source_layer: string;
+  coverage_tier: string;
+  confidence_rule: string;
+  home_payload: string;
+  payload_paths: string[];
+  home_surface: string;
+  displayed_surfaces: string[];
+  verification: string;
+  verification_checks: Array<Record<string, string>>;
+  implementation: string | null;
+  source_paths: string[];
+  limitations: string[];
+  owner: string;
+  reviewed: string;
+  version: number;
+  status: string;
+}
+
+export interface ParameterDefinition {
+  id: string;
+  label: string;
+  kind: string;
+  value: unknown;
+  unit: string;
+  used_by: string[];
+  config_path: string;
+  config_keys?: string[];
+  verification: string;
+  owner: string;
+  reviewed: string;
+  version: number;
+}
+
+export interface MetricsRegistry {
+  schema_version: number;
+  registry_version: string;
+  reviewed: string;
+  owner: string;
+  change_policy: Record<string, string | boolean>;
+  structural_number_patterns: string[];
+  metrics: MetricDefinition[];
+  parameters: ParameterDefinition[];
+  checksum: string;
+}
+
+export interface MetricAuditEntry {
+  id: string;
+  label: string;
+  description: string;
+  value_type: string;
+  verification: string;
+  provenance_only: boolean;
+  status: string;
+  home_payload: string;
+  home_surface: string;
+  displayed_surfaces: string[];
+  source_layer: string;
+  basis: string;
+  coverage_tier: string;
+  payloads: number;
+  numeric_leaves: number;
+  locations: Array<{
+    payload: string;
+    pointer: string;
+    nodes: number;
+    numeric_leaves: number;
+  }>;
+  rows_checked: number;
+  fields_checked: number;
+  checks: Array<{ name: string; status: string; message: string }>;
+  errors: string[];
+  limitations: string[];
+  version: number;
+}
+
+export interface ParameterAuditEntry {
+  id: string;
+  label: string;
+  status: string;
+  kind: string;
+  config_path: string;
+  config_keys: string[];
+  unit: string;
+  used_by: string[];
+  expected_checksum: string;
+  actual_checksum: string | null;
+  mismatches: string[];
+  errors: string[];
+  version: number;
+}
+
+export interface MetricsAudit {
+  schema_version: string;
+  registry_version: string;
+  registry_checksum: string;
+  registry_reviewed: string;
+  dataset_version: string;
+  generated_at: string;
+  audited_at: string;
+  season: string;
+  status: string;
+  summary: {
+    metrics_total: number;
+    metrics_passed: number;
+    metrics_failed: number;
+    parameters_total: number;
+    parameters_passed: number;
+    parameters_failed: number;
+    verification_modes: Record<string, number>;
+    provenance_only: number;
+    rows_checked: number;
+    fields_checked: number;
+  };
+  metrics: MetricAuditEntry[];
+  parameters: ParameterAuditEntry[];
+  allowlist: {
+    status: string;
+    entries: Array<Record<string, unknown>>;
+    expires: string | null;
+  };
+  errors: string[];
+}
+
+export interface ValidationReport {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  strict: boolean;
+  status: string;
+  errors: number;
+  warnings: number;
+  checks: Array<{ name: string; level: string; message: string; value?: unknown }>;
+}
+
+export interface CaseSource {
+  id: string;
+  name: string;
+  url?: string | null;
+  verified_at?: string | null;
+}
+
+export interface CaseOwnerView {
+  label: string;
+  text: string;
+  attribution: string;
+}
+
+export interface CaseChairmanFrame {
+  label: string;
+  text: string;
+  source: string;
+  note: string;
+}
+
+export interface CaseEvidence {
+  metric: string;
+  count: string;
+  sample: string;
+  period: string;
+  status: "supported" | "mixed" | "not_supported" | "cant_test" | string;
+  source: string;
+  note?: string | null;
+}
+
+export interface CaseLink {
+  label: string;
+  href: string;
+}
+
+export interface CaseClaim {
+  id: string;
+  domain: "matchday" | "off_pitch" | "chairman" | string;
+  order: number;
+  title: string;
+  claim: string;
+  count: string;
+  status: "supported" | "mixed" | "not_supported" | "cant_test" | string;
+  status_reason: string;
+  evidence: CaseEvidence[];
+  better_data: string;
+  change_mind: string;
+  links: CaseLink[];
+}
+
+export interface CaseBenchmark {
+  title: string;
+  note: string;
+  columns: string[];
+  rows: Array<Record<string, unknown>>;
+}
+
+export interface CaseCoverage {
+  status: string;
+  season: string;
+  availability_feed: string;
+  historical_appearances: string;
+  missing: string[];
+  note: string;
+}
+
+export interface CaseDocument {
+  schema_version: string;
+  generated_at: string;
+  season: string;
+  club_id: string;
+  state: string;
+  stale_reason?: string | null;
+  served_generated_at?: string | null;
+  title: string;
+  owner_view: CaseOwnerView;
+  chairman_frame: CaseChairmanFrame;
+  thesis: string;
+  claims: CaseClaim[];
+  benchmark: CaseBenchmark;
+  coverage: CaseCoverage;
+  sources: CaseSource[];
+  notes: string;
 }
 
 export interface SearchEntry {
@@ -2370,10 +2459,6 @@ export function getHistorySeason(season: string): HistorySeasonDocument | null {
 
 export function getMatchday(): MatchdayDocument | null {
   return readJson<MatchdayDocument>("matchday", "upcoming.json");
-}
-
-export function getThemes(): ThemesDocument | null {
-  return readJson<ThemesDocument>("themes", "aberdeen.json");
 }
 
 export function getProvenance(): ProvenanceDocument | null {
@@ -2430,6 +2515,22 @@ export function getForumSignal(): ForumSignalFile | null {
 
 export function getSearchIndex(): SearchEntry[] {
   return readJson<SearchEntry[]>("search-index.json") ?? [];
+}
+
+export function getCase(): CaseDocument | null {
+  return readJson<CaseDocument>("themes", "aberdeen.json");
+}
+
+export function getMetricsRegistry(): MetricsRegistry | null {
+  return readJson<MetricsRegistry>("metrics", "registry.json");
+}
+
+export function getMetricsAudit(): MetricsAudit | null {
+  return readJson<MetricsAudit>("audit", "metrics.json");
+}
+
+export function getValidationReport(): ValidationReport | null {
+  return readJson<ValidationReport>("audit", "validation.json");
 }
 
 export function dataAgeHours(manifest: Manifest | null): number | null {

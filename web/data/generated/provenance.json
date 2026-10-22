@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-22T01:57:25+00:00",
+  "generated_at": "2026-10-22T16:29:02+00:00",
   "layers": [
     {
       "fallback": [
@@ -151,7 +151,7 @@
         {
           "name": "football-data.co.uk",
           "role": "primary",
-          "rows": 0,
+          "rows": 216,
           "source_id": "football_data_uk",
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
@@ -381,7 +381,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 0,
+          "rows": 461,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-21"
@@ -516,7 +516,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 0,
+          "rows": 170,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-21"
@@ -548,7 +548,7 @@
         {
           "name": "Aberdeen FC news",
           "role": "corroboration",
-          "rows": 0,
+          "rows": 4,
           "source_id": "afc_news",
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
@@ -556,7 +556,7 @@
         {
           "name": "Wikipedia",
           "role": "corroboration",
-          "rows": 0,
+          "rows": 229,
           "source_id": "wikipedia",
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
@@ -770,9 +770,17 @@
       "scope": "2019-20 to current",
       "sources": [
         {
+          "name": "Aberdeen FC news",
+          "role": "corroboration",
+          "rows": 7,
+          "source_id": "afc_news",
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-21"
+        },
+        {
           "name": "Wikipedia",
           "role": "corroboration",
-          "rows": 0,
+          "rows": 30,
           "source_id": "wikipedia",
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
@@ -800,11 +808,11 @@
       "scope": "transfer register",
       "sources": [
         {
-          "name": "football-data.co.uk",
+          "name": "Wikipedia",
           "role": "corroboration",
-          "rows": 0,
-          "source_id": "football_data_uk",
-          "url": "https://www.football-data.co.uk/mmz4281",
+          "rows": 14,
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
@@ -901,7 +909,7 @@
         "league_results_history",
         "league_team_stats"
       ],
-      "rows": 9839,
+      "rows": 10055,
       "rows_basis": "primary contributions only",
       "url": "https://www.football-data.co.uk/mmz4281"
     },
@@ -919,7 +927,7 @@
         "squad_identity",
         "transfers_candidate"
       ],
-      "rows": 1003,
+      "rows": 1634,
       "rows_basis": "primary contributions only",
       "url": "https://www.api-football.com"
     },

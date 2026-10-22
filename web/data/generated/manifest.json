@@ -39,6 +39,15 @@
       "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
       "state": "unavailable"
     },
+    "case": {
+      "benchmark_rows": 8,
+      "club": "sco:aberdeen",
+      "count": 6,
+      "domains": 3,
+      "note": "The record is derived from local match, squad, history and transfer data. Missing layers are labelled; they are never zero.",
+      "season": "2026-27",
+      "state": "fresh"
+    },
     "competitions": [
       {
         "coverage": "match",
@@ -198,16 +207,6 @@
       "squad": 29,
       "stats_unavailable": 10
     },
-    "themes": {
-      "club": "sco:aberdeen",
-      "count": 5,
-      "mission_themes": 1,
-      "note": "No xG, channel, possession or mid-game shape data. Provider ratings are current-season Premiership only. Availability is unknown; provider injured flags are not team news.",
-      "provider_ratings": "Premiership starters",
-      "season": "2026-27",
-      "season_themes": 4,
-      "state": "fresh"
-    },
     "transfers": {
       "club": "sco:aberdeen",
       "confirmed": 4,
@@ -216,221 +215,221 @@
       "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
     }
   },
-  "dataset_version": "2026-10-22T01:57:25+00:00-e625e40",
+  "dataset_version": "2026-10-22T16:29:02+00:00-8db53cf",
   "files": [
     {
       "bytes": 7093,
-      "checksum": "sha256:5f43d74f5352b83c54c3e1073bf69c7a56589d2275c0b1c11eef76d8fac4aedd",
+      "checksum": "sha256:6ee87203060cb280091ae31e48dfe6c741e938c0b399f148a78b3e603eb99bee",
       "path": "tables/premiership-2026-27.json"
     },
     {
       "bytes": 6002,
-      "checksum": "sha256:b20f9fa8cb248b99a41ebe411929442783327a605a756a8fa76fec2378613127",
+      "checksum": "sha256:807b34e4a00120cea704f8d10bed86dfa3998186c10d34b109b76c6a07c7a490",
       "path": "tables/championship-2026-27.json"
     },
     {
       "bytes": 5941,
-      "checksum": "sha256:290adffd0ee54665b8435ba201628ee95c3fc50afa903ecb596c86c8644eb372",
+      "checksum": "sha256:e6b7e241e58c3f56bf3e9536ed9866e71b2fa070b6ee2e4c0c97da22f1e34b27",
       "path": "tables/league-one-2026-27.json"
     },
     {
       "bytes": 5846,
-      "checksum": "sha256:3da3f84cb351ecdde8625e6ce735fd52fd5d506c9b2cefd0ee82d1e165708b03",
+      "checksum": "sha256:9dfb40898bb042eb7078068cd25160012dbbe6f2aeee99f2fc6425058bd1f356",
       "path": "tables/league-two-2026-27.json"
     },
     {
       "bytes": 653654,
-      "checksum": "sha256:7481338930bc1f7990e3656c071020d5481a04d16c2269ec1006e169a9328db9",
+      "checksum": "sha256:0e116f032f8d1d5281ebd9925efc294d4890d9254b92764a86bf8d6ec6ecf10f",
       "path": "squad/aberdeen.json"
     },
     {
       "bytes": 10310,
-      "checksum": "sha256:c55baa5c03e77469fc8b09ebb7121d112181619adbc5ebfcfb574999a2a33eb8",
+      "checksum": "sha256:9e5fd6067a1366cb5217b6dedd5ed9a65a8e654ecdfda39df3cf2699600bf85c",
       "path": "players/163064.json"
     },
     {
       "bytes": 18989,
-      "checksum": "sha256:e1c8abc8881f462d18778f94d561008afb1a0608730ee884f5c4f3d11bd27648",
+      "checksum": "sha256:781dfb8af9e1f113846e85841f1a6aec19fd222e463e2534fc1997c3a522ff22",
       "path": "players/1141.json"
     },
     {
       "bytes": 9275,
-      "checksum": "sha256:d282d8dd139427cf38a3753848ae4bbf1d92f41d0a280e53afff71b30289b250",
+      "checksum": "sha256:55356eeb35dbe2aada98b8b00babdd44e2137217327e184f56b7aa543e4bebb9",
       "path": "players/430030.json"
     },
     {
       "bytes": 28770,
-      "checksum": "sha256:df2437e8092e9212a66089eb9408eb4ba1db0b9aedd14133cacc6f60cfa4ee6d",
+      "checksum": "sha256:4e6dbad89caac45230e5b211777f1261e970b7e3ed0b43dc3205de9a2d3c3bc9",
       "path": "players/44921.json"
     },
     {
       "bytes": 17909,
-      "checksum": "sha256:7da71f0ce8e380ab04149dd6c454fe34c068dc28ab0bec25de00b7458029357d",
+      "checksum": "sha256:bea17eceb82fc5e38e8cefcd268a1f4590e2754cd3afe720504fab2525b2c2bd",
       "path": "players/18068.json"
     },
     {
       "bytes": 17931,
-      "checksum": "sha256:a37f4fa9fe31be136811ebcd504f735fa20b2fe25815ca584aa4936116019424",
+      "checksum": "sha256:0edcd0010b37dcbdc18168cf944aa2293cb95254e2e90c86f5de5c3c4fcff22a",
       "path": "players/550363.json"
     },
     {
       "bytes": 24559,
-      "checksum": "sha256:3c035adb50496fabfe31fd3cb73535bc78de9aa6f69b2afe2b3d1aefa967a4cc",
+      "checksum": "sha256:379dcc77a2452e982d321038d42b16621f80ca3d60803af60c365643337834ca",
       "path": "players/161806.json"
     },
     {
       "bytes": 24954,
-      "checksum": "sha256:5f6a67c7994611bc23f4707eb46b05d1a10ecd307e1939d653014aca71159a79",
+      "checksum": "sha256:124ec1ee24deb2d2a82a44d2ca23d16a39e54e80c25e4851971a3851425e3035",
       "path": "players/321860.json"
     },
     {
       "bytes": 21962,
-      "checksum": "sha256:583bd561ccf4ebec7c57a63bc50a6a40abe3984e3f0d9a4e90ad120719dd37ae",
+      "checksum": "sha256:a38ae99273184f868b6931f3c82469fb271c0b2f2c26a4000eb4ade6af235efa",
       "path": "players/125695.json"
     },
     {
       "bytes": 16370,
-      "checksum": "sha256:7ef241b242bfcea33885c867688ad03f84120151514891c4168877e85f454809",
+      "checksum": "sha256:d0c557939e747b44e055254c73158cc3de2ccf650c7f128c54f8889314c1feb2",
       "path": "players/394703.json"
     },
     {
       "bytes": 22018,
-      "checksum": "sha256:67396e69a305273ed1741f06b9115895cf7d12b467ece16104c1322161511c86",
+      "checksum": "sha256:f11e65f58bc0603a18e1b4252f8feee84797f03c4960ceb4e69ebf2cb2e981fe",
       "path": "players/37253.json"
     },
     {
       "bytes": 24370,
-      "checksum": "sha256:84e18cbe86f81e0c2283b4f236de758d2956ff93a2c56430031b3983ef2a4968",
+      "checksum": "sha256:9eacc6278c94f46ff99f350b40b860152f11832c6665e0c6ffec43ca810a1a98",
       "path": "players/20422.json"
     },
     {
       "bytes": 29377,
-      "checksum": "sha256:dedd2647802bb0ab608be8e35714a5d46ae8d5cf7348bab6e568c008bf2f4e76",
+      "checksum": "sha256:f06b518e2bfc67df1a3da6bedb45d2dcb954f9b4cfd92537af38366b35588c12",
       "path": "players/108465.json"
     },
     {
       "bytes": 26976,
-      "checksum": "sha256:26d638205e77bb41a753ec0127e9a7628499e6bc2320b030ce455b79699e58b6",
+      "checksum": "sha256:88495c9a550bb10f57e583093f348193a35335a722100b2c22e2809592265994",
       "path": "players/57248.json"
     },
     {
       "bytes": 21296,
-      "checksum": "sha256:149bf4aaa4585c6aabfcb77135da2b1525a9e104c0792e116961d634c1d67098",
+      "checksum": "sha256:f78a93d211f90277286dbb6f7bb22609c8952d14283e96ff770911741e25dd2d",
       "path": "players/271395.json"
     },
     {
       "bytes": 16802,
-      "checksum": "sha256:04c5dce4eab811f20f10e88b3d2c7317ec01db81ae26db7c74259dc3bfaf74c1",
+      "checksum": "sha256:3d6dbff45bfb2b2937f89b82e00c6cf685e92059679a1cfb14a237972d56b18c",
       "path": "players/14344.json"
     },
     {
       "bytes": 28941,
-      "checksum": "sha256:1410869f9d46d77b78dcdbc97d5cc4f846587a580784415f1194e74f728b56ef",
+      "checksum": "sha256:2a08ee3447adcea371907cf8261d95607d63c549f7ce5043ddc0caedafda2639",
       "path": "players/45010.json"
     },
     {
       "bytes": 10348,
-      "checksum": "sha256:561a76d92738d74427dabfa9c18f9366bcd9d7638f7f568a2b74e15666691f34",
+      "checksum": "sha256:9b5d59b5fe8fe8b1310cc207ca9344a1c06aa666c3c2a623bbca712e26467c45",
       "path": "players/496904.json"
     },
     {
       "bytes": 29888,
-      "checksum": "sha256:07dcde744a619c63342d2607f4ad8639a1fc4537503cfc520b2a79143490126d",
+      "checksum": "sha256:e6fa5afe93c1f3bff83b67c7183b598b4f30918d04f1ed0c233146e3dcf89c96",
       "path": "players/61178.json"
     },
     {
       "bytes": 17665,
-      "checksum": "sha256:687c3cfca5e4a9c90e2d280340f75d458a25203b3af86a7fe89c184a78a194af",
+      "checksum": "sha256:c6b1a622c324b431ad4f3b0f777000ab4553e6bb4a41ddaa9ec95f48be487b68",
       "path": "players/379662.json"
     },
     {
       "bytes": 32491,
-      "checksum": "sha256:c67ae13ab15f76af6a4da4bf2970ba56dfdb639225b819e05fa6aa0b7b3fb42f",
+      "checksum": "sha256:4857532f2f4292817184eaa33252e1ce3bb392ebf9dd56e4ca32cc8d4f4ee596",
       "path": "players/18945.json"
     },
     {
       "bytes": 32388,
-      "checksum": "sha256:7235e55aadd9dd8a75227ed67f8679df8dc338d499d2dc22cb5fafdc50705130",
+      "checksum": "sha256:1f6796e713b2770f82cdffda00cfa8dba8750a53859523c2eeb030ab01a34235",
       "path": "players/231195.json"
     },
     {
       "bytes": 11783,
-      "checksum": "sha256:b5bb9bd396a3899d09a4c1ed1002c5b29ce28d4d74e3bcb460416ad29361f547",
+      "checksum": "sha256:18fcda4bd2f291569457d8af18014c7e89e0468197bbd95685dbb6d182d867ed",
       "path": "players/670299.json"
     },
     {
       "bytes": 17360,
-      "checksum": "sha256:d73b5b536659c5071dfefff6ddf824faff10db251421115ee3674d3346ceb474",
+      "checksum": "sha256:02c837e03e14ca90ff235fa46616ade6e3d15d859678b2462fddaaf699a0713e",
       "path": "players/303519.json"
     },
     {
       "bytes": 15701,
-      "checksum": "sha256:5016db6abfaf602155803973bfbf447f95d093f1b4e571fa5b66a3999e02bd60",
+      "checksum": "sha256:29e5839c6c0635c8f6df293bee84624c296410034677b9684c251dcdab74203c",
       "path": "players/84126.json"
     },
     {
       "bytes": 25040,
-      "checksum": "sha256:34a2cc50ca65b7c1a98a83e30ae109f8403f9287bc55b14cc7f2cb0b7eb19d9f",
+      "checksum": "sha256:a7f96f62d8f4937ffef48dc2f57642dd324c638e17a2c153892492438d5dc0c7",
       "path": "players/97896.json"
     },
     {
       "bytes": 21181,
-      "checksum": "sha256:11a772b5d785d6b2d1271a468825becb30464b67aecc02e79e12c04adad72a22",
+      "checksum": "sha256:f305f29be4cfbed63439fb48b4dbbb673987bdf09ffe7d8d15478b010da350e7",
       "path": "players/44982.json"
     },
     {
       "bytes": 25843,
-      "checksum": "sha256:a3cb4a5b765324cb4163ce8e5b2b0ee78a28ee6782deda12a263ae28ec2fb052",
+      "checksum": "sha256:4d143b2fa4aaffb94d23993f9238b0fcf47d0f23f8d9cb1c527d99af954729ad",
       "path": "players/267727.json"
     },
     {
       "bytes": 28508,
-      "checksum": "sha256:7372505cf85d594c1850eb52dea041c585d1ebc4fc16d4ced3eea53a4ec25f2b",
+      "checksum": "sha256:3afcfa809426ef51f4da9a05c542fb1c0df17d9af0efe125e840f699366693cf",
       "path": "players/388510.json"
     },
     {
       "bytes": 14986,
-      "checksum": "sha256:8b7e604b31451b43d38d22b61b116cb74326cfd0be319fc5fe99f86e4d45fedb",
+      "checksum": "sha256:5b41322ad9b63e07fbd6a3527a15ff76fe1663de6ffe9b3b47390351fcc75f25",
       "path": "players/6973.json"
     },
     {
       "bytes": 23024,
-      "checksum": "sha256:0c0d229f2218f08214639414dce521a62d155d825c42e7f728196e1338695c5f",
+      "checksum": "sha256:2428a90bd2abc19832b5e9d9240dcc354aba5a8dc672e6ebf63546d8464eaf98",
       "path": "players/340027.json"
     },
     {
       "bytes": 9398,
-      "checksum": "sha256:e99c22aa2329d43e33880931f3e058ad235c4e0229534ab0e5f6a54d3607457e",
+      "checksum": "sha256:08433a76218d5ec494f2bdff48c2cbcf670bb91248559d9d6fcecd986ac2fcb1",
       "path": "players/644159.json"
     },
     {
       "bytes": 9408,
-      "checksum": "sha256:67056284f70d3f82c342df52ca9d6269ed2ab732c4dff36080d572af61e1ccf2",
+      "checksum": "sha256:2a03ee2752b8e9e46158b551570b6053446ecac2a05afbe7fec44e227c67e1ab",
       "path": "players/625768.json"
     },
     {
       "bytes": 29615,
-      "checksum": "sha256:a42e5c8fe7ea327b1b3e2c0fcc61e1eec9b6d1ad2bb62dcbafbe2ab131f193e9",
+      "checksum": "sha256:db21c78f55a4e4d021713a4cc190718103241d23c9ec834e67c2f2c885270717",
       "path": "players/395743.json"
     },
     {
       "bytes": 9450,
-      "checksum": "sha256:98a573635e9d98599cf43b98a3880b7abd266aa85f442c94901225a5dd983bf1",
+      "checksum": "sha256:5c38e53f09aff35a4e321ae905cdd588d90cfd7f400edf7e75019221fbdd88d7",
       "path": "players/361406.json"
     },
     {
       "bytes": 22491,
-      "checksum": "sha256:2d30fc2b110713235814c76a9f12c33305e0de4a1e2977535eca626133b9e5aa",
+      "checksum": "sha256:e46b2f03f73efe087bac31a662fb4af3ccfdf25dc992aa907a1070e8a69807cf",
       "path": "players/153645.json"
     },
     {
       "bytes": 9385,
-      "checksum": "sha256:afb0aa68fa99e63962ddb0e261e2c537f85cbe20c5ccd231e0d3452c4bc1716b",
+      "checksum": "sha256:dbd1d1b8ec11e510be68763e649ad75989c2180d0df4fd83b1a4e8fe72281f02",
       "path": "players/477991.json"
     },
     {
       "bytes": 9388,
-      "checksum": "sha256:2d182021bee87c97545d325b1e2928a21ce0dbce7419fec9ef16d2ae66073789",
+      "checksum": "sha256:7c0a6afc5fca7a82c289c96c97dcb18c249e80cdbf4cb7ba678a5d51c38a5217",
       "path": "players/674621.json"
     },
     {
@@ -440,12 +439,12 @@
     },
     {
       "bytes": 23828,
-      "checksum": "sha256:80b861a6db90981b8a46c826bc3920e5f2de63f4b0bf74658917a58f37e002f1",
+      "checksum": "sha256:f8812a81a5b4ffa982c14ca271995bd885908cffc84e56a54ee909e351fb04b8",
       "path": "availability/aberdeen.json"
     },
     {
-      "bytes": 74814,
-      "checksum": "sha256:332af299e2c4f9ac5cfba99f95c1c8520283eaf08a802a35740bc62efadc56de",
+      "bytes": 74815,
+      "checksum": "sha256:678becf15e68062412a44a3de40b7d7506e34f5c8ea3312db1c0c790016e58ce",
       "path": "matchday/upcoming.json"
     },
     {
@@ -455,12 +454,12 @@
     },
     {
       "bytes": 8862,
-      "checksum": "sha256:c4abeb52d18cbf7fba7b79c5deeb79d0b90edda72047189e850eb49aab1297fa",
+      "checksum": "sha256:7e1880c5cfb57a9a4f18695e47ea25b9eb1727982ba271870ad8b3af4b0e42de",
       "path": "transfers/aberdeen.audit.json"
     },
     {
       "bytes": 67548,
-      "checksum": "sha256:2ccc8b06452a4b6d79d85dcd741ac7acdada99d9f4246ff0eb52d0f84d7ec176",
+      "checksum": "sha256:95ce8b5118659ec3de566b3efbf47413d9efbdbfcd99a0d5fa8b7f31da4d0c52",
       "path": "history/aberdeen.json"
     },
     {
@@ -504,33 +503,33 @@
       "path": "history/seasons/2026-27.json"
     },
     {
-      "bytes": 68712,
-      "checksum": "sha256:928e6f77228a0fe052b2a53e2fffb067f554c22283d188da6d39da6c39df9fa2",
+      "bytes": 19932,
+      "checksum": "sha256:827cdd4116140bb213fde645c7de2e2b959e288d7770b9cf76ba6c26eb0cb095",
       "path": "themes/aberdeen.json"
     },
     {
       "bytes": 36571,
-      "checksum": "sha256:8852f6a0f30b75b60a29d6ad05743582438beca2ae3ea02e551418010f2a429e",
+      "checksum": "sha256:8a7a58819eee7b90331b07f1a7b218bf68be9d58c57ad12ccc6f8775653d70d2",
       "path": "needs/aberdeen.json"
     },
     {
       "bytes": 742,
-      "checksum": "sha256:c44a1f2a9112ab7221f0823521f0ff0481451dce33aefd786523635b47b3e1d7",
+      "checksum": "sha256:cd11664ac6609c4f311b81bf4aa6134a5ac31911e307fdb9d18c50575f53c1a2",
       "path": "rumours/aberdeen.json"
     },
     {
       "bytes": 762,
-      "checksum": "sha256:ae4826215e8351950b36676b2b76ea78976f71463704da9832b78d61d0ee1624",
+      "checksum": "sha256:4810207c6fbec7c1d7270d9c14d8f5f7b2ce5159c1219da8f9dc4fb36fd0b465",
       "path": "rumours/profile.json"
     },
     {
-      "bytes": 32618,
-      "checksum": "sha256:1a92fac288970b9d478ef577fa9d47f001e9f3e378ed8140ad01db5364b11c93",
+      "bytes": 32663,
+      "checksum": "sha256:f8b453b61d4725a6ca5da25a6540b7199a015a3a097064cfb16b00ec9dbad00a",
       "path": "forum/afc_chat.json"
     },
     {
       "bytes": 3060,
-      "checksum": "sha256:88c52aa732d40ab774a23e78f5ba7a810aafc78b6bce858ba7c93bc9d4e756cb",
+      "checksum": "sha256:f10b721be68868b875a628c083c55ee5d7c0180101fe6f420794dcac16086e13",
       "path": "competitions/index.json"
     },
     {
@@ -544,58 +543,73 @@
       "path": "competitions/scottish-cup.json"
     },
     {
-      "bytes": 27433,
-      "checksum": "sha256:199f3b4e6c05b576b44367ffb6431264587f5538688695e36155ecf80c35baa5",
+      "bytes": 27650,
+      "checksum": "sha256:b8d74797547c9108363f68bdf59f09419e2c00254f1ed9a6eadbdc51f6ad7102",
       "path": "provenance.json"
     },
     {
-      "bytes": 15904,
-      "checksum": "sha256:a34f56211bece03a81434f052aa89665b243b7f2795086a5a57a5564efc34f0a",
+      "bytes": 16152,
+      "checksum": "sha256:e0f2668a778a125ed72681d9b3db90e3bcd54058d6ee21888e7c3d8c151d4f40",
       "path": "search-index.json"
     },
     {
-      "bytes": 8351,
-      "checksum": "sha256:d6db20ffd5e9d20021c7b2327d0994649ba5ca12569ea41ce3769e8db1804e5f",
+      "bytes": 8247,
+      "checksum": "sha256:4ca7c0fd97e2e88befa167b69fa1f585f4669c2a2b3e1098e2ace443401e99d5",
       "path": "coverage.json"
     },
     {
       "bytes": 255,
       "checksum": "sha256:b7b2fa287522cd8690b77342122396c868b7912ea01226e23c698a8f629c6846",
       "path": "seasons.json"
+    },
+    {
+      "bytes": 5538,
+      "checksum": "sha256:b722ce56e2ea3dff98d54f86abaf38659afcfa14abe71b66d1052de0c8b945c2",
+      "path": "audit/validation.json"
+    },
+    {
+      "bytes": 98546,
+      "checksum": "sha256:274ca3ac3c897434f4f352c2934cc49e6bf1d7089d3d49aa5cbe38b5e58e18ac",
+      "path": "metrics/registry.json"
+    },
+    {
+      "bytes": 101970,
+      "checksum": "sha256:7582df54166feb60b5705bd83ef9c65f92318409a46d9215be12ad521a7ded78",
+      "path": "audit/metrics.json"
     }
   ],
-  "generated_at": "2026-10-22T01:57:25+00:00",
+  "generated_at": "2026-10-22T16:29:02+00:00",
   "marts": [
     {
-      "checksum": "sha256:5f43d74f5352b83c54c3e1073bf69c7a56589d2275c0b1c11eef76d8fac4aedd",
+      "checksum": "sha256:6ee87203060cb280091ae31e48dfe6c741e938c0b399f148a78b3e603eb99bee",
       "id": "league_table.sco:premiership",
       "path": "tables/premiership-2026-27.json",
       "rows": 12,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:b20f9fa8cb248b99a41ebe411929442783327a605a756a8fa76fec2378613127",
+      "checksum": "sha256:807b34e4a00120cea704f8d10bed86dfa3998186c10d34b109b76c6a07c7a490",
       "id": "league_table.sco:championship",
       "path": "tables/championship-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:290adffd0ee54665b8435ba201628ee95c3fc50afa903ecb596c86c8644eb372",
+      "checksum": "sha256:e6b7e241e58c3f56bf3e9536ed9866e71b2fa070b6ee2e4c0c97da22f1e34b27",
       "id": "league_table.sco:league-one",
       "path": "tables/league-one-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:3da3f84cb351ecdde8625e6ce735fd52fd5d506c9b2cefd0ee82d1e165708b03",
+      "checksum": "sha256:9dfb40898bb042eb7078068cd25160012dbbe6f2aeee99f2fc6425058bd1f356",
       "id": "league_table.sco:league-two",
       "path": "tables/league-two-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:7481338930bc1f7990e3656c071020d5481a04d16c2269ec1006e169a9328db9",
+      "checksum": "sha256:0e116f032f8d1d5281ebd9925efc294d4890d9254b92764a86bf8d6ec6ecf10f",
       "id": "squad.sco:aberdeen",
       "path": "squad/aberdeen.json",
       "rows": 38,
@@ -609,14 +623,14 @@
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:80b861a6db90981b8a46c826bc3920e5f2de63f4b0bf74658917a58f37e002f1",
+      "checksum": "sha256:f8812a81a5b4ffa982c14ca271995bd885908cffc84e56a54ee909e351fb04b8",
       "id": "availability.sco:aberdeen",
       "path": "availability/aberdeen.json",
       "rows": 38,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:332af299e2c4f9ac5cfba99f95c1c8520283eaf08a802a35740bc62efadc56de",
+      "checksum": "sha256:678becf15e68062412a44a3de40b7d7506e34f5c8ea3312db1c0c790016e58ce",
       "id": "matchday.upcoming",
       "path": "matchday/upcoming.json",
       "rows": 1,
@@ -630,14 +644,14 @@
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:c4abeb52d18cbf7fba7b79c5deeb79d0b90edda72047189e850eb49aab1297fa",
+      "checksum": "sha256:7e1880c5cfb57a9a4f18695e47ea25b9eb1727982ba271870ad8b3af4b0e42de",
       "id": "transfers-audit.sco:aberdeen",
       "path": "transfers/aberdeen.audit.json",
       "rows": 1,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:2ccc8b06452a4b6d79d85dcd741ac7acdada99d9f4246ff0eb52d0f84d7ec176",
+      "checksum": "sha256:95ce8b5118659ec3de566b3efbf47413d9efbdbfcd99a0d5fa8b7f31da4d0c52",
       "id": "history.sco:aberdeen",
       "path": "history/aberdeen.json",
       "rows": 8,
@@ -700,42 +714,42 @@
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:928e6f77228a0fe052b2a53e2fffb067f554c22283d188da6d39da6c39df9fa2",
-      "id": "themes.sco:aberdeen",
+      "checksum": "sha256:827cdd4116140bb213fde645c7de2e2b959e288d7770b9cf76ba6c26eb0cb095",
+      "id": "case.sco:aberdeen",
       "path": "themes/aberdeen.json",
-      "rows": 5,
+      "rows": 6,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:8852f6a0f30b75b60a29d6ad05743582438beca2ae3ea02e551418010f2a429e",
+      "checksum": "sha256:8a7a58819eee7b90331b07f1a7b218bf68be9d58c57ad12ccc6f8775653d70d2",
       "id": "needs.sco:aberdeen",
       "path": "needs/aberdeen.json",
       "rows": 7,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:c44a1f2a9112ab7221f0823521f0ff0481451dce33aefd786523635b47b3e1d7",
+      "checksum": "sha256:cd11664ac6609c4f311b81bf4aa6134a5ac31911e307fdb9d18c50575f53c1a2",
       "id": "rumours.sco:aberdeen",
       "path": "rumours/aberdeen.json",
       "rows": 0,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:ae4826215e8351950b36676b2b76ea78976f71463704da9832b78d61d0ee1624",
+      "checksum": "sha256:4810207c6fbec7c1d7270d9c14d8f5f7b2ce5159c1219da8f9dc4fb36fd0b465",
       "id": "rumours.profile",
       "path": "rumours/profile.json",
       "rows": 0,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:1a92fac288970b9d478ef577fa9d47f001e9f3e378ed8140ad01db5364b11c93",
+      "checksum": "sha256:f8b453b61d4725a6ca5da25a6540b7199a015a3a097064cfb16b00ec9dbad00a",
       "id": "forum.afc_chat",
       "path": "forum/afc_chat.json",
       "rows": 83,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:88c52aa732d40ab774a23e78f5ba7a810aafc78b6bce858ba7c93bc9d4e756cb",
+      "checksum": "sha256:f10b721be68868b875a628c083c55ee5d7c0180101fe6f420794dcac16086e13",
       "id": "competitions.index",
       "path": "competitions/index.json",
       "rows": 3,
@@ -756,13 +770,96 @@
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:199f3b4e6c05b576b44367ffb6431264587f5538688695e36155ecf80c35baa5",
+      "checksum": "sha256:b8d74797547c9108363f68bdf59f09419e2c00254f1ed9a6eadbdc51f6ad7102",
       "id": "provenance",
       "path": "provenance.json",
       "rows": 23,
       "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:e0f2668a778a125ed72681d9b3db90e3bcd54058d6ee21888e7c3d8c151d4f40",
+      "id": "search.index",
+      "path": "search-index.json",
+      "row_basis": "one row per indexed page, theme or player",
+      "rows": 122,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:4ca7c0fd97e2e88befa167b69fa1f585f4669c2a2b3e1098e2ace443401e99d5",
+      "id": "coverage",
+      "path": "coverage.json",
+      "row_basis": "one coverage document",
+      "rows": 1,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:b7b2fa287522cd8690b77342122396c868b7912ea01226e23c698a8f629c6846",
+      "id": "seasons",
+      "path": "seasons.json",
+      "row_basis": "one row per published season",
+      "rows": 14,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:274ca3ac3c897434f4f352c2934cc49e6bf1d7089d3d49aa5cbe38b5e58e18ac",
+      "id": "metrics.registry",
+      "path": "metrics/registry.json",
+      "row_basis": "one row per registered metric",
+      "rows": 53,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:7582df54166feb60b5705bd83ef9c65f92318409a46d9215be12ad521a7ded78",
+      "id": "audit.metrics",
+      "path": "audit/metrics.json",
+      "row_basis": "one row per audited metric",
+      "rows": 53,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:b722ce56e2ea3dff98d54f86abaf38659afcfa14abe71b66d1052de0c8b945c2",
+      "id": "audit.validation",
+      "path": "audit/validation.json",
+      "row_basis": "one row per validation check",
+      "rows": 35,
+      "season": "2026-27"
+    },
+    {
+      "checksum": null,
+      "id": "players.sco:aberdeen",
+      "path": "players/",
+      "row_basis": "one file per squad player",
+      "rows": 38,
+      "season": "2026-27"
     }
   ],
+  "metrics": {
+    "allowlist": {
+      "entries": [],
+      "expires": null,
+      "status": "none"
+    },
+    "audit_checksum": "sha256:7582df54166feb60b5705bd83ef9c65f92318409a46d9215be12ad521a7ded78",
+    "audit_path": "audit/metrics.json",
+    "audited_at": "2026-10-22T16:29:02+00:00",
+    "metrics_failed": 0,
+    "metrics_passed": 53,
+    "metrics_total": 53,
+    "parameters_failed": 0,
+    "parameters_passed": 14,
+    "parameters_total": 14,
+    "provenance_only": 39,
+    "registry_checksum": "sha256:bceaea65c6e37dd961e9095cc42e94ce544dcf93168c6b963a00c56d26511717",
+    "registry_path": "metrics/registry.json",
+    "registry_reviewed": "2026-10-22",
+    "registry_version": "2.0.0",
+    "status": "pass",
+    "verification_modes": {
+      "cross_surface": 6,
+      "provenance_only": 39,
+      "recompute": 8
+    }
+  },
   "profile": "public",
   "provenance": {
     "availability": {
@@ -770,7 +867,7 @@
       "reason": "provider_declares_injuries_false",
       "status": "unavailable"
     },
-    "checksum": "sha256:199f3b4e6c05b576b44367ffb6431264587f5538688695e36155ecf80c35baa5",
+    "checksum": "sha256:b8d74797547c9108363f68bdf59f09419e2c00254f1ed9a6eadbdc51f6ad7102",
     "layers": 23,
     "migration": {
       "active_source": "football_data_uk",
@@ -796,7 +893,7 @@
         "league_team_stats"
       ],
       "name": "football-data.co.uk",
-      "rows": 9839,
+      "rows": 10055,
       "rows_basis": "primary contributions only",
       "status": "ok"
     },
@@ -814,7 +911,7 @@
         "transfers_candidate"
       ],
       "name": "API-Football",
-      "rows": 1003,
+      "rows": 1634,
       "rows_basis": "primary contributions only",
       "status": "ok"
     },
@@ -895,6 +992,14 @@
     }
   ],
   "validation": {
-    "status": "not_run"
+    "checks": 35,
+    "checksum": "sha256:b722ce56e2ea3dff98d54f86abaf38659afcfa14abe71b66d1052de0c8b945c2",
+    "errors": 0,
+    "generated_at": "2026-10-22T16:29:02+00:00",
+    "report": "audit/validation.json",
+    "season": "2026-27",
+    "status": "pass",
+    "strict": true,
+    "warnings": 0
   }
 }

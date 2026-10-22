@@ -1,4 +1,5 @@
-import { getManifest } from "@/lib/data";
+import { ContractPage } from "@/components/ContractPage";
+import { getManifest, getMetricsAudit, getValidationReport } from "@/lib/data";
 
 export const metadata = { title: "Data status · fitba" };
 
@@ -13,9 +14,11 @@ export default function StatusPage() {
     );
   }
   const totalBytes = manifest.files.reduce((sum, file) => sum + file.bytes, 0);
+  const audit = getMetricsAudit();
+  const validation = getValidationReport();
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="status">
+      <section className="page-head" data-contract="status.hero">
         <p className="eyebrow">Data status</p>
         <h1>What is in this build</h1>
         <p className="lede">
@@ -27,9 +30,15 @@ export default function StatusPage() {
           })}{" "}
           UTC. Season {manifest.season}.
         </p>
+        <p className="fine-print">
+          Metric definitions and verification are on{" "}
+          <a href="/metrics/">Metrics and audit</a>. Methods are on{" "}
+          <a href="/methodology/">Methodology</a>; source layers are on{" "}
+          <a href="/sources/">Sources and provenance</a>.
+        </p>
       </section>
 
-      <div className="grid three-col">
+      <div className="grid three-col" data-contract="status.build">
         <div className="stat-tile">
           <span className="stat-label">Schema</span>
           <span className="stat-value">{manifest.schema_version}</span>
@@ -45,7 +54,77 @@ export default function StatusPage() {
         </div>
       </div>
 
-      <section className="card">
+      <div className="grid two-col">
+        <section className="card" data-contract="status.validation">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Validation</p>
+              <h2>Data-quality checks</h2>
+            </div>
+            <span
+              className={
+                validation?.status === "pass" ? "badge badge-ok" : "badge badge-warn"
+              }
+            >
+              {validation?.status ?? "not run"}
+            </span>
+          </div>
+          <p>
+            {validation?.checks.length ?? 0} checks · {validation?.errors ?? 0} errors ·{" "}
+            {validation?.warnings ?? 0} warnings.
+          </p>
+          {validation?.checks
+            .filter((check) => check.level !== "ok")
+            .slice(0, 5)
+            .map((check) => (
+              <p key={check.name} className="fine-print">
+                <code>{check.level}</code> {check.name}: {check.message}
+              </p>
+            ))}
+          {validation ? (
+            <p className="fine-print">
+              Report checksum <code className="checksum">{manifest.validation?.checksum}</code>
+            </p>
+          ) : null}
+        </section>
+        <section className="card" data-contract="status.metrics">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Metric audit</p>
+              <h2>Registry and verification</h2>
+            </div>
+            <span
+              className={audit?.status === "pass" ? "badge badge-ok" : "badge badge-warn"}
+            >
+              {audit?.status ?? "not run"}
+            </span>
+          </div>
+          <p>
+            Registry {manifest.metrics?.registry_version ?? "—"} ·{" "}
+            {audit?.summary.metrics_passed ?? 0}/{audit?.summary.metrics_total ?? 0}{" "}
+            metrics passed · {audit?.summary.parameters_passed ?? 0}/
+            {audit?.summary.parameters_total ?? 0} parameters.
+          </p>
+          <p className="fine-print">
+            {audit?.summary.provenance_only ?? 0} metrics are provenance-only:
+            present and source-checked, not independently recomputed.{" "}
+            <a href="/metrics/">See every definition and audit result.</a>
+          </p>
+          <p className="fine-print">
+            Registry checksum{" "}
+            <code className="checksum">{manifest.metrics?.registry_checksum}</code>
+          </p>
+          {audit?.allowlist.status === "active" ? (
+            <p className="fine-print">
+              Temporary metric allowlist: {audit.allowlist.entries.length} entries,
+              expires {audit.allowlist.expires ?? "unset"}. It must be removed
+              before merge.
+            </p>
+          ) : null}
+        </section>
+      </div>
+
+      <section className="card" data-contract="status.coverage">
         <div className="section-head">
           <div>
             <p className="eyebrow">Coverage</p>
@@ -193,7 +272,7 @@ export default function StatusPage() {
       ) : null}
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="status.sources">
           <p className="eyebrow">Sources</p>
           <h2>Freshness</h2>
           <ul className="plain-list">
@@ -206,7 +285,7 @@ export default function StatusPage() {
             ))}
           </ul>
         </section>
-        <section className="card">
+        <section className="card" data-contract="status.marts">
           <p className="eyebrow">Marts</p>
           <h2>Published outputs</h2>
           <ul className="plain-list">
@@ -218,6 +297,6 @@ export default function StatusPage() {
           </ul>
         </section>
       </div>
-    </>
+    </ContractPage>
   );
 }

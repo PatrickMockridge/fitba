@@ -191,7 +191,7 @@ export default function SquadPage() {
       <p className="back-link">
         <Link href="/matchday/">← Matchday</Link>
         {" · "}
-        <Link href="/themes/">The bigger picture →</Link>
+        <Link href="/analysis/">Data analysis →</Link>
         {" · "}
         <Link href="/recruitment/">Off the pitch →</Link>
       </p>

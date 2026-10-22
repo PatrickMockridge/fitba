@@ -172,9 +172,9 @@ The matchday dashboard is described in [matchday.md](matchday.md). In summary:
   refresh carries the previous snapshot as stale, or degrades to league-only
   context with the opponent XI unavailable.
 
-## Medium and long-term themes
+## Analysis
 
-The `/themes/` layer is described in [themes.md](themes.md). In summary:
+Data analysis is described in [analysis.md](analysis.md). In summary:
 
 - **Family balance:** minutes-weighted provider ratings for Premiership starters,
   grouped by role family, with starts, minutes, goals, assists, sample and
@@ -190,7 +190,7 @@ The `/themes/` layer is described in [themes.md](themes.md). In summary:
 - **Mission context:** the documented Cormack-era trading pillars and the
   current-season turnover/selection record. Ratings are not used for history.
 
-The layer is 80% current season and 20% mission context. It uses two role
+The register spans matchday, off the pitch and the chairman's record; there is no fixed weighting. It uses two role
 bases explicitly: observed starting roles for family ratings and shape, and the
 squad's primary role for bench/goal attribution. Duplicate provider identities
 are mapped before aggregation.
@@ -205,7 +205,7 @@ are mapped before aggregation.
   [availability.md](availability.md). Out/suspended players are excluded from the
   predicted XI; doubtful players are selectable with a confidence downgrade;
   unknown stays unknown.
-- **Squad needs** turn themes, availability and depth into role profiles:
+- **Squad needs** turn analyses, availability and depth into role profiles:
   [needs.md](needs.md). Cover (loan/free), replace (active outgoing evidence
   only) and strengthen (measured weakness) are role classifications, not named
   targets.

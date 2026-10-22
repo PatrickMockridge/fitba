@@ -24,10 +24,10 @@ export.
 4. **Form guide** — last five league results and season home/away splits.
 5. **Style matchup** — the three-way lean and the measured evidence.
 6. **Relative strength** — league position and shot percentiles.
-7. **The bigger picture** — four current-season themes and one mission-context
-   card, with a link to `/themes/` for the full evidence. Themes are computed
-   independently of the opponent snapshot; a missing lineup does not remove
-   them. See [themes.md](themes.md).
+7. **Data analysis strip** — a compact selection of the claims about the team, with
+   a link to `/analysis/` for the full case. Claims are computed independently of
+   the opponent snapshot; a missing lineup does not remove them. See
+   [analysis.md](analysis.md).
 8. **Recent meetings and coverage** — context, limits and source links.
 
 The panel order is deliberate: the immediate read is above the fold; the

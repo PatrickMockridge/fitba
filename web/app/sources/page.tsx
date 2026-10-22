@@ -284,7 +284,7 @@ export default function SourcesPage() {
       <p className="back-link">
         <Link href="/about/">← About fitba</Link> ·{" "}
         <Link href="/methodology/">Methodology</Link> ·{" "}
-        <Link href="/themes/">The bigger picture</Link>
+        <Link href="/analysis/">Data analysis</Link>
       </p>
     </ContractPage>
   );

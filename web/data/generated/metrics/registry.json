@@ -1,0 +1,3446 @@
+{
+  "change_policy": {
+    "changelog": "docs/metric-changes.md",
+    "owner_approval_required": true,
+    "version_scheme": "semver"
+  },
+  "checksum": "sha256:bceaea65c6e37dd961e9095cc42e94ce544dcf93168c6b963a00c56d26511717",
+  "metrics": [
+    {
+      "aggregation": "per_team",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Per-team league record and ranking inputs.",
+      "displayed_surfaces": [
+        "/",
+        "/competitions/",
+        "/status/"
+      ],
+      "fields": [
+        "position",
+        "played",
+        "won",
+        "drawn",
+        "lost",
+        "gf",
+        "ga",
+        "gd",
+        "raw_points",
+        "deduction",
+        "points",
+        "form"
+      ],
+      "formula": {
+        "gd": "gf - ga",
+        "played": "won + drawn + lost",
+        "points": "raw_points - deduction",
+        "raw_points": "3*won + drawn"
+      },
+      "home_payload": "tables/*.json",
+      "home_surface": "/competitions/",
+      "id": "table.record",
+      "implementation": "fitba.metrics.checks:verify_table_record",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "League table record",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "tables/*.json#/rows/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_standings",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "table",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "League positions and cutoff labels.",
+      "displayed_surfaces": [
+        "/competitions/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "tables/*.json",
+      "home_surface": "/competitions/",
+      "id": "table.cutoffs",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "League cutoffs",
+      "limitations": [
+        "Cutoff positions are configured; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "tables/*.json#/cutoffs/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_standings",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Competition identity, coverage and match counts.",
+      "displayed_surfaces": [
+        "/competitions/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "competitions/index.json",
+      "home_surface": "/competitions/",
+      "id": "competition.index",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Competition index",
+      "limitations": [
+        "Competition metadata and coverage; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "competitions/index.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_standings",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "League Cup groups, rounds, ties and qualifiers.",
+      "displayed_surfaces": [
+        "/competitions/league-cup/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "competitions/league-cup.json",
+      "home_surface": "/competitions/league-cup/",
+      "id": "cup.league",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "League Cup",
+      "limitations": [
+        "Cup structure and results; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "competitions/league-cup.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "cup_fixtures",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Scottish Cup rounds, ties and coverage.",
+      "displayed_surfaces": [
+        "/competitions/scottish-cup/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "competitions/scottish-cup.json",
+      "home_surface": "/competitions/scottish-cup/",
+      "id": "cup.scottish",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Scottish Cup",
+      "limitations": [
+        "Cup structure and results; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "competitions/scottish-cup.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "cup_fixtures",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Recent and split form for both teams.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [
+        "played",
+        "won",
+        "drawn",
+        "lost",
+        "points",
+        "ppg",
+        "gf",
+        "ga",
+        "gd",
+        "shots_for_pm",
+        "shots_against_pm",
+        "gf_pg",
+        "ga_pg",
+        "gd_pg"
+      ],
+      "formula": {
+        "ga_pg": "ga / played",
+        "gd": "gf - ga",
+        "gd_pg": "gd / played",
+        "gf_pg": "gf / played",
+        "played": "won + drawn + lost",
+        "points": "3*won + drawn",
+        "ppg": "points / played"
+      },
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.form",
+      "implementation": "fitba.metrics.checks:verify_matchday_form",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Matchday form",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/teams/*/form/**",
+        "matchday/upcoming.json#/form_guide/*/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "counts": {
+          "decimals": 0,
+          "display": "0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "rates": {
+          "decimals": 2,
+          "display": "0.00",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        }
+      },
+      "source_layer": "league_results_current",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "League strength, percentiles and comparison.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [
+        "ppp",
+        "ppg",
+        "gf_pg",
+        "ga_pg",
+        "gd_pg",
+        "shots_for_pm",
+        "shot_share",
+        "position_gap",
+        "ppg_gap"
+      ],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.strength",
+      "implementation": "fitba.metrics.checks:verify_matchday_strength",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Matchday strength",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/teams/*/strength/**",
+        "matchday/upcoming.json#/strength/*/**",
+        "matchday/upcoming.json#/strength_comparison/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_standings",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Shot profile, approach index and style lean.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.style",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Matchday style",
+      "limitations": [
+        "Shot-profile derivatives; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/teams/*/style/**",
+        "matchday/upcoming.json#/styles/*/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_team_stats",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "event",
+      "denominator": null,
+      "description": "Predicted lineups, scores, selection weights and availability.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.lineup",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Predicted XI",
+      "limitations": [
+        "Selection and formation projections; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/predicted_lineups/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "lineups_roles",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Snapshot, lineup and form coverage.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [
+        "age_hours",
+        "fixtures",
+        "fixtures_with_lineups",
+        "lineup_coverage"
+      ],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.coverage",
+      "implementation": "fitba.metrics.checks:verify_matchday_coverage",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Matchday coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_results_current",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Recent meetings and results.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.head-to-head",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Head-to-head",
+      "limitations": [
+        "Historical meeting snapshot; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/head_to_head/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Upcoming club fixtures.",
+      "displayed_surfaces": [
+        "/matchday/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "matchday/upcoming.json",
+      "home_surface": "/matchday/",
+      "id": "matchday.next-fixtures",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Next fixtures",
+      "limitations": [
+        "Fixture snapshot; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "matchday/upcoming.json#/next_fixtures/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "club_fixtures",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Family counts and availability summary.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "fields": [
+        "families",
+        "cover",
+        "strengthen",
+        "replace",
+        "availability_known",
+        "availability_unknown",
+        "counts",
+        "top_priority"
+      ],
+      "formula": {
+        "availability_known": "count squad players with availability.status != unknown",
+        "availability_unknown": "squad players - availability_known",
+        "counts": "count families by category",
+        "families": "len(families)"
+      },
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.summary",
+      "implementation": "fitba.metrics.checks:verify_needs_summary",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Needs summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "needs/aberdeen.json#/summary/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "needs",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Per-family depth, quality, availability, market and roster metrics.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.family",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Needs families",
+      "limitations": [
+        "Derived family metrics; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "needs/aberdeen.json#/families/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "needs",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Roster current/max and outgoing-first policy.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.roster-space",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Roster space",
+      "limitations": [
+        "Roster policy; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "needs/aberdeen.json#/roster_space/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "needs",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Needs coverage and availability status.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "needs/aberdeen.json",
+      "home_surface": "/recruitment/",
+      "id": "needs.coverage",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Needs coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "needs/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "needs",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Register totals, players and period.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [
+        "total",
+        "confirmed",
+        "curated",
+        "players",
+        "seasons_covered",
+        "windows_covered"
+      ],
+      "formula": {
+        "confirmed": "count verification_status == confirmed",
+        "curated": "count verification_status == curated",
+        "players": "distinct player_key",
+        "seasons_covered": "distinct season",
+        "total": "len(transfers)",
+        "windows_covered": "distinct (season, window)"
+      },
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.summary",
+      "implementation": "fitba.metrics.checks:verify_transfer_summary",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/summary/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Per-window arrival/departure and valuation counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [
+        "arrivals",
+        "departures",
+        "permanent_in",
+        "permanent_out",
+        "loans_in",
+        "loans_out",
+        "free_in",
+        "free_out",
+        "disclosed_count",
+        "undisclosed_count",
+        "key",
+        "state"
+      ],
+      "formula": {
+        "arrivals": "count direction == in",
+        "departures": "count direction == out"
+      },
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.window",
+      "implementation": "fitba.metrics.checks:verify_transfer_windows",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer windows",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/windows/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Per-move fee, loan and verification values.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.row",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer rows",
+      "limitations": [
+        "Per-row curated fees and terms; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/transfers/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Modelled fee ranges and calibration counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.valuation",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer valuation",
+      "limitations": [
+        "Modelled valuation; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/valuation/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "valuation",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Sell-on percentages, basis and summary.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.sell-on",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Sell-on clauses",
+      "limitations": [
+        "Curated sell-on clauses; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/sell_on_summary/**",
+        "transfers/aberdeen.json#/sell_on_clauses/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Loan-in and loan-out slices.",
+      "displayed_surfaces": [
+        "/loans/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/loans/",
+      "id": "transfers.loans",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer loans",
+      "limitations": [
+        "Loan rows; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/loans_out/**",
+        "transfers/aberdeen.json#/loans_in/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "loans",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Withheld suspect rows and plausibility counts.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.plausibility",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer plausibility",
+      "limitations": [
+        "Plausibility policy; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/plausibility/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Seniority review, position coverage and gap ledger counts.",
+      "displayed_surfaces": [
+        "/transfers/",
+        "/status/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.audit.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.audit",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer completeness audit",
+      "limitations": [
+        "Completeness audit is report-only; it does not prove provider completeness."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.audit.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Audited/curated window coverage.",
+      "displayed_surfaces": [
+        "/transfers/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "transfers/aberdeen.json",
+      "home_surface": "/transfers/",
+      "id": "transfers.coverage",
+      "implementation": "fitba.metrics.checks:verify_transfer_coverage",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Transfer coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "transfers/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "transfer_register",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Era aggregates: seasons, managers, honours and positions.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [
+        "seasons",
+        "best_position",
+        "worst_position",
+        "average_position",
+        "average_points",
+        "manager_count",
+        "honours_total"
+      ],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.scorecard",
+      "implementation": "fitba.metrics.checks:verify_history_scorecard",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History scorecard",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/scorecard/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Season-level history rows.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.season",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History seasons",
+      "limitations": [
+        "Curated season refs; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/seasons/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Manager/staff stints and records.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.staff",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History staff",
+      "limitations": [
+        "Curated staff stints; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/staff/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "League-only baseline window.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [
+        "count",
+        "average_position",
+        "best_position",
+        "average_points"
+      ],
+      "formula": {
+        "average_points": "mean(points)",
+        "average_position": "mean(position)",
+        "count": "len(seasons)"
+      },
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.baseline",
+      "implementation": "fitba.metrics.checks:verify_history_baseline",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History baseline",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/baseline/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "averages": {
+          "decimals": 1,
+          "display": "0.0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "counts": {
+          "decimals": 0,
+          "display": "0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        }
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "History season/backfill coverage.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.coverage",
+      "implementation": "fitba.metrics.checks:verify_history_coverage",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Per-season history documents.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "history/seasons/*.json",
+      "home_surface": "/history/",
+      "id": "history.season-document",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "History season documents",
+      "limitations": [
+        "Curated season documents; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/seasons/*.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "history",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "event",
+      "denominator": null,
+      "description": "Squad size, loans, role evidence and coverage counts.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "fields": [
+        "squad_size",
+        "loans_out",
+        "loans_in",
+        "roles_observed",
+        "roles_partial",
+        "roles_unknown",
+        "stats_unavailable",
+        "average_age"
+      ],
+      "formula": {
+        "by_status": "count players by status",
+        "loans_in": "count status == loan_in",
+        "loans_out": "count status == loan_out",
+        "total_players": "len(players)"
+      },
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.summary",
+      "implementation": "fitba.metrics.checks:verify_squad_summary",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Squad summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "squad/aberdeen.json#/summary/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "squad_identity",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "event",
+      "denominator": null,
+      "description": "Per-player totals, playing time, role and position stats.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.players",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Squad players",
+      "limitations": [
+        "Per-player rows; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "squad/aberdeen.json#/players/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "squad_identity",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "event",
+      "denominator": null,
+      "description": "Role/career/position/attribute coverage metadata.",
+      "displayed_surfaces": [
+        "/squad/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "squad/aberdeen.json",
+      "home_surface": "/squad/",
+      "id": "squad.meta",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Squad metadata",
+      "limitations": [
+        "Coverage metadata; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "squad/aberdeen.json#/role_meta/**",
+        "squad/aberdeen.json#/career_meta/**",
+        "squad/aberdeen.json#/position_stats_meta/**",
+        "squad/aberdeen.json#/attributes_meta/**",
+        "squad/aberdeen.json#/availability_meta/**",
+        "squad/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "squad_identity",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "event",
+      "denominator": null,
+      "description": "Per-player page panels and records.",
+      "displayed_surfaces": [
+        "/players/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "players/*.json",
+      "home_surface": "/players/",
+      "id": "player.page",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Player pages",
+      "limitations": [
+        "Player page rows; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "players/*.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "player_match_stats",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Curated rumour counts and status.",
+      "displayed_surfaces": [
+        "/rumours/"
+      ],
+      "fields": [
+        "total",
+        "active",
+        "confirmed",
+        "by_confidence",
+        "by_status",
+        "by_direction"
+      ],
+      "formula": {
+        "by_confidence": "count rumours by confidence",
+        "by_direction": "count rumours by direction",
+        "by_status": "count rumours by status",
+        "total": "len(rumours)"
+      },
+      "home_payload": "rumours/aberdeen.json",
+      "home_surface": "/rumours/",
+      "id": "rumours.summary",
+      "implementation": "fitba.metrics.checks:verify_rumours_summary",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Rumour summary",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "rumours/aberdeen.json#/summary/**",
+        "rumours/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "rumours",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "inferred",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Advisory recruitment profile weights and buckets.",
+      "displayed_surfaces": [
+        "/recruitment/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "rumours/profile.json",
+      "home_surface": "/recruitment/",
+      "id": "rumours.profile",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Rumour profile",
+      "limitations": [
+        "Advisory profile; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "rumours/profile.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "rumours",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Fan-signal coverage, sentiment and profile.",
+      "displayed_surfaces": [
+        "/news/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "forum/afc_chat.json",
+      "home_surface": "/news/",
+      "id": "forum.signal",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Forum signal",
+      "limitations": [
+        "Reference fan signal; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "forum/afc_chat.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "forum_signal",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Layer/source row counts and truth table.",
+      "displayed_surfaces": [
+        "/sources/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "provenance.json",
+      "home_surface": "/sources/",
+      "id": "provenance.layers",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Provenance layers",
+      "limitations": [
+        "Provenance summary; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "provenance.json#/layers/**",
+        "provenance.json#/sources/**",
+        "provenance.json#/migration/**",
+        "provenance.json#/availability/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Build coverage counts across surfaces.",
+      "displayed_surfaces": [
+        "/status/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "coverage.json",
+      "home_surface": "/status/",
+      "id": "coverage.surfaces",
+      "implementation": "fitba.metrics.checks:verify_coverage",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Coverage",
+      "limitations": [
+        "Registered family; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "coverage.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Aberdeen club summary, history and news rows.",
+      "displayed_surfaces": [
+        "/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "clubs/aberdeen.json",
+      "home_surface": "/",
+      "id": "clubs.aberdeen",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Club payload",
+      "limitations": [
+        "Club summary payload; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "clubs/aberdeen.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "league_results_current",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Availability ledger coverage and entries.",
+      "displayed_surfaces": [
+        "/status/"
+      ],
+      "fields": [],
+      "formula": "Registered family; see description and fields.",
+      "home_payload": "availability/aberdeen.json",
+      "home_surface": "/status/",
+      "id": "availability.ledger",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Availability",
+      "limitations": [
+        "Curated team news; provenance checked, not recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "availability/aberdeen.json#/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "availability",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Owner view, chairman frame, thesis and state.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "schema_version",
+        "state"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.document",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The case document",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/owner_view/**",
+        "themes/aberdeen.json#/chairman_frame/**",
+        "themes/aberdeen.json#/thesis",
+        "themes/aberdeen.json#/state"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "The claim register: order, domain, status and counts.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "order",
+        "count",
+        "status"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claims",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The case claims",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "The evidence table attached to each claim.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "count",
+        "sample"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.evidence",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Claim evidence",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*/evidence/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "League performance of the other SPFL clubs.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "seasons",
+        "best",
+        "worst",
+        "median_points",
+        "current"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.benchmark",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Peer benchmark",
+      "limitations": [
+        "League performance only; other clubs transfer and wage models are not in the record."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/benchmark/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Availability, history and missing data classes.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "known",
+        "unknown"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.coverage",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Case coverage",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "League record and kick-off shape churn.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "played",
+        "points",
+        "gf",
+        "ga",
+        "form"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.team-now",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The team now",
+      "limitations": [
+        "Case claim; provenance checked, not independently recomputed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=team_now]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Three-at-the-back record, wide roles and availability.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "matches",
+        "points_pg",
+        "ga_pm",
+        "wb_starts_pm",
+        "wf_starts_pm"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.defence",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The defence",
+      "limitations": [
+        "Four three-CB matches; association only. Availability is unknown."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=defence]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Goals, shot share and the set-play/error gap.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "gf",
+        "ga",
+        "shot_share",
+        "attack_share"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.attack",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The attack",
+      "limitations": [
+        "No event data for set-piece goals, errors or penalties."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=attack]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "match",
+      "denominator": null,
+      "description": "Manager phases, runs and the cup.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "played",
+        "ppg",
+        "winning_run",
+        "winless_run"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.managers",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The managers",
+      "limitations": [
+        "18 Robinson matches; no pre-declared variance measure."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=managers]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Arrivals, departures, age, U21 minutes and the Morris sale.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "arrivals",
+        "departures",
+        "median_age",
+        "u21_minutes_share"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.squad",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The squad",
+      "limitations": [
+        "Confirmed business only; fees are mostly undisclosed."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=squad]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Declared by the claim status and the sample in the evidence table.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "The Cormack-era record, managers, honours and transfers.",
+      "displayed_surfaces": [
+        "/themes/"
+      ],
+      "fields": [
+        "seasons",
+        "best_position",
+        "worst_position",
+        "honours",
+        "manager_count",
+        "europe"
+      ],
+      "formula": "Registered case family; see the claim text and evidence table.",
+      "home_payload": "themes/aberdeen.json",
+      "home_surface": "/themes/",
+      "id": "case.claim.chairman-record",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "The chairman's record",
+      "limitations": [
+        "The record cannot prove causation or boardroom intent."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "themes/aberdeen.json#/claims/*[id=chairman_record]/**"
+      ],
+      "reviewed": "2026-10-22",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "themes",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    }
+  ],
+  "owner": "patrickmockridge",
+  "parameters": [
+    {
+      "config_keys": [],
+      "config_path": "matchday.style",
+      "id": "param.matchday.style",
+      "kind": "matrix",
+      "label": "Matchday style policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.style"
+      ],
+      "value": {
+        "attack_index": 60,
+        "attack_shot_share": 0.5,
+        "counter_index": 40,
+        "counter_shot_share": 0.48,
+        "min_matches": 4,
+        "overall_weight": 0.4,
+        "venue_min_matches": 3,
+        "venue_weight": 0.6,
+        "weights": {
+          "goals_for": 0.2,
+          "shot_share": 0.25,
+          "shots_for": 0.4,
+          "shots_on_target_for": 0.15
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "matchday.prediction",
+      "id": "param.matchday.prediction",
+      "kind": "matrix",
+      "label": "Matchday prediction policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.lineup"
+      ],
+      "value": {
+        "formation_window": 6,
+        "min_role_fit": 0.3,
+        "position_group_fit": {
+          "D": {
+            "CB": 0.3,
+            "DM": 0.2,
+            "LB": 0.3,
+            "LWB": 0.3,
+            "RB": 0.3,
+            "RWB": 0.3
+          },
+          "F": {
+            "AM": 0.2,
+            "LW": 0.3,
+            "RW": 0.3,
+            "ST": 0.3
+          },
+          "GK": {
+            "GK": 0.3
+          },
+          "M": {
+            "AM": 0.3,
+            "CM": 0.3,
+            "DM": 0.3,
+            "LM": 0.3,
+            "RM": 0.3
+          }
+        },
+        "recency_weights": [
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "role_adjacency": {
+          "AM": {
+            "AM": 1.0,
+            "CM": 0.7,
+            "LW": 0.6,
+            "RW": 0.6,
+            "ST": 0.5
+          },
+          "CB": {
+            "CB": 1.0,
+            "DM": 0.3,
+            "LB": 0.6,
+            "RB": 0.6
+          },
+          "CM": {
+            "AM": 0.7,
+            "CM": 1.0,
+            "DM": 0.8
+          },
+          "DM": {
+            "CB": 0.4,
+            "CM": 0.7,
+            "DM": 1.0
+          },
+          "GK": {
+            "GK": 1.0
+          },
+          "LB": {
+            "CB": 0.5,
+            "LB": 1.0,
+            "LM": 0.4,
+            "LWB": 0.9
+          },
+          "LM": {
+            "CM": 0.4,
+            "LB": 0.5,
+            "LM": 1.0,
+            "LW": 0.9
+          },
+          "LW": {
+            "AM": 0.5,
+            "LM": 0.8,
+            "LW": 1.0,
+            "ST": 0.5
+          },
+          "LWB": {
+            "LB": 0.8,
+            "LM": 0.5,
+            "LW": 0.4,
+            "LWB": 1.0
+          },
+          "RB": {
+            "CB": 0.5,
+            "RB": 1.0,
+            "RM": 0.4,
+            "RWB": 0.9
+          },
+          "RM": {
+            "CM": 0.4,
+            "RB": 0.5,
+            "RM": 1.0,
+            "RW": 0.9
+          },
+          "RW": {
+            "AM": 0.5,
+            "RM": 0.8,
+            "RW": 1.0,
+            "ST": 0.5
+          },
+          "RWB": {
+            "RB": 0.8,
+            "RM": 0.5,
+            "RW": 0.4,
+            "RWB": 1.0
+          },
+          "ST": {
+            "AM": 0.4,
+            "LW": 0.5,
+            "RW": 0.5,
+            "ST": 1.0
+          }
+        },
+        "scoring": {
+          "form": 0.2,
+          "minute_share": 0.1,
+          "recency_start": 0.18,
+          "recent_rating": 0.15,
+          "role_fit": 0.15,
+          "start_rate": 0.22
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "recent_fixtures",
+        "contenders",
+        "max_api_requests",
+        "refresh_after_hours",
+        "stale_after_hours",
+        "min_lineup_matches"
+      ],
+      "config_path": "matchday",
+      "id": "param.matchday.refresh",
+      "kind": "matrix",
+      "label": "Matchday refresh and sample policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "matchday.form",
+        "matchday.lineup",
+        "matchday.coverage"
+      ],
+      "value": {
+        "contenders": 6,
+        "max_api_requests": 24,
+        "min_lineup_matches": 3,
+        "recent_fixtures": 6,
+        "refresh_after_hours": 20,
+        "stale_after_hours": 48
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "needs.thresholds",
+      "id": "param.needs.thresholds",
+      "kind": "matrix",
+      "label": "Needs thresholds",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "needs.family",
+        "needs.summary"
+      ],
+      "value": {
+        "age_risk_strengthen": 0.5,
+        "availability_risk_cover": 0.25,
+        "cover_buffer": 1,
+        "depth_gap_cover": 0.5,
+        "quality_gap_strengthen": 0.35,
+        "quality_minutes": 900,
+        "ready_minutes": 180,
+        "ready_starts": 2,
+        "reliance_top_share": 0.55,
+        "starter_minutes": 450,
+        "starter_starts": 5,
+        "trusted_starts": 3,
+        "weak_family_delta": -0.15
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "needs.families",
+      "id": "param.needs.families",
+      "kind": "matrix",
+      "label": "Needs family policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "needs.family",
+        "needs.roster-space"
+      ],
+      "value": {
+        "AM/WM": {
+          "label": "Attacking / wide midfield",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 5,
+          "min_available": 3,
+          "scouting_groups": [
+            "AM"
+          ],
+          "traits": [
+            "key_passes_p90",
+            "dribbles_success_pct",
+            "shots_p90",
+            "progressive_carries_p90"
+          ]
+        },
+        "CB": {
+          "label": "Centre-backs",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 5,
+          "min_available": 4,
+          "scouting_groups": [
+            "CB"
+          ],
+          "traits": [
+            "aerial_win_pct",
+            "duel_win_pct",
+            "progressive_passes_p90",
+            "clearances_p90"
+          ]
+        },
+        "FB/WB": {
+          "label": "Full-backs / wing-backs",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 6,
+          "min_available": 4,
+          "scouting_groups": [
+            "FB"
+          ],
+          "traits": [
+            "crosses_p90",
+            "progressive_carries_p90",
+            "tackles_p90",
+            "duels_won_pct"
+          ]
+        },
+        "GK": {
+          "label": "Goalkeepers",
+          "market": [
+            "loan",
+            "free_agent"
+          ],
+          "max_squad": 4,
+          "min_available": 2,
+          "scouting_groups": [
+            "GK"
+          ],
+          "traits": [
+            "saves_p90",
+            "save_pct",
+            "crosses_claimed_p90",
+            "pass_completion"
+          ]
+        },
+        "MID": {
+          "label": "Central midfield",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 7,
+          "min_available": 4,
+          "scouting_groups": [
+            "DM",
+            "CM"
+          ],
+          "traits": [
+            "progressive_passes_p90",
+            "tackles_p90",
+            "interceptions_p90",
+            "pass_completion"
+          ]
+        },
+        "ST": {
+          "label": "Centre-forwards",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 4,
+          "min_available": 2,
+          "scouting_groups": [
+            "ST"
+          ],
+          "traits": [
+            "shots_p90",
+            "goals_per_shot",
+            "aerial_win_pct",
+            "touches_in_box_p90"
+          ]
+        },
+        "W": {
+          "label": "Wide forwards",
+          "market": [
+            "loan",
+            "free_agent",
+            "fee"
+          ],
+          "max_squad": 5,
+          "min_available": 3,
+          "scouting_groups": [
+            "W"
+          ],
+          "traits": [
+            "dribbles_success_pct",
+            "crosses_p90",
+            "shots_p90",
+            "touches_in_box_p90"
+          ]
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "transfers.audit",
+      "id": "param.transfers.audit",
+      "kind": "matrix",
+      "label": "Transfer audit thresholds",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "transfers.row",
+        "transfers.coverage"
+      ],
+      "value": {
+        "manual_finding_aids": {
+          "allowed": true,
+          "automated_access": false,
+          "publication": false
+        },
+        "prior_seasons": [
+          "2024-25",
+          "2025-26"
+        ],
+        "recent_windows": 4,
+        "seniority": {
+          "established_min_career_starts": 10,
+          "established_min_minutes": 450,
+          "established_min_starts": 5,
+          "youth_max_age": 20,
+          "youth_max_appearances": 4
+        },
+        "start_season": "2024-25"
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "transfers.valuation",
+      "id": "param.transfers.valuation",
+      "kind": "matrix",
+      "label": "Transfer valuation policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "transfers.valuation"
+      ],
+      "value": {
+        "currency": "GBP",
+        "fx_to_gbp": {
+          "EUR": 0.85,
+          "GBP": 1.0,
+          "USD": 0.78
+        },
+        "note": "Manual calibration may use restricted pages as a private sanity check only; no restricted value, URL or scraped table is published. Every inferred output is a range with a confidence label.\n",
+        "range_high": 1.6,
+        "range_low": 0.6
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "availability.policy",
+      "id": "param.availability.policy",
+      "kind": "matrix",
+      "label": "Availability policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "availability.ledger"
+      ],
+      "value": {
+        "allowed_hosts": [
+          "afc.co.uk",
+          "www.afc.co.uk"
+        ],
+        "conflict_confidence_downgrade": 2,
+        "doubtful_confidence_downgrade": 1,
+        "doubtful_weight": 0.5,
+        "filter_statuses": [
+          "out",
+          "suspended"
+        ],
+        "fresh_days": 7,
+        "max_age_days": 21,
+        "require_source_url": true,
+        "returned_weight": 0.9,
+        "stale_confidence_downgrade": 1,
+        "unknown_confidence_downgrade": 1,
+        "unknown_weight": 1.0
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "availability.provider",
+      "id": "param.availability.provider",
+      "kind": "matrix",
+      "label": "Availability provider policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "availability.ledger"
+      ],
+      "value": {
+        "endpoint": "/injuries",
+        "league_id": 179,
+        "never_sets": [
+          "available",
+          "returned",
+          "suspended"
+        ],
+        "require_league_coverage": true,
+        "source": "api_football",
+        "use_player_injured_boolean": false
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "competitions.competitions",
+      "id": "param.competitions",
+      "kind": "matrix",
+      "label": "Competition policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "table.record",
+        "table.cutoffs",
+        "competition.index"
+      ],
+      "value": [
+        {
+          "code": "SC0",
+          "cutoffs": [
+            {
+              "after_position": 3,
+              "kind": "europe",
+              "label": "European places · 1–3",
+              "note": "4th is conditional on the Scottish Cup winner already being in the top three."
+            },
+            {
+              "after_position": 6,
+              "kind": "split",
+              "label": "Top-six / bottom-six split",
+              "note": "The league splits after 33 matches; the bottom six cannot finish higher than 7th."
+            },
+            {
+              "after_position": 10,
+              "kind": "playoff",
+              "label": "Relegation play-off · 11th",
+              "note": "11th plays the Championship play-off winner over two legs."
+            },
+            {
+              "after_position": 11,
+              "kind": "relegation",
+              "label": "Relegation · 12th",
+              "note": "12th is relegated automatically."
+            }
+          ],
+          "id": "sco:premiership",
+          "matches_per_season": 228,
+          "name": "Scottish Premiership",
+          "qualification_note": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.\n",
+          "short_name": "Premiership",
+          "split_after_matches": 33,
+          "teams": 12,
+          "tier": 1
+        },
+        {
+          "code": "SC1",
+          "cutoffs": [
+            {
+              "after_position": 1,
+              "kind": "promotion",
+              "label": "Automatic promotion · 1st",
+              "note": "1st is promoted to the Premiership."
+            },
+            {
+              "after_position": 4,
+              "kind": "playoff",
+              "label": "Promotion play-off · 2nd–4th",
+              "note": "2nd–4th enter the Premiership play-off with 11th in the Premiership."
+            },
+            {
+              "after_position": 8,
+              "kind": "playoff",
+              "label": "Relegation play-off · 9th",
+              "note": "9th enters the Championship/League One play-off with 2nd–4th in League One."
+            },
+            {
+              "after_position": 9,
+              "kind": "relegation",
+              "label": "Relegation · 10th",
+              "note": "10th is relegated to League One."
+            }
+          ],
+          "id": "sco:championship",
+          "matches_per_season": 180,
+          "name": "Scottish Championship",
+          "qualification_note": "1st is promoted automatically. 2nd–4th enter the Premiership play-off with 11th in the Premiership. 9th enters the Championship/League One play-off, and 10th is relegated to League One.\n",
+          "short_name": "Championship",
+          "teams": 10,
+          "tier": 2
+        },
+        {
+          "code": "SC2",
+          "cutoffs": [
+            {
+              "after_position": 1,
+              "kind": "promotion",
+              "label": "Automatic promotion · 1st",
+              "note": "1st is promoted to the Championship."
+            },
+            {
+              "after_position": 4,
+              "kind": "playoff",
+              "label": "Promotion play-off · 2nd–4th",
+              "note": "2nd–4th enter the Championship/League One play-off with 9th in the Championship."
+            },
+            {
+              "after_position": 8,
+              "kind": "playoff",
+              "label": "Relegation play-off · 9th",
+              "note": "9th enters the League One/League Two play-off with 2nd–4th in League Two."
+            },
+            {
+              "after_position": 9,
+              "kind": "relegation",
+              "label": "Relegation · 10th",
+              "note": "10th is relegated to League Two."
+            }
+          ],
+          "id": "sco:league-one",
+          "matches_per_season": 180,
+          "name": "Scottish League One",
+          "qualification_note": "1st is promoted automatically. 2nd–4th enter the Championship play-off with 9th in the Championship. 9th enters the League One/League Two play-off, and 10th is relegated to League Two.\n",
+          "short_name": "League One",
+          "teams": 10,
+          "tier": 3
+        },
+        {
+          "code": "SC3",
+          "cutoffs": [
+            {
+              "after_position": 1,
+              "kind": "promotion",
+              "label": "Automatic promotion · 1st",
+              "note": "1st is promoted to League One."
+            },
+            {
+              "after_position": 4,
+              "kind": "playoff",
+              "label": "Promotion play-off · 2nd–4th",
+              "note": "2nd–4th enter the League One/League Two play-off with 9th in League One."
+            },
+            {
+              "after_position": 9,
+              "kind": "pyramid",
+              "label": "Pyramid play-off · 10th",
+              "note": "10th faces the tier-five group winner; no automatic relegation."
+            }
+          ],
+          "id": "sco:league-two",
+          "matches_per_season": 180,
+          "name": "Scottish League Two",
+          "qualification_note": "1st is promoted automatically. 2nd–4th enter the League One play-off with 9th in League One. 10th enters the pyramid play-off against the winner of the Highland / Lowland East / Lowland West champions' group; there is no automatic relegation, and the League Two club hosts the second leg.\n",
+          "short_name": "League Two",
+          "teams": 10,
+          "tier": 4
+        }
+      ],
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "competitions.history",
+      "id": "param.competitions.history",
+      "kind": "matrix",
+      "label": "Competition history backfill",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "table.record",
+        "table.cutoffs"
+      ],
+      "value": {
+        "all_four_from": "1997-98",
+        "default_backfill_from": "2013-14",
+        "first_season": "1994-95"
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "competitions.validation",
+      "id": "param.competitions.validation",
+      "kind": "matrix",
+      "label": "Competition validation policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "table.record"
+      ],
+      "value": {
+        "curtailed": {
+          "2019-20": [
+            "SC0",
+            "SC1",
+            "SC2",
+            "SC3"
+          ],
+          "2020-21": [
+            "SC1",
+            "SC2",
+            "SC3"
+          ]
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "themes.thresholds",
+      "id": "param.case.thresholds",
+      "kind": "matrix",
+      "label": "Case thresholds",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "case.claim.defence",
+        "case.claim.attack",
+        "case.claim.managers"
+      ],
+      "value": {
+        "balance": {
+          "medium_matches": 6
+        },
+        "depth": {
+          "concentration_high": 0.55,
+          "rotation_minutes": 90,
+          "starter_minutes": 450,
+          "starter_starts": 5,
+          "thin_rotation_starts": 3
+        },
+        "family": {
+          "high_matches": 6,
+          "high_minutes": 900,
+          "medium_matches": 3,
+          "medium_minutes": 450
+        },
+        "mission": {
+          "min_arrivals_for_confidence": 5
+        },
+        "shape": {
+          "medium_matches": 3
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [],
+      "config_path": "themes.scope",
+      "id": "param.case.scope",
+      "kind": "matrix",
+      "label": "Case scope",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-22",
+      "unit": "mixed",
+      "used_by": [
+        "case.claim.team-now",
+        "case.claim.defence",
+        "case.claim.attack"
+      ],
+      "value": {
+        "bench": "premiership",
+        "minutes": "all_competitive",
+        "ratings": "premiership",
+        "shapes": "all_competitive"
+      },
+      "verification": "config_match",
+      "version": 1
+    }
+  ],
+  "registry_version": "2.0.0",
+  "reviewed": "2026-10-22",
+  "schema_version": 1,
+  "structural_number_patterns": [
+    "**/player_id",
+    "**/team_id",
+    "**/api_team_id",
+    "**/match_id",
+    "**/fixture_id",
+    "**/shirt_number",
+    "**/order",
+    "**/tier",
+    "**/row",
+    "**/column",
+    "**/bytes",
+    "**/schema_version",
+    "**/version",
+    "**/season",
+    "**/*_at",
+    "**/checksum",
+    "**/after_position",
+    "**/minute",
+    "**/stoppage",
+    "**/shootout_home",
+    "**/shootout_away"
+  ]
+}

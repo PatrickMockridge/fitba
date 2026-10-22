@@ -143,11 +143,11 @@ Every row has a position where an allowed source states one. The precedence is:
 5. explicit unknown.
 
 `position_source`, `position_source_season` and `position_unknown_reason` are
-published so an unknown is visible, not guessed. At this check 217 of 230 rows
-have a position; the 13 unknowns are mostly youth/Highland loans with no
-position in any allowed source. Pre-2024-25 rows without a curated position are
-marked `historical_scope`; they are not profile-enriched from a current-season
-record.
+published so an unknown is visible, not guessed. The live count of specified and
+unknown positions is in the register completeness audit and `/metrics/`; the
+unknowns are mostly youth/Highland loans with no position in any allowed source.
+Pre-2024-25 rows without a curated position are marked `historical_scope`; they
+are not profile-enriched from a current-season record.
 
 ## Inferred fees and market values
 
@@ -172,8 +172,8 @@ modelled gross flows, rather than adding every row's extremes. That avoids a
 fake-precise or implausibly wide "net spend". Negative means income exceeds
 spend. Free transfers count as zero fee; loan fees are excluded.
 
-At the last check the model had 14 anchors and produced:
-**−£21.4m to −£5.6m** across 2019/20–2026/27. It is an inferred range, not an
+The live anchor count and inferred net range are in the transfer register,
+`/metrics/` and the generated valuation summary. The range is inferred, not an
 audited balance and not the club's internal valuation.
 
 Manual calibration may use a restricted page as a private sanity check, but no
@@ -257,25 +257,27 @@ The membership cards on `/` and `/recruitment/` read the period and player
 count from the payload, so a hard-coded “three seasons” label cannot drift
 back in.
 
-## Current register (2026-10-22)
+## Current register
 
-- 229 published rows across 19 windows with rows, plus one expected upcoming
-  window. The recent four are audited; 2019-20..2023-24 are curated partial.
-- 149 distinct players. A row is a **move**, not a player, so a player appears
-  once for each loan-out/return or transfer; 229 moves over eight seasons is an
-  average of about 29 per season, not 229 in three seasons.
-- 4 confirmed rows (official announcement linked); 225 curated against the
-  Wikipedia season table or the API feed.
-- 31 loans out and 31 loans in across the register.
-- Fee basis: 2 disclosed, 12 reported, 69 modelled, 83 free, 63 loan.
-- Inferred net range at this check: **−£21.4m to −£5.6m** (income exceeds
-  spend), with 14 anchors. This is a modelled range, not an audited balance.
-- 3 sell-on clauses: Calvin Ramsay 17.5% (confirmed), Lewis Ferguson 20%
-  (reported), Bojan Miovski (reported, percentage undisclosed).
-- Audit: no established or fringe senior moves awaiting review; one
-  unclassified prior player remains. Nine gaps are accepted in the ledger
-  (academy/development, a squad-list omission, a provider identity duplicate and
-  the Aaron Cummings provider-name correction).
+The live register is at `/transfers/`. Exact row, player, window, loan,
+fee-basis and net-range counts are in the generated payload, the register
+completeness audit and `/metrics/`; this document does not restate them.
+
+Stable facts at the 2026-10-22 publish:
+
+- The register covers 2019/20–2026/27. The most recent audited windows have been
+  reviewed against the seniority rules; earlier windows are curated partial.
+- A row is a **move**, not a player. A player appears once for each
+  loan-out/return or transfer, so the row count is not a count of players.
+- Confirmed and curated rows are separate; only completed business is published.
+- Loans out and loans in are separate slices of the same register.
+- Fee basis separates disclosed, reported, modelled, free and loan. The inferred
+  net range is modelled from anchors, not an audited balance.
+- Sell-on clauses are listed in the register; a reported clause is not a
+  confirmed contract term.
+- The completeness audit reports established/fringe senior moves awaiting review,
+  position coverage and open/accepted/resolved gaps. It is a report, not a
+  publish blocker.
 
 ## Sources and guardrails
 

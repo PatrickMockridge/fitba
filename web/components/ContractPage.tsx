@@ -4,7 +4,7 @@ export function ContractPage({
   children,
 }: {
   surface: string;
-  state?: "full" | "empty" | "no-fixture";
+  state?: "full" | "empty" | "no-fixture" | "redirect";
   children: React.ReactNode;
 }) {
   return (

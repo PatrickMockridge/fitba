@@ -22,15 +22,18 @@ from fitba.settings import (
     availability_policy,
     ensure_dirs,
 )
+from fitba.settings import (
+    aberdeen as aberdeen_config,
+)
 from fitba.sources import api_football
-from fitba.util.dates import utc_now_iso
+from fitba.util.dates import current_season, utc_now_iso
 
 AVAILABILITY_DIR = NORMALIZED_DIR / "availability"
 SNAPSHOT_PATH = AVAILABILITY_DIR / "aberdeen.parquet"
 META_PATH = AVAILABILITY_DIR / "meta.json"
-TEAM_ID = 252
-SEASON = 2026
-SEASON_LABEL = "2026-27"
+TEAM_ID = int(aberdeen_config()["api_football_id"])
+SEASON_LABEL = current_season()
+SEASON = int(SEASON_LABEL.split("-", 1)[0])
 STATUSES = {"out", "doubtful", "suspended", "returned", "available", "unknown"}
 ENTRY_COLUMNS = [
     "player_id",

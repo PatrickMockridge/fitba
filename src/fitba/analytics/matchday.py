@@ -15,6 +15,7 @@ from typing import Any
 import polars as pl
 
 from fitba.analytics.history import club_match_rows
+from fitba.analytics.records import record_totals
 from fitba.analytics.style import style_profile
 
 FORM_WINDOW = 5
@@ -112,13 +113,14 @@ def percentile_rank(values: Iterable[float | None], value: float | None) -> int 
 def record(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
     """W-D-L, points and per-match rates for a set of club-perspective rows."""
     items = list(rows)
-    played = len(items)
-    won = sum(1 for row in items if row.get("result") == "W")
-    drawn = sum(1 for row in items if row.get("result") == "D")
-    lost = sum(1 for row in items if row.get("result") == "L")
-    points = sum(int(row.get("points") or 0) for row in items)
-    gf = sum(int(row.get("gf") or 0) for row in items)
-    ga = sum(int(row.get("ga") or 0) for row in items)
+    totals = record_totals(items)
+    played = totals["played"]
+    won = totals["won"]
+    drawn = totals["drawn"]
+    lost = totals["lost"]
+    points = totals["points"]
+    gf = totals["gf"]
+    ga = totals["ga"]
     shots_for = sum(int(row.get("shots_for") or 0) for row in items)
     shots_against = sum(int(row.get("shots_against") or 0) for row in items)
     sot_for = sum(int(row.get("shots_on_target_for") or 0) for row in items)
@@ -134,10 +136,10 @@ def record(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
         "drawn": drawn,
         "lost": lost,
         "points": points,
-        "ppg": round(points / played, 2) if played else None,
+        "ppg": totals["ppg"],
         "gf": gf,
         "ga": ga,
-        "gd": gf - ga,
+        "gd": totals["gd"],
         "gf_pg": _rate(gf, played),
         "ga_pg": _rate(ga, played),
         "goals_for_pm": _rate(gf, played),

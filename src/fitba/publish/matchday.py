@@ -31,6 +31,9 @@ from fitba.ingest.fixtures import load_club_fixtures
 from fitba.ingest.matchday import MATCHDAY_DIR, load_meta, next_fixture
 from fitba.settings import NORMALIZED_DIR, source_ids, source_registry
 from fitba.settings import (
+    aberdeen as aberdeen_config,
+)
+from fitba.settings import (
     competitions as competitions_config,
 )
 from fitba.settings import (
@@ -42,6 +45,7 @@ from fitba.settings import (
 from fitba.util.dates import season_start_year
 
 SCHEMA_VERSION = "1.0.0"
+ABERDEEN_API_ID = int(aberdeen_config()["api_football_id"])
 STATE = Literal["fresh", "stale", "no_fixture", "unavailable"]
 BASIS = Literal["measured", "inferred", "unknown"]
 
@@ -540,7 +544,7 @@ def _aberdeen_appearances(
         return None
     frame = pl.read_parquet(path)
     year = season_start_year(season)
-    frame = frame.filter((pl.col("team_id") == 252) & (pl.col("season") == year))
+    frame = frame.filter((pl.col("team_id") == ABERDEEN_API_ID) & (pl.col("season") == year))
     if not frame.height:
         return None
     stats_path = NORMALIZED_DIR / "matches" / "player_match_stats.parquet"
@@ -577,12 +581,12 @@ def _aberdeen_lineup(
 ) -> dict[str, Any] | None:
     appearances = _aberdeen_appearances(season, squad_data=squad_data)
     if appearances is None:
-        return _unavailable_lineup("no_local_lineups", team_id=252)
+        return _unavailable_lineup("no_local_lineups", team_id=ABERDEEN_API_ID)
     shapes_path = NORMALIZED_DIR / "matches" / "team_shapes.parquet"
     shapes = pl.DataFrame()
     if shapes_path.exists():
         shapes = pl.read_parquet(shapes_path).filter(
-            (pl.col("team_id") == 252) & (pl.col("season") == season_start_year(season))
+            (pl.col("team_id") == ABERDEEN_API_ID) & (pl.col("season") == season_start_year(season))
         )
     played = matches.filter(
         (pl.col("home_team_id") == "sco:aberdeen") | (pl.col("away_team_id") == "sco:aberdeen")
@@ -599,7 +603,7 @@ def _aberdeen_lineup(
     return predict_lineup(
         appearances,
         shapes,
-        team_id=252,
+        team_id=ABERDEEN_API_ID,
         roles_config=roles_config(),
         policy=policy,
         squad=pl.DataFrame(squad_data.get("players", [])),

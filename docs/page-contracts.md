@@ -71,23 +71,34 @@ not-considered data are visible.
 Forbidden: "Who imposes what?", "Who starts?", bare form rows without GF/GA/
 shots, strength bars without percentiles, a predicted XI without confidence.
 
-### `/themes/` — the bigger picture
+### `/analysis/` — Data analysis
 
 Must remain visible:
 
-- Scope weights, generated date and state.
-- Five theme cards: declarative title and headline, read and basis, confidence,
-  evidence chips, implications. If the fan question is shown, it follows the
-  headline as secondary context.
-- The five metric panels: family balance, wing-back tax, cover question, leaky
-  boat, mission check, with the tables listed in the manifest.
-- Coverage: fixtures with ratings, starts mapped and role coverage, rated
-  minutes, the four missing data classes.
+- The chairman's frame, sourced and labelled as a summary.
+- The owner's view, attributed as opinion.
+- The thesis.
+- Every published claim with its title, claim, count, status, status reason,
+  evidence table, what better data would do and what would change the view.
+- The evidence table columns: Claim, Count, Sample, Period, Status, Source.
+- The peer benchmark table and its note that other clubs' transfer and wage
+  models are not in the public record.
+- Coverage: availability, historical appearances and the missing data classes.
+- Links to matchday, squad, recruitment, transfers, history, methodology,
+  metrics and sources.
 
-May be disclosed: per-theme caveats and method, the how-to-read definitions.
+May be disclosed: method, definitions, long caveats and the full data-science
+supporting content. They are linked, not repeated before the argument.
 
-Forbidden: question headings, evidence reduced to three chips on the full page,
-metric panels moved behind a closed disclosure, confidence badges removed.
+Forbidden: the old five-card/five-panel grid, the 80/20 split, a question
+heading, a claim without a count or status, a causal claim from a small sample,
+a proxy presented as a measured set-play/error claim, or hidden contracted data.
+
+
+### `/themes/` — legacy redirect
+
+The old route must show a visible link to `/analysis/` and redirect without
+losing a legacy anchor. It carries no data.
 
 ### `/recruitment/` — recruitment and squad needs
 
@@ -225,6 +236,38 @@ Must remain visible:
 
 Forbidden: the old "translation layer" identity line, question headings, a
 simplified-reader rationale.
+
+### `/metrics/` — metrics and audit
+
+Must remain visible:
+
+- Registry version, review date, dataset version and audit timestamp.
+- Audit status, metric and parameter pass/fail counts, rows and fields checked.
+- Every active metric: id, label, definition, formula, basis, source layer,
+  coverage tier, verification mode and audit status.
+- Every config-backed parameter: id, value, unit, used-by, config path and
+  status.
+- Registry and audit checksums, allowlist status and the validation summary.
+- The verification modes and what each does and does not prove, including the
+  `provenance_only` limitation.
+- Links to status, methodology, sources and about.
+
+The definitions and values are data, not method: they may not be hidden behind
+a default-closed disclosure. Rows carry `data-contract="metrics.registry"` and
+`data-contract="metrics.parameters"`, so a removed metric or parameter fails the
+guard.
+
+### `/status/` — build status and audit summary
+
+Must remain visible:
+
+- Dataset version, generation time, season, schema and profile.
+- File count and size.
+- Validation status, check count, errors and warnings.
+- Metric-audit status, registry version and checksum, metric and parameter
+  counts, and the `provenance_only` count.
+- Source freshness and the published mart list.
+- Coverage for competitions, cups, transfers, history, rumours and forum.
 
 ## What the guard checks
 

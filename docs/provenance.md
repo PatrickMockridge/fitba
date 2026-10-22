@@ -32,8 +32,8 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Fan signal | AFC Chat sample | Derived aggregates; no raw posts |
 | History | Mixed | API-Football backfill, Football-Data style, AFC/Wikipedia curation |
 | Valuation | Curated anchors + model | Ranges and confidence |
-| Themes | Derived | Local match/squad/history data |
-| Needs | Derived | Themes + availability + squad/transfers |
+| Data analysis | Derived | Local match/squad/history data |
+| Needs | Derived | Case evidence + availability + squad/transfers |
 | Odds | Not published | No betting content |
 
 ## League migration gate
@@ -45,7 +45,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 - zero unresolved teams and duplicate keys;
 - every Football-Data played result matched once;
 - 1.0 score agreement;
-- the team match stats the style/themes layers need.
+- the team match stats the style/case layers need.
 
 A partial pass does not migrate. The current report fails: the Premiership API
 fixture list is short (198 vs 228), and the Championship/League One/League Two

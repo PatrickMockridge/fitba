@@ -1,4 +1,4 @@
-.PHONY: sync test lint format typecheck check check-all web-contract-check docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check check-all web-contract-check docs-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
 
 BASE_PATH ?=
 
@@ -17,7 +17,7 @@ format:
 typecheck:
 	uv run pyright
 
-check: lint typecheck test docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check rumours-check squad-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+check: lint typecheck test docs-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check rumours-check squad-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
 
 check-all: check web-contract-check
 
@@ -27,6 +27,12 @@ web-contract-check:
 
 docs-check:
 	uv run python scripts/check_docs.py
+
+metrics-check:
+	uv run python scripts/check_metrics.py --strict
+
+publication-check:
+	uv run python scripts/check_publication.py
 
 names-check:
 	uv run python scripts/check_names.py
@@ -134,7 +140,7 @@ validate:
 	uv run fitba validate --season current
 
 publish:
-	uv run fitba publish --season current
+	uv run fitba publish --season current --profile public --require-validation
 
 web:
 	cd web && npm run dev

@@ -18,7 +18,7 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4c. Squad and player profiles | **Live.** `/squad/`, one `/players/<id>/` page per player, loan tags, coverage states and site-wide player links. |
 | 4d. Cormack-era historical record | **Live.** `/history/`, one season review per season, manager/staff timeline, honours, historical transfers, style and selection. |
 | 4e. Upcoming-matchday dashboard | **Live.** `/matchday/`, both predicted XIs, form, venue splits, style lean and strength; `/clubs/aberdeen/` retired to a moved notice. |
-| 4f. Medium and long-term themes | **Live.** `/themes/` and a matchday backdrop: role-family balance, wing-back trade-off, cover, attack-defence balance and the 20% Cormack-era mission context. |
+| 4f. Data analysis | **Live.** `/analysis/` and a matchday strip: the owner's view, the chairman's frame and six claims on the team, squad and Cormack-era record. |
 | 4g. Provenance, availability and needs | **Live.** Layer truth table at `/sources/`, curated availability ledger in the predicted XI, and a squad-needs board on `/recruitment/` that feeds the scouting method. |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, scouting views and richer opposition context. |
 | 5. Local rich-visual prototype | Not started. |
@@ -114,17 +114,18 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
   not team news. Possession is unknown and is not used.
 - See [matchday.md](matchday.md).
 
-## Phase 4f — Medium and long-term themes (live)
+## Phase 4f — Data analysis (live)
 
-- `/themes/` is the bridge between the matchday lookahead, squad, recruitment
-  and history; `/matchday/` carries a compact “The bigger picture” strip.
-- 80% current season: family balance, wing-back trade-off, defensive cover and
-  the attack-defence balance. 20% Cormack-era mission: the documented
+- `/analysis/` is the bridge between the matchday lookahead, squad, recruitment
+  and history; `/matchday/` carries a compact case strip.
+- The six claims: the team now, the defence, the attack, the managers, the squad
+  and the chairman's record. The Cormack-era frame is part of the case, not a
+  separate weighted appendix.
   trading-club pillars, turnover and young minutes.
 - Provider ratings are one labelled, minutes-weighted family signal. No
   individual ratings as verdicts, no blame, no invented availability and no
   unmeasured channel claims.
-- See [themes.md](themes.md).
+- See [analysis.md](analysis.md).
 
 ## Phase 4g — Provenance, availability and needs (live)
 
@@ -137,7 +138,7 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
   Scottish 2026. Out/suspended players are excluded from the predicted XI;
   doubtful players are downgraded; unknown stays unknown.
 - `/recruitment/` carries a seven-family needs board (cover / replace /
-  strengthen), `/themes/` carries implications and `/scouting/` carries priority
+  strengthen), `/analysis/` carries implications and `/scouting/` carries priority
   role profiles. No targets, fees or wages.
 - See [provenance.md](provenance.md), [availability.md](availability.md) and
   [needs.md](needs.md).

@@ -187,8 +187,8 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
         <Link className="text-link" href="/squad/">
           Squad →
         </Link>
-        <Link className="text-link" href="/themes/">
-          Themes →
+        <Link className="text-link" href="/analysis/">
+          Data analysis →
         </Link>
       </div>
     </article>
@@ -205,7 +205,7 @@ export function NeedsBoard({ data }: { data: NeedsDocument }) {
     >
       <div className="section-head">
         <div>
-          <p className="eyebrow">Themes → recruitment</p>
+          <p className="eyebrow">Data analysis → recruitment</p>
           <h2>Squad needs</h2>
         </div>
         <span className="badge badge-neutral">
