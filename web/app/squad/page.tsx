@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BucketBars } from "@/components/BucketBars";
+import { ContractPage } from "@/components/ContractPage";
 import { SquadBoard } from "@/components/SquadBoard";
 import { StatTile } from "@/components/StatTile";
 import { getSquad } from "@/lib/data";
@@ -24,28 +25,29 @@ export default function SquadPage() {
   const squad = getSquad();
   if (!squad || !squad.players.length) {
     return (
-      <section className="empty-state">
-        <h1>No squad published</h1>
-        <p>
-          Run <code>uv run fitba squad</code> and then{" "}
-          <code>uv run fitba publish</code> to ingest the current squad and
-          current-season statistics.
-        </p>
-      </section>
+      <ContractPage surface="squad" state="empty">
+        <section className="empty-state" data-contract="squad.empty">
+          <h1>No squad published</h1>
+          <p>
+            Run <code>uv run fitba squad</code> and then{" "}
+            <code>uv run fitba publish</code> to ingest the current squad and
+            current-season statistics.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   return (
-    <>
-      <section className="page-head">
-        <p className="eyebrow">The bridge · Season {squad.season}</p>
+    <ContractPage surface="squad">
+      <section className="page-head" data-contract="squad.hero">
+        <p className="eyebrow">On-field · Season {squad.season}</p>
         <h1>The current squad</h1>
         <p className="lede">
           Every Aberdeen player in one place: the men on the pitch, the players
           out on loan, and the current-season output the licensed feed can
-          support. This is the link between Matchday and Off the pitch — the
-          same player appears in the table, the transfer register and the rumour
-          mill, and this is where those views meet.
+          support. The same player appears in the matchday XI, the transfer
+          register and this squad record.
         </p>
         <div className="hero-actions">
           <Link className="button" href="/matchday/">
@@ -63,7 +65,7 @@ export default function SquadPage() {
         </div>
       </section>
 
-      <div className="stat-row four">
+      <div className="stat-row four" data-contract="squad.summary">
         <StatTile label="Squad" value={squad.summary.squad_size} note="registered players" />
         <StatTile
           label="On loan out"
@@ -79,10 +81,11 @@ export default function SquadPage() {
           label="Stats unavailable"
           value={squad.summary.stats_unavailable}
           note="labelled, not zero-filled"
+          indicator="unknown"
         />
       </div>
 
-      <section className="section">
+      <section className="section" data-contract="squad.roster">
         <div className="section-head">
           <div>
             <p className="eyebrow">Squad and loans</p>
@@ -93,7 +96,7 @@ export default function SquadPage() {
           </Link>
         </div>
         <SquadBoard players={squad.players} />
-        <p className="fine-print">
+        <p className="fine-print" data-contract="squad.coverage">
           {squad.coverage.note} Loan tags come from the confirmed transfer
           register; a loanee&apos;s parent-club rows are never shown as loan-club
           output.
@@ -101,7 +104,7 @@ export default function SquadPage() {
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="squad.role-mix">
           <p className="eyebrow">Shape</p>
           <h2>Role mix</h2>
           <BucketBars
@@ -119,7 +122,7 @@ export default function SquadPage() {
             no formation grid and are reported in the coverage note, not guessed.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="squad.how-to">
           <p className="eyebrow">How to read the page</p>
           <h2>What is measured and what is missing</h2>
           <ul className="plain-list">
@@ -175,7 +178,11 @@ export default function SquadPage() {
               everywhere on the site. Former players and rumour targets do not.
             </li>
           </ul>
-          <Link className="text-link" href="/methodology/">
+          <Link
+            className="text-link"
+            href="/methodology/"
+            data-contract-indicator="source"
+          >
             Method and source policy →
           </Link>
         </section>
@@ -188,6 +195,6 @@ export default function SquadPage() {
         {" · "}
         <Link href="/recruitment/">Off the pitch →</Link>
       </p>
-    </>
+    </ContractPage>
   );
 }

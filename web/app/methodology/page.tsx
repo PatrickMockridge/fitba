@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { getManifest } from "@/lib/data";
 
 export const metadata = { title: "Method and sources · fitba" };
@@ -6,9 +7,22 @@ export const metadata = { title: "Method and sources · fitba" };
 export default function MethodologyPage() {
   const manifest = getManifest();
   const sources = manifest?.sources ?? [];
+  if (!manifest) {
+    return (
+      <ContractPage surface="methodology" state="empty">
+        <section className="empty-state" data-contract="methodology.empty">
+          <h1>No methodology data published</h1>
+          <p>
+            Run <code>uv run fitba publish</code> to build the manifest and the
+            source registry.
+          </p>
+        </section>
+      </ContractPage>
+    );
+  }
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="methodology">
+      <section className="page-head" data-contract="methodology.hero">
         <p className="eyebrow">Method</p>
         <h1>How this is built</h1>
         <p className="lede">
@@ -28,7 +42,7 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.sources">
         <div className="section-head">
           <div>
             <p className="eyebrow">Sources</p>
@@ -60,7 +74,7 @@ export default function MethodologyPage() {
             </tbody>
           </table>
         </div>
-        <p className="fine-print">
+        <p className="fine-print" data-contract-indicator="source">
           League results and team match stats come from Football-Data.co.uk and
           are labelled as such; the current-season API-Football migration is
           gated on a full results-and-stats coverage probe. League Cup and
@@ -75,7 +89,7 @@ export default function MethodologyPage() {
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="methodology.tables">
           <p className="eyebrow">Tables</p>
           <h2>Computed, not scraped</h2>
           <p>
@@ -85,7 +99,7 @@ export default function MethodologyPage() {
             before ranking; the raw and adjusted points are both retained.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="methodology.cutoffs">
           <p className="eyebrow">Cut-offs</p>
           <h2>What the lines mean</h2>
           <p>
@@ -104,7 +118,7 @@ export default function MethodologyPage() {
             West champions&apos; group rather than being relegated automatically.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="methodology.cups">
           <p className="eyebrow">Cup formats</p>
           <h2>League Cup and Scottish Cup</h2>
           <p>
@@ -124,17 +138,17 @@ export default function MethodologyPage() {
             labelled, not invented.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="methodology.assumptions">
           <p className="eyebrow">Uncertainty</p>
           <h2>Assumptions are labelled</h2>
-          <p>
+          <p data-contract-indicator="unknown">
             League-strength adjustment uses Elo where available and a documented prior
             otherwise, with a confidence flag and sensitivity check. Budget fit is fee-only
             until a ceiling is set; individual Scottish wages are not public and are never
             invented.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="methodology.coverage">
           <p className="eyebrow">Coverage</p>
           <h2>Event, match, curated, value-only</h2>
           <p>
@@ -143,7 +157,7 @@ export default function MethodologyPage() {
             is never ranked against event-data peers without a warning.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="methodology.reconstruction">
           <p className="eyebrow">2D viewer</p>
           <h2>Reconstructed, not tracked</h2>
           <p>
@@ -155,7 +169,7 @@ export default function MethodologyPage() {
         </section>
       </div>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.matchday">
         <div className="section-head">
           <div>
             <p className="eyebrow">Matchday</p>
@@ -181,7 +195,7 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.transfers">
         <div className="section-head">
           <div>
             <p className="eyebrow">Transfers</p>
@@ -202,7 +216,7 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.history">
         <div className="section-head">
           <div>
             <p className="eyebrow">History</p>
@@ -228,7 +242,7 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.player-output">
         <div className="section-head">
           <div>
             <p className="eyebrow">Squad</p>
@@ -306,11 +320,11 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.registers">
         <div className="section-head">
           <div>
             <p className="eyebrow">Rumours and fan signal</p>
-            <h2>Two registers, one bridge</h2>
+            <h2>Two registers, one record</h2>
           </div>
           <span className="badge badge-warn">Separate from confirmed business</span>
         </div>
@@ -339,7 +353,7 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="methodology.policy">
         <div className="section-head">
           <div>
             <p className="eyebrow">Policy</p>
@@ -363,6 +377,6 @@ export default function MethodologyPage() {
           Data status and freshness →
         </Link>
       </section>
-    </>
+    </ContractPage>
   );
 }

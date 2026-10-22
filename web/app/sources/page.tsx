@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import {
   formatDate,
   getManifest,
@@ -34,18 +35,20 @@ export default function SourcesPage() {
   const manifest = getManifest();
   if (!data) {
     return (
-      <section className="empty-state">
-        <h1>No provenance published</h1>
-        <p>
-          Run <code>uv run fitba publish</code> to build the layer truth table.
-        </p>
-      </section>
+      <ContractPage surface="sources" state="empty">
+        <section className="empty-state" data-contract="sources.empty">
+          <h1>No provenance published</h1>
+          <p>
+            Run <code>uv run fitba publish</code> to build the layer truth table.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="sources">
+      <section className="page-head" data-contract="sources.hero">
         <p className="eyebrow">Sources and licences</p>
         <h1>Where the data comes from</h1>
         <p className="lede">
@@ -61,7 +64,7 @@ export default function SourcesPage() {
         </p>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="sources.layers">
         <div className="section-head">
           <div>
             <p className="eyebrow">Layer truth table</p>
@@ -114,7 +117,7 @@ export default function SourcesPage() {
         <p className="fine-print">{data.notes}</p>
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="sources.registry">
         <div className="section-head">
           <div>
             <p className="eyebrow">Active sources</p>
@@ -160,7 +163,7 @@ export default function SourcesPage() {
             </tbody>
           </table>
         </div>
-        <p className="fine-print">
+        <p className="fine-print" data-contract-indicator="source">
           A row count belongs to the source only where it is the primary
           contributor. Curated transfer rows are not counted as API-Football
           rows; a gated source can appear with zero rows.
@@ -168,7 +171,7 @@ export default function SourcesPage() {
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="sources.migration">
           <div className="section-head">
             <div>
               <p className="eyebrow">Current-season league migration</p>
@@ -201,7 +204,7 @@ export default function SourcesPage() {
           </p>
         </section>
 
-        <section className="card">
+        <section className="card" data-contract="sources.availability">
           <div className="section-head">
             <div>
               <p className="eyebrow">Availability</p>
@@ -227,14 +230,14 @@ export default function SourcesPage() {
               ? ` ${data.availability.reason.replaceAll("_", " ")}.`
               : ""}
           </p>
-          <p className="fine-print">
+          <p className="fine-print" data-contract-indicator="unknown">
             A provider injury flag is not team news. Unknown stays unknown; no
             injury status is inferred from the provider boolean.
           </p>
         </section>
       </div>
 
-      <section className="card">
+      <section className="card" data-contract="sources.excluded">
         <div className="section-head">
           <div>
             <p className="eyebrow">Excluded</p>
@@ -251,7 +254,7 @@ export default function SourcesPage() {
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="sources.derived">
           <p className="eyebrow">What is published</p>
           <h2>Derived, not raw</h2>
           <p>
@@ -267,7 +270,7 @@ export default function SourcesPage() {
             ingested.
           </p>
         </section>
-        <section className="card">
+        <section className="card" data-contract="sources.no-raw">
           <p className="eyebrow">What is not</p>
           <h2>No raw redistribution</h2>
           <p>
@@ -283,6 +286,6 @@ export default function SourcesPage() {
         <Link href="/methodology/">Methodology</Link> ·{" "}
         <Link href="/themes/">The bigger picture</Link>
       </p>
-    </>
+    </ContractPage>
   );
 }

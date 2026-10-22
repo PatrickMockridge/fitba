@@ -424,6 +424,138 @@
       }
     },
     {
+      "id": "squad",
+      "path": "/squad/",
+      "owners": ["web/app/squad/page.tsx", "web/components/SquadBoard.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "squad.hero", "min": 1},
+            {"id": "squad.summary", "min": 1},
+            {"id": "squad.roster", "min": 1},
+            {"id": "squad.coverage", "min": 1},
+            {"id": "squad.role-mix", "min": 1},
+            {"id": "squad.how-to", "min": 1}
+          ],
+          "columns": {
+            "squad.roster": [
+              "Player",
+              "Role",
+              "Age",
+              "Status",
+              "Starts",
+              "Sub",
+              "Mins",
+              "Conc",
+              "CS",
+              "G",
+              "A",
+              "OG",
+              "Rating",
+              "Stats"
+            ]
+          },
+          "indicators": {"unknown": 1, "source": 1},
+          "links": [
+            "/matchday/",
+            "/recruitment/",
+            "/transfers/",
+            "/loans/",
+            "/methodology/",
+            "/themes/"
+          ],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "squad.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "sources",
+      "path": "/sources/",
+      "owners": ["web/app/sources/page.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "sources.hero", "min": 1},
+            {"id": "sources.layers", "min": 1},
+            {"id": "sources.registry", "min": 1},
+            {"id": "sources.migration", "min": 1},
+            {"id": "sources.availability", "min": 1},
+            {"id": "sources.excluded", "min": 1},
+            {"id": "sources.derived", "min": 1},
+            {"id": "sources.no-raw", "min": 1}
+          ],
+          "columns": {
+            "sources.layers": [
+              "Layer",
+              "Primary",
+              "Fallback",
+              "Status",
+              "Rows",
+              "Scope"
+            ],
+            "sources.registry": [
+              "Source",
+              "Lane",
+              "Primary layers",
+              "Rows",
+              "Last checked"
+            ]
+          },
+          "indicators": {"unknown": 1, "source": 1},
+          "links": ["/about/", "/methodology/", "/themes/"],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "sources.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "methodology",
+      "path": "/methodology/",
+      "owners": ["web/app/methodology/page.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "methodology.hero", "min": 1},
+            {"id": "methodology.sources", "min": 1},
+            {"id": "methodology.tables", "min": 1},
+            {"id": "methodology.cutoffs", "min": 1},
+            {"id": "methodology.cups", "min": 1},
+            {"id": "methodology.assumptions", "min": 1},
+            {"id": "methodology.coverage", "min": 1},
+            {"id": "methodology.reconstruction", "min": 1},
+            {"id": "methodology.matchday", "min": 1},
+            {"id": "methodology.transfers", "min": 1},
+            {"id": "methodology.history", "min": 1},
+            {"id": "methodology.player-output", "min": 1},
+            {"id": "methodology.registers", "min": 1},
+            {"id": "methodology.policy", "min": 1}
+          ],
+          "columns": {
+            "methodology.sources": [
+              "Source",
+              "Publication lane",
+              "Rows",
+              "Last checked"
+            ]
+          },
+          "indicators": {"unknown": 1, "source": 1},
+          "links": ["/about/", "/sources/", "/squad/", "/rumours/", "/status/"],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "methodology.empty", "min": 1}]
+        }
+      }
+    },
+    {
       "id": "about",
       "path": "/about/",
       "owners": ["web/app/about/page.tsx"],

@@ -142,6 +142,23 @@ May be disclosed: the coverage prose and long method notes.
 Forbidden: loan cards without terms, a single "terms often unknown" badge with
 no per-card unknown state, removal of the in/out split.
 
+### `/squad/` — current squad
+
+Must remain visible:
+
+- The squad summary: size, loans out, role evidence, stats unavailable.
+- The roster table: Player, Role, Age, Status, Starts, Sub, Mins, Conc, CS, G,
+  A, OG, Rating, Stats, with loan status and availability labels.
+- The role-mix card and the "what is measured and what is missing" card.
+- The coverage note and the source/method link.
+
+May be disclosed: the role-inference dialog and its career heat map, and long
+method notes. The roster table stays visible.
+
+Forbidden: removing the stats-unavailable or coverage labels; zero-filling
+missing stats; presenting provider ratings as verdicts; hiding per-player data
+behind a default-closed disclosure.
+
 ### `/history/` — the Cormack era
 
 Must remain visible:
@@ -166,6 +183,35 @@ Forbidden: collapsing Europe to an unqualified "Europe"; removing the
 estimated-net confidence or known/modelled split; presenting the baseline as
 neutral; leaving heavy defeats or the European finishing position only in
 prose; deleting position or points.
+
+### `/sources/` — provenance and licences
+
+Must remain visible:
+
+- The layer truth table: Layer, Primary, Fallback, Status, Rows, Scope.
+- The source registry: Source, Lane, Primary layers, Rows, Last checked.
+- The league-migration gate, the availability special case, the excluded
+  sources, and the derived/not-raw and no-redistribution statements.
+- Source and unknown indicators.
+
+May be disclosed: the long attribution notes.
+
+Forbidden: removing a licence, source URL or last-checked date; a source list
+that omits the layers it supports; a gated source presented as primary.
+
+### `/methodology/` — method
+
+Must remain visible:
+
+- The source table: Source, Publication lane, Rows, Last checked.
+- The definitions, cut-offs, cup formats, assumptions, coverage, reconstruction,
+  matchday, transfer, history, player-output, register and policy sections.
+- The source and unknown indicators.
+
+May be disclosed: long method detail inside a section.
+
+Forbidden: deleting method text to shorten the page; removing the corrections
+policy or last-reviewed date; presenting a derived number as measured.
 
 ### `/about/` — identity and editorial standard
 

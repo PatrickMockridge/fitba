@@ -103,8 +103,9 @@ corrections are binding on published copy:
 - `docs/identity.md` is the canonical identity, voice and non-negotiable charter.
   `docs/product-strategy.md` defers identity and voice to it.
 - `docs/page-contracts.md` and `web/contracts/surfaces.json` define the visible
-  evidence for eight routes: `/`, `/matchday/`, `/themes/`, `/recruitment/`,
-  `/transfers/`, `/loans/`, `/history/` and `/about/`.
+  evidence for eleven routes: `/`, `/matchday/`, `/themes/`, `/recruitment/`,
+  `/transfers/`, `/loans/`, `/history/`, `/squad/`, `/sources/`,
+  `/methodology/` and `/about/`.
 - The theme question now follows the declarative headline as secondary context;
   it no longer leads the card.
 - The needs player table and the "Not considered" list are open by default.
@@ -124,6 +125,14 @@ corrections are binding on published copy:
   manager tile is "people in charge" with the stint count; the baseline is
   labelled a chosen comparison; the market-edge unknown share and the two
   Conference League campaigns are stated on the page.
+- `/squad/` is now contracted: the summary, roster table with its full column
+  set, role mix, coverage note and the measured/missing card. The page's
+  "bridge" and "rumour mill" framing was replaced with the concrete squad
+  record.
+- `/sources/` and `/methodology/` are now contracted: the layer truth table,
+  source registry, migration gate, excluded sources, and the method sections
+  from definitions through policy. The provenance pages can no longer be
+  emptied by a style pass.
 
 ## Guardrail design
 
@@ -161,8 +170,9 @@ corrections are binding on published copy:
 
 ## Deferred, with reasons
 
-- **`/squad/`, `/sources/` and `/methodology/` contracts.** `/history/` was added
-  after the first review pass; the remaining routes are a later pass.
+- **Player pages, `/scouting/`, `/competitions/`, `/scotland/` and `/news/`
+  contracts.** The main data and provenance routes are now covered; these are
+  the remaining routes.
 - **Computed-style/CSS hiding scan.** The static checker cannot see a bespoke
   stylesheet rule; a Playwright/computed-style pass is the correct fix.
 - **Full payload cross-check.** Compare rendered card/row/player counts with the
@@ -185,15 +195,13 @@ corrections are binding on published copy:
   anchors are contracted.
 - **Mobile and source-link accessibility fixes.** The predicted-XI grid orphan
   and repeated source-link names are recorded.
-- **Contracts for player pages, `/scouting/`, `/competitions/`, `/scotland/` and
-  `/news/`.** A later pass.
 - **Whether the fan question survives at all.** It is now secondary; the panel
   was split on removing it entirely.
 
 ## Verification
 
 - Root build and `/fitba` build both pass.
-- `uv run python scripts/check_web_contract.py --ci` reports 8 surfaces and 83
+- `uv run python scripts/check_web_contract.py --ci` reports 11 surfaces and 111
   contracted markers; the base-path check reports the same.
 - The full Python suite passes: 233 tests, including the 30 checker/contract
   tests, plus all publication guards (`make check`).
