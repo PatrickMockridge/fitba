@@ -1,0 +1,38 @@
+# fxG model policy.
+#
+# fxG is fitba's own shot-on-target expectation. It is not provider xG, and it
+# is not a location model: the record has no shot coordinates. The model card
+# in docs/xg.md must stay beside every published aggregate.
+
+version: 1
+model_id: fxg-1
+label: fxG
+status: experimental
+
+fit:
+  # Fit on competition-season conversion before the validation season.
+  before_season: 2026-27
+  min_shots_on_target: 120
+  prior_strength_sot: 250
+  # Friendlies are not part of the competitive model.
+  exclude_competition_prefixes: [sco:other:friendlies]
+
+interval:
+  level: 0.80
+  draws: 10000
+  seed: 20261022
+  z: 1.2816
+
+evaluation:
+  validation_season: 2026-27
+  max_abs_bias: 0.15
+  max_mae: 0.55
+  calibration_slope_min: 0.70
+  calibration_slope_max: 1.30
+
+publication:
+  # When the gate fails, publish the same numbers as a descriptive shot
+  # expectation, never as an xG substitute.
+  fallback_label: shot expectation
+  rolling_window: 10
+  aggregate_seasons: [2019-20, 2020-21, 2021-22, 2022-23, 2023-24, 2024-25, 2025-26, 2026-27]

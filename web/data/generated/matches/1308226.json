@@ -1,0 +1,843 @@
+{
+  "coverage": {
+    "depth": "result",
+    "events": true,
+    "lineups": true,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "result",
+  "fixture": {
+    "aberdeen_result": "L",
+    "away_goals": 0,
+    "away_ht_goals": 0,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:league-cup",
+    "competition_name": "League Cup",
+    "date": "2024-11-02",
+    "extra_time": false,
+    "fixture_id": 1308226,
+    "home_goals": 6,
+    "home_ht_goals": 3,
+    "home_penalties": null,
+    "home_team_id": "sco:celtic",
+    "home_team_name": "Celtic",
+    "href": "/matches/1308226/",
+    "referee": "K. Clancy",
+    "result": "W",
+    "round": "Semi-finals",
+    "season": "2024-25",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": "Hampden Park"
+  },
+  "form": {
+    "after": [],
+    "before": [
+      {
+        "date": "2024-07-20",
+        "fixture_id": 1202295,
+        "goals_against": 0,
+        "goals_for": 4,
+        "href": "/matches/1202295/",
+        "opponent_name": "East Kilbride",
+        "venue": "A"
+      },
+      {
+        "date": "2024-07-23",
+        "fixture_id": 1202310,
+        "goals_against": 1,
+        "goals_for": 2,
+        "href": "/matches/1202310/",
+        "opponent_name": "Airdrieonians",
+        "venue": "H"
+      },
+      {
+        "date": "2024-07-27",
+        "fixture_id": 1202326,
+        "goals_against": 0,
+        "goals_for": 6,
+        "href": "/matches/1202326/",
+        "opponent_name": "Dumbarton",
+        "venue": "H"
+      },
+      {
+        "date": "2024-08-17",
+        "fixture_id": 1269135,
+        "goals_against": 0,
+        "goals_for": 1,
+        "href": "/matches/1269135/",
+        "opponent_name": "Queen's Park",
+        "venue": "H"
+      },
+      {
+        "date": "2024-09-21",
+        "fixture_id": 1293134,
+        "goals_against": 0,
+        "goals_for": 4,
+        "href": "/matches/1293134/",
+        "opponent_name": "The Spartans",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": {
+      "coach_name": "J. Thelin",
+      "formation": "4-2-3-1",
+      "starters": [
+        {
+          "grid": "1:1",
+          "minutes": 90,
+          "player_id": 17939,
+          "player_name": "Dimitar Mitov",
+          "position": "G",
+          "role": "GK",
+          "shirt_number": 1
+        },
+        {
+          "grid": "2:4",
+          "minutes": 90,
+          "player_id": 20422,
+          "player_name": "Nicky Devlin",
+          "position": "D",
+          "role": "RB",
+          "shirt_number": 2
+        },
+        {
+          "grid": "2:3",
+          "minutes": 90,
+          "player_id": 44810,
+          "player_name": "Jack Mackenzie",
+          "position": "D",
+          "role": "CB",
+          "shirt_number": 3
+        },
+        {
+          "grid": "2:2",
+          "minutes": 90,
+          "player_id": 161806,
+          "player_name": "Gavin Molloy",
+          "position": "D",
+          "role": "CB",
+          "shirt_number": 21
+        },
+        {
+          "grid": "2:1",
+          "minutes": 90,
+          "player_id": 45800,
+          "player_name": "Slobodan Rubežić",
+          "position": "D",
+          "role": "LB",
+          "shirt_number": 33
+        },
+        {
+          "grid": "3:1",
+          "minutes": 90,
+          "player_id": 44812,
+          "player_name": "Graeme Shinnie",
+          "position": "M",
+          "role": "CM",
+          "shirt_number": 4
+        }
+      ],
+      "substitutes": [
+        {
+          "minutes": 20,
+          "on_minute": 70,
+          "player_id": 15644,
+          "player_name": "Sivert Heltne Nilsen",
+          "position": "M",
+          "shirt_number": 6
+        },
+        {
+          "minutes": 44,
+          "on_minute": 46,
+          "player_id": 195870,
+          "player_name": "Topi Keskinen",
+          "position": "M",
+          "shirt_number": 81
+        },
+        {
+          "minutes": 44,
+          "on_minute": 46,
+          "player_id": 162944,
+          "player_name": "Luís Henriques de Barros Lopes",
+          "position": "F",
+          "shirt_number": 11
+        },
+        {
+          "minutes": 8,
+          "on_minute": 82,
+          "player_id": 69243,
+          "player_name": "Jamie McGrath",
+          "position": "M",
+          "shirt_number": 7
+        },
+        {
+          "minutes": 20,
+          "on_minute": 70,
+          "player_id": 109712,
+          "player_name": "Ester Sokler",
+          "position": "F",
+          "shirt_number": 19
+        }
+      ],
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "home": {
+      "coach_name": "B. Rodgers",
+      "formation": "4-3-3",
+      "starters": [
+        {
+          "grid": "1:1",
+          "minutes": 90,
+          "player_id": 2728,
+          "player_name": "Kasper Schmeichel",
+          "position": "G",
+          "role": "GK",
+          "shirt_number": 1
+        },
+        {
+          "grid": "2:4",
+          "minutes": 90,
+          "player_id": 78547,
+          "player_name": "Alistair Johnston",
+          "position": "D",
+          "role": "RB",
+          "shirt_number": 2
+        },
+        {
+          "grid": "2:2",
+          "minutes": 90,
+          "player_id": 50737,
+          "player_name": "Auston Trusty",
+          "position": "D",
+          "role": "CB",
+          "shirt_number": 6
+        },
+        {
+          "grid": "3:3",
+          "minutes": 90,
+          "player_id": 180758,
+          "player_name": "Reo Hatate",
+          "position": "M",
+          "role": "CM",
+          "shirt_number": 41
+        },
+        {
+          "grid": "3:2",
+          "minutes": 90,
+          "player_id": 1129,
+          "player_name": "Callum McGregor",
+          "position": "M",
+          "role": "CM",
+          "shirt_number": 42
+        },
+        {
+          "grid": "4:1",
+          "minutes": 90,
+          "player_id": 33224,
+          "player_name": "Daizen Maeda",
+          "position": "F",
+          "role": "LW",
+          "shirt_number": 38
+        }
+      ],
+      "substitutes": [
+        {
+          "minutes": 26,
+          "on_minute": 64,
+          "player_id": 19314,
+          "player_name": "Cameron Carter-Vickers",
+          "position": "D",
+          "shirt_number": 20
+        },
+        {
+          "minutes": 27,
+          "on_minute": 63,
+          "player_id": 336560,
+          "player_name": "Álex Valle",
+          "position": "D",
+          "shirt_number": 11
+        },
+        {
+          "minutes": 27,
+          "on_minute": 63,
+          "player_id": 162210,
+          "player_name": "Arne Engels",
+          "position": "M",
+          "shirt_number": 27
+        },
+        {
+          "minutes": 18,
+          "on_minute": 72,
+          "player_id": 38753,
+          "player_name": "Nicolas-Gerrit Kühn",
+          "position": "F",
+          "shirt_number": 10
+        },
+        {
+          "minutes": 21,
+          "on_minute": 69,
+          "player_id": 33253,
+          "player_name": "Kyogo Furuhashi",
+          "position": "F",
+          "shirt_number": 8
+        }
+      ],
+      "team_id": "sco:celtic",
+      "team_name": "Celtic"
+    }
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/1220176/",
+    "previous": "/matches/1220164/",
+    "season": "/history/2024-25/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "C. Carter-Vickers opened the scoring on 29 minutes, assisted by A. Engels."
+      },
+      {
+        "basis": "measured",
+        "text": "The last goal came on 85 minutes, making it 6-0."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Celtic win it late against Aberdeen",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 6,
+      "event_score": {
+        "away": 0,
+        "home": 6
+      },
+      "final_score": {
+        "away": 0,
+        "home": 6
+      },
+      "matched": true
+    }
+  },
+  "timeline": [
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 16,
+      "player_name": "S. Rubezic",
+      "score_after": {
+        "away": 0,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 25,
+      "player_name": "C. McGregor",
+      "score_after": {
+        "away": 0,
+        "home": 0
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 27,
+      "player_name": "Duk",
+      "score_after": {
+        "away": 0,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "A. Engels",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 29,
+      "player_name": "C. Carter-Vickers",
+      "score_after": {
+        "away": 0,
+        "home": 1
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "D. Maeda",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 32,
+      "player_name": "K. Furuhashi",
+      "score_after": {
+        "away": 0,
+        "home": 2
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 34,
+      "player_name": "E. Sokler",
+      "score_after": {
+        "away": 0,
+        "home": 2
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 34,
+      "player_name": "G. Molloy",
+      "score_after": {
+        "away": 0,
+        "home": 2
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "N. Kuhn",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 40,
+      "player_name": "D. Maeda",
+      "score_after": {
+        "away": 0,
+        "home": 3
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "Duk",
+      "comments": null,
+      "detail": "Substitution 1",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 46,
+      "player_name": "S. Morris",
+      "score_after": {
+        "away": 0,
+        "home": 3
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "T. Keskinen",
+      "comments": null,
+      "detail": "Substitution 2",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 46,
+      "player_name": "A. Palaversa",
+      "score_after": {
+        "away": 0,
+        "home": 3
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 49,
+      "player_name": "D. Maeda",
+      "score_after": {
+        "away": 0,
+        "home": 4
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "A. Engels",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 59,
+      "player_name": "N. Kuhn",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 59,
+      "player_name": "S. Nilsen",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "A. Valle",
+      "comments": null,
+      "detail": "Substitution 1",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 63,
+      "player_name": "G. Taylor",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "A. Engels",
+      "comments": null,
+      "detail": "Substitution 2",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 63,
+      "player_name": "P. Bernardo",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "C. Carter-Vickers",
+      "comments": null,
+      "detail": "Substitution 3",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 64,
+      "player_name": "L. Scales",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "K. Furuhashi",
+      "comments": null,
+      "detail": "Substitution 4",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 69,
+      "player_name": "A. Idah",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "S. Nilsen",
+      "comments": null,
+      "detail": "Substitution 3",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 70,
+      "player_name": "P. Ambrose",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "E. Sokler",
+      "comments": null,
+      "detail": "Substitution 4",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 70,
+      "player_name": "L. Clarkson",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "N. Kuhn",
+      "comments": null,
+      "detail": "Substitution 5",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 72,
+      "player_name": "J. Forrest",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Celtic"
+    },
+    {
+      "assist_name": "J. McGrath",
+      "comments": null,
+      "detail": "Substitution 5",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 82,
+      "player_name": "V. Besuijen",
+      "score_after": {
+        "away": 0,
+        "home": 5
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "A. Johnston",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 85,
+      "player_name": "D. Maeda",
+      "score_after": {
+        "away": 0,
+        "home": 6
+      },
+      "team_name": "Celtic"
+    }
+  ],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

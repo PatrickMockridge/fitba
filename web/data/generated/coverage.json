@@ -64,7 +64,7 @@
       "events": 0,
       "expected_matches": 180,
       "id": "sco:championship",
-      "matches": 53,
+      "matches": 54,
       "name": "Scottish Championship",
       "player_stats": 0,
       "results_source": "football_data_uk",
@@ -111,6 +111,13 @@
       "ties": 50
     }
   ],
+  "fixtures": {
+    "count": 370,
+    "full": 232,
+    "note": "One page per played Cormack-era fixture; depth is the data actually available.",
+    "result": 99,
+    "score": 39
+  },
   "forum": {
     "first_page_only": true,
     "note": "Sampled first pages of recent Rumour Mill topics. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published, and the text is not used for AI training.",
@@ -212,5 +219,14 @@
     "count": 229,
     "curated": 225,
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
+  },
+  "xg": {
+    "evaluation": "fail",
+    "matches": 370,
+    "model": "fxg-1",
+    "note": "fxG needs shots on target. Missing provider team statistics are shown as unavailable, not zero.",
+    "state": "available",
+    "with_fxg": 292,
+    "with_provider_xg": 21
   }
 }

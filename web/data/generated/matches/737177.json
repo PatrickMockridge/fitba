@@ -1,0 +1,138 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": false,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "D",
+    "away_goals": 1,
+    "away_ht_goals": null,
+    "away_penalties": null,
+    "away_team_id": "sco:inverness-caledonian-thistle",
+    "away_team_name": "Inverness Caledonian Thistle",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2021-07-08",
+    "extra_time": false,
+    "fixture_id": 737177,
+    "home_goals": 1,
+    "home_ht_goals": null,
+    "home_penalties": null,
+    "home_team_id": "sco:aberdeen",
+    "home_team_name": "Aberdeen",
+    "href": "/matches/737177/",
+    "referee": null,
+    "result": "D",
+    "round": "Club Friendlies 3",
+    "season": "2021-22",
+    "status": "FT",
+    "venue": "H",
+    "venue_name": "Cormack Park"
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2021-07-16",
+        "fixture_id": 737737,
+        "goals_against": 0,
+        "goals_for": 0,
+        "href": "/matches/737737/",
+        "opponent_name": "St Johnstone",
+        "venue": "H"
+      }
+    ],
+    "before": []
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/737737/",
+    "previous": "/matches/687111/",
+    "season": "/history/2021-22/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "unknown",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "The event feed records 0 goals; the final score is 1-1. The score is authoritative."
+      },
+      {
+        "basis": "unknown",
+        "text": "The event feed records no goals for this fixture."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen and Inverness Caledonian Thistle draw 1-1",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 0,
+      "event_score": {
+        "away": 0,
+        "home": 0
+      },
+      "final_score": {
+        "away": 1,
+        "home": 1
+      },
+      "matched": false
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

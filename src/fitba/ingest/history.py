@@ -20,6 +20,15 @@ from fitba.ingest.match_data import (
     TEAM_SHAPE_COLUMNS,
     compute_match_data,
 )
+from fitba.ingest.match_extras import (
+    EVENT_COLUMNS,
+    LINEUP_COLUMNS,
+    load_events,
+    load_lineups,
+    normalize_events,
+    normalize_lineups,
+)
+from fitba.ingest.team_stats import TEAM_STAT_FIELDS, parse_team_stats
 from fitba.settings import NORMALIZED_DIR, ensure_dirs, history_policy
 from fitba.settings import roles as roles_config
 from fitba.sources import api_football
@@ -58,6 +67,13 @@ FIXTURE_COLUMNS = [
     "away_team_name",
     "home_goals",
     "away_goals",
+    "home_ht_goals",
+    "away_ht_goals",
+    "home_penalties",
+    "away_penalties",
+    "extra_time",
+    "venue",
+    "referee",
     "is_home",
     "is_away",
 ]
@@ -72,23 +88,7 @@ ROSTER_COLUMNS = [
     "position",
 ]
 
-TEAM_STAT_COLUMNS = [
-    "season",
-    "fixture_id",
-    "team_id",
-    "team_name",
-    "possession",
-    "shots",
-    "shots_on_target",
-    "passes",
-    "pass_accuracy",
-    "corners",
-    "fouls",
-    "offsides",
-    "yellow_cards",
-    "red_cards",
-    "saves",
-]
+TEAM_STAT_COLUMNS = ["season", *TEAM_STAT_FIELDS]
 
 
 def _season_dir(season: str) -> Path:
@@ -180,12 +180,17 @@ def _fixture_rows(
         fixture = item.get("fixture") or {}
         teams = item.get("teams") or {}
         goals = item.get("goals") or {}
+        score = item.get("score") or {}
         league = item.get("league") or {}
         fixture_id = fixture.get("id")
         if fixture_id is None:
             continue
         home = teams.get("home") or {}
         away = teams.get("away") or {}
+        halftime = score.get("halftime") or {}
+        extratime = score.get("extratime") or {}
+        penalty = score.get("penalty") or {}
+        venue = fixture.get("venue") or {}
         rows.append(
             {
                 "fixture_id": int(fixture_id),
@@ -201,6 +206,13 @@ def _fixture_rows(
                 "away_team_name": away.get("name"),
                 "home_goals": goals.get("home"),
                 "away_goals": goals.get("away"),
+                "home_ht_goals": halftime.get("home"),
+                "away_ht_goals": halftime.get("away"),
+                "home_penalties": penalty.get("home"),
+                "away_penalties": penalty.get("away"),
+                "extra_time": bool(extratime.get("home") is not None),
+                "venue": str(venue.get("name") or "") or None,
+                "referee": str(fixture.get("referee") or "") or None,
                 "is_home": home.get("id") == team_id,
                 "is_away": away.get("id") == team_id,
             }
@@ -259,47 +271,13 @@ def _roster_rows(payload: list[dict[str, Any]], season: str) -> list[dict[str, A
     return rows
 
 
-def _stat_number(values: dict[str, Any], key: str) -> int | None:
-    value = values.get(key)
-    if value is None:
-        return None
-    text = str(value).replace("%", "").strip()
-    try:
-        return int(float(text))
-    except ValueError:
-        return None
-
-
 def _parse_team_stats(
     season: str, fixture_id: int, payload: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    for item in payload:
-        team = item.get("team") or {}
-        values = {
-            str(stat.get("type") or "").casefold(): stat.get("value")
-            for stat in item.get("statistics") or []
-        }
-        rows.append(
-            {
-                "season": season,
-                "fixture_id": fixture_id,
-                "team_id": team.get("id"),
-                "team_name": team.get("name"),
-                "possession": _stat_number(values, "ball possession"),
-                "shots": _stat_number(values, "total shots"),
-                "shots_on_target": _stat_number(values, "shots on goal"),
-                "passes": _stat_number(values, "total passes"),
-                "pass_accuracy": _stat_number(values, "passes accurate"),
-                "corners": _stat_number(values, "corner kicks"),
-                "fouls": _stat_number(values, "fouls"),
-                "offsides": _stat_number(values, "offsides"),
-                "yellow_cards": _stat_number(values, "yellow cards"),
-                "red_cards": _stat_number(values, "red cards"),
-                "saves": _stat_number(values, "goalkeeper saves"),
-            }
-        )
-    return rows
+    return [
+        {"season": season, **row}
+        for row in parse_team_stats(payload, fixture_id=fixture_id)
+    ]
 
 
 def probe_season(season: str, *, team_id: int | None = None) -> dict[str, Any]:
@@ -369,6 +347,8 @@ def ingest_history_season(
 
     contexts: list[dict[str, Any]] = []
     team_stats: list[dict[str, Any]] = []
+    event_rows: list[dict[str, Any]] = []
+    lineup_rows: list[dict[str, Any]] = []
     stop = False
     for fixture in played:
         fixture_id = int(fixture["fixture_id"])
@@ -377,7 +357,7 @@ def ingest_history_season(
             continue
         context = {"fixture": raw_fixture, "lineups": [], "events": [], "players": []}
         for stage in ("lineups", "events", "players", "team_stats"):
-            if stage not in stages:
+            if stage not in stages and stage in ("players", "team_stats"):
                 continue
             if api_football.network_requests() - start_requests >= max_requests:
                 stop = True
@@ -429,7 +409,24 @@ def ingest_history_season(
                     status="error",
                     error=f"{type(exc).__name__}: {exc}",
                 )
+        if context.get("events"):
+            event_rows.extend(
+                normalize_events(
+                    context["events"],
+                    fixture_id=fixture_id,
+                    season=season,
+                    ingested_at=utc_now_iso(),
+                )
+            )
         if context.get("lineups"):
+            lineup_rows.extend(
+                normalize_lineups(
+                    context["lineups"],
+                    fixture_id=fixture_id,
+                    season=season,
+                    ingested_at=utc_now_iso(),
+                )
+            )
             contexts.append(context)
         if stop:
             break
@@ -462,6 +459,18 @@ def ingest_history_season(
                 error=f"{type(exc).__name__}: {exc}",
             )
 
+    if event_rows:
+        _write_frame(
+            _season_dir(season) / "events.parquet",
+            event_rows,
+            EVENT_COLUMNS,
+        )
+    if lineup_rows:
+        _write_frame(
+            _season_dir(season) / "lineups.parquet",
+            lineup_rows,
+            LINEUP_COLUMNS,
+        )
     if contexts:
         data = compute_match_data(
             contexts,
@@ -502,6 +511,9 @@ def ingest_history_season(
         "fixtures": len(fixtures),
         "played": len(played),
         "fixtures_with_lineups": len(contexts),
+        "fixtures_with_events": len({row["fixture_id"] for row in event_rows}),
+        "fixtures_with_players": sum(1 for context in contexts if context.get("players")),
+        "fixtures_with_team_stats": len({row["fixture_id"] for row in team_stats}),
         "stages": list(stages),
         "requests": api_football.network_requests() - start_requests,
         "stopped_at_budget": stop,
@@ -543,23 +555,40 @@ def load_history_team_stats(season: str) -> pl.DataFrame:
     return _read_frame(_season_dir(season) / "team_match_stats.parquet", TEAM_STAT_COLUMNS)
 
 
+def load_history_player_match_stats(season: str) -> pl.DataFrame:
+    return _read_frame(_season_dir(season) / "player_match_stats.parquet", PLAYER_MATCH_COLUMNS)
+
+
 def history_coverage(season: str) -> dict[str, Any]:
     fixtures = load_history_fixtures(season)
     appearances = load_history_appearances(season)
     rosters = load_history_rosters(season)
     stats = load_history_team_stats(season)
+    events = load_events(season)
+    lineups = load_lineups(season)
+    player_stats = load_history_player_match_stats(season)
     if not fixtures.height:
         return {
             "status": "unavailable",
             "fixtures_total": 0,
             "fixtures_with_lineups": 0,
+            "fixtures_with_events": 0,
+            "fixtures_with_player_stats": 0,
+            "fixtures_with_team_stats": 0,
             "lineup_coverage": None,
             "rosters": 0,
             "team_stats": 0,
+            "events": 0,
+            "player_stats": 0,
             "note": "Historical backfill has not run for this season.",
         }
     played = fixtures.filter(pl.col("status").is_in(list(PLAYED_STATUSES)))
     with_lineups = appearances.select("fixture_id").unique().height if appearances.height else 0
+    with_events = events.select("fixture_id").unique().height if events.height else 0
+    with_player_stats = (
+        player_stats.select("fixture_id").unique().height if player_stats.height else 0
+    )
+    with_team_stats = stats.select("fixture_id").unique().height if stats.height else 0
     total = played.height
     return {
         "status": (
@@ -571,12 +600,18 @@ def history_coverage(season: str) -> dict[str, Any]:
         ),
         "fixtures_total": total,
         "fixtures_with_lineups": with_lineups,
+        "fixtures_with_events": with_events,
+        "fixtures_with_player_stats": with_player_stats,
+        "fixtures_with_team_stats": with_team_stats,
         "lineup_coverage": round(with_lineups / total, 3) if total else None,
         "rosters": rosters.height,
         "team_stats": stats.height,
+        "events": events.height,
+        "player_stats": player_stats.height,
+        "lineups": lineups.height,
         "note": (
-            "Historical lineups/rosters are a bounded local backfill; missing "
-            "data is shown as unavailable."
+            "Historical lineups, events and statistics are a bounded local "
+            "backfill; missing data is shown as unavailable."
         ),
     }
 
@@ -593,6 +628,9 @@ def load_all_history() -> dict[str, Any]:
         seasons[season] = {
             "fixtures": load_history_fixtures(season),
             "appearances": load_history_appearances(season),
+            "events": load_events(season),
+            "lineups": load_lineups(season),
+            "player_match_stats": load_history_player_match_stats(season),
             "rosters": load_history_rosters(season),
             "team_stats": load_history_team_stats(season),
             "coverage": history_coverage(season),
@@ -610,6 +648,7 @@ __all__ = [
     "load_all_history",
     "load_history_appearances",
     "load_history_fixtures",
+    "load_history_player_match_stats",
     "load_history_rosters",
     "load_history_team_stats",
     "load_state",

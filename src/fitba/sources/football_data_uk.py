@@ -38,6 +38,13 @@ STAT_COLUMNS = {
     "AR": "away_red",
 }
 
+# Provider xG is present only in recent SC0 files. Keep it separate from the
+# integer stat columns and leave it null everywhere else.
+XG_COLUMNS = {
+    "HxG": "home_xg",
+    "AxG": "away_xg",
+}
+
 
 def url(division: str, season: str) -> str:
     if division not in DIVISIONS:
@@ -62,6 +69,12 @@ def _num(frame: pl.DataFrame, column: str) -> pl.Expr:
     return pl.col(column).cast(pl.Int64, strict=False)
 
 
+def _float(frame: pl.DataFrame, column: str) -> pl.Expr:
+    if column not in frame.columns:
+        return pl.lit(None, dtype=pl.Float64)
+    return pl.col(column).cast(pl.Float64, strict=False)
+
+
 def _str(frame: pl.DataFrame, column: str) -> pl.Expr:
     if column not in frame.columns:
         return pl.lit(None, dtype=pl.String)
@@ -84,6 +97,7 @@ def parse_csv(path: Path, season: str) -> pl.DataFrame:
         raise ValueError(f"{path} is missing required columns: {sorted(missing)}")
 
     stats = [_num(raw, column).alias(alias) for column, alias in STAT_COLUMNS.items()]
+    provider_xg = [_float(raw, column).alias(alias) for column, alias in XG_COLUMNS.items()]
     # Older seasons use dd/mm/yy; newer seasons use dd/mm/yyyy.
     date_text = pl.col("Date").cast(pl.String).str.strip_chars()
     date_expr = (
@@ -106,6 +120,7 @@ def parse_csv(path: Path, season: str) -> pl.DataFrame:
             _str(raw, "HTR").alias("ht_result"),
             _str(raw, "Referee").alias("referee"),
             *stats,
+            *provider_xg,
         ]
     )
     # Drop blank padding rows and any row whose date could not be parsed. A

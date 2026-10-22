@@ -1,0 +1,134 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": false,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "D",
+    "away_goals": 0,
+    "away_ht_goals": null,
+    "away_penalties": null,
+    "away_team_id": "sco:st-johnstone",
+    "away_team_name": "St Johnstone",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2021-07-16",
+    "extra_time": false,
+    "fixture_id": 737737,
+    "home_goals": 0,
+    "home_ht_goals": null,
+    "home_penalties": null,
+    "home_team_id": "sco:aberdeen",
+    "home_team_name": "Aberdeen",
+    "href": "/matches/737737/",
+    "referee": null,
+    "result": "D",
+    "round": "Club Friendlies 3",
+    "season": "2021-22",
+    "status": "FT",
+    "venue": "H",
+    "venue_name": "Cormack Park"
+  },
+  "form": {
+    "after": [],
+    "before": [
+      {
+        "date": "2021-07-08",
+        "fixture_id": 737177,
+        "goals_against": 1,
+        "goals_for": 1,
+        "href": "/matches/737177/",
+        "opponent_name": "Inverness Caledonian Thistle",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/714907/",
+    "previous": "/matches/737177/",
+    "season": "/history/2021-22/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "unknown",
+    "bullets": [
+      {
+        "basis": "unknown",
+        "text": "The event feed records no goals for this fixture."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen and St Johnstone draw 0-0",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 0,
+      "event_score": {
+        "away": 0,
+        "home": 0
+      },
+      "final_score": {
+        "away": 0,
+        "home": 0
+      },
+      "matched": true
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

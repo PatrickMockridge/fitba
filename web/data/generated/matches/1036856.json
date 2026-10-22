@@ -1,0 +1,196 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": true,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "L",
+    "away_goals": 0,
+    "away_ht_goals": 0,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2023-07-22",
+    "extra_time": false,
+    "fixture_id": 1036856,
+    "home_goals": 2,
+    "home_ht_goals": 2,
+    "home_penalties": null,
+    "home_team_id": "other:preston",
+    "home_team_name": "Preston",
+    "href": "/matches/1036856/",
+    "referee": null,
+    "result": "W",
+    "round": "Club Friendlies 3",
+    "season": "2023-24",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": "Deepdale"
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2023-07-29",
+        "fixture_id": 1030626,
+        "goals_against": 2,
+        "goals_for": 3,
+        "href": "/matches/1030626/",
+        "opponent_name": "Charlton",
+        "venue": "A"
+      }
+    ],
+    "before": [
+      {
+        "date": "2023-07-12",
+        "fixture_id": 1030479,
+        "goals_against": 0,
+        "goals_for": 9,
+        "href": "/matches/1030479/",
+        "opponent_name": "Turriff United",
+        "venue": "A"
+      },
+      {
+        "date": "2023-07-15",
+        "fixture_id": 1030509,
+        "goals_against": 0,
+        "goals_for": 2,
+        "href": "/matches/1030509/",
+        "opponent_name": "Fraserburgh",
+        "venue": "A"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/1030626/",
+    "previous": "/matches/1030509/",
+    "season": "/history/2023-24/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "M. Frokjaer opened the scoring on 7 minutes."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Preston beat Aberdeen 2-0",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 2,
+      "event_score": {
+        "away": 0,
+        "home": 2
+      },
+      "final_score": {
+        "away": 0,
+        "home": 2
+      },
+      "matched": true
+    }
+  },
+  "timeline": [
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 7,
+      "player_name": "M. Frokjaer",
+      "score_after": {
+        "away": 0,
+        "home": 1
+      },
+      "team_name": "Preston"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 18,
+      "player_name": "M. Frokjaer",
+      "score_after": {
+        "away": 0,
+        "home": 2
+      },
+      "team_name": "Preston"
+    }
+  ],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

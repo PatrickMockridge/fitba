@@ -1,0 +1,219 @@
+{
+  "coverage": {
+    "depth": "result",
+    "events": true,
+    "lineups": true,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "result",
+  "fixture": {
+    "aberdeen_result": "W",
+    "away_goals": 2,
+    "away_ht_goals": 2,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2026-07-11",
+    "extra_time": false,
+    "fixture_id": 1583282,
+    "home_goals": 0,
+    "home_ht_goals": 0,
+    "home_penalties": null,
+    "home_team_id": "other:linfield",
+    "home_team_name": "Linfield",
+    "href": "/matches/1583282/",
+    "referee": null,
+    "result": "L",
+    "round": "Club Friendlies",
+    "season": "2026-27",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": null
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2026-10-03",
+        "fixture_id": 1642951,
+        "goals_against": 1,
+        "goals_for": 4,
+        "href": "/matches/1642951/",
+        "opponent_name": "Dunfermline Athletic",
+        "venue": "A"
+      }
+    ],
+    "before": [
+      {
+        "date": "2026-06-27",
+        "fixture_id": 1554559,
+        "goals_against": 0,
+        "goals_for": 1,
+        "href": "/matches/1554559/",
+        "opponent_name": "Cove Rangers",
+        "venue": "A"
+      },
+      {
+        "date": "2026-07-04",
+        "fixture_id": 1554702,
+        "goals_against": 1,
+        "goals_for": 0,
+        "href": "/matches/1554702/",
+        "opponent_name": "Twente",
+        "venue": "A"
+      },
+      {
+        "date": "2026-07-07",
+        "fixture_id": 1584673,
+        "goals_against": 6,
+        "goals_for": 3,
+        "href": "/matches/1584673/",
+        "opponent_name": "Ross County",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": {
+      "coach_name": "Stephen Robinson",
+      "formation": null,
+      "starters": [],
+      "substitutes": [],
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "home": {
+      "coach_name": "David Healy",
+      "formation": null,
+      "starters": [],
+      "substitutes": [],
+      "team_id": "other:linfield",
+      "team_name": "Linfield"
+    }
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/1548122/",
+    "previous": "/matches/1584673/",
+    "season": "/history/2026-27/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "B. Lyons opened the scoring on 6 minutes."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen beat Linfield 2-0",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 2,
+      "event_score": {
+        "away": 2,
+        "home": 0
+      },
+      "final_score": {
+        "away": 2,
+        "home": 0
+      },
+      "matched": true
+    }
+  },
+  "timeline": [
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 6,
+      "player_name": "B. Lyons",
+      "score_after": {
+        "away": 1,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 36,
+      "player_name": "D. Lobban",
+      "score_after": {
+        "away": 2,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    }
+  ],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

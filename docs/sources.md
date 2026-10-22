@@ -26,7 +26,7 @@ gate passes for both results and required stats; the layer truth table is in
 | Cost | Pro subscription; the provider's published price and plan limits should be checked at checkout, not treated as a site fact |
 | Coverage | All four Scottish leagues, Scottish Cup and League Cup; the provider advertises 1,200+ competitions, but only the Scottish coverage below is key-tested |
 | Fields | Fixtures, rounds, AET/PEN status, penalty scores, standings, team-sheet lineups with formation and starting-XI grid, events, basic player stats, transfers/loans |
-| Gaps | **No preferred foot, xG, event coordinates, heat maps, market values or wages**; League Cup **group standings are not provided**; Scottish Cup feed is partial; current lower-tier player stats were empty at test time; **current-season Scottish injuries coverage is false**, so `/injuries` is not used as a team-news feed |
+| Gaps | **No preferred foot, event coordinates, heat maps, market values or wages**; provider xG is partial (`expected_goals` in some Premiership statistics responses; 2026-27 SC0 `HxG`/`AxG`), not a historical location model; League Cup **group standings are not provided**; Scottish Cup feed is partial; current lower-tier player stats were empty at test time; **current-season Scottish injuries coverage is false**, so `/injuries` is not used as a team-news feed |
 | Public display | Non-commercial apps/websites are contemplated in API-Sports terms; raw resale prohibited; derived pages fine. The provider does not grant underlying fixture IP; confirm terms in writing. |
 | Key-test | Passed with gaps: see below |
 
@@ -198,10 +198,13 @@ Data analysis (`/analysis/`) is derived from the same local data as the rest of 
 
 Provider ratings are labelled as provider ratings, not a fitba rating. They are
 minutes-weighted, not position-adjusted, and are never published as individual
-verdicts. There is no xG, channel, possession or mid-game shape feed. Injuries
-are a curated team-news special case ([availability.md](availability.md)); the
-provider injury feed is not populated for current-season Scotland. See
-[analysis.md](analysis.md).
+verdicts. Provider xG is partial: `expected_goals` appears in some Premiership
+statistics responses and football-data.co.uk 2026-27 SC0 carries `HxG`/`AxG`;
+there is no historical shot-location feed. fitba's own fxG is a separate,
+labelled model ([xg.md](xg.md)). There is no channel, possession-backfill or
+mid-game shape feed. Injuries are a curated team-news special case
+([availability.md](availability.md)); the provider injury feed is not populated
+for current-season Scotland. See [analysis.md](analysis.md).
 
 ## Transfers and loans
 

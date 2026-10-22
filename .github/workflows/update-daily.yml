@@ -56,6 +56,27 @@ jobs:
           key: matchday-${{ github.ref }}-${{ github.run_id }}
           restore-keys: matchday-${{ github.ref }}-
 
+      - name: Restore historical match record
+        uses: actions/cache@v4
+        with:
+          path: data/normalized/history
+          key: history-${{ github.ref }}-${{ github.run_id }}
+          restore-keys: history-${{ github.ref }}-
+
+      - name: Restore current match detail
+        uses: actions/cache@v4
+        with:
+          path: data/normalized/matches
+          key: match-detail-${{ github.ref }}-${{ github.run_id }}
+          restore-keys: match-detail-${{ github.ref }}-
+
+      - name: Refresh current-season match detail
+        continue-on-error: true
+        run: >
+          uv run fitba history --backfill --season current
+          --stages fixtures,lineups,events,rosters,players,team_stats
+          --max-requests 80
+
       - name: Refresh next-opponent matchday snapshot
         continue-on-error: true
         run: uv run fitba matchday --refresh --max-requests 24
@@ -113,6 +134,9 @@ jobs:
 
       - name: Check medium and long-term themes
         run: uv run python scripts/check_themes.py
+
+      - name: Check fxG model and evaluation gate
+        run: uv run python scripts/check_xg.py --published
 
       - name: Check data provenance
         run: uv run python scripts/check_provenance.py

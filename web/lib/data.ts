@@ -2521,6 +2521,268 @@ export function getCase(): CaseDocument | null {
   return readJson<CaseDocument>("themes", "aberdeen.json");
 }
 
+export interface FixtureIndexRow {
+  fixture_id: number;
+  season: string;
+  date: string;
+  competition_id: string;
+  competition_name: string;
+  home_team_name: string;
+  away_team_name: string;
+  home_goals: number | null;
+  away_goals: number | null;
+  result: "W" | "D" | "L";
+  aberdeen_result: "W" | "D" | "L";
+  depth: "full" | "result" | "score";
+  href: string;
+}
+
+export interface FixtureIndex {
+  schema_version: string;
+  generated_at: string;
+  count: number;
+  fixtures: FixtureIndexRow[];
+  state?: string;
+  stale_reason?: string;
+}
+
+export interface FixtureStatsRow {
+  key: string;
+  label: string;
+  home: number | string | null;
+  away: number | string | null;
+  source: string;
+  basis: string;
+}
+
+export interface FixtureTimelineRow {
+  minute: number | null;
+  extra_minute: number | null;
+  team_name: string | null;
+  player_name: string | null;
+  assist_name: string | null;
+  event_type: string | null;
+  detail: string | null;
+  is_goal: boolean;
+  is_own_goal: boolean;
+  is_penalty: boolean;
+  is_shootout: boolean;
+  is_red_card: boolean;
+  is_var: boolean;
+  score_after: { home: number; away: number };
+}
+
+export interface FixtureLineupPlayer {
+  player_id: number | null;
+  player_name: string | null;
+  shirt_number: number | null;
+  position: string | null;
+  role?: string | null;
+  minutes: number | null;
+  grid?: string | null;
+  on_minute?: number | null;
+}
+
+export interface FixtureLineup {
+  team_id: string;
+  team_name: string;
+  formation: string | null;
+  coach_name: string | null;
+  starters: FixtureLineupPlayer[];
+  substitutes: FixtureLineupPlayer[];
+}
+
+export interface FixturePlayerStat {
+  player_id: number | null;
+  player_name: string | null;
+  team_id: number | null;
+  rating: number | null;
+  minutes: number | null;
+  goals: number | null;
+  assists: number | null;
+  shots_total: number | null;
+  shots_on: number | null;
+  passes_total: number | null;
+  pass_accuracy: number | null;
+  tackles: number | null;
+  duels_won: number | null;
+  yellow_cards: number | null;
+  red_cards: number | null;
+}
+
+export interface FixtureDocument {
+  schema_version: string;
+  generated_at: string;
+  fixture: {
+    fixture_id: number;
+    season: string;
+    date: string;
+    competition_id: string;
+    competition_name: string;
+    round: string | null;
+    status: string;
+    venue: "H" | "A";
+    venue_name: string | null;
+    referee: string | null;
+    home_team_id: string;
+    home_team_name: string;
+    away_team_id: string;
+    away_team_name: string;
+    home_goals: number | null;
+    away_goals: number | null;
+    home_ht_goals: number | null;
+    away_ht_goals: number | null;
+    home_penalties: number | null;
+    away_penalties: number | null;
+    extra_time: boolean | null;
+    result: "W" | "D" | "L";
+    aberdeen_result: "W" | "D" | "L";
+    href: string;
+  };
+  depth: "full" | "result" | "score";
+  summary: {
+    headline: string;
+    basis: string;
+    bullets: Array<{ text: string; basis: string }>;
+    reconciliation?: {
+      event_goals: number;
+      event_score: { home: number; away: number };
+      final_score: { home: number; away: number };
+      matched: boolean;
+    };
+    note: string;
+  };
+  stats: {
+    home: Record<string, number | string | null>;
+    away: Record<string, number | string | null>;
+    rows: FixtureStatsRow[];
+    coverage: Record<string, string>;
+  };
+  xg: {
+    available: boolean;
+    home?: { value: number | null; low: number | null; high: number | null; provider: number | null };
+    away?: { value: number | null; low: number | null; high: number | null; provider: number | null };
+    model_id?: string;
+    note?: string;
+  };
+  timeline: FixtureTimelineRow[];
+  lineups: { home: FixtureLineup | null; away: FixtureLineup | null };
+  player_stats: FixturePlayerStat[];
+  form: {
+    before: Array<{
+      fixture_id: number;
+      date: string;
+      opponent_name: string;
+      venue: "H" | "A";
+      goals_for: number | null;
+      goals_against: number | null;
+      href: string;
+    }>;
+    after: Array<{
+      fixture_id: number;
+      date: string;
+      opponent_name: string;
+      venue: "H" | "A";
+      goals_for: number | null;
+      goals_against: number | null;
+      href: string;
+    }>;
+  };
+  coverage: Record<string, boolean | string>;
+  sources: Array<{ id: string; name: string; layer: string; note: string }>;
+  links: Record<string, string | null>;
+}
+
+export interface XgAggregate {
+  scope: "season" | "era" | "last10";
+  season: string;
+  competition_id: string;
+  matches: number;
+  fxg: number | null;
+  low: number | null;
+  high: number | null;
+  goals: number;
+  goals_minus_fxg: number | null;
+  goals_minus_low: number | null;
+  goals_minus_high: number | null;
+  shots_on_target: number;
+}
+
+export interface XgMatch {
+  fixture_id: number;
+  season: string;
+  date: string;
+  competition_id: string;
+  opponent_id: string;
+  opponent_name: string;
+  venue: "H" | "A";
+  goals_for: number | null;
+  goals_against: number | null;
+  fxg_for: number | null;
+  fxg_for_low: number | null;
+  fxg_for_high: number | null;
+  fxg_against: number | null;
+  fxg_against_low: number | null;
+  fxg_against_high: number | null;
+  fxg_diff: number | null;
+  provider_xg_for: number | null;
+  provider_xg_against: number | null;
+  source: string | null;
+}
+
+export interface XgDocument {
+  schema_version: string;
+  generated_at: string;
+  season: string;
+  state?: string;
+  stale_reason?: string;
+  model: {
+    model_id: string;
+    label: string;
+    status: string;
+    overdispersion: number;
+    fit_matches: number;
+    fit_seasons: string[];
+    global_rate: { rate: number; low: number; high: number };
+    rates: Array<Record<string, unknown>>;
+    competition_rates: Array<Record<string, unknown>>;
+    evaluation: Record<string, unknown> | null;
+  } | null;
+  evaluation: {
+    status: string;
+    validation_season: string;
+    matches: number;
+    bias: number | null;
+    mae: number | null;
+    calibration_slope: number | null;
+    thresholds: Record<string, number>;
+    passed: boolean;
+    note: string;
+  } | null;
+  matches: XgMatch[];
+  aggregates: XgAggregate[];
+  coverage: {
+    matches: number;
+    with_fxg: number;
+    with_provider_xg: number;
+    missing_team_stats: number;
+    note: string;
+  };
+  sources: Array<{ id: string; name: string; layer: string; note: string }>;
+}
+
+export function getFixtureIndex(): FixtureIndex | null {
+  return readJson<FixtureIndex>("fixtures", "index.json");
+}
+
+export function getFixture(fixtureId: string | number): FixtureDocument | null {
+  return readJson<FixtureDocument>("matches", `${fixtureId}.json`);
+}
+
+export function getXg(): XgDocument | null {
+  return readJson<XgDocument>("xg", "aberdeen.json");
+}
+
 export function getMetricsRegistry(): MetricsRegistry | null {
   return readJson<MetricsRegistry>("metrics", "registry.json");
 }

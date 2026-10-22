@@ -21,6 +21,7 @@ import polars as pl
 from fitba.ingest.fixtures import load_club_fixtures
 from fitba.ingest.history import competition_id
 from fitba.ingest.match_data import compute_match_data
+from fitba.ingest.team_stats import parse_team_stats
 from fitba.normalize.teams import TeamRegistry
 from fitba.settings import NORMALIZED_DIR, ensure_dirs, source_ids
 from fitba.settings import matchday as matchday_policy
@@ -476,34 +477,26 @@ def _parse_team_stats(
     ingested_at: str,
 ) -> list[dict[str, Any]]:
     rows = []
-    for team_block in payload:
-        team = team_block.get("team") or {}
-        team_id = _int(team.get("id"))
-        if team_id is None:
-            continue
-        values: dict[str, Any] = {}
-        for stat in team_block.get("statistics") or []:
-            key = str(stat.get("type") or "").casefold().replace(" ", "_")
-            values[key] = stat.get("value")
-        if team_id != opponent_api_id:
+    for parsed in parse_team_stats(payload, fixture_id=fixture_id):
+        if parsed["team_id"] != opponent_api_id:
             continue
         rows.append(
             {
                 "fixture_id": fixture_id,
-                "team_id": team_id,
-                "team_name": team.get("name"),
+                "team_id": parsed["team_id"],
+                "team_name": parsed["team_name"],
                 "venue": venue,
-                "possession": _float(values.get("ball_possession")),
-                "shots": _int(values.get("total_shots")),
-                "shots_on_target": _int(values.get("shots_on_goal")),
-                "passes": _int(values.get("total_passes")),
-                "pass_accuracy": _float(values.get("passes_%")),
-                "corners": _int(values.get("corner_kicks")),
-                "fouls": _int(values.get("fouls")),
-                "offsides": _int(values.get("offsides")),
-                "yellow_cards": _int(values.get("yellow_cards")),
-                "red_cards": _int(values.get("red_cards")),
-                "saves": _int(values.get("goalkeeper_saves")),
+                "possession": parsed["possession"],
+                "shots": parsed["shots"],
+                "shots_on_target": parsed["shots_on_target"],
+                "passes": parsed["passes"],
+                "pass_accuracy": parsed["passes_pct"],
+                "corners": parsed["corners"],
+                "fouls": parsed["fouls"],
+                "offsides": parsed["offsides"],
+                "yellow_cards": parsed["yellow_cards"],
+                "red_cards": parsed["red_cards"],
+                "saves": parsed["saves"],
                 "source_id": SOURCE_ID,
                 "ingested_at": ingested_at,
             }

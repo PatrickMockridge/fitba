@@ -38,6 +38,8 @@ MATCH_COLUMNS = [
     "away_shots",
     "home_shots_on_target",
     "away_shots_on_target",
+    "home_xg",
+    "away_xg",
     "home_fouls",
     "away_fouls",
     "home_corners",
@@ -167,7 +169,7 @@ def rebuild_combined() -> Path | None:
         return None
     frame = pl.concat(
         [pl.read_parquet(path) for path in files],
-        how="vertical_relaxed",
+        how="diagonal_relaxed",
     ).sort(["season", "date", "kickoff"], nulls_last=True)
     target = NORMALIZED_DIR / "matches.parquet"
     frame.write_parquet(target)

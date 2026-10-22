@@ -4,10 +4,10 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-10-22T16:29:02+00:00",
-  "dataset_version": "2026-10-22T16:29:02+00:00-8db53cf",
+  "audited_at": "2026-10-22T18:30:05+00:00",
+  "dataset_version": "2026-10-22T18:30:05+00:00-d8cbe92",
   "errors": [],
-  "generated_at": "2026-10-22T16:29:02+00:00",
+  "generated_at": "2026-10-22T18:30:05+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -1728,7 +1728,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 42 numeric leaves",
+          "message": "1 location(s), 90 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1749,7 +1749,7 @@
         "/history/"
       ],
       "errors": [],
-      "fields_checked": 44,
+      "fields_checked": 92,
       "home_payload": "history/aberdeen.json",
       "home_surface": "/history/",
       "id": "history.coverage",
@@ -1759,13 +1759,13 @@
       ],
       "locations": [
         {
-          "nodes": 78,
-          "numeric_leaves": 42,
+          "nodes": 126,
+          "numeric_leaves": 90,
           "payload": "history/aberdeen.json",
           "pointer": "/coverage/**"
         }
       ],
-      "numeric_leaves": 42,
+      "numeric_leaves": 90,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 2,
@@ -1785,7 +1785,7 @@
           "status": "pass"
         },
         {
-          "message": "8 location(s), 1706 numeric leaves",
+          "message": "8 location(s), 1754 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1806,7 +1806,7 @@
         "/history/"
       ],
       "errors": [],
-      "fields_checked": 1706,
+      "fields_checked": 1754,
       "home_payload": "history/seasons/*.json",
       "home_surface": "/history/",
       "id": "history.season-document",
@@ -1816,55 +1816,55 @@
       ],
       "locations": [
         {
-          "nodes": 448,
-          "numeric_leaves": 176,
+          "nodes": 454,
+          "numeric_leaves": 182,
           "payload": "history/seasons/2019-20.json",
           "pointer": "/**"
         },
         {
-          "nodes": 613,
-          "numeric_leaves": 218,
+          "nodes": 619,
+          "numeric_leaves": 224,
           "payload": "history/seasons/2020-21.json",
           "pointer": "/**"
         },
         {
-          "nodes": 597,
-          "numeric_leaves": 224,
+          "nodes": 603,
+          "numeric_leaves": 230,
           "payload": "history/seasons/2021-22.json",
           "pointer": "/**"
         },
         {
-          "nodes": 648,
-          "numeric_leaves": 227,
+          "nodes": 654,
+          "numeric_leaves": 233,
           "payload": "history/seasons/2022-23.json",
           "pointer": "/**"
         },
         {
-          "nodes": 697,
-          "numeric_leaves": 226,
+          "nodes": 703,
+          "numeric_leaves": 232,
           "payload": "history/seasons/2023-24.json",
           "pointer": "/**"
         },
         {
-          "nodes": 515,
-          "numeric_leaves": 193,
+          "nodes": 521,
+          "numeric_leaves": 199,
           "payload": "history/seasons/2024-25.json",
           "pointer": "/**"
         },
         {
-          "nodes": 718,
-          "numeric_leaves": 234,
+          "nodes": 724,
+          "numeric_leaves": 240,
           "payload": "history/seasons/2025-26.json",
           "pointer": "/**"
         },
         {
-          "nodes": 558,
-          "numeric_leaves": 208,
+          "nodes": 564,
+          "numeric_leaves": 214,
           "payload": "history/seasons/2026-27.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1706,
+      "numeric_leaves": 1754,
       "payloads": 8,
       "provenance_only": true,
       "rows_checked": 8,
@@ -2616,7 +2616,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 57 numeric leaves",
+          "message": "1 location(s), 64 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2637,7 +2637,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 60,
+      "fields_checked": 67,
       "home_payload": "coverage.json",
       "home_surface": "/status/",
       "id": "coverage.surfaces",
@@ -2647,13 +2647,13 @@
       ],
       "locations": [
         {
-          "nodes": 185,
-          "numeric_leaves": 57,
+          "nodes": 199,
+          "numeric_leaves": 64,
           "payload": "coverage.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 57,
+      "numeric_leaves": 64,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 2,
@@ -3422,6 +3422,2395 @@
       "value_type": "object",
       "verification": "provenance_only",
       "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "370 payload(s) matched matches/*.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "370 location(s), 166865 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "One played-fixture document: score, summary, stats, fxG, timeline, lineups, player stats, form and coverage.",
+      "displayed_surfaces": [
+        "/matches/",
+        "/analysis/",
+        "/analysis/xg/"
+      ],
+      "errors": [],
+      "fields_checked": 166865,
+      "home_payload": "matches/*.json",
+      "home_surface": "/matches/",
+      "id": "matches.document",
+      "label": "Match document",
+      "limitations": [
+        "The document family is checked for presence and source; individual model intervals are not independently recomputed in this release."
+      ],
+      "locations": [
+        {
+          "nodes": 1470,
+          "numeric_leaves": 594,
+          "payload": "matches/1023325.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1460,
+          "numeric_leaves": 560,
+          "payload": "matches/1023327.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1517,
+          "numeric_leaves": 603,
+          "payload": "matches/1023333.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1461,
+          "numeric_leaves": 586,
+          "payload": "matches/1023338.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1465,
+          "numeric_leaves": 565,
+          "payload": "matches/1023344.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 304,
+          "numeric_leaves": 46,
+          "payload": "matches/1030479.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 168,
+          "numeric_leaves": 25,
+          "payload": "matches/1030509.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 627,
+          "numeric_leaves": 149,
+          "payload": "matches/1030626.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 165,
+          "numeric_leaves": 25,
+          "payload": "matches/1036856.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1391,
+          "numeric_leaves": 537,
+          "payload": "matches/1094434.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1428,
+          "numeric_leaves": 564,
+          "payload": "matches/1094443.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1551,
+          "numeric_leaves": 602,
+          "payload": "matches/1094449.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1486,
+          "numeric_leaves": 586,
+          "payload": "matches/1094450.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1520,
+          "numeric_leaves": 602,
+          "payload": "matches/1094458.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1580,
+          "numeric_leaves": 623,
+          "payload": "matches/1094463.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1546,
+          "numeric_leaves": 592,
+          "payload": "matches/1094471.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1381,
+          "numeric_leaves": 551,
+          "payload": "matches/1094474.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1483,
+          "numeric_leaves": 587,
+          "payload": "matches/1094480.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1516,
+          "numeric_leaves": 601,
+          "payload": "matches/1094487.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1652,
+          "numeric_leaves": 634,
+          "payload": "matches/1094496.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1441,
+          "numeric_leaves": 571,
+          "payload": "matches/1094498.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1572,
+          "numeric_leaves": 605,
+          "payload": "matches/1094504.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1476,
+          "numeric_leaves": 578,
+          "payload": "matches/1094510.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1509,
+          "numeric_leaves": 601,
+          "payload": "matches/1094516.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1396,
+          "numeric_leaves": 555,
+          "payload": "matches/1094522.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1613,
+          "numeric_leaves": 613,
+          "payload": "matches/1094528.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1502,
+          "numeric_leaves": 584,
+          "payload": "matches/1094538.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1380,
+          "numeric_leaves": 549,
+          "payload": "matches/1094541.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1577,
+          "numeric_leaves": 599,
+          "payload": "matches/1094546.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1496,
+          "numeric_leaves": 597,
+          "payload": "matches/1094553.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1558,
+          "numeric_leaves": 587,
+          "payload": "matches/1094562.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1486,
+          "numeric_leaves": 587,
+          "payload": "matches/1094565.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1486,
+          "numeric_leaves": 591,
+          "payload": "matches/1094570.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1515,
+          "numeric_leaves": 606,
+          "payload": "matches/1094579.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1524,
+          "numeric_leaves": 607,
+          "payload": "matches/1094582.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1407,
+          "numeric_leaves": 570,
+          "payload": "matches/1094589.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1545,
+          "numeric_leaves": 621,
+          "payload": "matches/1094594.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1530,
+          "numeric_leaves": 599,
+          "payload": "matches/1094605.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1497,
+          "numeric_leaves": 598,
+          "payload": "matches/1094610.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1550,
+          "numeric_leaves": 605,
+          "payload": "matches/1094612.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1343,
+          "numeric_leaves": 549,
+          "payload": "matches/1094621.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1467,
+          "numeric_leaves": 576,
+          "payload": "matches/1094624.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 630,
+          "numeric_leaves": 155,
+          "payload": "matches/1102794.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 821,
+          "numeric_leaves": 220,
+          "payload": "matches/1119758.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 709,
+          "numeric_leaves": 188,
+          "payload": "matches/1119759.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 745,
+          "numeric_leaves": 178,
+          "payload": "matches/1121741.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1581,
+          "numeric_leaves": 624,
+          "payload": "matches/1126245.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1488,
+          "numeric_leaves": 591,
+          "payload": "matches/1126269.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1582,
+          "numeric_leaves": 615,
+          "payload": "matches/1126285.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1628,
+          "numeric_leaves": 619,
+          "payload": "matches/1126294.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1583,
+          "numeric_leaves": 621,
+          "payload": "matches/1126312.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1473,
+          "numeric_leaves": 602,
+          "payload": "matches/1126325.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 645,
+          "numeric_leaves": 155,
+          "payload": "matches/1136353.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 814,
+          "numeric_leaves": 222,
+          "payload": "matches/1141482.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 509,
+          "numeric_leaves": 133,
+          "payload": "matches/1144457.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 598,
+          "numeric_leaves": 126,
+          "payload": "matches/1162560.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 837,
+          "numeric_leaves": 226,
+          "payload": "matches/1174068.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1087,
+          "numeric_leaves": 253,
+          "payload": "matches/1184573.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1428,
+          "numeric_leaves": 588,
+          "payload": "matches/1196466.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1387,
+          "numeric_leaves": 556,
+          "payload": "matches/1196473.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1514,
+          "numeric_leaves": 611,
+          "payload": "matches/1196482.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1504,
+          "numeric_leaves": 572,
+          "payload": "matches/1196486.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1509,
+          "numeric_leaves": 613,
+          "payload": "matches/1196494.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 698,
+          "numeric_leaves": 177,
+          "payload": "matches/1202267.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 675,
+          "numeric_leaves": 176,
+          "payload": "matches/1202295.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 490,
+          "numeric_leaves": 106,
+          "payload": "matches/1202310.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 735,
+          "numeric_leaves": 186,
+          "payload": "matches/1202326.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 106,
+          "numeric_leaves": 10,
+          "payload": "matches/1210271.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1407,
+          "numeric_leaves": 586,
+          "payload": "matches/1220115.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1544,
+          "numeric_leaves": 631,
+          "payload": "matches/1220116.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1566,
+          "numeric_leaves": 651,
+          "payload": "matches/1220122.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1586,
+          "numeric_leaves": 642,
+          "payload": "matches/1220132.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1651,
+          "numeric_leaves": 668,
+          "payload": "matches/1220134.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1519,
+          "numeric_leaves": 638,
+          "payload": "matches/1220140.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1651,
+          "numeric_leaves": 654,
+          "payload": "matches/1220146.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1614,
+          "numeric_leaves": 657,
+          "payload": "matches/1220152.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1394,
+          "numeric_leaves": 588,
+          "payload": "matches/1220158.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1652,
+          "numeric_leaves": 664,
+          "payload": "matches/1220164.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1572,
+          "numeric_leaves": 650,
+          "payload": "matches/1220172.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1605,
+          "numeric_leaves": 669,
+          "payload": "matches/1220176.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1607,
+          "numeric_leaves": 643,
+          "payload": "matches/1220187.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1560,
+          "numeric_leaves": 635,
+          "payload": "matches/1220190.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1523,
+          "numeric_leaves": 641,
+          "payload": "matches/1220194.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1537,
+          "numeric_leaves": 613,
+          "payload": "matches/1220200.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1538,
+          "numeric_leaves": 645,
+          "payload": "matches/1220210.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1531,
+          "numeric_leaves": 629,
+          "payload": "matches/1220212.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1557,
+          "numeric_leaves": 640,
+          "payload": "matches/1220221.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1417,
+          "numeric_leaves": 560,
+          "payload": "matches/1220225.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1557,
+          "numeric_leaves": 645,
+          "payload": "matches/1220230.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1564,
+          "numeric_leaves": 643,
+          "payload": "matches/1220240.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1478,
+          "numeric_leaves": 613,
+          "payload": "matches/1220242.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1618,
+          "numeric_leaves": 660,
+          "payload": "matches/1220248.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1504,
+          "numeric_leaves": 635,
+          "payload": "matches/1220255.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1516,
+          "numeric_leaves": 631,
+          "payload": "matches/1220261.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1583,
+          "numeric_leaves": 654,
+          "payload": "matches/1220266.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1564,
+          "numeric_leaves": 653,
+          "payload": "matches/1220272.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1403,
+          "numeric_leaves": 585,
+          "payload": "matches/1220278.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1376,
+          "numeric_leaves": 596,
+          "payload": "matches/1220289.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1534,
+          "numeric_leaves": 632,
+          "payload": "matches/1220290.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1445,
+          "numeric_leaves": 608,
+          "payload": "matches/1220300.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1601,
+          "numeric_leaves": 657,
+          "payload": "matches/1220302.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 709,
+          "numeric_leaves": 181,
+          "payload": "matches/1269135.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 603,
+          "numeric_leaves": 132,
+          "payload": "matches/1293134.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 742,
+          "numeric_leaves": 167,
+          "payload": "matches/1308226.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 663,
+          "numeric_leaves": 162,
+          "payload": "matches/1318882.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 568,
+          "numeric_leaves": 125,
+          "payload": "matches/1338625.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 598,
+          "numeric_leaves": 144,
+          "payload": "matches/1349962.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 725,
+          "numeric_leaves": 151,
+          "payload": "matches/1360339.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1482,
+          "numeric_leaves": 609,
+          "payload": "matches/1371465.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1493,
+          "numeric_leaves": 614,
+          "payload": "matches/1371471.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1578,
+          "numeric_leaves": 661,
+          "payload": "matches/1371481.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1614,
+          "numeric_leaves": 664,
+          "payload": "matches/1371482.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1272,
+          "numeric_leaves": 543,
+          "payload": "matches/1371489.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 818,
+          "numeric_leaves": 185,
+          "payload": "matches/1372545.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1556,
+          "numeric_leaves": 640,
+          "payload": "matches/1382671.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1536,
+          "numeric_leaves": 636,
+          "payload": "matches/1382677.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1357,
+          "numeric_leaves": 564,
+          "payload": "matches/1382679.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1600,
+          "numeric_leaves": 658,
+          "payload": "matches/1382684.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1519,
+          "numeric_leaves": 617,
+          "payload": "matches/1382690.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1522,
+          "numeric_leaves": 629,
+          "payload": "matches/1382700.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1545,
+          "numeric_leaves": 655,
+          "payload": "matches/1382702.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1598,
+          "numeric_leaves": 648,
+          "payload": "matches/1382713.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1545,
+          "numeric_leaves": 658,
+          "payload": "matches/1382714.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1507,
+          "numeric_leaves": 592,
+          "payload": "matches/1382723.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1504,
+          "numeric_leaves": 638,
+          "payload": "matches/1382731.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1571,
+          "numeric_leaves": 654,
+          "payload": "matches/1382732.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1587,
+          "numeric_leaves": 660,
+          "payload": "matches/1382738.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1466,
+          "numeric_leaves": 636,
+          "payload": "matches/1382747.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1563,
+          "numeric_leaves": 645,
+          "payload": "matches/1382750.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1467,
+          "numeric_leaves": 607,
+          "payload": "matches/1382757.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1594,
+          "numeric_leaves": 644,
+          "payload": "matches/1382762.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1570,
+          "numeric_leaves": 648,
+          "payload": "matches/1382768.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1378,
+          "numeric_leaves": 570,
+          "payload": "matches/1382775.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1474,
+          "numeric_leaves": 619,
+          "payload": "matches/1382782.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1568,
+          "numeric_leaves": 654,
+          "payload": "matches/1382788.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1564,
+          "numeric_leaves": 644,
+          "payload": "matches/1382792.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1767,
+          "numeric_leaves": 691,
+          "payload": "matches/1382798.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1673,
+          "numeric_leaves": 680,
+          "payload": "matches/1382807.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1567,
+          "numeric_leaves": 653,
+          "payload": "matches/1382810.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1185,
+          "numeric_leaves": 499,
+          "payload": "matches/1382817.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1627,
+          "numeric_leaves": 666,
+          "payload": "matches/1382826.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1603,
+          "numeric_leaves": 627,
+          "payload": "matches/1382828.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1563,
+          "numeric_leaves": 630,
+          "payload": "matches/1382836.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1481,
+          "numeric_leaves": 624,
+          "payload": "matches/1382840.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1628,
+          "numeric_leaves": 669,
+          "payload": "matches/1382851.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1506,
+          "numeric_leaves": 623,
+          "payload": "matches/1382857.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1640,
+          "numeric_leaves": 657,
+          "payload": "matches/1382858.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 887,
+          "numeric_leaves": 224,
+          "payload": "matches/1411584.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 506,
+          "numeric_leaves": 108,
+          "payload": "matches/1421764.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 885,
+          "numeric_leaves": 233,
+          "payload": "matches/1436774.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 863,
+          "numeric_leaves": 229,
+          "payload": "matches/1436782.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 643,
+          "numeric_leaves": 165,
+          "payload": "matches/1438969.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1735,
+          "numeric_leaves": 677,
+          "payload": "matches/1451363.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1386,
+          "numeric_leaves": 597,
+          "payload": "matches/1451392.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1551,
+          "numeric_leaves": 644,
+          "payload": "matches/1451418.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1644,
+          "numeric_leaves": 661,
+          "payload": "matches/1451439.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1584,
+          "numeric_leaves": 660,
+          "payload": "matches/1451451.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1612,
+          "numeric_leaves": 674,
+          "payload": "matches/1452160.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 643,
+          "numeric_leaves": 164,
+          "payload": "matches/1488581.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 812,
+          "numeric_leaves": 213,
+          "payload": "matches/1509662.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 621,
+          "numeric_leaves": 139,
+          "payload": "matches/1525612.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1602,
+          "numeric_leaves": 677,
+          "payload": "matches/1540005.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1589,
+          "numeric_leaves": 652,
+          "payload": "matches/1540008.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1468,
+          "numeric_leaves": 602,
+          "payload": "matches/1540011.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1403,
+          "numeric_leaves": 582,
+          "payload": "matches/1540014.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1505,
+          "numeric_leaves": 643,
+          "payload": "matches/1540017.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 689,
+          "numeric_leaves": 176,
+          "payload": "matches/1548122.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 705,
+          "numeric_leaves": 179,
+          "payload": "matches/1548151.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 652,
+          "numeric_leaves": 161,
+          "payload": "matches/1548167.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 806,
+          "numeric_leaves": 230,
+          "payload": "matches/1548168.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 326,
+          "numeric_leaves": 85,
+          "payload": "matches/1554559.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 907,
+          "numeric_leaves": 198,
+          "payload": "matches/1554702.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1561,
+          "numeric_leaves": 647,
+          "payload": "matches/1556630.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1526,
+          "numeric_leaves": 651,
+          "payload": "matches/1556634.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1602,
+          "numeric_leaves": 662,
+          "payload": "matches/1556643.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1554,
+          "numeric_leaves": 621,
+          "payload": "matches/1556646.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1523,
+          "numeric_leaves": 656,
+          "payload": "matches/1556652.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1541,
+          "numeric_leaves": 629,
+          "payload": "matches/1556658.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1462,
+          "numeric_leaves": 613,
+          "payload": "matches/1556665.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1463,
+          "numeric_leaves": 626,
+          "payload": "matches/1556670.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1526,
+          "numeric_leaves": 629,
+          "payload": "matches/1556676.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 185,
+          "numeric_leaves": 28,
+          "payload": "matches/1583282.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 150,
+          "numeric_leaves": 20,
+          "payload": "matches/1584673.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 634,
+          "numeric_leaves": 163,
+          "payload": "matches/1603956.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 815,
+          "numeric_leaves": 217,
+          "payload": "matches/1629022.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 587,
+          "numeric_leaves": 140,
+          "payload": "matches/1642951.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 848,
+          "numeric_leaves": 208,
+          "payload": "matches/166347.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 635,
+          "numeric_leaves": 178,
+          "payload": "matches/166358.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 643,
+          "numeric_leaves": 181,
+          "payload": "matches/166362.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 692,
+          "numeric_leaves": 190,
+          "payload": "matches/166365.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 662,
+          "numeric_leaves": 188,
+          "payload": "matches/166371.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 673,
+          "numeric_leaves": 191,
+          "payload": "matches/166379.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 746,
+          "numeric_leaves": 202,
+          "payload": "matches/166386.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 688,
+          "numeric_leaves": 189,
+          "payload": "matches/166389.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 705,
+          "numeric_leaves": 196,
+          "payload": "matches/166399.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 686,
+          "numeric_leaves": 193,
+          "payload": "matches/166401.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 596,
+          "numeric_leaves": 173,
+          "payload": "matches/166408.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 705,
+          "numeric_leaves": 196,
+          "payload": "matches/166413.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 730,
+          "numeric_leaves": 199,
+          "payload": "matches/166423.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 807,
+          "numeric_leaves": 221,
+          "payload": "matches/166429.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 708,
+          "numeric_leaves": 196,
+          "payload": "matches/166431.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 694,
+          "numeric_leaves": 189,
+          "payload": "matches/166437.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 686,
+          "numeric_leaves": 193,
+          "payload": "matches/166444.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 629,
+          "numeric_leaves": 184,
+          "payload": "matches/166449.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 730,
+          "numeric_leaves": 199,
+          "payload": "matches/166455.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 644,
+          "numeric_leaves": 183,
+          "payload": "matches/166461.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 749,
+          "numeric_leaves": 203,
+          "payload": "matches/166468.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 686,
+          "numeric_leaves": 194,
+          "payload": "matches/166473.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 558,
+          "numeric_leaves": 168,
+          "payload": "matches/166484.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 724,
+          "numeric_leaves": 199,
+          "payload": "matches/166489.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 660,
+          "numeric_leaves": 186,
+          "payload": "matches/166491.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 717,
+          "numeric_leaves": 207,
+          "payload": "matches/166498.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 705,
+          "numeric_leaves": 199,
+          "payload": "matches/166503.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 709,
+          "numeric_leaves": 190,
+          "payload": "matches/166509.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 632,
+          "numeric_leaves": 166,
+          "payload": "matches/166516.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 734,
+          "numeric_leaves": 190,
+          "payload": "matches/166521.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 581,
+          "numeric_leaves": 142,
+          "payload": "matches/288887.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 559,
+          "numeric_leaves": 137,
+          "payload": "matches/288899.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 523,
+          "numeric_leaves": 138,
+          "payload": "matches/291786.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 503,
+          "numeric_leaves": 130,
+          "payload": "matches/318778.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 677,
+          "numeric_leaves": 157,
+          "payload": "matches/323229.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 561,
+          "numeric_leaves": 144,
+          "payload": "matches/327120.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 607,
+          "numeric_leaves": 156,
+          "payload": "matches/327954.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 725,
+          "numeric_leaves": 199,
+          "payload": "matches/368925.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 661,
+          "numeric_leaves": 159,
+          "payload": "matches/368926.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 574,
+          "numeric_leaves": 140,
+          "payload": "matches/368965.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 710,
+          "numeric_leaves": 196,
+          "payload": "matches/368966.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 615,
+          "numeric_leaves": 152,
+          "payload": "matches/369111.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 675,
+          "numeric_leaves": 188,
+          "payload": "matches/369112.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1110,
+          "numeric_leaves": 495,
+          "payload": "matches/569463.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1340,
+          "numeric_leaves": 572,
+          "payload": "matches/569466.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1531,
+          "numeric_leaves": 605,
+          "payload": "matches/569474.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1433,
+          "numeric_leaves": 575,
+          "payload": "matches/569478.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1332,
+          "numeric_leaves": 579,
+          "payload": "matches/569484.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1157,
+          "numeric_leaves": 516,
+          "payload": "matches/569495.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1432,
+          "numeric_leaves": 583,
+          "payload": "matches/569497.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1484,
+          "numeric_leaves": 577,
+          "payload": "matches/569503.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1496,
+          "numeric_leaves": 581,
+          "payload": "matches/569512.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1293,
+          "numeric_leaves": 519,
+          "payload": "matches/569515.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1246,
+          "numeric_leaves": 483,
+          "payload": "matches/569520.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1504,
+          "numeric_leaves": 580,
+          "payload": "matches/569527.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1351,
+          "numeric_leaves": 531,
+          "payload": "matches/569534.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1419,
+          "numeric_leaves": 561,
+          "payload": "matches/569539.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1500,
+          "numeric_leaves": 603,
+          "payload": "matches/569548.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1563,
+          "numeric_leaves": 615,
+          "payload": "matches/569555.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1446,
+          "numeric_leaves": 571,
+          "payload": "matches/569557.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1374,
+          "numeric_leaves": 549,
+          "payload": "matches/569562.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1317,
+          "numeric_leaves": 525,
+          "payload": "matches/569572.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1469,
+          "numeric_leaves": 553,
+          "payload": "matches/569575.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1317,
+          "numeric_leaves": 526,
+          "payload": "matches/569582.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1254,
+          "numeric_leaves": 503,
+          "payload": "matches/569587.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1408,
+          "numeric_leaves": 547,
+          "payload": "matches/569593.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1459,
+          "numeric_leaves": 564,
+          "payload": "matches/569602.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1564,
+          "numeric_leaves": 612,
+          "payload": "matches/569605.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1336,
+          "numeric_leaves": 533,
+          "payload": "matches/569615.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1396,
+          "numeric_leaves": 543,
+          "payload": "matches/569617.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1436,
+          "numeric_leaves": 575,
+          "payload": "matches/569624.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1362,
+          "numeric_leaves": 545,
+          "payload": "matches/569629.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1336,
+          "numeric_leaves": 538,
+          "payload": "matches/569635.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1381,
+          "numeric_leaves": 553,
+          "payload": "matches/569641.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1270,
+          "numeric_leaves": 491,
+          "payload": "matches/569646.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1452,
+          "numeric_leaves": 585,
+          "payload": "matches/569653.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 621,
+          "numeric_leaves": 148,
+          "payload": "matches/592880.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 520,
+          "numeric_leaves": 134,
+          "payload": "matches/606587.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 539,
+          "numeric_leaves": 136,
+          "payload": "matches/629194.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 567,
+          "numeric_leaves": 136,
+          "payload": "matches/647267.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1470,
+          "numeric_leaves": 585,
+          "payload": "matches/687087.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1371,
+          "numeric_leaves": 554,
+          "payload": "matches/687092.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1483,
+          "numeric_leaves": 569,
+          "payload": "matches/687099.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1343,
+          "numeric_leaves": 538,
+          "payload": "matches/687104.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1453,
+          "numeric_leaves": 578,
+          "payload": "matches/687111.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 520,
+          "numeric_leaves": 133,
+          "payload": "matches/687330.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 886,
+          "numeric_leaves": 198,
+          "payload": "matches/693837.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 500,
+          "numeric_leaves": 103,
+          "payload": "matches/698802.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1219,
+          "numeric_leaves": 487,
+          "payload": "matches/709664.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1354,
+          "numeric_leaves": 546,
+          "payload": "matches/709669.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1333,
+          "numeric_leaves": 526,
+          "payload": "matches/709674.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1383,
+          "numeric_leaves": 549,
+          "payload": "matches/709678.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1442,
+          "numeric_leaves": 560,
+          "payload": "matches/709687.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1355,
+          "numeric_leaves": 536,
+          "payload": "matches/709690.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1513,
+          "numeric_leaves": 581,
+          "payload": "matches/709701.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1342,
+          "numeric_leaves": 535,
+          "payload": "matches/709702.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1450,
+          "numeric_leaves": 570,
+          "payload": "matches/709708.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1453,
+          "numeric_leaves": 555,
+          "payload": "matches/709714.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1411,
+          "numeric_leaves": 548,
+          "payload": "matches/709724.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1395,
+          "numeric_leaves": 540,
+          "payload": "matches/709726.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1424,
+          "numeric_leaves": 547,
+          "payload": "matches/709732.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1271,
+          "numeric_leaves": 485,
+          "payload": "matches/709738.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1380,
+          "numeric_leaves": 552,
+          "payload": "matches/709744.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1358,
+          "numeric_leaves": 539,
+          "payload": "matches/709750.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1374,
+          "numeric_leaves": 555,
+          "payload": "matches/709756.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1367,
+          "numeric_leaves": 535,
+          "payload": "matches/709766.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1355,
+          "numeric_leaves": 547,
+          "payload": "matches/709769.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1251,
+          "numeric_leaves": 497,
+          "payload": "matches/709774.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1535,
+          "numeric_leaves": 577,
+          "payload": "matches/709780.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1433,
+          "numeric_leaves": 545,
+          "payload": "matches/709790.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1330,
+          "numeric_leaves": 529,
+          "payload": "matches/709797.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1477,
+          "numeric_leaves": 588,
+          "payload": "matches/709798.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1676,
+          "numeric_leaves": 617,
+          "payload": "matches/709806.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1479,
+          "numeric_leaves": 566,
+          "payload": "matches/709810.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1420,
+          "numeric_leaves": 547,
+          "payload": "matches/709820.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1268,
+          "numeric_leaves": 501,
+          "payload": "matches/709822.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1394,
+          "numeric_leaves": 568,
+          "payload": "matches/709830.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1429,
+          "numeric_leaves": 571,
+          "payload": "matches/709838.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1591,
+          "numeric_leaves": 598,
+          "payload": "matches/709840.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1392,
+          "numeric_leaves": 553,
+          "payload": "matches/709846.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1444,
+          "numeric_leaves": 561,
+          "payload": "matches/709852.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 697,
+          "numeric_leaves": 173,
+          "payload": "matches/714907.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 825,
+          "numeric_leaves": 197,
+          "payload": "matches/714908.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 114,
+          "numeric_leaves": 11,
+          "payload": "matches/737177.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 111,
+          "numeric_leaves": 11,
+          "payload": "matches/737737.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 597,
+          "numeric_leaves": 147,
+          "payload": "matches/747047.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 761,
+          "numeric_leaves": 185,
+          "payload": "matches/748814.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 720,
+          "numeric_leaves": 178,
+          "payload": "matches/748815.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 575,
+          "numeric_leaves": 146,
+          "payload": "matches/768802.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 735,
+          "numeric_leaves": 178,
+          "payload": "matches/768803.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 534,
+          "numeric_leaves": 134,
+          "payload": "matches/814019.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 662,
+          "numeric_leaves": 160,
+          "payload": "matches/828031.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1560,
+          "numeric_leaves": 594,
+          "payload": "matches/857258.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1368,
+          "numeric_leaves": 552,
+          "payload": "matches/857266.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1438,
+          "numeric_leaves": 580,
+          "payload": "matches/857272.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1454,
+          "numeric_leaves": 558,
+          "payload": "matches/857280.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1345,
+          "numeric_leaves": 553,
+          "payload": "matches/857285.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 566,
+          "numeric_leaves": 145,
+          "payload": "matches/863911.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 604,
+          "numeric_leaves": 159,
+          "payload": "matches/863923.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 713,
+          "numeric_leaves": 182,
+          "payload": "matches/863945.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 728,
+          "numeric_leaves": 181,
+          "payload": "matches/863975.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1405,
+          "numeric_leaves": 567,
+          "payload": "matches/868685.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1562,
+          "numeric_leaves": 590,
+          "payload": "matches/868686.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1481,
+          "numeric_leaves": 586,
+          "payload": "matches/868692.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1448,
+          "numeric_leaves": 573,
+          "payload": "matches/868703.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1619,
+          "numeric_leaves": 632,
+          "payload": "matches/868704.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1406,
+          "numeric_leaves": 564,
+          "payload": "matches/868714.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1667,
+          "numeric_leaves": 628,
+          "payload": "matches/868716.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1632,
+          "numeric_leaves": 615,
+          "payload": "matches/868722.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1583,
+          "numeric_leaves": 630,
+          "payload": "matches/868728.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1409,
+          "numeric_leaves": 529,
+          "payload": "matches/868734.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1486,
+          "numeric_leaves": 580,
+          "payload": "matches/868740.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1482,
+          "numeric_leaves": 570,
+          "payload": "matches/868749.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1527,
+          "numeric_leaves": 602,
+          "payload": "matches/868755.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1588,
+          "numeric_leaves": 616,
+          "payload": "matches/868758.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1662,
+          "numeric_leaves": 637,
+          "payload": "matches/868766.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1286,
+          "numeric_leaves": 504,
+          "payload": "matches/868770.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1417,
+          "numeric_leaves": 572,
+          "payload": "matches/868776.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1551,
+          "numeric_leaves": 583,
+          "payload": "matches/868787.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1460,
+          "numeric_leaves": 570,
+          "payload": "matches/868790.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1436,
+          "numeric_leaves": 580,
+          "payload": "matches/868794.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1516,
+          "numeric_leaves": 596,
+          "payload": "matches/868800.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1611,
+          "numeric_leaves": 628,
+          "payload": "matches/868807.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1677,
+          "numeric_leaves": 633,
+          "payload": "matches/868813.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1583,
+          "numeric_leaves": 591,
+          "payload": "matches/868818.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1633,
+          "numeric_leaves": 617,
+          "payload": "matches/868824.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1474,
+          "numeric_leaves": 592,
+          "payload": "matches/868830.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1426,
+          "numeric_leaves": 567,
+          "payload": "matches/868836.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1380,
+          "numeric_leaves": 521,
+          "payload": "matches/868842.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1573,
+          "numeric_leaves": 608,
+          "payload": "matches/868848.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1523,
+          "numeric_leaves": 575,
+          "payload": "matches/868858.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1400,
+          "numeric_leaves": 558,
+          "payload": "matches/868860.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1399,
+          "numeric_leaves": 555,
+          "payload": "matches/868871.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1341,
+          "numeric_leaves": 533,
+          "payload": "matches/868872.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 146,
+          "numeric_leaves": 23,
+          "payload": "matches/870479.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 146,
+          "numeric_leaves": 23,
+          "payload": "matches/870984.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 209,
+          "numeric_leaves": 34,
+          "payload": "matches/871150.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 146,
+          "numeric_leaves": 23,
+          "payload": "matches/890132.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 146,
+          "numeric_leaves": 25,
+          "payload": "matches/891298.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 620,
+          "numeric_leaves": 149,
+          "payload": "matches/922125.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 146,
+          "numeric_leaves": 23,
+          "payload": "matches/922189.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 608,
+          "numeric_leaves": 129,
+          "payload": "matches/948827.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 781,
+          "numeric_leaves": 181,
+          "payload": "matches/967595.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 670,
+          "numeric_leaves": 162,
+          "payload": "matches/976521.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 166865,
+      "payloads": 370,
+      "provenance_only": true,
+      "rows_checked": 370,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "1 payload(s) matched fixtures/index.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 1111 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "The played-fixture index: count, scores, depth and links.",
+      "displayed_surfaces": [
+        "/matches/"
+      ],
+      "errors": [],
+      "fields_checked": 1111,
+      "home_payload": "fixtures/index.json",
+      "home_surface": "/matches/",
+      "id": "fixtures.index",
+      "label": "Fixture index",
+      "limitations": [
+        "Index rows are checked for presence; the fixture pages carry the detailed source coverage."
+      ],
+      "locations": [
+        {
+          "nodes": 5185,
+          "numeric_leaves": 1111,
+          "payload": "fixtures/index.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 1111,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched xg/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 4158 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "fxG model, rates, intervals, provider comparison, aggregates and coverage.",
+      "displayed_surfaces": [
+        "/analysis/",
+        "/analysis/xg/",
+        "/matches/"
+      ],
+      "errors": [],
+      "fields_checked": 4158,
+      "home_payload": "xg/aberdeen.json",
+      "home_surface": "/analysis/xg/",
+      "id": "xg.document",
+      "label": "fxG document",
+      "limitations": [
+        "fxG is a shot-on-target model. The provider-xG gate currently fails, so the values are descriptive and are not a performance verdict."
+      ],
+      "locations": [
+        {
+          "nodes": 8796,
+          "numeric_leaves": 4158,
+          "payload": "xg/aberdeen.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 4158,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
     }
   ],
   "parameters": [
@@ -3681,27 +6070,70 @@
         "case.claim.attack"
       ],
       "version": 1
+    },
+    {
+      "actual_checksum": "sha256:6ef63677e2bc9d3d1cb9be9ec8a40a8796ecf96bac025ec2ef26f8c5ab1a5001",
+      "config_keys": [
+        "fit",
+        "interval",
+        "evaluation"
+      ],
+      "config_path": "xg",
+      "errors": [],
+      "expected_checksum": "sha256:6ef63677e2bc9d3d1cb9be9ec8a40a8796ecf96bac025ec2ef26f8c5ab1a5001",
+      "id": "param.xg",
+      "kind": "matrix",
+      "label": "fxG model policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "xg.document"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:0a5f2b54cb378f75747f1a2d00d5d74b1f2f4f538c8025ba4957f0896100c6ea",
+      "config_keys": [
+        "scope",
+        "matching",
+        "pages"
+      ],
+      "config_path": "fixtures",
+      "errors": [],
+      "expected_checksum": "sha256:0a5f2b54cb378f75747f1a2d00d5d74b1f2f4f538c8025ba4957f0896100c6ea",
+      "id": "param.fixtures",
+      "kind": "matrix",
+      "label": "Fixture record policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "matches.document",
+        "fixtures.index"
+      ],
+      "version": 1
     }
   ],
-  "registry_checksum": "sha256:bceaea65c6e37dd961e9095cc42e94ce544dcf93168c6b963a00c56d26511717",
+  "registry_checksum": "sha256:c1d1c12c652603581dbfce37358825968056c41d9af162a8d8d073792ed5ee9f",
   "registry_reviewed": "2026-10-22",
-  "registry_version": "2.0.0",
+  "registry_version": "2.2.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "status": "pass",
   "summary": {
-    "fields_checked": 20146,
+    "fields_checked": 192383,
     "metrics_failed": 0,
-    "metrics_passed": 53,
-    "metrics_total": 53,
+    "metrics_passed": 56,
+    "metrics_total": 56,
     "parameters_failed": 0,
-    "parameters_passed": 14,
-    "parameters_total": 14,
-    "provenance_only": 39,
-    "rows_checked": 482,
+    "parameters_passed": 16,
+    "parameters_total": 16,
+    "provenance_only": 42,
+    "rows_checked": 854,
     "verification_modes": {
       "cross_surface": 6,
-      "provenance_only": 39,
+      "provenance_only": 42,
       "recompute": 8
     }
   }

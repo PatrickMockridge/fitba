@@ -46,6 +46,9 @@ from fitba.util.dates import utc_now_iso
 APPEARANCE_COLUMNS = [
     "player_id",
     "player_key",
+    "player_name",
+    "shirt_number",
+    "position",
     "team_id",
     "team_name",
     "fixture_id",
@@ -77,6 +80,10 @@ APPEARANCE_COLUMNS = [
 PLAYER_MATCH_COLUMNS = [
     "player_id",
     "player_key",
+    "player_name",
+    "shirt_number",
+    "position",
+    "captain",
     "team_id",
     "fixture_id",
     "competition",
@@ -89,6 +96,20 @@ PLAYER_MATCH_COLUMNS = [
     "assists",
     "conceded",
     "saves",
+    "shots_total",
+    "shots_on",
+    "passes_total",
+    "pass_accuracy",
+    "dribbles_attempts",
+    "dribbles_success",
+    "fouls_drawn",
+    "fouls_committed",
+    "penalty_won",
+    "penalty_committed",
+    "penalty_scored",
+    "penalty_missed",
+    "penalty_saved",
+    "offsides",
     "tackles",
     "blocks",
     "interceptions",
@@ -214,6 +235,7 @@ def _players_by_team(payload: list[dict[str, Any]]) -> dict[int, list[dict[str, 
 
 
 def _player_stats(entry: dict[str, Any]) -> dict[str, Any]:
+    player = entry.get("player") or {}
     statistics = entry.get("statistics") or []
     stats = statistics[0] if statistics else {}
     games = stats.get("games") or {}
@@ -222,6 +244,10 @@ def _player_stats(entry: dict[str, Any]) -> dict[str, Any]:
     tackles = stats.get("tackles") or {}
     duels = stats.get("duels") or {}
     passes = stats.get("passes") or {}
+    shots = stats.get("shots") or {}
+    dribbles = stats.get("dribbles") or {}
+    fouls = stats.get("fouls") or {}
+    penalty = stats.get("penalty") or {}
     direct_red = _int(cards.get("red"))
     second_yellow = _int(cards.get("yellowred"))
     red_cards = (
@@ -230,6 +256,10 @@ def _player_stats(entry: dict[str, Any]) -> dict[str, Any]:
         else (direct_red or 0) + (second_yellow or 0)
     )
     return {
+        "player_name": str(player.get("name") or "") or None,
+        "shirt_number": _int(games.get("number")),
+        "position": str(games.get("position") or "") or None,
+        "captain": bool(games.get("captain")),
         "rating": _rating(games.get("rating")),
         "minutes": _int(games.get("minutes")),
         "substitute": bool(games.get("substitute")),
@@ -237,6 +267,20 @@ def _player_stats(entry: dict[str, Any]) -> dict[str, Any]:
         "assists": _int(goals.get("assists")),
         "conceded": _int(goals.get("conceded")),
         "saves": _int(goals.get("saves")),
+        "shots_total": _int(shots.get("total")),
+        "shots_on": _int(shots.get("on")),
+        "passes_total": _int(passes.get("total")),
+        "pass_accuracy": _int(passes.get("accuracy")),
+        "dribbles_attempts": _int(dribbles.get("attempts")),
+        "dribbles_success": _int(dribbles.get("success")),
+        "fouls_drawn": _int(fouls.get("drawn")),
+        "fouls_committed": _int(fouls.get("committed")),
+        "penalty_won": _int(penalty.get("won")),
+        "penalty_committed": _int(penalty.get("commited")),
+        "penalty_scored": _int(penalty.get("scored")),
+        "penalty_missed": _int(penalty.get("missed")),
+        "penalty_saved": _int(penalty.get("saved")),
+        "offsides": _int(stats.get("offsides")),
         "tackles": _int(tackles.get("total")),
         "blocks": _int(tackles.get("blocks")),
         "interceptions": _int(tackles.get("interceptions")),
@@ -350,10 +394,23 @@ def compute_match_data(
                 match_length=match_length,
             )
             start_entries: dict[int, dict[str, Any]] = {}
-            for entry in starters:
+            lineup_entries: dict[int, dict[str, Any]] = {}
+            starter_ids = {
+                _int((entry.get("player") or {}).get("id")) for entry in starters
+            }
+            for entry in [*starters, *(lineup.get("substitutes") or [])]:
                 player = entry.get("player") or {}
                 player_id = _int(player.get("id"))
-                if player_id is not None:
+                if player_id is None:
+                    continue
+                lineup_entry = {
+                    "name": str(player.get("name") or "") or None,
+                    "number": _int(player.get("number")),
+                    "pos": player.get("pos"),
+                    "grid": player.get("grid"),
+                }
+                lineup_entries[player_id] = lineup_entry
+                if player_id in starter_ids:
                     start_entries[player_id] = {
                         "grid": player.get("grid"),
                         "pos": player.get("pos"),
@@ -395,10 +452,14 @@ def compute_match_data(
                     if role_code:
                         starts_with_role += 1
 
+                lineup_entry = lineup_entries.get(player_id) or {}
                 appearances.append(
                     {
                         "player_id": player_id,
                         "player_key": f"api:player:{player_id}",
+                        "player_name": lineup_entry.get("name"),
+                        "shirt_number": lineup_entry.get("number"),
+                        "position": lineup_entry.get("pos"),
                         "team_id": team_id,
                         "team_name": team_name,
                         "fixture_id": fixture_id,

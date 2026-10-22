@@ -97,6 +97,9 @@ export default function FixturesPage() {
         </p>
         <Link className="text-link" href="/matchday/">
           Matchday dashboard →
+        </Link>{" "}
+        <Link className="text-link" href="/matches/">
+          Match record →
         </Link>
       </section>
     </>

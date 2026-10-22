@@ -1,0 +1,570 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": true,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "L",
+    "away_goals": 3,
+    "away_ht_goals": 2,
+    "away_penalties": null,
+    "away_team_id": "sco:dundee-united",
+    "away_team_name": "Dundee United",
+    "competition_id": "sco:scottish-cup",
+    "competition_name": "FA Cup",
+    "date": "2021-04-25",
+    "extra_time": false,
+    "fixture_id": 698802,
+    "home_goals": 0,
+    "home_ht_goals": 0,
+    "home_penalties": null,
+    "home_team_id": "sco:aberdeen",
+    "home_team_name": "Aberdeen",
+    "href": "/matches/698802/",
+    "referee": "K. Clancy",
+    "result": "L",
+    "round": "Quarter-finals",
+    "season": "2020-21",
+    "status": "FT",
+    "venue": "H",
+    "venue_name": "Pittodrie Stadium"
+  },
+  "form": {
+    "after": [],
+    "before": [
+      {
+        "date": "2021-04-03",
+        "fixture_id": 687330,
+        "goals_against": 0,
+        "goals_for": 1,
+        "href": "/matches/687330/",
+        "opponent_name": "Dumbarton",
+        "venue": "A"
+      },
+      {
+        "date": "2021-04-17",
+        "fixture_id": 693837,
+        "goals_against": 2,
+        "goals_for": 2,
+        "href": "/matches/693837/",
+        "opponent_name": "Livingston",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": {
+      "coach_name": "S. Glass",
+      "formation": "4-4-1-1",
+      "starters": [
+        {
+          "grid": "1:1",
+          "minutes": 90,
+          "player_id": 44964,
+          "player_name": "G. Woods",
+          "position": "G",
+          "role": "GK",
+          "shirt_number": 43
+        },
+        {
+          "grid": "2:4",
+          "minutes": 90,
+          "player_id": 44804,
+          "player_name": "A. Considine",
+          "position": "D",
+          "role": "RB",
+          "shirt_number": 4
+        },
+        {
+          "grid": "2:3",
+          "minutes": 90,
+          "player_id": 44807,
+          "player_name": "T. Hoban",
+          "position": "D",
+          "role": "CB",
+          "shirt_number": 3
+        },
+        {
+          "grid": "2:2",
+          "minutes": 90,
+          "player_id": 135525,
+          "player_name": "C. Ramsay",
+          "position": "D",
+          "role": "CB",
+          "shirt_number": 44
+        },
+        {
+          "grid": "2:1",
+          "minutes": 90,
+          "player_id": 1128,
+          "player_name": "J. Hayes",
+          "position": "M",
+          "role": "LB",
+          "shirt_number": 17
+        },
+        {
+          "grid": "3:4",
+          "minutes": 62,
+          "player_id": 44817,
+          "player_name": "N. McGinn",
+          "position": "M",
+          "role": "RM",
+          "shirt_number": 10
+        },
+        {
+          "grid": "3:3",
+          "minutes": 90,
+          "player_id": 44901,
+          "player_name": "M. Kennedy",
+          "position": "M",
+          "role": "CM",
+          "shirt_number": 33
+        },
+        {
+          "grid": "3:2",
+          "minutes": 90,
+          "player_id": 44814,
+          "player_name": "L. Ferguson",
+          "position": "M",
+          "role": "CM",
+          "shirt_number": 19
+        },
+        {
+          "grid": "3:1",
+          "minutes": 62,
+          "player_id": 44813,
+          "player_name": "D. Campbell",
+          "position": "M",
+          "role": "LM",
+          "shirt_number": 24
+        },
+        {
+          "grid": "4:1",
+          "minutes": 90,
+          "player_id": 44852,
+          "player_name": "F. Kamberi",
+          "position": "F",
+          "role": "AM",
+          "shirt_number": 22
+        },
+        {
+          "grid": "5:1",
+          "minutes": 77,
+          "player_id": 44905,
+          "player_name": "C. Hendry",
+          "position": "F",
+          "role": "ST",
+          "shirt_number": 9
+        }
+      ],
+      "substitutes": [
+        {
+          "minutes": 28,
+          "on_minute": 62,
+          "player_id": 44818,
+          "player_name": "E. Ross",
+          "position": "M",
+          "shirt_number": 23
+        },
+        {
+          "minutes": 28,
+          "on_minute": 62,
+          "player_id": 19908,
+          "player_name": "D. McGeouch",
+          "position": "M",
+          "shirt_number": 15
+        },
+        {
+          "minutes": 13,
+          "on_minute": 77,
+          "player_id": 138456,
+          "player_name": "M. Ruth",
+          "position": "F",
+          "shirt_number": 28
+        }
+      ],
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    }
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/687099/",
+    "previous": "/matches/687092/",
+    "season": "/history/2020-21/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "M. McNulty opened the scoring on 18 minutes, assisted by L. Shankland."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Dundee United beat Aberdeen 3-0",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 3,
+      "event_score": {
+        "away": 3,
+        "home": 0
+      },
+      "final_score": {
+        "away": 3,
+        "home": 0
+      },
+      "matched": true
+    }
+  },
+  "timeline": [
+    {
+      "assist_name": "L. Shankland",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 18,
+      "player_name": "M. McNulty",
+      "score_after": {
+        "away": 1,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": "N. Clark",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 37,
+      "player_name": "R. Edwards",
+      "score_after": {
+        "away": 2,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 40,
+      "player_name": "Calum Butcher",
+      "score_after": {
+        "away": 2,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 51,
+      "player_name": "Lewis Ferguson",
+      "score_after": {
+        "away": 2,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "I. Harkes",
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 54,
+      "player_name": "M. McNulty",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 59,
+      "player_name": "Marc McNulty",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 61,
+      "player_name": "Andy Considine",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "E. Ross",
+      "comments": null,
+      "detail": "Substitution 1",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 62,
+      "player_name": "N. McGinn",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "D. McGeouch",
+      "comments": null,
+      "detail": "Substitution 2",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 62,
+      "player_name": "D. Campbell",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": "M. Ruth",
+      "comments": null,
+      "detail": "Substitution 3",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 77,
+      "player_name": "C. Hendry",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 80,
+      "player_name": "Ian Harkes",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": "P. Pawlett",
+      "comments": null,
+      "detail": "Substitution 1",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 83,
+      "player_name": "C. Butcher",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": "L. Appéré",
+      "comments": null,
+      "detail": "Substitution 2",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 88,
+      "player_name": "L. Shankland",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    },
+    {
+      "assist_name": "L. Bolton",
+      "comments": null,
+      "detail": "Substitution 3",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 88,
+      "player_name": "N. Clark",
+      "score_after": {
+        "away": 3,
+        "home": 0
+      },
+      "team_name": "Dundee Utd"
+    }
+  ],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

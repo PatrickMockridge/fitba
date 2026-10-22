@@ -11,14 +11,15 @@ sources:
     publication_allowed: true
     required: true
     primary_for: [league_results_current, league_results_history, league_team_stats]
-    capabilities: [results, team_match_stats, fixtures, odds]
+    capabilities: [results, team_match_stats, fixtures, odds, partial_xg]
     base_url: https://www.football-data.co.uk/mmz4281
     attribution: Football-Data.co.uk
     role: current and historical league results and team match stats; fallback/cross-check if the API-Football gate passes
     notes: >
-      Free Scottish CSVs for SC0-SC3. Team-level only. The site asks for
-      private, non-commercial research use and cautions against automated/AI
-      data products; this project uses it non-commercially with attribution.
+      Free Scottish CSVs for SC0-SC3. Team-level only. The 2026-27 SC0 file
+      carries HxG/AxG; earlier seasons do not. The site asks for private,
+      non-commercial research use and cautions against automated/AI data
+      products; this project uses it non-commercially with attribution.
     last_verified: 2026-10-21
 
   afc_news:
@@ -292,8 +293,10 @@ sources:
       League Cup group standings are not provided (compute from group fixtures);
       the Scottish Cup feed covered 50 of 136 ties at test time (First Round and
       Second Round only); current lower-tier player stats were empty at test
-      time; no preferred foot, xG, event coordinates, heat maps, market values
-      or wages. Roles are derived from the starting-XI formation grid in the
+      time; no preferred foot, event coordinates, heat maps, market values or
+      wages. Provider xG is partial: expected_goals appears in some Premiership
+      statistics responses, not as a historical location feed. Roles are
+      derived from the starting-XI formation grid in the
       lineups; the feed does not report a formation after a substitution, so
       mid-game switches need a sourced context note. Team statistics and
       possession are not dependable at scale; the matchday style lean uses shot

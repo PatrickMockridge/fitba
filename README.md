@@ -25,7 +25,9 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Design foundation](docs/design.md) | The System 7 grammar, the four themes and the visual rules. |
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
-| [Data analysis](docs/analysis.md) | The owner's view, the chairman's frame and the six claims connecting the team, squad and record. |
+| [Data analysis](docs/analysis.md) | The owner's view, the chairman's frame, six claims and the fxG block. |
+| [Match record](docs/fixtures.md) | One page per played Cormack-era fixture, with events, lineups, stats and the deterministic read. |
+| [fxG](docs/xg.md) | The experimental shot-on-target expected-goals model, interval and provider-xG gate. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
 | [Sources](docs/sources.md) | Every source, its licence position, coverage and known gaps. |
@@ -52,8 +54,13 @@ full documentation index is [docs/README.md](docs/README.md).
   head-to-head tiebreaks, form and **points deductions** with citations.
   Verified against the official 2025/26 tables for all four tiers.
 - **Matchday dashboard**: the next fixture, both predicted XIs, form and style,
-  a compact case strip, and a squad-needs board with a fee-only budget
-  envelope. The old Aberdeen dashboard is a moved notice.
+  a compact case strip, and a squad-needs board with a
+  fee-only budget envelope. The old Aberdeen dashboard is a moved notice.
+- **Match record**: every played Cormack-era fixture has a page with the score,
+  timeline, lineups, league/API stats, player stats where available and fxG.
+  Missing data is labelled, never zero-filled.
+- **fxG**: an experimental shot-on-target xG model with an 80% interval and a
+  provider-xG gate. The gate currently fails, so fxG is descriptive only.
 - **Results & fixtures across all three Scottish competitions**: league results
   and team match stats from Football-Data.co.uk (clearly labelled, with a gated
   API-Football migration); League Cup and Scottish Cup fixtures from
@@ -215,7 +222,8 @@ The licensed base is **API-Football Pro**, active and key-tested 2026-10-21. It
 supplies the League Cup and Scottish Cup fixtures/rounds/penalties, plus
 Premiership and top-European player stats. Its known limits are documented: no
 League Cup standings (computed), a partial Scottish Cup feed (50 of 136 ties),
-no current lower-tier player stats, no xG/heat maps and no market values.
+no current lower-tier player stats, only partial provider xG and no shot
+locations/heat maps, and no market values.
 
 League results still come from football-data.co.uk and Aberdeen's club fixtures
 from the official SPFL feed until the migration is completed; those become local

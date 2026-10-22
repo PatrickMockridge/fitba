@@ -34,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav className="nav" aria-label="Main">
               <Link href="/matchday/">Matchday</Link>
+              <Link href="/matches/">Matches</Link>
               <Link href="/analysis/">Data analysis</Link>
               <Link href="/squad/">Squad</Link>
               <Link href="/recruitment/">Off the pitch</Link>

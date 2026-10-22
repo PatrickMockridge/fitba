@@ -20,6 +20,7 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4e. Upcoming-matchday dashboard | **Live.** `/matchday/`, both predicted XIs, form, venue splits, style lean and strength; `/clubs/aberdeen/` retired to a moved notice. |
 | 4f. Data analysis | **Live.** `/analysis/` and a matchday strip: the owner's view, the chairman's frame and six claims on the team, squad and Cormack-era record. |
 | 4g. Provenance, availability and needs | **Live.** Layer truth table at `/sources/`, curated availability ledger in the predicted XI, and a squad-needs board on `/recruitment/` that feeds the scouting method. |
+| 4h. Match record and fxG | **Live.** `/matches/` and one page per played fixture, plus an experimental fxG model at `/analysis/xg/`. The provider gate is failing, so fxG is descriptive only. |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, scouting views and richer opposition context. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |

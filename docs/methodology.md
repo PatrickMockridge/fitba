@@ -94,6 +94,8 @@ summary:
   the confidence is shown.
 - **Budget:** value bands, confidence and unknown states; no invented wages.
 - **Cups:** computed group tables are labelled; an unpublished draw is a state.
+- **fxG:** a shot-on-target model with an explicit interval, provider-xG
+  evaluation and a published gate. See [xg.md](xg.md).
 
 ## Transfers and loans
 
@@ -186,7 +188,8 @@ Data analysis is described in [analysis.md](analysis.md). In summary:
   Minutes cannot distinguish selection from curated availability; there is no
   provider injury/suspension feed.
 - **Attack-defence balance:** league goals, shots and points, plus goals by
-  primary family. No xG.
+  primary family. fxG is a separate descriptive block; it is not a performance
+  verdict while the provider-xG gate fails.
 - **Mission context:** the documented Cormack-era trading pillars and the
   current-season turnover/selection record. Ratings are not used for history.
 
@@ -194,6 +197,15 @@ The register spans matchday, off the pitch and the chairman's record; there is n
 bases explicitly: observed starting roles for family ratings and shape, and the
 squad's primary role for bench/goal attribution. Duplicate provider identities
 are mapped before aggregation.
+
+## fxG
+
+fxG estimates a competition-season on-target conversion rate with an
+empirical-Bayes Beta prior and multiplies it by the match's shots on target. The
+80% interval carries conversion uncertainty and a match-level overdispersion
+term. It has no shot location, opponent adjustment or home advantage. Provider
+xG is carried separately where available and never blended in. The model card,
+evaluation gate and limitations are in [xg.md](xg.md).
 
 ## Provenance and squad needs
 

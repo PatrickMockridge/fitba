@@ -21,7 +21,8 @@ Before changing public copy, layout or a number:
 7. [`docs/product-strategy.md`](docs/product-strategy.md) — scope and roadmap
    only.
 8. The relevant page specification: `docs/matchday.md`, `docs/analysis.md`,
-   `docs/needs.md`, `docs/transfers.md`, `docs/squad.md`.
+   `docs/fixtures.md`, `docs/xg.md`, `docs/needs.md`,
+   `docs/transfers.md`, `docs/squad.md`.
 
 Do not start a style, copy or number change without reading 1–6.
 

@@ -92,3 +92,76 @@ The themes section was rebuilt as **Data analysis**. The storage path stays
 - Audit impact: `case.*` families are `provenance_only` in this version with
   explicit limitations; the guard checks claim counts, statuses, evidence,
   benchmark and headline/table agreement.
+
+## 2.1.0 — 2026-10-22
+
+The API-Football match record, fxG and the confidence ledger.
+
+- Added `matches.document`, `fixtures.index`, `xg.document` and
+  `confidence.document` metric families. Each covers a published document family
+  with wildcard payload paths; all are `provenance_only` with explicit
+  limitations in this version. No existing metric or published value was
+  changed.
+- Added `param.xg`, `param.confidence` and `param.fixtures`. The values are the
+  live `config/xg.yaml`, `config/confidence.yaml` and `config/fixtures.yaml`
+  nodes.
+- The registry version moves to `2.1.0`. The audit grows from 53 to 57 metrics
+  and from 14 to 17 parameters. Numeric coverage now includes 370 fixture
+  documents plus the fixture index, xG and confidence payloads.
+- New surfaces: `/matches/` and `/analysis/xg/`; new markers on `/analysis/` and
+  `/matchday/`. Existing surfaces and contracts are unchanged.
+- fxG gate: fit before 2026-27, validate on 2026-27 provider xG. At this publish
+  the gate fails, so fxG is descriptive and is not used in a confidence verdict.
+- Confidence ledger: team form and up to 12 current-squad players, with 80%
+  intervals and mechanical verdicts. 2019-20 has no historical provider player
+  stats; later seasons are partial.
+- Affected surfaces: `/matches/`, `/analysis/`, `/analysis/xg/`, `/matchday/`,
+  `/methodology/`, `/metrics/`, `/status/`.
+- Audit impact: the four new families are present and sourced; they do not add
+  an independent recomputation of the fxG model or the confidence intervals in
+  this version.
+- Change-control comparison now normalises the previous registry through the
+  same metric/parameter models, so default-valued fields are not reported as
+  semantic changes. A real formula, parameter or path change still fails.
+
+### Value changes in 2.1.0
+
+The current-season football-data.co.uk re-ingest added one Championship result
+before the 2026-10-22 18:17 publish. The table formula did not change.
+
+| Field | Before | After | Reason |
+|---|---:|---:|---|
+| Dunfermline Athletic played / points / position | 9 / 14 / 6 | 10 / 15 / 5 | New 2026-27 Championship result in the source CSV. |
+| Partick Thistle played / points / position | 10 / 21 / 3 | 11 / 22 / 2 | Same result. |
+| Livingston position | 5 | 6 | Same result. |
+| Raith Rovers position | 2 | 3 | Same result. |
+
+Affected surfaces: `/`, `/competitions/`, `/status/`, `/metrics/`. The other
+three 2026-27 league tables are unchanged. The audit is regenerated with the new
+dataset version and passes.
+
+The same release completed the historical match-stat backfill. Coverage counts
+in `history` and the availability of lineup/event/player-stat fields increased
+where the provider returned data; no history formula or denominator changed.
+
+## 2.2.0 — 2026-10-22
+
+Removed the confidence ledger. It repeated obvious statements and factoids
+without adding evidence to the argument. This is an owner-directed removal, not
+a formula repair.
+
+- Removed the `confidence.document` metric family, the `param.confidence`
+  parameter, the `confidence/aberdeen.json` payload and mart, the
+  `ConfidenceTable` component, the confidence types and getter, and the
+  `/analysis/` and `/matchday/` confidence blocks.
+- Removed the `confidence.ledger` and `matchday.confidence` contract markers and
+  their pinned tests. No other surface contract changed.
+- Removed `docs/confidence.md` and the confidence method sections from
+  `docs/analysis.md`, `docs/matchday.md` and `docs/methodology.md`.
+- Retained from 2.1.0: `matches.document`, `fixtures.index`, `xg.document`,
+  `param.xg` and `param.fixtures`.
+- Registry version `2.2.0`; 56 metrics and 16 parameters.
+- fxG remains, descriptive only while the provider gate fails. It is no longer
+  described as entering a confidence verdict.
+- Affected surfaces: `/analysis/`, `/matchday/`, `/methodology/`, `/metrics/`,
+  `/status/`.

@@ -362,6 +362,8 @@ def history(
     if not backfill:
         console.print("Use --status, --probe --season 2019-20, --backfill or --backfill-transfers.")
         return
+    if season == "current":
+        season = current_season()
     selected_stages = tuple(part.strip() for part in stages.split(",") if part.strip())
     unknown = set(selected_stages) - set(STAGES)
     if unknown:
@@ -514,6 +516,39 @@ def tables(
                 ]
             )
         console.print(rich)
+
+
+@app.command()
+def xg(
+    fit: Annotated[bool, typer.Option("--fit", help="Fit and report the fxG model")] = False,
+    evaluate: Annotated[
+        bool, typer.Option("--evaluate", help="Run the provider-xG evaluation gate")
+    ] = False,
+) -> None:
+    """Report the local fxG model and its provider-xG gate."""
+    if not fit and not evaluate:
+        console.print("Use --fit or --evaluate.")
+        return
+    from fitba.publish.xg import build_xg_payload
+
+    payload = build_xg_payload()
+    model = payload.get("model") or {}
+    evaluation = payload.get("evaluation") or {}
+    console.print(
+        f"{model.get('model_id')}: fit_matches={model.get('fit_matches')} "
+        f"overdispersion={model.get('overdispersion')}"
+    )
+    console.print(
+        "gate: "
+        f"{evaluation.get('status')} | matches={evaluation.get('matches')} "
+        f"bias={evaluation.get('bias')} mae={evaluation.get('mae')} "
+        f"slope={evaluation.get('calibration_slope')}"
+    )
+    if evaluation.get("status") != "pass":
+        console.print(
+            "The gate has not passed; publish the numbers as descriptive, not as a "
+            "confidence verdict."
+        )
 
 
 @app.command()

@@ -3,7 +3,8 @@ import { CaseBenchmark } from "@/components/CaseBenchmark";
 import { CaseClaimCard } from "@/components/CaseClaimCard";
 import { CaseCoverage } from "@/components/CaseCoverage";
 import { ContractPage } from "@/components/ContractPage";
-import { getCase } from "@/lib/data";
+import { XgTable } from "@/components/XgTable";
+import { getCase, getXg } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
 export const metadata = {
@@ -28,6 +29,8 @@ export default function DataAnalysisPage() {
       </ContractPage>
     );
   }
+
+  const xg = getXg();
 
   return (
     <ContractPage surface="analysis">
@@ -75,6 +78,22 @@ export default function DataAnalysisPage() {
           <CaseClaimCard key={claim.id} claim={claim} />
         ))}
       </div>
+
+      {xg?.matches?.length ? (
+        <>
+          <XgTable aggregates={xg.aggregates} />
+          <p className="fine-print" data-contract="analysis.xg-link">
+            fxG is descriptive while the provider-xG gate fails. It is not a
+            performance verdict.{" "}
+            <Link className="text-link" href="/analysis/xg/">
+              fxG model, evaluation and coverage →
+            </Link>{" "}
+            <Link className="text-link" href="/matches/">
+              Match record →
+            </Link>
+          </p>
+        </>
+      ) : null}
 
       <CaseBenchmark benchmark={data.benchmark} />
       <CaseCoverage coverage={data.coverage} />

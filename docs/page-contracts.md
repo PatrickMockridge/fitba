@@ -83,9 +83,10 @@ Must remain visible:
 - The evidence table columns: Claim, Count, Sample, Period, Status, Source.
 - The peer benchmark table and its note that other clubs' transfer and wage
   models are not in the public record.
+- The compact fxG aggregate table and the link to `/analysis/xg/`.
 - Coverage: availability, historical appearances and the missing data classes.
-- Links to matchday, squad, recruitment, transfers, history, methodology,
-  metrics and sources.
+- Links to matchday, matches, squad, recruitment, transfers, history,
+  methodology, metrics and sources.
 
 May be disclosed: method, definitions, long caveats and the full data-science
 supporting content. They are linked, not repeated before the argument.
@@ -94,6 +95,54 @@ Forbidden: the old five-card/five-panel grid, the 80/20 split, a question
 heading, a claim without a count or status, a causal claim from a small sample,
 a proxy presented as a measured set-play/error claim, or hidden contracted data.
 
+
+### `/analysis/xg/` — fxG model
+
+Must remain visible:
+
+- The model id, label, experimental status and fit size.
+- The provider-xG evaluation: status, validation season, matches, bias, MAE and
+  calibration slope.
+- The aggregate table with columns Scope, Matches, fxG, 80% interval, Goals,
+  Goals − fxG, 80% interval.
+- Coverage: played fixtures, with fxG, with provider xG, missing team stats.
+- The model card: what it does, what it does not do and the gate result.
+- Links to Data analysis, methodology and the match record.
+
+Forbidden: calling fxG provider xG, hiding the gate failure, a point estimate
+without its interval, or a result prediction.
+
+### `/matches/` — match record
+
+Must remain visible:
+
+- Every played fixture grouped by season, with Date, Competition, Home, Score,
+  Away, Result and Depth.
+- Links to each fixture page.
+- The depth labels and the note that missing classes are unavailable.
+- Links to Data analysis, fxG, matchday and the Cormack era.
+
+Forbidden: a fixed "featured match" that hides the rest, a result without a
+depth label, or a match page link that does not resolve.
+
+### `/matches/<fixture_id>/` — fixture page
+
+Must remain visible:
+
+- Score, competition, round, date, venue, referee, half-time and penalties where
+  present.
+- The deterministic read with measured/inferred/unknown basis.
+- Match stats table with source and basis per row.
+- fxG and provider xG separately, or an explicit unavailable state.
+- Timeline with goals, cards, substitutions and VAR where available.
+- Both lineups and the substitutes.
+- Player match stats where available.
+- Coverage and the depth state.
+- Previous/next match, season and match-record links.
+
+Forbidden: a missing data class shown as zero, an invented attendance or
+injury, a question H1, "deserved"/"dominated" verdict language, or a fixture
+page omitted because the feed is incomplete.
 
 ### `/themes/` — legacy redirect
 

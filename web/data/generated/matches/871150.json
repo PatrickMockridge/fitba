@@ -1,0 +1,247 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": true,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "W",
+    "away_goals": 2,
+    "away_ht_goals": 0,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2022-06-25",
+    "extra_time": false,
+    "fixture_id": 871150,
+    "home_goals": 1,
+    "home_ht_goals": 0,
+    "home_penalties": null,
+    "home_team_id": "other:buckie-thistle",
+    "home_team_name": "Buckie Thistle",
+    "href": "/matches/871150/",
+    "referee": null,
+    "result": "L",
+    "round": "Club Friendlies 5",
+    "season": "2022-23",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": null
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2022-07-01",
+        "fixture_id": 890132,
+        "goals_against": 1,
+        "goals_for": 1,
+        "href": "/matches/890132/",
+        "opponent_name": "St Johnstone",
+        "venue": "H"
+      },
+      {
+        "date": "2022-07-06",
+        "fixture_id": 870479,
+        "goals_against": 1,
+        "goals_for": 7,
+        "href": "/matches/870479/",
+        "opponent_name": "Brechin City",
+        "venue": "A"
+      },
+      {
+        "date": "2022-07-06",
+        "fixture_id": 891298,
+        "goals_against": 1,
+        "goals_for": 7,
+        "href": "/matches/891298/",
+        "opponent_name": "Brechin City",
+        "venue": "H"
+      },
+      {
+        "date": "2022-07-06",
+        "fixture_id": 922189,
+        "goals_against": 1,
+        "goals_for": 7,
+        "href": "/matches/922189/",
+        "opponent_name": "Brechin City",
+        "venue": "A"
+      }
+    ],
+    "before": [
+      {
+        "date": "2022-06-25",
+        "fixture_id": 870984,
+        "goals_against": 1,
+        "goals_for": 2,
+        "href": "/matches/870984/",
+        "opponent_name": "Buckie Thistle",
+        "venue": "A"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/890132/",
+    "previous": "/matches/870984/",
+    "season": "/history/2022-23/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "M. Barry opened the scoring on 48 minutes."
+      },
+      {
+        "basis": "measured",
+        "text": "C. Ramirez made it 1-1 on 64 minutes."
+      },
+      {
+        "basis": "measured",
+        "text": "The last goal came on 89 minutes, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "The score includes a penalty."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen win it late against Buckie Thistle",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 3,
+      "event_score": {
+        "away": 2,
+        "home": 1
+      },
+      "final_score": {
+        "away": 2,
+        "home": 1
+      },
+      "matched": true
+    }
+  },
+  "timeline": [
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 48,
+      "player_name": "M. Barry",
+      "score_after": {
+        "away": 0,
+        "home": 1
+      },
+      "team_name": "Buckie Thistle"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Penalty",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": true,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 64,
+      "player_name": "C. Ramirez",
+      "score_after": {
+        "away": 1,
+        "home": 1
+      },
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "comments": null,
+      "detail": "Normal Goal",
+      "event_type": "goal",
+      "extra_minute": null,
+      "is_goal": true,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 89,
+      "player_name": "M. Kennedy",
+      "score_after": {
+        "away": 2,
+        "home": 1
+      },
+      "team_name": "Aberdeen"
+    }
+  ],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

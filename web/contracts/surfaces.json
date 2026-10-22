@@ -2,7 +2,7 @@
   "version": 1,
   "identity": {
     "line": "Aberdeen FC, without the noise.",
-    "lede": "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes.",
+    "lede": "An independent, data-driven record of Aberdeen FC \u2014 the numbers, the sources and the argument, without the hot takes.",
     "banned_phrases": [
       "The Scottish pyramid",
       "from Pittodrie out",
@@ -43,6 +43,7 @@
       ]
     },
     "links": [
+      "/matches/",
       "/analysis/",
       "/methodology/",
       "/about/",
@@ -133,7 +134,7 @@
           "copy": {
             "home.hero": [
               "Aberdeen FC, without the noise.",
-              "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes."
+              "An independent, data-driven record of Aberdeen FC \u2014 the numbers, the sources and the argument, without the hot takes."
             ]
           },
           "metadata": {
@@ -272,7 +273,9 @@
             "/history/",
             "/transfers/",
             "/sources/",
-            "/methodology/"
+            "/methodology/",
+            "/matches/",
+            "/analysis/"
           ],
           "headings": {
             "forbid_question": [
@@ -1055,7 +1058,7 @@
           "copy": {
             "about.hero": [
               "Aberdeen FC, without the noise.",
-              "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes."
+              "An independent, data-driven record of Aberdeen FC \u2014 the numbers, the sources and the argument, without the hot takes."
             ]
           },
           "metadata": {
@@ -1285,6 +1288,14 @@
             {
               "id": "case.links",
               "min": 1
+            },
+            {
+              "id": "xg.aggregate",
+              "min": 1
+            },
+            {
+              "id": "analysis.xg-link",
+              "min": 1
             }
           ],
           "columns": {
@@ -1295,6 +1306,15 @@
               "Period",
               "Status",
               "Source"
+            ],
+            "xg.aggregate": [
+              "Scope",
+              "Matches",
+              "fxG",
+              "80% interval",
+              "Goals",
+              "Goals \u2212 fxG",
+              "80% interval"
             ]
           },
           "links": [
@@ -1305,7 +1325,9 @@
             "/history/",
             "/methodology/",
             "/metrics/",
-            "/sources/"
+            "/sources/",
+            "/analysis/xg/",
+            "/matches/"
           ],
           "headings": {
             "forbid_question": [
@@ -1319,6 +1341,141 @@
             "title_contains": "Data analysis",
             "description_contains": "Aberdeen"
           }
+        }
+      }
+    },
+    {
+      "id": "matches",
+      "path": "/matches/",
+      "owners": [
+        "web/app/matches/page.tsx",
+        "web/components/MatchHeader.tsx",
+        "web/lib/data.ts"
+      ],
+      "ci_states": [
+        "full",
+        "empty"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "matches.hero",
+              "min": 1
+            },
+            {
+              "id": "matches.season",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "matches.season": [
+              "Date",
+              "Competition",
+              "Home",
+              "Score",
+              "Away",
+              "Result",
+              "Depth"
+            ]
+          },
+          "links": [
+            "/analysis/xg/",
+            "/matchday/",
+            "/history/",
+            "/analysis/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Match record"
+          },
+          "metadata": {
+            "title_contains": "Match record",
+            "description_contains": "Aberdeen"
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "matches.hero",
+              "min": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "analysis-xg",
+      "path": "/analysis/xg/",
+      "owners": [
+        "web/app/analysis/xg/page.tsx",
+        "web/components/XgTable.tsx",
+        "web/lib/data.ts"
+      ],
+      "ci_states": [
+        "full",
+        "empty"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "xg.hero",
+              "min": 1
+            },
+            {
+              "id": "xg.model",
+              "min": 1
+            },
+            {
+              "id": "xg.aggregate",
+              "min": 1
+            },
+            {
+              "id": "xg.coverage",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "xg.aggregate": [
+              "Scope",
+              "Matches",
+              "fxG",
+              "80% interval",
+              "Goals",
+              "Goals \u2212 fxG",
+              "80% interval"
+            ]
+          },
+          "links": [
+            "/analysis/",
+            "/methodology/",
+            "/matches/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "fxG"
+          },
+          "metadata": {
+            "title_contains": "fxG",
+            "description_contains": "expected goals"
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "xg.hero",
+              "min": 1
+            }
+          ]
         }
       }
     }

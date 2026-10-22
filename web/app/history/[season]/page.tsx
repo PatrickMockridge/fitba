@@ -568,6 +568,8 @@ export default async function HistorySeasonPage({
         {next ? <Link href={next.href}>{next.season} →</Link> : null}
         {" · "}
         <Link href="/history/">The record</Link>
+        {" · "}
+        <Link href="/matches/">Match record</Link>
       </p>
     </>
   );

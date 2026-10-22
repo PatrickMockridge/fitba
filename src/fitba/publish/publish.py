@@ -49,6 +49,7 @@ from fitba.normalize.teams import TeamRegistry
 from fitba.normalize.transfer_audit import build_transfer_audit
 from fitba.publish.availability import build_availability_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
+from fitba.publish.fixture import build_fixture_payloads
 from fitba.publish.history import build_history_payloads
 from fitba.publish.matchday import (
     build_matchday_payload,
@@ -66,6 +67,7 @@ from fitba.publish.rumours import (
 from fitba.publish.shapes import shape_payload
 from fitba.publish.squad import PlayerLinkIndex, squad_payload
 from fitba.publish.themes import build_themes_payload, fallback_themes_payload
+from fitba.publish.xg import build_xg_payload, fallback_xg_payload
 from fitba.settings import (
     WEB_DATA_DIR,
     ensure_dirs,
@@ -127,6 +129,35 @@ def _write(path: Path, payload: Any) -> dict[str, Any]:
         "path": str(path),
         "bytes": len(data),
         "checksum": "sha256:" + hashlib.sha256(data).hexdigest(),
+    }
+
+
+def _previous_fixture_payloads(target: Path) -> dict[str, Any] | None:
+    index_path = target / "fixtures" / "index.json"
+    if not index_path.exists():
+        return None
+    try:
+        index = orjson.loads(index_path.read_bytes())
+    except orjson.JSONDecodeError:
+        return None
+    documents: dict[int, dict[str, Any]] = {}
+    for path in (target / "matches").glob("*.json"):
+        if not path.stem.isdigit():
+            continue
+        try:
+            documents[int(path.stem)] = orjson.loads(path.read_bytes())
+        except orjson.JSONDecodeError:
+            continue
+    if not documents:
+        return None
+    return {
+        "schema_version": index.get("schema_version", "1.0.0"),
+        "generated_at": index.get("generated_at"),
+        "count": len(index.get("fixtures") or []),
+        "fixtures": index.get("fixtures") or [],
+        "documents": documents,
+        "state": "stale",
+        "stale_reason": "fixture_build_returned_fewer_pages",
     }
 
 
@@ -1066,6 +1097,14 @@ def publish(
         except orjson.JSONDecodeError:
             previous_case = None
 
+    previous_xg = None
+    previous_xg_path = target / "xg" / "aberdeen.json"
+    if previous_xg_path.exists():
+        try:
+            previous_xg = orjson.loads(previous_xg_path.read_bytes())
+        except orjson.JSONDecodeError:
+            previous_xg = None
+
     previous_needs = None
     previous_needs_path = target / "needs" / "aberdeen.json"
     if previous_needs_path.exists():
@@ -1342,6 +1381,85 @@ def publish(
         }
     )
 
+    try:
+        xg_payload = build_xg_payload(season=target_season, generated_at=generated_at)
+    except Exception as error:  # noqa: BLE001 - fxG must not fail the publish
+        xg_payload = fallback_xg_payload(
+            previous_xg,
+            reason=f"xg_build_failed:{type(error).__name__}",
+        )
+    if (xg_payload.get("coverage") or {}).get("matches", 0) == 0 and previous_xg:
+        xg_payload = fallback_xg_payload(
+            previous_xg, reason="xg_build_returned_no_matches"
+        )
+    xg_info = _write(temp / "xg" / "aberdeen.json", xg_payload)
+    written.append(xg_info)
+    marts.append(
+        {
+            "id": "xg.sco:aberdeen",
+            "path": "xg/aberdeen.json",
+            "rows": len(xg_payload.get("matches", [])),
+            "checksum": xg_info["checksum"],
+            "season": target_season,
+        }
+    )
+
+    try:
+        fixture_payloads = build_fixture_payloads(
+            generated_at=generated_at,
+            xg_payload=xg_payload,
+        )
+    except Exception as error:  # noqa: BLE001 - a broken fixture build is visible, not hidden
+        fixture_payloads = {
+            "schema_version": "1.0.0",
+            "generated_at": generated_at,
+            "count": 0,
+            "fixtures": [],
+            "documents": {},
+            "state": "unavailable",
+            "stale_reason": f"fixture_build_failed:{type(error).__name__}",
+        }
+    previous_fixtures = _previous_fixture_payloads(target)
+    if previous_fixtures and fixture_payloads.get("count", 0) < previous_fixtures["count"]:
+        previous_fixtures["stale_reason"] = (
+            f"new fixture build returned {fixture_payloads.get('count', 0)} pages; "
+            f"kept {previous_fixtures['count']}"
+        )
+        fixture_payloads = previous_fixtures
+    fixture_index = {
+        "schema_version": fixture_payloads.get("schema_version"),
+        "generated_at": fixture_payloads.get("generated_at"),
+        "count": fixture_payloads.get("count", 0),
+        "fixtures": fixture_payloads.get("fixtures", []),
+    }
+    if fixture_payloads.get("state"):
+        fixture_index["state"] = fixture_payloads["state"]
+        fixture_index["stale_reason"] = fixture_payloads.get("stale_reason")
+    fixtures_info = _write(temp / "fixtures" / "index.json", fixture_index)
+    written.append(fixtures_info)
+    marts.append(
+        {
+            "id": "fixtures.sco:aberdeen",
+            "path": "fixtures/index.json",
+            "rows": fixture_index["count"],
+            "checksum": fixtures_info["checksum"],
+            "season": target_season,
+        }
+    )
+    for fixture_id, document in sorted(fixture_payloads.get("documents", {}).items()):
+        document_info = _write(temp / "matches" / f"{fixture_id}.json", document)
+        written.append(document_info)
+    marts.append(
+        {
+            "id": "matches.sco:aberdeen",
+            "path": "matches/",
+            "rows": len(fixture_payloads.get("documents", {})),
+            "checksum": None,
+            "season": target_season,
+            "row_basis": "one file per played fixture",
+        }
+    )
+
     rumours_data = rumours_payload(
         rumour_rows, target_season, player_index, generated_at=generated_at
     )
@@ -1568,6 +1686,39 @@ def publish(
     search.append(
         {
             "type": "page",
+            "id": "matches",
+            "name": "Match record",
+            "slug": "matches",
+            "href": "/matches/",
+        }
+    )
+    search.extend(
+        {
+            "type": "match",
+            "id": f"fixture:{item['fixture_id']}",
+            "name": (
+                f"{item.get('home_team_name')} {item.get('home_goals')}-"
+                f"{item.get('away_goals')} {item.get('away_team_name')}"
+            ),
+            "slug": str(item["fixture_id"]),
+            "href": item.get("href") or f"/matches/{item['fixture_id']}/",
+        }
+        for item in fixture_index.get("fixtures", [])
+        if item.get("fixture_id") is not None
+    )
+    if xg_payload.get("matches"):
+        search.append(
+            {
+                "type": "page",
+                "id": "analysis-xg",
+                "name": "fxG model and aggregates",
+                "slug": "analysis-xg",
+                "href": "/analysis/xg/",
+            }
+        )
+    search.append(
+        {
+            "type": "page",
             "id": "sources",
             "name": "Data sources and provenance",
             "slug": "sources",
@@ -1758,6 +1909,37 @@ def publish(
             "domains": len({claim.get("domain") for claim in case_payload.get("claims", [])}),
             "benchmark_rows": len((case_payload.get("benchmark") or {}).get("rows") or []),
             "note": (case_payload.get("coverage") or {}).get("note"),
+        },
+        "xg": {
+            "model": (xg_payload.get("model") or {}).get("model_id"),
+            "state": xg_payload.get("state", "available"),
+            "matches": (xg_payload.get("coverage") or {}).get("matches"),
+            "with_fxg": (xg_payload.get("coverage") or {}).get("with_fxg"),
+            "with_provider_xg": (xg_payload.get("coverage") or {}).get("with_provider_xg"),
+            "evaluation": (xg_payload.get("evaluation") or {}).get("status"),
+            "note": (xg_payload.get("coverage") or {}).get("note"),
+        },
+        "fixtures": {
+            "count": fixture_index.get("count", 0),
+            "full": sum(
+                1
+                for item in fixture_index.get("fixtures", [])
+                if item.get("depth") == "full"
+            ),
+            "result": sum(
+                1
+                for item in fixture_index.get("fixtures", [])
+                if item.get("depth") == "result"
+            ),
+            "score": sum(
+                1
+                for item in fixture_index.get("fixtures", [])
+                if item.get("depth") == "score"
+            ),
+            "note": (
+                "One page per played Cormack-era fixture; depth is the data "
+                "actually available."
+            ),
         },
         "provenance": {
             "layers": len(provenance_payload.get("layers", [])),

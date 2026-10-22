@@ -1,0 +1,128 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": false,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "W",
+    "away_goals": 4,
+    "away_ht_goals": 3,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2024-07-10",
+    "extra_time": false,
+    "fixture_id": 1210271,
+    "home_goals": 0,
+    "home_ht_goals": 0,
+    "home_penalties": null,
+    "home_team_id": "sco:peterhead",
+    "home_team_name": "Peterhead",
+    "href": "/matches/1210271/",
+    "referee": null,
+    "result": "L",
+    "round": "Club Friendlies 3",
+    "season": "2024-25",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": "Balmoor Stadium"
+  },
+  "form": {
+    "after": [],
+    "before": []
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/1202267/",
+    "previous": "/matches/1196494/",
+    "season": "/history/2024-25/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "unknown",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "The event feed records 0 goals; the final score is 0-4. The score is authoritative."
+      },
+      {
+        "basis": "unknown",
+        "text": "The event feed records no goals for this fixture."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen beat Peterhead 4-0",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 0,
+      "event_score": {
+        "away": 0,
+        "home": 0
+      },
+      "final_score": {
+        "away": 4,
+        "home": 0
+      },
+      "matched": false
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

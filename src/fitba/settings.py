@@ -139,6 +139,24 @@ def themes() -> dict[str, Any]:
     return load_yaml(path) if path.exists() else {}
 
 
+@lru_cache(maxsize=1)
+def fixtures_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "fixtures.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
+@lru_cache(maxsize=1)
+def xg_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "xg.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
+@lru_cache(maxsize=1)
+def confidence_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "confidence.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
 
 @lru_cache(maxsize=1)
 def provenance() -> dict[str, Any]:

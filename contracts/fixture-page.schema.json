@@ -1,0 +1,1247 @@
+{
+  "$defs": {
+    "CoverageBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "events": {
+          "title": "Events",
+          "type": "boolean"
+        },
+        "lineups": {
+          "title": "Lineups",
+          "type": "boolean"
+        },
+        "team_stats": {
+          "title": "Team Stats",
+          "type": "boolean"
+        },
+        "player_stats": {
+          "title": "Player Stats",
+          "type": "boolean"
+        },
+        "xg": {
+          "title": "Xg",
+          "type": "boolean"
+        },
+        "depth": {
+          "title": "Depth",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "events",
+        "lineups",
+        "team_stats",
+        "player_stats",
+        "xg",
+        "depth",
+        "note"
+      ],
+      "title": "CoverageBlock",
+      "type": "object"
+    },
+    "FixtureInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "integer"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "competition_id": {
+          "title": "Competition Id",
+          "type": "string"
+        },
+        "competition_name": {
+          "title": "Competition Name",
+          "type": "string"
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Round"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        },
+        "venue_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Venue Name"
+        },
+        "referee": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Referee"
+        },
+        "home_team_id": {
+          "title": "Home Team Id",
+          "type": "string"
+        },
+        "home_team_name": {
+          "title": "Home Team Name",
+          "type": "string"
+        },
+        "away_team_id": {
+          "title": "Away Team Id",
+          "type": "string"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
+          "type": "string"
+        },
+        "home_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Goals"
+        },
+        "away_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Goals"
+        },
+        "home_ht_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Ht Goals"
+        },
+        "away_ht_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Ht Goals"
+        },
+        "home_penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Penalties"
+        },
+        "away_penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Penalties"
+        },
+        "extra_time": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Time"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "aberdeen_result": {
+          "title": "Aberdeen Result",
+          "type": "string"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "season",
+        "date",
+        "competition_id",
+        "competition_name",
+        "status",
+        "venue",
+        "home_team_id",
+        "home_team_name",
+        "away_team_id",
+        "away_team_name",
+        "result",
+        "aberdeen_result",
+        "href"
+      ],
+      "title": "FixtureInfo",
+      "type": "object"
+    },
+    "FormBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "before": {
+          "items": {
+            "$ref": "#/$defs/FormRow"
+          },
+          "title": "Before",
+          "type": "array"
+        },
+        "after": {
+          "items": {
+            "$ref": "#/$defs/FormRow"
+          },
+          "title": "After",
+          "type": "array"
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "title": "FormBlock",
+      "type": "object"
+    },
+    "FormRow": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "integer"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "opponent_name": {
+          "title": "Opponent Name",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        },
+        "goals_for": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals For"
+        },
+        "goals_against": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Against"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "date",
+        "opponent_name",
+        "venue",
+        "href"
+      ],
+      "title": "FormRow",
+      "type": "object"
+    },
+    "LineupBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "formation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Formation"
+        },
+        "coach_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coach Name"
+        },
+        "starters": {
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Starters",
+          "type": "array"
+        },
+        "substitutes": {
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Substitutes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "team_id",
+        "team_name",
+        "starters",
+        "substitutes"
+      ],
+      "title": "LineupBlock",
+      "type": "object"
+    },
+    "LineupPlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "shirt_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shirt Number"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "grid": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grid"
+        },
+        "on_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "On Minute"
+        }
+      },
+      "title": "LineupPlayer",
+      "type": "object"
+    },
+    "PlayerStat": {
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Id"
+        },
+        "rating": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals"
+        },
+        "assists": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assists"
+        },
+        "shots_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Total"
+        },
+        "shots_on": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On"
+        },
+        "passes_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passes Total"
+        },
+        "pass_accuracy": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Accuracy"
+        },
+        "tackles": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tackles"
+        },
+        "duels_won": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duels Won"
+        },
+        "yellow_cards": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Yellow Cards"
+        },
+        "red_cards": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red Cards"
+        }
+      },
+      "title": "PlayerStat",
+      "type": "object"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "layer": {
+          "title": "Layer",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "layer",
+        "note"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "StatsBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "home": {
+          "additionalProperties": true,
+          "title": "Home",
+          "type": "object"
+        },
+        "away": {
+          "additionalProperties": true,
+          "title": "Away",
+          "type": "object"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/StatsRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "coverage": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Coverage",
+          "type": "object"
+        }
+      },
+      "required": [
+        "home",
+        "away",
+        "rows",
+        "coverage"
+      ],
+      "title": "StatsBlock",
+      "type": "object"
+    },
+    "StatsRow": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "home": {
+          "default": null,
+          "title": "Home"
+        },
+        "away": {
+          "default": null,
+          "title": "Away"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "source",
+        "basis"
+      ],
+      "title": "StatsRow",
+      "type": "object"
+    },
+    "SummaryBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "bullets": {
+          "items": {
+            "$ref": "#/$defs/SummaryBullet"
+          },
+          "title": "Bullets",
+          "type": "array"
+        },
+        "reconciliation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SummaryReconciliation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "headline",
+        "basis",
+        "bullets",
+        "note"
+      ],
+      "title": "SummaryBlock",
+      "type": "object"
+    },
+    "SummaryBullet": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "basis"
+      ],
+      "title": "SummaryBullet",
+      "type": "object"
+    },
+    "SummaryReconciliation": {
+      "additionalProperties": false,
+      "properties": {
+        "event_goals": {
+          "title": "Event Goals",
+          "type": "integer"
+        },
+        "event_score": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Event Score",
+          "type": "object"
+        },
+        "final_score": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Final Score",
+          "type": "object"
+        },
+        "matched": {
+          "title": "Matched",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_goals",
+        "event_score",
+        "final_score",
+        "matched"
+      ],
+      "title": "SummaryReconciliation",
+      "type": "object"
+    },
+    "TimelineRow": {
+      "additionalProperties": false,
+      "properties": {
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minute"
+        },
+        "extra_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Minute"
+        },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "assist_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assist Name"
+        },
+        "event_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Type"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "comments": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Comments"
+        },
+        "is_goal": {
+          "title": "Is Goal",
+          "type": "boolean"
+        },
+        "is_own_goal": {
+          "title": "Is Own Goal",
+          "type": "boolean"
+        },
+        "is_penalty": {
+          "title": "Is Penalty",
+          "type": "boolean"
+        },
+        "is_shootout": {
+          "title": "Is Shootout",
+          "type": "boolean"
+        },
+        "is_red_card": {
+          "title": "Is Red Card",
+          "type": "boolean"
+        },
+        "is_second_yellow": {
+          "title": "Is Second Yellow",
+          "type": "boolean"
+        },
+        "is_var": {
+          "title": "Is Var",
+          "type": "boolean"
+        },
+        "score_after": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Score After",
+          "type": "object"
+        }
+      },
+      "required": [
+        "is_goal",
+        "is_own_goal",
+        "is_penalty",
+        "is_shootout",
+        "is_red_card",
+        "is_second_yellow",
+        "is_var",
+        "score_after"
+      ],
+      "title": "TimelineRow",
+      "type": "object"
+    },
+    "XgBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "title": "Available",
+          "type": "boolean"
+        },
+        "home": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/XgSide"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "away": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/XgSide"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Id"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "title": "XgBlock",
+      "type": "object"
+    },
+    "XgSide": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "low": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Low"
+        },
+        "high": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "High"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        }
+      },
+      "title": "XgSide",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "fixture": {
+      "$ref": "#/$defs/FixtureInfo"
+    },
+    "depth": {
+      "enum": [
+        "full",
+        "result",
+        "score"
+      ],
+      "title": "Depth",
+      "type": "string"
+    },
+    "summary": {
+      "$ref": "#/$defs/SummaryBlock"
+    },
+    "stats": {
+      "$ref": "#/$defs/StatsBlock"
+    },
+    "xg": {
+      "$ref": "#/$defs/XgBlock"
+    },
+    "timeline": {
+      "items": {
+        "$ref": "#/$defs/TimelineRow"
+      },
+      "title": "Timeline",
+      "type": "array"
+    },
+    "lineups": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/LineupBlock"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Lineups",
+      "type": "object"
+    },
+    "player_stats": {
+      "items": {
+        "$ref": "#/$defs/PlayerStat"
+      },
+      "title": "Player Stats",
+      "type": "array"
+    },
+    "form": {
+      "$ref": "#/$defs/FormBlock"
+    },
+    "coverage": {
+      "$ref": "#/$defs/CoverageBlock"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRef"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "links": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Links",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "fixture",
+    "depth",
+    "summary",
+    "stats",
+    "xg",
+    "timeline",
+    "lineups",
+    "player_stats",
+    "form",
+    "coverage",
+    "sources",
+    "links"
+  ],
+  "title": "FixtureDocument",
+  "type": "object"
+}

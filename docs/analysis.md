@@ -2,8 +2,10 @@
 
 **Status:** live. Last reviewed 2026-10-22.
 **Route:** `/analysis/` (the old `/themes/` route redirects here). **Nav and H1:** Data analysis.
-**Config:** `config/themes.yaml`. **Payload:** `web/data/generated/themes/aberdeen.json`.
-**Spec:** [case-spec.md](case-spec.md). **Guard:** `scripts/check_themes.py`.
+**Config:** `config/themes.yaml`, `config/xg.yaml`.
+**Payloads:** `themes/aberdeen.json`, `xg/aberdeen.json`.
+**Spec:** [case-spec.md](case-spec.md), [xg.md](xg.md).
+**Guards:** `scripts/check_themes.py`, `scripts/check_xg.py`.
 
 ## What it is
 
@@ -45,6 +47,13 @@ page prose. Contracted evidence stays visible.
 
 The count is whatever `config/themes.yaml` lists. There is no fixed five-card
 grid and no 80/20 weighting.
+
+## fxG block
+
+The page carries a compact fxG table and links to `/analysis/xg/`. fxG is
+fitba's shot-on-target model, not provider xG. At the 2026-10-22 publish the
+provider-xG gate fails, so fxG is descriptive only. The model card is in
+[xg.md](xg.md).
 
 ## Benchmark
 
@@ -106,6 +115,8 @@ bump and an entry in [metric-changes.md](metric-changes.md).
 ```bash
 uv run fitba publish --season current --profile public --require-validation
 uv run python scripts/check_themes.py
+uv run python scripts/check_xg.py
 uv run python scripts/check_metrics.py --strict
 make themes-check
+make xg-check
 ```

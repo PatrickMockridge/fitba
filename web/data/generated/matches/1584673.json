@@ -1,0 +1,180 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": false,
+    "lineups": true,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "L",
+    "away_goals": 6,
+    "away_ht_goals": null,
+    "away_penalties": null,
+    "away_team_id": "sco:ross-county",
+    "away_team_name": "Ross County",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2026-07-07",
+    "extra_time": false,
+    "fixture_id": 1584673,
+    "home_goals": 3,
+    "home_ht_goals": null,
+    "home_penalties": null,
+    "home_team_id": "sco:aberdeen",
+    "home_team_name": "Aberdeen",
+    "href": "/matches/1584673/",
+    "referee": null,
+    "result": "L",
+    "round": "Club Friendly",
+    "season": "2026-27",
+    "status": "FT",
+    "venue": "H",
+    "venue_name": null
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2026-07-11",
+        "fixture_id": 1583282,
+        "goals_against": 0,
+        "goals_for": 2,
+        "href": "/matches/1583282/",
+        "opponent_name": "Linfield",
+        "venue": "A"
+      },
+      {
+        "date": "2026-10-03",
+        "fixture_id": 1642951,
+        "goals_against": 1,
+        "goals_for": 4,
+        "href": "/matches/1642951/",
+        "opponent_name": "Dunfermline Athletic",
+        "venue": "A"
+      }
+    ],
+    "before": [
+      {
+        "date": "2026-06-27",
+        "fixture_id": 1554559,
+        "goals_against": 0,
+        "goals_for": 1,
+        "href": "/matches/1554559/",
+        "opponent_name": "Cove Rangers",
+        "venue": "A"
+      },
+      {
+        "date": "2026-07-04",
+        "fixture_id": 1554702,
+        "goals_against": 1,
+        "goals_for": 0,
+        "href": "/matches/1554702/",
+        "opponent_name": "Twente",
+        "venue": "A"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": {
+      "coach_name": "Stuart Kettlewell",
+      "formation": null,
+      "starters": [],
+      "substitutes": [],
+      "team_id": "sco:ross-county",
+      "team_name": "Ross County"
+    },
+    "home": {
+      "coach_name": "Stephen Robinson",
+      "formation": null,
+      "starters": [],
+      "substitutes": [],
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    }
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/1583282/",
+    "previous": "/matches/1554702/",
+    "season": "/history/2026-27/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "unknown",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "The event feed records 0 goals; the final score is 3-6. The score is authoritative."
+      },
+      {
+        "basis": "unknown",
+        "text": "The event feed records no goals for this fixture."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Ross County beat Aberdeen 6-3",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 0,
+      "event_score": {
+        "away": 0,
+        "home": 0
+      },
+      "final_score": {
+        "away": 6,
+        "home": 3
+      },
+      "matched": false
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

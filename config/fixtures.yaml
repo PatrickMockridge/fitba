@@ -1,0 +1,37 @@
+# Fixture record policy: one canonical key, one page, one coverage statement.
+#
+# The Cormack era is the match-detail era. Pre-era league results remain on the
+# history pages; they are not given match pages without the lineups and events
+# that make a page worth reading.
+
+version: 1
+
+scope:
+  first_season: 2019-20
+  last_season: 2026-27
+  include_friendlies: true
+  friendly_competition_prefixes: [sco:other:friendlies]
+
+matching:
+  # API-Football and football-data.co.uk agree on the date for every Aberdeen
+  # Premiership fixture in the current record. Do not widen this silently.
+  date_tolerance_days: 0
+  # Manual aliases take precedence over the automatic join. Keys are
+  # api:fixture:<id>; values are football-data.co.uk match ids.
+  overrides: {}
+
+pages:
+  route_prefix: /matches
+  # A page is generated for every played fixture. These are the data classes
+  # that decide its depth label.
+  full_classes: [events, lineups, league_stats, player_stats]
+  result_classes: [events, lineups]
+  score_classes: []
+  depth_labels:
+    full: Full record
+    result: Result, events and lineups
+    score: Score only
+  summary:
+    # A goal at or after this minute is a late goal for the stock-phrase read.
+    late_goal_minute: 85
+    stoppage_time_minute: 90

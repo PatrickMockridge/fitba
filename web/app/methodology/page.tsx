@@ -356,6 +356,37 @@ export default function MethodologyPage() {
         </Link>
       </section>
 
+      <section className="card" data-contract="methodology.xg">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">fxG</p>
+            <h2>Model output, labelled</h2>
+          </div>
+          <span className="badge badge-neutral">experimental</span>
+        </div>
+        <p>
+          fxG is fitba&apos;s own shot-on-target expected-goals model. It estimates a
+          competition-season conversion rate with an empirical-Bayes prior,
+          multiplies by shots on target, and publishes an 80% interval that
+          carries conversion uncertainty and match-to-match overdispersion. It
+          does not see shot location, opponent strength or game state.
+        </p>
+        <p>
+          Provider xG is carried separately where available and is never blended
+          into fxG. The model is validated against 2026-27 provider xG; at this
+          publish the gate fails, so fxG is descriptive and is not a performance
+          verdict.
+        </p>
+        <p className="fine-print">
+          <Link className="text-link" href="/analysis/xg/">
+            fxG model card →
+          </Link>{" "}
+          <Link className="text-link" href="/matches/">
+            Match record →
+          </Link>
+        </p>
+      </section>
+
       <section className="card" data-contract="methodology.policy">
         <div className="section-head">
           <div>

@@ -31,3 +31,19 @@ export function formatPercentValue(value: number, digits = 0): string {
 export function formatDecimal(value: number, digits = 2): string {
   return value.toFixed(digits);
 }
+
+export function formatSigned(value: number, digits = 2): string {
+  const text = value.toFixed(digits);
+  return value > 0 ? `+${text}` : text;
+}
+
+export function formatInterval(
+  low: number | null | undefined,
+  high: number | null | undefined,
+  digits = 2,
+): string {
+  if (low === null || low === undefined || high === null || high === undefined) {
+    return "—";
+  }
+  return `${formatDecimal(low, digits)}–${formatDecimal(high, digits)}`;
+}

@@ -1,0 +1,175 @@
+{
+  "coverage": {
+    "depth": "score",
+    "events": false,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": false,
+    "xg": false
+  },
+  "depth": "score",
+  "fixture": {
+    "aberdeen_result": "W",
+    "away_goals": 7,
+    "away_ht_goals": null,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:other:friendlies-clubs",
+    "competition_name": "Friendlies Clubs",
+    "date": "2022-07-06",
+    "extra_time": false,
+    "fixture_id": 870479,
+    "home_goals": 1,
+    "home_ht_goals": null,
+    "home_penalties": null,
+    "home_team_id": "sco:brechin-city",
+    "home_team_name": "Brechin City",
+    "href": "/matches/870479/",
+    "referee": null,
+    "result": "L",
+    "round": "Club Friendlies 3",
+    "season": "2022-23",
+    "status": "FT",
+    "venue": "A",
+    "venue_name": "Glebe Park"
+  },
+  "form": {
+    "after": [
+      {
+        "date": "2022-07-06",
+        "fixture_id": 891298,
+        "goals_against": 1,
+        "goals_for": 7,
+        "href": "/matches/891298/",
+        "opponent_name": "Brechin City",
+        "venue": "H"
+      },
+      {
+        "date": "2022-07-06",
+        "fixture_id": 922189,
+        "goals_against": 1,
+        "goals_for": 7,
+        "href": "/matches/922189/",
+        "opponent_name": "Brechin City",
+        "venue": "A"
+      }
+    ],
+    "before": [
+      {
+        "date": "2022-06-25",
+        "fixture_id": 870984,
+        "goals_against": 1,
+        "goals_for": 2,
+        "href": "/matches/870984/",
+        "opponent_name": "Buckie Thistle",
+        "venue": "A"
+      },
+      {
+        "date": "2022-06-25",
+        "fixture_id": 871150,
+        "goals_against": 1,
+        "goals_for": 2,
+        "href": "/matches/871150/",
+        "opponent_name": "Buckie Thistle",
+        "venue": "A"
+      },
+      {
+        "date": "2022-07-01",
+        "fixture_id": 890132,
+        "goals_against": 1,
+        "goals_for": 1,
+        "href": "/matches/890132/",
+        "opponent_name": "St Johnstone",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-22T18:30:05+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": "/matches/891298/",
+    "previous": "/matches/890132/",
+    "season": "/history/2022-23/"
+  },
+  "player_stats": [],
+  "schema_version": "1.0.0",
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {},
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "unavailable"
+    },
+    "home": {},
+    "rows": []
+  },
+  "summary": {
+    "basis": "unknown",
+    "bullets": [
+      {
+        "basis": "measured",
+        "text": "The event feed records 0 goals; the final score is 1-7. The score is authoritative."
+      },
+      {
+        "basis": "unknown",
+        "text": "The event feed records no goals for this fixture."
+      },
+      {
+        "basis": "unknown",
+        "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
+      }
+    ],
+    "headline": "Aberdeen beat Brechin City 7-1",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": 0,
+      "event_score": {
+        "away": 0,
+        "home": 0
+      },
+      "final_score": {
+        "away": 7,
+        "home": 1
+      },
+      "matched": false
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false,
+    "away": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "home": {
+      "high": null,
+      "low": null,
+      "provider": null,
+      "value": null
+    },
+    "model_id": null,
+    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+  }
+}

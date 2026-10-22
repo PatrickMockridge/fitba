@@ -34,6 +34,7 @@ from fitba.metrics.audit import (
     pointer_matches,
 )
 from fitba.metrics.checks import CHECKS
+from fitba.metrics.models import Metric, Parameter
 from fitba.metrics.registry import (
     SCHEMA_PATH,
     load_registry,
@@ -686,7 +687,12 @@ def _check_change_control(registry: Any, git_ref: str, report: Report) -> None:
                 return True
         return False
 
-    old_metrics = {item["id"]: item for item in old.get("metrics") or []}
+    # Load the old entries through the same model as the current registry, so
+    # default-valued fields are compared canonically rather than as missing.
+    old_metrics = {
+        item["id"]: Metric.model_validate(item).model_dump(mode="json")
+        for item in old.get("metrics") or []
+    }
     new_metrics = {item["id"]: item for item in registry.model_dump(mode="json")["metrics"]}
     changed: list[tuple[str, str]] = []
     for identifier in sorted(set(old_metrics) | set(new_metrics)):
@@ -708,7 +714,10 @@ def _check_change_control(registry: Any, git_ref: str, report: Report) -> None:
             if int(after.get("version") or 0) <= int(before.get("version") or 0):
                 changed.append((identifier, "version not bumped"))
 
-    old_parameters = {item["id"]: item for item in old.get("parameters") or []}
+    old_parameters = {
+        item["id"]: Parameter.model_validate(item).model_dump(mode="json")
+        for item in old.get("parameters") or []
+    }
     new_parameters = {item["id"]: item for item in registry.model_dump(mode="json")["parameters"]}
     for identifier in sorted(set(old_parameters) | set(new_parameters)):
         before = old_parameters.get(identifier)

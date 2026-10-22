@@ -141,6 +141,14 @@ Implemented:
   six claims on the team, squad and Cormack-era record.
   Cormack-era mission context. Derived from local match, squad, transfer and
   history payloads; no new network ingest.
+- `fixtures/index.json` — one row per played Cormack-era fixture with score,
+  depth and link. Built from `normalize/fixture_registry.py`.
+- `matches/<fixture_id>.json` — one document per played fixture: score, summary,
+  stats, fxG, timeline, lineups, player stats, form and coverage. Events and
+  lineups come from the normalized history backfill; league stats join from the
+  team-stat mart.
+- `xg/aberdeen.json` — fxG model card, rates, intervals, provider comparison,
+  aggregates and coverage. Built by `analytics/xg.py`; no new network ingest.
 - `provenance.json` — layer-by-layer source truth table, migration gate state
   and source contributions. Built from `config/provenance.yaml`.
 - `availability/aberdeen.json` — curated team-news ledger and optional provider
