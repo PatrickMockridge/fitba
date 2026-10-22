@@ -118,6 +118,8 @@ Must remain visible:
 
 - Every played fixture grouped by season, with Date, Competition, Home, Score,
   Away, Result and Depth.
+- A season selector bar that defaults to the current season and shows one
+  season at a time; every earlier season remains reachable from the bar.
 - Links to each fixture page.
 - The depth labels and the note that missing classes are unavailable.
 - Links to Data analysis, fxG, matchday and the Cormack era.
