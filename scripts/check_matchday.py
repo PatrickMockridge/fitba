@@ -124,13 +124,9 @@ def _check_lineup(
         total = sum(float(value) for value in weights.values())
         if abs(total - 1.0) > 0.01:
             errors.append(f"{team}: selection weights sum to {total:.2f}, not 1.0")
-        form_rating = float(weights.get("form", 0)) + float(
-            weights.get("recent_rating", 0)
-        )
+        form_rating = float(weights.get("form", 0)) + float(weights.get("recent_rating", 0))
         if form_rating < 0.30:
-            errors.append(
-                f"{team}: form + recent rating weight {form_rating:.2f} is below 0.30"
-            )
+            errors.append(f"{team}: form + recent rating weight {form_rating:.2f} is below 0.30")
     for player in players + contenders:
         rating = player.get("recent_rating")
         if rating is not None and not 0 <= float(rating) <= 10:

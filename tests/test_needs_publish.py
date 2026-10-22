@@ -93,9 +93,7 @@ def test_needs_payload_validates_and_has_no_targets():
 
 
 def test_needs_schema_is_checked_in():
-    checked_in = json.loads(
-        (ROOT / "contracts" / "needs.schema.json").read_text(encoding="utf-8")
-    )
+    checked_in = json.loads((ROOT / "contracts" / "needs.schema.json").read_text(encoding="utf-8"))
     assert checked_in == needs_schema()
 
 
