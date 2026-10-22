@@ -58,6 +58,7 @@ export default function HomePage() {
     <ContractPage surface="home">
       <section className="hero" data-contract="home.hero">
         <p className="eyebrow">Season {season}</p>
+        <p className="place-line">Aberdeen · North Sea · 1903</p>
         <h1>
           Aberdeen FC,
           <br />

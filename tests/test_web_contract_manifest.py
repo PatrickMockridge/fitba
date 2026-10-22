@@ -144,6 +144,7 @@ PINNED_MARKERS = {
         "about.hero",
         "about.audience",
         "about.club-side",
+        "about.city",
         "about.cormack",
         "about.line",
     },

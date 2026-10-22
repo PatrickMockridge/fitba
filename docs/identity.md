@@ -205,6 +205,7 @@ May not:
 
 ## Relationship to other documents
 
+- [brand.md](brand.md): the visual and verbal brand system (Granite & North Sea).
 - [product-strategy.md](product-strategy.md): product scope, content pillars and
   roadmap. It defers identity, audience and voice to this document.
 - [page-contracts.md](page-contracts.md): normative route contracts and the

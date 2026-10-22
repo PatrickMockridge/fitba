@@ -19,6 +19,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | Document | Read it for |
 |---|---|
 | [Identity](docs/identity.md) | The public line, reader, editorial stance, voice rules and non-negotiables. |
+| [Brand](docs/brand.md) | Granite & North Sea: the palette, typography, motifs, place line and brand guardrails. |
 | [Page contracts](docs/page-contracts.md) | The evidence each main route must keep visible, and the contract-change process. |
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |

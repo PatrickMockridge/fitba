@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { GullMark } from "@/components/GullMark";
 import { getHistory } from "@/lib/data";
 
 export const metadata = { title: "About · fitba" };
@@ -88,6 +89,28 @@ export default function AboutPage() {
           </p>
         </section>
       </div>
+
+      <section className="card city-card" data-contract="about.city">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">The city and the club</p>
+            <h2>Granite, the North Sea, and a one-club city</h2>
+          </div>
+          <GullMark />
+        </div>
+        <div className="aurora-rule" />
+        <p>
+          Aberdeen is the granite city: a one-club city on the North Sea, founded
+          in 1903. Pittodrie sits about 500 yards from the water; the gulls
+          arrive for the leftovers. The fans sing &ldquo;The Northern Lights of
+          Old Aberdeen&rdquo; about the aurora. The traditional derby is the New
+          Firm against Dundee United. Glasgow, Edinburgh and Dundee are two-club
+          cities; Aberdeen&apos;s identity is not split.
+        </p>
+        <p className="fine-print">
+          This is context, not decoration. The record above it is the point.
+        </p>
+      </section>
 
       <section className="card">
         <div className="section-head">
