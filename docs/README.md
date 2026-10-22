@@ -1,12 +1,15 @@
 # Documentation
 
 The documents below are the source of truth for what fitba is, how it works and
-what it will not claim. Start with the product strategy; use the methodology and
-sources when you need to check a number.
+what it will not claim. Start with the identity; use the product strategy for
+scope, and the methodology and sources when you need to check a number.
 
 | Document | Read it for |
 |---|---|
-| [Product strategy](product-strategy.md) | Why fitba exists, who it is for, the principles and the editorial line. |
+| [Identity](identity.md) | The public line, reader, editorial stance, voice rules, non-negotiables and the Cormack-era analytical frame. Canonical for identity and voice. |
+| [Page contracts](page-contracts.md) | The evidence each contracted route must keep visible, the marker convention and the contract-change process. Normative for the UI. |
+| [Identity review, October 2026](identity-review-2026-10.md) | The seven-lens panel record: identity decisions, corrections to the brief, the red-team matrix and the deferred follow-ups. |
+| [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |
 | [The bigger picture](themes.md) | Medium and long-term themes: role-family balance, the wing-back trade-off, defensive cover, the attack-defence balance and the Cormack-era mission context. |
 | [Data provenance](provenance.md) | The layer-by-layer source truth table, API-Football coverage, the league migration gate and manifest attribution. |
@@ -35,8 +38,14 @@ sources when you need to check a number.
 - Separate **what we know**, **what we infer** and **what we do not know**.
 - Every format or method claim carries a source and a last-reviewed date.
 - No marketing claims and no pretending to be club insiders.
+- Identity, audience and voice are governed by [identity.md](identity.md).
+  Product scope is governed by [product-strategy.md](product-strategy.md).
+  Route visibility is governed by [page-contracts.md](page-contracts.md).
+- Do not use word-count budgets to justify removing evidence. Contracted data is
+  visible by default; method and long caveats may be disclosed.
 - If a fact changes, update the document, the config and the in-app page in the
-  same change. `scripts/check_docs.py` guards the links and the key format facts.
+  same change. `scripts/check_docs.py` guards the links and the key format facts;
+  `scripts/check_web_contract.py` guards the rendered routes.
 
 ## Licence
 

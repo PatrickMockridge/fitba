@@ -18,6 +18,9 @@ DOCS = ROOT / "docs"
 
 REQUIRED = [
     "README.md",
+    "identity.md",
+    "page-contracts.md",
+    "identity-review-2026-10.md",
     "product-strategy.md",
     "matchday.md",
     "themes.md",
@@ -42,6 +45,8 @@ REQUIRED = [
 ]
 
 IN_APP = [
+    "web/app/page.tsx",
+    "web/app/layout.tsx",
     "web/app/about/page.tsx",
     "web/app/sources/page.tsx",
     "web/app/methodology/page.tsx",
@@ -130,12 +135,37 @@ def check_formats() -> list[str]:
     return errors
 
 
+def check_identity() -> list[str]:
+    errors: list[str] = []
+    identity = DOCS / "identity.md"
+    contracts = DOCS / "page-contracts.md"
+    if not identity.exists() or not contracts.exists():
+        return errors
+    text = identity.read_text(encoding="utf-8")
+    if "Aberdeen FC, without the noise." not in text:
+        errors.append("docs/identity.md is missing the identity line")
+    if "## Non-negotiables" not in text:
+        errors.append("docs/identity.md is missing the Non-negotiables section")
+    for target in ("page-contracts.md", "product-strategy.md", "history.md"):
+        if f"]({target})" not in text:
+            errors.append(f"docs/identity.md does not link {target}")
+    if "web/contracts/surfaces.json" not in contracts.read_text(encoding="utf-8"):
+        errors.append("docs/page-contracts.md does not reference the contract manifest")
+    strategy = (DOCS / "product-strategy.md").read_text(encoding="utf-8")
+    if "](identity.md)" not in strategy:
+        errors.append("docs/product-strategy.md does not defer to identity.md")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     for name in REQUIRED:
         if not (DOCS / name).exists():
             errors.append(f"missing docs/{name}")
     for path in IN_APP:
+        if not (ROOT / path).exists():
+            errors.append(f"missing {path}")
+    for path in ("AGENTS.md", "CLAUDE.md"):
         if not (ROOT / path).exists():
             errors.append(f"missing {path}")
     for path in (
@@ -146,6 +176,7 @@ def main() -> int:
         "config/league_migration.yaml",
         "config/availability.yaml",
         "config/needs.yaml",
+        "web/contracts/surfaces.json",
         "contracts/player-page.schema.json",
         "contracts/matchday.schema.json",
         "contracts/themes.schema.json",
@@ -159,6 +190,7 @@ def main() -> int:
             errors.append(f"missing {path}")
     errors.extend(check_links())
     errors.extend(check_formats())
+    errors.extend(check_identity())
 
     if errors:
         print("Documentation check failed:")

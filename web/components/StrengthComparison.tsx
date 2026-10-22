@@ -46,16 +46,18 @@ export function StrengthComparison({
   aberdeen,
   opponent,
   comparison,
+  contract,
 }: {
   aberdeenName: string;
   opponentName: string;
   aberdeen: MatchdayStrength;
   opponent: MatchdayStrength;
   comparison: MatchdayDocument["strength_comparison"];
+  contract?: string;
 }) {
   if (aberdeen.status !== "available" || opponent.status !== "available") {
     return (
-      <section className="card">
+      <section className="card" data-contract={contract}>
         <div className="section-head">
           <div>
             <p className="eyebrow">Relative strength</p>
@@ -63,7 +65,7 @@ export function StrengthComparison({
           </div>
           <span className="badge badge-neutral">Unavailable</span>
         </div>
-        <p className="muted">
+        <p className="muted" data-contract-indicator="unknown">
           No current league table is available for one or both teams, so no
           percentile comparison is made.
         </p>
@@ -72,7 +74,7 @@ export function StrengthComparison({
   }
 
   return (
-    <section className="card strength-compare">
+    <section className="card strength-compare" data-contract={contract}>
       <div className="section-head">
         <div>
           <p className="eyebrow">Relative strength · same league</p>
@@ -147,7 +149,7 @@ export function StrengthComparison({
               : "PPG unavailable"}
           </span>
         </div>
-        <div className="stat-tile">
+        <div className="stat-tile" data-contract-indicator="confidence">
           <span className="stat-label">Read confidence</span>
           <span className="stat-value">{comparison.confidence ?? "unknown"}</span>
           <span className="stat-note">

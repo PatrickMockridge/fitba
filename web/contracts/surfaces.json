@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "identity": {
+    "line": "Aberdeen FC, without the noise.",
+    "lede": "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes.",
+    "banned_phrases": [
+      "The Scottish pyramid",
+      "from Pittodrie out",
+      "Scottish football, Aberdeen-first",
+      "The data, for the stand and the analyst",
+      "Door one",
+      "Door two"
+    ],
+    "banned_headings": [
+      "Who is next",
+      "Who is available",
+      "What changed",
+      "What is the trend",
+      "Who starts",
+      "What is the bigger picture",
+      "Where is the squad short",
+      "Who arrived and who left",
+      "Is there a sourced link",
+      "What profiles matter",
+      "Who is out on loan",
+      "Who imposes what",
+      "How is each side playing",
+      "How do they compare"
+    ]
+  },
+  "site": {
+    "markers": ["site.header", "site.footer"],
+    "copy": {
+      "site.header": ["Aberdeen FC, without the noise."],
+      "site.footer": [
+        "Aberdeen FC, without the noise.",
+        "Not affiliated with Aberdeen FC"
+      ]
+    },
+    "links": ["/methodology/", "/about/", "/sources/", "/status/"]
+  },
+  "surfaces": [
+    {
+      "id": "home",
+      "path": "/",
+      "owners": ["web/app/page.tsx", "web/app/layout.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "home.hero", "min": 1},
+            {"id": "home.matchday", "min": 1},
+            {"id": "home.off-pitch", "min": 1},
+            {"id": "home.squad", "min": 1},
+            {"id": "home.news-rumours", "min": 1},
+            {"id": "home.competitions", "min": 1},
+            {"id": "home.standings", "min": 1}
+          ],
+          "columns": {
+            "home.standings": ["#", "Club", "P", "W", "D", "L", "GF", "GA", "GD", "Pts", "Form"]
+          },
+          "indicators": {"unknown": 1, "freshness": 1, "source": 1},
+          "links": [
+            "/matchday/",
+            "/recruitment/",
+            "/themes/",
+            "/history/",
+            "/transfers/",
+            "/loans/"
+          ],
+          "headings": {
+            "forbid_question": ["h1", "h2", "h3"],
+            "h1": "Aberdeen FC, without the noise."
+          },
+          "copy": {
+            "home.hero": [
+              "Aberdeen FC, without the noise.",
+              "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes."
+            ]
+          },
+          "metadata": {
+            "title_contains": "Aberdeen FC, without the noise",
+            "description_contains": "independent, data-driven record"
+          }
+        },
+        "empty": {
+          "markers": [{"id": "home.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "matchday",
+      "path": "/matchday/",
+      "owners": [
+        "web/app/matchday/page.tsx",
+        "web/components/MatchupRead.tsx",
+        "web/components/FormGuide.tsx",
+        "web/components/StyleMatchup.tsx",
+        "web/components/StrengthComparison.tsx",
+        "web/components/PredictedLineupPanel.tsx"
+      ],
+      "ci_states": ["full", "no-fixture"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "matchday.fixture", "min": 1},
+            {"id": "matchday.matchup-read", "min": 1},
+            {"id": "matchday.predicted-xis", "min": 1},
+            {"id": "matchday.lineup", "min": 2},
+            {"id": "matchday.lineup.pitch", "min": 2},
+            {"id": "matchday.lineup.formation-confidence", "min": 1},
+            {"id": "matchday.lineup.selection-weights", "min": 1},
+            {"id": "matchday.lineup.availability", "min": 1},
+            {"id": "matchday.lineup.contenders", "min": 1},
+            {"id": "matchday.not-considered", "min": 1},
+            {"id": "matchday.form-guide", "min": 1},
+            {"id": "matchday.style", "min": 1},
+            {"id": "matchday.strength", "min": 1},
+            {"id": "matchday.themes", "min": 1},
+            {"id": "matchday.head-to-head", "min": 1},
+            {"id": "matchday.coverage", "min": 1}
+          ],
+          "columns": {
+            "matchday.form-guide": [
+              "Split",
+              "P",
+              "W-D-L",
+              "Pts",
+              "PPG",
+              "GF",
+              "GA",
+              "Shots"
+            ],
+            "matchday.style": ["Split", "Shots for", "Shots against", "Shot share"],
+            "matchday.head-to-head": ["Date", "Match", "Score", "Aberdeen"]
+          },
+          "indicators": {
+            "basis": 2,
+            "confidence": 2,
+            "availability": 1,
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/fixtures/",
+            "/competitions/",
+            "/squad/",
+            "/history/",
+            "/transfers/",
+            "/sources/",
+            "/methodology/"
+          ],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "no-fixture": {
+          "markers": [{"id": "matchday.no-fixture", "min": 1}],
+          "links": ["/fixtures/", "/competitions/", "/squad/"]
+        },
+        "empty": {
+          "markers": [{"id": "matchday.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "themes",
+      "path": "/themes/",
+      "owners": [
+        "web/app/themes/page.tsx",
+        "web/components/ThemeCard.tsx",
+        "web/components/ThemeMetrics.tsx"
+      ],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "themes.hero", "min": 1},
+            {"id": "themes.scope", "min": 1},
+            {"id": "themes.season", "min": 1},
+            {"id": "themes.theme", "min": 5},
+            {"id": "themes.evidence", "min": 5},
+            {"id": "themes.mission", "min": 1},
+            {"id": "themes.metric-family-balance", "min": 1},
+            {"id": "themes.metric-wing-back-tax", "min": 1},
+            {"id": "themes.metric-cover-question", "min": 1},
+            {"id": "themes.metric-leaky-boat", "min": 1},
+            {"id": "themes.metric-mission-check", "min": 1},
+            {"id": "themes.coverage", "min": 1},
+            {"id": "themes.coverage.missing", "min": 1}
+          ],
+          "columns": {
+            "themes.metric-family-balance": [
+              "Family",
+              "Rating",
+              "Median",
+              "25th",
+              "vs squad",
+              "G",
+              "A",
+              "Starts",
+              "Minutes"
+            ],
+            "themes.metric-wing-back-tax": [
+              "Shape",
+              "P",
+              "Record",
+              "Pts/game",
+              "GF/game",
+              "GA/game",
+              "Saves/game",
+              "CB rating",
+              "WB starts",
+              "W starts",
+              "WF bench"
+            ],
+            "themes.metric-cover-question": [
+              "Role",
+              "Category",
+              "Starts",
+              "Minutes",
+              "Sub apps",
+              "Named bench",
+              "Arrival"
+            ],
+            "themes.metric-mission-check": [
+              "Defensive arrival",
+              "From",
+              "Date",
+              "Kind"
+            ]
+          },
+          "indicators": {"basis": 5, "confidence": 5, "unknown": 1, "source": 1},
+          "links": [
+            "/matchday/",
+            "/squad/",
+            "/transfers/",
+            "/recruitment/",
+            "/history/",
+            "/methodology/",
+            "/sources/"
+          ],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "themes.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "recruitment",
+      "path": "/recruitment/",
+      "owners": [
+        "web/app/recruitment/page.tsx",
+        "web/components/NeedsBoard.tsx"
+      ],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "recruitment.hero", "min": 1},
+            {"id": "recruitment.needs-board", "min": 1},
+            {"id": "recruitment.needs-summary", "min": 1},
+            {"id": "recruitment.needs-family", "min": 7},
+            {"id": "recruitment.needs-priority", "min": 7},
+            {"id": "recruitment.needs-confidence", "min": 7},
+            {"id": "recruitment.needs-market-route", "min": 7},
+            {"id": "recruitment.needs-roster", "min": 7},
+            {"id": "recruitment.needs-players", "min": 7},
+            {"id": "recruitment.transfer-summary", "min": 1},
+            {"id": "recruitment.rumour-summary", "min": 1},
+            {"id": "recruitment.profile", "min": 1},
+            {"id": "recruitment.forum-signals", "min": 1}
+          ],
+          "columns": {
+            "recruitment.needs-players": [
+              "Player",
+              "Category",
+              "Starts",
+              "Minutes",
+              "Sub apps",
+              "Availability"
+            ]
+          },
+          "indicators": {
+            "confidence": 2,
+            "availability": 2,
+            "unknown": 1,
+            "source": 1
+          },
+          "links": ["/transfers/", "/rumours/", "/scouting/", "/squad/", "/themes/"],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        }
+      }
+    },
+    {
+      "id": "transfers",
+      "path": "/transfers/",
+      "owners": [
+        "web/app/transfers/page.tsx",
+        "web/components/TransferBoard.tsx",
+        "web/components/TransferCard.tsx"
+      ],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "transfers.hero", "min": 1},
+            {"id": "transfers.board", "min": 1},
+            {"id": "transfers.summary", "min": 1},
+            {"id": "transfers.register", "min": 1},
+            {"id": "transfers.card", "min": 50},
+            {"id": "transfers.card.verification", "min": 1},
+            {"id": "transfers.card.identity", "min": 1},
+            {"id": "transfers.card.fee", "min": 1},
+            {"id": "transfers.card.loan-terms", "min": 1},
+            {"id": "transfers.card.sources", "min": 1},
+            {"id": "transfers.sell-on", "min": 1},
+            {"id": "transfers.audit", "min": 1},
+            {"id": "transfers.coverage", "min": 1}
+          ],
+          "columns": {
+            "transfers.sell-on": [
+              "Player",
+              "Buyer",
+              "Sale",
+              "Clause",
+              "Confidence",
+              "Source"
+            ]
+          },
+          "indicators": {"confidence": 2, "unknown": 1, "source": 1},
+          "links": ["/history/", "/sources/", "/methodology/"],
+          "anchor_patterns": {"^transfer-": 1},
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "transfers.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "loans",
+      "path": "/loans/",
+      "owners": ["web/app/loans/page.tsx", "web/components/TransferCard.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "loans.hero", "min": 1},
+            {"id": "loans.out", "min": 1},
+            {"id": "loans.in", "min": 1},
+            {"id": "loans.card", "min": 1},
+            {"id": "transfers.card.loan-terms", "min": 1},
+            {"id": "loans.coverage", "min": 1}
+          ],
+          "indicators": {"unknown": 1, "source": 1},
+          "links": ["/transfers/"],
+          "headings": {"forbid_question": ["h1", "h2", "h3"]}
+        },
+        "empty": {
+          "markers": [{"id": "loans.empty", "min": 1}]
+        }
+      }
+    },
+    {
+      "id": "about",
+      "path": "/about/",
+      "owners": ["web/app/about/page.tsx"],
+      "ci_states": ["full"],
+      "states": {
+        "full": {
+          "markers": [
+            {"id": "about.hero", "min": 1},
+            {"id": "about.audience", "min": 1},
+            {"id": "about.club-side", "min": 1},
+            {"id": "about.cormack", "min": 1},
+            {"id": "about.line", "min": 1}
+          ],
+          "links": ["/history/", "/methodology/", "/sources/"],
+          "headings": {
+            "forbid_question": ["h1", "h2", "h3"],
+            "h1": "Aberdeen FC, without the noise."
+          },
+          "copy": {
+            "about.hero": [
+              "Aberdeen FC, without the noise.",
+              "An independent, data-driven record of Aberdeen FC — the numbers, the sources and the argument, without the hot takes."
+            ]
+          },
+          "metadata": {
+            "description_contains": "independent, data-driven record"
+          }
+        }
+      }
+    }
+  ]
+}

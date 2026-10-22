@@ -20,14 +20,16 @@ export function PredictedLineupPanel({
   teamName,
   block,
   isAberdeen = false,
+  contract,
 }: {
   teamName: string;
   block: LineupBlock | null;
   isAberdeen?: boolean;
+  contract?: string;
 }) {
   if (!block || block.status === "unavailable") {
     return (
-      <article className="card lineup-panel">
+      <article className="card lineup-panel" data-contract={contract}>
         <div className="card-head">
           <div>
             <p className="eyebrow">Predicted XI</p>
@@ -35,7 +37,7 @@ export function PredictedLineupPanel({
           </div>
           <span className="badge badge-neutral">Unavailable</span>
         </div>
-        <p className="muted">
+        <p className="muted" data-contract-indicator="unknown">
           {block?.reason
             ? `No prediction: ${block.reason.replaceAll("_", " ")}.`
             : "No prediction is made without an observed lineup window."}
@@ -50,13 +52,13 @@ export function PredictedLineupPanel({
   }
 
   return (
-    <article className="card lineup-panel">
+    <article className="card lineup-panel" data-contract={contract}>
       <div className="card-head">
         <div>
           <p className="eyebrow">Predicted XI · not team news</p>
           <h2>{teamName}</h2>
         </div>
-        <div className="badge-row">
+        <div className="badge-row" data-contract="matchday.lineup.formation-confidence">
           <span className="badge badge-neutral">{block.formation ?? "—"}</span>
           {block.formation_confidence ? (
             <ConfidenceBadge confidence={block.formation_confidence} compact />
@@ -71,7 +73,7 @@ export function PredictedLineupPanel({
       </div>
 
       {block.selection ? (
-        <div className="mini-block">
+        <div className="mini-block" data-contract="matchday.lineup.selection-weights">
           <span className="stat-label">Selection inputs</span>
           <span className="fine-print">
             {" "}
@@ -99,7 +101,7 @@ export function PredictedLineupPanel({
       ) : null}
 
       {block.availability ? (
-        <div className="mini-block">
+        <div className="mini-block" data-contract="matchday.lineup.availability">
           <span className="stat-label">Availability</span>{" "}
           <AvailabilityBadge
             status={block.availability.state}
@@ -119,9 +121,10 @@ export function PredictedLineupPanel({
         players={block.players}
         formation={block.formation}
         teamName={teamName}
+        contract="matchday.lineup.pitch"
       />
 
-      <section className="contenders">
+      <section className="contenders" data-contract="matchday.lineup.contenders">
         <div className="section-head">
           <h3>Contenders</h3>
           <span className="badge badge-neutral">
@@ -154,9 +157,13 @@ export function PredictedLineupPanel({
         </ul>
       </section>
 
-      {block.unavailable.length ? (
-        <details className="lineup-details">
-          <summary>Not considered ({block.unavailable.length})</summary>
+      <details
+        className="lineup-details"
+        data-contract="matchday.not-considered"
+        open
+      >
+        <summary>Not considered ({block.unavailable.length})</summary>
+        {block.unavailable.length ? (
           <ul className="plain-list">
             {block.unavailable.map((player) => (
               <li key={`${player.player_id}-${player.reason}`}>
@@ -167,8 +174,10 @@ export function PredictedLineupPanel({
               </li>
             ))}
           </ul>
-        </details>
-      ) : null}
+        ) : (
+          <p className="muted">None recorded in this snapshot.</p>
+        )}
+      </details>
 
       <p className="fine-print">{block.disclaimer}</p>
       {block.note ? <p className="fine-print">{block.note}</p> : null}

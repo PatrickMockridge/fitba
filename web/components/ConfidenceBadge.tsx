@@ -17,6 +17,7 @@ export function ConfidenceBadge({
     <span
       className={`badge confidence-${value}`}
       title={LABEL[value] ?? "Confidence"}
+      data-contract-indicator="confidence"
     >
       {compact ? value : (LABEL[value] ?? value)}
     </span>

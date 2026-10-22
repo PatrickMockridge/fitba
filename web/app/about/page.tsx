@@ -1,28 +1,34 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
+import { getHistory } from "@/lib/data";
 
 export const metadata = { title: "About · fitba" };
 
 export default function AboutPage() {
+  const history = getHistory();
+  const scorecard = history?.scorecard;
+  const honourLabel =
+    scorecard && scorecard.honours_total === 1 ? "major honour" : "major honours";
+
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="about">
+      <section className="page-head" data-contract="about.hero">
         <p className="eyebrow">About</p>
-        <h1>The data, for the stand and the analyst</h1>
+        <h1>Aberdeen FC, without the noise.</h1>
         <p className="lede">
-          fitba is the translation layer between the data that shapes Scottish
-          football and the people who watch it. The same evidence, in the same
-          language, with the context and uncertainty that hot takes leave out.
+          An independent, data-driven record of Aberdeen FC — the numbers, the
+          sources and the argument, without the hot takes.
         </p>
       </section>
 
       <div className="grid two-col">
         <section className="card">
-          <p className="eyebrow">The problem</p>
-          <h2>Two tiers, rarely meeting</h2>
+          <p className="eyebrow">The gap</p>
+          <h2>One record, two audiences</h2>
           <p>
             Football has an analysis tier that works in percentiles, budgets, age
-            curves and uncertainty, and a spectator tier that watches results,
-            form and individual mistakes. Attempts to bridge them are often
+            curves and uncertainty, and a matchgoing reader who watches results,
+            form and individual mistakes. Attempts to connect them are often
             one-dimensional: a single rating, a &ldquo;data says&rdquo; take, or a
             chart with no explanation.
           </p>
@@ -49,6 +55,40 @@ export default function AboutPage() {
         </section>
       </div>
 
+      <div className="grid two-col">
+        <section className="card" data-contract="about.audience">
+          <p className="eyebrow">Who this is for</p>
+          <h2>Engaged supporters, not a hypothetical median reader</h2>
+          <p>
+            The primary reader knows the squad, the league and the arguments. They
+            may not be a statistician, but they are numerate and want the numbers,
+            the sources and the uncertainty. We do not design down to an imagined
+            casual fan, and we do not remove evidence to make a page feel lighter.
+          </p>
+          <p>
+            The same record is public so that supporters, the club, the press and
+            critics can look at the same evidence. We are independent of the club;
+            we are not neutral about its success.
+          </p>
+        </section>
+
+        <section className="card" data-contract="about.club-side">
+          <p className="eyebrow">The line we hold</p>
+          <h2>On the club&apos;s side, not in its pocket</h2>
+          <p>
+            We want Aberdeen to succeed. That is not the same as defending the
+            club. Being on the club&apos;s side means taking its problems seriously
+            enough to measure them: not softening bad numbers, not turning every
+            setback into a morality play, and not treating a bad result as proof
+            that a player or a manager is the whole problem.
+          </p>
+          <p>
+            Criticism is aimed at decisions and structures, with evidence. The
+            club is not a villain, and neither are its supporters.
+          </p>
+        </section>
+      </div>
+
       <section className="card">
         <div className="section-head">
           <div>
@@ -63,9 +103,9 @@ export default function AboutPage() {
             sample size — not a verdict.
           </li>
           <li>
-            <strong>Progressive disclosure.</strong> Headline, visual, what it
-            means, then the method. Casual fans stop at the first; analysts can go
-            all the way down.
+            <strong>Layered evidence, not withheld evidence.</strong> Headline,
+            visual, what it means, then the method. Substantive panels and sources
+            stay visible; deeper method can sit behind disclosure.
           </li>
           <li>
             <strong>Uncertainty is a feature.</strong> Sample-size badges, coverage
@@ -81,27 +121,48 @@ export default function AboutPage() {
           </li>
           <li>
             <strong>Independent and correctable.</strong> Non-commercial, no
-            betting advertising, a corrections route, and no claim to speak for
-            the club.
+            betting advertising, a published corrections policy, and no claim to
+            speak for the club. We are on the club&apos;s side without being its
+            mouthpiece.
           </li>
         </ul>
       </section>
 
       <div className="grid two-col">
-        <section className="card">
+        <section className="card" data-contract="about.cormack">
           <p className="eyebrow">Aberdeen</p>
-          <h2>The trading club</h2>
+          <h2>The Cormack era: player, manager, structure</h2>
+          {scorecard ? (
+            <p>
+              Since 16 December 2019 the public record covers{" "}
+              {scorecard.seasons} seasons and {scorecard.manager_count} people in
+              charge of at least one league match, including interim spells, with
+              league finishes from {scorecard.best_position ?? "—"} to{" "}
+              {scorecard.worst_position ?? "—"} and {scorecard.honours_total}{" "}
+              {honourLabel}. It also contains heavy defeats, including 6-0
+              losses, and a winless away run in 2026, alongside two Conference
+              League campaigns (the 2023-24 group stage and the 2025-26 league
+              phase) and significant player sales.
+            </p>
+          ) : (
+            <p>
+              Since 16 December 2019 the public record covers the Cormack era:
+              one Scottish Cup, two Conference League campaigns, league finishes
+              from third to tenth, heavy defeats and high squad turnover.
+            </p>
+          )}
           <p>
-            Aberdeen have operated as a trading club: buy low, develop, sell high,
-            reinvest in young players. The model has had commercial success, grown
-            the fanbase and delivered a Scottish Cup. It has also produced volatile
-            league form since Dave Cormack&apos;s chairmanship.
+            That is not a verdict on any one person. It is a set of facts that has
+            to be separated into three levels: the player, the manager and the
+            structure. fitba&apos;s job is to make each level measurable and to say
+            which one the evidence supports. If a pattern is unexplained by the
+            model, we say so; we do not fill the gap with a story. Attribution to
+            the model, the manager or the players is a labelled reading, not a
+            measured conclusion.
           </p>
-          <p>
-            That is a trade-off, not a villain. The app shows the logic — value,
-            youth minutes, sell-on income, wage discipline — and the costs: squad
-            turnover, replacement risk and week-to-week variance.
-          </p>
+          <Link className="text-link" href="/history/">
+            The full Cormack-era record →
+          </Link>
           <p className="fine-print">
             Club-context statements reflect the project owner&apos;s framing, not an
             audited financial or boardroom account.
@@ -134,7 +195,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      <section className="card">
+      <section className="card" data-contract="about.line">
         <div className="section-head">
           <div>
             <p className="eyebrow">What we will not build</p>
@@ -149,11 +210,16 @@ export default function AboutPage() {
           <li>Unmoderated forum posts or unsourced links presented as fact.</li>
           <li>Fake community vote counts before the engagement project exists.</li>
           <li>A full tracking visual before the licensed data and audience justify it.</li>
+          <li>
+            A question in place of a declarative heading, or a contracted table,
+            caveat or source hidden because it was judged too much for an imagined
+            average reader.
+          </li>
         </ul>
         <Link className="text-link" href="/methodology/">
           Read the methodology →
         </Link>
       </section>
-    </>
+    </ContractPage>
   );
 }

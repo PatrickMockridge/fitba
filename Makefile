@@ -1,4 +1,6 @@
-.PHONY: sync test lint format typecheck check docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check check-all web-contract-check docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+
+BASE_PATH ?=
 
 sync:
 	uv sync
@@ -16,6 +18,12 @@ typecheck:
 	uv run pyright
 
 check: lint typecheck test docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check rumours-check squad-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+
+check-all: check web-contract-check
+
+web-contract-check:
+	cd web && NEXT_PUBLIC_BASE_PATH="$(BASE_PATH)" npm run build
+	uv run python scripts/check_web_contract.py --ci --base-path "$(BASE_PATH)"
 
 docs-check:
 	uv run python scripts/check_docs.py

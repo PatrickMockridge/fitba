@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { TransferCard } from "@/components/TransferCard";
 import { getTransfers } from "@/lib/data";
 
@@ -8,19 +9,21 @@ export default function LoansPage() {
   const data = getTransfers();
   if (!data) {
     return (
-      <section className="empty-state">
-        <h1>No loan register published</h1>
-        <p>
-          Run <code>uv run fitba transfers</code> and then{" "}
-          <code>uv run fitba publish</code>.
-        </p>
-      </section>
+      <ContractPage surface="loans" state="empty">
+        <section className="empty-state" data-contract="loans.empty">
+          <h1>No loan register published</h1>
+          <p>
+            Run <code>uv run fitba transfers</code> and then{" "}
+            <code>uv run fitba publish</code>.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="loans">
+      <section className="page-head" data-contract="loans.hero">
         <p className="eyebrow">Aberdeen · confirmed loans</p>
         <h1>Loan register</h1>
         <p className="lede">
@@ -31,11 +34,13 @@ export default function LoansPage() {
         <div className="hero-actions">
           <span className="badge badge-neutral">{data.loans_out.length} out</span>
           <span className="badge badge-neutral">{data.loans_in.length} in</span>
-          <span className="badge badge-warn">terms often unknown</span>
+          <span className="badge badge-warn" data-contract-indicator="unknown">
+            terms often unknown
+          </span>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="loans.out">
         <div className="section-head">
           <div>
             <p className="eyebrow">Out</p>
@@ -44,7 +49,11 @@ export default function LoansPage() {
         </div>
         <div className="transfer-grid">
           {data.loans_out.map((loan) => (
-            <TransferCard key={loan.transfer_id} transfer={loan} />
+            <TransferCard
+              key={loan.transfer_id}
+              transfer={loan}
+              contract="loans.card"
+            />
           ))}
         </div>
         {data.loans_out.length === 0 ? (
@@ -52,7 +61,7 @@ export default function LoansPage() {
         ) : null}
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="loans.in">
         <div className="section-head">
           <div>
             <p className="eyebrow">In</p>
@@ -61,7 +70,11 @@ export default function LoansPage() {
         </div>
         <div className="transfer-grid">
           {data.loans_in.map((loan) => (
-            <TransferCard key={loan.transfer_id} transfer={loan} />
+            <TransferCard
+              key={loan.transfer_id}
+              transfer={loan}
+              contract="loans.card"
+            />
           ))}
         </div>
         {data.loans_in.length === 0 ? (
@@ -69,7 +82,7 @@ export default function LoansPage() {
         ) : null}
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="loans.coverage">
         <div className="card-head">
           <div>
             <p className="eyebrow">Coverage</p>
@@ -82,7 +95,7 @@ export default function LoansPage() {
           match log; the page labels the coverage rather than pretending all tiers
           are equal.
         </p>
-        <p className="fine-print">
+        <p className="fine-print" data-contract-indicator="unknown">
           Loan duration, recall and obligation terms are not in the transfer feed.
           They are shown only when confirmed by the club or a public record.
         </p>
@@ -90,6 +103,6 @@ export default function LoansPage() {
           Full transfer register →
         </Link>
       </section>
-    </>
+    </ContractPage>
   );
 }

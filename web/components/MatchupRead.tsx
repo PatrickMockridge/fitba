@@ -8,15 +8,24 @@ const BASIS_LABEL: Record<string, string> = {
 
 function Basis({ value }: { value: string }) {
   return (
-    <span className={`basis-badge basis-${value}`}>
+    <span
+      className={`basis-badge basis-${value}`}
+      data-contract-indicator="basis"
+    >
       {BASIS_LABEL[value] ?? value}
     </span>
   );
 }
 
-export function MatchupRead({ read }: { read: MatchdayRead }) {
+export function MatchupRead({
+  read,
+  contract,
+}: {
+  read: MatchdayRead;
+  contract?: string;
+}) {
   return (
-    <section className="matchday-read">
+    <section className="matchday-read" data-contract={contract}>
       <p className="eyebrow">The read</p>
       <h2>{read.headline}</h2>
       <ul className="read-list">

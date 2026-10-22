@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { TransferBoard } from "@/components/TransferBoard";
 import { getTransferAudit, getTransfers } from "@/lib/data";
 import { formatDate } from "@/lib/format";
@@ -10,19 +11,21 @@ export default function TransfersPage() {
   const audit = getTransferAudit();
   if (!data) {
     return (
-      <section className="empty-state">
-        <h1>No transfer register published</h1>
-        <p>
-          Run <code>uv run fitba transfers</code> and then{" "}
-          <code>uv run fitba publish</code>.
-        </p>
-      </section>
+      <ContractPage surface="transfers" state="empty">
+        <section className="empty-state" data-contract="transfers.empty">
+          <h1>No transfer register published</h1>
+          <p>
+            Run <code>uv run fitba transfers</code> and then{" "}
+            <code>uv run fitba publish</code>.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="transfers">
+      <section className="page-head" data-contract="transfers.hero">
         <p className="eyebrow">Aberdeen · confirmed business</p>
         <h1>Transfers &amp; loans</h1>
         <p className="lede">
@@ -59,7 +62,7 @@ export default function TransfersPage() {
       <TransferBoard data={data} />
 
       {data.sell_on_clauses?.length ? (
-        <section className="card">
+        <section className="card" data-contract="transfers.sell-on">
           <div className="section-head">
             <div>
               <p className="eyebrow">Future income</p>
@@ -103,6 +106,7 @@ export default function TransfersPage() {
                         className={`badge ${
                           clause.confidence === "confirmed" ? "badge-ok" : "badge-warn"
                         }`}
+                        data-contract-indicator="confidence"
                       >
                         {clause.confidence}
                       </span>
@@ -132,7 +136,7 @@ export default function TransfersPage() {
         </section>
       ) : null}
 
-      <section className="card">
+      <section className="card" data-contract="transfers.audit">
         <div className="card-head">
           <div>
             <p className="eyebrow">Completeness</p>
@@ -190,7 +194,7 @@ export default function TransfersPage() {
         )}
       </section>
 
-      <section className="card">
+      <section className="card" data-contract="transfers.coverage">
         <div className="card-head">
           <div>
             <p className="eyebrow">Coverage</p>
@@ -209,17 +213,17 @@ export default function TransfersPage() {
             the public season record; an official announcement link is shown where
             found.
           </li>
-          <li>
+          <li data-contract-indicator="unknown">
             <strong>Undisclosed:</strong> a fee exists but is not public. It is
             never counted as zero; permanent moves get an inferred range, and
             loan fees are excluded from the net.
           </li>
-          <li>
+          <li data-contract-indicator="unknown">
             <strong>Loan terms:</strong> end dates, recall and obligation clauses
             are unknown unless confirmed by an official source.
           </li>
         </ul>
-        <p className="fine-print">
+        <p className="fine-print" data-contract-indicator="source">
           Sources: {data.sources.length} linked pages, including official AFC
           announcements and the Wikipedia season records. No raw feed rows are
           published.
@@ -232,6 +236,6 @@ export default function TransfersPage() {
       <p className="back-link">
         <Link href="/matchday/">← Matchday dashboard</Link>
       </p>
-    </>
+    </ContractPage>
   );
 }

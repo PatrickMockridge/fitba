@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { FixtureList } from "@/components/FixtureList";
 import { FormGuide } from "@/components/FormGuide";
 import { KickoffNotice } from "@/components/KickoffNotice";
@@ -58,25 +59,27 @@ export default function MatchdayPage() {
   const themes = getThemes();
   if (!data) {
     return (
-      <section className="empty-state">
-        <h1>No matchday snapshot published</h1>
-        <p>
-          Run <code>uv run fitba matchday --refresh</code> and then{" "}
-          <code>uv run fitba publish</code>.
-        </p>
-        <p>
-          The page needs a local opponent snapshot. Form and league context can
-          still be viewed on <Link href="/fixtures/">fixtures</Link> and{" "}
-          <Link href="/competitions/">competitions</Link>.
-        </p>
-      </section>
+      <ContractPage surface="matchday" state="empty">
+        <section className="empty-state" data-contract="matchday.empty">
+          <h1>No matchday snapshot published</h1>
+          <p>
+            Run <code>uv run fitba matchday --refresh</code> and then{" "}
+            <code>uv run fitba publish</code>.
+          </p>
+          <p>
+            The page needs a local opponent snapshot. Form and league context can
+            still be viewed on <Link href="/fixtures/">fixtures</Link> and{" "}
+            <Link href="/competitions/">competitions</Link>.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   if (data.state === "no_fixture" || !data.fixture) {
     return (
-      <>
-        <section className="page-head">
+      <ContractPage surface="matchday" state="no-fixture">
+        <section className="page-head" data-contract="matchday.no-fixture">
           <p className="eyebrow">Matchday · Season {data.season}</p>
           <h1>No upcoming fixture</h1>
           <p className="lede">
@@ -98,7 +101,7 @@ export default function MatchdayPage() {
             <p className="fine-print">State: {data.stale_reason.replaceAll("_", " ")}.</p>
           ) : null}
         </section>
-      </>
+      </ContractPage>
     );
   }
 
@@ -117,8 +120,8 @@ export default function MatchdayPage() {
   );
 
   return (
-    <>
-      <section className="matchday-head">
+    <ContractPage surface="matchday">
+      <section className="matchday-head" data-contract="matchday.fixture">
         <div className="matchday-head-top">
           <p className="eyebrow">
             {fixture.competition_name}
@@ -132,17 +135,20 @@ export default function MatchdayPage() {
             ) : null}
           </div>
         </div>
-        <div className="versus">
-          <div className="versus-side">
+        <h1
+          className="versus"
+          aria-label={`${fixture.home_team_name} v ${fixture.away_team_name}`}
+        >
+          <span className="versus-side">
             <span className="versus-home">{fixture.home_team_name}</span>
             <span className="versus-note">Home</span>
-          </div>
+          </span>
           <span className="versus-v">v</span>
-          <div className="versus-side">
+          <span className="versus-side">
             <span className="versus-away">{fixture.away_team_name}</span>
             <span className="versus-note">Away</span>
-          </div>
-        </div>
+          </span>
+        </h1>
         <p className="match-meta">
           {formatDate(fixture.date)}
           {fixture.kickoff ? ` · ${fixture.kickoff}` : ""} ·{" "}
@@ -184,9 +190,14 @@ export default function MatchdayPage() {
         ) : null}
       </section>
 
-      {data.matchup_read ? <MatchupRead read={data.matchup_read} /> : null}
+      {data.matchup_read ? (
+        <MatchupRead
+          read={data.matchup_read}
+          contract="matchday.matchup-read"
+        />
+      ) : null}
 
-      <section className="section">
+      <section className="section" data-contract="matchday.predicted-xis">
         <div className="section-head">
           <div>
             <p className="eyebrow">Projected line-ups</p>
@@ -199,10 +210,12 @@ export default function MatchdayPage() {
             teamName={aberdeen?.name ?? "Aberdeen"}
             block={data.predicted_lineups.aberdeen ?? null}
             isAberdeen
+            contract="matchday.lineup"
           />
           <PredictedLineupPanel
             teamName={opponent?.name ?? fixture.opponent_name}
             block={data.predicted_lineups.opponent ?? null}
+            contract="matchday.lineup"
           />
         </div>
       </section>
@@ -213,6 +226,7 @@ export default function MatchdayPage() {
           opponentName={opponent?.name ?? fixture.opponent_name}
           aberdeen={data.form_guide.aberdeen}
           opponent={data.form_guide.opponent}
+          contract="matchday.form-guide"
         />
       ) : null}
 
@@ -223,6 +237,7 @@ export default function MatchdayPage() {
           aberdeen={data.styles.aberdeen}
           opponent={data.styles.opponent}
           venueLabel="Home / away"
+          contract="matchday.style"
         />
       ) : null}
 
@@ -233,11 +248,12 @@ export default function MatchdayPage() {
           aberdeen={data.strength.aberdeen}
           opponent={data.strength.opponent}
           comparison={data.strength_comparison}
+          contract="matchday.strength"
         />
       ) : null}
 
       {themes && (seasonThemes.length || missionTheme) ? (
-        <section className="section">
+        <section className="section" data-contract="matchday.themes">
           <div className="section-head">
             <div>
               <p className="eyebrow">The bigger picture · 80% season, 20% mission</p>
@@ -249,11 +265,20 @@ export default function MatchdayPage() {
           </div>
           <div className="theme-strip">
             {seasonThemes.map((theme) => (
-              <ThemeCard key={theme.theme_id} theme={theme} compact />
+              <ThemeCard
+                key={theme.theme_id}
+                theme={theme}
+                compact
+                contract="matchday.theme"
+              />
             ))}
           </div>
           {missionTheme ? (
-            <ThemeCard theme={missionTheme} compact />
+            <ThemeCard
+              theme={missionTheme}
+              compact
+              contract="matchday.theme"
+            />
           ) : null}
           <p className="fine-print">
             Four current-season themes and one Cormack-era mission theme.
@@ -268,7 +293,7 @@ export default function MatchdayPage() {
       ) : null}
 
       {data.head_to_head.length ? (
-        <section className="card">
+        <section className="card" data-contract="matchday.head-to-head">
           <div className="section-head">
             <div>
               <p className="eyebrow">Context, not a prediction</p>
@@ -311,7 +336,7 @@ export default function MatchdayPage() {
         </section>
       ) : null}
 
-      <section className="card coverage-card">
+      <section className="card coverage-card" data-contract="matchday.coverage">
         <div className="card-head">
           <div>
             <p className="eyebrow">How to read this page</p>
@@ -341,7 +366,7 @@ export default function MatchdayPage() {
           </li>
         </ul>
         <p className="fine-print">{data.coverage.note}</p>
-        <p className="fine-print">
+        <p className="fine-print" data-contract-indicator="source">
           Snapshot: {snapshotAt ? String(snapshotAt) : "none"} ·{" "}
           {typeof data.coverage.snapshot?.fixtures === "number"
             ? `${data.coverage.snapshot.fixtures} opponent fixtures`
@@ -359,13 +384,13 @@ export default function MatchdayPage() {
           {" · "}
           <Link href="/squad/">Squad</Link>
           {" · "}
-          <Link href="/history/">The record</Link>
+          <Link href="/history/">The Cormack era</Link>
           {" · "}
           <Link href="/transfers/">Transfers</Link>
         </p>
       </section>
 
       <p className="fine-print">{data.notes}</p>
-    </>
+    </ContractPage>
   );
 }

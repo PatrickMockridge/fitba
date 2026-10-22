@@ -93,14 +93,16 @@ export function FormGuide({
   opponentName,
   aberdeen,
   opponent,
+  contract,
 }: {
   aberdeenName: string;
   opponentName: string;
   aberdeen: FormBlock;
   opponent: FormBlock;
+  contract?: string;
 }) {
   return (
-    <section className="card form-guide">
+    <section className="card form-guide" data-contract={contract}>
       <div className="section-head">
         <div>
           <p className="eyebrow">League form</p>

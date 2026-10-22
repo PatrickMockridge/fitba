@@ -1,28 +1,33 @@
 # Product strategy: fitba
 
-**Status:** canonical product document. Last reviewed 2026-10-21.
+**Status:** canonical product document. Last reviewed 2026-10-22.
+
+> Identity, audience and voice are governed by [identity.md](identity.md) and
+> [page-contracts.md](page-contracts.md). This document governs product scope and
+> roadmap. Where they overlap, identity.md wins.
 
 ## In one sentence
 
-fitba is the translation layer between the data that shapes Scottish football and
-the people who watch it — the same evidence, in the same language, for the stand
-and the analyst, with the context and uncertainty that hot takes leave out.
+fitba is an independent, data-driven record of Aberdeen FC, with the same
+evidence applied across Scottish football. The public line, audience and voice
+are defined in [identity.md](identity.md).
 
 ## The problem
 
-Football has two audiences for analysis and they rarely meet:
+Football analysis is often split between an analysis tier and a matchgoing
+reader, and the two rarely meet:
 
 - the **analysis tier**, which works in percentiles, xG, role-adjusted output,
   budgets, age curves and confidence intervals;
-- the **spectator tier**, which watches results, form, individual mistakes and
+- the **matchgoing reader**, who watches results, form, individual mistakes and
   narrative, and is often offered either raw numbers without meaning or
   simplified content without evidence.
 
-Attempts to bridge them are frequently one-dimensional: a single player rating, a
-"data says" take, or a chart with no explanation. Fans are told they should
-understand data, but the data is rarely translated into the decisions they
-actually care about — who plays, who is signed, why a team is inconsistent, why a
-good process can produce a bad run.
+Attempts to connect them are frequently one-dimensional: a single player rating,
+a "data says" take, or a chart with no explanation. Fans are told they should
+understand data, but the data is rarely connected to the decisions they actually
+care about — who plays, who is signed, why a team is inconsistent, why a good
+process can produce a bad run.
 
 The result is predictable. Frustration gets aimed at individuals, confidence
 swings with the last result, and the structural reasons for a club's behaviour
@@ -30,8 +35,9 @@ disappear from the conversation.
 
 ## Who fitba is for
 
-- **Primary:** Aberdeen fans who want to understand the club's trading model,
-  recruitment, inconsistency and the gap between performance and results.
+- **Primary:** highly engaged, literate, numerate Aberdeen fans who want to see
+  the evidence behind the club's trading model, recruitment, inconsistency and
+  the gap between performance and results.
 - **Secondary:** Scottish football fans, students, journalists and analysts who
   want the same lens applied across the pyramid and to opponents.
 - **Tertiary:** people working in clubs who want a public-facing explanation of
@@ -91,10 +97,10 @@ clearly.
 1. **Evidence before narrative, context before blame.**
    A striker's drought is shown alongside role, minutes, shot quality, team
    style and sample size — not as a single verdict.
-2. **Progressive disclosure.**
-   Every insight has a headline, a visual, a "what this means" line and a
-   methodology drawer. Casual fans stop at the first; analysts go all the way
-   down.
+2. **Method disclosure, not data hiding.**
+   Every insight has a headline, a visual, a "what this means" line and a method
+   note. Substantive panels and sources stay visible; deeper method may sit
+   behind disclosure. Density is the product, not a defect.
 3. **Uncertainty is a feature.**
    Sample-size badges, coverage tiers, confidence intervals and "we don't know"
    states are visible. Precision is never faked.
@@ -104,8 +110,8 @@ clearly.
    Aberdeen, opponents and scouted players are measured with the same
    position-aware, league-adjusted method.
 6. **Independent and correctable.**
-   Non-commercial, no betting advertising, a corrections route, and a clear
-   separation between our analysis and the club's actual decisions.
+   Non-commercial, no betting advertising, a published corrections policy, and
+   a clear separation between our analysis and the club's actual decisions.
 7. **No licence landmines.**
    Public data comes from licensed feeds. Unlicensed event or tracking data stays
    local and unpublished.
@@ -165,7 +171,8 @@ usernames or quotes in the public payload.
   minutes reliability, league-strength adjustment, style fit, budget bands and
   coverage labels.
 - Opposition briefings using the same framework.
-- Fan explainers and a methodology/sources layer that a casual fan can follow.
+- Fan explainers and a methodology/sources layer that a reader new to a method
+  can follow without losing the evidence.
 - The official AFC news feed, clearly separated from our analysis.
 
 ## Content pillars
@@ -218,14 +225,16 @@ usernames or quotes in the public payload.
 - Raw scraped data in the public repo, unlicensed Opta/Sofascore feeds or
   betting odds.
 - Invented wages, fees or internal valuations.
+- A question in place of a declarative heading, or contracted data hidden
+  because it was judged too much for an imagined average reader.
 - A full graphical bracket or tracking visual before the licensed data and the
   audience justify it.
 
 ## How we measure success
 
 - **Comprehension:** can a fan explain the main idea of a panel after reading it?
-- **Breadth:** do casual fans and analysts both use the same pages, not two
-  separate products?
+- **Depth:** does the same page serve a supporter who wants the headline and one
+  who wants the method, without asking either to accept a simplified version?
 - **Trust:** corrections are visible, sources are linked, uncertainty is
   respected.
 - **Return:** readers come back for the next match, the next window, the next
@@ -238,8 +247,12 @@ and less accurate has failed.
 
 ## Open questions
 
-- The public name and brand (currently "fitba").
-- How much editorial voice to use alongside the data.
+- **Resolved:** the public name is "fitba", with the line "Aberdeen FC, without
+  the noise."
+- **Resolved:** the site has a labelled editorial voice; see
+  [identity.md](identity.md).
 - How to present budget bands without implying a precision the public data does
   not have.
 - Which enterprise event/tracking provider, if any, is worth approaching later.
+- When to add a public corrections route; until then the methodology and sources
+  pages carry the correction policy.

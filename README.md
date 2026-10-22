@@ -1,22 +1,26 @@
 # fitba
 
-**The translation layer between the data that shapes Scottish football and the
-people who watch it.**
+**Aberdeen FC, without the noise.**
 
-fitba is a Scottish football data project, Aberdeen-first. It is built for
-Aberdeen fans who want to understand the club's trading model, recruitment and
-inconsistency, and for Scottish football fans, students, journalists and analysts
-who want the same evidence applied across the pyramid. It is independent,
-non-commercial and explicitly not a club mouthpiece.
+An independent, data-driven record of Aberdeen FC — the numbers, the sources and
+the argument, without the hot takes.
 
-The product thesis is in [docs/product-strategy.md](docs/product-strategy.md).
-The full documentation index is [docs/README.md](docs/README.md).
+fitba is built for highly engaged, literate, numerate Aberdeen fans who want to
+see the evidence for themselves, and for Scottish football readers, students,
+journalists and analysts who want the same evidence applied across the pyramid.
+It is independent, non-commercial and explicitly not a club mouthpiece.
+
+The identity and non-negotiables are in [docs/identity.md](docs/identity.md). The
+product scope is in [docs/product-strategy.md](docs/product-strategy.md). The
+full documentation index is [docs/README.md](docs/README.md).
 
 ## Documentation
 
 | Document | Read it for |
 |---|---|
-| [Product strategy](docs/product-strategy.md) | Why fitba exists, who it is for and the editorial line. |
+| [Identity](docs/identity.md) | The public line, reader, editorial stance, voice rules and non-negotiables. |
+| [Page contracts](docs/page-contracts.md) | The evidence each main route must keep visible, and the contract-change process. |
+| [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
@@ -28,7 +32,8 @@ The full documentation index is [docs/README.md](docs/README.md).
 
 - **Same evidence, not insider knowledge.** We show public-data proxies and say
   what is measured, inferred, curated or unknown.
-- **Progressive disclosure.** Headline, visual, "what this means", methodology.
+- **Method disclosure, not data hiding.** Headline, visual, "what this means",
+  then the method. Substantive panels and sources stay visible.
 - **Uncertainty is a feature.** Sample sizes, coverage tiers and confidence are
   visible.
 - **Show the trade-offs, not villains.** A trading club creates value and

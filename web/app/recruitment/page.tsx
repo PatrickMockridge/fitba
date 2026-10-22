@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BucketBars } from "@/components/BucketBars";
+import { ContractPage } from "@/components/ContractPage";
 import { ForumSignalPanel } from "@/components/ForumSignalPanel";
 import { NeedsBoard } from "@/components/NeedsBoard";
 import { RumourCard } from "@/components/RumourCard";
@@ -26,14 +27,14 @@ export default function RecruitmentPage() {
   const latestRumours = rumours?.rumours.slice(0, 3) ?? [];
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="recruitment">
+      <section className="page-head" data-contract="recruitment.hero">
         <p className="eyebrow">Off the pitch · Season {rumours?.season ?? transfers?.season ?? "—"}</p>
-        <h1>Transfers, scouting and the rumour mill</h1>
+        <h1>Recruitment, transfers and the squad plan</h1>
         <p className="lede">
           The trading side of the club: the squad needs behind the next window,
           confirmed business, the loan register, the scouting method and the
-          curated rumour mill. Confirmed transfers and rumours stay in separate
+          curated rumour register. Confirmed transfers and rumours stay in separate
           registers; the needs board is where the themes meet recruitment.
         </p>
         <div className="hero-actions">
@@ -41,7 +42,7 @@ export default function RecruitmentPage() {
             Confirmed transfers
           </Link>
           <Link className="button button-ghost" href="/rumours/">
-            Rumour mill
+            Rumour register
           </Link>
           <Link className="button button-ghost" href="/scouting/">
             Scouting
@@ -55,7 +56,7 @@ export default function RecruitmentPage() {
       {needs ? <NeedsBoard data={needs} /> : null}
 
       <section className="grid two-col">
-        <div className="card">
+        <div className="card" data-contract="recruitment.transfer-summary">
           <div className="card-head">
             <div>
               <p className="eyebrow">Transfer register</p>
@@ -104,10 +105,10 @@ export default function RecruitmentPage() {
           </Link>
         </div>
 
-        <div className="card">
+        <div className="card" data-contract="recruitment.rumour-summary">
           <div className="card-head">
             <div>
-              <p className="eyebrow">Rumour mill</p>
+              <p className="eyebrow">Rumour register</p>
               <h2>Curated links, labelled</h2>
             </div>
           </div>
@@ -151,12 +152,12 @@ export default function RecruitmentPage() {
             </div>
           )}
           <Link className="text-link" href="/rumours/">
-            Rumour mill, profile and fan signal →
+            Rumour register, profile and fan signal →
           </Link>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="recruitment.profile">
         <div className="section-head">
           <div>
             <p className="eyebrow">Recruitment profile</p>
@@ -175,7 +176,9 @@ export default function RecruitmentPage() {
                 : "Advisory only; the data-driven fit stays primary."}
             </p>
             {profile && profile.sample_size > 0 && profile.low_confidence ? (
-              <span className="badge badge-warn">Small sample — treat as a hint, not a target list</span>
+              <span className="badge badge-warn" data-contract-indicator="confidence">
+                Small sample — treat as a hint, not a target list
+              </span>
             ) : null}
           </div>
           <div className="card">
@@ -184,7 +187,7 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="recruitment.forum-signals">
         <ForumSignalPanel data={forum} limit={6} showSentiment={false} showTopics={false} />
         <p className="back-link">
           <Link href="/rumours/">All fan signal and the sentiment comparison →</Link>
@@ -194,6 +197,6 @@ export default function RecruitmentPage() {
           <Link href="/themes/">The bigger picture →</Link>
         </p>
       </section>
-    </>
+    </ContractPage>
   );
 }

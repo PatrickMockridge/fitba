@@ -30,6 +30,7 @@ export function AvailabilityBadge({
     <span
       className={`badge ${CLASSES[value] ?? "badge-neutral"}`}
       title={note ?? "No verified team-news entry"}
+      data-contract-indicator="availability"
     >
       {compact ? LABELS[value] ?? value : `Availability: ${LABELS[value] ?? value}`}
     </span>

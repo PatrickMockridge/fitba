@@ -5,9 +5,9 @@ import { FreshnessBadge } from "@/components/FreshnessBadge";
 import { getManifest } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "fitba — Scottish football, Aberdeen-first",
+  title: "fitba — Aberdeen FC, without the noise.",
   description:
-    "League tables, Aberdeen analysis, transfers and the rumour mill across the Scottish football pyramid.",
+    "An independent, data-driven record of Aberdeen FC: matchday, squad, recruitment and the Cormack era, with sources and uncertainty.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -15,13 +15,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB">
       <body>
-        <header className="site-header">
+        <header className="site-header" data-contract="site.header">
           <div className="wrap header-inner">
             <Link href="/" className="brand">
               <span className="brand-mark">f</span>
               <span>
                 <strong>fitba</strong>
-                <small>Scottish football, Aberdeen-first</small>
+                <small>Aberdeen FC, without the noise.</small>
               </span>
             </Link>
             <nav className="nav" aria-label="Main">
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/themes/">Themes</Link>
               <Link href="/squad/">Squad</Link>
               <Link href="/recruitment/">Off the pitch</Link>
-              <Link href="/history/">The record</Link>
+              <Link href="/history/">The Cormack era</Link>
               <Link href="/news/">News &amp; rumours</Link>
             </nav>
           </div>
@@ -37,11 +37,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main className="wrap">{children}</main>
 
-        <footer className="site-footer">
+        <footer className="site-footer" data-contract="site.footer">
           <div className="wrap footer-inner">
             <div>
-              <strong>fitba</strong> · a non-commercial Scottish football research project.
-              Not affiliated with Aberdeen FC, the SPFL or any data provider.
+              <strong>fitba</strong> · Aberdeen FC, without the noise. An independent,
+              non-commercial research project. Not affiliated with Aberdeen FC, the
+              SPFL, the SFA or any data provider.
             </div>
             <div className="footer-meta">
               <FreshnessBadge manifest={manifest} />

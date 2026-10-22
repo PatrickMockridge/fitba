@@ -55,3 +55,8 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run build
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: cd .. && uv sync --frozen
+      - run: cd .. && uv run python scripts/check_web_contract.py --ci

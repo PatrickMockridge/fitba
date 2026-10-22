@@ -163,7 +163,7 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
 | Source gate | Does the licensed API cover the cups, group fixtures, early rounds and required fields? | Fall back to Sportmonks for cups; no scraping. |
 | Public-display gate | Are the terms compatible with a non-commercial public site? | Do not publish that source. |
 | Cup-table gate | Do computed group tables reconcile with official results? | Fix the model before publishing. |
-| Audience gate | Do casual fans and analysts use the same pages? | Simplify the presentation, not the evidence. |
+| Depth gate | Does the same page serve a reader who wants the headline and one who wants the method? | Improve hierarchy, not evidence. |
 | Enterprise gate | Is the product valuable enough to justify a data contract? | Keep the local prototype; do not buy. |
 
 ## Non-goals for this roadmap
@@ -172,4 +172,4 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
 - A raw data dump or an API for third parties.
 - Full tracking before a licensed contract.
 - Player ratings as verdicts or blame narratives.
-- A second, simplified site for casual fans.
+- A second, simplified site that withholds evidence from one audience.

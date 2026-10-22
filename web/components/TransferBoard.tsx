@@ -96,7 +96,7 @@ function Summary({ value }: { value: SummaryTotals }) {
       ? "Not modelled"
       : `${money(value.net_low)} – ${money(value.net_high)}`;
   return (
-    <div className="stat-row four">
+    <div className="stat-row four" data-contract="transfers.summary">
       <div className="stat-tile">
         <span className="stat-label">Arrivals</span>
         <span className="stat-value">{value.arrivals}</span>
@@ -109,7 +109,7 @@ function Summary({ value }: { value: SummaryTotals }) {
         <span className="stat-value">{value.departures}</span>
         <span className="stat-note">permanent, loan, free</span>
       </div>
-      <div className="stat-tile">
+      <div className="stat-tile" data-contract-indicator="confidence">
         <span className="stat-label">Estimated net</span>
         <span className="stat-value">{netLabel}</span>
         <span className="stat-note">
@@ -176,7 +176,13 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
   }
 
   return (
-    <section>
+    <section data-contract="transfers.board">
+      <div className="section-head">
+        <div>
+          <p className="eyebrow">Confirmed business</p>
+          <h2>The register</h2>
+        </div>
+      </div>
       <div className="board-controls">
         <div className="board-toggle" role="group" aria-label="Window range">
           {(["recent", "further", "out_of_window"] as const).map((value) => (
@@ -236,7 +242,7 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
 
       <Summary value={totals(activeWindows)} />
 
-      <p className="fine-print">
+      <p className="fine-print" data-contract-indicator="unknown">
         Estimated net is a range built from disclosed/reported fee anchors and a
         transparent age, position and market model. It is not an audited balance;
         negative means income exceeds spend. Free transfers count as zero fee;
@@ -273,9 +279,18 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
           : ""}
       </p>
 
-      <div className="transfer-grid">
+      <div
+        className="transfer-grid"
+        data-contract="transfers.register"
+        data-contract-count={filtered.length}
+        data-contract-count-of="transfers.card"
+      >
         {filtered.map((transfer) => (
-          <TransferCard key={transfer.transfer_id} transfer={transfer} />
+          <TransferCard
+            key={transfer.transfer_id}
+            transfer={transfer}
+            contract="transfers.card"
+          />
         ))}
       </div>
 

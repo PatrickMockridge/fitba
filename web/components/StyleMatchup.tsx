@@ -115,7 +115,7 @@ function StyleCard({ name, pair }: { name: string; pair: StylePair }) {
         </table>
       </div>
       <p className="fine-print">{pair.overall.note}</p>
-      <p className="fine-print">
+      <p className="fine-print" data-contract-indicator="unknown">
         Possession: unknown
         {pair.overall.possession_unknown_reason
           ? ` (${pair.overall.possession_unknown_reason.replaceAll("_", " ")})`
@@ -132,19 +132,21 @@ export function StyleMatchup({
   aberdeen,
   opponent,
   venueLabel,
+  contract,
 }: {
   aberdeenName: string;
   opponentName: string;
   aberdeen: StylePair;
   opponent: StylePair;
   venueLabel: string;
+  contract?: string;
 }) {
   return (
-    <section className="card style-matchup">
+    <section className="card style-matchup" data-contract={contract}>
       <div className="section-head">
         <div>
           <p className="eyebrow">Style and likely approach</p>
-          <h2>Who imposes what?</h2>
+          <h2>How the styles meet</h2>
         </div>
         <span className="badge badge-neutral">{venueLabel} splits</span>
       </div>

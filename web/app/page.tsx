@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CompetitionStrip } from "@/components/CompetitionStrip";
+import { ContractPage } from "@/components/ContractPage";
 import { FixtureList } from "@/components/FixtureList";
 import { FormStrip } from "@/components/FormStrip";
 import { LeagueTable } from "@/components/LeagueTable";
@@ -29,12 +30,14 @@ export default function HomePage() {
 
   if (!tables.length) {
     return (
-      <section className="empty-state">
-        <h1>No published data yet</h1>
-        <p>
-          Run <code>uv run fitba publish</code> to generate the web data, then rebuild.
-        </p>
-      </section>
+      <ContractPage surface="home" state="empty">
+        <section className="empty-state" data-contract="home.empty">
+          <h1>No published data yet</h1>
+          <p>
+            Run <code>uv run fitba publish</code> to generate the web data, then rebuild.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
@@ -42,6 +45,8 @@ export default function HomePage() {
     table.rows.some((row) => row.team_id === "sco:aberdeen"),
   );
   const summary = aberdeen?.summary;
+  const standingsUpdatedAt =
+    aberdeenTable?.rows[0]?.updated_at ?? manifest?.generated_at ?? null;
   const latestTransfers = transfers?.transfers.slice(0, 2) ?? [];
   const latestRumours = rumours?.rumours.slice(0, 2) ?? [];
   const topPlayers = (squad?.players ?? [])
@@ -50,19 +55,17 @@ export default function HomePage() {
     .slice(0, 6);
 
   return (
-    <>
-      <section className="hero">
+    <ContractPage surface="home">
+      <section className="hero" data-contract="home.hero">
         <p className="eyebrow">Season {season}</p>
         <h1>
-          The Scottish pyramid,
+          Aberdeen FC,
           <br />
-          from Pittodrie out.
+          without the noise.
         </h1>
         <p className="lede">
-          Two views of one club. Matchday: the next opponent, both predicted
-          XIs, form and the likely approach. Off the pitch: confirmed business,
-          the rumour mill and the recruitment signal. The same evidence for the
-          stand and the analyst.
+          An independent, data-driven record of Aberdeen FC — the numbers, the
+          sources and the argument, without the hot takes.
         </p>
         <div className="hero-actions">
           <Link className="button" href="/matchday/">
@@ -74,14 +77,17 @@ export default function HomePage() {
           <Link className="button button-ghost" href="/news/">
             News &amp; rumours
           </Link>
+          <Link className="button button-ghost" href="/themes/">
+            The bigger picture
+          </Link>
         </div>
       </section>
 
       <section className="grid two-col door-grid">
-        <div className="card door-card">
+        <div className="card door-card" data-contract="home.matchday">
           <div className="card-head">
             <div>
-              <p className="eyebrow">Door one</p>
+              <p className="eyebrow">On the pitch</p>
               <h2>Matchday</h2>
             </div>
             <span className="door-number">01</span>
@@ -120,17 +126,17 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="card door-card">
+        <div className="card door-card" data-contract="home.off-pitch">
           <div className="card-head">
             <div>
-              <p className="eyebrow">Door two</p>
-              <h2>Off the pitch</h2>
+              <p className="eyebrow">Off the pitch</p>
+              <h2>Recruitment &amp; transfers</h2>
             </div>
             <span className="door-number">02</span>
           </div>
           <p>
             Confirmed transfers and loans, the scouting method, and a curated
-            rumour mill that turns links and fan chatter into a testable profile.
+            rumour register that turns links and fan chatter into a testable profile.
           </p>
 
           <div className="stat-row">
@@ -176,16 +182,16 @@ export default function HomePage() {
             <Link href="/transfers/">Transfers</Link>
             <Link href="/loans/">Loans</Link>
             <Link href="/scouting/">Scouting</Link>
-            <Link href="/rumours/">Rumour mill</Link>
+            <Link href="/rumours/">Rumours</Link>
           </div>
         </div>
       </section>
 
       {squad ? (
-        <section className="section squad-bridge">
+        <section className="section squad-bridge" data-contract="home.squad">
           <div className="section-head">
             <div>
-              <p className="eyebrow">The bridge · players</p>
+              <p className="eyebrow">Squad · the same player across the record</p>
               <h2>The current squad</h2>
             </div>
             <Link className="text-link" href="/squad/">
@@ -212,6 +218,7 @@ export default function HomePage() {
                   label="Stats unavailable"
                   value={squad.summary.stats_unavailable}
                   note="labelled"
+                  indicator="unknown"
                 />
               </div>
               <Link className="text-link" href="/squad/">
@@ -244,10 +251,10 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      <section className="section bridge-band">
+      <section className="section bridge-band" data-contract="home.news-rumours">
         <div className="section-head">
           <div>
-            <p className="eyebrow">The bridge</p>
+            <p className="eyebrow">News, rumours and fan signal</p>
             <h2>News &amp; rumours</h2>
           </div>
           <Link className="text-link" href="/news/">
@@ -281,7 +288,7 @@ export default function HomePage() {
           </div>
           <div className="card">
             <p className="eyebrow">Curated · sourced</p>
-            <h3>Rumour mill</h3>
+            <h3>Rumour register</h3>
             {latestRumours.length ? (
               <div className="rumour-grid">
                 {latestRumours.map((rumour) => (
@@ -295,7 +302,7 @@ export default function HomePage() {
               </p>
             )}
             <Link className="text-link" href="/rumours/">
-              Rumour mill →
+              Rumour register →
             </Link>
           </div>
           <div className="card">
@@ -332,7 +339,7 @@ export default function HomePage() {
       </p>
 
       {aberdeen ? (
-        <section className="section">
+        <section className="section" data-contract="home.competitions">
           <div className="section-head">
             <div>
               <p className="eyebrow">Aberdeen</p>
@@ -347,7 +354,7 @@ export default function HomePage() {
       ) : null}
 
       {aberdeenTable ? (
-        <section className="section">
+        <section className="section" data-contract="home.standings">
           <div className="section-head">
             <div>
               <p className="eyebrow">{aberdeenTable.short_name}</p>
@@ -362,11 +369,18 @@ export default function HomePage() {
             highlightTeamId="sco:aberdeen"
             cutoffs={aberdeenTable.cutoffs}
           />
+          <p className="fine-print" data-contract-indicator="source">
+            Computed from league results
+            {standingsUpdatedAt
+              ? ` · updated ${formatDate(String(standingsUpdatedAt).slice(0, 10))}`
+              : ""}
+            .
+          </p>
           {aberdeenTable.qualification_note ? (
             <p className="fine-print">{aberdeenTable.qualification_note}</p>
           ) : null}
         </section>
       ) : null}
-    </>
+    </ContractPage>
   );
 }

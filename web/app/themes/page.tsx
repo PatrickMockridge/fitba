@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContractPage } from "@/components/ContractPage";
 import { ThemeCard } from "@/components/ThemeCard";
 import { ThemeMetrics } from "@/components/ThemeMetrics";
 import { formatDate, getThemes } from "@/lib/data";
@@ -9,16 +10,18 @@ export default function ThemesPage() {
   const data = getThemes();
   if (!data) {
     return (
-      <section className="empty-state">
-        <h1>No theme layer published</h1>
-        <p>
-          Run <code>uv run fitba publish</code> to build the themes from the
-          local match, squad and history data.
-        </p>
-        <p>
-          The next-match view is on <Link href="/matchday/">Matchday</Link>.
-        </p>
-      </section>
+      <ContractPage surface="themes" state="empty">
+        <section className="empty-state" data-contract="themes.empty">
+          <h1>No theme layer published</h1>
+          <p>
+            Run <code>uv run fitba publish</code> to build the themes from the
+            local match, squad and history data.
+          </p>
+          <p>
+            The next-match view is on <Link href="/matchday/">Matchday</Link>.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
@@ -26,9 +29,9 @@ export default function ThemesPage() {
   const mission = data.themes.find((theme) => theme.horizon === "mission");
 
   return (
-    <>
-      <section className="page-head">
-        <p className="eyebrow">The bridge · on-field, squad and recruitment</p>
+    <ContractPage surface="themes">
+      <section className="page-head" data-contract="themes.hero">
+        <p className="eyebrow">On-field, squad and recruitment</p>
         <h1>The bigger picture</h1>
         <p className="lede">
           The matchday page answers the next game. This page is the backdrop:
@@ -38,7 +41,7 @@ export default function ThemesPage() {
           meet the evidence.
         </p>
         <div className="hero-actions">
-          <span className="badge badge-neutral">
+          <span className="badge badge-neutral" data-contract="themes.scope">
             {data.scope.season_weight}% season · {data.scope.mission_weight}% mission
           </span>
           <Link className="button button-ghost" href="/matchday/">
@@ -93,7 +96,7 @@ export default function ThemesPage() {
               <strong>Curated:</strong> the Cormack-era mission pillars and the
               Tobers recovery note.
             </li>
-            <li>
+            <li data-contract-indicator="unknown">
               <strong>Unknown:</strong> availability without a verified team-news
               entry, xG, channel location, possession and mid-game shape.
             </li>
@@ -120,7 +123,7 @@ export default function ThemesPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="themes.season">
         <div className="section-head">
           <div>
             <p className="eyebrow">80% · the current season</p>
@@ -131,8 +134,11 @@ export default function ThemesPage() {
         <div className="theme-stack">
           {seasonThemes.map((theme) => (
             <div className="theme-block" key={theme.theme_id}>
-              <ThemeCard theme={theme} />
-              <div className="card theme-metrics">
+              <ThemeCard theme={theme} contract="themes.theme" />
+              <div
+                className="card theme-metrics"
+                data-contract={`themes.metric-${theme.theme_id.replaceAll("_", "-")}`}
+              >
                 <ThemeMetrics theme={theme} />
               </div>
             </div>
@@ -141,7 +147,7 @@ export default function ThemesPage() {
       </section>
 
       {mission ? (
-        <section className="mission-band">
+        <section className="mission-band" data-contract="themes.mission">
           <div className="section-head">
             <div>
               <p className="eyebrow">20% · the longer mission</p>
@@ -149,14 +155,14 @@ export default function ThemesPage() {
             </div>
             <span className="badge badge-warn">Cormack-era context</span>
           </div>
-          <ThemeCard theme={mission} />
-          <div className="card theme-metrics">
+          <ThemeCard theme={mission} contract="themes.theme" />
+          <div className="card theme-metrics" data-contract="themes.metric-mission-check">
             <ThemeMetrics theme={mission} />
           </div>
         </section>
       ) : null}
 
-      <section className="card coverage-card">
+      <section className="card coverage-card" data-contract="themes.coverage">
         <div className="section-head">
           <div>
             <p className="eyebrow">Coverage</p>
@@ -194,7 +200,11 @@ export default function ThemesPage() {
               {data.coverage.provider_rating_rows ?? "—"} player-match rows
             </span>
           </div>
-          <div className="stat-tile">
+          <div
+            className="stat-tile"
+            data-contract="themes.coverage.missing"
+            data-contract-indicator="unknown"
+          >
             <span className="stat-label">Missing</span>
             <span className="stat-value">4</span>
             <span className="stat-note">
@@ -208,7 +218,7 @@ export default function ThemesPage() {
           {data.coverage.provider_ratings}. Bench: {data.coverage.bench ?? "—"}.
         </p>
         <p className="fine-print">{data.notes}</p>
-        <p className="back-link">
+        <p className="back-link" data-contract-indicator="source">
           <Link href="/matchday/">Next matchday</Link>
           {" · "}
           <Link href="/squad/">Squad</Link>
@@ -224,6 +234,6 @@ export default function ThemesPage() {
           <Link href="/sources/">Sources</Link>
         </p>
       </section>
-    </>
+    </ContractPage>
   );
 }

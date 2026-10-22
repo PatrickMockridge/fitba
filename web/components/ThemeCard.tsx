@@ -17,15 +17,18 @@ function anchor(theme: ThemeBlock) {
 export function ThemeCard({
   theme,
   compact = false,
+  contract,
 }: {
   theme: ThemeBlock;
   compact?: boolean;
+  contract?: string;
 }) {
   const mission = theme.horizon === "mission";
   return (
     <article
       className={`theme-card${compact ? " is-compact" : ""}${mission ? " is-mission" : ""}`}
       id={anchor(theme)}
+      data-contract={contract}
     >
       <div className="theme-card-head">
         <div>
@@ -40,12 +43,19 @@ export function ThemeCard({
         </div>
       </div>
 
-      <p className="theme-question">{theme.fan_question}</p>
       <h4 className="theme-headline">{theme.headline ?? theme.title}</h4>
+      {theme.fan_question ? (
+        <p className="theme-question">
+          <span className="muted">The question:</span> {theme.fan_question}
+        </p>
+      ) : null}
 
       {theme.read ? (
         <p className="theme-read">
-          <span className={`basis-badge basis-${theme.read_basis}`}>
+          <span
+            className={`basis-badge basis-${theme.read_basis}`}
+            data-contract-indicator="basis"
+          >
             The read · {readLabel(theme)}
           </span>{" "}
           {theme.read}
@@ -56,7 +66,7 @@ export function ThemeCard({
         <p className="fine-print">Unavailable: {theme.reason.replaceAll("_", " ")}.</p>
       ) : null}
 
-      <div className="evidence-chips">
+      <div className="evidence-chips" data-contract="themes.evidence">
         {theme.evidence.slice(0, compact ? 3 : 5).map((item) => (
           <span className="evidence-chip" key={`${item.label}-${item.value}`}>
             <span className="evidence-label">{item.label}</span>
@@ -69,7 +79,7 @@ export function ThemeCard({
       </div>
 
       {theme.implications?.length ? (
-        <div className="theme-implications">
+        <div className="theme-implications" data-contract="themes.implications">
           <p className="eyebrow">Transfer implication</p>
           {theme.implications.map((implication) => (
             <p key={`${implication.family}-${implication.category}`}>

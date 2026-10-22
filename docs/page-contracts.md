@@ -1,0 +1,207 @@
+# Page contracts
+
+**Status:** normative for the contracted routes. Last reviewed 2026-10-22.
+**Machine-readable source:** `web/contracts/surfaces.json`.
+**Guard:** `scripts/check_web_contract.py`, run after `npm run build` in CI and
+before the Pages artifact is uploaded.
+
+A contract is a floor, not a ceiling. It lists the evidence that must be visible
+in the default rendered state, not the only evidence a page may show. Method
+notes, caveats and definitions may sit behind disclosure; contracted data may
+not.
+
+## Marker convention
+
+| Attribute | Purpose |
+|---|---|
+| `data-contract-page="<surface>"` | Identifies the contracted route |
+| `data-contract-state="full\|empty\|no-fixture"` | Declares the rendered state |
+| `data-contract="<surface>.<section>"` | Required data surface |
+| `data-contract-indicator="basis\|confidence\|availability\|unknown\|freshness\|source"` | Visible provenance or uncertainty cue |
+
+- IDs are lowercase kebab-case and namespaced by surface.
+- Markers sit on stable section or panel roots, not individual numbers.
+- Shared components take an optional `contract` prop and put the attribute on
+  their root. This keeps the marker attached when a page is refactored.
+- `data-contract-optional` does not suppress a required marker; it is an error
+  on one. There is no `data-contract-hidden` escape.
+- Required data inside a closed `<details>` fails. A closed disclosure that
+  contains a table, another contract marker or an indicator also fails.
+
+## Contracted routes
+
+### `/` — home
+
+Must remain visible:
+
+- Identity hero: the line and lede.
+- Matchday door: position, points, form, next fixtures.
+- Off-the-pitch door: registered moves, active rumours, fan signals, latest
+  confirmed moves, links to transfers, loans, scouting and rumours.
+- Squad: size, loans out, average age, stats unavailable, current-season leaders.
+- News and rumours: official news, the curated rumour register, forum signal.
+- Competitions and the full current standings table with cutoffs and
+  qualification note.
+- Unknown and freshness indicators.
+
+May be disclosed: the explanatory paragraphs inside the door cards, method
+notes.
+
+Forbidden: "Door one", "Door two", the old pyramid/pittodrie line, a three-row
+standings slice in place of the table.
+
+### `/matchday/` — matchday
+
+Must remain visible:
+
+- Fixture identity, competition, date, venue, state and snapshot freshness.
+- The matchup read: headline, bullets and keys with measured/inferred/unknown
+  basis.
+- Both predicted XIs: formation and confidence, selection weights, availability
+  known/unknown, the pitch, contenders, and the not-considered list.
+- Form guide: last five, overall/home/away split, P/W-D-L/Pts/PPG/GF/GA/Shots.
+- Style: lean, evidence, venue split, shot metrics, possession-unknown note.
+- Strength: percentile comparison, table gap, confidence and cross-tier flag.
+- Themes strip, head-to-head table with Date/Match/Score/Aberdeen, and the
+  coverage/limits card with snapshot counts and source/method links.
+
+May be disclosed: long method notes. The XIs, selection weights, form, style and
+not-considered data are visible.
+
+Forbidden: "Who imposes what?", "Who starts?", bare form rows without GF/GA/
+shots, strength bars without percentiles, a predicted XI without confidence.
+
+### `/themes/` — the bigger picture
+
+Must remain visible:
+
+- Scope weights, generated date and state.
+- Five theme cards: declarative title and headline, read and basis, confidence,
+  evidence chips, implications. If the fan question is shown, it follows the
+  headline as secondary context.
+- The five metric panels: family balance, wing-back tax, cover question, leaky
+  boat, mission check, with the tables listed in the manifest.
+- Coverage: fixtures with ratings, starts mapped and role coverage, rated
+  minutes, the four missing data classes.
+
+May be disclosed: per-theme caveats and method, the how-to-read definitions.
+
+Forbidden: question headings, evidence reduced to three chips on the full page,
+metric panels moved behind a closed disclosure, confidence badges removed.
+
+### `/recruitment/` — recruitment and squad needs
+
+Must remain visible:
+
+- Hero and the seven-family needs board.
+- Per family: priority, urgency, category, confidence, expected slots,
+  available/ready/trusted counts, top share, availability risk, drivers, market
+  route (fee, budget, wages), roster space, curated prior, and the player table
+  with Player/Category/Starts/Minutes/Sub apps/Availability.
+- Transfer register summary, rumour register summary, recruitment profile with
+  sample size and low-confidence flag, forum signals.
+
+May be disclosed: caveats and method notes.
+
+Forbidden: a six-column needs table that drops expected slots, ready/trusted,
+market route, roster, curated prior or availability; player tables hidden by
+default; confidence badges removed.
+
+### `/transfers/` — transfers and loans
+
+Must remain visible:
+
+- Confirmation, curation, total and withheld badges; audited/historical coverage.
+- Board filters and the estimated-net range with confidence and known/modelled/
+  loan decomposition.
+- The register cards: verification, position and nationality, fee or inferred
+  range, loan terms (or an explicit "not confirmed" for a loan), source links.
+- Sell-on clauses table: Player/Buyer/Sale/Clause/Confidence/Source.
+- Register completeness: seniority review, position coverage, open/accepted/
+  resolved gaps, last audit date.
+- Coverage and source links.
+
+May be disclosed: the "how to read" definitions and long fee method notes.
+
+Forbidden: cards without position, nationality, fee basis, loan terms or
+sources; a register that hides completeness; "undisclosed" counted as zero.
+
+### `/loans/` — loan register
+
+Must remain visible:
+
+- Out and in counts and sections.
+- Every loan card with direction, player, clubs, season/window, fee status and
+  loan terms (or an explicit "not confirmed by a public source").
+- Coverage: which tiers can be tracked, and that duration/recall/obligation are
+  unknown unless confirmed.
+- Source links where they exist.
+
+May be disclosed: the coverage prose and long method notes.
+
+Forbidden: loan cards without terms, a single "terms often unknown" badge with
+no per-card unknown state, removal of the in/out split.
+
+### `/about/` — identity and editorial standard
+
+Must remain visible:
+
+- The identity line and lede.
+- Who the site is for, and the explicit rejection of a hypothetical median user.
+- On the club's side, not in its pocket.
+- The Cormack-era frame: player, manager, structure.
+- The line: what the site will not build.
+
+Forbidden: the old "translation layer" identity line, question headings, a
+simplified-reader rationale.
+
+## What the guard checks
+
+1. Required route HTML exists and declares the expected page and state.
+2. Every required marker exists at least the required number of times. Per-card
+   markers can use `same_as` so every card must carry the field.
+3. No required marker is inside a closed `<details>`, `hidden`, `aria-hidden`,
+   `.sr-only`, a script/style/template, or an inline hidden style.
+4. Required table columns exist in order; extra columns are allowed.
+5. Required basis/confidence/availability/unknown/freshness/source indicators
+   are visible in the required numbers.
+6. Required anchors and links exist and are visible, with the base path
+   normalised.
+7. Required identity copy is present.
+8. Exactly one visible H1 per route; no interrogative H1/H2/H3; no forbidden
+   heading text.
+9. Banned identity phrases are absent from visible text, title and description.
+10. In CI, a page cannot pass by switching to a state the manifest does not
+    allow.
+
+The checker never counts words. **Word-count budgets are prohibited.** A budget
+on prose creates an incentive to delete data; prose length is an editorial
+judgement, not a build gate. The checker rejects any `max_words`, `word_budget`
+or similar key in the manifest.
+
+## Contract changes
+
+A contract change is a product decision, not a style tweak.
+
+1. Propose the diff to this document and `web/contracts/surfaces.json` in the
+   same change.
+2. Add or update a test for the new behaviour.
+3. State what data becomes unavailable, and why the identity still holds.
+4. Obtain owner approval. Never self-approve a deletion.
+5. Do not edit the checker to make a failing change pass.
+
+Adding a contract for a new surface is allowed without approval if it does not
+weaken an existing one.
+
+## Commands
+
+```bash
+cd web && npm run build
+cd .. && uv run python scripts/check_web_contract.py --ci
+
+cd web && NEXT_PUBLIC_BASE_PATH=/fitba npm run build
+cd .. && uv run python scripts/check_web_contract.py --ci --base-path /fitba
+
+make web-contract-check
+make web-contract-check BASE_PATH=/fitba
+```

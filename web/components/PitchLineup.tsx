@@ -17,10 +17,12 @@ export function PitchLineup({
   players,
   formation,
   teamName,
+  contract,
 }: {
   players: LineupPlayer[];
   formation?: string | null;
   teamName: string;
+  contract?: string;
 }) {
   const rows = new Map<number, LineupPlayer[]>();
   for (const player of players) {
@@ -32,7 +34,7 @@ export function PitchLineup({
   const ordered = [...rows.entries()].sort(([a], [b]) => a - b);
 
   return (
-    <div className="pitch-wrap">
+    <div className="pitch-wrap" data-contract={contract}>
       <div className="pitch" aria-hidden="true">
         <div className="pitch-line pitch-line-mid" />
         <div className="pitch-circle" />

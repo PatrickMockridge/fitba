@@ -27,19 +27,28 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
   const roster = family.roster_space ?? {};
   const anchor = family.family.toLowerCase().replaceAll("/", "-");
   return (
-    <article className="need-card" id={`needs-${anchor}`}>
+    <article
+      className="need-card"
+      id={`needs-${anchor}`}
+      data-contract="recruitment.needs-family"
+    >
       <div className="need-head">
         <div>
-          <p className="eyebrow">
+          <p className="eyebrow" data-contract="recruitment.needs-priority">
             Priority {family.priority ?? "—"} · {family.urgency}
           </p>
           <h3>{family.label}</h3>
         </div>
-        <div className="badge-row">
+        <div className="badge-row" data-contract="recruitment.needs-confidence">
           <span className={`badge ${CATEGORY_CLASS[family.category] ?? "badge-neutral"}`}>
             {family.category.replaceAll("_", " ")}
           </span>
-          <span className="badge badge-neutral">{family.confidence} confidence</span>
+          <span
+            className="badge badge-neutral"
+            data-contract-indicator="confidence"
+          >
+            {family.confidence} confidence
+          </span>
         </div>
       </div>
 
@@ -87,7 +96,7 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
           <p className="eyebrow">Drivers</p>
           <p>{family.drivers.length ? family.drivers.join(" · ") : "—"}</p>
         </div>
-        <div className="mini-block">
+        <div className="mini-block" data-contract="recruitment.needs-market-route">
           <p className="eyebrow">Market route</p>
           <p>
             {route.primary ?? "none"}
@@ -101,7 +110,7 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
             {(route.wage_status ?? "unknown").replaceAll("_", " ")}
           </p>
         </div>
-        <div className="mini-block">
+        <div className="mini-block" data-contract="recruitment.needs-roster">
           <p className="eyebrow">Roster</p>
           <p>
             {String(roster.current ?? "—")} / {String(roster.max_squad ?? "—")} in
@@ -127,7 +136,11 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
         </div>
       </div>
 
-      <details className="need-details">
+      <details
+        className="need-details"
+        data-contract="recruitment.needs-players"
+        open
+      >
         <summary>
           Players and availability ({family.players.length})
         </summary>
@@ -166,9 +179,11 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
       </details>
 
       <div className="theme-links">
-        <Link className="text-link" href={`/scouting/#priority-${anchor}`}>
-          Scouting profile →
-        </Link>
+        {["cover", "replace", "strengthen"].includes(family.category) ? (
+          <Link className="text-link" href={`/scouting/#priority-${anchor}`}>
+            Scouting profile →
+          </Link>
+        ) : null}
         <Link className="text-link" href="/squad/">
           Squad →
         </Link>
@@ -183,7 +198,11 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
 export function NeedsBoard({ data }: { data: NeedsDocument }) {
   const counts = data.summary.counts ?? {};
   return (
-    <section className="section" id="squad-needs">
+    <section
+      className="section"
+      id="squad-needs"
+      data-contract="recruitment.needs-board"
+    >
       <div className="section-head">
         <div>
           <p className="eyebrow">Themes → recruitment</p>
@@ -193,7 +212,7 @@ export function NeedsBoard({ data }: { data: NeedsDocument }) {
           {data.summary.families ?? 0} role families
         </span>
       </div>
-      <div className="stat-row four">
+      <div className="stat-row four" data-contract="recruitment.needs-summary">
         <div className="stat-tile">
           <span className="stat-label">Cover</span>
           <span className="stat-value">{counts.cover ?? 0}</span>
@@ -216,7 +235,9 @@ export function NeedsBoard({ data }: { data: NeedsDocument }) {
             {(data.summary.availability_known ?? 0) +
               (data.summary.availability_unknown ?? 0)}
           </span>
-          <span className="stat-note">unknown stays unknown</span>
+          <span className="stat-note" data-contract-indicator="unknown">
+            unknown stays unknown
+          </span>
         </div>
       </div>
       <p className="fine-print">

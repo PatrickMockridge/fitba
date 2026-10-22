@@ -104,8 +104,9 @@ The breakdown visuals are layered, not a single score:
    squad.
 4. **Method** — what is measured, what is inferred and what is missing.
 
-This is the progressive-disclosure pattern used across the site: a casual fan can
-read the headline and the visual; an analyst can open the method.
+This is the disclosure pattern used across the site: the headline and the
+evidence are visible, and the method note can be opened. The reader can take the
+headline and the visual, then open the method if they want it.
 
 ## What we cannot know
 

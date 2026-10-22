@@ -94,6 +94,11 @@ code {
   margin-inline: auto;
 }
 
+/* The contract wrapper exists for the post-build guard, not for layout. */
+.contract-page {
+  display: contents;
+}
+
 /* Header */
 .site-header {
   border-bottom: 1px solid var(--line);
