@@ -205,6 +205,8 @@ May not:
 
 ## Relationship to other documents
 
+- [design.md](design.md): the System 7 visual grammar, the four themes and the
+  design-change process.
 - [product-strategy.md](product-strategy.md): product scope, content pillars and
   roadmap. It defers identity, audience and voice to this document.
 - [page-contracts.md](page-contracts.md): normative route contracts and the

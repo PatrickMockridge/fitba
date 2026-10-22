@@ -20,6 +20,7 @@ full documentation index is [docs/README.md](docs/README.md).
 |---|---|
 | [Identity](docs/identity.md) | The public line, reader, editorial stance, voice rules and non-negotiables. |
 | [Page contracts](docs/page-contracts.md) | The evidence each main route must keep visible, and the contract-change process. |
+| [Design foundation](docs/design.md) | The System 7 grammar, the four themes and the visual rules. |
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |

@@ -8,6 +8,7 @@ scope, and the methodology and sources when you need to check a number.
 |---|---|
 | [Identity](identity.md) | The public line, reader, editorial stance, voice rules, non-negotiables and the Cormack-era analytical frame. Canonical for identity and voice. |
 | [Page contracts](page-contracts.md) | The evidence each contracted route must keep visible, the marker convention and the contract-change process. Normative for the UI. |
+| [Design foundation](design.md) | The System 7 grammar, the four themes, typography, colour roles, component rules and the design-change process. Canonical for the visual system. |
 | [Identity review, October 2026](identity-review-2026-10.md) | The seven-lens panel record: identity decisions, corrections to the brief, the red-team matrix and the deferred follow-ups. |
 | [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |

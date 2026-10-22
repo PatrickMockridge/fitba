@@ -6,16 +6,18 @@ This file is canonical for all coding agents. `CLAUDE.md` points here.
 
 1. [`docs/identity.md`](docs/identity.md) — the identity, reader, voice and
    non-negotiables.
-2. [`docs/page-contracts.md`](docs/page-contracts.md) — what each route must keep
+2. [`docs/design.md`](docs/design.md) — the System 7 grammar, the four themes and
+   the visual rules.
+3. [`docs/page-contracts.md`](docs/page-contracts.md) — what each route must keep
    visible.
-3. [`web/contracts/surfaces.json`](web/contracts/surfaces.json) — the
+4. [`web/contracts/surfaces.json`](web/contracts/surfaces.json) — the
    machine-readable contracts.
-4. [`docs/product-strategy.md`](docs/product-strategy.md) — scope and roadmap
+5. [`docs/product-strategy.md`](docs/product-strategy.md) — scope and roadmap
    only. It defers identity and voice to `docs/identity.md`.
-5. The relevant page specification: `docs/matchday.md`, `docs/themes.md`,
+6. The relevant page specification: `docs/matchday.md`, `docs/themes.md`,
    `docs/needs.md`, `docs/transfers.md`, `docs/squad.md`.
 
-Do not start a style, copy or engagement change without reading 1–3.
+Do not start a style, copy or engagement change without reading 1–4.
 
 ## Non-negotiables
 

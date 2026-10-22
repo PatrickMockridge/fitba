@@ -1,0 +1,603 @@
+/*
+ * Fitba production system layer.
+ * Imported after globals.css. The page structure and data contracts stay; this
+ * file replaces the rounded/pill/soft-shadow grammar with the square, ruled
+ * System 7 grammar and provides the four themes.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Merkland: standard light theme */
+  --s-paper: #f0f0ed;
+  --s-surface: #fcfcfa;
+  --s-surface-2: #eae3e4;
+  --s-ink: #17181a;
+  --s-muted: #5b5e62;
+  --s-line: #c9c4c2;
+  --s-rule: #17181a;
+  --s-club: #c8102e;
+  --s-club-fill: #c8102e;
+  --s-club-fill-hover: #a30d25;
+  --s-on-club: #ffffff;
+  --s-green: #1d6b45;
+  --s-amber: #7a5600;
+  --s-red: #a3261e;
+  --s-europe: #2f5f9e;
+  --s-shadow-hard: 1px 1px 0 var(--s-rule);
+  --s-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --s-mono:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --s-club-wash: color-mix(in srgb, var(--s-club) 8%, var(--s-surface));
+
+  /* Map the existing production tokens onto the new system. */
+  --bg: var(--s-paper);
+  --surface: var(--s-surface);
+  --surface-2: var(--s-surface-2);
+  --ink: var(--s-ink);
+  --muted: var(--s-muted);
+  --line: var(--s-line);
+  --accent: var(--s-club);
+  --accent-strong: var(--s-club-fill-hover);
+  --accent-tint: color-mix(in srgb, var(--s-club) 8%, transparent);
+  --green: var(--s-green);
+  --green-tint: color-mix(in srgb, var(--s-green) 12%, transparent);
+  --amber: var(--s-amber);
+  --amber-tint: color-mix(in srgb, var(--s-amber) 14%, transparent);
+  --red: var(--s-red);
+  --red-tint: color-mix(in srgb, var(--s-red) 12%, transparent);
+  --europe: var(--s-europe);
+  --radius: 0px;
+  --shadow: none;
+  --mono: var(--s-mono);
+}
+
+/* Aurora: standard dark theme when no explicit selection is stored. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --s-paper: #0b1020;
+    --s-surface: #121a2e;
+    --s-surface-2: #1b2540;
+    --s-ink: #eef1f8;
+    --s-muted: #a8b0c8;
+    --s-line: #34405f;
+    --s-rule: #d9def0;
+    --s-club: #ff5a6e;
+    --s-club-fill: #c8102e;
+    --s-club-fill-hover: #a30d25;
+    --s-green: #64e0b0;
+    --s-amber: #e8c06a;
+    --s-red: #ff8f86;
+    --s-europe: #9b8cf0;
+    --s-shadow-hard: 1px 1px 0 #000000;
+  }
+}
+
+:root[data-theme="merkland"] {
+  color-scheme: light;
+  --s-paper: #f0f0ed;
+  --s-surface: #fcfcfa;
+  --s-surface-2: #eae3e4;
+  --s-ink: #17181a;
+  --s-muted: #5b5e62;
+  --s-line: #c9c4c2;
+  --s-rule: #17181a;
+  --s-club: #c8102e;
+  --s-club-fill: #c8102e;
+  --s-club-fill-hover: #a30d25;
+  --s-green: #1d6b45;
+  --s-amber: #7a5600;
+  --s-red: #a3261e;
+  --s-europe: #2f5f9e;
+  --s-shadow-hard: 1px 1px 0 var(--s-rule);
+}
+
+:root[data-theme="red-matchday"] {
+  color-scheme: light;
+  --s-paper: #f7f1e3;
+  --s-surface: #fdf9ef;
+  --s-surface-2: #ece3d2;
+  --s-ink: #141312;
+  --s-muted: #55504a;
+  --s-line: #c9c0ae;
+  --s-rule: #141312;
+  --s-club: #b3122a;
+  --s-club-fill: #b3122a;
+  --s-club-fill-hover: #8f0b20;
+  --s-green: #1d5a3a;
+  --s-amber: #6b4a00;
+  --s-red: #8f1d18;
+  --s-europe: #2a4f7a;
+  --s-shadow-hard: 1px 1px 0 var(--s-rule);
+}
+
+:root[data-theme="aurora"] {
+  color-scheme: dark;
+  --s-paper: #0b1020;
+  --s-surface: #121a2e;
+  --s-surface-2: #1b2540;
+  --s-ink: #eef1f8;
+  --s-muted: #a8b0c8;
+  --s-line: #34405f;
+  --s-rule: #d9def0;
+  --s-club: #ff5a6e;
+  --s-club-fill: #c8102e;
+  --s-club-fill-hover: #a30d25;
+  --s-green: #64e0b0;
+  --s-amber: #e8c06a;
+  --s-red: #ff8f86;
+  --s-europe: #9b8cf0;
+  --s-shadow-hard: 1px 1px 0 #000000;
+}
+
+:root[data-theme="floodlight"] {
+  color-scheme: dark;
+  --s-paper: #0d1a13;
+  --s-surface: #12241a;
+  --s-surface-2: #1b3326;
+  --s-ink: #f2f5f0;
+  --s-muted: #a8b8ad;
+  --s-line: #385545;
+  --s-rule: #e8efe9;
+  --s-club: #ff5a6e;
+  --s-club-fill: #c8102e;
+  --s-club-fill-hover: #a30d25;
+  --s-green: #7fe0a8;
+  --s-amber: #e8c06a;
+  --s-red: #ff9a8f;
+  --s-europe: #8ab8ee;
+  --s-shadow-hard: 1px 1px 0 #000000;
+}
+
+/* Base */
+body {
+  background: var(--s-paper);
+  color: var(--s-ink);
+  font-family: var(--s-sans);
+}
+
+a {
+  text-decoration-color: color-mix(in srgb, var(--s-club) 55%, transparent);
+}
+
+a:hover {
+  color: var(--s-club);
+}
+
+:focus-visible {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+::selection {
+  background: var(--s-club-fill);
+  color: var(--s-on-club);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--s-sans);
+}
+
+h1 {
+  font-weight: 760;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-weight: 720;
+}
+
+h3 {
+  font-weight: 680;
+}
+
+.eyebrow {
+  font-family: var(--s-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--s-club);
+}
+
+.lede {
+  max-width: 68ch;
+  color: var(--s-muted);
+}
+
+.fine-print {
+  font-size: 0.75rem;
+}
+
+/* Shell */
+.site-header {
+  position: static;
+  background: var(--s-paper);
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--s-rule);
+}
+
+.header-inner {
+  min-height: 64px;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 0;
+  background: var(--s-club-fill);
+  color: var(--s-on-club);
+  font-size: 1.1rem;
+  padding-bottom: 0;
+}
+
+.brand strong {
+  font-weight: 760;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.brand small {
+  font-family: var(--s-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.nav {
+  gap: 14px;
+  font-size: 13px;
+}
+
+.nav a {
+  color: var(--s-ink);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.nav a:hover {
+  color: var(--s-ink);
+  border-color: var(--s-club);
+}
+
+main {
+  padding: 1.5rem 0 3rem;
+}
+
+.wrap {
+  width: min(1180px, 100% - 3rem);
+}
+
+.hero {
+  max-width: none;
+  padding: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--s-rule);
+}
+
+.page-head {
+  max-width: none;
+  margin: 0;
+  padding: 2rem 0 1.25rem;
+  border-bottom: 1px solid var(--s-rule);
+}
+
+.page-head h1 {
+  max-width: 22ch;
+}
+
+.section {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--s-rule);
+}
+
+.section-head {
+  margin-bottom: 1rem;
+}
+
+/* Cards and panes */
+.card,
+.door-card,
+.transfer-card,
+.rumour-card,
+.theme-card,
+.need-card,
+.priority-card,
+.honour-card,
+.pillar-card,
+.key-card,
+.style-card,
+.comp-card,
+.sentiment-card,
+.news-card,
+.data-panel,
+.dialog-panel,
+.empty-state {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.card {
+  border-color: var(--s-rule);
+  background: var(--s-surface);
+}
+
+.door-card {
+  border: 1px solid var(--s-rule);
+  border-top: 4px solid var(--s-club);
+}
+
+.transfer-card {
+  border: 1px solid var(--s-rule);
+}
+
+.transfer-card.is-in {
+  border-top-color: var(--s-green);
+}
+
+.transfer-card.is-out {
+  border-top-color: var(--s-club);
+}
+
+.theme-card {
+  border-color: var(--s-rule);
+  background: var(--s-surface);
+}
+
+.theme-card.is-mission {
+  background: var(--s-surface);
+}
+
+.need-card {
+  border-color: var(--s-rule);
+  background: var(--s-surface);
+}
+
+.empty-state {
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+}
+
+.dialog-panel {
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+}
+
+/* Controls */
+.button {
+  border-radius: 0;
+  border-color: var(--s-rule);
+  background: var(--s-club-fill);
+  color: var(--s-on-club);
+  box-shadow: var(--s-shadow-hard);
+  font-weight: 600;
+}
+
+.button:hover {
+  background: var(--s-club-fill-hover);
+  color: var(--s-on-club);
+}
+
+.button-ghost {
+  background: var(--s-surface);
+  color: var(--s-ink);
+  border-color: var(--s-rule);
+  box-shadow: var(--s-shadow-hard);
+}
+
+.button-ghost:hover {
+  background: var(--s-surface-2);
+  color: var(--s-ink);
+}
+
+.door-links a {
+  border-radius: 0;
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+}
+
+.board-toggle {
+  border-radius: 0;
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+}
+
+.board-toggle button {
+  border-radius: 0;
+}
+
+.board-toggle button.is-active {
+  background: var(--s-ink);
+  color: var(--s-paper);
+  box-shadow: none;
+}
+
+.board-controls label {
+  font-family: var(--s-mono);
+}
+
+.board-controls select,
+.board-controls input[type="search"] {
+  border-radius: 0;
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+  color: var(--s-ink);
+}
+
+/* Badges, pills, chips */
+.badge,
+.basis-badge,
+.stage-badge,
+.pill,
+.evidence-chip {
+  border-radius: 0;
+}
+
+.badge {
+  border: 1px solid currentColor;
+  font-family: var(--s-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+}
+
+.basis-badge {
+  font-family: var(--s-mono);
+  text-transform: uppercase;
+}
+
+.pill {
+  font-family: var(--s-mono);
+}
+
+.form-chip,
+.result-dot {
+  border-radius: 0;
+}
+
+/* Tables */
+.table-wrap {
+  border: 1px solid var(--s-rule);
+  background: var(--s-surface);
+}
+
+.card .table-wrap {
+  border: 0;
+}
+
+.league-table {
+  font-size: 13px;
+}
+
+.league-table th {
+  background: var(--s-surface-2);
+  border-bottom: 1px solid var(--s-rule);
+  color: var(--s-ink);
+  font-family: var(--s-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.league-table td {
+  border-bottom: 1px solid var(--s-line);
+  padding: 6px 8px;
+}
+
+.league-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.league-table .num {
+  font-variant-numeric: tabular-nums;
+}
+
+.league-table .is-highlight {
+  background: var(--s-club-wash);
+}
+
+.cutoff td {
+  background: var(--s-surface-2);
+  border-top: 2px solid var(--s-rule);
+}
+
+/* Stats and meters */
+.stat-tile {
+  border: 1px solid var(--s-line);
+  border-radius: 0;
+  background: var(--s-surface);
+}
+
+.stat-label {
+  font-family: var(--s-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.bar-track,
+.family-track,
+.goal-mix-track,
+.compare-bar,
+.lean-track {
+  border: 1px solid var(--s-rule);
+  border-radius: 0;
+  background: var(--s-surface-2);
+}
+
+.bar-fill,
+.family-fill,
+.goal-mix-track span,
+.lean-fill,
+.compare-aberdeen {
+  background: var(--s-club);
+}
+
+.compare-opponent {
+  background: var(--s-europe);
+}
+
+.matchday-read,
+.mission-band {
+  background: var(--s-surface);
+}
+
+.pitch {
+  border-radius: 0;
+  background: #1f6b46;
+}
+
+.pitch-player {
+  border-radius: 0;
+}
+
+/* Footer and theme control */
+.site-footer {
+  border-top: 1px solid var(--s-rule);
+  background: var(--s-paper);
+}
+
+.footer-meta {
+  font-family: var(--s-mono);
+  font-size: 10px;
+}
+
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-switcher > span {
+  color: var(--s-muted);
+  font: 400 9px/1.3 var(--s-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.theme-switcher select {
+  border: 1px solid var(--s-rule);
+  border-radius: 0;
+  background: var(--s-surface);
+  color: var(--s-ink);
+  padding: 3px 5px;
+  font: 600 10px/1.2 var(--s-sans);
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    width: calc(100% - 1.5rem);
+  }
+
+  .site-header {
+    position: static;
+  }
+}
