@@ -4,10 +4,15 @@
 The checks run against the normalized match tables, not the front end. A role
 can exist only for a starter with a mapped grid slot; a substitute never gets a
 role; every observed formation shape must be in config/roles.yaml.
+
+The warehouse is gitignored, so CI runs `--published-only`, which validates the
+committed squad payload and the role config. The full consistency checks run
+locally after a build.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from collections import defaultdict
@@ -24,6 +29,7 @@ from fitba.settings import source_ids as source_ids_config
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = ROOT / "config" / "roles.yaml"
 MATCHES = ROOT / "data" / "normalized" / "matches"
+SQUAD = ROOT / "web" / "data" / "generated" / "squad" / "aberdeen.json"
 
 
 def _load(name: str) -> list[dict[str, Any]]:
@@ -33,7 +39,47 @@ def _load(name: str) -> list[dict[str, Any]]:
     return pl.read_parquet(path).to_dicts()
 
 
-def main() -> int:
+def _check_published(
+    roles: dict[str, Any], formations: dict[str, Any], errors: list[str]
+) -> tuple[int, int, int, int]:
+    """Validate the committed squad payload without the local warehouse."""
+    if not SQUAD.exists():
+        errors.append(f"published squad payload is missing: {SQUAD}")
+        return 0, 0, 0, 0
+    squad = json.loads(SQUAD.read_text(encoding="utf-8"))
+    players = squad.get("players") or []
+    meta = squad.get("role_meta") or {}
+    checked = 0
+    for player in players:
+        role = player.get("role") or {}
+        code = role.get("code")
+        if not code:
+            continue
+        checked += 1
+        definition = roles.get(str(code))
+        if not definition:
+            errors.append(f"{player.get('name')}: published role {code!r} is not mapped")
+        elif role.get("family") != definition.get("family"):
+            errors.append(f"{player.get('name')}: published role family mismatch")
+    for shape in meta.get("formations_seen") or {}:
+        if shape not in formations and shape != "unknown":
+            errors.append(f"published formation {shape!r} is not mapped")
+    if meta.get("unmapped_formations"):
+        errors.append(f"unmapped formations: {meta['unmapped_formations']}")
+    if meta.get("slot_errors"):
+        errors.append(f"role slot errors: {meta['slot_errors']}")
+    starts_total = int(meta.get("starts_total") or 0)
+    starts_with_role = int(meta.get("starts_with_role") or 0)
+    if starts_with_role > starts_total:
+        errors.append("published starts_with_role exceeds starts_total")
+    if int(meta.get("fixtures_with_grid") or 0) > int(meta.get("fixtures_total") or 0):
+        errors.append("published grid fixtures exceed total fixtures")
+    if int(meta.get("players_with_role") or 0) > int(meta.get("players_with_starts") or 0):
+        errors.append("published players_with_role exceeds players_with_starts")
+    return checked, len(players), starts_with_role, starts_total
+
+
+def main(published_only: bool = False) -> int:
     errors: list[str] = []
     config = yaml.safe_load(ROLES.read_text(encoding="utf-8"))
     try:
@@ -43,6 +89,20 @@ def main() -> int:
         config = {"roles": {}, "formations": {}}
     roles = config.get("roles") or {}
     formations = config.get("formations") or {}
+
+    if published_only:
+        checked, squad_count, with_role, total = _check_published(roles, formations, errors)
+        if errors:
+            print("Role publication check failed:")
+            for error in errors:
+                print(f"  - {error}")
+            return 1
+        print(
+            "Role publication check passed "
+            f"(published only: {checked}/{squad_count} squad players with a role, "
+            f"{with_role}/{total} Aberdeen starts with a role)"
+        )
+        return 0
 
     club_id = str(aberdeen_config()["club_id"])
     team_id = int(source_ids_config()["teams"][club_id]["api_football"])
@@ -194,4 +254,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--published-only",
+        action="store_true",
+        help="check the committed squad payload instead of the local warehouse",
+    )
+    sys.exit(main(published_only=parser.parse_args().published_only))

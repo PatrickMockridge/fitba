@@ -4,10 +4,15 @@
 The shape view must distinguish the measured kick-off formation from a sourced
 mid-game note. This guard checks the normalized tables and the published club
 payload, and rejects a reported switch without a source.
+
+The warehouse is gitignored, so CI runs `--published-only`: shape notes and the
+committed club payload are still checked, while the normalized-table
+consistency checks run locally after a build.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from collections import Counter
@@ -38,7 +43,7 @@ def _valid_shapes(config: dict[str, Any]) -> set[str]:
     return set((config.get("formations") or {}).keys()) | {"unknown"}
 
 
-def main() -> int:
+def main(published_only: bool = False) -> int:
     errors: list[str] = []
     config = yaml.safe_load(ROLES.read_text(encoding="utf-8"))
     shapes = _load("team_shapes.parquet")
@@ -52,54 +57,57 @@ def main() -> int:
     club_id = str(aberdeen_config()["club_id"])
     team_id = int(source_ids_config()["teams"][club_id]["api_football"])
 
-    if not shapes:
-        errors.append("no team-shape rows were found")
-    if not appearances:
-        errors.append("no appearance rows were found")
+    if not published_only:
+        if not shapes:
+            errors.append("no team-shape rows were found")
+        if not appearances:
+            errors.append("no appearance rows were found")
 
-    shape_by_fixture_team = {(int(row["fixture_id"]), int(row["team_id"])): row for row in shapes}
-    starters_by_fixture_team: Counter[tuple[int, int]] = Counter()
-    cb_by_fixture_team: Counter[tuple[int, int]] = Counter()
-    dm_by_fixture_team: Counter[tuple[int, int]] = Counter()
-    for row in appearances:
-        key = (int(row["fixture_id"]), int(row["team_id"]))
-        if row.get("started"):
-            starters_by_fixture_team[key] += 1
-            if row.get("role_family") == "centre_back":
-                cb_by_fixture_team[key] += 1
-            if row.get("role_family") == "defensive_midfield":
-                dm_by_fixture_team[key] += 1
+        shape_by_fixture_team = {
+            (int(row["fixture_id"]), int(row["team_id"])): row for row in shapes
+        }
+        starters_by_fixture_team: Counter[tuple[int, int]] = Counter()
+        cb_by_fixture_team: Counter[tuple[int, int]] = Counter()
+        dm_by_fixture_team: Counter[tuple[int, int]] = Counter()
+        for row in appearances:
+            key = (int(row["fixture_id"]), int(row["team_id"]))
+            if row.get("started"):
+                starters_by_fixture_team[key] += 1
+                if row.get("role_family") == "centre_back":
+                    cb_by_fixture_team[key] += 1
+                if row.get("role_family") == "defensive_midfield":
+                    dm_by_fixture_team[key] += 1
 
-    for key, row in shape_by_fixture_team.items():
-        if starters_by_fixture_team.get(key, 0) and starters_by_fixture_team[key] != 11:
-            errors.append(f"{key}: shape row has {starters_by_fixture_team[key]} starters")
-        if row.get("cb_count") is not None and int(row["cb_count"]) != cb_by_fixture_team.get(
-            key, 0
-        ):
-            errors.append(f"{key}: cb_count does not match role rows")
-        if row.get("dm_count") is not None and int(row["dm_count"]) != dm_by_fixture_team.get(
-            key, 0
-        ):
-            errors.append(f"{key}: dm_count does not match role rows")
-        if row.get("formation_shape") and row["formation_shape"] not in valid_shapes:
-            errors.append(f"{key}: unknown formation shape {row['formation_shape']}")
-        if int(row.get("goals_for") or 0) < 0 or int(row.get("goals_against") or 0) < 0:
-            errors.append(f"{key}: negative goals")
-        if row.get("result") not in {"W", "D", "L", None}:
-            errors.append(f"{key}: invalid result {row.get('result')!r}")
+        for key, row in shape_by_fixture_team.items():
+            if starters_by_fixture_team.get(key, 0) and starters_by_fixture_team[key] != 11:
+                errors.append(f"{key}: shape row has {starters_by_fixture_team[key]} starters")
+            if row.get("cb_count") is not None and int(row["cb_count"]) != cb_by_fixture_team.get(
+                key, 0
+            ):
+                errors.append(f"{key}: cb_count does not match role rows")
+            if row.get("dm_count") is not None and int(row["dm_count"]) != dm_by_fixture_team.get(
+                key, 0
+            ):
+                errors.append(f"{key}: dm_count does not match role rows")
+            if row.get("formation_shape") and row["formation_shape"] not in valid_shapes:
+                errors.append(f"{key}: unknown formation shape {row['formation_shape']}")
+            if int(row.get("goals_for") or 0) < 0 or int(row.get("goals_against") or 0) < 0:
+                errors.append(f"{key}: negative goals")
+            if row.get("result") not in {"W", "D", "L", None}:
+                errors.append(f"{key}: invalid result {row.get('result')!r}")
 
-    seen_stats: set[tuple[int, int, int]] = set()
-    for row in match_stats:
-        key = (int(row["fixture_id"]), int(row["team_id"]), int(row["player_id"]))
-        if key in seen_stats:
-            errors.append(f"{key}: duplicate per-match stat row")
-        seen_stats.add(key)
-        rating = row.get("rating")
-        if rating is not None and not (0 < float(rating) <= 10):
-            errors.append(f"{key}: rating outside 0-10")
-        minutes = row.get("minutes")
-        if minutes is not None and not (0 <= int(minutes) <= 120):
-            errors.append(f"{key}: minutes outside 0-120")
+        seen_stats: set[tuple[int, int, int]] = set()
+        for row in match_stats:
+            key = (int(row["fixture_id"]), int(row["team_id"]), int(row["player_id"]))
+            if key in seen_stats:
+                errors.append(f"{key}: duplicate per-match stat row")
+            seen_stats.add(key)
+            rating = row.get("rating")
+            if rating is not None and not (0 < float(rating) <= 10):
+                errors.append(f"{key}: rating outside 0-10")
+            minutes = row.get("minutes")
+            if minutes is not None and not (0 <= int(minutes) <= 120):
+                errors.append(f"{key}: minutes outside 0-120")
 
     for index, row in enumerate(notes):
         prefix = f"shape note {index}"
@@ -118,6 +126,8 @@ def main() -> int:
         if row.get("confidence") not in {"reported", "confirmed"}:
             errors.append(f"{prefix}: invalid confidence")
 
+    if published_only and not CLUB.exists():
+        errors.append(f"published club payload is missing: {CLUB}")
     if CLUB.exists():
         club = json.loads(CLUB.read_text(encoding="utf-8"))
         shapes_payload = club.get("shapes") or {}
@@ -142,13 +152,25 @@ def main() -> int:
             print(f"  - {error}")
         return 1
 
-    print(
-        "Shape publication check passed "
-        f"({len(shapes)} team-shape rows, {len(match_stats)} per-match stat rows, "
-        f"{len(notes)} reported switches)"
-    )
+    if published_only:
+        print(
+            "Shape publication check passed "
+            f"(published only: {len(notes)} reported switches, club payload checked)"
+        )
+    else:
+        print(
+            "Shape publication check passed "
+            f"({len(shapes)} team-shape rows, {len(match_stats)} per-match stat rows, "
+            f"{len(notes)} reported switches)"
+        )
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--published-only",
+        action="store_true",
+        help="check shape notes and the committed payload instead of the local warehouse",
+    )
+    sys.exit(main(published_only=parser.parse_args().published_only))

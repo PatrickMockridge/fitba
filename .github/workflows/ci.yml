@@ -34,8 +34,8 @@ jobs:
       - run: uv run python scripts/check_needs.py
       - run: uv run python scripts/check_rumours.py
       - run: uv run python scripts/check_squad.py
-      - run: uv run python scripts/check_roles.py
-      - run: uv run python scripts/check_shapes.py
+      - run: uv run python scripts/check_roles.py --published-only
+      - run: uv run python scripts/check_shapes.py --published-only
       - run: uv run python scripts/check_career_roles.py --published-only
       - run: uv run python scripts/check_player_page.py
       - run: uv run python scripts/check_player_attributes.py

@@ -161,7 +161,9 @@ make check                 # Ruff, Pyright, pytest and every publication guard
 cd web && npm run build    # static export; fails on a broken route
 ```
 
-The warehouse and raw feeds live in `data/` and `.cache/` and are gitignored.
+CI runs the publication guards against the committed payloads; guards that
+need the local warehouse (roles, shapes) run in full after a build. The
+warehouse and raw feeds live in `data/` and `.cache/` and are gitignored.
 The published web data lives in `web/data/generated/` and is committed; Vercel
 builds the app with its project root set to `web`.
 
