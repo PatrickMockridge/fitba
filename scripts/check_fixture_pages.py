@@ -292,6 +292,18 @@ def main() -> int:
     base = args.base_path.rstrip("/")
     dash = chr(8211)
     checked = 0
+
+    # The match index renders one season at a time, defaulting to the current
+    # season. Its default HTML therefore links only that season's fixture
+    # pages; the earlier seasons are selected client-side. Require the selector
+    # to name every season, and keep the link assertion for the default season.
+    # The per-page checks below still cover every fixture in every season.
+    seasons = sorted({row.get("season") for row in rows if row.get("season")})
+    default_season = seasons[-1] if seasons else ""
+    if index_html:
+        for season in seasons:
+            if season not in index_html:
+                errors.append(f"match index season selector does not list {season}")
     for row in rows:
         fixture_id = int(row["fixture_id"])
         document_path = MATCHES / f"{fixture_id}.json"
@@ -319,8 +331,14 @@ def main() -> int:
         expected_href = f"{base}/matches/{fixture_id}/"
         if row.get("href") != f"/matches/{fixture_id}/":
             errors.append(f"{fixture_id}: index href is not canonical")
-        if index_html and expected_href not in index_html:
-            errors.append(f"{fixture_id}: match index does not link the page")
+        if (
+            index_html
+            and row.get("season") == default_season
+            and expected_href not in index_html
+        ):
+            errors.append(
+                f"{fixture_id}: match index does not link the default-season page"
+            )
 
         page_path = out_matches / str(fixture_id) / "index.html"
         if not page_path.exists():
