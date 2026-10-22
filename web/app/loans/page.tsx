@@ -1,143 +1,95 @@
 import Link from "next/link";
-import { EmptyState } from "@/components/EmptyState";
-import { LegendDisclosure } from "@/components/LegendDisclosure";
-import { MetricStrip } from "@/components/MetricStrip";
-import { PageHeader } from "@/components/PageHeader";
-import { PlayerLink } from "@/components/PlayerLink";
-import { TableFrame, Th } from "@/components/TableFrame";
-import { formatDate } from "@/lib/format";
-import { getTransfers, type TransferRecord } from "@/lib/data";
+import { TransferCard } from "@/components/TransferCard";
+import { getTransfers } from "@/lib/data";
 
 export const metadata = { title: "Loans · fitba" };
-
-function LoanTable({ loans, label }: { loans: TransferRecord[]; label: string }) {
-  if (!loans.length) {
-    return <p className="muted">No confirmed loans in this group.</p>;
-  }
-  return (
-    <TableFrame
-      label={`${label} loan register`}
-      caption={label}
-      className="league-table compact register-table stack-mobile"
-    >
-      <thead>
-        <tr>
-          <Th>Player</Th>
-          <Th>Club</Th>
-          <Th>Window</Th>
-          <Th>End</Th>
-          <Th>Status</Th>
-        </tr>
-      </thead>
-      <tbody>
-        {loans.map((loan) => (
-          <tr key={loan.transfer_id}>
-            <td data-label="Player">
-              <PlayerLink name={loan.player_name} href={loan.player_href} />
-            </td>
-            <td data-label="Club">
-              {loan.direction === "out" ? loan.to_club_name : loan.from_club_name}
-            </td>
-            <td data-label="Window">
-              {loan.season} · {loan.window}
-            </td>
-            <td data-label="End">
-              {loan.loan_end_date ? formatDate(loan.loan_end_date) : "—"}
-            </td>
-            <td data-label="Status">
-              {loan.verification_status === "confirmed" ? "Confirmed" : "Curated"}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </TableFrame>
-  );
-}
 
 export default function LoansPage() {
   const data = getTransfers();
   if (!data) {
     return (
-      <EmptyState
-        title="No loan register published"
-        body="The loan register is built from the confirmed transfer business and will appear after the next publish."
-        action={
-          <Link className="button button-ghost" href="/transfers/">
-            Transfer register
-          </Link>
-        }
-      />
+      <section className="empty-state">
+        <h1>No loan register published</h1>
+        <p>
+          Run <code>uv run fitba transfers</code> and then{" "}
+          <code>uv run fitba publish</code>.
+        </p>
+      </section>
     );
   }
 
-  const season = data.season;
-  const outNow = data.loans_out.filter((loan) => loan.season === season);
-  const outEarlier = data.loans_out.filter((loan) => loan.season !== season);
-  const inNow = data.loans_in.filter((loan) => loan.season === season);
-  const inEarlier = data.loans_in.filter((loan) => loan.season !== season);
-
   return (
     <>
-      <PageHeader
-        eyebrow="Aberdeen · loans"
-        title="Who is out on loan?"
-        summary={`${data.loans_out.length} out and ${data.loans_in.length} in since 2019/20. ${outNow.length} out this season, ${inNow.length} in.`}
-      />
-
-      <MetricStrip
-        columns={3}
-        items={[
-          { label: "Out", value: data.loans_out.length, note: "register" },
-          { label: "In", value: data.loans_in.length, note: "register" },
-          { label: "Out now", value: outNow.length, note: season },
-        ]}
-      />
+      <section className="page-head">
+        <p className="eyebrow">Aberdeen · confirmed loans</p>
+        <h1>Loan register</h1>
+        <p className="lede">
+          Aberdeen players out on loan and players borrowed in. Every deal is
+          confirmed business from the register; loan terms are shown only where an
+          official source records them.
+        </p>
+        <div className="hero-actions">
+          <span className="badge badge-neutral">{data.loans_out.length} out</span>
+          <span className="badge badge-neutral">{data.loans_in.length} in</span>
+          <span className="badge badge-warn">terms often unknown</span>
+        </div>
+      </section>
 
       <section className="section">
         <div className="section-head">
-          <h2>Out now</h2>
-          <Link className="text-link" href="/squad/">
-            Current squad →
-          </Link>
+          <div>
+            <p className="eyebrow">Out</p>
+            <h2>Aberdeen players on loan</h2>
+          </div>
         </div>
-        <LoanTable loans={outNow} label={`Aberdeen players out on loan in ${season}`} />
-        {outEarlier.length ? (
-          <details className="page-legend">
-            <summary>Earlier loans out ({outEarlier.length})</summary>
-            <div className="page-legend-body">
-              <LoanTable loans={outEarlier} label="Earlier Aberdeen loans out" />
-            </div>
-          </details>
+        <div className="transfer-grid">
+          {data.loans_out.map((loan) => (
+            <TransferCard key={loan.transfer_id} transfer={loan} />
+          ))}
+        </div>
+        {data.loans_out.length === 0 ? (
+          <p className="muted">No confirmed loans out in this register.</p>
         ) : null}
       </section>
 
       <section className="section">
         <div className="section-head">
-          <h2>In now</h2>
+          <div>
+            <p className="eyebrow">In</p>
+            <h2>Players borrowed in</h2>
+          </div>
         </div>
-        <LoanTable loans={inNow} label={`Players borrowed in during ${season}`} />
-        {inEarlier.length ? (
-          <details className="page-legend">
-            <summary>Earlier loans in ({inEarlier.length})</summary>
-            <div className="page-legend-body">
-              <LoanTable loans={inEarlier} label="Earlier players borrowed in" />
-            </div>
-          </details>
+        <div className="transfer-grid">
+          {data.loans_in.map((loan) => (
+            <TransferCard key={loan.transfer_id} transfer={loan} />
+          ))}
+        </div>
+        {data.loans_in.length === 0 ? (
+          <p className="muted">No confirmed loans in in this register.</p>
         ) : null}
       </section>
 
-      <LegendDisclosure title="Loan terms and coverage">
+      <section className="card">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">Coverage</p>
+            <h2>What we know about loan minutes</h2>
+          </div>
+        </div>
         <p>
-          Loan duration, recall and obligation terms are shown only when a public
-          source confirms them; otherwise the end date is a dash. Every row is
-          confirmed business from the transfer register.
+          Premium-tier loans can be tracked through lineups and events where the
+          licensed feed covers the loan club. League One/Two minutes use a curated
+          match log; the page labels the coverage rather than pretending all tiers
+          are equal.
         </p>
-        <p>
-          <Link href="/transfers/">Full transfer register</Link> ·{" "}
-          <Link href="/methodology/">Method</Link> ·{" "}
-          <Link href="/sources/">Sources</Link>
+        <p className="fine-print">
+          Loan duration, recall and obligation terms are not in the transfer feed.
+          They are shown only when confirmed by the club or a public record.
         </p>
-      </LegendDisclosure>
+        <Link className="text-link" href="/transfers/">
+          Full transfer register →
+        </Link>
+      </section>
     </>
   );
 }

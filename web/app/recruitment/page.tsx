@@ -1,93 +1,199 @@
 import Link from "next/link";
-import { LegendDisclosure } from "@/components/LegendDisclosure";
+import { BucketBars } from "@/components/BucketBars";
+import { ForumSignalPanel } from "@/components/ForumSignalPanel";
 import { NeedsBoard } from "@/components/NeedsBoard";
-import { PageHeader } from "@/components/PageHeader";
-import { getNeeds, getRumours, getTransfers } from "@/lib/data";
+import { RumourCard } from "@/components/RumourCard";
+import { StatTile } from "@/components/StatTile";
+import { TransferCard } from "@/components/TransferCard";
+import {
+  getForumSignal,
+  getNeeds,
+  getRumourProfile,
+  getRumours,
+  getTransfers,
+} from "@/lib/data";
 
 export const metadata = { title: "Off the pitch · fitba" };
 
 export default function RecruitmentPage() {
-  const needs = getNeeds();
   const transfers = getTransfers();
   const rumours = getRumours();
+  const profile = getRumourProfile();
+  const forum = getForumSignal();
+  const needs = getNeeds();
 
-  const counts = needs?.summary.counts ?? {};
-  const strengthen = counts.strengthen ?? 0;
-  const none = counts.none ?? 0;
-  const known = needs?.summary.availability_known ?? 0;
-  const unknown = needs?.summary.availability_unknown ?? 0;
-  const profiles = (needs?.families ?? []).filter(
-    (family) => family.category !== "none" && family.category !== "unknown",
-  ).length;
-  const activeRumours = rumours?.summary.by_status.active ?? 0;
+  const latestTransfers = transfers?.transfers.slice(0, 4) ?? [];
+  const latestRumours = rumours?.rumours.slice(0, 3) ?? [];
 
   return (
     <>
-      <PageHeader
-        eyebrow="Off the pitch"
-        title="Where is the squad short?"
-        summary={
-          needs
-            ? `${strengthen} position groups to strengthen; ${none} are stable. Injury status is unknown for ${known + unknown} players.`
-            : "The squad-needs layer is not available for this publish."
-        }
-      />
+      <section className="page-head">
+        <p className="eyebrow">Off the pitch · Season {rumours?.season ?? transfers?.season ?? "—"}</p>
+        <h1>Transfers, scouting and the rumour mill</h1>
+        <p className="lede">
+          The trading side of the club: the squad needs behind the next window,
+          confirmed business, the loan register, the scouting method and the
+          curated rumour mill. Confirmed transfers and rumours stay in separate
+          registers; the needs board is where the themes meet recruitment.
+        </p>
+        <div className="hero-actions">
+          <Link className="button" href="/transfers/">
+            Confirmed transfers
+          </Link>
+          <Link className="button button-ghost" href="/rumours/">
+            Rumour mill
+          </Link>
+          <Link className="button button-ghost" href="/scouting/">
+            Scouting
+          </Link>
+          <Link className="button button-ghost" href="/squad/">
+            Current squad
+          </Link>
+        </div>
+      </section>
 
       {needs ? <NeedsBoard data={needs} /> : null}
 
-      <section className="grid three-col">
-        <article className="card">
-          <p className="eyebrow">Transfers</p>
-          <h2>Who arrived and who left?</h2>
-          <p className="muted">
-            {transfers
-              ? `${transfers.summary.total} moves · ${transfers.summary.confirmed} officially confirmed`
-              : "Register unavailable."}
-          </p>
+      <section className="grid two-col">
+        <div className="card">
+          <div className="card-head">
+            <div>
+              <p className="eyebrow">Transfer register</p>
+              <h2>What actually happened</h2>
+            </div>
+          </div>
+          <div className="stat-row">
+            <StatTile
+              label="Registered moves"
+              value={transfers?.summary.total ?? 0}
+              note={
+                transfers
+                  ? `${transfers.summary.players} players · ${transfers.summary.period ?? "register"}`
+                  : "register"
+              }
+            />
+            <StatTile
+              label="Confirmed"
+              value={transfers?.summary.confirmed ?? 0}
+              note="official announcement"
+            />
+            <StatTile label="Loans out" value={transfers?.loans_out.length ?? 0} note="register" />
+            <StatTile label="Loans in" value={transfers?.loans_in.length ?? 0} note="register" />
+          </div>
+          {transfers ? (
+            <p className="fine-print">
+              Moves include loans, frees and youth/development registrations, and one
+              player can appear more than once (a loan out and a return, for example).
+              The register spans {transfers.summary.seasons_covered} seasons and{" "}
+              {transfers.summary.windows_covered} windows; {transfers.summary.confirmed}{" "}
+              rows carry an official announcement and the rest are curated from the
+              provider feed and Wikipedia.
+            </p>
+          ) : null}
+          {latestTransfers.length ? (
+            <div className="transfer-grid">
+              {latestTransfers.map((transfer) => (
+                <TransferCard key={transfer.transfer_id} transfer={transfer} />
+              ))}
+            </div>
+          ) : (
+            <p className="muted">No published transfers yet.</p>
+          )}
           <Link className="text-link" href="/transfers/">
-            Transfer register →
+            Full transfer register →
           </Link>
-        </article>
+        </div>
 
-        <article className="card">
-          <p className="eyebrow">Rumours</p>
-          <h2>Is there a sourced link?</h2>
-          <p className="muted">
-            {activeRumours
-              ? `${activeRumours} active link${activeRumours === 1 ? "" : "s"} in the curated register.`
-              : "No active, sourced links right now."}
+        <div className="card">
+          <div className="card-head">
+            <div>
+              <p className="eyebrow">Rumour mill</p>
+              <h2>Curated links, labelled</h2>
+            </div>
+          </div>
+          <p>
+            Rumours are curated with a public source, a status and an editorial
+            confidence. Status is a lifecycle label, not a probability. A
+            confirmed rumour links back to the transfer register; it never
+            becomes a second source of truth.
           </p>
+          <div className="stat-row">
+            <StatTile label="Links" value={rumours?.summary.total ?? 0} note="curated" />
+            <StatTile
+              label="Active"
+              value={rumours?.summary.by_status.active ?? 0}
+              note="still live"
+            />
+            <StatTile
+              label="Confirmed"
+              value={rumours?.summary.by_status.confirmed ?? 0}
+              note="linked to transfers"
+            />
+            <StatTile
+              label="Fan signals"
+              value={forum?.signals.length ?? 0}
+              note="names mentioned"
+            />
+          </div>
+          {latestRumours.length ? (
+            <div className="rumour-grid">
+              {latestRumours.map((rumour) => (
+                <RumourCard key={rumour.rumour_id} rumour={rumour} />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state compact">
+              <h3>No curated rumours yet</h3>
+              <p>
+                The register is deliberately empty until a link has a public source.
+                Fan chatter is shown as a signal, not as a rumour.
+              </p>
+            </div>
+          )}
           <Link className="text-link" href="/rumours/">
-            Rumour mill →
+            Rumour mill, profile and fan signal →
           </Link>
-        </article>
-
-        <article className="card">
-          <p className="eyebrow">Scouting</p>
-          <h2>What profiles matter?</h2>
-          <p className="muted">
-            {profiles
-              ? `${profiles} priority role profiles from the current needs.`
-              : "No priority profiles at this publish."}
-          </p>
-          <Link className="text-link" href="/scouting/">
-            Priority profiles →
-          </Link>
-        </article>
+        </div>
       </section>
 
-      <LegendDisclosure title="What this page does and does not say">
-        <p>
-          Position profiles and likely market routes only — no named targets, fees
-          or wages. Injury status is unknown unless a public team-news source
-          confirms it, and unknown entries do not change the model.
+      <section className="section">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Recruitment profile</p>
+            <h2>What the links say</h2>
+          </div>
+          <Link className="text-link" href="/scouting/">
+            Scouting board →
+          </Link>
+        </div>
+        <div className="grid two-col">
+          <div className="card">
+            <p>{profile?.narrative ?? "The profile activates when the rumour register has sourced rows."}</p>
+            <p className="fine-print">
+              {profile
+                ? `${profile.sample_size} active link${profile.sample_size === 1 ? "" : "s"} · weighted by editorial confidence and recency (${profile.weights.recency_half_life_days}-day half-life).`
+                : "Advisory only; the data-driven fit stays primary."}
+            </p>
+            {profile && profile.sample_size > 0 && profile.low_confidence ? (
+              <span className="badge badge-warn">Small sample — treat as a hint, not a target list</span>
+            ) : null}
+          </div>
+          <div className="card">
+            <BucketBars title="Position mix" buckets={profile?.buckets.position ?? {}} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <ForumSignalPanel data={forum} limit={6} showSentiment={false} showTopics={false} />
+        <p className="back-link">
+          <Link href="/rumours/">All fan signal and the sentiment comparison →</Link>
+          {" · "}
+          <Link href="/news/">News &amp; rumours, the bridge →</Link>
+          {" · "}
+          <Link href="/themes/">The bigger picture →</Link>
         </p>
-        <p>
-          <Link href="/themes/">Themes</Link> ·{" "}
-          <Link href="/methodology/">Method</Link> ·{" "}
-          <Link href="/sources/">Sources</Link>
-        </p>
-      </LegendDisclosure>
+      </section>
     </>
   );
 }

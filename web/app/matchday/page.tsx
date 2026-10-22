@@ -1,17 +1,12 @@
 import Link from "next/link";
-import { EmptyState } from "@/components/EmptyState";
 import { FixtureList } from "@/components/FixtureList";
 import { FormGuide } from "@/components/FormGuide";
-import { FormStrip } from "@/components/FormStrip";
 import { KickoffNotice } from "@/components/KickoffNotice";
-import { LegendDisclosure } from "@/components/LegendDisclosure";
 import { MatchupRead } from "@/components/MatchupRead";
-import { MetricStrip } from "@/components/MetricStrip";
-import { PageHeader } from "@/components/PageHeader";
 import { PredictedLineupPanel } from "@/components/PredictedLineupPanel";
 import { StrengthComparison } from "@/components/StrengthComparison";
 import { StyleMatchup } from "@/components/StyleMatchup";
-import { TableFrame, Th } from "@/components/TableFrame";
+import { ThemeCard } from "@/components/ThemeCard";
 import {
   formatDate,
   getMatchday,
@@ -19,12 +14,32 @@ import {
   type ClubFixture,
   type MatchdayDocument,
 } from "@/lib/data";
-import { plainText } from "@/lib/format";
 
 export const metadata = { title: "Matchday · fitba" };
 
+function snapshotValue(
+  data: MatchdayDocument,
+  key: string,
+): string | number | null {
+  const value = (data.coverage.snapshot ?? {})[key];
+  return typeof value === "string" || typeof value === "number" ? value : null;
+}
+
+function stateBadge(state: string) {
+  if (state === "fresh") {
+    return <span className="badge badge-ok">Snapshot fresh</span>;
+  }
+  if (state === "stale") {
+    return <span className="badge badge-warn">Stale snapshot</span>;
+  }
+  if (state === "no_fixture") {
+    return <span className="badge badge-neutral">No fixture</span>;
+  }
+  return <span className="badge badge-warn">Partial data</span>;
+}
+
 function fixtureList(data: MatchdayDocument): ClubFixture[] {
-  return data.next_fixtures.slice(0, 2).map((fixture) => ({
+  return data.next_fixtures.map((fixture) => ({
     match_id: fixture.match_id,
     competition_id: fixture.competition_id,
     competition_name: fixture.competition_name,
@@ -38,64 +53,68 @@ function fixtureList(data: MatchdayDocument): ClubFixture[] {
   }));
 }
 
-function stateLabel(state: string) {
-  if (state === "fresh") return "Snapshot fresh";
-  if (state === "stale") return "Snapshot stale";
-  if (state === "no_fixture") return "No fixture";
-  return "Partial data";
-}
-
 export default function MatchdayPage() {
   const data = getMatchday();
   const themes = getThemes();
   if (!data) {
     return (
-      <EmptyState
-        title="No matchday snapshot published"
-        body="The next-fixture projection appears after the next publish. Fixtures and league context are still available."
-        action={
-          <>
+      <section className="empty-state">
+        <h1>No matchday snapshot published</h1>
+        <p>
+          Run <code>uv run fitba matchday --refresh</code> and then{" "}
+          <code>uv run fitba publish</code>.
+        </p>
+        <p>
+          The page needs a local opponent snapshot. Form and league context can
+          still be viewed on <Link href="/fixtures/">fixtures</Link> and{" "}
+          <Link href="/competitions/">competitions</Link>.
+        </p>
+      </section>
+    );
+  }
+
+  if (data.state === "no_fixture" || !data.fixture) {
+    return (
+      <>
+        <section className="page-head">
+          <p className="eyebrow">Matchday · Season {data.season}</p>
+          <h1>No upcoming fixture</h1>
+          <p className="lede">
+            There is no scheduled Aberdeen fixture in the local feed, so there
+            is no matchday projection to show.
+          </p>
+          <div className="hero-actions">
             <Link className="button" href="/fixtures/">
               Results &amp; fixtures
             </Link>
             <Link className="button button-ghost" href="/competitions/">
               Competitions
             </Link>
-          </>
-        }
-      />
-    );
-  }
-
-  if (data.state === "no_fixture" || !data.fixture) {
-    return (
-      <PageHeader
-        eyebrow={`Matchday · Season ${data.season}`}
-        title="No upcoming fixture"
-        summary="There is no scheduled Aberdeen fixture in the local feed, so there is no matchday projection to show."
-        actions={
-          <>
-            <Link className="button" href="/fixtures/">
-              Results &amp; fixtures
-            </Link>
             <Link className="button button-ghost" href="/squad/">
               Current squad
             </Link>
-          </>
-        }
-      />
+          </div>
+          {data.stale_reason ? (
+            <p className="fine-print">State: {data.stale_reason.replaceAll("_", " ")}.</p>
+          ) : null}
+        </section>
+      </>
     );
   }
 
   const fixture = data.fixture;
   const opponent = data.teams.opponent;
   const aberdeen = data.teams.aberdeen;
+  const snapshotAt = snapshotValue(data, "generated_at");
+  const age = snapshotValue(data, "age_hours");
+  const lineupStatus = data.coverage.lineups ?? {};
   const next = fixtureList(data);
-  const seasonTheme = (themes?.themes ?? []).find((theme) => theme.horizon === "season");
-  const abdStrength = data.strength.aberdeen;
-  const oppStrength = data.strength.opponent;
-  const abdForm = data.form_guide.aberdeen;
-  const abdLineup = data.predicted_lineups.aberdeen;
+  const seasonThemes = (themes?.themes ?? []).filter(
+    (theme) => theme.horizon === "season",
+  );
+  const missionTheme = (themes?.themes ?? []).find(
+    (theme) => theme.horizon === "mission",
+  );
 
   return (
     <>
@@ -105,22 +124,25 @@ export default function MatchdayPage() {
             {fixture.competition_name}
             {fixture.stage ? ` · ${fixture.stage}` : ""}
           </p>
-          <p className="match-status">
-            {stateLabel(data.state)} · Predicted, not team news
-            {data.strength_comparison.cross_tier ? " · Cross-tier" : ""}
-          </p>
+          <div className="badge-row">
+            {stateBadge(data.state)}
+            <span className="badge badge-neutral">Predicted, not team news</span>
+            {data.strength_comparison.cross_tier ? (
+              <span className="badge badge-warn">Cross-tier</span>
+            ) : null}
+          </div>
         </div>
-        <h1 className="versus">
-          <span className="versus-side">
+        <div className="versus">
+          <div className="versus-side">
             <span className="versus-home">{fixture.home_team_name}</span>
             <span className="versus-note">Home</span>
-          </span>
+          </div>
           <span className="versus-v">v</span>
-          <span className="versus-side">
+          <div className="versus-side">
             <span className="versus-away">{fixture.away_team_name}</span>
             <span className="versus-note">Away</span>
-          </span>
-        </h1>
+          </div>
+        </div>
         <p className="match-meta">
           {formatDate(fixture.date)}
           {fixture.kickoff ? ` · ${fixture.kickoff}` : ""} ·{" "}
@@ -131,16 +153,29 @@ export default function MatchdayPage() {
         <KickoffNotice date={fixture.date} kickoff={fixture.kickoff} />
         {data.state === "stale" ? (
           <p className="stale-banner">
-            This snapshot is out of date. Check <Link href="/fixtures/">fixtures</Link>{" "}
-            for the latest.
+            This snapshot is out of date
+            {snapshotAt ? ` (${formatDate(String(snapshotAt).slice(0, 10))})` : ""}.
+            Check <Link href="/fixtures/">fixtures</Link> for the latest.
           </p>
         ) : null}
         {data.state === "unavailable" ? (
           <p className="stale-banner">
-            The opponent snapshot is incomplete; the opponent XI and style read may be
-            unavailable.
+            The opponent snapshot is incomplete. Form and league context are
+            shown, but the opponent XI and style read may be unavailable.
           </p>
         ) : null}
+        <div className="matchday-meta-row">
+          <span className="fine-print">
+            {snapshotAt
+              ? `Opponent snapshot ${formatDate(String(snapshotAt).slice(0, 10))}`
+              : "No opponent snapshot"}
+            {age !== null ? ` · ${age}h old` : ""}
+          </span>
+          <span className="fine-print">
+            Aberdeen XI: {lineupStatus.aberdeen ?? "unknown"} · Opponent XI:{" "}
+            {lineupStatus.opponent ?? "unknown"}
+          </span>
+        </div>
         {next.length ? (
           <div className="mini-block">
             <p className="eyebrow">Then</p>
@@ -149,38 +184,15 @@ export default function MatchdayPage() {
         ) : null}
       </section>
 
-      <MetricStrip
-        columns={4}
-        items={[
-          {
-            label: aberdeen?.name ?? "Aberdeen",
-            value: abdStrength?.position ? `${abdStrength.position}th` : "—",
-            note: abdStrength?.points != null ? `${abdStrength.points} pts` : "League",
-          },
-          {
-            label: opponent?.name ?? fixture.opponent_name,
-            value: oppStrength?.position ? `${oppStrength.position}th` : "—",
-            note: oppStrength?.ppg != null ? `${oppStrength.ppg} PPG` : "League",
-          },
-          {
-            label: "Form",
-            value: abdForm?.form ? <FormStrip form={abdForm.form} /> : "—",
-            note: "Last five",
-          },
-          {
-            label: "Predicted shape",
-            value: abdLineup?.formation ?? "—",
-            note: abdLineup?.team_confidence ? `${abdLineup.team_confidence} confidence` : "Not team news",
-          },
-        ]}
-      />
-
       {data.matchup_read ? <MatchupRead read={data.matchup_read} /> : null}
 
       <section className="section">
         <div className="section-head">
-          <h2>Who starts?</h2>
-          <span className="muted">Predicted, not team news</span>
+          <div>
+            <p className="eyebrow">Projected line-ups</p>
+            <h2>Predicted XIs</h2>
+          </div>
+          <span className="badge badge-neutral">Not official team news</span>
         </div>
         <div className="grid two-col lineup-grid">
           <PredictedLineupPanel
@@ -210,6 +222,7 @@ export default function MatchdayPage() {
           opponentName={opponent?.name ?? fixture.opponent_name}
           aberdeen={data.styles.aberdeen}
           opponent={data.styles.opponent}
+          venueLabel="Home / away"
         />
       ) : null}
 
@@ -223,68 +236,136 @@ export default function MatchdayPage() {
         />
       ) : null}
 
-      {seasonTheme ? (
+      {themes && (seasonThemes.length || missionTheme) ? (
         <section className="section">
           <div className="section-head">
-            <h2>What is the bigger picture?</h2>
+            <div>
+              <p className="eyebrow">The bigger picture · 80% season, 20% mission</p>
+              <h2>What backs this matchday</h2>
+            </div>
             <Link className="text-link" href="/themes/">
-              Themes →
+              Full evidence →
             </Link>
           </div>
-          <p className="page-summary">
-            {plainText(seasonTheme.headline ?? seasonTheme.title)}
+          <div className="theme-strip">
+            {seasonThemes.map((theme) => (
+              <ThemeCard key={theme.theme_id} theme={theme} compact />
+            ))}
+          </div>
+          {missionTheme ? (
+            <ThemeCard theme={missionTheme} compact />
+          ) : null}
+          <p className="fine-print">
+            Four current-season themes and one Cormack-era mission theme.
+            Provider ratings are league-only and never an individual verdict;
+            read the{" "}
+            <Link className="text-link" href="/themes/">
+              full evidence and caveats
+            </Link>
+            .
           </p>
         </section>
       ) : null}
 
       {data.head_to_head.length ? (
-        <section className="section">
+        <section className="card">
           <div className="section-head">
-            <h2>Recent meetings</h2>
-            <span className="muted">League meetings</span>
+            <div>
+              <p className="eyebrow">Context, not a prediction</p>
+              <h2>Recent meetings</h2>
+            </div>
+            <span className="badge badge-neutral">League meetings</span>
           </div>
-          <TableFrame label="Recent meetings" caption="Recent league meetings between the two teams">
-            <thead>
-              <tr>
-                <Th>Date</Th>
-                <Th>Match</Th>
-                <Th className="num">Score</Th>
-                <Th>Aberdeen</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.head_to_head.slice(0, 3).map((meeting) => (
-                <tr key={`${meeting.date}-${meeting.home_team_name}`}>
-                  <td>{formatDate(meeting.date)}</td>
-                  <td>
-                    {meeting.home_team_name} v {meeting.away_team_name}
-                  </td>
-                  <td className="num">
-                    {meeting.home_goals ?? "—"}–{meeting.away_goals ?? "—"}
-                  </td>
-                  <td>{meeting.result ?? "—"}</td>
+          <div className="table-wrap">
+            <table className="league-table compact">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Match</th>
+                  <th className="num">Score</th>
+                  <th>Aberdeen</th>
                 </tr>
-              ))}
-            </tbody>
-          </TableFrame>
+              </thead>
+              <tbody>
+                {data.head_to_head.map((meeting) => (
+                  <tr key={`${meeting.date}-${meeting.home_team_name}`}>
+                    <td>{formatDate(meeting.date)}</td>
+                    <td>
+                      {meeting.home_team_name} v {meeting.away_team_name}
+                    </td>
+                    <td className="num">
+                      {meeting.home_goals ?? "—"}–{meeting.away_goals ?? "—"}
+                    </td>
+                    <td>
+                      <span
+                        className={`result-dot result-${(meeting.result ?? "").toLowerCase()}`}
+                      >
+                        {meeting.result ?? "?"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       ) : null}
 
-      <LegendDisclosure title="How this projection is built">
-        <p>
-          Form is league-only. Style uses shots, shot share, shots on target and
-          goals; possession is unknown and is not used. Strength percentiles are
-          within the same league. Predicted XIs use recent starts, minutes,
-          formation and position fit.
+      <section className="card coverage-card">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">How to read this page</p>
+            <h2>Coverage and limits</h2>
+          </div>
+          <span className="badge badge-neutral">
+            {data.coverage.state ?? data.state}
+          </span>
+        </div>
+        <ul className="plain-list">
+          <li>
+            <strong>Form</strong> is league-only and uses the last five results;
+            home and away splits use every league match.
+          </li>
+          <li>
+            <strong>Style</strong> is measured from shots, shots on target,
+            goals and corners. Possession is unknown and is not used. It is not
+            xG and not a tactical model.
+          </li>
+          <li>
+            <strong>Predicted XIs</strong> come from recent starts, minutes,
+            formation and position fit. They are not team news.
+          </li>
+          <li>
+            <strong>Strength</strong> percentiles are within the same league.
+            Cross-tier comparisons show raw values only.
+          </li>
+        </ul>
+        <p className="fine-print">{data.coverage.note}</p>
+        <p className="fine-print">
+          Snapshot: {snapshotAt ? String(snapshotAt) : "none"} ·{" "}
+          {typeof data.coverage.snapshot?.fixtures === "number"
+            ? `${data.coverage.snapshot.fixtures} opponent fixtures`
+            : "no opponent fixtures"}{" "}
+          · {typeof data.coverage.snapshot?.fixtures_with_lineups === "number"
+            ? `${data.coverage.snapshot.fixtures_with_lineups} with lineups`
+            : "no lineup count"}
+          . <Link className="text-link" href="/methodology/">Method →</Link>{" "}
+          <Link className="text-link" href="/sources/">Sources →</Link>
         </p>
-        <p>{data.coverage.note}</p>
-        <p>
-          <Link href="/methodology/">Method</Link> ·{" "}
-          <Link href="/sources/">Sources</Link> ·{" "}
-          <Link href="/squad/">Squad</Link> ·{" "}
+        <p className="back-link">
           <Link href="/fixtures/">All fixtures</Link>
+          {" · "}
+          <Link href="/competitions/">Competitions</Link>
+          {" · "}
+          <Link href="/squad/">Squad</Link>
+          {" · "}
+          <Link href="/history/">The record</Link>
+          {" · "}
+          <Link href="/transfers/">Transfers</Link>
         </p>
-      </LegendDisclosure>
+      </section>
+
+      <p className="fine-print">{data.notes}</p>
     </>
   );
 }

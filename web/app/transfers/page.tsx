@@ -1,166 +1,237 @@
 import Link from "next/link";
-import { EmptyState } from "@/components/EmptyState";
-import { LegendDisclosure } from "@/components/LegendDisclosure";
-import { MetricStrip } from "@/components/MetricStrip";
-import { PageHeader } from "@/components/PageHeader";
-import { TableFrame, Th } from "@/components/TableFrame";
 import { TransferBoard } from "@/components/TransferBoard";
-import { formatDate } from "@/lib/format";
 import { getTransferAudit, getTransfers } from "@/lib/data";
+import { formatDate } from "@/lib/format";
 
 export const metadata = { title: "Transfers · fitba" };
-
-function money(value: number | null | undefined) {
-  if (value === null || value === undefined) return "—";
-  const sign = value < 0 ? "−" : "+";
-  return `${sign}£${(Math.abs(value) / 1_000_000).toFixed(1)}m`;
-}
 
 export default function TransfersPage() {
   const data = getTransfers();
   const audit = getTransferAudit();
   if (!data) {
     return (
-      <EmptyState
-        title="No transfer register published"
-        body="The confirmed transfer register will appear after the next publish."
-        action={
-          <Link className="button button-ghost" href="/status/">
-            Data status
-          </Link>
-        }
-      />
+      <section className="empty-state">
+        <h1>No transfer register published</h1>
+        <p>
+          Run <code>uv run fitba transfers</code> and then{" "}
+          <code>uv run fitba publish</code>.
+        </p>
+      </section>
     );
   }
 
-  const currentKey = data.window_groups?.recent?.[0];
-  const currentWindow = data.windows.find((window) => window.key === currentKey);
-  const netLow = currentWindow?.inferred_net_low_gbp;
-  const netHigh = currentWindow?.inferred_net_high_gbp;
-  const windowLabel = currentWindow?.label ?? "Current window";
-
   return (
     <>
-      <PageHeader
-        eyebrow="Aberdeen · transfer register"
-        title="Who arrived and who left?"
-        summary={`${data.summary.total} moves · ${data.summary.period ?? "2019/20"}. ${windowLabel}: ${currentWindow?.arrivals ?? 0} in, ${currentWindow?.departures ?? 0} out.`}
-      />
-
-      <MetricStrip
-        columns={5}
-        items={[
-          {
-            label: "Moves",
-            value: data.summary.total,
-            note: `${data.summary.players} players`,
-          },
-          { label: "In", value: currentWindow?.arrivals ?? "—", note: windowLabel },
-          { label: "Out", value: currentWindow?.departures ?? "—", note: windowLabel },
-          {
-            label: "Net",
-            value:
-              netLow === null || netLow === undefined || netHigh === null || netHigh === undefined
-                ? "—"
-                : `${money(netLow)} to ${money(netHigh)}`,
-            note: "inferred",
-          },
-          {
-            label: "Confirmed",
-            value: data.summary.confirmed,
-            note: "official announcement",
-          },
-        ]}
-      />
+      <section className="page-head">
+        <p className="eyebrow">Aberdeen · confirmed business</p>
+        <h1>Transfers &amp; loans</h1>
+        <p className="lede">
+          The business that actually happened: permanent transfers, loans and
+          free moves in and out of Pittodrie, from 2019-20 to the current
+          window. No rumours, no &ldquo;in talks&rdquo; lane, and no invented
+          fees.
+        </p>
+        <div className="hero-actions">
+          <span className="badge badge-ok">
+            {data.summary.confirmed} official-confirmed
+          </span>
+          <span className="badge badge-warn">
+            {data.summary.curated} source-linked curated
+          </span>
+          <span className="badge badge-neutral">{data.summary.total} deals</span>
+          {data.plausibility?.withheld ? (
+            <span className="badge badge-warn">
+              {data.plausibility.withheld} suspect row
+              {data.plausibility.withheld === 1 ? "" : "s"} withheld
+            </span>
+          ) : null}
+          <Link className="button button-ghost" href="/history/">
+            The Cormack era
+          </Link>
+        </div>
+        <p className="fine-print">
+          Audited from {data.coverage.audited_from ?? "2024-25"}; earlier windows
+          are curated partial. Disclosed and reported fees are anchors; other
+          permanent moves carry an inferred range. Undisclosed is never zero.
+        </p>
+      </section>
 
       <TransferBoard data={data} />
 
       {data.sell_on_clauses?.length ? (
-        <section className="section">
+        <section className="card">
           <div className="section-head">
             <div>
+              <p className="eyebrow">Future income</p>
               <h2>Sell-on clauses</h2>
             </div>
-            <span className="muted">
+            <span className="badge badge-neutral">
               {data.sell_on_summary.percentage_known} with a stated percentage
             </span>
           </div>
-          <TableFrame
-            label="Sell-on clauses"
-            caption="Aberdeen sell-on clauses on former players"
-          >
-            <thead>
-              <tr>
-                <Th>Player</Th>
-                <Th>Buyer</Th>
-                <Th>Sale</Th>
-                <Th>Clause</Th>
-                <Th>Confidence</Th>
-                <Th>Source</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.sell_on_clauses.map((clause) => (
-                <tr key={clause.clause_id}>
-                  <td className="strong">{clause.player_name}</td>
-                  <td>{clause.buyer_club_name}</td>
-                  <td>{formatDate(clause.sale_date)}</td>
-                  <td>
-                    {clause.sell_on_pct !== null
-                      ? `${clause.sell_on_pct}%${
-                          clause.basis === "profit"
-                            ? " of profit"
-                            : clause.basis === "gross_fee"
-                              ? " of fee"
-                              : ""
-                        }`
-                      : "Percentage undisclosed"}
-                  </td>
-                  <td>{clause.confidence}</td>
-                  <td>
-                    {clause.source_urls.length ? (
-                      clause.source_urls.map((url) => (
-                        <a key={url} href={url} target="_blank" rel="noreferrer">
-                          {url.includes("wikipedia.org") ? "Wikipedia" : "Source"}
-                        </a>
-                      ))
-                    ) : (
-                      <span>Reported</span>
-                    )}
-                  </td>
+          <div className="table-wrap">
+            <table className="league-table compact">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Buyer</th>
+                  <th>Sale</th>
+                  <th>Clause</th>
+                  <th>Confidence</th>
+                  <th>Source</th>
                 </tr>
-              ))}
-            </tbody>
-          </TableFrame>
+              </thead>
+              <tbody>
+                {data.sell_on_clauses.map((clause) => (
+                  <tr key={clause.clause_id}>
+                    <td className="strong">{clause.player_name}</td>
+                    <td>{clause.buyer_club_name}</td>
+                    <td>{formatDate(clause.sale_date)}</td>
+                    <td>
+                      {clause.sell_on_pct !== null
+                        ? `${clause.sell_on_pct}%${
+                            clause.basis === "profit"
+                              ? " of profit"
+                              : clause.basis === "gross_fee"
+                                ? " of fee"
+                                : ""
+                          }`
+                        : "Clause reported · % undisclosed"}
+                    </td>
+                    <td>
+                      <span
+                        className={`badge ${
+                          clause.confidence === "confirmed" ? "badge-ok" : "badge-warn"
+                        }`}
+                      >
+                        {clause.confidence}
+                      </span>
+                    </td>
+                    <td className="fine-print">
+                      {clause.source_urls.length ? (
+                        clause.source_urls.map((url) => (
+                          <a key={url} href={url} target="_blank" rel="noreferrer">
+                            {url.includes("wikipedia.org") ? "Wikipedia" : "source"}
+                          </a>
+                        ))
+                      ) : (
+                        <span>reported; no allowed public URL</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="fine-print">{data.sell_on_summary.note}</p>
+          <p className="fine-print">
+            A reported clause is not a confirmed contract term. The register
+            tracks it so future sale proceeds are not invisible; it does not
+            assume the percentage or the basis.
+          </p>
         </section>
       ) : null}
 
-      <LegendDisclosure title="How the register is built">
-        <p>
-          Fees are disclosed, reported or estimated. Undisclosed is never zero;
-          permanent moves without a public fee carry an inferred range, and loan
-          fees are excluded from net spend. A negative net means income exceeds
-          spend.
-        </p>
-        <p>
-          {data.summary.confirmed} moves carry an official announcement; the rest
-          are curated from the provider feed and Wikipedia season records.
-        </p>
+      <section className="card">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">Completeness</p>
+            <h2>Register completeness</h2>
+          </div>
+          <span className="badge badge-neutral">Report only</span>
+        </div>
         {audit && audit.status === "ok" ? (
-          <p>
-            Completeness: {audit.summary.needs_review.established} established and{" "}
-            {audit.summary.needs_review.fringe} fringe senior moves need review;{" "}
-            {audit.summary.gaps.accepted} gaps accepted;{" "}
-            {audit.summary.positions.specified}/
-            {audit.summary.positions.specified + audit.summary.positions.unknown} rows
-            have a position.
+          <>
+            <div className="stat-row four">
+              <div className="stat-tile">
+                <span className="stat-label">Established senior</span>
+                <span className="stat-value">
+                  {audit.summary.needs_review.established}
+                </span>
+                <span className="stat-note">needs review</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Fringe senior</span>
+                <span className="stat-value">{audit.summary.needs_review.fringe}</span>
+                <span className="stat-note">needs review</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Youth / development</span>
+                <span className="stat-value">{audit.summary.needs_review.youth}</span>
+                <span className="stat-note">tolerated gaps</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Position coverage</span>
+                <span className="stat-value">
+                  {audit.summary.positions.specified}/
+                  {audit.summary.positions.specified + audit.summary.positions.unknown}
+                </span>
+                <span className="stat-note">rows with a position</span>
+              </div>
+            </div>
+            <p className="fine-print">
+              Gaps: {audit.summary.gaps.open} open, {audit.summary.gaps.accepted}{" "}
+              accepted, {audit.summary.gaps.resolved} resolved.
+              {audit.summary.needs_review.unclassified
+                ? ` ${audit.summary.needs_review.unclassified} unclassified row${
+                    audit.summary.needs_review.unclassified === 1 ? "" : "s"
+                  } still needs review.`
+                : ""}{" "}
+              Last audit {formatDate(audit.generated_at)}. Senior gaps are
+              reported, not hidden; youth gaps are recorded and tolerated.
+            </p>
+          </>
+        ) : (
+          <p className="fine-print">
+            <strong>Audit not run.</strong> Run{" "}
+            <code>uv run fitba transfers --audit</code> after a window closes or
+            at the start of a season.
           </p>
-        ) : null}
-        <p>
-          <Link href="/methodology/">Method</Link> ·{" "}
-          <Link href="/sources/">Sources</Link> · <Link href="/status/">Data status</Link>
+        )}
+      </section>
+
+      <section className="card">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">Coverage</p>
+            <h2>How to read the register</h2>
+          </div>
+          <span className="badge badge-warn">Curated</span>
+        </div>
+        <p>{data.coverage.note}</p>
+        <ul className="plain-list">
+          <li>
+            <strong>Confirmed:</strong> a licensed-feed record plus an official
+            club announcement.
+          </li>
+          <li>
+            <strong>Curated:</strong> a licensed-feed record cross-checked against
+            the public season record; an official announcement link is shown where
+            found.
+          </li>
+          <li>
+            <strong>Undisclosed:</strong> a fee exists but is not public. It is
+            never counted as zero; permanent moves get an inferred range, and
+            loan fees are excluded from the net.
+          </li>
+          <li>
+            <strong>Loan terms:</strong> end dates, recall and obligation clauses
+            are unknown unless confirmed by an official source.
+          </li>
+        </ul>
+        <p className="fine-print">
+          Sources: {data.sources.length} linked pages, including official AFC
+          announcements and the Wikipedia season records. No raw feed rows are
+          published.
         </p>
-      </LegendDisclosure>
+        <Link className="text-link" href="/sources/">
+          Source and licence detail →
+        </Link>
+      </section>
+
+      <p className="back-link">
+        <Link href="/matchday/">← Matchday dashboard</Link>
+      </p>
     </>
   );
 }

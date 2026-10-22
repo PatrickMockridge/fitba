@@ -15,9 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB">
       <body>
-        <a className="skip-link" href="#main">
-          Skip to content
-        </a>
         <header className="site-header">
           <div className="wrap header-inner">
             <Link href="/" className="brand">
@@ -38,9 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        <main className="wrap" id="main">
-          {children}
-        </main>
+        <main className="wrap">{children}</main>
 
         <footer className="site-footer">
           <div className="wrap footer-inner">

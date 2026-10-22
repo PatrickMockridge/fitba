@@ -1,4 +1,4 @@
-.PHONY: sync test lint format typecheck check docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check web-copy-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check docs-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
 
 sync:
 	uv sync
@@ -82,9 +82,6 @@ career-refresh:
 
 player-attributes-check:
 	uv run python scripts/check_player_attributes.py
-
-web-copy-check:
-	uv run python scripts/check_web_copy.py
 
 sportmonks-attributes-test:
 	uv run python scripts/probe_sportmonks_attributes.py

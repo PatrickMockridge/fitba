@@ -159,7 +159,6 @@ cd web && npm install && npm run dev
 ```bash
 make check                 # Ruff, Pyright, pytest and every publication guard
 cd web && npm run build    # static export; fails on a broken route
-make web-copy-check        # after the build: copy budgets and table accessibility
 ```
 
 CI runs the publication guards against the committed payloads; guards that

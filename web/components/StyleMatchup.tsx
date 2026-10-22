@@ -1,29 +1,129 @@
-import { TableFrame, Th } from "@/components/TableFrame";
+import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import type { StylePair, StyleProfile } from "@/lib/data";
+
+const APPROACHES = [
+  { key: "sit_deep_counter", label: "Sit deep" },
+  { key: "balanced", label: "Balanced" },
+  { key: "attack", label: "Attack" },
+];
 
 function value(value: number | null | undefined, suffix = "") {
   return value === null || value === undefined ? "—" : `${value}${suffix}`;
 }
 
-function share(value: number | null | undefined) {
-  return value === null || value === undefined ? "—" : `${Math.round(value * 100)}%`;
+function ProfileMetrics({ profile }: { profile: StyleProfile }) {
+  const rows = [
+    ["Shots for", value(profile.shots_for_pm)],
+    ["Shots against", value(profile.shots_against_pm)],
+    ["Shot share", value(profile.shot_share !== null && profile.shot_share !== undefined ? Math.round(profile.shot_share * 100) : null, "%")],
+    ["On target", value(profile.shots_on_target_for_pm)],
+    ["Goals for", value(profile.goals_for_pm)],
+    ["Goals against", value(profile.goals_against_pm)],
+    ["Corners", value(profile.corners_for_pm)],
+  ];
+  return (
+    <dl className="style-metrics">
+      {rows.map(([label, metric]) => (
+        <div key={label}>
+          <dt>{label}</dt>
+          <dd>{metric}</dd>
+        </div>
+      ))}
+    </dl>
+  );
 }
 
-const METRICS: Array<{
-  label: string;
-  key: keyof StyleProfile;
-  format?: (value: number | null | undefined) => string;
-}> = [
-  { label: "Shots for", key: "shots_for_pm" },
-  { label: "Shots against", key: "shots_against_pm" },
-  { label: "Shot share", key: "shot_share", format: share },
-  { label: "Goals for", key: "goals_for_pm" },
-  { label: "Goals against", key: "goals_against_pm" },
-];
+function splitName(profile: StyleProfile) {
+  return profile.venue === "H" ? "Home" : profile.venue === "A" ? "Away" : "All";
+}
 
-function leanLine(name: string, pair: StylePair) {
-  const index = pair.lean.approach_index;
-  return `${name}: ${pair.lean.label}${index !== null && index !== undefined ? ` (${index}/100)` : ""} · ${pair.lean.confidence} confidence`;
+function StyleCard({ name, pair }: { name: string; pair: StylePair }) {
+  const { lean, venue, overall } = pair;
+  const index = lean.approach_index ?? 0;
+  return (
+    <article className="style-card">
+      <div className="style-card-head">
+        <div>
+          <p className="eyebrow">Measured shot profile</p>
+          <h3>{name}</h3>
+        </div>
+        <ConfidenceBadge confidence={lean.confidence} />
+      </div>
+      <p className="style-lean-label">{lean.label}</p>
+      <div className="lean-meter" aria-label={`Approach index ${index} of 100`}>
+        <span className="lean-track">
+          <span className="lean-fill" style={{ width: `${Math.max(0, Math.min(100, index))}%` }} />
+        </span>
+        <span className="lean-scale">
+          <span>Deep</span>
+          <span>Balanced</span>
+          <span>Attack</span>
+        </span>
+      </div>
+      <div className="lean-segments" aria-hidden="true">
+        {APPROACHES.map((approach) => (
+          <span
+            key={approach.key}
+            className={lean.approach === approach.key ? "is-active" : undefined}
+          >
+            {approach.label}
+          </span>
+        ))}
+      </div>
+      <ul className="style-evidence">
+        {lean.evidence.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <p className="fine-print">
+        {venue.matches} matches in this venue split
+        {lean.venue_used ? " · venue-weighted read" : " · overall read carries more weight"}
+      </p>
+      <ProfileMetrics profile={venue} />
+      <div className="table-wrap">
+        <table className="league-table compact style-split-table">
+          <thead>
+            <tr>
+              <th>Split</th>
+              <th className="num">Shots for</th>
+              <th className="num">Shots against</th>
+              <th className="num">Shot share</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Overall</td>
+              <td className="num">{overall.shots_for_pm ?? "—"}</td>
+              <td className="num">{overall.shots_against_pm ?? "—"}</td>
+              <td className="num">
+                {overall.shot_share === null || overall.shot_share === undefined
+                  ? "—"
+                  : `${Math.round(overall.shot_share * 100)}%`}
+              </td>
+            </tr>
+            <tr>
+              <td>{splitName(venue)}</td>
+              <td className="num">{venue.shots_for_pm ?? "—"}</td>
+              <td className="num">{venue.shots_against_pm ?? "—"}</td>
+              <td className="num">
+                {venue.shot_share === null || venue.shot_share === undefined
+                  ? "—"
+                  : `${Math.round(venue.shot_share * 100)}%`}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="fine-print">{pair.overall.note}</p>
+      <p className="fine-print">
+        Possession: unknown
+        {pair.overall.possession_unknown_reason
+          ? ` (${pair.overall.possession_unknown_reason.replaceAll("_", " ")})`
+          : ""}
+        .
+      </p>
+    </article>
+  );
 }
 
 export function StyleMatchup({
@@ -31,71 +131,32 @@ export function StyleMatchup({
   opponentName,
   aberdeen,
   opponent,
+  venueLabel,
 }: {
   aberdeenName: string;
   opponentName: string;
   aberdeen: StylePair;
   opponent: StylePair;
-  venueLabel?: string;
+  venueLabel: string;
 }) {
   return (
-    <section className="section">
+    <section className="card style-matchup">
       <div className="section-head">
-        <h2>Who imposes what?</h2>
-        <span className="muted">League · venue split</span>
-      </div>
-
-      <p className="page-summary">
-        {leanLine(aberdeenName, aberdeen)}. {leanLine(opponentName, opponent)}.
-      </p>
-
-      <TableFrame
-        label="Style comparison"
-        caption={`Shot profile comparison, ${aberdeenName} and ${opponentName}`}
-      >
-        <thead>
-          <tr>
-            <Th>Metric</Th>
-            <Th className="num">{aberdeenName}</Th>
-            <Th className="num">{opponentName}</Th>
-          </tr>
-        </thead>
-        <tbody>
-          {METRICS.map((metric) => {
-            const abd = aberdeen.venue[metric.key] as number | null | undefined;
-            const opp = opponent.venue[metric.key] as number | null | undefined;
-            return (
-              <tr key={metric.label}>
-                <td>{metric.label}</td>
-                <td className="num">
-                  {metric.format ? metric.format(abd) : value(abd)}
-                </td>
-                <td className="num">
-                  {metric.format ? metric.format(opp) : value(opp)}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </TableFrame>
-
-      <details className="page-legend">
-        <summary>Why this read</summary>
-        <div className="page-legend-body">
-          <p className="muted">
-            {aberdeenName}: {aberdeen.venue.matches} venue matches.{" "}
-            {aberdeen.lean.evidence.join(" ")}
-          </p>
-          <p className="muted">
-            {opponentName}: {opponent.venue.matches} venue matches.{" "}
-            {opponent.lean.evidence.join(" ")}
-          </p>
-          <p>
-            Possession is unknown and is not used. The lean is inferred from
-            shots, shot share, shots on target and goals; it is not xG.
-          </p>
+        <div>
+          <p className="eyebrow">Style and likely approach</p>
+          <h2>Who imposes what?</h2>
         </div>
-      </details>
+        <span className="badge badge-neutral">{venueLabel} splits</span>
+      </div>
+      <div className="style-grid">
+        <StyleCard name={aberdeenName} pair={aberdeen} />
+        <StyleCard name={opponentName} pair={opponent} />
+      </div>
+      <p className="fine-print">
+        The lean is inferred from measured shot volume, shot share, shots on
+        target and goals. It is not xG and not a tactical model. Possession is
+        not used.
+      </p>
     </section>
   );
 }

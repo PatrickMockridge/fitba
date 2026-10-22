@@ -1,4 +1,3 @@
-import { TableFrame, Th } from "@/components/TableFrame";
 import type { MatchdayDocument, MatchdayStrength } from "@/lib/data";
 
 const METRICS: Array<{
@@ -24,6 +23,23 @@ function display(value: unknown, suffix = "") {
   return `${value}${suffix}`;
 }
 
+function Bar({
+  percentile,
+  side,
+}: {
+  percentile?: number | null;
+  side: "aberdeen" | "opponent";
+}) {
+  if (percentile === null || percentile === undefined) {
+    return <span className="compare-bar is-empty" />;
+  }
+  return (
+    <span className={`compare-bar compare-${side}`}>
+      <span style={{ width: `${Math.max(2, Math.min(100, percentile))}%` }} />
+    </span>
+  );
+}
+
 export function StrengthComparison({
   aberdeenName,
   opponentName,
@@ -39,75 +55,107 @@ export function StrengthComparison({
 }) {
   if (aberdeen.status !== "available" || opponent.status !== "available") {
     return (
-      <section className="section">
-        <h2>How do they compare?</h2>
+      <section className="card">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Relative strength</p>
+            <h2>League comparison</h2>
+          </div>
+          <span className="badge badge-neutral">Unavailable</span>
+        </div>
         <p className="muted">
           No current league table is available for one or both teams, so no
-          comparison is made.
+          percentile comparison is made.
         </p>
       </section>
     );
   }
 
   return (
-    <section className="section">
+    <section className="card strength-compare">
       <div className="section-head">
-        <h2>How do they compare?</h2>
-        <span className="muted">Same league</span>
+        <div>
+          <p className="eyebrow">Relative strength · same league</p>
+          <h2>League comparison</h2>
+        </div>
+        <span className="badge badge-neutral">
+          {aberdeen.played ?? 0} matches each
+        </span>
       </div>
-
-      <p className="page-summary">
-        {aberdeenName} {aberdeen.position}th on {aberdeen.points} points ·{" "}
-        {opponentName} {opponent.position}th on {opponent.points} points ·{" "}
-        {comparison.descriptor ?? "table gap unknown"}
-        {comparison.ppg_gap !== null && comparison.ppg_gap !== undefined
-          ? ` (${comparison.ppg_gap > 0 ? "+" : ""}${comparison.ppg_gap} PPG)`
-          : ""}
-        .
-      </p>
-
-      <TableFrame
-        label="League comparison"
-        caption={`League comparison, ${aberdeenName} and ${opponentName}`}
-      >
-        <thead>
-          <tr>
-            <Th>Metric</Th>
-            <Th className="num">{aberdeenName}</Th>
-            <Th className="num">{opponentName}</Th>
-          </tr>
-        </thead>
-        <tbody>
-          {METRICS.map((metric) => {
-            const abd = aberdeen[metric.key] as number | null | undefined;
-            const opp = opponent[metric.key] as number | null | undefined;
-            const abdPct = aberdeen.percentiles?.[metric.percentile];
-            const oppPct = opponent.percentiles?.[metric.percentile];
-            return (
-              <tr key={metric.key}>
-                <td>
-                  {metric.label}
-                  {metric.lowerIsBetter ? (
-                    <span className="muted"> · lower is better</span>
-                  ) : null}
-                </td>
-                <td className="num">
+      <div className="compare-head">
+        <span>{aberdeenName}</span>
+        <span className="muted">Metric</span>
+        <span>{opponentName}</span>
+      </div>
+      <div className="compare-rows">
+        {METRICS.map((metric) => {
+          const abd = aberdeen[metric.key] as number | null | undefined;
+          const opp = opponent[metric.key] as number | null | undefined;
+          const abdPct = aberdeen.percentiles?.[metric.percentile];
+          const oppPct = opponent.percentiles?.[metric.percentile];
+          return (
+            <div className="compare-row" key={metric.key}>
+              <div className="compare-side">
+                <span className="compare-value">
                   {display(abd, metric.suffix)}
-                  {abdPct !== null && abdPct !== undefined ? (
-                    <span className="muted"> ({abdPct}th)</span>
-                  ) : null}
-                </td>
-                <td className="num">
+                </span>
+                <Bar percentile={abdPct} side="aberdeen" />
+                <span className="compare-percentile">
+                  {abdPct === null || abdPct === undefined ? "—" : `${abdPct}th`}
+                </span>
+              </div>
+              <div className="compare-label">
+                {metric.label}
+                {metric.lowerIsBetter ? (
+                  <span className="fine-print"> lower is better</span>
+                ) : null}
+              </div>
+              <div className="compare-side compare-side-right">
+                <span className="compare-percentile">
+                  {oppPct === null || oppPct === undefined ? "—" : `${oppPct}th`}
+                </span>
+                <Bar percentile={oppPct} side="opponent" />
+                <span className="compare-value">
                   {display(opp, metric.suffix)}
-                  {oppPct !== null && oppPct !== undefined ? (
-                    <span className="muted"> ({oppPct}th)</span>
-                  ) : null}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </TableFrame>
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="stat-row four">
+        <div className="stat-tile">
+          <span className="stat-label">{aberdeenName}</span>
+          <span className="stat-value">{aberdeen.position}th</span>
+          <span className="stat-note">
+            {aberdeen.points} pts · {aberdeen.gf}–{aberdeen.ga}
+          </span>
+        </div>
+        <div className="stat-tile">
+          <span className="stat-label">{opponentName}</span>
+          <span className="stat-value">{opponent.position}th</span>
+          <span className="stat-note">
+            {opponent.points} pts · {opponent.gf}–{opponent.ga}
+          </span>
+        </div>
+        <div className="stat-tile">
+          <span className="stat-label">Table gap</span>
+          <span className="stat-value">{comparison.descriptor ?? "Unknown"}</span>
+          <span className="stat-note">
+            {comparison.ppg_gap !== null && comparison.ppg_gap !== undefined
+              ? `${comparison.ppg_gap > 0 ? "+" : ""}${comparison.ppg_gap} PPG`
+              : "PPG unavailable"}
+          </span>
+        </div>
+        <div className="stat-tile">
+          <span className="stat-label">Read confidence</span>
+          <span className="stat-value">{comparison.confidence ?? "unknown"}</span>
+          <span className="stat-note">
+            {comparison.cross_tier ? "cross-tier · raw values only" : "same league"}
+          </span>
+        </div>
+      </div>
+      <p className="fine-print">{comparison.note}</p>
     </section>
   );
 }
