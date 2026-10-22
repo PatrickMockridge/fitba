@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function KickoffNotice({
@@ -24,9 +25,9 @@ export function KickoffNotice({
   return (
     <p className="kickoff-notice">
       This fixture may have kicked off.{" "}
-      <a className="text-link" href="/fixtures/">
+      <Link className="text-link" href="/fixtures/">
         Check the latest results →
-      </a>
+      </Link>
     </p>
   );
 }

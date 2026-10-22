@@ -294,9 +294,9 @@ export default async function HistorySeasonPage({
                   </span>{" "}
                   <strong>{transfer.player_name}</strong> · {transfer.from_club_name} →{" "}
                   {transfer.to_club_name} · {transfer.fee_display}{" "}
-                  <a className="text-link" href="/transfers/">
+                  <Link className="text-link" href="/transfers/">
                     register
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

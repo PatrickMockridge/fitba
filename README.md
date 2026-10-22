@@ -164,8 +164,23 @@ cd web && npm run build    # static export; fails on a broken route
 CI runs the publication guards against the committed payloads; guards that
 need the local warehouse (roles, shapes) run in full after a build. The
 warehouse and raw feeds live in `data/` and `.cache/` and are gitignored.
-The published web data lives in `web/data/generated/` and is committed; Vercel
-builds the app with its project root set to `web`.
+The published web data lives in `web/data/generated/` and is committed.
+
+## Deployment
+
+GitHub Pages serves the project site at
+**https://patrickmockridge.github.io/fitba/**. The
+[`deploy-pages`](.github/workflows/deploy-pages.yml) workflow builds `web` with
+`NEXT_PUBLIC_BASE_PATH=/fitba`, writes `.nojekyll` and publishes `web/out`.
+
+- Every push to `main` deploys.
+- Completed `update-daily` and `update-weekly` runs deploy the fresh data commit
+  even though a bot push made with `GITHUB_TOKEN` does not trigger `on: push`.
+- Local builds and the CI check use no base path and serve from the root.
+
+The project site sits under `/fitba/`, so a new hard-coded internal link must
+use `next/link` or include the base path. A custom domain would remove that
+requirement.
 
 ## Layout
 

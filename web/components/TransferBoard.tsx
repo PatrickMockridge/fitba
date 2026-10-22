@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { TransferCard } from "@/components/TransferCard";
 import type { TransferWindow, TransfersFile } from "@/lib/data";
@@ -240,9 +241,9 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
         transparent age, position and market model. It is not an audited balance;
         negative means income exceeds spend. Free transfers count as zero fee;
         loan fees are excluded.{" "}
-        <a className="text-link" href="/methodology/">
+        <Link className="text-link" href="/methodology/">
           How the range is built →
-        </a>
+        </Link>
       </p>
 
       <p className="fine-print">
