@@ -46,6 +46,7 @@ export function StrengthComparison({
   aberdeen,
   opponent,
   comparison,
+  aberdeenFirst,
   contract,
 }: {
   aberdeenName: string;
@@ -53,6 +54,7 @@ export function StrengthComparison({
   aberdeen: MatchdayStrength;
   opponent: MatchdayStrength;
   comparison: MatchdayDocument["strength_comparison"];
+  aberdeenFirst: boolean;
   contract?: string;
 }) {
   if (aberdeen.status !== "available" || opponent.status !== "available") {
@@ -73,6 +75,18 @@ export function StrengthComparison({
     );
   }
 
+  const leftIsAberdeen = aberdeenFirst;
+  const left = leftIsAberdeen ? aberdeen : opponent;
+  const right = leftIsAberdeen ? opponent : aberdeen;
+  const leftName = leftIsAberdeen ? aberdeenName : opponentName;
+  const rightName = leftIsAberdeen ? opponentName : aberdeenName;
+  const leftSide: "aberdeen" | "opponent" = leftIsAberdeen
+    ? "aberdeen"
+    : "opponent";
+  const rightSide: "aberdeen" | "opponent" = leftIsAberdeen
+    ? "opponent"
+    : "aberdeen";
+
   return (
     <section className="card strength-compare" data-contract={contract}>
       <div className="section-head">
@@ -85,25 +99,33 @@ export function StrengthComparison({
         </span>
       </div>
       <div className="compare-head">
-        <span>{aberdeenName}</span>
+        <span className={leftIsAberdeen ? "is-aberdeen" : undefined}>
+          {leftName}
+        </span>
         <span className="muted">Metric</span>
-        <span>{opponentName}</span>
+        <span className={leftIsAberdeen ? undefined : "is-aberdeen"}>
+          {rightName}
+        </span>
       </div>
       <div className="compare-rows">
         {METRICS.map((metric) => {
-          const abd = aberdeen[metric.key] as number | null | undefined;
-          const opp = opponent[metric.key] as number | null | undefined;
-          const abdPct = aberdeen.percentiles?.[metric.percentile];
-          const oppPct = opponent.percentiles?.[metric.percentile];
+          const leftValue = left[metric.key] as number | null | undefined;
+          const rightValue = right[metric.key] as number | null | undefined;
+          const leftPct = left.percentiles?.[metric.percentile];
+          const rightPct = right.percentiles?.[metric.percentile];
           return (
             <div className="compare-row" key={metric.key}>
-              <div className="compare-side">
+              <div
+                className={`compare-side${leftIsAberdeen ? " is-aberdeen" : ""}`}
+              >
                 <span className="compare-value">
-                  {display(abd, metric.suffix)}
+                  {display(leftValue, metric.suffix)}
                 </span>
-                <Bar percentile={abdPct} side="aberdeen" />
+                <Bar percentile={leftPct} side={leftSide} />
                 <span className="compare-percentile">
-                  {abdPct === null || abdPct === undefined ? "—" : `${abdPct}th`}
+                  {leftPct === null || leftPct === undefined
+                    ? "—"
+                    : `${leftPct}th`}
                 </span>
               </div>
               <div className="compare-label">
@@ -112,13 +134,19 @@ export function StrengthComparison({
                   <span className="fine-print"> lower is better</span>
                 ) : null}
               </div>
-              <div className="compare-side compare-side-right">
+              <div
+                className={`compare-side compare-side-right${
+                  leftIsAberdeen ? "" : " is-aberdeen"
+                }`}
+              >
                 <span className="compare-percentile">
-                  {oppPct === null || oppPct === undefined ? "—" : `${oppPct}th`}
+                  {rightPct === null || rightPct === undefined
+                    ? "—"
+                    : `${rightPct}th`}
                 </span>
-                <Bar percentile={oppPct} side="opponent" />
+                <Bar percentile={rightPct} side={rightSide} />
                 <span className="compare-value">
-                  {display(opp, metric.suffix)}
+                  {display(rightValue, metric.suffix)}
                 </span>
               </div>
             </div>
@@ -126,20 +154,21 @@ export function StrengthComparison({
         })}
       </div>
       <div className="stat-row four">
-        <div className="stat-tile">
-          <span className="stat-label">{aberdeenName}</span>
-          <span className="stat-value">{aberdeen.position}th</span>
-          <span className="stat-note">
-            {aberdeen.points} pts · {aberdeen.gf}–{aberdeen.ga}
-          </span>
-        </div>
-        <div className="stat-tile">
-          <span className="stat-label">{opponentName}</span>
-          <span className="stat-value">{opponent.position}th</span>
-          <span className="stat-note">
-            {opponent.points} pts · {opponent.gf}–{opponent.ga}
-          </span>
-        </div>
+        {[
+          { name: leftName, data: left, isAberdeen: leftIsAberdeen },
+          { name: rightName, data: right, isAberdeen: !leftIsAberdeen },
+        ].map((team) => (
+          <div
+            key={team.isAberdeen ? "aberdeen" : "opponent"}
+            className={`stat-tile${team.isAberdeen ? " is-aberdeen" : ""}`}
+          >
+            <span className="stat-label">{team.name}</span>
+            <span className="stat-value">{team.data.position}th</span>
+            <span className="stat-note">
+              {team.data.points} pts · {team.data.gf}–{team.data.ga}
+            </span>
+          </div>
+        ))}
         <div className="stat-tile">
           <span className="stat-label">Table gap</span>
           <span className="stat-value">{comparison.descriptor ?? "Unknown"}</span>

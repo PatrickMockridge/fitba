@@ -37,11 +37,19 @@ function splitName(profile: StyleProfile) {
   return profile.venue === "H" ? "Home" : profile.venue === "A" ? "Away" : "All";
 }
 
-function StyleCard({ name, pair }: { name: string; pair: StylePair }) {
+function StyleCard({
+  name,
+  pair,
+  isAberdeen = false,
+}: {
+  name: string;
+  pair: StylePair;
+  isAberdeen?: boolean;
+}) {
   const { lean, venue, overall } = pair;
   const index = lean.approach_index ?? 0;
   return (
-    <article className="style-card">
+    <article className={`style-card${isAberdeen ? " is-aberdeen" : ""}`}>
       <div className="style-card-head">
         <div>
           <p className="eyebrow">Measured shot profile</p>
@@ -132,6 +140,7 @@ export function StyleMatchup({
   aberdeen,
   opponent,
   venueLabel,
+  aberdeenFirst,
   contract,
 }: {
   aberdeenName: string;
@@ -139,8 +148,15 @@ export function StyleMatchup({
   aberdeen: StylePair;
   opponent: StylePair;
   venueLabel: string;
+  aberdeenFirst: boolean;
   contract?: string;
 }) {
+  const first = aberdeenFirst
+    ? { name: aberdeenName, pair: aberdeen, isAberdeen: true }
+    : { name: opponentName, pair: opponent, isAberdeen: false };
+  const second = aberdeenFirst
+    ? { name: opponentName, pair: opponent, isAberdeen: false }
+    : { name: aberdeenName, pair: aberdeen, isAberdeen: true };
   return (
     <section className="card style-matchup" data-contract={contract}>
       <div className="section-head">
@@ -151,8 +167,16 @@ export function StyleMatchup({
         <span className="badge badge-neutral">{venueLabel} splits</span>
       </div>
       <div className="style-grid">
-        <StyleCard name={aberdeenName} pair={aberdeen} />
-        <StyleCard name={opponentName} pair={opponent} />
+        <StyleCard
+          name={first.name}
+          pair={first.pair}
+          isAberdeen={first.isAberdeen}
+        />
+        <StyleCard
+          name={second.name}
+          pair={second.pair}
+          isAberdeen={second.isAberdeen}
+        />
       </div>
       <p className="fine-print">
         The lean is inferred from measured shot volume, shot share, shots on

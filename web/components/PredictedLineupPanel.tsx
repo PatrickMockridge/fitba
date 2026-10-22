@@ -29,7 +29,10 @@ export function PredictedLineupPanel({
 }) {
   if (!block || block.status === "unavailable") {
     return (
-      <article className="card lineup-panel" data-contract={contract}>
+      <article
+        className={`card lineup-panel${isAberdeen ? " is-aberdeen" : ""}`}
+        data-contract={contract}
+      >
         <div className="card-head">
           <div>
             <p className="eyebrow">Predicted XI</p>
@@ -52,7 +55,10 @@ export function PredictedLineupPanel({
   }
 
   return (
-    <article className="card lineup-panel" data-contract={contract}>
+    <article
+      className={`card lineup-panel${isAberdeen ? " is-aberdeen" : ""}`}
+      data-contract={contract}
+    >
       <div className="card-head">
         <div>
           <p className="eyebrow">Predicted XI · not team news</p>

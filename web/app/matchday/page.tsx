@@ -108,6 +108,9 @@ export default function MatchdayPage() {
   const fixture = data.fixture;
   const opponent = data.teams.opponent;
   const aberdeen = data.teams.aberdeen;
+  // The head-to-head is always home on the left, away on the right. Aberdeen's
+  // side follows the fixture, not the club's preference.
+  const aberdeenIsHome = fixture.home_team_id === "sco:aberdeen";
   const snapshotAt = snapshotValue(data, "generated_at");
   const age = snapshotValue(data, "age_hours");
   const lineupStatus = data.coverage.lineups ?? {};
@@ -203,17 +206,38 @@ export default function MatchdayPage() {
           <span className="badge badge-neutral">Not official team news</span>
         </div>
         <div className="grid two-col lineup-grid">
-          <PredictedLineupPanel
-            teamName={aberdeen?.name ?? "Aberdeen"}
-            block={data.predicted_lineups.aberdeen ?? null}
-            isAberdeen
-            contract="matchday.lineup"
-          />
-          <PredictedLineupPanel
-            teamName={opponent?.name ?? fixture.opponent_name}
-            block={data.predicted_lineups.opponent ?? null}
-            contract="matchday.lineup"
-          />
+          {[
+            aberdeenIsHome
+              ? {
+                  name: aberdeen?.name ?? "Aberdeen",
+                  block: data.predicted_lineups.aberdeen ?? null,
+                  isAberdeen: true,
+                }
+              : {
+                  name: opponent?.name ?? fixture.opponent_name,
+                  block: data.predicted_lineups.opponent ?? null,
+                  isAberdeen: false,
+                },
+            aberdeenIsHome
+              ? {
+                  name: opponent?.name ?? fixture.opponent_name,
+                  block: data.predicted_lineups.opponent ?? null,
+                  isAberdeen: false,
+                }
+              : {
+                  name: aberdeen?.name ?? "Aberdeen",
+                  block: data.predicted_lineups.aberdeen ?? null,
+                  isAberdeen: true,
+                },
+          ].map((side) => (
+            <PredictedLineupPanel
+              key={side.isAberdeen ? "aberdeen" : "opponent"}
+              teamName={side.name}
+              block={side.block}
+              isAberdeen={side.isAberdeen}
+              contract="matchday.lineup"
+            />
+          ))}
         </div>
       </section>
 
@@ -223,6 +247,7 @@ export default function MatchdayPage() {
           opponentName={opponent?.name ?? fixture.opponent_name}
           aberdeen={data.form_guide.aberdeen}
           opponent={data.form_guide.opponent}
+          aberdeenFirst={aberdeenIsHome}
           contract="matchday.form-guide"
         />
       ) : null}
@@ -234,6 +259,7 @@ export default function MatchdayPage() {
           aberdeen={data.styles.aberdeen}
           opponent={data.styles.opponent}
           venueLabel="Home / away"
+          aberdeenFirst={aberdeenIsHome}
           contract="matchday.style"
         />
       ) : null}
@@ -245,6 +271,7 @@ export default function MatchdayPage() {
           aberdeen={data.strength.aberdeen}
           opponent={data.strength.opponent}
           comparison={data.strength_comparison}
+          aberdeenFirst={aberdeenIsHome}
           contract="matchday.strength"
         />
       ) : null}

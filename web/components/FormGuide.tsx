@@ -50,13 +50,21 @@ function SplitTable({ block }: { block: FormBlock }) {
   );
 }
 
-function TeamForm({ name, block }: { name: string; block: FormBlock }) {
+function TeamForm({
+  name,
+  block,
+  isAberdeen = false,
+}: {
+  name: string;
+  block: FormBlock;
+  isAberdeen?: boolean;
+}) {
   const competition =
     typeof block.sample.competition_name === "string"
       ? block.sample.competition_name
       : "League";
   return (
-    <div className="form-team">
+    <div className={`form-team${isAberdeen ? " is-aberdeen" : ""}`}>
       <div className="form-team-head">
         <div>
           <p className="eyebrow">{competition}</p>
@@ -93,14 +101,22 @@ export function FormGuide({
   opponentName,
   aberdeen,
   opponent,
+  aberdeenFirst,
   contract,
 }: {
   aberdeenName: string;
   opponentName: string;
   aberdeen: FormBlock;
   opponent: FormBlock;
+  aberdeenFirst: boolean;
   contract?: string;
 }) {
+  const first = aberdeenFirst
+    ? { name: aberdeenName, block: aberdeen, isAberdeen: true }
+    : { name: opponentName, block: opponent, isAberdeen: false };
+  const second = aberdeenFirst
+    ? { name: opponentName, block: opponent, isAberdeen: false }
+    : { name: aberdeenName, block: aberdeen, isAberdeen: true };
   return (
     <section className="card form-guide" data-contract={contract}>
       <div className="section-head">
@@ -111,8 +127,16 @@ export function FormGuide({
         <span className="badge badge-neutral">Last five · home and away</span>
       </div>
       <div className="form-guide-grid">
-        <TeamForm name={aberdeenName} block={aberdeen} />
-        <TeamForm name={opponentName} block={opponent} />
+        <TeamForm
+          name={first.name}
+          block={first.block}
+          isAberdeen={first.isAberdeen}
+        />
+        <TeamForm
+          name={second.name}
+          block={second.block}
+          isAberdeen={second.isAberdeen}
+        />
       </div>
     </section>
   );

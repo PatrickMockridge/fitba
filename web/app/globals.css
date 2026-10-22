@@ -2659,6 +2659,36 @@ a.card:hover {
   opacity: 0.4;
 }
 
+/* Aberdeen is always marked with the club's red accent, whichever side of the
+   fixture it is on. The order itself follows home -> away. */
+.lineup-panel.is-aberdeen,
+.style-card.is-aberdeen {
+  border-top: 3px solid var(--accent);
+  background:
+    linear-gradient(180deg, var(--accent-tint), transparent 3.5rem),
+    var(--surface);
+}
+
+.form-team.is-aberdeen {
+  border-top: 3px solid var(--accent);
+  padding-top: 0.65rem;
+}
+
+.lineup-panel.is-aberdeen h2,
+.style-card.is-aberdeen h3,
+.form-team.is-aberdeen h3,
+.compare-head .is-aberdeen {
+  color: var(--accent-strong);
+}
+
+.compare-side.is-aberdeen .compare-value {
+  color: var(--accent-strong);
+}
+
+.stat-tile.is-aberdeen {
+  border-top: 3px solid var(--accent);
+}
+
 .coverage-card {
   margin-top: 1.2rem;
 }
