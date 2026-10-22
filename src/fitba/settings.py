@@ -157,7 +157,6 @@ def confidence_policy() -> dict[str, Any]:
     return load_yaml(path) if path.exists() else {}
 
 
-
 @lru_cache(maxsize=1)
 def provenance() -> dict[str, Any]:
     path = CONFIG_DIR / "provenance.yaml"

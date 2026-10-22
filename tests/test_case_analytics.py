@@ -31,9 +31,7 @@ def payload() -> dict:
         squad_data=json.loads((DATA / "squad" / "aberdeen.json").read_text()),
         transfers_data=json.loads((DATA / "transfers" / "aberdeen.json").read_text()),
         history_index=json.loads((DATA / "history" / "aberdeen.json").read_text()),
-        history_season=json.loads(
-            (DATA / "history" / "seasons" / "2026-27.json").read_text()
-        ),
+        history_season=json.loads((DATA / "history" / "seasons" / "2026-27.json").read_text()),
         history_seasons={
             path.stem: json.loads(path.read_text())
             for path in (DATA / "history" / "seasons").glob("*.json")

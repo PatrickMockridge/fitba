@@ -274,10 +274,7 @@ def _roster_rows(payload: list[dict[str, Any]], season: str) -> list[dict[str, A
 def _parse_team_stats(
     season: str, fixture_id: int, payload: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
-    return [
-        {"season": season, **row}
-        for row in parse_team_stats(payload, fixture_id=fixture_id)
-    ]
+    return [{"season": season, **row} for row in parse_team_stats(payload, fixture_id=fixture_id)]
 
 
 def probe_season(season: str, *, team_id: int | None = None) -> dict[str, Any]:

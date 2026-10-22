@@ -301,14 +301,10 @@ def build_fixture_registry(
             home_id = _team_id(teams, home_name)
             away_id = _team_id(teams, away_name)
             home_display = (
-                teams.canonical_name(home_id)
-                if not home_id.startswith("other:")
-                else home_name
+                teams.canonical_name(home_id) if not home_id.startswith("other:") else home_name
             )
             away_display = (
-                teams.canonical_name(away_id)
-                if not away_id.startswith("other:")
-                else away_name
+                teams.canonical_name(away_id) if not away_id.startswith("other:") else away_name
             )
             competition_id = str(row.get("competition_id") or "sco:other:unknown")
             key = f"api:fixture:{fixture_id}"

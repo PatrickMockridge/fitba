@@ -47,9 +47,7 @@ def _goal_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
-def _score_sequence(
-    goals: list[dict[str, Any]], home_name: str
-) -> list[dict[str, Any]]:
+def _score_sequence(goals: list[dict[str, Any]], home_name: str) -> list[dict[str, Any]]:
     home = 0
     away = 0
     sequence: list[dict[str, Any]] = []
@@ -113,9 +111,8 @@ def build_summary(
             comeback = "home"
         if item["side"] == "away" and item["home"] - item["away"] >= 2:
             comeback = "away"
-    if (
-        (home_goals > away_goals and comeback == "home")
-        or (away_goals > home_goals and comeback == "away")
+    if (home_goals > away_goals and comeback == "home") or (
+        away_goals > home_goals and comeback == "away"
     ):
         comeback = True
     else:
@@ -130,10 +127,7 @@ def build_summary(
         loser = away if winner == home else home
         winner_side = "home" if winner == home else "away"
         if shootout:
-            headline = (
-                f"{winner} beat {loser} on penalties after a "
-                f"{home_goals}-{away_goals} draw"
-            )
+            headline = f"{winner} beat {loser} on penalties after a {home_goals}-{away_goals} draw"
         elif comeback:
             headline = f"{winner} come back to beat {loser} {score}"
         elif late_goals and late_goals[-1]["side"] == winner_side:
@@ -168,9 +162,7 @@ def build_summary(
             opening = f"{scorer} opened the scoring on {first['minute']} minutes{assist}."
         bullets.append({"text": _sentence(opening), "basis": "measured"})
         equalisers = [
-            item
-            for item in sequence[1:]
-            if item["home"] == item["away"] and item["home"] > 0
+            item for item in sequence[1:] if item["home"] == item["away"] and item["home"] > 0
         ]
         if equalisers:
             item = equalisers[0]
@@ -232,8 +224,7 @@ def build_summary(
             bullets.append(
                 {
                     "text": _sentence(
-                        f"{label}: {home} {home_value}{suffix}, "
-                        f"{away} {away_value}{suffix}."
+                        f"{label}: {home} {home_value}{suffix}, {away} {away_value}{suffix}."
                     ),
                     "basis": "measured",
                 }

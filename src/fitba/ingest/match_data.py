@@ -395,9 +395,7 @@ def compute_match_data(
             )
             start_entries: dict[int, dict[str, Any]] = {}
             lineup_entries: dict[int, dict[str, Any]] = {}
-            starter_ids = {
-                _int((entry.get("player") or {}).get("id")) for entry in starters
-            }
+            starter_ids = {_int((entry.get("player") or {}).get("id")) for entry in starters}
             for entry in [*starters, *(lineup.get("substitutes") or [])]:
                 player = entry.get("player") or {}
                 player_id = _int(player.get("id"))

@@ -251,9 +251,7 @@ def _league_stats_rows(
         key = f"fdco:{fixture.match_id}" if fixture.match_id else f"api:{fixture.fixture_id}"
         row = by_key_team.get((key, ABERDEEN_ID))
         if row is not None:
-            output.append(
-                {**row, "fixture_id": fixture.fixture_id, "date": fixture.date}
-            )
+            output.append({**row, "fixture_id": fixture.fixture_id, "date": fixture.date})
     return output
 
 

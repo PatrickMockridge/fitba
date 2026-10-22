@@ -1389,9 +1389,7 @@ def publish(
             reason=f"xg_build_failed:{type(error).__name__}",
         )
     if (xg_payload.get("coverage") or {}).get("matches", 0) == 0 and previous_xg:
-        xg_payload = fallback_xg_payload(
-            previous_xg, reason="xg_build_returned_no_matches"
-        )
+        xg_payload = fallback_xg_payload(previous_xg, reason="xg_build_returned_no_matches")
     xg_info = _write(temp / "xg" / "aberdeen.json", xg_payload)
     written.append(xg_info)
     marts.append(
@@ -1922,23 +1920,16 @@ def publish(
         "fixtures": {
             "count": fixture_index.get("count", 0),
             "full": sum(
-                1
-                for item in fixture_index.get("fixtures", [])
-                if item.get("depth") == "full"
+                1 for item in fixture_index.get("fixtures", []) if item.get("depth") == "full"
             ),
             "result": sum(
-                1
-                for item in fixture_index.get("fixtures", [])
-                if item.get("depth") == "result"
+                1 for item in fixture_index.get("fixtures", []) if item.get("depth") == "result"
             ),
             "score": sum(
-                1
-                for item in fixture_index.get("fixtures", [])
-                if item.get("depth") == "score"
+                1 for item in fixture_index.get("fixtures", []) if item.get("depth") == "score"
             ),
             "note": (
-                "One page per played Cormack-era fixture; depth is the data "
-                "actually available."
+                "One page per played Cormack-era fixture; depth is the data actually available."
             ),
         },
         "provenance": {

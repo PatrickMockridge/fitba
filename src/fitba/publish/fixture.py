@@ -432,11 +432,7 @@ def _lineup_block(
     )
     team_key = str(team_name).casefold()
     line = next(
-        (
-            row
-            for row in line_rows
-            if str(row.get("team_name") or "").casefold() == team_key
-        ),
+        (row for row in line_rows if str(row.get("team_name") or "").casefold() == team_key),
         None,
     )
     if line is None:
@@ -446,9 +442,7 @@ def _lineup_block(
         if appearances.height
         else []
     )
-    players = [
-        row for row in people if str(row.get("team_name") or "").casefold() == team_key
-    ]
+    players = [row for row in people if str(row.get("team_name") or "").casefold() == team_key]
     starters = [
         {
             "player_id": row.get("player_id"),
@@ -484,9 +478,7 @@ def _lineup_block(
     }
 
 
-def _player_stats_block(
-    fixture: FixtureRecord, player_stats: pl.DataFrame
-) -> list[dict[str, Any]]:
+def _player_stats_block(fixture: FixtureRecord, player_stats: pl.DataFrame) -> list[dict[str, Any]]:
     if not player_stats.height:
         return []
     rows = player_stats.filter(pl.col("fixture_id") == fixture.fixture_id).to_dicts()
@@ -512,9 +504,7 @@ def _player_stats_block(
     ]
 
 
-def _form_context(
-    registry: Any, fixture: FixtureRecord
-) -> dict[str, Any]:
+def _form_context(registry: Any, fixture: FixtureRecord) -> dict[str, Any]:
     played = [
         item
         for item in registry.played()

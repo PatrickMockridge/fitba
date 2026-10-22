@@ -21,9 +21,7 @@ def main() -> int:
     if coverage.played == 0:
         errors.append("fixture registry has no played fixtures")
     if coverage.with_league_alias < 200:
-        warnings.append(
-            f"only {coverage.with_league_alias} played fixtures have a league alias"
-        )
+        warnings.append(f"only {coverage.with_league_alias} played fixtures have a league alias")
 
     for season in sorted(coverage.by_season):
         report = history_coverage(season)
