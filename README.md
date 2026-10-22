@@ -201,6 +201,8 @@ last-checked dates.
 
 ## Licence
 
+Copyright (C) 2026 Patrick Mockridge.
+
 The code and documentation in this repository are licensed under the **GNU
 Affero General Public License, version 3 or later** (AGPL-3.0-or-later). See
 [LICENSE](LICENSE). The AGPL's network clause applies: if you run a modified
