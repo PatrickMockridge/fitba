@@ -13,10 +13,16 @@ from fitba.ingest.match_data import (
 )
 from fitba.ingest.runner import load_matches
 from fitba.publish.case import build_case_payload
+from fitba.settings import NORMALIZED_DIR
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "web" / "data" / "generated"
 BANNED = ("role family", "provider rating", "inferred", "80/20", "leaky boat", "not a verdict")
+
+pytestmark = pytest.mark.skipif(
+    not (NORMALIZED_DIR / "matches").exists(),
+    reason="requires the local normalized match layer",
+)
 
 
 @pytest.fixture(scope="module")

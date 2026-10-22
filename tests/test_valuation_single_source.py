@@ -2,8 +2,13 @@ from __future__ import annotations
 
 from typing import Any
 
+import pytest
+
 import fitba.publish.history as history_module
 from fitba.analytics.valuation import summarise_valuations, value_transfers
+from fitba.settings import NORMALIZED_DIR
+
+HAS_MATCHES = (NORMALIZED_DIR / "matches").exists()
 
 ROWS: list[dict[str, Any]] = [
     {
@@ -57,6 +62,10 @@ def test_value_transfers_attaches_and_summarises() -> None:
     assert summary["fee_high_gbp"] == expected["fee_high_gbp"]
 
 
+@pytest.mark.skipif(
+    not HAS_MATCHES,
+    reason="requires the local normalized match layer",
+)
 def test_history_uses_the_supplied_valuation(monkeypatch) -> None:
     rows = [dict(row) for row in ROWS]
     valuation = value_transfers(rows, birth_dates=BIRTH_DATES, markets=MARKETS)

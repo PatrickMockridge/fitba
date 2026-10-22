@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import polars as pl
+import pytest
 
 from fitba.ingest.runner import load_matches
 from fitba.publish.case import (
@@ -12,9 +13,15 @@ from fitba.publish.case import (
     case_schema,
     fallback_case_payload,
 )
+from fitba.settings import NORMALIZED_DIR
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "web" / "data" / "generated"
+
+pytestmark = pytest.mark.skipif(
+    not (NORMALIZED_DIR / "matches").exists(),
+    reason="requires the local normalized match layer",
+)
 
 
 def _inputs():
