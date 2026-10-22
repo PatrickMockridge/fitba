@@ -872,6 +872,7 @@ def _transfers_payload(
     rows: list[dict[str, Any]], season: str, player_index: PlayerLinkIndex
 ) -> dict[str, Any]:
     seasons = sorted({row["season"] for row in rows}, reverse=True)
+    season_dash = chr(0x2013)
 
     def window_date_key(item: tuple[str, str]) -> tuple[int, int]:
         season, window = item
@@ -993,6 +994,14 @@ def _transfers_payload(
             "total": len(rows),
             "confirmed": confirmed,
             "curated": curated,
+            "players": len({row["player_key"] for row in rows}),
+            "seasons_covered": len(seasons),
+            "windows_covered": len({(row["season"], row["window"]) for row in rows}),
+            "period": (
+                f"{seasons[-1].replace('-', '/')}{season_dash}{seasons[0].replace('-', '/')}"
+                if seasons
+                else None
+            ),
         },
         "coverage": {
             "status": "curated",

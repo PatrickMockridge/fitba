@@ -405,7 +405,15 @@ export interface TransfersFile {
   transfers: TransferRecord[];
   loans_out: TransferRecord[];
   loans_in: TransferRecord[];
-  summary: { total: number; confirmed: number; curated: number };
+  summary: {
+    total: number;
+    confirmed: number;
+    curated: number;
+    players: number;
+    seasons_covered: number;
+    windows_covered: number;
+    period: string | null;
+  };
   coverage: {
     status: string;
     audited_from?: string;

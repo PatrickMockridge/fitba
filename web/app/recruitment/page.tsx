@@ -58,12 +58,20 @@ export default function RecruitmentPage() {
         <div className="card">
           <div className="card-head">
             <div>
-              <p className="eyebrow">Confirmed business</p>
+              <p className="eyebrow">Transfer register</p>
               <h2>What actually happened</h2>
             </div>
           </div>
           <div className="stat-row">
-            <StatTile label="Deals" value={transfers?.summary.total ?? 0} note="three seasons" />
+            <StatTile
+              label="Registered moves"
+              value={transfers?.summary.total ?? 0}
+              note={
+                transfers
+                  ? `${transfers.summary.players} players · ${transfers.summary.period ?? "register"}`
+                  : "register"
+              }
+            />
             <StatTile
               label="Confirmed"
               value={transfers?.summary.confirmed ?? 0}
@@ -72,6 +80,16 @@ export default function RecruitmentPage() {
             <StatTile label="Loans out" value={transfers?.loans_out.length ?? 0} note="register" />
             <StatTile label="Loans in" value={transfers?.loans_in.length ?? 0} note="register" />
           </div>
+          {transfers ? (
+            <p className="fine-print">
+              Moves include loans, frees and youth/development registrations, and one
+              player can appear more than once (a loan out and a return, for example).
+              The register spans {transfers.summary.seasons_covered} seasons and{" "}
+              {transfers.summary.windows_covered} windows; {transfers.summary.confirmed}{" "}
+              rows carry an official announcement and the rest are curated from the
+              provider feed and Wikipedia.
+            </p>
+          ) : null}
           {latestTransfers.length ? (
             <div className="transfer-grid">
               {latestTransfers.map((transfer) => (

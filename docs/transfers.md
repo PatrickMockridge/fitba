@@ -242,10 +242,28 @@ daily publish reads the local snapshot and never calls the network. The audit
 labels candidates **needs review**, not missing, because the provider snapshot
 can omit injured or unregistered players. It is report-only.
 
-## Current register (2026-10-21)
+## Sense checks
+
+`check_transfers.py` guards the aggregate as well as the rows:
+
+- the headline total equals the row count;
+- the distinct-player, season and window counts and the period are derived
+  from the rows and must match the payload;
+- no player has two identical moves (same direction, season and window);
+- window arrival/departure totals add up to the register;
+- the audited windows' arrival/departure counts match the audit payload.
+
+The membership cards on `/` and `/recruitment/` read the period and player
+count from the payload, so a hard-coded “three seasons” label cannot drift
+back in.
+
+## Current register (2026-10-22)
 
 - 229 published rows across 19 windows with rows, plus one expected upcoming
   window. The recent four are audited; 2019-20..2023-24 are curated partial.
+- 149 distinct players. A row is a **move**, not a player, so a player appears
+  once for each loan-out/return or transfer; 229 moves over eight seasons is an
+  average of about 29 per season, not 229 in three seasons.
 - 4 confirmed rows (official announcement linked); 225 curated against the
   Wikipedia season table or the API feed.
 - 31 loans out and 31 loans in across the register.

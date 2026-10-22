@@ -113,6 +113,13 @@ independently confirms it. `fitba transfers --audit` produces a report-only
 review queue and `reference/transfer_gaps.yaml` records accepted gaps. No gap
 blocks a publish.
 
+The register counts **moves, not players**: a loan out and a return are two
+rows. The payload derives the period, distinct-player, season and window counts
+from the rows, and the guard checks that those aggregates, the per-window
+arrival/departure totals and the audited window counts all agree. The
+membership cards read those values from the payload rather than a hard-coded
+season label.
+
 ## Historical record
 
 - **League tables:** a completed 12-team Premiership season is ranked inside its

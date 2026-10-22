@@ -35,6 +35,7 @@ UNKNOWN_REASONS = {
     "budget",
     "historical_scope",
 }
+SEASON_DASH = chr(0x2013)
 SENIORITIES = {"established", "fringe", "youth"}
 GAP_STATUSES = {"open", "accepted", "resolved"}
 VERIFICATION_AIDS = {"manual_third_party", "allowed_source", "none"}
@@ -130,8 +131,42 @@ def main() -> int:
         if basis == "modelled" and estimate.get("confidence") not in {"low", "medium"}:
             errors.append(f"{transfer_id}: modelled fee confidence {estimate.get('confidence')!r}")
 
-    if data.get("summary", {}).get("total") != len(rows):
+    payload_summary = data.get("summary") or {}
+    if payload_summary.get("total") != len(rows):
         errors.append("summary total does not match rows")
+    if int(payload_summary.get("players", -1)) != len({row.get("player_key") for row in rows}):
+        errors.append("summary players does not match the distinct player keys")
+    seasons_seen = {str(row.get("season")) for row in rows}
+    if int(payload_summary.get("seasons_covered", -1)) != len(seasons_seen):
+        errors.append("summary seasons_covered does not match the rows")
+    windows_seen = {(row.get("season"), row.get("window")) for row in rows}
+    if int(payload_summary.get("windows_covered", -1)) != len(windows_seen):
+        errors.append("summary windows_covered does not match the rows")
+    if seasons_seen:
+        first = min(seasons_seen).replace("-", "/")
+        last = max(seasons_seen).replace("-", "/")
+        expected_period = f"{first}{SEASON_DASH}{last}"
+        if payload_summary.get("period") != expected_period:
+            errors.append(
+                f"summary period {payload_summary.get('period')!r} "
+                f"does not match the rows ({expected_period!r})"
+            )
+    seen_moves: set[tuple[Any, Any, Any, Any]] = set()
+    for row in rows:
+        move = (
+            row.get("player_key"),
+            row.get("direction"),
+            row.get("season"),
+            row.get("window"),
+        )
+        if move in seen_moves:
+            errors.append(f"{row.get('transfer_id')}: duplicate move {move}")
+        seen_moves.add(move)
+    window_total = sum(
+        int(window.get("arrivals") or 0) + int(window.get("departures") or 0) for window in windows
+    )
+    if window_total != len(rows):
+        errors.append("window arrival/departure counts do not cover every transfer row")
 
     for window in windows:
         if window.get("disclosed_spend", 0) < 0 or window.get("disclosed_income", 0) < 0:
@@ -304,6 +339,19 @@ def main() -> int:
         }
         if audit.get("status") == "ok" and audit_windows != expected_audit_windows:
             errors.append("audit windows do not match published non-upcoming windows")
+        for audit_window in audit.get("windows") or []:
+            published = next(
+                (window for window in windows if window.get("key") == audit_window.get("key")),
+                None,
+            )
+            if published is None:
+                continue
+            for field in ("arrivals", "departures"):
+                if int(published.get(field) or 0) != int(audit_window.get(field) or 0):
+                    errors.append(
+                        f"audit {audit_window.get('key')}: {field} does not match "
+                        "the published window"
+                    )
         positions_summary = summary.get("positions") or {}
         if int(positions_summary.get("specified", 0)) + int(
             positions_summary.get("unknown", 0)

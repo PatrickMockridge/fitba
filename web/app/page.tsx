@@ -135,9 +135,13 @@ export default function HomePage() {
 
           <div className="stat-row">
             <StatTile
-              label="Confirmed deals"
+              label="Registered moves"
               value={transfers?.summary.total ?? 0}
-              note="three seasons"
+              note={
+                transfers
+                  ? `${transfers.summary.players} players · ${transfers.summary.period ?? "register"}`
+                  : "register"
+              }
             />
             <StatTile
               label="Active rumours"
