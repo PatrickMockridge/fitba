@@ -1,28 +1,13 @@
 import type { MatchdayRead } from "@/lib/data";
 
-const BASIS_LABEL: Record<string, string> = {
-  measured: "Measured",
-  inferred: "Inferred",
-  unknown: "Unknown",
-};
-
-function Basis({ value }: { value: string }) {
-  return (
-    <span className={`basis-badge basis-${value}`}>
-      {BASIS_LABEL[value] ?? value}
-    </span>
-  );
-}
-
 export function MatchupRead({ read }: { read: MatchdayRead }) {
   return (
     <section className="matchday-read">
       <p className="eyebrow">The read</p>
       <h2>{read.headline}</h2>
       <ul className="read-list">
-        {read.bullets.map((bullet, index) => (
+        {read.bullets.slice(0, 3).map((bullet, index) => (
           <li className="read-bullet" key={`${bullet.text}-${index}`}>
-            <Basis value={bullet.basis} />
             <span>{bullet.text}</span>
           </li>
         ))}
@@ -31,19 +16,15 @@ export function MatchupRead({ read }: { read: MatchdayRead }) {
         <>
           <h3 className="keys-title">Keys to the match</h3>
           <div className="keys-grid">
-            {read.keys.map((key) => (
+            {read.keys.slice(0, 3).map((key) => (
               <article className="key-card" key={`${key.label}-${key.text}`}>
-                <div className="key-head">
-                  <h4>{key.label}</h4>
-                  <Basis value={key.basis} />
-                </div>
+                <h4>{key.label}</h4>
                 <p>{key.text}</p>
               </article>
             ))}
           </div>
         </>
       ) : null}
-      <p className="fine-print">{read.note}</p>
     </section>
   );
 }

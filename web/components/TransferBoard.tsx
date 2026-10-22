@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
-import { TransferCard } from "@/components/TransferCard";
-import type { TransferWindow, TransfersFile } from "@/lib/data";
+import { PlayerLink } from "@/components/PlayerLink";
+import { TableFrame, Th } from "@/components/TableFrame";
+import { formatDate } from "@/lib/format";
+import type { TransferRecord, TransferWindow, TransfersFile } from "@/lib/data";
 
 type Direction = "all" | "in" | "out";
 type Kind = "all" | "permanent" | "loan" | "free";
@@ -15,118 +16,17 @@ const RANGE_LABEL: Record<Range, string> = {
   out_of_window: "Out of window",
 };
 
-interface SummaryTotals {
-  arrivals: number;
-  departures: number;
-  net_low: number | null;
-  net_high: number | null;
-  known_count: number;
-  modelled_count: number;
-  loan_count: number;
-  loans_in: number;
-  loans_out: number;
-  confidence: string;
-  windows: number;
-}
-
-function money(value: number) {
-  const sign = value < 0 ? "−" : "+";
-  return `${sign}£${Math.abs(value).toLocaleString("en-GB")}`;
-}
-
-const CONFIDENCE_RANK: Record<string, number> = {
-  unknown: 0,
-  low: 1,
-  medium: 2,
-  high: 3,
+const KIND_LABEL: Record<string, string> = {
+  permanent: "Permanent",
+  loan: "Loan",
+  free: "Free",
 };
 
-function totals(windows: TransferWindow[]): SummaryTotals {
-  return windows.reduce<SummaryTotals>(
-    (acc, window) => {
-      const counts = window.valuation_counts ?? {};
-      return {
-        arrivals: acc.arrivals + window.arrivals,
-        departures: acc.departures + window.departures,
-        net_low:
-          window.inferred_net_low_gbp === null ||
-          window.inferred_net_low_gbp === undefined
-            ? acc.net_low
-            : (acc.net_low ?? 0) + window.inferred_net_low_gbp,
-        net_high:
-          window.inferred_net_high_gbp === null ||
-          window.inferred_net_high_gbp === undefined
-            ? acc.net_high
-            : (acc.net_high ?? 0) + window.inferred_net_high_gbp,
-        known_count:
-          acc.known_count +
-          Number(counts.disclosed ?? 0) +
-          Number(counts.reported ?? 0),
-        modelled_count: acc.modelled_count + Number(counts.modelled ?? 0),
-        loan_count: acc.loan_count + Number(counts.loan ?? 0),
-        loans_in: acc.loans_in + window.loans_in,
-        loans_out: acc.loans_out + window.loans_out,
-        confidence:
-          (CONFIDENCE_RANK[window.valuation_confidence ?? "unknown"] ?? 0) <
-          (CONFIDENCE_RANK[acc.confidence] ?? 0)
-            ? (window.valuation_confidence ?? "unknown")
-            : acc.confidence,
-        windows: acc.windows + 1,
-      };
-    },
-    {
-      arrivals: 0,
-      departures: 0,
-      net_low: null,
-      net_high: null,
-      known_count: 0,
-      modelled_count: 0,
-      loan_count: 0,
-      loans_in: 0,
-      loans_out: 0,
-      confidence: "high",
-      windows: 0,
-    },
-  );
-}
-
-function Summary({ value }: { value: SummaryTotals }) {
-  const netLabel =
-    value.net_low === null || value.net_high === null
-      ? "Not modelled"
-      : `${money(value.net_low)} – ${money(value.net_high)}`;
-  return (
-    <div className="stat-row four">
-      <div className="stat-tile">
-        <span className="stat-label">Arrivals</span>
-        <span className="stat-value">{value.arrivals}</span>
-        <span className="stat-note">
-          {value.windows === 1 ? "this window" : `across ${value.windows} windows`}
-        </span>
-      </div>
-      <div className="stat-tile">
-        <span className="stat-label">Departures</span>
-        <span className="stat-value">{value.departures}</span>
-        <span className="stat-note">permanent, loan, free</span>
-      </div>
-      <div className="stat-tile">
-        <span className="stat-label">Estimated net</span>
-        <span className="stat-value">{netLabel}</span>
-        <span className="stat-note">
-          inferred · {value.windows ? value.confidence : "unknown"} confidence ·{" "}
-          {value.known_count} known · {value.modelled_count} modelled ·{" "}
-          {value.loan_count} loans
-        </span>
-      </div>
-      <div className="stat-tile">
-        <span className="stat-label">Loans out</span>
-        <span className="stat-value">{value.loans_out}</span>
-        <span className="stat-note">
-          {value.loans_in} in · loan fees excluded from net
-        </span>
-      </div>
-    </div>
-  );
+function sourceLabel(record: TransferRecord) {
+  const urls = (record.source_urls ?? []).join(" ").toLowerCase();
+  if (urls.includes("afc.co.uk")) return "AFC";
+  if (urls.includes("wikipedia.org")) return "Wikipedia";
+  return "Feed";
 }
 
 export function TransferBoard({ data }: { data: TransfersFile }) {
@@ -136,8 +36,12 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
     out_of_window: [],
     upcoming: [],
   };
+  const fallbackWindow =
+    groups.recent?.[0] ??
+    data.windows.find((window) => window.state !== "upcoming")?.key ??
+    "all";
   const [range, setRange] = useState<Range>("recent");
-  const [windowKey, setWindowKey] = useState("all");
+  const [windowKey, setWindowKey] = useState(fallbackWindow);
   const [direction, setDirection] = useState<Direction>("all");
   const [kind, setKind] = useState<Kind>("all");
 
@@ -166,9 +70,7 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
       : range === "further"
         ? "All further back"
         : "All out of window";
-  const outOfWindowCount = data.transfers.filter((transfer) =>
-    groups.out_of_window.includes(`${transfer.season}-${transfer.window}`),
-  ).length;
+  const viewLabel = selected ? selected.label : allLabel;
 
   function changeRange(next: Range) {
     setRange(next);
@@ -184,6 +86,7 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
               key={value}
               type="button"
               className={range === value ? "is-active" : undefined}
+              aria-pressed={range === value}
               onClick={() => changeRange(value)}
             >
               {RANGE_LABEL[value]}
@@ -194,7 +97,7 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
         <label>
           Window
           <select
-            value={windowKey}
+            value={selected ? windowKey : "all"}
             onChange={(event) => setWindowKey(event.target.value)}
           >
             <option value="all">{allLabel}</option>
@@ -213,6 +116,7 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
               key={value}
               type="button"
               className={direction === value ? "is-active" : undefined}
+              aria-pressed={direction === value}
               onClick={() => setDirection(value)}
             >
               {value === "all" ? "All" : value === "in" ? "In" : "Out"}
@@ -226,62 +130,59 @@ export function TransferBoard({ data }: { data: TransfersFile }) {
               key={value}
               type="button"
               className={kind === value ? "is-active" : undefined}
+              aria-pressed={kind === value}
               onClick={() => setKind(value)}
             >
-              {value === "all" ? "All types" : value}
+              {value === "all" ? "All types" : KIND_LABEL[value] ?? value}
             </button>
           ))}
         </div>
       </div>
 
-      <Summary value={totals(activeWindows)} />
-
-      <p className="fine-print">
-        Estimated net is a range built from disclosed/reported fee anchors and a
-        transparent age, position and market model. It is not an audited balance;
-        negative means income exceeds spend. Free transfers count as zero fee;
-        loan fees are excluded.{" "}
-        <Link className="text-link" href="/methodology/">
-          How the range is built →
-        </Link>
+      <p className="muted" aria-live="polite">
+        {viewLabel} · {filtered.length} move{filtered.length === 1 ? "" : "s"}
       </p>
 
-      <p className="fine-print">
-        {selected ? selected.label : allLabel} · {filtered.length} deal
-        {filtered.length === 1 ? "" : "s"} in this view.{" "}
-        <span
-          className={`badge ${
-            (selected?.coverage ?? groupWindows[0]?.coverage) === "audited"
-              ? "badge-ok"
-              : "badge-warn"
-          }`}
+      {filtered.length ? (
+        <TableFrame
+          label={`${viewLabel} transfer register`}
+          caption={`${viewLabel} Aberdeen transfers`}
+          className="league-table compact register-table stack-mobile"
         >
-          {(selected?.coverage ?? groupWindows[0]?.coverage) === "audited"
-            ? "Audited windows"
-            : "Curated partial"}
-        </span>
-        {selected?.era_context === "pre_era"
-          ? " Summer 2019 predates Cormack's chairmanship."
-          : ""}
-        {range === "recent" && outOfWindowCount > 0
-          ? ` ${outOfWindowCount} out-of-window move${
-              outOfWindowCount === 1 ? "" : "s"
-            } available under Out of window.`
-          : ""}
-        {range === "further"
-          ? " Earlier windows are curated partial, not audited against a seniority review."
-          : ""}
-      </p>
-
-      <div className="transfer-grid">
-        {filtered.map((transfer) => (
-          <TransferCard key={transfer.transfer_id} transfer={transfer} />
-        ))}
-      </div>
-
-      {filtered.length === 0 ? (
-        <p className="muted">No confirmed business matches these filters.</p>
-      ) : null}
+          <thead>
+            <tr>
+              <Th>Date</Th>
+              <Th>Player</Th>
+              <Th>In/Out</Th>
+              <Th>Type</Th>
+              <Th>From</Th>
+              <Th>To</Th>
+              <Th>Fee</Th>
+              <Th>Source</Th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((transfer) => (
+              <tr key={transfer.transfer_id}>
+                <td data-label="Date">{formatDate(transfer.date_effective)}</td>
+                <td data-label="Player">
+                  <PlayerLink name={transfer.player_name} href={transfer.player_href} />
+                </td>
+                <td data-label="In/Out">{transfer.direction === "in" ? "In" : "Out"}</td>
+                <td data-label="Type">
+                  {KIND_LABEL[transfer.transfer_kind] ?? transfer.transfer_kind}
+                </td>
+                <td data-label="From">{transfer.from_club_name}</td>
+                <td data-label="To">{transfer.to_club_name}</td>
+                <td data-label="Fee">{transfer.fee_display}</td>
+                <td data-label="Source">{sourceLabel(transfer)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </TableFrame>
+      ) : (
+        <p className="muted">No moves match these filters.</p>
+      )}
     </section>
   );
 }

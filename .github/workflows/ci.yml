@@ -55,3 +55,4 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run build
+      - run: python3 ../scripts/check_web_copy.py

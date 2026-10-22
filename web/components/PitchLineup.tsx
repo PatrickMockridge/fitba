@@ -17,10 +17,12 @@ export function PitchLineup({
   players,
   formation,
   teamName,
+  listHidden = false,
 }: {
   players: LineupPlayer[];
   formation?: string | null;
   teamName: string;
+  listHidden?: boolean;
 }) {
   const rows = new Map<number, LineupPlayer[]>();
   for (const player of players) {
@@ -62,12 +64,15 @@ export function PitchLineup({
           </div>
         ))}
       </div>
-      <p className="fine-print">
+      <p className="muted">
         {formation ? `${teamName} · ${formation}` : teamName} ·{" "}
         {players.filter((player) => player.player_id !== null).length} predicted
         starters
       </p>
-      <ol className="lineup-list" aria-label={`${teamName} predicted XI`}>
+      <ol
+        className={`lineup-list${listHidden ? " sr-only" : ""}`}
+        aria-label={`${teamName} predicted XI`}
+      >
         {players.map((player, index) => (
           <li key={`${player.player_id ?? "empty"}-${index}`}>
             <span className="lineup-slot">{player.slot ?? player.grid ?? "—"}</span>

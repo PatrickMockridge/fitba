@@ -252,3 +252,6 @@ After the API-Football key-test passes:
 - Publication guard checks size, provenance and tracked raw data.
 - Doc check verifies links and the key competition-format facts.
 - `npm run build` is the end-to-end static build check.
+- `scripts/check_web_copy.py` runs after the build and enforces the fan-facing
+  word/badge budgets, one H1 per page, table captions/scopes and named scroll
+  regions.

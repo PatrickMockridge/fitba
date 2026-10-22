@@ -1,110 +1,74 @@
 import Link from "next/link";
-import { ConfidenceBadge } from "@/components/ConfidenceBadge";
+import { MetricStrip } from "@/components/MetricStrip";
+import { ThemeMetrics } from "@/components/ThemeMetrics";
+import { plainText } from "@/lib/format";
 import type { ThemeBlock } from "@/lib/data";
-
-function horizonLabel(theme: ThemeBlock) {
-  return theme.horizon === "mission" ? "Cormack-era mission" : "Current season";
-}
-
-function readLabel(theme: ThemeBlock) {
-  return theme.read_basis === "curated" ? "Curated read" : "Inferred read";
-}
 
 function anchor(theme: ThemeBlock) {
   return theme.theme_id.replaceAll("_", "-");
 }
 
-export function ThemeCard({
-  theme,
-  compact = false,
-}: {
-  theme: ThemeBlock;
-  compact?: boolean;
-}) {
-  const mission = theme.horizon === "mission";
+export function ThemeCard({ theme }: { theme: ThemeBlock }) {
+  const evidence = theme.evidence.slice(0, 3);
+  const implication = theme.implications?.[0];
+
   return (
-    <article
-      className={`theme-card${compact ? " is-compact" : ""}${mission ? " is-mission" : ""}`}
-      id={anchor(theme)}
-    >
-      <div className="theme-card-head">
-        <div>
-          <p className="eyebrow">{horizonLabel(theme)}</p>
-          <h3>{theme.title}</h3>
-        </div>
-        <div className="badge-row">
-          {theme.status !== "available" ? (
-            <span className="badge badge-warn">{theme.status}</span>
-          ) : null}
-          <ConfidenceBadge confidence={theme.confidence} compact />
-        </div>
-      </div>
+    <article className="theme-card" id={anchor(theme)}>
+      <h3>{theme.title}</h3>
+      <p className="theme-headline">{plainText(theme.headline ?? theme.title)}</p>
 
-      <p className="theme-question">{theme.fan_question}</p>
-      <h4 className="theme-headline">{theme.headline ?? theme.title}</h4>
+      {evidence.length ? (
+        <MetricStrip
+          columns={3}
+          items={evidence.map((item) => ({
+            label: plainText(item.label),
+            value:
+              item.value === null || item.value === undefined ? "—" : String(item.value),
+            note: item.note ? plainText(item.note) : undefined,
+          }))}
+        />
+      ) : null}
 
-      {theme.read ? (
-        <p className="theme-read">
-          <span className={`basis-badge basis-${theme.read_basis}`}>
-            The read · {readLabel(theme)}
-          </span>{" "}
-          {theme.read}
+      {implication ? (
+        <p className="theme-implication">
+          <Link className="text-link" href={implication.href}>
+            {implication.line}
+          </Link>
         </p>
       ) : null}
 
-      {theme.status !== "available" && theme.reason ? (
-        <p className="fine-print">Unavailable: {theme.reason.replaceAll("_", " ")}.</p>
-      ) : null}
-
-      <div className="evidence-chips">
-        {theme.evidence.slice(0, compact ? 3 : 5).map((item) => (
-          <span className="evidence-chip" key={`${item.label}-${item.value}`}>
-            <span className="evidence-label">{item.label}</span>
-            <span className="evidence-value">
-              {item.value === null || item.value === undefined ? "—" : String(item.value)}
-            </span>
-            {item.note ? <span className="evidence-note">{item.note}</span> : null}
-          </span>
-        ))}
-      </div>
-
-      {theme.implications?.length ? (
-        <div className="theme-implications">
-          <p className="eyebrow">Transfer implication</p>
-          {theme.implications.map((implication) => (
-            <p key={`${implication.family}-${implication.category}`}>
-              <Link className="text-link" href={implication.href}>
-                {implication.line}
-              </Link>
-            </p>
-          ))}
-        </div>
-      ) : null}
-
-      <div className="theme-links">
-        {theme.links.map((link) => (
-          <Link className="text-link" href={link.href} key={link.href}>
-            {link.label} →
-          </Link>
-        ))}
-        {compact ? (
-          <Link className="text-link" href={`/themes/#${anchor(theme)}`}>
-            Full evidence →
-          </Link>
-        ) : null}
-      </div>
-
-      {!compact && theme.caveats.length ? (
-        <details className="theme-details">
-          <summary>Caveats and method</summary>
-          <ul className="plain-list">
-            {theme.caveats.map((caveat) => (
-              <li key={caveat}>{caveat}</li>
+      <details className="page-legend theme-evidence">
+        <summary>Evidence and method</summary>
+        <div className="page-legend-body">
+          {theme.read ? <p>{plainText(theme.read)}</p> : null}
+          <ul>
+            {theme.evidence.map((item) => (
+              <li key={`${item.label}-${item.value}`}>
+                <strong>{item.label}:</strong> {String(item.value ?? "—")}
+                {item.note ? ` — ${item.note}` : ""}
+              </li>
             ))}
           </ul>
-          {theme.method ? <p className="fine-print">{theme.method}</p> : null}
-        </details>
-      ) : null}
+          {theme.caveats.length ? (
+            <ul>
+              {theme.caveats.map((caveat) => (
+                <li key={caveat}>{caveat}</li>
+              ))}
+            </ul>
+          ) : null}
+          {theme.method ? <p>{theme.method}</p> : null}
+          <ThemeMetrics theme={theme} />
+          <p>
+            {theme.links.map((link) => (
+              <span key={link.href}>
+                <Link className="text-link" href={link.href}>
+                  {link.label} →
+                </Link>{" "}
+              </span>
+            ))}
+          </p>
+        </div>
+      </details>
     </article>
   );
 }
