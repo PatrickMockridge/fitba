@@ -19,7 +19,6 @@ DOCS = ROOT / "docs"
 REQUIRED = [
     "README.md",
     "identity.md",
-    "brand.md",
     "page-contracts.md",
     "identity-review-2026-10.md",
     "product-strategy.md",
@@ -147,7 +146,7 @@ def check_identity() -> list[str]:
         errors.append("docs/identity.md is missing the identity line")
     if "## Non-negotiables" not in text:
         errors.append("docs/identity.md is missing the Non-negotiables section")
-    for target in ("brand.md", "page-contracts.md", "product-strategy.md", "history.md"):
+    for target in ("page-contracts.md", "product-strategy.md", "history.md"):
         if f"]({target})" not in text:
             errors.append(f"docs/identity.md does not link {target}")
     if "web/contracts/surfaces.json" not in contracts.read_text(encoding="utf-8"):

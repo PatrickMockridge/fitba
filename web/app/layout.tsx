@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { FreshnessBadge } from "@/components/FreshnessBadge";
-import { GullMark } from "@/components/GullMark";
 import { getManifest } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -44,10 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <strong>fitba</strong> · Aberdeen FC, without the noise. An independent,
               non-commercial research project. Not affiliated with Aberdeen FC, the
               SPFL, the SFA or any data provider.
-              <div className="footer-place">
-                <GullMark />
-                <span>Aberdeen · North Sea · 1903</span>
-              </div>
             </div>
             <div className="footer-meta">
               <FreshnessBadge manifest={manifest} />

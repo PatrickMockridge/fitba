@@ -133,10 +133,6 @@ corrections are binding on published copy:
   source registry, migration gate, excluded sources, and the method sections
   from definitions through policy. The provenance pages can no longer be
   emptied by a style pass.
-- The brand system is documented in [brand.md](brand.md) and applied to the
-  shell, home hero, About city card and history header: granite paper, the
-  North Sea/aurora horizon, the gull mark, the place line and 1903. Data pages
-  keep their contracts.
 
 ## Guardrail design
 
@@ -205,7 +201,7 @@ corrections are binding on published copy:
 ## Verification
 
 - Root build and `/fitba` build both pass.
-- `uv run python scripts/check_web_contract.py --ci` reports 11 surfaces and 112
+- `uv run python scripts/check_web_contract.py --ci` reports 11 surfaces and 111
   contracted markers; the base-path check reports the same.
 - The full Python suite passes: 233 tests, including the 30 checker/contract
   tests, plus all publication guards (`make check`).

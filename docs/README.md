@@ -7,7 +7,6 @@ scope, and the methodology and sources when you need to check a number.
 | Document | Read it for |
 |---|---|
 | [Identity](identity.md) | The public line, reader, editorial stance, voice rules, non-negotiables and the Cormack-era analytical frame. Canonical for identity and voice. |
-| [Brand](brand.md) | Granite & North Sea: the palette, typography, motifs, voice, place line and brand guardrails. Canonical for the visual and verbal style. |
 | [Page contracts](page-contracts.md) | The evidence each contracted route must keep visible, the marker convention and the contract-change process. Normative for the UI. |
 | [Identity review, October 2026](identity-review-2026-10.md) | The seven-lens panel record: identity decisions, corrections to the brief, the red-team matrix and the deferred follow-ups. |
 | [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |

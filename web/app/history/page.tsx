@@ -125,7 +125,6 @@ export default function HistoryPage() {
     <ContractPage surface="history">
       <section className="page-head" data-contract="history.hero">
         <p className="eyebrow">The record · from 16 December 2019</p>
-        <p className="place-line">Aberdeen · North Sea · 1903</p>
         <h1>{history.era.label}</h1>
         <p className="lede">
           A record of Aberdeen&apos;s strategy as well as its results:
