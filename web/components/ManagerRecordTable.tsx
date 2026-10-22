@@ -16,16 +16,29 @@ export function ManagerRecordTable({
   return (
     <div className="table-wrap">
       <table className="league-table compact">
+        <caption className="fine-print">
+          Manager league records with interim spells kept separate.
+        </caption>
         <thead>
           <tr>
-            <th>Manager</th>
-            <th>Dates</th>
-            <th className="num">Pld</th>
-            <th>W-D-L</th>
-            <th className="num">GF</th>
-            <th className="num">GA</th>
-            <th className="num">Pts</th>
-            <th className="num">PPG</th>
+            <th scope="col">Manager</th>
+            <th scope="col">Dates</th>
+            <th scope="col" className="num">
+              Pld
+            </th>
+            <th scope="col">W-D-L</th>
+            <th scope="col" className="num">
+              GF
+            </th>
+            <th scope="col" className="num">
+              GA
+            </th>
+            <th scope="col" className="num">
+              Pts
+            </th>
+            <th scope="col" className="num">
+              PPG
+            </th>
           </tr>
         </thead>
         <tbody>

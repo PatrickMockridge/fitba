@@ -11,10 +11,22 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ tier: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tier: string }>;
+}) {
   const { tier } = await params;
   const table = getTable(tier);
-  return { title: table ? `${table.competition_name} · fitba` : "Not found · fitba" };
+  const name = table?.rows[0]?.competition_name ?? "Scottish league";
+  const title = `${name} table · fitba`;
+  const description = `The computed ${name} table with points deductions, cutoffs and form.`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/scotland/${tier}/` },
+    openGraph: { title, description, type: "website" },
+  };
 }
 
 export default async function TierPage({ params }: { params: Promise<{ tier: string }> }) {

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { CupRound } from "@/components/CupRound";
 import { formatDate, getScottishCup } from "@/lib/data";
 
-export const metadata = { title: "Scottish Cup · fitba" };
+export const metadata = {
+  alternates: { canonical: "/competitions/scottish-cup/" }, title: "Scottish Cup · fitba" };
 
 export default function ScottishCupPage() {
   const cup = getScottishCup();

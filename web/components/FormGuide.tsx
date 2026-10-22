@@ -14,6 +14,7 @@ function SplitTable({ block }: { block: FormBlock }) {
   return (
     <div className="table-wrap">
       <table className="league-table compact split-table">
+<caption className="fine-print">Form guide: last five and venue splits.</caption>
         <thead>
           <tr>
             <th>Split</th>

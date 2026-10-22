@@ -14,7 +14,7 @@ off it, and the chairman's stated vision and record. It is not a dashboard, a
 data-science appendix or a verdict machine.
 
 The page opens with the chairman's frame, summarised from the public record,
-then the owner's view, attributed as opinion. Six claims follow. Each claim
+then the site owner's view, attributed as opinion. Six claims follow. Each claim
 gives the count, the status, the evidence, what better data would settle and
 what would change the view. Method and definitions live in long-form supporting
 content, not before the argument.

@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2019-09-25",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 288887,
     "home_goals": 4,
@@ -49,7 +50,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -438,30 +439,32 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "The event feed records 4 goals; the final score is 4-4. The score is authoritative."
+        "text": "S. Cosgrove scored a penalty on 12 minutes, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "S. Cosgrove scored a penalty on 12 minutes."
+        "text": "S. MacLean scored on 22 minutes, assisted by L. Damour, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "S. MacLean made it 1-1 on 22 minutes."
+        "text": "S. Cosgrove scored a penalty on 31 minutes, making it 1-2."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 92 minutes, making it 2-2."
+        "text": "C. Halkett scored on 90+2 minutes, assisted by J. Mulraney, making it 2-2."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "The event feed records 4 goals but does not reconcile with the final score 4-4; only recorded goals are listed."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Heart of Midlothian and Aberdeen draw 4-4",
+    "events_available": true,
+    "goals_complete": false,
+    "headline": "Heart of Midlothian beat Aberdeen 3-0 on penalties after a 4-4 draw",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 4,
@@ -786,6 +789,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

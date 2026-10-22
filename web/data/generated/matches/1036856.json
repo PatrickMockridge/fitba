@@ -1,6 +1,6 @@
 {
   "coverage": {
-    "depth": "score",
+    "depth": "partial",
     "events": true,
     "lineups": false,
     "note": "Missing classes are unavailable, not zero.",
@@ -8,7 +8,7 @@
     "team_stats": false,
     "xg": false
   },
-  "depth": "score",
+  "depth": "partial",
   "fixture": {
     "aberdeen_result": "L",
     "away_goals": 0,
@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:other:friendlies-clubs",
-    "competition_name": "Friendlies Clubs",
+    "competition_name": "Club friendlies",
     "date": "2023-07-22",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1036856,
     "home_goals": 2,
@@ -68,7 +69,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": null,
     "home": null
@@ -161,13 +162,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "M. Frokjaer opened the scoring on 7 minutes."
+        "text": "M. Frokjaer opened the scoring on 7 minutes, making it 1-0."
+      },
+      {
+        "basis": "measured",
+        "text": "M. Frokjaer scored on 18 minutes, making it 2-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Preston beat Aberdeen 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -243,6 +250,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

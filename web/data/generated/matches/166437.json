@@ -17,8 +17,9 @@
     "away_team_id": "sco:rangers",
     "away_team_name": "Rangers",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2019-12-04",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166437,
     "home_goals": 2,
@@ -131,7 +132,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Gerrard",
@@ -568,11 +569,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "S. Arfield opened the scoring on 18 minutes, assisted by J. Tavernier."
+        "text": "S. Arfield opened the scoring on 18 minutes, assisted by J. Tavernier, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "A. Considine made it 2-2 on 48 minutes."
+        "text": "R. Jack scored on 30 minutes, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "J. Gallagher scored on 39 minutes, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "A. Considine scored on 48 minutes, making it 2-2."
       },
       {
         "basis": "measured",
@@ -587,6 +596,8 @@
         "text": "fxG: Aberdeen 1.634 (0.0-3.753), Rangers 2.615 (0.0-5.295)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen and Rangers draw 2-2",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -912,6 +923,10 @@
       "provider": null,
       "value": 2.615
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 3.753,
       "low": 0.0,

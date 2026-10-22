@@ -13,6 +13,9 @@ from datetime import date
 from statistics import mean
 from typing import Any
 
+from fitba.normalize.players import canonical_player_id, canonicalize_row
+from fitba.normalize.scope import COMPETITIVE, filter_scope
+
 
 def _date(value: Any) -> date | None:
     if value in (None, ""):
@@ -55,9 +58,11 @@ def selection_profile(
     previous_player_ids: set[int] | None = None,
     min_lineup_coverage: float = 0.6,
     min_age_coverage: float = 0.5,
+    scope: str = COMPETITIVE,
 ) -> dict[str, Any]:
     """Aggregate formation, age, minutes and debut metrics for a season."""
-    rows = [row for row in appearances if str(row.get("season")) == str(season)]
+    rows = [canonicalize_row(row) for row in appearances if str(row.get("season")) == str(season)]
+    rows = filter_scope(rows, scope)
     if not rows:
         return {
             "status": "unavailable",
@@ -125,14 +130,17 @@ def selection_profile(
                 player_id = row.get("player_id")
                 if player_id is None:
                     continue
-                if int(player_id) not in previous_player_ids and not any(
+                canonical_id = canonical_player_id(player_id)
+                if canonical_id is None:
+                    continue
+                if canonical_id not in previous_player_ids and not any(
                     int(item["player_id"]) == int(player_id) for item in debutants
                 ):
                     debutants.append(
                         {
-                            "player_id": int(player_id),
+                            "player_id": canonical_id,
                             "player_name": row.get("player_name")
-                            or (rosters.get(int(player_id)) or {}).get("player_name"),
+                            or (rosters.get(canonical_id) or {}).get("player_name"),
                             "date": row.get("date"),
                         }
                     )
@@ -147,6 +155,7 @@ def selection_profile(
         status = "partial"
     return {
         "status": status,
+        "scope": scope,
         "fixtures_total": fixtures_total,
         "fixtures_with_lineups": fixtures_with_lineups,
         "lineup_coverage": lineup_coverage,

@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2019-08-15",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 368926,
     "home_goals": 0,
@@ -44,7 +45,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369111/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "H"
       },
       {
@@ -53,7 +54,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369112/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "A"
       },
       {
@@ -85,7 +86,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "I. Bišćan",
@@ -408,7 +409,7 @@
       "is_aberdeen": true,
       "red_cards": [
         {
-          "card_type": "straight_red",
+          "card_type": "second_yellow",
           "detail": "Red Card",
           "extra_minute": null,
           "minute": 20,
@@ -452,17 +453,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "S. Lončar opened the scoring on 10 minutes."
+        "text": "S. Lončar opened the scoring on 10 minutes, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "Funso Ojo was sent off on 20 minutes."
+        "text": "A. Čolak scored on 32 minutes, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "Funso Ojo was sent off for a second yellow card on 20 minutes."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Ten-man HNK Rijeka beat Aberdeen 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -557,7 +564,7 @@
     {
       "assist_name": null,
       "beneficiary_side": null,
-      "card_type": "straight_red",
+      "card_type": "second_yellow",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
@@ -567,7 +574,7 @@
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
-      "is_second_yellow": false,
+      "is_second_yellow": true,
       "is_shootout": false,
       "is_var": false,
       "minute": 20,
@@ -863,6 +870,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

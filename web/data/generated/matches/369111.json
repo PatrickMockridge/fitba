@@ -15,10 +15,11 @@
     "away_ht_goals": 0,
     "away_penalties": null,
     "away_team_id": "other:rops",
-    "away_team_name": "Rops",
+    "away_team_name": "RoPS",
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2019-07-11",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 369111,
     "home_goals": 2,
@@ -43,7 +44,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369112/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "A"
       },
       {
@@ -85,7 +86,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "P. Tuutti",
@@ -209,7 +210,7 @@
         }
       ],
       "team_id": "other:rops",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     "home": {
       "coach_name": "D. McInnes",
@@ -369,14 +370,14 @@
             "home": 2
           },
           "side": "away",
-          "team_name": "Rops"
+          "team_name": "RoPS"
         }
       ],
       "is_aberdeen": false,
       "red_cards": [],
       "side": "away",
       "team_id": "other:rops",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     "events_available": true,
     "goals_complete": true,
@@ -448,18 +449,24 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "N. McGinn opened the scoring on 36 minutes."
+        "text": "N. McGinn opened the scoring on 36 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 93 minutes, making it 2-1."
+        "text": "S. Cosgrove scored on 48 minutes, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "T. Jäntti scored on 90+3 minutes, making it 2-1."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen beat Rops 2-1",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat RoPS 2-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 3,
@@ -498,7 +505,7 @@
         "home": 0
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": null,
@@ -523,7 +530,7 @@
         "home": 0
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": null,
@@ -623,7 +630,7 @@
         "home": 2
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "D. Campbell",
@@ -673,7 +680,7 @@
         "home": 2
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": null,
@@ -698,7 +705,7 @@
         "home": 2
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "C. McLennan",
@@ -748,7 +755,7 @@
         "home": 2
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "J. Wilson",
@@ -798,7 +805,7 @@
         "home": 2
       },
       "side": "away",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     }
   ],
   "xg": {
@@ -809,6 +816,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

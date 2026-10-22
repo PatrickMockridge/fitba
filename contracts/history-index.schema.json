@@ -54,6 +54,24 @@
       "title": "Seasons",
       "type": "array"
     },
+    "heavy_defeats": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Heavy Defeats",
+      "type": "array"
+    },
+    "europe": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Europe",
+      "type": "array"
+    },
     "sources": {
       "items": {
         "additionalProperties": true,

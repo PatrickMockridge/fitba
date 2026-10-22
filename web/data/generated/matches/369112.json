@@ -19,13 +19,14 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2019-07-18",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 369112,
     "home_goals": 1,
     "home_ht_goals": 1,
     "home_penalties": null,
     "home_team_id": "other:rops",
-    "home_team_name": "Rops",
+    "home_team_name": "RoPS",
     "href": "/matches/369112/",
     "referee": "Ü. Öztürk",
     "result": "L",
@@ -81,12 +82,12 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369111/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "H"
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -335,7 +336,7 @@
         }
       ],
       "team_id": "other:rops",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     }
   },
   "links": {
@@ -401,14 +402,14 @@
             "home": 1
           },
           "side": "home",
-          "team_name": "Rops"
+          "team_name": "RoPS"
         }
       ],
       "is_aberdeen": false,
       "red_cards": [],
       "side": "home",
       "team_id": "other:rops",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
@@ -544,38 +545,36 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "T. Kada opened the scoring on 2 minutes."
+        "text": "T. Kada opened the scoring on 2 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "S. Cosgrove made it 1-1 on 26 minutes."
+        "text": "S. Cosgrove scored a penalty on 26 minutes, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 94 minutes, making it 1-2."
+        "text": "L. Ferguson scored on 90+4 minutes, making it 1-2."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "Shots: RoPS 6, Aberdeen 12."
       },
       {
         "basis": "measured",
-        "text": "Shots: Rops 6, Aberdeen 12."
+        "text": "Shots on target: RoPS 2, Aberdeen 5."
       },
       {
         "basis": "measured",
-        "text": "Shots on target: Rops 2, Aberdeen 5."
-      },
-      {
-        "basis": "measured",
-        "text": "Possession: Rops 51.0%, Aberdeen 49.0%."
+        "text": "Possession: RoPS 51.0%, Aberdeen 49.0%."
       },
       {
         "basis": "inferred",
-        "text": "fxG: Rops 0.656 (0.0-1.999), Aberdeen 1.641 (0.0-3.764)."
+        "text": "fxG: RoPS 0.656 (0.0-1.999), Aberdeen 1.641 (0.0-3.764)."
       }
     ],
-    "headline": "Aberdeen win it late against Rops",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen win it late against RoPS",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 3,
@@ -614,7 +613,7 @@
         "home": 1
       },
       "side": "home",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": null,
@@ -664,7 +663,7 @@
         "home": 1
       },
       "side": "home",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "N. Jokelainen",
@@ -689,7 +688,7 @@
         "home": 1
       },
       "side": "home",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "C. Main",
@@ -739,7 +738,7 @@
         "home": 1
       },
       "side": "home",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": null,
@@ -789,7 +788,7 @@
         "home": 1
       },
       "side": "home",
-      "team_name": "Rops"
+      "team_name": "RoPS"
     },
     {
       "assist_name": "S. Wright",
@@ -875,6 +874,10 @@
       "provider": null,
       "value": 1.641
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 1.999,
       "low": 0.0,

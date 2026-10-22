@@ -56,6 +56,11 @@ thresholds). The payload therefore labels the model descriptive and the
 fxG is not used as a performance verdict. This is a finding, not a
 reason to loosen the gate.
 
+The evaluation reports `matches` as distinct match keys and `team_rows` as the
+two side-level observations per match. Every fixture page carries the gate status
+and a link to the model page, so a failed gate is visible where the number is
+used, not only on `/analysis/xg/`.
+
 ## Coverage
 
 - League shots and shots on target: football-data.co.uk for every league match.

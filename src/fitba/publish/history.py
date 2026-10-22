@@ -36,6 +36,9 @@ from fitba.ingest.history import (
 )
 from fitba.ingest.runner import load_matches
 from fitba.ingest.transfers import published_transfers
+from fitba.normalize.competitions import canonical_name
+from fitba.normalize.players import canonical_player_id
+from fitba.normalize.scope import is_competitive_row
 from fitba.settings import (
     aberdeen as aberdeen_config,
 )
@@ -85,6 +88,8 @@ class HistoryIndexDocument(StrictModel):
     staff: list[dict[str, Any]]
     honours: list[dict[str, Any]]
     seasons: list[dict[str, Any]]
+    heavy_defeats: list[dict[str, Any]] = []
+    europe: list[dict[str, Any]] = []
     sources: list[dict[str, Any]]
     notes: str
 
@@ -221,11 +226,13 @@ def _selection_profiles(
             if rosters is not None and rosters.height
             else {}
         )
-        total = (
-            fixtures.filter(pl.col("status").is_in(["FT", "AET", "PEN"])).height
-            if fixtures is not None and fixtures.height
-            else focus["fixture_id"].n_unique()
-        )
+        if fixtures is not None and fixtures.height:
+            played_rows = fixtures.filter(pl.col("status").is_in(["FT", "AET", "PEN"])).to_dicts()
+            total = sum(1 for row in played_rows if is_competitive_row(row))
+        else:
+            total = len(
+                {row.get("fixture_id") for row in focus.to_dicts() if is_competitive_row(row)}
+            )
         profile = selection_profile(
             focus.to_dicts(),
             season=season,
@@ -236,7 +243,11 @@ def _selection_profiles(
             min_age_coverage=min_age,
         )
         output[season] = profile
-        cumulative.update(int(player_id) for player_id in focus["player_id"].unique().to_list())
+        cumulative.update(
+            canonical_id
+            for player_id in focus["player_id"].unique().to_list()
+            if (canonical_id := canonical_player_id(player_id)) is not None
+        )
     return output
 
 
@@ -331,6 +342,71 @@ def _selection_era(profiles: dict[str, dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _heavy_defeats(
+    history_data: dict[str, Any],
+    seasons: list[str],
+    *,
+    threshold: int = 4,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    seen: set[int] = set()
+    for season in seasons:
+        frame = ((history_data.get("seasons") or {}).get(season) or {}).get("fixtures")
+        if frame is None or not getattr(frame, "height", 0):
+            continue
+        for row in frame.to_dicts():
+            fixture_id = row.get("fixture_id")
+            home = str(row.get("home_team_name") or "")
+            away = str(row.get("away_team_name") or "")
+            home_goals = row.get("home_goals")
+            away_goals = row.get("away_goals")
+            if home_goals is None or away_goals is None:
+                continue
+            if home == "Aberdeen":
+                goals_for, goals_against, opponent = home_goals, away_goals, away
+            elif away == "Aberdeen":
+                goals_for, goals_against, opponent = away_goals, home_goals, home
+            else:
+                continue
+            if int(goals_for) - int(goals_against) > -threshold:
+                continue
+            if fixture_id is not None:
+                if int(fixture_id) in seen:
+                    continue
+                seen.add(int(fixture_id))
+            rows.append(
+                {
+                    "season": season,
+                    "date": str(row.get("date") or "")[:10],
+                    "competition_name": row.get("competition_name"),
+                    "opponent": opponent,
+                    "goals_for": int(goals_for),
+                    "goals_against": int(goals_against),
+                    "fixture_id": fixture_id,
+                    "href": f"/matches/{fixture_id}/" if fixture_id is not None else None,
+                }
+            )
+    return sorted(rows, key=lambda item: str(item.get("date") or ""), reverse=True)
+
+
+def _europe_rows(season_docs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for doc in season_docs:
+        season = str(doc.get("season") or "")
+        for item in doc.get("europe") or []:
+            rows.append(
+                {
+                    "season": season,
+                    "competition_name": item.get("competition_name")
+                    or canonical_name(str(item.get("competition_id") or "")),
+                    "exit_round": item.get("stage_reached") or item.get("exit_round"),
+                    "outcome": item.get("outcome"),
+                    "note": item.get("note"),
+                }
+            )
+    return rows
+
+
 def build_history_payloads(
     *,
     generated_at: str,
@@ -422,6 +498,8 @@ def build_history_payloads(
         style=era_style,
     )
     staff = _staff_payload(manager_records)
+    heavy_defeats = _heavy_defeats(history_data, seasons)
+    europe_rows = _europe_rows(season_docs)
 
     source_urls: list[str] = []
     source_urls.extend(era_doc.get("source_urls") or [])
@@ -510,6 +588,8 @@ def build_history_payloads(
             }
             for doc in season_docs
         ],
+        heavy_defeats=heavy_defeats,
+        europe=europe_rows,
         sources=sources,
         notes=(
             "The Cormack era begins on 16 December 2019. 2019-20 is a transition "

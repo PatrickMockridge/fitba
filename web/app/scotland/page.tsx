@@ -2,7 +2,8 @@ import Link from "next/link";
 import { LeagueTable } from "@/components/LeagueTable";
 import { getManifest, getTableFiles } from "@/lib/data";
 
-export const metadata = { title: "The Scottish pyramid · fitba" };
+export const metadata = {
+  alternates: { canonical: "/scotland/" }, title: "The Scottish pyramid · fitba" };
 
 export default function ScotlandPage() {
   const tables = getTableFiles();

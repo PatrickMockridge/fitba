@@ -5,7 +5,8 @@ import { RumourCard } from "@/components/RumourCard";
 import { XTimeline } from "@/components/XTimeline";
 import { getAberdeen, getForumSignal, getManifest, getRumours } from "@/lib/data";
 
-export const metadata = { title: "Aberdeen news & rumours · fitba" };
+export const metadata = {
+  alternates: { canonical: "/news/" }, title: "Aberdeen news & rumours · fitba" };
 
 export default function NewsPage() {
   const aberdeen = getAberdeen();

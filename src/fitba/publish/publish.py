@@ -1406,6 +1406,7 @@ def publish(
         fixture_payloads = build_fixture_payloads(
             generated_at=generated_at,
             xg_payload=xg_payload,
+            player_index=player_index,
         )
     except Exception as error:  # noqa: BLE001 - a broken fixture build is visible, not hidden
         fixture_payloads = {
@@ -1418,7 +1419,8 @@ def publish(
             "stale_reason": f"fixture_build_failed:{type(error).__name__}",
         }
     previous_fixtures = _previous_fixture_payloads(target)
-    if previous_fixtures and fixture_payloads.get("count", 0) < previous_fixtures["count"]:
+    new_page_count = fixture_payloads.get("count", 0) + len(fixture_payloads.get("aliases", []))
+    if previous_fixtures and new_page_count < previous_fixtures["count"]:
         previous_fixtures["stale_reason"] = (
             f"new fixture build returned {fixture_payloads.get('count', 0)} pages; "
             f"kept {previous_fixtures['count']}"
@@ -1429,6 +1431,7 @@ def publish(
         "generated_at": fixture_payloads.get("generated_at"),
         "count": fixture_payloads.get("count", 0),
         "fixtures": fixture_payloads.get("fixtures", []),
+        "aliases": fixture_payloads.get("aliases", []),
     }
     if fixture_payloads.get("state"):
         fixture_index["state"] = fixture_payloads["state"]
@@ -1451,10 +1454,10 @@ def publish(
         {
             "id": "matches.sco:aberdeen",
             "path": "matches/",
-            "rows": len(fixture_payloads.get("documents", {})),
+            "rows": fixture_payloads.get("count", 0),
             "checksum": None,
             "season": target_season,
-            "row_basis": "one file per played fixture",
+            "row_basis": "one canonical file per played fixture; duplicate aliases separate",
         }
     )
 

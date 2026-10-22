@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2023-08-24",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1119758,
     "home_goals": 2,
@@ -49,7 +50,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -425,7 +426,7 @@
       "is_aberdeen": false,
       "red_cards": [
         {
-          "card_type": "straight_red",
+          "card_type": "second_yellow",
           "detail": "Red Card",
           "extra_minute": null,
           "minute": 90,
@@ -582,19 +583,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "A. Layouni opened the scoring on 36 minutes, assisted by I. Sadiq."
+        "text": "A. Layouni opened the scoring on 36 minutes, assisted by I. Sadiq, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "N. Devlin made it 2-2 on 79 minutes."
+        "text": "I. Sadiq scored a penalty on 69 minutes, making it 2-0."
       },
       {
         "basis": "measured",
-        "text": "Johan Hammar was sent off on 90 minutes."
+        "text": "B. Miovski scored on 75 minutes, assisted by L. Clarkson, making it 2-1."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "N. Devlin scored on 79 minutes, assisted by B. Miovski, making it 2-2."
+      },
+      {
+        "basis": "measured",
+        "text": "Johan Hammar was sent off for a second yellow card on 90 minutes."
       },
       {
         "basis": "measured",
@@ -613,6 +618,8 @@
         "text": "fxG: BK Hacken 2.297 (0.0-4.809), Aberdeen 1.641 (0.0-3.764)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "BK Hacken and Aberdeen draw 2-2",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -1005,31 +1012,6 @@
       "team_name": "BK Hacken"
     },
     {
-      "assist_name": "F. Tebo Uchenna",
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Substitution 5",
-      "event_type": "subst",
-      "extra_minute": 1,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 90,
-      "player_name": "A. Layouni",
-      "score_after": {
-        "away": 2,
-        "home": 2
-      },
-      "side": "home",
-      "team_name": "BK Hacken"
-    },
-    {
       "assist_name": null,
       "beneficiary_side": null,
       "card_type": null,
@@ -1057,7 +1039,7 @@
     {
       "assist_name": null,
       "beneficiary_side": null,
-      "card_type": "straight_red",
+      "card_type": "second_yellow",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
@@ -1067,11 +1049,36 @@
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
-      "is_second_yellow": false,
+      "is_second_yellow": true,
       "is_shootout": false,
       "is_var": false,
       "minute": 90,
       "player_name": "Johan Hammar",
+      "score_after": {
+        "away": 2,
+        "home": 2
+      },
+      "side": "home",
+      "team_name": "BK Hacken"
+    },
+    {
+      "assist_name": "F. Tebo Uchenna",
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Substitution 5",
+      "event_type": "subst",
+      "extra_minute": 1,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 90,
+      "player_name": "A. Layouni",
       "score_after": {
         "away": 2,
         "home": 2
@@ -1088,6 +1095,10 @@
       "provider": null,
       "value": 1.641
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 4.809,
       "low": 0.0,

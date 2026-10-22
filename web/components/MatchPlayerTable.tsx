@@ -1,3 +1,4 @@
+import { PlayerLink } from "@/components/PlayerLink";
 import type { FixtureDocument } from "@/lib/data";
 
 function n(value: number | null | undefined): string {
@@ -75,7 +76,12 @@ export function MatchPlayerTable({
                         : "unknown"
                   }
                 >
-                  <td>{player.player_name ?? "Unknown"}</td>
+                  <td>
+                    <PlayerLink
+                      name={player.player_name ?? "Unknown"}
+                      href={player.href}
+                    />
+                  </td>
                   <td>{player.team_name ?? "Team unknown"}</td>
                   <td className="num">{n(player.rating)}</td>
                   <td className="num">{n(player.minutes)}</td>

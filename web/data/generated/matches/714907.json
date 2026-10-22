@@ -17,8 +17,9 @@
     "away_team_id": "other:bk-hacken",
     "away_team_name": "BK Hacken",
     "competition_id": "uefa:conference-league",
-    "competition_name": "UEFA Europa Conference League",
+    "competition_name": "UEFA Conference League",
     "date": "2021-07-22",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 714907,
     "home_goals": 5,
@@ -85,7 +86,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "P. Høgmo",
@@ -515,22 +516,36 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "A. Considine opened the scoring on 28 minutes."
+        "text": "A. Considine opened the scoring on 28 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 93 minutes, making it 5-1."
+        "text": "L. Ferguson scored a penalty on 44 minutes, making it 2-0."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "L. Ferguson scored on 53 minutes, making it 3-0."
+      },
+      {
+        "basis": "measured",
+        "text": "A. Jeremejeff scored on 59 minutes, making it 3-1."
+      },
+      {
+        "basis": "measured",
+        "text": "C. Ramírez scored on 83 minutes, making it 4-1."
+      },
+      {
+        "basis": "measured",
+        "text": "C. McLennan scored on 90+3 minutes, making it 5-1."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against BK Hacken",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat BK Hacken 5-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 6,
@@ -955,6 +970,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

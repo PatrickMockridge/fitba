@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { formatDate, getCompetitionIndex } from "@/lib/data";
 
-export const metadata = { title: "Competitions · fitba" };
+export const metadata = {
+  alternates: { canonical: "/competitions/" }, title: "Competitions · fitba" };
 
 export default function CompetitionsPage() {
   const index = getCompetitionIndex();

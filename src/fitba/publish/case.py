@@ -911,7 +911,7 @@ def build_case_payload(
     )
     case_config = policy.get("case") or {}
     owner_view = OwnerView(
-        label=str(case_config.get("owner_label") or "The owner's view"),
+        label=str(case_config.get("owner_label") or "The site owner's view"),
         text=str(case_config.get("owner_view") or ""),
         attribution=str(case_config.get("owner_attribution") or "Patrick Mockridge"),
     )
@@ -940,7 +940,7 @@ def build_case_payload(
         coverage=coverage,
         sources=[CaseSource(**item) for item in _source_ids()],
         notes=(
-            "The owner's view is attributed opinion. Statuses are the record's "
+            "The site owner's view is attributed opinion. Statuses are the record's "
             "answer: supported, mixed, not supported or can't test yet."
         ),
     ).model_dump()
@@ -1045,7 +1045,7 @@ def fallback_case_payload(
         served_generated_at=generated_at,
         title="Data analysis",
         owner_view=OwnerView(
-            label=str(case_config.get("owner_label") or "The owner's view"),
+            label=str(case_config.get("owner_label") or "The site owner's view"),
             text=str(case_config.get("owner_view") or ""),
             attribution=str(case_config.get("owner_attribution") or "Patrick Mockridge"),
         ),

@@ -28,8 +28,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { playerId } = await params;
   const page = getPlayerPage(playerId);
+  const name = page?.identity.full_name || page?.identity.name;
+  const title = name ? `${name} · fitba` : "Player profile · fitba";
+  const description = name
+    ? `${name}: role evidence, competitive minutes, current-season output and availability.`
+    : "Aberdeen player profile.";
   return {
-    title: page ? `${page.identity.full_name || page.identity.name} · fitba` : "Player profile · fitba",
+    title,
+    description,
+    alternates: { canonical: `/players/${playerId}/` },
+    openGraph: { title, description, type: "profile" },
+    twitter: { card: "summary", title, description },
   };
 }
 
@@ -88,6 +97,7 @@ function PerformanceTable({
   return (
     <div className="table-wrap">
       <table className="league-table compact">
+<caption className="fine-print">Player record: competition, role or defensive context.</caption>
         <thead>
           <tr>
             {columns.map((column) => (
@@ -128,6 +138,7 @@ function PlayingTimeView({ data }: { data: NonNullable<PlayerPageDocument["panel
       </div>
       <div className="table-wrap">
         <table className="league-table compact">
+<caption className="fine-print">Player record: competition, role or defensive context.</caption>
           <thead>
             <tr>
               <th>Competition</th>
@@ -174,6 +185,7 @@ function PerformanceView({ data }: { data: PerformancePanel }) {
 
       <div className="table-wrap">
         <table className="league-table compact">
+<caption className="fine-print">Player record: competition, role or defensive context.</caption>
           <thead>
             <tr>
               {data.provider_columns.map((column) => (
@@ -218,6 +230,7 @@ function PerformanceView({ data }: { data: PerformancePanel }) {
           <p className="table-caption">Defensive context</p>
           <div className="table-wrap">
             <table className="league-table compact">
+<caption className="fine-print">Player record: competition, role or defensive context.</caption>
               <thead>
                 <tr>
                   <th>Competition</th>

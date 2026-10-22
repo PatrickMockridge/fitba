@@ -48,12 +48,14 @@ For each family:
 - `quality_gap = clamp(1 - mean(projected minutes) / 900)`.
 - `top_share = top player minutes / family minutes`.
 - `availability_risk = (out/suspended in projected + 0.5 × doubtful) /
-  ceil(slots)`.
+  known projected players`; it is null when no projected player has a known
+  availability status. Unknown is not zero.
 - `age_risk = share of projected players aged 30+`.
 
-The measured score is a transparent weighted sum of those components for
-ordering only: depth 30%, quality 20%, concentration 10%, availability 25%,
-age 15%. It is not a verdict.
+The measured score is a transparent weighted mean of the available components
+for ordering only: depth 30%, quality 20%, concentration 10%, availability 25%,
+age 15%. If availability is unknown, its weight is removed and the score is
+labelled partial; it is not silently treated as zero. It is not a verdict.
 
 The curated `squad_needs` prior from `config/clubs/aberdeen.yaml` is shown
 separately as **Analyst intent (curated)**. It is not blended into the measured

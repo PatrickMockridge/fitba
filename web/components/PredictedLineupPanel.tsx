@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AvailabilityBadge } from "@/components/AvailabilityBadge";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
+import { formatPercent } from "@/lib/format";
 import { PitchLineup } from "@/components/PitchLineup";
 import { PlayerLink } from "@/components/PlayerLink";
 import type { LineupBlock } from "@/lib/data";
@@ -83,16 +84,12 @@ export function PredictedLineupPanel({
           <span className="stat-label">Selection inputs</span>
           <span className="fine-print">
             {" "}
-            form {Math.round((block.selection.weights?.form ?? 0) * 100)}% ·
-            recent rating{" "}
-            {Math.round((block.selection.weights?.recent_rating ?? 0) * 100)}% ·
-            starts/recency{" "}
-            {Math.round(
-              ((block.selection.weights?.start_rate ?? 0) +
-                (block.selection.weights?.recency_start ?? 0)) *
-                100,
-            )}
-            %
+            form {formatPercent(block.selection.weights?.form ?? 0)} · minute share{" "}
+            {formatPercent(block.selection.weights?.minute_share ?? 0)} · recent
+            rating {formatPercent(block.selection.weights?.recent_rating ?? 0)} · role
+            fit {formatPercent(block.selection.weights?.role_fit ?? 0)} · start rate{" "}
+            {formatPercent(block.selection.weights?.start_rate ?? 0)} · recency{" "}
+            {formatPercent(block.selection.weights?.recency_start ?? 0)}
           </span>
           {block.selection.rating_coverage ? (
             <span className="fine-print">
@@ -116,8 +113,11 @@ export function PredictedLineupPanel({
           />
           <span className="fine-print">
             {" "}
-            {block.availability.known ?? 0} known ·{" "}
-            {block.availability.unknown ?? 0} unknown
+            {block.availability.applicable === false ||
+            block.availability.known == null ||
+            block.availability.unknown == null
+              ? "Not modelled for opponents"
+              : `${block.availability.known} known · ${block.availability.unknown} unknown`}
             {block.availability.as_of ? ` · as of ${block.availability.as_of}` : ""}
           </span>
         </div>

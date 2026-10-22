@@ -5,7 +5,8 @@ import { SquadBoard } from "@/components/SquadBoard";
 import { StatTile } from "@/components/StatTile";
 import { getSquad } from "@/lib/data";
 
-export const metadata = { title: "Current squad · fitba" };
+export const metadata = {
+  alternates: { canonical: "/squad/" }, title: "Current squad · fitba" };
 
 const GROUP_LABELS: Record<string, string> = {
   goalkeeper: "Goalkeeper",

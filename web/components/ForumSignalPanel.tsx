@@ -87,11 +87,6 @@ function SignalRow({ signal }: { signal: ForumSignal }) {
           {CREDIBILITY_LABEL[signal.credibility] ?? signal.credibility}
         </span>
       </td>
-      <td className="num">
-        {signal.sentiment.mean === null
-          ? "—"
-          : `${signal.sentiment.mean > 0 ? "+" : ""}${signal.sentiment.mean.toFixed(2)}`}
-      </td>
     </tr>
   );
 }
@@ -146,6 +141,7 @@ export function ForumSignalPanel({
       {signals.length ? (
         <div className="table-wrap">
           <table className="league-table compact">
+<caption className="fine-print">Sampled player mentions and cross-reference labels.</caption>
             <thead>
               <tr>
                 <th>Player mentioned</th>
@@ -154,7 +150,6 @@ export function ForumSignalPanel({
                 <th className="num">Mentions</th>
                 <th className="num">Topics</th>
                 <th>Cross-reference</th>
-                <th className="num">Fan score</th>
               </tr>
             </thead>
             <tbody>
@@ -190,11 +185,18 @@ export function ForumSignalPanel({
       </p>
 
       {showSentiment ? (
-        <div className="grid three-col">
-          <SentimentBars label="Fan forum" summary={data.sentiment.forum} />
-          <SentimentBars label="Press rumour claims" summary={data.sentiment.press} />
-          <SentimentBars label="Club output" summary={data.sentiment.club} />
-        </div>
+        <>
+          <p className="fine-print">
+            Sampled first-page sentiment across {data.coverage.topics_sampled} topics and{" "}
+            {data.coverage.posts_sampled} posts. It is not a poll of the fanbase and
+            no score is attached to a named player.
+          </p>
+          <div className="grid three-col">
+            <SentimentBars label="Fan forum" summary={data.sentiment.forum} />
+            <SentimentBars label="Press rumour claims" summary={data.sentiment.press} />
+            <SentimentBars label="Club output" summary={data.sentiment.club} />
+          </div>
+        </>
       ) : null}
 
       {showSentiment ? <p className="fine-print">{data.sentiment.note}</p> : null}

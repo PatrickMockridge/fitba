@@ -17,8 +17,9 @@
     "away_team_id": "sco:st-johnstone",
     "away_team_name": "St Johnstone",
     "competition_id": "sco:other:friendlies-clubs",
-    "competition_name": "Friendlies Clubs",
+    "competition_name": "Club friendlies",
     "date": "2022-07-01",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 890132,
     "home_goals": 1,
@@ -45,24 +46,6 @@
         "href": "/matches/870479/",
         "opponent_name": "Brechin City",
         "venue": "A"
-      },
-      {
-        "date": "2022-07-06",
-        "fixture_id": 891298,
-        "goals_against": 1,
-        "goals_for": 7,
-        "href": "/matches/891298/",
-        "opponent_name": "Brechin City",
-        "venue": "H"
-      },
-      {
-        "date": "2022-07-06",
-        "fixture_id": 922189,
-        "goals_against": 1,
-        "goals_for": 7,
-        "href": "/matches/922189/",
-        "opponent_name": "Brechin City",
-        "venue": "A"
       }
     ],
     "before": [
@@ -74,19 +57,10 @@
         "href": "/matches/870984/",
         "opponent_name": "Buckie Thistle",
         "venue": "A"
-      },
-      {
-        "date": "2022-06-25",
-        "fixture_id": 871150,
-        "goals_against": 1,
-        "goals_for": 2,
-        "href": "/matches/871150/",
-        "opponent_name": "Buckie Thistle",
-        "venue": "A"
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": null,
     "home": null
@@ -95,7 +69,7 @@
     "competition": "/competitions/",
     "matches": "/matches/",
     "next": "/matches/870479/",
-    "previous": "/matches/871150/",
+    "previous": "/matches/870984/",
     "season": "/history/2022-23/"
   },
   "player_stats": [],
@@ -149,31 +123,26 @@
     "basis": "unknown",
     "bullets": [
       {
-        "basis": "measured",
-        "text": "The event feed records 0 goals; the final score is 1-1. The score is authoritative."
-      },
-      {
         "basis": "unknown",
-        "text": "The event feed records no goals for this fixture."
+        "text": "The event feed is unavailable; the final score is authoritative."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": false,
+    "goals_complete": false,
     "headline": "Aberdeen and St Johnstone draw 1-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
-      "event_goals": 0,
-      "event_score": {
-        "away": 0,
-        "home": 0
-      },
+      "event_goals": null,
+      "event_score": null,
       "final_score": {
         "away": 1,
         "home": 1
       },
-      "matched": false
+      "matched": null
     }
   },
   "timeline": [],
@@ -185,6 +154,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

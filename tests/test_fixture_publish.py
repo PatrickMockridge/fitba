@@ -104,7 +104,63 @@ def test_depth_states() -> None:
     )
     assert _depth({"events": True, "lineups": True, "team_stats": True}) == "result"
     assert _depth({"events": True, "lineups": True}) == "result"
+    assert _depth({"events": True, "lineups": False, "team_stats": True}) == "partial"
+    assert _depth({"events": False, "lineups": False, "team_stats": True}) == "partial"
     assert _depth({"events": False, "lineups": False}) == "score"
+
+
+def test_timeline_orders_stoppage_time_after_regulation_minute() -> None:
+    events = _events(
+        [
+            _event(
+                90,
+                "Aberdeen",
+                "A. Card",
+                event_type="card",
+                detail="Yellow Card",
+                is_goal=False,
+                extra=3,
+            ),
+            _event(90, "Aberdeen", "B. Goal", detail="Normal Goal"),
+        ]
+    )
+    timeline = _timeline(events, _fixture(home_goals=1, away_goals=0))
+    assert [row["player_name"] for row in timeline] == ["B. Goal", "A. Card"]
+
+
+def test_timeline_infers_second_yellow_from_two_yellows() -> None:
+    events = _events(
+        [
+            _event(
+                31,
+                "St Mirren",
+                "D. Happe",
+                event_type="card",
+                detail="Yellow Card",
+                is_goal=False,
+            ),
+            _event(
+                58,
+                "St Mirren",
+                "D. Happe",
+                event_type="card",
+                detail="Yellow Card",
+                is_goal=False,
+            ),
+            _event(
+                58,
+                "St Mirren",
+                "D. Happe",
+                event_type="card",
+                detail="Red Card",
+                is_goal=False,
+                is_red_card=True,
+            ),
+        ]
+    )
+    timeline = _timeline(events, _fixture(home_goals=1, away_goals=0))
+    assert timeline[-1]["is_second_yellow"] is True
+    assert timeline[-1]["card_type"] == "second_yellow"
 
 
 def test_timeline_credits_own_goal_to_event_team_without_flip() -> None:

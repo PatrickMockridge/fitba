@@ -299,9 +299,13 @@ def build_needs_document(
         projected_doubtful = sum(
             1 for player in projected if player["availability_status"] == "doubtful"
         )
+        projected_known = sum(
+            1 for player in projected if player["availability_status"] != "unknown"
+        )
+        projected_unknown = len(projected) - projected_known
         availability_risk = (
-            round((projected_out + 0.5 * projected_doubtful) / projected_slots, 3)
-            if expected_slots is not None
+            round((projected_out + 0.5 * projected_doubtful) / projected_known, 3)
+            if expected_slots is not None and projected_known > 0
             else None
         )
         age_risk = (
@@ -324,19 +328,22 @@ def build_needs_document(
             if total_minutes
             else "unavailable"
         )
+        drivers = [
+            (0.30, depth_gap),
+            (0.20, quality_gap),
+            (0.10, top_share if family != "GK" else 0.0),
+            (0.25, availability_risk),
+            (0.15, age_risk),
+        ]
+        known_drivers = [(weight, value) for weight, value in drivers if value is not None]
         measured_score = (
             round(
                 100
-                * (
-                    0.30 * (depth_gap or 0)
-                    + 0.20 * (quality_gap or 0)
-                    + 0.10 * ((top_share or 0) if family != "GK" else 0)
-                    + 0.25 * (availability_risk or 0)
-                    + 0.15 * (age_risk or 0)
-                ),
+                * sum(weight * float(value) for weight, value in known_drivers)
+                / sum(weight for weight, _value in known_drivers),
                 1,
             )
-            if measured_status != "unavailable"
+            if measured_status != "unavailable" and known_drivers
             else None
         )
         family_rating_delta = _family_rating_delta(themes, family)
@@ -540,6 +547,8 @@ def build_needs_document(
                     "depth_gap": depth_gap,
                     "quality_gap": quality_gap,
                     "availability_risk": availability_risk,
+                    "availability_known": projected_known,
+                    "availability_unknown": projected_unknown,
                     "age_risk": age_risk,
                     "projected_shortfall": projected_shortfall,
                 },

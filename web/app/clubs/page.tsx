@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "/clubs/" },
   title: "Clubs · fitba",
   robots: { index: false },
 };

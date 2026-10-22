@@ -194,6 +194,8 @@ class StrengthTeam(StrictModel):
     shots_against_pm: float | None = None
     shot_share: float | None = None
     percentiles: dict[str, int | None] = {}
+    ranks: dict[str, int | None] = {}
+    league_size: int | None = None
     coverage: str | None = None
     sample_note: str | None = None
     reason: str | None = None

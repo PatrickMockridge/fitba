@@ -16,7 +16,8 @@ import {
   type MatchdayDocument,
 } from "@/lib/data";
 
-export const metadata = { title: "Matchday · fitba" };
+export const metadata = {
+  alternates: { canonical: "/matchday/" }, title: "Matchday · fitba" };
 
 function snapshotValue(
   data: MatchdayDocument,
@@ -316,6 +317,9 @@ export default function MatchdayPage() {
           </div>
           <div className="table-wrap">
             <table className="league-table compact">
+              <caption className="fine-print">
+                Recent league meetings, the score and Aberdeen&apos;s result.
+              </caption>
               <thead>
                 <tr>
                   <th>Date</th>

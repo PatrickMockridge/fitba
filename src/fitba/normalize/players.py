@@ -11,9 +11,11 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Any
 
 from fitba.normalize.names import strip_accents
+from fitba.settings import CONFIG_DIR, load_yaml
 from fitba.settings import players as players_config
 
 _PLAYER_PUNCT = re.compile(r"[^\w\s]")
@@ -110,3 +112,45 @@ class PlayerRegistry:
 
     def all(self) -> list[Player]:
         return sorted(self._players.values(), key=lambda player: player.name)
+
+
+@lru_cache(maxsize=1)
+def _duplicate_map() -> dict[int, int]:
+    path = CONFIG_DIR / "themes.yaml"
+    config = load_yaml(path) if path.exists() else {}
+    return {
+        int(key): int(value)
+        for key, value in ((config.get("identity") or {}).get("duplicate_player_ids") or {}).items()
+    }
+
+
+def canonical_player_id(value: object) -> int | None:
+    if not isinstance(value, (int, str)) or value == "":
+        return None
+    try:
+        player_id = int(value)
+    except (TypeError, ValueError):
+        return None
+    return _duplicate_map().get(player_id, player_id)
+
+
+def canonicalize_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy whose player id and key use the canonical identity."""
+    player_id = canonical_player_id(row.get("player_id"))
+    if player_id is None:
+        return row
+    output = dict(row)
+    output["player_id"] = player_id
+    if output.get("player_key"):
+        output["player_key"] = f"api:player:{player_id}"
+    return output
+
+
+__all__ = [
+    "Player",
+    "PlayerRegistry",
+    "canonical_player_id",
+    "canonicalize_row",
+    "normalize_player_name",
+    "player_slug",
+]

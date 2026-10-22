@@ -17,8 +17,9 @@
     "away_team_id": "sco:hibernian",
     "away_team_name": "Hibernian",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2020-03-07",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166521,
     "home_goals": 3,
@@ -85,7 +86,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Ross",
@@ -384,7 +385,7 @@
       "is_aberdeen": false,
       "red_cards": [
         {
-          "card_type": "straight_red",
+          "card_type": "second_yellow",
           "detail": "Red Card",
           "extra_minute": null,
           "minute": 55,
@@ -548,19 +549,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "C. Doidge opened the scoring on 39 minutes, assisted by S. Allan."
+        "text": "C. Doidge opened the scoring on 39 minutes, assisted by S. Allan, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "A. Jackson made it 1-1 on 64 minutes."
+        "text": "An own goal by A. Jackson made it 1-1 on 64 minutes."
       },
       {
         "basis": "measured",
-        "text": "Steven Whittaker was sent off on 55 minutes."
+        "text": "A. Considine scored on 66 minutes, making it 2-1."
       },
       {
         "basis": "measured",
-        "text": "The score includes an own goal."
+        "text": "C. Main scored on 82 minutes, making it 3-1."
+      },
+      {
+        "basis": "measured",
+        "text": "Steven Whittaker was sent off for a second yellow card on 55 minutes."
       },
       {
         "basis": "measured",
@@ -575,6 +580,8 @@
         "text": "fxG: Aberdeen 1.634 (0.0-3.753), Hibernian 1.307 (0.0-3.203)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Ten-man Aberdeen beat Hibernian 3-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -669,7 +676,7 @@
     {
       "assist_name": null,
       "beneficiary_side": null,
-      "card_type": "straight_red",
+      "card_type": "second_yellow",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
@@ -679,7 +686,7 @@
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
-      "is_second_yellow": false,
+      "is_second_yellow": true,
       "is_shootout": false,
       "is_var": false,
       "minute": 55,
@@ -975,6 +982,10 @@
       "provider": null,
       "value": 1.307
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 3.753,
       "low": 0.0,

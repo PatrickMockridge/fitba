@@ -130,10 +130,18 @@ equal = count(values == x) - 1
 percentile = 100 × (below + 0.5 × equal) / (n - 1)
 ```
 
-clamped to 0–100, or unknown when the sample is smaller than two. Goals against
-is presented as "lower is better". A cross-tier cup opponent is marked
-`cross_tier`; raw values and the tier gap are shown instead of a like-for-like
-percentile.
+clamped to 0–100, or unknown when the sample is smaller than two. The bar uses
+the percentile, but the visible label is a **league rank**, not a percentile:
+
+```text
+rank = 1 + count(values better than x)
+league_size = number of teams in the league
+```
+
+For goals against, lower is better. With a 12-team league, the labels run from
+1st to 12th of 12; a percentile in the 50s is a mid-table rank, not 59th place.
+A cross-tier cup opponent is marked `cross_tier`; raw values and the tier gap are
+shown instead of a like-for-like percentile.
 
 ## Predicted XI
 

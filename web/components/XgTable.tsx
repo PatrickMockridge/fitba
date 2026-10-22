@@ -19,6 +19,7 @@ export function XgTable({ aggregates }: { aggregates: XgDocument["aggregates"] }
       </div>
       <div className="table-wrap">
         <table className="league-table">
+<caption className="fine-print">fxG aggregates with intervals and goals.</caption>
           <thead>
             <tr>
               <th>Scope</th>

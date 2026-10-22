@@ -319,6 +319,7 @@ def evaluate_fxg(
     evaluation = config.get("evaluation") or {}
     validation_season = str(evaluation.get("validation_season") or "2026-27")
     pairs: list[tuple[float, float]] = []
+    match_keys: set[Any] = set()
     for row in rows:
         if not _valid_row(row):
             continue
@@ -329,6 +330,9 @@ def evaluate_fxg(
             continue
         prediction = predict_fxg(model, row)
         pairs.append((float(prediction["fxg"]), float(provider)))
+        match_key = row.get("match_key") or row.get("fixture_id") or row.get("match_id")
+        if match_key is not None:
+            match_keys.add(match_key)
     if not pairs:
         return {
             "status": "unavailable",
@@ -358,7 +362,8 @@ def evaluate_fxg(
     return {
         "status": "pass" if passed else "fail",
         "validation_season": validation_season,
-        "matches": len(pairs),
+        "matches": len(match_keys) if match_keys else len(pairs),
+        "team_rows": len(pairs),
         "bias": round(bias, 3),
         "mae": round(mae, 3),
         "calibration_slope": round(slope, 3) if slope is not None else None,

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
 import { getHistory } from "@/lib/data";
 
-export const metadata = { title: "About · fitba" };
+export const metadata = {
+  alternates: { canonical: "/about/" }, title: "About · fitba" };
 
 export default function AboutPage() {
   const history = getHistory();
@@ -121,9 +122,12 @@ export default function AboutPage() {
           </li>
           <li>
             <strong>Independent and correctable.</strong> Non-commercial, no
-            betting advertising, a published corrections policy, and no claim to
-            speak for the club. We are on the club&apos;s side without being its
-            mouthpiece.
+            betting advertising, a{" "}
+            <Link className="text-link" href="/corrections/">
+              published corrections policy
+            </Link>
+            , and no claim to speak for the club. We are on the club&apos;s side
+            without being its mouthpiece.
           </li>
         </ul>
       </section>
@@ -140,7 +144,8 @@ export default function AboutPage() {
               league finishes from {scorecard.best_position ?? "—"} to{" "}
               {scorecard.worst_position ?? "—"} and {scorecard.honours_total}{" "}
               {honourLabel}. It also contains heavy defeats, including 6-0
-              losses, and a winless away run in 2026, alongside two Conference
+              losses, and a winless away league run in the second half of 2025-26,
+              alongside two Conference
               League campaigns (the 2023-24 group stage and the 2025-26 league
               phase) and significant player sales.
             </p>

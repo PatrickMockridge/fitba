@@ -17,8 +17,9 @@
     "away_team_id": "sco:dumbarton",
     "away_team_name": "Dumbarton",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2024-07-27",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1202326,
     "home_goals": 6,
@@ -95,7 +96,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Farrell",
@@ -540,18 +541,36 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "J. MacKenzie opened the scoring on 46 minutes, assisted by G. Molloy."
+        "text": "J. MacKenzie opened the scoring on 46 minutes, assisted by G. Molloy, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 92 minutes, making it 6-0."
+        "text": "E. Sokler scored on 48 minutes, assisted by S. Morris, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "E. Sokler scored on 61 minutes, assisted by J. MacKenzie, making it 3-0."
+      },
+      {
+        "basis": "measured",
+        "text": "P. Ambrose scored on 84 minutes, assisted by J. McGarry, making it 4-0."
+      },
+      {
+        "basis": "measured",
+        "text": "J. McGarry scored on 86 minutes, assisted by V. Besuijen, making it 5-0."
+      },
+      {
+        "basis": "measured",
+        "text": "S. Rubežić scored on 90+2 minutes, assisted by R. Duncan, making it 6-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against Dumbarton",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat Dumbarton 6-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 6,
@@ -1001,6 +1020,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

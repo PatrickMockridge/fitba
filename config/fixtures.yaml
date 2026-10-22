@@ -24,12 +24,14 @@ pages:
   route_prefix: /matches
   # A page is generated for every played fixture. These are the data classes
   # that decide its depth label.
-  full_classes: [events, lineups, league_stats, player_stats]
+  full_classes: [events, lineups, team_stats, player_stats]
   result_classes: [events, lineups]
+  partial_classes: [events, lineups, team_stats, player_stats]
   score_classes: []
   depth_labels:
     full: Full record
     result: Result, events and lineups
+    partial: Partial record
     score: Score only
   summary:
     # A goal at or after this minute is a late goal for the stock-phrase read.

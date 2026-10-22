@@ -18,7 +18,25 @@ export function generateStaticParams() {
   return (history?.seasons ?? []).map(({ season }) => ({ season }));
 }
 
-export const metadata = { title: "Season review · fitba" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ season: string }>;
+}) {
+  const { season } = await params;
+  const doc = getHistorySeason(season);
+  const title = `${season} season review · fitba`;
+  const description = doc?.headline
+    ? `${doc.headline} The measured season record and the labelled assessment.`
+    : `The ${season} season record and assessment.`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/history/${season}/` },
+    openGraph: { title, description, type: "article" },
+    twitter: { card: "summary", title, description },
+  };
+}
 
 function pct(value: number | null | undefined) {
   if (value === null || value === undefined) return "—";
@@ -402,6 +420,7 @@ export default async function HistorySeasonPage({
                 <p className="eyebrow">Top by starts</p>
                 <div className="table-wrap">
                   <table className="league-table compact">
+<caption className="fine-print">Season record, managers, staff and selection.</caption>
                     <thead>
                       <tr>
                         <th>Player</th>

@@ -17,8 +17,9 @@
     "away_team_id": "sco:dundee",
     "away_team_name": "Dundee",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2026-08-15",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1603956,
     "home_goals": 3,
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "Steven Pressley",
@@ -473,13 +474,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "Kevin Nisbet opened the scoring on 51 minutes."
+        "text": "Kevin Nisbet opened the scoring on 51 minutes, making it 1-0."
+      },
+      {
+        "basis": "measured",
+        "text": "Mitchy Ntelo scored on 57 minutes, assisted by Toyosi Olusanya, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "Kevin Nisbet scored on 63 minutes, assisted by Tony Yogane, making it 3-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Dundee 3-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -830,6 +841,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

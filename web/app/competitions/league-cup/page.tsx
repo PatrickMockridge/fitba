@@ -3,7 +3,8 @@ import { CupGroupTable } from "@/components/CupGroupTable";
 import { CupRound } from "@/components/CupRound";
 import { formatDate, getLeagueCup } from "@/lib/data";
 
-export const metadata = { title: "League Cup · fitba" };
+export const metadata = {
+  alternates: { canonical: "/competitions/league-cup/" }, title: "League Cup · fitba" };
 
 export default function LeagueCupPage() {
   const cup = getLeagueCup();

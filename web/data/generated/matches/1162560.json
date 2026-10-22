@@ -1,6 +1,6 @@
 {
   "coverage": {
-    "depth": "score",
+    "depth": "partial",
     "events": true,
     "lineups": false,
     "note": "Missing classes are unavailable, not zero.",
@@ -8,7 +8,7 @@
     "team_stats": false,
     "xg": false
   },
-  "depth": "score",
+  "depth": "partial",
   "fixture": {
     "aberdeen_result": "W",
     "away_goals": 0,
@@ -17,8 +17,9 @@
     "away_team_id": "sco:bonnyrigg-rose",
     "away_team_name": "Bonnyrigg Rose",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2024-02-10",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1162560,
     "home_goals": 2,
@@ -68,7 +69,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": null,
     "home": {
@@ -309,13 +310,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "B. Miovski opened the scoring on 17 minutes, assisted by S. Morris."
+        "text": "B. Miovski opened the scoring on 17 minutes, assisted by S. Morris, making it 1-0."
+      },
+      {
+        "basis": "measured",
+        "text": "B. Miovski scored on 25 minutes, assisted by D. Polvara, making it 2-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Bonnyrigg Rose 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -791,6 +798,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

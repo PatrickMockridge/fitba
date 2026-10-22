@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2022-07-10",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 863911,
     "home_goals": 0,
@@ -85,7 +86,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -358,7 +359,7 @@
     "competition": "/competitions/",
     "matches": "/matches/",
     "next": "/matches/863923/",
-    "previous": "/matches/922189/",
+    "previous": "/matches/870479/",
     "season": "/history/2022-23/"
   },
   "player_stats": [],
@@ -442,17 +443,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "C. Ramírez scored a penalty on 63 minutes."
+        "text": "C. Ramírez scored a penalty on 63 minutes, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "C. Ramírez scored on 74 minutes, assisted by M. Watkins, making it 0-2."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Peterhead 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -728,6 +731,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

@@ -1,7 +1,8 @@
 import { ContractPage } from "@/components/ContractPage";
 import { getManifest, getMetricsAudit, getValidationReport } from "@/lib/data";
 
-export const metadata = { title: "Data status · fitba" };
+export const metadata = {
+  alternates: { canonical: "/status/" }, title: "Data status · fitba" };
 
 export default function StatusPage() {
   const manifest = getManifest();
@@ -133,6 +134,7 @@ export default function StatusPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table">
+<caption className="fine-print">Build status and surface coverage.</caption>
             <thead>
               <tr>
                 <th>Competition</th>
@@ -169,6 +171,7 @@ export default function StatusPage() {
           </div>
           <div className="table-wrap">
             <table className="league-table">
+<caption className="fine-print">Build status and surface coverage.</caption>
               <thead>
                 <tr>
                   <th>Competition</th>

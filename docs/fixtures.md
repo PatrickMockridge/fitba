@@ -10,9 +10,12 @@ what the record actually supports: the score first, then events, lineups, team
 statistics, player statistics, fxG and coverage. Missing data is labelled; it is
 never filled with a zero or a guess.
 
-The scope is 2019-20 to 2026-27: 370 played fixtures at the 2026-10-22 publish,
-including 19 friendlies. Friendlies are marked and excluded from form and
-league aggregates. The pre-2019-20 baseline remains on the history pages.
+The scope is 2019-20 to 2026-27: 367 canonical played fixtures at the
+2026-10-22 publish, including 16 friendlies. Three provider duplicate records
+(different fixture ids for the same match) are retained as labelled alias pages
+but excluded from counts, search and navigation. Friendlies are marked and
+excluded from competitive season and player aggregates. The pre-2019-20 baseline
+remains on the history pages.
 
 ## One fixture, one key
 
@@ -22,8 +25,13 @@ league aggregates. The pre-2019-20 baseline remains on the history pages.
   ids. `src/fitba/normalize/fixture_registry.py` joins them by date, competition
   and canonical team ids. An ambiguous or missing league alias is an error, not
   a guess.
-- The registry reports total, played, competitive, friendly and league-alias
-  counts. The generated index is `web/data/generated/fixtures/index.json`.
+- Duplicate records are detected by date, competition and the unordered team
+  pair with a compatible score: `870984`/`871150`, `870479`/`891298`/`922189`.
+  The canonical record wins; the aliases carry `duplicate_of` and are excluded
+  from counts and navigation.
+- The registry reports canonical total, played, competitive, friendly, alias and
+  duplicate counts. The generated index is
+  `web/data/generated/fixtures/index.json`.
 - The document contract is generated from `FixtureDocument` into
   `contracts/fixture-page.schema.json`; the every-page checker validates each
   document against it.
@@ -53,8 +61,14 @@ remain, so colour is never the only cue.
 ## Depth states
 
 - `full`: events, lineups, team stats and player stats.
-- `result`: events and lineups, no team or player stats.
-- `score`: score only; the event and lineup feeds are unavailable.
+- `result`: events and lineups; the coverage block lists which stat classes are
+  also present.
+- `partial`: at least one detail class (events, lineups, team stats or player
+  stats) but not both events and lineups.
+- `score`: none of the four detail classes; the score is authoritative.
+
+The label is the highest record class present, not a claim that other classes are
+absent. The coverage block is the authoritative list.
 
 Every played fixture gets a page. A page is never omitted because a data class is
 missing.
@@ -62,9 +76,13 @@ missing.
 ## The read
 
 `src/fitba/analytics/summary.py` selects stock phrases from measured facts:
-score, half-time, first goal, equaliser, late goal, comeback, red card, own goal,
-penalty and shootout. The measured half is labelled `measured`; the fxG sentence
-is labelled `inferred`. Missing data produces an explicit sentence.
+score, shootout, comeback, decisive late goal, red card, own goal, penalty and
+every scoring event. The measured half is labelled `measured`; the fxG sentence
+is labelled `inferred`. A shootout is named before the draw branch. A late-win
+phrase requires a one-goal margin and a decisive late goal; it is never used for a
+multi-goal defeat. When the event feed is absent the read says so and does not
+print "0 goals"; when it is partial, it says the record does not reconcile. Every
+recorded goal gets a bullet with scorer, minute and score after.
 
 The read never says "deserved", "dominated", "lucky", "should have won" or
 "bottled". It never predicts a result and never turns a player into a verdict.

@@ -23,6 +23,23 @@ function display(value: unknown, suffix = "") {
   return `${value}${suffix}`;
 }
 
+function ordinal(value: number | null | undefined) {
+  if (value === null || value === undefined) return "—";
+  const suffix =
+    value % 100 >= 11 && value % 100 <= 13
+      ? "th"
+      : { 1: "st", 2: "nd", 3: "rd" }[value % 10] ?? "th";
+  return `${value}${suffix}`;
+}
+
+function rankLabel(
+  rank: number | null | undefined,
+  leagueSize: number | null | undefined,
+) {
+  if (rank === null || rank === undefined) return "—";
+  return leagueSize ? `${ordinal(rank)} of ${leagueSize}` : ordinal(rank);
+}
+
 function Bar({
   percentile,
   side,
@@ -95,7 +112,8 @@ export function StrengthComparison({
           <h2>League comparison</h2>
         </div>
         <span className="badge badge-neutral">
-          {aberdeen.played ?? 0} matches each
+          {aberdeen.played ?? 0} matches each ·{" "}
+          {aberdeen.league_size ?? opponent.league_size ?? "—"} teams
         </span>
       </div>
       <div className="compare-head">
@@ -113,6 +131,8 @@ export function StrengthComparison({
           const rightValue = right[metric.key] as number | null | undefined;
           const leftPct = left.percentiles?.[metric.percentile];
           const rightPct = right.percentiles?.[metric.percentile];
+          const leftRank = left.ranks?.[metric.percentile];
+          const rightRank = right.ranks?.[metric.percentile];
           return (
             <div className="compare-row" key={metric.key}>
               <div
@@ -123,9 +143,7 @@ export function StrengthComparison({
                 </span>
                 <Bar percentile={leftPct} side={leftSide} />
                 <span className="compare-percentile">
-                  {leftPct === null || leftPct === undefined
-                    ? "—"
-                    : `${leftPct}th`}
+                  {rankLabel(leftRank, left.league_size)}
                 </span>
               </div>
               <div className="compare-label">
@@ -140,9 +158,7 @@ export function StrengthComparison({
                 }`}
               >
                 <span className="compare-percentile">
-                  {rightPct === null || rightPct === undefined
-                    ? "—"
-                    : `${rightPct}th`}
+                  {rankLabel(rightRank, right.league_size)}
                 </span>
                 <Bar percentile={rightPct} side={rightSide} />
                 <span className="compare-value">
@@ -163,7 +179,7 @@ export function StrengthComparison({
             className={`stat-tile${team.isAberdeen ? " is-aberdeen" : ""}`}
           >
             <span className="stat-label">{team.name}</span>
-            <span className="stat-value">{team.data.position}th</span>
+            <span className="stat-value">{ordinal(team.data.position)}</span>
             <span className="stat-note">
               {team.data.points} pts · {team.data.gf}–{team.data.ga}
             </span>
@@ -186,6 +202,11 @@ export function StrengthComparison({
           </span>
         </div>
       </div>
+      <p className="fine-print">
+        Bars are within-league percentile rank. Labels are league rank out of{" "}
+        {aberdeen.league_size ?? opponent.league_size ?? "the league"} teams; a
+        lower position is better, and “lower is better” marks goals against.
+      </p>
       <p className="fine-print">{comparison.note}</p>
     </section>
   );

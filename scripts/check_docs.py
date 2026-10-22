@@ -73,6 +73,7 @@ IN_APP = [
     "web/app/rumours/page.tsx",
     "web/app/squad/page.tsx",
     "web/app/players/[playerId]/page.tsx",
+    "web/app/corrections/page.tsx",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")

@@ -17,8 +17,9 @@
     "away_team_id": "sco:kilmarnock",
     "away_team_name": "Kilmarnock",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2024-03-09",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1174068,
     "home_goals": 3,
@@ -68,7 +69,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -591,11 +592,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "J. McGrath opened the scoring on 11 minutes."
+        "text": "J. McGrath opened the scoring on 11 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The score includes an own goal."
+        "text": "G. Shinnie scored on 33 minutes, assisted by J. McGrath, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "D. Armstrong scored on 41 minutes, assisted by K. Vassell, making it 2-1."
+      },
+      {
+        "basis": "measured",
+        "text": "An own goal by S. Findlay made it 3-1 on 66 minutes."
       },
       {
         "basis": "measured",
@@ -614,6 +623,8 @@
         "text": "fxG: Aberdeen 1.641 (0.0-3.764), Kilmarnock 0.656 (0.0-1.999)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Kilmarnock 3-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -1089,6 +1100,10 @@
       "provider": null,
       "value": 0.656
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 3.764,
       "low": 0.0,

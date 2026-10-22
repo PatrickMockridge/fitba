@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 from typing import Any, Literal
 
 import polars as pl
@@ -15,7 +16,7 @@ from fitba.ingest.history import (
     load_history_player_match_stats,
     load_history_team_stats,
 )
-from fitba.ingest.match_extras import load_events, load_lineups
+from fitba.ingest.match_extras import derive_second_yellows, load_events, load_lineups
 from fitba.normalize.fixture_registry import FixtureRecord, build_fixture_registry
 from fitba.normalize.teams import TeamRegistry
 from fitba.settings import MARTS_DIR, fixtures_policy, source_ids
@@ -34,16 +35,18 @@ class SummaryBullet(StrictModel):
 
 
 class SummaryReconciliation(StrictModel):
-    event_goals: int
-    event_score: dict[str, int]
+    event_goals: int | None = None
+    event_score: dict[str, int] | None = None
     final_score: dict[str, int]
-    matched: bool
+    matched: bool | None = None
 
 
 class SummaryBlock(StrictModel):
     headline: str
     basis: str
     bullets: list[SummaryBullet]
+    events_available: bool
+    goals_complete: bool
     reconciliation: SummaryReconciliation | None = None
     note: str
 
@@ -77,6 +80,10 @@ class XgBlock(StrictModel):
     away: XgSide | None = None
     model_id: str | None = None
     note: str | None = None
+    gate_status: str | None = None
+    gate_passed: bool | None = None
+    gate_note: str | None = None
+    evaluation_href: str | None = None
 
 
 class TimelineRow(StrictModel):
@@ -125,6 +132,7 @@ class LineupBlock(StrictModel):
 class PlayerStat(StrictModel):
     player_id: int | None = None
     player_name: str | None = None
+    href: str | None = None
     team_id: int | None = None
     team_name: str | None = None
     is_aberdeen: bool | None = None
@@ -199,6 +207,7 @@ class FixtureInfo(StrictModel):
     result: str
     aberdeen_result: str
     href: str
+    duplicate_of: str | None = None
 
 
 class ScoreboardGoal(StrictModel):
@@ -250,7 +259,7 @@ class FixtureDocument(StrictModel):
     schema_version: str
     generated_at: str
     fixture: FixtureInfo
-    depth: Literal["full", "result", "score"]
+    depth: Literal["full", "result", "partial", "score"]
     summary: SummaryBlock
     scoreboard: ScoreboardBlock
     stats: StatsBlock
@@ -412,14 +421,19 @@ def _stat_rows(
         away_value = away.get(key)
         if home_value is None and away_value is None:
             continue
+        basis = "measured"
+        row_label = label
+        if key == "goals_prevented":
+            basis = "unknown"
+            row_label = "Goals prevented (provider, unverified)"
         rows.append(
             {
                 "key": key,
-                "label": label,
+                "label": row_label,
                 "home": home_value,
                 "away": away_value,
                 "source": source.get(key, "unknown"),
-                "basis": "measured",
+                "basis": basis,
             }
         )
     return rows
@@ -464,7 +478,19 @@ def _timeline(
     if not events.height:
         return []
     team_registry = teams or TeamRegistry()
-    rows = events.sort(["minute", "extra_minute"], nulls_last=True).to_dicts()
+    frame = events
+    if "event_order" not in frame.columns:
+        frame = frame.with_row_index("event_order")
+    rows = (
+        frame.with_columns(
+            pl.col("minute").fill_null(0).alias("_minute_sort"),
+            pl.col("extra_minute").fill_null(0).alias("_extra_sort"),
+        )
+        .sort(["_minute_sort", "_extra_sort", "event_order"])
+        .drop(["_minute_sort", "_extra_sort"])
+        .to_dicts()
+    )
+    rows = derive_second_yellows(rows)
     for row in rows:
         side, team_name = _resolve_event_team(
             str(row.get("team_name") or ""), fixture, team_registry
@@ -713,6 +739,7 @@ def _player_stats_block(
     player_stats: pl.DataFrame,
     *,
     aberdeen_api_id: int,
+    player_index: Any | None = None,
 ) -> list[dict[str, Any]]:
     if not player_stats.height:
         return []
@@ -729,10 +756,14 @@ def _player_stats_block(
         else:
             team_name = None
             is_aberdeen = None
+        player_key = (
+            f"api:player:{row.get('player_id')}" if row.get("player_id") is not None else None
+        )
         output.append(
             {
                 "player_id": row.get("player_id"),
                 "player_name": row.get("player_name"),
+                "href": player_index.href(player_key) if player_index and player_key else None,
                 "team_id": team_id,
                 "team_name": team_name,
                 "is_aberdeen": is_aberdeen,
@@ -780,7 +811,11 @@ def _form_context(registry: Any, fixture: FixtureRecord) -> dict[str, Any]:
     }
 
 
-def _xg_block(fixture: FixtureRecord, xg_row: dict[str, Any] | None) -> dict[str, Any]:
+def _xg_block(
+    fixture: FixtureRecord,
+    xg_row: dict[str, Any] | None,
+    evaluation: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if not xg_row:
         return {"available": False}
     if fixture.is_aberdeen_home:
@@ -815,16 +850,25 @@ def _xg_block(fixture: FixtureRecord, xg_row: dict[str, Any] | None) -> dict[str
         "away": away,
         "model_id": xg_row.get("model_id"),
         "note": "fxG is fitba's shot-on-target model; provider xG is shown separately.",
+        "gate_status": (evaluation or {}).get("status"),
+        "gate_passed": (evaluation or {}).get("passed"),
+        "gate_note": (evaluation or {}).get("note"),
+        "evaluation_href": "/analysis/xg/",
     }
 
 
 def _depth(available: dict[str, bool]) -> str:
-    if available.get("events") and available.get("lineups") and available.get("team_stats"):
-        if available.get("player_stats"):
-            return "full"
+    """Highest record class present, never a claim that other classes are absent."""
+    events = bool(available.get("events"))
+    lineups = bool(available.get("lineups"))
+    team_stats = bool(available.get("team_stats"))
+    player_stats = bool(available.get("player_stats"))
+    if events and lineups and team_stats and player_stats:
+        return "full"
+    if events and lineups:
         return "result"
-    if available.get("events") and available.get("lineups"):
-        return "result"
+    if events or lineups or team_stats or player_stats:
+        return "partial"
     return "score"
 
 
@@ -832,6 +876,7 @@ def build_fixture_payloads(
     *,
     generated_at: str | None = None,
     xg_payload: dict[str, Any] | None = None,
+    player_index: Any | None = None,
 ) -> dict[str, Any]:
     config = fixtures_policy()
     page_config = config.get("pages") or {}
@@ -871,7 +916,11 @@ def build_fixture_payloads(
             api_stats=api_stats if api_stats is not None else pl.DataFrame(),
         )
         stats_available = bool(home_stats or away_stats)
-        home_xg = _xg_block(fixture, xg_by_fixture.get(fixture.fixture_id))
+        home_xg = _xg_block(
+            fixture,
+            xg_by_fixture.get(fixture.fixture_id),
+            evaluation=(xg_payload or {}).get("evaluation"),
+        )
         summary_stats = None
         if stats_available:
             summary_stats = {
@@ -914,6 +963,11 @@ def build_fixture_payloads(
             stats=summary_stats,
             xg=summary_xg,
             late_goal_minute=int(summary_config.get("late_goal_minute") or 85),
+            events_available=scoreboard["events_available"],
+            goals_complete=scoreboard["goals_complete"],
+            status=fixture.status,
+            home_penalties=fixture.home_penalties,
+            away_penalties=fixture.away_penalties,
         )
         home_lineup = _lineup_block(
             fixture,
@@ -931,6 +985,7 @@ def build_fixture_payloads(
             fixture,
             player_stats if player_stats is not None else pl.DataFrame(),
             aberdeen_api_id=aberdeen_api_id,
+            player_index=player_index,
         )
         available = {
             "events": bool(events_frame.height),
@@ -984,6 +1039,7 @@ def build_fixture_payloads(
                 "result": result,
                 "aberdeen_result": aberdeen_result,
                 "href": fixture.href,
+                "duplicate_of": None,
             },
             "depth": depth,
             "summary": summary,
@@ -1028,8 +1084,11 @@ def build_fixture_payloads(
                 "competition_name": fixture.competition_name,
                 "home_team_name": fixture.home_team_name,
                 "away_team_name": fixture.away_team_name,
+                "aberdeen_is_home": fixture.is_aberdeen_home,
                 "home_goals": fixture.home_goals,
                 "away_goals": fixture.away_goals,
+                "home_penalties": fixture.home_penalties,
+                "away_penalties": fixture.away_penalties,
                 "result": result,
                 "aberdeen_result": aberdeen_result,
                 "depth": depth,
@@ -1041,11 +1100,37 @@ def build_fixture_payloads(
             documents[row["fixture_id"]]["links"]["previous"] = index_rows[index - 1]["href"]
         if index + 1 < len(index_rows):
             documents[row["fixture_id"]]["links"]["next"] = index_rows[index + 1]["href"]
+
+    alias_rows: list[dict[str, Any]] = []
+    for alias in registry.aliases():
+        if alias.fixture_id is None or alias.duplicate_of is None:
+            continue
+        canonical = registry.by_key.get(alias.duplicate_of)
+        if canonical is None or canonical.fixture_id is None:
+            continue
+        canonical_document = documents.get(canonical.fixture_id)
+        if canonical_document is None:
+            continue
+        alias_document = copy.deepcopy(canonical_document)
+        alias_document["fixture"]["fixture_id"] = alias.fixture_id
+        alias_document["fixture"]["href"] = alias.href
+        alias_document["fixture"]["duplicate_of"] = canonical_document["fixture"]["href"]
+        documents[alias.fixture_id] = alias_document
+        alias_rows.append(
+            {
+                "fixture_id": alias.fixture_id,
+                "canonical_fixture_id": canonical.fixture_id,
+                "canonical_href": canonical_document["fixture"]["href"],
+                "href": alias.href,
+            }
+        )
+
     return {
         "schema_version": SCHEMA_VERSION,
         "generated_at": generated_at or utc_now_iso(),
         "count": len(index_rows),
         "fixtures": index_rows,
+        "aliases": alias_rows,
         "documents": documents,
     }
 

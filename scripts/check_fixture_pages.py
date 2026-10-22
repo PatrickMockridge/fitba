@@ -79,6 +79,20 @@ def _card_key(item: dict) -> tuple:
     )
 
 
+def _expected_depth(coverage: dict) -> str:
+    events = bool(coverage.get("events"))
+    lineups = bool(coverage.get("lineups"))
+    team_stats = bool(coverage.get("team_stats"))
+    player_stats = bool(coverage.get("player_stats"))
+    if events and lineups and team_stats and player_stats:
+        return "full"
+    if events and lineups:
+        return "result"
+    if events or lineups or team_stats or player_stats:
+        return "partial"
+    return "score"
+
+
 def _validate_scoreboard(document: dict, fixture_id: int, errors: list[str]) -> None:
     fixture = document.get("fixture") or {}
     board = document.get("scoreboard") or {}
@@ -179,6 +193,30 @@ def _validate_scoreboard(document: dict, fixture_id: int, errors: list[str]) -> 
     if goals_complete and (home_score, away_score) != (home_goals, away_goals):
         errors.append(f"{fixture_id}: complete timeline does not end at the final score")
 
+    summary = document.get("summary") or {}
+    summary_text = " ".join(
+        [str(summary.get("headline") or "")]
+        + [str(item.get("text") or "") for item in summary.get("bullets") or []]
+    )
+    if not summary.get("events_available") and "records 0 goals" in summary_text:
+        errors.append(f"{fixture_id}: unavailable event feed is described as 0 goals")
+    if (
+        fixture.get("home_penalties") is not None
+        and fixture.get("away_penalties") is not None
+        and "penalties" not in str(summary.get("headline") or "").casefold()
+    ):
+        errors.append(f"{fixture_id}: shootout headline does not name the penalty result")
+    if (
+        home_goals is not None
+        and away_goals is not None
+        and abs(int(home_goals) - int(away_goals)) > 1
+        and "win it late" in summary_text.casefold()
+    ):
+        errors.append(f"{fixture_id}: multi-goal margin described as a late win")
+    for row in (document.get("stats") or {}).get("rows") or []:
+        if row.get("key") == "goals_prevented" and row.get("basis") == "measured":
+            errors.append(f"{fixture_id}: goals prevented is labelled measured")
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -198,6 +236,7 @@ def main() -> int:
         errors.append("contracts/fixture-page.schema.json is stale")
     index = json.loads(INDEX.read_text(encoding="utf-8"))
     rows = index.get("fixtures") or []
+    alias_rows = index.get("aliases") or []
     if index.get("count") != len(rows):
         errors.append("fixtures/index.json count does not match its rows")
     if not rows:
@@ -205,12 +244,42 @@ def main() -> int:
 
     document_ids = {int(path.stem) for path in MATCHES.glob("*.json") if path.stem.isdigit()}
     index_ids = {int(row["fixture_id"]) for row in rows if row.get("fixture_id") is not None}
-    missing_docs = index_ids - document_ids
-    extra_docs = document_ids - index_ids
+    alias_ids = {int(row["fixture_id"]) for row in alias_rows if row.get("fixture_id") is not None}
+    missing_docs = (index_ids | alias_ids) - document_ids
+    extra_docs = document_ids - (index_ids | alias_ids)
     if missing_docs:
         errors.append(f"missing fixture documents: {sorted(missing_docs)[:5]}")
     if extra_docs:
         warnings.append(f"documents without index rows: {sorted(extra_docs)[:5]}")
+    seen_signatures: dict[tuple, int] = {}
+    for row in rows:
+        signature = (
+            row.get("date"),
+            row.get("competition_id"),
+            tuple(sorted([str(row.get("home_team_name")), str(row.get("away_team_name"))])),
+        )
+        if signature in seen_signatures:
+            errors.append(
+                f"{row.get('fixture_id')}: duplicate fixture signature of "
+                f"{seen_signatures[signature]}"
+            )
+        seen_signatures[signature] = int(row["fixture_id"])
+
+    for alias in alias_rows:
+        alias_id = int(alias["fixture_id"])
+        document_path = MATCHES / f"{alias_id}.json"
+        if not document_path.exists():
+            errors.append(f"{alias_id}: missing alias document")
+            continue
+        document = json.loads(document_path.read_text(encoding="utf-8"))
+        document_fixture = document.get("fixture") or {}
+        if document_fixture.get("duplicate_of") != alias.get("canonical_href"):
+            errors.append(f"{alias_id}: alias does not point to its canonical page")
+        alias_page = args.out / "matches" / str(alias_id) / "index.html"
+        if not alias_page.exists():
+            errors.append(f"{alias_id}: missing alias page")
+        elif 'data-contract="match.duplicate"' not in alias_page.read_text(encoding="utf-8"):
+            errors.append(f"{alias_id}: alias page has no duplicate notice")
 
     out_matches = args.out / "matches"
     index_page = out_matches / "index.html"
@@ -235,9 +304,18 @@ def main() -> int:
             errors.append(f"{fixture_id}: document schema: {error}")
             continue
         _validate_scoreboard(document, fixture_id, errors)
+        coverage = document.get("coverage") or {}
+        expected_depth = _expected_depth(coverage)
+        if document.get("depth") != expected_depth:
+            errors.append(f"{fixture_id}: depth {document.get('depth')!r} != {expected_depth!r}")
         fixture = document.get("fixture") or {}
         if fixture.get("fixture_id") != fixture_id:
             errors.append(f"{fixture_id}: document fixture_id mismatch")
+        if (
+            fixture.get("competition_id") == "sco:scottish-cup"
+            and "scottish cup" not in str(fixture.get("competition_name") or "").casefold()
+        ):
+            errors.append(f"{fixture_id}: Scottish Cup has a non-canonical label")
         expected_href = f"{base}/matches/{fixture_id}/"
         if row.get("href") != f"/matches/{fixture_id}/":
             errors.append(f"{fixture_id}: index href is not canonical")
@@ -259,6 +337,13 @@ def main() -> int:
             errors.append(f"{fixture_id}: no Aberdeen data-team marker")
         if 'data-team="opponent"' not in page:
             errors.append(f"{fixture_id}: no opponent data-team marker")
+        xg = document.get("xg") or {}
+        if (
+            xg.get("available")
+            and xg.get("gate_passed") is False
+            and _marker_count(page, "match.xg.gate") < 1
+        ):
+            errors.append(f"{fixture_id}: fxG gate failure is not shown on the page")
 
         title = _h1(page)
         if "?" in title:

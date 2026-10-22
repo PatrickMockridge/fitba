@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2019-08-18",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 288899,
     "home_goals": 1,
@@ -49,7 +50,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -421,25 +422,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "D. Johnson scored a penalty on 43 minutes."
+        "text": "D. Johnson scored a penalty on 43 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "A. Considine made it 1-1 on 91 minutes."
+        "text": "A. Considine scored on 90+1 minutes, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 103 minutes, making it 1-2."
-      },
-      {
-        "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "S. Cosgrove scored on 103 minutes, assisted by G. Leigh, making it 1-2."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen win it late against Dundee",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -740,6 +739,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

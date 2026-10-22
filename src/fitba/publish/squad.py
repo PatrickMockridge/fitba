@@ -347,6 +347,14 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
         if not player_evidence and not career_meta.get("generated_at"):
             career["status"] = "unavailable"
             career["unknown_reason"] = "career_backfill_not_run"
+        # Correct provider labels on already-normalised career rows. An English
+        # loan club's FA Cup is left alone; Aberdeen's is the Scottish Cup.
+        for item in career.get("history") or []:
+            if (
+                item.get("team_name") == "Aberdeen"
+                and str(item.get("competition") or "").casefold() == "fa cup"
+            ):
+                item["competition"] = "Scottish Cup"
         display = choose_display_role(role, career, config=role_config)
         position_rows = position_by_player.get(player_id, [])
         position_stats = [

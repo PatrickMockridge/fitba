@@ -18,6 +18,7 @@ from fitba.settings import NORMALIZED_DIR
 EVENT_COLUMNS = [
     "fixture_id",
     "season",
+    "event_order",
     "minute",
     "extra_minute",
     "team_id",
@@ -74,6 +75,48 @@ def _event_flags(event_type: str, detail: str, comments: str) -> dict[str, bool]
     }
 
 
+def derive_second_yellows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Mark a generic red card as a second yellow when two yellows preceded it.
+
+    The provider sometimes sends the dismissal as a plain "Red Card" after two
+    separate yellow-card events instead of a "Second Yellow card" detail. The
+    law makes that dismissal a second yellow, not a straight red. Explicit
+    provider text wins; a red after only one yellow stays a straight red.
+    """
+    ordered = sorted(
+        rows,
+        key=lambda row: (
+            int(row.get("minute") or 0),
+            int(row.get("extra_minute") or 0),
+            int(row.get("event_order") or 0),
+        ),
+    )
+    yellows: dict[tuple[Any, Any, Any], int] = {}
+    for row in ordered:
+        if str(row.get("event_type") or "") != "card":
+            continue
+        key = (
+            row.get("fixture_id"),
+            row.get("team_id") or row.get("team_name"),
+            row.get("player_id") or row.get("player_name"),
+        )
+        combined = f"{row.get('detail') or ''} {row.get('comments') or ''}".casefold()
+        is_second = bool(row.get("is_second_yellow"))
+        is_red = bool(row.get("is_red_card"))
+        if is_second:
+            row["is_red_card"] = True
+            yellows[key] = yellows.get(key, 0) + 1
+            continue
+        if is_red:
+            if yellows.get(key, 0) >= 2:
+                row["is_second_yellow"] = True
+                row["is_red_card"] = True
+            continue
+        if "yellow" in combined:
+            yellows[key] = yellows.get(key, 0) + 1
+    return rows
+
+
 def normalize_events(
     payload: list[dict[str, Any]],
     *,
@@ -82,7 +125,7 @@ def normalize_events(
     ingested_at: str,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for event in payload or []:
+    for event_order, event in enumerate(payload or []):
         time = event.get("time") or {}
         team = event.get("team") or {}
         player = event.get("player") or {}
@@ -94,6 +137,7 @@ def normalize_events(
             {
                 "fixture_id": fixture_id,
                 "season": season,
+                "event_order": event_order,
                 "minute": _int(time.get("elapsed")),
                 "extra_minute": _int(time.get("extra")),
                 "team_id": _int(team.get("id")),
@@ -109,7 +153,7 @@ def normalize_events(
                 "ingested_at": ingested_at,
             }
         )
-    return rows
+    return derive_second_yellows(rows)
 
 
 def normalize_lineups(
@@ -163,6 +207,7 @@ def load_lineups(season: str) -> pl.DataFrame:
 __all__ = [
     "EVENT_COLUMNS",
     "LINEUP_COLUMNS",
+    "derive_second_yellows",
     "load_events",
     "load_lineups",
     "normalize_events",

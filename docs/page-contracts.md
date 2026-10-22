@@ -76,7 +76,7 @@ shots, strength bars without percentiles, a predicted XI without confidence.
 Must remain visible:
 
 - The chairman's frame, sourced and labelled as a summary.
-- The owner's view, attributed as opinion.
+- The site owner's view, attributed as opinion.
 - The thesis.
 - Every published claim with its title, claim, count, status, status reason,
   evidence table, what better data would do and what would change the view.
@@ -130,7 +130,7 @@ depth label, or a match page link that does not resolve.
 Must remain visible:
 
 - Score, competition, round, date, venue, referee, half-time and penalties where
-  present.
+  present. A shootout outcome is named in the H1 and the result badge.
 - The scoreboard: final score, goals with scorer, minute, assist and penalty
   marker; red cards with explicit "Straight red" and "Second yellow" labels;
   shootout score; the team key; and the event-feed completeness note.
@@ -139,12 +139,16 @@ Must remain visible:
   colour is never the only cue.
 - The deterministic read with measured/inferred/unknown basis.
 - Match stats table with source and basis per row.
-- fxG and provider xG separately, or an explicit unavailable state.
+- fxG and provider xG separately, or an explicit unavailable state. When the
+  fxG gate has failed, the gate status and a link to the model page are visible
+  beside the number.
 - Timeline with goals, cards, substitutions and VAR where available.
 - Both lineups and the substitutes.
 - Player match stats where available.
 - Coverage and the depth state.
 - Previous/next match, season and match-record links.
+- A duplicate record carries a visible notice and a link to the canonical match;
+  it is excluded from counts and navigation.
 
 Forbidden: a missing data class shown as zero, an invented attendance or
 injury, a question H1, "deserved"/"dominated" verdict language, a fixture page
@@ -279,6 +283,17 @@ May be disclosed: long method detail inside a section.
 
 Forbidden: deleting method text to shorten the page; removing the corrections
 policy or last-reviewed date; presenting a derived number as measured.
+
+### `/corrections/` — policy, contact and log
+
+Must remain visible:
+
+- The corrections policy and what information to include.
+- A public contact route and the last-reviewed date.
+- A dated log with the affected page, the claim, the correction and the status.
+- Links to the method and source pages.
+
+Forbidden: claiming a corrections policy without a contact route or log.
 
 ### `/about/` — identity and editorial standard
 

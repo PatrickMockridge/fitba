@@ -17,8 +17,9 @@
     "away_team_id": "sco:motherwell",
     "away_team_name": "Motherwell",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2025-09-20",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1438969,
     "home_goals": 0,
@@ -49,7 +50,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "Jens Berthel Askou",
@@ -439,9 +440,11 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "R. Charles-Cook opened the scoring on 63 minutes, assisted by E. Longelo."
+        "text": "R. Charles-Cook opened the scoring on 63 minutes, assisted by E. Longelo, making it 0-1."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Motherwell beat Aberdeen 1-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -817,6 +820,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

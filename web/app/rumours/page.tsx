@@ -10,7 +10,8 @@ import {
   getTransfers,
 } from "@/lib/data";
 
-export const metadata = { title: "Rumour mill · fitba" };
+export const metadata = {
+  alternates: { canonical: "/rumours/" }, title: "Rumour mill · fitba" };
 
 export default function RumoursPage() {
   const rumours = getRumours();

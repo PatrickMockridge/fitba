@@ -1478,6 +1478,53 @@
           ]
         }
       }
+    },
+    {
+      "id": "corrections",
+      "path": "/corrections/",
+      "owners": [
+        "web/app/corrections/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "corrections.policy",
+              "min": 1
+            },
+            {
+              "id": "corrections.contact",
+              "min": 1
+            },
+            {
+              "id": "corrections.log",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "source": 1
+          },
+          "links": [
+            "/methodology/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Corrections and contact"
+          },
+          "metadata": {
+            "title_contains": "Corrections",
+            "description_contains": "corrections policy"
+          }
+        }
+      }
     }
   ]
 }

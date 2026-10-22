@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2019-12-21",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166455,
     "home_goals": 2,
@@ -131,7 +132,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -580,11 +581,15 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "C. Jullien opened the scoring on 7 minutes, assisted by R. Christie."
+        "text": "C. Jullien opened the scoring on 7 minutes, assisted by R. Christie, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "S. Cosgrove made it 1-1 on 35 minutes."
+        "text": "S. Cosgrove scored on 35 minutes, assisted by N. McGinn, making it 1-1."
+      },
+      {
+        "basis": "measured",
+        "text": "O. Édouard scored on 66 minutes, assisted by R. Christie, making it 2-1."
       },
       {
         "basis": "measured",
@@ -603,6 +608,8 @@
         "text": "fxG: Celtic 3.595 (0.452-6.739), Aberdeen 0.327 (0.0-1.275)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Ten-man Celtic beat Aberdeen 2-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -953,6 +960,10 @@
       "provider": null,
       "value": 0.327
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 6.739,
       "low": 0.452,

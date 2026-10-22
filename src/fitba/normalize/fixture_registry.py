@@ -9,13 +9,15 @@ football-data.co.uk alias.
 
 from __future__ import annotations
 
+from collections import defaultdict
 from collections.abc import Iterable
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, timedelta
 from typing import Any
 
 import polars as pl
 
+from fitba.normalize.competitions import canonical_name
 from fitba.normalize.names import slugify
 from fitba.normalize.teams import TeamRegistry
 from fitba.settings import fixtures_policy
@@ -53,6 +55,8 @@ class FixtureRecord:
     away_penalties: int | None = None
     extra_time: bool | None = None
     source_ids: dict[str, str] = field(default_factory=dict)
+    duplicate_of: str | None = None
+    duplicate_fixture_ids: tuple[int, ...] = ()
 
     @property
     def played(self) -> bool:
@@ -115,6 +119,8 @@ class FixtureRecord:
             "extra_time": self.extra_time,
             "href": self.href,
             "source_ids": dict(self.source_ids),
+            "duplicate_of": self.duplicate_of,
+            "duplicate_fixture_ids": list(self.duplicate_fixture_ids),
         }
 
 
@@ -127,6 +133,7 @@ class FixtureCoverage:
     with_league_alias: int
     by_season: dict[str, int]
     by_competition: dict[str, int]
+    duplicates: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -137,6 +144,7 @@ class FixtureCoverage:
             "with_league_alias": self.with_league_alias,
             "by_season": dict(self.by_season),
             "by_competition": dict(self.by_competition),
+            "duplicates": self.duplicates,
         }
 
 
@@ -159,6 +167,16 @@ class FixtureRegistry:
                 self.by_match_id[item.match_id] = item
 
     def played(self) -> tuple[FixtureRecord, ...]:
+        return tuple(item for item in self.fixtures if item.played and item.duplicate_of is None)
+
+    def all_played(self) -> tuple[FixtureRecord, ...]:
+        return tuple(item for item in self.fixtures if item.played)
+
+    def aliases(self) -> tuple[FixtureRecord, ...]:
+        return tuple(item for item in self.played_all if item.duplicate_of is not None)
+
+    @property
+    def played_all(self) -> tuple[FixtureRecord, ...]:
         return tuple(item for item in self.fixtures if item.played)
 
     def competitive(self) -> tuple[FixtureRecord, ...]:
@@ -182,7 +200,7 @@ class FixtureRegistry:
             by_season[item.season] = by_season.get(item.season, 0) + 1
             by_competition[item.competition_id] = by_competition.get(item.competition_id, 0) + 1
         return FixtureCoverage(
-            total=len(self.fixtures),
+            total=sum(1 for item in self.fixtures if item.duplicate_of is None),
             played=len(played),
             competitive=len(competitive),
             friendlies=len(played) - len(competitive),
@@ -191,7 +209,74 @@ class FixtureRegistry:
             by_competition=dict(
                 sorted(by_competition.items(), key=lambda item: (-item[1], item[0]))
             ),
+            duplicates=len(self.aliases()),
         )
+
+
+def _score_by_team(fixture: FixtureRecord) -> dict[str, int] | None:
+    if fixture.home_goals is None or fixture.away_goals is None:
+        return None
+    return {
+        fixture.home_team_id: int(fixture.home_goals),
+        fixture.away_team_id: int(fixture.away_goals),
+    }
+
+
+def _deduplicate(fixtures: list[FixtureRecord]) -> list[FixtureRecord]:
+    """Mark same-date, same-competition, same-pair records as aliases.
+
+    The signature is orientation-free, and the score must agree after mapping
+    goals to team ids. Incompatible scores are left alone rather than merged.
+    """
+    groups: dict[tuple[str, str, tuple[str, ...]], list[tuple[FixtureRecord, dict[str, int]]]] = (
+        defaultdict(list)
+    )
+    for fixture in fixtures:
+        score = _score_by_team(fixture)
+        if score is None:
+            continue
+        key = (
+            fixture.date,
+            fixture.competition_id,
+            tuple(sorted((fixture.home_team_id, fixture.away_team_id))),
+        )
+        groups[key].append((fixture, score))
+
+    aliases: dict[str, str] = {}
+    canonical_keys: set[str] = set()
+    for items in groups.values():
+        if len(items) < 2:
+            continue
+        if len({tuple(sorted(score.items())) for _, score in items}) != 1:
+            continue
+        items.sort(
+            key=lambda item: (
+                0 if item[0].venue_name else 1,
+                0 if item[0].match_id else 1,
+                item[0].fixture_id or 0,
+            )
+        )
+        canonical = items[0][0]
+        canonical_keys.add(canonical.key)
+        for fixture, _score in items[1:]:
+            aliases[fixture.key] = canonical.key
+
+    output: list[FixtureRecord] = []
+    for fixture in fixtures:
+        if fixture.key in aliases:
+            output.append(replace(fixture, duplicate_of=aliases[fixture.key]))
+        elif fixture.key in canonical_keys:
+            alias_ids = tuple(
+                sorted(
+                    item.fixture_id
+                    for item in fixtures
+                    if item.fixture_id is not None and aliases.get(item.key) == fixture.key
+                )
+            )
+            output.append(replace(fixture, duplicate_fixture_ids=alias_ids))
+        else:
+            output.append(fixture)
+    return output
 
 
 def _parse_date(value: Any) -> date | None:
@@ -300,12 +385,8 @@ def build_fixture_registry(
             away_name = str(row.get("away_team_name") or "Unknown")
             home_id = _team_id(teams, home_name)
             away_id = _team_id(teams, away_name)
-            home_display = (
-                teams.canonical_name(home_id) if not home_id.startswith("other:") else home_name
-            )
-            away_display = (
-                teams.canonical_name(away_id) if not away_id.startswith("other:") else away_name
-            )
+            home_display = teams.display_name_for_id(home_id, home_name)
+            away_display = teams.display_name_for_id(away_id, away_name)
             competition_id = str(row.get("competition_id") or "sco:other:unknown")
             key = f"api:fixture:{fixture_id}"
             override = overrides.get(key)
@@ -339,7 +420,9 @@ def build_fixture_registry(
                     season=season,
                     date=str(row.get("date") or "")[:10],
                     competition_id=competition_id,
-                    competition_name=str(row.get("competition_name") or "Unknown competition"),
+                    competition_name=canonical_name(
+                        competition_id, str(row.get("competition_name") or "")
+                    ),
                     round=str(row.get("round") or "") or None,
                     home_team_id=home_id,
                     home_team_name=home_display,
@@ -359,7 +442,7 @@ def build_fixture_registry(
                 )
             )
 
-    return FixtureRegistry(fixtures)
+    return FixtureRegistry(_deduplicate(fixtures))
 
 
 __all__ = [

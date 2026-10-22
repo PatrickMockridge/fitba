@@ -8,7 +8,7 @@
     "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
     "possession": "unknown",
     "snapshot": {
-      "age_hours": 20.7,
+      "age_hours": 23.2,
       "fixtures": 6,
       "fixtures_with_lineups": 6,
       "generated_at": "2026-10-21T23:05:03+00:00",
@@ -417,7 +417,7 @@
       }
     }
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "head_to_head": [
     {
       "away_goals": 0,
@@ -489,7 +489,7 @@
       {
         "basis": "measured",
         "label": "Set pieces",
-        "text": "Corners per match: Dundee United 8.2, Aberdeen 5.0. Delivery and second balls are the measurable set-piece edge."
+        "text": "Corners per match: Dundee United 8.2, Aberdeen 5.0. Only corner volume is measured; delivery and second balls are not in the feed."
       },
       {
         "basis": "measured",
@@ -542,6 +542,7 @@
     "aberdeen": {
       "assignment_note": "Greedy slot assignment. Goalkeeper is assigned first; outfield players are never placed in goal.",
       "availability": {
+        "applicable": true,
         "as_of": "2026-10-22T00:28:10+00:00",
         "conflicts": 0,
         "doubtful": 0,
@@ -1231,17 +1232,18 @@
     "opponent": {
       "assignment_note": "Greedy slot assignment. Goalkeeper is assigned first; outfield players are never placed in goal.",
       "availability": {
+        "applicable": false,
         "as_of": null,
-        "conflicts": 0,
-        "doubtful": 0,
-        "known": 0,
-        "note": "Curated team-news availability. A provider injury boolean is not team news.",
-        "out": 0,
-        "returned": 0,
+        "conflicts": null,
+        "doubtful": null,
+        "known": null,
+        "note": "Opponent team news is not modelled; no availability count is implied.",
+        "out": null,
+        "returned": null,
         "source_ids": [],
-        "state": "unavailable",
-        "suspended": 0,
-        "unknown": 0
+        "state": "not_modelled",
+        "suspended": null,
+        "unknown": null
       },
       "basis": "provider_lineups",
       "contenders": [
@@ -1909,7 +1911,7 @@
       "team_id": 1386,
       "unavailable": [],
       "unknowns": [
-        "No provider team-news feed for the opponent; availability is unknown."
+        "Opponent availability is not modelled; no count is implied."
       ]
     }
   },
@@ -1950,10 +1952,11 @@
       "gd_pg": 0.0,
       "gf": 10,
       "gf_pg": 1.11,
+      "league_size": 12,
       "percentiles": {
-        "ga_pg": 64,
+        "ga_pg": 77,
         "gd_pg": 59,
-        "gf_pg": 45,
+        "gf_pg": 32,
         "ppg": 45,
         "shot_share": 36,
         "shots_for_pm": 27
@@ -1962,6 +1965,14 @@
       "points": 11,
       "position": 7,
       "ppg": 1.22,
+      "ranks": {
+        "ga_pg": 3,
+        "gd_pg": 5,
+        "gf_pg": 8,
+        "ppg": 7,
+        "shot_share": 8,
+        "shots_for_pm": 9
+      },
       "reason": null,
       "sample_note": "9 league matches.",
       "shot_share": 0.441,
@@ -1983,10 +1994,11 @@
       "gd_pg": -0.11,
       "gf": 11,
       "gf_pg": 1.22,
+      "league_size": 12,
       "percentiles": {
-        "ga_pg": 36,
+        "ga_pg": 50,
         "gd_pg": 45,
-        "gf_pg": 73,
+        "gf_pg": 55,
         "ppg": 59,
         "shot_share": 64,
         "shots_for_pm": 64
@@ -1995,6 +2007,14 @@
       "points": 12,
       "position": 6,
       "ppg": 1.33,
+      "ranks": {
+        "ga_pg": 6,
+        "gd_pg": 7,
+        "gf_pg": 5,
+        "ppg": 5,
+        "shot_share": 5,
+        "shots_for_pm": 5
+      },
       "reason": null,
       "sample_note": "9 league matches.",
       "shot_share": 0.514,

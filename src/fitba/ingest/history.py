@@ -29,6 +29,7 @@ from fitba.ingest.match_extras import (
     normalize_lineups,
 )
 from fitba.ingest.team_stats import TEAM_STAT_FIELDS, parse_team_stats
+from fitba.normalize.competitions import canonical_from_league, competition_id_from_league
 from fitba.settings import NORMALIZED_DIR, ensure_dirs, history_policy
 from fitba.settings import roles as roles_config
 from fitba.sources import api_football
@@ -157,19 +158,8 @@ def _slug(value: str) -> str:
 
 
 def competition_id(league: dict[str, Any]) -> str:
-    league_id = int(league.get("id") or 0)
-    name = str(league.get("name") or "")
-    if league_id == 179:
-        return "sco:premiership"
-    if league_id == 185:
-        return "sco:league-cup"
-    if league_id == 181:
-        return "sco:scottish-cup"
-    if "europa league" in name.casefold():
-        return "uefa:europa-league"
-    if "conference league" in name.casefold():
-        return "uefa:conference-league"
-    return f"sco:other:{_slug(name)}"
+    """Backwards-compatible wrapper around the canonical resolver."""
+    return competition_id_from_league(league)
 
 
 def _fixture_rows(
@@ -191,14 +181,15 @@ def _fixture_rows(
         extratime = score.get("extratime") or {}
         penalty = score.get("penalty") or {}
         venue = fixture.get("venue") or {}
+        resolved_competition_id, resolved_competition_name = canonical_from_league(league)
         rows.append(
             {
                 "fixture_id": int(fixture_id),
                 "season": season,
                 "date": str(fixture.get("date") or ""),
                 "status": str((fixture.get("status") or {}).get("short") or ""),
-                "competition_id": competition_id(league),
-                "competition_name": str(league.get("name") or "Unknown competition"),
+                "competition_id": resolved_competition_id,
+                "competition_name": resolved_competition_name,
                 "round": str(league.get("round") or ""),
                 "home_team_id": home.get("id"),
                 "home_team_name": home.get("name"),

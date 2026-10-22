@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
 import { getManifest } from "@/lib/data";
 
-export const metadata = { title: "Method and sources · fitba" };
+export const metadata = {
+  alternates: { canonical: "/methodology/" }, title: "Method and sources · fitba" };
 
 export default function MethodologyPage() {
   const manifest = getManifest();
@@ -55,6 +56,7 @@ export default function MethodologyPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table">
+<caption className="fine-print">Sources, definitions and method notes.</caption>
             <thead>
               <tr>
                 <th>Source</th>

@@ -17,8 +17,9 @@
     "away_team_id": "sco:kelty-hearts",
     "away_team_name": "Kelty Hearts",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2026-07-25",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1548168,
     "home_goals": 3,
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": null,
@@ -612,11 +613,15 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "K. Nisbet scored a penalty on 2 minutes."
+        "text": "K. Nisbet scored a penalty on 2 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "K. Kjartansson scored on 27 minutes, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "T. Olusanya scored on 50 minutes, making it 3-0."
       },
       {
         "basis": "measured",
@@ -635,6 +640,8 @@
         "text": "fxG: Aberdeen 1.969 (0.0-4.295), Kelty Hearts 0.0 (0.0-0.0)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Kelty Hearts 3-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -1035,6 +1042,10 @@
       "provider": null,
       "value": 0.0
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 4.295,
       "low": 0.0,

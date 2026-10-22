@@ -5,6 +5,7 @@ export function CaseEvidenceTable({ evidence }: { evidence: CaseEvidence[] }) {
   return (
     <div className="table-wrap" data-contract="case.claim.evidence">
       <table className="league-table case-evidence">
+<caption className="fine-print">Claim evidence with count, sample, period, status and source.</caption>
         <thead>
           <tr>
             <th>Claim</th>

@@ -86,7 +86,7 @@ export function HistoryTimeline({
       title: honour.competition,
       detail: `${honour.season}${honour.opponent ? ` · ${honour.opponent}` : ""}${
         honour.score ? ` · ${honour.score}` : ""
-      }`,
+      }${honour.penalties ? ` · ${honour.penalties}` : ""}`,
       badge: "Honour",
       href: honour.source_urls?.[0],
     });

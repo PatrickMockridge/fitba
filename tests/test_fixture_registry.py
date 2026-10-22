@@ -108,6 +108,76 @@ def test_registry_joins_league_alias_and_keeps_cup_separate() -> None:
     assert unplayed.href is None
 
 
+def test_registry_marks_duplicate_and_reversed_fixtures_as_aliases() -> None:
+    history = pl.DataFrame(
+        [
+            {
+                "fixture_id": 2001,
+                "season": "2025-26",
+                "date": "2025-07-01T14:00:00+00:00",
+                "status": "FT",
+                "competition_id": "sco:other:friendlies",
+                "competition_name": "Friendlies Clubs",
+                "round": None,
+                "home_team_name": "Buckie Thistle",
+                "away_team_name": "Aberdeen",
+                "home_goals": 1,
+                "away_goals": 2,
+            },
+            {
+                "fixture_id": 2002,
+                "season": "2025-26",
+                "date": "2025-07-01T14:00:00+00:00",
+                "status": "FT",
+                "competition_id": "sco:other:friendlies",
+                "competition_name": "Friendlies Clubs",
+                "round": None,
+                "home_team_name": "Buckie Thistle",
+                "away_team_name": "Aberdeen",
+                "home_goals": 1,
+                "away_goals": 2,
+            },
+            {
+                "fixture_id": 2003,
+                "season": "2025-26",
+                "date": "2025-07-06T14:00:00+00:00",
+                "status": "FT",
+                "competition_id": "sco:other:friendlies",
+                "competition_name": "Friendlies Clubs",
+                "round": None,
+                "home_team_name": "Brechin City",
+                "away_team_name": "Aberdeen",
+                "home_goals": 1,
+                "away_goals": 7,
+            },
+            {
+                "fixture_id": 2004,
+                "season": "2025-26",
+                "date": "2025-07-06T14:00:00+00:00",
+                "status": "FT",
+                "competition_id": "sco:other:friendlies",
+                "competition_name": "Friendlies Clubs",
+                "round": None,
+                "home_team_name": "Aberdeen",
+                "away_team_name": "Brechin City",
+                "home_goals": 7,
+                "away_goals": 1,
+            },
+        ]
+    )
+    registry = build_fixture_registry(
+        history_frames={"2025-26": history},
+        match_rows=_matches(),
+        policy=POLICY,
+    )
+
+    assert registry.coverage().played == 2
+    assert registry.coverage().duplicates == 2
+    assert registry.by_fixture_id[2002].duplicate_of == "api:fixture:2001"
+    assert registry.by_fixture_id[2004].duplicate_of == "api:fixture:2003"
+    assert {item.fixture_id for item in registry.played()} == {2001, 2003}
+
+
 def test_registry_tolerates_date_offset_when_configured() -> None:
     policy = {**POLICY, "matching": {"date_tolerance_days": 1, "overrides": {}}}
     registry = build_fixture_registry(

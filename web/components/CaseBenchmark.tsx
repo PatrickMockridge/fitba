@@ -18,6 +18,9 @@ export function CaseBenchmark({ benchmark }: { benchmark: Benchmark }) {
       </div>
       <div className="table-wrap">
         <table className="league-table">
+          <caption className="fine-print">
+            {benchmark.title}: league performance benchmark.
+          </caption>
           <thead>
             <tr>
               {benchmark.columns.map((column) => (

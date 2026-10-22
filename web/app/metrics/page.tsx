@@ -7,6 +7,7 @@ import {
 } from "@/lib/data";
 
 export const metadata = {
+  alternates: { canonical: "/metrics/" },
   title: "Metrics and audit · fitba",
   description:
     "Every published number: its definition, formula, source, coverage, verification and audit status.",
@@ -234,6 +235,9 @@ export default function MetricsPage() {
             </h3>
             <div className="table-wrap">
               <table className="league-table metric-table">
+                <caption className="fine-print">
+                  Registered metrics for the {surface} surface.
+                </caption>
                 <thead>
                   <tr>
                     <th>Metric</th>
@@ -308,6 +312,9 @@ export default function MetricsPage() {
             <h3>{domain}</h3>
             <div className="table-wrap">
               <table className="league-table metric-table">
+                <caption className="fine-print">
+                  Config parameters for {domain}.
+                </caption>
                 <thead>
                   <tr>
                     <th>Parameter</th>
@@ -363,6 +370,9 @@ export default function MetricsPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table">
+            <caption className="fine-print">
+              Verification modes, what each proves and what it does not prove.
+            </caption>
             <thead>
               <tr>
                 <th>Mode</th>

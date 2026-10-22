@@ -5,6 +5,7 @@ import { getXg } from "@/lib/data";
 import { formatDecimal } from "@/lib/format";
 
 export const metadata = {
+  alternates: { canonical: "/analysis/xg/" },
   title: "fxG model · fitba",
   description:
     "fitba's shot-on-target expected goals model, its interval, its provider-xG evaluation and its limitations.",
@@ -88,6 +89,7 @@ export default function XgPage() {
               <ul className="plain-list">
                 <li>Validation season: {evaluation.validation_season}</li>
                 <li>Matches with provider xG: {evaluation.matches}</li>
+                <li>Team-match rows with provider xG: {evaluation.team_rows ?? "—"}</li>
                 <li>Bias: {evaluation.bias ?? "—"}</li>
                 <li>MAE: {evaluation.mae ?? "—"}</li>
                 <li>Calibration slope: {evaluation.calibration_slope ?? "—"}</li>

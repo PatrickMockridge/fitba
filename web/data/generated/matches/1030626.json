@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:other:friendlies-clubs",
-    "competition_name": "Friendlies Clubs",
+    "competition_name": "Club friendlies",
     "date": "2023-07-29",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1030626,
     "home_goals": 2,
@@ -67,7 +68,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -411,13 +412,27 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "G. Shinnie opened the scoring on 3 minutes."
+        "text": "G. Shinnie opened the scoring on 3 minutes, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 90 minutes, making it 2-3."
+        "text": "G. Shinnie scored on 22 minutes, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "B. Miovski scored on 33 minutes, making it 0-3."
+      },
+      {
+        "basis": "measured",
+        "text": "C. Blackett-Taylor scored on 69 minutes, making it 1-3."
+      },
+      {
+        "basis": "measured",
+        "text": "D. Kanu scored on 90 minutes, making it 2-3."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Charlton 3-2",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -868,6 +883,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

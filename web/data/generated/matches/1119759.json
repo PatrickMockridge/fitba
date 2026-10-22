@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2023-08-31",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1119759,
     "home_goals": 1,
@@ -49,7 +50,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "P. Høgmo",
@@ -520,11 +521,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "I. Sadiq opened the scoring on 14 minutes, assisted by R. Amané."
+        "text": "I. Sadiq opened the scoring on 14 minutes, assisted by R. Amané, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "I. Sadiq scored on 41 minutes, assisted by M. Rygaard, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "B. Miovski scored a penalty on 55 minutes, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "A. Layouni scored a penalty on 81 minutes, making it 1-3."
       },
       {
         "basis": "measured",
@@ -539,6 +548,8 @@
         "text": "fxG: Aberdeen 1.641 (0.0-3.764), BK Hacken 2.297 (0.0-4.809)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "BK Hacken beat Aberdeen 3-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -862,6 +873,31 @@
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 90,
+      "player_name": "Nicky Devlin",
+      "score_after": {
+        "away": 3,
+        "home": 1
+      },
+      "side": "home",
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
       "extra_minute": 6,
       "is_goal": false,
       "is_missed_penalty": false,
@@ -904,31 +940,6 @@
       },
       "side": "away",
       "team_name": "BK Hacken"
-    },
-    {
-      "assist_name": null,
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Yellow Card",
-      "event_type": "card",
-      "extra_minute": null,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 90,
-      "player_name": "Nicky Devlin",
-      "score_after": {
-        "away": 3,
-        "home": 1
-      },
-      "side": "home",
-      "team_name": "Aberdeen"
     }
   ],
   "xg": {
@@ -939,6 +950,10 @@
       "provider": null,
       "value": 2.297
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 3.764,
       "low": 0.0,

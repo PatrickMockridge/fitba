@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AvailabilityBadge } from "@/components/AvailabilityBadge";
 import type { NeedsDocument, NeedsFamily } from "@/lib/data";
+import { formatDecimal, formatPercent } from "@/lib/format";
 
 const CATEGORY_CLASS: Record<string, string> = {
   cover: "badge-warn",
@@ -13,12 +14,12 @@ const CATEGORY_CLASS: Record<string, string> = {
 
 function pct(value: unknown) {
   if (typeof value !== "number") return "—";
-  return `${Math.round(value * 100)}%`;
+  return formatPercent(value);
 }
 
 function num(value: unknown) {
   if (typeof value !== "number") return "—";
-  return value.toFixed(2).replace(/\.00$/, "");
+  return formatDecimal(value).replace(/\.00$/, "");
 }
 
 function FamilyCard({ family }: { family: NeedsFamily }) {
@@ -78,6 +79,12 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
           <strong>{pct(measured.availability_risk)}</strong>
         </span>
       </div>
+      {measured.availability_risk == null ? (
+        <p className="fine-print">
+          Availability risk is unknown: {String(measured.availability_known ?? 0)} known /{" "}
+          {String(measured.availability_unknown ?? "—")} unknown projected players.
+        </p>
+      ) : null}
 
       <p className="need-line">
         {family.category === "cover"
@@ -146,6 +153,7 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
         </summary>
         <div className="table-wrap">
           <table className="league-table compact">
+<caption className="fine-print">Squad needs by family with availability and market route.</caption>
             <thead>
               <tr>
                 <th>Player</th>

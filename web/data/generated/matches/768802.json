@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "uefa:conference-league",
-    "competition_name": "UEFA Europa Conference League",
+    "competition_name": "UEFA Conference League",
     "date": "2021-08-19",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 768802,
     "home_goals": 1,
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Glass",
@@ -421,13 +422,15 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "Jaime Romero opened the scoring on 30 minutes."
+        "text": "Jaime Romero opened the scoring on 30 minutes, making it 1-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Qarabag beat Aberdeen 1-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -728,6 +731,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

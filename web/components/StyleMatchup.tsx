@@ -90,6 +90,7 @@ function StyleCard({
       <ProfileMetrics profile={venue} />
       <div className="table-wrap">
         <table className="league-table compact style-split-table">
+<caption className="fine-print">Shot profile and approach index by venue split.</caption>
           <thead>
             <tr>
               <th>Split</th>

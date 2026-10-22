@@ -16,7 +16,7 @@ check a number.
 | [Identity review, October 2026](identity-review-2026-10.md) | The seven-lens panel record: identity decisions, corrections to the brief, the red-team matrix and the deferred follow-ups. |
 | [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |
-| [Data analysis](analysis.md) | The owner's view, the chairman's frame and six evidence-led claims connecting the team, the squad and the Cormack-era record. |
+| [Data analysis](analysis.md) | The site owner's view, the chairman's frame and six evidence-led claims connecting the team, the squad and the Cormack-era record. |
 | [Match record](fixtures.md) | One page per played Cormack-era fixture: canonical ids, depth states, timeline, lineups, stats and the deterministic read. |
 | [fxG](xg.md) | The experimental shot-on-target expected-goals model, interval, provider-xG evaluation gate and limitations. |
 | [Match scoreboard](match-scoreboard.md) | The top-level score, goal and red-card widget, event semantics and the Aberdeen/opposition split. |

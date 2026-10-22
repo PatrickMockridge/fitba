@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2025-01-18",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1318882,
     "home_goals": 0,
@@ -76,7 +77,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Thelin",
@@ -465,11 +466,15 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "S. Morris opened the scoring on 21 minutes, assisted by Duk."
+        "text": "S. Morris opened the scoring on 21 minutes, assisted by Duk, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 92 minutes, making it 0-3."
+        "text": "Duk scored on 72 minutes, assisted by A. Jensen, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "Duk scored on 90+2 minutes, assisted by N. Devlin, making it 0-3."
       },
       {
         "basis": "measured",
@@ -480,7 +485,9 @@
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against Elgin City",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Ten-man Aberdeen beat Elgin City 3-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 3,
@@ -880,6 +887,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

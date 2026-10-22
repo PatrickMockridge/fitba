@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2023-01-15",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 967595,
     "home_goals": 2,
@@ -85,7 +86,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Goodwin",
@@ -467,25 +468,27 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "B. Miovski opened the scoring on 41 minutes, assisted by M. Kennedy."
+        "text": "B. Miovski opened the scoring on 41 minutes, assisted by M. Kennedy, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "R. Jack made it 1-1 on 61 minutes."
+        "text": "R. Jack scored on 61 minutes, assisted by A. Morelos, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 94 minutes, making it 2-1."
+        "text": "K. Roofe scored on 94 minutes, assisted by S. Wright, making it 2-1."
       },
       {
         "basis": "measured",
-        "text": "A. Stewart was sent off on 93 minutes."
+        "text": "A. Stewart was sent off on 90+3 minutes."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Rangers win it late against Aberdeen",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -753,56 +756,6 @@
       "team_name": "Aberdeen"
     },
     {
-      "assist_name": null,
-      "beneficiary_side": null,
-      "card_type": "straight_red",
-      "comments": null,
-      "detail": "Red Card",
-      "event_type": "card",
-      "extra_minute": 3,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": true,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 90,
-      "player_name": "A. Stewart",
-      "score_after": {
-        "away": 1,
-        "home": 1
-      },
-      "side": "away",
-      "team_name": "Aberdeen"
-    },
-    {
-      "assist_name": null,
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Yellow Card",
-      "event_type": "card",
-      "extra_minute": 9,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 90,
-      "player_name": "C. Goldson",
-      "score_after": {
-        "away": 1,
-        "home": 1
-      },
-      "side": "home",
-      "team_name": "Rangers"
-    },
-    {
       "assist_name": "S. Wright",
       "beneficiary_side": null,
       "card_type": null,
@@ -851,6 +804,56 @@
       },
       "side": "away",
       "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": "straight_red",
+      "comments": null,
+      "detail": "Red Card",
+      "event_type": "card",
+      "extra_minute": 3,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": true,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 90,
+      "player_name": "A. Stewart",
+      "score_after": {
+        "away": 1,
+        "home": 1
+      },
+      "side": "away",
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": 9,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 90,
+      "player_name": "C. Goldson",
+      "score_after": {
+        "away": 1,
+        "home": 1
+      },
+      "side": "home",
+      "team_name": "Rangers"
     },
     {
       "assist_name": "S. Wright",
@@ -1036,6 +1039,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

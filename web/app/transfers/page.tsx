@@ -4,7 +4,8 @@ import { TransferBoard } from "@/components/TransferBoard";
 import { getTransferAudit, getTransfers } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
-export const metadata = { title: "Transfers · fitba" };
+export const metadata = {
+  alternates: { canonical: "/transfers/" }, title: "Transfers · fitba" };
 
 export default function TransfersPage() {
   const data = getTransfers();
@@ -74,6 +75,7 @@ export default function TransfersPage() {
           </div>
           <div className="table-wrap">
             <table className="league-table compact">
+<caption className="fine-print">Confirmed transfers, loans and coverage.</caption>
               <thead>
                 <tr>
                   <th>Player</th>

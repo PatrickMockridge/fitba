@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2019-08-08",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 368925,
     "home_goals": 2,
@@ -54,7 +55,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369111/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "H"
       },
       {
@@ -63,7 +64,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369112/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "A"
       },
       {
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -546,15 +547,11 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "A. Čolak scored a penalty on 62 minutes."
+        "text": "A. Čolak scored a penalty on 62 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 87 minutes, making it 2-0."
-      },
-      {
-        "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "R. Murić scored on 87 minutes, making it 2-0."
       },
       {
         "basis": "measured",
@@ -573,7 +570,9 @@
         "text": "fxG: HNK Rijeka 1.313 (0.0-3.212), Aberdeen 0.328 (0.0-1.278)."
       }
     ],
-    "headline": "HNK Rijeka win it late against Aberdeen",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "HNK Rijeka beat Aberdeen 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 2,
@@ -923,6 +922,10 @@
       "provider": null,
       "value": 0.328
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 3.212,
       "low": 0.0,

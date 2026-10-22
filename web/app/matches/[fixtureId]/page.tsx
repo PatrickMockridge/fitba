@@ -16,7 +16,9 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const index = getFixtureIndex();
-  return (index?.fixtures ?? []).map((row) => ({ fixtureId: String(row.fixture_id) }));
+  return [...(index?.fixtures ?? []), ...(index?.aliases ?? [])].map((row) => ({
+    fixtureId: String(row.fixture_id),
+  }));
 }
 
 export async function generateMetadata({
@@ -28,9 +30,16 @@ export async function generateMetadata({
   const data = getFixture(fixtureId);
   if (!data) return { title: "Match · fitba" };
   const f = data.fixture;
+  const duplicate = Boolean(f.duplicate_of);
+  const title = `${f.home_team_name} ${f.home_goals ?? "–"}–${f.away_goals ?? "–"} ${f.away_team_name} · ${formatDate(f.date)}${duplicate ? ` (duplicate record ${fixtureId})` : ""} · fitba`;
+  const description = `${f.competition_name}, ${formatDate(f.date)}. The measured match record, scoreboard, events and coverage.`;
   return {
-    title: `${f.home_team_name} ${f.home_goals ?? "–"}–${f.away_goals ?? "–"} ${f.away_team_name} · fitba`,
-    description: `${f.competition_name}, ${formatDate(f.date)}. The measured match record.`,
+    title,
+    description,
+    alternates: { canonical: f.duplicate_of ?? `/matches/${fixtureId}/` },
+    openGraph: { title, description, type: "article" },
+    twitter: { card: "summary", title, description },
+    robots: f.duplicate_of ? { index: false, follow: true } : undefined,
   };
 }
 
@@ -48,6 +57,15 @@ export default async function MatchPage({
   const aberdeenIsHome = f.home_team_id === "sco:aberdeen";
   return (
     <ContractPage surface="match">
+      {f.duplicate_of ? (
+        <p className="stale-banner" data-contract="match.duplicate">
+          This is a duplicate fixture record. The canonical match is{" "}
+          <Link className="text-link" href={f.duplicate_of}>
+            here
+          </Link>
+          ; counts and navigation use the canonical record.
+        </p>
+      ) : null}
       <MatchHeader fixture={data} />
       <MatchScoreboard fixture={data} />
       <MatchSummary summary={data.summary} />
@@ -69,6 +87,23 @@ export default async function MatchPage({
           </div>
           <span className="badge badge-neutral">experimental</span>
         </div>
+        {data.xg.available && data.xg.gate_passed === false ? (
+          <p className="fine-print" data-contract="match.xg.gate">
+            <span className="badge badge-warn">fxG gate failed</span>{" "}
+            {data.xg.gate_note ?? "The model is descriptive, not decision-grade."}{" "}
+            <Link className="text-link" href={data.xg.evaluation_href ?? "/analysis/xg/"}>
+              Model and gate →
+            </Link>
+          </p>
+        ) : null}
+        {data.xg.available && data.xg.gate_passed === true ? (
+          <p className="fine-print" data-contract="match.xg.gate">
+            <span className="badge badge-ok">fxG gate passed</span>{" "}
+            <Link className="text-link" href={data.xg.evaluation_href ?? "/analysis/xg/"}>
+              Model and gate →
+            </Link>
+          </p>
+        ) : null}
         {data.xg.available && data.xg.home && data.xg.away ? (
           <div className="match-xg-grid">
             <div

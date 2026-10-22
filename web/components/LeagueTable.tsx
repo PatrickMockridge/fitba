@@ -8,11 +8,13 @@ export function LeagueTable({
   highlightTeamId,
   compact = false,
   cutoffs = [],
+  caption = "League table: position, played, won, drawn, lost, goals for and against, goal difference, points and form.",
 }: {
   rows: TableRow[];
   highlightTeamId?: string;
   compact?: boolean;
   cutoffs?: Cutoff[];
+  caption?: string;
 }) {
   const columnCount = compact ? 10 : 11;
   const cutoffsByPosition = new Map(
@@ -21,19 +23,38 @@ export function LeagueTable({
   return (
     <div className="table-wrap">
       <table className="league-table">
+        <caption className="fine-print">{caption}</caption>
         <thead>
           <tr>
-            <th className="num">#</th>
-            <th>Club</th>
-            <th className="num">P</th>
-            <th className="num">W</th>
-            <th className="num">D</th>
-            <th className="num">L</th>
-            <th className="num">GF</th>
-            <th className="num">GA</th>
-            <th className="num">GD</th>
-            <th className="num">Pts</th>
-            {compact ? null : <th>Form</th>}
+            <th scope="col" className="num">
+              #
+            </th>
+            <th scope="col">Club</th>
+            <th scope="col" className="num">
+              P
+            </th>
+            <th scope="col" className="num">
+              W
+            </th>
+            <th scope="col" className="num">
+              D
+            </th>
+            <th scope="col" className="num">
+              L
+            </th>
+            <th scope="col" className="num">
+              GF
+            </th>
+            <th scope="col" className="num">
+              GA
+            </th>
+            <th scope="col" className="num">
+              GD
+            </th>
+            <th scope="col" className="num">
+              Pts
+            </th>
+            {compact ? null : <th scope="col">Form</th>}
           </tr>
         </thead>
         <tbody>

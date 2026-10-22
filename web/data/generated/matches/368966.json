@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2019-08-01",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 368966,
     "home_goals": 5,
@@ -63,7 +64,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369111/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "H"
       },
       {
@@ -72,7 +73,7 @@
         "goals_against": 1,
         "goals_for": 2,
         "href": "/matches/369112/",
-        "opponent_name": "Rops",
+        "opponent_name": "RoPS",
         "venue": "A"
       },
       {
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Pruidze",
@@ -578,7 +579,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "S. Cosgrove opened the scoring on 9 minutes."
+        "text": "S. Cosgrove opened the scoring on 9 minutes, making it 1-0."
+      },
+      {
+        "basis": "measured",
+        "text": "S. Cosgrove scored on 20 minutes, making it 2-0."
+      },
+      {
+        "basis": "measured",
+        "text": "G. Leigh scored on 58 minutes, making it 3-0."
+      },
+      {
+        "basis": "measured",
+        "text": "S. Wright scored on 64 minutes, making it 4-0."
+      },
+      {
+        "basis": "measured",
+        "text": "S. Cosgrove scored on 80 minutes, making it 5-0."
       },
       {
         "basis": "measured",
@@ -597,6 +614,8 @@
         "text": "fxG: Aberdeen 2.626 (0.0-5.311), Chikhura Sachkhere 0.656 (0.0-1.999)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Chikhura Sachkhere 5-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -947,6 +966,10 @@
       "provider": null,
       "value": 0.656
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 5.311,
       "low": 0.0,

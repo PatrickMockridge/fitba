@@ -78,7 +78,9 @@ class TeamRegistry:
         if team_id == "sco:free-agent" or normalize_name(str(raw or "")) == "free agent":
             return "Free agent"
         if team_id and not team_id.startswith("sco:provisional-"):
-            return self.canonical_name(team_id)
+            team = self._teams.get(team_id)
+            if team is not None:
+                return team.name
         return titlecase_club_name(str(raw or "Unknown"))
 
     def resolve(self, raw: str) -> str | None:

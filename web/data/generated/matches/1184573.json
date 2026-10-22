@@ -17,8 +17,9 @@
     "away_team_id": "sco:celtic",
     "away_team_name": "Celtic",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2024-04-20",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 1184573,
     "home_goals": 3,
@@ -67,7 +68,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Rodgers",
@@ -508,22 +509,36 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "B. Miovski opened the scoring on 2 minutes, assisted by L. Clarkson."
+        "text": "B. Miovski opened the scoring on 2 minutes, assisted by L. Clarkson, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "N. Kühn made it 1-1 on 21 minutes."
+        "text": "N. Kühn scored on 21 minutes, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 119 minutes, making it 3-3."
+        "text": "J. Forrest scored on 63 minutes, assisted by R. Hatate, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "E. Sokler scored on 90 minutes, assisted by J. Hoilett, making it 2-2."
+      },
+      {
+        "basis": "measured",
+        "text": "M. O'Riley scored on 105+1 minutes, assisted by A. Johnston, making it 2-3."
+      },
+      {
+        "basis": "measured",
+        "text": "A. MacDonald scored on 119 minutes, assisted by J. Hoilett, making it 3-3."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen and Celtic draw 3-3",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Celtic beat Aberdeen 6-5 on penalties after a 3-3 draw",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 6,
@@ -865,31 +880,6 @@
       "team_name": "Celtic"
     },
     {
-      "assist_name": null,
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Yellow Card",
-      "event_type": "card",
-      "extra_minute": 1,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 90,
-      "player_name": "Ester Sokler",
-      "score_after": {
-        "away": 2,
-        "home": 1
-      },
-      "side": "home",
-      "team_name": "Aberdeen"
-    },
-    {
       "assist_name": "J. Hoilett",
       "beneficiary_side": "home",
       "card_type": null,
@@ -907,6 +897,31 @@
       "is_var": false,
       "minute": 90,
       "player_name": "E. Sokler",
+      "score_after": {
+        "away": 2,
+        "home": 2
+      },
+      "side": "home",
+      "team_name": "Aberdeen"
+    },
+    {
+      "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Yellow Card",
+      "event_type": "card",
+      "extra_minute": 1,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 90,
+      "player_name": "Ester Sokler",
       "score_after": {
         "away": 2,
         "home": 2
@@ -940,6 +955,31 @@
       "team_name": "Aberdeen"
     },
     {
+      "assist_name": "R. Duncan",
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Substitution 6",
+      "event_type": "subst",
+      "extra_minute": null,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 105,
+      "player_name": "C. Barron",
+      "score_after": {
+        "away": 2,
+        "home": 2
+      },
+      "side": "home",
+      "team_name": "Aberdeen"
+    },
+    {
       "assist_name": "A. Johnston",
       "beneficiary_side": "away",
       "card_type": null,
@@ -963,31 +1003,6 @@
       },
       "side": "away",
       "team_name": "Celtic"
-    },
-    {
-      "assist_name": "R. Duncan",
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Substitution 6",
-      "event_type": "subst",
-      "extra_minute": null,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 105,
-      "player_name": "C. Barron",
-      "score_after": {
-        "away": 3,
-        "home": 2
-      },
-      "side": "home",
-      "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. Hoilett",
@@ -1473,6 +1488,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

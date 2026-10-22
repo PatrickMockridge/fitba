@@ -1,7 +1,7 @@
 {
   "coverage": {
     "depth": "score",
-    "events": true,
+    "events": false,
     "lineups": false,
     "note": "Missing classes are unavailable, not zero.",
     "player_stats": false,
@@ -12,28 +12,29 @@
   "fixture": {
     "aberdeen_result": "W",
     "away_goals": 2,
-    "away_ht_goals": 0,
+    "away_ht_goals": null,
     "away_penalties": null,
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:other:friendlies-clubs",
-    "competition_name": "Friendlies Clubs",
+    "competition_name": "Club friendlies",
     "date": "2022-06-25",
+    "duplicate_of": "/matches/870984/",
     "extra_time": false,
     "fixture_id": 871150,
     "home_goals": 1,
-    "home_ht_goals": 0,
+    "home_ht_goals": null,
     "home_penalties": null,
     "home_team_id": "other:buckie-thistle",
     "home_team_name": "Buckie Thistle",
     "href": "/matches/871150/",
     "referee": null,
     "result": "L",
-    "round": "Club Friendlies 5",
+    "round": "Club Friendlies 3",
     "season": "2022-23",
     "status": "FT",
     "venue": "A",
-    "venue_name": null
+    "venue_name": "Victoria Park"
   },
   "form": {
     "after": [
@@ -54,39 +55,11 @@
         "href": "/matches/870479/",
         "opponent_name": "Brechin City",
         "venue": "A"
-      },
-      {
-        "date": "2022-07-06",
-        "fixture_id": 891298,
-        "goals_against": 1,
-        "goals_for": 7,
-        "href": "/matches/891298/",
-        "opponent_name": "Brechin City",
-        "venue": "H"
-      },
-      {
-        "date": "2022-07-06",
-        "fixture_id": 922189,
-        "goals_against": 1,
-        "goals_for": 7,
-        "href": "/matches/922189/",
-        "opponent_name": "Brechin City",
-        "venue": "A"
       }
     ],
-    "before": [
-      {
-        "date": "2022-06-25",
-        "fixture_id": 870984,
-        "goals_against": 1,
-        "goals_for": 2,
-        "href": "/matches/870984/",
-        "opponent_name": "Buckie Thistle",
-        "venue": "A"
-      }
-    ]
+    "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": null,
     "home": null
@@ -95,75 +68,31 @@
     "competition": "/competitions/",
     "matches": "/matches/",
     "next": "/matches/890132/",
-    "previous": "/matches/870984/",
+    "previous": "/matches/857285/",
     "season": "/history/2022-23/"
   },
   "player_stats": [],
   "schema_version": "1.1.0",
   "scoreboard": {
     "away": {
-      "goals": [
-        {
-          "assist_name": null,
-          "extra_minute": null,
-          "is_own_goal": false,
-          "is_penalty": true,
-          "minute": 64,
-          "player_name": "C. Ramirez",
-          "score_after": {
-            "away": 1,
-            "home": 1
-          },
-          "side": "away",
-          "team_name": "Aberdeen"
-        },
-        {
-          "assist_name": null,
-          "extra_minute": null,
-          "is_own_goal": false,
-          "is_penalty": false,
-          "minute": 89,
-          "player_name": "M. Kennedy",
-          "score_after": {
-            "away": 2,
-            "home": 1
-          },
-          "side": "away",
-          "team_name": "Aberdeen"
-        }
-      ],
+      "goals": [],
       "is_aberdeen": true,
       "red_cards": [],
       "side": "away",
       "team_id": "sco:aberdeen",
       "team_name": "Aberdeen"
     },
-    "events_available": true,
-    "goals_complete": true,
+    "events_available": false,
+    "goals_complete": false,
     "home": {
-      "goals": [
-        {
-          "assist_name": null,
-          "extra_minute": null,
-          "is_own_goal": false,
-          "is_penalty": false,
-          "minute": 48,
-          "player_name": "M. Barry",
-          "score_after": {
-            "away": 0,
-            "home": 1
-          },
-          "side": "home",
-          "team_name": "Buckie Thistle"
-        }
-      ],
+      "goals": [],
       "is_aberdeen": false,
       "red_cards": [],
       "side": "home",
       "team_id": "other:buckie-thistle",
       "team_name": "Buckie Thistle"
     },
-    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "note": "The event feed is unavailable; the final score is authoritative.",
     "shootout": null
   },
   "sources": [
@@ -190,121 +119,32 @@
     "rows": []
   },
   "summary": {
-    "basis": "measured",
+    "basis": "unknown",
     "bullets": [
       {
-        "basis": "measured",
-        "text": "M. Barry opened the scoring on 48 minutes."
-      },
-      {
-        "basis": "measured",
-        "text": "C. Ramirez made it 1-1 on 64 minutes."
-      },
-      {
-        "basis": "measured",
-        "text": "The last goal came on 89 minutes, making it 1-2."
-      },
-      {
-        "basis": "measured",
-        "text": "The score includes a penalty."
+        "basis": "unknown",
+        "text": "The event feed is unavailable; the final score is authoritative."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against Buckie Thistle",
+    "events_available": false,
+    "goals_complete": false,
+    "headline": "Aberdeen beat Buckie Thistle 2-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
-      "event_goals": 3,
-      "event_score": {
-        "away": 2,
-        "home": 1
-      },
+      "event_goals": null,
+      "event_score": null,
       "final_score": {
         "away": 2,
         "home": 1
       },
-      "matched": true
+      "matched": null
     }
   },
-  "timeline": [
-    {
-      "assist_name": null,
-      "beneficiary_side": "home",
-      "card_type": null,
-      "comments": null,
-      "detail": "Normal Goal",
-      "event_type": "goal",
-      "extra_minute": null,
-      "is_goal": true,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 48,
-      "player_name": "M. Barry",
-      "score_after": {
-        "away": 0,
-        "home": 1
-      },
-      "side": "home",
-      "team_name": "Buckie Thistle"
-    },
-    {
-      "assist_name": null,
-      "beneficiary_side": "away",
-      "card_type": null,
-      "comments": null,
-      "detail": "Penalty",
-      "event_type": "goal",
-      "extra_minute": null,
-      "is_goal": true,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": true,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 64,
-      "player_name": "C. Ramirez",
-      "score_after": {
-        "away": 1,
-        "home": 1
-      },
-      "side": "away",
-      "team_name": "Aberdeen"
-    },
-    {
-      "assist_name": null,
-      "beneficiary_side": "away",
-      "card_type": null,
-      "comments": null,
-      "detail": "Normal Goal",
-      "event_type": "goal",
-      "extra_minute": null,
-      "is_goal": true,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 89,
-      "player_name": "M. Kennedy",
-      "score_after": {
-        "away": 2,
-        "home": 1
-      },
-      "side": "away",
-      "team_name": "Aberdeen"
-    }
-  ],
+  "timeline": [],
   "xg": {
     "available": false,
     "away": {
@@ -313,6 +153,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

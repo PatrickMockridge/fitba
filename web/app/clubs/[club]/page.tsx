@@ -9,7 +9,8 @@ export function generateStaticParams() {
 
 export const metadata = {
   title: "Aberdeen dashboard moved · fitba",
-  robots: { index: false },
+  alternates: { canonical: "/matchday/" },
+  robots: { index: false, follow: true },
 };
 
 export default async function ClubPage({

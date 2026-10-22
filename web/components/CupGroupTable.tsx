@@ -16,6 +16,9 @@ export function CupGroupTable({
       </div>
       <div className="table-wrap">
         <table className="league-table compact cup-group-table">
+          <caption className="fine-print">
+            {group.id} table with group-stage points and shoot-out bonus.
+          </caption>
           <thead>
             <tr>
               <th className="num">#</th>

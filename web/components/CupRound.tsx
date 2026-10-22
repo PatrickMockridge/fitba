@@ -66,6 +66,7 @@ export function CupRound({
       {hasFixtures ? (
         <div className="table-wrap">
           <table className="league-table compact cup-ties">
+            <caption className="fine-print">{round.name} ties and scores.</caption>
             <thead>
               <tr>
                 <th>Date</th>

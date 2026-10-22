@@ -32,6 +32,7 @@ export function CareerRoleHeatmap({ career }: { career: CareerRole }) {
   return (
     <div className="table-wrap">
       <table className="league-table compact role-heatmap">
+<caption className="fine-print">Career starts by role family and season.</caption>
         <thead>
           <tr>
             <th>Season</th>

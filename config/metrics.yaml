@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 2.2.1
+registry_version: 2.3.0
 reviewed: '2026-10-22'
 owner: patrickmockridge
 change_policy:
@@ -86,7 +86,8 @@ metrics:
   description: League positions and cutoff labels.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Configured league cutoffs; positions are read from config/competitions.yaml,
+    not recomputed from results.
   inputs:
   - published payload
   unit: mixed
@@ -113,14 +114,15 @@ metrics:
   - Cutoff positions are configured; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: competition.index
   label: Competition index
   description: Competition identity, coverage and match counts.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: One row per configured competition; counts are fixtures or table rows joined
+    by competition_id; coverage states come from the source frame.
   inputs:
   - published payload
   unit: mixed
@@ -147,14 +149,15 @@ metrics:
   - Competition metadata and coverage; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: cup.league
   label: League Cup
   description: League Cup groups, rounds, ties and qualifiers.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: 'Group tables: points = 3*won + drawn + shootout bonus; ties and rounds
+    counted from cup fixtures; qualifiers read from config/cups.yaml.'
   inputs:
   - published payload
   unit: mixed
@@ -181,14 +184,15 @@ metrics:
   - Cup structure and results; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: cup.scottish
   label: Scottish Cup
   description: Scottish Cup rounds, ties and coverage.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Rounds and ties counted from cup fixtures; coverage compares published
+    ties with the configured official round count.
   inputs:
   - published payload
   unit: mixed
@@ -215,7 +219,7 @@ metrics:
   - Cup structure and results; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matchday.form
   label: Matchday form
@@ -290,9 +294,15 @@ metrics:
   - gd_pg
   - shots_for_pm
   - shot_share
+  - ranks
+  - league_size
   - position_gap
   - ppg_gap
-  formula: Registered family; see description and fields.
+  formula: ppp = points/played; ppg = points/played; gf_pg = gf/played; ga_pg = ga/played;
+    gd_pg = (gf-ga)/played; shots_for_pm = shots/matches; shot_share = team shots/(team
+    + opponent shots); rank = 1 + count of better teams (lower is better for ga_pg);
+    league_size = teams in the league; position_gap and ppg_gap = team value minus
+    opponent value. Percentiles set the bar length; ranks set the visible label.
   inputs:
   - published payload
   unit: mixed
@@ -321,14 +331,16 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 3
   status: active
 - id: matchday.style
   label: Matchday style
   description: Shot profile, approach index and style lean.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Approach index is the mean of within-league percentiles for shots, shots
+    on target, goals and corners; possession is not used. Style lean is the sign of
+    the approach index against the league median.
   inputs:
   - published payload
   unit: mixed
@@ -356,14 +368,16 @@ metrics:
   - Shot-profile derivatives; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matchday.lineup
   label: Predicted XI
   description: Predicted lineups, scores, selection weights and availability.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Player score = 0.20*form + 0.10*minute_share + 0.15*recent_rating + 0.15*role_fit
+    + 0.18*recency_start + 0.22*start_rate. Availability counts curated entries; opponent
+    availability is not modelled.
   inputs:
   - published payload
   unit: mixed
@@ -390,7 +404,7 @@ metrics:
   - Selection and formation projections; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matchday.coverage
   label: Matchday coverage
@@ -401,7 +415,8 @@ metrics:
   - fixtures
   - fixtures_with_lineups
   - lineup_coverage
-  formula: Registered family; see description and fields.
+  formula: age_hours = (generated_at - snapshot_at)/3600; lineup_coverage = fixtures_with_lineups/fixtures;
+    counts are from the opponent snapshot.
   inputs:
   - published payload
   unit: mixed
@@ -428,14 +443,15 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matchday.head-to-head
   label: Head-to-head
   description: Recent meetings and results.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: League meetings joined by date and team ids; result is W/D/L for Aberdeen;
+    score is the final score, with shootouts shown separately.
   inputs:
   - published payload
   unit: mixed
@@ -462,14 +478,15 @@ metrics:
   - Historical meeting snapshot; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matchday.next-fixtures
   label: Next fixtures
   description: Upcoming club fixtures.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Upcoming club fixtures from the SPFL/API feed, ordered by date; one row
+    per fixture.
   inputs:
   - published payload
   unit: mixed
@@ -496,7 +513,7 @@ metrics:
   - Fixture snapshot; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: needs.summary
   label: Needs summary
@@ -549,7 +566,10 @@ metrics:
   description: Per-family depth, quality, availability, market and roster metrics.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: 'measured_score = 100 * sum(w*x)/sum(w) over available drivers: depth_gap
+    0.30, quality_gap 0.20, top_share 0.10, availability_risk 0.25, age_risk 0.15.
+    availability_risk = (out + 0.5*doubtful)/known projected players; null when known
+    = 0.'
   inputs:
   - published payload
   unit: mixed
@@ -576,14 +596,15 @@ metrics:
   - Derived family metrics; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: needs.roster-space
   label: Roster space
   description: Roster current/max and outgoing-first policy.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: roster current = senior squad players under contract; max from config/needs.yaml;
+    outgoing-first policy is a config flag, not a measured value.
   inputs:
   - published payload
   unit: mixed
@@ -610,14 +631,15 @@ metrics:
   - Roster policy; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: needs.coverage
   label: Needs coverage
   description: Needs coverage and availability status.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Counts of known and unknown availability entries, contract data and squad
+    rows; states are available, partial or unavailable.
   inputs:
   - published payload
   unit: mixed
@@ -644,7 +666,7 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.summary
   label: Transfer summary
@@ -745,7 +767,9 @@ metrics:
   description: Per-move fee, loan and verification values.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: One row per confirmed move; fee is disclosed/reported/inferred/undisclosed;
+    inferred ranges are modelled, never treated as fees; loan terms are unknown unless
+    confirmed.
   inputs:
   - published payload
   unit: mixed
@@ -772,14 +796,15 @@ metrics:
   - Per-row curated fees and terms; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.valuation
   label: Transfer valuation
   description: Modelled fee ranges and calibration counts.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Fee range from disclosed comparables by position, age and league; calibration
+    counts are the rows with a disclosed or reported anchor used to fit the range.
   inputs:
   - published payload
   unit: mixed
@@ -806,14 +831,15 @@ metrics:
   - Modelled valuation; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.sell-on
   label: Sell-on clauses
   description: Sell-on percentages, basis and summary.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Sell-on percentage is published only where confirmed; summary counts confirmed,
+    reported and unknown clauses; unknown is not zero.
   inputs:
   - published payload
   unit: mixed
@@ -841,14 +867,15 @@ metrics:
   - Curated sell-on clauses; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.loans
   label: Transfer loans
   description: Loan-in and loan-out slices.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Loan-in and loan-out rows from the confirmed register; one row per loan;
+    parent club, dates and terms are source-linked.
   inputs:
   - published payload
   unit: mixed
@@ -876,14 +903,15 @@ metrics:
   - Loan rows; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.plausibility
   label: Transfer plausibility
   description: Withheld suspect rows and plausibility counts.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Counts of rows withheld or flagged by the plausibility audit; the audit
+    compares fee, age, position and window against the published register.
   inputs:
   - published payload
   unit: mixed
@@ -910,14 +938,15 @@ metrics:
   - Plausibility policy; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.audit
   label: Transfer completeness audit
   description: Seniority review, position coverage and gap ledger counts.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Counts by seniority, position coverage and gap status; the ledger records
+    unresolved or duplicate identities, not transfer claims.
   inputs:
   - published payload
   unit: mixed
@@ -945,14 +974,15 @@ metrics:
   - Completeness audit is report-only; it does not prove provider completeness.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: transfers.coverage
   label: Transfer coverage
   description: Audited/curated window coverage.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Windows are audited or curated partial; counts are confirmed rows per window;
+    earlier windows are partial, not silently complete.
   inputs:
   - published payload
   unit: mixed
@@ -979,7 +1009,7 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: history.scorecard
   label: History scorecard
@@ -993,7 +1023,10 @@ metrics:
   - average_points
   - manager_count
   - honours_total
-  formula: Registered family; see description and fields.
+  formula: seasons = covered seasons; best/worst_position = min/max league position;
+    average_position = mean season position; average_points = mean season points;
+    manager_count = distinct people with a league match; honours_total = register
+    count.
   inputs:
   - published payload
   unit: mixed
@@ -1020,14 +1053,15 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: history.season
   label: History seasons
   description: Season-level history rows.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: One row per season; league position/points from the club payload; cup and
+    European outcomes from season documents; manager spells kept separate.
   inputs:
   - published payload
   unit: mixed
@@ -1054,14 +1088,15 @@ metrics:
   - Curated season refs; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: history.staff
   label: History staff
   description: Manager/staff stints and records.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: One row per manager or staff stint; played, points, gf and ga are league
+    matches only; interim spells are separate.
   inputs:
   - published payload
   unit: mixed
@@ -1088,7 +1123,7 @@ metrics:
   - Curated staff stints; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: history.baseline
   label: History baseline
@@ -1141,7 +1176,8 @@ metrics:
   description: History season/backfill coverage.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Counts of seasons with history documents, backfilled lineups, staff and
+    honours; missing seasons are labelled unavailable.
   inputs:
   - published payload
   unit: mixed
@@ -1168,14 +1204,15 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: history.season-document
   label: History season documents
   description: Per-season history documents.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: 'Document envelope: one per season with review, style, selection, staff,
+    transfers and honours; measured facts and the labelled assessment are kept separate.'
   inputs:
   - published payload
   unit: mixed
@@ -1202,7 +1239,7 @@ metrics:
   - Curated season documents; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: squad.summary
   label: Squad summary
@@ -1255,7 +1292,9 @@ metrics:
   description: Per-player totals, playing time, role and position stats.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Playing time reconstructed from lineups and substitution events; starts
+    and minutes are competitive-only; role shares use starting-XI observations; totals
+    sum competition rows.
   inputs:
   - published payload
   unit: mixed
@@ -1282,14 +1321,15 @@ metrics:
   - Per-player rows; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: squad.meta
   label: Squad metadata
   description: Role/career/position/attribute coverage metadata.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Coverage flags for role, career, position and attribute data; unknown fields
+    are null, not filled.
   inputs:
   - published payload
   unit: mixed
@@ -1321,14 +1361,15 @@ metrics:
   - Coverage metadata; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: player.page
   label: Player pages
   description: Per-player page panels and records.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: 'Document envelope: player totals, playing time, role evidence, position
+    stats, availability and source notes for one player.'
   inputs:
   - published payload
   unit: mixed
@@ -1355,7 +1396,7 @@ metrics:
   - Player page rows; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: rumours.summary
   label: Rumour summary
@@ -1407,7 +1448,8 @@ metrics:
   description: Advisory recruitment profile weights and buckets.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Advisory profile weights by position, age and mention volume; buckets are
+    descriptive, not probabilities or recommendations.
   inputs:
   - published payload
   unit: mixed
@@ -1434,14 +1476,15 @@ metrics:
   - Advisory profile; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: forum.signal
   label: Forum signal
   description: Fan-signal coverage, sentiment and profile.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Mention counts from sampled first pages; topic-level VADER sentiment only;
+    no per-player sentiment score is published; n posts and topics are shown.
   inputs:
   - published payload
   unit: mixed
@@ -1468,14 +1511,15 @@ metrics:
   - Reference fan signal; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: provenance.layers
   label: Provenance layers
   description: Layer/source row counts and truth table.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Row counts by source layer; status is the source probe state; coverage
+    gaps remain visible in the truth table.
   inputs:
   - published payload
   unit: mixed
@@ -1505,14 +1549,15 @@ metrics:
   - Provenance summary; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: coverage.surfaces
   label: Coverage
   description: Build coverage counts across surfaces.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Counts of built pages and published payloads per surface; used by the build
+    status page.
   inputs:
   - published payload
   unit: mixed
@@ -1539,14 +1584,15 @@ metrics:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: clubs.aberdeen
   label: Club payload
   description: Aberdeen club summary, history and news rows.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Club summary joins league table, recent results, upcoming fixtures and
+    news metadata by club id; no commercial or attendance series is invented.
   inputs:
   - published payload
   unit: mixed
@@ -1573,14 +1619,15 @@ metrics:
   - Club summary payload; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: availability.ledger
   label: Availability
   description: Availability ledger coverage and entries.
   value_type: object
   fields: []
-  formula: Registered family; see description and fields.
+  formula: Entries require a player key, status, source id and verified_at; known/unknown
+    counts are over the current squad; a provider injury boolean is not team news.
   inputs:
   - published payload
   unit: mixed
@@ -1607,7 +1654,7 @@ metrics:
   - Curated team news; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.document
   label: The case document
@@ -1616,7 +1663,8 @@ metrics:
   fields:
   - schema_version
   - state
-  formula: Registered case family; see the claim text and evidence table.
+  formula: 'Document envelope: owner view, chairman frame, thesis, claims and coverage
+    state; opinion is attributed, measured counts are labelled.'
   inputs:
   - published payload
   unit: mixed
@@ -1646,7 +1694,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claims
   label: The case claims
@@ -1656,7 +1704,8 @@ metrics:
   - order
   - count
   - status
-  formula: Registered case family; see the claim text and evidence table.
+  formula: One row per claim; count is the qualifying rows in the claim evidence table;
+    status is supported, partial, can't test yet or not supported; order is editorial.
   inputs:
   - published payload
   unit: mixed
@@ -1683,7 +1732,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.evidence
   label: Claim evidence
@@ -1692,7 +1741,8 @@ metrics:
   fields:
   - count
   - sample
-  formula: Registered case family; see the claim text and evidence table.
+  formula: One row per evidence item; count is the observed value, sample is the denominator
+    or qualifying set; source and period are carried with the row.
   inputs:
   - published payload
   unit: mixed
@@ -1719,7 +1769,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.benchmark
   label: Peer benchmark
@@ -1731,7 +1781,8 @@ metrics:
   - worst
   - median_points
   - current
-  formula: Registered case family; see the claim text and evidence table.
+  formula: 'League performance of the other SPFL clubs: best/worst/median position
+    and points from the computed tables; current is the latest season position.'
   inputs:
   - published payload
   unit: mixed
@@ -1758,7 +1809,7 @@ metrics:
   - League performance only; other clubs transfer and wage models are not in the record.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.coverage
   label: Case coverage
@@ -1767,7 +1818,8 @@ metrics:
   fields:
   - known
   - unknown
-  formula: Registered case family; see the claim text and evidence table.
+  formula: Counts of known and unknown data classes; unknown is not zero and is listed
+    in the coverage block.
   inputs:
   - published payload
   unit: mixed
@@ -1794,7 +1846,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.team-now
   label: The team now
@@ -1806,7 +1858,9 @@ metrics:
   - gf
   - ga
   - form
-  formula: Registered case family; see the claim text and evidence table.
+  formula: played = competitive matches in the period; points = 3*won + drawn; gf/ga
+    = league goals for/against; form = last five league results; churn = kick-off
+    shape changes.
   inputs:
   - published payload
   unit: mixed
@@ -1833,7 +1887,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.defence
   label: The defence
@@ -1845,7 +1899,9 @@ metrics:
   - ga_pm
   - wb_starts_pm
   - wf_starts_pm
-  formula: Registered case family; see the claim text and evidence table.
+  formula: matches = matches with three centre-backs at kick-off; points_pg = points/matches;
+    ga_pm = goals against/matches; wb_starts_pm = wing-back starts/matches; wf_starts_pm
+    = wide-forward starts/matches; denominator = qualifying matches only.
   inputs:
   - published payload
   unit: mixed
@@ -1872,7 +1928,7 @@ metrics:
   - Four three-CB matches; association only. Availability is unknown.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.attack
   label: The attack
@@ -1883,7 +1939,9 @@ metrics:
   - ga
   - shot_share
   - attack_share
-  formula: Registered case family; see the claim text and evidence table.
+  formula: gf/ga = league goals; shot_share = Aberdeen shots/(Aberdeen + opponent
+    shots); attack_share = goals from wide forwards and strikers/total league goals;
+    roles from the starting-XI grid.
   inputs:
   - published payload
   unit: mixed
@@ -1910,7 +1968,7 @@ metrics:
   - No event data for set-piece goals, errors or penalties.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.managers
   label: The managers
@@ -1921,7 +1979,8 @@ metrics:
   - ppg
   - winning_run
   - winless_run
-  formula: Registered case family; see the claim text and evidence table.
+  formula: played/ppg by manager stint; winning_run/winless_run = longest league run;
+    cup outcome from the honours register; interim spells are separate.
   inputs:
   - published payload
   unit: mixed
@@ -1948,7 +2007,7 @@ metrics:
   - 18 Robinson matches; no pre-declared variance measure.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.squad
   label: The squad
@@ -1959,7 +2018,9 @@ metrics:
   - departures
   - median_age
   - u21_minutes_share
-  formula: Registered case family; see the claim text and evidence table.
+  formula: arrivals/departures = confirmed register rows in the window; median_age
+    = median current squad age; u21_minutes_share = U21 minutes/total minutes; Morris
+    sale = confirmed transfer.
   inputs:
   - published payload
   unit: mixed
@@ -1986,7 +2047,7 @@ metrics:
   - Confirmed business only; fees are mostly undisclosed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: case.claim.chairman-record
   label: The chairman's record
@@ -1999,7 +2060,8 @@ metrics:
   - honours
   - manager_count
   - europe
-  formula: Registered case family; see the claim text and evidence table.
+  formula: seasons = covered seasons; positions from computed league tables; honours
+    from the register; manager_count = distinct people; europe from season documents.
   inputs:
   - published payload
   unit: mixed
@@ -2026,12 +2088,12 @@ metrics:
   - The record cannot prove causation or boardroom intent.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: matches.document
   label: Match document
-  description: 'One played-fixture document: score, summary, scoreboard, stats,
-    fxG, timeline, lineups, player stats, form and coverage.'
+  description: 'One played-fixture document: score, summary, scoreboard, stats, fxG,
+    timeline, lineups, player stats, form and coverage.'
   value_type: object
   fields:
   - fixture
@@ -2045,8 +2107,9 @@ metrics:
   - form
   - coverage
   - links
-  formula: Registered document family; values are measured or model-labelled in the
-    payload.
+  formula: One document per canonical played fixture; final score is authoritative;
+    summary, timeline and scoreboard use regular goals only; missing classes are null
+    with coverage labels; duplicate aliases are separate.
   inputs:
   - published payload
   unit: mixed
@@ -2076,7 +2139,7 @@ metrics:
     are not independently recomputed in this release.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: fixtures.index
   label: Fixture index
@@ -2085,8 +2148,8 @@ metrics:
   fields:
   - count
   - fixtures
-  formula: Registered document family; values are measured or model-labelled in the
-    payload.
+  formula: count = canonical played fixtures (duplicate aliases excluded); each row
+    carries score, result, depth and href; depth is derived from the coverage booleans.
   inputs:
   - published payload
   unit: mixed
@@ -2114,7 +2177,7 @@ metrics:
     coverage.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: xg.document
   label: fxG document
@@ -2126,8 +2189,9 @@ metrics:
   - matches
   - aggregates
   - coverage
-  formula: Registered document family; values are measured or model-labelled in the
-    payload.
+  formula: fxG = 1 - exp(-rate * shots_on_target), rate from competition-season shot
+    conversion with a prior; interval level 0.8; evaluation matches = distinct match
+    keys, team_rows = one pair per team.
   inputs:
   - published payload
   unit: mixed
@@ -2155,6 +2219,46 @@ metrics:
   limitations:
   - fxG is a shot-on-target model. The provider-xG gate currently fails, so the values
     are descriptive and are not a performance verdict.
+  owner: patrickmockridge
+  reviewed: '2026-10-22'
+  version: 2
+  status: active
+- id: history.defeats
+  label: Heavy defeats
+  description: Cormack-era defeats by four or more goals, newest first.
+  value_type: table
+  fields:
+  - goals_for
+  - goals_against
+  formula: goals_for/goals_against are the final score for each defeat with a margin
+    of four or more; one row per fixture, newest first; the threshold is a display
+    parameter, not a modelled value.
+  inputs:
+  - published payload
+  unit: goals
+  aggregation: per_match
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: measured
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: Complete for every season with an API fixture record; the coverage
+    table lists missing seasons.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/heavy_defeats/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - The four-goal threshold is a presentation choice; the match page carries the full
+    score and record.
   owner: patrickmockridge
   reviewed: '2026-10-22'
   version: 1
@@ -2845,15 +2949,21 @@ parameters:
       full_classes:
       - events
       - lineups
-      - league_stats
+      - team_stats
       - player_stats
       result_classes:
       - events
       - lineups
+      partial_classes:
+      - events
+      - lineups
+      - team_stats
+      - player_stats
       score_classes: []
       depth_labels:
         full: Full record
         result: Result, events and lineups
+        partial: Partial record
         score: Score only
       summary:
         late_goal_minute: 85

@@ -8,6 +8,13 @@ import { PlayerLink } from "@/components/PlayerLink";
 import { RumourCard } from "@/components/RumourCard";
 import { StatTile } from "@/components/StatTile";
 import { formatDate } from "@/lib/format";
+
+export const metadata = {
+  alternates: { canonical: "/" },
+  title: "fitba — Aberdeen FC, without the noise.",
+  description:
+    "An independent, data-driven record of Aberdeen FC: matchday, squad, recruitment and the Cormack era, with sources and uncertainty.",
+};
 import {
   getAberdeen,
   getForumSignal,
@@ -45,6 +52,7 @@ export default function HomePage() {
     table.rows.some((row) => row.team_id === "sco:aberdeen"),
   );
   const summary = aberdeen?.summary;
+  const lastResult = aberdeen?.recent_results?.[0];
   const standingsUpdatedAt =
     aberdeenTable?.rows[0]?.updated_at ?? manifest?.generated_at ?? null;
   const latestTransfers = transfers?.transfers.slice(0, 2) ?? [];
@@ -66,6 +74,13 @@ export default function HomePage() {
         <p className="lede">
           An independent, data-driven record of Aberdeen FC — the numbers, the
           sources and the argument, without the hot takes.
+        </p>
+        <p className="fine-print">
+          Independent, non-commercial, and not affiliated with Aberdeen FC, the
+          SPFL, the SFA or any data provider.{" "}
+          <Link className="text-link" href="/about/">
+            About fitba →
+          </Link>
         </p>
         <div className="hero-actions">
           <Link className="button" href="/matchday/">
@@ -107,6 +122,22 @@ export default function HomePage() {
               />
               <StatTile label="Points" value={summary.points} note={`${summary.played} played`} />
               <StatTile label="Form" value={<FormStrip form={summary.form} />} />
+            </div>
+          ) : null}
+
+          {lastResult ? (
+            <div className="mini-block" data-contract="home.last-result">
+              <p className="eyebrow">Last result</p>
+              <p>
+                <strong>
+                  {lastResult.venue === "H"
+                    ? `Aberdeen ${lastResult.goals_for}–${lastResult.goals_against} ${lastResult.opponent_name}`
+                    : `${lastResult.opponent_name} ${lastResult.goals_against}–${lastResult.goals_for} Aberdeen`}
+                </strong>{" "}
+                <span className="muted">
+                  · {lastResult.competition_name} · {formatDate(lastResult.date)}
+                </span>
+              </p>
             </div>
           ) : null}
 

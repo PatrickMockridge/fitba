@@ -93,6 +93,29 @@ def _ordinal(value: int) -> str:
     return f"{value}{suffix}"
 
 
+def league_rank(
+    values: Iterable[float | None],
+    value: float | None,
+    *,
+    higher_is_better: bool = True,
+) -> int | None:
+    """League rank (1 = best) in a finite league distribution.
+
+    Ties share the better rank. A sample smaller than two returns ``None``.
+    Unlike a percentile, this is bounded by the number of teams in the league.
+    """
+    if value is None:
+        return None
+    clean = [float(item) for item in values if item is not None]
+    if len(clean) < 2:
+        return None
+    if higher_is_better:
+        better = sum(1 for item in clean if item > value)
+    else:
+        better = sum(1 for item in clean if item < value)
+    return 1 + better
+
+
 def percentile_rank(values: Iterable[float | None], value: float | None) -> int | None:
     """Percentile rank in a league distribution, 0-100.
 
@@ -326,14 +349,24 @@ def strength_block(
     ]
     share_values = [item.get("shot_share") for item in values if item.get("shot_share") is not None]
 
-    ga_percentile = percentile_rank(ga_values, (ga / played) if played else None)
+    ga_per_match = round(ga / played, 2) if played else None
+    gf_per_match = round(gf / played, 2) if played else None
+    ga_percentile = percentile_rank(ga_values, ga_per_match)
     percentiles = {
         "ppg": percentile_rank(ppg_values, ppg),
-        "gf_pg": percentile_rank(gf_values, (gf / played) if played else None),
+        "gf_pg": percentile_rank(gf_values, gf_per_match),
         "ga_pg": 100 - ga_percentile if ga_percentile is not None else None,
         "gd_pg": percentile_rank(gd_values, gd_pg),
         "shots_for_pm": percentile_rank(shots_values, shots_for),
         "shot_share": percentile_rank(share_values, shot_share),
+    }
+    ranks = {
+        "ppg": league_rank(ppg_values, ppg),
+        "gf_pg": league_rank(gf_values, gf_per_match),
+        "ga_pg": league_rank(ga_values, ga_per_match, higher_is_better=False),
+        "gd_pg": league_rank(gd_values, gd_pg),
+        "shots_for_pm": league_rank(shots_values, shots_for),
+        "shot_share": league_rank(share_values, shot_share),
     }
     return {
         "status": "available",
@@ -357,6 +390,8 @@ def strength_block(
         "shots_against_pm": shots_against,
         "shot_share": shot_share,
         "percentiles": percentiles,
+        "ranks": ranks,
+        "league_size": len(rows),
         "coverage": "available" if played >= 4 else "partial",
         "sample_note": f"{played} league matches.",
     }
@@ -1352,21 +1387,41 @@ def predict_lineup(
         for status in ("out", "suspended", "doubtful", "returned", "available")
     )
     availability_conflicts = sum(1 for entry in availability_entries if entry.get("conflict"))
-    availability_summary = {
-        "state": availability_state,
-        "known": availability_known,
-        "unknown": status_counts["unknown"],
-        "out": status_counts["out"],
-        "suspended": status_counts["suspended"],
-        "doubtful": status_counts["doubtful"],
-        "returned": status_counts["returned"],
-        "conflicts": availability_conflicts,
-        "as_of": availability_as_of,
-        "source_ids": availability_source_ids or [],
-        "note": ("Curated team-news availability. A provider injury boolean is not team news."),
-    }
+    roster_count = len(scored["players"])
+    availability_applicable = include_squad_only is not False
+    if availability_applicable:
+        availability_unknown = max(status_counts["unknown"], roster_count - availability_known)
+        availability_summary = {
+            "state": availability_state,
+            "applicable": True,
+            "known": availability_known,
+            "unknown": availability_unknown,
+            "out": status_counts["out"],
+            "suspended": status_counts["suspended"],
+            "doubtful": status_counts["doubtful"],
+            "returned": status_counts["returned"],
+            "conflicts": availability_conflicts,
+            "as_of": availability_as_of,
+            "source_ids": availability_source_ids or [],
+            "note": ("Curated team-news availability. A provider injury boolean is not team news."),
+        }
+    else:
+        availability_summary = {
+            "state": "not_modelled",
+            "applicable": False,
+            "known": None,
+            "unknown": None,
+            "out": None,
+            "suspended": None,
+            "doubtful": None,
+            "returned": None,
+            "conflicts": None,
+            "as_of": None,
+            "source_ids": [],
+            "note": "Opponent team news is not modelled; no availability count is implied.",
+        }
     if include_squad_only is False:
-        availability_note = "No provider team-news feed for the opponent; availability is unknown."
+        availability_note = "Opponent availability is not modelled; no count is implied."
     elif availability_state == "partial":
         availability_note = (
             "Curated AFC team news"
@@ -1638,8 +1693,8 @@ def matchup_read(
                 "label": "Set pieces",
                 "text": (
                     f"Corners per match: {opponent_name} {opp_corners:.1f}, "
-                    f"Aberdeen {abd_corners:.1f}. Delivery and second balls are "
-                    "the measurable set-piece edge."
+                    f"Aberdeen {abd_corners:.1f}. Only corner volume is measured; "
+                    "delivery and second balls are not in the feed."
                 ),
                 "basis": "measured",
             }

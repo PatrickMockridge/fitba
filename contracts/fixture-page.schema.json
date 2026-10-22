@@ -222,6 +222,18 @@
         "href": {
           "title": "Href",
           "type": "string"
+        },
+        "duplicate_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duplicate Of"
         }
       },
       "required": [
@@ -514,6 +526,18 @@
           ],
           "default": null,
           "title": "Player Name"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
         },
         "team_id": {
           "anyOf": [
@@ -1100,6 +1124,14 @@
           "title": "Bullets",
           "type": "array"
         },
+        "events_available": {
+          "title": "Events Available",
+          "type": "boolean"
+        },
+        "goals_complete": {
+          "title": "Goals Complete",
+          "type": "boolean"
+        },
         "reconciliation": {
           "anyOf": [
             {
@@ -1120,6 +1152,8 @@
         "headline",
         "basis",
         "bullets",
+        "events_available",
+        "goals_complete",
         "note"
       ],
       "title": "SummaryBlock",
@@ -1148,15 +1182,31 @@
       "additionalProperties": false,
       "properties": {
         "event_goals": {
-          "title": "Event Goals",
-          "type": "integer"
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Goals"
         },
         "event_score": {
-          "additionalProperties": {
-            "type": "integer"
-          },
-          "title": "Event Score",
-          "type": "object"
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Score"
         },
         "final_score": {
           "additionalProperties": {
@@ -1166,15 +1216,20 @@
           "type": "object"
         },
         "matched": {
-          "title": "Matched",
-          "type": "boolean"
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matched"
         }
       },
       "required": [
-        "event_goals",
-        "event_score",
-        "final_score",
-        "matched"
+        "final_score"
       ],
       "title": "SummaryReconciliation",
       "type": "object"
@@ -1432,6 +1487,54 @@
           ],
           "default": null,
           "title": "Note"
+        },
+        "gate_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Status"
+        },
+        "gate_passed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Passed"
+        },
+        "gate_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Note"
+        },
+        "evaluation_href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evaluation Href"
         }
       },
       "required": [
@@ -1513,6 +1616,7 @@
       "enum": [
         "full",
         "result",
+        "partial",
         "score"
       ],
       "title": "Depth",

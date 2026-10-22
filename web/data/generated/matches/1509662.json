@@ -17,8 +17,9 @@
     "away_team_id": "sco:motherwell",
     "away_team_name": "Motherwell",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2026-02-18",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1509662,
     "home_goals": 2,
@@ -59,7 +60,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "Jens Askou",
@@ -552,11 +553,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "K. Nisbet opened the scoring on 4 minutes."
+        "text": "K. Nisbet opened the scoring on 4 minutes, making it 1-0."
+      },
+      {
+        "basis": "measured",
+        "text": "G. Shinnie scored on 63 minutes, assisted by M. Frame, making it 2-0."
       },
       {
         "basis": "measured",
         "text": "Oscar Priestman was sent off on 2 minutes."
+      },
+      {
+        "basis": "measured",
+        "text": "Dennis Geiger was sent off on 24 minutes."
+      },
+      {
+        "basis": "measured",
+        "text": "Liam Gordon was sent off on 50 minutes."
       },
       {
         "basis": "measured",
@@ -571,6 +584,8 @@
         "text": "fxG: Aberdeen 2.954 (0.106-5.802), Motherwell 1.313 (0.0-3.212)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Ten-man Aberdeen beat Motherwell 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -1071,6 +1086,10 @@
       "provider": null,
       "value": 1.313
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 5.802,
       "low": 0.106,

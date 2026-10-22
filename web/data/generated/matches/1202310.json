@@ -1,6 +1,6 @@
 {
   "coverage": {
-    "depth": "score",
+    "depth": "partial",
     "events": true,
     "lineups": false,
     "note": "Missing classes are unavailable, not zero.",
@@ -8,7 +8,7 @@
     "team_stats": false,
     "xg": false
   },
-  "depth": "score",
+  "depth": "partial",
   "fixture": {
     "aberdeen_result": "W",
     "away_goals": 1,
@@ -17,8 +17,9 @@
     "away_team_id": "sco:airdrieonians",
     "away_team_name": "Airdrieonians",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2024-07-23",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1202310,
     "home_goals": 2,
@@ -95,7 +96,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": null,
     "home": {
@@ -327,17 +328,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "B. Wilson opened the scoring on 40 minutes."
+        "text": "B. Wilson opened the scoring on 40 minutes, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "G. Shinnie made it 1-1 on 49 minutes."
+        "text": "G. Shinnie scored on 49 minutes, making it 1-1."
+      },
+      {
+        "basis": "measured",
+        "text": "L. Clarkson scored on 59 minutes, assisted by G. Shinnie, making it 2-1."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Airdrieonians 2-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -663,6 +670,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

@@ -3,7 +3,8 @@ import { ContractPage } from "@/components/ContractPage";
 import { TransferCard } from "@/components/TransferCard";
 import { getTransfers } from "@/lib/data";
 
-export const metadata = { title: "Loans · fitba" };
+export const metadata = {
+  alternates: { canonical: "/loans/" }, title: "Loans · fitba" };
 
 export default function LoansPage() {
   const data = getTransfers();

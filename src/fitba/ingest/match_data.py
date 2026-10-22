@@ -28,6 +28,7 @@ from fitba.ingest.position_stats import (
     compute_position_stats,
     fixture_contexts,
 )
+from fitba.normalize.competitions import canonical_from_league
 from fitba.normalize.roles import (
     formation_family,
     primary_role,
@@ -341,7 +342,7 @@ def compute_match_data(
         if context.get("players_ok", True) and players_payload:
             fixtures_with_players += 1
         players_by_team = _players_by_team(players_payload)
-        competition = str((fixture.get("league") or {}).get("name") or "Unknown competition")
+        _competition_id, competition = canonical_from_league(fixture.get("league") or {})
         date = str((fixture.get("fixture") or {}).get("date") or "")
         season = _int((fixture.get("league") or {}).get("season")) or season_year
         match_length = _match_length(fixture)

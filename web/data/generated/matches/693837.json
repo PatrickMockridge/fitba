@@ -17,8 +17,9 @@
     "away_team_id": "sco:livingston",
     "away_team_name": "Livingston",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2021-04-17",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 693837,
     "home_goals": 2,
@@ -59,7 +60,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. Martindale",
@@ -440,26 +441,28 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "J. Emmanuel-Thomas opened the scoring on 37 minutes, assisted by S. Pittman."
+        "text": "J. Emmanuel-Thomas opened the scoring on 37 minutes, assisted by S. Pittman, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "N. McGinn made it 1-1 on 77 minutes."
+        "text": "N. McGinn scored on 77 minutes, assisted by J. Hayes, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 95 minutes, making it 2-2."
+        "text": "J. Emmanuel-Thomas scored a penalty on 93 minutes, making it 1-2."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "F. Kamberi scored on 95 minutes, assisted by N. McGinn, making it 2-2."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen and Livingston draw 2-2",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat Livingston 5-3 on penalties after a 2-2 draw",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 4,
@@ -826,31 +829,6 @@
       "team_name": "Aberdeen"
     },
     {
-      "assist_name": "E. Ross",
-      "beneficiary_side": null,
-      "card_type": null,
-      "comments": null,
-      "detail": "Substitution 4",
-      "event_type": "subst",
-      "extra_minute": 2,
-      "is_goal": false,
-      "is_missed_penalty": false,
-      "is_own_goal": false,
-      "is_penalty": false,
-      "is_red_card": false,
-      "is_second_yellow": false,
-      "is_shootout": false,
-      "is_var": false,
-      "minute": 105,
-      "player_name": "N. McGinn",
-      "score_after": {
-        "away": 2,
-        "home": 2
-      },
-      "side": "home",
-      "team_name": "Aberdeen"
-    },
-    {
       "assist_name": "J. McMillan",
       "beneficiary_side": null,
       "card_type": null,
@@ -874,6 +852,31 @@
       },
       "side": "away",
       "team_name": "Livingston"
+    },
+    {
+      "assist_name": "E. Ross",
+      "beneficiary_side": null,
+      "card_type": null,
+      "comments": null,
+      "detail": "Substitution 4",
+      "event_type": "subst",
+      "extra_minute": 2,
+      "is_goal": false,
+      "is_missed_penalty": false,
+      "is_own_goal": false,
+      "is_penalty": false,
+      "is_red_card": false,
+      "is_second_yellow": false,
+      "is_shootout": false,
+      "is_var": false,
+      "minute": 105,
+      "player_name": "N. McGinn",
+      "score_after": {
+        "away": 2,
+        "home": 2
+      },
+      "side": "home",
+      "team_name": "Aberdeen"
     },
     {
       "assist_name": "A. Taylor-Sinclair",
@@ -1184,6 +1187,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

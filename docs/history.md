@@ -61,6 +61,12 @@ Numeric league facts are not stored in the history payload. The web joins
 `clubs/aberdeen.json` `history` by season. Manager career records live on the
 index staff stints; season documents hold only the season segment.
 
+The index also carries two visible measured blocks: defeats by four or more
+goals (date, season, competition, opponent, score, match link) and European
+campaigns (competition, stage reached, outcome). They are not left in prose.
+Season and player totals use competitive matches; friendlies are excluded and
+labelled separately.
+
 ## One fact, one home
 
 | Fact | Canonical home |

@@ -3,7 +3,8 @@ import { CompetitionStrip } from "@/components/CompetitionStrip";
 import { FixtureList } from "@/components/FixtureList";
 import { formatDate, getAberdeen, getManifest } from "@/lib/data";
 
-export const metadata = { title: "Results & fixtures · fitba" };
+export const metadata = {
+  alternates: { canonical: "/fixtures/" }, title: "Results & fixtures · fitba" };
 
 export default function FixturesPage() {
   const aberdeen = getAberdeen();

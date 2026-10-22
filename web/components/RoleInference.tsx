@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { CareerRoleHeatmap } from "@/components/CareerRoleHeatmap";
 import { RoleMix } from "@/components/RoleMix";
@@ -44,6 +44,7 @@ export function RoleInferenceContent({ model }: { model: RoleInferenceModel }) {
               </p>
               {role.fm_label ? <p className="fine-print">Current positions: {role.fm_label}</p> : null}
               <table className="league-table compact">
+<caption className="fine-print">Role inference: position, share and starts.</caption>
                 <thead>
                   <tr>
                     <th>Role</th>
@@ -88,6 +89,7 @@ export function RoleInferenceContent({ model }: { model: RoleInferenceModel }) {
           ) : null}
           {career.slots.length ? (
             <table className="league-table compact">
+<caption className="fine-print">Role inference: position, share and starts.</caption>
               <thead>
                 <tr>
                   <th>Position</th>
@@ -117,6 +119,7 @@ export function RoleInferenceContent({ model }: { model: RoleInferenceModel }) {
           {model.club_history.length ? (
             <div className="table-wrap">
               <table className="league-table compact">
+<caption className="fine-print">Role inference: position, share and starts.</caption>
                 <thead>
                   <tr>
                     <th>Season</th>
@@ -192,16 +195,45 @@ export function RoleInferenceDialog({
   player: SquadPlayer | null;
   onClose: () => void;
 }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!player) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const panel = panelRef.current;
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    closeRef.current?.focus();
     const handler = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab" || !panel) return;
+      const focusable = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (element) => !element.hasAttribute("disabled"),
+      );
+      if (!focusable.length) {
+        event.preventDefault();
+        panel.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", handler);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handler);
       document.body.style.overflow = "";
+      previous?.focus();
     };
   }, [player, onClose]);
 
@@ -214,8 +246,21 @@ export function RoleInferenceDialog({
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="dialog-panel" role="dialog" aria-modal="true" aria-label="Position inference">
-        <button className="dialog-close" type="button" onClick={onClose} aria-label="Close">
+      <div
+        className="dialog-panel"
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Position inference"
+        tabIndex={-1}
+      >
+        <button
+          className="dialog-close"
+          ref={closeRef}
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+        >
           ×
         </button>
         <p className="eyebrow">Position inference</p>

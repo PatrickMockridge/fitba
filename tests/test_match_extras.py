@@ -77,6 +77,58 @@ def test_normalize_events_classifies_goals_cards_and_var() -> None:
     assert rows[5]["extra_minute"] == 4
 
 
+def test_normalize_events_infers_second_yellow_after_two_yellows() -> None:
+    payload = [
+        {
+            "time": {"elapsed": 31},
+            "team": {"id": 252, "name": "Aberdeen"},
+            "player": {"id": 7, "name": "D. Happe"},
+            "type": "Card",
+            "detail": "Yellow Card",
+        },
+        {
+            "time": {"elapsed": 58},
+            "team": {"id": 252, "name": "Aberdeen"},
+            "player": {"id": 7, "name": "D. Happe"},
+            "type": "Card",
+            "detail": "Yellow Card",
+        },
+        {
+            "time": {"elapsed": 58},
+            "team": {"id": 252, "name": "Aberdeen"},
+            "player": {"id": 7, "name": "D. Happe"},
+            "type": "Card",
+            "detail": "Red Card",
+        },
+    ]
+    rows = normalize_events(payload, fixture_id=1629022, season="2026-27", ingested_at="now")
+    assert [row["event_order"] for row in rows] == [0, 1, 2]
+    assert rows[2]["is_red_card"] is True
+    assert rows[2]["is_second_yellow"] is True
+
+
+def test_normalize_events_keeps_straight_red_after_one_yellow() -> None:
+    payload = [
+        {
+            "time": {"elapsed": 31},
+            "team": {"id": 252, "name": "Aberdeen"},
+            "player": {"id": 7, "name": "D. Happe"},
+            "type": "Card",
+            "detail": "Yellow Card",
+        },
+        {
+            "time": {"elapsed": 58},
+            "team": {"id": 252, "name": "Aberdeen"},
+            "player": {"id": 7, "name": "D. Happe"},
+            "type": "Card",
+            "detail": "Red Card",
+        },
+    ]
+    rows = normalize_events(payload, fixture_id=2, season="2026-27", ingested_at="now")
+    assert rows[1]["is_red_card"] is True
+    assert rows[1]["is_second_yellow"] is False
+
+
 def test_normalize_events_drops_missed_penalty_from_goals() -> None:
     payload = [
         {

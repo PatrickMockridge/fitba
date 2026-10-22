@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2022-08-30",
+    "duplicate_of": null,
     "extra_time": true,
     "fixture_id": 922125,
     "home_goals": 1,
@@ -95,7 +96,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -478,22 +479,32 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "V. Besuijen opened the scoring on 55 minutes, assisted by J. MacKenzie."
+        "text": "V. Besuijen opened the scoring on 55 minutes, assisted by J. MacKenzie, making it 0-1."
       },
       {
         "basis": "measured",
-        "text": "S. Swinglehurst made it 1-1 on 81 minutes."
+        "text": "S. Swinglehurst scored on 81 minutes, assisted by C. Johnston, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 117 minutes, making it 1-4."
+        "text": "Duk scored on 97 minutes, assisted by L. Clarkson, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "V. Besuijen scored on 105 minutes, assisted by J. Hayes, making it 1-3."
+      },
+      {
+        "basis": "measured",
+        "text": "L. Clarkson scored on 117 minutes, assisted by A. Stewart, making it 1-4."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against Annan Athletic",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat Annan Athletic 4-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 5,
@@ -843,6 +854,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

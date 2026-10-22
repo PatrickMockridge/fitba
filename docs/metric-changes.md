@@ -192,3 +192,47 @@ Match scoreboard and event attribution corrections.
 - Audit impact: the existing `matches.document` wildcard covers the new numeric
   leaves; the audit passes and the fixture checker verifies scoreboard/timeline
   reconciliation.
+
+## 2.3.0 — 2026-10-22
+
+Six-lens review remediation. Owner approval recorded in the reviewed plan.
+Registry version 2.3.0.
+
+### Definitions and parameters
+
+- Replaced 48 placeholder formulas with explicit definitions or document-envelope
+  definitions. A registry lint now rejects the placeholder phrases.
+- Metrics whose definitions changed in this entry (versions bumped): table.cutoffs, competition.index, cup.league, cup.scottish, matchday.strength, matchday.style, matchday.lineup, matchday.coverage, matchday.head-to-head, matchday.next-fixtures, needs.family, needs.roster-space, needs.coverage, transfers.row, transfers.valuation, transfers.sell-on, transfers.loans, transfers.plausibility, transfers.audit, transfers.coverage, history.scorecard, history.season, history.staff, history.coverage, history.season-document, squad.players, squad.meta, player.page, rumours.profile, forum.signal, provenance.layers, coverage.surfaces, clubs.aberdeen, availability.ledger, case.document, case.claims, case.evidence, case.benchmark, case.coverage, case.claim.team-now, case.claim.defence, case.claim.attack, case.claim.managers, case.claim.squad, case.claim.chairman-record, matches.document, fixtures.index, xg.document, history.defeats.
+- `param.fixtures.pages` now describes `team_stats` (not `league_stats`), adds
+  `partial_classes`, and adds the `partial` depth label.
+- `matches.document` summary now carries `events_available`, `goals_complete` and
+  nullable reconciliation fields.
+- `xg.document` evaluation now reports distinct `matches` and `team_rows`.
+
+### Value changes
+
+| Field | Before | After | Reason |
+|---|---:|---:|---|
+| Canonical played fixtures | 370 | 367 | Three duplicate provider records became labelled aliases. |
+| Friendlies | 19 | 16 | Same dedup; `870984`/`871150`, `870479`/`891298`/`922189`. |
+| Depth `score` pages | 39 | 6 | 30 pages with events/stats are now `partial`; the label no longer understates the page. |
+| Depth `partial` pages | 0 | 30 | New honest state. |
+| Scottish Cup competition labels | 23 × `FA Cup` | 23 × `Scottish Gas Men's Scottish Cup` | Provider label passthrough removed. |
+| Second-yellow dismissals | 0 labelled | 30 labelled | A red after two yellows is inferred as a second yellow. |
+| No-event summaries | “records 0 goals” on 9 pages | “event feed is unavailable” | Unknown is not zero. |
+| Late-win headlines | 5 heavy defeats | “beat …” / “Ten-man …” | The phrase now requires a one-goal decisive late goal. |
+| Shootout final `1372545` | “draw 1-1”, FA Cup | “beat Celtic 4-3 on penalties…” | Shootout checked before draw; canonical label. |
+| Nisbet 2026-27 starts/minutes | 17 / 1,313 | 15 / 1,221 | Competitive-only scope; friendlies excluded from player and season totals. |
+| Needs availability risk | 0.0 when all unknown | null | Denominator over known projected players; score renormalised. |
+| Forum per-player sentiment | published | removed | Topic-level sentiment only; sample size shown. |
+
+### Affected surfaces
+
+- `/matches/`, `/matches/<fixture_id>/`, `/history/`, `/history/<season>/`,
+  `/analysis/`, `/analysis/xg/`, `/matchday/`, `/recruitment/`, `/squad/`,
+  `/players/<id>/`, `/metrics/`, `/status/`, `/corrections/`.
+- The fixture checker now asserts depth/coverage agreement, dedup signatures,
+  shootout headlines, no-event wording, late-win margin, fxG gate visibility and
+  goals-prevented basis.
+- The web contract adds `/corrections/`; the metrics registry and audit are
+  regenerated. Audit status passes.

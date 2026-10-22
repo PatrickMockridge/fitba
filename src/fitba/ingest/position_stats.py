@@ -19,6 +19,7 @@ from typing import Any
 
 import polars as pl
 
+from fitba.normalize.competitions import canonical_from_league
 from fitba.settings import (
     NORMALIZED_DIR,
     ensure_dirs,
@@ -169,7 +170,7 @@ def compute_position_stats(
         lineups = context.get("lineups") or []
         events = context.get("events") or []
         league = fixture.get("league") or {}
-        competition = str(league.get("name") or "Unknown competition")
+        _competition_id, competition = canonical_from_league(league)
         lineup = _team_lineup(lineups, team_id)
         if lineup is None or not context.get("events_ok", True):
             missing.append(
@@ -234,13 +235,14 @@ def compute_position_stats(
     note = (
         "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while "
         f"on the pitch) and own goals are computed from fixture lineups and events "
-        f"for {covered} of {total} played matches."
+        f"for {covered} of {total} competitive matches; friendlies are excluded."
     )
     if missing:
         note += (
             " Fixtures without lineups or events are excluded and the coverage is marked partial."
         )
     meta = {
+        "scope": "competitive",
         "fixtures_total": total,
         "fixtures_covered": covered,
         "coverage": coverage,

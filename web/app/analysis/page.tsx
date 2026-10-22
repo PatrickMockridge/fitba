@@ -8,6 +8,7 @@ import { getCase, getXg } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
 export const metadata = {
+  alternates: { canonical: "/analysis/" },
   title: "Data analysis · fitba",
   description:
     "Aberdeen's team, squad and chairman's record, with the evidence, the counts and what would change the view.",

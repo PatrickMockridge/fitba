@@ -14,7 +14,8 @@ import {
   getTransfers,
 } from "@/lib/data";
 
-export const metadata = { title: "Off the pitch · fitba" };
+export const metadata = {
+  alternates: { canonical: "/recruitment/" }, title: "Off the pitch · fitba" };
 
 export default function RecruitmentPage() {
   const transfers = getTransfers();

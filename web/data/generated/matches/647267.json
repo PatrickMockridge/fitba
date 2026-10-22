@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:league-cup",
-    "competition_name": "League Cup",
+    "competition_name": "Premier Sports Cup",
     "date": "2020-11-28",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 647267,
     "home_goals": 2,
@@ -39,7 +40,7 @@
     "after": [],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -411,21 +412,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "Í. Durmuş opened the scoring on 4 minutes."
+        "text": "Í. Durmuş opened the scoring on 4 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "N. McGinn made it 1-1 on 43 minutes."
+        "text": "N. McGinn scored on 43 minutes, assisted by S. Cosgrove, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 88 minutes, making it 2-1."
+        "text": "J. McGrath scored on 88 minutes, assisted by J. Morias, making it 2-1."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "St Mirren win it late against Aberdeen",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -751,6 +754,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

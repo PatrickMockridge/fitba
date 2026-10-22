@@ -3,7 +3,8 @@ import { BucketBars } from "@/components/BucketBars";
 import { PriorityProfiles } from "@/components/PriorityProfiles";
 import { getManifest, getNeeds, getRumourProfile } from "@/lib/data";
 
-export const metadata = { title: "Scouting · fitba" };
+export const metadata = {
+  alternates: { canonical: "/scouting/" }, title: "Scouting · fitba" };
 
 const POSITION_GROUPS = ["GK", "CB", "FB", "DM", "CM", "AM", "W", "ST"];
 const POOL = [
@@ -155,6 +156,7 @@ export default function ScoutingPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table compact">
+<caption className="fine-print">Scouting profiles and priority board.</caption>
             <thead>
               <tr>
                 <th>Competition</th>

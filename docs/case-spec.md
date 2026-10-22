@@ -50,7 +50,7 @@ sentence, no invented model.
 
 ## Voice and attribution
 
-- **The opinion is the owner's.** It is labelled "The owner's view" or "Our
+- **The opinion is the owner's.** It is labelled "The site owner's view" or "Our
   view" once, at the top. It is not presented as a finding.
 - **The chairman's frame is sourced.** Use two or three short official quotes or
   attributed statements from Dave Cormack, with source URLs and dates. If a
@@ -58,7 +58,7 @@ sentence, no invented model.
   `reference/history/era.yaml`; never invent a quote.
 - **Fitba tests the record.** Each claim carries a status: **Supported**,
   **Mixed**, **Not supported** or **Can't test yet**.
-- **The page can say the owner's view is not supported.** That is the point of
+- **The page can say the site owner's view is not supported.** That is the point of
   publishing it as a view.
 - **Level is named every time.** Player, manager, squad or club. No claim about
   boardroom intent, wages or private valuations.
@@ -83,7 +83,7 @@ it or says it cannot yet be tested.
 ## Page structure
 
 1. **The frame.** Two or three sourced sentences from the chairman on what the
-   club is trying to do. Then the owner's view, attributed. Then the one-
+   club is trying to do. Then the site owner's view, attributed. Then the one-
    paragraph case above.
 2. **The team now.** What the reader watched on Saturday: league record, shape
    churn, the current question.
@@ -350,7 +350,7 @@ change.
 
 ## Definition of done
 
-- The owner's view is visible and attributed; the chairman's frame is sourced.
+- The site owner's view is visible and attributed; the chairman's frame is sourced.
 - Every claim has a count, a status, an evidence table, one limitation and a
   withdrawal condition.
 - The data corrections above are fixed; no headline contradicts its table.

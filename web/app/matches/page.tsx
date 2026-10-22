@@ -1,13 +1,33 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
-import { getFixtureIndex } from "@/lib/data";
+import { MatchArchiveSearch } from "@/components/MatchArchiveSearch";
+import { getFixtureIndex, getSearchIndex } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
 export const metadata = {
+  alternates: { canonical: "/matches/" },
   title: "Match record · fitba",
   description:
     "Every played Aberdeen fixture in the Cormack era, with the depth the record supports.",
 };
+
+function resultLabel(row: {
+  home_penalties?: number | null;
+  away_penalties?: number | null;
+  aberdeen_is_home?: boolean;
+  aberdeen_result: string;
+}) {
+  if (row.home_penalties == null || row.away_penalties == null) {
+    return row.aberdeen_result;
+  }
+  const aberdeenHome = row.aberdeen_is_home ?? true;
+  const aberdeenPens = aberdeenHome ? row.home_penalties : row.away_penalties;
+  const opponentPens = aberdeenHome ? row.away_penalties : row.home_penalties;
+  const won = aberdeenPens > opponentPens;
+  return won
+    ? `Won ${aberdeenPens}–${opponentPens} pens`
+    : `Lost ${opponentPens}–${aberdeenPens} pens`;
+}
 
 export default function MatchesPage() {
   const index = getFixtureIndex();
@@ -26,6 +46,10 @@ export default function MatchesPage() {
     );
   }
   const seasons = Array.from(new Set(index.fixtures.map((row) => row.season))).sort();
+  const publishedHrefs = new Set(index.fixtures.map((row) => row.href));
+  const searchEntries = getSearchIndex().filter(
+    (entry) => entry.type === "match" && entry.href && publishedHrefs.has(entry.href),
+  );
   return (
     <ContractPage surface="matches">
       <section className="page-head" data-contract="matches.hero">
@@ -51,12 +75,25 @@ export default function MatchesPage() {
             The Cormack era →
           </Link>
         </p>
+        <nav className="badge-row" aria-label="Match seasons">
+          {seasons.map((season) => (
+            <a className="badge badge-neutral" key={season} href={`#season-${season}`}>
+              {season}
+            </a>
+          ))}
+        </nav>
+        <MatchArchiveSearch entries={searchEntries} />
       </section>
 
       {seasons.map((season) => {
         const rows = index.fixtures.filter((row) => row.season === season);
         return (
-          <section className="card" key={season} data-contract="matches.season">
+          <section
+            className="card"
+            key={season}
+            id={`season-${season}`}
+            data-contract="matches.season"
+          >
             <div className="section-head">
               <div>
                 <p className="eyebrow">{season}</p>
@@ -65,15 +102,21 @@ export default function MatchesPage() {
             </div>
             <div className="table-wrap">
               <table className="league-table">
+                <caption className="fine-print">
+                  {season}: {rows.length} played fixtures. Depth is the highest
+                  record class available; the match page lists every class.
+                </caption>
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Competition</th>
-                    <th>Home</th>
-                    <th className="num">Score</th>
-                    <th>Away</th>
-                    <th>Result</th>
-                    <th>Depth</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Competition</th>
+                    <th scope="col">Home</th>
+                    <th scope="col" className="num">
+                      Score
+                    </th>
+                    <th scope="col">Away</th>
+                    <th scope="col">Result</th>
+                    <th scope="col">Depth</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -83,12 +126,17 @@ export default function MatchesPage() {
                       <td>{row.competition_name}</td>
                       <td>{row.home_team_name}</td>
                       <td className="num">
-                        <Link className="text-link" href={row.href}>
+                        <Link
+                          className="text-link"
+                          href={row.href}
+                          prefetch={false}
+                          aria-label={`${row.home_team_name} ${row.home_goals ?? "—"}–${row.away_goals ?? "—"} ${row.away_team_name}, ${formatDate(row.date)}`}
+                        >
                           {row.home_goals ?? "—"}–{row.away_goals ?? "—"}
                         </Link>
                       </td>
                       <td>{row.away_team_name}</td>
-                      <td>{row.aberdeen_result}</td>
+                      <td>{resultLabel(row)}</td>
                       <td>{row.depth}</td>
                     </tr>
                   ))}

@@ -5,6 +5,9 @@ const LABELS: Record<string, string> = {
   returned: "Returned",
   available: "Available",
   unknown: "Unknown",
+  unavailable: "Unavailable",
+  partial: "Partial",
+  not_modelled: "Not modelled",
 };
 
 const CLASSES: Record<string, string> = {

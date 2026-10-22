@@ -17,8 +17,9 @@
     "away_team_id": "sco:dumbarton",
     "away_team_name": "Dumbarton",
     "competition_id": "sco:scottish-cup",
-    "competition_name": "FA Cup",
+    "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2020-01-18",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 291786,
     "home_goals": 1,
@@ -76,7 +77,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Duffy",
@@ -419,21 +420,15 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "S. Cosgrove scored a penalty on 86 minutes."
-      },
-      {
-        "basis": "measured",
-        "text": "The last goal came on 86 minutes, making it 1-0."
-      },
-      {
-        "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "S. Cosgrove scored a penalty on 86 minutes, making it 1-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen win it late against Dumbarton",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -659,6 +654,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

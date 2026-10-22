@@ -7,7 +7,8 @@ import {
   type ProvenanceDocument,
 } from "@/lib/data";
 
-export const metadata = { title: "Sources and licences · fitba" };
+export const metadata = {
+  alternates: { canonical: "/sources/" }, title: "Sources and licences · fitba" };
 
 function sourceName(data: ProvenanceDocument, sourceId: string) {
   if (sourceId === "computed") return "Computed on site";
@@ -74,6 +75,7 @@ export default function SourcesPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table compact">
+<caption className="fine-print">Source layers and the source registry.</caption>
             <thead>
               <tr>
                 <th>Layer</th>
@@ -127,6 +129,7 @@ export default function SourcesPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table">
+<caption className="fine-print">Source layers and the source registry.</caption>
             <thead>
               <tr>
                 <th>Source</th>

@@ -19,6 +19,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2020-08-27",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 592880,
     "home_goals": 6,
@@ -58,7 +59,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "G. Ståhl",
@@ -471,22 +472,36 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "L. Ferguson opened the scoring on 36 minutes."
+        "text": "L. Ferguson opened the scoring on 36 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "The last goal came on 86 minutes, making it 6-0."
+        "text": "C. Main scored on 42 minutes, making it 2-0."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "R. Hedges scored on 49 minutes, making it 3-0."
+      },
+      {
+        "basis": "measured",
+        "text": "R. Hedges scored on 59 minutes, making it 4-0."
+      },
+      {
+        "basis": "measured",
+        "text": "J. Hayes scored on 63 minutes, making it 5-0."
+      },
+      {
+        "basis": "measured",
+        "text": "R. Hedges scored a penalty on 86 minutes, making it 6-0."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
-    "headline": "Aberdeen win it late against NSI Runavik",
+    "events_available": true,
+    "goals_complete": true,
+    "headline": "Aberdeen beat NSI Runavik 6-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
       "event_goals": 6,
@@ -861,6 +876,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

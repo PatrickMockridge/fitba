@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2019-11-09",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166423,
     "home_goals": 1,
@@ -131,7 +132,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -584,15 +585,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "J. Mullin scored a penalty on 5 minutes."
+        "text": "J. Mullin scored a penalty on 5 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "N. McGinn made it 1-1 on 10 minutes."
+        "text": "N. McGinn scored on 10 minutes, making it 1-1."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "R. Hedges scored on 52 minutes, making it 1-2."
+      },
+      {
+        "basis": "measured",
+        "text": "A. Considine scored on 70 minutes, making it 1-3."
       },
       {
         "basis": "measured",
@@ -607,6 +612,8 @@
         "text": "fxG: Ross County 0.981 (0.0-2.622), Aberdeen 1.961 (0.0-4.283)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Ross County 3-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -957,6 +964,10 @@
       "provider": null,
       "value": 1.961
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 2.622,
       "low": 0.0,

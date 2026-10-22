@@ -17,8 +17,9 @@
     "away_team_id": "sco:celtic",
     "away_team_name": "Celtic",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2019-10-27",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166401,
     "home_goals": 0,
@@ -131,7 +132,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "N. Lennon",
@@ -583,7 +584,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "O. Édouard opened the scoring on 10 minutes, assisted by J. Forrest."
+        "text": "O. Édouard opened the scoring on 10 minutes, assisted by J. Forrest, making it 0-1."
+      },
+      {
+        "basis": "measured",
+        "text": "J. Frimpong scored on 15 minutes, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "J. Forrest scored on 37 minutes, assisted by M. Elyounoussi, making it 0-3."
+      },
+      {
+        "basis": "measured",
+        "text": "M. Elyounoussi scored on 44 minutes, assisted by T. Rogić, making it 0-4."
       },
       {
         "basis": "measured",
@@ -598,6 +611,8 @@
         "text": "fxG: Aberdeen 0.0 (0.0-0.0), Celtic 1.634 (0.0-3.753)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Celtic beat Aberdeen 4-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -898,6 +913,10 @@
       "provider": null,
       "value": 1.634
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 0.0,
       "low": 0.0,

@@ -12,7 +12,8 @@ import {
   type HistorySeasonRef,
 } from "@/lib/data";
 
-export const metadata = { title: "The Cormack era · fitba" };
+export const metadata = {
+  alternates: { canonical: "/history/" }, title: "The Cormack era · fitba" };
 
 function money(value: number | null | undefined) {
   if (value === null || value === undefined) return "—";
@@ -230,6 +231,9 @@ export default function HistoryPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table compact">
+            <caption className="fine-print">
+              Season-by-season league record, managers, honours and review status.
+            </caption>
             <thead>
               <tr>
                 <th>Season</th>
@@ -339,6 +343,9 @@ export default function HistoryPage() {
           </p>
           <div className="table-wrap">
             <table className="league-table compact">
+              <caption className="fine-print">
+                Baseline seasons immediately before the Cormack era.
+              </caption>
               <thead>
                 <tr>
                   <th>Season</th>
@@ -393,6 +400,94 @@ export default function HistoryPage() {
         </p>
       </section>
 
+      {history.heavy_defeats?.length ? (
+        <section className="card" data-contract="history.heavy-defeats">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">The lows, measured</p>
+              <h2>Heavy defeats</h2>
+            </div>
+            <span className="badge badge-neutral">
+              {history.heavy_defeats.length} by four or more goals
+            </span>
+          </div>
+          <div className="table-wrap">
+            <table className="league-table">
+              <caption className="fine-print">
+                Defeats by four or more goals in the Cormack era, newest first.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Season</th>
+                  <th scope="col">Competition</th>
+                  <th scope="col">Opponent</th>
+                  <th scope="col" className="num">
+                    Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.heavy_defeats.map((row) => (
+                  <tr key={`${row.date}-${row.opponent}-${row.goals_against}`}>
+                    <td>{formatDate(row.date)}</td>
+                    <td>{row.season}</td>
+                    <td>{row.competition_name ?? "—"}</td>
+                    <td>{row.opponent}</td>
+                    <td className="num">
+                      {row.href ? (
+                        <Link className="text-link" href={row.href}>
+                          {row.goals_for}–{row.goals_against}
+                        </Link>
+                      ) : (
+                        `${row.goals_for}–${row.goals_against}`
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      {history.europe?.length ? (
+        <section className="card" data-contract="history.europe">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Europe</p>
+              <h2>European campaigns</h2>
+            </div>
+            <span className="badge badge-neutral">{history.europe.length} campaigns</span>
+          </div>
+          <div className="table-wrap">
+            <table className="league-table">
+              <caption className="fine-print">
+                European campaigns, the round reached and the outcome.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Season</th>
+                  <th scope="col">Competition</th>
+                  <th scope="col">Round reached</th>
+                  <th scope="col">Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.europe.map((row) => (
+                  <tr key={`${row.season}-${row.competition_name}`}>
+                    <td>{row.season}</td>
+                    <td>{row.competition_name ?? "—"}</td>
+                    <td>{row.exit_round ?? "—"}</td>
+                    <td>{row.outcome ?? row.note ?? "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
       <section className="card read-block" data-contract="history.read">
         <p className="eyebrow">The read</p>
         <h2>An assessment, not a measurement</h2>
@@ -412,6 +507,9 @@ export default function HistoryPage() {
         </div>
         <div className="table-wrap">
           <table className="league-table compact">
+            <caption className="fine-print">
+              Data coverage by season: league, transfers, lineups and match stats.
+            </caption>
             <thead>
               <tr>
                 <th>Season</th>

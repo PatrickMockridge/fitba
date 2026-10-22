@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "uefa:conference-league",
-    "competition_name": "UEFA Europa Conference League",
+    "competition_name": "UEFA Conference League",
     "date": "2021-07-29",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 714908,
     "home_goals": 2,
@@ -86,7 +87,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Glass",
@@ -441,7 +442,7 @@
       "is_aberdeen": false,
       "red_cards": [
         {
-          "card_type": "straight_red",
+          "card_type": "second_yellow",
           "detail": "Red Card",
           "extra_minute": null,
           "minute": 72,
@@ -485,21 +486,23 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "M. Olsson opened the scoring on 51 minutes."
+        "text": "M. Olsson opened the scoring on 51 minutes, making it 1-0."
       },
       {
         "basis": "measured",
-        "text": "Patrick Wålemark was sent off on 72 minutes."
+        "text": "L. Bengtsson scored a penalty on 68 minutes, making it 2-0."
       },
       {
         "basis": "measured",
-        "text": "The score includes a penalty."
+        "text": "Patrick Wålemark was sent off for a second yellow card on 72 minutes."
       },
       {
         "basis": "unknown",
         "text": "Team statistics are unavailable for this fixture; the score and event record are shown."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Ten-man BK Hacken beat Aberdeen 2-0",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -819,7 +822,7 @@
     {
       "assist_name": null,
       "beneficiary_side": null,
-      "card_type": "straight_red",
+      "card_type": "second_yellow",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
@@ -829,7 +832,7 @@
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
-      "is_second_yellow": false,
+      "is_second_yellow": true,
       "is_shootout": false,
       "is_var": false,
       "minute": 72,
@@ -1075,6 +1078,10 @@
       "provider": null,
       "value": null
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": null,
       "low": null,

@@ -399,14 +399,6 @@ def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None
                 "age": row.get("age"),
                 "mentions": row.get("mentions"),
                 "topic_count": row.get("topic_count"),
-                "sentiment": {
-                    "count": row.get("sentiment_count"),
-                    "mean": row.get("sentiment_mean"),
-                    "median": row.get("sentiment_median"),
-                    "positive_share": row.get("positive_share"),
-                    "neutral_share": row.get("neutral_share"),
-                    "negative_share": row.get("negative_share"),
-                },
                 "credibility": row.get("credibility"),
                 "player_href": player_index.href(row.get("player_key")),
                 "cross_references": {

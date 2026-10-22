@@ -84,6 +84,7 @@ def test_evaluation_uses_provider_xg_and_gate() -> None:
     model = fit_fxg(rows, CONFIG)
     evaluation = evaluate_fxg(model, rows, CONFIG)
     assert evaluation["matches"] == 2
+    assert evaluation["team_rows"] == 2
     assert evaluation["status"] in {"pass", "fail"}
     assert evaluation["bias"] is not None
     assert evaluation["mae"] is not None

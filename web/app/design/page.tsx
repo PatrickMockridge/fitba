@@ -49,6 +49,13 @@ const THEMES = [
   { id: "floodlight", label: "Floodlight", swatch: "floodlight" },
 ];
 
+export const metadata = {
+  title: "Design specimen · fitba",
+  description: "The System 7 design grammar, four themes and component specimens.",
+  alternates: { canonical: "/design/" },
+  robots: { index: false, follow: true },
+};
+
 export default function DesignSpecimenPage() {
   const manifest = getManifest();
   const tables = getTableFiles();

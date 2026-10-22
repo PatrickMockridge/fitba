@@ -1,4 +1,4 @@
-.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check data-coverage-check docs-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check data-coverage-check docs-check corrections-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
 
 BASE_PATH ?=
 
@@ -17,7 +17,7 @@ format:
 typecheck:
 	uv run pyright
 
-check: lint typecheck test docs-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check xg-check provenance-check availability-check needs-check rumours-check squad-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+check: lint typecheck test docs-check corrections-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check xg-check provenance-check availability-check needs-check rumours-check squad-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
 
 check-all: check web-contract-check
 
@@ -25,6 +25,8 @@ web-contract-check:
 	cd web && NEXT_PUBLIC_BASE_PATH="$(BASE_PATH)" npm run build
 	uv run python scripts/check_web_contract.py --ci --base-path "$(BASE_PATH)"
 	uv run python scripts/check_fixture_pages.py --base-path "$(BASE_PATH)"
+	uv run python scripts/check_seo.py
+	uv run python scripts/check_accessibility.py
 
 fixtures-check:
 	uv run python scripts/check_fixture_pages.py --base-path "$(BASE_PATH)"
@@ -37,6 +39,9 @@ data-coverage-check:
 
 docs-check:
 	uv run python scripts/check_docs.py
+
+corrections-check:
+	uv run python scripts/check_corrections.py
 
 metrics-check:
 	uv run python scripts/check_metrics.py --strict

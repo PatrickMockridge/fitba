@@ -17,8 +17,9 @@
     "away_team_id": "sco:aberdeen",
     "away_team_name": "Aberdeen",
     "competition_id": "sco:premiership",
-    "competition_name": "Premiership",
+    "competition_name": "Scottish Premiership",
     "date": "2020-02-11",
+    "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166498,
     "home_goals": 1,
@@ -122,7 +123,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T19:45:11+00:00",
+  "generated_at": "2026-10-22T22:17:07+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -615,7 +616,19 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "C. Main opened the scoring on 15 minutes, assisted by A. Considine."
+        "text": "C. Main opened the scoring on 15 minutes, assisted by A. Considine, making it 0-1."
+      },
+      {
+        "basis": "measured",
+        "text": "N. McGinn scored on 23 minutes, assisted by L. Ferguson, making it 0-2."
+      },
+      {
+        "basis": "measured",
+        "text": "C. McLennan scored on 45+4 minutes, assisted by A. Considine, making it 0-3."
+      },
+      {
+        "basis": "measured",
+        "text": "M. Ogboe scored on 84 minutes, assisted by D. Moyo, making it 1-3."
       },
       {
         "basis": "measured",
@@ -634,6 +647,8 @@
         "text": "fxG: Hamilton Academical 0.327 (0.0-1.275), Aberdeen 1.634 (0.0-3.753)."
       }
     ],
+    "events_available": true,
+    "goals_complete": true,
     "headline": "Aberdeen beat Hamilton Academical 3-1",
     "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
     "reconciliation": {
@@ -934,6 +949,10 @@
       "provider": null,
       "value": 1.634
     },
+    "evaluation_href": "/analysis/xg/",
+    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
+    "gate_passed": false,
+    "gate_status": "fail",
     "home": {
       "high": 1.275,
       "low": 0.0,

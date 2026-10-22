@@ -605,7 +605,6 @@ export interface ForumSignal {
   age: number | null;
   mentions: number;
   topic_count: number;
-  sentiment: SentimentSummary;
   credibility: string;
   cross_references: {
     confirmed_transfer: boolean;
@@ -1345,6 +1344,23 @@ export interface HistoryIndex {
     transfer_coverage: { audited_from: string; historical_from: string };
     note: string;
   };
+  heavy_defeats?: Array<{
+    season: string;
+    date: string;
+    competition_name: string | null;
+    opponent: string;
+    goals_for: number;
+    goals_against: number;
+    fixture_id: number | null;
+    href: string | null;
+  }>;
+  europe?: Array<{
+    season: string;
+    competition_name: string | null;
+    exit_round: string | null;
+    outcome: string | null;
+    note: string | null;
+  }>;
   scorecard: {
     seasons: number;
     best_position: number | null;
@@ -1633,6 +1649,8 @@ export interface MatchdayStrength {
   shots_against_pm?: number | null;
   shot_share?: number | null;
   percentiles?: Record<string, number | null>;
+  ranks?: Record<string, number | null>;
+  league_size?: number | null;
   coverage?: string | null;
   sample_note?: string | null;
   reason?: string | null;
@@ -1751,13 +1769,14 @@ export interface LineupBlock {
   unknowns: string[];
   availability?: {
     state?: string;
-    known?: number;
-    unknown?: number;
-    out?: number;
-    suspended?: number;
-    doubtful?: number;
-    returned?: number;
-    conflicts?: number;
+    applicable?: boolean;
+    known?: number | null;
+    unknown?: number | null;
+    out?: number | null;
+    suspended?: number | null;
+    doubtful?: number | null;
+    returned?: number | null;
+    conflicts?: number | null;
     as_of?: string | null;
     source_ids?: string[];
     note?: string;
@@ -2529,11 +2548,21 @@ export interface FixtureIndexRow {
   competition_name: string;
   home_team_name: string;
   away_team_name: string;
+  aberdeen_is_home?: boolean;
   home_goals: number | null;
   away_goals: number | null;
+  home_penalties?: number | null;
+  away_penalties?: number | null;
   result: "W" | "D" | "L";
   aberdeen_result: "W" | "D" | "L";
-  depth: "full" | "result" | "score";
+  depth: "full" | "result" | "partial" | "score";
+  href: string;
+}
+
+export interface FixtureIndexAlias {
+  fixture_id: number;
+  canonical_fixture_id: number;
+  canonical_href: string;
   href: string;
 }
 
@@ -2542,6 +2571,7 @@ export interface FixtureIndex {
   generated_at: string;
   count: number;
   fixtures: FixtureIndexRow[];
+  aliases?: FixtureIndexAlias[];
   state?: string;
   stale_reason?: string;
 }
@@ -2643,6 +2673,7 @@ export interface FixtureLineup {
 export interface FixturePlayerStat {
   player_id: number | null;
   player_name: string | null;
+  href?: string | null;
   team_id: number | null;
   team_name: string | null;
   is_aberdeen: boolean | null;
@@ -2688,18 +2719,21 @@ export interface FixtureDocument {
     result: "W" | "D" | "L";
     aberdeen_result: "W" | "D" | "L";
     href: string;
+    duplicate_of?: string | null;
   };
-  depth: "full" | "result" | "score";
+  depth: "full" | "result" | "partial" | "score";
   scoreboard: FixtureScoreboard;
   summary: {
     headline: string;
     basis: string;
     bullets: Array<{ text: string; basis: string }>;
+    events_available: boolean;
+    goals_complete: boolean;
     reconciliation?: {
-      event_goals: number;
-      event_score: { home: number; away: number };
+      event_goals: number | null;
+      event_score: { home: number; away: number } | null;
       final_score: { home: number; away: number };
-      matched: boolean;
+      matched: boolean | null;
     };
     note: string;
   };
@@ -2715,6 +2749,10 @@ export interface FixtureDocument {
     away?: { value: number | null; low: number | null; high: number | null; provider: number | null };
     model_id?: string;
     note?: string;
+    gate_status?: string | null;
+    gate_passed?: boolean | null;
+    gate_note?: string | null;
+    evaluation_href?: string | null;
   };
   timeline: FixtureTimelineRow[];
   lineups: { home: FixtureLineup | null; away: FixtureLineup | null };
@@ -2803,6 +2841,7 @@ export interface XgDocument {
     status: string;
     validation_season: string;
     matches: number;
+    team_rows?: number;
     bias: number | null;
     mae: number | null;
     calibration_slope: number | null;

@@ -32,6 +32,8 @@ BAD_PATTERNS = [
     re.compile(r"\bST\.\s+(?:Johnstone|Mirren)\b"),
     re.compile(r"\bADO\s+den\s+Haag\b"),
     re.compile(r"\bFree\s+Agent\b"),
+    re.compile(r"\bFriendlies\s+Clubs\b"),
+    re.compile(r"\bRops\b"),
 ]
 
 

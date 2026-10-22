@@ -221,7 +221,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
         </label>
       </div>
 
-      <p className="fine-print">
+      <p className="fine-print" aria-live="polite">
         {filtered.length} player{filtered.length === 1 ? "" : "s"} in this view.{" "}
         <strong>Click a player&apos;s position</strong> to see how it was inferred: current
         Aberdeen usage, career clubs and seasons, the FM-style eligibility and any tactical
@@ -235,6 +235,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
 
       <div className="table-wrap">
         <table className="league-table compact squad-table">
+<caption className="fine-print">Current squad with roles, minutes and output.</caption>
           <thead>
             <tr>
               <th>Player</th>

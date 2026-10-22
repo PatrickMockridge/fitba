@@ -10,7 +10,9 @@ const ORDER = [
 
 function label(honour: HistoryHonour) {
   if (honour.competition === "League") return "League title";
-  const details = [honour.opponent, honour.score].filter(Boolean).join(" · ");
+  const details = [honour.opponent, honour.score, honour.penalties]
+    .filter(Boolean)
+    .join(" · ");
   return details || honour.competition;
 }
 

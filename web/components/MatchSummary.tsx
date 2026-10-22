@@ -26,10 +26,15 @@ export function MatchSummary({ summary }: { summary: FixtureDocument["summary"] 
           </li>
         ))}
       </ul>
-      {summary.reconciliation && !summary.reconciliation.matched ? (
+      {summary.reconciliation?.matched === false ? (
         <p className="fine-print">
           The event feed and the final score do not reconcile. The score is
           authoritative; the timeline is incomplete.
+        </p>
+      ) : null}
+      {summary.reconciliation?.matched === null ? (
+        <p className="fine-print">
+          Event reconciliation is unavailable; the final score is authoritative.
         </p>
       ) : null}
       <p className="fine-print">{summary.note}</p>

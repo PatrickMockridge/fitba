@@ -172,6 +172,22 @@ def _check_registry(registry: Any, report: Report) -> None:
         if metric.status != "active":
             report.note("registry.status", f"{metric.id} is {metric.status}")
             continue
+        formula_text = str(metric.formula or "")
+        report.check(
+            not any(
+                placeholder in formula_text
+                for placeholder in (
+                    "Registered family",
+                    "Registered case family",
+                    "Registered document family",
+                )
+            ),
+            "registry.formula",
+            (
+                f"{metric.id}: placeholder formula; publish a real definition "
+                "or an explicit document envelope"
+            ),
+        )
         if metric.verification == "recompute":
             report.check(
                 metric.implementation in CHECKS,
