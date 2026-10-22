@@ -125,13 +125,9 @@ def check(route: str, budget: dict[str, object]) -> list[str]:
     words = len(" ".join(parser.visible).split())
     errors: list[str] = []
     if words > int(budget["words"]):
-        errors.append(
-            f"/{route}/ has {words} visible words (budget {budget['words']})"
-        )
+        errors.append(f"/{route}/ has {words} visible words (budget {budget['words']})")
     if parser.badges > int(budget["badges"]):
-        errors.append(
-            f"/{route}/ has {parser.badges} visible badges (budget {budget['badges']})"
-        )
+        errors.append(f"/{route}/ has {parser.badges} visible badges (budget {budget['badges']})")
     if parser.fine > int(budget["fine"]):
         errors.append(
             f"/{route}/ has {parser.fine} visible fine-print blocks (budget {budget['fine']})"
@@ -139,17 +135,11 @@ def check(route: str, budget: dict[str, object]) -> list[str]:
     if parser.h1 != 1:
         errors.append(f"/{route}/ has {parser.h1} visible h1 elements, expected 1")
     if parser.table_captions < parser.tables:
-        errors.append(
-            f"/{route}/ has {parser.tables} tables and {parser.table_captions} captions"
-        )
+        errors.append(f"/{route}/ has {parser.tables} tables and {parser.table_captions} captions")
     if parser.table_th_without_scope:
-        errors.append(
-            f"/{route}/ has {parser.table_th_without_scope} th elements without scope"
-        )
+        errors.append(f"/{route}/ has {parser.table_th_without_scope} th elements without scope")
     if parser.unnamed_regions:
-        errors.append(
-            f"/{route}/ has {parser.unnamed_regions} table regions without role/name"
-        )
+        errors.append(f"/{route}/ has {parser.unnamed_regions} table regions without role/name")
     full = " ".join(parser.all_main).casefold()
     for phrase in BANNED:
         if phrase in full:
