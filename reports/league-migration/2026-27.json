@@ -1,0 +1,317 @@
+{
+  "season": "2026-27",
+  "checked_at": "2026-10-22T00:26:35+00:00",
+  "gate": {
+    "status": "fail",
+    "enabled": false,
+    "active_source": "football_data_uk",
+    "checks": [
+      {
+        "id": "fixture_count.SC0",
+        "status": "fail",
+        "value": 198
+      },
+      {
+        "id": "team_count.SC0",
+        "status": "pass",
+        "value": 12
+      },
+      {
+        "id": "unresolved_teams.SC0",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "duplicate_keys.SC0",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "dates_in_bounds.SC0",
+        "status": "pass",
+        "value": true
+      },
+      {
+        "id": "every_played_result_matched.SC0",
+        "status": "pass",
+        "value": "0 missing"
+      },
+      {
+        "id": "score_agreement.SC0",
+        "status": "pass",
+        "value": 1.0
+      },
+      {
+        "id": "team_match_stats.SC0",
+        "status": "pass",
+        "value": "metadata True; sample fixture 1556628: 2 team blocks"
+      },
+      {
+        "id": "fixture_count.SC1",
+        "status": "pass",
+        "value": 180
+      },
+      {
+        "id": "team_count.SC1",
+        "status": "pass",
+        "value": 10
+      },
+      {
+        "id": "unresolved_teams.SC1",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "duplicate_keys.SC1",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "dates_in_bounds.SC1",
+        "status": "pass",
+        "value": true
+      },
+      {
+        "id": "every_played_result_matched.SC1",
+        "status": "pass",
+        "value": "0 missing"
+      },
+      {
+        "id": "score_agreement.SC1",
+        "status": "pass",
+        "value": 1.0
+      },
+      {
+        "id": "team_match_stats.SC1",
+        "status": "fail",
+        "value": "metadata False; sample fixture 1556828: 0 team blocks"
+      },
+      {
+        "id": "fixture_count.SC2",
+        "status": "pass",
+        "value": 180
+      },
+      {
+        "id": "team_count.SC2",
+        "status": "pass",
+        "value": 10
+      },
+      {
+        "id": "unresolved_teams.SC2",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "duplicate_keys.SC2",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "dates_in_bounds.SC2",
+        "status": "pass",
+        "value": true
+      },
+      {
+        "id": "every_played_result_matched.SC2",
+        "status": "pass",
+        "value": "0 missing"
+      },
+      {
+        "id": "score_agreement.SC2",
+        "status": "pass",
+        "value": 1.0
+      },
+      {
+        "id": "team_match_stats.SC2",
+        "status": "fail",
+        "value": "metadata False; sample fixture 1557006: 0 team blocks"
+      },
+      {
+        "id": "fixture_count.SC3",
+        "status": "pass",
+        "value": 180
+      },
+      {
+        "id": "team_count.SC3",
+        "status": "pass",
+        "value": 10
+      },
+      {
+        "id": "unresolved_teams.SC3",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "duplicate_keys.SC3",
+        "status": "pass",
+        "value": 0
+      },
+      {
+        "id": "dates_in_bounds.SC3",
+        "status": "pass",
+        "value": true
+      },
+      {
+        "id": "every_played_result_matched.SC3",
+        "status": "pass",
+        "value": "0 missing"
+      },
+      {
+        "id": "score_agreement.SC3",
+        "status": "pass",
+        "value": 1.0
+      },
+      {
+        "id": "team_match_stats.SC3",
+        "status": "fail",
+        "value": "metadata False; sample fixture 1557752: 0 team blocks"
+      }
+    ],
+    "failures": [
+      "SC0: fixture_count (198)",
+      "SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks)",
+      "SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
+      "SC3: team_match_stats (metadata False; sample fixture 1557752: 0 team blocks)"
+    ]
+  },
+  "competitions": [
+    {
+      "division": "SC0",
+      "competition_id": "sco:premiership",
+      "provider_fixtures": 198,
+      "expected_fixtures": 228,
+      "provider_teams": 12,
+      "expected_teams": 12,
+      "fd_played": 54,
+      "api_played": 54,
+      "matched_played": 54,
+      "score_agreement": 1.0,
+      "missing_from_provider": [],
+      "extra_in_provider": [],
+      "unresolved_teams": [],
+      "duplicate_keys": 0,
+      "coverage": {
+        "fixtures": {
+          "events": true,
+          "lineups": true,
+          "statistics_fixtures": true,
+          "statistics_players": true
+        },
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": false,
+        "predictions": true,
+        "odds": true
+      },
+      "team_stats_sample": "metadata True; sample fixture 1556628: 2 team blocks"
+    },
+    {
+      "division": "SC1",
+      "competition_id": "sco:championship",
+      "provider_fixtures": 180,
+      "expected_fixtures": 180,
+      "provider_teams": 10,
+      "expected_teams": 10,
+      "fd_played": 53,
+      "api_played": 54,
+      "matched_played": 53,
+      "score_agreement": 1.0,
+      "missing_from_provider": [],
+      "extra_in_provider": [
+        [
+          "2026-10-20",
+          "sco:dunfermline-athletic",
+          "sco:partick-thistle"
+        ]
+      ],
+      "unresolved_teams": [],
+      "duplicate_keys": 0,
+      "coverage": {
+        "fixtures": {
+          "events": true,
+          "lineups": true,
+          "statistics_fixtures": false,
+          "statistics_players": false
+        },
+        "standings": true,
+        "players": false,
+        "top_scorers": false,
+        "top_assists": false,
+        "top_cards": false,
+        "injuries": false,
+        "predictions": true,
+        "odds": true
+      },
+      "team_stats_sample": "metadata False; sample fixture 1556828: 0 team blocks"
+    },
+    {
+      "division": "SC2",
+      "competition_id": "sco:league-one",
+      "provider_fixtures": 180,
+      "expected_fixtures": 180,
+      "provider_teams": 10,
+      "expected_teams": 10,
+      "fd_played": 54,
+      "api_played": 54,
+      "matched_played": 54,
+      "score_agreement": 1.0,
+      "missing_from_provider": [],
+      "extra_in_provider": [],
+      "unresolved_teams": [],
+      "duplicate_keys": 0,
+      "coverage": {
+        "fixtures": {
+          "events": true,
+          "lineups": true,
+          "statistics_fixtures": false,
+          "statistics_players": false
+        },
+        "standings": true,
+        "players": false,
+        "top_scorers": false,
+        "top_assists": false,
+        "top_cards": false,
+        "injuries": false,
+        "predictions": true,
+        "odds": true
+      },
+      "team_stats_sample": "metadata False; sample fixture 1557006: 0 team blocks"
+    },
+    {
+      "division": "SC3",
+      "competition_id": "sco:league-two",
+      "provider_fixtures": 180,
+      "expected_fixtures": 180,
+      "provider_teams": 10,
+      "expected_teams": 10,
+      "fd_played": 55,
+      "api_played": 55,
+      "matched_played": 55,
+      "score_agreement": 1.0,
+      "missing_from_provider": [],
+      "extra_in_provider": [],
+      "unresolved_teams": [],
+      "duplicate_keys": 0,
+      "coverage": {
+        "fixtures": {
+          "events": true,
+          "lineups": true,
+          "statistics_fixtures": false,
+          "statistics_players": false
+        },
+        "standings": true,
+        "players": false,
+        "top_scorers": false,
+        "top_assists": false,
+        "top_cards": false,
+        "injuries": false,
+        "predictions": true,
+        "odds": true
+      },
+      "team_stats_sample": "metadata False; sample fixture 1557752: 0 team blocks"
+    }
+  ]
+}

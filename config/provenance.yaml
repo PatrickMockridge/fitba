@@ -1,0 +1,299 @@
+# Layer-by-layer data provenance.
+#
+# This is the single truth table for "where does this number come from?".
+# config/sources.yaml remains the source registry (terms, lanes, capabilities,
+# URLs); this file says which source owns which layer. A source is never
+# described as primary for a layer it does not actually supply.
+
+version: 1
+
+layers:
+  - id: league_results_current
+    label: League results, current season
+    kind: provider
+    primary: football_data_uk
+    fallback: [api_football]
+    status: active
+    scope: current season, all four SPFL tiers
+    fields: [fixtures, results, status]
+    gate: config/league_migration.yaml
+    surfaces: [/sources/, /methodology/, /scotland/]
+    note: >
+      Football-Data is primary until the current-season API-Football coverage
+      gate passes for all four leagues. API-Football does not currently supply
+      all-tier team match stats, so a result-only migration would split the
+      source silently. The gate checks results and required stats.
+
+  - id: league_results_history
+    label: League results, historical
+    kind: provider
+    primary: football_data_uk
+    fallback: []
+    status: active
+    scope: 2013-14 to the season before the current one
+    fields: [fixtures, results]
+    surfaces: [/sources/, /history/]
+    note: Historical league results and the compact pre-2019 baseline.
+
+  - id: league_team_stats
+    label: League team match stats
+    kind: provider
+    primary: football_data_uk
+    fallback: []
+    status: active
+    scope: 2013-14 to current
+    fields: [shots, shots_on_target, corners, fouls, cards]
+    surfaces: [/sources/, /themes/, /scotland/]
+    note: >
+      Shots, corners, fouls and cards for the style/theme proxies. API-Football
+      team statistics are not available for every SPFL tier.
+
+  - id: league_standings
+    label: League tables
+    kind: computed
+    primary: computed
+    fallback: []
+    status: active
+    scope: current and historical seasons
+    fields: [points, goal_difference, position, form]
+    surfaces: [/scotland/]
+    note: Computed from league results with split and deduction rules.
+
+  - id: cup_fixtures
+    label: League Cup and Scottish Cup fixtures
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: current season
+    fields: [fixtures, results, rounds, penalties]
+    surfaces: [/competitions/, /sources/]
+    note: >
+      League Cup is complete; Scottish Cup is 50 of 136 ties at the key-test.
+      Missing rounds are labelled.
+
+  - id: club_fixtures
+    label: Aberdeen club fixture list
+    kind: provider
+    primary: spfl
+    fallback: [api_football]
+    status: active
+    scope: current season
+    fields: [fixtures, results, kickoff]
+    surfaces: [/fixtures/, /matchday/]
+    note: SPFL club feed; API-Football remains a cross-check.
+
+  - id: lineups_roles
+    label: Lineups, formations and starting roles
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: active
+    scope: Aberdeen fixtures, current season
+    fields: [formation, starting_xi, grid, events, minutes]
+    surfaces: [/squad/, /matchday/, /themes/]
+    note: Roles are derived from the starting-XI grid, never from position labels.
+
+  - id: player_match_stats
+    label: Player match ratings and stats
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: Premiership, current season
+    fields: [rating, goals, assists, cards, minutes]
+    surfaces: [/themes/, /squad/, /matchday/]
+    note: >
+      Premiership coverage; lower-tier current-season player stats were empty
+      at the key-test. Historical player-match-stat files are empty.
+
+  - id: event_layer
+    label: Event-derived Aberdeen stats
+    kind: derived
+    primary: api_football
+    fallback: []
+    status: active
+    scope: Aberdeen fixtures with lineups and events
+    fields: [goals_conceded_on_pitch, clean_sheets, substitutions]
+    surfaces: [/squad/, /themes/]
+    note: Reconstructed from lineups and events; not tracking data.
+
+  - id: squad_identity
+    label: Current squad
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: active
+    scope: current season
+    fields: [player_id, name, age, nationality, position, shirt_number, status]
+    surfaces: [/squad/]
+    note: Curated player overrides correct identity or youth gaps.
+
+  - id: preferred_foot
+    label: Preferred foot
+    kind: provider
+    primary: sportmonks
+    fallback: [afc_official, wikipedia]
+    status: gated
+    scope: current squad
+    fields: [preferred_foot]
+    surfaces: [/squad/, /sources/]
+    note: >
+      Sportmonks is gated; AFC official yields no foot values today; Wikipedia
+      is last resort with a revision permalink. 1 known, 37 unknown.
+
+  - id: transfers_candidate
+    label: Transfer candidate feed
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: active
+    scope: Aberdeen full transfer history
+    fields: [date, direction, clubs, kind]
+    surfaces: [/transfers/, /sources/]
+    note: Candidate feed only; it has no fees, loan end dates or recall terms.
+
+  - id: transfer_register
+    label: Published transfer register
+    kind: curated
+    primary: curated
+    fallback: []
+    status: active
+    scope: 2019-20 to current
+    fields: [confirmed_business, fees, loans, sell_ons]
+    surfaces: [/transfers/]
+    note: >
+      Curated against AFC announcements and Wikipedia season records, with the
+      API-Football candidate feed as discovery. Most rows are curated, not
+      provider-confirmed; fees are mostly undisclosed.
+
+  - id: loans
+    label: Loan register
+    kind: curated
+    primary: curated
+    fallback: []
+    status: partial
+    scope: current and historical
+    fields: [loan_club, dates, recall, obligation, option]
+    surfaces: [/loans/, /transfers/]
+    note: Loan-out tags come from the register; end/recall/obligation terms are unknown.
+
+  - id: news
+    label: AFC news headlines
+    kind: provider
+    primary: afc_news
+    fallback: []
+    status: active
+    scope: current
+    fields: [title, category, date, url]
+    surfaces: [/news/]
+    note: Listing metadata only; article bodies are not copied.
+
+  - id: availability
+    label: Injuries and availability
+    kind: curated
+    primary: afc_news
+    fallback: [api_football]
+    status: partial
+    scope: current squad and next opponent
+    fields: [status, reason, expected_return, source, verified_at]
+    surfaces: [/squad/, /matchday/, /themes/, /recruitment/]
+    note: >
+      Curated official AFC team news is primary. API-Football /injuries is an
+      optional provider snapshot; its current-season Scottish coverage is
+      reported false. Provider 'injured' booleans are not team news.
+
+  - id: rumours
+    label: Curated rumour register
+    kind: curated
+    primary: curated
+    fallback: []
+    status: active
+    scope: current
+    fields: [claim, status, confidence, sources]
+    surfaces: [/rumours/, /recruitment/]
+    note: Unconfirmed links, separate from the confirmed register.
+
+  - id: forum_signal
+    label: Fan signal
+    kind: derived
+    primary: afc_chat
+    fallback: []
+    status: active
+    scope: sampled first pages
+    fields: [mentions, cross_references, sentiment]
+    surfaces: [/rumours/]
+    note: Sampled, rule-based, no raw posts or usernames.
+
+  - id: history
+    label: Cormack-era historical record
+    kind: mixed
+    primary: mixed
+    fallback: []
+    status: active
+    scope: 2019-20 to current
+    fields: [staff, honours, transfers, style, selection, reviews]
+    surfaces: [/history/]
+    note: >
+      Mixed sources: API-Football backfill, football-data style proxies, AFC
+      official and Wikipedia curation. The season documents label their basis.
+
+  - id: valuation
+    label: Inferred transfer values
+    kind: derived
+    primary: curated
+    fallback: []
+    status: active
+    scope: transfer register
+    fields: [fee_range, confidence, method]
+    surfaces: [/transfers/, /methodology/]
+    note: Disclosed/reported anchors plus a transparent age/position/market model.
+
+  - id: themes
+    label: Medium and long-term themes
+    kind: derived
+    primary: derived
+    fallback: []
+    status: active
+    scope: current season + Cormack era
+    fields: [family_balance, shape_tradeoff, cover, balance, mission]
+    surfaces: [/themes/, /matchday/]
+    note: Derived from lineups, events, provider ratings, league rows and history.
+
+  - id: needs
+    label: Squad needs
+    kind: derived
+    primary: derived
+    fallback: []
+    status: active
+    scope: current squad
+    fields: [cover, replace, strengthen, market_route]
+    surfaces: [/recruitment/, /scouting/, /themes/]
+    note: >
+      Derived from themes, availability, squad minutes, transfers and rumours.
+      Role profiles only; no targets or invented fees.
+
+  - id: odds
+    label: Betting odds
+    kind: none
+    primary: none
+    fallback: []
+    status: not_published
+    scope: n/a
+    fields: []
+    surfaces: []
+    note: Not ingested or published.
+
+excluded:
+  - id: bbc_sport
+    reason: Terms prohibit scraping or republication; manual finding aid only.
+  - id: transfermarkt
+    reason: Scraping prohibited; not used for public data.
+  - id: fotmob
+    reason: Terms prohibit scraping or republication.
+  - id: sofascore
+    reason: Terms prohibit scraping or republication.
+  - id: fbref
+    reason: Scraping prohibited; written permission required.
+  - id: pannadata
+    reason: No licence stated; local research only, never published.

@@ -1,0 +1,19 @@
+# Private verification queue for availability context.
+#
+# These rows are NOT published and do NOT affect the predicted XI or needs.
+# They record context that still needs an official AFC team-news URL and a
+# verified_at date. Do not promote a row into reference/availability.yaml
+# without that source.
+candidates:
+  - player_key: api:player:37253
+    player_name: M. Knoester
+    context: Project-owner context that the player has had an injury concern.
+    status: pending_verification
+    checked_at: 2026-10-22
+    note: No official AFC team-news URL recorded yet.
+  - player_key: api:player:68534
+    player_name: K. Tobers
+    context: Existing transfer-gap note says recovering from injury and absent from the provider squad snapshot.
+    status: pending_verification
+    checked_at: 2026-10-22
+    note: No official AFC team-news URL recorded yet; keep unknown.

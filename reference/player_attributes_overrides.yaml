@@ -1,0 +1,22 @@
+# Verified corrections to preferred foot.
+#
+# This is NOT a source. It is a last-resort correction layer for cases where a
+# resolver source is wrong, stale or unavailable. Every row must carry a source
+# id, a public source URL, a reason and a verification date. The guard rejects
+# rows without them.
+#
+# Attribute values:
+#   preferred_foot: left | right | both
+#
+# Side is not an attribute here. It is derived from the starting-XI role.
+#
+# players:
+#   - player_key: api:player:12345
+#     attribute: preferred_foot
+#     value: left
+#     source_id: official
+#     source_url: https://example.com/verified-source
+#     reason: The club profile states left-footed; the resolver source is stale.
+#     verified_at: 2026-10-21
+
+players: []

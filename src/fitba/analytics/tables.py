@@ -53,6 +53,11 @@ def _playable(matches: pl.DataFrame) -> pl.DataFrame:
     )
 
 
+def playable_matches(matches: pl.DataFrame) -> pl.DataFrame:
+    """Public alias for the playable-match filter."""
+    return _playable(matches)
+
+
 def team_match_rows(matches: pl.DataFrame) -> pl.DataFrame:
     """One row per team per match (home and away views concatenated)."""
     frame = _playable(matches)
@@ -154,6 +159,31 @@ def _rank(rows: pl.DataFrame, deductions: dict[str, int] | None = None) -> list[
     return ordered
 
 
+def _split_order(
+    subset: pl.DataFrame,
+    *,
+    split_after: int,
+    team_count: int,
+    deductions: dict[str, int],
+) -> list[dict[str, Any]]:
+    """Rank a completed split season inside its top-six/bottom-six groups.
+
+    The split membership is decided after the configured number of matches.
+    The final positions are then ranked within each group using the full-season
+    record, so a bottom-six team cannot be placed above a top-six team.
+    """
+    rows = team_match_rows(subset).sort(["team_id", "date"])
+    rows = rows.with_columns(pl.col("date").cum_count().over("team_id").alias("team_match_no"))
+    regular = rows.filter(pl.col("team_match_no") <= split_after)
+    regular_ranked = _rank(regular, deductions)
+    top_ids = {row["team_id"] for row in regular_ranked[: team_count // 2]}
+    bottom_ids = {row["team_id"] for row in regular_ranked[team_count // 2 :]}
+    full_ranked = _rank(rows, deductions)
+    ordered = [row for row in full_ranked if row["team_id"] in top_ids]
+    ordered.extend(row for row in full_ranked if row["team_id"] in bottom_ids)
+    return ordered
+
+
 def compute_table(
     matches: pl.DataFrame,
     *,
@@ -174,8 +204,41 @@ def compute_table(
                 deductions[entry["team_id"]] = deductions.get(entry["team_id"], 0) + int(
                     entry["points"]
                 )
+    competition = next(
+        (
+            item
+            for item in competitions_config().get("competitions", [])
+            if item.get("id") == competition_id
+        ),
+        None,
+    )
+    split_after = int((competition or {}).get("split_after_matches") or 0)
+    team_count = int((competition or {}).get("teams") or 0)
     rows = team_match_rows(subset)
-    ordered = _rank(rows, deductions)
+    max_played: Any = (
+        rows.group_by("team_id").agg(pl.len().alias("played"))["played"].max()
+        if rows.height
+        else None
+    )
+    played_per_team = int(max_played) if max_played is not None else 0
+    expected_matches = int((competition or {}).get("matches_per_season") or 0)
+    full_season = bool(
+        split_after
+        and team_count
+        and expected_matches
+        and played_per_team
+        and played_per_team * team_count >= expected_matches * 2
+    )
+    ordered = (
+        _split_order(
+            subset,
+            split_after=split_after,
+            team_count=team_count,
+            deductions=deductions,
+        )
+        if full_season
+        else _rank(rows, deductions)
+    )
     updated_at = utc_now_iso()
     frame = pl.DataFrame(
         [
@@ -224,6 +287,25 @@ def compute_table(
         },
     )
     return frame.select(TABLE_COLUMNS)
+
+
+def league_row(
+    matches: pl.DataFrame,
+    *,
+    competition_id: str,
+    season: str,
+    team_id: str,
+    competition_name: str | None = None,
+) -> dict[str, Any] | None:
+    """Return one team's row from the same table logic used by the site."""
+    table = compute_table(
+        matches,
+        competition_id=competition_id,
+        competition_name=competition_name,
+        season=season,
+    )
+    rows = table.filter(pl.col("team_id") == team_id)
+    return rows.to_dicts()[0] if rows.height else None
 
 
 def build_tables(

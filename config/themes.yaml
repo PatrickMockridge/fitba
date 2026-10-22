@@ -1,0 +1,86 @@
+# Medium and long-term theme policy.
+#
+# Themes are hypotheses with evidence, not verdicts. The current-season layer
+# carries four themes; the club-mission layer is one theme and is the long-term
+# 20% context. Thresholds and family groupings live here so the read can be
+# audited without changing code.
+
+version: 1
+club: aberdeen
+season: 2026-27
+
+scope:
+  ratings: premiership
+  minutes: all_competitive
+  shapes: all_competitive
+  bench: premiership
+
+themes:
+  - id: family_balance
+    horizon: season
+    order: 1
+    title: The family balance
+    fan_question: Where are Aberdeen strong and weak?
+  - id: wing_back_tax
+    horizon: season
+    order: 2
+    title: The wing-back tax
+    fan_question: What does three at the back cost?
+  - id: cover_question
+    horizon: season
+    order: 3
+    title: The cover question
+    fan_question: Who is actually covering the defence?
+  - id: leaky_boat
+    horizon: season
+    order: 4
+    title: The leaky boat
+    fan_question: Are the forwards covering the defence?
+  - id: mission_check
+    horizon: mission
+    order: 5
+    title: The mission check
+    fan_question: Is the trading model working, or just a leaky boat?
+
+identity:
+  # Provider duplicate identities recorded in reference/transfer_gaps.yaml.
+  # The current squad uses the canonical id; theme aggregations must not
+  # double-count the duplicate.
+  duplicate_player_ids:
+    "668797": 44982   # Lewis Smith
+    "334359": 550363  # Emmanuel Gyamfi
+
+family_groups:
+  GK: [goalkeeper]
+  CB: [centre_back]
+  FB/WB: [full_back, wing_back]
+  MID: [defensive_midfield, central_midfield]
+  AM/WM: [attacking_midfield, wide_midfield]
+  W: [wide_forward]
+  ST: [centre_forward]
+
+thresholds:
+  family:
+    high_minutes: 900
+    high_matches: 6
+    medium_minutes: 450
+    medium_matches: 3
+  depth:
+    starter_starts: 5
+    starter_minutes: 450
+    rotation_minutes: 90
+    concentration_high: 0.55
+    thin_rotation_starts: 3
+  shape:
+    medium_matches: 3
+  balance:
+    medium_matches: 6
+  mission:
+    min_arrivals_for_confidence: 5
+
+mission:
+  pillars_source: reference/history/era.yaml
+  commercial_context: >
+    Commercial growth and fanbase expansion are part of the public framing of
+    the Cormack era. They are context only: the public football data cannot
+    measure them, so they are not scored.

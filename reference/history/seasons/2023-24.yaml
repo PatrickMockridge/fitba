@@ -1,0 +1,132 @@
+# 2023-24: European group stage, a cup final and a seventh-place league finish.
+season: 2023-24
+status: completed
+headline: A European group stage and a League Cup final, but a seventh-place league season and three managers.
+as_of: null
+reviewed_at: '2026-10-21'
+manager_stint_ids:
+  - barry-robson-manager-2023
+  - peter-leven-interim-2024a
+  - neil-warnock-interim-2024
+  - peter-leven-interim-2024b
+
+expectations:
+  baseline: >
+    A top-four baseline after third place, with a first European group stage
+    since 2007-08 and a squad capable of competing on three fronts.
+  target: >
+    Top four, European group-stage progress and a cup run. This is an
+    analyst-set baseline, not a published club target.
+  context: >
+    Barry Robson was dismissed on 31 January 2024. Peter Leven took the 3
+    February match as interim, Neil Warnock was interim from 5 February to 9
+    March, and Leven returned as interim until the end of the season.
+  source_ids: [wikipedia]
+  source_urls:
+    - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+
+league_context: >
+  Aberdeen finished seventh with 48 points. The season included a European
+  group stage and a League Cup final, but the league form did not hold. The
+  club used three managers and finished in the bottom half.
+
+cup_runs:
+  - competition_id: sco:scottish-cup
+    exit_round: Semi-final
+    outcome: eliminated
+    note: Drew 3-3 with Celtic after extra time and lost 6-5 on penalties on 20 April 2024.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+  - competition_id: sco:league-cup
+    exit_round: Final
+    outcome: eliminated
+    note: Lost 1-0 to Rangers in the final on 17 December 2023; runners-up, not winners.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+
+europe:
+  - competition_id: uefa:europa-league
+    stage_reached: Play-off round
+    outcome: eliminated
+    note: Lost 5-3 on aggregate to BK Häcken and dropped into the Conference League.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+  - competition_id: uefa:conference-league
+    stage_reached: Group stage
+    outcome: eliminated
+    note: Finished third in Group G with Eintracht Frankfurt, PAOK and HJK Helsinki.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+
+honours: []
+
+key_transfers:
+  arrivals: []
+  departures: []
+  note: >
+    Historical transfer rows are curated partial before 2024-25. Key business
+    includes Leighton Clarkson's permanent move, Graeme Shinnie's return and
+    Ross McCrorie's sale to Bristol City. The full set is in the transfer
+    register.
+
+academy_debuts:
+  - player_key: null
+    player_name: Fletcher Boyd
+    debut_date: '2024-05-12'
+    competition: Scottish Premiership
+    note: Scored on his debut in the 4-0 win at Hibernian, aged 16.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+
+tactical:
+  shape_note: >
+    The season spans Robson, Warnock and Leven. The manager split is the honest
+    unit; a single season shape would average across three regimes.
+  style_note: >
+    European group-stage football and a cup final are real achievements. The
+    measured proxies show whether the league style changed; the reading does
+    not treat a cup run as proof that the league model worked.
+  selection_note: >
+    The lineup backfill is available or partial; selection metrics are measured
+    where coverage allows and the fraction is shown.
+
+review:
+  what_worked: >
+    The club reached a European group stage and a League Cup final, and Fletcher
+    Boyd's debut offered a visible youth-pathway moment. The cup run and the
+    European campaign gave the season a shape beyond the league table.
+  what_did_not: >
+    The league fell to seventh, the League Cup final was lost, and the Scottish
+    Cup semi-final was lost on penalties. Three managers in one season is a
+    stability cost that the cup run does not offset.
+  trade_off: >
+    A cup final and a European group stage are exactly the kind of variance a
+    trading model can produce: they raise revenue and expectation while
+    consuming squad depth. The league cost was visible in the same season.
+  read: >
+    This is the season where the trade-off is hardest to reduce to a verdict.
+    The cup final and European group stage were genuine achievements; the
+    seventh-place finish and three managers were a genuine cost. The record
+    keeps both and refuses to use one to cancel the other.
+  look_ahead: >
+    The 2024-25 season would bring a new manager, a strong start, a collapse and
+    the Scottish Cup — the most extreme swing in the record.
+  label: curated_editorial
+
+coverage_declared:
+  transfers: curated_partial
+  staff: curated
+  lineups: partial
+  match_stats: measured_league_proxies
+
+known_gaps:
+  - Historical transfer rows before 2024-25 are curated partial.
+  - The 2023-24 League Cup was a runners-up finish and is not in the honours register.
+
+source_urls:
+  - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season

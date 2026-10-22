@@ -1,0 +1,22 @@
+# Community engagement is deliberately NOT built in this phase.
+#
+# TODO(engagement): votes, polls, rumour submissions and comments are a separate
+# project. They need identity, moderation, rate limiting, a data store and a
+# privacy policy. The static export has no backend, so no widget here may imply
+# a shared vote or count.
+enabled: false
+provider: undecided
+features:
+  - votes
+  - polls
+  - rumour_submissions
+reason: >
+  Engagement is deferred as its own project. The researched candidates are
+  Supabase (anonymous auth + row-level security), Cloudflare D1/Workers,
+  Firebase, and third-party embeds. None is chosen and none is wired up.
+requirements:
+  - moderation policy and abuse handling before public submissions
+  - rate limiting and anonymous-but-abuse-resistant identity
+  - a privacy note covering IP, device and vote storage
+  - export and deletion path for submitted content
+  - never expose an unmoderated rumour as fact

@@ -1,0 +1,769 @@
+{
+  "generated_at": "2026-10-22T00:52:30+00:00",
+  "identity": {
+    "age": 25,
+    "full_name": "Lewis Smith",
+    "href": "/players/44982/",
+    "injured": false,
+    "loan": null,
+    "name": "L. Smith",
+    "nationality": "Scotland",
+    "number": 11,
+    "player_id": 44982,
+    "preferred_foot": {
+      "reason": "not_sourced",
+      "source": null,
+      "status": "unknown",
+      "value": null
+    },
+    "role": "Right midfielder",
+    "season": "2026-27",
+    "side": "right",
+    "status": "squad"
+  },
+  "panel_order": [
+    "position",
+    "playing_time",
+    "performance",
+    "records"
+  ],
+  "panels": {
+    "performance": {
+      "badge": "available",
+      "data": {
+        "detail_columns": [
+          {
+            "key": "passes_key",
+            "label": "Key passes"
+          },
+          {
+            "key": "penalty_scored",
+            "label": "Penalties"
+          }
+        ],
+        "position_stats": [
+          {
+            "clean_sheets": 1,
+            "competition": "Premiership",
+            "conceded_on_pitch": 3,
+            "matches": 7,
+            "minutes_on_pitch": 325,
+            "own_goals": 0,
+            "player_id": 44982,
+            "player_key": "api:player:44982"
+          },
+          {
+            "clean_sheets": 0,
+            "competition": "League Cup",
+            "conceded_on_pitch": 2,
+            "matches": 4,
+            "minutes_on_pitch": 167,
+            "own_goals": 0,
+            "player_id": 44982,
+            "player_key": "api:player:44982"
+          }
+        ],
+        "position_stats_coverage": "available",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+        "provider_columns": [
+          {
+            "key": "competition",
+            "label": "Competition"
+          },
+          {
+            "key": "team_name",
+            "label": "Team"
+          },
+          {
+            "key": "goals",
+            "label": "G"
+          },
+          {
+            "key": "assists",
+            "label": "A"
+          },
+          {
+            "key": "yellow_cards",
+            "label": "YC"
+          },
+          {
+            "key": "red_cards",
+            "label": "RC"
+          },
+          {
+            "format": "decimal",
+            "key": "rating",
+            "label": "Rating"
+          }
+        ],
+        "stats": [
+          {
+            "appearances": 5,
+            "assists": 0,
+            "blocks": 1,
+            "competition": "Premiership",
+            "conceded": 0,
+            "dribbles_attempts": 7,
+            "dribbles_success": 3,
+            "duels_total": 39,
+            "duels_won": 16,
+            "fouls_committed": 4,
+            "fouls_drawn": 5,
+            "goals": 0,
+            "interceptions": 2,
+            "minutes": 196,
+            "pass_accuracy": 69.0,
+            "passes_key": 2,
+            "passes_total": 59,
+            "penalty_committed": null,
+            "penalty_missed": 0,
+            "penalty_saved": null,
+            "penalty_scored": 0,
+            "penalty_won": null,
+            "rating": 6.56,
+            "red_cards": 0,
+            "saves": null,
+            "scope": "club",
+            "season": 2026,
+            "shots_on": 1,
+            "shots_total": 3,
+            "starts": 1,
+            "tackles": 6,
+            "team_name": "Aberdeen",
+            "yellow_cards": 0
+          }
+        ],
+        "stats_coverage": "available",
+        "stats_note": "Current-season statistics from the licensed feed.",
+        "tiles": [
+          {
+            "key": "goals",
+            "label": "Goals",
+            "note": "provider",
+            "value": 0
+          },
+          {
+            "key": "assists",
+            "label": "Assists",
+            "note": "provider",
+            "value": 0
+          },
+          {
+            "key": "shots_total",
+            "label": "Shots",
+            "note": "provider",
+            "value": 3
+          },
+          {
+            "key": "dribbles_success",
+            "label": "Dribbles won",
+            "note": "provider",
+            "value": 3
+          }
+        ]
+      },
+      "eyebrow": "Performance",
+      "id": "performance",
+      "note": "Current-season statistics from the licensed feed.",
+      "status": "available",
+      "title": "Performance",
+      "warnings": []
+    },
+    "playing_time": {
+      "badge": "available",
+      "data": {
+        "playing_time": {
+          "by_competition": [
+            {
+              "competition": "League Cup",
+              "minutes": 167,
+              "minutes_as_sub": 13,
+              "minutes_started": 154,
+              "starts": 3,
+              "sub_apps": 1
+            },
+            {
+              "competition": "Premiership",
+              "minutes": 325,
+              "minutes_as_sub": 187,
+              "minutes_started": 138,
+              "starts": 2,
+              "sub_apps": 5
+            }
+          ],
+          "coverage": "available",
+          "minutes": 492,
+          "minutes_as_sub": 200,
+          "minutes_started": 292,
+          "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
+          "starts": 5,
+          "sub_apps": 6
+        }
+      },
+      "eyebrow": "Playing time",
+      "id": "playing_time",
+      "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
+      "status": "available",
+      "title": "Playing time",
+      "warnings": []
+    },
+    "position": {
+      "badge": null,
+      "data": {
+        "career_role": {
+          "broad_groups": [
+            "midfielder",
+            "attacker"
+          ],
+          "coverage": "3/10",
+          "dominant": {
+            "code": "RM",
+            "family": "wide_midfield",
+            "family_label": "Wide midfield",
+            "label": "Right midfielder",
+            "provisional": true,
+            "share": 0.6667,
+            "side": "right",
+            "starts": 2,
+            "weighted_starts": 2.0
+          },
+          "eligibility": [
+            {
+              "fm": "M R",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Right midfielder",
+              "share": 0.6667,
+              "side": "right",
+              "slot": "M_R",
+              "starts": 2,
+              "tier": "primary",
+              "weighted_starts": 2.0
+            },
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "share": 0.3333,
+              "side": "right",
+              "slot": "AM_R",
+              "starts": 1,
+              "tier": "stretch",
+              "weighted_starts": 1.0
+            }
+          ],
+          "family_shares": [
+            {
+              "family": "wide_midfield",
+              "label": "Wide midfield",
+              "share": 0.6667,
+              "starts": 2,
+              "weighted_starts": 2.0
+            },
+            {
+              "family": "wide_forward",
+              "label": "Wide forward",
+              "share": 0.3333,
+              "starts": 1,
+              "weighted_starts": 1.0
+            }
+          ],
+          "fm_label": "M R (stretch: AM R)",
+          "history": [
+            {
+              "competition": "Premiership",
+              "role_code": "RW",
+              "role_family": "wide_forward",
+              "role_label": "Right winger",
+              "scope": "aberdeen",
+              "season": "2026-27",
+              "share": 0.3333,
+              "starts": 1,
+              "team_id": 252,
+              "team_name": "Aberdeen"
+            },
+            {
+              "competition": "Premiership",
+              "role_code": "RM",
+              "role_family": "wide_midfield",
+              "role_label": "Right midfielder",
+              "scope": "aberdeen",
+              "season": "2026-27",
+              "share": 0.6667,
+              "starts": 1,
+              "team_id": 252,
+              "team_name": "Aberdeen"
+            },
+            {
+              "competition": "League Cup",
+              "role_code": "RM",
+              "role_family": "wide_midfield",
+              "role_label": "Right midfielder",
+              "scope": "aberdeen",
+              "season": "2026-27",
+              "share": 0.6667,
+              "starts": 1,
+              "team_id": 252,
+              "team_name": "Aberdeen"
+            }
+          ],
+          "note": "Career starts are starting-XI observations from lineups, equal-weighted across the configured seasons. Substitute appearances are excluded; unknown-role starts count for coverage but not for shares.",
+          "policy": {
+            "min_family_share": 0.4,
+            "min_family_starts": 5,
+            "min_margin": 0.15,
+            "seasons": 3,
+            "weights": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "policy_version": "a7086379dacc",
+          "primary_slot": {
+            "code": "RM",
+            "family": "wide_midfield",
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "role_label": "Right midfielder",
+            "share": 0.6667,
+            "side": "right",
+            "slot": "M_R",
+            "starts": 2,
+            "weighted_starts": 2.0
+          },
+          "role_shares": [
+            {
+              "code": "RM",
+              "family": "wide_midfield",
+              "label": "Right midfielder",
+              "share": 0.6667,
+              "starts": 2,
+              "weighted_starts": 2.0
+            },
+            {
+              "code": "RW",
+              "family": "wide_forward",
+              "label": "Right winger",
+              "share": 0.3333,
+              "starts": 1,
+              "weighted_starts": 1.0
+            }
+          ],
+          "scopes": [
+            {
+              "label": "Aberdeen",
+              "scope": "aberdeen",
+              "share": 1.0,
+              "starts": 3
+            }
+          ],
+          "seasons": [
+            {
+              "families": [
+                {
+                  "family": "wide_midfield",
+                  "label": "Wide midfield",
+                  "share": 0.6667,
+                  "starts": 2
+                },
+                {
+                  "family": "wide_forward",
+                  "label": "Wide forward",
+                  "share": 0.3333,
+                  "starts": 1
+                }
+              ],
+              "scopes": [
+                {
+                  "scope": "aberdeen",
+                  "share": 1.0,
+                  "starts": 3
+                }
+              ],
+              "season": "2026-27",
+              "season_year": 2026,
+              "slots": [
+                {
+                  "fm": "M R",
+                  "groups": [
+                    "midfielder"
+                  ],
+                  "label": "Right midfielder",
+                  "share": 0.6667,
+                  "side": "right",
+                  "slot": "M_R",
+                  "starts": 2
+                },
+                {
+                  "fm": "AM R",
+                  "groups": [
+                    "attacker"
+                  ],
+                  "label": "Right winger",
+                  "share": 0.3333,
+                  "side": "right",
+                  "slot": "AM_R",
+                  "starts": 1
+                }
+              ],
+              "starts_with_role": 3
+            }
+          ],
+          "seasons_with_role": 1,
+          "secondary": [
+            {
+              "family": "wide_forward",
+              "label": "Wide forward",
+              "share": 0.3333,
+              "starts": 1,
+              "weighted_starts": 1.0
+            }
+          ],
+          "secondary_slots": [],
+          "sides": [
+            "right"
+          ],
+          "slot_definitions": [
+            {
+              "fm": "D C",
+              "groups": [
+                "defender"
+              ],
+              "label": "Centre back",
+              "order": 1,
+              "side": "centre",
+              "slot": "D_C"
+            },
+            {
+              "fm": "D/WB L",
+              "groups": [
+                "defender",
+                "midfielder"
+              ],
+              "label": "Left back / left wing-back",
+              "order": 2,
+              "side": "left",
+              "slot": "D_WB_L"
+            },
+            {
+              "fm": "D/WB R",
+              "groups": [
+                "defender",
+                "midfielder"
+              ],
+              "label": "Right back / right wing-back",
+              "order": 3,
+              "side": "right",
+              "slot": "D_WB_R"
+            },
+            {
+              "fm": "DM C",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Defensive midfielder",
+              "order": 4,
+              "side": "centre",
+              "slot": "DM_C"
+            },
+            {
+              "fm": "M C",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Centre midfielder",
+              "order": 5,
+              "side": "centre",
+              "slot": "M_C"
+            },
+            {
+              "fm": "AM C",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Attacking midfielder",
+              "order": 6,
+              "side": "centre",
+              "slot": "AM_C"
+            },
+            {
+              "fm": "M L",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Left midfielder",
+              "order": 7,
+              "side": "left",
+              "slot": "M_L"
+            },
+            {
+              "fm": "M R",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Right midfielder",
+              "order": 8,
+              "side": "right",
+              "slot": "M_R"
+            },
+            {
+              "fm": "AM L",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Left winger",
+              "order": 9,
+              "side": "left",
+              "slot": "AM_L"
+            },
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "order": 10,
+              "side": "right",
+              "slot": "AM_R"
+            },
+            {
+              "fm": "ST C",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Centre forward",
+              "order": 11,
+              "side": "centre",
+              "slot": "ST_C"
+            },
+            {
+              "fm": "GK",
+              "groups": [
+                "goalkeeper"
+              ],
+              "label": "Goalkeeper",
+              "order": 999,
+              "side": null,
+              "slot": "GK"
+            }
+          ],
+          "slots": [
+            {
+              "fm": "M R",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Right midfielder",
+              "share": 0.6667,
+              "side": "right",
+              "slot": "M_R",
+              "starts": 2,
+              "tier": "primary",
+              "weighted_starts": 2.0
+            },
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "share": 0.3333,
+              "side": "right",
+              "slot": "AM_R",
+              "starts": 1,
+              "tier": "stretch",
+              "weighted_starts": 1.0
+            }
+          ],
+          "starts_total": 10,
+          "starts_with_role": 3,
+          "status": "low_evidence",
+          "stretch_slots": [
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "share": 0.3333,
+              "side": "right",
+              "slot": "AM_R",
+              "starts": 1,
+              "tier": "stretch",
+              "weighted_starts": 1.0
+            }
+          ],
+          "top_families": [
+            {
+              "family": "wide_midfield",
+              "label": "Wide midfield",
+              "share": 0.6667,
+              "starts": 2
+            },
+            {
+              "family": "wide_forward",
+              "label": "Wide forward",
+              "share": 0.3333,
+              "starts": 1
+            }
+          ],
+          "unknown_reason": null
+        },
+        "club_history": [
+          {
+            "appearances": 5,
+            "competition": "Premiership",
+            "minutes": 196,
+            "season": 2026,
+            "starts": 1,
+            "team_name": "Aberdeen"
+          }
+        ],
+        "display_role": {
+          "career_dominant": {
+            "code": "RM",
+            "family": "wide_midfield",
+            "family_label": "Wide midfield",
+            "label": "Right midfielder",
+            "provisional": true,
+            "share": 0.6667,
+            "side": "right",
+            "starts": 2,
+            "weighted_starts": 2.0
+          },
+          "code": "RM",
+          "conditions": {
+            "career_family": "wide_midfield",
+            "career_family_share": 0.6667,
+            "career_seasons": 1,
+            "career_starts": 3,
+            "career_status": "low_evidence",
+            "current_family": "wide_midfield",
+            "current_share": 0.6667,
+            "current_starts": 3,
+            "different_family": false,
+            "different_group": false,
+            "enabled": true,
+            "passes": false
+          },
+          "family": "wide_midfield",
+          "family_label": "Wide midfield",
+          "label": "Right midfielder",
+          "reason": "Career evidence is not strong enough to override the established Aberdeen role.",
+          "share": 0.6667,
+          "side": "right",
+          "source": "current_season",
+          "starts": 3
+        },
+        "history_status": "partial",
+        "role": {
+          "broad_groups": [
+            "midfielder",
+            "attacker"
+          ],
+          "code": "RM",
+          "coverage": "3/5",
+          "family": "wide_midfield",
+          "fm_label": "M/AM R",
+          "primary": "Right midfielder",
+          "primary_slot": {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "share": 0.6667,
+            "side": "right",
+            "slot": "M_R",
+            "starts": 2,
+            "tier": "primary"
+          },
+          "roles": [
+            {
+              "code": "RM",
+              "family": "wide_midfield",
+              "label": "Right midfielder",
+              "minutes": 124,
+              "starts": 2
+            },
+            {
+              "code": "RW",
+              "family": "wide_forward",
+              "label": "Right winger",
+              "minutes": 76,
+              "starts": 1
+            }
+          ],
+          "side": "right",
+          "sides": [
+            "right"
+          ],
+          "slots": [
+            {
+              "fm": "M R",
+              "groups": [
+                "midfielder"
+              ],
+              "label": "Right midfielder",
+              "share": 0.6667,
+              "side": "right",
+              "slot": "M_R",
+              "starts": 2,
+              "tier": "primary"
+            },
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "share": 0.3333,
+              "side": "right",
+              "slot": "AM_R",
+              "starts": 1,
+              "tier": "secondary"
+            }
+          ],
+          "source": {
+            "fixtures_covered": 13,
+            "id": "api_football",
+            "method": "starting_xi_grid",
+            "starts_with_role": 3
+          },
+          "starts_total": 5,
+          "starts_with_role": 3,
+          "status": "partial",
+          "unknown_reason": null
+        },
+        "tactical_notes": []
+      },
+      "eyebrow": "Position",
+      "id": "position",
+      "note": null,
+      "status": "available",
+      "title": "How this position was inferred",
+      "warnings": []
+    },
+    "records": {
+      "badge": null,
+      "data": [],
+      "eyebrow": "Records",
+      "id": "records",
+      "note": null,
+      "status": "not_applicable",
+      "title": "Records outside the main scope",
+      "warnings": []
+    }
+  },
+  "player_id": 44982,
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "warnings": []
+}

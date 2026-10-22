@@ -1,0 +1,866 @@
+{
+  "$defs": {
+    "Theme": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "default": "measured",
+          "enum": [
+            "measured",
+            "inferred",
+            "curated",
+            "mixed",
+            "unknown"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "caveats": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveats",
+          "type": "array"
+        },
+        "confidence": {
+          "default": "unknown",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ThemeEvidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "fan_question": {
+          "title": "Fan Question",
+          "type": "string"
+        },
+        "headline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Headline"
+        },
+        "horizon": {
+          "enum": [
+            "season",
+            "mission"
+          ],
+          "title": "Horizon",
+          "type": "string"
+        },
+        "implications": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Implications",
+          "type": "array"
+        },
+        "links": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ThemeLink"
+          },
+          "title": "Links",
+          "type": "array"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "metrics": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Metrics",
+          "type": "object"
+        },
+        "order": {
+          "title": "Order",
+          "type": "integer"
+        },
+        "players": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ThemePlayer"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "read": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Read"
+        },
+        "read_basis": {
+          "default": "inferred",
+          "enum": [
+            "measured",
+            "inferred",
+            "curated",
+            "mixed",
+            "unknown"
+          ],
+          "title": "Read Basis",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "theme_id": {
+          "title": "Theme Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "theme_id",
+        "horizon",
+        "order",
+        "title",
+        "fan_question",
+        "status"
+      ],
+      "title": "Theme",
+      "type": "object"
+    },
+    "ThemeEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "default": "measured",
+          "enum": [
+            "measured",
+            "inferred",
+            "curated",
+            "mixed",
+            "unknown"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "value": {
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "title": "ThemeEvidence",
+      "type": "object"
+    },
+    "ThemeLink": {
+      "additionalProperties": false,
+      "properties": {
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ],
+      "title": "ThemeLink",
+      "type": "object"
+    },
+    "ThemePlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "arrival": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arrival"
+        },
+        "arrival_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arrival Kind"
+        },
+        "availability_confidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Confidence"
+        },
+        "availability_conflict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Conflict"
+        },
+        "availability_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Note"
+        },
+        "availability_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Source"
+        },
+        "availability_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Status"
+        },
+        "availability_verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Verified At"
+        },
+        "bench_named": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bench Named"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "role_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Family"
+        },
+        "starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts"
+        },
+        "sub_apps": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sub Apps"
+        },
+        "sub_minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sub Minutes"
+        },
+        "three_cb_starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Three Cb Starts"
+        },
+        "two_cb_starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Two Cb Starts"
+        }
+      },
+      "title": "ThemePlayer",
+      "type": "object"
+    },
+    "ThemeScope": {
+      "additionalProperties": false,
+      "properties": {
+        "mission_label": {
+          "title": "Mission Label",
+          "type": "string"
+        },
+        "mission_weight": {
+          "default": 20,
+          "title": "Mission Weight",
+          "type": "integer"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "season_weight": {
+          "default": 80,
+          "title": "Season Weight",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "season",
+        "mission_label",
+        "note"
+      ],
+      "title": "ThemeScope",
+      "type": "object"
+    },
+    "ThemeSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "ThemeSource",
+      "type": "object"
+    },
+    "ThemesCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "availability_feed": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Availability Feed",
+          "type": "object"
+        },
+        "bench": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bench"
+        },
+        "channel_data": {
+          "default": false,
+          "title": "Channel Data",
+          "type": "boolean"
+        },
+        "fixtures_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fixtures Total"
+        },
+        "fixtures_with_ratings": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fixtures With Ratings"
+        },
+        "historical_ratings": {
+          "default": false,
+          "title": "Historical Ratings",
+          "type": "boolean"
+        },
+        "midgame_shape": {
+          "default": false,
+          "title": "Midgame Shape",
+          "type": "boolean"
+        },
+        "minutes_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes Total"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "possession": {
+          "default": false,
+          "title": "Possession",
+          "type": "boolean"
+        },
+        "provider_rating_minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Rating Minutes"
+        },
+        "provider_rating_rows": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Rating Rows"
+        },
+        "provider_ratings": {
+          "title": "Provider Ratings",
+          "type": "string"
+        },
+        "role_basis": {
+          "title": "Role Basis",
+          "type": "string"
+        },
+        "role_start_coverage": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Start Coverage"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "shapes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shapes"
+        },
+        "starts_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts Total"
+        },
+        "starts_with_role": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts With Role"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "sub_minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sub Minutes"
+        },
+        "xg": {
+          "default": false,
+          "title": "Xg",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "season",
+        "role_basis",
+        "provider_ratings",
+        "note"
+      ],
+      "title": "ThemesCoverage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "coverage": {
+      "$ref": "#/$defs/ThemesCoverage"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/$defs/ThemeScope"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "served_generated_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served Generated At"
+    },
+    "sources": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ThemeSource"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "state": {
+      "enum": [
+        "fresh",
+        "partial",
+        "unavailable",
+        "stale"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    },
+    "themes": {
+      "items": {
+        "$ref": "#/$defs/Theme"
+      },
+      "title": "Themes",
+      "type": "array"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generated_at",
+    "season",
+    "club_id",
+    "state",
+    "title",
+    "scope",
+    "summary",
+    "coverage",
+    "themes",
+    "notes"
+  ],
+  "title": "ThemesDocument",
+  "type": "object"
+}

@@ -1,5 +1,17 @@
 # Canonical player overrides. Source player IDs never become canonical.
-# Add entries only when a source mismatch is found or a player needs a manual
-# canonical key. The entity resolver creates provisional players for unmatched
-# rows and reports them; provisional players are excluded from shortlists.
-players: []
+# The API-Football player id is the initial spine; add an entry only when a
+# player needs a stable cross-source identity or a manual correction.
+#
+# Required fields per player:
+#   player_key, name, aliases, dob, nationality, position, shirt_number,
+#   api_football_id, status (resolved | provisional)
+players:
+  - player_key: api:player:625768
+    name: Aaron Cummings
+    aliases: ["A. Morgan-Cummings", "Aaron Cummings"]
+    dob: null
+    nationality: Scotland
+    position: Midfielder
+    shirt_number: 44
+    api_football_id: 625768
+    status: resolved

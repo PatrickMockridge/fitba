@@ -1,0 +1,67 @@
+# Curated transfer positions.
+#
+# This is the correction layer for transfer rows whose API-Football or current
+# squad position is missing or wrong. It wins over the squad and season profile
+# resolvers. Positions are the generic Goalkeeper/Defender/Midfielder/Attacker
+# labels used by the provider; specific role labels come from career evidence.
+#
+# Every row needs allowed publication sources and a verification date. A
+# third-party page may be read as a finding aid, but its URL does not belong
+# here: only AFC or Wikipedia may be cited.
+players:
+- player_key: api:player:350876
+  player_name: D. Polvara
+  position: Midfielder
+  source_urls:
+  - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia describes Polvara as a midfielder; the API squad label was Defender.
+- player_key: api:player:195870
+  player_name: T. Keskinen
+  position: Attacker
+  source_urls:
+  - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Keskinen as FW.
+- player_key: api:player:303519
+  player_name: A. Mouloua
+  position: Attacker
+  source_urls:
+  - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Mouloua as FW.
+- player_key: api:player:44982
+  player_name: L. Smith
+  position: Midfielder
+  source_urls:
+  - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Lewis Smith as MF; the current squad payload said Attacker.
+- player_key: api:player:373297
+  player_name: K. Kjartansson
+  position: Midfielder
+  source_urls:
+  - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Kjartansson as MF.
+- player_key: api:player:394703
+  player_name: M. Frame
+  position: Defender
+  source_urls:
+  - https://www.afc.co.uk/en/news/scottish-youth-international-joins-the-dons
+  verified_at: '2026-10-21'
+  notes: AFC announcement describes Frame as a left-back.
+- player_key: api:player:20323
+  player_name: E. Bwomono
+  position: Defender
+  source_urls:
+  - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Bwomono as DF.
+- player_key: api:player:15644
+  player_name: S. Heltne Nilsen
+  position: Midfielder
+  source_urls:
+  - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+  verified_at: '2026-10-21'
+  notes: Wikipedia season table lists Nilsen as MF.

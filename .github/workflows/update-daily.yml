@@ -28,6 +28,62 @@ jobs:
       - name: Ingest current season
         run: uv run fitba ingest --season current
 
+      - name: Ingest League Cup and Scottish Cup
+        run: uv run fitba cups
+
+      - name: Restore last-good club fixtures
+        uses: actions/cache@v4
+        with:
+          path: data/normalized/club_fixtures
+          key: club-fixtures-${{ github.ref }}-${{ github.run_id }}
+          restore-keys: club-fixtures-${{ github.ref }}-
+
+      - name: Restore career role history
+        uses: actions/cache@v4
+        with:
+          path: data/normalized/career
+          key: career-roles-${{ github.ref }}-${{ github.run_id }}
+          restore-keys: career-roles-${{ github.ref }}-
+
+      - name: Ingest Aberdeen fixtures and cup results
+        continue-on-error: true
+        run: uv run fitba fixtures --club aberdeen
+
+      - name: Restore matchday snapshot
+        uses: actions/cache@v4
+        with:
+          path: data/normalized/matchday
+          key: matchday-${{ github.ref }}-${{ github.run_id }}
+          restore-keys: matchday-${{ github.ref }}-
+
+      - name: Refresh next-opponent matchday snapshot
+        continue-on-error: true
+        run: uv run fitba matchday --refresh --max-requests 24
+
+      - name: Ingest Aberdeen transfers and loans
+        continue-on-error: true
+        run: uv run fitba transfers
+
+      - name: Ingest Aberdeen squad and player stats
+        continue-on-error: true
+        run: uv run fitba squad
+
+      - name: Refresh availability ledger snapshot
+        continue-on-error: true
+        run: uv run fitba availability --refresh
+
+      - name: Refresh current Aberdeen career slice (local, no network)
+        continue-on-error: true
+        run: uv run fitba career refresh
+
+      - name: Ingest Aberdeen news
+        continue-on-error: true
+        run: uv run fitba news
+
+      - name: Sample AFC Chat Rumour Mill (reference use)
+        continue-on-error: true
+        run: uv run fitba forum --limit 6
+
       - name: Build warehouse
         run: uv run fitba build --season all
 
@@ -39,6 +95,46 @@ jobs:
 
       - name: Check publication policy
         run: uv run python scripts/check_publication.py
+
+      - name: Check club-name capitalisation
+        run: uv run python scripts/check_names.py
+
+      - name: Check historical record
+        run: uv run python scripts/check_history.py
+
+      - name: Check matchday dashboard
+        run: uv run python scripts/check_matchday.py
+
+      - name: Check medium and long-term themes
+        run: uv run python scripts/check_themes.py
+
+      - name: Check data provenance
+        run: uv run python scripts/check_provenance.py
+
+      - name: Check availability
+        run: uv run python scripts/check_availability.py
+
+      - name: Check squad needs
+        run: uv run python scripts/check_needs.py
+
+      - name: Check rumour and fan-signal policy
+        run: uv run python scripts/check_rumours.py
+
+      - name: Check squad and player-link policy
+        run: uv run python scripts/check_squad.py
+      - name: Check roles and shape coverage
+        run: |
+          uv run python scripts/check_roles.py
+          uv run python scripts/check_shapes.py
+
+      - name: Check career role eligibility
+        run: uv run python scripts/check_career_roles.py
+
+      - name: Check player-page contract
+        run: uv run python scripts/check_player_page.py
+
+      - name: Check player-attribute provenance
+        run: uv run python scripts/check_player_attributes.py
 
       - name: Commit data if changed
         run: |

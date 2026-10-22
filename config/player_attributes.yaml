@@ -1,0 +1,61 @@
+# Controlled vocabulary and phrase maps for preferred foot.
+#
+# Side is not resolved here. It is derived from the starting-XI role in the
+# lineup feed (see config/roles.yaml). The resolver only accepts explicit
+# foot statements; it never infers preferred foot from role, side, a name, a
+# shirt number or a generic position.
+
+# Source precedence. Lower rank is consulted first and wins. A same-rank
+# disagreement is a conflict, not a vote.
+tiers:
+  override: 0
+  sportmonks: 2
+  official: 3
+  wikipedia: 4
+
+# Wikipedia is the last resort. Stop after this many page searches per run.
+max_pages_per_run: 200
+
+# Sportmonks is the preferred licensed source for preferred foot (metadata) and
+# detailed position. Every gate must be true before the adapter is allowed to
+# make a request.
+sportmonks:
+  enabled: false
+  plan_confirmed: false
+  public_display_terms_confirmed: false
+  crosswalk_confirmed: false
+
+attributes:
+  preferred_foot:
+    allowed: [left, right, both]
+    description: >
+      Preferred kicking foot. Only accepted from an explicit statement such as
+      "left-footed", "right foot" or "both feet".
+
+# Searched only in the article text, and only when the page identity guard
+# passes. A page that states more than one foot value without a clear primary
+# value is treated as a conflict, not guessed.
+foot_phrases:
+  left:
+    - left-footed
+    - left footed
+    - left foot
+    - prefers his left foot
+    - prefers her left foot
+  right:
+    - right-footed
+    - right footed
+    - right foot
+    - prefers his right foot
+    - prefers her right foot
+  both:
+    - both-footed
+    - both footed
+    - both feet
+    - either foot
+
+confidence:
+  sportmonks: licensed
+  official: official
+  wikipedia: reference
+  override: curated

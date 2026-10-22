@@ -1,0 +1,87 @@
+# Source-market map for recruitment aggregates.
+#
+# Scottish clubs with a canonical `sco:` id that is not a provisional foreign
+# club are classified as Scotland in code. This file covers the provisional and
+# foreign clubs that appear in the transfer register, so "overlooked markets"
+# can be counted without guessing. A club not listed here is `unknown`, never
+# silently assigned to a market.
+#
+# market: scotland | england | europe | other | unknown
+
+markets:
+  - {club_name: 1. FC Kaiserslautern, country: Germany, market: europe}
+  - {club_name: 1899 Hoffenheim, country: Germany, market: europe}
+  - {club_name: AC Milan, country: Italy, market: europe}
+  - {club_name: Blackpool, country: England, market: england}
+  - {club_name: Bologna, country: Italy, market: europe}
+  - {club_name: Brentford, country: England, market: england}
+  - {club_name: Brisbane Roar, country: Australia, market: other}
+  - {club_name: Cerezo Osaka, country: Japan, market: other}
+  - {club_name: Charleroi, country: Belgium, market: europe}
+  - {club_name: Colorado Rapids, country: USA, market: other}
+  - {club_name: Crusaders FC, country: Northern Ireland, market: other}
+  - {club_name: Crystal Palace, country: England, market: england}
+  - {club_name: Diosgyori VTK, country: Hungary, market: europe}
+  - {club_name: Emmen, country: Netherlands, market: europe}
+  - {club_name: Estac Troyes, country: France, market: europe}
+  - {club_name: Exeter City, country: England, market: england}
+  - {club_name: FC Augsburg, country: Germany, market: europe}
+  - {club_name: FC BW Linz, country: Austria, market: europe}
+  - {club_name: FC Lugano, country: Switzerland, market: europe}
+  - {club_name: FC Midtjylland, country: Denmark, market: europe}
+  - {club_name: FC Noah, country: Armenia, market: europe}
+  - {club_name: FC Schalke 04, country: Germany, market: europe}
+  - {club_name: FC St. Pauli, country: Germany, market: europe}
+  - {club_name: FK Haugesund, country: Norway, market: europe}
+  - {club_name: FUS Rabat, country: Morocco, market: other}
+  - {club_name: Ferencvarosi TC, country: Hungary, market: europe}
+  - {club_name: Girona, country: Spain, market: europe}
+  - {club_name: Grasshoppers, country: Switzerland, market: europe}
+  - {club_name: HJK Helsinki, country: Finland, market: europe}
+  - {club_name: Houston Dynamo, country: USA, market: other}
+  - {club_name: IBV Vestmannaeyjar, country: Iceland, market: europe}
+  - {club_name: IF Brommapojkarna, country: Sweden, market: europe}
+  - {club_name: IF Elfsborg, country: Sweden, market: europe}
+  - {club_name: IFK Varnamo, country: Sweden, market: europe}
+  - {club_name: Kallithea, country: Greece, market: europe}
+  - {club_name: Keflavik, country: Iceland, market: europe}
+  - {club_name: Korona Kielce, country: Poland, market: europe}
+  - {club_name: Kristiansund BK, country: Norway, market: europe}
+  - {club_name: Larne, country: Northern Ireland, market: other}
+  - {club_name: Leganes, country: Spain, market: europe}
+  - {club_name: Leyton Orient, country: England, market: england}
+  - {club_name: Liverpool, country: England, market: england}
+  - {club_name: Livingston, country: Scotland, market: scotland}
+  - {club_name: Luton, country: England, market: england}
+  - {club_name: Millwall, country: England, market: england}
+  - {club_name: Neuchatel Xamax FC, country: Switzerland, market: europe}
+  - {club_name: Northampton, country: England, market: england}
+  - {club_name: Novi Pazar, country: Serbia, market: europe}
+  - {club_name: Odense, country: Denmark, market: europe}
+  - {club_name: Panionios, country: Greece, market: europe}
+  - {club_name: Plymouth, country: England, market: england}
+  - {club_name: Portsmouth, country: England, market: england}
+  - {club_name: Preston, country: England, market: england}
+  - {club_name: QPR, country: England, market: england}
+  - {club_name: Radnicki 1923, country: Serbia, market: europe}
+  - {club_name: SK Brann, country: Norway, market: europe}
+  - {club_name: Sanfrecce Hiroshima, country: Japan, market: other}
+  - {club_name: Sheffield Wednesday, country: England, market: england}
+  - {club_name: Shelbourne, country: Ireland, market: europe}
+  - {club_name: St. Louis City, country: USA, market: other}
+  - {club_name: Stjarnan, country: Iceland, market: europe}
+  - {club_name: Stromsgodset, country: Norway, market: europe}
+  - {club_name: Sunderland, country: England, market: england}
+  - {club_name: Tomori Berat, country: Albania, market: europe}
+  - {club_name: Tottenham, country: England, market: england}
+  - {club_name: Triestina, country: Italy, market: europe}
+  - {club_name: Ujpest, country: Hungary, market: europe}
+  - {club_name: Vejle, country: Denmark, market: europe}
+  - {club_name: VfL Wolfsburg, country: Germany, market: europe}
+  - {club_name: Western Sydney Wanderers, country: Australia, market: other}
+  - {club_name: Yverdon Sport, country: Switzerland, market: europe}
+  - {club_name: Žilina, country: Slovakia, market: europe}
+  - {club_name: Formartine United, country: Scotland, market: scotland}
+  - {club_name: Banks O' Dee, country: Scotland, market: scotland}
+  - {club_name: Buckie Thistle, country: Scotland, market: scotland}
+  - {club_name: Free agent, country: null, market: unknown}

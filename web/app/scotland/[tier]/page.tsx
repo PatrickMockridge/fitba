@@ -35,8 +35,13 @@ export default async function TierPage({ params }: { params: Promise<{ tier: str
       </section>
 
       <section className="card">
-        <LeagueTable rows={table.rows} highlightTeamId="sco:aberdeen" />
+        <LeagueTable
+          rows={table.rows}
+          highlightTeamId="sco:aberdeen"
+          cutoffs={table.cutoffs}
+        />
         <div className="table-notes">
+          {table.qualification_note ? <p>{table.qualification_note}</p> : null}
           <p>
             P/W/D/L/GF/GA/GD are computed from results. Form is the last five league
             matches, most recent first. Points deductions are shown beside the club and

@@ -1,0 +1,96 @@
+# Cormack-era historical record: policy, not content.
+#
+# Curated records live in reference/history/. This file carries the thresholds
+# and expected totals so the publisher, the docs and the guard read the same
+# numbers.
+
+era:
+  id: cormack
+  first_season: 2019-20
+  completed_through: 2025-26
+  baseline:
+    from: 2013-14
+    to: 2018-19
+    source_id: football_data_uk
+    note: League-only context from the existing match data. No cup or Europe detail.
+
+# Historical backfill is manual/local. The daily publish only reads the
+# normalized parquet and never calls a provider.
+backfill:
+  stages: [fixtures, lineups, events, rosters]
+  optional_stages: [players, team_stats]
+  max_requests_per_run: 200
+  cache_ttl_hours: 168
+  min_lineup_coverage: 0.60
+  min_age_coverage: 0.50
+
+transfers:
+  history_from: '2019-07-01'
+  audited_from: 2024-25
+  historical_coverage: curated_partial
+  expected_windows_from: 2019-20
+  # A recall net for the era's defining business. The guard checks each move
+  # appears exactly once in the right direction/season. It is not a claim that
+  # the historical register is complete.
+  required_moves:
+    - player: S. McKenna
+      direction: out
+      season: 2020-21
+    - player: C. Ramsay
+      direction: out
+      season: 2022-23
+    - player: L. Ferguson
+      direction: out
+      season: 2022-23
+    - player: B. Miovski
+      direction: out
+      season: 2024-25
+
+staff:
+  role_groups:
+    [manager, assistant_manager, first_team_coach, goalkeeper_coach,
+     sporting_director, head_of_recruitment, academy_director,
+     chief_executive, chair, board_member]
+  manager_gap_warn_days: 21
+
+honours:
+  expected_totals:
+    League: 4
+    Scottish Cup: 8
+    League Cup: 6
+    European Cup Winners' Cup: 1
+    European Super Cup: 1
+  required_ids: [scottish-cup-2024-25]
+  expected_major_count: 20
+
+# Curated key business shown on each season review. Names are resolved against
+# the published transfer register for that season and direction; the full set
+# remains in transfers/aberdeen.json.
+key_transfers:
+  2019-20:
+    arrivals: [F. Ojo, M. Kennedy]
+    departures: [G. Shinnie, S. May]
+  2020-21:
+    arrivals: [J. Hayes, R. McCrorie]
+    departures: [S. McKenna, S. Cosgrove]
+  2021-22:
+    arrivals: [S. Brown, C. Ramirez, V. Besuijen]
+    departures: [R. Hedges, N. McGinn]
+  2022-23:
+    arrivals: [B. Miovski, Y. Ramadani]
+    departures: [C. Ramsay, L. Ferguson]
+  2023-24:
+    arrivals: [L. Clarkson, G. Shinnie]
+    departures: [R. McCrorie, Y. Ramadani]
+  2024-25:
+    arrivals: [D. Mitov, S. Heltne Nilsen, K. Nisbet]
+    departures: [B. Miovski]
+  2025-26:
+    arrivals: [K. Nisbet, N. Milanovic]
+    departures: [D. Polvara, L. Clarkson]
+  2026-27:
+    arrivals: [A. Mouloua, L. Smith, L. Mayo]
+    departures: [T. Keskinen, K. Kjartansson]
+
+publication:
+  max_season_files: 12

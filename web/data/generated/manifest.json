@@ -1,14 +1,55 @@
 {
   "coverage": {
+    "availability": {
+      "club": "sco:aberdeen",
+      "coverage": {
+        "conflicts": 0,
+        "doubtful": 0,
+        "entries": 38,
+        "known": 0,
+        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
+        "out": 0,
+        "provider_snapshot": {
+          "coverage": {
+            "fixtures": {
+              "events": true,
+              "lineups": true,
+              "statistics_fixtures": true,
+              "statistics_players": true
+            },
+            "injuries": false,
+            "odds": true,
+            "players": true,
+            "predictions": true,
+            "standings": true,
+            "top_assists": true,
+            "top_cards": true,
+            "top_scorers": true
+          },
+          "reason": "provider_declares_injuries_false",
+          "rows": 0,
+          "status": "unavailable"
+        },
+        "returned": 0,
+        "stale": 0,
+        "status": "unavailable",
+        "suspended": 0,
+        "unknown": 38
+      },
+      "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
+      "state": "unavailable"
+    },
     "competitions": [
       {
         "coverage": "match",
-        "events": 0,
+        "events": 9,
         "expected_matches": 228,
         "id": "sco:premiership",
         "matches": 54,
         "name": "Scottish Premiership",
-        "player_stats": 0
+        "player_stats": 360,
+        "results_source": "football_data_uk",
+        "team_stats_source": "football_data_uk"
       },
       {
         "coverage": "match",
@@ -17,7 +58,9 @@
         "id": "sco:championship",
         "matches": 53,
         "name": "Scottish Championship",
-        "player_stats": 0
+        "player_stats": 0,
+        "results_source": "football_data_uk",
+        "team_stats_source": "football_data_uk"
       },
       {
         "coverage": "match",
@@ -26,7 +69,9 @@
         "id": "sco:league-one",
         "matches": 54,
         "name": "Scottish League One",
-        "player_stats": 0
+        "player_stats": 0,
+        "results_source": "football_data_uk",
+        "team_stats_source": "football_data_uk"
       },
       {
         "coverage": "match",
@@ -35,46 +80,482 @@
         "id": "sco:league-two",
         "matches": 55,
         "name": "Scottish League Two",
-        "player_stats": 0
+        "player_stats": 0,
+        "results_source": "football_data_uk",
+        "team_stats_source": "football_data_uk"
       }
     ],
-    "season": "2026-27"
+    "cups": [
+      {
+        "coverage": "match",
+        "groups": 8,
+        "id": "sco:league-cup",
+        "matches": 94,
+        "name": "Premier Sports Cup",
+        "note": "The licensed feed supplies all 80 group matches and the knockout ties, including penalty shoot-outs. Group standings are not provided; the app computes the eight group tables. Group letters are assigned by the app from the fixture graph because the feed does not expose the official draw letters.\n"
+      },
+      {
+        "coverage": "partial",
+        "id": "sco:scottish-cup",
+        "name": "Scottish Gas Men's Scottish Cup",
+        "note": "The licensed feed covers 50 of 136 ties (First Round, Second Round). Rounds not provided: Preliminary Round One, Preliminary Round Two, Preliminary Round Three, Third Round, Fourth Round, Fifth Round, Quarter-final, Semi-final, Final. The page labels the gap rather than inventing ties.",
+        "official_ties": 136,
+        "ties": 50
+      }
+    ],
+    "forum": {
+      "first_page_only": true,
+      "note": "Sampled first pages of recent Rumour Mill topics. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published, and the text is not used for AI training.",
+      "posts": 83,
+      "raw_posts_published": false,
+      "source": "afc_chat",
+      "topics": 4
+    },
+    "history": {
+      "analytics": {
+        "managers": "available",
+        "recruitment": "curated_partial",
+        "selection": "available",
+        "style": "available"
+      },
+      "club": "sco:aberdeen",
+      "completed": 7,
+      "honours": 20,
+      "note": "Manager records are league-only. Pre-2024-25 transfer windows are curated partial. Selection depends on the historical lineup backfill.",
+      "seasons": 8,
+      "staff": 22
+    },
+    "matchday": {
+      "club": "sco:aberdeen",
+      "date": "2026-10-24",
+      "fixture": "spfl-premiership-2026-10-24-dundee-united-aberdeen",
+      "lineups": {
+        "aberdeen": "available",
+        "opponent": "available"
+      },
+      "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
+      "opponent": "Dundee United",
+      "snapshot_at": "2026-10-21T23:05:03+00:00",
+      "state": "fresh"
+    },
+    "needs": {
+      "club": "sco:aberdeen",
+      "coverage": {
+        "availability": {
+          "known": 0,
+          "unknown": 38
+        },
+        "basis": "measured + curated prior",
+        "measured_families": 7,
+        "rumours": "empty",
+        "status": "partial",
+        "transfers": "available",
+        "valuation": "inferred"
+      },
+      "note": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
+      "state": "fresh",
+      "summary": {
+        "availability_known": 0,
+        "availability_unknown": 38,
+        "counts": {
+          "none": 3,
+          "strengthen": 4
+        },
+        "families": 7,
+        "note": "Role profiles and market routes only. No targets, fees or wages.",
+        "top_priority": "AM/WM"
+      }
+    },
+    "provenance": {
+      "availability": {
+        "provider_snapshot": "unavailable",
+        "reason": "provider_declares_injuries_false",
+        "status": "unavailable"
+      },
+      "layers": 23,
+      "migration": {
+        "active_source": "football_data_uk",
+        "enabled": false,
+        "gate_status": "fail",
+        "reason": "Gate failed: SC0: fixture_count (198); SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks); SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
+        "report": "reports/league-migration/2026-27.json",
+        "season": "2026-27"
+      },
+      "note": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such."
+    },
+    "rumours": {
+      "active": 0,
+      "club": "sco:aberdeen",
+      "count": 0,
+      "note": "A curated register of Aberdeen-linked rumours, separate from the confirmed transfer register. Status is a lifecycle label, not a probability. Confidence is editorial and must be justified by the linked sources. Confirmed rows link to the transfer register and are then a historical record, not a second source of truth."
+    },
+    "season": "2026-27",
+    "squad": {
+      "club": "sco:aberdeen",
+      "count": 38,
+      "loans_out": 9,
+      "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. Loan tags come from the confirmed transfer register. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
+      "squad": 29,
+      "stats_unavailable": 10
+    },
+    "themes": {
+      "club": "sco:aberdeen",
+      "count": 5,
+      "mission_themes": 1,
+      "note": "No xG, channel, possession or mid-game shape data. Provider ratings are current-season Premiership only. Availability is unknown; provider injured flags are not team news.",
+      "provider_ratings": "Premiership starters",
+      "season": "2026-27",
+      "season_themes": 4,
+      "state": "fresh"
+    },
+    "transfers": {
+      "club": "sco:aberdeen",
+      "confirmed": 4,
+      "count": 229,
+      "curated": 225,
+      "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
+    }
   },
-  "dataset_version": "2026-10-21T12:53:23+00:00-154dccc",
+  "dataset_version": "2026-10-22T00:52:30+00:00-dae6e8f",
   "files": [
     {
-      "bytes": 5872,
-      "checksum": "sha256:0f50d8e9ccc66878d129882dc46f3d78abba96cad39c1ee6054fc6ce457698ef",
+      "bytes": 7093,
+      "checksum": "sha256:4633153a0d514bd3db262302a1f52db9fcabe02aae8aeff1e4eae87dee845771",
       "path": "tables/premiership-2026-27.json"
     },
     {
-      "bytes": 5042,
-      "checksum": "sha256:d87ea619643500a737f447859206acd1b09ff873618e306191cfc4ac2492c786",
+      "bytes": 6002,
+      "checksum": "sha256:ff4cd0df280b2fe44f3a027242d2ad65fa1e502efa58b5313c5e76cf0bda149b",
       "path": "tables/championship-2026-27.json"
     },
     {
-      "bytes": 4971,
-      "checksum": "sha256:7b029c061a65706d0ed6e09b83889fcab9547bf3b7885a3e7b1f0f148b8a1bbe",
+      "bytes": 5941,
+      "checksum": "sha256:ef5df008377d140e955d2c48ca7c5bd8dd398de1b2a0466c701a03e10c0f1a79",
       "path": "tables/league-one-2026-27.json"
     },
     {
-      "bytes": 4954,
-      "checksum": "sha256:7ba2c67076aa2d9dfa3cbb9f05b8fc73bff8c90c8fbdc6f242f6aea06a87e301",
+      "bytes": 5846,
+      "checksum": "sha256:41693b34c1b2164dc7251baa43de88d8bedb6b75fbc27d20c56fdf4fee5a93cd",
       "path": "tables/league-two-2026-27.json"
     },
     {
-      "bytes": 6266,
-      "checksum": "sha256:94269a82abe04299ecd28f21511e239372884b22573042d6f409581cebe9ea51",
+      "bytes": 653654,
+      "checksum": "sha256:75adbd5c4c31bf86473b3dc301bedee052a165704aaec456995c4f59de6a55fb",
+      "path": "squad/aberdeen.json"
+    },
+    {
+      "bytes": 10310,
+      "checksum": "sha256:ce422989517401aecc9c267c23fe7a6c76acc3b33dba75fa31ad39a574bb093b",
+      "path": "players/163064.json"
+    },
+    {
+      "bytes": 18989,
+      "checksum": "sha256:6b1c8ae8bd750aa7a65f5977d78920c3651e08cd07fd97e38a5c4d8879ca9ade",
+      "path": "players/1141.json"
+    },
+    {
+      "bytes": 9275,
+      "checksum": "sha256:6797e35e921704b877c42bc5e3e18f4814d4cba64787c31d89a7c3499cc5eee0",
+      "path": "players/430030.json"
+    },
+    {
+      "bytes": 28770,
+      "checksum": "sha256:b5d25ba1b4f70670acc1d1968d646c7107988f43a28da9258524aa8888c5c9b0",
+      "path": "players/44921.json"
+    },
+    {
+      "bytes": 17909,
+      "checksum": "sha256:ab05a23b05b59adafea0b477d734607d4ea5c895f5743688ef5a5fbd947df4a8",
+      "path": "players/18068.json"
+    },
+    {
+      "bytes": 17931,
+      "checksum": "sha256:d7db79d5e966dad8a0c60093354fb4fe0fdaa828c6d6db500b00c067b5427a87",
+      "path": "players/550363.json"
+    },
+    {
+      "bytes": 24559,
+      "checksum": "sha256:cf15a014f6a9f09c358497b61dfa2c29994a57839d25ab30f26eaf790e90c30a",
+      "path": "players/161806.json"
+    },
+    {
+      "bytes": 24954,
+      "checksum": "sha256:d23701274a6b1b66a270218c53b6629b677ce8a030a2a2321d97db34a302a76d",
+      "path": "players/321860.json"
+    },
+    {
+      "bytes": 21962,
+      "checksum": "sha256:939a780dd87626d75ae00f34a9b8fc7c30ac5a4e52570d228d08c701e65c4344",
+      "path": "players/125695.json"
+    },
+    {
+      "bytes": 16370,
+      "checksum": "sha256:ab6f6454d2d9f3e2d81a52338cbbf50e07e3272dc7964dc9418c7d7c20989f30",
+      "path": "players/394703.json"
+    },
+    {
+      "bytes": 22018,
+      "checksum": "sha256:2efb645b033d862339e16fd7b4eea1c388f824af00fb67b0e58457a3f493f808",
+      "path": "players/37253.json"
+    },
+    {
+      "bytes": 24370,
+      "checksum": "sha256:3b6c9e0af5380a32044b6959a688b4456f70d10306c005aa2bcdeec04d181c73",
+      "path": "players/20422.json"
+    },
+    {
+      "bytes": 29377,
+      "checksum": "sha256:8cb5eff7c1c4ecd8168847b6fca4a8ca512833f73f6e2232ef1e509ec4a2d59b",
+      "path": "players/108465.json"
+    },
+    {
+      "bytes": 26976,
+      "checksum": "sha256:7618ef6846c8f3a924e2c31d2698ca58232f74c77e574dca6c023d704b728713",
+      "path": "players/57248.json"
+    },
+    {
+      "bytes": 21296,
+      "checksum": "sha256:f02f3813334884bd79f926fd8342c36bdf5b44394a15d455c695ad4710c01601",
+      "path": "players/271395.json"
+    },
+    {
+      "bytes": 16802,
+      "checksum": "sha256:5fe2a37e4dbc35fb1bfc8c5943c69c4bbff94eb9574764af286d0649ae70dc35",
+      "path": "players/14344.json"
+    },
+    {
+      "bytes": 28941,
+      "checksum": "sha256:b0d62ea942e5f8029212139745731d943746c5ed346aa36841be5b186676398e",
+      "path": "players/45010.json"
+    },
+    {
+      "bytes": 10348,
+      "checksum": "sha256:1012caacfcae289d52059d0d4361ac022a5c1f3120ce0f63f8ee21a2d0d1845f",
+      "path": "players/496904.json"
+    },
+    {
+      "bytes": 29888,
+      "checksum": "sha256:c6918386725582dfa2a23fe70344c44df056559b649c5508c6375f79dde4fe30",
+      "path": "players/61178.json"
+    },
+    {
+      "bytes": 17665,
+      "checksum": "sha256:2f68a61edb58b0dfcc1857c32b26179a8f1c5c2ad54a8683b96a63b4abd7cbda",
+      "path": "players/379662.json"
+    },
+    {
+      "bytes": 32491,
+      "checksum": "sha256:4268f80811d862d2e0c03e2f592d56be6bf21fc2ec1e75311102a045282b7fe1",
+      "path": "players/18945.json"
+    },
+    {
+      "bytes": 32388,
+      "checksum": "sha256:5f87cb8c0ed1b7ba93d8d6f475e840cd03d6e967fbaf5767847187b3899a08bd",
+      "path": "players/231195.json"
+    },
+    {
+      "bytes": 11783,
+      "checksum": "sha256:c515dc3b2eb07df7900527399a6552d272a12c98af4586acda5719e9203b2fa8",
+      "path": "players/670299.json"
+    },
+    {
+      "bytes": 17360,
+      "checksum": "sha256:8bca5079bc8915b45b29f4b845ea48fa4c35d4af76ae96bb53d9c106b51878c3",
+      "path": "players/303519.json"
+    },
+    {
+      "bytes": 15701,
+      "checksum": "sha256:7ce33fe41995f4d61d9e6bba6025fe4b39738758cff82b216dcd026d35c82771",
+      "path": "players/84126.json"
+    },
+    {
+      "bytes": 25040,
+      "checksum": "sha256:bdc91cd60a200cc5210856ed777f49b70cd15fc2e5a0fd3a54235fd2d33d2de6",
+      "path": "players/97896.json"
+    },
+    {
+      "bytes": 21181,
+      "checksum": "sha256:ef6b0692f8227ffc7353dd126f45769c6e1a68e933e65849d252e7402e7450ba",
+      "path": "players/44982.json"
+    },
+    {
+      "bytes": 25843,
+      "checksum": "sha256:1ee9b5c38ca138f8d201d9e7ee66d622d220eb18370b16bb1ee1f97f99d0123c",
+      "path": "players/267727.json"
+    },
+    {
+      "bytes": 28508,
+      "checksum": "sha256:d7f5cd22e00d21a2d67b86d8319788fcea45f187857a409a9784d893d9a0a344",
+      "path": "players/388510.json"
+    },
+    {
+      "bytes": 14986,
+      "checksum": "sha256:1ce1a86358d72831e47ab099888018a4b1b1f57f346fe39f49cdcd454c865b47",
+      "path": "players/6973.json"
+    },
+    {
+      "bytes": 23024,
+      "checksum": "sha256:30b23e180d02b4f3b4eefa5576019f5130b71602d9ccbffd25736de36912c08d",
+      "path": "players/340027.json"
+    },
+    {
+      "bytes": 9398,
+      "checksum": "sha256:d36762575de68d65317f52f4777f943c0903eeefb9960a7b938f1d26d62ffa0e",
+      "path": "players/644159.json"
+    },
+    {
+      "bytes": 9408,
+      "checksum": "sha256:faaf9887523095ac4448a371eeb24e27a00d6cd0dc5c1ebaf80e11254f26b58a",
+      "path": "players/625768.json"
+    },
+    {
+      "bytes": 29615,
+      "checksum": "sha256:ed5547a9ffc9c65a6ed306289ce094e8927bb2a7631b2b3326a57ed8542aeabb",
+      "path": "players/395743.json"
+    },
+    {
+      "bytes": 9450,
+      "checksum": "sha256:c9befabe52c9758f31db62847cdea61245c46954ca2bc9c535cd43542aa8167e",
+      "path": "players/361406.json"
+    },
+    {
+      "bytes": 22491,
+      "checksum": "sha256:4b6634194b22da4ccef6132dcb73d544d81e0f0c1ad595e81305fecc3ce44b52",
+      "path": "players/153645.json"
+    },
+    {
+      "bytes": 9385,
+      "checksum": "sha256:ea23dac0444f564e3b026078a7a263b68704c8576aa41974c3c5fb413482c901",
+      "path": "players/477991.json"
+    },
+    {
+      "bytes": 9388,
+      "checksum": "sha256:facf81f06a1fad6b1e1fd5fd608033a7b7a14a051c85e3ceb530d76a9374fdff",
+      "path": "players/674621.json"
+    },
+    {
+      "bytes": 25313,
+      "checksum": "sha256:93731166b356a42032e8175296a46e50a3be86ecf884570f97d551adacb598dc",
       "path": "clubs/aberdeen.json"
     },
     {
-      "bytes": 4776,
-      "checksum": "sha256:55339cc2e31f4ed44996e6069e213fff773294fb2fe304517bf0e1c65e923aa0",
+      "bytes": 23828,
+      "checksum": "sha256:3c69a2eb074aad13fd351ad20a59372cc4c631b90525a74397ee322f8c394f1a",
+      "path": "availability/aberdeen.json"
+    },
+    {
+      "bytes": 74814,
+      "checksum": "sha256:c93e445031a5c059d56805b6a736f6884bc51b794c1c18b9814421f4fec55392",
+      "path": "matchday/upcoming.json"
+    },
+    {
+      "bytes": 533936,
+      "checksum": "sha256:858dac248de5412cf4f7192e6ba9428fa0db2db1ced010e79bc4b867976f4ebe",
+      "path": "transfers/aberdeen.json"
+    },
+    {
+      "bytes": 8862,
+      "checksum": "sha256:63d820f247da827566dbab080a61e0a561125cf90a1dd74707acd2b68c3d8cbd",
+      "path": "transfers/aberdeen.audit.json"
+    },
+    {
+      "bytes": 67548,
+      "checksum": "sha256:414d0736d12cf3d47dcedb826c6a36d2020b1dcb4ad6c78c31a26f213e2402e0",
+      "path": "history/aberdeen.json"
+    },
+    {
+      "bytes": 16112,
+      "checksum": "sha256:f8db364e474f0f96263a164f47bf05725c1561bd3592ffa0bf636db6bdeac586",
+      "path": "history/seasons/2019-20.json"
+    },
+    {
+      "bytes": 21348,
+      "checksum": "sha256:4e0e3252bfafaa3bfce92eaa51639ae367155e0c00d4c5e91aa9852022ffd4c6",
+      "path": "history/seasons/2020-21.json"
+    },
+    {
+      "bytes": 20427,
+      "checksum": "sha256:a80a50f3e00c9d4e9463d6561ce07c3ffd8330407b4c53b606b6fbfa0415d588",
+      "path": "history/seasons/2021-22.json"
+    },
+    {
+      "bytes": 22362,
+      "checksum": "sha256:a69c80e912231d195b2eb3fe241b168d0d78f1d139a13425d83c407838a62540",
+      "path": "history/seasons/2022-23.json"
+    },
+    {
+      "bytes": 24328,
+      "checksum": "sha256:bc9ac4a71f80a421f7507eec4fd5270f8d34119a3550e767db109e5528c55c9a",
+      "path": "history/seasons/2023-24.json"
+    },
+    {
+      "bytes": 18638,
+      "checksum": "sha256:20e965c5e0e617ef362d56a3a47ebf2e24f227700280a3ceeb81de51ed1cb19d",
+      "path": "history/seasons/2024-25.json"
+    },
+    {
+      "bytes": 25178,
+      "checksum": "sha256:fd653e5f0ea80b1b164bb4b8be4e347d7733fef344ac59782f7dd80ffae04283",
+      "path": "history/seasons/2025-26.json"
+    },
+    {
+      "bytes": 19056,
+      "checksum": "sha256:dd78102eb9110e3a254b6d7f8d1242b81ce72e4314452209e42a2feedd86b385",
+      "path": "history/seasons/2026-27.json"
+    },
+    {
+      "bytes": 68712,
+      "checksum": "sha256:5dafdefe29461f7c6e5514e593d763a286932a3b4952e9cf0b553cf738f0312e",
+      "path": "themes/aberdeen.json"
+    },
+    {
+      "bytes": 36571,
+      "checksum": "sha256:941fafb2ca9d5d4a1158c35ae0fe8eacf4111a8d818420fc7ed408b3a4dd2514",
+      "path": "needs/aberdeen.json"
+    },
+    {
+      "bytes": 742,
+      "checksum": "sha256:64bf241d2d42fc9d884059b1acea66468fbc0647a977fd009646ff844f1bfb27",
+      "path": "rumours/aberdeen.json"
+    },
+    {
+      "bytes": 762,
+      "checksum": "sha256:614aa6b04261b9de5dac6148def92fc51d3b050410dba79847ae7bedbc0645b6",
+      "path": "rumours/profile.json"
+    },
+    {
+      "bytes": 32618,
+      "checksum": "sha256:1a92fac288970b9d478ef577fa9d47f001e9f3e378ed8140ad01db5364b11c93",
+      "path": "forum/afc_chat.json"
+    },
+    {
+      "bytes": 3060,
+      "checksum": "sha256:1a52ee2e0c8fc9b7daab3723c06903521705222c6a6a99cfa5f0582dcb854c5e",
+      "path": "competitions/index.json"
+    },
+    {
+      "bytes": 146841,
+      "checksum": "sha256:c3e24384c1c6e040e0d6e5fdc83520470fd02f3e0af6a57627e1f5a33cc5ad24",
+      "path": "competitions/league-cup.json"
+    },
+    {
+      "bytes": 80370,
+      "checksum": "sha256:7cb18fb4416447d6b8897c686034e556e737262559e266486ca3ebc6f51caae2",
+      "path": "competitions/scottish-cup.json"
+    },
+    {
+      "bytes": 27433,
+      "checksum": "sha256:236f1a66fa5c0200b7a162e8d4bc43a7a9d394aaa5c55a02cf130e2055a0f9ba",
+      "path": "provenance.json"
+    },
+    {
+      "bytes": 15904,
+      "checksum": "sha256:a34f56211bece03a81434f052aa89665b243b7f2795086a5a57a5564efc34f0a",
       "path": "search-index.json"
     },
     {
-      "bytes": 863,
-      "checksum": "sha256:a1c1abb4b30a41bf6b3d623132ed71ee42154fae56d08e32a562554abea52af6",
+      "bytes": 8351,
+      "checksum": "sha256:d6db20ffd5e9d20021c7b2327d0994649ba5ca12569ea41ce3769e8db1804e5f",
       "path": "coverage.json"
     },
     {
@@ -83,45 +564,224 @@
       "path": "seasons.json"
     }
   ],
-  "generated_at": "2026-10-21T12:53:23+00:00",
+  "generated_at": "2026-10-22T00:52:30+00:00",
   "marts": [
     {
-      "checksum": "sha256:0f50d8e9ccc66878d129882dc46f3d78abba96cad39c1ee6054fc6ce457698ef",
+      "checksum": "sha256:4633153a0d514bd3db262302a1f52db9fcabe02aae8aeff1e4eae87dee845771",
       "id": "league_table.sco:premiership",
       "path": "tables/premiership-2026-27.json",
       "rows": 12,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:d87ea619643500a737f447859206acd1b09ff873618e306191cfc4ac2492c786",
+      "checksum": "sha256:ff4cd0df280b2fe44f3a027242d2ad65fa1e502efa58b5313c5e76cf0bda149b",
       "id": "league_table.sco:championship",
       "path": "tables/championship-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:7b029c061a65706d0ed6e09b83889fcab9547bf3b7885a3e7b1f0f148b8a1bbe",
+      "checksum": "sha256:ef5df008377d140e955d2c48ca7c5bd8dd398de1b2a0466c701a03e10c0f1a79",
       "id": "league_table.sco:league-one",
       "path": "tables/league-one-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:7ba2c67076aa2d9dfa3cbb9f05b8fc73bff8c90c8fbdc6f242f6aea06a87e301",
+      "checksum": "sha256:41693b34c1b2164dc7251baa43de88d8bedb6b75fbc27d20c56fdf4fee5a93cd",
       "id": "league_table.sco:league-two",
       "path": "tables/league-two-2026-27.json",
       "rows": 10,
       "season": "2026-27"
     },
     {
-      "checksum": "sha256:94269a82abe04299ecd28f21511e239372884b22573042d6f409581cebe9ea51",
+      "checksum": "sha256:75adbd5c4c31bf86473b3dc301bedee052a165704aaec456995c4f59de6a55fb",
+      "id": "squad.sco:aberdeen",
+      "path": "squad/aberdeen.json",
+      "rows": 38,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:93731166b356a42032e8175296a46e50a3be86ecf884570f97d551adacb598dc",
       "id": "club.sco:aberdeen",
       "path": "clubs/aberdeen.json",
       "rows": 9,
       "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:3c69a2eb074aad13fd351ad20a59372cc4c631b90525a74397ee322f8c394f1a",
+      "id": "availability.sco:aberdeen",
+      "path": "availability/aberdeen.json",
+      "rows": 38,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:c93e445031a5c059d56805b6a736f6884bc51b794c1c18b9814421f4fec55392",
+      "id": "matchday.upcoming",
+      "path": "matchday/upcoming.json",
+      "rows": 1,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:858dac248de5412cf4f7192e6ba9428fa0db2db1ced010e79bc4b867976f4ebe",
+      "id": "transfers.sco:aberdeen",
+      "path": "transfers/aberdeen.json",
+      "rows": 229,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:63d820f247da827566dbab080a61e0a561125cf90a1dd74707acd2b68c3d8cbd",
+      "id": "transfers-audit.sco:aberdeen",
+      "path": "transfers/aberdeen.audit.json",
+      "rows": 1,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:414d0736d12cf3d47dcedb826c6a36d2020b1dcb4ad6c78c31a26f213e2402e0",
+      "id": "history.sco:aberdeen",
+      "path": "history/aberdeen.json",
+      "rows": 8,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:f8db364e474f0f96263a164f47bf05725c1561bd3592ffa0bf636db6bdeac586",
+      "id": "history.season.2019-20",
+      "path": "history/seasons/2019-20.json",
+      "rows": 1,
+      "season": "2019-20"
+    },
+    {
+      "checksum": "sha256:4e0e3252bfafaa3bfce92eaa51639ae367155e0c00d4c5e91aa9852022ffd4c6",
+      "id": "history.season.2020-21",
+      "path": "history/seasons/2020-21.json",
+      "rows": 3,
+      "season": "2020-21"
+    },
+    {
+      "checksum": "sha256:a80a50f3e00c9d4e9463d6561ce07c3ffd8330407b4c53b606b6fbfa0415d588",
+      "id": "history.season.2021-22",
+      "path": "history/seasons/2021-22.json",
+      "rows": 3,
+      "season": "2021-22"
+    },
+    {
+      "checksum": "sha256:a69c80e912231d195b2eb3fe241b168d0d78f1d139a13425d83c407838a62540",
+      "id": "history.season.2022-23",
+      "path": "history/seasons/2022-23.json",
+      "rows": 3,
+      "season": "2022-23"
+    },
+    {
+      "checksum": "sha256:bc9ac4a71f80a421f7507eec4fd5270f8d34119a3550e767db109e5528c55c9a",
+      "id": "history.season.2023-24",
+      "path": "history/seasons/2023-24.json",
+      "rows": 4,
+      "season": "2023-24"
+    },
+    {
+      "checksum": "sha256:20e965c5e0e617ef362d56a3a47ebf2e24f227700280a3ceeb81de51ed1cb19d",
+      "id": "history.season.2024-25",
+      "path": "history/seasons/2024-25.json",
+      "rows": 1,
+      "season": "2024-25"
+    },
+    {
+      "checksum": "sha256:fd653e5f0ea80b1b164bb4b8be4e347d7733fef344ac59782f7dd80ffae04283",
+      "id": "history.season.2025-26",
+      "path": "history/seasons/2025-26.json",
+      "rows": 3,
+      "season": "2025-26"
+    },
+    {
+      "checksum": "sha256:dd78102eb9110e3a254b6d7f8d1242b81ce72e4314452209e42a2feedd86b385",
+      "id": "history.season.2026-27",
+      "path": "history/seasons/2026-27.json",
+      "rows": 1,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:5dafdefe29461f7c6e5514e593d763a286932a3b4952e9cf0b553cf738f0312e",
+      "id": "themes.sco:aberdeen",
+      "path": "themes/aberdeen.json",
+      "rows": 5,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:941fafb2ca9d5d4a1158c35ae0fe8eacf4111a8d818420fc7ed408b3a4dd2514",
+      "id": "needs.sco:aberdeen",
+      "path": "needs/aberdeen.json",
+      "rows": 7,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:64bf241d2d42fc9d884059b1acea66468fbc0647a977fd009646ff844f1bfb27",
+      "id": "rumours.sco:aberdeen",
+      "path": "rumours/aberdeen.json",
+      "rows": 0,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:614aa6b04261b9de5dac6148def92fc51d3b050410dba79847ae7bedbc0645b6",
+      "id": "rumours.profile",
+      "path": "rumours/profile.json",
+      "rows": 0,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:1a92fac288970b9d478ef577fa9d47f001e9f3e378ed8140ad01db5364b11c93",
+      "id": "forum.afc_chat",
+      "path": "forum/afc_chat.json",
+      "rows": 83,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:1a52ee2e0c8fc9b7daab3723c06903521705222c6a6a99cfa5f0582dcb854c5e",
+      "id": "competitions.index",
+      "path": "competitions/index.json",
+      "rows": 3,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:c3e24384c1c6e040e0d6e5fdc83520470fd02f3e0af6a57627e1f5a33cc5ad24",
+      "id": "competitions.league-cup",
+      "path": "competitions/league-cup.json",
+      "rows": 94,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:7cb18fb4416447d6b8897c686034e556e737262559e266486ca3ebc6f51caae2",
+      "id": "competitions.scottish-cup",
+      "path": "competitions/scottish-cup.json",
+      "rows": 50,
+      "season": "2026-27"
+    },
+    {
+      "checksum": "sha256:236f1a66fa5c0200b7a162e8d4bc43a7a9d394aaa5c55a02cf130e2055a0f9ba",
+      "id": "provenance",
+      "path": "provenance.json",
+      "rows": 23,
+      "season": "2026-27"
     }
   ],
   "profile": "public",
+  "provenance": {
+    "availability": {
+      "provider_snapshot": "unavailable",
+      "reason": "provider_declares_injuries_false",
+      "status": "unavailable"
+    },
+    "checksum": "sha256:236f1a66fa5c0200b7a162e8d4bc43a7a9d394aaa5c55a02cf130e2055a0f9ba",
+    "layers": 23,
+    "migration": {
+      "active_source": "football_data_uk",
+      "enabled": false,
+      "gate_status": "fail",
+      "reason": "Gate failed: SC0: fixture_count (198); SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks); SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
+      "report": "reports/league-migration/2026-27.json",
+      "season": "2026-27"
+    },
+    "path": "provenance.json"
+  },
   "schema_version": "1.0.0",
   "season": "2026-27",
   "sources": [
@@ -130,8 +790,107 @@
       "id": "football_data_uk",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
+      "layers": [
+        "league_results_current",
+        "league_results_history",
+        "league_team_stats"
+      ],
       "name": "football-data.co.uk",
-      "rows": 216,
+      "rows": 9839,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": null,
+      "id": "api_football",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [
+        "cup_fixtures",
+        "event_layer",
+        "lineups_roles",
+        "player_match_stats",
+        "squad_identity",
+        "transfers_candidate"
+      ],
+      "name": "API-Football",
+      "rows": 1003,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "AFC Chat forum contributors",
+      "id": "afc_chat",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [
+        "forum_signal"
+      ],
+      "name": "AFC Chat — The Rumour Mill",
+      "rows": 83,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "Aberdeen FC",
+      "id": "afc_news",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [
+        "availability",
+        "news"
+      ],
+      "name": "Aberdeen FC news",
+      "rows": 12,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "SPFL",
+      "id": "spfl",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [
+        "club_fixtures"
+      ],
+      "name": "SPFL official club feed",
+      "rows": 6,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "Wikipedia contributors",
+      "id": "wikipedia",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [],
+      "name": "Wikipedia",
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "Sportmonks",
+      "id": "sportmonks",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [
+        "preferred_foot"
+      ],
+      "name": "Sportmonks",
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "status": "ok"
+    },
+    {
+      "attribution": "Aberdeen FC",
+      "id": "afc_official",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "layers": [],
+      "name": "Aberdeen FC player profiles",
+      "rows": 0,
+      "rows_basis": "primary contributions only",
       "status": "ok"
     }
   ],

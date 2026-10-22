@@ -1,29 +1,31 @@
 import Link from "next/link";
 
-export const metadata = { title: "Clubs · fitba" };
+export const metadata = {
+  title: "Clubs · fitba",
+  robots: { index: false },
+};
 
 export default function ClubsPage() {
   return (
-    <>
-      <section className="page-head">
-        <p className="eyebrow">Club profiles</p>
-        <h1>Clubs</h1>
-        <p className="lede">Aberdeen is the focal club; the rest of the pyramid follows.</p>
-      </section>
-      <Link className="card tier-card" href="/clubs/aberdeen/">
-        <div className="card-head">
-          <div>
-            <p className="eyebrow">Premiership · Pittodrie</p>
-            <h2>Aberdeen</h2>
-          </div>
-          <span className="club-roundel">AFC</span>
-        </div>
-        <p>
-          League position, results, season history, intended style, squad needs and the
-          recruitment budget envelope.
-        </p>
-        <span className="text-link">Open dashboard →</span>
-      </Link>
-    </>
+    <section className="page-head">
+      <p className="eyebrow">Moved</p>
+      <h1>Club profiles have moved</h1>
+      <p className="lede">
+        The old Aberdeen dashboard tried to be a club profile, transfer board,
+        shape report and news page at once. The matchday dashboard now answers
+        the immediate question before the next game.
+      </p>
+      <div className="hero-actions">
+        <Link className="button" href="/matchday/">
+          Matchday dashboard
+        </Link>
+        <Link className="button button-ghost" href="/squad/">
+          Current squad
+        </Link>
+        <Link className="button button-ghost" href="/scotland/">
+          The pyramid
+        </Link>
+      </div>
+    </section>
   );
 }

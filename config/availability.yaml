@@ -1,0 +1,30 @@
+# Availability policy.
+#
+# Injuries and suspensions are a special case of team news, not a normal
+# statistic. The curated ledger is primary; the provider /injuries snapshot is
+# optional and currently not populated for Scottish 2026. Unknown stays unknown.
+
+version: 1
+policy:
+  max_age_days: 21
+  fresh_days: 7
+  filter_statuses: [out, suspended]
+  doubtful_weight: 0.5
+  returned_weight: 0.9
+  unknown_weight: 1.0
+  doubtful_confidence_downgrade: 1
+  stale_confidence_downgrade: 1
+  unknown_confidence_downgrade: 1
+  conflict_confidence_downgrade: 2
+  require_source_url: true
+  allowed_hosts:
+    - afc.co.uk
+    - www.afc.co.uk
+
+provider:
+  source: api_football
+  endpoint: /injuries
+  league_id: 179
+  require_league_coverage: true
+  use_player_injured_boolean: false
+  never_sets: [available, returned, suspended]

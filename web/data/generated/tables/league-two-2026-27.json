@@ -1,6 +1,27 @@
 {
   "competition_id": "sco:league-two",
   "competition_name": "Scottish League Two",
+  "cutoffs": [
+    {
+      "after_position": 1,
+      "kind": "promotion",
+      "label": "Automatic promotion · 1st",
+      "note": "1st is promoted to League One."
+    },
+    {
+      "after_position": 4,
+      "kind": "playoff",
+      "label": "Promotion play-off · 2nd–4th",
+      "note": "2nd–4th enter the League One/League Two play-off with 9th in League One."
+    },
+    {
+      "after_position": 9,
+      "kind": "pyramid",
+      "label": "Pyramid play-off · 10th",
+      "note": "10th faces the tier-five group winner; no automatic relegation."
+    }
+  ],
+  "qualification_note": "1st is promoted automatically. 2nd–4th enter the League One play-off with 9th in League One. 10th enters the pyramid play-off against the winner of the Highland / Lowland East / Lowland West champions' group; there is no automatic relegation, and the League Two club hosts the second leg.\n",
   "rows": [
     {
       "competition_id": "sco:league-two",
@@ -19,7 +40,7 @@
       "season": "2026-27",
       "team_id": "sco:stranraer",
       "team_name": "Stranraer",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 7
     },
     {
@@ -39,7 +60,7 @@
       "season": "2026-27",
       "team_id": "sco:clyde",
       "team_name": "Clyde",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 7
     },
     {
@@ -59,7 +80,7 @@
       "season": "2026-27",
       "team_id": "sco:elgin-city",
       "team_name": "Elgin City",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 5
     },
     {
@@ -79,7 +100,7 @@
       "season": "2026-27",
       "team_id": "sco:edinburgh-city",
       "team_name": "Edinburgh City",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 4
     },
     {
@@ -99,7 +120,7 @@
       "season": "2026-27",
       "team_id": "sco:the-spartans",
       "team_name": "The Spartans",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 4
     },
     {
@@ -119,7 +140,7 @@
       "season": "2026-27",
       "team_id": "sco:kelty-hearts",
       "team_name": "Kelty Hearts",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 5
     },
     {
@@ -139,7 +160,7 @@
       "season": "2026-27",
       "team_id": "sco:dumbarton",
       "team_name": "Dumbarton",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 4
     },
     {
@@ -159,7 +180,7 @@
       "season": "2026-27",
       "team_id": "sco:stirling-albion",
       "team_name": "Stirling Albion",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     },
     {
@@ -179,7 +200,7 @@
       "season": "2026-27",
       "team_id": "sco:forfar-athletic",
       "team_name": "Forfar Athletic",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     },
     {
@@ -199,7 +220,7 @@
       "season": "2026-27",
       "team_id": "sco:annan-athletic",
       "team_name": "Annan Athletic",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     }
   ],

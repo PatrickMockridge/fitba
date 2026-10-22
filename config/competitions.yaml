@@ -10,6 +10,32 @@ competitions:
     teams: 12
     matches_per_season: 228
     split_after_matches: 33
+    # Scotland has four UEFA places in the 2027/28 access list (the season this
+    # table feeds). The cup winner's berth can move the league cut-off.
+    qualification_note: >
+      Scotland has four UEFA places for 2027/28: the champions enter the Champions
+      League second qualifying round, the Scottish Cup winner enters the Europa League
+      first qualifying round, and 2nd and 3rd enter the Conference League second
+      qualifying round. 4th only qualifies if the Scottish Cup winner is already in
+      the top three. The League Cup carries no European place. Subject to the final
+      UEFA access list and cup outcomes.
+    cutoffs:
+      - after_position: 3
+        kind: europe
+        label: European places · 1–3
+        note: 4th is conditional on the Scottish Cup winner already being in the top three.
+      - after_position: 6
+        kind: split
+        label: Top-six / bottom-six split
+        note: The league splits after 33 matches; the bottom six cannot finish higher than 7th.
+      - after_position: 10
+        kind: playoff
+        label: Relegation play-off · 11th
+        note: 11th plays the Championship play-off winner over two legs.
+      - after_position: 11
+        kind: relegation
+        label: Relegation · 12th
+        note: 12th is relegated automatically.
   - id: sco:championship
     code: SC1
     name: Scottish Championship
@@ -17,6 +43,27 @@ competitions:
     tier: 2
     teams: 10
     matches_per_season: 180
+    qualification_note: >
+      1st is promoted automatically. 2nd–4th enter the Premiership play-off with
+      11th in the Premiership. 9th enters the Championship/League One play-off,
+      and 10th is relegated to League One.
+    cutoffs:
+      - after_position: 1
+        kind: promotion
+        label: Automatic promotion · 1st
+        note: 1st is promoted to the Premiership.
+      - after_position: 4
+        kind: playoff
+        label: Promotion play-off · 2nd–4th
+        note: 2nd–4th enter the Premiership play-off with 11th in the Premiership.
+      - after_position: 8
+        kind: playoff
+        label: Relegation play-off · 9th
+        note: 9th enters the Championship/League One play-off with 2nd–4th in League One.
+      - after_position: 9
+        kind: relegation
+        label: Relegation · 10th
+        note: 10th is relegated to League One.
   - id: sco:league-one
     code: SC2
     name: Scottish League One
@@ -24,6 +71,27 @@ competitions:
     tier: 3
     teams: 10
     matches_per_season: 180
+    qualification_note: >
+      1st is promoted automatically. 2nd–4th enter the Championship play-off with
+      9th in the Championship. 9th enters the League One/League Two play-off, and
+      10th is relegated to League Two.
+    cutoffs:
+      - after_position: 1
+        kind: promotion
+        label: Automatic promotion · 1st
+        note: 1st is promoted to the Championship.
+      - after_position: 4
+        kind: playoff
+        label: Promotion play-off · 2nd–4th
+        note: 2nd–4th enter the Championship/League One play-off with 9th in the Championship.
+      - after_position: 8
+        kind: playoff
+        label: Relegation play-off · 9th
+        note: 9th enters the League One/League Two play-off with 2nd–4th in League Two.
+      - after_position: 9
+        kind: relegation
+        label: Relegation · 10th
+        note: 10th is relegated to League Two.
   - id: sco:league-two
     code: SC3
     name: Scottish League Two
@@ -31,6 +99,24 @@ competitions:
     tier: 4
     teams: 10
     matches_per_season: 180
+    qualification_note: >
+      1st is promoted automatically. 2nd–4th enter the League One play-off with 9th
+      in League One. 10th enters the pyramid play-off against the winner of the
+      Highland / Lowland East / Lowland West champions' group; there is no automatic
+      relegation, and the League Two club hosts the second leg.
+    cutoffs:
+      - after_position: 1
+        kind: promotion
+        label: Automatic promotion · 1st
+        note: 1st is promoted to League One.
+      - after_position: 4
+        kind: playoff
+        label: Promotion play-off · 2nd–4th
+        note: 2nd–4th enter the League One/League Two play-off with 9th in League One.
+      - after_position: 9
+        kind: pyramid
+        label: Pyramid play-off · 10th
+        note: 10th faces the tier-five group winner; no automatic relegation.
 
 history:
   # Top two tiers go back to 1994/95; all four from 1997/98.

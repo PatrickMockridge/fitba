@@ -80,6 +80,118 @@ export default function StatusPage() {
         </div>
       </section>
 
+      {manifest.coverage.cups?.length ? (
+        <section className="card">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Cups</p>
+              <h2>Licensed coverage</h2>
+            </div>
+          </div>
+          <div className="table-wrap">
+            <table className="league-table">
+              <thead>
+                <tr>
+                  <th>Competition</th>
+                  <th className="num">Licensed</th>
+                  <th className="num">Official</th>
+                  <th>Coverage</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                {manifest.coverage.cups.map((cup) => (
+                  <tr key={cup.id}>
+                    <td>{cup.name}</td>
+                    <td className="num">{cup.ties ?? cup.matches ?? "—"}</td>
+                    <td className="num">{cup.official_ties ?? "—"}</td>
+                    <td>
+                      <span
+                        className={
+                          cup.coverage === "partial" ? "badge badge-warn" : "badge badge-ok"
+                        }
+                      >
+                        {cup.coverage}
+                      </span>
+                    </td>
+                    <td className="fine-print">{cup.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      {manifest.coverage.transfers ? (
+        <section className="card">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Transfers</p>
+              <h2>Confirmed business</h2>
+            </div>
+            <span className="badge badge-warn">Curated</span>
+          </div>
+          <p>
+            {manifest.coverage.transfers.count} rows ·{" "}
+            {manifest.coverage.transfers.confirmed} official-confirmed ·{" "}
+            {manifest.coverage.transfers.curated} source-linked curated.
+          </p>
+          <p className="fine-print">{manifest.coverage.transfers.note}</p>
+        </section>
+      ) : null}
+
+      {manifest.coverage.history ? (
+        <section className="card">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">History</p>
+              <h2>The Cormack era</h2>
+            </div>
+            <span className="badge badge-neutral">
+              {manifest.coverage.history.completed} completed + current
+            </span>
+          </div>
+          <p>
+            {manifest.coverage.history.seasons} curated seasons ·{" "}
+            {manifest.coverage.history.staff} people ·{" "}
+            {manifest.coverage.history.honours} major honours.
+          </p>
+          <p className="fine-print">{manifest.coverage.history.note}</p>
+        </section>
+      ) : null}
+
+      {manifest.coverage.rumours || manifest.coverage.forum ? (
+        <section className="card">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Rumours and fan signal</p>
+              <h2>Curated and sampled</h2>
+            </div>
+            <span className="badge badge-warn">Separate from confirmed business</span>
+          </div>
+          {manifest.coverage.rumours ? (
+            <p>
+              {manifest.coverage.rumours.count} curated rumour rows ·{" "}
+              {manifest.coverage.rumours.active} active.
+            </p>
+          ) : null}
+          {manifest.coverage.forum ? (
+            <p>
+              {manifest.coverage.forum.topics} forum topics and{" "}
+              {manifest.coverage.forum.posts} first-page posts sampled ·{" "}
+              {manifest.coverage.forum.raw_posts_published
+                ? "raw posts published"
+                : "no raw posts published"}
+              .
+            </p>
+          ) : null}
+          <p className="fine-print">
+            {manifest.coverage.rumours?.note} {manifest.coverage.forum?.note}
+          </p>
+        </section>
+      ) : null}
+
       <div className="grid two-col">
         <section className="card">
           <p className="eyebrow">Sources</p>

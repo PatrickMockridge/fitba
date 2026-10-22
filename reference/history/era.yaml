@@ -1,0 +1,65 @@
+# The era this historical record covers.
+#
+# The start is the date Dave Cormack took office as chairman. He was announced
+# during the November 2019 international break and formally replaced Stewart
+# Milne on 16 December 2019, so 2019-20 is a transition season: the review covers
+# the whole season and labels the pre-chairmanship portion.
+era:
+  id: cormack
+  label: The Cormack era
+  chairman_person_id: dave-cormack
+  start: '2019-12-16'
+  start_precision: day
+  first_season: 2019-20
+  short_description: >
+    The period from Dave Cormack's chairmanship to the present, read through the
+    public record of recruitment, managers, style, selection and silverware.
+  pillars:
+    - id: trading
+      title: Buy low, develop, sell high
+      statement: >
+        Recruit players whose current output or potential is priced below their
+        likely future value, give them minutes, and realise value when the offer
+        and the sporting cost balance.
+      evidence: [transfers, minutes_by_age, inferred_net_range, sell_on_clauses]
+    - id: pathway
+      title: Develop and play young players
+      statement: >
+        A development-and-sale model needs a pathway: academy graduates and
+        young signings have to get first-team minutes, not just squad numbers.
+      evidence: [u21_minutes_share, academy_debuts, players_used]
+    - id: style
+      title: A defined style of play
+      statement: >
+        Recruitment and selection should serve a recognisable way of playing.
+        The record shows the observed shapes and match-stat proxies, and labels
+        the tactical reading separately.
+      evidence: [formation_mix, style_proxies, tactical_notes]
+    - id: market-edge
+      title: Undervalued players and overlooked markets
+      statement: >
+        Look for under-appreciated players in poorer teams, undervalued Scottish
+        players, and markets the domestic game overlooks. The record shows the
+        source market, age, known fee and minutes; it does not yet score
+        "undervalued" itself.
+      evidence: [source_market_mix, age_at_arrival, known_fees]
+    - id: trade-off
+      title: Squad turnover, league variance and cup runs
+      statement: >
+        A trading model accepts squad turnover and young-player variance in
+        exchange for commercial and developmental upside. Cup runs are real
+        achievements and a source of variance, not proof that the league model
+        is working.
+      evidence: [players_used, manager_splits, league_finishes, honours]
+  read: >
+    The Cormack era is best read as a trade-off, not a verdict. The club has
+    produced a Scottish Cup, a European group-stage campaign and a series of
+    significant player sales, while league form has swung between third and
+    tenth. The record below separates what happened from what it might mean.
+    It does not claim to know the boardroom's intent, the wage structure or the
+    private valuation of any player.
+  source_ids: [wikipedia]
+  source_urls:
+    - https://en.wikipedia.org/wiki/Dave_Cormack
+    - https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season
+  verified_at: '2026-10-21'

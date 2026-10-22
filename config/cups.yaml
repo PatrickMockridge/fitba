@@ -1,0 +1,86 @@
+# Scottish cup competitions. Public data comes from the licensed API-Football
+# feed. The structure and dates are from the official SPFL/SFA format pages.
+cups:
+  - id: sco:league-cup
+    name: Premier Sports Cup
+    short_name: League Cup
+    format: group_knockout
+    status: Active
+    source: https://spfl.co.uk/league/league-cup/format
+    verified_at: 2026-10-21
+    groups: 8
+    teams_per_group: 5
+    group_points:
+      win: 3
+      draw: 1
+      shootout_bonus: 1
+    qualifiers:
+      group_winners: 8
+      best_runners_up: 3
+    bye_rule: five European representatives
+    official_rounds:
+      - { name: Group Stage, order: 1 }
+      - { name: Round of 16, order: 2 }
+      - { name: Quarter-final, order: 3 }
+      - { name: Semi-final, order: 4 }
+      - { name: Final, order: 5 }
+    round_map:
+      Group Stage: Group Stage
+      Round of 16: Round of 16
+      Quarter-finals: Quarter-final
+      Semi-finals: Semi-final
+      Final: Final
+    stage_windows:
+      - { start: 2026-10-31, end: 2026-11-01, stage: Semi-final }
+      - { start: 2026-12-13, end: 2026-12-13, stage: Final }
+    coverage_note: >
+      The licensed feed supplies all 80 group matches and the knockout ties,
+      including penalty shoot-outs. Group standings are not provided; the app
+      computes the eight group tables. Group letters are assigned by the app
+      from the fixture graph because the feed does not expose the official draw
+      letters.
+
+  - id: sco:scottish-cup
+    name: Scottish Gas Men's Scottish Cup
+    short_name: Scottish Cup
+    format: knockout
+    status: In progress
+    total_clubs: 137
+    total_ties: 136
+    entry_round: Fourth Round
+    entry_date: 2027-01-16
+    note: >
+      Premiership clubs enter in the fourth round. The licensed feed currently
+      starts at the First Round and does not carry the preliminary rounds.
+    source: https://www.scottishfa.co.uk/en/scottish-cup/scottish-gas-mens-scottish-cup/format-rules
+    verified_at: 2026-10-21
+    official_rounds:
+      - { name: Preliminary Round One, order: 1, date: 2026-08-01, ties: 5 }
+      - { name: Preliminary Round Two, order: 2, date: 2026-08-22, ties: 20 }
+      - { name: Preliminary Round Three, order: 3, date: 2026-09-12, ties: 10 }
+      - { name: First Round, order: 4, date: 2026-10-03, ties: 30 }
+      - { name: Second Round, order: 5, date: 2026-10-24, ties: 20 }
+      - { name: Third Round, order: 6, date: 2026-11-28, ties: 20 }
+      - { name: Fourth Round, order: 7, date: 2027-01-16, ties: 16 }
+      - { name: Fifth Round, order: 8, date: 2027-02-06, ties: 8 }
+      - { name: Quarter-final, order: 9, date: 2027-03-06, ties: 4 }
+      - { name: Semi-final, order: 10, date: 2027-04-17, ties: 2 }
+      - { name: Final, order: 11, date: 2027-05-22, ties: 1 }
+    # The provider's round labels do not match the official names. Assign the
+    # official round by the fixture date window first, then fall back to these
+    # known labels.
+    round_windows:
+      - { start: 2026-10-01, end: 2026-10-05, name: First Round, order: 4 }
+      - { start: 2026-10-22, end: 2026-10-26, name: Second Round, order: 5 }
+      - { start: 2026-11-26, end: 2026-11-30, name: Third Round, order: 6 }
+      - { start: 2027-01-14, end: 2027-01-18, name: Fourth Round, order: 7 }
+      - { start: 2027-02-04, end: 2027-02-08, name: Fifth Round, order: 8 }
+      - { start: 2027-03-04, end: 2027-03-08, name: Quarter-final, order: 9 }
+      - { start: 2027-04-15, end: 2027-04-20, name: Semi-final, order: 10 }
+      - { start: 2027-05-20, end: 2027-05-24, name: Final, order: 11 }
+    round_map:
+      1st Round: First Round
+      Round of 128: Second Round
+      Quarter-finals: Quarter-final
+      Semi-finals: Semi-final
+      Final: Final

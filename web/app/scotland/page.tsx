@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LeagueTable } from "@/components/LeagueTable";
 import { getManifest, getTableFiles } from "@/lib/data";
 
 export const metadata = { title: "The Scottish pyramid · fitba" };
@@ -10,37 +11,45 @@ export default function ScotlandPage() {
     <>
       <section className="page-head">
         <p className="eyebrow">Season {manifest?.season ?? "—"}</p>
-        <h1>The Scottish pyramid</h1>
+        <h1>The full pyramid</h1>
         <p className="lede">
-          Tables computed from match results, with points deductions applied and recorded.
+          All four SPFL tiers, computed from results, with promotion, play-off,
+          split and relegation cut-offs marked.
         </p>
       </section>
-      <div className="grid two-col">
+
+      <div className="pyramid-stack">
         {tables.map((table) => {
           const slug = table.competition_id.split(":")[1];
           return (
-            <Link className="card tier-card" key={table.competition_id} href={`/scotland/${slug}/`}>
-              <div className="card-head">
+            <section className="card" key={table.competition_id}>
+              <div className="section-head">
                 <div>
-                  <p className="eyebrow">Tier {table.tier}</p>
+                  <p className="eyebrow">Tier {table.tier} · Season {table.season}</p>
                   <h2>{table.competition_name}</h2>
                 </div>
-                <span className="tier-count">{table.rows.length}</span>
+                <Link className="text-link" href={`/scotland/${slug}/`}>
+                  Open tier →
+                </Link>
               </div>
-              <ol className="mini-table">
-                {table.rows.slice(0, 4).map((row) => (
-                  <li key={row.team_id}>
-                    <span className="mini-pos">{row.position}</span>
-                    <span className="mini-team">{row.team_name}</span>
-                    <span className="mini-pts">{row.points}</span>
-                  </li>
-                ))}
-              </ol>
-              <span className="text-link">Open table →</span>
-            </Link>
+              <LeagueTable
+                rows={table.rows}
+                highlightTeamId="sco:aberdeen"
+                cutoffs={table.cutoffs}
+              />
+              {table.qualification_note ? (
+                <p className="fine-print">{table.qualification_note}</p>
+              ) : null}
+            </section>
           );
         })}
       </div>
+
+      <p className="fine-print">
+        Play-off matches are not included in league tables. Cut-offs follow SPFL rules
+        and, for Europe, the current UEFA access list; see the{" "}
+        <Link href="/methodology/">methodology</Link> for sources and caveats.
+      </p>
     </>
   );
 }

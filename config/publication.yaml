@@ -9,7 +9,7 @@ profiles:
       Only derived outputs. Raw payloads, source-shaped tables and full event
       feeds are never written to this directory.
   research:
-    allow_lanes: [open, derived_display, prohibited]
+    allow_lanes: [open, derived_display, no_publication]
     require_publication_flag: false
     publish: false
     notes: Local analysis only; nothing from this profile is committed.

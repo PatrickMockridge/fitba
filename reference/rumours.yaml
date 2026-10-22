@@ -1,0 +1,73 @@
+# Aberdeen-linked rumours — a curated register, separate from confirmed business.
+#
+# This file is NOT the transfer register. A row here is an unconfirmed link,
+# speculation or a denied claim. It becomes `confirmed` only when the same move
+# appears in reference/transfers.yaml, and then `linked_transfer_id` must point
+# at that row. The confirmed register never imports rumour rows.
+#
+# Fields:
+#   rumour_id        stable id, e.g. rum:2026-27:player-slug
+#   player_key       player identity where known (api:player:<id> or a slug)
+#   player_name      display name
+#   linked_club      sco:aberdeen
+#   direction        in | out
+#   current_club     club at the time of the link (text, not an id)
+#   position         GK | CB | FB | DM | CM | AM | W | ST | null
+#   age              integer or null
+#   league           league name or null
+#   value_band       free | loan | under-500k | 500k-1m | 1m-2m | 2m-plus | unknown
+#   claim            one factual sentence describing the link, no quotes
+#   status           active | denied | confirmed | stale
+#   confidence       low | medium | high — editorial, justified by source_types
+#   source_urls      public links that support the claim
+#   source_types     press | journalist | forum | club
+#   first_seen       YYYY-MM-DD
+#   last_seen        YYYY-MM-DD
+#   verified_at      YYYY-MM-DD (when a human last checked the links)
+#   linked_transfer_id  set only for status: confirmed
+#   linked_player_key    same as player_key; kept for the scouting join
+#   analysis_tags    descriptive tags only (e.g. wide-forward, left-footed, loan)
+#   engagement       reserved; always null until the engagement project ships
+#
+# Rules:
+#   - no fabricated quotes, no player abuse, no betting/odds framing;
+#   - confidence is not a probability and must be explained by the sources;
+#   - a confirmed row is a historical record, not a second source of truth;
+#   - engagement stays null in this phase (see config/engagement.yaml).
+
+rumours: []
+
+# Add a row like this once a link has a public source:
+#
+# - rumour_id: rum:2026-27:example-player
+#   player_key: api:player:12345
+#   player_name: Example Player
+#   linked_club: sco:aberdeen
+#   direction: in
+#   current_club: Example FC
+#   position: W
+#   age: 22
+#   league: Scottish Premiership
+#   value_band: 1m-2m
+#   claim: One factual sentence describing the reported link.
+#   status: active
+#   confidence: medium
+#   source_urls: [https://example.com/report]
+#   source_types: [press]
+#   first_seen: 2026-10-20
+#   last_seen: 2026-10-21
+#   verified_at: 2026-10-21
+#   analysis_tags: [wide-forward, left-footed]
+#   engagement: null
+
+# Curated, data-backed opinion cards. Each card must cite rumour ids and at
+# least one measured comparison (squad need, budget, confirmed business, or a
+# coverage-labelled player stat). Opinions are labelled as opinions.
+#
+# - opinion_id: opinion:2026-27:example
+#   title: The links point to a winger; the squad need is central
+#   stance: Prefer a central midfielder over another wide forward.
+#   body: One or two short paragraphs citing the evidence.
+#   evidence: [rum:2026-27:example-player]
+#   published: 2026-10-21
+opinions: []

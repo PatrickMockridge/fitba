@@ -152,6 +152,38 @@ def probe_datafc() -> dict[str, object]:
         return record("sofascore_datafc", "not_installed")
 
 
+def probe_afc_news(client: httpx.Client) -> dict[str, object]:
+    url = "https://www.afc.co.uk/en/news"
+    try:
+        r = client.get(url)
+        ok = r.status_code == 200 and "articleCard" in r.text
+        return record(
+            "afc_news",
+            "ok" if ok else "blocked",
+            url=url,
+            http=r.status_code,
+            notes="Listing metadata only; article bodies and images are not copied.",
+        )
+    except Exception as exc:  # noqa: BLE001
+        return record("afc_news", "error", url=url, error=str(exc))
+
+
+def probe_spfl(client: httpx.Client) -> dict[str, object]:
+    url = "https://spfl.co.uk/clubs/aberdeen/fixtures"
+    try:
+        r = client.get(url)
+        ok = r.status_code == 200 and "fixtures-list__group" in r.text
+        return record(
+            "spfl",
+            "ok" if ok else "blocked",
+            url=url,
+            http=r.status_code,
+            notes="Official SPFL club feed; league and Premier Sports Cup fixtures/results.",
+        )
+    except Exception as exc:  # noqa: BLE001
+        return record("spfl", "error", url=url, error=str(exc))
+
+
 def probe_statsbomb(client: httpx.Client) -> dict[str, object]:
     url = "https://raw.githubusercontent.com/hudl/open-data/master/data/competitions.json"
     try:
@@ -218,6 +250,8 @@ def main() -> int:
         results.append(probe_pannadata(client, deep=args.deep))
         results.append(probe_fbref(client))
         results.append(probe_datafc())
+        results.append(probe_afc_news(client))
+        results.append(probe_spfl(client))
         results.append(probe_statsbomb(client))
         results.append(probe_clubelo(client))
     results.extend(probe_optional_keys())

@@ -1,0 +1,345 @@
+# Role taxonomy and formation maps.
+#
+# Role is a starting-XI observation: the formation shape is taken from the
+# starting-XI grid in the licensed lineup feed, and each grid slot maps to one
+# role code below. A substitute has no grid slot and therefore no role.
+#
+# Formation keys are the outfield row counts (goalkeeper excluded), so the
+# 4-2-3-1 key describes a (1, 4, 2, 3, 1) grid. Each row in `formations` is the
+# full grid including the goalkeeper row and is read left to right from the
+# team's perspective: grid column 1 is the left side, the highest column is the
+# right side.
+#
+# `side` is right/left for wide roles, central for central roles, and null for
+# goalkeepers. It is derived from the role, never from preferred foot.
+
+roles:
+  GK:
+    label: Goalkeeper
+    family: goalkeeper
+    side: null
+    order: 0
+  CB:
+    label: Centre back
+    family: centre_back
+    side: central
+    order: 1
+  RB:
+    label: Right back
+    family: full_back
+    side: right
+    order: 2
+  LB:
+    label: Left back
+    family: full_back
+    side: left
+    order: 3
+  RWB:
+    label: Right wing-back
+    family: wing_back
+    side: right
+    order: 4
+  LWB:
+    label: Left wing-back
+    family: wing_back
+    side: left
+    order: 5
+  DM:
+    label: Defensive midfielder
+    family: defensive_midfield
+    side: central
+    order: 6
+  CM:
+    label: Centre midfielder
+    family: central_midfield
+    side: central
+    order: 7
+  AM:
+    label: Attacking midfielder
+    family: attacking_midfield
+    side: central
+    order: 8
+  RM:
+    label: Right midfielder
+    family: wide_midfield
+    side: right
+    order: 9
+  LM:
+    label: Left midfielder
+    family: wide_midfield
+    side: left
+    order: 10
+  RW:
+    label: Right winger
+    family: wide_forward
+    side: right
+    order: 11
+  LW:
+    label: Left winger
+    family: wide_forward
+    side: left
+    order: 12
+  ST:
+    label: Centre forward
+    family: centre_forward
+    side: central
+    order: 13
+
+families:
+  goalkeeper:
+    label: Goalkeeper
+    order: 0
+  centre_back:
+    label: Centre back
+    order: 1
+  full_back:
+    label: Full-back
+    order: 2
+  wing_back:
+    label: Wing-back
+    order: 3
+  defensive_midfield:
+    label: Defensive midfield
+    order: 4
+  central_midfield:
+    label: Centre midfield
+    order: 5
+  attacking_midfield:
+    label: Attacking midfield
+    order: 6
+  wide_midfield:
+    label: Wide midfield
+    order: 7
+  wide_forward:
+    label: Wide forward
+    order: 8
+  centre_forward:
+    label: Centre forward
+    order: 9
+
+formations:
+  # Observed in the 2026-27 Aberdeen season at the time of writing.
+  4-2-3-1:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [CM, CM]
+    - [LW, AM, RW]
+    - [ST]
+  4-1-4-1:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [DM]
+    - [LM, CM, CM, RM]
+    - [ST]
+  3-5-2:
+    - [GK]
+    - [CB, CB, CB]
+    - [LWB, CM, CM, CM, RWB]
+    - [ST, ST]
+  5-3-2:
+    - [GK]
+    - [LWB, CB, CB, CB, RWB]
+    - [CM, CM, CM]
+    - [ST, ST]
+  4-1-3-2:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [DM]
+    - [LM, AM, RM]
+    - [ST, ST]
+
+  # Common shapes, included so a new season does not fail immediately when a
+  # familiar formation appears.
+  4-3-3:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [CM, CM, CM]
+    - [LW, ST, RW]
+  4-4-2:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [LM, CM, CM, RM]
+    - [ST, ST]
+  4-4-1-1:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [LM, CM, CM, RM]
+    - [AM]
+    - [ST]
+  4-2-2-2:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [CM, CM]
+    - [AM, AM]
+    - [ST, ST]
+  3-4-3:
+    - [GK]
+    - [CB, CB, CB]
+    - [LWB, CM, CM, RWB]
+    - [LW, ST, RW]
+  3-4-2-1:
+    - [GK]
+    - [CB, CB, CB]
+    - [LWB, CM, CM, RWB]
+    - [AM, AM]
+    - [ST]
+  3-4-1-2:
+    - [GK]
+    - [CB, CB, CB]
+    - [LWB, CM, CM, RWB]
+    - [AM]
+    - [ST, ST]
+  4-2-4:
+    - [GK]
+    - [LB, CB, CB, RB]
+    - [CM, CM]
+    - [LW, ST, ST, RW]
+  3-5-1-1:
+    - [GK]
+    - [CB, CB, CB]
+    - [LWB, CM, CM, CM, RWB]
+    - [AM]
+    - [ST]
+
+# Career role policy. Role is a distribution across starting appearances, not a
+# single current-club label. Equal weight per start by default; the current
+# Aberdeen role only overrides the display label when it is clearly different.
+career:
+  seasons: 3                       # current + 2 previous
+  max_fixtures_per_player_season: 15
+  target_starts: 6
+  include_national_team: true
+  season_weights: [1.0, 1.0, 1.0]
+
+  dominant:
+    min_family_starts: 5
+    min_family_share: 0.40
+    min_margin: 0.15
+    min_secondary_share: 0.10
+    max_secondary_roles: 2
+
+  # FM-style position slots. A full-back / wing-back slot counts as both a
+  # defender and a midfielder for the broad squad filter; a DM is a midfielder;
+  # a winger is an attacker. `roles` maps the starting-XI role codes into the
+  # slot. `stretch_min_starts` keeps a single emergency start visible but below
+  # the primary/secondary thresholds.
+  slots:
+    GK:
+      label: Goalkeeper
+      fm: GK
+      side: null
+      groups: [goalkeeper]
+      roles: [GK]
+      order: 0
+    D_C:
+      label: Centre back
+      fm: D C
+      side: centre
+      groups: [defender]
+      roles: [CB]
+      order: 1
+    D_WB_L:
+      label: Left back / left wing-back
+      fm: D/WB L
+      side: left
+      groups: [defender, midfielder]
+      roles: [LB, LWB]
+      order: 2
+    D_WB_R:
+      label: Right back / right wing-back
+      fm: D/WB R
+      side: right
+      groups: [defender, midfielder]
+      roles: [RB, RWB]
+      order: 3
+    DM_C:
+      label: Defensive midfielder
+      fm: DM C
+      side: centre
+      groups: [midfielder]
+      roles: [DM]
+      order: 4
+    M_C:
+      label: Centre midfielder
+      fm: M C
+      side: centre
+      groups: [midfielder]
+      roles: [CM]
+      order: 5
+    AM_C:
+      label: Attacking midfielder
+      fm: AM C
+      side: centre
+      groups: [midfielder]
+      roles: [AM]
+      order: 6
+    M_L:
+      label: Left midfielder
+      fm: M L
+      side: left
+      groups: [midfielder]
+      roles: [LM]
+      order: 7
+    M_R:
+      label: Right midfielder
+      fm: M R
+      side: right
+      groups: [midfielder]
+      roles: [RM]
+      order: 8
+    AM_L:
+      label: Left winger
+      fm: AM L
+      side: left
+      groups: [attacker]
+      roles: [LW]
+      order: 9
+    AM_R:
+      label: Right winger
+      fm: AM R
+      side: right
+      groups: [attacker]
+      roles: [RW]
+      order: 10
+    ST_C:
+      label: Centre forward
+      fm: ST C
+      side: centre
+      groups: [attacker]
+      roles: [ST]
+      order: 11
+  eligibility:
+    secondary_min_share: 0.15
+    secondary_min_starts: 3
+    stretch_min_starts: 1
+
+  override:
+    enabled: true
+    min_aberdeen_starts: 5
+    min_aberdeen_share: 0.40
+    min_career_starts: 10
+    min_career_seasons: 2
+    max_career_share_of_current_family: 0.25
+    require_group_change: true
+
+  family_groups:
+    goalkeeper: [goalkeeper]
+    defence: [centre_back, full_back, wing_back]
+    midfield:
+      - defensive_midfield
+      - central_midfield
+      - attacking_midfield
+      - wide_midfield
+    attack_central: [centre_forward]
+    attack_wide: [wide_forward]
+
+  refresh:
+    historical_ttl_days: 30
+    current_season_ttl_hours: 24
+    transfers_ttl_days: 7
+    team_ttl_days: 30
+
+  backfill:
+    max_requests_per_run: 1500
+    request_interval_seconds: 0.25
+    club_scan_max_fixtures: 60

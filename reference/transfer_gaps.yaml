@@ -1,0 +1,118 @@
+# Transfer completeness gap ledger.
+#
+# One row per expected move that is not in reference/transfers.yaml. The audit
+# is report-only: an open senior gap is shown prominently but never blocks CI.
+# Accepted and resolved rows need a reason and a checked_at date. An accepted
+# row also removes the player from the audit review queue.
+#
+# seniority: established | fringe | youth
+# status: open | accepted | resolved
+# verification_aid: manual_third_party | allowed_source | none
+#
+# verification_aid is a generic label, not a citation. A third-party page may be
+# read as a finding aid, but its URL does not belong here: source_urls may
+# contain AFC or Wikipedia only.
+gaps:
+- player_key: api:player:379662
+  player_name: F. Marshall
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: >-
+    Academy/development graduate with no transfer event. Curated override from
+    established because he is a first-team squad graduate, not a signed player.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:477991
+  player_name: L. Carroll
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: Young squad player with no provider profile and no transfer event.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:674621
+  player_name: Sam McLean
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: Young squad player with no provider profile and no transfer event.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:670299
+  player_name: A. Fasanya
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: Academy/development player with no transfer event.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:496904
+  player_name: C. Masson
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: Academy/development player with no transfer event.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:68534
+  player_name: K. Tobers
+  direction: out
+  season: 2025-26
+  window: other
+  seniority: fringe
+  status: accepted
+  reason: >-
+    Still under contract and recovering from injury; absent from the
+    current-squad provider snapshot. This is a squad-list gap, not a transfer.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:334359
+  player_name: Emmanuel Gyamfi
+  direction: out
+  season: 2025-26
+  window: summer
+  seniority: established
+  status: accepted
+  reason: >-
+    Provider duplicate identity: api:player:334359 and api:player:550363 are the
+    same arrival, and the current squad uses 550363. This is a duplicate-identity
+    departure false positive, not a separate outgoing move.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:469479
+  player_name: Fletcher Boyd
+  direction: out
+  season: 2025-26
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: >-
+    Youth departure to Aston Villa. Tolerated youth gap under the completeness
+    policy; not a senior register omission.
+  verification_aid: none
+  checked_at: '2026-10-21'
+- player_key: api:player:625768
+  player_name: Aaron Cummings
+  direction: in
+  season: 2026-27
+  window: summer
+  seniority: youth
+  status: accepted
+  reason: >-
+    Aberdeen academy player promoted into the first-team squad; there is no
+    incoming transfer. API-Football merged the provider name with another player
+    and invented a Potters Bar Town row; that candidate is excluded in
+    config/transfers.yaml. The real Elgin City loan remains in the register.
+  verification_aid: allowed_source
+  checked_at: '2026-10-21'

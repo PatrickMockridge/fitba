@@ -1,0 +1,84 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "era": {
+      "additionalProperties": true,
+      "title": "Era",
+      "type": "object"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "scorecard": {
+      "additionalProperties": true,
+      "title": "Scorecard",
+      "type": "object"
+    },
+    "baseline": {
+      "additionalProperties": true,
+      "title": "Baseline",
+      "type": "object"
+    },
+    "staff": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Staff",
+      "type": "array"
+    },
+    "honours": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Honours",
+      "type": "array"
+    },
+    "seasons": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Seasons",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "era",
+    "generated_at",
+    "coverage",
+    "scorecard",
+    "baseline",
+    "staff",
+    "honours",
+    "seasons",
+    "sources",
+    "notes"
+  ],
+  "title": "HistoryIndexDocument",
+  "type": "object"
+}

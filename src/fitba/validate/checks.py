@@ -11,7 +11,7 @@ import polars as pl
 
 from fitba.analytics.tables import build_tables
 from fitba.ingest.runner import load_matches
-from fitba.settings import REPORTS_DIR
+from fitba.settings import REPORTS_DIR, source_registry
 from fitba.settings import competitions as competitions_config
 from fitba.util.dates import current_season, season_bounds, utc_now_iso
 
@@ -270,7 +270,16 @@ def validate_published(directory: Path) -> list[CheckResult]:
     checks.append(
         _result("published.size", not oversized, f"files over 2 MB: {oversized}", value=oversized)
     )
-    forbidden = ("optapy", "raw_event", "source_row_id")
+    forbidden = (
+        "optapy",
+        "raw_event",
+        "source_row_id",
+        "source_text",
+        "evidence_text",
+        "wikitext",
+        "raw_html",
+        "alternate_sources",
+    )
     hits: list[str] = []
     for path in files:
         text = path.read_text(encoding="utf-8", errors="ignore")
@@ -279,5 +288,27 @@ def validate_published(directory: Path) -> list[CheckResult]:
                 hits.append(f"{path.name}:{token}")
     checks.append(
         _result("published.provenance", not hits, f"forbidden tokens: {hits}", value=hits)
+    )
+    blocked_hosts = {"bbc.co.uk", "bbc.com"}
+    for source in (source_registry().get("sources") or {}).values():
+        if source.get("lane") != "no_publication":
+            continue
+        for field in ("url", "base_url"):
+            url = str(source.get(field) or "")
+            if "://" in url:
+                blocked_hosts.add(url.split("://", 1)[1].split("/", 1)[0].removeprefix("www."))
+    source_hits: list[str] = []
+    for path in files:
+        text = path.read_text(encoding="utf-8", errors="ignore").lower()
+        for host in sorted(blocked_hosts):
+            if host in text:
+                source_hits.append(f"{path.name}:{host}")
+    checks.append(
+        _result(
+            "published.sources",
+            not source_hits,
+            f"sources not allowed for publication: {source_hits}",
+            value=source_hits,
+        )
     )
     return checks

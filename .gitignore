@@ -16,10 +16,15 @@ data/
 *.duckdb
 *.duckdb.wal
 
+# Review-only transfer candidates (source-derived; never published)
+reference/transfers.candidates.yaml
+reference/loans.candidates.yaml
+
 # Generated audit artefacts; keep the human-written reports tracked
 reports/source-probes/
 reports/ingest-*.json
 reports/validation-*.json
+reports/api-football-key-test-*.json
 reports/unresolved/
 
 # Web build
@@ -36,3 +41,6 @@ web/.vercel/
 # OS/editor
 .DS_Store
 *.swp
+
+# TypeScript incremental build
+web/tsconfig.tsbuildinfo

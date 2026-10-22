@@ -1,0 +1,495 @@
+# Aberdeen staff and board stints for the historical record.
+#
+# Key named football-operations and board roles only; this is not a full staff
+# directory. Dates are kept at the precision the source supports. A null end is
+# a current role. Every stint carries at least one allowed public source.
+#
+# role_group is the closed enum from config/history.yaml. role is the display
+# label. Interim spells are separate stints; they keep their own manager record.
+
+people:
+  - person_id: stewart-milne
+    name: Stewart Milne
+    stints:
+      - stint_id: stewart-milne-chair-1998
+        role: Chairman
+        role_group: chair
+        start: '1998'
+        start_precision: year
+        end: '2019-12-16'
+        end_precision: day
+        interim: false
+        reason_out: resigned
+        source_ids: [wikipedia, afc_news]
+        source_urls:
+          - https://en.wikipedia.org/wiki/Stewart_Milne
+          - https://www.afc.co.uk/en/news/stewart-milne-steps-down-from-aberdeen-fc-board-after-32-years
+        verified_at: '2026-10-21'
+        notes: Chairman from 1998 until Dave Cormack formally replaced him on 16 December 2019.
+      - stint_id: stewart-milne-board-2019
+        role: Board member
+        role_group: board_member
+        start: '2019-12-16'
+        start_precision: day
+        end: '2026'
+        end_precision: year
+        interim: false
+        reason_out: resigned
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/stewart-milne-steps-down-from-aberdeen-fc-board-after-32-years
+        verified_at: '2026-10-21'
+        notes: Remained a non-executive director after leaving the chair; stepped down from the board after 32 years.
+
+  - person_id: dave-cormack
+    name: Dave Cormack
+    stints:
+      - stint_id: dave-cormack-board-2017
+        role: Board member
+        role_group: board_member
+        start: '2017-06'
+        start_precision: month
+        end: '2019-12-16'
+        end_precision: day
+        interim: false
+        reason_out: role_change
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/Dave_Cormack
+        verified_at: '2026-10-21'
+        notes: Returned as an investor and board member in June 2017; later vice-chairman.
+      - stint_id: dave-cormack-chair-2019
+        role: Chairman
+        role_group: chair
+        start: '2019-12-16'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/Dave_Cormack
+          - https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Announced during the November 2019 international break; formally took over from Stewart Milne on 16 December 2019.
+
+  - person_id: derek-mcinnes
+    name: Derek McInnes
+    stints:
+      - stint_id: derek-mcinnes-manager-2013
+        role: Manager
+        role_group: manager
+        start: '2013-04-06'
+        start_precision: day
+        end: '2021-03-08'
+        end_precision: day
+        interim: false
+        reason_out: resigned
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Left after eight years by agreement on 8 March 2021.
+
+  - person_id: tony-docherty
+    name: Tony Docherty
+    stints:
+      - stint_id: tony-docherty-assistant-2013
+        role: Assistant head coach
+        role_group: assistant_manager
+        start: '2013-04-06'
+        start_precision: day
+        end: '2021-03-08'
+        end_precision: day
+        interim: false
+        reason_out: moved_club
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Assistant head coach under Derek McInnes; left with him in March 2021.
+
+  - person_id: paul-sheerin
+    name: Paul Sheerin
+    stints:
+      - stint_id: paul-sheerin-interim-2021
+        role: Interim manager
+        role_group: manager
+        start: '2021-03-08'
+        start_precision: day
+        end: '2021-03-23'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: First-team coach who took interim charge for the 1-0 defeat at Dundee United.
+
+  - person_id: stephen-glass
+    name: Stephen Glass
+    stints:
+      - stint_id: stephen-glass-manager-2021
+        role: Manager
+        role_group: manager
+        start: '2021-03-23'
+        start_precision: day
+        end: '2022-02-13'
+        end_precision: day
+        interim: false
+        reason_out: dismissed
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2021%E2%80%9322_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Appointed 23 March 2021; dismissed 13 February 2022.
+
+  - person_id: barry-robson
+    name: Barry Robson
+    stints:
+      - stint_id: barry-robson-interim-2022
+        role: Interim manager
+        role_group: manager
+        start: '2022-02-13'
+        start_precision: day
+        end: '2022-02-19'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2021%E2%80%9322_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Caretaker for one match between Stephen Glass and Jim Goodwin.
+      - stint_id: barry-robson-interim-2023
+        role: Interim manager
+        role_group: manager
+        start: '2023-01-29'
+        start_precision: day
+        end: '2023-05-01'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2022%E2%80%9323_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Interim after Jim Goodwin's dismissal; appointed permanently on 1 May 2023.
+      - stint_id: barry-robson-manager-2023
+        role: Manager
+        role_group: manager
+        start: '2023-05-01'
+        start_precision: day
+        end: '2024-01-31'
+        end_precision: day
+        interim: false
+        reason_out: dismissed
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2022%E2%80%9323_Aberdeen_F.C._season
+          - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Permanent from 1 May 2023; dismissed 31 January 2024.
+
+  - person_id: jim-goodwin
+    name: Jim Goodwin
+    stints:
+      - stint_id: jim-goodwin-manager-2022
+        role: Manager
+        role_group: manager
+        start: '2022-02-19'
+        start_precision: day
+        end: '2023-01-28'
+        end_precision: day
+        interim: false
+        reason_out: dismissed
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2021%E2%80%9322_Aberdeen_F.C._season
+          - https://en.wikipedia.org/wiki/2022%E2%80%9323_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Appointed 19 February 2022; dismissed 28 January 2023 after the 6-0 defeat at Hibernian.
+
+  - person_id: steve-agnew
+    name: Steve Agnew
+    stints:
+      - stint_id: steve-agnew-assistant-2023
+        role: Assistant manager
+        role_group: assistant_manager
+        start: '2023-05-01'
+        start_precision: day
+        end: '2024-01-31'
+        end_precision: day
+        interim: false
+        reason_out: unknown
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2022%E2%80%9323_Aberdeen_F.C._season
+          - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Named as Barry Robson's assistant on 1 May 2023; not named after Robson's departure.
+
+  - person_id: peter-leven
+    name: Peter Leven
+    stints:
+      - stint_id: peter-leven-interim-2024a
+        role: Interim manager
+        role_group: manager
+        start: '2024-01-31'
+        start_precision: day
+        end: '2024-02-05'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Took the 3 February 2024 draw with Celtic between Barry Robson and Neil Warnock.
+      - stint_id: peter-leven-interim-2024b
+        role: Interim manager
+        role_group: manager
+        start: '2024-03-09'
+        start_precision: day
+        end: '2024-05-31'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Interim after Neil Warnock until the end of 2023-24.
+      - stint_id: peter-leven-interim-2026
+        role: Interim manager
+        role_group: manager
+        start: '2026-01-04'
+        start_precision: day
+        end: '2026-03-12'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Interim after Jimmy Thelin; assisted by Craig Hinchliffe.
+
+  - person_id: neil-warnock
+    name: Neil Warnock
+    stints:
+      - stint_id: neil-warnock-interim-2024
+        role: Interim manager
+        role_group: manager
+        start: '2024-02-05'
+        start_precision: day
+        end: '2024-03-09'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2023%E2%80%9324_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Interim manager for eight matches.
+
+  - person_id: jimmy-thelin
+    name: Jimmy Thelin
+    stints:
+      - stint_id: jimmy-thelin-manager-2024
+        role: Manager
+        role_group: manager
+        start: '2024-06-03'
+        start_precision: day
+        end: '2026-01-04'
+        end_precision: day
+        interim: false
+        reason_out: dismissed
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2024%E2%80%9325_Aberdeen_F.C._season
+          - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Took charge on 3 June 2024; dismissed 4 January 2026 after the defeat at Falkirk.
+
+  - person_id: christer-persson
+    name: Christer Persson
+    stints:
+      - stint_id: christer-persson-assistant-2024
+        role: Assistant manager
+        role_group: assistant_manager
+        start: '2024-06-03'
+        start_precision: day
+        end: '2026-01-04'
+        end_precision: day
+        interim: false
+        reason_out: dismissed
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Left with Jimmy Thelin on 4 January 2026.
+
+  - person_id: craig-hinchliffe
+    name: Craig Hinchliffe
+    stints:
+      - stint_id: craig-hinchliffe-interim-assistant-2026
+        role: Assistant manager
+        role_group: assistant_manager
+        start: '2026-01-04'
+        start_precision: day
+        end: '2026-03-12'
+        end_precision: day
+        interim: true
+        reason_out: interim_end
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Assisted Peter Leven during the 2026 interim spell.
+
+  - person_id: stephen-robinson
+    name: Stephen Robinson
+    stints:
+      - stint_id: stephen-robinson-manager-2026
+        role: Manager
+        role_group: manager
+        start: '2026-03-12'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach
+        verified_at: '2026-10-21'
+        notes: Joined from St Mirren on a contract until summer 2029.
+
+  - person_id: brian-kerr
+    name: Brian Kerr
+    stints:
+      - stint_id: brian-kerr-assistant-2026
+        role: Assistant manager
+        role_group: assistant_manager
+        start: '2026-03-12'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach
+        verified_at: '2026-10-21'
+        notes: Joined with Stephen Robinson from St Mirren.
+
+  - person_id: stephen-craigan
+    name: Stephen Craigan
+    stints:
+      - stint_id: stephen-craigan-coach-2026
+        role: First-team coach
+        role_group: first_team_coach
+        start: '2026-06'
+        start_precision: month
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [wikipedia]
+        source_urls:
+          - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+        verified_at: '2026-10-21'
+        notes: Joined the coaching staff in pre-season 2026 with a youth-transition remit.
+
+  - person_id: alan-burrows
+    name: Alan Burrows
+    stints:
+      - stint_id: alan-burrows-ceo-2023
+        role: Chief executive
+        role_group: chief_executive
+        start: '2023-02-27'
+        start_precision: day
+        end: '2026-09-14'
+        end_precision: day
+        interim: false
+        reason_out: resigned
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/aberdeen-football-club-appoint-adrian-bevington-as-chief-executive
+        verified_at: '2026-10-21'
+        notes: Joined from Motherwell; stepped down for family reasons after three and a half years.
+
+  - person_id: adrian-bevington
+    name: Adrian Bevington
+    stints:
+      - stint_id: adrian-bevington-ceo-2026
+        role: Chief executive
+        role_group: chief_executive
+        start: '2026-09-15'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/aberdeen-football-club-appoint-adrian-bevington-as-chief-executive
+        verified_at: '2026-10-21'
+        notes: Appointed the day after Alan Burrows' departure.
+
+  - person_id: steven-gunn
+    name: Steven Gunn
+    stints:
+      - stint_id: steven-gunn-director-2021
+        role: Director of football
+        role_group: sporting_director
+        start: '2021'
+        start_precision: year
+        end: '2025-10'
+        end_precision: month
+        interim: false
+        reason_out: resigned
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/director-of-football-steven-gunn-to-depart-afc
+        verified_at: '2026-10-21'
+        notes: Announced his departure on 15 September 2025 after more than 25 years at the club; left in October 2025.
+
+  - person_id: lutz-pfannenstiel
+    name: Lutz Pfannenstiel
+    stints:
+      - stint_id: lutz-pfannenstiel-sporting-director-2025
+        role: Sporting director
+        role_group: sporting_director
+        start: '2025-11-10'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/dons-name-pfannenstiel-as-new-sporting-director
+        verified_at: '2026-10-21'
+        notes: Announced 26-27 October 2025; started 10 November 2025 subject to visa formalities.
+
+  - person_id: rachel-corsie
+    name: Rachel Corsie
+    stints:
+      - stint_id: rachel-corsie-board-2026
+        role: Board member
+        role_group: board_member
+        start: '2026-07-23'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: false
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/aberdeen-fc-appoints-rachel-corsie-to-board-of-directors
+        verified_at: '2026-10-21'
+        notes: Former Scotland captain; appointed to the board on 23 July 2026.

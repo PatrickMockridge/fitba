@@ -1,0 +1,1002 @@
+{
+  "availability": {
+    "provider_snapshot": "unavailable",
+    "reason": "provider_declares_injuries_false",
+    "status": "unavailable"
+  },
+  "excluded": [
+    {
+      "id": "bbc_sport",
+      "reason": "Terms prohibit scraping or republication; manual finding aid only."
+    },
+    {
+      "id": "transfermarkt",
+      "reason": "Scraping prohibited; not used for public data."
+    },
+    {
+      "id": "fotmob",
+      "reason": "Terms prohibit scraping or republication."
+    },
+    {
+      "id": "sofascore",
+      "reason": "Terms prohibit scraping or republication."
+    },
+    {
+      "id": "fbref",
+      "reason": "Scraping prohibited; written permission required."
+    },
+    {
+      "id": "pannadata",
+      "reason": "No licence stated; local research only, never published."
+    }
+  ],
+  "generated_at": "2026-10-22T00:52:30+00:00",
+  "layers": [
+    {
+      "fallback": [
+        "api_football"
+      ],
+      "fields": [
+        "fixtures",
+        "results",
+        "status"
+      ],
+      "gate": {
+        "id": "config/league_migration.yaml",
+        "reason": null,
+        "report": null,
+        "status": "configured"
+      },
+      "id": "league_results_current",
+      "kind": "provider",
+      "label": "League results, current season",
+      "note": "Football-Data is primary until the current-season API-Football coverage gate passes for all four leagues. API-Football does not currently supply all-tier team match stats, so a result-only migration would split the source silently. The gate checks results and required stats.",
+      "primary": "football_data_uk",
+      "primary_source": {
+        "attribution": "Football-Data.co.uk",
+        "id": "football_data_uk",
+        "lane": "derived_display",
+        "name": "football-data.co.uk",
+        "url": "https://www.football-data.co.uk/mmz4281",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current season, all four SPFL tiers",
+      "sources": [
+        {
+          "name": "football-data.co.uk",
+          "role": "primary",
+          "rows": 216,
+          "source_id": "football_data_uk",
+          "url": "https://www.football-data.co.uk/mmz4281",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "API-Football",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/sources/",
+        "/methodology/",
+        "/scotland/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "fixtures",
+        "results"
+      ],
+      "gate": null,
+      "id": "league_results_history",
+      "kind": "provider",
+      "label": "League results, historical",
+      "note": "Historical league results and the compact pre-2019 baseline.",
+      "primary": "football_data_uk",
+      "primary_source": {
+        "attribution": "Football-Data.co.uk",
+        "id": "football_data_uk",
+        "lane": "derived_display",
+        "name": "football-data.co.uk",
+        "url": "https://www.football-data.co.uk/mmz4281",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "2013-14 to the season before the current one",
+      "sources": [
+        {
+          "name": "football-data.co.uk",
+          "role": "primary",
+          "rows": 9623,
+          "source_id": "football_data_uk",
+          "url": "https://www.football-data.co.uk/mmz4281",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/sources/",
+        "/history/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "shots",
+        "shots_on_target",
+        "corners",
+        "fouls",
+        "cards"
+      ],
+      "gate": null,
+      "id": "league_team_stats",
+      "kind": "provider",
+      "label": "League team match stats",
+      "note": "Shots, corners, fouls and cards for the style/theme proxies. API-Football team statistics are not available for every SPFL tier.",
+      "primary": "football_data_uk",
+      "primary_source": {
+        "attribution": "Football-Data.co.uk",
+        "id": "football_data_uk",
+        "lane": "derived_display",
+        "name": "football-data.co.uk",
+        "url": "https://www.football-data.co.uk/mmz4281",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "2013-14 to current",
+      "sources": [
+        {
+          "name": "football-data.co.uk",
+          "role": "primary",
+          "rows": 0,
+          "source_id": "football_data_uk",
+          "url": "https://www.football-data.co.uk/mmz4281",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/sources/",
+        "/themes/",
+        "/scotland/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "points",
+        "goal_difference",
+        "position",
+        "form"
+      ],
+      "gate": null,
+      "id": "league_standings",
+      "kind": "computed",
+      "label": "League tables",
+      "note": "Computed from league results with split and deduction rules.",
+      "primary": "computed",
+      "primary_source": null,
+      "scope": "current and historical seasons",
+      "sources": [],
+      "status": "active",
+      "surfaces": [
+        "/scotland/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "fixtures",
+        "results",
+        "rounds",
+        "penalties"
+      ],
+      "gate": null,
+      "id": "cup_fixtures",
+      "kind": "provider",
+      "label": "League Cup and Scottish Cup fixtures",
+      "note": "League Cup is complete; Scottish Cup is 50 of 136 ties at the key-test. Missing rounds are labelled.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 144,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/competitions/",
+        "/sources/"
+      ]
+    },
+    {
+      "fallback": [
+        "api_football"
+      ],
+      "fields": [
+        "fixtures",
+        "results",
+        "kickoff"
+      ],
+      "gate": null,
+      "id": "club_fixtures",
+      "kind": "provider",
+      "label": "Aberdeen club fixture list",
+      "note": "SPFL club feed; API-Football remains a cross-check.",
+      "primary": "spfl",
+      "primary_source": {
+        "attribution": "SPFL",
+        "id": "spfl",
+        "lane": "derived_display",
+        "name": "SPFL official club feed",
+        "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current season",
+      "sources": [
+        {
+          "name": "SPFL official club feed",
+          "role": "primary",
+          "rows": 6,
+          "source_id": "spfl",
+          "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "API-Football",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/fixtures/",
+        "/matchday/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "formation",
+        "starting_xi",
+        "grid",
+        "events",
+        "minutes"
+      ],
+      "gate": null,
+      "id": "lineups_roles",
+      "kind": "provider",
+      "label": "Lineups, formations and starting roles",
+      "note": "Roles are derived from the starting-XI grid, never from position labels.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "Aberdeen fixtures, current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 461,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/squad/",
+        "/matchday/",
+        "/themes/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "rating",
+        "goals",
+        "assists",
+        "cards",
+        "minutes"
+      ],
+      "gate": null,
+      "id": "player_match_stats",
+      "kind": "provider",
+      "label": "Player match ratings and stats",
+      "note": "Premiership coverage; lower-tier current-season player stats were empty at the key-test. Historical player-match-stat files are empty.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "Premiership, current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 360,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/themes/",
+        "/squad/",
+        "/matchday/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "goals_conceded_on_pitch",
+        "clean_sheets",
+        "substitutions"
+      ],
+      "gate": null,
+      "id": "event_layer",
+      "kind": "derived",
+      "label": "Event-derived Aberdeen stats",
+      "note": "Reconstructed from lineups and events; not tracking data.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "Aberdeen fixtures with lineups and events",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 0,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/squad/",
+        "/themes/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "player_id",
+        "name",
+        "age",
+        "nationality",
+        "position",
+        "shirt_number",
+        "status"
+      ],
+      "gate": null,
+      "id": "squad_identity",
+      "kind": "provider",
+      "label": "Current squad",
+      "note": "Curated player overrides correct identity or youth gaps.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 38,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/squad/"
+      ]
+    },
+    {
+      "fallback": [
+        "afc_official",
+        "wikipedia"
+      ],
+      "fields": [
+        "preferred_foot"
+      ],
+      "gate": null,
+      "id": "preferred_foot",
+      "kind": "provider",
+      "label": "Preferred foot",
+      "note": "Sportmonks is gated; AFC official yields no foot values today; Wikipedia is last resort with a revision permalink. 1 known, 37 unknown.",
+      "primary": "sportmonks",
+      "primary_source": {
+        "attribution": "Sportmonks",
+        "id": "sportmonks",
+        "lane": "derived_display",
+        "name": "Sportmonks",
+        "url": "https://docs.sportmonks.com/v3/",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current squad",
+      "sources": [
+        {
+          "name": "Sportmonks",
+          "role": "primary",
+          "rows": null,
+          "source_id": "sportmonks",
+          "url": "https://docs.sportmonks.com/v3/",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "Aberdeen FC player profiles",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "afc_official",
+          "url": "https://www.afc.co.uk/en/teams/mens",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "Wikipedia",
+          "role": "fallback",
+          "rows": 1,
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "gated",
+      "surfaces": [
+        "/squad/",
+        "/sources/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "date",
+        "direction",
+        "clubs",
+        "kind"
+      ],
+      "gate": null,
+      "id": "transfers_candidate",
+      "kind": "provider",
+      "label": "Transfer candidate feed",
+      "note": "Candidate feed only; it has no fees, loan end dates or recall terms.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "Aberdeen full transfer history",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": 0,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/transfers/",
+        "/sources/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "confirmed_business",
+        "fees",
+        "loans",
+        "sell_ons"
+      ],
+      "gate": null,
+      "id": "transfer_register",
+      "kind": "curated",
+      "label": "Published transfer register",
+      "note": "Curated against AFC announcements and Wikipedia season records, with the API-Football candidate feed as discovery. Most rows are curated, not provider-confirmed; fees are mostly undisclosed.",
+      "primary": "curated",
+      "primary_source": null,
+      "scope": "2019-20 to current",
+      "sources": [
+        {
+          "name": "Aberdeen FC news",
+          "role": "corroboration",
+          "rows": 0,
+          "source_id": "afc_news",
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "Wikipedia",
+          "role": "corroboration",
+          "rows": 0,
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/transfers/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "loan_club",
+        "dates",
+        "recall",
+        "obligation",
+        "option"
+      ],
+      "gate": null,
+      "id": "loans",
+      "kind": "curated",
+      "label": "Loan register",
+      "note": "Loan-out tags come from the register; end/recall/obligation terms are unknown.",
+      "primary": "curated",
+      "primary_source": null,
+      "scope": "current and historical",
+      "sources": [],
+      "status": "partial",
+      "surfaces": [
+        "/loans/",
+        "/transfers/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "title",
+        "category",
+        "date",
+        "url"
+      ],
+      "gate": null,
+      "id": "news",
+      "kind": "provider",
+      "label": "AFC news headlines",
+      "note": "Listing metadata only; article bodies are not copied.",
+      "primary": "afc_news",
+      "primary_source": {
+        "attribution": "Aberdeen FC",
+        "id": "afc_news",
+        "lane": "derived_display",
+        "name": "Aberdeen FC news",
+        "url": "https://www.afc.co.uk/en/news",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current",
+      "sources": [
+        {
+          "name": "Aberdeen FC news",
+          "role": "primary",
+          "rows": 12,
+          "source_id": "afc_news",
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/news/"
+      ]
+    },
+    {
+      "fallback": [
+        "api_football"
+      ],
+      "fields": [
+        "status",
+        "reason",
+        "expected_return",
+        "source",
+        "verified_at"
+      ],
+      "gate": null,
+      "id": "availability",
+      "kind": "curated",
+      "label": "Injuries and availability",
+      "note": "Curated official AFC team news is primary. API-Football /injuries is an optional provider snapshot; its current-season Scottish coverage is reported false. Provider 'injured' booleans are not team news.",
+      "primary": "afc_news",
+      "primary_source": {
+        "attribution": "Aberdeen FC",
+        "id": "afc_news",
+        "lane": "derived_display",
+        "name": "Aberdeen FC news",
+        "url": "https://www.afc.co.uk/en/news",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "current squad and next opponent",
+      "sources": [
+        {
+          "name": "Aberdeen FC news",
+          "role": "primary",
+          "rows": 0,
+          "source_id": "afc_news",
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "name": "API-Football",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/squad/",
+        "/matchday/",
+        "/themes/",
+        "/recruitment/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "claim",
+        "status",
+        "confidence",
+        "sources"
+      ],
+      "gate": null,
+      "id": "rumours",
+      "kind": "curated",
+      "label": "Curated rumour register",
+      "note": "Unconfirmed links, separate from the confirmed register.",
+      "primary": "curated",
+      "primary_source": null,
+      "scope": "current",
+      "sources": [
+        {
+          "name": "Aberdeen FC news",
+          "role": "corroboration",
+          "rows": 0,
+          "source_id": "afc_news",
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/rumours/",
+        "/recruitment/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "mentions",
+        "cross_references",
+        "sentiment"
+      ],
+      "gate": null,
+      "id": "forum_signal",
+      "kind": "derived",
+      "label": "Fan signal",
+      "note": "Sampled, rule-based, no raw posts or usernames.",
+      "primary": "afc_chat",
+      "primary_source": {
+        "attribution": "AFC Chat forum contributors",
+        "id": "afc_chat",
+        "lane": "derived_display",
+        "name": "AFC Chat — The Rumour Mill",
+        "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/",
+        "verified_at": "2026-10-21"
+      },
+      "scope": "sampled first pages",
+      "sources": [
+        {
+          "name": "AFC Chat — The Rumour Mill",
+          "role": "primary",
+          "rows": 83,
+          "source_id": "afc_chat",
+          "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/rumours/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "staff",
+        "honours",
+        "transfers",
+        "style",
+        "selection",
+        "reviews"
+      ],
+      "gate": null,
+      "id": "history",
+      "kind": "mixed",
+      "label": "Cormack-era historical record",
+      "note": "Mixed sources: API-Football backfill, football-data style proxies, AFC official and Wikipedia curation. The season documents label their basis.",
+      "primary": "mixed",
+      "primary_source": null,
+      "scope": "2019-20 to current",
+      "sources": [
+        {
+          "name": "Wikipedia",
+          "role": "corroboration",
+          "rows": 0,
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/history/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "fee_range",
+        "confidence",
+        "method"
+      ],
+      "gate": null,
+      "id": "valuation",
+      "kind": "derived",
+      "label": "Inferred transfer values",
+      "note": "Disclosed/reported anchors plus a transparent age/position/market model.",
+      "primary": "curated",
+      "primary_source": null,
+      "scope": "transfer register",
+      "sources": [
+        {
+          "name": "football-data.co.uk",
+          "role": "corroboration",
+          "rows": 0,
+          "source_id": "football_data_uk",
+          "url": "https://www.football-data.co.uk/mmz4281",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/transfers/",
+        "/methodology/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "family_balance",
+        "shape_tradeoff",
+        "cover",
+        "balance",
+        "mission"
+      ],
+      "gate": null,
+      "id": "themes",
+      "kind": "derived",
+      "label": "Medium and long-term themes",
+      "note": "Derived from lineups, events, provider ratings, league rows and history.",
+      "primary": "derived",
+      "primary_source": null,
+      "scope": "current season + Cormack era",
+      "sources": [],
+      "status": "active",
+      "surfaces": [
+        "/themes/",
+        "/matchday/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "cover",
+        "replace",
+        "strengthen",
+        "market_route"
+      ],
+      "gate": null,
+      "id": "needs",
+      "kind": "derived",
+      "label": "Squad needs",
+      "note": "Derived from themes, availability, squad minutes, transfers and rumours. Role profiles only; no targets or invented fees.",
+      "primary": "derived",
+      "primary_source": null,
+      "scope": "current squad",
+      "sources": [],
+      "status": "active",
+      "surfaces": [
+        "/recruitment/",
+        "/scouting/",
+        "/themes/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [],
+      "gate": null,
+      "id": "odds",
+      "kind": "none",
+      "label": "Betting odds",
+      "note": "Not ingested or published.",
+      "primary": "none",
+      "primary_source": null,
+      "scope": "n/a",
+      "sources": [],
+      "status": "not_published",
+      "surfaces": []
+    }
+  ],
+  "migration": {
+    "active_source": "football_data_uk",
+    "enabled": false,
+    "gate_status": "fail",
+    "reason": "Gate failed: SC0: fixture_count (198); SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks); SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
+    "report": "reports/league-migration/2026-27.json",
+    "season": "2026-27"
+  },
+  "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "sources": [
+    {
+      "attribution": "Football-Data.co.uk",
+      "id": "football_data_uk",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "football-data.co.uk",
+      "primary_layers": [
+        "league_results_current",
+        "league_results_history",
+        "league_team_stats"
+      ],
+      "rows": 9839,
+      "rows_basis": "primary contributions only",
+      "url": "https://www.football-data.co.uk/mmz4281"
+    },
+    {
+      "attribution": null,
+      "id": "api_football",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "API-Football",
+      "primary_layers": [
+        "cup_fixtures",
+        "event_layer",
+        "lineups_roles",
+        "player_match_stats",
+        "squad_identity",
+        "transfers_candidate"
+      ],
+      "rows": 1003,
+      "rows_basis": "primary contributions only",
+      "url": "https://www.api-football.com"
+    },
+    {
+      "attribution": "AFC Chat forum contributors",
+      "id": "afc_chat",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "AFC Chat — The Rumour Mill",
+      "primary_layers": [
+        "forum_signal"
+      ],
+      "rows": 83,
+      "rows_basis": "primary contributions only",
+      "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
+    },
+    {
+      "attribution": "Aberdeen FC",
+      "id": "afc_news",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "Aberdeen FC news",
+      "primary_layers": [
+        "availability",
+        "news"
+      ],
+      "rows": 12,
+      "rows_basis": "primary contributions only",
+      "url": "https://www.afc.co.uk/en/news"
+    },
+    {
+      "attribution": "SPFL",
+      "id": "spfl",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "SPFL official club feed",
+      "primary_layers": [
+        "club_fixtures"
+      ],
+      "rows": 6,
+      "rows_basis": "primary contributions only",
+      "url": "https://spfl.co.uk/clubs/aberdeen/fixtures"
+    },
+    {
+      "attribution": "Wikipedia contributors",
+      "id": "wikipedia",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "Wikipedia",
+      "primary_layers": [],
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "url": "https://en.wikipedia.org"
+    },
+    {
+      "attribution": "Sportmonks",
+      "id": "sportmonks",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "Sportmonks",
+      "primary_layers": [
+        "preferred_foot"
+      ],
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "url": "https://docs.sportmonks.com/v3/"
+    },
+    {
+      "attribution": "Aberdeen FC",
+      "id": "afc_official",
+      "lane": "derived_display",
+      "last_verified": "2026-10-21",
+      "name": "Aberdeen FC player profiles",
+      "primary_layers": [],
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "url": "https://www.afc.co.uk/en/teams/mens"
+    }
+  ]
+}

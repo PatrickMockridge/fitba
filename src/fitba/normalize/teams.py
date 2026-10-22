@@ -10,7 +10,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from fitba.normalize.names import normalize_name, slugify, team_slug
+from fitba.normalize.names import (
+    normalize_name,
+    slugify,
+    team_slug,
+    titlecase_club_name,
+)
 from fitba.settings import teams as teams_config
 
 
@@ -60,6 +65,21 @@ class TeamRegistry:
     def canonical_name(self, team_id: str) -> str:
         team = self._teams.get(team_id)
         return team.name if team else team_id
+
+    def display_name(self, raw: str) -> str:
+        """Canonical name for a resolved club, else a title-cased fallback."""
+        team_id = self.resolve(raw)
+        if team_id is not None:
+            return self.canonical_name(team_id)
+        return titlecase_club_name(raw)
+
+    def display_name_for_id(self, team_id: str | None, raw: str | None) -> str:
+        """Use the canonical name for a resolved id; otherwise fix the raw name."""
+        if team_id == "sco:free-agent" or normalize_name(str(raw or "")) == "free agent":
+            return "Free agent"
+        if team_id and not team_id.startswith("sco:provisional-"):
+            return self.canonical_name(team_id)
+        return titlecase_club_name(str(raw or "Unknown"))
 
     def resolve(self, raw: str) -> str | None:
         key = normalize_name(raw)

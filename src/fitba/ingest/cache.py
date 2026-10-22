@@ -78,8 +78,8 @@ def fetch(
         response.raise_for_status()
         payload = response.content
         if expected_marker is not None:
-            head = payload[:4096].decode("utf-8", errors="ignore").lstrip("﻿")
-            if expected_marker not in head:
+            text = payload.decode("utf-8", errors="ignore").lstrip("﻿")
+            if expected_marker not in text:
                 raise SourceBlockedError(
                     f"{url} did not contain expected marker {expected_marker!r}; "
                     "the source may be blocking automated access"

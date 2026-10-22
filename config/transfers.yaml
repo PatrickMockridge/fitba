@@ -1,0 +1,52 @@
+# Transfer register and completeness policy.
+#
+# The register itself lives in reference/transfers.yaml. This file carries the
+# presentation windows and the audit thresholds so the docs, the publisher and
+# the guards read the same numbers.
+audit:
+  start_season: 2024-25
+  recent_windows: 4
+  seniority:
+    established_min_starts: 5
+    established_min_minutes: 450
+    established_min_career_starts: 10
+    youth_max_age: 20
+    youth_max_appearances: 4
+  # A reviewer may read a third-party page to spot a missing move. It is a
+  # finding aid only: never fetched automatically, never published, never
+  # cited as a source or recorded as a URL.
+  manual_finding_aids:
+    allowed: true
+    automated_access: false
+    publication: false
+  prior_seasons:
+  - 2024-25
+  - 2025-26
+
+# Inferred valuation policy. Fees are usually undisclosed, so the register
+# publishes a range from reported/disclosed anchors plus a transparent
+# age/position/market model. This is not an audited balance.
+valuation:
+  currency: GBP
+  fx_to_gbp:
+    GBP: 1.0
+    EUR: 0.85
+    USD: 0.78
+  range_low: 0.6
+  range_high: 1.6
+  note: >
+    Manual calibration may use restricted pages as a private sanity check only;
+    no restricted value, URL or scraped table is published. Every inferred
+    output is a range with a confidence label.
+
+# Provider candidate rows that must never enter the review files or the
+# published register. Each exclusion carries a reason; this is a correction,
+# not a silent dedupe.
+candidate_exclusions:
+  - transfer_id: afc:5d5cd277f72dad2a
+    player_key: api:player:625768
+    reason: >
+      API-Football merged the provider name "A. Morgan-Cummings" with Aaron
+      Cummings. The Wikipedia 2026-27 season table records Aaron Cummings as an
+      Aberdeen academy player on a season-long loan to Elgin City; there is no
+      Potters Bar Town transfer.

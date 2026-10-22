@@ -1,0 +1,81 @@
+# Matchday dashboard policy.
+#
+# This file controls the bounded next-opponent refresh, the predicted-XI
+# scoring and the three-way style lean. It contains policy and thresholds, not
+# data. A missing or partial provider feed is a coverage state, never a reason
+# to invent a lineup, formation or possession value.
+
+version: 1
+
+club: aberdeen
+recent_fixtures: 6
+contenders: 6
+max_api_requests: 24
+
+# Optional provider stages. Events already carry goals, assists and cards, so
+# /fixtures/players is not needed for the v1 prediction. Possession from
+# /fixtures/statistics is not dependable at scale and is never a lean input.
+include_players: false
+include_statistics: false
+
+refresh_after_hours: 20
+stale_after_hours: 48
+min_lineup_matches: 3
+
+style:
+  min_matches: 4
+  venue_min_matches: 3
+  venue_weight: 0.6
+  overall_weight: 0.4
+  attack_index: 60
+  counter_index: 40
+  attack_shot_share: 0.50
+  counter_shot_share: 0.48
+  weights:
+    shots_for: 0.40
+    shot_share: 0.25
+    goals_for: 0.20
+    shots_on_target_for: 0.15
+
+prediction:
+  formation_window: 6
+  recency_weights: [6, 5, 4, 3, 2, 1]
+  min_role_fit: 0.3
+  # Selection weights. Player form and recent provider ratings are deliberately
+  # material: together they carry 35% of the score, close to the 40% carried by
+  # start rate and recency of starts. Provider ratings are a selection signal,
+  # not a fitba rating or an individual verdict.
+  scoring:
+    start_rate: 0.22
+    recency_start: 0.18
+    minute_share: 0.10
+    role_fit: 0.15
+    form: 0.20
+    recent_rating: 0.15
+
+  # Adjacency from the player's most frequent observed role code to the target
+  # slot code. Exact is 1.0; adjacent roles keep a player selectable; a missing
+  # code falls back to the coarse position group below.
+  role_adjacency:
+    GK: { GK: 1.0 }
+    CB: { CB: 1.0, RB: 0.6, LB: 0.6, DM: 0.3 }
+    RB: { RB: 1.0, RWB: 0.9, CB: 0.5, RM: 0.4 }
+    LB: { LB: 1.0, LWB: 0.9, CB: 0.5, LM: 0.4 }
+    RWB: { RWB: 1.0, RB: 0.8, RM: 0.5, RW: 0.4 }
+    LWB: { LWB: 1.0, LB: 0.8, LM: 0.5, LW: 0.4 }
+    DM: { DM: 1.0, CM: 0.7, CB: 0.4 }
+    CM: { CM: 1.0, DM: 0.8, AM: 0.7 }
+    AM: { AM: 1.0, CM: 0.7, RW: 0.6, LW: 0.6, ST: 0.5 }
+    RM: { RM: 1.0, RW: 0.9, RB: 0.5, CM: 0.4 }
+    LM: { LM: 1.0, LW: 0.9, LB: 0.5, CM: 0.4 }
+    RW: { RW: 1.0, RM: 0.8, ST: 0.5, AM: 0.5 }
+    LW: { LW: 1.0, LM: 0.8, ST: 0.5, AM: 0.5 }
+    ST: { ST: 1.0, RW: 0.5, LW: 0.5, AM: 0.4 }
+
+  # Coarse fallback when a player has no observed role code. It is deliberately
+  # capped below the minimum role fit for a high-confidence pick.
+  position_group_fit:
+    GK: { GK: 0.30 }
+    D: { CB: 0.30, RB: 0.30, LB: 0.30, RWB: 0.30, LWB: 0.30, DM: 0.20 }
+    M: { DM: 0.30, CM: 0.30, AM: 0.30, RM: 0.30, LM: 0.30 }
+    F: { RW: 0.30, LW: 0.30, ST: 0.30, AM: 0.20 }

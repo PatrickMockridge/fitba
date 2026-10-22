@@ -1,0 +1,410 @@
+# Aberdeen's major honours.
+#
+# The register is complete for the five competitions the club counts as major:
+# the Scottish top flight, the Scottish Cup, the League Cup, the European Cup
+# Winners' Cup and the European Super Cup. League titles have no single final,
+# so date/opponent/score/venue are null and date_precision is season.
+#
+# The 2023-24 League Cup was a runners-up finish, not a win; it belongs in the
+# 2023-24 season's cup_runs, not here.
+
+honours:
+  - honour_id: league-1954-55
+    competition_id: sco:premiership
+    competition: League
+    season: 1954-55
+    date: null
+    date_precision: season
+    opponent: null
+    score: null
+    after_extra_time: false
+    penalties: null
+    venue: null
+    manager_person_id: null
+    manager_name: null
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1954%E2%80%9355_Scottish_Division_One
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Scottish top-flight title.
+
+  - honour_id: league-1979-80
+    competition_id: sco:premiership
+    competition: League
+    season: 1979-80
+    date: null
+    date_precision: season
+    opponent: null
+    score: null
+    after_extra_time: false
+    penalties: null
+    venue: null
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1979%E2%80%9380_Scottish_Premier_Division
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Scottish top-flight title.
+
+  - honour_id: league-1983-84
+    competition_id: sco:premiership
+    competition: League
+    season: 1983-84
+    date: null
+    date_precision: season
+    opponent: null
+    score: null
+    after_extra_time: false
+    penalties: null
+    venue: null
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1983%E2%80%9384_Scottish_Premier_Division
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Scottish top-flight title.
+
+  - honour_id: league-1984-85
+    competition_id: sco:premiership
+    competition: League
+    season: 1984-85
+    date: null
+    date_precision: season
+    opponent: null
+    score: null
+    after_extra_time: false
+    penalties: null
+    venue: null
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1984%E2%80%9385_Scottish_Premier_Division
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Scottish top-flight title.
+
+  - honour_id: scottish-cup-1946-47
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1946-47
+    date: '1947-04-19'
+    date_precision: day
+    opponent: Hibernian
+    score: 2-1
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: null
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1947_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: scottish-cup-1969-70
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1969-70
+    date: '1970-04-11'
+    date_precision: day
+    opponent: Celtic
+    score: 3-1
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: null
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1970_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: scottish-cup-1981-82
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1981-82
+    date: '1982-05-22'
+    date_precision: day
+    opponent: Rangers
+    score: 4-1
+    after_extra_time: true
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1982_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time.
+
+  - honour_id: scottish-cup-1982-83
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1982-83
+    date: '1983-05-21'
+    date_precision: day
+    opponent: Rangers
+    score: 1-0
+    after_extra_time: true
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1983_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time; Eric Black scored in the 116th minute.
+
+  - honour_id: scottish-cup-1983-84
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1983-84
+    date: '1984-05-19'
+    date_precision: day
+    opponent: Celtic
+    score: 2-1
+    after_extra_time: true
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1984_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time.
+
+  - honour_id: scottish-cup-1985-86
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1985-86
+    date: '1986-05-10'
+    date_precision: day
+    opponent: Heart of Midlothian
+    score: 3-0
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1986_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: scottish-cup-1989-90
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 1989-90
+    date: '1990-05-12'
+    date_precision: day
+    opponent: Celtic
+    score: 0-0
+    after_extra_time: true
+    penalties: 9-8
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Smith
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1990_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Won 9-8 on penalties after a 0-0 draw.
+
+  - honour_id: scottish-cup-2024-25
+    competition_id: sco:scottish-cup
+    competition: Scottish Cup
+    season: 2024-25
+    date: '2025-05-24'
+    date_precision: day
+    opponent: Celtic
+    score: 1-1
+    after_extra_time: true
+    penalties: 4-3
+    venue: Hampden Park, Glasgow
+    manager_person_id: jimmy-thelin
+    manager_name: Jimmy Thelin
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2025_Scottish_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Won 4-3 on penalties after a 1-1 draw; the club's first Scottish Cup since 1990.
+
+  - honour_id: league-cup-1955-56
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 1955-56
+    date: '1955-10-22'
+    date_precision: day
+    opponent: St Mirren
+    score: 2-1
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: null
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1955%E2%80%9356_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: league-cup-1976-77
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 1976-77
+    date: '1976-11-06'
+    date_precision: day
+    opponent: Celtic
+    score: 2-1
+    after_extra_time: true
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1976%E2%80%9377_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time.
+
+  - honour_id: league-cup-1985-86
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 1985-86
+    date: '1985-10-27'
+    date_precision: day
+    opponent: Hibernian
+    score: 3-0
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1985%E2%80%9386_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: league-cup-1989-90
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 1989-90
+    date: '1989-10-22'
+    date_precision: day
+    opponent: Rangers
+    score: 2-1
+    after_extra_time: true
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Alex Smith
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1989%E2%80%9390_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time.
+
+  - honour_id: league-cup-1995-96
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 1995-96
+    date: '1995-11-26'
+    date_precision: day
+    opponent: Dundee
+    score: 2-0
+    after_extra_time: false
+    penalties: null
+    venue: Hampden Park, Glasgow
+    manager_person_id: null
+    manager_name: Roy Aitken
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1995%E2%80%9396_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: null
+
+  - honour_id: league-cup-2013-14
+    competition_id: sco:league-cup
+    competition: League Cup
+    season: 2013-14
+    date: '2014-03-16'
+    date_precision: day
+    opponent: Inverness CT
+    score: 0-0
+    after_extra_time: true
+    penalties: 4-2
+    venue: Celtic Park, Glasgow
+    manager_person_id: derek-mcinnes
+    manager_name: Derek McInnes
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2013%E2%80%9314_Scottish_League_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: Won 4-2 on penalties after a 0-0 draw.
+
+  - honour_id: european-cup-winners-cup-1982-83
+    competition_id: uefa:cup-winners-cup
+    competition: European Cup Winners' Cup
+    season: 1982-83
+    date: '1983-05-11'
+    date_precision: day
+    opponent: Real Madrid
+    score: 2-1
+    after_extra_time: true
+    penalties: null
+    venue: Nya Ullevi, Gothenburg
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1983_European_Cup_Winners%27_Cup_final
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: After extra time; Aberdeen's first European trophy.
+
+  - honour_id: european-super-cup-1983
+    competition_id: uefa:super-cup
+    competition: European Super Cup
+    season: 1983-84
+    date: '1983-12-20'
+    date_precision: day
+    opponent: Hamburger SV
+    score: 2-0 on aggregate
+    after_extra_time: false
+    penalties: null
+    venue: Pittodrie Stadium, Aberdeen (second leg)
+    manager_person_id: null
+    manager_name: Alex Ferguson
+    source_ids: [wikipedia, afc_news]
+    source_urls:
+      - https://en.wikipedia.org/wiki/1983_European_Super_Cup
+      - https://www.afc.co.uk/club/honours/
+    verified_at: '2026-10-21'
+    notes: First leg 0-0 in Hamburg on 22 November 1983; second leg won 2-0 at Pittodrie on 20 December 1983.

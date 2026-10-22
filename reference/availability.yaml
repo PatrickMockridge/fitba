@@ -1,0 +1,20 @@
+# Curated availability ledger.
+#
+# A published status requires an official AFC team-news source URL and a
+# verified_at date. The provider injury boolean is not team news. Unknown is a
+# valid state; it is never converted to "available" or "fit".
+#
+# Fields:
+#   availability_id, player_key, player_name, status, reason_category, reason,
+#   expected_return, effective_from, effective_to, source_id, source_url,
+#   source_title, verified_at, confidence, note
+#
+# status: out | doubtful | suspended | returned | available | unknown
+# reason_category: injury | illness | suspension | international | personal | unknown
+# confidence: confirmed | reported | curated | unknown
+
+version: 1
+club: sco:aberdeen
+season: 2026-27
+updated_at: 2026-10-22
+entries: []

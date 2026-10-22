@@ -1,0 +1,89 @@
+# Squad-needs policy.
+#
+# The model emits role profiles and market routes, never named targets, fees or
+# wages. The measured depth/availability drives the category; the curated
+# squad_needs prior is shown separately as analyst intent.
+
+version: 1
+season: 2026-27
+
+families:
+  GK:
+    label: Goalkeepers
+    min_available: 2
+    max_squad: 4
+    scouting_groups: [GK]
+    market: [loan, free_agent]
+    traits: [saves_p90, save_pct, crosses_claimed_p90, pass_completion]
+  CB:
+    label: Centre-backs
+    min_available: 4
+    max_squad: 5
+    scouting_groups: [CB]
+    market: [loan, free_agent, fee]
+    traits: [aerial_win_pct, duel_win_pct, progressive_passes_p90, clearances_p90]
+  FB/WB:
+    label: Full-backs / wing-backs
+    min_available: 4
+    max_squad: 6
+    scouting_groups: [FB]
+    market: [loan, free_agent, fee]
+    traits: [crosses_p90, progressive_carries_p90, tackles_p90, duels_won_pct]
+  MID:
+    label: Central midfield
+    min_available: 4
+    max_squad: 7
+    scouting_groups: [DM, CM]
+    market: [loan, free_agent, fee]
+    traits: [progressive_passes_p90, tackles_p90, interceptions_p90, pass_completion]
+  AM/WM:
+    label: Attacking / wide midfield
+    min_available: 3
+    max_squad: 5
+    scouting_groups: [AM]
+    market: [loan, free_agent, fee]
+    traits: [key_passes_p90, dribbles_success_pct, shots_p90, progressive_carries_p90]
+  W:
+    label: Wide forwards
+    min_available: 3
+    max_squad: 5
+    scouting_groups: [W]
+    market: [loan, free_agent, fee]
+    traits: [dribbles_success_pct, crosses_p90, shots_p90, touches_in_box_p90]
+  ST:
+    label: Centre-forwards
+    min_available: 2
+    max_squad: 4
+    scouting_groups: [ST]
+    market: [loan, free_agent, fee]
+    traits: [shots_p90, goals_per_shot, aerial_win_pct, touches_in_box_p90]
+
+thresholds:
+  ready_starts: 2
+  ready_minutes: 180
+  starter_starts: 5
+  starter_minutes: 450
+  trusted_starts: 3
+  quality_minutes: 900
+  cover_buffer: 1
+  weak_family_delta: -0.15
+  reliance_top_share: 0.55
+  depth_gap_cover: 0.5
+  availability_risk_cover: 0.25
+  quality_gap_strengthen: 0.35
+  age_risk_strengthen: 0.5
+
+roster:
+  senior_squad_limit: null
+  outgoing_first_families: [CB]
+  note: >
+    The public registration limit is not known. The CB outgoing-first rule is
+    analyst policy, not a league rule. A signing in a family at or above
+    max_squad needs an outgoing before it is net-positive.
+
+market:
+  budget_status: ceiling_unset
+  wage_status: not_public
+  note: >
+    The club budget has no public fee ceiling and wages are not public. A route
+    is a role-profile recommendation, not a target or a fee claim.

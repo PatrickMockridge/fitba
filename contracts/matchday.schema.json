@@ -1,0 +1,2107 @@
+{
+  "$defs": {
+    "FixtureBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "away_team_id": {
+          "title": "Away Team Id",
+          "type": "string"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
+          "type": "string"
+        },
+        "competition_id": {
+          "title": "Competition Id",
+          "type": "string"
+        },
+        "competition_name": {
+          "title": "Competition Name",
+          "type": "string"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "home_team_id": {
+          "title": "Home Team Id",
+          "type": "string"
+        },
+        "home_team_name": {
+          "title": "Home Team Name",
+          "type": "string"
+        },
+        "kickoff": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Kickoff"
+        },
+        "match_id": {
+          "title": "Match Id",
+          "type": "string"
+        },
+        "opponent_id": {
+          "title": "Opponent Id",
+          "type": "string"
+        },
+        "opponent_name": {
+          "title": "Opponent Name",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "match_id",
+        "competition_id",
+        "competition_name",
+        "season",
+        "date",
+        "home_team_id",
+        "home_team_name",
+        "away_team_id",
+        "away_team_name",
+        "venue",
+        "opponent_id",
+        "opponent_name",
+        "status"
+      ],
+      "title": "FixtureBlock",
+      "type": "object"
+    },
+    "FormBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "away": {
+          "additionalProperties": true,
+          "title": "Away",
+          "type": "object"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        },
+        "form": {
+          "title": "Form",
+          "type": "string"
+        },
+        "form_points": {
+          "title": "Form Points",
+          "type": "integer"
+        },
+        "home": {
+          "additionalProperties": true,
+          "title": "Home",
+          "type": "object"
+        },
+        "matches": {
+          "items": {
+            "$ref": "#/$defs/FormMatch"
+          },
+          "title": "Matches",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "recent": {
+          "additionalProperties": true,
+          "title": "Recent",
+          "type": "object"
+        },
+        "sample": {
+          "additionalProperties": true,
+          "title": "Sample",
+          "type": "object"
+        },
+        "season_record": {
+          "additionalProperties": true,
+          "title": "Season Record",
+          "type": "object"
+        }
+      },
+      "required": [
+        "basis",
+        "sample",
+        "matches",
+        "form",
+        "recent",
+        "form_points",
+        "season_record",
+        "home",
+        "away",
+        "coverage",
+        "note"
+      ],
+      "title": "FormBlock",
+      "type": "object"
+    },
+    "FormMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "competition_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Name"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "ga": {
+          "title": "Ga",
+          "type": "integer"
+        },
+        "gf": {
+          "title": "Gf",
+          "type": "integer"
+        },
+        "match_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Match Id"
+        },
+        "opponent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opponent Id"
+        },
+        "opponent_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opponent Name"
+        },
+        "points": {
+          "title": "Points",
+          "type": "integer"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result"
+        },
+        "venue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Venue"
+        }
+      },
+      "required": [
+        "date",
+        "gf",
+        "ga",
+        "points"
+      ],
+      "title": "FormMatch",
+      "type": "object"
+    },
+    "HeadToHead": {
+      "additionalProperties": false,
+      "properties": {
+        "away_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Goals"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
+          "type": "string"
+        },
+        "competition_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Name"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "home_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Goals"
+        },
+        "home_team_name": {
+          "title": "Home Team Name",
+          "type": "string"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "date",
+        "home_team_name",
+        "away_team_name",
+        "venue"
+      ],
+      "title": "HeadToHead",
+      "type": "object"
+    },
+    "LeanBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "approach": {
+          "title": "Approach",
+          "type": "string"
+        },
+        "approach_index": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approach Index"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "confidence": {
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "missing_metrics": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Metrics",
+          "type": "array"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "overall_index": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Overall Index"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Share"
+        },
+        "venue_index": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Venue Index"
+        },
+        "venue_matches": {
+          "default": 0,
+          "title": "Venue Matches",
+          "type": "integer"
+        },
+        "venue_used": {
+          "default": false,
+          "title": "Venue Used",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "approach",
+        "label",
+        "confidence",
+        "basis",
+        "interpretation"
+      ],
+      "title": "LeanBlock",
+      "type": "object"
+    },
+    "LineupBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assignment Note"
+        },
+        "availability": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Availability",
+          "type": "object"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis"
+        },
+        "contenders": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Contenders",
+          "type": "array"
+        },
+        "coverage": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Coverage",
+          "type": "object"
+        },
+        "disclaimer": {
+          "title": "Disclaimer",
+          "type": "string"
+        },
+        "filled": {
+          "default": 0,
+          "title": "Filled",
+          "type": "integer"
+        },
+        "formation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Formation"
+        },
+        "formation_confidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Formation Confidence"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "players": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "selection": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Selection",
+          "type": "object"
+        },
+        "selection_risks": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Selection Risks",
+          "type": "array"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "team_confidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Confidence"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Id"
+        },
+        "unavailable": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Unavailable",
+          "type": "array"
+        },
+        "unknowns": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknowns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "disclaimer"
+      ],
+      "title": "LineupBlock",
+      "type": "object"
+    },
+    "LineupPlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "availability_confidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Confidence"
+        },
+        "availability_conflict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Conflict"
+        },
+        "availability_downgrade": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Downgrade"
+        },
+        "availability_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Note"
+        },
+        "availability_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Source"
+        },
+        "availability_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Source Url"
+        },
+        "availability_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Status"
+        },
+        "availability_verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Verified At"
+        },
+        "available": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Available"
+        },
+        "confidence": {
+          "default": "unknown",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "form": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Form"
+        },
+        "grid": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grid"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
+        },
+        "last_seen": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Key"
+        },
+        "position_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position Group"
+        },
+        "rating_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating Count"
+        },
+        "rating_coverage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating Coverage"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "recency_start": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recency Start"
+        },
+        "recent_rating": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recent Rating"
+        },
+        "recent_rating_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recent Rating Score"
+        },
+        "role_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Code"
+        },
+        "role_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Family"
+        },
+        "role_fit": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Fit"
+        },
+        "role_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Label"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "shirt_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shirt Number"
+        },
+        "slot": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Slot"
+        },
+        "starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "unavailable_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unavailable Reason"
+        }
+      },
+      "title": "LineupPlayer",
+      "type": "object"
+    },
+    "MatchupRead": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "bullets": {
+          "items": {
+            "$ref": "#/$defs/ReadBullet"
+          },
+          "title": "Bullets",
+          "type": "array"
+        },
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "keys": {
+          "items": {
+            "$ref": "#/$defs/ReadKey"
+          },
+          "title": "Keys",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "headline",
+        "bullets",
+        "keys",
+        "basis",
+        "note"
+      ],
+      "title": "MatchupRead",
+      "type": "object"
+    },
+    "ReadBullet": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "enum": [
+            "measured",
+            "inferred",
+            "unknown"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "basis"
+      ],
+      "title": "ReadBullet",
+      "type": "object"
+    },
+    "ReadKey": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "enum": [
+            "measured",
+            "inferred",
+            "unknown"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "text",
+        "basis"
+      ],
+      "title": "ReadKey",
+      "type": "object"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "StrengthTeam": {
+      "additionalProperties": false,
+      "properties": {
+        "competition_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Id"
+        },
+        "competition_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Name"
+        },
+        "coverage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coverage"
+        },
+        "form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Form"
+        },
+        "ga": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ga"
+        },
+        "ga_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ga Pg"
+        },
+        "gd": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gd"
+        },
+        "gd_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gd Pg"
+        },
+        "gf": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gf"
+        },
+        "gf_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gf Pg"
+        },
+        "percentiles": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Percentiles",
+          "type": "object"
+        },
+        "played": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Played"
+        },
+        "points": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Points"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position"
+        },
+        "ppg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ppg"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "sample_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Note"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Share"
+        },
+        "shots_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Against Pm"
+        },
+        "shots_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots For Pm"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "tier": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tier"
+        }
+      },
+      "required": [
+        "status",
+        "team_id"
+      ],
+      "title": "StrengthTeam",
+      "type": "object"
+    },
+    "StyleBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "conversion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conversion"
+        },
+        "corners_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Corners Against Pm"
+        },
+        "corners_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Corners For Pm"
+        },
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        },
+        "fouls_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fouls Against Pm"
+        },
+        "fouls_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fouls For Pm"
+        },
+        "goals_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Against Pm"
+        },
+        "goals_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals For Pm"
+        },
+        "goals_per_shot": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Per Shot"
+        },
+        "goals_per_shot_on_target": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Per Shot On Target"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "integer"
+        },
+        "missing_stats": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Stats",
+          "type": "array"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "percentiles": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Percentiles",
+          "type": "object"
+        },
+        "possession_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession Against Pm"
+        },
+        "possession_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession For Pm"
+        },
+        "possession_unknown_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession Unknown Reason"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "recent_shot_shares": {
+          "default": [],
+          "items": {
+            "type": "number"
+          },
+          "title": "Recent Shot Shares",
+          "type": "array"
+        },
+        "red_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red Against Pm"
+        },
+        "red_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red For Pm"
+        },
+        "season": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Season"
+        },
+        "shot_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Accuracy"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Share"
+        },
+        "shots_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Against Pm"
+        },
+        "shots_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots For Pm"
+        },
+        "shots_on_target_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target Against Pm"
+        },
+        "shots_on_target_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target For Pm"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        },
+        "yellow_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Yellow Against Pm"
+        },
+        "yellow_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Yellow For Pm"
+        }
+      },
+      "required": [
+        "matches",
+        "coverage",
+        "venue"
+      ],
+      "title": "StyleBlock",
+      "type": "object"
+    },
+    "StylePair": {
+      "additionalProperties": false,
+      "properties": {
+        "lean": {
+          "$ref": "#/$defs/LeanBlock"
+        },
+        "overall": {
+          "$ref": "#/$defs/StyleBlock"
+        },
+        "venue": {
+          "$ref": "#/$defs/StyleBlock"
+        }
+      },
+      "required": [
+        "overall",
+        "venue",
+        "lean"
+      ],
+      "title": "StylePair",
+      "type": "object"
+    },
+    "TeamRef": {
+      "additionalProperties": false,
+      "properties": {
+        "api_team_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Api Team Id"
+        },
+        "club_id": {
+          "title": "Club Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "short_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Short Name"
+        }
+      },
+      "required": [
+        "club_id",
+        "name"
+      ],
+      "title": "TeamRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "coverage": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Coverage",
+      "type": "object"
+    },
+    "fixture": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FixtureBlock"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "form_guide": {
+      "additionalProperties": {
+        "$ref": "#/$defs/FormBlock"
+      },
+      "default": {},
+      "title": "Form Guide",
+      "type": "object"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "head_to_head": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/HeadToHead"
+      },
+      "title": "Head To Head",
+      "type": "array"
+    },
+    "matchup_read": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MatchupRead"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "next_fixtures": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FixtureBlock"
+      },
+      "title": "Next Fixtures",
+      "type": "array"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "predicted_lineups": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/LineupBlock"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "default": {},
+      "title": "Predicted Lineups",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "served_generated_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served Generated At"
+    },
+    "sources": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SourceRef"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "state": {
+      "enum": [
+        "fresh",
+        "stale",
+        "no_fixture",
+        "unavailable"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "strength": {
+      "additionalProperties": {
+        "$ref": "#/$defs/StrengthTeam"
+      },
+      "default": {},
+      "title": "Strength",
+      "type": "object"
+    },
+    "strength_comparison": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Strength Comparison",
+      "type": "object"
+    },
+    "styles": {
+      "additionalProperties": {
+        "$ref": "#/$defs/StylePair"
+      },
+      "default": {},
+      "title": "Styles",
+      "type": "object"
+    },
+    "teams": {
+      "additionalProperties": {
+        "$ref": "#/$defs/TeamRef"
+      },
+      "default": {},
+      "title": "Teams",
+      "type": "object"
+    }
+  },
+  "required": [
+    "generated_at",
+    "season",
+    "state",
+    "notes"
+  ],
+  "title": "MatchdayDocument",
+  "type": "object"
+}

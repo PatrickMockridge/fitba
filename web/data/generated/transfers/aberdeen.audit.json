@@ -1,0 +1,344 @@
+{
+  "audit_start": "2024-25",
+  "candidate_review": [
+    {
+      "count": 1,
+      "key": "2024-25-summer",
+      "season": "2024-25",
+      "window": "summer"
+    },
+    {
+      "count": 1,
+      "key": "2024-25-winter",
+      "season": "2024-25",
+      "window": "winter"
+    },
+    {
+      "count": 2,
+      "key": "2025-26-other",
+      "season": "2025-26",
+      "window": "other"
+    },
+    {
+      "count": 11,
+      "key": "2025-26-summer",
+      "season": "2025-26",
+      "window": "summer"
+    },
+    {
+      "count": 5,
+      "key": "2025-26-winter",
+      "season": "2025-26",
+      "window": "winter"
+    },
+    {
+      "count": 18,
+      "key": "2026-27-summer",
+      "season": "2026-27",
+      "window": "summer"
+    }
+  ],
+  "current_squad_arrivals": [],
+  "gaps": [
+    {
+      "checked_at": "2026-10-21",
+      "direction": "out",
+      "player_key": "api:player:334359",
+      "player_name": "Emmanuel Gyamfi",
+      "reason": "Provider duplicate identity: api:player:334359 and api:player:550363 are the same arrival, and the current squad uses 550363. This is a duplicate-identity departure false positive, not a separate outgoing move.",
+      "season": "2025-26",
+      "seniority": "established",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "out",
+      "player_key": "api:player:68534",
+      "player_name": "K. Tobers",
+      "reason": "Still under contract and recovering from injury; absent from the current-squad provider snapshot. This is a squad-list gap, not a transfer.",
+      "season": "2025-26",
+      "seniority": "fringe",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "other"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:670299",
+      "player_name": "A. Fasanya",
+      "reason": "Academy/development player with no transfer event.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:625768",
+      "player_name": "Aaron Cummings",
+      "reason": "Aberdeen academy player promoted into the first-team squad; there is no incoming transfer. API-Football merged the provider name with another player and invented a Potters Bar Town row; that candidate is excluded in config/transfers.yaml. The real Elgin City loan remains in the register.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "allowed_source",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:496904",
+      "player_name": "C. Masson",
+      "reason": "Academy/development player with no transfer event.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:379662",
+      "player_name": "F. Marshall",
+      "reason": "Academy/development graduate with no transfer event. Curated override from established because he is a first-team squad graduate, not a signed player.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "out",
+      "player_key": "api:player:469479",
+      "player_name": "Fletcher Boyd",
+      "reason": "Youth departure to Aston Villa. Tolerated youth gap under the completeness policy; not a senior register omission.",
+      "season": "2025-26",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:477991",
+      "player_name": "L. Carroll",
+      "reason": "Young squad player with no provider profile and no transfer event.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    },
+    {
+      "checked_at": "2026-10-21",
+      "direction": "in",
+      "player_key": "api:player:674621",
+      "player_name": "Sam McLean",
+      "reason": "Young squad player with no provider profile and no transfer event.",
+      "season": "2026-27",
+      "seniority": "youth",
+      "status": "accepted",
+      "transfer_id": null,
+      "verification_aid": "none",
+      "window": "summer"
+    }
+  ],
+  "generated_at": "2026-10-22T00:52:30+00:00",
+  "prior_departures": [
+    {
+      "player_key": "api:player:129710",
+      "player_name": "J. Richardson",
+      "reason": "prior-season player has no out row after that season",
+      "season": "2024-25",
+      "seniority": "unclassified"
+    }
+  ],
+  "snapshot_at": "2026-10-21T22:17:59+00:00",
+  "status": "ok",
+  "summary": {
+    "gaps": {
+      "accepted": 9,
+      "open": 0,
+      "resolved": 0
+    },
+    "needs_review": {
+      "established": 0,
+      "fringe": 0,
+      "unclassified": 1,
+      "youth": 0
+    },
+    "positions": {
+      "specified": 218,
+      "unknown": 11
+    }
+  },
+  "windows": [
+    {
+      "arrivals": 15,
+      "departures": 25,
+      "key": "2026-27-summer",
+      "position_unknown": 5,
+      "season": "2026-27",
+      "window": "summer"
+    },
+    {
+      "arrivals": 7,
+      "departures": 7,
+      "key": "2025-26-winter",
+      "position_unknown": 0,
+      "season": "2025-26",
+      "window": "winter"
+    },
+    {
+      "arrivals": 16,
+      "departures": 24,
+      "key": "2025-26-summer",
+      "position_unknown": 5,
+      "season": "2025-26",
+      "window": "summer"
+    },
+    {
+      "arrivals": 1,
+      "departures": 1,
+      "key": "2025-26-other",
+      "position_unknown": 0,
+      "season": "2025-26",
+      "window": "other"
+    },
+    {
+      "arrivals": 6,
+      "departures": 7,
+      "key": "2024-25-winter",
+      "position_unknown": 1,
+      "season": "2024-25",
+      "window": "winter"
+    },
+    {
+      "arrivals": 13,
+      "departures": 11,
+      "key": "2024-25-summer",
+      "position_unknown": 0,
+      "season": "2024-25",
+      "window": "summer"
+    },
+    {
+      "arrivals": 2,
+      "departures": 0,
+      "key": "2023-24-winter",
+      "position_unknown": 0,
+      "season": "2023-24",
+      "window": "winter"
+    },
+    {
+      "arrivals": 10,
+      "departures": 7,
+      "key": "2023-24-summer",
+      "position_unknown": 0,
+      "season": "2023-24",
+      "window": "summer"
+    },
+    {
+      "arrivals": 6,
+      "departures": 2,
+      "key": "2022-23-winter",
+      "position_unknown": 0,
+      "season": "2022-23",
+      "window": "winter"
+    },
+    {
+      "arrivals": 10,
+      "departures": 10,
+      "key": "2022-23-summer",
+      "position_unknown": 0,
+      "season": "2022-23",
+      "window": "summer"
+    },
+    {
+      "arrivals": 0,
+      "departures": 1,
+      "key": "2022-23-other",
+      "position_unknown": 0,
+      "season": "2022-23",
+      "window": "other"
+    },
+    {
+      "arrivals": 3,
+      "departures": 3,
+      "key": "2021-22-winter",
+      "position_unknown": 0,
+      "season": "2021-22",
+      "window": "winter"
+    },
+    {
+      "arrivals": 9,
+      "departures": 0,
+      "key": "2021-22-summer",
+      "position_unknown": 0,
+      "season": "2021-22",
+      "window": "summer"
+    },
+    {
+      "arrivals": 0,
+      "departures": 1,
+      "key": "2021-22-other",
+      "position_unknown": 0,
+      "season": "2021-22",
+      "window": "other"
+    },
+    {
+      "arrivals": 3,
+      "departures": 3,
+      "key": "2020-21-winter",
+      "position_unknown": 0,
+      "season": "2020-21",
+      "window": "winter"
+    },
+    {
+      "arrivals": 5,
+      "departures": 3,
+      "key": "2020-21-summer",
+      "position_unknown": 0,
+      "season": "2020-21",
+      "window": "summer"
+    },
+    {
+      "arrivals": 2,
+      "departures": 0,
+      "key": "2020-21-other",
+      "position_unknown": 0,
+      "season": "2020-21",
+      "window": "other"
+    },
+    {
+      "arrivals": 3,
+      "departures": 2,
+      "key": "2019-20-winter",
+      "position_unknown": 0,
+      "season": "2019-20",
+      "window": "winter"
+    },
+    {
+      "arrivals": 7,
+      "departures": 4,
+      "key": "2019-20-summer",
+      "position_unknown": 0,
+      "season": "2019-20",
+      "window": "summer"
+    }
+  ]
+}

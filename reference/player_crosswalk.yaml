@@ -1,0 +1,18 @@
+# Reviewed crosswalk between the API-Football player key and the Sportmonks
+# player id. Do not auto-promote candidates. A row is accepted only when the
+# normalized full name, date of birth, nationality and current club all match
+# exactly and uniquely.
+#
+# players:
+#   - player_key: api:player:20422
+#     sportmonks_player_id: 123456
+#     name: Nicky Devlin
+#     dob: 1993-10-17
+#     nationality: Scotland
+#     club: Aberdeen
+#     matched_on: [name, dob, nationality, club]
+#     confidence: exact
+#     reviewed_by: <name>
+#     reviewed_at: 2026-10-21
+
+players: []

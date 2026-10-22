@@ -1,0 +1,25 @@
+# Current-season league-results migration gate.
+#
+# The gate is deliberately strict. A partial pass does not migrate. API-Football
+# must supply the complete fixture list, every football-data played result with
+# an exact score, and the team match stats the style/themes layers require.
+# A human flips `enabled` only after reviewing the report; the probe never does.
+
+version: 1
+season: 2026-27
+enabled: false
+report: reports/league-migration/2026-27.json
+current_season_only: true
+fallback: football_data_uk
+
+require:
+  all_leagues: true
+  full_fixture_list: true
+  zero_unresolved_teams: true
+  zero_duplicate_keys: true
+  every_played_result_matched: true
+  score_agreement: 1.0
+  allow_date_shift_days: 0
+  team_match_stats: true
+
+on_failure: football_data_uk

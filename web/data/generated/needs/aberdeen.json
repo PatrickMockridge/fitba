@@ -1,0 +1,1337 @@
+{
+  "club_id": "sco:aberdeen",
+  "coverage": {
+    "availability": {
+      "known": 0,
+      "unknown": 38
+    },
+    "basis": "measured + curated prior",
+    "measured_families": 7,
+    "rumours": "empty",
+    "status": "partial",
+    "transfers": "available",
+    "valuation": "inferred"
+  },
+  "families": [
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "strengthen",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.3,
+      "drivers": [
+        "depth_gap",
+        "quality_gap",
+        "concentration",
+        "family_rating"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 1.08
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 2
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.62
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.3
+        }
+      ],
+      "expected_slots": 1.08,
+      "family": "AM/WM",
+      "label": "Attacking / wide midfield",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-am-wm",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [
+          "free_agent"
+        ],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": "long_term",
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "permanent",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 2,
+        "concentration": 0.62,
+        "depth_gap": 0.6666666666666666,
+        "fringe": 0,
+        "players": 2,
+        "projected_shortfall": 1,
+        "quality_gap": 0.45333333333333337,
+        "ready_count": 2,
+        "rotation": 1,
+        "starters": 1,
+        "status": "available",
+        "top_share": 0.62,
+        "total_minutes": 799,
+        "trusted_count": 2
+      },
+      "measured_score": 35.3,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "rotation",
+          "minutes": 307,
+          "name": "A. Briedl",
+          "note": null,
+          "player_id": 271395,
+          "role_family": "AM/WM",
+          "starts": 3,
+          "sub_apps": 6
+        },
+        {
+          "arrival": "2026-07-13",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 492,
+          "name": "L. Smith",
+          "note": null,
+          "player_id": 44982,
+          "role_family": "AM/WM",
+          "starts": 5,
+          "sub_apps": 6
+        }
+      ],
+      "priority": 1,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "key_passes_p90",
+          "dribbles_success_pct",
+          "shots_p90",
+          "progressive_carries_p90"
+        ],
+        "label": "Attacking / wide midfield",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 2,
+        "max_squad": 5,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "AM"
+      ],
+      "urgency": "high"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "strengthen",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.7,
+      "drivers": [
+        "depth_gap",
+        "concentration",
+        "family_rating"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 0.92
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 2
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.57
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.7
+        }
+      ],
+      "expected_slots": 0.92,
+      "family": "W",
+      "label": "Wide forwards",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-w",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [
+          "free_agent"
+        ],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": "long_term",
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "permanent",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 3,
+        "concentration": 0.57,
+        "depth_gap": 0.3333333333333333,
+        "fringe": 1,
+        "players": 3,
+        "projected_shortfall": 0,
+        "quality_gap": 0.01777777777777778,
+        "ready_count": 2,
+        "rotation": 0,
+        "starters": 2,
+        "status": "available",
+        "top_share": 0.57,
+        "total_minutes": 1541,
+        "trusted_count": 2
+      },
+      "measured_score": 16.1,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 884,
+          "name": "T. Olusanya",
+          "note": null,
+          "player_id": 231195,
+          "role_family": "W",
+          "starts": 8,
+          "sub_apps": 6
+        },
+        {
+          "arrival": "2026-09-08",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 22,
+          "name": "H. Mahou",
+          "note": null,
+          "player_id": 84126,
+          "role_family": "W",
+          "starts": 0,
+          "sub_apps": 1
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 635,
+          "name": "Tony Yogane",
+          "note": null,
+          "player_id": 388510,
+          "role_family": "W",
+          "starts": 8,
+          "sub_apps": 3
+        }
+      ],
+      "priority": 2,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "dribbles_success_pct",
+          "crosses_p90",
+          "shots_p90",
+          "touches_in_box_p90"
+        ],
+        "label": "Wide forwards",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 3,
+        "max_squad": 5,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "W"
+      ],
+      "urgency": "medium"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "strengthen",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.5,
+      "drivers": [
+        "concentration"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 1.46
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 3
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.67
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.5
+        }
+      ],
+      "expected_slots": 1.46,
+      "family": "ST",
+      "label": "Centre-forwards",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-st",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [
+          "free_agent"
+        ],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": "long_term",
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "permanent",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 3,
+        "concentration": 0.67,
+        "depth_gap": 0.0,
+        "fringe": 0,
+        "players": 3,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 3,
+        "rotation": 2,
+        "starters": 1,
+        "status": "available",
+        "top_share": 0.67,
+        "total_minutes": 1820,
+        "trusted_count": 2
+      },
+      "measured_score": 6.7,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-06-28",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "rotation",
+          "minutes": 334,
+          "name": "A. Mouloua",
+          "note": null,
+          "player_id": 303519,
+          "role_family": "ST",
+          "starts": 2,
+          "sub_apps": 12
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 1221,
+          "name": "K. Nisbet",
+          "note": null,
+          "player_id": 97896,
+          "role_family": "ST",
+          "starts": 15,
+          "sub_apps": 0
+        },
+        {
+          "arrival": "2026-08-07",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "rotation",
+          "minutes": 265,
+          "name": "M. Ntelo",
+          "note": null,
+          "player_id": 267727,
+          "role_family": "ST",
+          "starts": 4,
+          "sub_apps": 1
+        }
+      ],
+      "priority": 3,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "shots_p90",
+          "goals_per_shot",
+          "aerial_win_pct",
+          "touches_in_box_p90"
+        ],
+        "label": "Centre-forwards",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 3,
+        "max_squad": 4,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "ST"
+      ],
+      "urgency": "medium"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "strengthen",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.4,
+      "drivers": [
+        "family_rating"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 2.0
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 2
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.54
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.4
+        }
+      ],
+      "expected_slots": 2.0,
+      "family": "FB/WB",
+      "label": "Full-backs / wing-backs",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-fb-wb",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [
+          "free_agent"
+        ],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": "long_term",
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "permanent",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 5,
+        "concentration": 0.54,
+        "depth_gap": 0.0,
+        "fringe": 3,
+        "players": 5,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 2,
+        "rotation": 0,
+        "starters": 2,
+        "status": "available",
+        "top_share": 0.54,
+        "total_minutes": 2252,
+        "trusted_count": 2
+      },
+      "measured_score": 5.4,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-07-30",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 999,
+          "name": "C. Cadden",
+          "note": null,
+          "player_id": 44921,
+          "role_family": "FB/WB",
+          "starts": 11,
+          "sub_apps": 0
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 14,
+          "name": "E. Gyamfi",
+          "note": null,
+          "player_id": 550363,
+          "role_family": "FB/WB",
+          "starts": 0,
+          "sub_apps": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 0,
+          "name": "M. Frame",
+          "note": null,
+          "player_id": 394703,
+          "role_family": "FB/WB",
+          "starts": 0,
+          "sub_apps": 0
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 32,
+          "name": "N. Devlin",
+          "note": null,
+          "player_id": 20422,
+          "role_family": "FB/WB",
+          "starts": 0,
+          "sub_apps": 1
+        },
+        {
+          "arrival": "2026-07-07",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 1207,
+          "name": "N. Guinness-Walker",
+          "note": null,
+          "player_id": 108465,
+          "role_family": "FB/WB",
+          "starts": 14,
+          "sub_apps": 1
+        }
+      ],
+      "priority": 4,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "crosses_p90",
+          "progressive_carries_p90",
+          "tackles_p90",
+          "duels_won_pct"
+        ],
+        "label": "Full-backs / wing-backs",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 5,
+        "max_squad": 6,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "FB"
+      ],
+      "urgency": "medium"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "none",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.8,
+      "drivers": [
+        "stable"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 2.31
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 5
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.32
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.8
+        }
+      ],
+      "expected_slots": 2.31,
+      "family": "CB",
+      "label": "Centre-backs",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-cb",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": null,
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "none",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 5,
+        "concentration": 0.32,
+        "depth_gap": 0.0,
+        "fringe": 0,
+        "players": 5,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 5,
+        "rotation": 1,
+        "starters": 4,
+        "status": "available",
+        "top_share": 0.32,
+        "total_minutes": 3399,
+        "trusted_count": 5
+      },
+      "measured_score": 3.2,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 789,
+          "name": "D. Happe",
+          "note": null,
+          "player_id": 18068,
+          "role_family": "CB",
+          "starts": 9,
+          "sub_apps": 2
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 499,
+          "name": "G. Molloy",
+          "note": null,
+          "player_id": 161806,
+          "role_family": "CB",
+          "starts": 5,
+          "sub_apps": 5
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "rotation",
+          "minutes": 438,
+          "name": "J. Milne",
+          "note": null,
+          "player_id": 321860,
+          "role_family": "CB",
+          "starts": 4,
+          "sub_apps": 4
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 1100,
+          "name": "L. Mayo",
+          "note": null,
+          "player_id": 125695,
+          "role_family": "CB",
+          "starts": 13,
+          "sub_apps": 0
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 573,
+          "name": "M. Knoester",
+          "note": null,
+          "player_id": 37253,
+          "role_family": "CB",
+          "starts": 6,
+          "sub_apps": 1
+        }
+      ],
+      "priority": 5,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "aerial_win_pct",
+          "duel_win_pct",
+          "progressive_passes_p90",
+          "clearances_p90"
+        ],
+        "label": "Centre-backs",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 5,
+        "max_squad": 5,
+        "note": "A signing in this family needs an outgoing first.",
+        "outgoing_first": true,
+        "status": "requires_outgoing"
+      },
+      "scouting_groups": [
+        "CB"
+      ],
+      "urgency": "none"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "none",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.55,
+      "drivers": [
+        "stable"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 2.23
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 5
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.29
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.55
+        }
+      ],
+      "expected_slots": 2.23,
+      "family": "MID",
+      "label": "Central midfield",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-mid",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": null,
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "none",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 6,
+        "concentration": 0.29,
+        "depth_gap": 0.0,
+        "fringe": 1,
+        "players": 6,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 5,
+        "rotation": 1,
+        "starters": 4,
+        "status": "available",
+        "top_share": 0.29,
+        "total_minutes": 3388,
+        "trusted_count": 5
+      },
+      "measured_score": 2.9,
+      "outgoing_risk": {
+        "evidence": [
+          {
+            "basis": "measured",
+            "note": "Starter aged 30+; watch only, not a sale claim.",
+            "player_id": 18945,
+            "player_name": "S. Armstrong",
+            "type": "age_signal"
+          }
+        ],
+        "level": "watch",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 983,
+          "name": "A. Aremu",
+          "note": null,
+          "player_id": 57248,
+          "role_family": "MID",
+          "starts": 13,
+          "sub_apps": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 0,
+          "name": "A. Palaversa",
+          "note": null,
+          "player_id": 14344,
+          "role_family": "MID",
+          "starts": 0,
+          "sub_apps": 0
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 570,
+          "name": "B. Lyons",
+          "note": null,
+          "player_id": 45010,
+          "role_family": "MID",
+          "starts": 7,
+          "sub_apps": 0
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 868,
+          "name": "C. Ronan",
+          "note": null,
+          "player_id": 61178,
+          "role_family": "MID",
+          "starts": 11,
+          "sub_apps": 2
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "rotation",
+          "minutes": 284,
+          "name": "F. Marshall",
+          "note": null,
+          "player_id": 379662,
+          "role_family": "MID",
+          "starts": 3,
+          "sub_apps": 5
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 683,
+          "name": "S. Armstrong",
+          "note": null,
+          "player_id": 18945,
+          "role_family": "MID",
+          "starts": 5,
+          "sub_apps": 8
+        }
+      ],
+      "priority": 6,
+      "replace_status": "watch",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "progressive_passes_p90",
+          "tackles_p90",
+          "interceptions_p90",
+          "pass_completion"
+        ],
+        "label": "Central midfield",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 6,
+        "max_squad": 7,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "DM",
+        "CM"
+      ],
+      "urgency": "none"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "none",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.2,
+      "drivers": [
+        "stable"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 1.0
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 1
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 1.0
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.2
+        }
+      ],
+      "expected_slots": 1.0,
+      "family": "GK",
+      "label": "Goalkeepers",
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/scouting/#priority-gk",
+          "label": "Scouting profile"
+        },
+        {
+          "href": "/themes/",
+          "label": "Themes"
+        }
+      ],
+      "market_route": {
+        "alternatives": [],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": null,
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "none",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_risk": 0.0,
+        "available_players": 3,
+        "concentration": 1.0,
+        "depth_gap": 0.0,
+        "fringe": 2,
+        "players": 3,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 1,
+        "rotation": 0,
+        "starters": 1,
+        "status": "available",
+        "top_share": 1.0,
+        "total_minutes": 1260,
+        "trusted_count": 1
+      },
+      "measured_score": 0.0,
+      "outgoing_risk": {
+        "evidence": [
+          {
+            "basis": "measured",
+            "note": "Starter aged 30+; watch only, not a sale claim.",
+            "player_id": 1141,
+            "player_name": "M. Müller",
+            "type": "age_signal"
+          }
+        ],
+        "level": "watch",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": "2026-09-03",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 0,
+          "name": "D. Klein",
+          "note": null,
+          "player_id": 163064,
+          "role_family": "GK",
+          "starts": 0,
+          "sub_apps": 0
+        },
+        {
+          "arrival": "2026-07-15",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 1260,
+          "name": "M. Müller",
+          "note": null,
+          "player_id": 1141,
+          "role_family": "GK",
+          "starts": 14,
+          "sub_apps": 0
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 0,
+          "name": "R. Vītols",
+          "note": null,
+          "player_id": 430030,
+          "role_family": "GK",
+          "starts": 0,
+          "sub_apps": 0
+        }
+      ],
+      "priority": 7,
+      "replace_status": "watch",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "saves_p90",
+          "save_pct",
+          "crosses_claimed_p90",
+          "pass_completion"
+        ],
+        "label": "Goalkeepers",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 3,
+        "max_squad": 4,
+        "note": "No public senior-squad or contract limit is known.",
+        "outgoing_first": false,
+        "status": "space_unknown"
+      },
+      "scouting_groups": [
+        "GK"
+      ],
+      "urgency": "none"
+    }
+  ],
+  "generated_at": "2026-10-22T00:52:30+00:00",
+  "notes": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
+  "roster_space": {
+    "net_add_allowed": null,
+    "note": "The public registration limit is not known. The CB outgoing-first rule is analyst policy, not a league rule. A signing in a family at or above max_squad needs an outgoing before it is net-positive.\n",
+    "outgoing_first_families": [
+      "CB"
+    ],
+    "senior_squad_limit": null,
+    "status": "unknown"
+  },
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "sources": [
+    {
+      "id": "afc_news",
+      "name": "Aberdeen FC news",
+      "url": "https://www.afc.co.uk/en/news",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "api_football",
+      "name": "API-Football",
+      "url": "https://www.api-football.com",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "football_data_uk",
+      "name": "football-data.co.uk",
+      "url": "https://www.football-data.co.uk/mmz4281",
+      "verified_at": "2026-10-21"
+    }
+  ],
+  "state": "fresh",
+  "summary": {
+    "availability_known": 0,
+    "availability_unknown": 38,
+    "counts": {
+      "none": 3,
+      "strengthen": 4
+    },
+    "families": 7,
+    "note": "Role profiles and market routes only. No targets, fees or wages.",
+    "top_priority": "AM/WM"
+  }
+}

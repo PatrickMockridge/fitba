@@ -1,0 +1,134 @@
+# 2020-21: the end of the McInnes era.
+season: 2020-21
+status: completed
+headline: A fourth-place finish, a managerial change in March, and the start of the Glass experiment.
+as_of: null
+reviewed_at: '2026-10-21'
+manager_stint_ids:
+  - derek-mcinnes-manager-2013
+  - paul-sheerin-interim-2021
+  - stephen-glass-manager-2021
+
+expectations:
+  baseline: >
+    Another top-four baseline after the curtailed 2019-20 season, with a cup run
+    and an attempt to move beyond the Europa League third qualifying round.
+  target: >
+    Top four and European qualification. This is an analyst-set baseline, not a
+    published club target.
+  context: >
+    The season was played largely without crowds because of COVID-19. Derek
+    McInnes left after eight years on 8 March 2021; Paul Sheerin took one match
+    as interim and Stephen Glass was appointed on 23 March.
+  source_ids: [wikipedia]
+  source_urls:
+    - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+
+league_context: >
+  Aberdeen finished fourth with 56 points. The change of manager in March did
+  not change the final position, but it marked the end of the long McInnes
+  cycle and the beginning of a new recruitment and style direction.
+
+cup_runs:
+  - competition_id: sco:scottish-cup
+    exit_round: Quarter-final
+    outcome: eliminated
+    note: Lost 3-0 to Dundee United in April 2021.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+  - competition_id: sco:league-cup
+    exit_round: Second round
+    outcome: eliminated
+    note: Lost to St Mirren in November 2020 after a late goalkeeping error.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+
+europe:
+  - competition_id: uefa:europa-league
+    stage_reached: Third qualifying round
+    outcome: eliminated
+    note: Lost to Sporting CP; the exact aggregate is not stated in the season page.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+
+honours: []
+
+key_transfers:
+  arrivals: []
+  departures: []
+  note: >
+    Historical transfer rows are curated partial before 2024-25. Key moves
+    include Scott McKenna's club-record sale to Nottingham Forest in September
+    2020. The full set is in the transfer register.
+
+academy_debuts:
+  - player_key: null
+    player_name: Ryan Duncan
+    debut_date: '2020-11'
+    date_precision: month
+    competition: Scottish Premiership
+    note: Made his debut aged 16 against Rangers in November 2020; exact day not stated in the season page.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+  - player_key: null
+    player_name: Miko Virtanen
+    debut_date: '2021-01'
+    date_precision: month
+    competition: Scottish Premiership
+    note: Made his first-team debut against Motherwell in January 2021; exact day not stated in the season page.
+    source_ids: [wikipedia]
+    source_urls:
+      - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season
+
+tactical:
+  shape_note: >
+    The season spans two managerial regimes, so a single season shape would hide
+    the change. The style panel uses the match-stat proxies; the manager split
+    keeps the McInnes and Glass segments separate.
+  style_note: >
+    The Glass appointment was intended to change the way the team played. The
+    measured proxies show whether the change is visible; the reading is kept
+    separate.
+  selection_note: >
+    The lineup backfill is available or partial; selection metrics are measured
+    where coverage allows and the fraction is shown.
+
+review:
+  what_worked: >
+    The league position held at fourth and the club reached the Scottish Cup
+    quarter-final. The managerial transition was orderly: one interim match,
+    then a permanent appointment.
+  what_did_not: >
+    The League Cup exit came in the second round and the Scottish Cup run ended
+    with a 3-0 defeat at Dundee United. The European campaign again stopped at
+    the third qualifying round.
+  trade_off: >
+    Changing manager while holding a top-four finish protected the league floor
+    but delayed the rebuild until the following season. The new manager inherited
+    a squad shaped by the previous regime.
+  read: >
+    This is the hinge season. The results still look like the McInnes era, but
+    the appointment of Stephen Glass changed the intended direction. Judging the
+    new direction from the final league position alone would miss the point; the
+    next season is where the cost of the transition becomes visible.
+  look_ahead: >
+    Glass would be dismissed in February 2022 after a bottom-six season, and the
+    club would move through Robson and Goodwin before the next stable spell.
+  label: curated_editorial
+
+coverage_declared:
+  transfers: curated_partial
+  staff: curated
+  lineups: available
+  match_stats: measured_league_proxies
+
+known_gaps:
+  - Historical transfer rows before 2024-25 are curated partial.
+  - The Sporting CP aggregate is not stated in the season page.
+
+source_urls:
+  - https://en.wikipedia.org/wiki/2020%E2%80%9321_Aberdeen_F.C._season

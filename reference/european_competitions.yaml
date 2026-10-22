@@ -1,0 +1,19 @@
+# Aberdeen's European competition entry for the current season.
+#
+# European football is checked separately from the SPFL pyramid. Leave
+# in_europe false when Aberdeen are not in a UEFA competition; the competitions
+# page shows that as a labelled state rather than silently omitting Europe.
+#
+# When Aberdeen qualify, set in_europe true and add entries such as:
+#   - id: uefa:conference-league
+#     name: UEFA Conference League
+#     short_name: Conference League
+#     stage: League phase
+#     next_fixture: null
+#     source: https://www.uefa.com/uefaconferenceleague/
+#     verified_at: '2026-10-21'
+season: 2026-27
+aberdeen:
+  in_europe: false
+  note: Not in European competition this season.
+  competitions: []

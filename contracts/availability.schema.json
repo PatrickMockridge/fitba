@@ -1,0 +1,373 @@
+{
+  "$defs": {
+    "AvailabilityCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "conflicts": {
+          "title": "Conflicts",
+          "type": "integer"
+        },
+        "doubtful": {
+          "title": "Doubtful",
+          "type": "integer"
+        },
+        "entries": {
+          "title": "Entries",
+          "type": "integer"
+        },
+        "known": {
+          "title": "Known",
+          "type": "integer"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "out": {
+          "title": "Out",
+          "type": "integer"
+        },
+        "provider_snapshot": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Provider Snapshot",
+          "type": "object"
+        },
+        "returned": {
+          "title": "Returned",
+          "type": "integer"
+        },
+        "stale": {
+          "title": "Stale",
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "suspended": {
+          "title": "Suspended",
+          "type": "integer"
+        },
+        "unknown": {
+          "title": "Unknown",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "entries",
+        "known",
+        "unknown",
+        "out",
+        "suspended",
+        "doubtful",
+        "returned",
+        "stale",
+        "conflicts",
+        "note"
+      ],
+      "title": "AvailabilityCoverage",
+      "type": "object"
+    },
+    "AvailabilityEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "default": "unknown",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "conflict": {
+          "default": false,
+          "title": "Conflict",
+          "type": "boolean"
+        },
+        "effective_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective From"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "expected_return": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Return"
+        },
+        "in_squad": {
+          "default": true,
+          "title": "In Squad",
+          "type": "boolean"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Key"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "provider_signal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Signal"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "reason_category": {
+          "default": "unknown",
+          "title": "Reason Category",
+          "type": "string"
+        },
+        "source_id": {
+          "default": "none",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Title"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "out",
+            "doubtful",
+            "suspended",
+            "returned",
+            "available",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        }
+      },
+      "title": "AvailabilityEntry",
+      "type": "object"
+    },
+    "AvailabilitySource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "AvailabilitySource",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "As Of"
+    },
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "coverage": {
+      "$ref": "#/$defs/AvailabilityCoverage"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/AvailabilityEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "sources": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AvailabilitySource"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "state": {
+      "title": "State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generated_at",
+    "season",
+    "club_id",
+    "state",
+    "policy_version",
+    "coverage",
+    "entries",
+    "notes"
+  ],
+  "title": "AvailabilityDocument",
+  "type": "object"
+}

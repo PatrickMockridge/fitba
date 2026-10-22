@@ -1,0 +1,534 @@
+{
+  "academy": {
+    "debut_basis": "not_computed",
+    "debuts": [],
+    "measured_new_players": [],
+    "note": "Curated debuts are explicit club/academy records. Measured new players are first appearances in the covered history, not career debuts."
+  },
+  "as_of": null,
+  "coverage": {
+    "history": {
+      "fixtures_total": 43,
+      "fixtures_with_lineups": 43,
+      "lineup_coverage": 1.0,
+      "note": "Historical lineups/rosters are a bounded local backfill; missing data is shown as unavailable.",
+      "rosters": 39,
+      "status": "available",
+      "team_stats": 0
+    },
+    "league_record": "available",
+    "manager_scope": "league",
+    "note": "League-only manager records. Cup/Europe runs are curated exit rounds. Selection is measured where historical lineups exist.",
+    "transfers": "curated_partial",
+    "unattributed_matches": 0
+  },
+  "cup_runs": [
+    {
+      "competition_id": "sco:scottish-cup",
+      "competition_name": "Scottish Cup",
+      "exit_round": "Semi-final",
+      "note": "Lost 2-0 to Celtic; the semi-final was played on 1 November 2020 after the league had been curtailed.",
+      "outcome": "eliminated",
+      "source_ids": [
+        "wikipedia"
+      ],
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season"
+      ]
+    },
+    {
+      "competition_id": "sco:league-cup",
+      "competition_name": "League Cup",
+      "exit_round": "Quarter-final",
+      "note": "Lost to Heart of Midlothian on penalties in September 2019.",
+      "outcome": "eliminated",
+      "source_ids": [
+        "wikipedia"
+      ],
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season"
+      ]
+    }
+  ],
+  "europe": [
+    {
+      "competition_id": "uefa:europa-league",
+      "competition_name": "Europa League",
+      "note": "Lost 4-0 on aggregate to Rijeka; the home leg was on 15 August 2019.",
+      "outcome": "eliminated",
+      "source_ids": [
+        "wikipedia"
+      ],
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season"
+      ],
+      "stage_reached": "Third qualifying round"
+    }
+  ],
+  "expectations": {
+    "baseline": "A top-four baseline under Derek McInnes, with an expectation of European qualification and a meaningful cup run.\n",
+    "context": "The league was curtailed in May 2020 and placings were decided on average points per game. The Scottish Cup semi-final was not played until November 2020. Cormack's chairmanship began in December 2019, so this is a transition season rather than a full Cormack-era sample.\n",
+    "label": "curated",
+    "source_ids": [
+      "wikipedia"
+    ],
+    "source_urls": [
+      "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season",
+      "https://en.wikipedia.org/wiki/Dave_Cormack"
+    ],
+    "target": "Qualify for Europe and reach the latter stages of a cup. This is an analyst-set baseline, not a published club target.\n"
+  },
+  "headline": "A top-four finish in a season that began before Cormack and ended in a curtailed league.",
+  "honour_ids": [],
+  "interim_read": null,
+  "key_transfers": {
+    "arrivals": [
+      "afc:449e816ae44f97eb",
+      "afc:7fff89cdf5cb61b9"
+    ],
+    "departures": [
+      "afc:7b55560dd2198c8e",
+      "afc:30270c14c645bfe8"
+    ],
+    "note": "Historical transfer rows are curated partial before 2024-25. The full 2019-20 set is in the transfer register.\n"
+  },
+  "managers": [
+    {
+      "drawn": 9,
+      "end": "2020-03-07",
+      "first_match": "2019-08-04",
+      "ga": 36,
+      "gf": 40,
+      "interim": false,
+      "last_match": "2020-03-07",
+      "lost": 9,
+      "name": "Derek McInnes",
+      "person_id": "derek-mcinnes",
+      "played": 30,
+      "points": 45,
+      "ppg": 1.5,
+      "start": "2019-08-04",
+      "stint_end": "2021-03-08",
+      "stint_id": "derek-mcinnes-manager-2013",
+      "stint_start": "2013-04-06",
+      "won": 12
+    }
+  ],
+  "recruitment": {
+    "age_bands": {
+      "21-24": 4,
+      "25-29": 4,
+      "30+": 0,
+      "u21": 0
+    },
+    "age_coverage": 0.8,
+    "arrivals": 10,
+    "average_age": 24.9,
+    "coverage": "curated_partial",
+    "departures": 6,
+    "disclosed_count": 0,
+    "disclosed_income": 0,
+    "disclosed_net": null,
+    "disclosed_spend": 0,
+    "free_in": 4,
+    "free_out": 5,
+    "loans_in": 2,
+    "loans_out": 0,
+    "market_mix": [
+      {
+        "arrivals": 2,
+        "market": "scotland",
+        "share": 0.2
+      },
+      {
+        "arrivals": 2,
+        "market": "england",
+        "share": 0.2
+      },
+      {
+        "arrivals": 0,
+        "market": "europe",
+        "share": 0.0
+      },
+      {
+        "arrivals": 0,
+        "market": "other",
+        "share": 0.0
+      },
+      {
+        "arrivals": 6,
+        "market": "unknown",
+        "share": 0.6
+      }
+    ],
+    "market_unknown_count": 6,
+    "median_age": 24.5,
+    "note": "Disclosed fees only. Undisclosed is never zero and is excluded from the totals. Age is shown only where a birth date is known.",
+    "permanent_in": 4,
+    "permanent_out": 1,
+    "season": "2019-20",
+    "top_source_clubs": [
+      {
+        "arrivals": 1,
+        "club": "Stabaek"
+      },
+      {
+        "arrivals": 1,
+        "club": "St Johnstone"
+      },
+      {
+        "arrivals": 1,
+        "club": "Sunderland"
+      },
+      {
+        "arrivals": 1,
+        "club": "Scunthorpe"
+      },
+      {
+        "arrivals": 1,
+        "club": "Motherwell"
+      }
+    ],
+    "undisclosed_count": 5,
+    "valuation": {
+      "anchor_count": 14,
+      "calibration_factor": 2.0,
+      "confidence": "low",
+      "counts": {
+        "disclosed": 0,
+        "free": 9,
+        "loan": 2,
+        "modelled": 3,
+        "reported": 2,
+        "unknown": 0
+      },
+      "currency": "GBP",
+      "fee_high_gbp": 1065000,
+      "fee_low_gbp": 350000,
+      "income_high_gbp": 995000,
+      "income_low_gbp": 280000,
+      "note": "Estimated net spend range from public/reported fees and a transparent model. The aggregate uses modelled midpoints with a 20% portfolio band on modelled gross flows, not the sum of every row's extremes. Free transfers count as zero fee; loan fees are excluded. Negative means income exceeds spend. Not an audited balance.",
+      "spend_high_gbp": 1702500,
+      "spend_low_gbp": 987500
+    }
+  },
+  "review": {
+    "label": "curated_editorial",
+    "look_ahead": "The 2020-21 season would end the McInnes era and begin the most volatile managerial sequence of the period.\n",
+    "read": "This is the control case: a stable, senior squad under a long-serving manager, finishing where the previous seasons had finished. It is not yet evidence for or against the trading model. Its value is as a comparison — the later seasons show what changed when the squad, the manager and the recruitment pattern changed.\n",
+    "trade_off": "Continuity protected the league floor but did not change the European ceiling. The first Cormack season is the baseline against which the later turnover is measured.\n",
+    "what_did_not": "The European campaign ended at the third qualifying round for the sixth year in a row, and the Scottish Cup semi-final was lost without a goal. The league position was decided by average points per game, not a full season.\n",
+    "what_worked": "The senior squad held a top-four position through a curtailed league and reached the Scottish Cup semi-final and League Cup quarter-final. The transition from Milne to Cormack did not produce a mid-season collapse.\n"
+  },
+  "reviewed_at": "2026-10-21",
+  "schema_version": "1.0.0",
+  "season": "2019-20",
+  "selection": {
+    "age_coverage": 1.0,
+    "average_starter_age": 26.22,
+    "debut_basis": "not_computed",
+    "debutants": [],
+    "fixtures_total": 43,
+    "fixtures_with_lineups": 43,
+    "formation_mix": [
+      {
+        "fixtures": 17,
+        "formation": "4-2-3-1",
+        "share": 0.395
+      },
+      {
+        "fixtures": 8,
+        "formation": "4-3-3",
+        "share": 0.186
+      },
+      {
+        "fixtures": 7,
+        "formation": "unknown",
+        "share": 0.163
+      },
+      {
+        "fixtures": 3,
+        "formation": "4-4-2",
+        "share": 0.07
+      },
+      {
+        "fixtures": 3,
+        "formation": "3-5-2",
+        "share": 0.07
+      },
+      {
+        "fixtures": 1,
+        "formation": "4-1-4-1",
+        "share": 0.023
+      },
+      {
+        "fixtures": 1,
+        "formation": "4-1-2-3",
+        "share": 0.023
+      },
+      {
+        "fixtures": 1,
+        "formation": "5-4-1",
+        "share": 0.023
+      },
+      {
+        "fixtures": 1,
+        "formation": "4-4-1-1",
+        "share": 0.023
+      },
+      {
+        "fixtures": 1,
+        "formation": "3-5-1-1",
+        "share": 0.023
+      }
+    ],
+    "lineup_coverage": 1.0,
+    "minutes_by_age_band": {
+      "21-24": {
+        "minutes": 13753,
+        "share": 0.324
+      },
+      "25-29": {
+        "minutes": 9028,
+        "share": 0.213
+      },
+      "30+": {
+        "minutes": 13974,
+        "share": 0.329
+      },
+      "u21": {
+        "minutes": 5701,
+        "share": 0.134
+      }
+    },
+    "note": "Formation is the kick-off shape. Ages use the season roster or a known birth date; missing ages are excluded, not filled. Top-by-starts is not a claim that those players started together.",
+    "players_used": 29,
+    "status": "available",
+    "tactical_note": "The most-used players and age profile are measured from the historical lineups, not inferred from the current squad.\n",
+    "top_by_starts": [
+      {
+        "age": 31,
+        "minutes": 3870,
+        "player_id": 44802,
+        "player_name": "J. Lewis",
+        "role_family": "goalkeeper",
+        "starts": 43
+      },
+      {
+        "age": 19,
+        "minutes": 3510,
+        "player_id": 44814,
+        "player_name": "L. Ferguson",
+        "role_family": "wide_forward",
+        "starts": 39
+      },
+      {
+        "age": 32,
+        "minutes": 3467,
+        "player_id": 44804,
+        "player_name": "A. Considine",
+        "role_family": "full_back",
+        "starts": 38
+      },
+      {
+        "age": 22,
+        "minutes": 3049,
+        "player_id": 44811,
+        "player_name": "S. McKenna",
+        "role_family": "full_back",
+        "starts": 35
+      },
+      {
+        "age": 31,
+        "minutes": 3053,
+        "player_id": 44808,
+        "player_name": "S. Logan",
+        "role_family": "centre_back",
+        "starts": 34
+      },
+      {
+        "age": 22,
+        "minutes": 2914,
+        "player_id": 44821,
+        "player_name": "S. Cosgrove",
+        "role_family": "centre_forward",
+        "starts": 33
+      },
+      {
+        "age": 32,
+        "minutes": 2866,
+        "player_id": 44817,
+        "player_name": "N. McGinn",
+        "role_family": null,
+        "starts": 33
+      },
+      {
+        "age": 27,
+        "minutes": 1973,
+        "player_id": 20474,
+        "player_name": "F. Ojo",
+        "role_family": "central_midfield",
+        "starts": 24
+      },
+      {
+        "age": 24,
+        "minutes": 2010,
+        "player_id": 38690,
+        "player_name": "G. Leigh",
+        "role_family": "centre_back",
+        "starts": 23
+      },
+      {
+        "age": 24,
+        "minutes": 1972,
+        "player_id": 19803,
+        "player_name": "R. Hedges",
+        "role_family": null,
+        "starts": 23
+      },
+      {
+        "age": 29,
+        "minutes": 1635,
+        "player_id": 17776,
+        "player_name": "A. Taylor",
+        "role_family": "centre_back",
+        "starts": 20
+      }
+    ],
+    "u21_minutes_share": 0.134,
+    "unknown_age_minutes": 0
+  },
+  "sources": [
+    {
+      "id": "wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Dave_Cormack",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Stewart_Milne",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "afc_news",
+      "url": "https://www.afc.co.uk/en/news/stewart-milne-steps-down-from-aberdeen-fc-board-after-32-years",
+      "verified_at": "2026-10-21"
+    }
+  ],
+  "staff_changes": [
+    {
+      "change": "out",
+      "date": "2019-12-16",
+      "interim": false,
+      "name": "Dave Cormack",
+      "person_id": "dave-cormack",
+      "reason_out": "role_change",
+      "role": "Board member",
+      "role_group": "board_member",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Dave_Cormack"
+      ],
+      "stint_id": "dave-cormack-board-2017"
+    },
+    {
+      "change": "in",
+      "date": "2019-12-16",
+      "interim": false,
+      "name": "Dave Cormack",
+      "person_id": "dave-cormack",
+      "reason_out": null,
+      "role": "Chairman",
+      "role_group": "chair",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Dave_Cormack",
+        "https://en.wikipedia.org/wiki/2019%E2%80%9320_Aberdeen_F.C._season"
+      ],
+      "stint_id": "dave-cormack-chair-2019"
+    },
+    {
+      "change": "out",
+      "date": "2019-12-16",
+      "interim": false,
+      "name": "Stewart Milne",
+      "person_id": "stewart-milne",
+      "reason_out": "resigned",
+      "role": "Chairman",
+      "role_group": "chair",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Stewart_Milne",
+        "https://www.afc.co.uk/en/news/stewart-milne-steps-down-from-aberdeen-fc-board-after-32-years"
+      ],
+      "stint_id": "stewart-milne-chair-1998"
+    },
+    {
+      "change": "in",
+      "date": "2019-12-16",
+      "interim": false,
+      "name": "Stewart Milne",
+      "person_id": "stewart-milne",
+      "reason_out": "resigned",
+      "role": "Board member",
+      "role_group": "board_member",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/stewart-milne-steps-down-from-aberdeen-fc-board-after-32-years"
+      ],
+      "stint_id": "stewart-milne-board-2019"
+    }
+  ],
+  "status": "completed",
+  "style": {
+    "corners_against_pm": 4.03,
+    "corners_for_pm": 5.4,
+    "coverage": "available",
+    "era_average": {
+      "corners_against_pm": 5.28,
+      "corners_for_pm": 5.06,
+      "coverage": "available",
+      "fouls_against_pm": 12.7,
+      "fouls_for_pm": 12.35,
+      "goals_against_pm": 1.35,
+      "goals_for_pm": 1.2,
+      "matches": 258,
+      "red_for_pm": 0.09,
+      "seasons": 7,
+      "shot_accuracy": 0.33,
+      "shots_against_pm": 12.25,
+      "shots_for_pm": 11.6,
+      "shots_on_target_against_pm": 4.17,
+      "shots_on_target_for_pm": 3.83,
+      "yellow_for_pm": 1.83
+    },
+    "fouls_against_pm": 11.9,
+    "fouls_for_pm": 14.1,
+    "goals_against_pm": 1.2,
+    "goals_for_pm": 1.33,
+    "goals_per_shot": 0.146,
+    "goals_per_shot_on_target": 0.357,
+    "matches": 30,
+    "missing_stats": [],
+    "note": "Opponent-unadjusted team proxies from league match rows. Not xG and not a tactical model. Possession is provider-reported only.",
+    "possession_against_pm": null,
+    "possession_for_pm": null,
+    "possession_unknown_reason": "provider_statistics_not_backfilled",
+    "red_against_pm": 0.17,
+    "red_for_pm": 0.13,
+    "shot_accuracy": 0.409,
+    "shots_against_pm": 9.5,
+    "shots_for_pm": 9.13,
+    "shots_on_target_against_pm": 4.13,
+    "shots_on_target_for_pm": 3.73,
+    "tactical_note": "The page does not claim a tactical identity from memory. It shows the measured shot, corner, foul and card proxies and labels the reading.\n",
+    "yellow_against_pm": 1.43,
+    "yellow_for_pm": 1.57
+  },
+  "tactical": {
+    "selection_note": "The most-used players and age profile are measured from the historical lineups, not inferred from the current squad.\n",
+    "shape_note": "The lineup backfill covers every played fixture; the shape mix is measured from the kick-off grid. It is descriptive, not a claim about the manager's intent.\n",
+    "style_note": "The page does not claim a tactical identity from memory. It shows the measured shot, corner, foul and card proxies and labels the reading.\n"
+  }
+}

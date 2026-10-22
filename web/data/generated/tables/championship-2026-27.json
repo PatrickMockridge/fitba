@@ -1,6 +1,33 @@
 {
   "competition_id": "sco:championship",
   "competition_name": "Scottish Championship",
+  "cutoffs": [
+    {
+      "after_position": 1,
+      "kind": "promotion",
+      "label": "Automatic promotion · 1st",
+      "note": "1st is promoted to the Premiership."
+    },
+    {
+      "after_position": 4,
+      "kind": "playoff",
+      "label": "Promotion play-off · 2nd–4th",
+      "note": "2nd–4th enter the Premiership play-off with 11th in the Premiership."
+    },
+    {
+      "after_position": 8,
+      "kind": "playoff",
+      "label": "Relegation play-off · 9th",
+      "note": "9th enters the Championship/League One play-off with 2nd–4th in League One."
+    },
+    {
+      "after_position": 9,
+      "kind": "relegation",
+      "label": "Relegation · 10th",
+      "note": "10th is relegated to League One."
+    }
+  ],
+  "qualification_note": "1st is promoted automatically. 2nd–4th enter the Premiership play-off with 11th in the Premiership. 9th enters the Championship/League One play-off, and 10th is relegated to League One.\n",
   "rows": [
     {
       "competition_id": "sco:championship",
@@ -19,7 +46,7 @@
       "season": "2026-27",
       "team_id": "sco:stenhousemuir",
       "team_name": "Stenhousemuir",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 7
     },
     {
@@ -39,7 +66,7 @@
       "season": "2026-27",
       "team_id": "sco:raith-rovers",
       "team_name": "Raith Rovers",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 6
     },
     {
@@ -59,7 +86,7 @@
       "season": "2026-27",
       "team_id": "sco:partick-thistle",
       "team_name": "Partick Thistle",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 6
     },
     {
@@ -79,7 +106,7 @@
       "season": "2026-27",
       "team_id": "sco:inverness-caledonian-thistle",
       "team_name": "Inverness Caledonian Thistle",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 4
     },
     {
@@ -99,7 +126,7 @@
       "season": "2026-27",
       "team_id": "sco:livingston",
       "team_name": "Livingston",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 4
     },
     {
@@ -119,7 +146,7 @@
       "season": "2026-27",
       "team_id": "sco:dunfermline-athletic",
       "team_name": "Dunfermline Athletic",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     },
     {
@@ -139,7 +166,7 @@
       "season": "2026-27",
       "team_id": "sco:ayr-united",
       "team_name": "Ayr United",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     },
     {
@@ -159,7 +186,7 @@
       "season": "2026-27",
       "team_id": "sco:arbroath",
       "team_name": "Arbroath",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 3
     },
     {
@@ -179,7 +206,7 @@
       "season": "2026-27",
       "team_id": "sco:greenock-morton",
       "team_name": "Greenock Morton",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 2
     },
     {
@@ -199,7 +226,7 @@
       "season": "2026-27",
       "team_id": "sco:queens-park",
       "team_name": "Queen's Park",
-      "updated_at": "2026-10-21T12:53:23+00:00",
+      "updated_at": "2026-10-22T00:52:30+00:00",
       "won": 2
     }
   ],

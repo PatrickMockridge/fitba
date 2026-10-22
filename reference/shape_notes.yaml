@@ -1,0 +1,22 @@
+# Curated mid-game shape observations.
+#
+# The licensed lineup feed gives the kick-off formation and starting grid, not
+# the shape after a substitution. This file records only sourced, reported
+# switches. It never feeds role assignments or kick-off shape counts.
+#
+# Required fields for every row: fixture_id, team_id, minute, from_shape,
+# to_shape, source_url, confidence.
+#
+# Example:
+# matches:
+#   - fixture_id: 1556630
+#     team_id: 252
+#     minute: 60
+#     from_shape: "4-2-3-1"
+#     to_shape: "4-4-2"
+#     source_url: "https://example.com/match-report"
+#     confidence: reported
+#     note: "Manager changed to a back four after the second substitution."
+#
+# The absence of a row means "not recorded", not "no change".
+matches: []

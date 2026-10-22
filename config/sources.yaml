@@ -1,7 +1,7 @@
 # Source registry. `lane` controls what may be published:
 #   open            - raw or derived data may be published
 #   derived_display - only our derived metrics/visuals may be published; never raw
-#   prohibited      - nothing may be published
+#   no_publication  - may be read manually, but never ingested or published
 # `ingest_allowed` is separate from `publication_allowed` on purpose.
 sources:
   football_data_uk:
@@ -10,36 +10,87 @@ sources:
     ingest_allowed: true
     publication_allowed: true
     required: true
+    primary_for: [league_results_current, league_results_history, league_team_stats]
     capabilities: [results, team_match_stats, fixtures, odds]
     base_url: https://www.football-data.co.uk/mmz4281
     attribution: Football-Data.co.uk
+    role: current and historical league results and team match stats; fallback/cross-check if the API-Football gate passes
     notes: >
       Free Scottish CSVs for SC0-SC3. Team-level only. The site asks for
       private, non-commercial research use and cautions against automated/AI
       data products; this project uses it non-commercially with attribution.
     last_verified: 2026-10-21
 
-  pannadata:
-    name: pannadata (cached Opta)
+  afc_news:
+    name: Aberdeen FC news
     lane: derived_display
     ingest_allowed: true
     publication_allowed: true
-    adapter_ready: false  # release verified; event adapter is phase 3
+    capabilities: [news, history, availability]
+    primary_for: [news, availability]
+    url: https://www.afc.co.uk/en/news
+    attribution: Aberdeen FC
+    notes: >
+      Listing metadata only: headline, category, publish date and canonical link.
+      Article bodies and images are not copied; every card links to afc.co.uk.
+      The same official source is the preferred citation for staff, honours and
+      season-record entries in reference/history/. The availability ledger is
+      curated by a human from official team news; article bodies are not parsed.
+    last_verified: 2026-10-21
+
+  afc_chat:
+    name: AFC Chat — The Rumour Mill
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    capabilities: [fan_signal, sentiment]
+    url: https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/
+    rss: https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill.xml/
+    attribution: AFC Chat forum contributors
+    content_signal: "search=yes, ai-train=no, use=reference"
+    notes: >
+      Reference use only: sampled first pages of recent Rumour Mill topics are
+      used to derive name mentions, cross-reference labels and rule-based
+      sentiment. Raw post bodies, usernames and quotes are never published and
+      never used for AI training. Topic titles and links may be shown.
+      Coverage is a sample, not the whole forum or fanbase.
+    last_verified: 2026-10-21
+
+  spfl:
+    name: SPFL official club feed
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    capabilities: [fixtures, results]
+    primary_for: [club_fixtures]
+    url: https://spfl.co.uk/clubs/aberdeen/fixtures
+    attribution: SPFL
+    role: current Aberdeen club fixtures; API-Football remains a cross-check
+    notes: >
+      Server-rendered club fixture page covering Aberdeen's league fixtures.
+      League Cup and Scottish Cup fixtures come from API-Football. One request
+      per run, cached for one hour.
+    last_verified: 2026-10-21
+
+  pannadata:
+    name: pannadata (cached Opta)
+    lane: no_publication
+    ingest_allowed: false
+    publication_allowed: false
     required: false
     capabilities: [events, shots, player_match_stats, lineups]
     url: https://github.com/peteowen1/pannadata
     attribution: Opta data cached by pannadata
     notes: >
-      Verified Scottish Premiership 2019+ with event x/y. No licence stated:
-      raw Parquet never committed; only derived heat maps, percentiles and
-      compact sequences may be published.
+      No licence stated. Local research prototype only; never committed or
+      published. The public app does not use it.
     last_verified: 2026-10-21
 
   sofascore_datafc:
     name: Sofascore via datafc
-    lane: derived_display
+    lane: no_publication
     ingest_allowed: false
-    publication_allowed: true
+    publication_allowed: false
     adapter_ready: false
     required: false
     capabilities: [heatmaps, average_positions, lineups, player_match_stats]
@@ -53,7 +104,7 @@ sources:
 
   fbref:
     name: FBref / Sports Reference
-    lane: prohibited
+    lane: no_publication
     ingest_allowed: false
     publication_allowed: false
     required: false
@@ -66,18 +117,15 @@ sources:
 
   transfermarkt:
     name: Transfermarkt
-    lane: derived_display
+    lane: no_publication
     ingest_allowed: false
-    publication_allowed: true
-    adapter_ready: false
+    publication_allowed: false
     required: false
     capabilities: [market_values, loans, transfers]
     url: https://www.transfermarkt.com
-    attribution: Transfermarkt
     notes: >
-      Terms prohibit scraping. Values are cached locally and used only for
-      budget bands and shortlist context; raw values are never published.
-      Curated overrides in reference/market_values.yaml win.
+      Terms prohibit scraping. Not used. Market values are curated with citations
+      in reference/market_values.yaml; no raw feed is published.
     last_verified: 2026-10-21
 
   sportmonks:
@@ -87,13 +135,73 @@ sources:
     publication_allowed: true
     adapter_ready: false
     required: false
+    cost: freemium
     api_key_env: SPORTMONKS_API_KEY
-    capabilities: [fixtures, lineups, player_match_stats, team_match_stats]
+    capabilities:
+      - fixtures
+      - standings
+      - lineups
+      - player_match_stats
+      - team_match_stats
+      - player_attributes
     url: https://docs.sportmonks.com/v3/
     attribution: Sportmonks
     notes: >
-      Free tier covers the Scottish Premiership. No player heat maps at any
-      tier (ball coordinates only). Enabled only when SPORTMONKS_API_KEY is set.
+      Free tier covers the Scottish Premiership only. Paid Starter €29/mo
+      covers 5 competitions; the catalogue lists the Scottish Cup and League Cup
+      with cup group standings. It is not the cup fallback today: API-Football
+      is active and key-tested for the cups. The player endpoint exposes
+      preferred foot through the `metadata` include; this is the preferred
+      licensed source for that attribute. Role does not depend on Sportmonks:
+      it comes from the API-Football starting-XI grid. The adapter stays
+      disabled until the key, the plan's Scottish Premiership
+      coverage, the public-display terms and a player crosswalk are confirmed.
+      xG add-on covers the Premiership, not the cups. No player heat maps at any
+      tier.
+    last_verified: 2026-10-21
+
+  afc_official:
+    name: Aberdeen FC player profiles
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    adapter_ready: false
+    required: false
+    cost: free
+    capabilities: [player_attributes]
+    url: https://www.afc.co.uk/en/teams/mens
+    attribution: Aberdeen FC
+    notes: >
+      Official player profile pages state the shirt number, nationality and a
+      generic position (Goalkeeper/Defender/Midfielder/Forward). They do not
+      state preferred foot, so this source yields no attribute values today.
+      Reserved for an explicit statement if the club publishes one; no crawling
+      beyond a listed page.
+    last_verified: 2026-10-21
+
+  wikipedia:
+    name: Wikipedia
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    adapter_ready: true
+    required: false
+    cost: free
+    capabilities: [player_attributes, history]
+    url: https://en.wikipedia.org
+    attribution: Wikipedia contributors
+    role: last-resort reference for preferred foot and historical club records
+    notes: >
+      Used only when the licensed Sportmonks foot source is unavailable and an
+      official page does not state the attribute, and as a last-resort citation
+      for managers, honours, cup/European runs and season records where no AFC
+      page states the fact. The adapter reads explicit
+      foot statements, requires the page to match the player and mention
+      Aberdeen, records the page URL and revision, is rate-limited, and never
+      crawls in bulk. Only the derived value and source URL are published;
+      article text is not. Wikipedia is a finding aid, not an authority. A
+      conflicting statement yields unknown. Side is not read from Wikipedia; it
+      is derived from the starting-XI role.
     last_verified: 2026-10-21
 
   pitchapi:
@@ -113,7 +221,7 @@ sources:
 
   bzzoiro:
     name: Bzzoiro Sports Data
-    lane: prohibited
+    lane: no_publication
     ingest_allowed: false
     publication_allowed: false
     required: false
@@ -153,11 +261,81 @@ sources:
   api_football:
     name: API-Football
     lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    adapter_ready: true
+    required: true
+    primary_for:
+      - cup_fixtures
+      - lineups_roles
+      - player_match_stats
+      - squad_identity
+      - transfers_candidate
+    cost: paid
+    key_test_required: true
+    key_tested_at: 2026-10-21
+    api_key_env: API_FOOTBALL_KEY
+    capabilities:
+      - fixtures
+      - results
+      - standings
+      - lineups
+      - player_roles
+      - events
+      - player_match_stats
+      - transfers
+      - loans
+    url: https://www.api-football.com
+    coverage: [all four SPFL tiers, Scottish Cup, League Cup]
+    pricing_note: Pro subscription; check the provider's current plan and price at checkout.
+    known_gaps: >
+      League Cup group standings are not provided (compute from group fixtures);
+      the Scottish Cup feed covered 50 of 136 ties at test time (First Round and
+      Second Round only); current lower-tier player stats were empty at test
+      time; no preferred foot, xG, event coordinates, heat maps, market values
+      or wages. Roles are derived from the starting-XI formation grid in the
+      lineups; the feed does not report a formation after a substitution, so
+      mid-game switches need a sourced context note. Team statistics and
+      possession are not dependable at scale; the matchday style lean uses shot
+      proxies only and never possession. Current-season Scottish injuries
+      coverage is false, so /injuries is not used as a team-news feed. Team
+      match stats are not available for every SPFL tier, which is why league
+      results and stats remain on Football-Data.co.uk until the strict
+      migration gate passes.
+    public_display: >
+      Non-commercial apps/websites are contemplated in API-Sports terms; raw
+      resale is prohibited; derived pages are permitted. The provider does not
+      grant underlying fixture IP. Confirm terms in writing.
+    notes: >
+      Licensed base for the public competition layer. Key-tested 2026-10-21:
+      all 80 League Cup group matches, knockout fixtures with penalty scores,
+      and Scottish Cup First/Second Round fixtures; League Cup standings empty;
+      top European leagues and the Premiership return player stats; current
+      Championship/League One/League Two player stats were not populated.
+    last_verified: 2026-10-21
+
+  bbc_sport:
+    name: BBC Sport
+    lane: no_publication
     ingest_allowed: false
     publication_allowed: false
     required: false
-    api_key_env: API_FOOTBALL_KEY
-    capabilities: [fixtures, lineups, player_match_stats, transfers]
-    url: https://www.api-football.com
-    notes: Paid option; left disabled for the free baseline.
+    capabilities: [fixtures, results]
+    url: https://www.bbc.com/sport/football/scottish-cup
+    notes: >
+      Complete Scottish cup coverage, but the terms prohibit scraping and
+      republication. A person may read a page manually as a finding aid; the
+      site is never fetched automatically, cited or republished.
+    last_verified: 2026-10-21
+
+  fotmob:
+    name: FotMob
+    lane: no_publication
+    ingest_allowed: false
+    publication_allowed: false
+    required: false
+    capabilities: [fixtures, results, standings]
+    url: https://www.fotmob.com
+    notes: >
+      Terms prohibit scraping; no public-display licence. Not used.
     last_verified: 2026-10-21

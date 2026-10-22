@@ -1,0 +1,2085 @@
+{
+  "club_id": "sco:aberdeen",
+  "coverage": {
+    "availability_feed": {
+      "counts": {
+        "unknown": 38
+      },
+      "known": 0,
+      "status": "unavailable",
+      "unknown": 38
+    },
+    "bench": "Premiership only",
+    "channel_data": false,
+    "fixtures_total": 15,
+    "fixtures_with_ratings": 9,
+    "historical_ratings": false,
+    "midgame_shape": false,
+    "minutes_total": 14865,
+    "note": "No xG, channel, possession or mid-game shape data. Provider ratings are current-season Premiership only. Availability is unknown; provider injured flags are not team news.",
+    "possession": false,
+    "provider_rating_minutes": 7803,
+    "provider_rating_rows": 139,
+    "provider_ratings": "Premiership starters",
+    "role_basis": "observed starters for family ratings; primary squad role for bench and goals; observed starts for shape",
+    "role_start_coverage": 0.873,
+    "season": "2026-27",
+    "shapes": "kick-off only",
+    "starts_total": 165,
+    "starts_with_role": 144,
+    "status": "fresh",
+    "sub_minutes": 1779,
+    "xg": false
+  },
+  "generated_at": "2026-10-22T00:52:30+00:00",
+  "notes": "The read is inferred/curated from measured evidence. It is not a result prediction, not betting advice, and not a claim about the manager's private intent.",
+  "schema_version": "1.0.0",
+  "scope": {
+    "mission_label": "The Cormack-era mission",
+    "mission_weight": 20,
+    "note": "80% current season; 20% the long-term trading-club mission. The split is editorial, not a statistical model.",
+    "season": "2026-27",
+    "season_weight": 80
+  },
+  "season": "2026-27",
+  "served_generated_at": null,
+  "sources": [
+    {
+      "id": "spfl",
+      "name": "SPFL official club feed",
+      "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "football_data_uk",
+      "name": "football-data.co.uk",
+      "url": "https://www.football-data.co.uk/mmz4281",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "api_football",
+      "name": "API-Football",
+      "url": "https://www.api-football.com",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "wikipedia",
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org",
+      "verified_at": "2026-10-21"
+    }
+  ],
+  "stale_reason": null,
+  "state": "fresh",
+  "summary": {
+    "confidence": "medium",
+    "headline": "Four season themes and one mission context behind the next match.",
+    "mission_themes": 1,
+    "note": "Themes are hypotheses with evidence, not verdicts. Provider ratings are labelled and never an individual verdict.",
+    "season_themes": 4,
+    "theme_count": 5
+  },
+  "themes": [
+    {
+      "basis": "measured",
+      "caveats": [
+        "Provider ratings are not position-adjusted and are not a fitba rating.",
+        "The rating sample is Premiership-only; starts and minutes include cup fixtures.",
+        "A family mean can hide a high-variance unit; the 25th percentile and spread matter.",
+        "The squad-page position-group rating is an equal-weighted season aggregate and mixes full-backs with centre-backs; this layer uses per-match starters."
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Squad provider mean",
+          "note": "minutes-weighted starters, Premiership",
+          "value": 6.96
+        },
+        {
+          "basis": "measured",
+          "label": "Weakest family",
+          "note": "6.56",
+          "value": "W"
+        },
+        {
+          "basis": "measured",
+          "label": "CB mean",
+          "note": "+0.05 vs squad",
+          "value": 7.01
+        },
+        {
+          "basis": "measured",
+          "label": "CB spread",
+          "note": "25th-percentile match rating",
+          "value": 6.6
+        }
+      ],
+      "fan_question": "Where are Aberdeen strong and weak?",
+      "headline": "W and AM/WM rate lowest; the CB mean is not the weak spot.",
+      "horizon": "season",
+      "implications": [
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "AM/WM",
+          "href": "/recruitment/#needs-am-wm",
+          "line": "Attacking / wide midfield: strengthen; high urgency; market route permanent.",
+          "urgency": "high"
+        },
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "W",
+          "href": "/recruitment/#needs-w",
+          "line": "Wide forwards: strengthen; medium urgency; market route permanent.",
+          "urgency": "medium"
+        }
+      ],
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/methodology/",
+          "label": "Roles and shape"
+        }
+      ],
+      "method": "Minutes-weighted mean of provider match ratings for starters with an observed role. Goals and assists use the player's primary family so substitutes count.",
+      "metrics": {
+        "coverage": {
+          "fixtures_total": 15,
+          "fixtures_with_ratings": 9,
+          "minutes_total": 14865,
+          "provider_rating_minutes": 7803,
+          "provider_rating_rows": 139,
+          "role_start_coverage": 0.873,
+          "starts_total": 165,
+          "starts_with_role": 144,
+          "sub_minutes": 1779
+        },
+        "groups": [
+          {
+            "assists": 1,
+            "confidence": "medium",
+            "family": "GK",
+            "goals": 0,
+            "matches": 14,
+            "players": 2,
+            "provider_rating": 7.46,
+            "rating_median": 7.5,
+            "rating_p25": 6.9,
+            "rating_sample": {
+              "minutes": 810,
+              "player_matches": 9,
+              "players": 2
+            },
+            "squad_rating_delta": 0.5,
+            "starter_minutes": 1260,
+            "starts": 14
+          },
+          {
+            "assists": 1,
+            "confidence": "high",
+            "family": "CB",
+            "goals": 2,
+            "matches": 13,
+            "players": 5,
+            "provider_rating": 7.01,
+            "rating_median": 6.9,
+            "rating_p25": 6.6,
+            "rating_sample": {
+              "minutes": 1881,
+              "player_matches": 22,
+              "players": 5
+            },
+            "squad_rating_delta": 0.05,
+            "starter_minutes": 2559,
+            "starts": 30
+          },
+          {
+            "assists": 0,
+            "confidence": "high",
+            "family": "FB/WB",
+            "goals": 0,
+            "matches": 13,
+            "players": 5,
+            "provider_rating": 6.8,
+            "rating_median": 6.9,
+            "rating_p25": 6.2,
+            "rating_sample": {
+              "minutes": 1558,
+              "player_matches": 18,
+              "players": 5
+            },
+            "squad_rating_delta": -0.16,
+            "starter_minutes": 2194,
+            "starts": 26
+          },
+          {
+            "assists": 3,
+            "confidence": "high",
+            "family": "MID",
+            "goals": 2,
+            "matches": 13,
+            "players": 6,
+            "provider_rating": 7.04,
+            "rating_median": 7.0,
+            "rating_p25": 6.6,
+            "rating_sample": {
+              "minutes": 1536,
+              "player_matches": 21,
+              "players": 6
+            },
+            "squad_rating_delta": 0.08,
+            "starter_minutes": 2166,
+            "starts": 29
+          },
+          {
+            "assists": 0,
+            "confidence": "medium",
+            "family": "AM/WM",
+            "goals": 0,
+            "matches": 9,
+            "players": 8,
+            "provider_rating": 6.73,
+            "rating_median": 6.7,
+            "rating_p25": 6.6,
+            "rating_sample": {
+              "minutes": 471,
+              "player_matches": 7,
+              "players": 8
+            },
+            "squad_rating_delta": -0.23,
+            "starter_minutes": 1065,
+            "starts": 14
+          },
+          {
+            "assists": 0,
+            "confidence": "medium",
+            "family": "W",
+            "goals": 0,
+            "matches": 6,
+            "players": 5,
+            "provider_rating": 6.56,
+            "rating_median": 6.65,
+            "rating_p25": 6.3,
+            "rating_sample": {
+              "minutes": 552,
+              "player_matches": 8,
+              "players": 5
+            },
+            "squad_rating_delta": -0.4,
+            "starter_minutes": 833,
+            "starts": 12
+          },
+          {
+            "assists": 2,
+            "confidence": "high",
+            "family": "ST",
+            "goals": 6,
+            "matches": 13,
+            "players": 4,
+            "provider_rating": 6.96,
+            "rating_median": 6.65,
+            "rating_p25": 6.3,
+            "rating_sample": {
+              "minutes": 995,
+              "player_matches": 14,
+              "players": 4
+            },
+            "squad_rating_delta": 0.0,
+            "starter_minutes": 1408,
+            "starts": 19
+          }
+        ],
+        "scope": {
+          "minutes": "all competitive fixtures",
+          "note": "Provider ratings are Premiership-only and current-season. They are not position-adjusted; cross-family comparison is descriptive.",
+          "ratings": "Premiership starters"
+        },
+        "squad_provider_rating": 6.96
+      },
+      "order": 1,
+      "players": [],
+      "read": "Provider ratings put GK at the top (7.46) and W at the bottom (6.56). The CB family mean is 7.01, +0.05 against the squad mean. The data does not show a weak CB family overall; it shows dispersion and a shape effect. Ratings are provider match ratings, not a fitba rating and not position-adjusted.",
+      "read_basis": "inferred",
+      "reason": null,
+      "status": "available",
+      "theme_id": "family_balance",
+      "title": "The family balance"
+    },
+    {
+      "basis": "measured",
+      "caveats": [
+        "Kick-off shape only; mid-game switches are not inferred.",
+        "The three-CB sample is small; association is not causation.",
+        "Named bench and substitute data are premiership only.",
+        "No channel or cross data: the \"doubling up in the channels\" claim cannot be measured."
+      ],
+      "confidence": "low",
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Three-CB fixtures",
+          "note": "kick-off shape only",
+          "value": 4
+        },
+        {
+          "basis": "measured",
+          "label": "Wing-back starts",
+          "note": "per match in three-CB games",
+          "value": 2.0
+        },
+        {
+          "basis": "measured",
+          "label": "Wide-forward starts",
+          "note": "per match in three-CB games",
+          "value": 0.0
+        },
+        {
+          "basis": "measured",
+          "label": "Goals against",
+          "note": "per match, three-CB vs two-CB",
+          "value": 1.25
+        }
+      ],
+      "fan_question": "What does three at the back cost?",
+      "headline": "Three at the back is a wing-back tax: the wide defenders start, the wide forwards do not.",
+      "horizon": "season",
+      "implications": [
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "FB/WB",
+          "href": "/recruitment/#needs-fb-wb",
+          "line": "Full-backs / wing-backs: strengthen; medium urgency; market route permanent.",
+          "urgency": "medium"
+        },
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "W",
+          "href": "/recruitment/#needs-w",
+          "line": "Wide forwards: strengthen; medium urgency; market route permanent.",
+          "urgency": "medium"
+        }
+      ],
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/matchday/",
+          "label": "Predicted XI"
+        }
+      ],
+      "method": "Group fixtures by kick-off centre-back count, then count observed wing-back, full-back and wide-forward starters, named bench rows and substitute minutes.",
+      "metrics": {
+        "coverage": {
+          "bench_scope": "Premiership only",
+          "fixtures_total": 15,
+          "fixtures_with_shape": 13,
+          "unknown_shapes": 2
+        },
+        "groups": [
+          {
+            "cb_rating": 7.04,
+            "fb_starts_pm": 2.0,
+            "ga_pm": 0.78,
+            "gf_pm": 1.44,
+            "group": "two_cb",
+            "matches": 9,
+            "named_bench_fbwb_pm": 0.22,
+            "named_bench_wf_pm": 0.0,
+            "points_pg": 1.89,
+            "record": "5-2-2",
+            "saves_pm": 4.2,
+            "wb_starts_pm": 0.0,
+            "wf_starts_pm": 1.33,
+            "wf_sub_minutes_pm": 10.0
+          },
+          {
+            "cb_rating": 6.94,
+            "fb_starts_pm": 0.0,
+            "ga_pm": 1.25,
+            "gf_pm": 1.25,
+            "group": "three_cb",
+            "matches": 4,
+            "named_bench_fbwb_pm": 0.5,
+            "named_bench_wf_pm": 1.25,
+            "points_pg": 1.0,
+            "record": "1-1-2",
+            "saves_pm": 5.33,
+            "wb_starts_pm": 2.0,
+            "wf_starts_pm": 0.0,
+            "wf_sub_minutes_pm": 24.5
+          },
+          {
+            "cb_rating": null,
+            "fb_starts_pm": 0.0,
+            "ga_pm": 0.5,
+            "gf_pm": 3.5,
+            "group": "unknown",
+            "matches": 2,
+            "named_bench_fbwb_pm": 0.0,
+            "named_bench_wf_pm": 0.0,
+            "points_pg": 3.0,
+            "record": "2-0-0",
+            "saves_pm": null,
+            "wb_starts_pm": 0.0,
+            "wf_starts_pm": 0.0,
+            "wf_sub_minutes_pm": 0.0
+          }
+        ],
+        "scope": {
+          "bench": "Premiership only",
+          "ratings": "Premiership only",
+          "shapes": "all competitive fixtures; kick-off only",
+          "unknown_shapes": 2
+        }
+      },
+      "order": 2,
+      "players": [
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": null,
+          "minutes": null,
+          "name": "N. Guinness-Walker",
+          "note": null,
+          "player_id": 108465,
+          "role_family": "full_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 0,
+          "three_cb_starts": 4,
+          "two_cb_starts": 9
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": null,
+          "minutes": null,
+          "name": "C. Cadden",
+          "note": null,
+          "player_id": 44921,
+          "role_family": "full_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 0,
+          "three_cb_starts": 4,
+          "two_cb_starts": 6
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 3,
+          "category": null,
+          "minutes": null,
+          "name": "Tony Yogane",
+          "note": null,
+          "player_id": 388510,
+          "role_family": "wide_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 76,
+          "three_cb_starts": 0,
+          "two_cb_starts": 5
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": null,
+          "minutes": null,
+          "name": "T. Olusanya",
+          "note": null,
+          "player_id": 231195,
+          "role_family": "wide_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 90,
+          "three_cb_starts": 0,
+          "two_cb_starts": 3
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": null,
+          "minutes": null,
+          "name": "M. Ntelo",
+          "note": null,
+          "player_id": 267727,
+          "role_family": "wide_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 45,
+          "three_cb_starts": 0,
+          "two_cb_starts": 2
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 2,
+          "category": null,
+          "minutes": null,
+          "name": "L. Smith",
+          "note": null,
+          "player_id": 44982,
+          "role_family": "wide_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 189,
+          "three_cb_starts": 0,
+          "two_cb_starts": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 4,
+          "category": null,
+          "minutes": null,
+          "name": "J. Milne",
+          "note": null,
+          "player_id": 321860,
+          "role_family": "full_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 78,
+          "three_cb_starts": 0,
+          "two_cb_starts": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": null,
+          "minutes": null,
+          "name": "D. Lobban",
+          "note": null,
+          "player_id": 340027,
+          "role_family": "full_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 0,
+          "three_cb_starts": 0,
+          "two_cb_starts": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": null,
+          "minutes": null,
+          "name": "L. Mayo",
+          "note": null,
+          "player_id": 125695,
+          "role_family": "full_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 0,
+          "three_cb_starts": 0,
+          "two_cb_starts": 1
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": null,
+          "minutes": null,
+          "name": "L. Smith",
+          "note": null,
+          "player_id": 668797,
+          "role_family": "wide_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": 0,
+          "three_cb_starts": 0,
+          "two_cb_starts": 1
+        }
+      ],
+      "read": "There are 4 three-CB fixtures and 9 two-CB fixtures. Wing-backs start 2.0 per match in the three-CB set and 0.0 in the two-CB set; wide forwards start 0.0 vs 1.3. Three-CB games concede 1.25 goals per match vs 0.78, with 5.3 vs 4.2 saves per match where saves are available. This is an association in a small sample, not a causal claim.",
+      "read_basis": "inferred",
+      "reason": null,
+      "status": "available",
+      "theme_id": "wing_back_tax",
+      "title": "The wing-back tax"
+    },
+    {
+      "basis": "measured",
+      "caveats": [
+        "Minutes are not proof of trust; the data cannot distinguish selection from availability.",
+        "Availability comes from the curated official team-news ledger; provider injury flags are not team news. Unknown stays unknown.",
+        "Named bench rows are Premiership-only."
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "CB top share",
+          "note": "share of CB group minutes",
+          "value": "32%"
+        },
+        {
+          "basis": "measured",
+          "label": "FB/WB top share",
+          "note": "share of FB/WB group minutes",
+          "value": "54%"
+        },
+        {
+          "basis": "measured",
+          "label": "CB starters",
+          "note": "5 with 3+ starts",
+          "value": 4
+        },
+        {
+          "basis": "measured",
+          "label": "Defensive arrivals",
+          "note": "2026-27 arrivals in these groups",
+          "value": 4
+        }
+      ],
+      "fan_question": "Who is actually covering the defence?",
+      "headline": "The defensive minutes are concentrated at the top and thin behind it; the data cannot say whether that is selection or availability.",
+      "horizon": "season",
+      "implications": [
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "FB/WB",
+          "href": "/recruitment/#needs-fb-wb",
+          "line": "Full-backs / wing-backs: strengthen; medium urgency; market route permanent.",
+          "urgency": "medium"
+        }
+      ],
+      "links": [
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        },
+        {
+          "href": "/transfers/",
+          "label": "Transfers"
+        },
+        {
+          "href": "/recruitment/",
+          "label": "Recruitment"
+        }
+      ],
+      "method": "Aggregate starts, minutes, substitute appearances and named bench rows by primary role family, then classify players as starter, rotation or fringe. Recent arrivals are identified from the transfer register.",
+      "metrics": {
+        "coverage": {
+          "availability": {
+            "unknown": 10
+          },
+          "bench_classified": 15,
+          "bench_rows": 39,
+          "bench_unknown": 24,
+          "minutes_total": 5651,
+          "squad_players": 10,
+          "transfers_available": true
+        },
+        "curated_notes": [
+          {
+            "basis": "curated",
+            "name": "K. Tobers",
+            "note": "Still under contract and recovering from injury; absent from the current-squad provider snapshot. This is a squad-list gap, not a transfer.",
+            "player_id": 68534,
+            "source": "reference/transfer_gaps.yaml"
+          }
+        ],
+        "groups": [
+          {
+            "arrival_minutes": 1889,
+            "arrivals": 2,
+            "concentration": "moderate",
+            "fringe": 0,
+            "group": "CB",
+            "items": [
+              {
+                "arrival": "2026-06-30",
+                "arrival_kind": "free",
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 1,
+                "category": "starter",
+                "minutes": 1100,
+                "name": "L. Mayo",
+                "note": null,
+                "player_id": 125695,
+                "role_family": "centre_back",
+                "starts": 13,
+                "sub_apps": 0
+              },
+              {
+                "arrival": "2026-06-30",
+                "arrival_kind": "free",
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 2,
+                "category": "starter",
+                "minutes": 789,
+                "name": "D. Happe",
+                "note": null,
+                "player_id": 18068,
+                "role_family": "centre_back",
+                "starts": 9,
+                "sub_apps": 2
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 1,
+                "category": "starter",
+                "minutes": 573,
+                "name": "M. Knoester",
+                "note": null,
+                "player_id": 37253,
+                "role_family": "centre_back",
+                "starts": 6,
+                "sub_apps": 1
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 3,
+                "category": "starter",
+                "minutes": 499,
+                "name": "G. Molloy",
+                "note": null,
+                "player_id": 161806,
+                "role_family": "centre_back",
+                "starts": 5,
+                "sub_apps": 5
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 4,
+                "category": "rotation",
+                "minutes": 438,
+                "name": "J. Milne",
+                "note": null,
+                "player_id": 321860,
+                "role_family": "centre_back",
+                "starts": 4,
+                "sub_apps": 4
+              }
+            ],
+            "named_bench": 11,
+            "players": 5,
+            "players_with_3_starts": 5,
+            "rotation": 1,
+            "starters": 4,
+            "thin_rotation": false,
+            "top_share": 0.32,
+            "total_minutes": 3399
+          },
+          {
+            "arrival_minutes": 2206,
+            "arrivals": 2,
+            "concentration": "moderate",
+            "fringe": 3,
+            "group": "FB/WB",
+            "items": [
+              {
+                "arrival": "2026-07-07",
+                "arrival_kind": "free",
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 0,
+                "category": "starter",
+                "minutes": 1207,
+                "name": "N. Guinness-Walker",
+                "note": null,
+                "player_id": 108465,
+                "role_family": "full_back",
+                "starts": 14,
+                "sub_apps": 1
+              },
+              {
+                "arrival": "2026-07-30",
+                "arrival_kind": "permanent",
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 0,
+                "category": "starter",
+                "minutes": 999,
+                "name": "C. Cadden",
+                "note": null,
+                "player_id": 44921,
+                "role_family": "wing_back",
+                "starts": 11,
+                "sub_apps": 0
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 3,
+                "category": "fringe",
+                "minutes": 32,
+                "name": "N. Devlin",
+                "note": null,
+                "player_id": 20422,
+                "role_family": "full_back",
+                "starts": 0,
+                "sub_apps": 1
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 0,
+                "category": "fringe",
+                "minutes": 14,
+                "name": "E. Gyamfi",
+                "note": null,
+                "player_id": 550363,
+                "role_family": "wing_back",
+                "starts": 0,
+                "sub_apps": 1
+              },
+              {
+                "arrival": null,
+                "arrival_kind": null,
+                "availability_confidence": "unknown",
+                "availability_conflict": false,
+                "availability_note": "No verified official team-news entry.",
+                "availability_source": "none",
+                "availability_status": "unknown",
+                "availability_verified_at": null,
+                "bench_named": 0,
+                "category": "fringe",
+                "minutes": 0,
+                "name": "M. Frame",
+                "note": null,
+                "player_id": 394703,
+                "role_family": "full_back",
+                "starts": 0,
+                "sub_apps": 0
+              }
+            ],
+            "named_bench": 3,
+            "players": 5,
+            "players_with_3_starts": 2,
+            "rotation": 0,
+            "starters": 2,
+            "thin_rotation": true,
+            "top_share": 0.54,
+            "total_minutes": 2252
+          }
+        ],
+        "scope": {
+          "availability": "curated team-news ledger; provider injuries optional",
+          "bench": "Premiership only",
+          "minutes": "all competitive fixtures"
+        }
+      },
+      "order": 3,
+      "players": [
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": "starter",
+          "minutes": 1100,
+          "name": "L. Mayo",
+          "note": null,
+          "player_id": 125695,
+          "role_family": "centre_back",
+          "starts": 13,
+          "sub_apps": 0,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 2,
+          "category": "starter",
+          "minutes": 789,
+          "name": "D. Happe",
+          "note": null,
+          "player_id": 18068,
+          "role_family": "centre_back",
+          "starts": 9,
+          "sub_apps": 2,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 1,
+          "category": "starter",
+          "minutes": 573,
+          "name": "M. Knoester",
+          "note": null,
+          "player_id": 37253,
+          "role_family": "centre_back",
+          "starts": 6,
+          "sub_apps": 1,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 3,
+          "category": "starter",
+          "minutes": 499,
+          "name": "G. Molloy",
+          "note": null,
+          "player_id": 161806,
+          "role_family": "centre_back",
+          "starts": 5,
+          "sub_apps": 5,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 4,
+          "category": "rotation",
+          "minutes": 438,
+          "name": "J. Milne",
+          "note": null,
+          "player_id": 321860,
+          "role_family": "centre_back",
+          "starts": 4,
+          "sub_apps": 4,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": "2026-07-07",
+          "arrival_kind": "free",
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": "starter",
+          "minutes": 1207,
+          "name": "N. Guinness-Walker",
+          "note": null,
+          "player_id": 108465,
+          "role_family": "full_back",
+          "starts": 14,
+          "sub_apps": 1,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": "2026-07-30",
+          "arrival_kind": "permanent",
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": "starter",
+          "minutes": 999,
+          "name": "C. Cadden",
+          "note": null,
+          "player_id": 44921,
+          "role_family": "wing_back",
+          "starts": 11,
+          "sub_apps": 0,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 3,
+          "category": "fringe",
+          "minutes": 32,
+          "name": "N. Devlin",
+          "note": null,
+          "player_id": 20422,
+          "role_family": "full_back",
+          "starts": 0,
+          "sub_apps": 1,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": "fringe",
+          "minutes": 14,
+          "name": "E. Gyamfi",
+          "note": null,
+          "player_id": 550363,
+          "role_family": "wing_back",
+          "starts": 0,
+          "sub_apps": 1,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": "unknown",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_source": "none",
+          "availability_status": "unknown",
+          "availability_verified_at": null,
+          "bench_named": 0,
+          "category": "fringe",
+          "minutes": 0,
+          "name": "M. Frame",
+          "note": null,
+          "player_id": 394703,
+          "role_family": "full_back",
+          "starts": 0,
+          "sub_apps": 0,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        }
+      ],
+      "read": "The CB group has 4 players at starter minutes and 5 with at least three starts; the top CB carries 32% of the group minutes. The FB/WB group has 2 players at starter minutes and 2 with at least three starts. The minutes pattern is consistent with limited rotation; the data cannot distinguish selection from availability.",
+      "read_basis": "inferred",
+      "reason": null,
+      "status": "available",
+      "theme_id": "cover_question",
+      "title": "The cover question"
+    },
+    {
+      "basis": "measured",
+      "caveats": [
+        "No xG, shot quality or expected-goals model.",
+        "Goals by family use the player's primary role, not the role in each match.",
+        "A descriptive balance is not a causal explanation."
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "League goals",
+          "note": "11 points",
+          "value": "10-10"
+        },
+        {
+          "basis": "measured",
+          "label": "Attack share",
+          "note": "share of league goals scored by W/ST",
+          "value": "60%"
+        },
+        {
+          "basis": "measured",
+          "label": "Last five",
+          "note": "8 points",
+          "value": "8-3"
+        },
+        {
+          "basis": "measured",
+          "label": "Shot share",
+          "note": "shots for / (for + against)",
+          "value": 0.441
+        }
+      ],
+      "fan_question": "Are the forwards covering the defence?",
+      "headline": "The attack is producing most of the goals; the defence is conceding enough to keep the balance fragile.",
+      "horizon": "season",
+      "implications": [
+        {
+          "basis": "mixed",
+          "category": "strengthen",
+          "family": "ST",
+          "href": "/recruitment/#needs-st",
+          "line": "Centre-forwards: strengthen; medium urgency; market route permanent.",
+          "urgency": "medium"
+        }
+      ],
+      "links": [
+        {
+          "href": "/fixtures/",
+          "label": "Fixtures"
+        },
+        {
+          "href": "/squad/",
+          "label": "Squad"
+        }
+      ],
+      "method": "League match rows for goals, shots and points; provider goals joined to the squad's primary role family.",
+      "metrics": {
+        "coverage": {
+          "league_matches": 9,
+          "provider_stat_rows": 180
+        },
+        "goals_by_family": {
+          "attack": 6,
+          "attack_share": 0.6,
+          "defence": 2,
+          "midfield": 2,
+          "total": 10
+        },
+        "last_five": {
+          "conversion": 0.116,
+          "corners_against_pm": 5.2,
+          "corners_for_pm": 6.4,
+          "drawn": 2,
+          "fouls_against_pm": 11.6,
+          "fouls_for_pm": 12.2,
+          "ga": 3,
+          "ga_pg": 0.6,
+          "gd": 5,
+          "gd_pg": 1.0,
+          "gf": 8,
+          "gf_pg": 1.6,
+          "goals_against_pm": 0.6,
+          "goals_for_pm": 1.6,
+          "lost": 1,
+          "matches_with_shots": 5,
+          "played": 5,
+          "points": 8,
+          "ppg": 1.6,
+          "shot_accuracy": 0.29,
+          "shot_share": 0.566,
+          "shots_against_pm": 10.6,
+          "shots_for_pm": 13.8,
+          "shots_on_target_against_pm": 3.8,
+          "shots_on_target_for_pm": 4.0,
+          "won": 2
+        },
+        "scope": {
+          "basis": "league only",
+          "competition": "Premiership"
+        },
+        "season": {
+          "conversion": 0.093,
+          "corners_against_pm": 6.44,
+          "corners_for_pm": 5.67,
+          "drawn": 2,
+          "fouls_against_pm": 12.11,
+          "fouls_for_pm": 12.44,
+          "ga": 10,
+          "ga_pg": 1.11,
+          "gd": 0,
+          "gd_pg": 0.0,
+          "gf": 10,
+          "gf_pg": 1.11,
+          "goals_against_pm": 1.11,
+          "goals_for_pm": 1.11,
+          "lost": 4,
+          "matches_with_shots": 9,
+          "played": 9,
+          "points": 11,
+          "ppg": 1.22,
+          "shot_accuracy": 0.278,
+          "shot_share": 0.441,
+          "shots_against_pm": 15.22,
+          "shots_for_pm": 12.0,
+          "shots_on_target_against_pm": 5.22,
+          "shots_on_target_for_pm": 3.33,
+          "won": 3
+        }
+      },
+      "order": 4,
+      "players": [
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": null,
+          "category": "scorer",
+          "minutes": null,
+          "name": "K. Nisbet",
+          "note": "4 league goals",
+          "player_id": 97896,
+          "role_family": "centre_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": null,
+          "category": "scorer",
+          "minutes": null,
+          "name": "A. Mouloua",
+          "note": "2 league goals",
+          "player_id": 303519,
+          "role_family": "centre_forward",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": null,
+          "category": "scorer",
+          "minutes": null,
+          "name": "L. Mayo",
+          "note": "1 league goals",
+          "player_id": 125695,
+          "role_family": "centre_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": null,
+          "category": "scorer",
+          "minutes": null,
+          "name": "G. Molloy",
+          "note": "1 league goals",
+          "player_id": 161806,
+          "role_family": "centre_back",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_confidence": null,
+          "availability_conflict": null,
+          "availability_note": null,
+          "availability_source": null,
+          "availability_status": null,
+          "availability_verified_at": null,
+          "bench_named": null,
+          "category": "scorer",
+          "minutes": null,
+          "name": "C. Ronan",
+          "note": "1 league goals",
+          "player_id": 61178,
+          "role_family": "central_midfield",
+          "starts": null,
+          "sub_apps": null,
+          "sub_minutes": null,
+          "three_cb_starts": null,
+          "two_cb_starts": null
+        }
+      ],
+      "read": "The league season is 10-10 with 11 points. Forwards scored 6 of 10 goals (60%); the data shows where the goals come from and what the team concedes. It does not prove the forwards are \"bailing out\" the defence, and there is no xG or shot-quality model here.",
+      "read_basis": "inferred",
+      "reason": null,
+      "status": "available",
+      "theme_id": "leaky_boat",
+      "title": "The leaky boat"
+    },
+    {
+      "basis": "mixed",
+      "caveats": [
+        "The mission is the documented trading-club framing, not the club's internal model.",
+        "Commercial and fanbase growth are context only; the public football data cannot measure them.",
+        "High turnover is not a verdict on any individual decision."
+      ],
+      "confidence": "medium",
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Arrivals / departures",
+          "note": "2026-27",
+          "value": "15 / 25"
+        },
+        {
+          "basis": "measured",
+          "label": "Median arrival age",
+          "note": "2026-27 arrivals",
+          "value": 26
+        },
+        {
+          "basis": "measured",
+          "label": "U21 minutes",
+          "note": "share of minutes",
+          "value": "8%"
+        },
+        {
+          "basis": "measured",
+          "label": "Era league range",
+          "note": "Cormack era",
+          "value": "3-10"
+        }
+      ],
+      "fan_question": "Is the trading model working, or just a leaky boat?",
+      "headline": "The model is visible in the turnover; the sporting cost is an unsettled back line.",
+      "horizon": "mission",
+      "implications": [],
+      "links": [
+        {
+          "href": "/history/",
+          "label": "The Cormack era"
+        },
+        {
+          "href": "/transfers/",
+          "label": "Transfers"
+        },
+        {
+          "href": "/recruitment/",
+          "label": "Recruitment"
+        }
+      ],
+      "method": "Join the published era scorecard, 2026-27 recruitment/selection aggregates and the transfer register. No historical ratings exist.",
+      "metrics": {
+        "commercial_context": "Commercial growth and fanbase expansion are part of the public framing of the Cormack era. They are context only: the public football data cannot measure them, so they are not scored.\n",
+        "coverage": {
+          "current_season_review": true,
+          "history_index": true,
+          "ratings_used": false,
+          "transfers": true
+        },
+        "defensive_arrivals": [
+          {
+            "date_effective": "2026-07-30",
+            "from_club_name": "Hibernian",
+            "player_name": "C. Cadden",
+            "transfer_kind": "permanent"
+          },
+          {
+            "date_effective": "2026-07-07",
+            "from_club_name": "Northampton",
+            "player_name": "N. Guinness-Walker",
+            "transfer_kind": "free"
+          },
+          {
+            "date_effective": "2026-06-30",
+            "from_club_name": "Kilmarnock",
+            "player_name": "L. Mayo",
+            "transfer_kind": "free"
+          },
+          {
+            "date_effective": "2026-06-30",
+            "from_club_name": "Leyton Orient",
+            "player_name": "D. Happe",
+            "transfer_kind": "free"
+          }
+        ],
+        "pillars": [
+          {
+            "basis": "curated",
+            "evidence": [
+              "transfers",
+              "minutes_by_age",
+              "inferred_net_range",
+              "sell_on_clauses"
+            ],
+            "id": "trading",
+            "statement": "Recruit players whose current output or potential is priced below their likely future value, give them minutes, and realise value when the offer and the sporting cost balance.\n",
+            "status": "available",
+            "title": "Buy low, develop, sell high"
+          },
+          {
+            "basis": "curated",
+            "evidence": [
+              "u21_minutes_share",
+              "academy_debuts",
+              "players_used"
+            ],
+            "id": "pathway",
+            "statement": "A development-and-sale model needs a pathway: academy graduates and young signings have to get first-team minutes, not just squad numbers.\n",
+            "status": "available",
+            "title": "Develop and play young players"
+          },
+          {
+            "basis": "curated",
+            "evidence": [
+              "formation_mix",
+              "style_proxies",
+              "tactical_notes"
+            ],
+            "id": "style",
+            "statement": "Recruitment and selection should serve a recognisable way of playing. The record shows the observed shapes and match-stat proxies, and labels the tactical reading separately.\n",
+            "status": "available",
+            "title": "A defined style of play"
+          },
+          {
+            "basis": "curated",
+            "evidence": [
+              "source_market_mix",
+              "age_at_arrival",
+              "known_fees"
+            ],
+            "id": "market-edge",
+            "statement": "Look for under-appreciated players in poorer teams, undervalued Scottish players, and markets the domestic game overlooks. The record shows the source market, age, known fee and minutes; it does not yet score \"undervalued\" itself.\n",
+            "status": "available",
+            "title": "Undervalued players and overlooked markets"
+          },
+          {
+            "basis": "curated",
+            "evidence": [
+              "players_used",
+              "manager_splits",
+              "league_finishes",
+              "honours"
+            ],
+            "id": "trade-off",
+            "statement": "A trading model accepts squad turnover and young-player variance in exchange for commercial and developmental upside. Cup runs are real achievements and a source of variance, not proof that the league model is working.\n",
+            "status": "available",
+            "title": "Squad turnover, league variance and cup runs"
+          }
+        ],
+        "pillars_source": "reference/history/era.yaml",
+        "recruitment": {
+          "age_bands": {
+            "21-24": 2,
+            "25-29": 11,
+            "30+": 1,
+            "u21": 1
+          },
+          "age_coverage": 1.0,
+          "arrivals": 15,
+          "average_age": 26.4,
+          "coverage": "audited",
+          "departures": 25,
+          "disclosed_count": 0,
+          "disclosed_income": 0,
+          "disclosed_net": null,
+          "disclosed_spend": 0,
+          "free_in": 9,
+          "free_out": 8,
+          "loans_in": 0,
+          "loans_out": 9,
+          "market_mix": [
+            {
+              "arrivals": 4,
+              "market": "scotland",
+              "share": 0.267
+            },
+            {
+              "arrivals": 3,
+              "market": "england",
+              "share": 0.2
+            },
+            {
+              "arrivals": 5,
+              "market": "europe",
+              "share": 0.333
+            },
+            {
+              "arrivals": 3,
+              "market": "other",
+              "share": 0.2
+            },
+            {
+              "arrivals": 0,
+              "market": "unknown",
+              "share": 0.0
+            }
+          ],
+          "market_unknown_count": 0,
+          "median_age": 26,
+          "note": "Disclosed fees only. Undisclosed is never zero and is excluded from the totals. Age is shown only where a birth date is known.",
+          "permanent_in": 6,
+          "permanent_out": 8,
+          "season": "2026-27",
+          "top_source_clubs": [
+            {
+              "arrivals": 2,
+              "club": "Kilmarnock"
+            },
+            {
+              "arrivals": 1,
+              "club": "FC Lugano"
+            },
+            {
+              "arrivals": 1,
+              "club": "FC Augsburg"
+            },
+            {
+              "arrivals": 1,
+              "club": "Yverdon Sport"
+            },
+            {
+              "arrivals": 1,
+              "club": "Hibernian"
+            }
+          ],
+          "undisclosed_count": 14,
+          "valuation": {
+            "anchor_count": 14,
+            "calibration_factor": 2.0,
+            "confidence": "low",
+            "counts": {
+              "disclosed": 0,
+              "free": 17,
+              "loan": 9,
+              "modelled": 14,
+              "reported": 0,
+              "unknown": 0
+            },
+            "currency": "GBP",
+            "fee_high_gbp": -495000,
+            "fee_low_gbp": -4155000,
+            "income_high_gbp": 7567500,
+            "income_low_gbp": 3907500,
+            "note": "Estimated net spend range from public/reported fees and a transparent model. The aggregate uses modelled midpoints with a 20% portfolio band on modelled gross flows, not the sum of every row's extremes. Free transfers count as zero fee; loan fees are excluded. Negative means income exceeds spend. Not an audited balance.",
+            "spend_high_gbp": 5242500,
+            "spend_low_gbp": 1582500
+          }
+        },
+        "scope": {
+          "horizon": "Cormack era",
+          "season": "2026-27"
+        },
+        "scorecard": {
+          "average_points": 48.6,
+          "average_position": 6,
+          "best_position": 3,
+          "honours_by_competition": {
+            "Scottish Cup": 1
+          },
+          "honours_total": 1,
+          "manager_count": 9,
+          "recruitment": {
+            "arrivals": 103,
+            "departures": 86,
+            "disclosed_count": 2,
+            "disclosed_income": 11000000.0,
+            "disclosed_net": -11000000.0,
+            "disclosed_spend": 0.0,
+            "market_mix": [
+              {
+                "arrivals": 20,
+                "market": "scotland",
+                "share": 0.194
+              },
+              {
+                "arrivals": 14,
+                "market": "england",
+                "share": 0.136
+              },
+              {
+                "arrivals": 23,
+                "market": "europe",
+                "share": 0.223
+              },
+              {
+                "arrivals": 3,
+                "market": "other",
+                "share": 0.029
+              },
+              {
+                "arrivals": 43,
+                "market": "unknown",
+                "share": 0.417
+              }
+            ],
+            "market_unknown_count": 43,
+            "note": "Disclosed fees only; pre-2024 windows are curated partial.",
+            "seasons": 7,
+            "undisclosed_count": 67,
+            "valuation": {
+              "confidence": "low",
+              "counts": {
+                "disclosed": 2,
+                "free": 66,
+                "loan": 54,
+                "modelled": 55,
+                "reported": 12,
+                "unknown": 0
+              },
+              "currency": "GBP",
+              "fee_high_gbp": -4576000,
+              "fee_low_gbp": -16866000,
+              "income_high_gbp": 38095000,
+              "income_low_gbp": 25805000,
+              "note": "Estimated net spend range from public/reported fees and a transparent model. The aggregate uses modelled midpoints with a 20% portfolio band on modelled gross flows, not the sum of every row's extremes. Free transfers count as zero fee; loan fees are excluded. Negative means income exceeds spend. Not an audited balance.",
+              "spend_high_gbp": 27374000,
+              "spend_low_gbp": 15084000
+            }
+          },
+          "seasons": 7,
+          "selection": {
+            "average_starter_age": 26.28,
+            "seasons": 7,
+            "u21_minutes_share": 0.077
+          },
+          "style": {
+            "corners_against_pm": 5.28,
+            "corners_for_pm": 5.06,
+            "coverage": "available",
+            "fouls_against_pm": 12.7,
+            "fouls_for_pm": 12.35,
+            "goals_against_pm": 1.35,
+            "goals_for_pm": 1.2,
+            "matches": 258,
+            "red_for_pm": 0.09,
+            "seasons": 7,
+            "shot_accuracy": 0.33,
+            "shots_against_pm": 12.25,
+            "shots_for_pm": 11.6,
+            "shots_on_target_against_pm": 4.17,
+            "shots_on_target_for_pm": 3.83,
+            "yellow_for_pm": 1.83
+          },
+          "worst_position": 10
+        },
+        "selection": {
+          "age_coverage": 0.811,
+          "average_starter_age": 26.99,
+          "debut_basis": "covered_history",
+          "debutants": [
+            {
+              "date": "2026-06-27T13:00:00+00:00",
+              "player_id": 430030,
+              "player_name": null
+            },
+            {
+              "date": "2026-06-27T13:00:00+00:00",
+              "player_id": 644159,
+              "player_name": null
+            },
+            {
+              "date": "2026-07-04T12:00:00+00:00",
+              "player_id": 379664,
+              "player_name": null
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 18068,
+              "player_name": "D. Happe"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 125695,
+              "player_name": "L. Mayo"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 108465,
+              "player_name": "N. Guinness-Walker"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 45010,
+              "player_name": "B. Lyons"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 668797,
+              "player_name": "Lewis Smith"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 61178,
+              "player_name": "C. Ronan"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 388510,
+              "player_name": "Tony Yogane"
+            },
+            {
+              "date": "2026-07-14T18:45:00+00:00",
+              "player_id": 303519,
+              "player_name": "A. Mouloua"
+            },
+            {
+              "date": "2026-07-18T16:00:00+00:00",
+              "player_id": 1141,
+              "player_name": "M. Müller"
+            },
+            {
+              "date": "2026-07-18T16:00:00+00:00",
+              "player_id": 44982,
+              "player_name": "L. Smith"
+            },
+            {
+              "date": "2026-07-18T16:00:00+00:00",
+              "player_id": 271395,
+              "player_name": "A. Briedl"
+            },
+            {
+              "date": "2026-07-25T14:00:00+00:00",
+              "player_id": 379662,
+              "player_name": "F. Marshall"
+            },
+            {
+              "date": "2026-07-25T14:00:00+00:00",
+              "player_id": 670299,
+              "player_name": "A. Fasanya"
+            },
+            {
+              "date": "2026-08-01T16:30:00+00:00",
+              "player_id": 44921,
+              "player_name": "C. Cadden"
+            },
+            {
+              "date": "2026-08-30T11:00:00+00:00",
+              "player_id": 267727,
+              "player_name": "M. Ntelo"
+            },
+            {
+              "date": "2026-10-03T13:00:00+00:00",
+              "player_id": 163064,
+              "player_name": "D. Klein"
+            },
+            {
+              "date": "2026-10-11T13:00:00+00:00",
+              "player_id": 84126,
+              "player_name": "H. Mahou"
+            }
+          ],
+          "fixtures_total": 20,
+          "fixtures_with_lineups": 18,
+          "formation_mix": [
+            {
+              "fixtures": 6,
+              "formation": "4-2-3-1",
+              "share": 0.333
+            },
+            {
+              "fixtures": 5,
+              "formation": "unknown",
+              "share": 0.278
+            },
+            {
+              "fixtures": 3,
+              "formation": "5-3-2",
+              "share": 0.167
+            },
+            {
+              "fixtures": 2,
+              "formation": "4-1-3-2",
+              "share": 0.111
+            },
+            {
+              "fixtures": 1,
+              "formation": "4-1-4-1",
+              "share": 0.056
+            },
+            {
+              "fixtures": 1,
+              "formation": "3-5-2",
+              "share": 0.056
+            }
+          ],
+          "lineup_coverage": 0.9,
+          "minutes_by_age_band": {
+            "21-24": {
+              "minutes": 2205,
+              "share": 0.127
+            },
+            "25-29": {
+              "minutes": 11187,
+              "share": 0.642
+            },
+            "30+": {
+              "minutes": 2594,
+              "share": 0.149
+            },
+            "u21": {
+              "minutes": 1437,
+              "share": 0.082
+            }
+          },
+          "note": "Formation is the kick-off shape. Ages use the season roster or a known birth date; missing ages are excluded, not filled. Top-by-starts is not a claim that those players started together.",
+          "players_used": 37,
+          "status": "available",
+          "tactical_note": "Selection metrics are current-season and coverage-labelled. A young or newly assembled squad can produce volatile minutes; the page shows the distribution rather than a single average.\n",
+          "top_by_starts": [
+            {
+              "age": 29,
+              "minutes": 1313,
+              "player_id": 97896,
+              "player_name": "K. Nisbet",
+              "role_family": "centre_forward",
+              "starts": 17
+            },
+            {
+              "age": 26,
+              "minutes": 1280,
+              "player_id": 125695,
+              "player_name": "L. Mayo",
+              "role_family": "centre_back",
+              "starts": 15
+            },
+            {
+              "age": 26,
+              "minutes": 1253,
+              "player_id": 108465,
+              "player_name": "N. Guinness-Walker",
+              "role_family": "full_back",
+              "starts": 15
+            },
+            {
+              "age": 33,
+              "minutes": 1260,
+              "player_id": 1141,
+              "player_name": "M. Müller",
+              "role_family": "goalkeeper",
+              "starts": 14
+            },
+            {
+              "age": 26,
+              "minutes": 1074,
+              "player_id": 57248,
+              "player_name": "A. Aremu",
+              "role_family": "central_midfield",
+              "starts": 14
+            },
+            {
+              "age": 28,
+              "minutes": 976,
+              "player_id": 61178,
+              "player_name": "C. Ronan",
+              "role_family": "attacking_midfield",
+              "starts": 13
+            },
+            {
+              "age": 29,
+              "minutes": 1045,
+              "player_id": 44921,
+              "player_name": "C. Cadden",
+              "role_family": "full_back",
+              "starts": 12
+            },
+            {
+              "age": 27,
+              "minutes": 1002,
+              "player_id": 18068,
+              "player_name": "D. Happe",
+              "role_family": "centre_back",
+              "starts": 12
+            },
+            {
+              "age": 20,
+              "minutes": 833,
+              "player_id": 388510,
+              "player_name": "Tony Yogane",
+              "role_family": "wide_forward",
+              "starts": 11
+            },
+            {
+              "age": 28,
+              "minutes": 1018,
+              "player_id": 231195,
+              "player_name": "T. Olusanya",
+              "role_family": null,
+              "starts": 9
+            },
+            {
+              "age": 29,
+              "minutes": 719,
+              "player_id": 45010,
+              "player_name": "B. Lyons",
+              "role_family": "central_midfield",
+              "starts": 9
+            }
+          ],
+          "u21_minutes_share": 0.082,
+          "unknown_age_minutes": 0
+        }
+      },
+      "order": 5,
+      "players": [],
+      "read": "The 2026-27 rebuild shows 15 arrivals and 25 departures, a median arrival age of 26, U21 minutes at 8% and 37 players used. That is the trading model visible in the squad: high turnover, young minutes and a changing back line. The data can show the trade-off; it cannot decide whether the club's risk appetite is right.",
+      "read_basis": "curated",
+      "reason": null,
+      "status": "available",
+      "theme_id": "mission_check",
+      "title": "The mission check"
+    }
+  ],
+  "title": "The bigger picture"
+}

@@ -1,0 +1,494 @@
+{
+  "$defs": {
+    "NeedsFamily": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Availability",
+          "type": "array"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "cover",
+            "replace",
+            "strengthen",
+            "monitor",
+            "none",
+            "unknown"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "caveats": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveats",
+          "type": "array"
+        },
+        "confidence": {
+          "title": "Confidence",
+          "type": "string"
+        },
+        "curated_prior": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Curated Prior"
+        },
+        "drivers": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Drivers",
+          "type": "array"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expected_slots": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Slots"
+        },
+        "family": {
+          "title": "Family",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "links": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/NeedsLink"
+          },
+          "title": "Links",
+          "type": "array"
+        },
+        "market_route": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Market Route",
+          "type": "object"
+        },
+        "measured": {
+          "additionalProperties": true,
+          "title": "Measured",
+          "type": "object"
+        },
+        "measured_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Measured Score"
+        },
+        "outgoing_risk": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Outgoing Risk",
+          "type": "object"
+        },
+        "players": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/NeedsPlayer"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priority"
+        },
+        "replace_status": {
+          "title": "Replace Status",
+          "type": "string"
+        },
+        "role_profile": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Role Profile",
+          "type": "object"
+        },
+        "roster_space": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Roster Space",
+          "type": "object"
+        },
+        "scouting_groups": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Scouting Groups",
+          "type": "array"
+        },
+        "urgency": {
+          "title": "Urgency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "family",
+        "label",
+        "category",
+        "urgency",
+        "confidence",
+        "basis",
+        "measured",
+        "replace_status"
+      ],
+      "title": "NeedsFamily",
+      "type": "object"
+    },
+    "NeedsLink": {
+      "additionalProperties": false,
+      "properties": {
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "href"
+      ],
+      "title": "NeedsLink",
+      "type": "object"
+    },
+    "NeedsPlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "arrival": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arrival"
+        },
+        "arrival_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arrival Kind"
+        },
+        "availability_conflict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Conflict"
+        },
+        "availability_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Note"
+        },
+        "availability_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Status"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "role_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Family"
+        },
+        "starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts"
+        },
+        "sub_apps": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sub Apps"
+        }
+      },
+      "title": "NeedsPlayer",
+      "type": "object"
+    },
+    "NeedsSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "NeedsSource",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "families": {
+      "items": {
+        "$ref": "#/$defs/NeedsFamily"
+      },
+      "title": "Families",
+      "type": "array"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "roster_space": {
+      "additionalProperties": true,
+      "title": "Roster Space",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "sources": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/NeedsSource"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "state": {
+      "enum": [
+        "fresh",
+        "partial",
+        "unavailable",
+        "stale"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    }
+  },
+  "required": [
+    "generated_at",
+    "season",
+    "club_id",
+    "state",
+    "summary",
+    "coverage",
+    "roster_space",
+    "families",
+    "notes"
+  ],
+  "title": "NeedsDocument",
+  "type": "object"
+}

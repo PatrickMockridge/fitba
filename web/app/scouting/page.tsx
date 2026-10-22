@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { getManifest } from "@/lib/data";
+import { BucketBars } from "@/components/BucketBars";
+import { PriorityProfiles } from "@/components/PriorityProfiles";
+import { getManifest, getNeeds, getRumourProfile } from "@/lib/data";
 
 export const metadata = { title: "Scouting · fitba" };
 
@@ -16,6 +18,8 @@ const POOL = [
 
 export default function ScoutingPage() {
   const manifest = getManifest();
+  const profile = getRumourProfile();
+  const needs = getNeeds();
   const coverage = manifest?.coverage.competitions ?? [];
   return (
     <>
@@ -28,6 +32,47 @@ export default function ScoutingPage() {
           separately so you can see why a player ranks where they do.
         </p>
         <span className="badge badge-warn">Method published · player data not yet published</span>
+      </section>
+
+      {needs ? <PriorityProfiles data={needs} /> : null}
+
+      <section className="card advisory-overlay">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">Advisory overlay · rumour signal</p>
+            <h2>What the links point to — not what the fit says</h2>
+          </div>
+          <span className="badge badge-warn">Advisory only</span>
+        </div>
+        <p>
+          The rumour cohort can suggest the profile Aberdeen&apos;s recruitment team
+          are looking at, but it is a small, editorial sample. It adjusts the
+          reading of the board, never the ranking itself: the data-driven fit
+          remains primary.
+        </p>
+        {profile && profile.sample_size ? (
+          <>
+            <p>{profile.narrative}</p>
+            {profile.low_confidence ? (
+              <span className="badge badge-warn">
+                Small cohort ({profile.sample_size}) — treat as a hint
+              </span>
+            ) : null}
+            <div className="grid two-col">
+              <BucketBars title="Rumour position mix" buckets={profile.buckets.position} />
+              <BucketBars title="Rumour age mix" buckets={profile.buckets.age_band} />
+            </div>
+            <p className="fine-print">{profile.note}</p>
+            <Link className="text-link" href="/rumours/">
+              Sources, statuses and the full profile →
+            </Link>
+          </>
+        ) : (
+          <p className="muted">
+            The overlay activates when the curated rumour register has active,
+            sourced rows. It is empty by design until then.
+          </p>
+        )}
       </section>
 
       <div className="grid three-col">

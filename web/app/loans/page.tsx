@@ -1,76 +1,93 @@
 import Link from "next/link";
+import { TransferCard } from "@/components/TransferCard";
+import { getTransfers } from "@/lib/data";
 
 export const metadata = { title: "Loans · fitba" };
 
 export default function LoansPage() {
+  const data = getTransfers();
+  if (!data) {
+    return (
+      <section className="empty-state">
+        <h1>No loan register published</h1>
+        <p>
+          Run <code>uv run fitba transfers</code> and then{" "}
+          <code>uv run fitba publish</code>.
+        </p>
+      </section>
+    );
+  }
+
   return (
     <>
       <section className="page-head">
-        <p className="eyebrow">Aberdeen out on loan</p>
-        <h1>Loanee tracker</h1>
+        <p className="eyebrow">Aberdeen · confirmed loans</p>
+        <h1>Loan register</h1>
         <p className="lede">
-          Minutes, goals, assists and position-specific development, labelled by what the
-          data actually is. The lower tiers are the hard part — and the most important.
+          Aberdeen players out on loan and players borrowed in. Every deal is
+          confirmed business from the register; loan terms are shown only where an
+          official source records them.
         </p>
-        <span className="badge badge-warn">Register ready · first verified entries pending</span>
+        <div className="hero-actions">
+          <span className="badge badge-neutral">{data.loans_out.length} out</span>
+          <span className="badge badge-neutral">{data.loans_in.length} in</span>
+          <span className="badge badge-warn">terms often unknown</span>
+        </div>
       </section>
 
-      <div className="empty-state card">
-        <h2>No verified loans published yet</h2>
-        <p>
-          The loan register is curated, not guessed. An entry is published only when it has
-          a club announcement or equivalent source, a loan club, dates and a recall flag.
-          Machine suggestions are reviewed separately and never auto-published.
-        </p>
-        <p className="fine-print">
-          Add entries in <code>reference/loans.yaml</code>, then run{" "}
-          <code>uv run fitba publish</code>.
-        </p>
-      </div>
+      <section className="section">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Out</p>
+            <h2>Aberdeen players on loan</h2>
+          </div>
+        </div>
+        <div className="transfer-grid">
+          {data.loans_out.map((loan) => (
+            <TransferCard key={loan.transfer_id} transfer={loan} />
+          ))}
+        </div>
+        {data.loans_out.length === 0 ? (
+          <p className="muted">No confirmed loans out in this register.</p>
+        ) : null}
+      </section>
 
-      <div className="grid three-col">
-        <section className="card">
-          <p className="eyebrow">Coverage · event</p>
-          <h2>Premiership</h2>
-          <p>
-            Event and player-match data where verified: minutes, xG/xA, progressive actions,
-            defensive actions and adjusted percentiles.
-          </p>
-        </section>
-        <section className="card">
-          <p className="eyebrow">Coverage · match</p>
-          <h2>Championship</h2>
-          <p>
-            Appearances and basic output where available. Rich event metrics are shown only
-            when the source covers the fixture.
-          </p>
-        </section>
-        <section className="card">
-          <p className="eyebrow">Coverage · curated</p>
-          <h2>League One &amp; Two</h2>
-          <p>
-            No free rich player feed exists here. Minutes and output come from a curated
-            match log with a source and verification date per row — and the UI says so.
-          </p>
-        </section>
-      </div>
+      <section className="section">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">In</p>
+            <h2>Players borrowed in</h2>
+          </div>
+        </div>
+        <div className="transfer-grid">
+          {data.loans_in.map((loan) => (
+            <TransferCard key={loan.transfer_id} transfer={loan} />
+          ))}
+        </div>
+        {data.loans_in.length === 0 ? (
+          <p className="muted">No confirmed loans in in this register.</p>
+        ) : null}
+      </section>
 
       <section className="card">
         <div className="card-head">
           <div>
-            <p className="eyebrow">Development view</p>
-            <h2>What a loanee card will show</h2>
+            <p className="eyebrow">Coverage</p>
+            <h2>What we know about loan minutes</h2>
           </div>
         </div>
-        <ul className="plain-list">
-          <li>Minutes share of the loan club&apos;s available minutes.</li>
-          <li>Goals, assists and xG/xA where the source supports it.</li>
-          <li>League-adjusted output compared with Aberdeen options at the same position.</li>
-          <li>Alerts for bench-warming, standout output, injury and recall windows.</li>
-          <li>A coverage badge and a link to every source used.</li>
-        </ul>
-        <Link className="text-link" href="/methodology/">
-          How coverage and adjustments work →
+        <p>
+          Premium-tier loans can be tracked through lineups and events where the
+          licensed feed covers the loan club. League One/Two minutes use a curated
+          match log; the page labels the coverage rather than pretending all tiers
+          are equal.
+        </p>
+        <p className="fine-print">
+          Loan duration, recall and obligation terms are not in the transfer feed.
+          They are shown only when confirmed by the club or a public record.
+        </p>
+        <Link className="text-link" href="/transfers/">
+          Full transfer register →
         </Link>
       </section>
     </>

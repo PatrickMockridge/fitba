@@ -1,0 +1,172 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "as_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "As Of"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "headline": {
+      "title": "Headline",
+      "type": "string"
+    },
+    "expectations": {
+      "additionalProperties": true,
+      "title": "Expectations",
+      "type": "object"
+    },
+    "managers": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Managers",
+      "type": "array"
+    },
+    "cup_runs": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Cup Runs",
+      "type": "array"
+    },
+    "europe": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Europe",
+      "type": "array"
+    },
+    "honour_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Honour Ids",
+      "type": "array"
+    },
+    "key_transfers": {
+      "additionalProperties": true,
+      "title": "Key Transfers",
+      "type": "object"
+    },
+    "recruitment": {
+      "additionalProperties": true,
+      "title": "Recruitment",
+      "type": "object"
+    },
+    "style": {
+      "additionalProperties": true,
+      "title": "Style",
+      "type": "object"
+    },
+    "selection": {
+      "additionalProperties": true,
+      "title": "Selection",
+      "type": "object"
+    },
+    "academy": {
+      "additionalProperties": true,
+      "title": "Academy",
+      "type": "object"
+    },
+    "tactical": {
+      "additionalProperties": true,
+      "title": "Tactical",
+      "type": "object"
+    },
+    "staff_changes": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Staff Changes",
+      "type": "array"
+    },
+    "review": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Review"
+    },
+    "interim_read": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Interim Read"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "season",
+    "status",
+    "as_of",
+    "reviewed_at",
+    "headline",
+    "expectations",
+    "managers",
+    "cup_runs",
+    "europe",
+    "honour_ids",
+    "key_transfers",
+    "recruitment",
+    "style",
+    "selection",
+    "academy",
+    "tactical",
+    "staff_changes",
+    "review",
+    "interim_read",
+    "coverage",
+    "sources"
+  ],
+  "title": "HistorySeasonDocument",
+  "type": "object"
+}

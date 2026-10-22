@@ -17,14 +17,23 @@ class Capability(StrEnum):
     LINEUPS = "lineups"
     HEATMAPS = "heatmaps"
     MARKET_VALUES = "market_values"
+    TRANSFERS = "transfers"
     LOANS = "loans"
+    NEWS = "news"
     TEAM_ELO = "team_elo"
+    FAN_SIGNAL = "fan_signal"
+    SENTIMENT = "sentiment"
+    PLAYER_ATTRIBUTES = "player_attributes"
+    PLAYER_ROLES = "player_roles"
+    INJURIES = "injuries"
 
 
 class Lane(StrEnum):
     OPEN = "open"
     DERIVED_DISPLAY = "derived_display"
-    PROHIBITED = "prohibited"
+    # Reading a public page is fair use; this lane means the source may not be
+    # ingested automatically or republished.
+    NO_PUBLICATION = "no_publication"
 
 
 @dataclass(slots=True)

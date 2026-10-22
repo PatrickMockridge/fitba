@@ -1,0 +1,41 @@
+# Curated tactical role context.
+#
+# These notes explain how a player is actually used when the nominal starting-XI
+# slot does not tell the whole story: inside forward, inverted full-back,
+# utility player, or a No. 10 rather than a traditional centre forward. They are
+# context, not role evidence; they never change the slot arithmetic or the
+# squad filter. Every note needs a player_key, note_type, note, source and
+# verified_at.
+#
+# `source` may be a public URL or the local context diary for an editorial
+# observation. The guard records which.
+players:
+  - player_key: api:player:231195
+    note_type: inside_forward
+    note: >
+      At Aberdeen used as an inside forward / No. 10 rather than a traditional
+      centre forward: gets to the byline or in behind, wins first and second
+      balls and stretches the defence. Led the line at a previous club but is
+      not a natural finisher; Nisbet and Mouloua hold the pure centre-forward
+      slots.
+    source: docs/context/aberdeen-2026-27.md
+    verified_at: 2026-10-21
+  - player_key: api:player:125695
+    note_type: position_change
+    note: >
+      Wears number 8 for Aberdeen; the manager intends to use him in central
+      midfield. At Kilmarnock he played centre-back because the team needed him
+      there. The current team-sheet starts still show centre-back, so that
+      remains the observed role; central midfield is the intended current usage,
+      not an observed start.
+    source: docs/context/aberdeen-2026-27.md
+    verified_at: 2026-10-21
+  - player_key: api:player:394703
+    note_type: position_change
+    note: >
+      Right back by trade. The 2025-26 Aberdeen team sheets place him on the
+      left (left back / left wing-back), with Devlin or Lobban on the right of
+      the same back line. The observed left-side starts are the team-sheet
+      evidence; right back is his natural side, not an observed 2025-26 slot.
+    source: docs/context/aberdeen-2026-27.md
+    verified_at: 2026-10-21

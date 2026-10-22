@@ -1,0 +1,62 @@
+# Sell-on clauses on Aberdeen's outgoing transfers.
+#
+# Only clauses with a public source are "confirmed". A clause reported in the
+# press but without an allowed public URL is "reported"; the page labels it as
+# unverified and does not link a restricted source. A blank percentage means the
+# clause is reported but the percentage is undisclosed. Never infer a clause.
+#
+# basis: profit | gross_fee | unknown
+# confidence: confirmed | reported | unknown
+# verification_aid: allowed_source | manual_third_party | none
+clauses:
+  - clause_id: sell-on-ramsay-liverpool
+    transfer_id: afc:cadef9587ea85378
+    player_key: api:player:135525
+    player_name: Calvin Ramsay
+    buyer_club_id: sco:provisional-liverpool
+    buyer_club_name: Liverpool
+    sale_date: '2022-06-19'
+    sell_on_pct: 17.5
+    basis: unknown
+    confidence: confirmed
+    source_urls:
+      - https://en.wikipedia.org/wiki/2022%E2%80%9323_Aberdeen_F.C._season
+    verification_aid: allowed_source
+    verified_at: '2026-10-21'
+    notes: >
+      Wikipedia records an initial £4.2m, up to £2.5m in add-ons and a 17.5%
+      sell-on. The basis of the percentage is not stated.
+
+  - clause_id: sell-on-ferguson-bologna
+    transfer_id: afc:75a0927d6d671e7f
+    player_key: api:player:44814
+    player_name: Lewis Ferguson
+    buyer_club_id: sco:provisional-bologna
+    buyer_club_name: Bologna
+    sale_date: '2022-07-12'
+    sell_on_pct: 20.0
+    basis: unknown
+    confidence: reported
+    source_urls: []
+    verification_aid: manual_third_party
+    verified_at: '2026-10-21'
+    notes: >
+      Reported in the press as a 20% sell-on. No allowed public URL states the
+      percentage; treat as reported, not confirmed. The basis is not stated.
+
+  - clause_id: sell-on-miovski-girona
+    transfer_id: afc:d5e7216b339d7d45
+    player_key: api:player:109564
+    player_name: Bojan Miovski
+    buyer_club_id: sco:provisional-girona
+    buyer_club_name: Girona
+    sale_date: '2024-08-15'
+    sell_on_pct: null
+    basis: unknown
+    confidence: reported
+    source_urls: []
+    verification_aid: manual_third_party
+    verified_at: '2026-10-21'
+    notes: >
+      A sell-on clause was reported as part of the club-record sale; the
+      percentage was not disclosed. Do not infer it.

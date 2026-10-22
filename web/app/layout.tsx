@@ -7,7 +7,7 @@ import { getManifest } from "@/lib/data";
 export const metadata: Metadata = {
   title: "fitba — Scottish football, Aberdeen-first",
   description:
-    "League tables, Aberdeen analysis and player scouting across the Scottish football pyramid.",
+    "League tables, Aberdeen analysis, transfers and the rumour mill across the Scottish football pyramid.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,11 +25,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
             </Link>
             <nav className="nav" aria-label="Main">
-              <Link href="/scotland/">Pyramid</Link>
-              <Link href="/clubs/aberdeen/">Aberdeen</Link>
-              <Link href="/scouting/">Scouting</Link>
-              <Link href="/loans/">Loans</Link>
-              <Link href="/methodology/">Method</Link>
+              <Link href="/matchday/">Matchday</Link>
+              <Link href="/themes/">Themes</Link>
+              <Link href="/squad/">Squad</Link>
+              <Link href="/recruitment/">Off the pitch</Link>
+              <Link href="/history/">The record</Link>
+              <Link href="/news/">News &amp; rumours</Link>
             </nav>
           </div>
         </header>
@@ -44,6 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div className="footer-meta">
               <FreshnessBadge manifest={manifest} />
+              <Link href="/methodology/">Method</Link>
+              <Link href="/about/">About</Link>
+              <Link href="/sources/">Sources</Link>
               <Link href="/status/">Data status</Link>
             </div>
           </div>
