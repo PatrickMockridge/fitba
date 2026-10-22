@@ -32,16 +32,23 @@ league aggregates. The pre-2019-20 baseline remains on the history pages.
 
 1. Header: competition, round, date, venue, referee, score, half-time, extra
    time and penalties.
-2. The read: a deterministic summary from events and measured stats.
-3. Match stats: the shared league stat row first; API possession, passes, shot
+2. Scoreboard: final score, goals with scorer/minute/assist/penalty badge, red
+   cards with straight-red vs second-yellow labels, shootout score and the
+   Aberdeen/opposition team key. See [match-scoreboard.md](match-scoreboard.md).
+3. The read: a deterministic summary from events and measured stats.
+4. Match stats: the shared league stat row first; API possession, passes, shot
    locations, saves and provider xG where available. Every row names its source.
-4. fxG and provider xG, separately. fxG is never blended with provider xG.
-5. Timeline: goals, assists, own goals, penalties, cards, substitutions, VAR
-   and shootouts, with the score after each goal.
-6. Lineups: observed formation, starting XI, substitutes and coach.
-7. Player stats: provider rating and match output where available.
-8. Form context: the five matches before and after.
+5. fxG and provider xG, separately. fxG is never blended with provider xG.
+6. Timeline: goals, assists, own goals, penalties, cards, substitutions, VAR
+   and shootouts, with the score after each regular goal.
+7. Lineups: observed formation, starting XI, substitutes and coach.
+8. Player stats: provider rating and match output where available.
 9. Coverage: events, lineups, team stats, player stats and fxG availability.
+10. Form context and the previous/next links.
+
+Aberdeen is red throughout the scoreboard, stats, fxG sides, timeline, lineups
+and player stats. The opponent is neutral. Team names and a visible team key
+remain, so colour is never the only cue.
 
 ## Depth states
 

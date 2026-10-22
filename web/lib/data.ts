@@ -2555,6 +2555,48 @@ export interface FixtureStatsRow {
   basis: string;
 }
 
+export type MatchSide = "home" | "away";
+
+export interface FixtureScoreboardGoal {
+  minute: number | null;
+  extra_minute: number | null;
+  side: MatchSide;
+  team_name: string;
+  player_name: string | null;
+  assist_name: string | null;
+  is_penalty: boolean;
+  is_own_goal: boolean;
+  score_after: { home: number; away: number };
+}
+
+export interface FixtureScoreboardRedCard {
+  minute: number | null;
+  extra_minute: number | null;
+  side: MatchSide;
+  team_name: string;
+  player_name: string | null;
+  card_type: "straight_red" | "second_yellow";
+  detail: string | null;
+}
+
+export interface FixtureScoreboardSide {
+  side: MatchSide;
+  team_id: string;
+  team_name: string;
+  is_aberdeen: boolean;
+  goals: FixtureScoreboardGoal[];
+  red_cards: FixtureScoreboardRedCard[];
+}
+
+export interface FixtureScoreboard {
+  home: FixtureScoreboardSide;
+  away: FixtureScoreboardSide;
+  shootout: { home: number; away: number } | null;
+  events_available: boolean;
+  goals_complete: boolean;
+  note: string;
+}
+
 export interface FixtureTimelineRow {
   minute: number | null;
   extra_minute: number | null;
@@ -2563,11 +2605,17 @@ export interface FixtureTimelineRow {
   assist_name: string | null;
   event_type: string | null;
   detail: string | null;
+  comments: string | null;
+  side: MatchSide | null;
+  beneficiary_side: MatchSide | null;
+  card_type: "straight_red" | "second_yellow" | null;
   is_goal: boolean;
   is_own_goal: boolean;
   is_penalty: boolean;
   is_shootout: boolean;
   is_red_card: boolean;
+  is_second_yellow: boolean;
+  is_missed_penalty: boolean;
   is_var: boolean;
   score_after: { home: number; away: number };
 }
@@ -2596,6 +2644,8 @@ export interface FixturePlayerStat {
   player_id: number | null;
   player_name: string | null;
   team_id: number | null;
+  team_name: string | null;
+  is_aberdeen: boolean | null;
   rating: number | null;
   minutes: number | null;
   goals: number | null;
@@ -2640,6 +2690,7 @@ export interface FixtureDocument {
     href: string;
   };
   depth: "full" | "result" | "score";
+  scoreboard: FixtureScoreboard;
   summary: {
     headline: string;
     basis: string;

@@ -85,7 +85,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Ross",
@@ -362,7 +362,97 @@
     "season": "/history/2019-20/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": "S. Allan",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 39,
+          "player_name": "C. Doidge",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Hibernian"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [
+        {
+          "card_type": "straight_red",
+          "detail": "Red Card",
+          "extra_minute": null,
+          "minute": 55,
+          "player_name": "Steven Whittaker",
+          "side": "away",
+          "team_name": "Hibernian"
+        }
+      ],
+      "side": "away",
+      "team_id": "sco:hibernian",
+      "team_name": "Hibernian"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": true,
+          "is_penalty": false,
+          "minute": 64,
+          "player_name": "A. Jackson",
+          "score_after": {
+            "away": 1,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 66,
+          "player_name": "A. Considine",
+          "score_after": {
+            "away": 1,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 82,
+          "player_name": "C. Main",
+          "score_after": {
+            "away": 1,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -458,15 +548,11 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "The event feed records 4 goals; the final score is 3-1. The score is authoritative."
-      },
-      {
-        "basis": "measured",
         "text": "C. Doidge opened the scoring on 39 minutes, assisted by S. Allan."
       },
       {
         "basis": "measured",
-        "text": "C. Main made it 2-2 on 82 minutes."
+        "text": "A. Jackson made it 1-1 on 64 minutes."
       },
       {
         "basis": "measured",
@@ -494,24 +580,27 @@
     "reconciliation": {
       "event_goals": 4,
       "event_score": {
-        "away": 2,
-        "home": 2
+        "away": 1,
+        "home": 3
       },
       "final_score": {
         "away": 1,
         "home": 3
       },
-      "matched": false
+      "matched": true
     }
   },
   "timeline": [
     {
       "assist_name": "S. Allan",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -524,15 +613,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -545,15 +638,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -566,15 +663,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": "straight_red",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
@@ -587,15 +688,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": "M. Hallberg",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -608,15 +713,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": "B. Anderson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -629,15 +738,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Own Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": true,
       "is_penalty": false,
       "is_red_card": false,
@@ -647,18 +760,22 @@
       "minute": 64,
       "player_name": "A. Jackson",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -668,18 +785,22 @@
       "minute": 65,
       "player_name": "Melker Hallberg",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -689,18 +810,22 @@
       "minute": 66,
       "player_name": "A. Considine",
       "score_after": {
-        "away": 2,
-        "home": 1
+        "away": 1,
+        "home": 2
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Omeonga",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -710,18 +835,22 @@
       "minute": 69,
       "player_name": "S. Allan",
       "score_after": {
-        "away": 2,
-        "home": 1
+        "away": 1,
+        "home": 2
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": "M. Devlin",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -731,18 +860,22 @@
       "minute": 72,
       "player_name": "C. McLennan",
       "score_after": {
-        "away": 2,
-        "home": 1
+        "away": 1,
+        "home": 2
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Horgan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -752,18 +885,22 @@
       "minute": 82,
       "player_name": "L. Stevenson",
       "score_after": {
-        "away": 2,
-        "home": 1
+        "away": 1,
+        "home": 2
       },
+      "side": "away",
       "team_name": "Hibernian"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -773,18 +910,22 @@
       "minute": 82,
       "player_name": "C. Main",
       "score_after": {
-        "away": 2,
-        "home": 2
+        "away": 1,
+        "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Hernández",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -794,18 +935,22 @@
       "minute": 84,
       "player_name": "N. McGinn",
       "score_after": {
-        "away": 2,
-        "home": 2
+        "away": 1,
+        "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -815,9 +960,10 @@
       "minute": 87,
       "player_name": "Paul McGinn",
       "score_after": {
-        "away": 2,
-        "home": 2
+        "away": 1,
+        "home": 3
       },
+      "side": "away",
       "team_name": "Hibernian"
     }
   ],

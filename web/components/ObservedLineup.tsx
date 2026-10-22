@@ -5,35 +5,55 @@ function playerName(player: FixtureLineup["starters"][number]): string {
   return `${number}${player.player_name ?? "Unknown player"}`;
 }
 
-export function ObservedLineup({ lineup }: { lineup: FixtureLineup | null }) {
+export function ObservedLineup({
+  lineup,
+  teamName,
+  isAberdeen,
+}: {
+  lineup: FixtureLineup | null;
+  teamName: string;
+  isAberdeen: boolean;
+}) {
+  const team = isAberdeen ? "aberdeen" : "opponent";
+  const role = isAberdeen ? "Aberdeen" : "Opposition";
   if (!lineup) {
     return (
-      <div className="match-lineup" data-contract="match.lineup">
+      <section className="match-lineup" data-contract="match.lineup" data-team={team}>
+        <p className="eyebrow">
+          {role} · {teamName}
+        </p>
         <p className="fine-print">The lineup for this team is unavailable.</p>
-      </div>
+      </section>
     );
   }
   return (
-    <div className="match-lineup" data-contract="match.lineup">
+    <section className="match-lineup" data-contract="match.lineup" data-team={team}>
       <div className="section-head">
         <div>
-          <p className="eyebrow">{lineup.team_name}</p>
+          <p className="eyebrow">
+            {role} · {teamName}
+          </p>
           <h3>{lineup.formation ?? "Formation unknown"}</h3>
         </div>
         <span className="badge badge-neutral">{lineup.coach_name ?? "Coach unknown"}</span>
       </div>
       <div className="table-wrap">
         <table className="league-table">
+          <caption className="fine-print">
+            {teamName} starting XI and substitutes.
+          </caption>
           <thead>
             <tr>
-              <th>Starter</th>
-              <th>Role</th>
-              <th className="num">Min</th>
+              <th scope="col">Starter</th>
+              <th scope="col">Role</th>
+              <th scope="col" className="num">
+                Min
+              </th>
             </tr>
           </thead>
           <tbody>
             {lineup.starters.map((player, index) => (
-              <tr key={`${player.player_id ?? index}-start`}>
+              <tr key={`${player.player_id ?? index}-start`} data-team={team}>
                 <td>{playerName(player)}</td>
                 <td>{player.role ?? player.position ?? "—"}</td>
                 <td className="num">{player.minutes ?? "—"}</td>
@@ -53,6 +73,6 @@ export function ObservedLineup({ lineup }: { lineup: FixtureLineup | null }) {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }

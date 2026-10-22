@@ -39,7 +39,7 @@
     "after": [],
     "before": []
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Goodwin",
@@ -332,7 +332,44 @@
     "season": "/history/2022-23/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": "W. Robertson",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 19,
+          "player_name": "J. Kirkpatrick",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Darvel"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "other:darvel",
+      "team_name": "Darvel"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -386,11 +423,14 @@
   "timeline": [
     {
       "assist_name": "W. Robertson",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -403,15 +443,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -424,15 +468,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -445,15 +493,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -466,15 +518,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "B. Miovski",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -487,15 +543,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "V. Besuijen",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -508,15 +568,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -529,15 +593,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": "A. Stirling",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -550,15 +618,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": "J. Hayes",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -571,15 +643,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Ferguson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -592,15 +668,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": "C. Moore",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -613,15 +693,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": "T. Reilly",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -634,15 +718,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": "C. Roberts",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -655,15 +743,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": 1,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -676,15 +768,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Darvel"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": 1,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -697,15 +793,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": 3,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -718,15 +818,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -739,6 +843,7 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

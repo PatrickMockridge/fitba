@@ -85,7 +85,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "Stephen Robinson",
@@ -394,7 +394,58 @@
     "season": "/history/2026-27/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 35,
+          "player_name": "K. Nisbet",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "C. Ronan",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 76,
+          "player_name": "K. Nisbet",
+          "score_after": {
+            "away": 2,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "other:brora-rangers",
+      "team_name": "Brora Rangers"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -452,11 +503,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -469,15 +523,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -490,15 +548,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": "N. Devlin",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -511,15 +573,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "T. Olusanya",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -532,15 +598,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "G. Molloy",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -553,15 +623,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "M. Ewan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -574,15 +648,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": "J. Rodgers",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -595,15 +673,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -616,15 +698,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": "C. Ronan",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -637,15 +723,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "A. Mouloua",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -658,15 +748,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. Milne",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -679,15 +773,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "K. Samuels",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -700,15 +798,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": "B. Gardiner",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -721,15 +823,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": "A. Wilson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -742,15 +848,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -763,6 +873,7 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Brora Rangers"
     }
   ],

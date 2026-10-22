@@ -95,7 +95,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Thelin",
@@ -404,7 +404,86 @@
     "season": "/history/2024-25/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": "G. Molloy",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 27,
+          "player_name": "N. Devlin",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "S. Morris",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 34,
+          "player_name": "J. McGrath",
+          "score_after": {
+            "away": 2,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 54,
+          "player_name": "L. Clarkson",
+          "score_after": {
+            "away": 3,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "R. Duncan",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 62,
+          "player_name": "S. Morris",
+          "score_after": {
+            "away": 4,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:east-kilbride",
+      "team_name": "East Kilbride"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -458,11 +537,14 @@
   "timeline": [
     {
       "assist_name": "G. Molloy",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -475,15 +557,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Morris",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -496,15 +582,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -517,15 +607,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "P. Ambrose",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -538,15 +632,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -559,15 +657,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -580,15 +682,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "A. Stirling",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -601,15 +707,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "home",
       "team_name": "East Kilbride"
     },
     {
       "assist_name": "R. Jensen",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -622,15 +732,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. McGarry",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -643,15 +757,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Thomson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -664,15 +782,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "home",
       "team_name": "East Kilbride"
     },
     {
       "assist_name": "A. Livingstone",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -685,15 +807,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "home",
       "team_name": "East Kilbride"
     },
     {
       "assist_name": "T. Daramola",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -706,15 +832,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "home",
       "team_name": "East Kilbride"
     },
     {
       "assist_name": "F. Boyd",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -727,15 +857,19 @@
         "away": 4,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. Biggar",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -748,6 +882,7 @@
         "away": 4,
         "home": 0
       },
+      "side": "home",
       "team_name": "East Kilbride"
     }
   ],

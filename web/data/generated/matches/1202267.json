@@ -85,7 +85,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Thelin",
@@ -386,7 +386,72 @@
     "season": "/history/2024-25/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": "S. Morris",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 6,
+          "player_name": "E. Sokler",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 23,
+          "player_name": "G. Shinnie",
+          "score_after": {
+            "away": 2,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "L. Clarkson",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 37,
+          "player_name": "E. Sokler",
+          "score_after": {
+            "away": 3,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:queen-of-the-south",
+      "team_name": "Queen of the South"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -440,11 +505,14 @@
   "timeline": [
     {
       "assist_name": "S. Morris",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -457,15 +525,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -478,15 +550,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "L. Clarkson",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -499,15 +575,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -520,15 +600,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": "Z. Craic",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -541,15 +625,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": "J. McGarry",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -562,15 +650,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -583,15 +675,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "P. Ambrose",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -604,15 +700,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "K. McKechnie",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -625,15 +725,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": "J. Walker",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -646,15 +750,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": "J. Milne",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -667,15 +775,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "F. Boyd",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -688,15 +800,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -709,15 +825,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": "E. Ross",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -730,15 +850,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": 1,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -751,15 +875,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Queen of the South"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": 3,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -772,6 +900,7 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

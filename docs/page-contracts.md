@@ -131,6 +131,12 @@ Must remain visible:
 
 - Score, competition, round, date, venue, referee, half-time and penalties where
   present.
+- The scoreboard: final score, goals with scorer, minute, assist and penalty
+  marker; red cards with explicit "Straight red" and "Second yellow" labels;
+  shootout score; the team key; and the event-feed completeness note.
+- Aberdeen in red and the opposition neutral across the scoreboard, stats, fxG,
+  timeline, lineups and player stats. Team names and a visible team key remain;
+  colour is never the only cue.
 - The deterministic read with measured/inferred/unknown basis.
 - Match stats table with source and basis per row.
 - fxG and provider xG separately, or an explicit unavailable state.
@@ -141,8 +147,9 @@ Must remain visible:
 - Previous/next match, season and match-record links.
 
 Forbidden: a missing data class shown as zero, an invented attendance or
-injury, a question H1, "deserved"/"dominated" verdict language, or a fixture
-page omitted because the feed is incomplete.
+injury, a question H1, "deserved"/"dominated" verdict language, a fixture page
+omitted because the feed is incomplete, colour-only team identity, a shootout
+kick counted as a match goal, or a second yellow rendered as a straight red.
 
 ### `/themes/` — legacy redirect
 

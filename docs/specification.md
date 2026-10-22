@@ -73,7 +73,7 @@ reworded or reorganised if the evidence and source remain visible.
 | `/analysis/` | Data analysis: chairman frame, owner view, six claims with count/status/evidence, fxG block, benchmark, coverage | method, definitions, long caveats | layout and visual treatment |
 | `/analysis/xg/` | fxG model card, provider-xG gate, aggregates, coverage | model detail, limitations | layout |
 | `/matches/` | played-fixture index, scores, depth and links | grouping | layout |
-| `/matches/<fixture_id>/` | score, summary, stats, fxG, timeline, lineups, player stats, form, coverage | summary variants, method | layout |
+| `/matches/<fixture_id>/` | scoreboard (score, goals, assists, penalties, red cards), Aberdeen/opposition split, summary, stats, fxG, timeline, lineups, player stats, form, coverage | summary variants, method | layout |
 | `/recruitment/` | seven families, priority/urgency/category/confidence, slots, counts, market route, roster, player table | caveats/method | layout |
 | `/transfers/` | verification badges, net range, position/fee/loan/source, sell-on table, completeness, coverage | how-to-read, fee method | card styling |
 | `/loans/` | in/out counts, every loan card with terms or unknown, coverage, sources | coverage prose | styling |

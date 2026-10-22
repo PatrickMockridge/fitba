@@ -29,14 +29,15 @@ def _minute(event: dict[str, Any]) -> int:
 
 
 def _goal_side(event: dict[str, Any], home_name: str) -> str:
-    side = (
+    if event.get("beneficiary_side") in {"home", "away"}:
+        return str(event["beneficiary_side"])
+    if event.get("side") in {"home", "away"}:
+        return str(event["side"])
+    return (
         "home"
         if str(event.get("team_name") or "").casefold() == str(home_name).casefold()
         else "away"
     )
-    if event.get("is_own_goal"):
-        return "away" if side == "home" else "home"
-    return side
 
 
 def _goal_events(events: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:

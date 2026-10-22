@@ -76,7 +76,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "Stephen Robinson",
@@ -277,7 +277,101 @@
     "season": "/history/2026-27/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 30,
+          "player_name": "J. Milne",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 48,
+          "player_name": "A. Mouloua",
+          "score_after": {
+            "away": 2,
+            "home": 1
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 61,
+          "player_name": "A. Mouloua",
+          "score_after": {
+            "away": 3,
+            "home": 1
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 82,
+          "player_name": "L. Smith",
+          "score_after": {
+            "away": 4,
+            "home": 1
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 44,
+          "player_name": "K. Bray",
+          "score_after": {
+            "away": 1,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Dunfermline Athletic"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:dunfermline-athletic",
+      "team_name": "Dunfermline Athletic"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -306,11 +400,11 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "The event feed records 5 goals; the final score is 1-4. The score is authoritative."
+        "text": "J. Milne opened the scoring on 30 minutes."
       },
       {
         "basis": "measured",
-        "text": "J. Milne opened the scoring on 30 minutes."
+        "text": "K. Bray made it 1-1 on 44 minutes."
       },
       {
         "basis": "unknown",
@@ -322,24 +416,27 @@
     "reconciliation": {
       "event_goals": 5,
       "event_score": {
-        "away": 5,
-        "home": 0
+        "away": 4,
+        "home": 1
       },
       "final_score": {
         "away": 4,
         "home": 1
       },
-      "matched": false
+      "matched": true
     }
   },
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -352,15 +449,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -370,18 +471,22 @@
       "minute": 44,
       "player_name": "K. Bray",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "N. Devlin",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -391,18 +496,22 @@
       "minute": 46,
       "player_name": "T. Yogane",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "M. Knoester",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -412,18 +521,22 @@
       "minute": 46,
       "player_name": "K. Nisbet",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "A. Mouloua",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -433,18 +546,22 @@
       "minute": 46,
       "player_name": "G. Molloy",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "A. Briedl",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -454,18 +571,22 @@
       "minute": 46,
       "player_name": "N. Guinness-Walker",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "L. Smith",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -475,18 +596,22 @@
       "minute": 46,
       "player_name": "C. Ronan",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "H. Mahou",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 6",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -496,18 +621,22 @@
       "minute": 46,
       "player_name": "C. Cadden",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Armstrong",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 7",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -517,18 +646,22 @@
       "minute": 46,
       "player_name": "M. Ntelo",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "F. Marshall",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 8",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -538,18 +671,22 @@
       "minute": 47,
       "player_name": "A. Aremu",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 1,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -559,18 +696,22 @@
       "minute": 48,
       "player_name": "A. Mouloua",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 2,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "E. Gyamfi",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 9",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -580,18 +721,22 @@
       "minute": 61,
       "player_name": "D. Happe",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 2,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -601,18 +746,22 @@
       "minute": 61,
       "player_name": "A. Mouloua",
       "score_after": {
-        "away": 4,
-        "home": 0
+        "away": 3,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "B. Lyons",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 10",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -622,18 +771,22 @@
       "minute": 77,
       "player_name": "J. Milne",
       "score_after": {
-        "away": 4,
-        "home": 0
+        "away": 3,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -643,9 +796,10 @@
       "minute": 82,
       "player_name": "L. Smith",
       "score_after": {
-        "away": 5,
-        "home": 0
+        "away": 4,
+        "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

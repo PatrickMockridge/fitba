@@ -29,6 +29,7 @@ REQUIRED = [
     "matchday.md",
     "analysis.md",
     "fixtures.md",
+    "match-scoreboard.md",
     "xg.md",
     "provenance.md",
     "availability.md",

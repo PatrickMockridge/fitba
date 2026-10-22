@@ -9,13 +9,21 @@ export function MatchStatsTable({
   stats,
   home,
   away,
+  aberdeenIsHome,
 }: {
   stats: FixtureDocument["stats"];
   home: string;
   away: string;
+  aberdeenIsHome: boolean;
 }) {
+  const homeTeam = aberdeenIsHome ? "aberdeen" : "opponent";
+  const awayTeam = aberdeenIsHome ? "opponent" : "aberdeen";
   return (
-    <section className="card" data-contract="match.stats">
+    <section
+      className="card match-stats-table"
+      data-contract="match.stats"
+      data-team-split="aberdeen-opponent"
+    >
       <div className="section-head">
         <div>
           <p className="eyebrow">Match stats</p>
@@ -24,21 +32,32 @@ export function MatchStatsTable({
       </div>
       <div className="table-wrap">
         <table className="league-table">
+          <caption className="fine-print">
+            {home} and {away}, with Aberdeen highlighted in red.
+          </caption>
           <thead>
             <tr>
-              <th>Stat</th>
-              <th className="num">{home}</th>
-              <th className="num">{away}</th>
-              <th>Source</th>
-              <th>Basis</th>
+              <th scope="col">Stat</th>
+              <th scope="col" className="num" data-team={homeTeam}>
+                {home}
+              </th>
+              <th scope="col" className="num" data-team={awayTeam}>
+                {away}
+              </th>
+              <th scope="col">Source</th>
+              <th scope="col">Basis</th>
             </tr>
           </thead>
           <tbody>
             {stats.rows.map((row) => (
               <tr key={row.key}>
                 <td>{row.label}</td>
-                <td className="num">{value(row.home)}</td>
-                <td className="num">{value(row.away)}</td>
+                <td className="num" data-team={homeTeam}>
+                  {value(row.home)}
+                </td>
+                <td className="num" data-team={awayTeam}>
+                  {value(row.away)}
+                </td>
                 <td>{row.source}</td>
                 <td>{row.basis}</td>
               </tr>

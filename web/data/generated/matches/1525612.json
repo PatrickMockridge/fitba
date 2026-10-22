@@ -58,7 +58,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "Peter Leven",
@@ -219,7 +219,72 @@
     "season": "/history/2025-26/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 14,
+          "player_name": "M. Todd",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Dunfermline Athletic"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 22,
+          "player_name": "O. Thomas",
+          "score_after": {
+            "away": 0,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "Dunfermline Athletic"
+        },
+        {
+          "assist_name": "C. Kane",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 61,
+          "player_name": "O. Thomas",
+          "score_after": {
+            "away": 0,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "Dunfermline Athletic"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:dunfermline-athletic",
+      "team_name": "Dunfermline Athletic"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -349,10 +414,6 @@
     "bullets": [
       {
         "basis": "measured",
-        "text": "The event feed records 3 goals; the final score is 3-0. The score is authoritative."
-      },
-      {
-        "basis": "measured",
         "text": "M. Todd opened the scoring on 14 minutes."
       }
     ],
@@ -361,24 +422,27 @@
     "reconciliation": {
       "event_goals": 3,
       "event_score": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
       "final_score": {
         "away": 0,
         "home": 3
       },
-      "matched": false
+      "matched": true
     }
   },
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -388,18 +452,22 @@
       "minute": 14,
       "player_name": "M. Todd",
       "score_after": {
-        "away": 1,
-        "home": 0
+        "away": 0,
+        "home": 1
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -409,18 +477,22 @@
       "minute": 22,
       "player_name": "O. Thomas",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 0,
+        "home": 2
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "S. Nilsen",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -430,18 +502,22 @@
       "minute": 46,
       "player_name": "L. Cameron",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 0,
+        "home": 2
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "T. Olusanya",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -451,18 +527,22 @@
       "minute": 46,
       "player_name": "N. Milanovic",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 0,
+        "home": 2
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "G. Molloy",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -472,18 +552,22 @@
       "minute": 46,
       "player_name": "M. Frame",
       "score_after": {
-        "away": 2,
-        "home": 0
+        "away": 0,
+        "home": 2
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. Kane",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -493,18 +577,22 @@
       "minute": 61,
       "player_name": "O. Thomas",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "S. Kearney",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -514,18 +602,22 @@
       "minute": 65,
       "player_name": "A. Amade",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "C. Hamilton",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -535,18 +627,22 @@
       "minute": 66,
       "player_name": "C. Kane",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -556,18 +652,22 @@
       "minute": 70,
       "player_name": "Charlie Gilmour",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "M. Lazetic",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -577,18 +677,22 @@
       "minute": 74,
       "player_name": "S. Armstrong",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "L. Morrison",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -598,18 +702,22 @@
       "minute": 76,
       "player_name": "T. McIntyre",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "K. Benedictus",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -619,18 +727,22 @@
       "minute": 80,
       "player_name": "F. Turley",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "J. Cooper",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -640,18 +752,22 @@
       "minute": 80,
       "player_name": "M. Todd",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": "T. Oakley-Boothe",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -661,18 +777,22 @@
       "minute": 83,
       "player_name": "O. Thomas",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
-      "team_name": "Dunfermline"
+      "side": "home",
+      "team_name": "Dunfermline Athletic"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -682,9 +802,10 @@
       "minute": 89,
       "player_name": "Graeme Shinnie",
       "score_after": {
-        "away": 3,
-        "home": 0
+        "away": 0,
+        "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

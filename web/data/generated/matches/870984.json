@@ -85,7 +85,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": null,
     "home": null
@@ -98,7 +98,29 @@
     "season": "/history/2022-23/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": false,
+    "goals_complete": false,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "other:buckie-thistle",
+      "team_name": "Buckie Thistle"
+    },
+    "note": "The event feed is unavailable; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",

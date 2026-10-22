@@ -131,7 +131,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -408,7 +408,72 @@
     "season": "/history/2019-20/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": "G. Leigh",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 15,
+          "player_name": "S. Cosgrove",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 53,
+          "player_name": "N. McGinn",
+          "score_after": {
+            "away": 2,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "S. Logan",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 60,
+          "player_name": "Z. Vyner",
+          "score_after": {
+            "away": 3,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:motherwell",
+      "team_name": "Motherwell"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -537,11 +602,14 @@
   "timeline": [
     {
       "assist_name": "G. Leigh",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -554,15 +622,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "B. Mugabi",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -575,15 +647,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "home",
       "team_name": "Motherwell"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -596,15 +672,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. McLennan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -617,15 +697,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. Hylton",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -638,15 +722,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Motherwell"
     },
     {
       "assist_name": "S. Logan",
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -659,15 +747,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Cole",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -680,15 +772,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Motherwell"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -701,15 +797,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Campbell",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -722,15 +822,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -743,15 +847,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Motherwell"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -764,15 +872,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Gleeson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -785,6 +897,7 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

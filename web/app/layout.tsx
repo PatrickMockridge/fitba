@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import "./system.css";
 import { FreshnessBadge } from "@/components/FreshnessBadge";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { getManifest } from "@/lib/data";
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-GB" suppressHydrationWarning>
       <body>
+        <ScrollToTop />
         <script
           dangerouslySetInnerHTML={{
             __html:

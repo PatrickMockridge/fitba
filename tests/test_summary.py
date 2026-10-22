@@ -81,7 +81,14 @@ def test_red_card_and_own_goal_are_measured() -> None:
             "away_goals": 1,
         },
         events=[
-            _event(12, "Dundee", "D", is_own_goal=True),
+            _event(
+                12,
+                "Dundee",
+                "D",
+                is_own_goal=True,
+                beneficiary_side="away",
+            ),
+            _event(50, "Aberdeen", "A", beneficiary_side="home"),
             _event(70, "Dundee", "E", is_goal=False, is_red_card=True),
         ],
         stats=None,
@@ -89,6 +96,7 @@ def test_red_card_and_own_goal_are_measured() -> None:
     )
     assert any("own goal" in item["text"].casefold() for item in summary["bullets"])
     assert any("sent off" in item["text"] for item in summary["bullets"])
+    assert summary["reconciliation"]["matched"] is True
 
 
 def test_banned_verdict_language_is_rejected() -> None:

@@ -95,7 +95,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Farrell",
@@ -404,7 +404,114 @@
     "season": "/history/2024-25/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:dumbarton",
+      "team_name": "Dumbarton"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": "G. Molloy",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 46,
+          "player_name": "J. MacKenzie",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "S. Morris",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 48,
+          "player_name": "E. Sokler",
+          "score_after": {
+            "away": 0,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "J. MacKenzie",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 61,
+          "player_name": "E. Sokler",
+          "score_after": {
+            "away": 0,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "J. McGarry",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 84,
+          "player_name": "P. Ambrose",
+          "score_after": {
+            "away": 0,
+            "home": 4
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "V. Besuijen",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 86,
+          "player_name": "J. McGarry",
+          "score_after": {
+            "away": 0,
+            "home": 5
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "R. Duncan",
+          "extra_minute": 2,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 90,
+          "player_name": "S. Rubežić",
+          "score_after": {
+            "away": 0,
+            "home": 6
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -462,11 +569,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -479,15 +589,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "G. Molloy",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -500,15 +614,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Morris",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -521,15 +639,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "P. Guèye",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -542,15 +664,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "K. Orsi",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -563,15 +689,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "away",
       "team_name": "Dumbarton"
     },
     {
       "assist_name": "J. MacKenzie",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -584,15 +714,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. McGarry",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -605,15 +739,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -626,15 +764,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "P. Ambrose",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -647,15 +789,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. Clark",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -668,15 +814,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Dumbarton"
     },
     {
       "assist_name": "J. Mumbongo",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -689,15 +839,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Dumbarton"
     },
     {
       "assist_name": "G. Young",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -710,15 +864,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Dumbarton"
     },
     {
       "assist_name": "V. Besuijen",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -731,15 +889,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. McGuffie",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -752,15 +914,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Dumbarton"
     },
     {
       "assist_name": "J. McGarry",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -773,15 +939,19 @@
         "away": 0,
         "home": 4
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "V. Besuijen",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -794,15 +964,19 @@
         "away": 0,
         "home": 5
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": 2,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -815,6 +989,7 @@
         "away": 0,
         "home": 6
       },
+      "side": "home",
       "team_name": "Aberdeen"
     }
   ],

@@ -49,7 +49,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "Bo Jimmy Thelin",
@@ -358,7 +358,82 @@
     "season": "/history/2025-26/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [
+        {
+          "card_type": "straight_red",
+          "detail": "Red Card",
+          "extra_minute": null,
+          "minute": 44,
+          "player_name": "Alexander Jensen",
+          "side": "away",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 45,
+          "player_name": "D. Olaru",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "FCSB"
+        },
+        {
+          "assist_name": "D. Olaru",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 52,
+          "player_name": "A. Sut",
+          "score_after": {
+            "away": 0,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "FCSB"
+        },
+        {
+          "assist_name": "V. Cretu",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 59,
+          "player_name": "D. Olaru",
+          "score_after": {
+            "away": 0,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "FCSB"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "other:fcsb",
+      "team_name": "FCSB"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -545,11 +620,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -562,15 +640,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -583,15 +665,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -604,15 +690,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -625,15 +715,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": "straight_red",
       "comments": null,
       "detail": "Red Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": true,
@@ -646,15 +740,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -667,15 +765,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "S. Nilsen",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -688,15 +790,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "L. Clarkson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -709,15 +815,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Olaru",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -730,15 +840,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "V. Cretu",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -751,15 +865,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "K. Yengi",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -772,15 +890,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "N. Milanovic",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -793,15 +915,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -814,15 +940,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "A. Dorrington",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -835,15 +965,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "B. Alhassan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -856,15 +990,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -877,15 +1015,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Politic",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -898,15 +1040,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "D. Alibec",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -919,15 +1065,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "V. Chiriches",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -940,15 +1090,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     },
     {
       "assist_name": "O. Popescu",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -961,6 +1115,7 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "FCSB"
     }
   ],

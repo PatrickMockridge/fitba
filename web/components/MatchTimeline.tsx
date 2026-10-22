@@ -6,22 +6,44 @@ function minute(row: FixtureDocument["timeline"][number]): string {
 }
 
 function label(row: FixtureDocument["timeline"][number]): string {
+  if (row.is_shootout) {
+    return row.is_goal ? "Shootout goal" : "Shootout penalty missed";
+  }
   if (row.is_goal) {
     if (row.is_own_goal) return "Own goal";
     if (row.is_penalty) return "Penalty";
-    if (row.is_shootout) return "Shootout goal";
     return "Goal";
   }
-  if (row.is_red_card) return "Red card";
-  if (row.event_type === "Card") return "Card";
+  if (row.is_missed_penalty) return "Missed penalty";
+  if (row.card_type === "second_yellow") return "Second yellow";
+  if (row.card_type === "straight_red") return "Straight red";
+  if (row.event_type === "card") return "Yellow card";
   if (row.event_type === "subst") return "Substitution";
   if (row.is_var) return "VAR";
   return row.event_type ?? "Event";
 }
 
-export function MatchTimeline({ timeline }: { timeline: FixtureDocument["timeline"] }) {
+function teamAttr(
+  row: FixtureDocument["timeline"][number],
+  aberdeenIsHome: boolean,
+): string {
+  if (!row.side) return "unknown";
+  return (row.side === "home") === aberdeenIsHome ? "aberdeen" : "opponent";
+}
+
+export function MatchTimeline({
+  timeline,
+  aberdeenIsHome,
+}: {
+  timeline: FixtureDocument["timeline"];
+  aberdeenIsHome: boolean;
+}) {
   return (
-    <section className="card" data-contract="match.timeline">
+    <section
+      className="card match-timeline"
+      data-contract="match.timeline"
+      data-team-split="aberdeen-opponent"
+    >
       <div className="section-head">
         <div>
           <p className="eyebrow">Timeline</p>
@@ -31,26 +53,33 @@ export function MatchTimeline({ timeline }: { timeline: FixtureDocument["timelin
       {timeline.length ? (
         <div className="table-wrap">
           <table className="league-table">
+            <caption className="fine-print">
+              Match timeline with Aberdeen highlighted in red.
+            </caption>
             <thead>
               <tr>
-                <th>Min</th>
-                <th>Event</th>
-                <th>Team</th>
-                <th>Player</th>
-                <th>Detail</th>
-                <th className="num">Score</th>
+                <th scope="col">Min</th>
+                <th scope="col">Event</th>
+                <th scope="col">Team</th>
+                <th scope="col">Player</th>
+                <th scope="col">Detail</th>
+                <th scope="col" className="num">
+                  Score
+                </th>
               </tr>
             </thead>
             <tbody>
               {timeline.map((row, index) => (
-                <tr key={index}>
+                <tr key={index} data-team={teamAttr(row, aberdeenIsHome)}>
                   <td className="num">{minute(row)}</td>
                   <td>{label(row)}</td>
                   <td>{row.team_name ?? "—"}</td>
                   <td>{row.player_name ?? "—"}</td>
                   <td>{row.detail ?? (row.is_var ? "VAR" : "—")}</td>
                   <td className="num">
-                    {row.is_goal ? `${row.score_after.home}–${row.score_after.away}` : "—"}
+                    {row.is_goal && !row.is_shootout
+                      ? `${row.score_after.home}–${row.score_after.away}`
+                      : "—"}
                   </td>
                 </tr>
               ))}

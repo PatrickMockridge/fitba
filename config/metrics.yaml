@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 2.2.0
+registry_version: 2.2.1
 reviewed: '2026-10-22'
 owner: patrickmockridge
 change_policy:
@@ -2030,12 +2030,13 @@ metrics:
   status: active
 - id: matches.document
   label: Match document
-  description: 'One played-fixture document: score, summary, stats, fxG, timeline,
-    lineups, player stats, form and coverage.'
+  description: 'One played-fixture document: score, summary, scoreboard, stats,
+    fxG, timeline, lineups, player stats, form and coverage.'
   value_type: object
   fields:
   - fixture
   - summary
+  - scoreboard
   - stats
   - xg
   - timeline
@@ -2075,7 +2076,7 @@ metrics:
     are not independently recomputed in this release.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 1
+  version: 2
   status: active
 - id: fixtures.index
   label: Fixture index

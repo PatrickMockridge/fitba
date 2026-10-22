@@ -4,6 +4,7 @@ import { ContractPage } from "@/components/ContractPage";
 import { MatchCoverage } from "@/components/MatchCoverage";
 import { MatchHeader } from "@/components/MatchHeader";
 import { MatchPlayerTable } from "@/components/MatchPlayerTable";
+import { MatchScoreboard } from "@/components/MatchScoreboard";
 import { MatchStatsTable } from "@/components/MatchStatsTable";
 import { MatchSummary } from "@/components/MatchSummary";
 import { MatchTimeline } from "@/components/MatchTimeline";
@@ -48,9 +49,19 @@ export default async function MatchPage({
   return (
     <ContractPage surface="match">
       <MatchHeader fixture={data} />
+      <MatchScoreboard fixture={data} />
       <MatchSummary summary={data.summary} />
-      <MatchStatsTable stats={data.stats} home={home} away={away} />
-      <section className="card" data-contract="match.xg">
+      <MatchStatsTable
+        stats={data.stats}
+        home={home}
+        away={away}
+        aberdeenIsHome={aberdeenIsHome}
+      />
+      <section
+        className="card"
+        data-contract="match.xg"
+        data-team-split="aberdeen-opponent"
+      >
         <div className="section-head">
           <div>
             <p className="eyebrow">Expected goals</p>
@@ -60,7 +71,10 @@ export default async function MatchPage({
         </div>
         {data.xg.available && data.xg.home && data.xg.away ? (
           <div className="match-xg-grid">
-            <div>
+            <div
+              className="match-xg-side"
+              data-team={aberdeenIsHome ? "aberdeen" : "opponent"}
+            >
               <p className="eyebrow">{home}</p>
               <p className="stat-value">{data.xg.home.value ?? "—"}</p>
               <p className="fine-print">
@@ -70,7 +84,10 @@ export default async function MatchPage({
                 Provider xG {data.xg.home.provider ?? "unavailable"}
               </p>
             </div>
-            <div>
+            <div
+              className="match-xg-side"
+              data-team={aberdeenIsHome ? "opponent" : "aberdeen"}
+            >
               <p className="eyebrow">{away}</p>
               <p className="stat-value">{data.xg.away.value ?? "—"}</p>
               <p className="fine-print">
@@ -91,17 +108,20 @@ export default async function MatchPage({
           {data.xg.note ?? "fxG is a shot-on-target model, not provider xG."}
         </p>
       </section>
-      <MatchTimeline timeline={data.timeline} />
-      <div className="match-lineups-grid">
-        <ObservedLineup lineup={data.lineups.home} />
-        <ObservedLineup lineup={data.lineups.away} />
+      <MatchTimeline timeline={data.timeline} aberdeenIsHome={aberdeenIsHome} />
+      <div className="match-lineups-grid" data-team-split="aberdeen-opponent">
+        <ObservedLineup
+          lineup={data.lineups.home}
+          teamName={home}
+          isAberdeen={aberdeenIsHome}
+        />
+        <ObservedLineup
+          lineup={data.lineups.away}
+          teamName={away}
+          isAberdeen={!aberdeenIsHome}
+        />
       </div>
-      <MatchPlayerTable
-        players={data.player_stats}
-        home={home}
-        away={away}
-        aberdeenIsHome={aberdeenIsHome}
-      />
+      <MatchPlayerTable players={data.player_stats} />
       <MatchCoverage coverage={data.coverage} />
       <section className="card" data-contract="match.links">
         <div className="section-head">

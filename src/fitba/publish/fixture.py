@@ -17,10 +17,11 @@ from fitba.ingest.history import (
 )
 from fitba.ingest.match_extras import load_events, load_lineups
 from fitba.normalize.fixture_registry import FixtureRecord, build_fixture_registry
-from fitba.settings import MARTS_DIR, fixtures_policy
+from fitba.normalize.teams import TeamRegistry
+from fitba.settings import MARTS_DIR, fixtures_policy, source_ids
 from fitba.util.dates import utc_now_iso
 
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
 
 
 class StrictModel(BaseModel):
@@ -87,12 +88,16 @@ class TimelineRow(StrictModel):
     event_type: str | None = None
     detail: str | None = None
     comments: str | None = None
+    side: Literal["home", "away"] | None = None
+    beneficiary_side: Literal["home", "away"] | None = None
+    card_type: Literal["straight_red", "second_yellow"] | None = None
     is_goal: bool
     is_own_goal: bool
     is_penalty: bool
     is_shootout: bool
     is_red_card: bool
     is_second_yellow: bool
+    is_missed_penalty: bool
     is_var: bool
     score_after: dict[str, int]
 
@@ -121,6 +126,8 @@ class PlayerStat(StrictModel):
     player_id: int | None = None
     player_name: str | None = None
     team_id: int | None = None
+    team_name: str | None = None
+    is_aberdeen: bool | None = None
     rating: float | None = None
     minutes: int | None = None
     goals: int | None = None
@@ -194,12 +201,58 @@ class FixtureInfo(StrictModel):
     href: str
 
 
+class ScoreboardGoal(StrictModel):
+    minute: int | None = None
+    extra_minute: int | None = None
+    side: Literal["home", "away"]
+    team_name: str
+    player_name: str | None = None
+    assist_name: str | None = None
+    is_penalty: bool
+    is_own_goal: bool
+    score_after: dict[str, int]
+
+
+class ScoreboardRedCard(StrictModel):
+    minute: int | None = None
+    extra_minute: int | None = None
+    side: Literal["home", "away"]
+    team_name: str
+    player_name: str | None = None
+    card_type: Literal["straight_red", "second_yellow"]
+    detail: str | None = None
+
+
+class ScoreboardSide(StrictModel):
+    side: Literal["home", "away"]
+    team_id: str
+    team_name: str
+    is_aberdeen: bool
+    goals: list[ScoreboardGoal]
+    red_cards: list[ScoreboardRedCard]
+
+
+class ScoreboardShootout(StrictModel):
+    home: int
+    away: int
+
+
+class ScoreboardBlock(StrictModel):
+    home: ScoreboardSide
+    away: ScoreboardSide
+    shootout: ScoreboardShootout | None = None
+    events_available: bool
+    goals_complete: bool
+    note: str
+
+
 class FixtureDocument(StrictModel):
     schema_version: str
     generated_at: str
     fixture: FixtureInfo
     depth: Literal["full", "result", "score"]
     summary: SummaryBlock
+    scoreboard: ScoreboardBlock
     stats: StatsBlock
     xg: XgBlock
     timeline: list[TimelineRow]
@@ -372,49 +425,226 @@ def _stat_rows(
     return rows
 
 
-def _timeline(events: pl.DataFrame, fixture: FixtureRecord) -> list[dict[str, Any]]:
+def _resolve_event_team(
+    raw_team: str,
+    fixture: FixtureRecord,
+    teams: TeamRegistry,
+) -> tuple[Literal["home", "away"] | None, str | None]:
+    if not raw_team:
+        return None, None
+    if raw_team.casefold() == str(fixture.home_team_name).casefold():
+        return "home", fixture.home_team_name
+    if raw_team.casefold() == str(fixture.away_team_name).casefold():
+        return "away", fixture.away_team_name
+    resolved = teams.resolve(raw_team)
+    if resolved == fixture.home_team_id:
+        return "home", fixture.home_team_name
+    if resolved == fixture.away_team_id:
+        return "away", fixture.away_team_name
+    return None, raw_team
+
+
+def _is_shootout_candidate(row: dict[str, Any]) -> bool:
+    if not row.get("is_goal") or row.get("is_shootout"):
+        return False
+    if row.get("minute") is None or int(row["minute"]) < 120:
+        return False
+    if row.get("extra_minute") is None:
+        return False
+    combined = f"{row.get('detail') or ''} {row.get('comments') or ''}".casefold()
+    return bool(row.get("is_penalty") or "penalty" in combined)
+
+
+def _timeline(
+    events: pl.DataFrame,
+    fixture: FixtureRecord,
+    *,
+    teams: TeamRegistry | None = None,
+) -> list[dict[str, Any]]:
     if not events.height:
         return []
+    team_registry = teams or TeamRegistry()
+    rows = events.sort(["minute", "extra_minute"], nulls_last=True).to_dicts()
+    for row in rows:
+        side, team_name = _resolve_event_team(
+            str(row.get("team_name") or ""), fixture, team_registry
+        )
+        row["_side"] = side
+        row["_team_name"] = team_name
+
+    # Some shootouts are not marked by the provider. Reclassify only when
+    # excluding the 120+ penalty candidates reconciles to the final score.
+    if (
+        fixture.status == "PEN"
+        and fixture.home_penalties is not None
+        and fixture.away_penalties is not None
+    ):
+        candidate_indices = {index for index, row in enumerate(rows) if _is_shootout_candidate(row)}
+        if candidate_indices:
+            regular = [row for index, row in enumerate(rows) if index not in candidate_indices]
+            home_regular = sum(
+                1
+                for row in regular
+                if row.get("is_goal") and not row.get("is_shootout") and row["_side"] == "home"
+            )
+            away_regular = sum(
+                1
+                for row in regular
+                if row.get("is_goal") and not row.get("is_shootout") and row["_side"] == "away"
+            )
+            if (home_regular, away_regular) == (fixture.home_goals, fixture.away_goals):
+                for index in candidate_indices:
+                    rows[index]["is_shootout"] = True
+
     home_goals = 0
     away_goals = 0
+    final_score = {
+        "home": int(fixture.home_goals or 0),
+        "away": int(fixture.away_goals or 0),
+    }
     output: list[dict[str, Any]] = []
-    for row in events.sort(["minute", "extra_minute"], nulls_last=True).to_dicts():
-        raw_team = str(row.get("team_name") or "")
-        if raw_team.casefold() == str(fixture.home_team_name).casefold():
-            event_team = fixture.home_team_name
-        elif raw_team.casefold() == str(fixture.away_team_name).casefold():
-            event_team = fixture.away_team_name
-        else:
-            event_team = raw_team or None
-        if row.get("is_goal") and not row.get("is_shootout"):
-            side = "home" if event_team == fixture.home_team_name else "away"
-            if row.get("is_own_goal"):
-                side = "away" if side == "home" else "home"
-            if side == "home":
-                home_goals += 1
-            else:
-                away_goals += 1
+    for row in rows:
+        side = row["_side"]
+        is_shootout = bool(row.get("is_shootout"))
+        is_goal = bool(row.get("is_goal"))
+        beneficiary_side = side if is_goal and not is_shootout and side else None
+        if beneficiary_side == "home":
+            home_goals += 1
+        elif beneficiary_side == "away":
+            away_goals += 1
+        combined = f"{row.get('detail') or ''} {row.get('comments') or ''}".casefold()
+        is_second_yellow = bool(row.get("is_second_yellow"))
+        is_red_card = bool(row.get("is_red_card") or is_second_yellow)
+        card_type = None
+        if str(row.get("event_type") or "") == "card":
+            if is_second_yellow:
+                card_type = "second_yellow"
+            elif is_red_card:
+                card_type = "straight_red"
         output.append(
             {
                 "minute": row.get("minute"),
                 "extra_minute": row.get("extra_minute"),
-                "team_name": event_team,
+                "team_name": row["_team_name"],
                 "player_name": row.get("player_name"),
                 "assist_name": row.get("assist_name"),
                 "event_type": row.get("event_type"),
                 "detail": row.get("detail"),
                 "comments": row.get("comments"),
-                "is_goal": bool(row.get("is_goal")),
+                "side": side,
+                "beneficiary_side": beneficiary_side,
+                "card_type": card_type,
+                "is_goal": is_goal,
                 "is_own_goal": bool(row.get("is_own_goal")),
                 "is_penalty": bool(row.get("is_penalty")),
-                "is_shootout": bool(row.get("is_shootout")),
-                "is_red_card": bool(row.get("is_red_card")),
-                "is_second_yellow": bool(row.get("is_second_yellow")),
+                "is_shootout": is_shootout,
+                "is_red_card": is_red_card,
+                "is_second_yellow": is_second_yellow,
+                "is_missed_penalty": (
+                    str(row.get("event_type") or "") == "goal"
+                    and not is_goal
+                    and "penalty" in combined
+                ),
                 "is_var": bool(row.get("is_var")),
-                "score_after": {"home": home_goals, "away": away_goals},
+                "score_after": (
+                    final_score if is_shootout else {"home": home_goals, "away": away_goals}
+                ),
             }
         )
     return output
+
+
+def _scoreboard(
+    timeline: list[dict[str, Any]],
+    fixture: FixtureRecord,
+    *,
+    events_available: bool,
+) -> dict[str, Any]:
+    sides: dict[str, dict[str, Any]] = {
+        "home": {
+            "side": "home",
+            "team_id": fixture.home_team_id,
+            "team_name": fixture.home_team_name,
+            "is_aberdeen": fixture.home_team_id == "sco:aberdeen",
+            "goals": [],
+            "red_cards": [],
+        },
+        "away": {
+            "side": "away",
+            "team_id": fixture.away_team_id,
+            "team_name": fixture.away_team_name,
+            "is_aberdeen": fixture.away_team_id == "sco:aberdeen",
+            "goals": [],
+            "red_cards": [],
+        },
+    }
+    regular_goals = 0
+    for row in timeline:
+        if row.get("is_goal") and not row.get("is_shootout") and row.get("beneficiary_side"):
+            side = str(row["beneficiary_side"])
+            sides[side]["goals"].append(
+                {
+                    "minute": row.get("minute"),
+                    "extra_minute": row.get("extra_minute"),
+                    "side": side,
+                    "team_name": sides[side]["team_name"],
+                    "player_name": row.get("player_name"),
+                    "assist_name": row.get("assist_name"),
+                    "is_penalty": bool(row.get("is_penalty")),
+                    "is_own_goal": bool(row.get("is_own_goal")),
+                    "score_after": row.get("score_after") or {"home": 0, "away": 0},
+                }
+            )
+            regular_goals += 1
+        if row.get("is_red_card") and row.get("side") and row.get("card_type"):
+            side = str(row["side"])
+            sides[side]["red_cards"].append(
+                {
+                    "minute": row.get("minute"),
+                    "extra_minute": row.get("extra_minute"),
+                    "side": side,
+                    "team_name": sides[side]["team_name"],
+                    "player_name": row.get("player_name"),
+                    "card_type": row["card_type"],
+                    "detail": row.get("detail"),
+                }
+            )
+
+    home_goals = fixture.home_goals
+    away_goals = fixture.away_goals
+    all_regular_goals = sum(
+        1 for row in timeline if row.get("is_goal") and not row.get("is_shootout")
+    )
+    goals_complete = bool(
+        events_available
+        and home_goals is not None
+        and away_goals is not None
+        and all_regular_goals == regular_goals
+        and len(sides["home"]["goals"]) == home_goals
+        and len(sides["away"]["goals"]) == away_goals
+    )
+    shootout = None
+    if fixture.home_penalties is not None and fixture.away_penalties is not None:
+        shootout = {"home": fixture.home_penalties, "away": fixture.away_penalties}
+
+    if not events_available:
+        note = "The event feed is unavailable; the final score is authoritative."
+    elif not goals_complete:
+        note = (
+            "The event feed does not reconcile with the final score; only "
+            "recorded goals are listed."
+        )
+    else:
+        note = "Goals and red cards are from the event feed; the final score is authoritative."
+
+    return {
+        "home": sides["home"],
+        "away": sides["away"],
+        "shootout": shootout,
+        "events_available": events_available,
+        "goals_complete": goals_complete,
+        "note": note,
+    }
 
 
 def _lineup_block(
@@ -478,30 +708,49 @@ def _lineup_block(
     }
 
 
-def _player_stats_block(fixture: FixtureRecord, player_stats: pl.DataFrame) -> list[dict[str, Any]]:
+def _player_stats_block(
+    fixture: FixtureRecord,
+    player_stats: pl.DataFrame,
+    *,
+    aberdeen_api_id: int,
+) -> list[dict[str, Any]]:
     if not player_stats.height:
         return []
     rows = player_stats.filter(pl.col("fixture_id") == fixture.fixture_id).to_dicts()
-    return [
-        {
-            "player_id": row.get("player_id"),
-            "player_name": row.get("player_name"),
-            "team_id": row.get("team_id"),
-            "rating": row.get("rating"),
-            "minutes": row.get("minutes"),
-            "goals": row.get("goals"),
-            "assists": row.get("assists"),
-            "shots_total": row.get("shots_total"),
-            "shots_on": row.get("shots_on"),
-            "passes_total": row.get("passes_total"),
-            "pass_accuracy": row.get("pass_accuracy"),
-            "tackles": row.get("tackles"),
-            "duels_won": row.get("duels_won"),
-            "yellow_cards": row.get("yellow_cards"),
-            "red_cards": row.get("red_cards"),
-        }
-        for row in rows
-    ]
+    output: list[dict[str, Any]] = []
+    for row in rows:
+        team_id = row.get("team_id")
+        if team_id == aberdeen_api_id:
+            team_name = "Aberdeen"
+            is_aberdeen: bool | None = True
+        elif team_id is not None:
+            team_name = fixture.opponent_name
+            is_aberdeen = False
+        else:
+            team_name = None
+            is_aberdeen = None
+        output.append(
+            {
+                "player_id": row.get("player_id"),
+                "player_name": row.get("player_name"),
+                "team_id": team_id,
+                "team_name": team_name,
+                "is_aberdeen": is_aberdeen,
+                "rating": row.get("rating"),
+                "minutes": row.get("minutes"),
+                "goals": row.get("goals"),
+                "assists": row.get("assists"),
+                "shots_total": row.get("shots_total"),
+                "shots_on": row.get("shots_on"),
+                "passes_total": row.get("passes_total"),
+                "pass_accuracy": row.get("pass_accuracy"),
+                "tackles": row.get("tackles"),
+                "duels_won": row.get("duels_won"),
+                "yellow_cards": row.get("yellow_cards"),
+                "red_cards": row.get("red_cards"),
+            }
+        )
+    return output
 
 
 def _form_context(registry: Any, fixture: FixtureRecord) -> dict[str, Any]:
@@ -588,6 +837,8 @@ def build_fixture_payloads(
     page_config = config.get("pages") or {}
     summary_config = page_config.get("summary") or {}
     registry = build_fixture_registry()
+    teams = TeamRegistry()
+    aberdeen_api_id = int(source_ids()["teams"]["sco:aberdeen"]["api_football"])
     season_data = _load_season_data()
     league_stats_path = MARTS_DIR / "team_match_stats.parquet"
     league_stats = (
@@ -645,6 +896,12 @@ def build_fixture_payloads(
                 "away_low": home_xg["away"]["low"],
                 "away_high": home_xg["away"]["high"],
             }
+        timeline = _timeline(events_frame, fixture, teams=teams)
+        scoreboard = _scoreboard(
+            timeline,
+            fixture,
+            events_available=bool(events_frame.height),
+        )
         fixture_payload = {
             "home_team_name": fixture.home_team_name,
             "away_team_name": fixture.away_team_name,
@@ -653,7 +910,7 @@ def build_fixture_payloads(
         }
         summary = build_summary(
             fixture=fixture_payload,
-            events=events_frame.to_dicts() if events_frame.height else [],
+            events=timeline,
             stats=summary_stats,
             xg=summary_xg,
             late_goal_minute=int(summary_config.get("late_goal_minute") or 85),
@@ -671,7 +928,9 @@ def build_fixture_payloads(
             appearances=appearances if appearances is not None else pl.DataFrame(),
         )
         player_rows = _player_stats_block(
-            fixture, player_stats if player_stats is not None else pl.DataFrame()
+            fixture,
+            player_stats if player_stats is not None else pl.DataFrame(),
+            aberdeen_api_id=aberdeen_api_id,
         )
         available = {
             "events": bool(events_frame.height),
@@ -728,6 +987,7 @@ def build_fixture_payloads(
             },
             "depth": depth,
             "summary": summary,
+            "scoreboard": scoreboard,
             "stats": {
                 "home": home_stats,
                 "away": away_stats,
@@ -740,7 +1000,7 @@ def build_fixture_payloads(
                 },
             },
             "xg": home_xg,
-            "timeline": _timeline(events_frame, fixture),
+            "timeline": timeline,
             "lineups": {"home": home_lineup, "away": away_lineup},
             "player_stats": player_rows,
             "form": _form_context(registry, fixture),

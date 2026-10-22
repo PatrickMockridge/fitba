@@ -1070,3 +1070,207 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep in-page anchor targets below the sticky masthead. */
+:target {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Match scoreboard and Aberdeen/opposition split */
+.badge-positive {
+  color: var(--s-green);
+  border-color: var(--s-green);
+  background: color-mix(in srgb, var(--s-green) 10%, transparent);
+}
+
+.badge-negative {
+  color: var(--s-red);
+  border-color: var(--s-red);
+  background: color-mix(in srgb, var(--s-red) 10%, transparent);
+}
+
+.match-scoreboard {
+  border-top: 4px solid var(--s-rule);
+}
+
+.match-team-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--s-line);
+  border-bottom: 1px solid var(--s-line);
+  margin-bottom: 0.85rem;
+}
+
+.team-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--s-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.team-key-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--s-line);
+  background: var(--s-surface-2);
+}
+
+.team-key-aberdeen {
+  color: var(--s-club);
+  font-weight: 700;
+}
+
+.team-key-aberdeen .team-key-swatch {
+  background: var(--s-club);
+  border-color: var(--s-club);
+}
+
+.team-key-opponent {
+  color: var(--s-muted);
+}
+
+.match-scoreboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--s-rule);
+}
+
+.scoreboard-side {
+  min-width: 0;
+  padding: 1rem;
+  background: var(--s-surface);
+}
+
+.scoreboard-side + .scoreboard-side {
+  border-left: 1px solid var(--s-rule);
+}
+
+.scoreboard-side.is-aberdeen {
+  background: var(--s-club-wash);
+  box-shadow: inset 3px 0 0 var(--s-club);
+}
+
+.scoreboard-side.is-aberdeen h3,
+.scoreboard-side.is-aberdeen .scoreboard-score {
+  color: var(--s-club);
+}
+
+.scoreboard-side h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.scoreboard-score {
+  margin: 0.25rem 0 0;
+  font-family: var(--s-mono);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.scoreboard-events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.scoreboard-event {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 0.15rem 0.5rem;
+  align-items: baseline;
+  border-top: 1px solid var(--s-line);
+  padding-top: 0.45rem;
+}
+
+.scoreboard-time {
+  font-family: var(--s-mono);
+  font-size: 0.72rem;
+  color: var(--s-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.scoreboard-event .badge {
+  margin-left: 0.35rem;
+}
+
+.scoreboard-assist,
+.scoreboard-running {
+  display: block;
+  color: var(--s-muted);
+  font-size: 0.75rem;
+}
+
+.scoreboard-running {
+  font-family: var(--s-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.match-stats-table th[data-team="aberdeen"],
+.match-stats-table td[data-team="aberdeen"] {
+  background: var(--s-club-wash);
+}
+
+.match-stats-table th[data-team="aberdeen"] {
+  color: var(--s-club);
+  border-bottom-color: var(--s-club);
+}
+
+.match-stats-table th[data-team="aberdeen"],
+.match-stats-table td[data-team="aberdeen"] {
+  box-shadow: inset 3px 0 0 var(--s-club);
+}
+
+.match-timeline tr[data-team="aberdeen"] td,
+.match-player-table tr[data-team="aberdeen"] td {
+  background: var(--s-club-wash);
+}
+
+.match-timeline tr[data-team="aberdeen"] td:first-child,
+.match-player-table tr[data-team="aberdeen"] td:first-child {
+  box-shadow: inset 3px 0 0 var(--s-club);
+}
+
+.match-lineup[data-team="aberdeen"] {
+  background: var(--s-club-wash);
+  border-left: 3px solid var(--s-club);
+}
+
+.match-xg-side[data-team="aberdeen"] {
+  background: var(--s-club-wash);
+  border-left: 3px solid var(--s-club);
+  padding-left: 0.75rem;
+}
+
+.match-lineups-grid[data-team-split] {
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .match-scoreboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scoreboard-side + .scoreboard-side {
+    border-left: 0;
+    border-top: 1px solid var(--s-rule);
+  }
+
+  .scoreboard-side.is-aberdeen {
+    box-shadow: inset 0 3px 0 var(--s-club);
+  }
+
+  .scoreboard-event {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+}

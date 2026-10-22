@@ -6,21 +6,15 @@ function n(value: number | null | undefined): string {
 
 export function MatchPlayerTable({
   players,
-  home,
-  away,
-  aberdeenIsHome,
 }: {
   players: FixtureDocument["player_stats"];
-  home: string;
-  away: string;
-  aberdeenIsHome: boolean;
 }) {
-  const teamName = (teamId: number | null): string => {
-    if (teamId === 252) return "Aberdeen";
-    return aberdeenIsHome ? away : home;
-  };
   return (
-    <section className="card" data-contract="match.player-stats">
+    <section
+      className="card match-player-table"
+      data-contract="match.player-stats"
+      data-team-split="aberdeen-opponent"
+    >
       <div className="section-head">
         <div>
           <p className="eyebrow">Player stats</p>
@@ -30,27 +24,59 @@ export function MatchPlayerTable({
       {players.length ? (
         <div className="table-wrap">
           <table className="league-table">
+            <caption className="fine-print">
+              Player match statistics with Aberdeen highlighted in red.
+            </caption>
             <thead>
               <tr>
-                <th>Player</th>
-                <th>Team</th>
-                <th className="num">Rating</th>
-                <th className="num">Min</th>
-                <th className="num">G</th>
-                <th className="num">A</th>
-                <th className="num">Sh</th>
-                <th className="num">SoT</th>
-                <th className="num">Accurate passes</th>
-                <th className="num">Tackles</th>
-                <th className="num">Duels</th>
-                <th className="num">Cards</th>
+                <th scope="col">Player</th>
+                <th scope="col">Team</th>
+                <th scope="col" className="num">
+                  Rating
+                </th>
+                <th scope="col" className="num">
+                  Min
+                </th>
+                <th scope="col" className="num">
+                  G
+                </th>
+                <th scope="col" className="num">
+                  A
+                </th>
+                <th scope="col" className="num">
+                  Sh
+                </th>
+                <th scope="col" className="num">
+                  SoT
+                </th>
+                <th scope="col" className="num">
+                  Accurate passes
+                </th>
+                <th scope="col" className="num">
+                  Tackles
+                </th>
+                <th scope="col" className="num">
+                  Duels
+                </th>
+                <th scope="col" className="num">
+                  Cards
+                </th>
               </tr>
             </thead>
             <tbody>
               {players.map((player, index) => (
-                <tr key={`${player.player_id ?? index}-${player.team_id ?? "team"}`}>
+                <tr
+                  key={`${player.player_id ?? index}-${player.team_id ?? "team"}`}
+                  data-team={
+                    player.is_aberdeen === true
+                      ? "aberdeen"
+                      : player.is_aberdeen === false
+                        ? "opponent"
+                        : "unknown"
+                  }
+                >
                   <td>{player.player_name ?? "Unknown"}</td>
-                  <td>{teamName(player.team_id)}</td>
+                  <td>{player.team_name ?? "Team unknown"}</td>
                   <td className="num">{n(player.rating)}</td>
                   <td className="num">{n(player.minutes)}</td>
                   <td className="num">{n(player.goals)}</td>

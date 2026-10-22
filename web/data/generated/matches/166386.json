@@ -131,7 +131,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -408,7 +408,100 @@
     "season": "/history/2019-20/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 20,
+          "player_name": "J. Tavernier",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Rangers"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 40,
+          "player_name": "G. Stewart",
+          "score_after": {
+            "away": 0,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "Rangers"
+        },
+        {
+          "assist_name": "B. Barišić",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 50,
+          "player_name": "A. Morelos",
+          "score_after": {
+            "away": 0,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "Rangers"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 71,
+          "player_name": "J. Tavernier",
+          "score_after": {
+            "away": 0,
+            "home": 4
+          },
+          "side": "home",
+          "team_name": "Rangers"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 80,
+          "player_name": "J. Defoe",
+          "score_after": {
+            "away": 0,
+            "home": 5
+          },
+          "side": "home",
+          "team_name": "Rangers"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:rangers",
+      "team_name": "Rangers"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -541,11 +634,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -558,15 +654,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -579,15 +679,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -600,15 +704,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": "B. Barišić",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -621,15 +729,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": "J. Defoe",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -642,15 +754,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": "B. Barker",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -663,15 +779,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -684,15 +804,19 @@
         "away": 0,
         "home": 4
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": "J. Gallagher",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -705,15 +829,19 @@
         "away": 0,
         "home": 4
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "S. Edmundson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -726,15 +854,19 @@
         "away": 0,
         "home": 4
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -747,15 +879,19 @@
         "away": 0,
         "home": 5
       },
+      "side": "home",
       "team_name": "Rangers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -768,15 +904,19 @@
         "away": 0,
         "home": 5
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "E. Ross",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -789,15 +929,19 @@
         "away": 0,
         "home": 5
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -810,15 +954,19 @@
         "away": 0,
         "home": 5
       },
+      "side": "away",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "C. Main",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -831,6 +979,7 @@
         "away": 0,
         "home": 5
       },
+      "side": "away",
       "team_name": "Aberdeen"
     }
   ],

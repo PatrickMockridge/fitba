@@ -19,6 +19,7 @@ check a number.
 | [Data analysis](analysis.md) | The owner's view, the chairman's frame and six evidence-led claims connecting the team, the squad and the Cormack-era record. |
 | [Match record](fixtures.md) | One page per played Cormack-era fixture: canonical ids, depth states, timeline, lineups, stats and the deterministic read. |
 | [fxG](xg.md) | The experimental shot-on-target expected-goals model, interval, provider-xG evaluation gate and limitations. |
+| [Match scoreboard](match-scoreboard.md) | The top-level score, goal and red-card widget, event semantics and the Aberdeen/opposition split. |
 | [Data provenance](provenance.md) | The layer-by-layer source truth table, API-Football coverage, the league migration gate and manifest attribution. |
 | [Injuries and availability](availability.md) | The curated team-news ledger, provider snapshot policy, status taxonomy, staleness and predicted-XI confidence. |
 | [Squad needs](needs.md) | The seven role families, measured depth, cover/replace/strengthen logic, market routes and roster caveats. |

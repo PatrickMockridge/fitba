@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:c1d1c12c652603581dbfce37358825968056c41d9af162a8d8d073792ed5ee9f",
+  "checksum": "sha256:818346a941182da35bc12b3f4a3fee7b027e8ad90421b43ec2565bf6cecca9bd",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2634,7 +2634,7 @@
       "confidence_rule": "Declared by the payload fields and the source row; see docs/methodology.md.",
       "coverage_tier": "match",
       "denominator": null,
-      "description": "One played-fixture document: score, summary, stats, fxG, timeline, lineups, player stats, form and coverage.",
+      "description": "One played-fixture document: score, summary, scoreboard, stats, fxG, timeline, lineups, player stats, form and coverage.",
       "displayed_surfaces": [
         "/matches/",
         "/analysis/",
@@ -2643,6 +2643,7 @@
       "fields": [
         "fixture",
         "summary",
+        "scoreboard",
         "stats",
         "xg",
         "timeline",
@@ -2684,7 +2685,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "document",
@@ -3675,7 +3676,7 @@
       "version": 1
     }
   ],
-  "registry_version": "2.2.0",
+  "registry_version": "2.2.1",
   "reviewed": "2026-10-22",
   "schema_version": 1,
   "structural_number_patterns": [

@@ -85,7 +85,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "Q. Qurbanov",
@@ -378,7 +378,87 @@
     "season": "/history/2021-22/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 8,
+          "player_name": "T. Bayramov",
+          "score_after": {
+            "away": 1,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Qarabag"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 18,
+          "player_name": "Kady",
+          "score_after": {
+            "away": 2,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Qarabag"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 72,
+          "player_name": "A. Zoubir",
+          "score_after": {
+            "away": 3,
+            "home": 0
+          },
+          "side": "away",
+          "team_name": "Qarabag"
+        }
+      ],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "other:qarabag",
+      "team_name": "Qarabag"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": 2,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 90,
+          "player_name": "L. Ferguson",
+          "score_after": {
+            "away": 3,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -440,11 +520,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -457,15 +540,19 @@
         "away": 1,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -478,15 +565,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -499,15 +590,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -520,15 +615,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "J. Emmanuel-Thomas",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -541,15 +640,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -562,15 +665,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -583,15 +690,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -604,15 +715,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -625,15 +740,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "F. Ozobić",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -646,15 +765,19 @@
         "away": 2,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "away",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -667,15 +790,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": "N. McGinn",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -688,15 +815,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Campbell",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -709,15 +840,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "M. Vešović",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -730,15 +865,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": "M. Qurbanlı",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -751,15 +890,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": "R. Almeyda",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -772,15 +915,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": "B. Mustafazadə",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -793,15 +940,19 @@
         "away": 3,
         "home": 0
       },
+      "side": "away",
       "team_name": "Qarabag"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": 2,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -814,6 +965,7 @@
         "away": 3,
         "home": 1
       },
+      "side": "home",
       "team_name": "Aberdeen"
     }
   ],

@@ -527,6 +527,30 @@
           "default": null,
           "title": "Team Id"
         },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "is_aberdeen": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Is Aberdeen"
+        },
         "rating": {
           "anyOf": [
             {
@@ -673,6 +697,286 @@
         }
       },
       "title": "PlayerStat",
+      "type": "object"
+    },
+    "ScoreboardBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "home": {
+          "$ref": "#/$defs/ScoreboardSide"
+        },
+        "away": {
+          "$ref": "#/$defs/ScoreboardSide"
+        },
+        "shootout": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ScoreboardShootout"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "events_available": {
+          "title": "Events Available",
+          "type": "boolean"
+        },
+        "goals_complete": {
+          "title": "Goals Complete",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "home",
+        "away",
+        "events_available",
+        "goals_complete",
+        "note"
+      ],
+      "title": "ScoreboardBlock",
+      "type": "object"
+    },
+    "ScoreboardGoal": {
+      "additionalProperties": false,
+      "properties": {
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minute"
+        },
+        "extra_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Minute"
+        },
+        "side": {
+          "enum": [
+            "home",
+            "away"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "assist_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assist Name"
+        },
+        "is_penalty": {
+          "title": "Is Penalty",
+          "type": "boolean"
+        },
+        "is_own_goal": {
+          "title": "Is Own Goal",
+          "type": "boolean"
+        },
+        "score_after": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Score After",
+          "type": "object"
+        }
+      },
+      "required": [
+        "side",
+        "team_name",
+        "is_penalty",
+        "is_own_goal",
+        "score_after"
+      ],
+      "title": "ScoreboardGoal",
+      "type": "object"
+    },
+    "ScoreboardRedCard": {
+      "additionalProperties": false,
+      "properties": {
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minute"
+        },
+        "extra_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Minute"
+        },
+        "side": {
+          "enum": [
+            "home",
+            "away"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "card_type": {
+          "enum": [
+            "straight_red",
+            "second_yellow"
+          ],
+          "title": "Card Type",
+          "type": "string"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        }
+      },
+      "required": [
+        "side",
+        "team_name",
+        "card_type"
+      ],
+      "title": "ScoreboardRedCard",
+      "type": "object"
+    },
+    "ScoreboardShootout": {
+      "additionalProperties": false,
+      "properties": {
+        "home": {
+          "title": "Home",
+          "type": "integer"
+        },
+        "away": {
+          "title": "Away",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "home",
+        "away"
+      ],
+      "title": "ScoreboardShootout",
+      "type": "object"
+    },
+    "ScoreboardSide": {
+      "additionalProperties": false,
+      "properties": {
+        "side": {
+          "enum": [
+            "home",
+            "away"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "is_aberdeen": {
+          "title": "Is Aberdeen",
+          "type": "boolean"
+        },
+        "goals": {
+          "items": {
+            "$ref": "#/$defs/ScoreboardGoal"
+          },
+          "title": "Goals",
+          "type": "array"
+        },
+        "red_cards": {
+          "items": {
+            "$ref": "#/$defs/ScoreboardRedCard"
+          },
+          "title": "Red Cards",
+          "type": "array"
+        }
+      },
+      "required": [
+        "side",
+        "team_id",
+        "team_name",
+        "is_aberdeen",
+        "goals",
+        "red_cards"
+      ],
+      "title": "ScoreboardSide",
       "type": "object"
     },
     "SourceRef": {
@@ -974,6 +1278,54 @@
           "default": null,
           "title": "Comments"
         },
+        "side": {
+          "anyOf": [
+            {
+              "enum": [
+                "home",
+                "away"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Side"
+        },
+        "beneficiary_side": {
+          "anyOf": [
+            {
+              "enum": [
+                "home",
+                "away"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Beneficiary Side"
+        },
+        "card_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "straight_red",
+                "second_yellow"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Card Type"
+        },
         "is_goal": {
           "title": "Is Goal",
           "type": "boolean"
@@ -998,6 +1350,10 @@
           "title": "Is Second Yellow",
           "type": "boolean"
         },
+        "is_missed_penalty": {
+          "title": "Is Missed Penalty",
+          "type": "boolean"
+        },
         "is_var": {
           "title": "Is Var",
           "type": "boolean"
@@ -1017,6 +1373,7 @@
         "is_shootout",
         "is_red_card",
         "is_second_yellow",
+        "is_missed_penalty",
         "is_var",
         "score_after"
       ],
@@ -1164,6 +1521,9 @@
     "summary": {
       "$ref": "#/$defs/SummaryBlock"
     },
+    "scoreboard": {
+      "$ref": "#/$defs/ScoreboardBlock"
+    },
     "stats": {
       "$ref": "#/$defs/StatsBlock"
     },
@@ -1232,6 +1592,7 @@
     "fixture",
     "depth",
     "summary",
+    "scoreboard",
     "stats",
     "xg",
     "timeline",

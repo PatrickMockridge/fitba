@@ -219,6 +219,21 @@ Rules:
 - Cards are for editorial units: a theme, a transfer, a match read. They are not
   the default container for every section.
 
+### Club identity in match views
+
+Match records have two sides and a persistent identity rule:
+
+- **Aberdeen is red.** Use a club-red wash, a 3px club-red edge and the literal
+  word "Aberdeen" on its scoreboard side, stat column, fxG side, timeline rows,
+  lineup and player rows.
+- **The opponent is neutral.** Use surface and line tokens; do not introduce a
+  second opponent hue. `--s-europe` is reserved for European cut-offs.
+- **Colour is not the only cue.** Every side keeps its team name and a visible
+  team key. The rule works in Red Matchday and in both dark themes.
+- The rule is normative on `/matches/<fixture_id>/`; see
+  [match-scoreboard.md](match-scoreboard.md). It does not change league,
+  history or recruitment tables.
+
 ### Interaction
 
 - Filters look like controls, not pills. Controls are square, labelled and

@@ -95,7 +95,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-22T18:30:05+00:00",
+  "generated_at": "2026-10-22T19:45:11+00:00",
   "lineups": {
     "away": {
       "coach_name": "I. Murray",
@@ -396,7 +396,72 @@
     "season": "/history/2022-23/"
   },
   "player_stats": [],
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:raith-rovers",
+      "team_name": "Raith Rovers"
+    },
+    "events_available": true,
+    "goals_complete": true,
+    "home": {
+      "goals": [
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": true,
+          "minute": 6,
+          "player_name": "B. Miovski",
+          "score_after": {
+            "away": 0,
+            "home": 1
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": null,
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 39,
+          "player_name": "R. McCrorie",
+          "score_after": {
+            "away": 0,
+            "home": 2
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        },
+        {
+          "assist_name": "B. Miovski",
+          "extra_minute": null,
+          "is_own_goal": false,
+          "is_penalty": false,
+          "minute": 46,
+          "player_name": "J. Hayes",
+          "score_after": {
+            "away": 0,
+            "home": 3
+          },
+          "side": "home",
+          "team_name": "Aberdeen"
+        }
+      ],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "note": "Goals and red cards are from the event feed; the final score is authoritative.",
+    "shootout": null
+  },
   "sources": [
     {
       "id": "api_football",
@@ -454,11 +519,14 @@
   "timeline": [
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -471,15 +539,19 @@
         "away": 0,
         "home": 0
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Penalty",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": true,
       "is_red_card": false,
@@ -492,15 +564,19 @@
         "away": 0,
         "home": 1
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -513,15 +589,19 @@
         "away": 0,
         "home": 2
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "B. Miovski",
+      "beneficiary_side": "home",
+      "card_type": null,
       "comments": null,
       "detail": "Normal Goal",
       "event_type": "goal",
       "extra_minute": null,
       "is_goal": true,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -534,15 +614,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Easton",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -555,15 +639,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": "C. Ramírez",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 1",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -576,15 +664,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "Duk",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -597,15 +689,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "R. Duncan",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -618,15 +714,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "K. Mitchell",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 2",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -639,15 +739,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": "M. Watkins",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -660,15 +764,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "D. Polvara",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 5",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -681,15 +789,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": "L. Mahady",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 3",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -702,15 +814,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": "Q. Coulson",
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Substitution 4",
       "event_type": "subst",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -723,15 +839,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -744,15 +864,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -765,15 +889,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "away",
       "team_name": "Raith Rovers"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -786,15 +914,19 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     },
     {
       "assist_name": null,
+      "beneficiary_side": null,
+      "card_type": null,
       "comments": null,
       "detail": "Yellow Card",
       "event_type": "card",
       "extra_minute": null,
       "is_goal": false,
+      "is_missed_penalty": false,
       "is_own_goal": false,
       "is_penalty": false,
       "is_red_card": false,
@@ -807,6 +939,7 @@
         "away": 0,
         "home": 3
       },
+      "side": "home",
       "team_name": "Aberdeen"
     }
   ],

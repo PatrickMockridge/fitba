@@ -165,3 +165,30 @@ a formula repair.
   described as entering a confidence verdict.
 - Affected surfaces: `/analysis/`, `/matchday/`, `/methodology/`, `/metrics/`,
   `/status/`.
+
+## 2.2.1 — 2026-10-22
+
+Match scoreboard and event attribution corrections.
+
+- Added `scoreboard`, timeline `side`/`beneficiary_side`/`card_type`/
+  `is_missed_penalty`, and player-stat `team_name`/`is_aberdeen` to the fixture
+  document. `matches.document` moves to version 2; registry version 2.2.1.
+- Corrected own-goal attribution. API-Football's own-goal event team is the
+  benefiting team; the old timeline flipped it. Examples:
+  - `1174068` Aberdeen 3–1 Kilmarnock now ends 3–1 (was 2–2 in the timeline);
+  - `569617` Aberdeen 0–2 Livingston now ends 0–2 (was 1–1);
+  - `1382671` Hearts 2–0 Aberdeen now ends 2–0 (was 1–1).
+- Corrected team alias matching (`Dundee Utd`, `Heart OF Midlothian`, etc.) via
+  the team registry, with an exact-name fallback.
+- Reclassified unflagged penalty-shootout events for PEN fixtures when excluding
+  them reconciles to the final score. `693837` is 2–2 with 5–3 penalties; its
+  timeline no longer runs to 7–5.
+- Summaries now consume the corrected timeline, so the read reconciles with the
+  final score.
+- Nine fixtures have no event feed and one (`288887`) is partial; the scoreboard
+  labels them unavailable/incomplete rather than inventing goals.
+- Affected surfaces: `/matches/`, `/matches/<fixture_id>/`, `/analysis/`,
+  `/metrics/`, `/status/`.
+- Audit impact: the existing `matches.document` wildcard covers the new numeric
+  leaves; the audit passes and the fixture checker verifies scoreboard/timeline
+  reconciliation.

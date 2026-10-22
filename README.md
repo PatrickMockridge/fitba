@@ -28,6 +28,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Data analysis](docs/analysis.md) | The owner's view, the chairman's frame, six claims and the fxG block. |
 | [Match record](docs/fixtures.md) | One page per played Cormack-era fixture, with events, lineups, stats and the deterministic read. |
 | [fxG](docs/xg.md) | The experimental shot-on-target expected-goals model, interval and provider-xG gate. |
+| [Match scoreboard](docs/match-scoreboard.md) | The top-level score, goal and red-card widget and the Aberdeen/opposition split. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
 | [Sources](docs/sources.md) | Every source, its licence position, coverage and known gaps. |
@@ -56,9 +57,11 @@ full documentation index is [docs/README.md](docs/README.md).
 - **Matchday dashboard**: the next fixture, both predicted XIs, form and style,
   a compact case strip, and a squad-needs board with a
   fee-only budget envelope. The old Aberdeen dashboard is a moved notice.
-- **Match record**: every played Cormack-era fixture has a page with the score,
-  timeline, lineups, league/API stats, player stats where available and fxG.
-  Missing data is labelled, never zero-filled.
+- **Match record**: every played Cormack-era fixture has a page with a top-level
+  scoreboard (goals, scorers, assists, penalties, straight-red vs second-yellow
+  cards), timeline, lineups, league/API stats, player stats where available and
+  fxG. Aberdeen is red and the opposition neutral throughout; missing data is
+  labelled, never zero-filled.
 - **fxG**: an experimental shot-on-target xG model with an 80% interval and a
   provider-xG gate. The gate currently fails, so fxG is descriptive only.
 - **Results & fixtures across all three Scottish competitions**: league results
