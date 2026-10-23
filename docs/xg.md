@@ -68,6 +68,29 @@ used, not only on `/analysis/xg/`.
 - Missing team statistics are `unavailable`; fxG is not zero.
 - 2019-20 has no per-player provider stats; that does not stop league fxG.
 
+## Provider-style estimate for missing rows
+
+Provider xG is not reconstructible from this record. The provider uses shot
+locations and a provider model; fitba has shots on target only. Where the
+provider did not supply league xG, the page publishes a **calibrated estimate**:
+
+```text
+provider_xg_estimate = max(0, intercept + slope × fxG)
+```
+
+The calibration is fitted by OLS on the 2026-27 football-data.co.uk league team
+rows where both fxG and provider xG exist: 54 matches, 108 team rows. At the
+2026-10-23 publish `intercept = 0.5161`, `slope = 0.6445`, in-sample MAE
+`0.4806`, leave-one-row-out MAE `0.4919`, maximum LOOCV error `2.1945`, R²
+`0.4794`. It is applied per match side to league rows with no provider value;
+actual provider values are never replaced, and actual and estimated values are
+never summed.
+
+The estimate does not recover shot-location effects or match-specific provider
+adjustments. It does not mean the provider-xG gate has passed. Manager splits are
+league-only and attribute matches to stints by date; matches in a gap are
+labelled unattributed.
+
 ## What fxG does not do
 
 - It does not see shot location, goalkeeper position or game state.

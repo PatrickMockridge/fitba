@@ -44,6 +44,21 @@ class Rate:
 
 
 @dataclass(frozen=True, slots=True)
+class ProviderCalibration:
+    season: str
+    competition_id: str
+    intercept: float
+    slope: float
+    clamp_min: float
+    sample_matches: int
+    sample_team_rows: int
+    in_sample_mae: float
+    loocv_mae: float | None
+    max_loocv_error: float | None
+    r2: float | None
+
+
+@dataclass(frozen=True, slots=True)
 class FxGModel:
     model_id: str
     label: str
@@ -299,8 +314,70 @@ def aggregate_fxg(model: FxGModel, rows: Iterable[dict[str, Any]]) -> dict[str, 
     }
 
 
-def _ols_slope(xs: list[float], ys: list[float]) -> float | None:
-    if len(xs) < 2:
+def fit_provider_calibration(
+    pairs: Iterable[tuple[float, float]],
+    *,
+    season: str,
+    competition_id: str,
+    sample_matches: int,
+    min_team_rows: int = 60,
+    clamp_min: float = 0.0,
+) -> ProviderCalibration | None:
+    """Fit a provider-style xG calibration from (fxg, provider_xg) team rows.
+
+    This is a calibration on the provider values supplied for one season, not a
+    reconstruction of the provider's model. A small sample or zero fxG variance
+    returns None.
+    """
+    points = [(float(x), float(y)) for x, y in pairs]
+    if len(points) < max(2, min_team_rows):
+        return None
+    xs = [x for x, _y in points]
+    ys = [y for _x, y in points]
+    fit = _ols_fit(xs, ys)
+    if fit is None:
+        return None
+    intercept, slope = fit
+    errors = [abs(y - (intercept + slope * x)) for x, y in points]
+    mean_y = sum(ys) / len(ys)
+    ss_res = sum((y - (intercept + slope * x)) ** 2 for x, y in points)
+    ss_tot = sum((y - mean_y) ** 2 for y in ys)
+    loocv_errors: list[float] = []
+    if len(points) > 2:
+        for index, (x, y) in enumerate(points):
+            rest = points[:index] + points[index + 1 :]
+            leave_fit = _ols_fit([p[0] for p in rest], [p[1] for p in rest])
+            if leave_fit is None:
+                continue
+            leave_intercept, leave_slope = leave_fit
+            loocv_errors.append(abs(y - (leave_intercept + leave_slope * x)))
+    return ProviderCalibration(
+        season=season,
+        competition_id=competition_id,
+        intercept=round(intercept, 4),
+        slope=round(slope, 4),
+        clamp_min=clamp_min,
+        sample_matches=sample_matches,
+        sample_team_rows=len(points),
+        in_sample_mae=round(sum(errors) / len(errors), 4),
+        loocv_mae=round(sum(loocv_errors) / len(loocv_errors), 4) if loocv_errors else None,
+        max_loocv_error=round(max(loocv_errors), 4) if loocv_errors else None,
+        r2=round(1 - ss_res / ss_tot, 4) if ss_tot else None,
+    )
+
+
+def estimate_provider_xg(
+    calibration: ProviderCalibration | None, fxg: float | None
+) -> float | None:
+    if calibration is None or fxg is None:
+        return None
+    value = calibration.intercept + calibration.slope * float(fxg)
+    return round(max(calibration.clamp_min, value), 3)
+
+
+def _ols_fit(xs: list[float], ys: list[float]) -> tuple[float, float] | None:
+    """Return (intercept, slope) for y = a + b*x, or None if underdetermined."""
+    if len(xs) < 2 or len(xs) != len(ys):
         return None
     mean_x = sum(xs) / len(xs)
     mean_y = sum(ys) / len(ys)
@@ -308,7 +385,13 @@ def _ols_slope(xs: list[float], ys: list[float]) -> float | None:
     variance = sum((x - mean_x) ** 2 for x in xs)
     if variance == 0:
         return None
-    return covariance / variance
+    slope = covariance / variance
+    return mean_y - slope * mean_x, slope
+
+
+def _ols_slope(xs: list[float], ys: list[float]) -> float | None:
+    fit = _ols_fit(xs, ys)
+    return fit[1] if fit is not None else None
 
 
 def evaluate_fxg(
@@ -413,10 +496,13 @@ def model_to_dict(model: FxGModel, evaluation: dict[str, Any] | None = None) -> 
 
 __all__ = [
     "FxGModel",
+    "ProviderCalibration",
     "Rate",
     "aggregate_fxg",
+    "estimate_provider_xg",
     "evaluate_fxg",
     "fit_fxg",
+    "fit_provider_calibration",
     "model_to_dict",
     "predict_fxg",
 ]

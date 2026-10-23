@@ -55,6 +55,19 @@ fitba's shot-on-target model, not provider xG. At the 2026-10-22 publish the
 provider-xG gate fails, so fxG is descriptive only. The model card is in
 [xg.md](xg.md).
 
+The season-so-far block adds:
+
+- fxG and provider xG for and against, for Robinson's 2026-27 and 2025-26 league
+  spells, with the full 2025-26 season as context.
+- a source panel separating fitba fxG, actual provider xG and the calibrated
+  provider-style estimate.
+- a manager table with league-only match counts, fxG, goals and provider basis.
+- a coverage note that names the missing provider rows and the six 2025-26
+  European rows under Thelin that are excluded from the league comparison.
+
+Actual and estimated provider values are never summed. The estimate is a
+calibration, not provider xG, and the page says so beside the number.
+
 ## Benchmark
 
 The chairman's record carries a "How the record compares" table. It compares

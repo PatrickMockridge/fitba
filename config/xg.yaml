@@ -30,6 +30,18 @@ evaluation:
   calibration_slope_min: 0.70
   calibration_slope_max: 1.30
 
+provider_estimate:
+  # A calibrated provider-style estimate for league rows where the provider did
+  # not supply xG. It is not provider xG: the provider uses shot locations that
+  # this record does not carry. Fit only on the provider rows supplied for the
+  # configured season and league.
+  method: ols
+  season: 2026-27
+  competition_id: sco:premiership
+  comparison_person_id: stephen-robinson
+  min_team_rows: 60
+  clamp_min: 0.0
+
 publication:
   # When the gate fails, publish the same numbers as a descriptive shot
   # expectation, never as an xG substitute.

@@ -207,6 +207,88 @@ def manager_stint_records(
     return records
 
 
+def _match_key(row: dict[str, Any]) -> str:
+    return str(row.get("match_id") or row.get("fixture_id") or row.get("key") or "")
+
+
+def manager_match_segments(
+    match_rows: pl.DataFrame,
+    stints: list[dict[str, Any]],
+    *,
+    competition_ids: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Attribute league match rows to manager stints by date.
+
+    Returns one segment per stint with the assigned rows, plus an Unattributed
+    segment for matches in a gap. The xG publisher uses the same boundaries as
+    the history manager records.
+    """
+    if not match_rows.height:
+        return []
+    allowed = competition_ids or LEAGUE_COMPETITION_IDS
+    rows = [row for row in match_rows.to_dicts() if row.get("competition_id") in allowed]
+    manager_stints = [stint for stint in stints if stint.get("role_group") == "manager"]
+    manager_stints.sort(
+        key=lambda stint: (
+            str(stint.get("start") or ""),
+            str(stint.get("stint_id") or ""),
+        )
+    )
+    claimed: set[str] = set()
+    segments: list[dict[str, Any]] = []
+    for stint in manager_stints:
+        start = _boundary(stint.get("start"), str(stint.get("start_precision") or "day"), end=False)
+        end = _boundary(stint.get("end"), str(stint.get("end_precision") or "day"), end=True)
+        if start is None:
+            continue
+        assigned: list[dict[str, Any]] = []
+        for row in rows:
+            key = _match_key(row)
+            if key in claimed:
+                continue
+            match_date = _date(row.get("date"))
+            if match_date is None or match_date < start:
+                continue
+            if end is not None and match_date > end:
+                continue
+            assigned.append(row)
+            claimed.add(key)
+        if not assigned:
+            continue
+        assigned.sort(key=lambda row: str(row.get("date") or ""))
+        segments.append(
+            {
+                "rows": assigned,
+                "stint_id": stint.get("stint_id"),
+                "person_id": stint.get("person_id"),
+                "name": stint.get("name"),
+                "interim": bool(stint.get("interim")),
+                "stint_start": stint.get("start"),
+                "stint_end": stint.get("end"),
+                "first_match": assigned[0].get("date"),
+                "last_match": assigned[-1].get("date"),
+            }
+        )
+    unattributed = [row for row in rows if _match_key(row) not in claimed]
+    if unattributed:
+        unattributed.sort(key=lambda row: str(row.get("date") or ""))
+        segments.append(
+            {
+                "rows": unattributed,
+                "stint_id": None,
+                "person_id": None,
+                "name": "Unattributed",
+                "interim": False,
+                "stint_start": None,
+                "stint_end": None,
+                "first_match": unattributed[0].get("date"),
+                "last_match": unattributed[-1].get("date"),
+            }
+        )
+    segments.sort(key=lambda item: str(item.get("first_match") or ""))
+    return segments
+
+
 def manager_splits_by_season(
     match_rows: pl.DataFrame,
     stints: list[dict[str, Any]],
@@ -395,6 +477,7 @@ __all__ = [
     "era_scorecard",
     "era_seasons",
     "flatten_stints",
+    "manager_match_segments",
     "manager_splits_by_season",
     "manager_stint_records",
     "season_records",

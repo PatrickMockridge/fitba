@@ -84,6 +84,11 @@ Must remain visible:
 - The peer benchmark table and its note that other clubs' transfer and wage
   models are not in the public record.
 - The compact fxG aggregate table and the link to `/analysis/xg/`.
+- The fxG/provider-xG season tiles, the "where the numbers come from" panel,
+  the manager comparison table and the provider coverage note.
+- The manager table columns: Manager, Stint, Season, Matches, fxG for,
+  fxG against, Goals for, Goals against, Goals − fxG for, Goals − fxG against,
+  Provider xG for, Provider xG against, Provider basis.
 - Coverage: availability, historical appearances and the missing data classes.
 - Links to matchday, matches, squad, recruitment, transfers, history,
   methodology, metrics and sources.
@@ -93,7 +98,10 @@ supporting content. They are linked, not repeated before the argument.
 
 Forbidden: the old five-card/five-panel grid, the 80/20 split, a question
 heading, a claim without a count or status, a causal claim from a small sample,
-a proxy presented as a measured set-play/error claim, or hidden contracted data.
+a proxy presented as a measured set-play/error claim, hidden contracted data, a
+provider-style estimate presented as provider xG, actual and estimated provider
+values summed into one number, or an unlabelled actual-versus-estimate
+comparison.
 
 
 ### `/analysis/xg/` — fxG model

@@ -2819,6 +2819,81 @@ export interface XgMatch {
   source: string | null;
 }
 
+export interface XgProviderEstimate {
+  status: "available" | "unavailable" | string;
+  label: string;
+  basis: "estimate" | string;
+  method: string;
+  formula?: string;
+  coefficients?: { intercept: number; slope: number };
+  clamp_min?: number;
+  sample: {
+    season: string;
+    competition_id: string;
+    matches: number;
+    team_rows: number;
+    source: string;
+  };
+  in_sample_mae?: number;
+  loocv_mae?: number | null;
+  max_loocv_error?: number | null;
+  r2?: number | null;
+  loocv_basis?: string;
+  reason?: string;
+  source: string;
+  limitations: string[];
+}
+
+export interface XgManagerPerMatch {
+  fxg_for: number | null;
+  fxg_against: number | null;
+  goals_for: number | null;
+  goals_against: number | null;
+  goals_minus_fxg_for: number | null;
+  goals_minus_fxg_against: number | null;
+  provider_actual_for: number | null;
+  provider_actual_against: number | null;
+  provider_estimate_for: number | null;
+  provider_estimate_against: number | null;
+}
+
+export interface XgManagerSplit {
+  season: string;
+  competition_id: string;
+  scope: "manager_stint" | "season_context" | string;
+  stint_id: string | null;
+  person_id: string | null;
+  manager: string;
+  interim: boolean;
+  stint_start: string | null;
+  stint_end: string | null;
+  first_match: string | null;
+  last_match: string | null;
+  matches: number;
+  fxg_for: number | null;
+  fxg_against: number | null;
+  goals_for: number;
+  goals_against: number;
+  goals_minus_fxg_for: number | null;
+  goals_minus_fxg_against: number | null;
+  provider_actual_for: number | null;
+  provider_actual_against: number | null;
+  provider_actual_matches: number;
+  provider_estimate_for: number | null;
+  provider_estimate_against: number | null;
+  provider_estimate_matches: number;
+  provider_basis: "actual" | "estimate" | "actual_partial" | "unavailable" | string;
+  comparison_role: "current" | "previous" | "context" | string;
+  per_match: XgManagerPerMatch;
+  coverage: {
+    matches: number;
+    with_fxg: number;
+    with_provider_actual: number;
+    with_provider_estimate: number;
+    note: string;
+  };
+}
+
 export interface XgDocument {
   schema_version: string;
   generated_at: string;
@@ -2851,11 +2926,28 @@ export interface XgDocument {
   } | null;
   matches: XgMatch[];
   aggregates: XgAggregate[];
+  provider_estimate?: XgProviderEstimate | null;
+  manager_splits?: XgManagerSplit[];
   coverage: {
     matches: number;
     with_fxg: number;
     with_provider_xg: number;
     missing_team_stats: number;
+    provider_actual?: {
+      total_matches: number;
+      league_2026_27: number;
+      league_2025_26: number;
+      conference_2025_26: number;
+      conference_2023_24: number;
+      note: string;
+    };
+    manager_splits?: {
+      seasons: string[];
+      competition_id: string;
+      rows: number;
+      unattributed_matches: number;
+      note: string;
+    };
     note: string;
   };
   sources: Array<{ id: string; name: string; layer: string; note: string }>;

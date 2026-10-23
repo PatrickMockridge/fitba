@@ -236,3 +236,21 @@ Registry version 2.3.0.
   goals-prevented basis.
 - The web contract adds `/corrections/`; the metrics registry and audit are
   regenerated. Audit status passes.
+
+## 2.4.0 — 2026-10-23
+
+fxG/provider-xG breakdown on Data analysis. Owner approval recorded in the
+reviewed plan. Registry version 2.4.0.
+
+- `xg.document` gains `provider_estimate` and `manager_splits`. The estimate is
+  an OLS calibration `max(0, intercept + slope * fxg)` fitted on 2026-27 league
+  team rows where provider xG exists; manager splits sum league match rows by
+  date-attributed manager stint. Actual provider values and estimates are never
+  summed. `xg.document` moves to version 3.
+- `param.xg` gains the `provider_estimate` config node and moves to version 2.
+- Existing numeric values are unchanged; the new leaves are additive. The
+  estimate is `provenance_only` and is not a reconstruction of provider xG.
+- Affected surfaces: `/analysis/`, `/analysis/xg/`, `/metrics/`, `/status/`.
+- Audit impact: the `xg.document` wildcard covers the new numeric leaves; the
+  audit is regenerated and the xG checker validates the estimate and split
+  coverage.

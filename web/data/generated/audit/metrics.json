@@ -4,10 +4,10 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-10-22T22:17:07+00:00",
-  "dataset_version": "2026-10-22T22:17:07+00:00-9128b8b",
+  "audited_at": "2026-10-23T00:51:34+00:00",
+  "dataset_version": "2026-10-23T00:51:34+00:00-34b883b",
   "errors": [],
-  "generated_at": "2026-10-22T22:17:07+00:00",
+  "generated_at": "2026-10-23T00:51:34+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -5762,7 +5762,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 4151 numeric leaves",
+          "message": "1 location(s), 4286 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -5778,30 +5778,32 @@
         }
       ],
       "coverage_tier": "derived",
-      "description": "fxG model, rates, intervals, provider comparison, aggregates and coverage.",
+      "description": "fxG model, rates, intervals, provider-xG estimate, league manager splits, aggregates and coverage.",
       "displayed_surfaces": [
         "/analysis/",
         "/analysis/xg/",
         "/matches/"
       ],
       "errors": [],
-      "fields_checked": 4151,
+      "fields_checked": 4286,
       "home_payload": "xg/aberdeen.json",
       "home_surface": "/analysis/xg/",
       "id": "xg.document",
       "label": "fxG document",
       "limitations": [
-        "fxG is a shot-on-target model. The provider-xG gate currently fails, so the values are descriptive and are not a performance verdict."
+        "fxG is a shot-on-target model. The provider-xG gate currently fails, so the values are descriptive and are not a performance verdict.",
+        "The provider-style estimate is a calibration, not provider xG; the record has no shot locations.",
+        "The estimate is fitted on 2026-27 league rows and applied to earlier league rows as a labelled estimate."
       ],
       "locations": [
         {
-          "nodes": 8732,
-          "numeric_leaves": 4151,
+          "nodes": 8995,
+          "numeric_leaves": 4286,
           "payload": "xg/aberdeen.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 4151,
+      "numeric_leaves": 4286,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -5810,7 +5812,7 @@
       "status": "pass",
       "value_type": "object",
       "verification": "provenance_only",
-      "version": 2
+      "version": 3
     },
     {
       "basis": "measured",
@@ -6172,14 +6174,14 @@
       "version": 1
     }
   ],
-  "registry_checksum": "sha256:03eb20531af21d42ef224fe22c3861d87d455bc89e0e24f689d265145fdeaae5",
+  "registry_checksum": "sha256:cb2df09242cc353078a4da210a451fb6f83f71a5500044fd12bae59e05245dba",
   "registry_reviewed": "2026-10-22",
-  "registry_version": "2.3.0",
+  "registry_version": "2.4.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "status": "pass",
   "summary": {
-    "fields_checked": 195140,
+    "fields_checked": 195275,
     "metrics_failed": 0,
     "metrics_passed": 57,
     "metrics_total": 57,

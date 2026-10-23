@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 2.3.0
+registry_version: 2.4.0
 reviewed: '2026-10-22'
 owner: patrickmockridge
 change_policy:
@@ -2181,7 +2181,8 @@ metrics:
   status: active
 - id: xg.document
   label: fxG document
-  description: fxG model, rates, intervals, provider comparison, aggregates and coverage.
+  description: fxG model, rates, intervals, provider-xG estimate, league manager splits,
+    aggregates and coverage.
   value_type: object
   fields:
   - model
@@ -2189,9 +2190,14 @@ metrics:
   - matches
   - aggregates
   - coverage
+  - provider_estimate
+  - manager_splits
   formula: fxG = 1 - exp(-rate * shots_on_target), rate from competition-season shot
     conversion with a prior; interval level 0.8; evaluation matches = distinct match
-    keys, team_rows = one pair per team.
+    keys, team_rows = one pair per team. provider_estimate = max(0, intercept + slope
+    * fxg), OLS fitted on 2026-27 league team rows where provider xG exists. manager_splits
+    sum league match rows by date-attributed manager stint, for and against separately.
+    Actual and estimated provider values are never summed.
   inputs:
   - published payload
   unit: mixed
@@ -2219,9 +2225,13 @@ metrics:
   limitations:
   - fxG is a shot-on-target model. The provider-xG gate currently fails, so the values
     are descriptive and are not a performance verdict.
+  - The provider-style estimate is a calibration, not provider xG; the record has
+    no shot locations.
+  - The estimate is fitted on 2026-27 league rows and applied to earlier league rows
+    as a labelled estimate.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-23'
+  version: 3
   status: active
 - id: history.defeats
   label: Heavy defeats

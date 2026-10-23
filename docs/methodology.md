@@ -204,8 +204,12 @@ fxG estimates a competition-season on-target conversion rate with an
 empirical-Bayes Beta prior and multiplies it by the match's shots on target. The
 80% interval carries conversion uncertainty and a match-level overdispersion
 term. It has no shot location, opponent adjustment or home advantage. Provider
-xG is carried separately where available and never blended in. The model card,
-evaluation gate and limitations are in [xg.md](xg.md).
+xG is carried separately where available and never blended in. Where the
+provider did not supply league xG, a calibrated provider-style estimate is
+published instead, clearly labelled as an estimate; it uses the 2026-27 provider
+rows as calibration and does not reconstruct the provider's shot-location
+model. The model card, evaluation gate and limitations are in
+[xg.md](xg.md).
 
 ## Provenance and squad needs
 

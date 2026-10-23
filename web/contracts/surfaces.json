@@ -1228,7 +1228,11 @@
         "web/components/CaseClaimCard.tsx",
         "web/components/CaseEvidenceTable.tsx",
         "web/components/CaseBenchmark.tsx",
-        "web/lib/data.ts"
+        "web/lib/data.ts",
+        "web/components/XgSeasonTiles.tsx",
+        "web/components/XgProvenance.tsx",
+        "web/components/ManagerXgTable.tsx",
+        "web/components/ProviderCoverageNote.tsx"
       ],
       "ci_states": [
         "full",
@@ -1296,6 +1300,22 @@
             {
               "id": "analysis.xg-link",
               "min": 1
+            },
+            {
+              "id": "xg.season-tiles",
+              "min": 1
+            },
+            {
+              "id": "xg.provenance",
+              "min": 1
+            },
+            {
+              "id": "xg.managers",
+              "min": 1
+            },
+            {
+              "id": "xg.provider-coverage",
+              "min": 1
             }
           ],
           "columns": {
@@ -1315,6 +1335,21 @@
               "Goals",
               "Goals \u2212 fxG",
               "80% interval"
+            ],
+            "xg.managers": [
+              "Manager",
+              "Stint",
+              "Season",
+              "Matches",
+              "fxG for",
+              "fxG against",
+              "Goals for",
+              "Goals against",
+              "Goals \u2212 fxG for",
+              "Goals \u2212 fxG against",
+              "Provider xG for",
+              "Provider xG against",
+              "Provider basis"
             ]
           },
           "links": [

@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:03eb20531af21d42ef224fe22c3861d87d455bc89e0e24f689d265145fdeaae5",
+  "checksum": "sha256:cb2df09242cc353078a4da210a451fb6f83f71a5500044fd12bae59e05245dba",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2743,7 +2743,7 @@
       "confidence_rule": "Declared by the payload fields and the source row; see docs/methodology.md.",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "fxG model, rates, intervals, provider comparison, aggregates and coverage.",
+      "description": "fxG model, rates, intervals, provider-xG estimate, league manager splits, aggregates and coverage.",
       "displayed_surfaces": [
         "/analysis/",
         "/analysis/xg/",
@@ -2754,9 +2754,11 @@
         "evaluation",
         "matches",
         "aggregates",
-        "coverage"
+        "coverage",
+        "provider_estimate",
+        "manager_splits"
       ],
-      "formula": "fxG = 1 - exp(-rate * shots_on_target), rate from competition-season shot conversion with a prior; interval level 0.8; evaluation matches = distinct match keys, team_rows = one pair per team.",
+      "formula": "fxG = 1 - exp(-rate * shots_on_target), rate from competition-season shot conversion with a prior; interval level 0.8; evaluation matches = distinct match keys, team_rows = one pair per team. provider_estimate = max(0, intercept + slope * fxg), OLS fitted on 2026-27 league team rows where provider xG exists. manager_splits sum league match rows by date-attributed manager stint, for and against separately. Actual and estimated provider values are never summed.",
       "home_payload": "xg/aberdeen.json",
       "home_surface": "/analysis/xg/",
       "id": "xg.document",
@@ -2766,13 +2768,15 @@
       ],
       "label": "fxG document",
       "limitations": [
-        "fxG is a shot-on-target model. The provider-xG gate currently fails, so the values are descriptive and are not a performance verdict."
+        "fxG is a shot-on-target model. The provider-xG gate currently fails, so the values are descriptive and are not a performance verdict.",
+        "The provider-style estimate is a calibration, not provider xG; the record has no shot locations.",
+        "The estimate is fitted on 2026-27 league rows and applied to earlier league rows as a labelled estimate."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "xg/aberdeen.json#/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-10-23",
       "rounding": {
         "decimals": 3,
         "display": "0.000",
@@ -2788,7 +2792,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "per_match",
@@ -3733,7 +3737,7 @@
       "version": 1
     }
   ],
-  "registry_version": "2.3.0",
+  "registry_version": "2.4.0",
   "reviewed": "2026-10-22",
   "schema_version": 1,
   "structural_number_patterns": [

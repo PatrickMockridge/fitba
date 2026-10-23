@@ -3,6 +3,10 @@ import { CaseBenchmark } from "@/components/CaseBenchmark";
 import { CaseClaimCard } from "@/components/CaseClaimCard";
 import { CaseCoverage } from "@/components/CaseCoverage";
 import { ContractPage } from "@/components/ContractPage";
+import { ManagerXgTable } from "@/components/ManagerXgTable";
+import { ProviderCoverageNote } from "@/components/ProviderCoverageNote";
+import { XgProvenance } from "@/components/XgProvenance";
+import { XgSeasonTiles } from "@/components/XgSeasonTiles";
 import { XgTable } from "@/components/XgTable";
 import { getCase, getXg } from "@/lib/data";
 import { formatDate } from "@/lib/format";
@@ -93,6 +97,20 @@ export default function DataAnalysisPage() {
               Match record →
             </Link>
           </p>
+          <XgSeasonTiles
+            rows={xg.manager_splits ?? []}
+            estimate={xg.provider_estimate ?? null}
+          />
+          <XgProvenance
+            estimate={xg.provider_estimate ?? null}
+            evaluation={xg.evaluation}
+            coverage={xg.coverage}
+          />
+          <ManagerXgTable rows={xg.manager_splits ?? []} />
+          <ProviderCoverageNote
+            coverage={xg.coverage}
+            estimate={xg.provider_estimate ?? null}
+          />
         </>
       ) : null}
 

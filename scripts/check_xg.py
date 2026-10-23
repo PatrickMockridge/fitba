@@ -52,6 +52,63 @@ def main() -> int:
     if coverage.get("with_fxg", 0) <= 0:
         errors.append("no fixture has fxG")
 
+    estimate = payload.get("provider_estimate") or {}
+    if not estimate:
+        errors.append("missing provider_estimate")
+    elif estimate.get("status") == "available":
+        coefficients = estimate.get("coefficients") or {}
+        if coefficients.get("intercept") is None or coefficients.get("slope") is None:
+            errors.append("provider estimate has no coefficients")
+        if not estimate.get("sample", {}).get("team_rows"):
+            errors.append("provider estimate has no calibration sample")
+        if estimate.get("in_sample_mae") is None or estimate.get("loocv_mae") is None:
+            errors.append("provider estimate has no error diagnostics")
+    elif estimate.get("status") == "unavailable":
+        print("warning: provider-style estimate is unavailable")
+    else:
+        errors.append(f"unknown provider estimate status {estimate.get('status')!r}")
+
+    splits = payload.get("manager_splits") or []
+    if not splits:
+        errors.append("missing manager splits")
+    else:
+        allowed = {"actual", "estimate", "actual_partial", "unavailable"}
+        for row in splits:
+            if row.get("provider_basis") not in allowed:
+                errors.append(
+                    f"manager split has invalid provider basis {row.get('provider_basis')!r}"
+                )
+            if row.get("provider_basis") == "actual" and row.get(
+                "provider_actual_matches"
+            ) != row.get("matches"):
+                errors.append(
+                    f"{row.get('manager')} {row.get('season')}: actual basis with partial rows"
+                )
+            if row.get("provider_basis") == "estimate" and row.get(
+                "provider_estimate_matches"
+            ) != row.get("matches"):
+                errors.append(
+                    f"{row.get('manager')} {row.get('season')}: estimate basis with partial rows"
+                )
+        for season in ("2025-26", "2026-27"):
+            managers = [
+                row
+                for row in splits
+                if row.get("season") == season and row.get("scope") == "manager_stint"
+            ]
+            if not managers:
+                errors.append(f"no manager split for {season}")
+            context = [
+                row
+                for row in splits
+                if row.get("season") == season and row.get("scope") == "season_context"
+            ]
+            if season == "2025-26" and not context:
+                errors.append("no full-season context row for 2025-26")
+        robinson = [row for row in splits if row.get("person_id") == "stephen-robinson"]
+        if not robinson:
+            errors.append("no Robinson manager split")
+
     for error in errors:
         print(f"error: {error}")
     status = evaluation.get("status") or "unavailable"

@@ -4,6 +4,7 @@ import polars as pl
 
 from fitba.analytics.history import (
     club_match_rows,
+    manager_match_segments,
     manager_splits_by_season,
     manager_stint_records,
     season_records,
@@ -326,3 +327,52 @@ def test_blocked_source_hosts_are_rejected():
     _, hosts = no_publication_tokens()
     assert is_blocked_url("https://www.bbc.co.uk/sport/123", hosts)
     assert not is_blocked_url("https://en.wikipedia.org/wiki/Aberdeen_F.C.", hosts)
+
+
+def test_manager_match_segments_attributes_by_date_and_flags_gaps():
+    frame = pl.DataFrame(
+        [
+            {
+                "match_id": "m1",
+                "date": "2025-08-01",
+                "competition_id": "sco:premiership",
+                "season": "2025-26",
+            },
+            {
+                "match_id": "m2",
+                "date": "2025-10-01",
+                "competition_id": "sco:premiership",
+                "season": "2025-26",
+            },
+            {
+                "match_id": "m3",
+                "date": "2025-11-01",
+                "competition_id": "sco:premiership",
+                "season": "2025-26",
+            },
+        ]
+    )
+    stints = [
+        {
+            "stint_id": "a",
+            "person_id": "a",
+            "name": "Manager A",
+            "role_group": "manager",
+            "start": "2025-07-01",
+            "end": "2025-09-01",
+            "interim": False,
+        },
+        {
+            "stint_id": "b",
+            "person_id": "b",
+            "name": "Manager B",
+            "role_group": "manager",
+            "start": "2025-10-15",
+            "end": None,
+            "interim": False,
+        },
+    ]
+    segments = manager_match_segments(frame, stints)
+    assert [segment["name"] for segment in segments] == ["Manager A", "Unattributed", "Manager B"]
+    assert [len(segment["rows"]) for segment in segments] == [1, 1, 1]
+    assert segments[2]["first_match"] == "2025-11-01"
