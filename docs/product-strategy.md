@@ -164,9 +164,11 @@ usernames or quotes in the public payload.
 - An upcoming-matchday dashboard and a trading-club view: the next opponent,
   predicted XIs, form, style and strength; squad age/value, minutes by age,
   transfers, sell-on candidates, contract and loan status on the club pages.
-- A scouting board using basic licensed stats: position-aware percentiles,
-  minutes reliability, league-strength adjustment, style fit, budget bands and
-  coverage labels.
+- A scouting board using licensed season stats: role-family cohorts, rating
+  percentiles, minutes reliability, six player profiles and per-league coverage
+  labels, an empirical cross-league alignment and a non-currency value index.
+  GBP value bands, style fit and budget bands are not yet published; the board
+  does not claim them.
 - Opposition briefings using the same framework.
 - Fan explainers and a methodology/sources layer that a reader new to a method
   can follow without losing the evidence.

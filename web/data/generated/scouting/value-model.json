@@ -1,0 +1,80 @@
+{
+  "anchor_count": 4,
+  "coefficient_vector": null,
+  "coefficients": null,
+  "gate": {
+    "age_bands": 3,
+    "age_pass": true,
+    "anchor_count": 4,
+    "league_tiers": 1,
+    "min_age_bands": 3,
+    "min_anchors": 60,
+    "min_league_tiers": 3,
+    "min_role_anchors": 5,
+    "passed": false,
+    "role_counts": {
+      "DEF": 1,
+      "FWD": 1,
+      "MID": 2
+    },
+    "role_pass": false,
+    "tier_pass": false,
+    "top_tier_pass": true,
+    "top_tier_required": 0.2,
+    "top_tier_share": 1.0
+  },
+  "in_sample_mae": null,
+  "index": {
+    "age_curve": [
+      {
+        "factor": 0.5,
+        "max_age": 18
+      },
+      {
+        "factor": 0.7,
+        "max_age": 20
+      },
+      {
+        "factor": 0.9,
+        "max_age": 23
+      },
+      {
+        "factor": 1.0,
+        "max_age": 27
+      },
+      {
+        "factor": 0.8,
+        "max_age": 29
+      },
+      {
+        "factor": 0.55,
+        "max_age": 31
+      },
+      {
+        "factor": 0.3,
+        "max_age": 120
+      }
+    ],
+    "min_weight_coverage": 0.7,
+    "minutes_full": 1800,
+    "weights": {
+      "age": 0.15,
+      "minutes": 0.15,
+      "performance": 0.55,
+      "profile": 0.15
+    }
+  },
+  "interval": 0.8,
+  "limitations": [
+    "The GBP band is fitted only from a public-source anchor register; it is not a fee or a market quote.",
+    "Contract length, wages, release clauses and agent fees are unknown.",
+    "The performance input is the league-adjusted scouting percentile; the league adjustment is an empirical model."
+  ],
+  "loocv_mae": null,
+  "max_loocv_error": null,
+  "r2": null,
+  "residual_sd": null,
+  "sample": null,
+  "state": "awaiting_anchors",
+  "usable_anchors": 4
+}

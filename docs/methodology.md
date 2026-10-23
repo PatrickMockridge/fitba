@@ -79,12 +79,17 @@ validated against the official results and published with a "computed" label.
 The scouting engine is described in [scouting-method.md](scouting-method.md). In
 summary:
 
-- per-90 rates with empirical-Bayes or Poisson shrinkage;
-- winsorised, robust z-scores within league, season and position group;
-- shrinkage toward the positional mean by effective minutes;
-- a league-strength adjustment with a confidence flag and sensitivity check;
-- raw and adjusted percentiles shown side by side;
-- no composite when more than 40% of the absolute weight is missing.
+- per-90 rates from provider season totals;
+- rating percentiles within `(league, season, role family)` at 450+ minutes,
+  with a minimum cohort of 15 (8 for goalkeepers);
+- role families from starting-XI grids, with a labelled provider-group fallback
+  where the feed has no grid;
+- an empirical Premiership-equivalent percentile built from the observed
+  league/role median and spread, shown beside the raw within-league percentile
+  and labelled as a model;
+- archetype scores from winsorised robust z-scores, with minutes shrinkage and a
+  70% weight-coverage floor;
+- no composite when the applicable weight coverage is below the floor.
 
 ## Uncertainty
 
@@ -297,6 +302,31 @@ a multi-slot summary. This is a general football model for fluid formations and
 utility/inverted roles; curated `reference/role_notes.yaml` context covers
 interpretations the kick-off grid cannot see. See
 [career-roles.md](career-roles.md).
+
+## Scouting
+
+The scouting universe is `config/scouting/leagues.yaml`. Player season
+statistics and starting-XI lineups come from API-Football. At the 2026-10-23
+sync, 25 of 33 enabled leagues returned searchable player statistics; seven are
+labelled as having none and one is partial. Role families come from the same starting-XI
+grid as the Aberdeen roles; a league without a grid uses the provider position
+group and says so.
+
+Ratings and profile scores are compared only within a league and role family.
+There is no cross-league rating adjustment: the strength priors are assumptions,
+not a measured mapping. Per-90 values use the provider season totals; completed
+passes are `passes.total × accuracy / 100`. Forward and progressive passes,
+carries, pressures, aerial wins and crosses are not in the feed. Contracts,
+wages, fees and release clauses are not claimed. The availability layer uses
+only verified official AFC team news.
+
+`/scouting/search/` searches every ranked player across the pool and shows the
+league beside every row. The adjusted percentile is an empirical alignment to
+the Premiership cohort, not a measured equivalence. The value index is a
+scouting ordering; a GBP band is published only after the public-source anchor
+register passes its gate.
+
+See [scouting-method.md](scouting-method.md).
 
 ## Preferred foot
 

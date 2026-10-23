@@ -287,14 +287,17 @@ sources:
       - transfers
       - loans
     url: https://www.api-football.com
-    coverage: [all four SPFL tiers, Scottish Cup, League Cup]
+    coverage: [all four SPFL tiers, Scottish Cup, League Cup, and the configured scouting universe (season player statistics and starting-XI lineups)]
     pricing_note: Pro subscription; check the provider's current plan and price at checkout.
     known_gaps: >
       League Cup group standings are not provided (compute from group fixtures);
       the Scottish Cup feed covered 50 of 136 ties at test time (First Round and
       Second Round only); current lower-tier player stats were empty at test
       time; no preferred foot, event coordinates, heat maps, market values or
-      wages. Provider xG is partial: expected_goals appears in some Premiership
+      wages, contracts or release clauses. In the scouting universe, seven enabled
+      leagues return no player season statistics, and some lineups omit the
+      formation and grid; both are labelled per league and never inferred.
+      Provider xG is partial: expected_goals appears in some Premiership
       statistics responses, not as a historical location feed. Roles are
       derived from the starting-XI formation grid in the
       lineups; the feed does not report a formation after a substitution, so
@@ -315,7 +318,7 @@ sources:
       and Scottish Cup First/Second Round fixtures; League Cup standings empty;
       top European leagues and the Premiership return player stats; current
       Championship/League One/League Two player stats were not populated.
-    last_verified: 2026-10-21
+    last_verified: 2026-10-23
 
   bbc_sport:
     name: BBC Sport

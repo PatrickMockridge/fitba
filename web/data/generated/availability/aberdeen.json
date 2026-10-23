@@ -1,13 +1,13 @@
 {
-  "as_of": "2026-10-22T00:28:10+00:00",
+  "as_of": "2026-10-23T13:16:49+00:00",
   "club_id": "sco:aberdeen",
   "coverage": {
     "conflicts": 0,
     "doubtful": 0,
-    "entries": 38,
-    "known": 0,
+    "entries": 39,
+    "known": 2,
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
-    "out": 0,
+    "out": 1,
     "provider_snapshot": {
       "coverage": {
         "fixtures": {
@@ -31,9 +31,9 @@
     },
     "returned": 0,
     "stale": 0,
-    "status": "unavailable",
+    "status": "partial",
     "suspended": 0,
-    "unknown": 38
+    "unknown": 37
   },
   "entries": [
     {
@@ -499,6 +499,27 @@
       "verified_at": null
     },
     {
+      "confidence": "confirmed",
+      "conflict": false,
+      "effective_from": "2026-10-08",
+      "effective_to": null,
+      "expected_return": null,
+      "in_squad": false,
+      "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
+      "player_id": 68534,
+      "player_key": "api:player:68534",
+      "player_name": "K. Tobers",
+      "provider_signal": null,
+      "reason": "Knee injury; not yet involved in matchday squads.",
+      "reason_category": "injury",
+      "source_id": "afc_news",
+      "source_title": "Stephen Robinson: St Johnstone Press Conference",
+      "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+      "stale": false,
+      "status": "out",
+      "verified_at": "2026-10-23"
+    },
+    {
       "confidence": "unknown",
       "conflict": false,
       "effective_from": null,
@@ -604,25 +625,25 @@
       "verified_at": null
     },
     {
-      "confidence": "unknown",
+      "confidence": "reported",
       "conflict": false,
-      "effective_from": null,
+      "effective_from": "2026-10-16",
       "effective_to": null,
       "expected_return": null,
       "in_squad": true,
-      "note": "No verified official team-news entry.",
+      "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
       "player_id": 37253,
       "player_key": "api:player:37253",
       "player_name": "M. Knoester",
       "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
+      "reason": "Returned from injury; player reports fit.",
+      "reason_category": "injury",
+      "source_id": "afc_news",
+      "source_title": "Mats Knoester: St Mirren Preview",
+      "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
       "stale": false,
-      "status": "unknown",
-      "verified_at": null
+      "status": "available",
+      "verified_at": "2026-10-23"
     },
     {
       "confidence": "unknown",
@@ -835,7 +856,7 @@
       "verified_at": null
     }
   ],
-  "generated_at": "2026-10-23T00:51:34+00:00",
+  "generated_at": "2026-10-23T14:41:26+00:00",
   "notes": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
   "policy_version": "1.0.0",
   "schema_version": "1.0.0",
@@ -852,5 +873,5 @@
       "url": "https://www.api-football.com"
     }
   ],
-  "state": "unavailable"
+  "state": "partial"
 }

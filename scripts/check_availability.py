@@ -115,8 +115,15 @@ def main() -> int:
             ):
                 errors.append(f"{player.get('name')}: doubtful player retains high confidence")
         availability = lineup.get("availability") or {}
-        if availability and int(availability.get("known") or 0) != known:
-            warnings.append("matchday availability known count differs from the published ledger")
+        squad_known = sum(
+            1
+            for entry in entries
+            if entry.get("in_squad", True) and entry.get("status") != "unknown"
+        )
+        if availability and int(availability.get("known") or 0) != squad_known:
+            warnings.append(
+                "matchday availability known count differs from the published squad entries"
+            )
 
     if DOCUMENT.stat().st_size > MAX_FILE_BYTES:
         errors.append(f"{DOCUMENT} exceeds the {MAX_FILE_BYTES} byte cap")

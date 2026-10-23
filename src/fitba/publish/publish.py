@@ -64,6 +64,10 @@ from fitba.publish.rumours import (
     profile_payload,
     rumours_payload,
 )
+from fitba.publish.scouting import (
+    build_scouting_bundle,
+    fallback_scouting_bundle,
+)
 from fitba.publish.shapes import shape_payload
 from fitba.publish.squad import PlayerLinkIndex, squad_payload
 from fitba.publish.themes import build_themes_payload, fallback_themes_payload
@@ -119,6 +123,20 @@ def _dumps(payload: Any) -> bytes:
     return orjson.dumps(payload, option=orjson.OPT_INDENT_2 | orjson.OPT_SORT_KEYS, default=str)
 
 
+def _write_compact(path: Path, payload: Any) -> dict[str, Any]:
+    """Write a machine-oriented index without pretty-printing, under the same cap."""
+    data = orjson.dumps(payload, option=orjson.OPT_SORT_KEYS, default=str)
+    if len(data) > MAX_FILE_BYTES:
+        raise ValueError(f"{path} is {len(data)} bytes, over the {MAX_FILE_BYTES} cap")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+    return {
+        "path": str(path),
+        "bytes": len(data),
+        "checksum": "sha256:" + hashlib.sha256(data).hexdigest(),
+    }
+
+
 def _write(path: Path, payload: Any) -> dict[str, Any]:
     data = _dumps(payload)
     if len(data) > MAX_FILE_BYTES:
@@ -159,6 +177,32 @@ def _previous_fixture_payloads(target: Path) -> dict[str, Any] | None:
         "state": "stale",
         "stale_reason": "fixture_build_returned_fewer_pages",
     }
+
+
+def _previous_scouting_bundle(target: Path) -> dict[str, Any] | None:
+    hub_path = target / "scouting" / "aberdeen.json"
+    if not hub_path.exists():
+        return None
+    try:
+        hub = orjson.loads(hub_path.read_bytes())
+    except orjson.JSONDecodeError:
+        return None
+    coverage = None
+    coverage_path = target / "scouting" / "coverage.json"
+    if coverage_path.exists():
+        try:
+            coverage = orjson.loads(coverage_path.read_bytes())
+        except orjson.JSONDecodeError:
+            coverage = None
+    pools: dict[str, Any] = {}
+    pool_dir = target / "scouting" / "pool"
+    if pool_dir.exists():
+        for path in sorted(pool_dir.glob("*.json")):
+            try:
+                pools[path.stem] = orjson.loads(path.read_bytes())
+            except orjson.JSONDecodeError:
+                continue
+    return {"hub": hub, "coverage": coverage, "pools": pools}
 
 
 def _git_sha() -> str:
@@ -1105,6 +1149,8 @@ def publish(
         except orjson.JSONDecodeError:
             previous_xg = None
 
+    previous_scouting = _previous_scouting_bundle(target)
+
     previous_needs = None
     previous_needs_path = target / "needs" / "aberdeen.json"
     if previous_needs_path.exists():
@@ -1398,6 +1444,82 @@ def publish(
             "path": "xg/aberdeen.json",
             "rows": len(xg_payload.get("matches", [])),
             "checksum": xg_info["checksum"],
+            "season": target_season,
+        }
+    )
+
+    try:
+        scouting_bundle = build_scouting_bundle(
+            season=target_season,
+            squad_data=squad_data,
+            availability=availability_payload,
+            generated_at=generated_at,
+        )
+    except Exception as error:  # noqa: BLE001 - scouting must not fail the publish
+        scouting_bundle = fallback_scouting_bundle(
+            previous_scouting,
+            reason=f"scouting_build_failed:{type(error).__name__}",
+            season=target_season,
+            generated_at=generated_at,
+        )
+    hub = scouting_bundle["hub"]
+    hub_info = _write(temp / "scouting" / "aberdeen.json", hub)
+    written.append(hub_info)
+    coverage_document = scouting_bundle["coverage"]
+    coverage_info = _write(temp / "scouting" / "coverage.json", coverage_document)
+    written.append(coverage_info)
+    pool_documents = scouting_bundle.get("pools") or {}
+    for slug, document in sorted(pool_documents.items()):
+        pool_info = _write(temp / "scouting" / "pool" / f"{slug}.json", document)
+        written.append(pool_info)
+    search_document = scouting_bundle["search"]
+    search_info = _write_compact(temp / "scouting" / "search-index.json", search_document)
+    written.append(search_info)
+    value_model_document = hub.get("value_model") or {"state": "unavailable"}
+    value_model_info = _write(temp / "scouting" / "value-model.json", value_model_document)
+    written.append(value_model_info)
+    marts.append(
+        {
+            "id": "scouting.sco:aberdeen",
+            "path": "scouting/aberdeen.json",
+            "rows": len(hub.get("board", {}).get("families", [])),
+            "checksum": hub_info["checksum"],
+            "season": target_season,
+        }
+    )
+    marts.append(
+        {
+            "id": "scouting.coverage",
+            "path": "scouting/coverage.json",
+            "rows": len(coverage_document.get("leagues", [])),
+            "checksum": coverage_info["checksum"],
+            "season": target_season,
+        }
+    )
+    marts.append(
+        {
+            "id": "scouting.pool",
+            "path": "scouting/pool/",
+            "rows": sum(len(document.get("players") or []) for document in pool_documents.values()),
+            "checksum": None,
+            "season": target_season,
+        }
+    )
+    marts.append(
+        {
+            "id": "scouting.search",
+            "path": "scouting/search-index.json",
+            "rows": len(search_document.get("players") or []),
+            "checksum": search_info["checksum"],
+            "season": target_season,
+        }
+    )
+    marts.append(
+        {
+            "id": "scouting.value-model",
+            "path": "scouting/value-model.json",
+            "rows": 1,
+            "checksum": value_model_info["checksum"],
             "season": target_season,
         }
     )

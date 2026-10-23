@@ -5,7 +5,7 @@
 # valid state; it is never converted to "available" or "fit".
 #
 # Fields:
-#   availability_id, player_key, player_name, status, reason_category, reason,
+#   player_id, player_key, player_name, status, reason_category, reason,
 #   expected_return, effective_from, effective_to, source_id, source_url,
 #   source_title, verified_at, confidence, note
 #
@@ -16,5 +16,49 @@
 version: 1
 club: sco:aberdeen
 season: 2026-27
-updated_at: 2026-10-22
-entries: []
+updated_at: 2026-10-23
+entries:
+  # Verified 2026-10-23 against the official AFC article of 2026-10-08. The
+  # manager said Tobers was still a little bit away and would not be in the
+  # matchday squad for two to three weeks. No return date is published, so
+  # expected_return stays null rather than inventing one.
+  - player_id: 68534
+    player_key: api:player:68534
+    player_name: K. Tobers
+    status: out
+    reason_category: injury
+    reason: Knee injury; not yet involved in matchday squads.
+    expected_return: null
+    effective_from: "2026-10-08"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference
+    source_title: "Stephen Robinson: St Johnstone Press Conference"
+    verified_at: "2026-10-23"
+    confidence: confirmed
+    note: >
+      Official club press conference. Manager: still a little bit away from being
+      considered; needs games; not in the matchday squad for the next two to
+      three weeks. No medical detail beyond the club's own words.
+
+  # Verified 2026-10-23 against the official AFC interview of 2026-10-16. The
+  # player reports being fit after returning on 2026-09-02. This is a player
+  # self-report, so confidence is reported, not confirmed.
+  - player_id: 37253
+    player_key: api:player:37253
+    player_name: M. Knoester
+    status: available
+    reason_category: injury
+    reason: Returned from injury; player reports fit.
+    expected_return: null
+    effective_from: "2026-10-16"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview
+    source_title: "Mats Knoester: St Mirren Preview"
+    verified_at: "2026-10-23"
+    confidence: reported
+    note: >
+      Official club interview. Player: I feel good; I feel good and fit; a good
+      number of games since returning. Not a medical clearance; the match report
+      of 2026-09-02 records the return to the side.

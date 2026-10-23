@@ -21,7 +21,8 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4f. Data analysis | **Live.** `/analysis/` and a matchday strip: the owner's view, the chairman's frame and six claims on the team, squad and Cormack-era record. |
 | 4g. Provenance, availability and needs | **Live.** Layer truth table at `/sources/`, curated availability ledger in the predicted XI, and a squad-needs board on `/recruitment/` that feeds the scouting method. |
 | 4h. Match record and fxG | **Live.** `/matches/` and one page per played fixture, plus an experimental fxG model at `/analysis/xg/`. The provider gate is failing, so fxG is descriptive only. |
-| 5. Fan-facing insight layer | **Next.** Trading analytics, scouting views and richer opposition context. |
+| 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and six profiles. An empirical league alignment and a scouting value index are live; GBP value bands, style fit and budget bands are deferred. |
+| 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |
 

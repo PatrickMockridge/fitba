@@ -254,3 +254,62 @@ reviewed plan. Registry version 2.4.0.
 - Audit impact: the `xg.document` wildcard covers the new numeric leaves; the
   audit is regenerated and the xG checker validates the estimate and split
   coverage.
+
+## 2.5.0 — 2026-10-23
+
+Scouting board, player pool and role-family cohorts. Owner approval recorded in
+the reviewed plan. Registry version 2.5.0.
+
+- New `scouting.pool` metric: provider season statistics, per-90 and percentage
+  formulas, within-league role percentiles and archetype scores. Provider
+  ratings are opaque and league-relative; no cross-league ranking is published.
+- New `scouting.board` metric: Aberdeen role-family averages against the other
+  Scottish Premiership players in the same role family, with verified
+  availability and first-choice evidence. The reading is evidence, not a
+  verdict.
+- New `scouting.archetypes` metric: six signed weighted composites using only
+  fields the licensed feed supplies, with winsorisation, robust z-scores,
+  minutes shrinkage, weight renormalisation and a 70% coverage floor.
+- New `scouting.squad` metric: Aberdeen registered-squad position-specific per-90
+  output, competitive matches only, at 180+ minutes.
+- New `scouting.coverage` metric: per-league player, rating, minutes and role
+  counts; seven enabled leagues return no player statistics and are labelled.
+- New `param.scouting` parameter backed by `config/scouting/model.yaml`.
+- New provenance layer `scouting_pool` (API-Football player season statistics
+  and starting-XI lineups).
+- `scouting.pool` also covers `scouting/search-index.json`, the compact
+  cross-league search index. The index carries the league with every row; it
+  does not publish a cross-league percentile rank.
+- Existing values are unchanged; the new leaves are additive. The new metrics
+  are provenance-only or derived; `scripts/check_scouting.py` validates the
+  document structure, percentile bounds, cohort bases, layer-0 statuses and
+  coverage reconciliation.
+- Affected surfaces: `/scouting/`, `/scouting/search/`, `/scouting/<league>/`, `/sources/`,
+  `/methodology/`, `/metrics/`, `/status/`, `/sitemap.xml`.
+- Audit impact: the new wildcard payload paths cover the numeric leaves; the
+  audit is regenerated. Contracts and prices are not in the feed and are not
+  claimed.
+
+## 2.6.0 — 2026-10-23
+
+Cross-league Layer 2 and the anchor-gated scouting value model. Owner approval
+recorded in the reviewed plan. Registry version 2.6.0.
+
+- `scouting.pool` now carries an empirical Premiership-equivalent percentile,
+  adjusted profile scores, a 0–100 value index and value-model fields. The
+  adjustment uses the observed league/role median and spread from the pool; the
+  Premiership is the identity. It is a model, not a measured equivalence.
+- Layer 2 archetype leaders and the pivot card now use all ranked leagues, not
+  the Premiership only.
+- New `scouting.value-model` metric: the value index and the GBP band, which is
+  published only after the public-source anchor gate passes. With no anchors,
+  the state is `awaiting_anchors` and every GBP band is null.
+- New `param.scouting.value` backed by `config/scouting/value.yaml`.
+- New `reference/scouting_values.yaml` anchor register, scaffolded with four
+  diagnostic Aberdeen-market rows. The gate requires 60 usable anchors with
+  role, tier and age coverage. The GBP band is deferred; no GBP value is
+  published before the gate.
+- Affected surfaces: `/scouting/`, `/scouting/search/`, `/scouting/<league>/`,
+  `/metrics/`, `/status/`, `/methodology/`, `/sources/`.
+- Audit impact: the new wildcard payload paths cover the value-model and
+  adjusted leaves; the audit is regenerated.

@@ -107,6 +107,21 @@ layers:
       Premiership coverage; lower-tier current-season player stats were empty
       at the key-test. Historical player-match-stat files are empty.
 
+  - id: scouting_pool
+    label: Scouting player pool and starting-XI roles
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: configured scouting leagues, current season
+    fields: [player_season_statistics, provider_rating, lineups, starting_xi_grids]
+    surfaces: [/scouting/, /sources/, /methodology/]
+    note: >
+      Season player statistics and starting-XI lineups for the configured
+      scouting universe. Seven enabled leagues return no player season
+      statistics, and several leagues omit the formation and grid. Coverage is
+      labelled per league; nothing is zero-filled or inferred.
+
   - id: event_layer
     label: Event-derived Aberdeen stats
     kind: derived

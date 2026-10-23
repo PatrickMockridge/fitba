@@ -656,7 +656,20 @@ def build_needs_document(
     for index, family in enumerate(families, start=1):
         family["priority"] = index
     counts = Counter(row["category"] for row in families)
-    known = sum(1 for entry in availability_entries.values() if entry.get("status") != "unknown")
+    # Availability is counted once per squad player, matching the squad payload.
+    # A ledger entry for a player absent from the provider squad (for example a
+    # long-term absentee) is shown by the scouting layer, not as a squad row.
+    squad_ids = {
+        int(player["player_id"])
+        for player in (squad_data or {}).get("players") or []
+        if player.get("player_id") is not None
+    }
+    known = sum(
+        1
+        for player_id, entry in availability_entries.items()
+        if player_id in squad_ids and entry.get("status") != "unknown"
+    )
+    unknown = max(0, len(squad_ids) - known)
     document = {
         "schema_version": "1.0.0",
         "generated_at": generated_at,
@@ -670,17 +683,17 @@ def build_needs_document(
             "counts": dict(counts),
             "top_priority": families[0]["family"] if families else None,
             "availability_known": known,
-            "availability_unknown": max(0, len(availability_entries) - known),
+            "availability_unknown": unknown,
             "note": ("Role profiles and market routes only. No targets, fees or wages."),
         },
         "coverage": {
-            "status": "partial" if known < len(availability_entries) else "available",
+            "status": "partial" if known < len(squad_ids) else "available",
             "measured_families": sum(
                 1 for row in families if row["measured"]["status"] != "unavailable"
             ),
             "availability": {
                 "known": known,
-                "unknown": max(0, len(availability_entries) - known),
+                "unknown": unknown,
             },
             "transfers": "available" if transfers else "unavailable",
             "rumours": "available" if rumours else "empty",

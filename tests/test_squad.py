@@ -1,12 +1,9 @@
 from fitba.ingest.squad import (
     _club_matches,
     _coverage,
-    _float,
-    _int,
-    _rating,
     _scope_for,
-    _stat_row,
 )
+from fitba.normalize.player_stats import parse_stat_entry, to_float, to_int, to_rating
 from fitba.normalize.positions import position_group, squad_group
 from fitba.publish.squad import PlayerLinkIndex, _totals
 
@@ -28,7 +25,7 @@ def _stat(**overrides):
         "passes": {"total": 300, "key": 2, "accuracy": "78%"},
     }
     entry.update(overrides)
-    return _stat_row(
+    return parse_stat_entry(
         player_id=1,
         player_key="api:player:1",
         entry=entry,
@@ -39,12 +36,12 @@ def _stat(**overrides):
 
 
 def test_number_parsing_preserves_zero_and_rejects_missing():
-    assert _int(0) == 0
-    assert _int(None) is None
-    assert _int("") is None
-    assert _float("78%") == 78.0
-    assert _rating("0") is None
-    assert _rating("7.34") == 7.34
+    assert to_int(0) == 0
+    assert to_int(None) is None
+    assert to_int("") is None
+    assert to_float("78%") == 78.0
+    assert to_rating("0") is None
+    assert to_rating("7.34") == 7.34
 
 
 def test_stat_row_maps_api_typo_and_sums_red_cards():
@@ -113,7 +110,7 @@ def test_coverage_partial_when_minutes_missing():
     assert "minutes" in note
 
 
-def test_totals_sum_and_weight_rating():
+def test_totals_sum_and_weightto_rating():
     rows = [
         {
             "appearances": 10,

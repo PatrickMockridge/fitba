@@ -1,0 +1,50 @@
+# Scouting model parameters.
+#
+# Every threshold here is a published parameter; changing one requires owner
+# approval, a metrics registry version bump and an entry in
+# docs/metric-changes.md. The values are assumptions, not facts.
+version: 1
+reviewed: 2026-10-23
+
+pool:
+  # A player is ranked in the external pool at this many minutes. The pool is a
+  # current-season view; 450 minutes is a mid-season threshold, not a full season.
+  min_minutes: 450
+  # Above this the sample is labelled low-minutes, never hidden.
+  low_minutes: 900
+  # Minimum cohort size before a percentile is published.
+  min_cohort: 15
+  # Goalkeeper cohorts are one-per-club and are legitimately smaller.
+  min_cohort_by_family:
+    goalkeeper: 8
+  # If a role-family cohort is too small, fall back to the provider position
+  # group only when that group has at least this many players.
+  fallback_group_min: 15
+
+board:
+  # Aberdeen player inclusion in the family average.
+  min_minutes: 300
+  # Percentile cut-offs for below / at / above the cohort.
+  status_below: 40.0
+  status_above: 60.0
+  # First-choice evidence for layer 0, measured on the most recent season with
+  # enough minutes, never on the current injury.
+  first_choice_minutes: 900
+  first_choice_starts: 10
+  prior_min_minutes: 450
+  prior_seasons: 3
+
+archetypes:
+  winsor_low: 0.01
+  winsor_high: 0.99
+  shrink_minutes: 450
+  min_minutes: 450
+  # Absolute weight that must be present before a composite is published.
+  min_weight_coverage: 0.70
+
+squad:
+  min_minutes: 180
+
+coverage:
+  # A league is searchable when it has at least this many rated players.
+  min_rated_players: 25

@@ -1,0 +1,85 @@
+# Scouting archetypes.
+#
+# These are profile definitions, not positions and not recommendations. Each is
+# a signed weighted composite of features the licensed API-Football season
+# statistics actually supply; no xG, xA, progressive-pass, carry, pressure,
+# aerial or cross data is used because the feed does not carry it.
+#
+# `families` limits the archetype to role families where the profile is
+# meaningful. A player outside those families gets null scores, not a low score.
+# Absolute weights sum to 1.0; missing features are removed and the remaining
+# absolute weights renormalised, with a minimum coverage in model.yaml.
+version: 1
+reviewed: 2026-10-23
+archetypes:
+  ball_winning_pivot:
+    label: Ball-winning pivot
+    description: >
+      A midfielder whose measurable work is defensive: tackles, interceptions
+      and duels, with enough passing to keep the ball after winning it.
+    families: [defensive_midfield, central_midfield]
+    features:
+      tackles_p90: 0.35
+      interceptions_p90: 0.30
+      duel_win_pct: 0.20
+      pass_completion_pct: 0.15
+
+  deep_lying_playmaker:
+    label: Deep-lying playmaker
+    description: >
+      A midfielder who receives and moves the ball in volume with accuracy and
+      creates from deep. Forward-pass splits are not in the feed; completed
+      passes and key passes are the available evidence.
+    families: [defensive_midfield, central_midfield]
+    features:
+      passes_completed_p90: 0.35
+      pass_completion_pct: 0.30
+      key_passes_p90: 0.20
+      assists_p90: 0.15
+
+  build_up_defender:
+    label: Build-up defender
+    description: >
+      A defender whose passing and retention are closer to a midfielder's:
+      volume, accuracy, progression through key passes and the ability to carry
+      the ball out of a challenge.
+    families: [centre_back, full_back, wing_back]
+    features:
+      passes_completed_p90: 0.40
+      pass_completion_pct: 0.35
+      key_passes_p90: 0.15
+      dribbles_success_p90: 0.10
+
+  wide_dribbler:
+    label: Wide dribbler
+    description: >
+      A wide or attacking midfielder who beats players and creates: successful
+      dribbles, dribble success rate, key passes and goal contributions.
+    families: [wide_midfield, wide_forward, attacking_midfield]
+    features:
+      dribbles_success_p90: 0.35
+      dribble_success_pct: 0.25
+      key_passes_p90: 0.20
+      goals_assists_p90: 0.20
+
+  goal_contributor:
+    label: Goal contributor
+    description: >
+      A forward or attacking midfielder whose measurable output is goals and
+      assists, supported by shot volume and conversion.
+    families: [centre_forward, wide_forward, attacking_midfield]
+    features:
+      goals_assists_p90: 0.50
+      shots_p90: 0.25
+      conversion_pct: 0.25
+
+  goalkeeper_shot_stopper:
+    label: Goalkeeper shot-stopper
+    description: >
+      A goalkeeper whose save rate is high and whose goals conceded per 90 is
+      low. The feed does not carry post-shot xG, so this is a shot-stopping
+      profile, not an expected-goals verdict.
+    families: [goalkeeper]
+    features:
+      save_pct: 0.60
+      conceded_p90: -0.40

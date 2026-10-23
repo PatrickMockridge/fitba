@@ -103,6 +103,14 @@ def _sources() -> list[AvailabilitySource]:
     return output
 
 
+def _date_text(value: Any) -> str | None:
+    if value is None:
+        return None
+    if hasattr(value, "isoformat"):
+        return str(value.isoformat())
+    return str(value)
+
+
 def build_availability_payload(
     *,
     squad_data: dict[str, Any] | None,
@@ -161,13 +169,13 @@ def build_availability_payload(
                 status=cast(STATUS, str(entry.get("status") or "unknown")),
                 reason_category=str(entry.get("reason_category") or "unknown"),
                 reason=entry.get("reason"),
-                expected_return=entry.get("expected_return"),
-                effective_from=entry.get("effective_from"),
-                effective_to=entry.get("effective_to"),
+                expected_return=_date_text(entry.get("expected_return")),
+                effective_from=_date_text(entry.get("effective_from")),
+                effective_to=_date_text(entry.get("effective_to")),
                 source_id=str(entry.get("source_id") or "none"),
                 source_url=entry.get("source_url"),
                 source_title=entry.get("source_title"),
-                verified_at=entry.get("verified_at"),
+                verified_at=_date_text(entry.get("verified_at")),
                 confidence=str(entry.get("confidence") or "unknown"),
                 stale=bool(entry.get("stale")),
                 provider_signal=entry.get("provider_signal"),

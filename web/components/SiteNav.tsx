@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/matches/", label: "Matches" },
   { href: "/analysis/", label: "Data analysis" },
   { href: "/squad/", label: "Squad" },
+  { href: "/scouting/", label: "Scouting" },
   { href: "/recruitment/", label: "Off the pitch" },
   { href: "/history/", label: "The Cormack era" },
   { href: "/news/", label: "News & rumours" },

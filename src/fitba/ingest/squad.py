@@ -19,6 +19,13 @@ from fitba.ingest.match_data import ingest_match_data
 from fitba.ingest.player_attributes import ingest_player_attributes
 from fitba.ingest.transfers import published_transfers
 from fitba.normalize.names import strip_accents
+from fitba.normalize.player_stats import (
+    STAT_COLUMNS,
+    parse_stat_entry,
+)
+from fitba.normalize.player_stats import (
+    to_int as _int,
+)
 from fitba.normalize.players import PlayerRegistry
 from fitba.normalize.positions import squad_group
 from fitba.settings import (
@@ -58,73 +65,10 @@ PLAYER_COLUMNS = [
     "ingested_at",
 ]
 
-STAT_COLUMNS = [
-    "player_id",
-    "player_key",
-    "scope",
-    "competition",
-    "team_id",
-    "team_name",
-    "season",
-    "appearances",
-    "starts",
-    "minutes",
-    "goals",
-    "assists",
-    "yellow_cards",
-    "red_cards",
-    "rating",
-    "shots_total",
-    "shots_on",
-    "passes_total",
-    "passes_key",
-    "pass_accuracy",
-    "saves",
-    "conceded",
-    "tackles",
-    "blocks",
-    "interceptions",
-    "duels_total",
-    "duels_won",
-    "dribbles_attempts",
-    "dribbles_success",
-    "fouls_drawn",
-    "fouls_committed",
-    "penalty_won",
-    "penalty_committed",
-    "penalty_scored",
-    "penalty_missed",
-    "penalty_saved",
-    "ingested_at",
-]
-
 STATUS_ORDER = {"squad": 0, "loan_in": 1, "loan_out": 2}
 POSITION_ORDER = {"GK": 0, "DEF": 1, "MID": 2, "FWD": 3}
 PUNCT_RE = re.compile(r"[^\w\s]")
 SPACE_RE = re.compile(r"\s+")
-
-
-def _int(value: Any) -> int | None:
-    if value is None or value == "":
-        return None
-    try:
-        return int(float(value))
-    except (TypeError, ValueError):
-        return None
-
-
-def _float(value: Any) -> float | None:
-    if value is None or value == "":
-        return None
-    try:
-        return float(str(value).replace("%", ""))
-    except (TypeError, ValueError):
-        return None
-
-
-def _rating(value: Any) -> float | None:
-    rating = _float(value)
-    return rating if rating and rating > 0 else None
 
 
 def _club_key(value: str) -> str:
@@ -184,78 +128,6 @@ def _loan_maps(season: str) -> tuple[dict[str, dict[str, Any]], dict[str, dict[s
         if row.get("transfer_kind") == "loan" and row.get("direction") == "in"
     }
     return outs, ins
-
-
-def _stat_row(
-    *,
-    player_id: int,
-    player_key: str,
-    entry: dict[str, Any],
-    scope: str,
-    season_year: int,
-    ingested_at: str,
-) -> dict[str, Any] | None:
-    league = entry.get("league") or {}
-    team = entry.get("team") or {}
-    entry_season = _int(league.get("season"))
-    if entry_season is not None and entry_season != season_year:
-        return None
-    games = entry.get("games") or {}
-    goals = entry.get("goals") or {}
-    cards = entry.get("cards") or {}
-    shots = entry.get("shots") or {}
-    passes = entry.get("passes") or {}
-    tackles = entry.get("tackles") or {}
-    duels = entry.get("duels") or {}
-    dribbles = entry.get("dribbles") or {}
-    fouls = entry.get("fouls") or {}
-    penalty = entry.get("penalty") or {}
-    direct_red = _int(cards.get("red"))
-    second_yellow = _int(cards.get("yellowred"))
-    red_cards = (
-        None
-        if direct_red is None and second_yellow is None
-        else (direct_red or 0) + (second_yellow or 0)
-    )
-    return {
-        "player_id": player_id,
-        "player_key": player_key,
-        "scope": scope,
-        "competition": str(league.get("name") or "Unknown competition"),
-        "team_id": _int(team.get("id")),
-        "team_name": str(team.get("name") or "Unknown team"),
-        "season": entry_season or season_year,
-        "appearances": _int(games.get("appearences", games.get("appearances"))),
-        "starts": _int(games.get("lineups")),
-        "minutes": _int(games.get("minutes")),
-        "goals": _int(goals.get("total")),
-        "assists": _int(goals.get("assists")),
-        "yellow_cards": _int(cards.get("yellow")),
-        "red_cards": red_cards,
-        "rating": _rating(games.get("rating")),
-        "shots_total": _int(shots.get("total")),
-        "shots_on": _int(shots.get("on")),
-        "passes_total": _int(passes.get("total")),
-        "passes_key": _int(passes.get("key")),
-        "pass_accuracy": _float(passes.get("accuracy")),
-        "saves": _int(goals.get("saves")),
-        "conceded": _int(goals.get("conceded")),
-        "tackles": _int(tackles.get("total")),
-        "blocks": _int(tackles.get("blocks")),
-        "interceptions": _int(tackles.get("interceptions")),
-        "duels_total": _int(duels.get("total")),
-        "duels_won": _int(duels.get("won")),
-        "dribbles_attempts": _int(dribbles.get("attempts")),
-        "dribbles_success": _int(dribbles.get("success")),
-        "fouls_drawn": _int(fouls.get("drawn")),
-        "fouls_committed": _int(fouls.get("committed")),
-        "penalty_won": _int(penalty.get("won")),
-        "penalty_committed": _int(penalty.get("commited")),
-        "penalty_scored": _int(penalty.get("scored")),
-        "penalty_missed": _int(penalty.get("missed")),
-        "penalty_saved": _int(penalty.get("saved")),
-        "ingested_at": ingested_at,
-    }
 
 
 def _scope_for(
@@ -356,7 +228,7 @@ def _player_row(
             loan_club=loan_club,
             parent_team_id=parent_team_id,
         )
-        row = _stat_row(
+        row = parse_stat_entry(
             player_id=player_id,
             player_key=player_key,
             entry=entry,

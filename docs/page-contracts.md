@@ -245,6 +245,74 @@ Forbidden: removing the stats-unavailable or coverage labels; zero-filling
 missing stats; presenting provider ratings as verdicts; hiding per-player data
 behind a default-closed disclosure.
 
+### `/scouting/` — scouting board
+
+Must remain visible:
+
+- The hero, season and the league/search counts.
+- Layer 0: every verified availability entry with player, role, status, current
+  minutes, prior rating and minutes, source link and verification date; an
+  explicit unknown state when the ledger has no verified entry.
+- Layer 1: one row per role family with players, minutes, Aberdeen rating,
+  cohort median and n, percentile, availability summary and the reading
+  (structural, cover, hold, none, insufficient).
+- Layer 2: the six archetype definitions with their feature weights and
+  all-league adjusted leaders (league, club, raw score, adjusted score, value
+  index), and the double-pivot hypothesis card with all-league profiles.
+- The value index is a scouting ordering, not a transfer value; a GBP band is
+  deferred until a public-source anchor register is available.
+- The league index: every enabled league with players, rated, 450+, role
+  coverage, status and a link to its search page. No-player-statistics leagues
+  are labelled.
+- The squad profile table: Player, Role, Mins, Rating, Pct, G+A/90, Shots/90,
+  Dribbles/90, Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90,
+  Duels won %.
+- Coverage: totals, known gaps, sources and links to method and sources.
+
+May be disclosed: long method notes and the archetype feature definitions.
+
+Forbidden: a provider rating presented as a verdict; a cross-league ranking; a
+contract, wage or fee claim; a first-choice or injury claim without a verified
+official source; a pivot pairing presented as a causal fix; zero-filling a
+league with no player statistics.
+
+### `/scouting/<league>/` — league player search
+
+One static page per enabled league. Must remain visible:
+
+- The league name, country, season and source.
+- The search filters and the ranked table at 450+ minutes: Player, Club, Role,
+  Age, Mins, Rating, Pct, Adj Pct, Value index, G+A/90, Dribbles/90,
+  Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %,
+  Profile.
+- A caption stating that percentiles are within the league and role, and a
+  visible link back to `/scouting/`.
+- Coverage: played fixtures, players with a role, the 450+ pool, rated players
+  and the limits. A league with no player statistics shows an explicit empty
+  state, not zero rows.
+
+Forbidden: a table without a caption; a percentile presented across leagues; a
+missing role shown as a guessed role; hiding the no-player-statistics state.
+
+### `/scouting/search/` — full scouting search
+
+Must remain visible:
+
+- The hero counts: ranked players, leagues with players and the season.
+- The filters: text, league, role, nationality, profile, minimum minutes, maximum age and sort.
+- The full table: Player, Club, League, Nationality, Role, Age, Mins, Rating, Pct,
+  Adj Pct, Value index, G+A/90, Dribbles/90, Passes/90, Pass %, Key passes/90,
+  Tackles/90, Interceptions/90, Duels won %, Profile.
+- The league column and a visible statement that percentiles are within each
+  league and role, never a cross-league ranking.
+- Coverage: ranked players, leagues with players, leagues without stats and the
+  cross-league limitation.
+- Links back to `/scouting/`, `/methodology/` and `/sources/`.
+
+Forbidden: a raw percentile presented as a cross-league rank; hiding the league;
+a GBP value claim; a contract, wage or fee claim; an empty table without an
+explicit state.
+
 ### `/history/` — the Cormack era
 
 Must remain visible:

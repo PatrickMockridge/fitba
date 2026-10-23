@@ -4,10 +4,10 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-10-23T00:51:34+00:00",
-  "dataset_version": "2026-10-23T00:51:34+00:00-34b883b",
+  "audited_at": "2026-10-23T14:41:26+00:00",
+  "dataset_version": "2026-10-23T14:41:26+00:00-0295b95",
   "errors": [],
-  "generated_at": "2026-10-23T00:51:34+00:00",
+  "generated_at": "2026-10-23T14:41:26+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -803,7 +803,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 313 numeric leaves",
+          "message": "1 location(s), 314 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -824,7 +824,7 @@
         "/recruitment/"
       ],
       "errors": [],
-      "fields_checked": 313,
+      "fields_checked": 314,
       "home_payload": "needs/aberdeen.json",
       "home_surface": "/recruitment/",
       "id": "needs.family",
@@ -834,13 +834,13 @@
       ],
       "locations": [
         {
-          "nodes": 1108,
-          "numeric_leaves": 313,
+          "nodes": 1113,
+          "numeric_leaves": 314,
           "payload": "needs/aberdeen.json",
           "pointer": "/families/**"
         }
       ],
-      "numeric_leaves": 313,
+      "numeric_leaves": 314,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -1998,7 +1998,7 @@
           "status": "pass"
         },
         {
-          "message": "6 location(s), 59 numeric leaves",
+          "message": "6 location(s), 61 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2019,7 +2019,7 @@
         "/squad/"
       ],
       "errors": [],
-      "fields_checked": 59,
+      "fields_checked": 61,
       "home_payload": "squad/aberdeen.json",
       "home_surface": "/squad/",
       "id": "squad.meta",
@@ -2053,8 +2053,8 @@
           "pointer": "/attributes_meta/**"
         },
         {
-          "nodes": 44,
-          "numeric_leaves": 12,
+          "nodes": 46,
+          "numeric_leaves": 14,
           "payload": "squad/aberdeen.json",
           "pointer": "/availability_meta/**"
         },
@@ -2065,7 +2065,7 @@
           "pointer": "/coverage/**"
         }
       ],
-      "numeric_leaves": 59,
+      "numeric_leaves": 61,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 6,
@@ -2572,13 +2572,13 @@
       ],
       "locations": [
         {
-          "nodes": 725,
+          "nodes": 759,
           "numeric_leaves": 20,
           "payload": "provenance.json",
           "pointer": "/layers/**"
         },
         {
-          "nodes": 95,
+          "nodes": 96,
           "numeric_leaves": 8,
           "payload": "provenance.json",
           "pointer": "/sources/**"
@@ -2611,12 +2611,12 @@
       "basis": "mixed",
       "checks": [
         {
-          "message": "1 payload(s) matched coverage.json",
+          "message": "2 payload(s) matched coverage.json",
           "name": "payload",
           "status": "pass"
         },
         {
-          "message": "1 location(s), 64 numeric leaves",
+          "message": "2 location(s), 1115 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2637,7 +2637,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 67,
+      "fields_checked": 1118,
       "home_payload": "coverage.json",
       "home_surface": "/status/",
       "id": "coverage.surfaces",
@@ -2651,12 +2651,18 @@
           "numeric_leaves": 64,
           "payload": "coverage.json",
           "pointer": "/**"
+        },
+        {
+          "nodes": 1736,
+          "numeric_leaves": 1051,
+          "payload": "scouting/coverage.json",
+          "pointer": "/**"
         }
       ],
-      "numeric_leaves": 64,
-      "payloads": 1,
+      "numeric_leaves": 1115,
+      "payloads": 2,
       "provenance_only": false,
-      "rows_checked": 2,
+      "rows_checked": 3,
       "source_checksums": {},
       "source_layer": "computed",
       "status": "pass",
@@ -2730,7 +2736,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 48 numeric leaves",
+          "message": "1 location(s), 49 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2751,7 +2757,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 48,
+      "fields_checked": 49,
       "home_payload": "availability/aberdeen.json",
       "home_surface": "/status/",
       "id": "availability.ledger",
@@ -2761,13 +2767,13 @@
       ],
       "locations": [
         {
-          "nodes": 809,
-          "numeric_leaves": 48,
+          "nodes": 829,
+          "numeric_leaves": 49,
           "payload": "availability/aberdeen.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 48,
+      "numeric_leaves": 49,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -5870,6 +5876,588 @@
       "value_type": "table",
       "verification": "provenance_only",
       "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "34 payload(s) matched scouting/pool/sco-premiership.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "34 location(s), 210623 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "scouting_pool: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "One row per ranked player per league with provider season statistics, within-league role percentiles and profile scores.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/"
+      ],
+      "errors": [],
+      "fields_checked": 210623,
+      "home_payload": "scouting/pool/sco-premiership.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.pool",
+      "label": "Scouting player pool",
+      "limitations": [
+        "Provider ratings are opaque and relative to a league and role cohort; no cross-league ranking is published.",
+        "The feed has no xG/xA, progressive passes, carries, pressures, aerial wins or crosses, so those features are absent rather than inferred.",
+        "Role families need starting-XI grids; leagues without grids use the provider position group and say so."
+      ],
+      "locations": [
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/alb-kategoria.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 6675,
+          "numeric_leaves": 3441,
+          "payload": "scouting/pool/aut-bundesliga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 9933,
+          "numeric_leaves": 4990,
+          "payload": "scouting/pool/bel-pro-league.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/bul-parva-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 5954,
+          "numeric_leaves": 3087,
+          "payload": "scouting/pool/cro-hnl.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 10740,
+          "numeric_leaves": 5576,
+          "payload": "scouting/pool/cze-fortuna-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 8454,
+          "numeric_leaves": 4390,
+          "payload": "scouting/pool/den-superliga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 16968,
+          "numeric_leaves": 8740,
+          "payload": "scouting/pool/eng-championship.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 16463,
+          "numeric_leaves": 8535,
+          "payload": "scouting/pool/eng-league-one.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 17122,
+          "numeric_leaves": 8907,
+          "payload": "scouting/pool/eng-league-two.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 9815,
+          "numeric_leaves": 5121,
+          "payload": "scouting/pool/fin-veikkausliiga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 5298,
+          "numeric_leaves": 2703,
+          "payload": "scouting/pool/gre-super-league.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 6770,
+          "numeric_leaves": 3503,
+          "payload": "scouting/pool/hun-nb-i.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 12327,
+          "numeric_leaves": 6473,
+          "payload": "scouting/pool/ire-premier-division.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/isl-besta-deild.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 10994,
+          "numeric_leaves": 5715,
+          "payload": "scouting/pool/ned-eredivisie.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/nir-nifl.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 17173,
+          "numeric_leaves": 8988,
+          "payload": "scouting/pool/nor-eliteserien.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 12027,
+          "numeric_leaves": 6241,
+          "payload": "scouting/pool/pol-ekstraklasa.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 9307,
+          "numeric_leaves": 4812,
+          "payload": "scouting/pool/por-primeira-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 11695,
+          "numeric_leaves": 6077,
+          "payload": "scouting/pool/rou-liga-i.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 11379,
+          "numeric_leaves": 5882,
+          "payload": "scouting/pool/rus-premier-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/sco-championship.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/sco-league-one.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/sco-league-two.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 6230,
+          "numeric_leaves": 3217,
+          "payload": "scouting/pool/sco-premiership.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 9868,
+          "numeric_leaves": 5129,
+          "payload": "scouting/pool/srb-super-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 7650,
+          "numeric_leaves": 3952,
+          "payload": "scouting/pool/sui-super-league.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/svk-super-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 34,
+          "numeric_leaves": 10,
+          "payload": "scouting/pool/svn-prvaliga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 17039,
+          "numeric_leaves": 8940,
+          "payload": "scouting/pool/swe-allsvenskan.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 10106,
+          "numeric_leaves": 5128,
+          "payload": "scouting/pool/tur-super-lig.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 1588,
+          "numeric_leaves": 715,
+          "payload": "scouting/pool/ukr-premier-liga.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 147546,
+          "numeric_leaves": 80271,
+          "payload": "scouting/search-index.json",
+          "pointer": "/**"
+        }
+      ],
+      "numeric_leaves": 210623,
+      "payloads": 34,
+      "provenance_only": true,
+      "rows_checked": 34,
+      "source_checksums": {},
+      "source_layer": "scouting_pool",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched scouting/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 444 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "scouting_pool: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Aberdeen role-family ratings against the Scottish Premiership cohort, with verified availability evidence.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "errors": [],
+      "fields_checked": 444,
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.board",
+      "label": "Scouting weakness board",
+      "limitations": [
+        "The model cannot separate selection, availability and quality.",
+        "The provider rating is not a verdict; the cohort is the other Premiership players in the same role family, not a like-for-like cross-league pool.",
+        "Only verified official AFC team news can mark a player out or available."
+      ],
+      "locations": [
+        {
+          "nodes": 927,
+          "numeric_leaves": 431,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/board/**"
+        },
+        {
+          "nodes": 47,
+          "numeric_leaves": 13,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/layer_zero/**"
+        }
+      ],
+      "numeric_leaves": 444,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "scouting_pool",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "1 payload(s) matched scouting/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 429 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Weighted player-profile scores, their feature weights, coverage and the double-pivot comparison.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "errors": [],
+      "fields_checked": 429,
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.archetypes",
+      "label": "Scouting archetype profiles",
+      "limitations": [
+        "A profile is not a position, a target or a recommendation.",
+        "The pivot pairing is a hypothesis; the data can show a profile gap, not a causal effect on goals conceded."
+      ],
+      "locations": [
+        {
+          "nodes": 558,
+          "numeric_leaves": 321,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/archetypes/**"
+        },
+        {
+          "nodes": 184,
+          "numeric_leaves": 108,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/pivot/**"
+        }
+      ],
+      "numeric_leaves": 429,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "mixed",
+      "checks": [
+        {
+          "message": "1 payload(s) matched scouting/aberdeen.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "1 location(s), 445 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "squad_identity: active",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "match",
+      "description": "Aberdeen registered-squad position-specific per-90 output, competitive matches only.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/squad/"
+      ],
+      "errors": [],
+      "fields_checked": 445,
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.squad",
+      "label": "Scouting squad profile",
+      "limitations": [
+        "Forward and progressive passes, carries and pressures are not in the feed; they are unavailable, not inferred.",
+        "Loanees out are excluded; their loan-club rows are not Aberdeen output."
+      ],
+      "locations": [
+        {
+          "nodes": 696,
+          "numeric_leaves": 445,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/squad/**"
+        }
+      ],
+      "numeric_leaves": 445,
+      "payloads": 1,
+      "provenance_only": true,
+      "rows_checked": 1,
+      "source_checksums": {},
+      "source_layer": "squad_identity",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "measured",
+      "checks": [
+        {
+          "message": "2 payload(s) matched scouting/coverage.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "3 location(s), 1355 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "scouting_pool: partial",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "Per-league provider coverage, role coverage and pool counts.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "errors": [],
+      "fields_checked": 1355,
+      "home_payload": "scouting/coverage.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.coverage",
+      "label": "Scouting coverage",
+      "limitations": [
+        "Coverage is a provider fact at the last sync, not a permanent statement.",
+        "Scottish lower tiers have lineups but no player season statistics."
+      ],
+      "locations": [
+        {
+          "nodes": 1736,
+          "numeric_leaves": 1051,
+          "payload": "scouting/coverage.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 595,
+          "numeric_leaves": 297,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/leagues/**"
+        },
+        {
+          "nodes": 28,
+          "numeric_leaves": 7,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/coverage/**"
+        }
+      ],
+      "numeric_leaves": 1355,
+      "payloads": 2,
+      "provenance_only": true,
+      "rows_checked": 3,
+      "source_checksums": {},
+      "source_layer": "scouting_pool",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
+    },
+    {
+      "basis": "inferred",
+      "checks": [
+        {
+          "message": "2 payload(s) matched scouting/value-model.json",
+          "name": "payload",
+          "status": "pass"
+        },
+        {
+          "message": "2 location(s), 70 numeric leaves",
+          "name": "locations",
+          "status": "pass"
+        },
+        {
+          "message": "computed: computed in this repository",
+          "name": "source_layer",
+          "status": "pass"
+        },
+        {
+          "message": "present and provenance-checked; not independently recomputed",
+          "name": "provenance_only",
+          "status": "pass"
+        }
+      ],
+      "coverage_tier": "derived",
+      "description": "The 0-100 scouting value index and the anchor-gated GBP value model.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/"
+      ],
+      "errors": [],
+      "fields_checked": 70,
+      "home_payload": "scouting/value-model.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.value-model",
+      "label": "Scouting value model",
+      "limitations": [
+        "The value index is a scouting ordering, not a transfer value or fee.",
+        "The GBP band is not published until the public-source anchor register passes the gate; it is never an uncalibrated currency estimate.",
+        "Contract length, wages, release clauses and agent fees are unknown."
+      ],
+      "locations": [
+        {
+          "nodes": 66,
+          "numeric_leaves": 35,
+          "payload": "scouting/value-model.json",
+          "pointer": "/**"
+        },
+        {
+          "nodes": 66,
+          "numeric_leaves": 35,
+          "payload": "scouting/aberdeen.json",
+          "pointer": "/value_model/**"
+        }
+      ],
+      "numeric_leaves": 70,
+      "payloads": 2,
+      "provenance_only": true,
+      "rows_checked": 2,
+      "source_checksums": {},
+      "source_layer": "computed",
+      "status": "pass",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "version": 1
     }
   ],
   "parameters": [
@@ -6172,27 +6760,74 @@
         "fixtures.index"
       ],
       "version": 1
+    },
+    {
+      "actual_checksum": "sha256:a84e530e858986f71651b01b3a075a6a648b335846ad3a94399e950f40974813",
+      "config_keys": [
+        "pool",
+        "board",
+        "archetypes",
+        "squad",
+        "coverage"
+      ],
+      "config_path": "scouting/model",
+      "errors": [],
+      "expected_checksum": "sha256:a84e530e858986f71651b01b3a075a6a648b335846ad3a94399e950f40974813",
+      "id": "param.scouting",
+      "kind": "matrix",
+      "label": "Scouting model policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "scouting.pool",
+        "scouting.board",
+        "scouting.archetypes",
+        "scouting.squad",
+        "scouting.coverage"
+      ],
+      "version": 1
+    },
+    {
+      "actual_checksum": "sha256:cf46d80d4804c327c1cc7f9add04363f253d03661abe5f050615988b4aceb14f",
+      "config_keys": [
+        "index",
+        "fit"
+      ],
+      "config_path": "scouting/value",
+      "errors": [],
+      "expected_checksum": "sha256:cf46d80d4804c327c1cc7f9add04363f253d03661abe5f050615988b4aceb14f",
+      "id": "param.scouting.value",
+      "kind": "matrix",
+      "label": "Scouting value policy",
+      "mismatches": [],
+      "status": "pass",
+      "unit": "mixed",
+      "used_by": [
+        "scouting.value-model"
+      ],
+      "version": 1
     }
   ],
-  "registry_checksum": "sha256:cb2df09242cc353078a4da210a451fb6f83f71a5500044fd12bae59e05245dba",
-  "registry_reviewed": "2026-10-22",
-  "registry_version": "2.4.0",
+  "registry_checksum": "sha256:da692a1bf94a7bab286db092470e8b9beedad83ec23b5c34154d99d62896de06",
+  "registry_reviewed": "2026-10-23",
+  "registry_version": "2.6.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "status": "pass",
   "summary": {
-    "fields_checked": 195275,
+    "fields_checked": 409696,
     "metrics_failed": 0,
-    "metrics_passed": 57,
-    "metrics_total": 57,
+    "metrics_passed": 63,
+    "metrics_total": 63,
     "parameters_failed": 0,
-    "parameters_passed": 16,
-    "parameters_total": 16,
-    "provenance_only": 43,
-    "rows_checked": 855,
+    "parameters_passed": 18,
+    "parameters_total": 18,
+    "provenance_only": 49,
+    "rows_checked": 900,
     "verification_modes": {
       "cross_surface": 6,
-      "provenance_only": 43,
+      "provenance_only": 49,
       "recompute": 8
     }
   }

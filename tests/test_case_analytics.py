@@ -89,7 +89,7 @@ def test_defence_is_plain_and_availability_unknown(payload) -> None:
         + [f"{item['metric']} {item['count']}" for item in claim["evidence"]]
     )
     assert "three-centre-back" in text
-    assert "0 known / 38 unknown" in text
+    assert "1 known / 37 unknown" in text
     assert "Tobers is not in the current squad" in text
     assert "CB" not in text
 

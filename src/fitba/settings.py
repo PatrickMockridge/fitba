@@ -62,6 +62,27 @@ def scouting_leagues() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def scouting_model() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "scouting" / "model.yaml")
+
+
+@lru_cache(maxsize=1)
+def scouting_archetypes() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "scouting" / "archetypes.yaml")
+
+
+@lru_cache(maxsize=1)
+def scouting_value() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "scouting" / "value.yaml")
+
+
+@lru_cache(maxsize=1)
+def scouting_teams() -> dict[str, Any]:
+    path = REFERENCE_DIR / "scouting_teams.yaml"
+    return load_yaml(path) if path.exists() else {"teams": []}
+
+
+@lru_cache(maxsize=1)
 def disciplinary() -> dict[str, Any]:
     return load_yaml(REFERENCE_DIR / "disciplinary.yaml")
 

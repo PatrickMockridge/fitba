@@ -2,8 +2,8 @@
   "club_id": "sco:aberdeen",
   "coverage": {
     "availability": {
-      "known": 0,
-      "unknown": 38
+      "known": 1,
+      "unknown": 37
     },
     "basis": "measured + curated prior",
     "measured_families": 7,
@@ -710,7 +710,14 @@
       "urgency": "medium"
     },
     {
-      "availability": [],
+      "availability": [
+        {
+          "name": "M. Knoester",
+          "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+          "player_id": 37253,
+          "status": "available"
+        }
+      ],
       "basis": "measured",
       "category": "none",
       "caveats": [
@@ -865,8 +872,8 @@
           "arrival": null,
           "arrival_kind": null,
           "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
+          "availability_note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+          "availability_status": "available",
           "category": "starter",
           "minutes": 573,
           "name": "M. Knoester",
@@ -1303,7 +1310,7 @@
       "urgency": "none"
     }
   ],
-  "generated_at": "2026-10-23T00:51:34+00:00",
+  "generated_at": "2026-10-23T14:41:26+00:00",
   "notes": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
   "roster_space": {
     "net_add_allowed": null,
@@ -1327,7 +1334,7 @@
       "id": "api_football",
       "name": "API-Football",
       "url": "https://www.api-football.com",
-      "verified_at": "2026-10-21"
+      "verified_at": "2026-10-23"
     },
     {
       "id": "football_data_uk",
@@ -1338,8 +1345,8 @@
   ],
   "state": "fresh",
   "summary": {
-    "availability_known": 0,
-    "availability_unknown": 38,
+    "availability_known": 1,
+    "availability_unknown": 37,
     "counts": {
       "none": 3,
       "strengthen": 4

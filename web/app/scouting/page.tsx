@@ -1,192 +1,203 @@
 import Link from "next/link";
-import { BucketBars } from "@/components/BucketBars";
-import { PriorityProfiles } from "@/components/PriorityProfiles";
-import { getManifest, getNeeds, getRumourProfile } from "@/lib/data";
+import { ContractPage } from "@/components/ContractPage";
+import { ScoutingArchetypes } from "@/components/ScoutingArchetypes";
+import { ScoutingCoverage } from "@/components/ScoutingCoverage";
+import { ScoutingLayerZeroTable } from "@/components/ScoutingLayerZero";
+import { ScoutingLeagueIndex } from "@/components/ScoutingLeagueIndex";
+import { ScoutingSquadTable } from "@/components/ScoutingSquadTable";
+import { ScoutingWeaknessTable } from "@/components/ScoutingWeaknessTable";
+import { getScouting } from "@/lib/data";
+import { formatInteger, formatPercentValue } from "@/lib/format";
 
 export const metadata = {
-  alternates: { canonical: "/scouting/" }, title: "Scouting · fitba" };
-
-const POSITION_GROUPS = ["GK", "CB", "FB", "DM", "CM", "AM", "W", "ST"];
-const POOL = [
-  "Scotland — all four tiers",
-  "England — Championship, League One",
-  "Netherlands, Belgium, Portugal, Switzerland, Austria",
-  "Denmark, Norway, Sweden, Finland, Iceland",
-  "Poland, Czechia, Slovakia, Hungary, Slovenia, Croatia, Serbia, Romania, Bulgaria, Albania",
-  "Greece, Türkiye, Ukraine, Russia",
-  "Ireland, Northern Ireland",
-];
+  alternates: { canonical: "/scouting/" },
+  title: "Scouting board · fitba",
+  description:
+    "Aberdeen's squad gaps by role family, verified availability, player profiles and a licensed player search across the scouting universe.",
+};
 
 export default function ScoutingPage() {
-  const manifest = getManifest();
-  const profile = getRumourProfile();
-  const needs = getNeeds();
-  const coverage = manifest?.coverage.competitions ?? [];
+  const scouting = getScouting();
+  if (!scouting || scouting.state === "empty") {
+    return (
+      <ContractPage surface="scouting" state="empty">
+        <section className="page-head" data-contract="scouting.hero">
+          <p className="eyebrow">Recruitment · Scouting</p>
+          <h1>The scouting board</h1>
+          <p className="lede">
+            No scouting data is published in this build. Run the pool and role backfill, then
+            publish the derived record.
+          </p>
+        </section>
+        <section className="empty-state" data-contract="scouting.empty">
+          <p>
+            The board needs provider season statistics and starting-XI lineups. Until they are
+            ingested, no ranking is shown: an empty table would imply a measured zero.
+          </p>
+        </section>
+      </ContractPage>
+    );
+  }
+
+  const board = scouting.board;
+  const coverage = scouting.coverage;
+  const totals = coverage.totals;
+
   return (
-    <>
-      <section className="page-head">
-        <p className="eyebrow">Recruitment</p>
-        <h1>Players who fit Aberdeen</h1>
+    <ContractPage surface="scouting">
+      <section className="page-head" data-contract="scouting.hero">
+        <p className="eyebrow">Recruitment · Season {scouting.season}</p>
+        <h1>The scouting board</h1>
         <p className="lede">
-          A position-aware, explainable shortlist — not a list of the biggest numbers.
-          Quality, style, squad need, budget, age, reliability and availability are scored
-          separately so you can see why a player ranks where they do.
+          Start with the players already at the club, then the role families where the
+          competitive record sits below the league cohort, then the profiles that would add
+          options. Provider ratings are relative to a league and role; they are not a verdict.
         </p>
-        <span className="badge badge-warn">Method published · player data not yet published</span>
+        <div className="hero-actions">
+          <Link className="button" href="/scouting/search/">
+            Search all leagues
+          </Link>
+          <Link className="button button-ghost" href="/recruitment/">
+            Off the pitch
+          </Link>
+          <Link className="button button-ghost" href="/squad/">
+            Current squad
+          </Link>
+          <span className="badge badge-neutral">
+            {formatInteger(totals.searchable ?? 0)}/{formatInteger(totals.leagues ?? 0)} leagues
+            searchable
+          </span>
+          <span className="badge badge-warn">
+            {formatInteger(totals.with_minutes_450 ?? 0)} ranked players
+          </span>
+        </div>
+        {scouting.state === "stale" ? (
+          <p className="fine-print" data-contract-indicator="freshness">
+            Stale record: {scouting.stale_reason ?? "refresh needed"}. The last good documents
+            are shown rather than a silently empty board.
+          </p>
+        ) : null}
       </section>
 
-      {needs ? <PriorityProfiles data={needs} /> : null}
-
-      <section className="card advisory-overlay">
-        <div className="card-head">
+      <section className="section" data-contract="scouting.layer-zero">
+        <div className="section-head">
           <div>
-            <p className="eyebrow">Advisory overlay · rumour signal</p>
-            <h2>What the links point to — not what the fit says</h2>
+            <p className="eyebrow">Layer 0 · Internal first</p>
+            <h2>The players already at the club</h2>
           </div>
-          <span className="badge badge-warn">Advisory only</span>
+          <span className="badge badge-neutral">Official AFC team news only</span>
         </div>
         <p>
-          The rumour cohort can suggest the profile Aberdeen&apos;s recruitment team
-          are looking at, but it is a small, editorial sample. It adjusts the
-          reading of the board, never the ranking itself: the data-driven fit
-          remains primary.
+          Injured and returning players are considered before the market. A verified first-
+          choice absentee changes the reading of a weak family from a replacement to cover.
+          Availability is never inferred from minutes, and an unverified name stays unknown.
         </p>
-        {profile && profile.sample_size ? (
-          <>
-            <p>{profile.narrative}</p>
-            {profile.low_confidence ? (
-              <span className="badge badge-warn">
-                Small cohort ({profile.sample_size}) — treat as a hint
-              </span>
-            ) : null}
-            <div className="grid two-col">
-              <BucketBars title="Rumour position mix" buckets={profile.buckets.position} />
-              <BucketBars title="Rumour age mix" buckets={profile.buckets.age_band} />
-            </div>
-            <p className="fine-print">{profile.note}</p>
-            <Link className="text-link" href="/rumours/">
-              Sources, statuses and the full profile →
-            </Link>
-          </>
-        ) : (
-          <p className="muted">
-            The overlay activates when the curated rumour register has active,
-            sourced rows. It is empty by design until then.
-          </p>
-        )}
+        <ScoutingLayerZeroTable items={scouting.layer_zero} />
+        <p className="fine-print" data-contract-indicator="availability">
+          {formatInteger(scouting.layer_zero.length)} verified availability{" "}
+          {scouting.layer_zero.length === 1 ? "entry" : "entries"}. Current-season minutes are
+          not fitness evidence. {formatInteger(totals.players ?? 0)} pool players remain
+          unaffected by a verified absence.
+        </p>
       </section>
 
-      <div className="grid three-col">
-        <section className="card">
-          <p className="eyebrow">01 · Quality</p>
-          <h2>League-adjusted percentiles</h2>
-          <p>
-            Per-90 metrics are winsorised, robustly standardised within league and position,
-            shrunk toward the positional mean by effective minutes, then adjusted for league
-            strength. Raw and adjusted percentiles are shown side by side.
-          </p>
-        </section>
-        <section className="card">
-          <p className="eyebrow">02 · Style</p>
-          <h2>Aberdeen&apos;s style vector</h2>
-          <p>
-            Possession, directness, pressing, line height, width, tempo, crossing, build-up
-            and transition. The target is 60% current style and 40% the analyst&apos;s intent,
-            with similarity reported on a 0–100 scale.
-          </p>
-        </section>
-        <section className="card">
-          <p className="eyebrow">03 · Fit</p>
-          <h2>Budget, need and reliability</h2>
-          <p>
-            Fit combines 32% quality, 18% style, 16% squad need, 12% budget, 10% age, 7%
-            reliability and 5% availability. Known unknowns lower confidence; they never
-            silently become zero.
-          </p>
-        </section>
-      </div>
-
-      <div className="grid two-col">
-        <section className="card">
-          <div className="card-head">
-            <div>
-              <p className="eyebrow">Universe</p>
-              <h2>Where we look</h2>
-            </div>
+      <section className="section" data-contract="scouting.weakness-board">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Layer 1 · Measured gaps</p>
+            <h2>Where the squad sits below its cohort</h2>
           </div>
-          <ul className="plain-list">
-            {POOL.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="fine-print">
-            Fringe markets are included because Aberdeen have recruited there. Coverage is
-            labelled per league; a value-only league is never compared as if it had event data.
-          </p>
-        </section>
+          <span className="badge badge-neutral">
+            {formatInteger(board.summary.below_cohort ?? 0)} role families below
+          </span>
+        </div>
+        <ScoutingWeaknessTable board={board} />
+      </section>
 
-        <section className="card">
-          <div className="card-head">
-            <div>
-              <p className="eyebrow">Position groups</p>
-              <h2>Role-aware scoring</h2>
-            </div>
+      <section className="section" data-contract="scouting.archetypes">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Layer 2 · Profile options</p>
+            <h2>What would add strength in depth</h2>
           </div>
-          <div className="pill-row">
-            {POSITION_GROUPS.map((group) => (
-              <span className="pill" key={group}>
-                {group}
-              </span>
-            ))}
-          </div>
-          <p>
-            Each group has a separate feature registry and signed weights. Missing features
-            are removed and the remaining weights renormalised; if more than 40% of the
-            weight is missing, the player is not ranked.
-          </p>
-        </section>
-      </div>
+          <span className="badge badge-warn">Profiles, not targets</span>
+        </div>
+        <p>
+          Each profile is a weighted composite of stats the licensed feed supplies, scored
+          within the league and role cohort. Missing features are removed and the remaining
+          weights renormalised; a profile below the coverage floor is null, not zero.
+        </p>
+        <ScoutingArchetypes archetypes={scouting.archetypes} pivot={scouting.pivot} />
+      </section>
 
-      <section className="card">
+      <section className="section" data-contract="scouting.league-index">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Search the pool</p>
+            <h2>Every league in the configured universe</h2>
+          </div>
+          <span className="badge badge-neutral">
+            {formatInteger(totals.searchable ?? 0)} searchable
+          </span>
+          <Link className="text-link" href="/scouting/search/">
+            Search all leagues →
+          </Link>
+        </div>
+        <ScoutingLeagueIndex leagues={scouting.leagues} />
+      </section>
+
+      <section className="section" data-contract="scouting.squad-profile">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Squad by role</p>
+            <h2>Position-specific output</h2>
+          </div>
+          <span className="badge badge-neutral">
+            {formatPercentValue(
+              ((totals.role_players ?? 0) / Math.max(totals.players ?? 1, 1)) * 100,
+              1,
+            )}{" "}
+            role coverage
+          </span>
+        </div>
+        <p>
+          Forwards are read through goal contributions, wide players through successful
+          dribbles, midfielders through completed and key passes, and defenders through the
+          same passing and retention measures. Forward-pass splits, carries and pressures are
+          not in the feed. The value index is a scouting ordering, not a transfer value; a GBP
+          band is deferred until a public-source anchor register is available.
+        </p>
+        <ScoutingSquadTable rows={scouting.squad} />
+      </section>
+
+      <section
+        className="card"
+        data-contract="scouting.coverage"
+        data-contract-indicator="source"
+      >
         <div className="card-head">
           <div>
-            <p className="eyebrow">Coverage</p>
-            <h2>What the current data can support</h2>
+            <p className="eyebrow">Coverage and limits</p>
+            <h2>What the pool can and cannot support</h2>
           </div>
+          <span className="badge badge-neutral">Derived · licensed feed</span>
         </div>
-        <div className="table-wrap">
-          <table className="league-table compact">
-<caption className="fine-print">Scouting profiles and priority board.</caption>
-            <thead>
-              <tr>
-                <th>Competition</th>
-                <th className="num">Matches</th>
-                <th className="num">Expected</th>
-                <th>Data depth</th>
-                <th className="num">Event matches</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coverage.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.name}</td>
-                  <td className="num">{row.matches}</td>
-                  <td className="num">{row.expected_matches}</td>
-                  <td>{row.coverage}</td>
-                  <td className="num">{row.events}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="fine-print">
-          The results foundation is live. Player percentiles arrive with the verified event
-          layer; until then this page deliberately shows no rankings.
-        </p>
-        <Link className="text-link" href="/methodology/">
-          Read the method and source policy →
-        </Link>
+        <ScoutingCoverage
+          totals={coverage.totals}
+          knownGaps={coverage.known_gaps}
+          sources={coverage.sources}
+        />
       </section>
-    </>
+
+      <p className="back-link">
+        <Link href="/recruitment/">← Off the pitch</Link>
+        {" · "}
+        <Link href="/squad/">Squad →</Link>
+        {" · "}
+        <Link href="/analysis/">Data analysis →</Link>
+        {" · "}
+        <Link href="/methodology/">Method →</Link>
+      </p>
+    </ContractPage>
   );
 }

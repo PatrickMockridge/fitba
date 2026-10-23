@@ -47,3 +47,20 @@ export function formatInterval(
   }
   return `${formatDecimal(low, digits)}–${formatDecimal(high, digits)}`;
 }
+
+export function formatGbp(value: number): string {
+  if (value >= 1_000_000) {
+    return `£${(value / 1_000_000).toFixed(value >= 10_000_000 ? 1 : 2)}m`;
+  }
+  return `£${Math.round(value / 1000)}k`;
+}
+
+export function formatGbpBand(
+  low: number | null | undefined,
+  high: number | null | undefined,
+): string {
+  if (low === null || low === undefined || high === null || high === undefined) {
+    return "—";
+  }
+  return `${formatGbp(low)}–${formatGbp(high)}`;
+}

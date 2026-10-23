@@ -4,10 +4,10 @@
     "coverage": {
       "conflicts": 0,
       "doubtful": 0,
-      "entries": 38,
-      "known": 0,
+      "entries": 39,
+      "known": 2,
       "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
-      "out": 0,
+      "out": 1,
       "provider_snapshot": {
         "coverage": {
           "fixtures": {
@@ -31,12 +31,12 @@
       },
       "returned": 0,
       "stale": 0,
-      "status": "unavailable",
+      "status": "partial",
       "suspended": 0,
-      "unknown": 38
+      "unknown": 37
     },
     "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
-    "state": "unavailable"
+    "state": "partial"
   },
   "case": {
     "benchmark_rows": 8,
@@ -157,8 +157,8 @@
     "club": "sco:aberdeen",
     "coverage": {
       "availability": {
-        "known": 0,
-        "unknown": 38
+        "known": 1,
+        "unknown": 37
       },
       "basis": "measured + curated prior",
       "measured_families": 7,
@@ -170,8 +170,8 @@
     "note": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
     "state": "fresh",
     "summary": {
-      "availability_known": 0,
-      "availability_unknown": 38,
+      "availability_known": 1,
+      "availability_unknown": 37,
       "counts": {
         "none": 3,
         "strengthen": 4
@@ -185,9 +185,9 @@
     "availability": {
       "provider_snapshot": "unavailable",
       "reason": "provider_declares_injuries_false",
-      "status": "unavailable"
+      "status": "partial"
     },
-    "layers": 23,
+    "layers": 24,
     "migration": {
       "active_source": "football_data_uk",
       "enabled": false,

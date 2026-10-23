@@ -1,0 +1,3466 @@
+{
+  "archetypes": [
+    {
+      "description": "A midfielder whose measurable work is defensive: tackles, interceptions and duels, with enough passing to keep the ball after winning it.\n",
+      "families": [
+        "defensive_midfield",
+        "central_midfield"
+      ],
+      "features": {
+        "duel_win_pct": 0.2,
+        "interceptions_p90": 0.3,
+        "pass_completion_pct": 0.15,
+        "tackles_p90": 0.35
+      },
+      "id": "ball_winning_pivot",
+      "label": "Ball-winning pivot",
+      "leaders": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 95.3,
+          "club": "Servette FC",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 746,
+          "name": "Pedro Naressi",
+          "player_id": 9467,
+          "rating": 7.3,
+          "rating_percentile": 85.7,
+          "raw_score": 90.6,
+          "value_index": 90.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 93.7,
+          "club": "KVC Westerlo",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 653,
+          "name": "I. Fofana",
+          "player_id": 351979,
+          "rating": 7.1,
+          "rating_percentile": 60.6,
+          "raw_score": 77.5,
+          "value_index": 85.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 92.0,
+          "club": "Standard Liege",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 645,
+          "name": "A. Trouillet",
+          "player_id": 194073,
+          "rating": 7.18,
+          "rating_percentile": 74.2,
+          "raw_score": 73.6,
+          "value_index": 86.3,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 91.0,
+          "club": "Union St. Gilloise",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 695,
+          "name": "K. Van de Perre",
+          "player_id": 340574,
+          "rating": 7.48,
+          "rating_percentile": 92.4,
+          "raw_score": 71.5,
+          "value_index": 87.9,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 57.9,
+          "adjusted_score": 90.3,
+          "club": "SK Beveren",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 474,
+          "name": "C. Conde",
+          "player_id": 199309,
+          "rating": 6.84,
+          "rating_percentile": 19.7,
+          "raw_score": 70.1,
+          "value_index": 64.3,
+          "value_index_coverage": 1.0
+        }
+      ]
+    },
+    {
+      "description": "A midfielder who receives and moves the ball in volume with accuracy and creates from deep. Forward-pass splits are not in the feed; completed passes and key passes are the available evidence.\n",
+      "families": [
+        "defensive_midfield",
+        "central_midfield"
+      ],
+      "features": {
+        "assists_p90": 0.15,
+        "key_passes_p90": 0.2,
+        "pass_completion_pct": 0.3,
+        "passes_completed_p90": 0.35
+      },
+      "id": "deep_lying_playmaker",
+      "label": "Deep-lying playmaker",
+      "leaders": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 98.1,
+          "club": "Stockport County",
+          "coverage": 1.0,
+          "league_id": "eng:league-one",
+          "league_name": "EFL League One",
+          "league_slug": "eng-league-one",
+          "minutes": 934,
+          "name": "O. Norwood",
+          "player_id": 19105,
+          "rating": 7.53,
+          "rating_percentile": 97.3,
+          "raw_score": 98.4,
+          "value_index": 82.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 96.3,
+          "club": "FC Lugano",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 841,
+          "name": "A. Grgić",
+          "player_id": 48520,
+          "rating": 7.45,
+          "rating_percentile": 98.2,
+          "raw_score": 92.4,
+          "value_index": 88.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 95.9,
+          "club": "Club Brugge KV",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 623,
+          "name": "H. Vanaken",
+          "player_id": 78,
+          "rating": 7.69,
+          "rating_percentile": 98.5,
+          "raw_score": 83.3,
+          "value_index": 79.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 94.0,
+          "club": "FC Lugano",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 718,
+          "name": "U. Bislimi",
+          "player_id": 125708,
+          "rating": 7.22,
+          "rating_percentile": 80.4,
+          "raw_score": 88.5,
+          "value_index": 90.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 93.1,
+          "club": "Fredrikstad",
+          "coverage": 1.0,
+          "league_id": "nor:eliteserien",
+          "league_name": "Eliteserien",
+          "league_slug": "nor-eliteserien",
+          "minutes": 1258,
+          "name": "S. Leach Holm",
+          "player_id": 47776,
+          "rating": 7.09,
+          "rating_percentile": 84.1,
+          "raw_score": 92.2,
+          "value_index": 88.5,
+          "value_index_coverage": 1.0
+        }
+      ]
+    },
+    {
+      "description": "A defender whose passing and retention are closer to a midfielder's: volume, accuracy, progression through key passes and the ability to carry the ball out of a challenge.\n",
+      "families": [
+        "centre_back",
+        "full_back",
+        "wing_back"
+      ],
+      "features": {
+        "dribbles_success_p90": 0.1,
+        "key_passes_p90": 0.15,
+        "pass_completion_pct": 0.35,
+        "passes_completed_p90": 0.4
+      },
+      "id": "build_up_defender",
+      "label": "Build-up defender",
+      "leaders": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 97.7,
+          "club": "Bodo/Glimt",
+          "coverage": 1.0,
+          "league_id": "nor:eliteserien",
+          "league_name": "Eliteserien",
+          "league_slug": "nor-eliteserien",
+          "minutes": 1980,
+          "name": "F. Sjøvold",
+          "player_id": 351483,
+          "rating": 7.74,
+          "rating_percentile": 98.5,
+          "raw_score": 98.2,
+          "value_index": 98.2,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 96.5,
+          "club": "Bodo/Glimt",
+          "coverage": 1.0,
+          "league_id": "nor:eliteserien",
+          "league_name": "Eliteserien",
+          "league_slug": "nor-eliteserien",
+          "minutes": 1243,
+          "name": "F. Bjørkan",
+          "player_id": 39058,
+          "rating": 7.23,
+          "rating_percentile": 95.5,
+          "raw_score": 97.2,
+          "value_index": 91.9,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 89.5,
+          "adjusted_score": 96.1,
+          "club": "Železničar Pančevo",
+          "coverage": 1.0,
+          "league_id": "srb:super-liga",
+          "league_name": "Serbian SuperLiga",
+          "league_slug": "srb-super-liga",
+          "minutes": 945,
+          "name": "N. Đuričić",
+          "player_id": 202115,
+          "rating": 7.04,
+          "rating_percentile": 94.2,
+          "raw_score": 96.9,
+          "value_index": 86.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 76.2,
+          "adjusted_score": 95.4,
+          "club": "Stockport County",
+          "coverage": 1.0,
+          "league_id": "eng:league-one",
+          "league_name": "EFL League One",
+          "league_slug": "eng-league-one",
+          "minutes": 798,
+          "name": "B. Osborn",
+          "player_id": 19302,
+          "rating": 7.14,
+          "rating_percentile": 89.1,
+          "raw_score": 96.4,
+          "value_index": 71.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 43.6,
+          "adjusted_score": 94.2,
+          "club": "Cercle Brugge",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 694,
+          "name": "G. Magnée",
+          "player_id": 127416,
+          "rating": 6.79,
+          "rating_percentile": 16.7,
+          "raw_score": 87.2,
+          "value_index": 58.9,
+          "value_index_coverage": 1.0
+        }
+      ]
+    },
+    {
+      "description": "A wide or attacking midfielder who beats players and creates: successful dribbles, dribble success rate, key passes and goal contributions.\n",
+      "families": [
+        "wide_midfield",
+        "wide_forward",
+        "attacking_midfield"
+      ],
+      "features": {
+        "dribble_success_pct": 0.25,
+        "dribbles_success_p90": 0.35,
+        "goals_assists_p90": 0.2,
+        "key_passes_p90": 0.2
+      },
+      "id": "wide_dribbler",
+      "label": "Wide dribbler",
+      "leaders": [
+        {
+          "adjusted_percentile": 50.0,
+          "adjusted_score": 100.0,
+          "club": "Rangers",
+          "coverage": 1.0,
+          "league_id": "sco:premiership",
+          "league_name": "Scottish Premiership",
+          "league_slug": "sco-premiership",
+          "minutes": 486,
+          "name": "Minsu Kim",
+          "player_id": 397941,
+          "rating": 6.78,
+          "rating_percentile": 50.0,
+          "raw_score": 100.0,
+          "value_index": 57.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 97.5,
+          "club": "Dinamo Bucuresti",
+          "coverage": 1.0,
+          "league_id": "rou:liga-i",
+          "league_name": "Liga I",
+          "league_slug": "rou-liga-i",
+          "minutes": 949,
+          "name": "D. Armstrong",
+          "player_id": 45063,
+          "rating": 7.71,
+          "rating_percentile": 99.2,
+          "raw_score": 98.5,
+          "value_index": 89.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 92.8,
+          "club": "Çorum FK",
+          "coverage": 1.0,
+          "league_id": "tur:super-lig",
+          "league_name": "Super Lig",
+          "league_slug": "tur-super-lig",
+          "minutes": 514,
+          "name": "A. Kyziridis",
+          "player_id": 68213,
+          "rating": 7.92,
+          "rating_percentile": 99.2,
+          "raw_score": 90.1,
+          "value_index": 88.2,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 95.0,
+          "adjusted_score": 92.5,
+          "club": "Djurgardens IF",
+          "coverage": 1.0,
+          "league_id": "swe:allsvenskan",
+          "league_name": "Allsvenskan",
+          "league_slug": "swe-allsvenskan",
+          "minutes": 2005,
+          "name": "Bo Åsulv  Hegland",
+          "player_id": 354470,
+          "rating": 7.51,
+          "rating_percentile": 99.5,
+          "raw_score": 94.0,
+          "value_index": 94.6,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 92.5,
+          "club": "Benfica",
+          "coverage": 1.0,
+          "league_id": "por:primeira-liga",
+          "league_name": "Primeira Liga",
+          "league_slug": "por-primeira-liga",
+          "minutes": 662,
+          "name": "G. Prestianni",
+          "player_id": 362755,
+          "rating": 8.39,
+          "rating_percentile": 97.7,
+          "raw_score": 89.9,
+          "value_index": 84.9,
+          "value_index_coverage": 1.0
+        }
+      ]
+    },
+    {
+      "description": "A forward or attacking midfielder whose measurable output is goals and assists, supported by shot volume and conversion.\n",
+      "families": [
+        "centre_forward",
+        "wide_forward",
+        "attacking_midfield"
+      ],
+      "features": {
+        "conversion_pct": 0.25,
+        "goals_assists_p90": 0.5,
+        "shots_p90": 0.25
+      },
+      "id": "goal_contributor",
+      "label": "Goal contributor",
+      "leaders": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 99.8,
+          "club": "Dinamo Zagreb",
+          "coverage": 1.0,
+          "league_id": "cro:hnl",
+          "league_name": "Croatian HNL",
+          "league_slug": "cro-hnl",
+          "minutes": 663,
+          "name": "D. Beljo",
+          "player_id": 182434,
+          "rating": 8.38,
+          "rating_percentile": 95.8,
+          "raw_score": 100.0,
+          "value_index": 89.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 99.8,
+          "club": "Trabzonspor",
+          "coverage": 1.0,
+          "league_id": "tur:super-lig",
+          "league_name": "Super Lig",
+          "league_slug": "tur-super-lig",
+          "minutes": 648,
+          "name": "Mohamed Salah",
+          "player_id": 306,
+          "rating": 8.0,
+          "rating_percentile": 97.6,
+          "raw_score": 99.6,
+          "value_index": 79.9,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 98.0,
+          "adjusted_score": 96.2,
+          "club": "Fenerbahçe",
+          "coverage": 1.0,
+          "league_id": "tur:super-lig",
+          "league_name": "Super Lig",
+          "league_slug": "tur-super-lig",
+          "minutes": 597,
+          "name": "M. Greenwood",
+          "player_id": 897,
+          "rating": 7.66,
+          "rating_percentile": 92.9,
+          "raw_score": 94.5,
+          "value_index": 88.3,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 93.1,
+          "adjusted_score": 95.0,
+          "club": "FC Copenhagen",
+          "coverage": 1.0,
+          "league_id": "den:superliga",
+          "league_name": "Danish Superliga",
+          "league_slug": "den-superliga",
+          "minutes": 875,
+          "name": "M. Elyounoussi",
+          "player_id": 18946,
+          "rating": 7.38,
+          "rating_percentile": 93.4,
+          "raw_score": 96.1,
+          "value_index": 81.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 92.1,
+          "adjusted_score": 95.0,
+          "club": "Lask Linz",
+          "coverage": 1.0,
+          "league_id": "aut:bundesliga",
+          "league_name": "Austrian Bundesliga",
+          "league_slug": "aut-bundesliga",
+          "minutes": 561,
+          "name": "C. Lang",
+          "player_id": 271327,
+          "rating": 7.32,
+          "rating_percentile": 96.7,
+          "raw_score": 94.4,
+          "value_index": 83.1,
+          "value_index_coverage": 1.0
+        }
+      ]
+    },
+    {
+      "description": "A goalkeeper whose save rate is high and whose goals conceded per 90 is low. The feed does not carry post-shot xG, so this is a shot-stopping profile, not an expected-goals verdict.\n",
+      "families": [
+        "goalkeeper"
+      ],
+      "features": {
+        "conceded_p90": -0.4,
+        "save_pct": 0.6
+      },
+      "id": "goalkeeper_shot_stopper",
+      "label": "Goalkeeper shot-stopper",
+      "leaders": [
+        {
+          "adjusted_percentile": 92.1,
+          "adjusted_score": 99.2,
+          "club": "Club Brugge KV",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 720,
+          "name": "Y. Sommer",
+          "player_id": 2802,
+          "rating": 7.4,
+          "rating_percentile": 85.3,
+          "raw_score": 93.3,
+          "value_index": 76.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 79.2,
+          "adjusted_score": 99.1,
+          "club": "Gent",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 720,
+          "name": "D. Roef",
+          "player_id": 8716,
+          "rating": 7.16,
+          "rating_percentile": 50.0,
+          "raw_score": 93.0,
+          "value_index": 72.7,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 92.1,
+          "adjusted_score": 98.8,
+          "club": "Union St. Gilloise",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 630,
+          "name": "H. Koffi",
+          "player_id": 22220,
+          "rating": 7.37,
+          "rating_percentile": 76.5,
+          "raw_score": 91.2,
+          "value_index": 82.7,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.1,
+          "adjusted_score": 97.9,
+          "club": "Anderlecht",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 720,
+          "name": "C. Coosemans",
+          "player_id": 8469,
+          "rating": 7.48,
+          "rating_percentile": 91.2,
+          "raw_score": 87.0,
+          "value_index": 76.9,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 92.1,
+          "adjusted_score": 97.7,
+          "club": "Zulte Waregem",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 585,
+          "name": "L. Bostyn",
+          "player_id": 8606,
+          "rating": 7.37,
+          "rating_percentile": 76.5,
+          "raw_score": 86.3,
+          "value_index": 74.7,
+          "value_index_coverage": 1.0
+        }
+      ]
+    }
+  ],
+  "board": {
+    "families": [
+      {
+        "absent_first_choice": 0,
+        "average_rating": 7.34,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 7.34,
+          "min_minutes": 450,
+          "n": 11,
+          "role_family": "goalkeeper"
+        },
+        "drivers": [
+          "small_sample"
+        ],
+        "family": "goalkeeper",
+        "label": "Goalkeeper",
+        "layer0": [],
+        "minutes": 810,
+        "player_count": 1,
+        "players": [
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 810,
+            "name": "M. Müller",
+            "player_id": 1141,
+            "prior": null,
+            "prior_history": [],
+            "rates": {
+              "assists_p90": 0.11,
+              "conceded_p90": 0.89,
+              "conversion_pct": null,
+              "dribble_success_pct": null,
+              "dribbles_success_p90": 0.0,
+              "duel_win_pct": 83.33,
+              "goals_assists_p90": 0.11,
+              "goals_p90": 0.0,
+              "interceptions_p90": 0.0,
+              "key_passes_p90": 0.22,
+              "pass_completion_pct": 55.0,
+              "passes_completed_p90": 17.66,
+              "save_pct": 82.22,
+              "shots_p90": 0.0,
+              "tackles_p90": 0.11
+            },
+            "rating": 7.34,
+            "role_label": "Goalkeeper"
+          }
+        ],
+        "rating_percentile": 54.5,
+        "reading": "none",
+        "status": "at"
+      },
+      {
+        "absent_first_choice": 1,
+        "average_rating": 5.99,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 7.0,
+          "min_minutes": 450,
+          "n": 22,
+          "role_family": "centre_back"
+        },
+        "drivers": [
+          "rating_below_cohort",
+          "first_choice_out"
+        ],
+        "family": "centre_back",
+        "label": "Centre back",
+        "layer0": [
+          {
+            "appearances": 0,
+            "availability": {
+              "confidence": "confirmed",
+              "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
+              "source_id": "afc_news",
+              "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+              "stale": false,
+              "status": "out",
+              "verified_at": "2026-10-23"
+            },
+            "first_choice": true,
+            "minutes": 0,
+            "name": "K. Tobers",
+            "player_id": 68534,
+            "prior": {
+              "minutes": 774,
+              "rating": 6.97,
+              "role_code": "CB",
+              "role_family": "centre_back",
+              "role_starts": 11,
+              "season": "2024-25",
+              "starts": 10
+            },
+            "prior_history": [
+              {
+                "minutes": 61,
+                "rating": 7.2,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 1,
+                "season": "2025-26",
+                "starts": 1
+              },
+              {
+                "minutes": 774,
+                "rating": 6.97,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 11,
+                "season": "2024-25",
+                "starts": 10
+              }
+            ],
+            "rates": {},
+            "rating": null,
+            "role_label": "Centre back"
+          },
+          {
+            "appearances": 6,
+            "availability": {
+              "confidence": "reported",
+              "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+              "source_id": "afc_news",
+              "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
+              "stale": false,
+              "status": "available",
+              "verified_at": "2026-10-23"
+            },
+            "first_choice": true,
+            "minutes": 483,
+            "name": "M. Knoester",
+            "player_id": 37253,
+            "prior": {
+              "minutes": 2709,
+              "rating": 6.79,
+              "role_code": "CB",
+              "role_family": "centre_back",
+              "role_starts": 30,
+              "season": "2025-26",
+              "starts": 32
+            },
+            "prior_history": [
+              {
+                "minutes": 2709,
+                "rating": 6.79,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 30,
+                "season": "2025-26",
+                "starts": 32
+              },
+              {
+                "minutes": 1137,
+                "rating": 7.12,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 16,
+                "season": "2024-25",
+                "starts": 13
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": null,
+              "dribble_success_pct": 100.0,
+              "dribbles_success_p90": 0.19,
+              "duel_win_pct": 64.29,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.86,
+              "key_passes_p90": 0.19,
+              "pass_completion_pct": 88.0,
+              "passes_completed_p90": 43.78,
+              "save_pct": null,
+              "shots_p90": 0.0,
+              "tackles_p90": 1.49
+            },
+            "rating": 6.9,
+            "role_label": "Centre back"
+          }
+        ],
+        "minutes": 1809,
+        "player_count": 4,
+        "players": [
+          {
+            "appearances": 7,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 560,
+            "name": "L. Mayo",
+            "player_id": 125695,
+            "prior": {
+              "minutes": 90,
+              "rating": 6.5,
+              "role_code": "CB",
+              "role_family": "centre_back",
+              "role_starts": 1,
+              "season": "2025-26",
+              "starts": 1
+            },
+            "prior_history": [
+              {
+                "minutes": 90,
+                "rating": 6.5,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 1,
+                "season": "2025-26",
+                "starts": 1
+              },
+              {
+                "minutes": 270,
+                "rating": 7.0,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 3,
+                "season": "2024-25",
+                "starts": 3
+              },
+              {
+                "minutes": 270,
+                "rating": 7.13,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 3,
+                "season": "2023-24",
+                "starts": 3
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 33.33,
+              "dribble_success_pct": null,
+              "dribbles_success_p90": 0.0,
+              "duel_win_pct": 60.98,
+              "goals_assists_p90": 0.16,
+              "goals_p90": 0.16,
+              "interceptions_p90": 1.61,
+              "key_passes_p90": 0.0,
+              "pass_completion_pct": 83.0,
+              "passes_completed_p90": 32.95,
+              "save_pct": null,
+              "shots_p90": 0.48,
+              "tackles_p90": 1.61
+            },
+            "rating": 5.98,
+            "role_label": "Centre back"
+          },
+          {
+            "appearances": 6,
+            "availability": {
+              "confidence": "reported",
+              "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+              "source_id": "afc_news",
+              "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
+              "stale": false,
+              "status": "available",
+              "verified_at": "2026-10-23"
+            },
+            "first_choice": true,
+            "minutes": 483,
+            "name": "M. Knoester",
+            "player_id": 37253,
+            "prior": {
+              "minutes": 2709,
+              "rating": 6.79,
+              "role_code": "CB",
+              "role_family": "centre_back",
+              "role_starts": 30,
+              "season": "2025-26",
+              "starts": 32
+            },
+            "prior_history": [
+              {
+                "minutes": 2709,
+                "rating": 6.79,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 30,
+                "season": "2025-26",
+                "starts": 32
+              },
+              {
+                "minutes": 1137,
+                "rating": 7.12,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 16,
+                "season": "2024-25",
+                "starts": 13
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": null,
+              "dribble_success_pct": 100.0,
+              "dribbles_success_p90": 0.19,
+              "duel_win_pct": 64.29,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.86,
+              "key_passes_p90": 0.19,
+              "pass_completion_pct": 88.0,
+              "passes_completed_p90": 43.78,
+              "save_pct": null,
+              "shots_p90": 0.0,
+              "tackles_p90": 1.49
+            },
+            "rating": 6.9,
+            "role_label": "Centre back"
+          },
+          {
+            "appearances": 6,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": true,
+            "minutes": 384,
+            "name": "G. Molloy",
+            "player_id": 161806,
+            "prior": {
+              "minutes": 1332,
+              "rating": 6.63,
+              "role_code": "CB",
+              "role_family": "centre_back",
+              "role_starts": 8,
+              "season": "2025-26",
+              "starts": 14
+            },
+            "prior_history": [
+              {
+                "minutes": 1332,
+                "rating": 6.63,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 8,
+                "season": "2025-26",
+                "starts": 14
+              },
+              {
+                "minutes": 1698,
+                "rating": 6.97,
+                "role_code": "CB",
+                "role_family": "centre_back",
+                "role_starts": 22,
+                "season": "2024-25",
+                "starts": 19
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.23,
+              "conceded_p90": 0.0,
+              "conversion_pct": 33.33,
+              "dribble_success_pct": null,
+              "dribbles_success_p90": 0.0,
+              "duel_win_pct": 60.71,
+              "goals_assists_p90": 0.47,
+              "goals_p90": 0.23,
+              "interceptions_p90": 1.88,
+              "key_passes_p90": 0.47,
+              "pass_completion_pct": 81.0,
+              "passes_completed_p90": 38.16,
+              "save_pct": null,
+              "shots_p90": 0.7,
+              "tackles_p90": 2.11
+            },
+            "rating": 5.83,
+            "role_label": "Centre back"
+          },
+          {
+            "appearances": 6,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 382,
+            "name": "D. Happe",
+            "player_id": 18068,
+            "prior": null,
+            "prior_history": [],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": null,
+              "dribbles_success_p90": 0.0,
+              "duel_win_pct": 76.32,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.41,
+              "key_passes_p90": 0.24,
+              "pass_completion_pct": 83.0,
+              "passes_completed_p90": 43.02,
+              "save_pct": null,
+              "shots_p90": 1.18,
+              "tackles_p90": 1.41
+            },
+            "rating": 5.25,
+            "role_label": "Centre back"
+          }
+        ],
+        "rating_percentile": 13.6,
+        "reading": "cover",
+        "status": "below"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": 6.99,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.74,
+          "min_minutes": 450,
+          "n": 19,
+          "role_family": "full_back"
+        },
+        "drivers": [
+          "small_sample"
+        ],
+        "family": "full_back",
+        "label": "Full-back",
+        "layer0": [],
+        "minutes": 765,
+        "player_count": 1,
+        "players": [
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 765,
+            "name": "N. Guinness-Walker",
+            "player_id": 108465,
+            "prior": null,
+            "prior_history": [],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": 50.0,
+              "dribbles_success_p90": 1.29,
+              "duel_win_pct": 62.79,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.65,
+              "key_passes_p90": 0.59,
+              "pass_completion_pct": 77.0,
+              "passes_completed_p90": 22.92,
+              "save_pct": null,
+              "shots_p90": 0.35,
+              "tackles_p90": 2.24
+            },
+            "rating": 6.99,
+            "role_label": "Left back"
+          }
+        ],
+        "rating_percentile": 68.4,
+        "reading": "none",
+        "status": "above"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": 6.45,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 7.0,
+          "min_minutes": 450,
+          "n": 1,
+          "role_family": "wing_back"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "wing_back",
+        "label": "Wing-back",
+        "layer0": [],
+        "minutes": 792,
+        "player_count": 1,
+        "players": [
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 792,
+            "name": "C. Cadden",
+            "player_id": 44921,
+            "prior": {
+              "minutes": 59,
+              "rating": 6.6,
+              "role_code": "RWB",
+              "role_family": "wing_back",
+              "role_starts": 1,
+              "season": "2025-26",
+              "starts": 1
+            },
+            "prior_history": [
+              {
+                "minutes": 59,
+                "rating": 6.6,
+                "role_code": "RWB",
+                "role_family": "wing_back",
+                "role_starts": 1,
+                "season": "2025-26",
+                "starts": 1
+              },
+              {
+                "minutes": 245,
+                "rating": 6.93,
+                "role_code": "RWB",
+                "role_family": "wing_back",
+                "role_starts": 3,
+                "season": "2024-25",
+                "starts": 3
+              },
+              {
+                "minutes": 90,
+                "rating": 6.3,
+                "role_code": "RB",
+                "role_family": "full_back",
+                "role_starts": 1,
+                "season": "2023-24",
+                "starts": 1
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": 37.5,
+              "dribbles_success_p90": 0.34,
+              "duel_win_pct": 52.38,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.25,
+              "key_passes_p90": 0.34,
+              "pass_completion_pct": 73.0,
+              "passes_completed_p90": 27.29,
+              "save_pct": null,
+              "shots_p90": 0.45,
+              "tackles_p90": 1.82
+            },
+            "rating": 6.45,
+            "role_label": "Right wing-back"
+          }
+        ],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": null,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": null,
+          "min_minutes": 450,
+          "n": 0,
+          "role_family": "defensive_midfield"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "defensive_midfield",
+        "label": "Defensive midfield",
+        "layer0": [],
+        "minutes": 0,
+        "player_count": 0,
+        "players": [],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": 6.65,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.82,
+          "min_minutes": 450,
+          "n": 19,
+          "role_family": "central_midfield"
+        },
+        "drivers": [
+          "rating_below_cohort"
+        ],
+        "family": "central_midfield",
+        "label": "Centre midfield",
+        "layer0": [],
+        "minutes": 1491,
+        "player_count": 3,
+        "players": [
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 587,
+            "name": "A. Aremu",
+            "player_id": 57248,
+            "prior": {
+              "minutes": 635,
+              "rating": 6.8,
+              "role_code": "CM",
+              "role_family": "central_midfield",
+              "role_starts": 6,
+              "season": "2025-26",
+              "starts": 9
+            },
+            "prior_history": [
+              {
+                "minutes": 635,
+                "rating": 6.8,
+                "role_code": "CM",
+                "role_family": "central_midfield",
+                "role_starts": 6,
+                "season": "2025-26",
+                "starts": 9
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.15,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": 66.67,
+              "dribbles_success_p90": 0.31,
+              "duel_win_pct": 60.76,
+              "goals_assists_p90": 0.15,
+              "goals_p90": 0.0,
+              "interceptions_p90": 1.69,
+              "key_passes_p90": 0.46,
+              "pass_completion_pct": 83.0,
+              "passes_completed_p90": 37.41,
+              "save_pct": null,
+              "shots_p90": 0.46,
+              "tackles_p90": 4.14
+            },
+            "rating": 6.16,
+            "role_label": "Centre midfielder"
+          },
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": true,
+            "minutes": 458,
+            "name": "S. Armstrong",
+            "player_id": 18945,
+            "prior": {
+              "minutes": 2380,
+              "rating": 6.89,
+              "role_code": "CM",
+              "role_family": "central_midfield",
+              "role_starts": 18,
+              "season": "2025-26",
+              "starts": 28
+            },
+            "prior_history": [
+              {
+                "minutes": 2380,
+                "rating": 6.89,
+                "role_code": "CM",
+                "role_family": "central_midfield",
+                "role_starts": 18,
+                "season": "2025-26",
+                "starts": 28
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": 12.5,
+              "dribbles_success_p90": 0.2,
+              "duel_win_pct": 41.86,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 0.39,
+              "key_passes_p90": 2.95,
+              "pass_completion_pct": 87.0,
+              "passes_completed_p90": 53.0,
+              "save_pct": null,
+              "shots_p90": 0.59,
+              "tackles_p90": 1.97
+            },
+            "rating": 6.8,
+            "role_label": "Centre midfielder"
+          },
+          {
+            "appearances": 7,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": false,
+            "minutes": 446,
+            "name": "C. Ronan",
+            "player_id": 61178,
+            "prior": null,
+            "prior_history": [],
+            "rates": {
+              "assists_p90": 0.4,
+              "conceded_p90": 0.0,
+              "conversion_pct": 16.67,
+              "dribble_success_pct": 75.0,
+              "dribbles_success_p90": 0.61,
+              "duel_win_pct": 36.11,
+              "goals_assists_p90": 0.61,
+              "goals_p90": 0.2,
+              "interceptions_p90": 0.2,
+              "key_passes_p90": 1.82,
+              "pass_completion_pct": 83.0,
+              "passes_completed_p90": 35.68,
+              "save_pct": null,
+              "shots_p90": 1.21,
+              "tackles_p90": 1.21
+            },
+            "rating": 7.09,
+            "role_label": "Centre midfielder"
+          }
+        ],
+        "rating_percentile": 28.9,
+        "reading": "structural",
+        "status": "below"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": null,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.78,
+          "min_minutes": 450,
+          "n": 7,
+          "role_family": "attacking_midfield"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "attacking_midfield",
+        "label": "Attacking midfield",
+        "layer0": [],
+        "minutes": 0,
+        "player_count": 0,
+        "players": [],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": null,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.67,
+          "min_minutes": 450,
+          "n": 3,
+          "role_family": "wide_midfield"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "wide_midfield",
+        "label": "Wide midfield",
+        "layer0": [],
+        "minutes": 0,
+        "player_count": 0,
+        "players": [],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": 6.2,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.78,
+          "min_minutes": 450,
+          "n": 14,
+          "role_family": "wide_forward"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "wide_forward",
+        "label": "Wide forward",
+        "layer0": [],
+        "minutes": 574,
+        "player_count": 1,
+        "players": [
+          {
+            "appearances": 8,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": true,
+            "minutes": 574,
+            "name": "T. Olusanya",
+            "player_id": 231195,
+            "prior": {
+              "minutes": 1043,
+              "rating": 6.5,
+              "role_code": "ST",
+              "role_family": "centre_forward",
+              "role_starts": 5,
+              "season": "2025-26",
+              "starts": 11
+            },
+            "prior_history": [
+              {
+                "minutes": 1043,
+                "rating": 6.5,
+                "role_code": "ST",
+                "role_family": "centre_forward",
+                "role_starts": 5,
+                "season": "2025-26",
+                "starts": 11
+              },
+              {
+                "minutes": 238,
+                "rating": 7.83,
+                "role_code": "ST",
+                "role_family": "centre_forward",
+                "role_starts": 3,
+                "season": "2024-25",
+                "starts": 3
+              },
+              {
+                "minutes": 141,
+                "rating": 7.27,
+                "role_code": "ST",
+                "role_family": "centre_forward",
+                "role_starts": 1,
+                "season": "2023-24",
+                "starts": 1
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.0,
+              "conceded_p90": 0.0,
+              "conversion_pct": 0.0,
+              "dribble_success_pct": 0.0,
+              "dribbles_success_p90": 0.0,
+              "duel_win_pct": 25.53,
+              "goals_assists_p90": 0.0,
+              "goals_p90": 0.0,
+              "interceptions_p90": 0.0,
+              "key_passes_p90": 1.41,
+              "pass_completion_pct": 79.0,
+              "passes_completed_p90": 8.55,
+              "save_pct": null,
+              "shots_p90": 0.47,
+              "tackles_p90": 1.1
+            },
+            "rating": 6.2,
+            "role_label": "Right winger"
+          }
+        ],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      },
+      {
+        "absent_first_choice": 0,
+        "average_rating": 7.23,
+        "cohort": {
+          "basis": "role_family",
+          "league_id": "sco:premiership",
+          "median": 6.89,
+          "min_minutes": 450,
+          "n": 5,
+          "role_family": "centre_forward"
+        },
+        "drivers": [
+          "small_cohort",
+          "small_sample"
+        ],
+        "family": "centre_forward",
+        "label": "Centre forward",
+        "layer0": [],
+        "minutes": 719,
+        "player_count": 1,
+        "players": [
+          {
+            "appearances": 9,
+            "availability": {
+              "confidence": "unknown",
+              "note": "No verified official team-news entry.",
+              "source_id": "none",
+              "source_url": null,
+              "stale": false,
+              "status": "unknown",
+              "verified_at": null
+            },
+            "first_choice": true,
+            "minutes": 719,
+            "name": "K. Nisbet",
+            "player_id": 97896,
+            "prior": {
+              "minutes": 2405,
+              "rating": 6.63,
+              "role_code": "ST",
+              "role_family": "centre_forward",
+              "role_starts": 29,
+              "season": "2025-26",
+              "starts": 28
+            },
+            "prior_history": [
+              {
+                "minutes": 2405,
+                "rating": 6.63,
+                "role_code": "ST",
+                "role_family": "centre_forward",
+                "role_starts": 29,
+                "season": "2025-26",
+                "starts": 28
+              },
+              {
+                "minutes": 1955,
+                "rating": 6.95,
+                "role_code": "ST",
+                "role_family": "centre_forward",
+                "role_starts": 22,
+                "season": "2024-25",
+                "starts": 22
+              }
+            ],
+            "rates": {
+              "assists_p90": 0.25,
+              "conceded_p90": 0.0,
+              "conversion_pct": 19.05,
+              "dribble_success_pct": 66.67,
+              "dribbles_success_p90": 0.5,
+              "duel_win_pct": 46.58,
+              "goals_assists_p90": 0.75,
+              "goals_p90": 0.5,
+              "interceptions_p90": 0.13,
+              "key_passes_p90": 0.88,
+              "pass_completion_pct": 71.0,
+              "passes_completed_p90": 9.69,
+              "save_pct": null,
+              "shots_p90": 2.63,
+              "tackles_p90": 0.75
+            },
+            "rating": 7.23,
+            "role_label": "Centre forward"
+          }
+        ],
+        "rating_percentile": null,
+        "reading": "insufficient",
+        "status": "insufficient"
+      }
+    ],
+    "league_id": "sco:premiership",
+    "summary": {
+      "below_cohort": 2,
+      "cover_readings": 1,
+      "families": 10,
+      "insufficient": 6,
+      "layer0_players": 2,
+      "structural_readings": 1
+    },
+    "unassigned_layer0": []
+  },
+  "club_id": "sco:aberdeen",
+  "coverage": {
+    "known_gaps": [
+      "7 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
+      "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",
+      "No event coordinates, xG/xA, progressive passes, carries, pressures, aerial wins or crosses.",
+      "Role families need starting-XI grids; leagues without them use the provider group.",
+      "Provider ratings are opaque and league-relative; no cross-league ranking is published.",
+      "The availability ledger has only the verified official AFC entries; every other injury state is unknown.",
+      "This is a profile search, not a target list or a recommendation."
+    ],
+    "sources": [
+      {
+        "coverage": "season player statistics and starting-XI lineups",
+        "id": "api_football",
+        "name": "API-Football",
+        "url": "https://www.api-football.com"
+      },
+      {
+        "coverage": "verified availability ledger entries",
+        "id": "afc_news",
+        "name": "Aberdeen FC official",
+        "url": "https://www.afc.co.uk"
+      }
+    ],
+    "totals": {
+      "leagues": 33,
+      "no_player_stats": 7,
+      "players": 11250,
+      "rated": 9457,
+      "role_players": 8318,
+      "searchable": 25,
+      "with_minutes_450": 4115
+    }
+  },
+  "generated_at": "2026-10-23T14:41:26+00:00",
+  "layer_zero": [
+    {
+      "confidence": "confirmed",
+      "family": "centre_back",
+      "family_label": "Centre back",
+      "first_choice": true,
+      "minutes": 0,
+      "name": "K. Tobers",
+      "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
+      "player_id": 68534,
+      "prior": {
+        "minutes": 774,
+        "rating": 6.97,
+        "role_code": "CB",
+        "role_family": "centre_back",
+        "role_starts": 11,
+        "season": "2024-25",
+        "starts": 10
+      },
+      "rating": null,
+      "role_label": "Centre back",
+      "source_id": "afc_news",
+      "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+      "status": "out",
+      "verified_at": "2026-10-23"
+    },
+    {
+      "confidence": "reported",
+      "family": "centre_back",
+      "family_label": "Centre back",
+      "first_choice": true,
+      "minutes": 483,
+      "name": "M. Knoester",
+      "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+      "player_id": 37253,
+      "prior": {
+        "minutes": 2709,
+        "rating": 6.79,
+        "role_code": "CB",
+        "role_family": "centre_back",
+        "role_starts": 30,
+        "season": "2025-26",
+        "starts": 32
+      },
+      "rating": 6.9,
+      "role_label": "Centre back",
+      "source_id": "afc_news",
+      "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
+      "status": "available",
+      "verified_at": "2026-10-23"
+    }
+  ],
+  "leagues": [
+    {
+      "country": "Scotland",
+      "error": null,
+      "fixtures_played": 54,
+      "href": "/scouting/sco-premiership/",
+      "id": "sco:premiership",
+      "lineups_fetched": 54,
+      "name": "Scottish Premiership",
+      "players": 317,
+      "provider_league_id": 179,
+      "rated": 267,
+      "role_coverage": 0.773,
+      "role_players": 245,
+      "searchable": true,
+      "slug": "sco-premiership",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 101
+    },
+    {
+      "country": "Scotland",
+      "error": null,
+      "fixtures_played": 0,
+      "href": "/scouting/sco-championship/",
+      "id": "sco:championship",
+      "lineups_fetched": 0,
+      "name": "Scottish Championship",
+      "players": 0,
+      "provider_league_id": 180,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 0,
+      "searchable": false,
+      "slug": "sco-championship",
+      "status": "no_player_stats",
+      "tier": 2,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Scotland",
+      "error": null,
+      "fixtures_played": 0,
+      "href": "/scouting/sco-league-one/",
+      "id": "sco:league-one",
+      "lineups_fetched": 0,
+      "name": "Scottish League One",
+      "players": 0,
+      "provider_league_id": 183,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 0,
+      "searchable": false,
+      "slug": "sco-league-one",
+      "status": "no_player_stats",
+      "tier": 3,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Scotland",
+      "error": null,
+      "fixtures_played": 0,
+      "href": "/scouting/sco-league-two/",
+      "id": "sco:league-two",
+      "lineups_fetched": 0,
+      "name": "Scottish League Two",
+      "players": 0,
+      "provider_league_id": 184,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 0,
+      "searchable": false,
+      "slug": "sco-league-two",
+      "status": "no_player_stats",
+      "tier": 4,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "England",
+      "error": null,
+      "fixtures_played": 132,
+      "href": "/scouting/eng-championship/",
+      "id": "eng:championship",
+      "lineups_fetched": 132,
+      "name": "EFL Championship",
+      "players": 686,
+      "provider_league_id": 40,
+      "rated": 574,
+      "role_coverage": 0.698,
+      "role_players": 479,
+      "searchable": true,
+      "slug": "eng-championship",
+      "status": "ok",
+      "tier": 2,
+      "with_minutes_450": 279
+    },
+    {
+      "country": "England",
+      "error": null,
+      "fixtures_played": 126,
+      "href": "/scouting/eng-league-one/",
+      "id": "eng:league-one",
+      "lineups_fetched": 126,
+      "name": "EFL League One",
+      "players": 636,
+      "provider_league_id": 41,
+      "rated": 561,
+      "role_coverage": 0.734,
+      "role_players": 467,
+      "searchable": true,
+      "slug": "eng-league-one",
+      "status": "ok",
+      "tier": 3,
+      "with_minutes_450": 269
+    },
+    {
+      "country": "England",
+      "error": null,
+      "fixtures_played": 138,
+      "href": "/scouting/eng-league-two/",
+      "id": "eng:league-two",
+      "lineups_fetched": 138,
+      "name": "EFL League Two",
+      "players": 634,
+      "provider_league_id": 42,
+      "rated": 560,
+      "role_coverage": 0.746,
+      "role_players": 473,
+      "searchable": true,
+      "slug": "eng-league-two",
+      "status": "ok",
+      "tier": 4,
+      "with_minutes_450": 280
+    },
+    {
+      "country": "Netherlands",
+      "error": null,
+      "fixtures_played": 81,
+      "href": "/scouting/ned-eredivisie/",
+      "id": "ned:eredivisie",
+      "lineups_fetched": 81,
+      "name": "Eredivisie",
+      "players": 528,
+      "provider_league_id": 88,
+      "rated": 425,
+      "role_coverage": 0.627,
+      "role_players": 331,
+      "searchable": true,
+      "slug": "ned-eredivisie",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 178
+    },
+    {
+      "country": "Belgium",
+      "error": null,
+      "fixtures_played": 72,
+      "href": "/scouting/bel-pro-league/",
+      "id": "bel:pro-league",
+      "lineups_fetched": 72,
+      "name": "Belgian Pro League",
+      "players": 512,
+      "provider_league_id": 144,
+      "rated": 424,
+      "role_coverage": 0.615,
+      "role_players": 315,
+      "searchable": true,
+      "slug": "bel-pro-league",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 163
+    },
+    {
+      "country": "Portugal",
+      "error": null,
+      "fixtures_played": 72,
+      "href": "/scouting/por-primeira-liga/",
+      "id": "por:primeira-liga",
+      "lineups_fetched": 72,
+      "name": "Primeira Liga",
+      "players": 538,
+      "provider_league_id": 94,
+      "rated": 434,
+      "role_coverage": 0.621,
+      "role_players": 334,
+      "searchable": true,
+      "slug": "por-primeira-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 151
+    },
+    {
+      "country": "Switzerland",
+      "error": null,
+      "fixtures_played": 60,
+      "href": "/scouting/sui-super-league/",
+      "id": "sui:super-league",
+      "lineups_fetched": 60,
+      "name": "Swiss Super League",
+      "players": 331,
+      "provider_league_id": 207,
+      "rated": 290,
+      "role_coverage": 0.743,
+      "role_players": 246,
+      "searchable": true,
+      "slug": "sui-super-league",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 125
+    },
+    {
+      "country": "Austria",
+      "error": null,
+      "fixtures_played": 54,
+      "href": "/scouting/aut-bundesliga/",
+      "id": "aut:bundesliga",
+      "lineups_fetched": 54,
+      "name": "Austrian Bundesliga",
+      "players": 329,
+      "provider_league_id": 218,
+      "rated": 274,
+      "role_coverage": 0.693,
+      "role_players": 228,
+      "searchable": true,
+      "slug": "aut-bundesliga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 109
+    },
+    {
+      "country": "Denmark",
+      "error": null,
+      "fixtures_played": 66,
+      "href": "/scouting/den-superliga/",
+      "id": "den:superliga",
+      "lineups_fetched": 66,
+      "name": "Danish Superliga",
+      "players": 347,
+      "provider_league_id": 119,
+      "rated": 300,
+      "role_coverage": 0.68,
+      "role_players": 236,
+      "searchable": true,
+      "slug": "den-superliga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 138
+    },
+    {
+      "country": "Norway",
+      "error": null,
+      "fixtures_played": 184,
+      "href": "/scouting/nor-eliteserien/",
+      "id": "nor:eliteserien",
+      "lineups_fetched": 184,
+      "name": "Eliteserien",
+      "players": 519,
+      "provider_league_id": 103,
+      "rated": 446,
+      "role_coverage": 0.728,
+      "role_players": 378,
+      "searchable": true,
+      "slug": "nor-eliteserien",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 284
+    },
+    {
+      "country": "Sweden",
+      "error": null,
+      "fixtures_played": 192,
+      "href": "/scouting/swe-allsvenskan/",
+      "id": "swe:allsvenskan",
+      "lineups_fetched": 192,
+      "name": "Allsvenskan",
+      "players": 525,
+      "provider_league_id": 113,
+      "rated": 459,
+      "role_coverage": 0.75,
+      "role_players": 394,
+      "searchable": true,
+      "slug": "swe-allsvenskan",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 280
+    },
+    {
+      "country": "Poland",
+      "error": null,
+      "fixtures_played": 97,
+      "href": "/scouting/pol-ekstraklasa/",
+      "id": "pol:ekstraklasa",
+      "lineups_fetched": 97,
+      "name": "Ekstraklasa",
+      "players": 529,
+      "provider_league_id": 106,
+      "rated": 429,
+      "role_coverage": 0.684,
+      "role_players": 362,
+      "searchable": true,
+      "slug": "pol-ekstraklasa",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 197
+    },
+    {
+      "country": "Czechia",
+      "error": null,
+      "fixtures_played": 87,
+      "href": "/scouting/cze-fortuna-liga/",
+      "id": "cze:fortuna-liga",
+      "lineups_fetched": 87,
+      "name": "Czech First League",
+      "players": 472,
+      "provider_league_id": 345,
+      "rated": 400,
+      "role_coverage": 0.72,
+      "role_players": 340,
+      "searchable": true,
+      "slug": "cze-fortuna-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 175
+    },
+    {
+      "country": "Greece",
+      "error": null,
+      "fixtures_played": 48,
+      "href": "/scouting/gre-super-league/",
+      "id": "gre:super-league",
+      "lineups_fetched": 48,
+      "name": "Super League Greece",
+      "players": 399,
+      "provider_league_id": 197,
+      "rated": 330,
+      "role_coverage": 0.692,
+      "role_players": 276,
+      "searchable": true,
+      "slug": "gre-super-league",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 87
+    },
+    {
+      "country": "Croatia",
+      "error": null,
+      "fixtures_played": 49,
+      "href": "/scouting/cro-hnl/",
+      "id": "cro:hnl",
+      "lineups_fetched": 49,
+      "name": "Croatian HNL",
+      "players": 310,
+      "provider_league_id": 210,
+      "rated": 260,
+      "role_coverage": 0.71,
+      "role_players": 220,
+      "searchable": true,
+      "slug": "cro-hnl",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 96
+    },
+    {
+      "country": "Serbia",
+      "error": null,
+      "fixtures_played": 82,
+      "href": "/scouting/srb-super-liga/",
+      "id": "srb:super-liga",
+      "lineups_fetched": 82,
+      "name": "Serbian SuperLiga",
+      "players": 449,
+      "provider_league_id": 286,
+      "rated": 387,
+      "role_coverage": 0.733,
+      "role_players": 329,
+      "searchable": true,
+      "slug": "srb-super-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 161
+    },
+    {
+      "country": "Romania",
+      "error": null,
+      "fixtures_played": 96,
+      "href": "/scouting/rou-liga-i/",
+      "id": "rou:liga-i",
+      "lineups_fetched": 96,
+      "name": "Liga I",
+      "players": 500,
+      "provider_league_id": 283,
+      "rated": 403,
+      "role_coverage": 0.682,
+      "role_players": 341,
+      "searchable": true,
+      "slug": "rou-liga-i",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 192
+    },
+    {
+      "country": "Slovakia",
+      "error": null,
+      "fixtures_played": 64,
+      "href": "/scouting/svk-super-liga/",
+      "id": "svk:super-liga",
+      "lineups_fetched": 64,
+      "name": "Slovak Super Liga",
+      "players": 235,
+      "provider_league_id": 332,
+      "rated": 185,
+      "role_coverage": 0.689,
+      "role_players": 162,
+      "searchable": true,
+      "slug": "svk-super-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Bulgaria",
+      "error": null,
+      "fixtures_played": 76,
+      "href": "/scouting/bul-parva-liga/",
+      "id": "bul:parva-liga",
+      "lineups_fetched": 76,
+      "name": "First Professional League",
+      "players": 0,
+      "provider_league_id": 172,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 290,
+      "searchable": false,
+      "slug": "bul-parva-liga",
+      "status": "no_player_stats",
+      "tier": 1,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Finland",
+      "error": null,
+      "fixtures_played": 166,
+      "href": "/scouting/fin-veikkausliiga/",
+      "id": "fin:veikkausliiga",
+      "lineups_fetched": 166,
+      "name": "Veikkausliiga",
+      "players": 373,
+      "provider_league_id": 244,
+      "rated": 330,
+      "role_coverage": 0.836,
+      "role_players": 312,
+      "searchable": true,
+      "slug": "fin-veikkausliiga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 160
+    },
+    {
+      "country": "Iceland",
+      "error": null,
+      "fixtures_played": 156,
+      "href": "/scouting/isl-besta-deild/",
+      "id": "isl:besta-deild",
+      "lineups_fetched": 156,
+      "name": "Besta deild",
+      "players": 0,
+      "provider_league_id": 164,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 72,
+      "searchable": false,
+      "slug": "isl-besta-deild",
+      "status": "no_player_stats",
+      "tier": 1,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Slovenia",
+      "error": null,
+      "fixtures_played": 59,
+      "href": "/scouting/svn-prvaliga/",
+      "id": "svn:prvaliga",
+      "lineups_fetched": 59,
+      "name": "Slovenian PrvaLiga",
+      "players": 0,
+      "provider_league_id": 373,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 22,
+      "searchable": false,
+      "slug": "svn-prvaliga",
+      "status": "no_player_stats",
+      "tier": 1,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Albania",
+      "error": null,
+      "fixtures_played": 35,
+      "href": "/scouting/alb-kategoria/",
+      "id": "alb:kategoria",
+      "lineups_fetched": 35,
+      "name": "Kategoria Superiore",
+      "players": 1,
+      "provider_league_id": 310,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 0,
+      "searchable": false,
+      "slug": "alb-kategoria",
+      "status": "partial",
+      "tier": 1,
+      "with_minutes_450": 0
+    },
+    {
+      "country": "Hungary",
+      "error": null,
+      "fixtures_played": 59,
+      "href": "/scouting/hun-nb-i/",
+      "id": "hun:nb-i",
+      "lineups_fetched": 59,
+      "name": "Nemzeti Bajnoksag I",
+      "players": 362,
+      "provider_league_id": 271,
+      "rated": 305,
+      "role_coverage": 0.68,
+      "role_players": 246,
+      "searchable": true,
+      "slug": "hun-nb-i",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 110
+    },
+    {
+      "country": "Ukraine",
+      "error": null,
+      "fixtures_played": 70,
+      "href": "/scouting/ukr-premier-liga/",
+      "id": "ukr:premier-liga",
+      "lineups_fetched": 70,
+      "name": "Ukrainian Premier League",
+      "players": 436,
+      "provider_league_id": 333,
+      "rated": 347,
+      "role_coverage": 0.72,
+      "role_players": 314,
+      "searchable": true,
+      "slug": "ukr-premier-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 27
+    },
+    {
+      "country": "Russia",
+      "error": null,
+      "fixtures_played": 88,
+      "href": "/scouting/rus-premier-liga/",
+      "id": "rus:premier-liga",
+      "lineups_fetched": 88,
+      "name": "Russian Premier League",
+      "players": 462,
+      "provider_league_id": 235,
+      "rated": 382,
+      "role_coverage": 0.697,
+      "role_players": 322,
+      "searchable": true,
+      "slug": "rus-premier-liga",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 186
+    },
+    {
+      "country": "Turkiye",
+      "error": null,
+      "fixtures_played": 72,
+      "href": "/scouting/tur-super-lig/",
+      "id": "tur:super-lig",
+      "lineups_fetched": 72,
+      "name": "Super Lig",
+      "players": 491,
+      "provider_league_id": 203,
+      "rated": 409,
+      "role_coverage": 0.678,
+      "role_players": 333,
+      "searchable": true,
+      "slug": "tur-super-lig",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 164
+    },
+    {
+      "country": "Ireland",
+      "error": null,
+      "fixtures_played": 170,
+      "href": "/scouting/ire-premier-division/",
+      "id": "ire:premier-division",
+      "lineups_fetched": 170,
+      "name": "League of Ireland Premier",
+      "players": 329,
+      "provider_league_id": 357,
+      "rated": 276,
+      "role_coverage": 0.763,
+      "role_players": 251,
+      "searchable": true,
+      "slug": "ire-premier-division",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 203
+    },
+    {
+      "country": "N. Ireland",
+      "error": null,
+      "fixtures_played": 69,
+      "href": "/scouting/nir-nifl/",
+      "id": "nir:nifl",
+      "lineups_fetched": 69,
+      "name": "NIFL Premiership",
+      "players": 0,
+      "provider_league_id": 408,
+      "rated": 0,
+      "role_coverage": 0.0,
+      "role_players": 0,
+      "searchable": false,
+      "slug": "nir-nifl",
+      "status": "no_player_stats",
+      "tier": 1,
+      "with_minutes_450": 0
+    }
+  ],
+  "limitations": [
+    "Provider ratings are relative to a league and role cohort; they are not a verdict.",
+    "The model cannot separate selection, availability and quality.",
+    "The pivot card is a hypothesis, not a causal claim.",
+    "No contracts, wages, fees or release clauses are claimed.",
+    "No target list and no Aberdeen FC recommendation."
+  ],
+  "pivot": {
+    "archetype_labels": {
+      "ball_winning_pivot": "Ball-winning pivot",
+      "deep_lying_playmaker": "Deep-lying playmaker"
+    },
+    "current": {
+      "ball_winning_pivot": {
+        "coverage": 1.0,
+        "minutes": 587,
+        "name": "A. Aremu",
+        "player_id": 57248,
+        "role_label": "Centre midfielder",
+        "score": 85.8
+      },
+      "deep_lying_playmaker": {
+        "coverage": 1.0,
+        "minutes": 458,
+        "name": "S. Armstrong",
+        "player_id": 18945,
+        "role_label": "Centre midfielder",
+        "score": 67.3
+      }
+    },
+    "hypothesis": "A ball-winning pivot plus a deep-lying playmaker is a testable way to shield a centre-back line and still offer a short forward pass. This page measures the profile gap; it cannot show that a signing would reduce goals conceded. It is a hypothesis, not a recommendation.",
+    "label": "The double pivot",
+    "pool": {
+      "ball_winning_pivot": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 95.3,
+          "club": "Servette FC",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 746,
+          "name": "Pedro Naressi",
+          "player_id": 9467,
+          "rating": 7.3,
+          "rating_percentile": 85.7,
+          "raw_score": 90.6,
+          "value_index": 90.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 93.7,
+          "club": "KVC Westerlo",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 653,
+          "name": "I. Fofana",
+          "player_id": 351979,
+          "rating": 7.1,
+          "rating_percentile": 60.6,
+          "raw_score": 77.5,
+          "value_index": 85.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 92.0,
+          "club": "Standard Liege",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 645,
+          "name": "A. Trouillet",
+          "player_id": 194073,
+          "rating": 7.18,
+          "rating_percentile": 74.2,
+          "raw_score": 73.6,
+          "value_index": 86.3,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 91.0,
+          "club": "Union St. Gilloise",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 695,
+          "name": "K. Van de Perre",
+          "player_id": 340574,
+          "rating": 7.48,
+          "rating_percentile": 92.4,
+          "raw_score": 71.5,
+          "value_index": 87.9,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 57.9,
+          "adjusted_score": 90.3,
+          "club": "SK Beveren",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 474,
+          "name": "C. Conde",
+          "player_id": 199309,
+          "rating": 6.84,
+          "rating_percentile": 19.7,
+          "raw_score": 70.1,
+          "value_index": 64.3,
+          "value_index_coverage": 1.0
+        }
+      ],
+      "deep_lying_playmaker": [
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 98.1,
+          "club": "Stockport County",
+          "coverage": 1.0,
+          "league_id": "eng:league-one",
+          "league_name": "EFL League One",
+          "league_slug": "eng-league-one",
+          "minutes": 934,
+          "name": "O. Norwood",
+          "player_id": 19105,
+          "rating": 7.53,
+          "rating_percentile": 97.3,
+          "raw_score": 98.4,
+          "value_index": 82.0,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 96.3,
+          "club": "FC Lugano",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 841,
+          "name": "A. Grgić",
+          "player_id": 48520,
+          "rating": 7.45,
+          "rating_percentile": 98.2,
+          "raw_score": 92.4,
+          "value_index": 88.5,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 95.9,
+          "club": "Club Brugge KV",
+          "coverage": 1.0,
+          "league_id": "bel:pro-league",
+          "league_name": "Belgian Pro League",
+          "league_slug": "bel-pro-league",
+          "minutes": 623,
+          "name": "H. Vanaken",
+          "player_id": 78,
+          "rating": 7.69,
+          "rating_percentile": 98.5,
+          "raw_score": 83.3,
+          "value_index": 79.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 100.0,
+          "adjusted_score": 94.0,
+          "club": "FC Lugano",
+          "coverage": 1.0,
+          "league_id": "sui:super-league",
+          "league_name": "Swiss Super League",
+          "league_slug": "sui-super-league",
+          "minutes": 718,
+          "name": "U. Bislimi",
+          "player_id": 125708,
+          "rating": 7.22,
+          "rating_percentile": 80.4,
+          "raw_score": 88.5,
+          "value_index": 90.1,
+          "value_index_coverage": 1.0
+        },
+        {
+          "adjusted_percentile": 94.7,
+          "adjusted_score": 93.1,
+          "club": "Fredrikstad",
+          "coverage": 1.0,
+          "league_id": "nor:eliteserien",
+          "league_name": "Eliteserien",
+          "league_slug": "nor-eliteserien",
+          "minutes": 1258,
+          "name": "S. Leach Holm",
+          "player_id": 47776,
+          "rating": 7.09,
+          "rating_percentile": 84.1,
+          "raw_score": 92.2,
+          "value_index": 88.5,
+          "value_index_coverage": 1.0
+        }
+      ]
+    }
+  },
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "squad": [
+    {
+      "archetypes": {
+        "goalkeeper_shot_stopper": {
+          "coverage": 1.0,
+          "score": 64.0
+        }
+      },
+      "assists": 1,
+      "assists_p90": 0.11,
+      "cohort": {
+        "basis": "role_family",
+        "n": 11
+      },
+      "conceded_p90": 0.89,
+      "conversion_pct": null,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 83.33,
+      "goals": 0,
+      "goals_assists_p90": 0.11,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.0,
+      "key_passes_p90": 0.22,
+      "minutes": 810,
+      "name": "M. Müller",
+      "pass_completion_pct": 55.0,
+      "passes_completed_p90": 17.66,
+      "player_id": 1141,
+      "profile": {
+        "adjusted_score": null,
+        "id": "goalkeeper_shot_stopper",
+        "label": "Goalkeeper shot-stopper",
+        "raw_score": 64.0,
+        "score": 64.0
+      },
+      "rating": 7.34,
+      "rating_percentile": 54.5,
+      "role_family": "goalkeeper",
+      "role_label": "Goalkeeper",
+      "save_pct": 82.22,
+      "shots_p90": 0.0,
+      "tackles_p90": 0.11
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 31.0
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 22
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 33.33,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 60.98,
+      "goals": 1,
+      "goals_assists_p90": 0.16,
+      "goals_p90": 0.16,
+      "interceptions_p90": 1.61,
+      "key_passes_p90": 0.0,
+      "minutes": 560,
+      "name": "L. Mayo",
+      "pass_completion_pct": 83.0,
+      "passes_completed_p90": 32.95,
+      "player_id": 125695,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 31.0,
+        "score": 31.0
+      },
+      "rating": 5.98,
+      "rating_percentile": 13.6,
+      "role_family": "centre_back",
+      "role_label": "Centre back",
+      "save_pct": null,
+      "shots_p90": 0.48,
+      "tackles_p90": 1.61
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 52.5
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 22
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": null,
+      "dribble_success_pct": 100.0,
+      "dribbles_success_p90": 0.19,
+      "duel_win_pct": 64.29,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.86,
+      "key_passes_p90": 0.19,
+      "minutes": 483,
+      "name": "M. Knoester",
+      "pass_completion_pct": 88.0,
+      "passes_completed_p90": 43.78,
+      "player_id": 37253,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 52.5,
+        "score": 52.5
+      },
+      "rating": 6.9,
+      "rating_percentile": 45.5,
+      "role_family": "centre_back",
+      "role_label": "Centre back",
+      "save_pct": null,
+      "shots_p90": 0.0,
+      "tackles_p90": 1.49
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 37.3
+        }
+      },
+      "assists": 1,
+      "assists_p90": 0.23,
+      "cohort": {
+        "basis": "role_family",
+        "n": 22
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 33.33,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 60.71,
+      "goals": 1,
+      "goals_assists_p90": 0.47,
+      "goals_p90": 0.23,
+      "interceptions_p90": 1.88,
+      "key_passes_p90": 0.47,
+      "minutes": 384,
+      "name": "G. Molloy",
+      "pass_completion_pct": 81.0,
+      "passes_completed_p90": 38.16,
+      "player_id": 161806,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 37.3,
+        "score": 37.3
+      },
+      "rating": 5.83,
+      "rating_percentile": 9.1,
+      "role_family": "centre_back",
+      "role_label": "Centre back",
+      "save_pct": null,
+      "shots_p90": 0.7,
+      "tackles_p90": 2.11
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 40.9
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 22
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 76.32,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.41,
+      "key_passes_p90": 0.24,
+      "minutes": 382,
+      "name": "D. Happe",
+      "pass_completion_pct": 83.0,
+      "passes_completed_p90": 43.02,
+      "player_id": 18068,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 40.9,
+        "score": 40.9
+      },
+      "rating": 5.25,
+      "rating_percentile": 0.0,
+      "role_family": "centre_back",
+      "role_label": "Centre back",
+      "save_pct": null,
+      "shots_p90": 1.18,
+      "tackles_p90": 1.41
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 44.0
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 22
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 56.52,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.73,
+      "key_passes_p90": 0.0,
+      "minutes": 248,
+      "name": "J. Milne",
+      "pass_completion_pct": 82.0,
+      "passes_completed_p90": 52.97,
+      "player_id": 321860,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 44.0,
+        "score": 44.0
+      },
+      "rating": 5.52,
+      "rating_percentile": 0.0,
+      "role_family": "centre_back",
+      "role_label": "Centre back",
+      "save_pct": null,
+      "shots_p90": 1.81,
+      "tackles_p90": 1.09
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 1.0,
+          "score": 42.3
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 50.0,
+      "dribbles_success_p90": 1.29,
+      "duel_win_pct": 62.79,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.65,
+      "key_passes_p90": 0.59,
+      "minutes": 765,
+      "name": "N. Guinness-Walker",
+      "pass_completion_pct": 77.0,
+      "passes_completed_p90": 22.92,
+      "player_id": 108465,
+      "profile": {
+        "adjusted_score": null,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 42.3,
+        "score": 42.3
+      },
+      "rating": 6.99,
+      "rating_percentile": 68.4,
+      "role_family": "full_back",
+      "role_label": "Left back",
+      "save_pct": null,
+      "shots_p90": 0.35,
+      "tackles_p90": 2.24
+    },
+    {
+      "archetypes": {
+        "build_up_defender": {
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 1
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 37.5,
+      "dribbles_success_p90": 0.34,
+      "duel_win_pct": 52.38,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.25,
+      "key_passes_p90": 0.34,
+      "minutes": 792,
+      "name": "C. Cadden",
+      "pass_completion_pct": 73.0,
+      "passes_completed_p90": 27.29,
+      "player_id": 44921,
+      "profile": null,
+      "rating": 6.45,
+      "rating_percentile": null,
+      "role_family": "wing_back",
+      "role_label": "Right wing-back",
+      "save_pct": null,
+      "shots_p90": 0.45,
+      "tackles_p90": 1.82
+    },
+    {
+      "archetypes": {
+        "ball_winning_pivot": {
+          "coverage": 1.0,
+          "score": 85.8
+        },
+        "deep_lying_playmaker": {
+          "coverage": 1.0,
+          "score": 43.8
+        }
+      },
+      "assists": 1,
+      "assists_p90": 0.15,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 66.67,
+      "dribbles_success_p90": 0.31,
+      "duel_win_pct": 60.76,
+      "goals": 0,
+      "goals_assists_p90": 0.15,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.69,
+      "key_passes_p90": 0.46,
+      "minutes": 587,
+      "name": "A. Aremu",
+      "pass_completion_pct": 83.0,
+      "passes_completed_p90": 37.41,
+      "player_id": 57248,
+      "profile": {
+        "adjusted_score": null,
+        "id": "ball_winning_pivot",
+        "label": "Ball-winning pivot",
+        "raw_score": 85.8,
+        "score": 85.8
+      },
+      "rating": 6.16,
+      "rating_percentile": 5.3,
+      "role_family": "central_midfield",
+      "role_label": "Centre midfielder",
+      "save_pct": null,
+      "shots_p90": 0.46,
+      "tackles_p90": 4.14
+    },
+    {
+      "archetypes": {
+        "ball_winning_pivot": {
+          "coverage": 1.0,
+          "score": 31.9
+        },
+        "deep_lying_playmaker": {
+          "coverage": 1.0,
+          "score": 67.3
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 12.5,
+      "dribbles_success_p90": 0.2,
+      "duel_win_pct": 41.86,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.39,
+      "key_passes_p90": 2.95,
+      "minutes": 458,
+      "name": "S. Armstrong",
+      "pass_completion_pct": 87.0,
+      "passes_completed_p90": 53.0,
+      "player_id": 18945,
+      "profile": {
+        "adjusted_score": null,
+        "id": "deep_lying_playmaker",
+        "label": "Deep-lying playmaker",
+        "raw_score": 67.3,
+        "score": 67.3
+      },
+      "rating": 6.8,
+      "rating_percentile": 47.4,
+      "role_family": "central_midfield",
+      "role_label": "Centre midfielder",
+      "save_pct": null,
+      "shots_p90": 0.59,
+      "tackles_p90": 1.97
+    },
+    {
+      "archetypes": {
+        "ball_winning_pivot": {
+          "coverage": 1.0,
+          "score": 20.2
+        },
+        "deep_lying_playmaker": {
+          "coverage": 1.0,
+          "score": 58.7
+        }
+      },
+      "assists": 2,
+      "assists_p90": 0.4,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 16.67,
+      "dribble_success_pct": 75.0,
+      "dribbles_success_p90": 0.61,
+      "duel_win_pct": 36.11,
+      "goals": 1,
+      "goals_assists_p90": 0.61,
+      "goals_p90": 0.2,
+      "interceptions_p90": 0.2,
+      "key_passes_p90": 1.82,
+      "minutes": 446,
+      "name": "C. Ronan",
+      "pass_completion_pct": 83.0,
+      "passes_completed_p90": 35.68,
+      "player_id": 61178,
+      "profile": {
+        "adjusted_score": null,
+        "id": "deep_lying_playmaker",
+        "label": "Deep-lying playmaker",
+        "raw_score": 58.7,
+        "score": 58.7
+      },
+      "rating": 7.09,
+      "rating_percentile": 86.8,
+      "role_family": "central_midfield",
+      "role_label": "Centre midfielder",
+      "save_pct": null,
+      "shots_p90": 1.21,
+      "tackles_p90": 1.21
+    },
+    {
+      "archetypes": {
+        "ball_winning_pivot": {
+          "coverage": 1.0,
+          "score": 31.6
+        },
+        "deep_lying_playmaker": {
+          "coverage": 1.0,
+          "score": 35.8
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 33.33,
+      "dribbles_success_p90": 0.34,
+      "duel_win_pct": 47.62,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.68,
+      "key_passes_p90": 1.36,
+      "minutes": 265,
+      "name": "F. Marshall",
+      "pass_completion_pct": 71.0,
+      "passes_completed_p90": 17.84,
+      "player_id": 379662,
+      "profile": {
+        "adjusted_score": null,
+        "id": "deep_lying_playmaker",
+        "label": "Deep-lying playmaker",
+        "raw_score": 35.8,
+        "score": 35.8
+      },
+      "rating": 5.6,
+      "rating_percentile": 0.0,
+      "role_family": "central_midfield",
+      "role_label": "Centre midfielder",
+      "save_pct": null,
+      "shots_p90": 1.36,
+      "tackles_p90": 1.02
+    },
+    {
+      "archetypes": {
+        "ball_winning_pivot": {
+          "coverage": 1.0,
+          "score": 57.3
+        },
+        "deep_lying_playmaker": {
+          "coverage": 1.0,
+          "score": 44.1
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 19
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 50.0,
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 63.89,
+      "goals": 1,
+      "goals_assists_p90": 0.4,
+      "goals_p90": 0.4,
+      "interceptions_p90": 0.8,
+      "key_passes_p90": 0.8,
+      "minutes": 225,
+      "name": "B. Lyons",
+      "pass_completion_pct": 83.0,
+      "passes_completed_p90": 37.18,
+      "player_id": 45010,
+      "profile": {
+        "adjusted_score": null,
+        "id": "ball_winning_pivot",
+        "label": "Ball-winning pivot",
+        "raw_score": 57.3,
+        "score": 57.3
+      },
+      "rating": 7.21,
+      "rating_percentile": 94.7,
+      "role_family": "central_midfield",
+      "role_label": "Centre midfielder",
+      "save_pct": null,
+      "shots_p90": 0.8,
+      "tackles_p90": 2.4
+    },
+    {
+      "archetypes": {
+        "wide_dribbler": {
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 3
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 42.86,
+      "dribbles_success_p90": 1.38,
+      "duel_win_pct": 41.03,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.92,
+      "key_passes_p90": 0.92,
+      "minutes": 196,
+      "name": "L. Smith",
+      "pass_completion_pct": 69.0,
+      "passes_completed_p90": 18.69,
+      "player_id": 44982,
+      "profile": null,
+      "rating": 6.56,
+      "rating_percentile": null,
+      "role_family": "wide_midfield",
+      "role_label": "Right midfielder",
+      "save_pct": null,
+      "shots_p90": 1.38,
+      "tackles_p90": 2.76
+    },
+    {
+      "archetypes": {
+        "goal_contributor": {
+          "coverage": 1.0,
+          "score": 28.4
+        },
+        "wide_dribbler": {
+          "coverage": 1.0,
+          "score": 31.7
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 14
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 0.0,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 25.53,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.0,
+      "key_passes_p90": 1.41,
+      "minutes": 574,
+      "name": "T. Olusanya",
+      "pass_completion_pct": 79.0,
+      "passes_completed_p90": 8.55,
+      "player_id": 231195,
+      "profile": {
+        "adjusted_score": null,
+        "id": "wide_dribbler",
+        "label": "Wide dribbler",
+        "raw_score": 31.7,
+        "score": 31.7
+      },
+      "rating": 6.2,
+      "rating_percentile": null,
+      "role_family": "wide_forward",
+      "role_label": "Right winger",
+      "save_pct": null,
+      "shots_p90": 0.47,
+      "tackles_p90": 1.1
+    },
+    {
+      "archetypes": {
+        "goal_contributor": {
+          "coverage": 1.0,
+          "score": 39.1
+        },
+        "wide_dribbler": {
+          "coverage": 1.0,
+          "score": 41.1
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 14
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "dribble_success_pct": 42.86,
+      "dribbles_success_p90": 0.95,
+      "duel_win_pct": 60.61,
+      "goals": 0,
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.27,
+      "key_passes_p90": 0.63,
+      "minutes": 284,
+      "name": "Tony Yogane",
+      "pass_completion_pct": 71.0,
+      "passes_completed_p90": 9.45,
+      "player_id": 388510,
+      "profile": {
+        "adjusted_score": null,
+        "id": "wide_dribbler",
+        "label": "Wide dribbler",
+        "raw_score": 41.1,
+        "score": 41.1
+      },
+      "rating": 6.66,
+      "rating_percentile": null,
+      "role_family": "wide_forward",
+      "role_label": "Left winger",
+      "save_pct": null,
+      "shots_p90": 1.9,
+      "tackles_p90": 0.95
+    },
+    {
+      "archetypes": {
+        "goal_contributor": {
+          "coverage": 1.0,
+          "score": 51.3
+        }
+      },
+      "assists": 2,
+      "assists_p90": 0.25,
+      "cohort": {
+        "basis": "role_family",
+        "n": 5
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 19.05,
+      "dribble_success_pct": 66.67,
+      "dribbles_success_p90": 0.5,
+      "duel_win_pct": 46.58,
+      "goals": 4,
+      "goals_assists_p90": 0.75,
+      "goals_p90": 0.5,
+      "interceptions_p90": 0.13,
+      "key_passes_p90": 0.88,
+      "minutes": 719,
+      "name": "K. Nisbet",
+      "pass_completion_pct": 71.0,
+      "passes_completed_p90": 9.69,
+      "player_id": 97896,
+      "profile": {
+        "adjusted_score": null,
+        "id": "goal_contributor",
+        "label": "Goal contributor",
+        "raw_score": 51.3,
+        "score": 51.3
+      },
+      "rating": 7.23,
+      "rating_percentile": null,
+      "role_family": "centre_forward",
+      "role_label": "Centre forward",
+      "save_pct": null,
+      "shots_p90": 2.63,
+      "tackles_p90": 0.75
+    },
+    {
+      "archetypes": {
+        "goal_contributor": {
+          "coverage": 1.0,
+          "score": 59.2
+        }
+      },
+      "assists": 0,
+      "assists_p90": 0.0,
+      "cohort": {
+        "basis": "role_family",
+        "n": 5
+      },
+      "conceded_p90": 0.0,
+      "conversion_pct": 28.57,
+      "dribble_success_pct": 33.33,
+      "dribbles_success_p90": 0.35,
+      "duel_win_pct": 49.15,
+      "goals": 2,
+      "goals_assists_p90": 0.71,
+      "goals_p90": 0.71,
+      "interceptions_p90": 0.35,
+      "key_passes_p90": 0.71,
+      "minutes": 255,
+      "name": "A. Mouloua",
+      "pass_completion_pct": 43.0,
+      "passes_completed_p90": 9.41,
+      "player_id": 303519,
+      "profile": {
+        "adjusted_score": null,
+        "id": "goal_contributor",
+        "label": "Goal contributor",
+        "raw_score": 59.2,
+        "score": 59.2
+      },
+      "rating": 6.77,
+      "rating_percentile": null,
+      "role_family": "centre_forward",
+      "role_label": "Centre forward",
+      "save_pct": null,
+      "shots_p90": 2.47,
+      "tackles_p90": 4.24
+    }
+  ],
+  "state": "full",
+  "value_model": {
+    "anchor_count": 4,
+    "coefficient_vector": null,
+    "coefficients": null,
+    "gate": {
+      "age_bands": 3,
+      "age_pass": true,
+      "anchor_count": 4,
+      "league_tiers": 1,
+      "min_age_bands": 3,
+      "min_anchors": 60,
+      "min_league_tiers": 3,
+      "min_role_anchors": 5,
+      "passed": false,
+      "role_counts": {
+        "DEF": 1,
+        "FWD": 1,
+        "MID": 2
+      },
+      "role_pass": false,
+      "tier_pass": false,
+      "top_tier_pass": true,
+      "top_tier_required": 0.2,
+      "top_tier_share": 1.0
+    },
+    "in_sample_mae": null,
+    "index": {
+      "age_curve": [
+        {
+          "factor": 0.5,
+          "max_age": 18
+        },
+        {
+          "factor": 0.7,
+          "max_age": 20
+        },
+        {
+          "factor": 0.9,
+          "max_age": 23
+        },
+        {
+          "factor": 1.0,
+          "max_age": 27
+        },
+        {
+          "factor": 0.8,
+          "max_age": 29
+        },
+        {
+          "factor": 0.55,
+          "max_age": 31
+        },
+        {
+          "factor": 0.3,
+          "max_age": 120
+        }
+      ],
+      "min_weight_coverage": 0.7,
+      "minutes_full": 1800,
+      "weights": {
+        "age": 0.15,
+        "minutes": 0.15,
+        "performance": 0.55,
+        "profile": 0.15
+      }
+    },
+    "interval": 0.8,
+    "limitations": [
+      "The GBP band is fitted only from a public-source anchor register; it is not a fee or a market quote.",
+      "Contract length, wages, release clauses and agent fees are unknown.",
+      "The performance input is the league-adjusted scouting percentile; the league adjustment is an empirical model."
+    ],
+    "loocv_mae": null,
+    "max_loocv_error": null,
+    "r2": null,
+    "residual_sd": null,
+    "sample": null,
+    "state": "awaiting_anchors",
+    "usable_anchors": 4
+  }
+}

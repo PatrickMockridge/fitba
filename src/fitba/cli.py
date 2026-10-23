@@ -12,6 +12,13 @@ import typer
 from rich.console import Console
 from rich.table import Table as RichTable
 
+from fitba.analytics.scouting_value import (
+    ANCHORS_PATH,
+    anchor_report,
+    fit_value_model,
+    seed_anchors_from_transfers,
+    write_anchors,
+)
 from fitba.analytics.tables import build_tables
 from fitba.ingest.availability import (
     load_availability_meta,
@@ -36,6 +43,15 @@ from fitba.ingest.matchday import refresh_matchday
 from fitba.ingest.matchday import status as matchday_status
 from fitba.ingest.news import ingest_news
 from fitba.ingest.runner import ingest_season, load_matches
+from fitba.ingest.scouting import (
+    ingest_pool as ingest_scouting_pool,
+)
+from fitba.ingest.scouting import (
+    ingest_roles as ingest_scouting_roles,
+)
+from fitba.ingest.scouting import (
+    scouting_status as load_scouting_status,
+)
 from fitba.ingest.squad import ingest_squad
 from fitba.ingest.transfer_audit import run_transfer_audit
 from fitba.ingest.transfers import ingest_transfer_history, ingest_transfers
@@ -50,6 +66,11 @@ from fitba.warehouse.build import build_warehouse
 
 app = typer.Typer(no_args_is_help=True, help="Scottish football data, Aberdeen-first.")
 console = Console()
+scouting_app = typer.Typer(
+    no_args_is_help=True,
+    help="Scouting player pool and starting-XI role backfill.",
+)
+app.add_typer(scouting_app, name="scouting")
 
 
 def _parse_seasons(value: str) -> list[str]:
@@ -668,6 +689,155 @@ def career_status() -> None:
         console.print(f"unknown reasons: {meta['unknown_reasons']}")
     if meta.get("errors"):
         console.print(f"warnings: {len(meta['errors'])}")
+
+
+@scouting_app.command("pool")
+def scouting_pool(
+    season: Annotated[str, typer.Option(help="current or a season like 2025-26")] = "current",
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+    leagues: Annotated[
+        str, typer.Option(help="all or comma-separated canonical league ids")
+    ] = "all",
+) -> None:
+    """Fetch season player statistics for the scouting pool."""
+    label = current_season() if season == "current" else season
+    meta = ingest_scouting_pool(season=label, refresh=refresh, league_ids=leagues)
+    totals = meta["totals"]
+    console.print(
+        f"scouting pool {meta['season']}: {totals['rows']} players, "
+        f"{totals['rated']} rated, {totals['searchable']}/{totals['leagues']} leagues searchable"
+    )
+    failed = [item for item in meta["leagues"] if item["status"] == "error"]
+    for item in failed:
+        console.print(f"  [red]{item['id']}[/red]: {item['error']}")
+
+
+@scouting_app.command("roles")
+def scouting_roles(
+    season: Annotated[str, typer.Option(help="current or a season like 2025-26")] = "current",
+    budget: Annotated[int, typer.Option(help="Network request budget for this run")] = 6500,
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+    leagues: Annotated[
+        str, typer.Option(help="all or comma-separated canonical league ids")
+    ] = "all",
+) -> None:
+    """Fetch played-fixture lineups and derive starting-XI role families."""
+    label = current_season() if season == "current" else season
+    state = ingest_scouting_roles(
+        season=label,
+        budget=budget,
+        refresh=refresh,
+        league_ids=leagues,
+    )
+    totals = state["totals"]
+    console.print(
+        f"scouting roles {state['season']}: {totals['lineups_fetched']}/"
+        f"{totals['played']} played fixtures, {totals['role_players']} players, "
+        f"{totals['requests']}/{totals['budget']} requests"
+    )
+    if totals.get("stopped_on_budget"):
+        console.print("[yellow]stopped on the request budget; rerun to continue[/yellow]")
+    for item in state["leagues"]:
+        if item.get("error"):
+            console.print(f"  [red]{item['id']}[/red]: {item['error']}")
+        if item.get("unmapped_formations"):
+            console.print(
+                f"  [yellow]{item['id']}[/yellow] unmapped: {item['unmapped_formations']}"
+            )
+
+
+@scouting_app.command("values")
+def scouting_values(
+    status: Annotated[bool, typer.Option("--status", help="Show the anchor gate")] = False,
+    validate_anchors: Annotated[
+        bool, typer.Option("--validate", help="Validate every anchor")
+    ] = False,
+    fit: Annotated[
+        bool, typer.Option("--fit", help="Fit the value model if the gate passes")
+    ] = False,
+    seed: Annotated[
+        bool,
+        typer.Option(
+            "--seed", help="Seed the diagnostic Aberdeen spine from the transfer register"
+        ),
+    ] = False,
+) -> None:
+    """Inspect or fit the public-source value anchors."""
+    if seed:
+        anchors = seed_anchors_from_transfers()
+        write_anchors(anchors)
+        console.print(f"seeded {len(anchors)} diagnostic anchors -> {ANCHORS_PATH}")
+        return
+    action = "validate" if validate_anchors else "fit" if fit else "status"
+    report = anchor_report()
+    gate = report["gate"]
+    if action == "validate":
+        if report["invalid"]:
+            for item in report["invalid"]:
+                console.print(f"  [red]{item['player_key']}[/red]: {item['errors']}")
+            raise typer.Exit(code=1)
+        console.print(f"value anchors valid: {report['usable']}/{report['anchors']}")
+        return
+    if action == "fit":
+        model = fit_value_model()
+        console.print(
+            f"value model: {model['state']} · anchors {model['usable_anchors']} · "
+            f"sample {model['sample']} · LOOCV MAE {model['loocv_mae']}"
+        )
+        if model["state"] != "ready":
+            console.print(
+                "  gate: "
+                f"anchors {gate['anchor_count']}/{gate['min_anchors']}, "
+                f"roles {gate['role_pass']}, tiers {gate['league_tiers']}/"
+                f"{gate['min_league_tiers']}, age bands {gate['age_bands']}/"
+                f"{gate['min_age_bands']}, top-tier share {gate['top_tier_share']}"
+            )
+        return
+    console.print(
+        f"value anchors: {report['usable']} usable / {report['anchors']} · "
+        f"gate {'passed' if gate['passed'] else 'not met'}"
+    )
+    console.print(
+        f"  roles {gate['role_counts']} · tiers {gate['league_tiers']}/"
+        f"{gate['min_league_tiers']} · age bands {gate['age_bands']}/"
+        f"{gate['min_age_bands']} · top-tier share {gate['top_tier_share']}"
+    )
+    if report["invalid"]:
+        console.print(f"  invalid anchors: {len(report['invalid'])}")
+
+
+@scouting_app.command("status")
+def scouting_status_command() -> None:
+    """Show the local pool and role-backfill coverage."""
+    state = load_scouting_status()
+    pool = state.get("pool")
+    roles = state.get("roles")
+    if not pool:
+        console.print("scouting pool has not run")
+    else:
+        totals = pool.get("totals") or {}
+        console.print(
+            f"pool {pool.get('season')}: {totals.get('rows', 0)} players, "
+            f"{totals.get('rated', 0)} rated, "
+            f"{totals.get('searchable', 0)}/{totals.get('leagues', 0)} searchable"
+        )
+    if not roles:
+        console.print("scouting roles have not run")
+        return
+    totals = roles.get("totals") or {}
+    console.print(
+        f"roles {roles.get('season')}: {totals.get('lineups_fetched', 0)}/"
+        f"{totals.get('played', 0)} played fixtures, "
+        f"{totals.get('role_players', 0)} players, "
+        f"{totals.get('requests', 0)} requests"
+    )
+    unmapped = {
+        item["id"]: item["unmapped_formations"]
+        for item in roles.get("leagues") or []
+        if item.get("unmapped_formations")
+    }
+    if unmapped:
+        console.print(f"unmapped formations: {unmapped}")
 
 
 if __name__ == "__main__":

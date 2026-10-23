@@ -1,0 +1,40 @@
+{
+  "coverage": {
+    "fixtures_played": 0,
+    "lineups_fetched": 0,
+    "note": "The provider returns no player season statistics for this league.",
+    "players": 0,
+    "rated": 0,
+    "role_coverage": 0.0,
+    "role_players": 0,
+    "with_minutes_450": 0
+  },
+  "generated_at": "2026-10-23T14:41:26+00:00",
+  "league": {
+    "country": "Scotland",
+    "id": "sco:league-one",
+    "name": "Scottish League One",
+    "provider_league_id": 183,
+    "slug": "sco-league-one",
+    "tier": 3
+  },
+  "limitations": [
+    "Provider ratings are opaque and not comparable across leagues.",
+    "Percentiles are within this league and role cohort; no cross-league ranking.",
+    "No contracts, wages, fees or release clauses are claimed.",
+    "No xG/xA, progressive passes, carries, pressures, aerial wins or crosses are in the feed.",
+    "Role families come from starting-XI grids; leagues without grids use the provider group."
+  ],
+  "min_minutes": 450,
+  "players": [],
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "sources": [
+    {
+      "id": "api_football",
+      "name": "API-Football",
+      "url": "https://www.api-football.com"
+    }
+  ],
+  "state": "no_player_stats"
+}

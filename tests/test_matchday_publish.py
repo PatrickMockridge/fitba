@@ -136,6 +136,7 @@ def test_document_builds_and_validates(monkeypatch, tmp_path):
         lambda snapshot_dir=None: dict(FIXTURE),
     )
     monkeypatch.setattr("fitba.publish.matchday.load_meta", lambda snapshot_dir=None: dict(META))
+    monkeypatch.setattr("fitba.publish.matchday._age_hours", lambda value: 1.0)
     document = build_matchday_payload(
         season="2026-27",
         generated_at="2026-10-22T10:00:00+00:00",

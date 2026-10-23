@@ -1,0 +1,38 @@
+# Scouting value configuration.
+#
+# The value index is a performance/league/age/minutes ordering, NOT a transfer
+# value. The GBP band is fitted only when the public-source anchor register
+# passes the fit gate below.
+version: 1
+reviewed: 2026-10-23
+
+index:
+  weights:
+    performance: 0.55
+    age: 0.15
+    minutes: 0.15
+    profile: 0.15
+  # Absolute weight that must be present before an index is published.
+  min_weight_coverage: 0.70
+  # A full season of minutes for reliability purposes.
+  minutes_full: 1800
+  age_curve:
+    - { max_age: 18, factor: 0.50 }
+    - { max_age: 20, factor: 0.70 }
+    - { max_age: 23, factor: 0.90 }
+    - { max_age: 27, factor: 1.00 }
+    - { max_age: 29, factor: 0.80 }
+    - { max_age: 31, factor: 0.55 }
+    - { max_age: 120, factor: 0.30 }
+
+fit:
+  # Do not lower these to force a GBP publication.
+  min_anchors: 60
+  min_role_anchors: 5
+  min_league_tiers: 3
+  min_age_bands: 3
+  top_tier_share: 0.20
+  interval: 0.80
+  min_minutes: 450
+  # A value anchor must be within this many days of its performance season.
+  max_value_age_days: 550

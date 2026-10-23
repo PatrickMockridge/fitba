@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getFixtureIndex, getHistory, getSquad } from "@/lib/data";
+import {
+  getFixtureIndex,
+  getHistory,
+  getScoutingCoverage,
+  getSquad,
+} from "@/lib/data";
 
 export const dynamic = "force-static";
 
@@ -13,6 +18,8 @@ const STATIC_ROUTES = [
   "/analysis/xg/",
   "/squad/",
   "/players/",
+  "/scouting/",
+  "/scouting/search/",
   "/recruitment/",
   "/transfers/",
   "/loans/",
@@ -42,6 +49,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
   for (const player of getSquad()?.players ?? []) {
     if (player.href) urls.add(`${SITE_URL}${player.href}`);
+  }
+  for (const league of getScoutingCoverage()?.leagues ?? []) {
+    urls.add(`${SITE_URL}${league.href}`);
   }
   return [...urls].sort().map((url) => ({ url, lastModified: undefined }));
 }

@@ -1,127 +1,200 @@
 # Scouting method
 
-**Status:** method reference. Last reviewed 2026-10-21.
+**Status:** live. Last reviewed 2026-10-23.
 
-The scouting engine is deliberately explainable. It does not produce a single
-"good player" verdict; it shows the components, the coverage and the uncertainty.
+The scouting section is deliberately explainable. It does not produce a single
+"good player" verdict or a target list. It shows the components, the cohort, the
+coverage and the uncertainty. Every number is registered in
+`config/metrics.yaml` and checked by `scripts/check_scouting.py`.
 
-## Universe and positions
+## Layer model
 
-- Scottish pyramid: all four tiers.
-- European pool: comparable markets plus fringe leagues Aberdeen have recruited
-  from, including Slovenia, Albania, Hungary, Eastern Europe and Switzerland.
-- Position groups are role families from the starting-XI team sheet:
-  `GK`, `CB`, `FB`, `WB`, `DM`, `CM`, `AM`, `WM`, `WF`, `ST`. See
-  [roles.md](roles.md).
-- A player is compared within their role family, not across a generic “DEF” or
-  “MID” pool. A left back is compared with left backs, a centre back with centre
-  backs, a winger with wingers.
-- Multi-position players get separate percentiles per role family; they are
-  never averaged across families. A player without a starting-XI role is
-  excluded from a role cohort and labelled, not silently grouped into the
-  nearest bucket.
+1. **Layer 0 — internal first.** The verified availability ledger is read before
+   the market. A player with first-choice evidence in the most recent season
+   with at least 450 minutes (10 starts or 900 minutes) is an internal future
+   option. One verified first-choice absentee in a below-cohort family is read as
+   **cover**; two or more is **hold**. A player absent from the provider squad
+   snapshot but present in the official ledger keeps a role only from prior
+   starting-XI evidence, never from a generic position.
+2. **Layer 1 — measured gaps.** Aberdeen's competitive provider rating by role
+   family is compared with the other Scottish Premiership players in the same
+   role family. Aberdeen are excluded from their own cohort.
+3. **Layer 2 — profiles.** Six archetypes show the types of player that add
+   options. The double-pivot card is a labelled hypothesis, not a causal claim.
 
-## Features
+## Universe
 
-The feature registry is in `config/scouting/features.yaml`; the group weights are
-in `config/scouting/weights.yaml`. Each feature records its required capability
-(`match` or `event`) and direction.
+`config/scouting/leagues.yaml` is the universe. It includes the Scottish
+pyramid, England's Championship, League One and the explicitly added **League
+Two**, and the configured European markets. Provider ids and coverage flags are
+recorded per league.
 
-If a feature is unavailable it is removed and the remaining weights are
-renormalised. If more than **40% of the absolute weight** is missing, no composite
-is produced; the player is marked "insufficient data".
+At the 2026-10-23 sync, 33 leagues are enabled. Twenty-five return searchable
+player statistics; seven return none and are shown as honest empty pages; one
+(Albania) returns a single unrated row and is labelled partial:
 
-## Shrinkage
+- Scottish Championship, League One and League Two;
+- Bulgarian First Professional League, Icelandic Besta deild, Slovenian
+  PrvaLiga and NIFL Premiership.
 
-Small samples are shrunk toward the positional mean:
+That is a provider fact, not a zero. The coverage table on `/scouting/` reports
+it league by league.
 
-- binomial rates: `(s + alpha) / (n + alpha + beta)` with an empirical prior;
-- count rates: `(c + mu*k) / (exposure + k)`, with `k` around 450 minutes;
-- goals over xG: shrunk over 900 minutes.
+## Roles and cohorts
 
-This prevents a few good matches from producing an extreme percentile.
+A player's role family comes from the starting-XI grid in `/fixtures/lineups`:
+the shape is derived from the grid with `shape_from_grid()`, then the slot maps
+through `config/roles.yaml`. A formation string is a fallback when the grid is
+incomplete. A team sheet with neither a formation nor a grid is marked
+`role_unavailable` and falls back to the provider position group (GK/DEF/MID/
+FWD); the page says so. Nothing is inferred from a generic position, a shirt
+number or the bench. The goalkeeper `pos=G` fallback is the only exception.
 
-## Normalisation
+A player's primary family is the family with the most starts, then minutes, then
+config order. `role_family_share` is the share of role starts in that family; a
+share below 0.6 is labelled `mixed`.
 
-Within each `(league, season, position group)` cell:
+Percentiles are within `(league, season, role family)`, at 450+ minutes, with a
+minimum cohort of 15 (8 for goalkeepers). When the role cohort is too small, the
+page may use the provider position group and labels `cohort_basis:
+provider_group`. It never pools cohorts across leagues.
 
-1. require at least 25 players with at least 450 minutes, or fall back to a
-   broader cell;
-2. winsorise at the 1st/99th percentile;
-3. compute a robust z-score using median and MAD, with defined fallbacks for zero
-   MAD;
-4. shrink the z-score toward the positional mean by effective minutes;
-5. composite `Q = 100 * Phi(z_composite)`.
+Provider ratings are opaque and league-relative, so the page also publishes an
+**empirical Premiership-equivalent percentile**. It maps a player's rating into
+the actual Premiership cohort distribution using the observed league/role
+spread; the raw rating's level carries the league's level, and the Premiership
+is the identity. A profile score is a within-league percentile, so the profile
+alignment also adds the observed league/role location. This is a model, not a
+measured equivalence; the raw and adjusted values are shown side by side and the
+per-league median, scale, offset, cohort size and basis are published in the
+coverage document.
 
-Raw league percentile and league-adjusted percentile are both shown.
+`/scouting/search/` is the full search across every league in the pool. It
+shows the league, club and nationality beside every row and filters by league,
+so the comparison boundary is explicit. The default sort is a league mix, not a
+cross-league quality rank; the adjusted percentile is available as a sort and
+is labelled as a model.
 
-## League strength
+## Per-90 and position-specific output
 
-Measured Elo is preferred; otherwise a documented prior from
-`config/scouting/leagues.yaml` is used. The adjustment is a z-score offset by
-feature family, not a blanket multiplier. The confidence flag is `high` when Elo
-is available and `low` for a prior. A sensitivity check at ±50% of the prior is
-shown rather than hiding the assumption.
+- per-90: `stat × 90 / minutes`;
+- completed passes: `passes.total × passes.accuracy / 100`;
+- duel and dribble percentages divide by the provider attempts;
+- conversion: `goals / shots.total`;
+- save percentage: `saves / (saves + conceded)`.
 
-## Aberdeen style and fit
+The feed does **not** carry forward or progressive passes, carries, pressures,
+aerial wins, crosses, xG or xA. Those are shown as unavailable, not inferred.
+For defenders, the passing and retention measures are the available proxy for
+build-up and press resistance; they are not a complete answer.
 
-The team style vector covers possession, directness, pressing, line height,
-width, tempo, crossing, build-up and transition. The recruitment target is:
+## Archetypes
+
+`config/scouting/archetypes.yaml` defines six profiles:
+
+| Profile | Families | Inputs |
+|---|---|---|
+| Ball-winning pivot | DM, CM | tackles/90, interceptions/90, duels won %, pass completion |
+| Deep-lying playmaker | DM, CM | completed passes/90, pass completion, key passes/90, assists/90 |
+| Build-up defender | CB, FB, WB | completed passes/90, pass completion, key passes/90, successful dribbles/90 |
+| Wide dribbler | WM, WF, AM | successful dribbles/90, dribble success %, key passes/90, G+A/90 |
+| Goal contributor | ST, WF, AM | G+A/90, shots/90, conversion % |
+| Goalkeeper shot-stopper | GK | save %, goals conceded/90 |
+
+Each score is a weighted composite of winsorised robust z-scores within the
+league and role cohort, shrunk by `minutes / (minutes + 450)` and mapped to
+0–100 with the normal CDF. Missing features are dropped and the remaining
+absolute weights renormalised. If less than 70% of the absolute weight is
+present, the score is null, not zero.
+
+Layer 2 and the pivot card use the top league-adjusted profiles across every
+league, not the Premiership only. Each leader shows the league and club, the raw
+score and the adjusted score. The pivot card shows the current squad's best
+ball-winner and deep playmaker and the all-league profiles. It answers "what
+profile is missing?", not "would this signing reduce goals?".
+
+## Value
+
+The **value index** is a 0–100 scouting ordering, not a transfer value:
 
 ```text
-target_style = 0.6 * current_style + 0.4 * config_intent
+value_index = 100 × (
+  0.55 × adjusted_percentile/100
++ 0.15 × age_curve
++ 0.15 × minutes_reliability
++ 0.15 × profile_fit
+)
 ```
 
-`config_intent` is set by the analyst in `config/clubs/aberdeen.yaml`, not
-inferred. Player style similarity is `50 + 50 * cosine(player_z, target_z)`,
-damped by the style confidence.
+The weights are renormalised over available components; below 70% coverage the
+index is null. The age curve peaks at 24–27; minutes reliability is
+`min(1, minutes / 1800)`; profile fit is the best adjusted profile / 100. It is
+labelled **"Scouting value index — not a transfer value"** everywhere and never
+uses a currency symbol.
 
-The fit score is a weighted, explainable composite:
+A GBP band is fitted only from the public-source anchor register in
+`reference/scouting_values.yaml`:
 
 ```text
-0.32 quality + 0.18 style + 0.16 squad need + 0.12 budget
-+ 0.10 age + 0.07 reliability + 0.05 availability
-- explicit penalties
+log(value_gbp) = b0 + b1×adjusted_percentile/100 + b2×age + b3×age²
+               + b4×log(minutes) + role-group dummies
 ```
 
-Hard filters (known fee above ceiling, age outside band, work-permit
-ineligibility) are separate from the score. Unknowns never hard-exclude; they
-lower confidence and are flagged.
+Each anchor needs a contemporaneous performance snapshot, an allowed source URL
+and a verified date. The gate requires 60 usable anchors, at least 5 per broad
+role group, at least 3 league tiers, at least 3 age bands and at least 20% in
+the top two tiers. If the gate is not met, the state is `awaiting_anchors`, the
+GBP band is null and no currency value is published.
 
-## Budget
+The GBP band is deferred for now. The value index is live; the anchor register
+and fit gate are scaffolded (four diagnostic Aberdeen-market anchors) and will be
+revisited with a proper public-source curation pass. No GBP value is published
+until then.
 
-- `config/clubs/aberdeen.yaml` holds the fee ceiling, wage ceiling and age band.
-- Default mode is fee-only; individual Scottish wages are not public.
-- Market values are curated and cited in `reference/market_values.yaml`; the app
-  publishes value bands and the fit score, not a raw market-value feed.
-- Loan/agent fees and sell-ons are flagged unknown.
+## Availability
 
-## Reliability and output
+The curated ledger in `reference/availability.yaml` is primary. An entry needs
+an official AFC source URL and a `verified_at` date; stale entries become
+unknown for selection but keep their ledger status visible. The provider injury
+boolean is not team news, and minutes are never fitness evidence.
 
-- Headline shortlist: at least 900 effective minutes and fit confidence ≥ 0.5.
-- 450–900 minutes: visibly flagged watchlist.
-- Below 450: no percentile, only raw stats and "insufficient data".
-- Every card shows coverage tier, minutes, league, value band, confidence and a
-  component-by-component contribution breakdown.
-- The output is never presented as an Aberdeen FC recommendation.
+At this review, two entries are verified: Kristers Tobers (out, official club
+press conference 2026-10-08) and Mats Knoester (available, official club
+interview 2026-10-16, confidence `reported`). Every other player is unknown.
 
-## Rumour signal overlay
+## Contracts
 
-The scouting board carries a labelled **advisory overlay** derived from the
-curated rumour register (see [rumours.md](rumours.md)). It shows the weighted
-position, age, league and value mix of active links, with an explicit sample size
-and a low-confidence flag below five rows.
+The licensed feed has no contract expiry field. The curated
+`reference/contracts.yaml` is empty and every entry would need a public source.
+No contract column, filter or ranking input is published. Wages, fees, sell-on
+terms and release clauses are not claimed.
 
-The overlay is not part of the fit score and never re-ranks a player. It answers a
-different question: "what profile are the public links pointing at?" The
-data-driven fit remains primary, and an opinion card that argues for a different
-profile must cite the rumour ids and the measured comparison it relies on.
+## Commands
+
+```bash
+uv run fitba scouting pool  --season current
+uv run fitba scouting roles --season current --budget 6500
+uv run fitba scouting status
+uv run fitba scouting values --status
+uv run fitba scouting values --validate
+uv run fitba scouting values --fit
+uv run fitba publish --season current --profile public --require-validation
+uv run python scripts/check_scouting.py
+```
+
+The pool sync caches every provider response. The role backfill is resumable and
+stops cleanly at the request budget; a full run is about 2,750 played fixtures
+and fits inside the Pro daily allowance. Raw responses stay in `.cache` and are
+never published.
 
 ## What the method does not know
 
-- The club's internal rankings, wage structure and sell-on terms.
-- Individual wages and agent fees.
-- Event coordinates, xG or tracking unless a licensed event source is added.
-- Lower-tier player detail where no licensed source exists.
-
-Those gaps are labelled, not filled.
+- The club's internal rankings, wage structure, sell-on terms or contract
+  details.
+- Individual wages, agent fees or release clauses.
+- Event coordinates, xG/xA, progressive passes, carries, pressures or aerial
+  data.
+- Lower-tier player detail where the provider returns no statistics.
+- Whether a profile would change results. The data can show a gap, not a cause.
+- A calibrated transfer value. The public-source anchor register is the missing
+  input; until it passes the gate, only the value index is published.

@@ -2,7 +2,7 @@
   "availability": {
     "provider_snapshot": "unavailable",
     "reason": "provider_declares_injuries_false",
-    "status": "unavailable"
+    "status": "partial"
   },
   "excluded": [
     {
@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-23T00:51:34+00:00",
+  "generated_at": "2026-10-23T14:41:26+00:00",
   "layers": [
     {
       "fallback": [
@@ -76,7 +76,7 @@
           "rows": null,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -206,7 +206,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "current season",
       "sources": [
@@ -216,7 +216,7 @@
           "rows": 144,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "partial",
@@ -264,7 +264,7 @@
           "rows": null,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -294,7 +294,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "Aberdeen fixtures, current season",
       "sources": [
@@ -304,7 +304,7 @@
           "rows": 461,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -335,7 +335,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "Premiership, current season",
       "sources": [
@@ -345,7 +345,7 @@
           "rows": 360,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "partial",
@@ -353,6 +353,46 @@
         "/themes/",
         "/squad/",
         "/matchday/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "player_season_statistics",
+        "provider_rating",
+        "lineups",
+        "starting_xi_grids"
+      ],
+      "gate": null,
+      "id": "scouting_pool",
+      "kind": "provider",
+      "label": "Scouting player pool and starting-XI roles",
+      "note": "Season player statistics and starting-XI lineups for the configured scouting universe. Seven enabled leagues return no player season statistics, and several leagues omit the formation and grid. Coverage is labelled per league; nothing is zero-filled or inferred.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "configured scouting leagues, current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/scouting/",
+        "/sources/",
+        "/methodology/"
       ]
     },
     {
@@ -374,7 +414,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "Aberdeen fixtures with lineups and events",
       "sources": [
@@ -384,7 +424,7 @@
           "rows": 461,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -416,7 +456,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "current season",
       "sources": [
@@ -426,7 +466,7 @@
           "rows": 38,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -509,7 +549,7 @@
         "lane": "derived_display",
         "name": "API-Football",
         "url": "https://www.api-football.com",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-23"
       },
       "scope": "Aberdeen full transfer history",
       "sources": [
@@ -519,7 +559,7 @@
           "rows": 170,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "active",
@@ -659,7 +699,7 @@
         {
           "name": "Aberdeen FC news",
           "role": "primary",
-          "rows": 0,
+          "rows": 2,
           "source_id": "afc_news",
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
@@ -670,7 +710,7 @@
           "rows": null,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-23"
         }
       ],
       "status": "partial",
@@ -917,13 +957,14 @@
       "attribution": null,
       "id": "api_football",
       "lane": "derived_display",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-23",
       "name": "API-Football",
       "primary_layers": [
         "cup_fixtures",
         "event_layer",
         "lineups_roles",
         "player_match_stats",
+        "scouting_pool",
         "squad_identity",
         "transfers_candidate"
       ],
@@ -954,7 +995,7 @@
         "availability",
         "news"
       ],
-      "rows": 12,
+      "rows": 14,
       "rows_basis": "primary contributions only",
       "url": "https://www.afc.co.uk/en/news"
     },

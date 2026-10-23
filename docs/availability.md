@@ -21,6 +21,12 @@ At the last check API-Football reports `injuries=false` for Scottish 2026, so
 the provider snapshot is `unavailable`. The app says so; it does not advertise
 a feed that returns nothing.
 
+At 2026-10-23 the curated ledger has two verified entries: Kristers Tobers
+(`out`, official AFC press conference of 2026-10-08) and Mats Knoester
+(`available`, official AFC interview of 2026-10-16, confidence `reported`). The
+scouting layer reads them through the same resolved availability payload; it does
+not keep a second ledger.
+
 ## Ledger
 
 `reference/availability.yaml`:

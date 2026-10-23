@@ -84,9 +84,9 @@ The aggregates are `player_roles.parquet` (player/team/season/role) and
 Starts and Sub rather than a single “apps” column; the player profile shows the
 minutes split by competition.
 
-The current feed has a formation grid for 13 of 15 Aberdeen matches. The two
-early League Cup matches have no grid; their starts and minutes are still
-counted, but their roles are unknown. That is reported, not filled.
+At the last check the feed has a formation grid for 13 of 15 Aberdeen matches.
+The two fixtures without a grid still count their starts and minutes, but their
+roles are unknown. That is reported, not filled.
 
 ## Shape and balance
 

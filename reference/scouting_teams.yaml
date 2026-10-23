@@ -1,0 +1,8 @@
+# Display-name overrides for clubs in the scouting pool.
+#
+# The pool covers clubs outside the SPFL. Their names are display strings, not
+# table identities: no competition table is built from them. The resolver tries
+# reference/teams.yaml first, then this file, then the provider name.
+teams:
+  - provider_name: "FC ST. Gallen"
+    display_name: "FC St. Gallen"

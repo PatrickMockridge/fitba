@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:cb2df09242cc353078a4da210a451fb6f83f71a5500044fd12bae59e05245dba",
+  "checksum": "sha256:da692a1bf94a7bab286db092470e8b9beedad83ec23b5c34154d99d62896de06",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2841,6 +2841,394 @@
       "verification": "provenance_only",
       "verification_checks": [],
       "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "mixed",
+      "confidence_rule": "Published only where the provider value exists and the player has at least 450 minutes; cohorts must meet their minimum or the percentile is null. Unknown is never zero.",
+      "coverage_tier": "match",
+      "denominator": "minutes; passes_total; duels_total; dribbles_attempts; shots_total; saves + conceded",
+      "description": "One row per ranked player per league with provider season statistics, within-league role percentiles and profile scores.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/"
+      ],
+      "fields": [
+        "players",
+        "minutes",
+        "appearances",
+        "age",
+        "rating",
+        "rating_percentile",
+        "cohort_n",
+        "role_family_share",
+        "goals_p90",
+        "assists_p90",
+        "goals_assists_p90",
+        "shots_p90",
+        "dribbles_success_p90",
+        "passes_completed_p90",
+        "key_passes_p90",
+        "tackles_p90",
+        "interceptions_p90",
+        "pass_completion_pct",
+        "duel_win_pct",
+        "dribble_success_pct",
+        "conversion_pct",
+        "save_pct",
+        "conceded_p90",
+        "archetype_score",
+        "archetype_coverage"
+      ],
+      "formula": "Per-90 values are stat * 90 / minutes. Completed passes are passes_total * pass_accuracy / 100. Duel and dribble percentages divide by their provider attempts; conversion divides goals by shots; save percentage divides saves by saves + conceded. The rating percentile is the midrank percentile of the provider rating within the league and role family at 450+ minutes; the provider-group fallback is used only when the role cohort is below its minimum. Archetype scores are 100 * Phi(sum(w * shrunk robust z) / sum(abs(w))), with winsorisation at 1/99, median/MAD scaling, minutes shrinkage and weight renormalisation.\n",
+      "home_payload": "scouting/pool/sco-premiership.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.pool",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "config/scouting/model.yaml",
+        "config/scouting/archetypes.yaml"
+      ],
+      "label": "Scouting player pool",
+      "limitations": [
+        "Provider ratings are opaque and relative to a league and role cohort; no cross-league ranking is published.",
+        "The feed has no xG/xA, progressive passes, carries, pressures, aerial wins or crosses, so those features are absent rather than inferred.",
+        "Role families need starting-XI grids; leagues without grids use the provider position group and say so."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/pool/*.json#/**",
+        "scouting/search-index.json#/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "scouting_pool",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "role_family",
+      "basis": "mixed",
+      "confidence_rule": "A family is not ranked without a qualifying cohort; availability is used only from the verified ledger. The reading is evidence, not a medical or selection verdict.",
+      "coverage_tier": "derived",
+      "denominator": "minutes",
+      "description": "Aberdeen role-family ratings against the Scottish Premiership cohort, with verified availability evidence.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "fields": [
+        "families",
+        "players",
+        "minutes",
+        "average_rating",
+        "rating_percentile",
+        "cohort_n",
+        "cohort_median",
+        "absent_first_choice",
+        "layer0_players"
+      ],
+      "formula": "The family average is the appearance-weighted mean provider rating of Aberdeen players at 300+ competitive minutes in the role family. The percentile is the midrank position of that average within the other Premiership players in the same role family at 450+ minutes; Aberdeen are excluded from their own cohort. The reading is structural below 40, at 40-60, above 60; a below-cohort family with one absent first-choice player is cover, two or more is hold. First-choice evidence is 10 starts or 900 minutes in the most recent prior season with at least 450 minutes.\n",
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.board",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "data/normalized/history/season=*/appearances.parquet",
+        "reference/availability.yaml"
+      ],
+      "label": "Scouting weakness board",
+      "limitations": [
+        "The model cannot separate selection, availability and quality.",
+        "The provider rating is not a verdict; the cohort is the other Premiership players in the same role family, not a like-for-like cross-league pool.",
+        "Only verified official AFC team news can mark a player out or available."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/aberdeen.json#/board/**",
+        "scouting/aberdeen.json#/layer_zero/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "scouting_pool",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "inferred",
+      "confidence_rule": "A profile is published only for its applicable role families and with at least 70% of the absolute weight present; otherwise null.",
+      "coverage_tier": "derived",
+      "denominator": "minutes",
+      "description": "Weighted player-profile scores, their feature weights, coverage and the double-pivot comparison.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "fields": [
+        "score",
+        "coverage",
+        "minutes",
+        "rating",
+        "rating_percentile"
+      ],
+      "formula": "Each archetype is a weighted composite of winsorised, robust z-scores within league and role family: z = (x - median) / (1.4826 * MAD), shrunk by minutes / (minutes + 450), combined with signed weights and mapped to 0-100 by the normal CDF. Missing features are removed and the remaining absolute weights renormalised; below 70% coverage the score is null. Weights are in config/scouting/archetypes.yaml and are published with the score.\n",
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.archetypes",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "config/scouting/archetypes.yaml",
+        "config/scouting/model.yaml"
+      ],
+      "label": "Scouting archetype profiles",
+      "limitations": [
+        "A profile is not a position, a target or a recommendation.",
+        "The pivot pairing is a hypothesis; the data can show a profile gap, not a causal effect on goals conceded."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/aberdeen.json#/archetypes/**",
+        "scouting/aberdeen.json#/pivot/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 1,
+        "display": "0.0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "index",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "mixed",
+      "confidence_rule": "A player is listed at 180+ competitive minutes; a missing provider value is null, never zero.",
+      "coverage_tier": "match",
+      "denominator": "minutes",
+      "description": "Aberdeen registered-squad position-specific per-90 output, competitive matches only.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/squad/"
+      ],
+      "fields": [
+        "players",
+        "minutes",
+        "rating",
+        "rating_percentile",
+        "goals",
+        "assists",
+        "goals_p90",
+        "assists_p90",
+        "goals_assists_p90",
+        "shots_p90",
+        "dribbles_success_p90",
+        "passes_completed_p90",
+        "key_passes_p90",
+        "tackles_p90",
+        "interceptions_p90",
+        "pass_completion_pct",
+        "duel_win_pct"
+      ],
+      "formula": "The same per-90 and percentage formulas as scouting.pool, applied to the registered Aberdeen squad in competitive matches only (friendlies and loan-club rows excluded), at 180+ minutes. The rating is appearance-weighted; the percentile is within the Premiership role cohort.\n",
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.squad",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "data/normalized/squad/aberdeen_stats.parquet"
+      ],
+      "label": "Scouting squad profile",
+      "limitations": [
+        "Forward and progressive passes, carries and pressures are not in the feed; they are unavailable, not inferred.",
+        "Loanees out are excluded; their loan-club rows are not Aberdeen output."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/aberdeen.json#/squad/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "squad_identity",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "league",
+      "basis": "measured",
+      "confidence_rule": "Every league reports what the provider returned; an empty response is labelled, not zero-filled.",
+      "coverage_tier": "derived",
+      "denominator": "league player rows",
+      "description": "Per-league provider coverage, role coverage and pool counts.",
+      "displayed_surfaces": [
+        "/scouting/"
+      ],
+      "fields": [
+        "leagues",
+        "searchable",
+        "no_player_stats",
+        "players",
+        "rated",
+        "with_minutes_450",
+        "role_players",
+        "role_coverage",
+        "lineups_fetched",
+        "fixtures_played"
+      ],
+      "formula": "Counts of provider player-season rows, rated rows, rows at 450+ minutes, players with at least one starting-XI role, played fixtures and lineups fetched. Role coverage is role players divided by the league pool. Searchable requires at least 25 rated players.\n",
+      "home_payload": "scouting/coverage.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.coverage",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "data/normalized/scouting/meta.json",
+        "data/normalized/scouting/roles_state.json"
+      ],
+      "label": "Scouting coverage",
+      "limitations": [
+        "Coverage is a provider fact at the last sync, not a permanent statement.",
+        "Scottish lower tiers have lineups but no player season statistics."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/coverage.json#/**",
+        "scouting/aberdeen.json#/leagues/**",
+        "scouting/aberdeen.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 3,
+        "display": "0.000",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "scouting_pool",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "inferred",
+      "confidence_rule": "The index is published only with at least 70% of the weight present. The GBP band is published only when the anchor gate passes; the gate requires 60 usable anchors, role, tier and age coverage. A missing band is null, never zero.",
+      "coverage_tier": "derived",
+      "denominator": "minutes",
+      "description": "The 0-100 scouting value index and the anchor-gated GBP value model.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/"
+      ],
+      "fields": [
+        "anchor_count",
+        "usable_anchors",
+        "gate",
+        "sample",
+        "coefficients",
+        "residual_sd",
+        "in_sample_mae",
+        "loocv_mae",
+        "max_loocv_error",
+        "r2",
+        "interval",
+        "value_index",
+        "value_index_coverage",
+        "value_low_gbp",
+        "value_high_gbp"
+      ],
+      "formula": "Value index = 100 * sum(w_i * component_i) / sum(w_i) over performance (league-adjusted percentile / 100), age curve, minutes reliability (min(1, minutes / 1800)) and best adjusted profile score / 100. Weights are renormalised over available components and the index is null below 70% coverage. The GBP band is fitted only after the public-source anchor gate passes: log(value_gbp) = b0 + b1*adjusted_percentile/100 + b2*age + b3*age^2 + b4*log(minutes) + role-group dummies. The published band is the 80% prediction interval. No GBP value is published before the gate.\n",
+      "home_payload": "scouting/value-model.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.value-model",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "reference/scouting_values.yaml",
+        "config/scouting/value.yaml"
+      ],
+      "label": "Scouting value model",
+      "limitations": [
+        "The value index is a scouting ordering, not a transfer value or fee.",
+        "The GBP band is not published until the public-source anchor register passes the gate; it is never an uncalibrated currency estimate.",
+        "Contract length, wages, release clauses and agent fees are unknown."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/value-model.json#/**",
+        "scouting/aberdeen.json#/value_model/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [
+        "reference/scouting_values.yaml"
+      ],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
     }
   ],
   "owner": "patrickmockridge",
@@ -3735,10 +4123,138 @@
       },
       "verification": "config_match",
       "version": 1
+    },
+    {
+      "config_keys": [
+        "pool",
+        "board",
+        "archetypes",
+        "squad",
+        "coverage"
+      ],
+      "config_path": "scouting/model",
+      "id": "param.scouting",
+      "kind": "matrix",
+      "label": "Scouting model policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-23",
+      "unit": "mixed",
+      "used_by": [
+        "scouting.pool",
+        "scouting.board",
+        "scouting.archetypes",
+        "scouting.squad",
+        "scouting.coverage"
+      ],
+      "value": {
+        "archetypes": {
+          "min_minutes": 450,
+          "min_weight_coverage": 0.7,
+          "shrink_minutes": 450,
+          "winsor_high": 0.99,
+          "winsor_low": 0.01
+        },
+        "board": {
+          "first_choice_minutes": 900,
+          "first_choice_starts": 10,
+          "min_minutes": 300,
+          "prior_min_minutes": 450,
+          "prior_seasons": 3,
+          "status_above": 60.0,
+          "status_below": 40.0
+        },
+        "coverage": {
+          "min_rated_players": 25
+        },
+        "pool": {
+          "fallback_group_min": 15,
+          "low_minutes": 900,
+          "min_cohort": 15,
+          "min_cohort_by_family": {
+            "goalkeeper": 8
+          },
+          "min_minutes": 450
+        },
+        "squad": {
+          "min_minutes": 180
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "index",
+        "fit"
+      ],
+      "config_path": "scouting/value",
+      "id": "param.scouting.value",
+      "kind": "matrix",
+      "label": "Scouting value policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-23",
+      "unit": "mixed",
+      "used_by": [
+        "scouting.value-model"
+      ],
+      "value": {
+        "fit": {
+          "interval": 0.8,
+          "max_value_age_days": 550,
+          "min_age_bands": 3,
+          "min_anchors": 60,
+          "min_league_tiers": 3,
+          "min_minutes": 450,
+          "min_role_anchors": 5,
+          "top_tier_share": 0.2
+        },
+        "index": {
+          "age_curve": [
+            {
+              "factor": 0.5,
+              "max_age": 18
+            },
+            {
+              "factor": 0.7,
+              "max_age": 20
+            },
+            {
+              "factor": 0.9,
+              "max_age": 23
+            },
+            {
+              "factor": 1.0,
+              "max_age": 27
+            },
+            {
+              "factor": 0.8,
+              "max_age": 29
+            },
+            {
+              "factor": 0.55,
+              "max_age": 31
+            },
+            {
+              "factor": 0.3,
+              "max_age": 120
+            }
+          ],
+          "min_weight_coverage": 0.7,
+          "minutes_full": 1800,
+          "weights": {
+            "age": 0.15,
+            "minutes": 0.15,
+            "performance": 0.55,
+            "profile": 0.15
+          }
+        }
+      },
+      "verification": "config_match",
+      "version": 1
     }
   ],
-  "registry_version": "2.4.0",
-  "reviewed": "2026-10-22",
+  "registry_version": "2.6.0",
+  "reviewed": "2026-10-23",
   "schema_version": 1,
   "structural_number_patterns": [
     "**/player_id",

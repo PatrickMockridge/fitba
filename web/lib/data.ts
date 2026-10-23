@@ -2953,6 +2953,400 @@ export interface XgDocument {
   sources: Array<{ id: string; name: string; layer: string; note: string }>;
 }
 
+export interface ScoutingArchetypeScore {
+  score: number | null;
+  adjusted_score?: number | null;
+  coverage: number | null;
+}
+
+export interface ScoutingProfile {
+  id: string;
+  label: string;
+  score: number;
+  raw_score?: number | null;
+  adjusted_score?: number | null;
+}
+
+export interface ScoutingRates {
+  goals_p90: number | null;
+  assists_p90: number | null;
+  goals_assists_p90: number | null;
+  shots_p90: number | null;
+  dribbles_success_p90: number | null;
+  passes_completed_p90: number | null;
+  key_passes_p90: number | null;
+  tackles_p90: number | null;
+  interceptions_p90: number | null;
+  pass_completion_pct: number | null;
+  duel_win_pct: number | null;
+  dribble_success_pct: number | null;
+  conversion_pct: number | null;
+  save_pct: number | null;
+  conceded_p90: number | null;
+}
+
+export interface ScoutingPlayer extends ScoutingRates {
+  player_id: number;
+  name: string;
+  full_name?: string | null;
+  club: string;
+  age: number | null;
+  nationality: string | null;
+  position_group: string;
+  role_family: string | null;
+  role_label: string;
+  role_status: string;
+  role_family_share: number | null;
+  minutes: number;
+  appearances: number | null;
+  rating: number | null;
+  rating_percentile: number | null;
+  adjusted_percentile: number | null;
+  adjustment_basis: string;
+  value_index: number | null;
+  value_index_coverage: number | null;
+  value_index_drivers: string[];
+  value_index_basis: string | null;
+  value_low_gbp: number | null;
+  value_high_gbp: number | null;
+  value_confidence: string;
+  value_method: string;
+  cohort_basis: string;
+  cohort_n: number;
+  flags: string[];
+  archetypes: Record<string, ScoutingArchetypeScore>;
+  profile: ScoutingProfile | null;
+}
+
+export interface ScoutingSearchRow {
+  i: number;
+  n: string;
+  c: string;
+  l: string;
+  na: string | null;
+  rf: string | null;
+  a: number | null;
+  m: number;
+  rt: number | null;
+  p: number | null;
+  ap: number | null;
+  vi: number | null;
+  vc: number | null;
+  ab: string | null;
+  vl: number | null;
+  vh: number | null;
+  vconf: string | null;
+  vm: string | null;
+  ga: number | null;
+  dr: number | null;
+  ps: number | null;
+  pa: number | null;
+  kp: number | null;
+  tk: number | null;
+  it: number | null;
+  dw: number | null;
+  pr: string | null;
+  psc: number | null;
+  ar: Record<string, [number | null, number | null]>;
+  f: string[];
+}
+
+export interface ScoutingSearchDocument {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  state: string;
+  min_minutes: number;
+  count: number;
+  leagues: Array<{
+    id: string;
+    slug: string;
+    name: string;
+    country: string;
+    players: number;
+    searchable: boolean;
+    href: string;
+  }>;
+  role_labels: Record<string, string>;
+  profile_labels: Record<string, string>;
+  players: ScoutingSearchRow[];
+  limitations: string[];
+}
+
+export interface ScoutingPoolCoverage {
+  players: number;
+  rated: number;
+  with_minutes_450: number;
+  role_players: number;
+  role_coverage: number;
+  lineups_fetched: number;
+  fixtures_played: number;
+  note: string;
+}
+
+export interface ScoutingPoolDocument {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  league: {
+    id: string;
+    slug: string;
+    name: string;
+    country: string | null;
+    tier: number | null;
+    provider_league_id: number;
+  };
+  state: string;
+  stale_reason?: string;
+  min_minutes: number;
+  players: ScoutingPlayer[];
+  coverage: ScoutingPoolCoverage;
+  limitations: string[];
+  sources: Array<{ id: string; name: string; url: string }>;
+}
+
+export interface ScoutingPrior {
+  season: string;
+  minutes: number;
+  starts: number;
+  rating: number | null;
+  role_family?: string | null;
+  role_code?: string | null;
+  role_starts?: number;
+}
+
+export interface ScoutingAvailability {
+  status: string;
+  confidence: string;
+  source_id: string | null;
+  source_url: string | null;
+  verified_at: string | null;
+  note: string | null;
+  stale: boolean;
+}
+
+export interface ScoutingBoardPlayer {
+  player_id: number;
+  name: string;
+  role_label: string | null;
+  minutes: number;
+  rating: number | null;
+  availability: ScoutingAvailability;
+  prior: ScoutingPrior | null;
+  first_choice: boolean;
+}
+
+export interface ScoutingFamily {
+  family: string;
+  label: string;
+  players: ScoutingBoardPlayer[];
+  player_count: number;
+  minutes: number;
+  average_rating: number | null;
+  rating_percentile: number | null;
+  cohort: {
+    league_id: string;
+    role_family: string;
+    n: number;
+    median: number | null;
+    min_minutes: number;
+    basis: string;
+  };
+  status: string;
+  reading: string;
+  absent_first_choice: number;
+  drivers: string[];
+  layer0: ScoutingBoardPlayer[];
+}
+
+export interface ScoutingBoard {
+  league_id: string;
+  families: ScoutingFamily[];
+  unassigned_layer0?: ScoutingBoardPlayer[];
+  summary: {
+    families: number;
+    below_cohort: number;
+    cover_readings: number;
+    structural_readings: number;
+    insufficient: number;
+    layer0_players: number;
+  };
+}
+
+export interface ScoutingLayerZero {
+  player_id: number;
+  name: string;
+  family: string | null;
+  family_label: string;
+  role_label: string | null;
+  minutes: number;
+  rating: number | null;
+  status: string;
+  confidence: string;
+  source_id: string | null;
+  source_url: string | null;
+  verified_at: string | null;
+  note: string | null;
+  prior: ScoutingPrior | null;
+  first_choice: boolean;
+}
+
+export interface ScoutingSquadRow extends ScoutingRates {
+  player_id: number;
+  name: string;
+  role_family: string | null;
+  role_label: string;
+  minutes: number;
+  rating: number | null;
+  rating_percentile: number | null;
+  goals: number | null;
+  assists: number | null;
+  archetypes: Record<string, ScoutingArchetypeScore>;
+  profile: ScoutingProfile | null;
+  cohort: { n: number; basis: string };
+}
+
+export interface ScoutingLeader {
+  player_id: number;
+  name: string;
+  club: string;
+  league_id: string;
+  league_slug: string;
+  league_name: string;
+  minutes: number;
+  rating: number | null;
+  rating_percentile: number | null;
+  adjusted_percentile: number | null;
+  raw_score: number | null;
+  adjusted_score: number | null;
+  coverage: number | null;
+  value_index: number | null;
+  value_index_coverage: number | null;
+}
+
+export interface ScoutingArchetypeDefinition {
+  id: string;
+  label: string;
+  description: string | null;
+  families: string[];
+  features: Record<string, number>;
+  leaders: ScoutingLeader[];
+}
+
+export interface ScoutingPivot {
+  label: string;
+  current: Record<
+    string,
+    {
+      player_id: number;
+      name: string;
+      role_label: string;
+      minutes: number;
+      score: number;
+      coverage: number | null;
+    } | null
+  >;
+  pool: Record<string, ScoutingLeader[]>;
+  archetype_labels: Record<string, string>;
+  hypothesis: string;
+}
+
+export interface ScoutingLeagueSummary {
+  id: string;
+  slug: string;
+  name: string;
+  country: string;
+  tier: number | null;
+  provider_league_id: number;
+  status: string;
+  searchable: boolean;
+  players: number;
+  rated: number;
+  with_minutes_450: number;
+  role_players: number;
+  role_coverage: number;
+  lineups_fetched: number;
+  fixtures_played: number;
+  error: string | null;
+  href: string;
+}
+
+export interface ScoutingValueGate {
+  min_anchors: number;
+  anchor_count: number;
+  min_role_anchors: number;
+  role_counts: Record<string, number>;
+  role_pass: boolean;
+  league_tiers: number;
+  min_league_tiers: number;
+  tier_pass: boolean;
+  age_bands: number;
+  min_age_bands: number;
+  age_pass: boolean;
+  top_tier_share: number;
+  top_tier_required: number;
+  top_tier_pass: boolean;
+  passed: boolean;
+}
+
+export interface ScoutingValueModel {
+  state: string;
+  anchor_count: number;
+  usable_anchors: number;
+  gate: ScoutingValueGate;
+  sample: number | null;
+  coefficients: Record<string, number | null> | null;
+  residual_sd: number | null;
+  in_sample_mae: number | null;
+  loocv_mae: number | null;
+  max_loocv_error: number | null;
+  r2: number | null;
+  interval: number;
+  index: {
+    weights?: Record<string, number>;
+    minutes_full?: number;
+    min_weight_coverage?: number;
+    age_curve?: Array<{ max_age: number; factor: number }>;
+  };
+  limitations: string[];
+}
+
+export interface ScoutingDocument {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  state: string;
+  stale_reason?: string;
+  club_id: string;
+  board: ScoutingBoard;
+  layer_zero: ScoutingLayerZero[];
+  squad: ScoutingSquadRow[];
+  archetypes: ScoutingArchetypeDefinition[];
+  pivot: ScoutingPivot | null;
+  value_model: ScoutingValueModel;
+  leagues: ScoutingLeagueSummary[];
+  coverage: {
+    totals: Record<string, number>;
+    known_gaps: string[];
+    sources: Array<{ id: string; name: string; url: string; coverage?: string }>;
+  };
+  limitations: string[];
+}
+
+export interface ScoutingCoverageDocument {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  state?: string;
+  stale_reason?: string;
+  provider: string;
+  cohort_minutes: number;
+  leagues: ScoutingLeagueSummary[];
+  totals: Record<string, number>;
+  known_gaps: string[];
+  sources: Array<{ id: string; name: string; url: string; coverage?: string }>;
+}
+
 export function getFixtureIndex(): FixtureIndex | null {
   return readJson<FixtureIndex>("fixtures", "index.json");
 }
@@ -2963,6 +3357,22 @@ export function getFixture(fixtureId: string | number): FixtureDocument | null {
 
 export function getXg(): XgDocument | null {
   return readJson<XgDocument>("xg", "aberdeen.json");
+}
+
+export function getScouting(): ScoutingDocument | null {
+  return readJson<ScoutingDocument>("scouting", "aberdeen.json");
+}
+
+export function getScoutingCoverage(): ScoutingCoverageDocument | null {
+  return readJson<ScoutingCoverageDocument>("scouting", "coverage.json");
+}
+
+export function getScoutingPool(slug: string): ScoutingPoolDocument | null {
+  return readJson<ScoutingPoolDocument>("scouting", "pool", `${slug}.json`);
+}
+
+export function getScoutingSearch(): ScoutingSearchDocument | null {
+  return readJson<ScoutingSearchDocument>("scouting", "search-index.json");
 }
 
 export function getMetricsRegistry(): MetricsRegistry | null {

@@ -815,6 +815,208 @@
       }
     },
     {
+      "id": "scouting",
+      "path": "/scouting/",
+      "owners": [
+        "web/app/scouting/page.tsx",
+        "web/components/ScoutingLayerZero.tsx",
+        "web/components/ScoutingWeaknessTable.tsx",
+        "web/components/ScoutingArchetypes.tsx",
+        "web/components/ScoutingLeagueIndex.tsx",
+        "web/components/ScoutingSquadTable.tsx",
+        "web/components/ScoutingCoverage.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "scouting.hero",
+              "min": 1
+            },
+            {
+              "id": "scouting.layer-zero",
+              "min": 1
+            },
+            {
+              "id": "scouting.weakness-board",
+              "min": 1
+            },
+            {
+              "id": "scouting.archetypes",
+              "min": 1
+            },
+            {
+              "id": "scouting.league-index",
+              "min": 1
+            },
+            {
+              "id": "scouting.squad-profile",
+              "min": 1
+            },
+            {
+              "id": "scouting.coverage",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "scouting.layer-zero": [
+              "Player",
+              "Role",
+              "Status",
+              "Current mins",
+              "Prior rating",
+              "Prior mins",
+              "Source",
+              "Verified"
+            ],
+            "scouting.weakness-board": [
+              "Role family",
+              "Players",
+              "Minutes",
+              "Aberdeen rating",
+              "Cohort median",
+              "Percentile",
+              "Availability",
+              "Reading"
+            ],
+            "scouting.squad-profile": [
+              "Player",
+              "Role",
+              "Mins",
+              "Rating",
+              "Pct",
+              "G+A/90",
+              "Shots/90",
+              "Dribbles/90",
+              "Passes/90",
+              "Pass %",
+              "Key passes/90",
+              "Tackles/90",
+              "Interceptions/90",
+              "Duels won %"
+            ]
+          },
+          "indicators": {
+            "availability": 2,
+            "confidence": 1,
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/recruitment/",
+            "/squad/",
+            "/methodology/",
+            "/sources/",
+            "/analysis/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "scouting.hero",
+              "min": 1
+            },
+            {
+              "id": "scouting.empty",
+              "min": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "scouting-search",
+      "path": "/scouting/search/",
+      "owners": [
+        "web/app/scouting/search/page.tsx",
+        "web/components/ScoutingGlobalSearch.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "scouting.search.hero",
+              "min": 1
+            },
+            {
+              "id": "scouting.search.board",
+              "min": 1
+            },
+            {
+              "id": "scouting.search.coverage",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "scouting.search.board": [
+              "Player",
+              "Club",
+              "League",
+              "Nationality",
+              "Role",
+              "Age",
+              "Mins",
+              "Rating",
+              "Pct",
+              "Adj Pct",
+              "Value index",
+              "G+A/90",
+              "Dribbles/90",
+              "Passes/90",
+              "Pass %",
+              "Key passes/90",
+              "Tackles/90",
+              "Interceptions/90",
+              "Duels won %",
+              "Profile"
+            ]
+          },
+          "indicators": {
+            "confidence": 1,
+            "unknown": 1,
+            "source": 1
+          },
+          "links": [
+            "/scouting/",
+            "/methodology/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "scouting.search.hero",
+              "min": 1
+            },
+            {
+              "id": "scouting.search.empty",
+              "min": 1
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "sources",
       "path": "/sources/",
       "owners": [
