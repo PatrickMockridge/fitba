@@ -1,0 +1,368 @@
+/* fitba docs theme.
+ *
+ * Merkland is the light theme (mdBook class .light); Aurora is the dark theme
+ * (mdBook class .coal). The classes are mdBook's built-ins so Auto, syntax
+ * highlighting and localStorage keep working; the labels are relabelled in
+ * theme/index.hbs.
+ *
+ * Tokens mirror web/app/system.css, the canonical fitba visual system.
+ */
+
+:root {
+  --sidebar-target-width: 290px;
+  --page-padding: 24px;
+  --content-max-width: 860px;
+  --mono-font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --code-font-size: 0.84em;
+  --fitba-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fitba-measure: 68ch;
+  --fitba-rule: 1px solid var(--table-border-color);
+}
+
+/* Merkland — light */
+.light {
+  --bg: #f0f0ed;
+  --fg: #17181a;
+  --sidebar-bg: #f0f0ed;
+  --sidebar-fg: #17181a;
+  --sidebar-non-existant: #8a8784;
+  --sidebar-active: #c8102e;
+  --sidebar-spacer: #c9c4c2;
+  --scrollbar: #c9c4c2;
+  --icons: #5b5e62;
+  --icons-hover: #17181a;
+  --links: #a30d25;
+  --inline-code-color: #17181a;
+  --theme-popup-bg: #fcfcfa;
+  --theme-popup-border: #c9c4c2;
+  --theme-hover: #eae3e4;
+  --quote-bg: #eae3e4;
+  --quote-border: #c9c4c2;
+  --warning-border: #7a5600;
+  --table-border-color: #c9c4c2;
+  --table-header-bg: #eae3e4;
+  --table-alternate-bg: transparent;
+  --searchbar-border-color: #c9c4c2;
+  --searchbar-bg: #fcfcfa;
+  --searchbar-fg: #17181a;
+  --searchbar-shadow-color: #c9c4c2;
+  --searchresults-header-fg: #5b5e62;
+  --searchresults-border-color: #c9c4c2;
+  --searchresults-li-bg: #eae3e4;
+  --search-mark-bg: rgba(122, 86, 0, 0.3);
+  --sidebar-header-border-color: #c9c4c2;
+  --blockquote-note-color: #1d6b45;
+  --blockquote-tip-color: #1d6b45;
+  --blockquote-important-color: #2f5f9e;
+  --blockquote-warning-color: #7a5600;
+  --blockquote-caution-color: #a3261e;
+  --footnote-highlight: rgba(122, 86, 0, 0.3);
+  --overlay-bg: rgba(23, 24, 26, 0.4);
+  --color-scheme: light;
+  --fitba-surface: #fcfcfa;
+  --fitba-surface-2: #eae3e4;
+  --fitba-muted: #5b5e62;
+  --fitba-rule-strong: #17181a;
+  --fitba-club: #c8102e;
+  --fitba-club-fill: #c8102e;
+  --fitba-on-club: #ffffff;
+  --fitba-green: #1d6b45;
+  --fitba-amber: #7a5600;
+  --fitba-red: #a3261e;
+  --fitba-europe: #2f5f9e;
+}
+
+/* Aurora — dark */
+.coal {
+  --bg: #0b1020;
+  --fg: #eef1f8;
+  --sidebar-bg: #0b1020;
+  --sidebar-fg: #eef1f8;
+  --sidebar-non-existant: #34405f;
+  --sidebar-active: #ff5a6e;
+  --sidebar-spacer: #34405f;
+  --scrollbar: #34405f;
+  --icons: #a8b0c8;
+  --icons-hover: #eef1f8;
+  --links: #ff5a6e;
+  --inline-code-color: #eef1f8;
+  --theme-popup-bg: #121a2e;
+  --theme-popup-border: #34405f;
+  --theme-hover: #1b2540;
+  --quote-bg: #1b2540;
+  --quote-border: #34405f;
+  --warning-border: #e8c06a;
+  --table-border-color: #34405f;
+  --table-header-bg: #1b2540;
+  --table-alternate-bg: transparent;
+  --searchbar-border-color: #34405f;
+  --searchbar-bg: #121a2e;
+  --searchbar-fg: #eef1f8;
+  --searchbar-shadow-color: #34405f;
+  --searchresults-header-fg: #a8b0c8;
+  --searchresults-border-color: #34405f;
+  --searchresults-li-bg: #1b2540;
+  --search-mark-bg: rgba(232, 192, 106, 0.35);
+  --sidebar-header-border-color: #34405f;
+  --blockquote-note-color: #64e0b0;
+  --blockquote-tip-color: #64e0b0;
+  --blockquote-important-color: #9b8cf0;
+  --blockquote-warning-color: #e8c06a;
+  --blockquote-caution-color: #ff8f86;
+  --footnote-highlight: rgba(232, 192, 106, 0.35);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --color-scheme: dark;
+  --fitba-surface: #121a2e;
+  --fitba-surface-2: #1b2540;
+  --fitba-muted: #a8b0c8;
+  --fitba-rule-strong: #d9def0;
+  --fitba-club: #ff5a6e;
+  --fitba-club-fill: #c8102e;
+  --fitba-on-club: #ffffff;
+  --fitba-green: #64e0b0;
+  --fitba-amber: #e8c06a;
+  --fitba-red: #ff8f86;
+  --fitba-europe: #9b8cf0;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body,
+.content {
+  font-family: var(--fitba-sans);
+}
+
+.content {
+  line-height: 1.55;
+  max-width: var(--content-max-width);
+}
+
+.content p,
+.content li {
+  max-width: var(--fitba-measure);
+}
+
+.content h1 {
+  margin-top: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 760;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.content h2 {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--table-border-color);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 720;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.content h3 {
+  font-size: 1rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+.content a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, var(--fitba-club) 55%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.content a:hover {
+  color: var(--links);
+}
+
+.content code {
+  font-family: var(--mono-font);
+  border-radius: 0;
+  background: transparent;
+}
+
+.content pre {
+  background: var(--fitba-surface-2);
+  border: 1px solid var(--quote-border);
+  border-radius: 0;
+}
+
+.content pre code {
+  background: transparent;
+}
+
+.content table {
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.content table thead th {
+  background: var(--table-header-bg);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.content table td,
+.content table th {
+  border: 1px solid var(--table-border-color);
+  padding: 0.35rem 0.5rem;
+}
+
+.content table tbody tr:nth-child(2n) {
+  background: transparent;
+}
+
+.content table td.num,
+.content table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.content blockquote {
+  border-left: 3px solid var(--quote-border);
+  background: var(--quote-bg);
+}
+
+.content hr {
+  border: 0;
+  border-top: 1px solid var(--table-border-color);
+}
+
+/* mdBook chrome */
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--table-border-color);
+}
+
+.sidebar .sidebar-scrollbox {
+  top: 3.1rem;
+  padding-top: 0.6rem;
+}
+
+.fitba-sidebar-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  height: 3.1rem;
+  padding: 0.9rem 1rem 0.7rem;
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.fitba-sidebar-brand {
+  color: var(--sidebar-fg);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.fitba-sidebar-label {
+  color: var(--fitba-muted);
+  font-family: var(--mono-font);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.menu-title {
+  color: var(--fg);
+  font-family: var(--fitba-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.menu-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.theme-popup {
+  background: var(--theme-popup-bg);
+  border: 1px solid var(--theme-popup-border);
+  border-radius: 0;
+}
+
+.theme-popup .theme {
+  border-radius: 0;
+}
+
+.theme-popup .theme:hover {
+  background: var(--theme-hover);
+}
+
+.searchbar-outer input {
+  border-radius: 0;
+  border: 1px solid var(--searchbar-border-color);
+  background: var(--searchbar-bg);
+  color: var(--searchbar-fg);
+}
+
+#mdbook-searchresults-outer {
+  border-radius: 0;
+}
+
+#mdbook-searchresults li {
+  border-radius: 0;
+}
+
+.nav-chapters {
+  color: var(--fitba-muted);
+}
+
+.nav-chapters:hover {
+  color: var(--links);
+}
+
+.fitba-skip-link {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.6rem 0.9rem;
+  background: var(--fitba-club-fill);
+  color: var(--fitba-on-club);
+  font: 700 0.8rem/1.2 var(--fitba-sans);
+  text-decoration: none;
+}
+
+.fitba-skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+::selection {
+  background: var(--fitba-club-fill);
+  color: var(--fitba-on-club);
+}
+
+@media (max-width: 700px) {
+  :root {
+    --page-padding: 14px;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+}

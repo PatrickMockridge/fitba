@@ -1,6 +1,6 @@
 # Methodology
 
-**Status:** reference. Last reviewed 2026-10-23.
+**Status:** reference. Last reviewed 2026-10-24.
 
 This page defines how numbers are produced and how uncertainty is shown. It is
 the technical companion to the [product strategy](product-strategy.md).
@@ -312,19 +312,27 @@ labelled as having none and one is partial. Role families come from the same sta
 grid as the Aberdeen roles; a league without a grid uses the provider position
 group and says so.
 
-Ratings and profile scores are compared only within a league and role family.
-There is no cross-league rating adjustment: the strength priors are assumptions,
-not a measured mapping. Per-90 values use the provider season totals; completed
-passes are `passes.total × accuracy / 100`. Forward and progressive passes,
-carries, pressures, aerial wins and crosses are not in the feed. Contracts,
-wages, fees and release clauses are not claimed. The availability layer uses
-only verified official AFC team news.
+Raw ratings and profile scores are compared only within a league and role
+family. A separate empirical alignment maps a player's within-league percentile
+into the actual Premiership cohort distribution; it is a model built from the
+observed league and role spread, not a measured equivalence, and the raw and
+adjusted values are shown side by side. Per-90 values use the provider season
+totals; completed passes are `passes.total × accuracy / 100`. Forward and
+progressive passes, carries, pressures, aerial wins and crosses are not in the
+feed. Contracts, wages, fees and release clauses are not claimed. The
+availability layer uses only verified official AFC team news.
 
 `/scouting/search/` searches every ranked player across the pool and shows the
-league beside every row. The adjusted percentile is an empirical alignment to
-the Premiership cohort, not a measured equivalence. The value index is a
-scouting ordering; a GBP band is published only after the public-source anchor
-register passes its gate.
+league beside every row. The adjusted percentile is the empirical
+Premiership-equivalent alignment, not a measured equivalence. The value index
+is a scouting ordering, not a transfer value; it combines the adjusted
+percentile, the age curve, minutes reliability and profile fit. Aberdeen's U23
+and European shop-window preferences are applied after the index as a separate
+priority, and the team-context lens compares the player's role-adjusted
+percentile with the team's points-per-game percentile. The hub exposes simple
+reader lenses; the full search adds reader weights, thresholds and eligibility
+filters as labelled scenarios. A GBP band is published only after the
+public-source anchor register passes its gate.
 
 See [scouting-method.md](scouting-method.md).
 

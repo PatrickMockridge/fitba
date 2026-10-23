@@ -24,6 +24,8 @@ Before changing public copy, layout or a number:
    `docs/fixtures.md`, `docs/match-scoreboard.md`, `docs/xg.md`, `docs/needs.md`,
    `docs/transfers.md`, `docs/squad.md`, and the shared
    `docs/player-profile-standard.md` for player profiles.
+9. [`docs/docs-book.md`](docs/docs-book.md) — the mdBook source,
+   Merkland/Aurora themes and build commands.
 
 Do not start a style, copy or number change without reading 1–6.
 
@@ -112,6 +114,10 @@ cd .. && uv run python scripts/check_web_contract.py --ci
 cd web && NEXT_PUBLIC_BASE_PATH=/fitba npm run build
 cd .. && uv run python scripts/check_web_contract.py --ci --base-path /fitba
 
+# Documentation book
+mdbook build
+mdbook serve
+
 # Metrics
 uv run python scripts/check_metrics.py --strict
 uv run python scripts/diff_published.py --before <baseline> --after web/data/generated
@@ -127,6 +133,8 @@ make web-contract-check
 ## Done means
 
 - The specification, registry and any page contract are updated where relevant.
+- The docs Markdown, `docs/SUMMARY.md` and any affected docs page are updated;
+  `mdbook build` succeeds.
 - Root and base-path builds pass; `make check` and `make check-all` pass.
 - `check_metrics.py --strict` passes and the audit status is pass.
 - Every changed number is registered, tested, audited and documented.

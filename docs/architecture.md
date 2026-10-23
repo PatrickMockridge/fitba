@@ -1,7 +1,7 @@
 # Architecture
 
 **Status:** describes the implemented pipeline and the planned cup layer. Last
-reviewed 2026-10-21.
+reviewed 2026-10-24.
 
 ## Pipeline
 
@@ -208,6 +208,26 @@ Components: `LeagueTable`, `FixtureList`, `CompetitionStrip`, `NewsGrid`,
 `ShapeSplitTable`, `DepthChart`, `BalancePanel`, `MissionPanel`, `NeedsBoard`,
 `PriorityProfiles`, `AvailabilityBadge`.
 
+## Documentation book
+
+The documentation is a local mdBook built from the same Markdown as the
+repository docs:
+
+```text
+docs/*.md, docs/context/*.md  canonical documentation
+docs/SUMMARY.md               chapter order
+book.toml                     mdBook configuration (src = "docs", output = "book/")
+theme/                        local template, head, palette overrides
+book/                         generated output; gitignored, not deployed
+```
+
+`mdbook build` builds `book/`; `mdbook serve` previews it locally. The book is
+not copied into the Pages artifact and is not a route on the website.
+
+The Markdown remains the source of truth. The book has no independent payload
+and no independent numbers; reader scenarios are still browser-only and the
+published registry/audit remain the source of published values.
+
 ## File map
 
 ```text
@@ -265,4 +285,5 @@ After the API-Football key-test passes:
 - Table arithmetic and cup group tables are tested on in-memory frames.
 - Publication guard checks size, provenance and tracked raw data.
 - Doc check verifies links and the key competition-format facts.
+- `mdbook build` is the docs book build check.
 - `npm run build` is the end-to-end static build check.

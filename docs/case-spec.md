@@ -1,8 +1,9 @@
 # Case archive: matchday evidence strip
 
-**Status:** superseded for `/analysis/` by [analysis.md](analysis.md). Retained
-for the compact matchday evidence strip and the retained `themes/aberdeen.json`
-payload.
+**Status:** archive. Superseded for `/analysis/` by [analysis.md](analysis.md).
+Retained for the compact matchday evidence strip and the retained
+`themes/aberdeen.json` payload. This document is kept for the record and is not
+current guidance; it appears in the documentation book's Archive part.
 **Owner:** patrickmockridge. **Drafted:** 2026-10-22.
 
 ## Decisions recorded

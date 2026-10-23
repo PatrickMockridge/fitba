@@ -1,0 +1,16 @@
+[book]
+title = "fitba docs"
+authors = ["Patrick Mockridge"]
+language = "en"
+src = "docs"
+
+[build]
+build-dir = "book"
+
+[output.html]
+theme = "theme"
+default-theme = "light"
+preferred-dark-theme = "coal"
+additional-css = ["theme/fitba.css"]
+git-repository-url = "https://github.com/PatrickMockridge/fitba"
+edit-url-template = "https://github.com/PatrickMockridge/fitba/edit/main/{path}"

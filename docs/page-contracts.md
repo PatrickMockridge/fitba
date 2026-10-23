@@ -1,6 +1,6 @@
 # Page contracts
 
-**Status:** normative for the contracted routes. Last reviewed 2026-10-23.
+**Status:** normative for the contracted routes. Last reviewed 2026-10-24.
 **Machine-readable source:** `web/contracts/surfaces.json`.
 **Guard:** `scripts/check_web_contract.py`, run after `npm run build` in CI and
 before the Pages artifact is uploaded.
@@ -313,6 +313,13 @@ Must remain visible:
   active lens selects from the full pool and is labelled **Reader scenario**
   with a visible reset. The reader scenario never replaces or relabels the
   published default order and never changes a published value or the audit.
+- The published list shape: five leaders per archetype, eight per attacker
+  list, twelve goal-scoring rows and twelve team-context rows. Reader
+  scenarios use the same limits.
+- The full-pool payload at `/scouting/pool.json` is fetched only when a lens is
+  active, with a visible loading state, an explicit error and retry, and the
+  published lists kept unchanged on failure. The payload is not embedded in the
+  initial hub page.
 - The attacker sections: assist-biased leaders, goal-biased leaders and the
   goal-scoring table with Player, Club, League, Age, Mins, Goals, Assists,
   Goals/90, G+A/90, Shots/90, Conversion, Priority. The table is ordered by

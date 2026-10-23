@@ -1,6 +1,6 @@
 # Product strategy: fitba
 
-**Status:** canonical product document. Last reviewed 2026-10-22.
+**Status:** canonical product document. Last reviewed 2026-10-24.
 
 > Identity, audience and voice are governed by [identity.md](identity.md) and
 > [page-contracts.md](page-contracts.md). This document governs product scope and
@@ -165,10 +165,11 @@ usernames or quotes in the public payload.
   predicted XIs, form, style and strength; squad age/value, minutes by age,
   transfers, sell-on candidates, contract and loan status on the club pages.
 - A scouting board using licensed season stats: role-family cohorts, rating
-  percentiles, minutes reliability, six player profiles and per-league coverage
-  labels, an empirical cross-league alignment and a non-currency value index.
-  GBP value bands, style fit and budget bands are not yet published; the board
-  does not claim them.
+  percentiles, minutes reliability, seven player profiles, per-league coverage
+  labels, an empirical Premiership-equivalent alignment, a non-currency value
+  index, U23/European priority, a team-context lens, reader-selectable lenses
+  and an advanced full search. GBP value bands, style fit and budget bands are
+  not yet published; the board does not claim them.
 - Opposition briefings using the same framework.
 - Fan explainers and a methodology/sources layer that a reader new to a method
   can follow without losing the evidence.
@@ -184,8 +185,10 @@ usernames or quotes in the public payload.
 3. **The trading club** — squad age/value, minutes by age, inferred transfer
    balance, sell-on candidates, contract expiry, wage bands, the commercial
    logic and its costs.
-4. **Recruitment and scouting** — role-aware percentiles, style fit, budget
-   bands, coverage warnings, shortlists.
+4. **Recruitment and scouting** — role-aware percentiles, the value index,
+   U23/European priority, the team-context lens, reader-selectable lenses and
+   the advanced full search. Style fit, budget bands, coverage warnings and
+   shortlists are next.
 5. **Loans and the youth pathway** — lower-tier minutes, development, recall
    readiness.
 6. **Opposition briefings** — style, budget and squad comparison.
