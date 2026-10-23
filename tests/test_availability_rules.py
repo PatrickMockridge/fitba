@@ -1,4 +1,16 @@
+import pytest
+
 from fitba.analytics.availability_rules import card_summary, suspension_rows
+from fitba.settings import NORMALIZED_DIR
+
+pytestmark = pytest.mark.skipif(
+    not (
+        (NORMALIZED_DIR / "history" / "season=2026-27" / "fixtures.parquet").exists()
+        and (NORMALIZED_DIR / "history" / "season=2026-27" / "events.parquet").exists()
+        and (NORMALIZED_DIR / "club_fixtures" / "aberdeen.parquet").exists()
+    ),
+    reason="requires the local normalized history, event and club-fixture feeds",
+)
 
 
 def test_second_yellow_is_recovered_and_scoped_to_the_cup():
