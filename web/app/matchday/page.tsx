@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
-import { FixtureList } from "@/components/FixtureList";
 import { FormGuide } from "@/components/FormGuide";
 import { KickoffNotice } from "@/components/KickoffNotice";
 import { MatchupRead } from "@/components/MatchupRead";
@@ -50,7 +49,7 @@ function fixtureList(data: MatchdayDocument): ClubFixture[] {
     kickoff: fixture.kickoff,
     opponent_id: fixture.opponent_id,
     opponent_name: fixture.opponent_name,
-    venue: fixture.venue === "H" ? "H" : "A",
+    venue: fixture.venue === "H" ? "H" : fixture.venue === "N" ? "N" : "A",
     status: fixture.status,
   }));
 }
@@ -115,7 +114,10 @@ export default function MatchdayPage() {
   const snapshotAt = snapshotValue(data, "generated_at");
   const age = snapshotValue(data, "age_hours");
   const lineupStatus = data.coverage.lineups ?? {};
-  const next = fixtureList(data);
+  const lookahead = fixtureList({
+    ...data,
+    next_fixtures: data.fixture ? [data.fixture, ...data.next_fixtures] : data.next_fixtures,
+  });
   const matchdayClaims = (caseData?.claims ?? [])
     .filter((claim) => claim.domain === "matchday")
     .slice(0, 2);
@@ -153,9 +155,11 @@ export default function MatchdayPage() {
         <p className="match-meta">
           {formatDate(fixture.date)}
           {fixture.kickoff ? ` · ${fixture.kickoff}` : ""} ·{" "}
-          {fixture.venue === "A"
-            ? `Aberdeen away at ${fixture.home_team_name}`
-            : `Aberdeen home to ${fixture.away_team_name}`}
+          {fixture.venue === "N"
+            ? `Neutral venue: ${fixture.home_team_name} v ${fixture.away_team_name}`
+            : fixture.venue === "A"
+              ? `Aberdeen away at ${fixture.home_team_name}`
+              : `Aberdeen home to ${fixture.away_team_name}`}
         </p>
         <KickoffNotice date={fixture.date} kickoff={fixture.kickoff} />
         {data.state === "stale" ? (
@@ -183,10 +187,40 @@ export default function MatchdayPage() {
             {lineupStatus.opponent ?? "unknown"}
           </span>
         </div>
-        {next.length ? (
-          <div className="mini-block">
-            <p className="eyebrow">Then</p>
-            <FixtureList fixtures={next} empty="No further fixtures." />
+        {lookahead.length ? (
+          <div className="mini-block" data-contract="matchday.lookahead">
+            <p className="eyebrow">Next six</p>
+            <p className="fine-print">
+              This fixture and the next five competitive matches. Kickoff is
+              Europe/London; provisional times are marked by the source.
+            </p>
+            <div className="table-wrap">
+              <table className="league-table compact">
+                <caption className="fine-print">
+                  Current fixture plus the next five competitive matches.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Competition</th>
+                    <th scope="col">Opponent</th>
+                    <th scope="col">Venue</th>
+                    <th scope="col">Kickoff</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lookahead.map((row) => (
+                    <tr key={row.match_id}>
+                      <td>{formatDate(row.date)}</td>
+                      <td>{row.competition_name}</td>
+                      <td>{row.opponent_name}</td>
+                      <td>{row.venue === "N" ? "Neutral" : row.venue}</td>
+                      <td>{row.kickoff ?? "TBC"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : null}
       </section>
@@ -281,11 +315,11 @@ export default function MatchdayPage() {
         <section className="section" data-contract="matchday.themes">
           <div className="section-head">
             <div>
-              <p className="eyebrow">Data analysis · the current evidence</p>
+              <p className="eyebrow">Season overview · the current evidence</p>
               <h2>What backs this matchday</h2>
             </div>
             <Link className="text-link" href="/analysis/">
-              Full case →
+              Season overview →
             </Link>
           </div>
           <div className="theme-strip">
@@ -299,7 +333,7 @@ export default function MatchdayPage() {
             A selection of the claims about the team. The full case, the counts,
             the status and what would change the view are on{" "}
             <Link className="text-link" href="/analysis/">
-              Data analysis
+              Season overview
             </Link>
             .
           </p>

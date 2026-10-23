@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import type { PlayerPageDocument } from "@/lib/player-page";
+import type { RoseBlock, RoseCatalogue } from "@/lib/rose";
 
 const DATA_DIR = path.join(process.cwd(), "data", "generated");
 
@@ -74,7 +75,8 @@ export interface ClubFixture {
   kickoff?: string | null;
   opponent_id: string;
   opponent_name: string;
-  venue: "H" | "A";
+  venue: "H" | "A" | "N";
+  neutral?: boolean;
   status: string;
   goals_for?: number;
   goals_against?: number;
@@ -2540,6 +2542,172 @@ export function getCase(): CaseDocument | null {
   return readJson<CaseDocument>("themes", "aberdeen.json");
 }
 
+export interface AnalysisFixture {
+  fixture_id: number | string | null;
+  match_id?: string | null;
+  date: string;
+  kickoff: string | null;
+  kickoff_tz?: string;
+  kickoff_status?: string | null;
+  competition_id: string;
+  competition_name: string;
+  stage?: string | null;
+  opponent_name: string;
+  venue: "H" | "A" | "N";
+  neutral: boolean;
+  status: string;
+  conflict_review: boolean;
+  source_id: string;
+}
+
+export interface AnalysisOfficial {
+  player_id: number;
+  player_name: string | null;
+  status: string;
+  reason: string | null;
+  reason_category: string | null;
+  expected_return: string | null;
+  confidence: string | null;
+  source_id: string | null;
+  source_url: string | null;
+  verified_at: string | null;
+  note: string | null;
+}
+
+export interface AnalysisSuspension {
+  player_id: number;
+  player_name: string | null;
+  competition_id: string;
+  competition_name: string;
+  cautions: number;
+  threshold: number | null;
+  reds: number;
+  red_type: string | null;
+  reason: string | null;
+  status: string;
+  rule_verified: boolean;
+  rule_source: string | null;
+  last_card_date: string | null;
+  next_fixture: {
+    fixture_id: number | string | null;
+    date: string;
+    competition_id: string;
+    opponent_name: string;
+  } | null;
+}
+
+export interface AnalysisInference {
+  player_id: number;
+  player_name: string | null;
+  role_label: string | null;
+  fixtures: Array<{ fixture_id: number; date: string; competition: string }>;
+  in_squad_of_six: number;
+  starts_of_six: number;
+  bench_of_six: number;
+  confidence: string;
+  basis: string;
+  note: string;
+}
+
+export interface AnalysisSelection {
+  player_id: number | null;
+  player_name: string | null;
+  role_label: string | null;
+  confidence: string;
+  score: number | null;
+  basis: string;
+  note: string;
+}
+
+export interface AnalysisAim {
+  id: string;
+  label: string;
+  target: string;
+  current: string;
+  status: string;
+  gap: number | null;
+  basis: string;
+  note: string;
+}
+
+export interface AnalysisLensRow {
+  player_id: number;
+  player_name: string | null;
+  age: number | null;
+  role_label: string | null;
+  role_family: string | null;
+  minutes: number;
+  minutes_share: number | null;
+  rating_percentile: number | null;
+  cohort_n: number | null;
+  role_depth: number;
+  needs_priority: number | null;
+}
+
+export interface AnalysisLens {
+  label: string;
+  definition: string;
+  count: number;
+  rows: AnalysisLensRow[];
+}
+
+export interface AnalysisSummary {
+  schema_version: string;
+  season: string;
+  generated_at: string;
+  state: string;
+  stale_reason?: string;
+  hero: {
+    position?: number | null;
+    played?: number | null;
+    points?: number | null;
+    goal_difference?: number | null;
+    form?: string | null;
+    league_name?: string | null;
+  };
+  next_up: AnalysisFixture[];
+  availability: {
+    counts: Record<string, number>;
+    official: AnalysisOfficial[];
+    suspensions: AnalysisSuspension[];
+    inferred: AnalysisInference[];
+    selection: AnalysisSelection[];
+    coverage: Record<string, unknown>;
+    note: string;
+  };
+  aims: AnalysisAim[];
+  squad_decisions: {
+    denominator: Record<string, unknown>;
+    rows: AnalysisLensRow[];
+    lenses: Record<string, AnalysisLens>;
+    loans: Array<{
+      player_id: number;
+      player_name: string | null;
+      club: string | null;
+      end_date: string | null;
+      status: string;
+      note: string;
+    }>;
+    contract: { status: string; note: string };
+    coverage: Record<string, number>;
+  };
+  bridges: Array<{ label: string; href: string; summary: string }>;
+  coverage: {
+    availability: { known: number; unknown: number; active: number };
+    cards?: Record<string, { played: number; covered: number; complete: boolean }>;
+    bench?: { fixtures: number; named_bench_complete: number };
+    schedule?: { rows: number; scheduled: number; conflicts: number; overdue: number };
+    qualification?: string;
+    limitations?: string[];
+  };
+  sources: string[];
+  notes: string;
+}
+
+export function getAnalysisSummary(): AnalysisSummary | null {
+  return readJson<AnalysisSummary>("analysis", "summary.json");
+}
+
 export interface FixtureIndexRow {
   fixture_id: number;
   season: string;
@@ -2566,11 +2734,34 @@ export interface FixtureIndexAlias {
   href: string;
 }
 
+export interface ScheduledFixtureRow {
+  fixture_id: number | string;
+  season: string;
+  date: string;
+  kickoff: string | null;
+  kickoff_status: string | null;
+  competition_id: string;
+  competition_name: string;
+  stage: string | null;
+  home_team_name: string;
+  away_team_name: string;
+  aberdeen_is_home: boolean;
+  opponent_name: string;
+  venue: string | null;
+  neutral: boolean;
+  status: "scheduled" | "conflict_review" | "postponed" | "cancelled" | "abandoned" | "unknown" | string;
+  conflict_review: boolean;
+  source_id: string;
+}
+
 export interface FixtureIndex {
   schema_version: string;
   generated_at: string;
   count: number;
   fixtures: FixtureIndexRow[];
+  scheduled?: ScheduledFixtureRow[];
+  scheduled_count?: number;
+  schedule_coverage?: Record<string, unknown>;
   aliases?: FixtureIndexAlias[];
   state?: string;
   stale_reason?: string;
@@ -2983,6 +3174,7 @@ export interface ScoutingRates {
   conversion_pct: number | null;
   save_pct: number | null;
   conceded_p90: number | null;
+  saves_p90: number | null;
 }
 
 export interface ScoutingPlayer extends ScoutingRates {
@@ -2990,6 +3182,11 @@ export interface ScoutingPlayer extends ScoutingRates {
   name: string;
   full_name?: string | null;
   club: string;
+  stats_club: string;
+  current_club_status: string;
+  current_club_source: string;
+  transferred_at: string | null;
+  current_league_name: string | null;
   age: number | null;
   nationality: string | null;
   position_group: string;
@@ -3007,6 +3204,13 @@ export interface ScoutingPlayer extends ScoutingRates {
   value_index_coverage: number | null;
   value_index_drivers: string[];
   value_index_basis: string | null;
+  scouting_priority: number | null;
+  age_multiplier: number | null;
+  europe_multiplier: number | null;
+  european_league_phase_minutes: number | null;
+  european_league_phase_appearances: number | null;
+  european_league_phase_competitions: string[];
+  european_status: string;
   value_low_gbp: number | null;
   value_high_gbp: number | null;
   value_confidence: string;
@@ -3016,12 +3220,14 @@ export interface ScoutingPlayer extends ScoutingRates {
   flags: string[];
   archetypes: Record<string, ScoutingArchetypeScore>;
   profile: ScoutingProfile | null;
+  rose?: RoseBlock | null;
 }
 
 export interface ScoutingSearchRow {
   i: number;
   n: string;
   c: string;
+  sc: string | null;
   l: string;
   na: string | null;
   rf: string | null;
@@ -3031,12 +3237,9 @@ export interface ScoutingSearchRow {
   p: number | null;
   ap: number | null;
   vi: number | null;
-  vc: number | null;
-  ab: string | null;
-  vl: number | null;
-  vh: number | null;
-  vconf: string | null;
-  vm: string | null;
+  em: number | null;
+  es: string | null;
+  eu: string[];
   ga: number | null;
   dr: number | null;
   ps: number | null;
@@ -3047,7 +3250,7 @@ export interface ScoutingSearchRow {
   dw: number | null;
   pr: string | null;
   psc: number | null;
-  ar: Record<string, [number | null, number | null]>;
+  ar: Record<string, number | null>;
   f: string[];
 }
 
@@ -3069,6 +3272,8 @@ export interface ScoutingSearchDocument {
   }>;
   role_labels: Record<string, string>;
   profile_labels: Record<string, string>;
+  priority: ScoutingPriorityConfig;
+  europe_coverage: ScoutingEuropeCoverage;
   players: ScoutingSearchRow[];
   limitations: string[];
 }
@@ -3099,6 +3304,11 @@ export interface ScoutingPoolDocument {
   state: string;
   stale_reason?: string;
   min_minutes: number;
+  rose_meta?: {
+    catalogue: RoseCatalogue;
+    min_petals: number;
+    method_note: string;
+  };
   players: ScoutingPlayer[];
   coverage: ScoutingPoolCoverage;
   limitations: string[];
@@ -3213,6 +3423,9 @@ export interface ScoutingLeader {
   league_id: string;
   league_slug: string;
   league_name: string;
+  stats_club: string;
+  current_club_status: string;
+  age: number | null;
   minutes: number;
   rating: number | null;
   rating_percentile: number | null;
@@ -3222,6 +3435,52 @@ export interface ScoutingLeader {
   coverage: number | null;
   value_index: number | null;
   value_index_coverage: number | null;
+  scouting_priority: number | null;
+  bias?: number | null;
+  assist_score?: number | null;
+  goal_score?: number | null;
+  age_multiplier: number | null;
+  europe_multiplier: number | null;
+  european_league_phase_minutes: number | null;
+  european_league_phase_competitions: string[];
+  european_status: string;
+}
+
+export interface ScoutingGoalScorer {
+  player_id: number;
+  name: string;
+  club: string;
+  stats_club: string;
+  league_id: string;
+  league_slug: string;
+  league_name: string;
+  age: number | null;
+  minutes: number;
+  goals: number | null;
+  assists: number | null;
+  goals_p90: number | null;
+  assists_p90: number | null;
+  goals_assists_p90: number | null;
+  shots_p90: number | null;
+  conversion_pct: number | null;
+  scouting_priority: number | null;
+  value_index: number | null;
+  european_status: string;
+  european_league_phase_minutes: number | null;
+  current_club_status: string;
+}
+
+export interface ScoutingAttackerGroup {
+  profile_id: string;
+  label: string;
+  leaders: ScoutingLeader[];
+}
+
+export interface ScoutingAttackers {
+  assist_bias: ScoutingAttackerGroup;
+  goal_bias: ScoutingAttackerGroup;
+  goal_scoring: ScoutingGoalScorer[];
+  note: string;
 }
 
 export interface ScoutingArchetypeDefinition {
@@ -3269,6 +3528,39 @@ export interface ScoutingLeagueSummary {
   fixtures_played: number;
   error: string | null;
   href: string;
+}
+
+export interface ScoutingPriorityConfig {
+  u23_max_age: number;
+  u23_multiplier: number;
+  europe_minutes_threshold: number;
+  europe_multiplier: number;
+}
+
+export interface ScoutingEuropeCompetition {
+  competition_id: string;
+  competition: string;
+  provider_league_id: number;
+  fixtures_total: number;
+  league_phase: number;
+  played: number;
+  fetched: number;
+  missing: number;
+  players: number;
+  complete?: boolean;
+  error?: string | null;
+}
+
+export interface ScoutingEuropeCoverage {
+  schema_version?: string;
+  season?: string;
+  generated_at?: string;
+  coverage_complete?: boolean;
+  competitions?: ScoutingEuropeCompetition[];
+  players?: number;
+  requests?: number;
+  budget?: number;
+  stopped_on_budget?: boolean;
 }
 
 export interface ScoutingValueGate {
@@ -3322,8 +3614,10 @@ export interface ScoutingDocument {
   layer_zero: ScoutingLayerZero[];
   squad: ScoutingSquadRow[];
   archetypes: ScoutingArchetypeDefinition[];
-  pivot: ScoutingPivot | null;
+  attackers: ScoutingAttackers;
   value_model: ScoutingValueModel;
+  priority: ScoutingPriorityConfig;
+  europe_coverage: ScoutingEuropeCoverage;
   leagues: ScoutingLeagueSummary[];
   coverage: {
     totals: Record<string, number>;
@@ -3367,12 +3661,55 @@ export function getScoutingCoverage(): ScoutingCoverageDocument | null {
   return readJson<ScoutingCoverageDocument>("scouting", "coverage.json");
 }
 
-export function getScoutingPool(slug: string): ScoutingPoolDocument | null {
-  return readJson<ScoutingPoolDocument>("scouting", "pool", `${slug}.json`);
-}
+let scoutingSearchCache: ScoutingSearchDocument | null | undefined;
 
 export function getScoutingSearch(): ScoutingSearchDocument | null {
-  return readJson<ScoutingSearchDocument>("scouting", "search-index.json");
+  if (scoutingSearchCache !== undefined) return scoutingSearchCache;
+  scoutingSearchCache = readJson<ScoutingSearchDocument>(
+    "scouting",
+    "search-index.json",
+  );
+  return scoutingSearchCache;
+}
+
+const scoutingPoolCache = new Map<string, ScoutingPoolDocument | null>();
+
+export function getScoutingPool(slug: string): ScoutingPoolDocument | null {
+  const cached = scoutingPoolCache.get(slug);
+  if (cached !== undefined) return cached;
+  const document = readJson<ScoutingPoolDocument>(
+    "scouting",
+    "pool",
+    `${slug}.json`,
+  );
+  scoutingPoolCache.set(slug, document);
+  return document;
+}
+
+export interface ScoutingPlayerView {
+  primary: ScoutingSearchRow;
+  others: ScoutingSearchRow[];
+}
+
+export function getScoutingPlayer(
+  playerId: string | number,
+): ScoutingPlayerView | null {
+  const document = getScoutingSearch();
+  if (!document) return null;
+  const id = Number(playerId);
+  const rows = document.players
+    .filter((row) => row.i === id)
+    .sort((left, right) => right.m - left.m);
+  if (!rows.length) return null;
+  return { primary: rows[0], others: rows.slice(1) };
+}
+
+export function getScoutingPlayerIds(): number[] {
+  const document = getScoutingSearch();
+  if (!document) return [];
+  return Array.from(new Set(document.players.map((row) => row.i))).sort(
+    (left, right) => left - right,
+  );
 }
 
 export function getMetricsRegistry(): MetricsRegistry | null {

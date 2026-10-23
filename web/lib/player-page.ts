@@ -7,6 +7,7 @@ import type {
   SquadStat,
   TacticalNote,
 } from "@/lib/data";
+import type { RoseBlock, RoseCatalogue } from "@/lib/rose";
 
 export type DataStatus = "available" | "partial" | "unavailable" | "not_applicable";
 
@@ -34,8 +35,17 @@ export interface KnownValue<T> {
   } | null;
 }
 
+export type PanelId =
+  | "profile"
+  | "availability"
+  | "position"
+  | "playing_time"
+  | "performance"
+  | "recent_matches"
+  | "records";
+
 export interface Panel<T> {
-  id: "position" | "playing_time" | "performance" | "records";
+  id: PanelId;
   eyebrow: string;
   title: string;
   status: DataStatus;
@@ -122,17 +132,74 @@ export interface PerformancePanel {
   position_stats_note: string;
 }
 
+export interface ProfileSummary {
+  season: string;
+  league: string;
+  league_label: string;
+  role_label: string | null;
+  minutes: number;
+  appearances: number | null;
+  rating: number | null;
+  rating_percentile: number | null;
+  cohort_basis: string | null;
+  cohort_n: number | null;
+}
+
+export interface ProfilePanelData {
+  tier: "extended" | "standard";
+  current_squad: boolean;
+  summary: ProfileSummary;
+  rose: RoseBlock;
+  rose_catalogue: RoseCatalogue;
+}
+
+export interface AvailabilityBlock {
+  status: string;
+  reason: string | null;
+  reason_category: string | null;
+  expected_return: string | null;
+  confidence: string;
+  source_id: string | null;
+  source_title: string | null;
+  source_url: string | null;
+  verified_at: string | null;
+  note: string | null;
+  in_squad: boolean | null;
+}
+
+export interface AvailabilityPanelData {
+  availability: AvailabilityBlock;
+}
+
+export interface RecentMatch {
+  fixture_id: number | string;
+  date: string;
+  competition: string;
+  opponent: string;
+  venue: "H" | "A" | null;
+  score_for: number | null;
+  score_against: number | null;
+  result: "W" | "D" | "L" | null;
+  minutes: number | null;
+  rating: number | null;
+  goals: number | null;
+  assists: number | null;
+}
+
 export interface PlayerPageDocument {
-  schema_version: "1.0.0";
+  schema_version: "1.1.0";
   player_id: number;
   season: string;
   generated_at: string;
   identity: IdentityBlock;
-  panel_order: Array<"position" | "playing_time" | "performance" | "records">;
+  panel_order: PanelId[];
   panels: {
+    profile: Panel<ProfilePanelData>;
+    availability: Panel<AvailabilityPanelData>;
     position: Panel<PositionPanel>;
     playing_time: Panel<PlayingTimePanel>;
     performance: Panel<PerformancePanel>;
+    recent_matches: Panel<RecentMatch[]>;
     records: Panel<SquadStat[]>;
   };
   warnings: PageWarning[];

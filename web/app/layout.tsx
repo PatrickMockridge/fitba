@@ -86,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="footer-meta">
               <ThemeSwitcher />
               <FreshnessBadge manifest={manifest} />
-              <Link href="/analysis/">Data analysis</Link>
+              <Link href="/analysis/">Season overview</Link>
               <Link href="/methodology/">Method</Link>
               <Link href="/about/">About</Link>
               <Link href="/sources/">Sources</Link>

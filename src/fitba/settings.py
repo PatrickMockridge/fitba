@@ -77,6 +77,22 @@ def scouting_value() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def player_rose() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "player-rose.yaml")
+
+
+@lru_cache(maxsize=1)
+def suspensions() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "suspensions.yaml")
+
+
+@lru_cache(maxsize=1)
+def analysis_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "analysis.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
+@lru_cache(maxsize=1)
 def scouting_teams() -> dict[str, Any]:
     path = REFERENCE_DIR / "scouting_teams.yaml"
     return load_yaml(path) if path.exists() else {"teams": []}

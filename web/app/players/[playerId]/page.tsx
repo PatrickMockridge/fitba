@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ContractPage } from "@/components/ContractPage";
 import { Panel } from "@/components/Panel";
+import { PlayerRose } from "@/components/PlayerRose";
+import { ProfileHeader } from "@/components/ProfileHeader";
+import { ProfileSection } from "@/components/ProfileSection";
 import { RoleInferenceContent } from "@/components/RoleInference";
 import { StatTile } from "@/components/StatTile";
-import { formatDate } from "@/lib/format";
+import { formatDate, formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
 import { getPlayerPage, getSquad } from "@/lib/data";
 import type { SquadStat } from "@/lib/data";
 import type {
+  AvailabilityPanelData,
   IdentityBlock,
   PerformancePanel,
   PlayerPageDocument,
+  RecentMatch,
   TableColumn,
 } from "@/lib/player-page";
 
@@ -29,9 +35,9 @@ export async function generateMetadata({
   const { playerId } = await params;
   const page = getPlayerPage(playerId);
   const name = page?.identity.full_name || page?.identity.name;
-  const title = name ? `${name} · fitba` : "Player profile · fitba";
+  const title = name ? `${name} · player profile · fitba` : "Player profile · fitba";
   const description = name
-    ? `${name}: role evidence, competitive minutes, current-season output and availability.`
+    ? `${name}: statistical profile, role evidence, competitive minutes, current-season output, availability and recent matches.`
     : "Aberdeen player profile.";
   return {
     title,
@@ -40,16 +46,6 @@ export async function generateMetadata({
     openGraph: { title, description, type: "profile" },
     twitter: { card: "summary", title, description },
   };
-}
-
-function initials(name: string): string {
-  const parts = name.replace(/\./g, "").split(/\s+/).filter(Boolean);
-  return (
-    parts
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("") || "?"
-  );
 }
 
 function sideLabel(side: string | null): string | null {
@@ -274,6 +270,125 @@ const RECORD_COLUMNS: TableColumn[] = [
   { key: "rating", label: "Rating", format: "decimal" },
 ];
 
+function KeyFacts({ page }: { page: PlayerPageDocument }) {
+  const summary = page.panels.profile.data?.summary;
+  if (!summary) return null;
+  return (
+    <div className="stat-row four">
+      <StatTile label="League minutes" value={summary.minutes} note="Premiership" />
+      <StatTile
+        label="Appearances"
+        value={summary.appearances ?? "—"}
+        note="Premiership"
+      />
+      <StatTile
+        label="Provider rating"
+        value={summary.rating === null ? "—" : formatDecimal(summary.rating)}
+        note="opaque; not a verdict"
+      />
+      <StatTile
+        label="Cohort percentile"
+        value={
+          summary.rating_percentile === null
+            ? "—"
+            : formatPercentValue(summary.rating_percentile, 1)
+        }
+        note={
+          summary.cohort_n
+            ? `${summary.cohort_basis ?? "role"} cohort, n=${summary.cohort_n}`
+            : "cohort unavailable"
+        }
+      />
+    </div>
+  );
+}
+
+function AvailabilityView({ data }: { data: AvailabilityPanelData }) {
+  const availability = data.availability;
+  return (
+    <div>
+      <div className="stat-row four">
+        <StatTile label="Status" value={availability.status} note={availability.confidence} />
+        <StatTile label="Reason" value={availability.reason ?? "—"} note={availability.reason_category ?? ""} />
+        <StatTile
+          label="Expected return"
+          value={availability.expected_return ?? "—"}
+          note="official team news only"
+        />
+        <StatTile
+          label="Verified"
+          value={
+            availability.verified_at ? formatDate(availability.verified_at) : "—"
+          }
+          note={availability.source_id ?? "no source"}
+        />
+      </div>
+      <p className="fine-print">
+        {availability.note ?? "No verified official team-news entry."}
+        {availability.source_url ? (
+          <>
+            {" "}
+            <a href={availability.source_url} target="_blank" rel="noreferrer">
+              Source
+            </a>
+          </>
+        ) : null}
+      </p>
+    </div>
+  );
+}
+
+function RecentMatchesView({ rows }: { rows: RecentMatch[] }) {
+  if (!rows.length) {
+    return <p className="muted">No current-season competitive match rows are available.</p>;
+  }
+  return (
+    <div className="table-wrap">
+      <table className="league-table compact">
+        <caption className="fine-print">
+          Latest 10 competitive current-season rows. Missing provider values are a dash, not zero.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Competition</th>
+            <th scope="col">Opponent</th>
+            <th scope="col">Venue</th>
+            <th className="num" scope="col">Score</th>
+            <th scope="col">Result</th>
+            <th className="num" scope="col">Mins</th>
+            <th className="num" scope="col">Rating</th>
+            <th className="num" scope="col">G</th>
+            <th className="num" scope="col">A</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={String(row.fixture_id)}>
+              <td>{row.date ? formatDate(row.date) : "—"}</td>
+              <td>{row.competition}</td>
+              <td>{row.opponent}</td>
+              <td>{row.venue ?? "—"}</td>
+              <td className="num">
+                {row.score_for === null || row.score_against === null
+                  ? "—"
+                  : `${row.score_for}–${row.score_against}`}
+              </td>
+              <td>{row.result ?? "—"}</td>
+              <td className="num">{row.minutes ?? "—"}</td>
+              <td className="num">
+                {row.rating === null ? "—" : formatDecimal(row.rating)}
+              </td>
+              <td className="num">{row.goals ?? "—"}</td>
+              <td className="num">{row.assists ?? "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default async function PlayerPage({
   params,
 }: {
@@ -292,65 +407,86 @@ export default async function PlayerPage({
   const recordsData = page.panels.records.data;
 
   return (
-    <>
-      <section className="club-head player-identity">
-        <div className="club-identity">
-          <span className="club-roundel large">{initials(identity.full_name || identity.name)}</span>
-          <div>
-            <p className="eyebrow">Player profile · Season {identity.season}</p>
-            <h1>{identity.full_name || identity.name}</h1>
-            <p className="lede">
-              {identity.role ? (
-                <span className="position-with-hint">
-                  <a className="position-link" href="#position">
-                    {identity.role}
-                  </a>
+    <ContractPage surface="player-profile" state="full">
+      <ProfileHeader
+        eyebrow={`Aberdeen profile · Season ${identity.season}`}
+        name={identity.full_name || identity.name}
+        lede={
+          <>
+            {identity.role ? (
+              <span className="position-with-hint">
+                <a className="position-link" href="#position">
+                  {identity.role}
+                </a>
+                <a
+                  className="position-hint"
+                  href="#position"
+                  aria-label="How this position was inferred"
+                  title="How this position was inferred"
+                >
+                  i
+                </a>
+              </span>
+            ) : (
+              "Position unavailable"
+            )}
+            {identity.age ? ` · age ${identity.age}` : ""}
+            {identity.nationality ? ` · ${identity.nationality}` : ""}
+            {identity.number ? ` · squad number ${identity.number}` : ""}
+          </>
+        }
+        attributes={
+          side || foot ? (
+            <>
+              {[side, foot].filter(Boolean).join(" · ")}
+              {foot && identity.preferred_foot.source?.url ? (
+                <>
+                  {" · "}
                   <a
-                    className="position-hint"
-                    href="#position"
-                    aria-label="How this position was inferred"
-                    title="How this position was inferred"
+                    href={identity.preferred_foot.source.url}
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    i
+                    source
                   </a>
-                </span>
-              ) : (
-                "Position unavailable"
-              )}
-              {identity.age ? ` · age ${identity.age}` : ""}
-              {identity.nationality ? ` · ${identity.nationality}` : ""}
-              {identity.number ? ` · squad number ${identity.number}` : ""}
-            </p>
-            {side || foot ? (
-              <p className="player-attributes">
-                {[side, foot].filter(Boolean).join(" · ")}
-                {foot && identity.preferred_foot.source?.url ? (
-                  <>
-                    {" · "}
-                    <a
-                      href={identity.preferred_foot.source.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      source
-                    </a>
-                  </>
-                ) : null}
-              </p>
-            ) : null}
-            <div className="hero-actions">
-              <span className={statusClass(identity.status)}>{statusText(identity)}</span>
-              {identity.injured ? <span className="badge badge-warn">Injured</span> : null}
-              {identity.loan?.since ? (
-                <span className="badge badge-neutral">
-                  Since {formatDate(identity.loan.since)}
-                  {identity.loan.end_date ? ` · to ${formatDate(identity.loan.end_date)}` : ""}
-                </span>
+                </>
               ) : null}
-            </div>
-          </div>
-        </div>
-      </section>
+            </>
+          ) : null
+        }
+        badges={
+          <>
+            <span className={statusClass(identity.status)}>{statusText(identity)}</span>
+            {identity.injured ? <span className="badge badge-warn">Injured</span> : null}
+            {identity.loan?.since ? (
+              <span className="badge badge-neutral">
+                Since {formatDate(identity.loan.since)}
+                {identity.loan.end_date ? ` · to ${formatDate(identity.loan.end_date)}` : ""}
+              </span>
+            ) : null}
+          </>
+        }
+      />
+
+      {page.panels.profile.data ? (
+        <PlayerRose
+          rose={page.panels.profile.data.rose}
+          playerName={identity.full_name || identity.name}
+          idPrefix={`player-${page.player_id}`}
+          catalogue={page.panels.profile.data.rose_catalogue}
+        />
+      ) : null}
+
+      <ProfileSection
+        id="key-facts"
+        eyebrow="Key facts"
+        title="Season summary"
+        badge={page.panels.profile.data?.summary.league_label}
+        indicator="basis"
+        contract="player-profile.summary"
+      >
+        <KeyFacts page={page} />
+      </ProfileSection>
 
       <Panel panel={page.panels.position} id="position">
         {positionData ? (
@@ -371,8 +507,20 @@ export default async function PlayerPage({
         {playingData ? <PlayingTimeView data={playingData} /> : null}
       </Panel>
 
-      <Panel panel={page.panels.performance} id="performance">
+      <Panel panel={page.panels.performance} id="performance" contract="player-profile.output">
         {performanceData ? <PerformanceView data={performanceData} /> : null}
+      </Panel>
+
+      <Panel panel={page.panels.availability} id="availability" contract="player-profile.context">
+        {page.panels.availability.data ? (
+          <AvailabilityView data={page.panels.availability.data} />
+        ) : null}
+      </Panel>
+
+      <Panel panel={page.panels.recent_matches} id="recent-matches" contract="player-profile.context">
+        {page.panels.recent_matches.data ? (
+          <RecentMatchesView rows={page.panels.recent_matches.data} />
+        ) : null}
       </Panel>
 
       {page.panels.records.status === "available" && recordsData ? (
@@ -381,13 +529,30 @@ export default async function PlayerPage({
         </Panel>
       ) : null}
 
+      <ProfileSection
+        eyebrow="Coverage and limits"
+        title="What this profile can and cannot say"
+        badge="Source · API-Football"
+        contract="player-profile.coverage"
+      >
+        <p>
+          The rose uses Premiership-only rates and compares with the same league and role
+          cohort at the cohort minutes threshold. Provider values are opaque and league-relative;
+          the cohort percentile is not a cross-league verdict. Availability comes from the
+          curated ledger and keeps its source and verification date. No contracts, wages, fees or
+          recommendations are claimed.
+        </p>
+      </ProfileSection>
+
       <p className="back-link">
         <Link href="/squad/">← Current squad</Link>
         {" · "}
         <Link href="/matchday/">Matchday</Link>
         {" · "}
+        <Link href="/scouting/">Scouting comparison</Link>
+        {" · "}
         <Link href="/recruitment/">Off the pitch</Link>
       </p>
-    </>
+    </ContractPage>
   );
 }

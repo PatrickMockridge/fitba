@@ -191,10 +191,24 @@ def main() -> int:
             warnings.append(
                 f"fixture {fixture_date} has passed; the next publish should replace it"
             )
-        if fixture.get("venue") not in {"H", "A"}:
+        if fixture.get("venue") not in {"H", "A", "N"}:
             errors.append("fixture venue must be H or A")
-        if len(document.get("next_fixtures") or []) > 3:
-            errors.append("next_fixtures must contain at most three rows")
+        next_fixtures = document.get("next_fixtures") or []
+        if len(next_fixtures) > 5:
+            errors.append("next_fixtures must contain at most five rows")
+        fixture_date = str((document.get("fixture") or {}).get("date") or "")
+        dates = [str(row.get("date") or "") for row in next_fixtures]
+        if dates != sorted(dates):
+            errors.append("next_fixtures must be date-sorted")
+        if len(set(dates)) != len(dates):
+            errors.append("next_fixtures must not repeat a date")
+        if any(date <= fixture_date for date in dates):
+            errors.append("next_fixtures must be after the featured fixture")
+        for row in next_fixtures:
+            if row.get("venue") not in {"H", "A", "N"}:
+                errors.append("next_fixtures has an invalid venue")
+            if row.get("competition_id") == "sco:other:friendlies-clubs":
+                errors.append("next_fixtures must exclude friendlies")
 
     for team, form in (document.get("form_guide") or {}).items():
         matches = form.get("matches") or []

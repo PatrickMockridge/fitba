@@ -131,12 +131,12 @@ The site is organised around the question a fan actually arrives with:
   same player is the destination from matchday, transfers, rumours and news.
 - **News & rumours** (`/news/`) — the editorial bridge: the club's own voice, the
   X timeline and the curated rumour register side by side.
-- **Data analysis** (`/analysis/`) — the evidence-led bridge between the matchday
-  lookahead, the squad, recruitment and the Cormack-era record. The owner's view
-  leads, the chairman's approach frames it, and six claims carry the evidence,
-  the status and what would change the view. Its squad-needs board on
-  `/recruitment/` turns the claims into role profiles and market routes; it
-  names no targets.
+- **Season overview** (`/analysis/`) — the bridge between the next matchday, the
+  results and form record, the squad and scouting. It shows the next fixtures,
+  official and derived availability, measured season aims and factual
+  squad-decision lenses, then links to matchday, matches, squad, scouting and
+  the xG deep page. It names no targets and makes no medical, contract or fee
+  claim.
 
 The rumour mill is a distinct product lane, not a feed of links:
 
@@ -200,10 +200,9 @@ usernames or quotes in the public payload.
 10. **The Cormack era** — a season-by-season historical record of managers,
     backroom and board changes, honours, transfers, style and selection, with a
     labelled assessment. See [history.md](history.md).
-11. **Data analysis** — the owner's view and the chairman's frame, tested through six
-    claims on the team, the squad and the Cormack-era record. Each claim carries
-    a count, a status and what would change the view. See
-    [analysis.md](analysis.md).
+11. **Season overview** — next fixtures, availability, aims and squad decisions,
+    with the evidence and unknown states visible. See
+    [analysis.md](analysis.md) and [analysis-review.md](analysis-review.md).
 
 ## Editorial policy
 

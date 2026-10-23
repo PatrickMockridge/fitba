@@ -66,7 +66,7 @@ unknown unless confirmed. See [transfers.md](transfers.md) and `/transfers/`.
 
 ## The current bridge
 
-[Data analysis](analysis.md) sets the chairman's approach against the current squad: the
+[Season overview](analysis.md) sets the chairman's approach against the current squad: the
 role-family balance, the three-at-the-back record, the defensive depth and availability and
 the attack-defence balance, with a separate Cormack-era analysis. It is the
 short-horizon companion to the era record below.

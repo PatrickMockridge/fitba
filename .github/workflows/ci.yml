@@ -66,3 +66,4 @@ jobs:
       - run: cd .. && uv sync --frozen
       - run: cd .. && uv run python scripts/check_web_contract.py --ci
       - run: cd .. && uv run python scripts/check_fixture_pages.py
+      - run: cd .. && uv run python scripts/check_player_page.py --pages

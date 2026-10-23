@@ -62,16 +62,34 @@ archetypes:
       key_passes_p90: 0.20
       goals_assists_p90: 0.20
 
-  goal_contributor:
-    label: Goal contributor
+  assist_creator:
+    label: Assist-biased contributor
     description: >
-      A forward or attacking midfielder whose measurable output is goals and
-      assists, supported by shot volume and conversion.
+      An attacker whose measurable contribution leans to creating rather than
+      finishing: pass volume and accuracy, key passes, assists and successful
+      dribbles. The feed carries no cross or chance-creation data, so key passes
+      are the closest available creation signal.
+    families: [centre_forward, wide_forward, attacking_midfield, wide_midfield]
+    features:
+      assists_p90: 0.25
+      key_passes_p90: 0.30
+      passes_completed_p90: 0.25
+      pass_completion_pct: 0.05
+      dribbles_success_p90: 0.15
+
+  goal_scorer:
+    label: Goal-scoring forward
+    description: >
+      An attacker whose measurable contribution leans to scoring: goals, shot
+      volume, conversion and total goal contribution. Pass and dribble volume
+      are deliberately excluded so this profile does not duplicate the
+      assist-biased one.
     families: [centre_forward, wide_forward, attacking_midfield]
     features:
-      goals_assists_p90: 0.50
-      shots_p90: 0.25
-      conversion_pct: 0.25
+      goals_p90: 0.50
+      shots_p90: 0.20
+      conversion_pct: 0.20
+      goals_assists_p90: 0.10
 
   goalkeeper_shot_stopper:
     label: Goalkeeper shot-stopper

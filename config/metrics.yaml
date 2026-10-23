@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 2.6.0
+registry_version: 3.1.0
 reviewed: '2026-10-23'
 owner: patrickmockridge
 change_policy:
@@ -484,9 +484,15 @@ metrics:
   label: Next fixtures
   description: Upcoming club fixtures.
   value_type: object
-  fields: []
-  formula: Upcoming club fixtures from the SPFL/API feed, ordered by date; one row
-    per fixture.
+  fields:
+  - date
+  - competition
+  - opponent
+  - venue
+  - kickoff
+  formula: Upcoming competitive club fixtures from the merged season schedule, ordered
+    by local date and kickoff; current plus the next five are rendered on matchday.
+    Conflict-review and friendly rows are excluded from the lookahead.
   inputs:
   - published payload
   unit: mixed
@@ -513,7 +519,7 @@ metrics:
   - Fixture snapshot; provenance checked, not recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: needs.summary
   label: Needs summary
@@ -1365,13 +1371,41 @@ metrics:
   status: active
 - id: player.page
   label: Player pages
-  description: Per-player page panels and records.
+  description: Per-player page panels, two-figure Nightingale rose, availability
+    projection and recent match log.
   value_type: object
-  fields: []
-  formula: 'Document envelope: player totals, playing time, role evidence, position
-    stats, availability and source notes for one player.'
+  fields:
+  - tier
+  - current_squad
+  - minutes
+  - appearances
+  - rating
+  - rating_percentile
+  - cohort_basis
+  - cohort_n
+  - rose
+  - figures
+  - axes
+  - value
+  - percentile
+  - availability
+  - recent_matches
+  formula: >
+    Document envelope: player totals, playing time, role evidence, position
+    stats, the published rose axes, the curated availability projection and the
+    latest competitive match rows for one player. The rose uses league-only
+    rates from the provider season totals; each percentile is the midrank rank
+    of the raw value in the player's league and role cohort (provider-group
+    fallback), with conceded_p90 ranked on negated values. The percentile is
+    null when the cohort or value is unavailable. The match log is a projection
+    of the normalized player-match rows joined to the fixture date, opponent and
+    score; it is not recomputed in React.
   inputs:
   - published payload
+  - data/normalized/matches/player_match_stats.parquet
+  - data/normalized/matches/player_appearances.parquet
+  - availability/aberdeen.json
+  - config/player-rose.yaml
   unit: mixed
   aggregation: family
   denominator: null
@@ -1382,7 +1416,9 @@ metrics:
   basis: mixed
   source_layer: player_match_stats
   coverage_tier: event
-  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  confidence_rule: Declared by the source metric; see docs/methodology.md. A
+    rose percentile is null when the cohort minimum, player minutes gate or
+    feature value is missing; a missing match-log value is null, never zero.
   home_payload: players/*.json
   payload_paths:
   - players/*.json#/**
@@ -1394,9 +1430,15 @@ metrics:
   source_paths: []
   limitations:
   - Player page rows; provenance checked, not recomputed.
+  - The provider rating is opaque and league-relative; it is not a verdict.
+  - Rose percentiles are within one league and role cohort; there is no
+    cross-league ranking.
+  - Availability is the curated ledger projection, not an inferred injury.
+  - The recent match log is limited to the latest 10 competitive current-season
+    rows with provider coverage; missing values are a dash.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-23'
+  version: 3
   status: active
 - id: rumours.summary
   label: Rumour summary
@@ -2141,15 +2183,90 @@ metrics:
   reviewed: '2026-10-22'
   version: 3
   status: active
+- id: analysis.summary
+  label: Season overview
+  description: Current position and form, next fixtures, official and derived availability,
+    measured aims, squad-decision lenses and the category bridges.
+  value_type: object
+  fields:
+  - position
+  - played
+  - points
+  - goal_difference
+  - form
+  - next_up
+  - counts
+  - official
+  - suspensions
+  - inferred
+  - selection
+  - aims
+  - squad_decisions
+  - coverage
+  formula: >
+    A projection of the current table row, the merged season schedule, the AFC
+    availability ledger, sourced card rules, named-squad membership, matchday
+    contenders, the season expectations and factual squad-decision lenses. No
+    value, fee, wage, contract expiry or medical diagnosis is derived. Counts
+    sum to the active universe (current squad plus ledger-only players); the
+    nine loan-outs are separate. Aims are analyst-set targets with a measured
+    current value and status; they are not club targets.
+  inputs:
+  - published payload
+  - data/normalized/matches/player_squads.parquet
+  - data/normalized/matches/events.parquet
+  - data/normalized/history/season=*/fixtures.parquet
+  - availability/aberdeen.json
+  - scouting/aberdeen.json
+  - needs/aberdeen.json
+  - history/seasons/<season>.json
+  - config/analysis.yaml
+  - config/suspensions.yaml
+  unit: mixed
+  aggregation: document
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: >
+    Official availability is ledger-only; derived availability is labelled
+    inferred or projected and capped at medium; unknown is never zero. A card
+    rule that is not verified publishes watch/review_required, not a ban.
+  home_payload: analysis/summary.json
+  payload_paths:
+  - analysis/summary.json#/**
+  home_surface: /analysis/
+  displayed_surfaces:
+  - /analysis/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Inferred absence is not a medical diagnosis; cause is not published.
+  - Suspension rules are watch/review-only until the current SFA protocol is sourced.
+  - No contract-expiry, free-agent, wage, fee or release-clause data is held.
+  - Market/value language is not used; squad decisions are measured lenses only.
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 1
+  status: active
 - id: fixtures.index
   label: Fixture index
-  description: 'The played-fixture index: count, scores, depth and links.'
+  description: 'The fixture index: played results plus the remaining scheduled fixtures.'
   value_type: object
   fields:
   - count
   - fixtures
-  formula: count = canonical played fixtures (duplicate aliases excluded); each row
-    carries score, result, depth and href; depth is derived from the coverage booleans.
+  - scheduled
+  - scheduled_count
+  formula: count = canonical played fixtures (duplicate aliases excluded); each played
+    row carries score, result, depth and href. scheduled = remaining canonical fixtures
+    after the played registry and conflict handling; scheduled_count = len(scheduled).
+    A conflict-review row is retained but excluded from forward-looking surfaces.
   inputs:
   - published payload
   unit: mixed
@@ -2177,7 +2294,7 @@ metrics:
     coverage.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: xg.document
   label: fxG document
@@ -2216,7 +2333,6 @@ metrics:
   - xg/aberdeen.json#/**
   home_surface: /analysis/xg/
   displayed_surfaces:
-  - /analysis/
   - /analysis/xg/
   - /matches/
   verification: provenance_only
@@ -2231,7 +2347,7 @@ metrics:
     as a labelled estimate.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 3
+  version: 4
   status: active
 - id: history.defeats
   label: Heavy defeats
@@ -2302,8 +2418,22 @@ metrics:
   - conversion_pct
   - save_pct
   - conceded_p90
+  - saves_p90
+  - rose
+  - rose_meta
+  - percentile
   - archetype_score
   - archetype_coverage
+  - scouting_priority
+  - age_multiplier
+  - europe_multiplier
+  - european_league_phase_minutes
+  - european_league_phase_appearances
+  - european_status
+  - current_club_status
+  - stats_club
+  - current_club_source
+  - transferred_at
   formula: >
     Per-90 values are stat * 90 / minutes. Completed passes are passes_total *
     pass_accuracy / 100. Duel and dribble percentages divide by their provider
@@ -2313,11 +2443,15 @@ metrics:
     provider-group fallback is used only when the role cohort is below its
     minimum. Archetype scores are 100 * Phi(sum(w * shrunk robust z) / sum(abs(w))),
     with winsorisation at 1/99, median/MAD scaling, minutes shrinkage and weight
-    renormalisation.
+    renormalisation. The rose uses the same league-only rates: each axis is the
+    midrank percentile of the raw value in the same role-family cohort (provider
+    group fallback), with conceded_p90 ranked on negated values. Missing values
+    and insufficient cohorts are null.
   inputs:
   - published payload
   - config/scouting/model.yaml
   - config/scouting/archetypes.yaml
+  - config/player-rose.yaml
   unit: mixed
   aggregation: per_player
   denominator: minutes; passes_total; duels_total; dribbles_attempts; shots_total;
@@ -2350,9 +2484,14 @@ metrics:
     or crosses, so those features are absent rather than inferred.
   - Role families need starting-XI grids; leagues without grids use the provider
     position group and say so.
+  - Scouting priority is an Aberdeen preference, not a measured quality term.
+  - The current club comes from the provider transfer feed; the stats club is
+    kept where it differs. A subsequent move outside a pool team may be missing.
+  - Rose percentiles are within the league and role cohort, not a cross-league
+    rank. A missing or insufficient cohort is null, never zero.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 4
   status: active
 - id: scouting.board
   label: Scouting weakness board
@@ -2416,15 +2555,20 @@ metrics:
   status: active
 - id: scouting.archetypes
   label: Scouting archetype profiles
-  description: Weighted player-profile scores, their feature weights, coverage
-    and the double-pivot comparison.
+  description: Weighted player-profile scores, their feature weights, coverage,
+    the attacker assist/goal split and the dedicated goal-scoring list.
   value_type: object
   fields:
   - score
+  - adjusted_score
   - coverage
   - minutes
   - rating
   - rating_percentile
+  - bias
+  - assist_score
+  - goal_score
+  - goal_scoring
   formula: >
     Each archetype is a weighted composite of winsorised, robust z-scores within
     league and role family: z = (x - median) / (1.4826 * MAD), shrunk by
@@ -2451,7 +2595,7 @@ metrics:
   home_payload: scouting/aberdeen.json
   payload_paths:
   - scouting/aberdeen.json#/archetypes/**
-  - scouting/aberdeen.json#/pivot/**
+  - scouting/aberdeen.json#/attackers/**
   home_surface: /scouting/
   displayed_surfaces:
   - /scouting/
@@ -2460,11 +2604,18 @@ metrics:
   source_paths: []
   limitations:
   - A profile is not a position, a target or a recommendation.
-  - The pivot pairing is a hypothesis; the data can show a profile gap, not a
-    causal effect on goals conceded.
+  - Assist bias and goal bias are separate attacker profiles. Each leader list
+    is ordered by its own adjusted profile score multiplied by the U23 and
+    European preferences; the goal-scoring table is ordered by goals per 90,
+    not by a composite.
+  - The assist profile weights passes, key passes, pass accuracy and dribbles.
+    The feed carries no crosses or chance-creation data, so those are absent
+    rather than inferred.
+  - The goal profile deliberately excludes pass and dribble volume so it does
+    not reproduce the assist order.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 3
   status: active
 - id: scouting.squad
   label: Scouting squad profile
@@ -2489,11 +2640,14 @@ metrics:
   - interceptions_p90
   - pass_completion_pct
   - duel_win_pct
+  - saves_p90
+  - rose
   formula: >
     The same per-90 and percentage formulas as scouting.pool, applied to the
     registered Aberdeen squad in competitive matches only (friendlies and
     loan-club rows excluded), at 180+ minutes. The rating is appearance-weighted;
-    the percentile is within the Premiership role cohort.
+    the percentile is within the Premiership role cohort. The rose uses
+    Premiership-only rates against the same league and role cohort.
   inputs:
   - published payload
   - data/normalized/squad/aberdeen_stats.parquet
@@ -2525,7 +2679,7 @@ metrics:
   - Loanees out are excluded; their loan-club rows are not Aberdeen output.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 2
   status: active
 - id: scouting.coverage
   label: Scouting coverage
@@ -2542,6 +2696,8 @@ metrics:
   - role_coverage
   - lineups_fetched
   - fixtures_played
+  - europe
+  - current_clubs
   formula: >
     Counts of provider player-season rows, rated rows, rows at 450+ minutes,
     players with at least one starting-XI role, played fixtures and lineups
@@ -2577,9 +2733,11 @@ metrics:
   limitations:
   - Coverage is a provider fact at the last sync, not a permanent statement.
   - Scottish lower tiers have lineups but no player season statistics.
+  - Current-club coverage comes from the team transfer feed and may miss a later
+    move outside a pool team.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 3
   status: active
 
 - id: scouting.value-model
@@ -2646,6 +2804,74 @@ metrics:
   - The GBP band is not published until the public-source anchor register passes
     the gate; it is never an uncalibrated currency estimate.
   - Contract length, wages, release clauses and agent fees are unknown.
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 1
+  status: active
+
+- id: scouting.priority
+  label: Scouting priority
+  description: U23 and European shop-window weighting on top of the value index.
+  value_type: object
+  fields:
+  - scouting_priority
+  - age_multiplier
+  - europe_multiplier
+  - european_league_phase_minutes
+  - european_league_phase_appearances
+  - european_status
+  formula: >
+    scouting_priority = value_index * age_multiplier * europe_multiplier.
+    age_multiplier = u23_multiplier when age <= u23_max_age, else 1.0.
+    europe_multiplier = europe_multiplier when european league-phase minutes
+    >= europe_minutes_threshold, else 1.0. The European flag is built from the
+    league-phase fixtures of the Champions League, Europa League and Conference
+    League and the per-fixture player endpoint; qualifiers and play-offs are
+    excluded. A player not found is none only when coverage is complete;
+    otherwise the status is unknown and the multiplier is 1.0.
+  inputs:
+  - published payload
+  - config/scouting/value.yaml
+  - data/normalized/scouting/europe_appearances.parquet
+  unit: index
+  aggregation: per_player
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 1
+    display: '0.0'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: Priority is published only where the value index exists.
+    European status unknown is never discounted. The weight is a scouting
+    preference, not a measured quality equivalence.
+  home_payload: scouting/aberdeen.json
+  payload_paths:
+  - scouting/pool/*.json#/**
+  - scouting/search-index.json#/**
+  - scouting/aberdeen.json#/priority/**
+  - scouting/aberdeen.json#/europe_coverage/**
+  - scouting/aberdeen.json#/archetypes/**
+  - scouting/aberdeen.json#/pivot/**
+  - scouting/coverage.json#/europe/**
+  home_surface: /scouting/
+  displayed_surfaces:
+  - /scouting/
+  - /scouting/search/
+  - /scouting/player/
+  verification: provenance_only
+  implementation: null
+  source_paths:
+  - data/normalized/scouting/europe_appearances.parquet
+  limitations:
+  - The U23 boost and the European shop-window discount are Aberdeen scouting
+    preferences, not measured quality.
+  - Only the league phase of the three UEFA competitions is used; qualifiers,
+    play-offs and domestic Europe are not.
+  - A player with fewer than 90 league-phase minutes is shown but not
+    discounted. Unknown European status is not discounted.
+  - Priority is not a transfer value or a fee.
   owner: patrickmockridge
   reviewed: '2026-10-23'
   version: 1
@@ -3443,6 +3669,11 @@ parameters:
         factor: 0.55
       - max_age: 120
         factor: 0.3
+    priority:
+      u23_max_age: 23
+      u23_multiplier: 1.3
+      europe_minutes_threshold: 90
+      europe_multiplier: 0.6
     fit:
       min_anchors: 60
       min_role_anchors: 5
@@ -3455,10 +3686,66 @@ parameters:
   unit: mixed
   used_by:
   - scouting.value-model
+  - scouting.priority
   config_path: scouting/value
   config_keys:
   - index
+  - priority
   - fit
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 2
+- id: param.player.rose
+  label: Player rose policy
+  kind: matrix
+  value:
+    min_petals: 4
+  unit: mixed
+  used_by:
+  - player.page
+  - scouting.pool
+  - scouting.squad
+  config_path: player-rose
+  config_keys:
+  - min_petals
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 1
+- id: param.analysis
+  label: Season overview policy
+  kind: matrix
+  value:
+    absence:
+      confidence_cap: medium
+      consecutive_omissions: 2
+      min_squad_inclusions: 5
+      min_starts_or_bench: 3
+      window_fixtures: 6
+    matchday_lookahead: 6
+    next_up: 3
+    selection_watch: 3
+    squad_decisions:
+      low_minutes_age_min: 23
+      low_minutes_share_max: 0.25
+      max_per_lens: 3
+      peak_age_min: 27
+      peak_minutes_min: 450
+      percentile_min_cohort: 8
+    suspensions:
+      require_verified_rule: true
+  unit: mixed
+  used_by:
+  - analysis.summary
+  config_path: analysis
+  config_keys:
+  - next_up
+  - matchday_lookahead
+  - selection_watch
+  - squad_decisions
+  - suspensions
+  - absence
   verification: config_match
   owner: patrickmockridge
   reviewed: '2026-10-23'

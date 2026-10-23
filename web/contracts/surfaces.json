@@ -233,6 +233,10 @@
             {
               "id": "matchday.coverage",
               "min": 1
+            },
+            {
+              "id": "matchday.lookahead",
+              "min": 1
             }
           ],
           "columns": {
@@ -257,6 +261,13 @@
               "Match",
               "Score",
               "Aberdeen"
+            ],
+            "matchday.lookahead": [
+              "Date",
+              "Competition",
+              "Opponent",
+              "Venue",
+              "Kickoff"
             ]
           },
           "indicators": {
@@ -334,10 +345,10 @@
               "h2",
               "h3"
             ],
-            "h1": "Data analysis"
+            "h1": "Season overview"
           },
           "metadata": {
-            "title_contains": "Data analysis"
+            "title_contains": "Season overview"
           }
         }
       }
@@ -849,6 +860,18 @@
               "min": 1
             },
             {
+              "id": "scouting.attackers",
+              "min": 1
+            },
+            {
+              "id": "scouting.goal-scoring",
+              "min": 1
+            },
+            {
+              "id": "scouting.weights",
+              "min": 1
+            },
+            {
               "id": "scouting.league-index",
               "min": 1
             },
@@ -882,6 +905,20 @@
               "Availability",
               "Reading"
             ],
+            "scouting.goal-scoring": [
+              "Player",
+              "Club",
+              "League",
+              "Age",
+              "Mins",
+              "Goals",
+              "Assists",
+              "Goals/90",
+              "G+A/90",
+              "Shots/90",
+              "Conversion",
+              "Priority"
+            ],
             "scouting.squad-profile": [
               "Player",
               "Role",
@@ -901,6 +938,7 @@
           },
           "indicators": {
             "availability": 2,
+            "basis": 1,
             "confidence": 1,
             "unknown": 1,
             "source": 1
@@ -973,6 +1011,8 @@
               "Pct",
               "Adj Pct",
               "Value index",
+              "Priority",
+              "Europe",
               "G+A/90",
               "Dribbles/90",
               "Passes/90",
@@ -985,6 +1025,7 @@
             ]
           },
           "indicators": {
+            "basis": 1,
             "confidence": 1,
             "unknown": 1,
             "source": 1
@@ -1427,14 +1468,7 @@
       "path": "/analysis/",
       "owners": [
         "web/app/analysis/page.tsx",
-        "web/components/CaseClaimCard.tsx",
-        "web/components/CaseEvidenceTable.tsx",
-        "web/components/CaseBenchmark.tsx",
-        "web/lib/data.ts",
-        "web/components/XgSeasonTiles.tsx",
-        "web/components/XgProvenance.tsx",
-        "web/components/ManagerXgTable.tsx",
-        "web/components/ProviderCoverageNote.tsx"
+        "web/lib/data.ts"
       ],
       "ci_states": [
         "full",
@@ -1444,7 +1478,7 @@
         "empty": {
           "markers": [
             {
-              "id": "case.hero",
+              "id": "analysis.hero",
               "min": 1
             }
           ]
@@ -1452,119 +1486,59 @@
         "full": {
           "markers": [
             {
-              "id": "case.hero",
+              "id": "analysis.hero",
               "min": 1
             },
             {
-              "id": "case.frame",
+              "id": "analysis.next-up",
               "min": 1
             },
             {
-              "id": "case.opinion",
+              "id": "analysis.availability",
               "min": 1
             },
             {
-              "id": "case.claim",
+              "id": "analysis.aims",
               "min": 1
             },
             {
-              "id": "case.claim.status",
+              "id": "analysis.squad-decisions",
               "min": 1
             },
             {
-              "id": "case.claim.count",
+              "id": "analysis.bridges",
               "min": 1
             },
             {
-              "id": "case.claim.evidence",
-              "min": 1
-            },
-            {
-              "id": "case.claim.change",
-              "min": 1
-            },
-            {
-              "id": "case.benchmark",
-              "min": 1
-            },
-            {
-              "id": "case.coverage",
-              "min": 1
-            },
-            {
-              "id": "case.links",
-              "min": 1
-            },
-            {
-              "id": "xg.aggregate",
-              "min": 1
-            },
-            {
-              "id": "analysis.xg-link",
-              "min": 1
-            },
-            {
-              "id": "xg.season-tiles",
-              "min": 1
-            },
-            {
-              "id": "xg.provenance",
-              "min": 1
-            },
-            {
-              "id": "xg.managers",
-              "min": 1
-            },
-            {
-              "id": "xg.provider-coverage",
+              "id": "analysis.coverage",
               "min": 1
             }
           ],
           "columns": {
-            "case.claim.evidence": [
-              "Claim",
-              "Count",
-              "Sample",
-              "Period",
-              "Status",
-              "Source"
+            "analysis.next-up": [
+              "Date",
+              "Competition",
+              "Opponent",
+              "Venue",
+              "Kickoff",
+              "Status"
             ],
-            "xg.aggregate": [
-              "Scope",
-              "Matches",
-              "fxG",
-              "80% interval",
-              "Goals",
-              "Goals \u2212 fxG",
-              "80% interval"
-            ],
-            "xg.managers": [
-              "Manager",
-              "Stint",
-              "Season",
-              "Matches",
-              "fxG for",
-              "fxG against",
-              "Goals for",
-              "Goals against",
-              "Goals \u2212 fxG for",
-              "Goals \u2212 fxG against",
-              "Provider xG for",
-              "Provider xG against",
-              "Provider basis"
+            "analysis.aims": [
+              "Aim",
+              "Target",
+              "Current",
+              "Status"
             ]
           },
           "links": [
             "/matchday/",
+            "/matches/",
             "/squad/",
-            "/recruitment/",
+            "/scouting/",
             "/transfers/",
-            "/history/",
-            "/methodology/",
-            "/metrics/",
-            "/sources/",
             "/analysis/xg/",
-            "/matches/"
+            "/methodology/",
+            "/sources/"
           ],
           "headings": {
             "forbid_question": [
@@ -1572,10 +1546,10 @@
               "h2",
               "h3"
             ],
-            "h1": "Data analysis"
+            "h1": "Season overview"
           },
           "metadata": {
-            "title_contains": "Data analysis",
+            "title_contains": "Season overview",
             "description_contains": "Aberdeen"
           }
         }
@@ -1607,6 +1581,10 @@
             {
               "id": "matches.season-select",
               "min": 1
+            },
+            {
+              "id": "matches.upcoming",
+              "min": 1
             }
           ],
           "columns": {
@@ -1618,6 +1596,15 @@
               "Away",
               "Result",
               "Depth"
+            ],
+            "matches.upcoming": [
+              "Date",
+              "Competition",
+              "Home",
+              "Away",
+              "Venue",
+              "Kickoff",
+              "Status"
             ]
           },
           "links": [

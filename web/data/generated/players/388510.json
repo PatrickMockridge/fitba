@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T14:41:26+00:00",
+  "generated_at": "2026-10-23T18:35:21+00:00",
   "identity": {
     "age": 20,
     "full_name": "Tony Yogane",
@@ -22,12 +22,39 @@
     "status": "squad"
   },
   "panel_order": [
+    "profile",
     "position",
     "playing_time",
     "performance",
+    "availability",
+    "recent_matches",
     "records"
   ],
   "panels": {
+    "availability": {
+      "badge": "unknown",
+      "data": {
+        "availability": {
+          "confidence": "unknown",
+          "expected_return": null,
+          "in_squad": true,
+          "note": "No verified official team-news entry.",
+          "reason": null,
+          "reason_category": "unknown",
+          "source_id": "none",
+          "source_title": null,
+          "source_url": null,
+          "status": "unknown",
+          "verified_at": null
+        }
+      },
+      "eyebrow": "Availability",
+      "id": "availability",
+      "note": "No verified official team-news entry.",
+      "status": "partial",
+      "title": "Availability and team news",
+      "warnings": []
+    },
     "performance": {
       "badge": "available",
       "data": {
@@ -44,7 +71,7 @@
         "position_stats": [
           {
             "clean_sheets": 0,
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "conceded_on_pitch": 2,
             "matches": 6,
             "minutes_on_pitch": 286,
@@ -54,7 +81,7 @@
           },
           {
             "clean_sheets": 2,
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "conceded_on_pitch": 2,
             "matches": 5,
             "minutes_on_pitch": 349,
@@ -64,7 +91,7 @@
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -175,7 +202,7 @@
         "playing_time": {
           "by_competition": [
             {
-              "competition": "League Cup",
+              "competition": "Premier Sports Cup",
               "minutes": 349,
               "minutes_as_sub": 44,
               "minutes_started": 305,
@@ -183,7 +210,7 @@
               "sub_apps": 1
             },
             {
-              "competition": "Premiership",
+              "competition": "Scottish Premiership",
               "minutes": 286,
               "minutes_as_sub": 75,
               "minutes_started": 211,
@@ -998,6 +1025,403 @@
       "title": "How this position was inferred",
       "warnings": []
     },
+    "profile": {
+      "badge": "provider_group",
+      "data": {
+        "current_squad": true,
+        "rose": {
+          "basis": "provider_group",
+          "cohort_min_minutes": 450,
+          "cohort_n": 15,
+          "figures": [
+            {
+              "axes": [
+                {
+                  "cohort_n": 15,
+                  "metric": "goals_p90",
+                  "percentile": 6.7,
+                  "value": 0.0
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "assists_p90",
+                  "percentile": 20.0,
+                  "value": 0.0
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "shots_p90",
+                  "percentile": 33.3,
+                  "value": 1.9
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "key_passes_p90",
+                  "percentile": 20.0,
+                  "value": 0.63
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "dribbles_success_p90",
+                  "percentile": 73.3,
+                  "value": 0.95
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "passes_completed_p90",
+                  "percentile": 20.0,
+                  "value": 9.45
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "pass_completion_pct",
+                  "percentile": 30.0,
+                  "value": 71.0
+                },
+                {
+                  "cohort_n": 14,
+                  "metric": "tackles_p90",
+                  "percentile": null,
+                  "value": 0.95
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "interceptions_p90",
+                  "percentile": 100.0,
+                  "value": 1.27
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "duel_win_pct",
+                  "percentile": 100.0,
+                  "value": 60.61
+                }
+              ],
+              "id": "overall",
+              "label": "Overall profile",
+              "status": "available"
+            },
+            {
+              "axes": [
+                {
+                  "cohort_n": 15,
+                  "metric": "goals_p90",
+                  "percentile": 6.7,
+                  "value": 0.0
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "assists_p90",
+                  "percentile": 20.0,
+                  "value": 0.0
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "key_passes_p90",
+                  "percentile": 20.0,
+                  "value": 0.63
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "dribbles_success_p90",
+                  "percentile": 73.3,
+                  "value": 0.95
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "dribble_success_pct",
+                  "percentile": 73.3,
+                  "value": 42.86
+                },
+                {
+                  "cohort_n": 15,
+                  "metric": "pass_completion_pct",
+                  "percentile": 30.0,
+                  "value": 71.0
+                }
+              ],
+              "id": "position",
+              "label": "Position profile",
+              "status": "available"
+            }
+          ],
+          "league": "sco:premiership",
+          "league_label": "Scottish Premiership",
+          "min_minutes": 180,
+          "minutes": 284,
+          "reason": null,
+          "status": "available"
+        },
+        "rose_catalogue": {
+          "assists_p90": {
+            "direction": "positive",
+            "label": "Assists /90",
+            "short": "Assists",
+            "unit": "per90"
+          },
+          "conceded_p90": {
+            "direction": "negative",
+            "label": "Conceded /90",
+            "short": "Conceded",
+            "unit": "per90"
+          },
+          "conversion_pct": {
+            "direction": "positive",
+            "label": "Conversion",
+            "short": "Conv.",
+            "unit": "percent"
+          },
+          "dribble_success_pct": {
+            "direction": "positive",
+            "label": "Dribble success",
+            "short": "Dribble %",
+            "unit": "percent"
+          },
+          "dribbles_success_p90": {
+            "direction": "positive",
+            "label": "Dribbles /90",
+            "short": "Dribbles",
+            "unit": "per90"
+          },
+          "duel_win_pct": {
+            "direction": "positive",
+            "label": "Duels won",
+            "short": "Duels %",
+            "unit": "percent"
+          },
+          "goals_assists_p90": {
+            "direction": "positive",
+            "label": "G+A /90",
+            "short": "G+A",
+            "unit": "per90"
+          },
+          "goals_p90": {
+            "direction": "positive",
+            "label": "Goals /90",
+            "short": "Goals",
+            "unit": "per90"
+          },
+          "interceptions_p90": {
+            "direction": "positive",
+            "label": "Interceptions /90",
+            "short": "Intercepts",
+            "unit": "per90"
+          },
+          "key_passes_p90": {
+            "direction": "positive",
+            "label": "Key passes /90",
+            "short": "Key",
+            "unit": "per90"
+          },
+          "pass_completion_pct": {
+            "direction": "positive",
+            "label": "Pass completion",
+            "short": "Pass %",
+            "unit": "percent"
+          },
+          "passes_completed_p90": {
+            "direction": "positive",
+            "label": "Passes /90",
+            "short": "Passes",
+            "unit": "per90"
+          },
+          "save_pct": {
+            "direction": "positive",
+            "label": "Save %",
+            "short": "Save %",
+            "unit": "percent"
+          },
+          "saves_p90": {
+            "direction": "positive",
+            "label": "Saves /90",
+            "short": "Saves",
+            "unit": "per90"
+          },
+          "shots_p90": {
+            "direction": "positive",
+            "label": "Shots /90",
+            "short": "Shots",
+            "unit": "per90"
+          },
+          "tackles_p90": {
+            "direction": "positive",
+            "label": "Tackles /90",
+            "short": "Tackles",
+            "unit": "per90"
+          }
+        },
+        "summary": {
+          "appearances": 6,
+          "cohort_basis": "role_family",
+          "cohort_n": 14,
+          "league": "sco:premiership",
+          "league_label": "Scottish Premiership",
+          "minutes": 284,
+          "rating": 6.66,
+          "rating_percentile": null,
+          "role_label": "Left winger",
+          "season": "2026-27"
+        },
+        "tier": "extended"
+      },
+      "eyebrow": "Profile",
+      "id": "profile",
+      "note": "League-only rates; cohort provider group n=15; percentiles 0-100, higher is better.",
+      "status": "available",
+      "title": "Overall and position profile",
+      "warnings": []
+    },
+    "recent_matches": {
+      "badge": "10 rows",
+      "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-10-17",
+          "fixture_id": "1556676",
+          "goals": null,
+          "minutes": 44,
+          "opponent": "St Mirren",
+          "rating": 6.6,
+          "result": "W",
+          "score_against": 1,
+          "score_for": 3,
+          "venue": "H"
+        },
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-10-11",
+          "fixture_id": "1556670",
+          "goals": null,
+          "minutes": 31,
+          "opponent": "St Johnstone",
+          "rating": 6.9,
+          "result": "L",
+          "score_against": 1,
+          "score_for": 0,
+          "venue": "H"
+        },
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-09-05",
+          "fixture_id": "1556658",
+          "goals": null,
+          "minutes": 46,
+          "opponent": "Kilmarnock",
+          "rating": 6.6,
+          "result": "D",
+          "score_against": 0,
+          "score_for": 0,
+          "venue": "H"
+        },
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-08-30",
+          "fixture_id": "1556646",
+          "goals": null,
+          "minutes": 46,
+          "opponent": "Rangers",
+          "rating": 6.9,
+          "result": "L",
+          "score_against": 1,
+          "score_for": 0,
+          "venue": "H"
+        },
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "date": "2026-08-15",
+          "fixture_id": "1603956",
+          "goals": null,
+          "minutes": 77,
+          "opponent": "Dundee",
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "venue": null
+        },
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-08-08",
+          "fixture_id": "1556634",
+          "goals": null,
+          "minutes": 46,
+          "opponent": "Dundee",
+          "rating": 6.2,
+          "result": "L",
+          "score_against": 2,
+          "score_for": 0,
+          "venue": "A"
+        },
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-08-01",
+          "fixture_id": "1556630",
+          "goals": null,
+          "minutes": 73,
+          "opponent": "Heart of Midlothian",
+          "rating": 6.9,
+          "result": "W",
+          "score_against": 1,
+          "score_for": 2,
+          "venue": "H"
+        },
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "date": "2026-07-25",
+          "fixture_id": "1548168",
+          "goals": null,
+          "minutes": 44,
+          "opponent": "Kelty Hearts",
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "venue": null
+        },
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "date": "2026-07-22",
+          "fixture_id": "1548167",
+          "goals": null,
+          "minutes": 67,
+          "opponent": "Queen of the South",
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "venue": null
+        },
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "date": "2026-07-18",
+          "fixture_id": "1548151",
+          "goals": null,
+          "minutes": 81,
+          "opponent": "Queen's Park",
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "venue": null
+        }
+      ],
+      "eyebrow": "Recent matches",
+      "id": "recent_matches",
+      "note": "Current season, competitive matches only; latest 10. Missing provider values are shown as a dash, not zero.",
+      "status": "available",
+      "title": "Recent match log",
+      "warnings": []
+    },
     "records": {
       "badge": null,
       "data": [],
@@ -1010,7 +1434,7 @@
     }
   },
   "player_id": 388510,
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "season": "2026-27",
   "warnings": []
 }

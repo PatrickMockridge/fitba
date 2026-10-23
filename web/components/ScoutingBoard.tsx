@@ -1,14 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type {
   ScoutingArchetypeDefinition,
   ScoutingPlayer,
   ScoutingPoolDocument,
+  ScoutingPriorityConfig,
 } from "@/lib/data";
 import { formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
 
 type SortKey =
+  | "priority"
   | "percentile"
   | "adjusted"
   | "value_index"
@@ -17,7 +20,10 @@ type SortKey =
   | "goals_assists"
   | "archetype";
 
+type Row = ScoutingPlayer & { priority: number | null };
+
 const SORT_LABELS: Record<SortKey, string> = {
+  priority: "Scouting priority",
   percentile: "Rating percentile",
   adjusted: "Adjusted percentile",
   value_index: "Value index",
@@ -25,6 +31,12 @@ const SORT_LABELS: Record<SortKey, string> = {
   minutes: "Minutes",
   goals_assists: "Goals + assists /90",
   archetype: "Profile score",
+};
+
+const EUROPE_LABELS: Record<string, string> = {
+  "UEFA Champions League": "UCL",
+  "UEFA Europa League": "UEL",
+  "UEFA Conference League": "UECL",
 };
 
 function value(value: number | null | undefined, digits = 2): string {
@@ -39,7 +51,26 @@ function percentage(value: number | null): string {
   return value === null || value === undefined ? "—" : formatPercentValue(value, 1);
 }
 
-function sortValue(player: ScoutingPlayer, key: SortKey, archetype: string): number | null {
+function priorityFor(
+  player: ScoutingPlayer,
+  weights: ScoutingPriorityConfig,
+  u23Boost: boolean,
+  europeDiscount: boolean,
+): number | null {
+  if (player.value_index === null) return null;
+  const ageMultiplier =
+    u23Boost && player.age !== null && player.age <= weights.u23_max_age
+      ? weights.u23_multiplier
+      : 1;
+  const europeMultiplier =
+    europeDiscount && player.european_status === "qualified"
+      ? weights.europe_multiplier
+      : 1;
+  return player.value_index * ageMultiplier * europeMultiplier;
+}
+
+function sortValue(player: Row, key: SortKey, archetype: string): number | null {
+  if (key === "priority") return player.priority;
   if (key === "percentile") return player.rating_percentile;
   if (key === "adjusted") return player.adjusted_percentile;
   if (key === "value_index") return player.value_index;
@@ -49,20 +80,42 @@ function sortValue(player: ScoutingPlayer, key: SortKey, archetype: string): num
   return player.archetypes[archetype]?.score ?? null;
 }
 
+function europeLabel(player: ScoutingPlayer): string {
+  if (player.european_status === "unknown") return "Unknown";
+  if (player.european_status === "none") return "—";
+  const competitions = player.european_league_phase_competitions
+    .map((name) => EUROPE_LABELS[name] ?? name)
+    .join("/");
+  const minutes = player.european_league_phase_minutes ?? 0;
+  return competitions ? `${competitions} · ${minutes}m` : `${minutes}m`;
+}
+
 export function ScoutingBoard({
   document,
   archetypes,
+  priority,
 }: {
   document: ScoutingPoolDocument;
   archetypes: ScoutingArchetypeDefinition[];
+  priority?: ScoutingPriorityConfig;
 }) {
   const players = document.players;
+  const weights: ScoutingPriorityConfig = priority ?? {
+    u23_max_age: 23,
+    u23_multiplier: 1.3,
+    europe_minutes_threshold: 90,
+    europe_multiplier: 0.6,
+  };
   const [query, setQuery] = useState("");
   const [role, setRole] = useState("all");
   const [archetype, setArchetype] = useState("all");
   const [minMinutes, setMinMinutes] = useState("450");
   const [maxAge, setMaxAge] = useState("all");
-  const [sort, setSort] = useState<SortKey>("percentile");
+  const [u23Boost, setU23Boost] = useState(true);
+  const [u23Only, setU23Only] = useState(false);
+  const [europeDiscount, setEuropeDiscount] = useState(true);
+  const [excludeEurope, setExcludeEurope] = useState(false);
+  const [sort, setSort] = useState<SortKey>("priority");
 
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
@@ -85,7 +138,7 @@ export function ScoutingBoard({
     const needle = query.trim().toLowerCase();
     const minimum = Number(minMinutes);
     const ageLimit = maxAge === "all" ? null : Number(maxAge);
-    return players
+    const matched = players
       .filter((player) => {
         if (needle) {
           const haystack = `${player.name} ${player.full_name ?? ""} ${player.club}`.toLowerCase();
@@ -95,18 +148,39 @@ export function ScoutingBoard({
         if (archetype !== "all" && player.archetypes[archetype]?.score == null) return false;
         if (player.minutes < minimum) return false;
         if (ageLimit !== null && (player.age ?? 99) > ageLimit) return false;
+        if (u23Only && (player.age === null || player.age > weights.u23_max_age)) {
+          return false;
+        }
+        if (excludeEurope && player.european_status === "qualified") return false;
         return true;
       })
-      .sort((left, right) => {
-        const leftValue = sortValue(left, sort, archetype);
-        const rightValue = sortValue(right, sort, archetype);
-        if (leftValue === null && rightValue === null) return 0;
-        if (leftValue === null) return 1;
-        if (rightValue === null) return -1;
-        if (rightValue !== leftValue) return rightValue - leftValue;
-        return right.minutes - left.minutes;
-      });
-  }, [players, query, role, archetype, minMinutes, maxAge, sort]);
+      .map((player) => ({
+        ...player,
+        priority: priorityFor(player, weights, u23Boost, europeDiscount),
+      }));
+    return matched.sort((left, right) => {
+      const leftValue = sortValue(left, sort, archetype);
+      const rightValue = sortValue(right, sort, archetype);
+      if (leftValue === null && rightValue === null) return 0;
+      if (leftValue === null) return 1;
+      if (rightValue === null) return -1;
+      if (rightValue !== leftValue) return rightValue - leftValue;
+      return right.minutes - left.minutes;
+    });
+  }, [
+    players,
+    query,
+    role,
+    archetype,
+    minMinutes,
+    maxAge,
+    u23Boost,
+    u23Only,
+    europeDiscount,
+    excludeEurope,
+    sort,
+    weights,
+  ]);
 
   return (
     <div>
@@ -167,6 +241,38 @@ export function ScoutingBoard({
           </select>
         </label>
         <label>
+          <input
+            type="checkbox"
+            checked={u23Boost}
+            onChange={(event) => setU23Boost(event.target.checked)}
+          />{" "}
+          U23 boost
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={u23Only}
+            onChange={(event) => setU23Only(event.target.checked)}
+          />{" "}
+          U23 only
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={europeDiscount}
+            onChange={(event) => setEuropeDiscount(event.target.checked)}
+          />{" "}
+          Europe discount
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={excludeEurope}
+            onChange={(event) => setExcludeEurope(event.target.checked)}
+          />{" "}
+          Exclude 90+ Europe
+        </label>
+        <label>
           Sort
           <select value={sort} onChange={(event) => setSort(event.target.value as SortKey)}>
             {(Object.keys(SORT_LABELS) as SortKey[]).map((key) => (
@@ -177,19 +283,22 @@ export function ScoutingBoard({
           </select>
         </label>
       </div>
-      <p className="fine-print" aria-live="polite">
-        Showing {formatInteger(filtered.length)} of {formatInteger(players.length)} ranked
-        players at {formatInteger(Number(minMinutes))}+ minutes. Pct is within{" "}
-        {document.league.name} and the role cohort; Adj Pct maps that standing into the
-        Premiership distribution. The value index is a scouting ordering, not a transfer value.
-        {document.coverage.role_players} players have a starting-XI role.
+      <p className="fine-print" aria-live="polite" data-contract-indicator="basis">
+        Showing {formatInteger(filtered.length)} of {formatInteger(players.length)} ranked players
+        at {formatInteger(Number(minMinutes))}+ minutes. Priority = value index × U23 multiplier ×
+        European league-phase multiplier. U23 ≤{formatInteger(weights.u23_max_age)} ×
+        {formatDecimal(weights.u23_multiplier, 2)}; European league phase ≥
+        {formatInteger(weights.europe_minutes_threshold)} min ×
+        {formatDecimal(weights.europe_multiplier, 2)}. Preferences, not measured quality; unknown
+        Europe is not discounted.
       </p>
       <div className="table-wrap">
         <table className="league-table compact">
           <caption className="fine-print">
-            Provider season statistics for {document.league.name}. Percentiles are league- and
-            role-relative; the provider rating is not a verdict. A dash means the feed does not
-            supply the value.
+            Provider season statistics for {document.league.name}. Pct is within this league and
+            role; Adj Pct maps that standing into the Premiership distribution. The value index
+            is not a transfer value; priority is a scouting preference. A dash means the feed does
+            not supply the value.
           </caption>
           <thead>
             <tr>
@@ -202,6 +311,8 @@ export function ScoutingBoard({
               <th className="num" scope="col">Pct</th>
               <th className="num" scope="col">Adj Pct</th>
               <th className="num" scope="col">Value index</th>
+              <th className="num" scope="col">Priority</th>
+              <th scope="col">Europe</th>
               <th className="num" scope="col">G+A/90</th>
               <th className="num" scope="col">Dribbles/90</th>
               <th className="num" scope="col">Passes/90</th>
@@ -216,15 +327,29 @@ export function ScoutingBoard({
           <tbody>
             {filtered.map((player) => (
               <tr key={`${player.player_id}-${player.club}`}>
-                <td>{player.name}</td>
-                <td>{player.club}</td>
+                <td>
+                  <Link href={`/scouting/player/${player.player_id}/`}>
+                    {player.name}
+                  </Link>
+                </td>
+                <td>
+                  {player.club}
+                  {player.stats_club && player.stats_club !== player.club ? (
+                    <span className="muted"> · stats at {player.stats_club}</span>
+                  ) : null}
+                </td>
                 <td>
                   {player.role_label}
                   {player.flags.includes("role_unknown") ? (
                     <span className="badge badge-neutral"> role unknown</span>
                   ) : null}
                 </td>
-                <td className="num">{value(player.age, 0)}</td>
+                <td className="num">
+                  {value(player.age, 0)}
+                  {player.age !== null && player.age <= weights.u23_max_age ? (
+                    <span className="badge badge-neutral"> U23</span>
+                  ) : null}
+                </td>
                 <td className="num">
                   {formatInteger(player.minutes)}
                   {player.flags.includes("low_minutes") ? (
@@ -235,6 +360,13 @@ export function ScoutingBoard({
                 <td className="num">{percentile(player.rating_percentile)}</td>
                 <td className="num">{percentile(player.adjusted_percentile)}</td>
                 <td className="num">{value(player.value_index, 1)}</td>
+                <td className="num">{value(player.priority, 1)}</td>
+                <td>
+                  {europeLabel(player)}
+                  {player.european_status === "qualified" ? (
+                    <span className="badge badge-warn"> shop window</span>
+                  ) : null}
+                </td>
                 <td className="num">{value(player.goals_assists_p90)}</td>
                 <td className="num">{value(player.dribbles_success_p90)}</td>
                 <td className="num">{value(player.passes_completed_p90)}</td>

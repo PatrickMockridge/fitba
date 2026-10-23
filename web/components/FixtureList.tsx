@@ -28,7 +28,7 @@ export function FixtureList({
           <span className="fixture-comp">
             {COMPETITION_LABEL[fixture.competition_id] ?? fixture.competition_name}
           </span>
-          <span className="match-venue">{fixture.venue}</span>
+          <span className="match-venue">{fixture.venue === "N" ? "Neutral" : fixture.venue}</span>
           <span className="match-opponent">
             {fixture.opponent_name}
             {fixture.stage ? <span className="stage-badge">{fixture.stage}</span> : null}

@@ -22,7 +22,8 @@ Before changing public copy, layout or a number:
    only.
 8. The relevant page specification: `docs/matchday.md`, `docs/analysis.md`,
    `docs/fixtures.md`, `docs/match-scoreboard.md`, `docs/xg.md`, `docs/needs.md`,
-   `docs/transfers.md`, `docs/squad.md`.
+   `docs/transfers.md`, `docs/squad.md`, and the shared
+   `docs/player-profile-standard.md` for player profiles.
 
 Do not start a style, copy or number change without reading 1–6.
 

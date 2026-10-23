@@ -15,13 +15,13 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 3. Competition pages | **Complete.** `/competitions/`, League Cup and Scottish Cup pages live. |
 | 4. Transfers and loans | **Live for Aberdeen.** Confirmed-business register, `/transfers/` and `/loans/`. |
 | 4b. Two doors and rumour mill | **Live.** `/matchday/`, `/recruitment/`, curated rumours, fan signal and the advisory profile; engagement deferred. |
-| 4c. Squad and player profiles | **Live.** `/squad/`, one `/players/<id>/` page per player, loan tags, coverage states and site-wide player links. |
+| 4c. Squad and player profiles | **Live.** `/squad/`, one `/players/<id>/` page per player with the shared two-figure Nightingale rose, extended current-squad availability and recent-match log, loan tags, coverage states and site-wide player links. |
 | 4d. Cormack-era historical record | **Live.** `/history/`, one season review per season, manager/staff timeline, honours, historical transfers, style and selection. |
 | 4e. Upcoming-matchday dashboard | **Live.** `/matchday/`, both predicted XIs, form, venue splits, style lean and strength; `/clubs/aberdeen/` retired to a moved notice. |
-| 4f. Data analysis | **Live.** `/analysis/` and a matchday strip: the owner's view, the chairman's frame and six claims on the team, squad and Cormack-era record. |
+| 4f. Season overview | **Live.** `/analysis/` is the season briefing: next fixtures, availability, aims, squad decisions and bridges; `/analysis/xg/` remains the xG deep page. |
 | 4g. Provenance, availability and needs | **Live.** Layer truth table at `/sources/`, curated availability ledger in the predicted XI, and a squad-needs board on `/recruitment/` that feeds the scouting method. |
 | 4h. Match record and fxG | **Live.** `/matches/` and one page per played fixture, plus an experimental fxG model at `/analysis/xg/`. The provider gate is failing, so fxG is descriptive only. |
-| 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and six profiles. An empirical league alignment and a scouting value index are live; GBP value bands, style fit and budget bands are deferred. |
+| 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and seven profiles, including split assist/goal attacker lenses. An empirical league alignment, a value index, U23/European scouting priority and one profile page per ranked player are live; GBP value bands, style fit and budget bands are deferred. |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |
@@ -116,18 +116,15 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
   not team news. Possession is unknown and is not used.
 - See [matchday.md](matchday.md).
 
-## Phase 4f — Data analysis (live)
+## Phase 4f — Season overview (live)
 
-- `/analysis/` is the bridge between the matchday lookahead, squad, recruitment
-  and history; `/matchday/` carries a compact case strip.
-- The six claims: the team now, the defence, the attack, the managers, the squad
-  and the chairman's record. The Cormack-era frame is part of the case, not a
-  separate weighted appendix.
-  trading-club pillars, turnover and young minutes.
-- Provider ratings are one labelled, minutes-weighted family signal. No
-  individual ratings as verdicts, no blame, no invented availability and no
-  unmeasured channel claims.
-- See [analysis.md](analysis.md).
+- `/analysis/` is the bridge between the next matchday, the results/form record,
+  the squad and scouting; `/matchday/` carries the six-game lookahead.
+- The season overview shows next fixtures, official AFC team news, derived
+  selection signals, measured aims and factual squad-decision lenses.
+- Provider ratings are labelled and relative, never individual verdicts; no
+  blame, invented availability, contract or fee claims.
+- See [analysis.md](analysis.md) and [analysis-review.md](analysis-review.md).
 
 ## Phase 4g — Provenance, availability and needs (live)
 

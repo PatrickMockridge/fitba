@@ -11,6 +11,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from fitba.normalize.teams import TeamRegistry
+
 DataStatus = Literal["available", "partial", "unavailable", "not_applicable"]
 WarningCode = Literal[
     "COVERAGE_PARTIAL",
@@ -71,6 +73,88 @@ class PanelBase(StrictModel):
     warnings: list[PageWarning] = Field(default_factory=list)
 
 
+class RoseAxis(StrictModel):
+    metric: str
+    value: float | None
+    percentile: float | None
+    cohort_n: int
+
+
+class RoseFigure(StrictModel):
+    id: Literal["overall", "position"]
+    label: str
+    status: Literal["available", "partial", "unavailable"]
+    axes: list[RoseAxis]
+
+
+class RoseBlock(StrictModel):
+    status: Literal["available", "partial", "unavailable"]
+    reason: str | None
+    league: str
+    league_label: str
+    minutes: int
+    min_minutes: int
+    cohort_min_minutes: int
+    basis: Literal["role_family", "provider_group", "insufficient"]
+    cohort_n: int
+    figures: list[RoseFigure]
+
+
+class ProfileSummary(StrictModel):
+    season: str
+    league: str
+    league_label: str
+    role_label: str | None
+    minutes: int
+    appearances: int | None
+    rating: float | None
+    rating_percentile: float | None
+    cohort_basis: str | None
+    cohort_n: int | None
+
+
+class AvailabilityBlock(StrictModel):
+    status: str
+    reason: str | None
+    reason_category: str | None
+    expected_return: str | None
+    confidence: str
+    source_id: str | None
+    source_title: str | None
+    source_url: str | None
+    verified_at: str | None
+    note: str | None
+    in_squad: bool | None
+
+
+class RecentMatch(StrictModel):
+    fixture_id: int | str
+    date: str
+    competition: str
+    opponent: str
+    venue: Literal["H", "A"] | None
+    score_for: int | None
+    score_against: int | None
+    result: Literal["W", "D", "L"] | None
+    minutes: int | None
+    rating: float | None
+    goals: int | None
+    assists: int | None
+
+
+class ProfilePanel(PanelBase):
+    id: Literal["profile"] = "profile"
+    data: dict[str, Any] | None
+
+
+class AvailabilityPanel(PanelBase):
+    id: Literal["availability"] = "availability"
+
+
+class RecentMatchesPanel(PanelBase):
+    id: Literal["recent_matches"] = "recent_matches"
+
+
 class PositionPanel(PanelBase):
     id: Literal["position"] = "position"
 
@@ -87,17 +171,133 @@ class RecordsPanel(PanelBase):
     id: Literal["records"] = "records"
 
 
+PanelId = Literal[
+    "profile",
+    "position",
+    "playing_time",
+    "performance",
+    "availability",
+    "recent_matches",
+    "records",
+]
+
+PANEL_ORDER: list[PanelId] = [
+    "profile",
+    "position",
+    "playing_time",
+    "performance",
+    "availability",
+    "recent_matches",
+    "records",
+]
+
+
 class PlayerPageDocument(StrictModel):
-    schema_version: Literal["1.0.0"] = "1.0.0"
+    schema_version: Literal["1.1.0"] = "1.1.0"
     player_id: int
     season: str
     generated_at: str
     identity: IdentityBlock
-    panel_order: list[Literal["position", "playing_time", "performance", "records"]] = Field(
-        default_factory=lambda: ["position", "playing_time", "performance", "records"]
-    )
-    panels: dict[str, PositionPanel | PlayingTimePanel | PerformancePanel | RecordsPanel]
+    panel_order: list[PanelId] = Field(default_factory=lambda: list(PANEL_ORDER))
+    panels: dict[
+        str,
+        ProfilePanel
+        | AvailabilityPanel
+        | PositionPanel
+        | PlayingTimePanel
+        | PerformancePanel
+        | RecentMatchesPanel
+        | RecordsPanel,
+    ]
     warnings: list[PageWarning] = Field(default_factory=list)
+
+
+def build_recent_matches(
+    appearance_rows: list[dict[str, Any]],
+    stat_rows: list[dict[str, Any]],
+    match_rows: list[dict[str, Any]],
+    *,
+    player_id: int,
+    team_id: int = 252,
+    season: str,
+    limit: int = 10,
+) -> list[dict[str, Any]]:
+    """Latest competitive current-season rows for one Aberdeen player."""
+    season_start = season.split("-")[0]
+    team_names = TeamRegistry()
+    stats = {
+        str(row.get("fixture_id")): row
+        for row in stat_rows
+        if str(row.get("player_id")) == str(player_id) and str(row.get("team_id")) == str(team_id)
+    }
+    matches: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for row in match_rows:
+        if str(row.get("season")) != season or row.get("home_goals") is None:
+            continue
+        date = str(row.get("date") or "")[:10]
+        home = str(row.get("home_team_name") or "").casefold()
+        away = str(row.get("away_team_name") or "").casefold()
+        if home and away:
+            matches[(date, home, away)] = row
+    rows: list[dict[str, Any]] = []
+    for row in appearance_rows:
+        if str(row.get("player_id")) != str(player_id):
+            continue
+        if str(row.get("team_id")) != str(team_id):
+            continue
+        if str(row.get("season")) != season_start:
+            continue
+        if int(row.get("minutes") or 0) <= 0:
+            continue
+        competition = str(row.get("competition") or "")
+        if "friendly" in competition.lower():
+            continue
+        rows.append(row)
+    rows.sort(key=lambda item: str(item.get("date") or ""), reverse=True)
+    out: list[dict[str, Any]] = []
+    for row in rows[:limit]:
+        fixture_key = str(row.get("fixture_id"))
+        stat = stats.get(fixture_key) or {}
+        date = str(row.get("date") or "")[:10]
+        competition = str(row.get("competition") or "")
+        opponent = team_names.display_name(str(row.get("opponent") or "Unknown"))
+        fixture = matches.get((date, "aberdeen", opponent.casefold())) or matches.get(
+            (date, opponent.casefold(), "aberdeen")
+        )
+        venue: Literal["H", "A"] | None = None
+        score_for = score_against = None
+        result: Literal["W", "D", "L"] | None = None
+        if fixture is not None:
+            home = str(fixture.get("home_team_name") or "").casefold() == "aberdeen"
+            home_goals = fixture.get("home_goals")
+            away_goals = fixture.get("away_goals")
+            if home_goals is not None and away_goals is not None:
+                venue = "H" if home else "A"
+                score_for = int(home_goals) if home else int(away_goals)
+                score_against = int(away_goals) if home else int(home_goals)
+                if score_for > score_against:
+                    result = "W"
+                elif score_for < score_against:
+                    result = "L"
+                else:
+                    result = "D"
+        out.append(
+            {
+                "fixture_id": fixture_key,
+                "date": date,
+                "competition": competition,
+                "opponent": opponent,
+                "venue": venue,
+                "score_for": score_for,
+                "score_against": score_against,
+                "result": result,
+                "minutes": row.get("minutes"),
+                "rating": stat.get("rating"),
+                "goals": stat.get("goals"),
+                "assists": stat.get("assists"),
+            }
+        )
+    return out
 
 
 def _known_foot(player: dict[str, Any]) -> KnownValue:
@@ -308,11 +508,74 @@ def _status(value: str | None, *, not_applicable: bool = False) -> DataStatus:
     return "unavailable"
 
 
+def _unavailable_rose(reason: str = "not_built") -> dict[str, Any]:
+    return {
+        "status": "unavailable",
+        "reason": reason,
+        "league": "sco:premiership",
+        "league_label": "Scottish Premiership",
+        "minutes": 0,
+        "min_minutes": 180,
+        "cohort_min_minutes": 450,
+        "basis": "insufficient",
+        "cohort_n": 0,
+        "figures": [
+            {"id": "overall", "label": "Overall profile", "status": "unavailable", "axes": []},
+            {"id": "position", "label": "Position profile", "status": "unavailable", "axes": []},
+        ],
+    }
+
+
+def _league_summary(player: dict[str, Any], rose: dict[str, Any] | None) -> dict[str, Any]:
+    rows = [
+        row
+        for row in player.get("stats") or []
+        if row.get("scope") == "club" and row.get("competition") == "Premiership"
+    ]
+    minutes = sum(int(row.get("minutes") or 0) for row in rows)
+    appearances = sum(int(row.get("appearances") or 0) for row in rows)
+    rated = [
+        (float(row["rating"]), int(row.get("appearances") or 0))
+        for row in rows
+        if row.get("rating") is not None and int(row.get("appearances") or 0) > 0
+    ]
+    rating = (
+        round(
+            sum(value * apps for value, apps in rated) / sum(apps for _, apps in rated),
+            2,
+        )
+        if rated
+        else None
+    )
+    display = player.get("display_role") or {}
+    role = player.get("role") or {}
+    return {
+        "season": str(player.get("season") or ""),
+        "league": "sco:premiership",
+        "league_label": "Scottish Premiership",
+        "role_label": display.get("label") or role.get("label"),
+        "minutes": int((rose or {}).get("minutes") or minutes),
+        "appearances": appearances or None,
+        "rating": rating,
+        "rating_percentile": None,
+        "cohort_basis": None,
+        "cohort_n": None,
+    }
+
+
 def build_player_page(
     player: dict[str, Any],
     *,
     season: str,
     generated_at: str,
+    rose: dict[str, Any] | None = None,
+    rose_catalogue: dict[str, Any] | None = None,
+    availability: dict[str, Any] | None = None,
+    recent_matches: list[dict[str, Any]] | None = None,
+    rating_percentile: float | None = None,
+    cohort_basis: str | None = None,
+    cohort_n: int | None = None,
+    current_squad: bool | None = None,
 ) -> dict[str, Any]:
     """Project one squad player into the player-page result document."""
     role = player.get("role") or {}
@@ -394,6 +657,37 @@ def build_player_page(
     if position_status == "unavailable" and club_history:
         position_status = "partial"
 
+    current = bool(player.get("status") == "squad") if current_squad is None else current_squad
+    rose_block = RoseBlock.model_validate(rose or _unavailable_rose())
+    summary_values = _league_summary(player, rose_block.model_dump())
+    summary_values.update(
+        {
+            "season": season,
+            "rating_percentile": rating_percentile,
+            "cohort_basis": cohort_basis,
+            "cohort_n": cohort_n,
+        }
+    )
+    summary = ProfileSummary.model_validate(summary_values)
+    availability_block = (
+        AvailabilityBlock(
+            status=str(availability.get("status") or "unknown"),
+            reason=availability.get("reason"),
+            reason_category=availability.get("reason_category"),
+            expected_return=availability.get("expected_return"),
+            confidence=str(availability.get("confidence") or "unknown"),
+            source_id=availability.get("source_id"),
+            source_title=availability.get("source_title"),
+            source_url=availability.get("source_url"),
+            verified_at=availability.get("verified_at"),
+            note=availability.get("note"),
+            in_squad=availability.get("in_squad"),
+        )
+        if availability is not None
+        else None
+    )
+    match_rows = [RecentMatch.model_validate(row) for row in (recent_matches or [])]
+
     identity = IdentityBlock(
         player_id=int(player["player_id"]),
         name=str(player.get("name") or ""),
@@ -409,6 +703,68 @@ def build_player_page(
         loan=player.get("loan"),
         side=display.get("side"),
         preferred_foot=_known_foot(player),
+    )
+
+    profile_panel = ProfilePanel(
+        eyebrow="Profile",
+        title="Overall and position profile",
+        status=rose_block.status,
+        badge=rose_block.basis if rose_block.status != "unavailable" else rose_block.reason,
+        data={
+            "tier": "extended",
+            "current_squad": current,
+            "summary": summary.model_dump(),
+            "rose": rose_block.model_dump(),
+            "rose_catalogue": rose_catalogue or {},
+        },
+        note=(
+            f"League-only rates; cohort {rose_block.basis.replace('_', ' ')} "
+            f"n={rose_block.cohort_n}; percentiles 0-100, higher is better."
+        ),
+        warnings=[],
+    )
+
+    availability_status: DataStatus = (
+        "available"
+        if availability_block is not None and availability_block.status != "unknown"
+        else "partial"
+        if availability_block is not None
+        else "not_applicable"
+    )
+    availability_panel = AvailabilityPanel(
+        eyebrow="Availability",
+        title="Availability and team news",
+        status=availability_status,
+        badge=availability_block.status if availability_block is not None else None,
+        data=(
+            {"availability": availability_block.model_dump()}
+            if availability_block is not None
+            else None
+        ),
+        note=(
+            availability_block.note
+            if availability_block is not None
+            else "Current-squad team news is not applicable to this loan profile."
+        ),
+        warnings=[],
+    )
+
+    recent_status: DataStatus = (
+        "available" if match_rows else "unavailable" if current else "not_applicable"
+    )
+    recent_panel = RecentMatchesPanel(
+        eyebrow="Recent matches",
+        title="Recent match log",
+        status=recent_status,
+        badge=f"{len(match_rows)} rows" if match_rows else None,
+        data=[row.model_dump() for row in match_rows],
+        note=(
+            "Current season, competitive matches only; latest 10. Missing "
+            "provider values are shown as a dash, not zero."
+            if current
+            else "Recent Aberdeen matches are not applicable to this loan profile."
+        ),
+        warnings=[],
     )
 
     position_panel = PositionPanel(
@@ -508,9 +864,12 @@ def build_player_page(
         generated_at=generated_at,
         identity=identity,
         panels={
+            "profile": profile_panel,
+            "availability": availability_panel,
             "position": position_panel,
             "playing_time": playing_panel,
             "performance": performance_panel,
+            "recent_matches": recent_panel,
             "records": records_panel,
         },
         warnings=warnings,
@@ -522,4 +881,9 @@ def player_page_schema() -> dict[str, Any]:
     return PlayerPageDocument.model_json_schema()
 
 
-__all__ = ["PlayerPageDocument", "build_player_page", "player_page_schema"]
+__all__ = [
+    "PlayerPageDocument",
+    "build_player_page",
+    "build_recent_matches",
+    "player_page_schema",
+]

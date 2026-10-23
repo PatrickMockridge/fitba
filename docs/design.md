@@ -216,6 +216,11 @@ Rules:
   source. Those are part of the design, not optional chrome.
 - A chart must be accompanied by the table or the data it encodes. It does not
   replace the evidence.
+- A Nightingale rose uses equal-angle sectors and a radius proportional to the
+  square root of the percentile, so sector area encodes the value. It always has
+  a title/description, a companion table with the raw value, percentile and
+  cohort n, and an explicit unavailable state. It never draws a missing value
+  as a zero petal.
 - Cards are for editorial units: a theme, a transfer, a match read. They are not
   the default container for every section.
 

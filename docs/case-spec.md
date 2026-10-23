@@ -1,16 +1,15 @@
-# Data analysis: specification
+# Case archive: matchday evidence strip
 
-**Status:** approved for implementation. The owner view is the thesis in the
-  brief, edited only for grammar; the chairman frame is a summary from the
-  public record.
-**Route:** `/analysis/`. The old `/themes/` route redirects here. **Nav and H1:** Data analysis.
+**Status:** superseded for `/analysis/` by [analysis.md](analysis.md). Retained
+for the compact matchday evidence strip and the retained `themes/aberdeen.json`
+payload.
 **Owner:** patrickmockridge. **Drafted:** 2026-10-22.
 
 ## Decisions recorded
 
 - **Voice:** the owner's opinion leads, stated and attributed as opinion. The
   chairman's vision and own words frame it. Fitba tests the record.
-- **Name:** Data analysis. The route is `/analysis/`; `/themes/` redirects.
+- **Name:** Case archive. The public season page is `/analysis/`.
 - **Small samples:** state the claim, then the count, then what is and is not
   established. Do not hold the claim.
 - **Structure:** claim-led rebuild with a property-based contract change. Six
@@ -25,14 +24,10 @@
 
 ## Purpose
 
-Data analysis is the logical bridge between the team on the pitch, the squad built
-off it, and the chairman's stated vision and record. It is not a dashboard, a
-data-science appendix or a verdict machine.
-
-The page starts with the owner's opinion, clearly attributed as opinion. It then
-shows how much the public record supports it, what contradicts it, and what
-better data would settle. The chairman's vision and own words frame the analysis;
-fitba tests the record.
+This document now describes the retained case archive. The claim cards are used
+only by the compact matchday evidence strip; the public season page `/analysis/`
+is the season overview described in [analysis.md](analysis.md). It is not a
+dashboard, a data-science appendix or a verdict machine.
 
 ## Reader promise
 
@@ -278,7 +273,7 @@ contracted table, column, confidence or unknown state is not.
 
 ## Contract and governance
 
-- `/analysis/` is the canonical route; `/themes/` redirects. Nav and H1 are **Data analysis**.
+- `/analysis/` is the canonical season-overview route; `/themes/` redirects. The case archive is not rendered there.
 - The contract becomes property-based:
   - every published claim is visible with claim, count, status, evidence table,
     limitation and withdrawal condition;

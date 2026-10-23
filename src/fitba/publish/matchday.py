@@ -27,8 +27,8 @@ from fitba.analytics.matchday import (
     style_block,
     style_lean,
 )
-from fitba.ingest.fixtures import load_club_fixtures
 from fitba.ingest.matchday import MATCHDAY_DIR, load_meta, next_fixture
+from fitba.normalize.schedule import load_schedule
 from fitba.settings import NORMALIZED_DIR, source_ids, source_registry
 from fitba.settings import (
     aberdeen as aberdeen_config,
@@ -670,40 +670,37 @@ def _tables_for(matches: pl.DataFrame, season: str) -> dict[str, pl.DataFrame]:
 def _next_fixtures(
     *,
     after_date: str,
-    limit: int = 3,
+    season: str,
+    limit: int = 5,
 ) -> list[FixtureBlock]:
-    frame = load_club_fixtures("aberdeen")
-    if frame.height == 0:
-        return []
     rows = []
-    for row in frame.to_dicts():
-        if str(row.get("status") or "").casefold() not in {"scheduled", "upcoming", "tbd"}:
+    for row in load_schedule(season):
+        if row.get("status") != "scheduled" or row.get("conflict_review"):
             continue
-        if str(row.get("date") or "")[:10] <= after_date:
+        if row.get("is_friendly"):
             continue
-        venue = "H" if row.get("home_team_id") == "sco:aberdeen" else "A"
+        if str(row.get("date") or "") <= after_date:
+            continue
         rows.append(
             FixtureBlock(
-                match_id=str(row.get("match_id") or ""),
+                match_id=str(
+                    row.get("fixture_id") or row.get("match_id") or row.get("schedule_key")
+                ),
                 competition_id=str(row.get("competition_id") or ""),
                 competition_name=str(row.get("competition_name") or ""),
-                stage=row.get("stage") or row.get("round"),
-                season=str(row.get("season") or ""),
-                date=str(row.get("date") or "")[:10],
+                stage=row.get("stage"),
+                season=str(row.get("season") or season),
+                date=str(row.get("date") or ""),
                 kickoff=row.get("kickoff"),
                 home_team_id=str(row.get("home_team_id") or ""),
                 home_team_name=str(row.get("home_team_name") or ""),
                 away_team_id=str(row.get("away_team_id") or ""),
                 away_team_name=str(row.get("away_team_name") or ""),
-                venue=venue,
-                opponent_id=str(
-                    row.get("away_team_id") if venue == "H" else row.get("home_team_id")
-                ),
-                opponent_name=str(
-                    row.get("away_team_name") if venue == "H" else row.get("home_team_name")
-                ),
+                venue="N" if row.get("neutral") else "H" if row.get("is_home") else "A",
+                opponent_id=str(row.get("opponent_id") or ""),
+                opponent_name=str(row.get("opponent_name") or ""),
                 status=str(row.get("status") or ""),
-                source_id=row.get("source_id"),
+                source_id="spfl" if "spfl" in (row.get("sources") or []) else "api_football",
             )
         )
     rows.sort(key=lambda item: (item.date, item.kickoff or ""))
@@ -1016,14 +1013,28 @@ def build_matchday_payload(
         "model or comparison is used. The page is not a result prediction and "
         "not betting advice."
     )
+    fixture_block = _fixture_block(fixture)
+    for schedule_row in load_schedule(season):
+        if (
+            str(schedule_row.get("date") or "") == fixture_block.date
+            and str(schedule_row.get("competition_id") or "") == fixture_block.competition_id
+            and str(schedule_row.get("opponent_name") or "") == fixture_block.opponent_name
+        ):
+            fixture_block.venue = (
+                "N" if schedule_row.get("neutral") else "H" if schedule_row.get("is_home") else "A"
+            )
+            fixture_block.stage = schedule_row.get("stage")
+            fixture_block.competition_name = str(schedule_row.get("competition_name") or "")
+            fixture_block.kickoff = schedule_row.get("kickoff") or fixture_block.kickoff
+            break
     document = MatchdayDocument(
         generated_at=generated_at,
         season=season,
         state=state,
         stale_reason=stale_reason,
         served_generated_at=meta.get("generated_at"),
-        fixture=_fixture_block(fixture),
-        next_fixtures=_next_fixtures(after_date=fixture_date),
+        fixture=fixture_block,
+        next_fixtures=_next_fixtures(after_date=fixture_date, season=season),
         teams=teams,
         form_guide={key: FormBlock(**value) for key, value in form_guide.items()},
         head_to_head=_head_to_head(all_matches, opponent_id),

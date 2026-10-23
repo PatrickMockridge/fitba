@@ -313,3 +313,186 @@ recorded in the reviewed plan. Registry version 2.6.0.
   `/metrics/`, `/status/`, `/methodology/`, `/sources/`.
 - Audit impact: the new wildcard payload paths cover the value-model and
   adjusted leaves; the audit is regenerated.
+
+## 2.7.0 — 2026-10-23
+
+U23 and European shop-window scouting priority, and per-player scouting profile
+pages. Owner approval recorded in the reviewed plan. Registry version 2.7.0.
+
+- New `scouting.priority` metric: `scouting_priority = value_index ×
+  age_multiplier × europe_multiplier`, with U23 ≤23 ×1.30 and European
+  league-phase ≥90 minutes ×0.60. The priority is an Aberdeen scouting
+  preference, not a measured quality term or a transfer value. Unknown European
+  status is never discounted.
+- `scouting.pool` gains `scouting_priority`, `age_multiplier`,
+  `europe_multiplier`, `european_league_phase_minutes`,
+  `european_league_phase_appearances` and `european_status`; version 2.
+- `scouting.coverage` gains the European league-phase coverage block; version 2.
+- `param.scouting.value` gains the `priority` block (U23 cutoff, U23 multiplier,
+  European threshold, European multiplier) and moves to version 2.
+- New provenance layer `scouting_europe`: the 2026-27 league phases of the
+  Champions League, Europa League and Conference League, built from league-phase
+  fixtures and the per-fixture player endpoint. Qualifiers and play-offs are
+  excluded. 147 requests covered 54/54 UCL, 54/54 UEL and 36/36 UECL played
+  league-phase fixtures at the first run; 2,130 players, 494 in the domestic
+  pool.
+- Layer 2 archetype leaders and the pivot card rank by scouting priority after
+  the profile filter. The global and per-league searches default to priority and
+  expose U23/Europe filters and columns.
+- New `/scouting/player/<playerId>/` scouting profile page for every unique
+  ranked player (4,105 pages), linked from the search, league tables and Layer 2.
+- Affected surfaces: `/scouting/`, `/scouting/search/`, `/scouting/<league>/`,
+  `/scouting/player/<id>/`, `/methodology/`, `/sources/`, `/metrics/`,
+  `/status/`, `/sitemap.xml`.
+- Audit impact: the new payload paths cover the priority and European leaves;
+  the audit is regenerated. Existing values are unchanged except the additive
+  priority fields.
+
+## 2.8.0 — 2026-10-23
+
+Current-club resolution and split attacker lenses. Owner approval recorded in
+the reviewed request. Registry version 2.8.0.
+
+- The scouting pool now publishes the **current club** from the provider
+  transfer feed for every team in the pool, with the season-statistics club kept
+  as `stats_club`. `scouting.pool` gains `current_club_status`,
+  `stats_club`, `current_club_source` and `transferred_at`; version 3.
+  `scouting.coverage` gains the current-club coverage block; version 3.
+- Robbie Ure’s 2026-27 Allsvenskan statistics remain Sirius; his latest transfer
+  is to Sevilla on 2026-08-10, so the club shown is Sevilla with “stats at
+  Sirius”. A player with no later transfer keeps the stats club and is labelled
+  `source: stats_snapshot`.
+- The combined “goal contributor” archetype is replaced by **assist-biased
+  contributor** and **goal-scoring forward** profiles. `scouting.archetypes`
+  gains the attacker payload path and moves to version 2; the hub gains the
+  attacker leader sections and a dedicated goal-scoring table ordered by goals
+  per 90.
+- New provenance layer `scouting_current_clubs` (API-Football team transfer
+  feed). The current-club source, snapshot date, team coverage and the
+  subsequent-move limitation are published.
+- New `/scouting/player/<playerId>/` profile pages show current club, stats
+  club, transfer date/source, priority and the seven archetype scores.
+- Affected surfaces: `/scouting/`, `/scouting/search/`, `/scouting/<league>/`,
+  `/scouting/player/<id>/`, `/sources/`, `/methodology/`, `/metrics/`,
+  `/status/`, `/sitemap.xml`.
+- Audit impact: the new payload paths cover the current-club and attacker
+  leaves; the audit is regenerated.
+
+## 2.9.0 — 2026-10-23
+
+Separate the assist and goal-scoring attacker rankings. Owner approval recorded
+in the reviewed request: the two lists were displaying the same players.
+Registry version 2.9.0.
+
+- `config/scouting/archetypes.yaml`: the assist-biased profile now weights
+  completed passes 0.25, key passes 0.30, pass completion 0.05, assists 0.25
+  and successful dribbles 0.15. The goal-scoring profile weights goals 0.50,
+  shots 0.20, conversion 0.20 and goal contribution 0.10, and deliberately
+  excludes pass and dribble volume. The feed has no cross data.
+- Layer 2 profile leaders and the attacker assist/goal lists are now ordered by
+  the profile's adjusted score multiplied by the published U23 and European
+  league-phase multipliers, not by the value-index priority. Ranking by value
+  index alone produced the same names in the same order for every attacking
+  profile.
+- Layer 2 leaders now show the current club and keep the stats club where it
+  differs; previously the leader list used the stats club.
+- `scouting.archetypes` description, fields, limitations and payload paths
+  updated; the stale `/pivot/**` path is removed. Version 3.
+- The dead double-pivot builder and its limitation sentence are removed.
+- Affected surfaces: `/scouting/`. Audit impact: payload paths unchanged except
+  the removed pivot path; the audit is regenerated. Published archetype scores
+  change for the assist profile because its weights changed; no other metric
+  changes.
+
+Also included in this publish, carried from the uncommitted 2.7.0/2.8.0 work:
+`scouting.pool` v3 current-club/stats-club fields, `scouting.coverage` v3
+current-club and European coverage blocks, the new `scouting.priority`
+metric, and the `param.scouting.value` v2 priority block. These identifiers
+are listed here because this is the first registry version validated against
+`origin/main`; their definitions are recorded in the 2.7.0 and 2.8.0 entries
+above.
+
+## 3.0.0 — 2026-10-23
+
+Nightingale player roses and the unified player-profile standard. Owner
+approval recorded in the reviewed request. Registry version 3.0.0.
+
+- New `config/player-rose.yaml` defines the 16-metric catalogue, the shared
+  10-axis overall outfield set, the goalkeeper overall/position sets, the ten
+  role-family position sets and the four provider-group fallback sets. The
+  thresholds are not duplicated: `config/scouting/model.yaml` supplies the
+  450-minute pool cohort, 180-minute squad gate and cohort minima.
+- `saves_p90` is added to the shared rate fields so goalkeepers have a
+  five-axis overall and four-axis position profile. It is derived as
+  `saves * 90 / minutes`.
+- Both roses compare with the same role-family cohort (provider position group
+  when the role cohort is below its minimum). Percentiles are midrank ranks
+  from 0 to 100; `conceded_p90` is ranked on negated values. Missing values and
+  insufficient cohorts are null, never zero.
+- `scouting.pool` gains `saves_p90`, `rose`, `rose_meta` and the rose
+  percentile fields; version 4. `scouting.squad` gains `saves_p90` and `rose`;
+  version 2. `player.page` gains the profile, availability and recent-match
+  projections and their limitations; version 3.
+- New `param.player.rose` records `min_petals` and points at
+  `config/player-rose.yaml`; the catalogue and axis sets are declared in the
+  metric inputs and the contract file.
+- The `/players/<id>/` result document moves to schema 1.1.0 with Profile,
+  Availability, Position, Playing time, Performance, Recent matches and
+  Records panels. Current Aberdeen squad members get availability and a latest
+  10 competitive-match log; loan-out profiles mark those panels not applicable.
+- The `/scouting/player/<id>/` page adopts the shared header, rose, key facts,
+  output and profile-score order; priority and Europe move to Scouting context.
+- `docs/player-profile-standard.md` is the new normative standard. Affected
+  surfaces: `/players/<id>/`, `/scouting/player/<id>/`, `/scouting/`,
+  `/methodology/`, `/sources/`, `/metrics/`, `/status/`.
+- Audit impact: `player.page` already covers every numeric leaf under
+  `players/*.json`; `scouting.pool` covers the pool documents. The audit is
+  regenerated. Existing values other than the archetype weight change in 2.9.0
+  are unchanged; the new values are additive.
+
+Also included in this publish, carried from the uncommitted 2.7.0/2.8.0 work:
+`scouting.archetypes` v3 (attacker split, profile ordering and stale pivot path
+removal), `scouting.coverage` v3 current-club/European blocks, the new
+`scouting.priority` metric, and the `param.scouting.value` v2 priority block.
+These identifiers are listed here because this is the first registry version
+validated against `origin/main`; their definitions are recorded in the 2.7.0
+and 2.8.0 entries above.
+
+## 3.1.0 — 2026-10-23
+
+Season overview and the full fixture calendar. Owner approval recorded in the
+reviewed request and the six-agent review record. Registry version 3.1.0.
+
+- New `analysis.summary` metric covers `analysis/summary.json`: current table
+  row and form, the next three fixtures, official and derived availability,
+  measured season aims, factual squad-decision lenses and the bridge block.
+- `fixtures.index` gains `scheduled`, `scheduled_count` and the schedule
+  coverage fields; version 3. The played `fixtures`/`count` contract is
+  unchanged, and scheduled rows have no page or sitemap entry.
+- `matchday.next-fixtures` becomes current plus the next five (six-game
+  lookahead), excludes friendlies/conflicts, and records local kickoff; version
+  3.
+- `xg.document` no longer lists `/analysis/` as a displayed surface and moves
+  to version 4; `/analysis/xg/` remains the deep page.
+- New `param.analysis` registers the next-up count, lookahead count, selection
+  watch, squad-decision thresholds and absence-inference window.
+- New `config/suspensions.yaml` registers sourced rules with `verified` flags.
+  Unverified rules publish watch/review-required states, not player bans.
+- New `data/normalized/matches/player_squads.parquet` records all starters and
+  named substitutes, including unused substitutes, with per-side
+  `bench_complete`.
+- The `/analysis/` page is now the season overview; old claim cards, owner view,
+  chairman frame, benchmark and xG tables are no longer rendered there. The
+  case payload and `matchday.themes` strip remain contracted and unchanged.
+- Affected surfaces: `/analysis/`, `/matches/`, `/matchday/`, `/themes/`,
+  `/methodology/`, `/sources/`, `/metrics/`, `/status/`, `/sitemap.xml`.
+- Audit impact: the new payload paths cover the analysis, scheduled fixture and
+  lookahead leaves; the audit is regenerated. Existing published values are
+  unchanged; the new values are additive.
+
+Also included in this publish, carried from the uncommitted 3.0.0 rose work:
+`player.page` v3, `scouting.archetypes` v3, `scouting.coverage` v3,
+`scouting.pool` v4, `scouting.priority`, `scouting.squad` v2,
+`param.player.rose` and the `param.scouting.value` priority block. These
+identifiers are listed here because this is the first registry version
+validated against `origin/main`; their definitions are in the 3.0.0 entry above.

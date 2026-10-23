@@ -11,7 +11,7 @@
       "wikipedia": 1
     },
     "conflicts": 0,
-    "ingested_at": "2026-10-21T22:15:37+00:00",
+    "ingested_at": "2026-10-23T18:12:26+00:00",
     "known": 1,
     "note": "Preferred-foot resolution. Side is derived from the starting-XI role, not from this resolver. The licensed API does not provide foot; Sportmonks is used when enabled; Wikipedia is the last resort and only explicit statements are accepted. Unknown is a valid state.",
     "rows": 38,
@@ -135,7 +135,7 @@
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. Loan tags come from the confirmed transfer register. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "status": "match"
   },
-  "generated_at": "2026-10-23T14:41:26+00:00",
+  "generated_at": "2026-10-23T18:35:21+00:00",
   "name": "Aberdeen",
   "players": [
     {
@@ -889,7 +889,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 450,
             "minutes_as_sub": 0,
             "minutes_started": 450,
@@ -897,7 +897,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 810,
             "minutes_as_sub": 0,
             "minutes_started": 810,
@@ -918,7 +918,7 @@
       "position_stats": [
         {
           "clean_sheets": 2,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 10,
           "matches": 9,
           "minutes_on_pitch": 810,
@@ -928,7 +928,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 3,
           "matches": 5,
           "minutes_on_pitch": 450,
@@ -938,7 +938,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 13,
@@ -2043,7 +2043,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 206,
             "minutes_as_sub": 0,
             "minutes_started": 206,
@@ -2051,7 +2051,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 793,
             "minutes_as_sub": 0,
             "minutes_started": 793,
@@ -2072,7 +2072,7 @@
       "position_stats": [
         {
           "clean_sheets": 2,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 10,
           "matches": 9,
           "minutes_on_pitch": 793,
@@ -2082,7 +2082,7 @@
         },
         {
           "clean_sheets": 1,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 2,
           "minutes_on_pitch": 206,
@@ -2092,7 +2092,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 11,
@@ -2635,7 +2635,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 408,
             "minutes_as_sub": 0,
             "minutes_started": 408,
@@ -2643,7 +2643,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 381,
             "minutes_as_sub": 21,
             "minutes_started": 360,
@@ -2664,7 +2664,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 4,
           "matches": 6,
           "minutes_on_pitch": 381,
@@ -2674,7 +2674,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
           "matches": 5,
           "minutes_on_pitch": 408,
@@ -2684,7 +2684,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 6,
@@ -2814,561 +2814,6 @@
         "starts": 4,
         "tackles": 6,
         "yellow_cards": 1
-      }
-    },
-    {
-      "age": 21,
-      "attributes": {
-        "coverage": "unknown",
-        "preferred_foot": {
-          "conflict_sources": [],
-          "conflict_state": "none",
-          "source": null,
-          "status": "unknown",
-          "unknown_reason": "not_sourced",
-          "value": null
-        }
-      },
-      "availability": {
-        "confidence": "unknown",
-        "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
-        "stale": false,
-        "status": "unknown",
-        "verified_at": null
-      },
-      "career_role": {
-        "broad_groups": [
-          "defender",
-          "midfielder"
-        ],
-        "coverage": "12/14",
-        "dominant": {
-          "code": "LWB",
-          "family": "wing_back",
-          "family_label": "Wing-back",
-          "label": "Left wing-back",
-          "provisional": false,
-          "share": 0.6667,
-          "side": "left",
-          "starts": 8,
-          "weighted_starts": 8.0
-        },
-        "eligibility": [
-          {
-            "fm": "D/WB L",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Left back / left wing-back",
-            "share": 1.0,
-            "side": "left",
-            "slot": "D_WB_L",
-            "starts": 12,
-            "tier": "primary",
-            "weighted_starts": 12.0
-          }
-        ],
-        "family_shares": [
-          {
-            "family": "full_back",
-            "label": "Full-back",
-            "share": 0.3333,
-            "starts": 4,
-            "weighted_starts": 4.0
-          },
-          {
-            "family": "wing_back",
-            "label": "Wing-back",
-            "share": 0.6667,
-            "starts": 8,
-            "weighted_starts": 8.0
-          }
-        ],
-        "fm_label": "D/WB L",
-        "history": [
-          {
-            "competition": "Premiership",
-            "role_code": "LWB",
-            "role_family": "wing_back",
-            "role_label": "Left wing-back",
-            "scope": "aberdeen",
-            "season": "2025-26",
-            "share": 0.6667,
-            "starts": 8,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          },
-          {
-            "competition": "Premiership",
-            "role_code": "LB",
-            "role_family": "full_back",
-            "role_label": "Left back",
-            "scope": "aberdeen",
-            "season": "2025-26",
-            "share": 0.3333,
-            "starts": 3,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          },
-          {
-            "competition": "League Cup",
-            "role_code": "LB",
-            "role_family": "full_back",
-            "role_label": "Left back",
-            "scope": "aberdeen",
-            "season": "2025-26",
-            "share": 0.3333,
-            "starts": 1,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          }
-        ],
-        "note": "Career starts are starting-XI observations from lineups, equal-weighted across the configured seasons. Substitute appearances are excluded; unknown-role starts count for coverage but not for shares.",
-        "policy": {
-          "min_family_share": 0.4,
-          "min_family_starts": 5,
-          "min_margin": 0.15,
-          "seasons": 3,
-          "weights": [
-            1.0,
-            1.0,
-            1.0
-          ]
-        },
-        "policy_version": "4a37ee71ce63",
-        "primary_slot": {
-          "code": "LWB",
-          "family": "wing_back",
-          "fm": "D/WB L",
-          "groups": [
-            "defender",
-            "midfielder"
-          ],
-          "label": "Left back / left wing-back",
-          "role_label": "Left wing-back",
-          "share": 1.0,
-          "side": "left",
-          "slot": "D_WB_L",
-          "starts": 12,
-          "weighted_starts": 12.0
-        },
-        "role_shares": [
-          {
-            "code": "LB",
-            "family": "full_back",
-            "label": "Left back",
-            "share": 0.3333,
-            "starts": 4,
-            "weighted_starts": 4.0
-          },
-          {
-            "code": "LWB",
-            "family": "wing_back",
-            "label": "Left wing-back",
-            "share": 0.6667,
-            "starts": 8,
-            "weighted_starts": 8.0
-          }
-        ],
-        "scopes": [
-          {
-            "label": "Aberdeen",
-            "scope": "aberdeen",
-            "share": 1.0,
-            "starts": 12
-          }
-        ],
-        "seasons": [
-          {
-            "families": [
-              {
-                "family": "full_back",
-                "label": "Full-back",
-                "share": 0.3333,
-                "starts": 4
-              },
-              {
-                "family": "wing_back",
-                "label": "Wing-back",
-                "share": 0.6667,
-                "starts": 8
-              }
-            ],
-            "scopes": [
-              {
-                "scope": "aberdeen",
-                "share": 1.0,
-                "starts": 12
-              }
-            ],
-            "season": "2025-26",
-            "season_year": 2025,
-            "slots": [
-              {
-                "fm": "D/WB L",
-                "groups": [
-                  "defender",
-                  "midfielder"
-                ],
-                "label": "Left back / left wing-back",
-                "share": 1.0,
-                "side": "left",
-                "slot": "D_WB_L",
-                "starts": 12
-              }
-            ],
-            "starts_with_role": 12
-          }
-        ],
-        "seasons_with_role": 1,
-        "secondary": [
-          {
-            "family": "full_back",
-            "label": "Full-back",
-            "share": 0.3333,
-            "starts": 4,
-            "weighted_starts": 4.0
-          }
-        ],
-        "secondary_slots": [],
-        "sides": [
-          "left"
-        ],
-        "slot_definitions": [
-          {
-            "fm": "D C",
-            "groups": [
-              "defender"
-            ],
-            "label": "Centre back",
-            "order": 1,
-            "side": "centre",
-            "slot": "D_C"
-          },
-          {
-            "fm": "D/WB L",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Left back / left wing-back",
-            "order": 2,
-            "side": "left",
-            "slot": "D_WB_L"
-          },
-          {
-            "fm": "D/WB R",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Right back / right wing-back",
-            "order": 3,
-            "side": "right",
-            "slot": "D_WB_R"
-          },
-          {
-            "fm": "DM C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Defensive midfielder",
-            "order": 4,
-            "side": "centre",
-            "slot": "DM_C"
-          },
-          {
-            "fm": "M C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Centre midfielder",
-            "order": 5,
-            "side": "centre",
-            "slot": "M_C"
-          },
-          {
-            "fm": "AM C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Attacking midfielder",
-            "order": 6,
-            "side": "centre",
-            "slot": "AM_C"
-          },
-          {
-            "fm": "M L",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Left midfielder",
-            "order": 7,
-            "side": "left",
-            "slot": "M_L"
-          },
-          {
-            "fm": "M R",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Right midfielder",
-            "order": 8,
-            "side": "right",
-            "slot": "M_R"
-          },
-          {
-            "fm": "AM L",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Left winger",
-            "order": 9,
-            "side": "left",
-            "slot": "AM_L"
-          },
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "order": 10,
-            "side": "right",
-            "slot": "AM_R"
-          },
-          {
-            "fm": "ST C",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Centre forward",
-            "order": 11,
-            "side": "centre",
-            "slot": "ST_C"
-          },
-          {
-            "fm": "GK",
-            "groups": [
-              "goalkeeper"
-            ],
-            "label": "Goalkeeper",
-            "order": 999,
-            "side": null,
-            "slot": "GK"
-          }
-        ],
-        "slots": [
-          {
-            "fm": "D/WB L",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Left back / left wing-back",
-            "share": 1.0,
-            "side": "left",
-            "slot": "D_WB_L",
-            "starts": 12,
-            "tier": "primary",
-            "weighted_starts": 12.0
-          }
-        ],
-        "starts_total": 14,
-        "starts_with_role": 12,
-        "status": "observed",
-        "stretch_slots": [],
-        "top_families": [
-          {
-            "family": "wing_back",
-            "label": "Wing-back",
-            "share": 0.6667,
-            "starts": 8
-          },
-          {
-            "family": "full_back",
-            "label": "Full-back",
-            "share": 0.3333,
-            "starts": 4
-          }
-        ],
-        "unknown_reason": null
-      },
-      "display_role": {
-        "career_dominant": {
-          "code": "LWB",
-          "family": "wing_back",
-          "family_label": "Wing-back",
-          "label": "Left wing-back",
-          "provisional": false,
-          "share": 1.0,
-          "side": "left",
-          "starts": 12,
-          "weighted_starts": 12.0
-        },
-        "code": "LWB",
-        "conditions": {
-          "career_family": "wing_back",
-          "career_family_share": 0.0,
-          "career_seasons": 1,
-          "career_starts": 12,
-          "career_status": "observed",
-          "current_family": null,
-          "current_share": 0.0,
-          "current_starts": 0,
-          "different_family": false,
-          "different_group": false,
-          "enabled": true,
-          "passes": false
-        },
-        "family": "wing_back",
-        "family_label": "Wing-back",
-        "label": "Left wing-back",
-        "reason": "Career position is the dominant role across the recent seasons.",
-        "share": 1.0,
-        "side": "left",
-        "source": "career",
-        "starts": 12
-      },
-      "firstname": null,
-      "full_name": "E. Gyamfi",
-      "href": "/players/550363/",
-      "injured": false,
-      "lastname": null,
-      "loan": null,
-      "name": "E. Gyamfi",
-      "nationality": null,
-      "number": 77,
-      "other_stats": [],
-      "player_id": 550363,
-      "player_key": "api:player:550363",
-      "playing_time": {
-        "by_competition": [
-          {
-            "competition": "Premiership",
-            "minutes": 14,
-            "minutes_as_sub": 14,
-            "minutes_started": 0,
-            "starts": 0,
-            "sub_apps": 1
-          }
-        ],
-        "coverage": "available",
-        "minutes": 14,
-        "minutes_as_sub": 14,
-        "minutes_started": 0,
-        "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
-        "starts": 0,
-        "sub_apps": 1
-      },
-      "position": "Defender",
-      "position_group": "DEF",
-      "position_stats": [
-        {
-          "clean_sheets": 0,
-          "competition": "Premiership",
-          "conceded_on_pitch": 0,
-          "matches": 1,
-          "minutes_on_pitch": 14,
-          "own_goals": 0,
-          "player_id": 550363,
-          "player_key": "api:player:550363"
-        }
-      ],
-      "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
-      "position_totals": {
-        "clean_sheets": 0,
-        "conceded_on_pitch": 0,
-        "matches": 1,
-        "minutes_on_pitch": 14,
-        "own_goals": 0
-      },
-      "provider_flag": false,
-      "role": {
-        "broad_groups": [],
-        "code": null,
-        "coverage": "0/0",
-        "family": null,
-        "fm_label": "",
-        "primary": null,
-        "primary_slot": null,
-        "roles": [],
-        "side": null,
-        "sides": [],
-        "slots": [],
-        "source": null,
-        "starts_total": 0,
-        "starts_with_role": 0,
-        "status": "unknown",
-        "unknown_reason": "no_starting_xi_role"
-      },
-      "stats": [
-        {
-          "appearances": 1,
-          "assists": 0,
-          "blocks": 0,
-          "competition": "Premiership",
-          "conceded": 0,
-          "dribbles_attempts": 2,
-          "dribbles_success": 0,
-          "duels_total": 6,
-          "duels_won": 1,
-          "fouls_committed": 2,
-          "fouls_drawn": 1,
-          "goals": 0,
-          "interceptions": 1,
-          "minutes": 14,
-          "pass_accuracy": 100.0,
-          "passes_key": 0,
-          "passes_total": 3,
-          "penalty_committed": null,
-          "penalty_missed": null,
-          "penalty_saved": null,
-          "penalty_scored": 0,
-          "penalty_won": null,
-          "rating": 6.07,
-          "red_cards": 0,
-          "saves": 0,
-          "scope": "club",
-          "season": 2026,
-          "shots_on": 0,
-          "shots_total": 0,
-          "starts": 0,
-          "tackles": 0,
-          "team_name": "Aberdeen",
-          "yellow_cards": 0
-        }
-      ],
-      "stats_coverage": "available",
-      "stats_note": "Current-season statistics from the licensed feed.",
-      "status": "squad",
-      "tactical_notes": [],
-      "totals": {
-        "appearances": 1,
-        "assists": 0,
-        "blocks": 0,
-        "dribbles_success": 0,
-        "duels_won": 1,
-        "fouls_committed": 2,
-        "goals": 0,
-        "interceptions": 1,
-        "minutes": 14,
-        "passes_key": 0,
-        "penalty_saved": 0,
-        "penalty_scored": 0,
-        "rating": 6.07,
-        "red_cards": 0,
-        "saves": 0,
-        "shots_on": 0,
-        "shots_total": 0,
-        "starts": 0,
-        "tackles": 0,
-        "yellow_cards": 0
       }
     },
     {
@@ -3977,7 +3422,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 124,
             "minutes_as_sub": 78,
             "minutes_started": 46,
@@ -3985,7 +3430,7 @@
             "sub_apps": 3
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 375,
             "minutes_as_sub": 23,
             "minutes_started": 352,
@@ -4006,7 +3451,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 5,
           "matches": 6,
           "minutes_on_pitch": 375,
@@ -4016,7 +3461,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 4,
           "minutes_on_pitch": 124,
@@ -4026,7 +3471,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 6,
@@ -4755,7 +4200,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 190,
             "minutes_as_sub": 10,
             "minutes_started": 180,
@@ -4763,7 +4208,7 @@
             "sub_apps": 1
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 248,
             "minutes_as_sub": 78,
             "minutes_started": 170,
@@ -4784,7 +4229,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 2,
           "matches": 5,
           "minutes_on_pitch": 248,
@@ -4794,7 +4239,7 @@
         },
         {
           "clean_sheets": 1,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 3,
           "minutes_on_pitch": 190,
@@ -4804,7 +4249,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 3,
@@ -5435,7 +4880,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 540,
             "minutes_as_sub": 0,
             "minutes_started": 540,
@@ -5443,7 +4888,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 560,
             "minutes_as_sub": 0,
             "minutes_started": 560,
@@ -5464,7 +4909,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 8,
           "matches": 7,
           "minutes_on_pitch": 560,
@@ -5474,7 +4919,7 @@
         },
         {
           "clean_sheets": 3,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 3,
           "matches": 6,
           "minutes_on_pitch": 540,
@@ -5484,7 +4929,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 11,
@@ -6642,7 +6087,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 90,
             "minutes_as_sub": 0,
             "minutes_started": 90,
@@ -6650,7 +6095,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 483,
             "minutes_as_sub": 44,
             "minutes_started": 439,
@@ -6671,7 +6116,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 6,
           "matches": 6,
           "minutes_on_pitch": 483,
@@ -6681,7 +6126,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 1,
           "minutes_on_pitch": 90,
@@ -6691,7 +6136,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 7,
@@ -7481,7 +6926,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 32,
             "minutes_as_sub": 32,
             "minutes_started": 0,
@@ -7502,7 +6947,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 1,
           "minutes_on_pitch": 32,
@@ -7512,7 +6957,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -8356,7 +7801,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 442,
             "minutes_as_sub": 44,
             "minutes_started": 398,
@@ -8364,7 +7809,7 @@
             "sub_apps": 1
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 765,
             "minutes_as_sub": 0,
             "minutes_started": 765,
@@ -8385,7 +7830,7 @@
       "position_stats": [
         {
           "clean_sheets": 2,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 10,
           "matches": 9,
           "minutes_on_pitch": 765,
@@ -8395,7 +7840,7 @@
         },
         {
           "clean_sheets": 3,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
           "matches": 6,
           "minutes_on_pitch": 442,
@@ -8405,7 +7850,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 5,
         "conceded_on_pitch": 12,
@@ -9191,7 +8636,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 393,
             "minutes_as_sub": 0,
             "minutes_started": 393,
@@ -9199,7 +8644,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 590,
             "minutes_as_sub": 0,
             "minutes_started": 590,
@@ -9220,7 +8665,7 @@
       "position_stats": [
         {
           "clean_sheets": 2,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 8,
           "matches": 8,
           "minutes_on_pitch": 590,
@@ -9230,7 +8675,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 3,
           "matches": 5,
           "minutes_on_pitch": 393,
@@ -9240,7 +8685,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 11,
@@ -9425,7 +8870,7 @@
             "revision": "1379713265",
             "tier": 4,
             "url": "https://en.wikipedia.org/w/index.php?title=Alexander_Briedl&oldid=1379713265",
-            "verified_at": "2026-10-21"
+            "verified_at": "2026-10-23"
           },
           "status": "known",
           "unknown_reason": null,
@@ -9886,7 +9331,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 145,
             "minutes_as_sub": 78,
             "minutes_started": 67,
@@ -9894,7 +9339,7 @@
             "sub_apps": 3
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 162,
             "minutes_as_sub": 52,
             "minutes_started": 110,
@@ -9915,7 +9360,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 5,
           "matches": 5,
           "minutes_on_pitch": 162,
@@ -9925,7 +9370,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 4,
           "minutes_on_pitch": 145,
@@ -9935,7 +9380,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 6,
@@ -11324,7 +10769,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 344,
             "minutes_as_sub": 0,
             "minutes_started": 344,
@@ -11332,7 +10777,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 226,
             "minutes_as_sub": 0,
             "minutes_started": 226,
@@ -11353,7 +10798,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 3,
           "matches": 3,
           "minutes_on_pitch": 226,
@@ -11363,7 +10808,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
           "matches": 4,
           "minutes_on_pitch": 344,
@@ -11373,7 +10818,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
         "conceded_on_pitch": 5,
@@ -12569,7 +12014,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 422,
             "minutes_as_sub": 31,
             "minutes_started": 391,
@@ -12577,7 +12022,7 @@
             "sub_apps": 1
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 446,
             "minutes_as_sub": 44,
             "minutes_started": 402,
@@ -12598,7 +12043,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 4,
           "matches": 7,
           "minutes_on_pitch": 446,
@@ -12608,7 +12053,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 3,
           "matches": 6,
           "minutes_on_pitch": 422,
@@ -12618,7 +12063,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 7,
@@ -12786,6 +12231,561 @@
         "starts": 6,
         "tackles": 6,
         "yellow_cards": 1
+      }
+    },
+    {
+      "age": 21,
+      "attributes": {
+        "coverage": "unknown",
+        "preferred_foot": {
+          "conflict_sources": [],
+          "conflict_state": "none",
+          "source": null,
+          "status": "unknown",
+          "unknown_reason": "not_sourced",
+          "value": null
+        }
+      },
+      "availability": {
+        "confidence": "unknown",
+        "conflict": false,
+        "note": "No verified official team-news entry.",
+        "source_id": "none",
+        "source_url": null,
+        "stale": false,
+        "status": "unknown",
+        "verified_at": null
+      },
+      "career_role": {
+        "broad_groups": [
+          "defender",
+          "midfielder"
+        ],
+        "coverage": "12/14",
+        "dominant": {
+          "code": "LWB",
+          "family": "wing_back",
+          "family_label": "Wing-back",
+          "label": "Left wing-back",
+          "provisional": false,
+          "share": 0.6667,
+          "side": "left",
+          "starts": 8,
+          "weighted_starts": 8.0
+        },
+        "eligibility": [
+          {
+            "fm": "D/WB L",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Left back / left wing-back",
+            "share": 1.0,
+            "side": "left",
+            "slot": "D_WB_L",
+            "starts": 12,
+            "tier": "primary",
+            "weighted_starts": 12.0
+          }
+        ],
+        "family_shares": [
+          {
+            "family": "full_back",
+            "label": "Full-back",
+            "share": 0.3333,
+            "starts": 4,
+            "weighted_starts": 4.0
+          },
+          {
+            "family": "wing_back",
+            "label": "Wing-back",
+            "share": 0.6667,
+            "starts": 8,
+            "weighted_starts": 8.0
+          }
+        ],
+        "fm_label": "D/WB L",
+        "history": [
+          {
+            "competition": "Premiership",
+            "role_code": "LWB",
+            "role_family": "wing_back",
+            "role_label": "Left wing-back",
+            "scope": "aberdeen",
+            "season": "2025-26",
+            "share": 0.6667,
+            "starts": 8,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          },
+          {
+            "competition": "Premiership",
+            "role_code": "LB",
+            "role_family": "full_back",
+            "role_label": "Left back",
+            "scope": "aberdeen",
+            "season": "2025-26",
+            "share": 0.3333,
+            "starts": 3,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          },
+          {
+            "competition": "League Cup",
+            "role_code": "LB",
+            "role_family": "full_back",
+            "role_label": "Left back",
+            "scope": "aberdeen",
+            "season": "2025-26",
+            "share": 0.3333,
+            "starts": 1,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          }
+        ],
+        "note": "Career starts are starting-XI observations from lineups, equal-weighted across the configured seasons. Substitute appearances are excluded; unknown-role starts count for coverage but not for shares.",
+        "policy": {
+          "min_family_share": 0.4,
+          "min_family_starts": 5,
+          "min_margin": 0.15,
+          "seasons": 3,
+          "weights": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "policy_version": "4a37ee71ce63",
+        "primary_slot": {
+          "code": "LWB",
+          "family": "wing_back",
+          "fm": "D/WB L",
+          "groups": [
+            "defender",
+            "midfielder"
+          ],
+          "label": "Left back / left wing-back",
+          "role_label": "Left wing-back",
+          "share": 1.0,
+          "side": "left",
+          "slot": "D_WB_L",
+          "starts": 12,
+          "weighted_starts": 12.0
+        },
+        "role_shares": [
+          {
+            "code": "LB",
+            "family": "full_back",
+            "label": "Left back",
+            "share": 0.3333,
+            "starts": 4,
+            "weighted_starts": 4.0
+          },
+          {
+            "code": "LWB",
+            "family": "wing_back",
+            "label": "Left wing-back",
+            "share": 0.6667,
+            "starts": 8,
+            "weighted_starts": 8.0
+          }
+        ],
+        "scopes": [
+          {
+            "label": "Aberdeen",
+            "scope": "aberdeen",
+            "share": 1.0,
+            "starts": 12
+          }
+        ],
+        "seasons": [
+          {
+            "families": [
+              {
+                "family": "full_back",
+                "label": "Full-back",
+                "share": 0.3333,
+                "starts": 4
+              },
+              {
+                "family": "wing_back",
+                "label": "Wing-back",
+                "share": 0.6667,
+                "starts": 8
+              }
+            ],
+            "scopes": [
+              {
+                "scope": "aberdeen",
+                "share": 1.0,
+                "starts": 12
+              }
+            ],
+            "season": "2025-26",
+            "season_year": 2025,
+            "slots": [
+              {
+                "fm": "D/WB L",
+                "groups": [
+                  "defender",
+                  "midfielder"
+                ],
+                "label": "Left back / left wing-back",
+                "share": 1.0,
+                "side": "left",
+                "slot": "D_WB_L",
+                "starts": 12
+              }
+            ],
+            "starts_with_role": 12
+          }
+        ],
+        "seasons_with_role": 1,
+        "secondary": [
+          {
+            "family": "full_back",
+            "label": "Full-back",
+            "share": 0.3333,
+            "starts": 4,
+            "weighted_starts": 4.0
+          }
+        ],
+        "secondary_slots": [],
+        "sides": [
+          "left"
+        ],
+        "slot_definitions": [
+          {
+            "fm": "D C",
+            "groups": [
+              "defender"
+            ],
+            "label": "Centre back",
+            "order": 1,
+            "side": "centre",
+            "slot": "D_C"
+          },
+          {
+            "fm": "D/WB L",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Left back / left wing-back",
+            "order": 2,
+            "side": "left",
+            "slot": "D_WB_L"
+          },
+          {
+            "fm": "D/WB R",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Right back / right wing-back",
+            "order": 3,
+            "side": "right",
+            "slot": "D_WB_R"
+          },
+          {
+            "fm": "DM C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Defensive midfielder",
+            "order": 4,
+            "side": "centre",
+            "slot": "DM_C"
+          },
+          {
+            "fm": "M C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Centre midfielder",
+            "order": 5,
+            "side": "centre",
+            "slot": "M_C"
+          },
+          {
+            "fm": "AM C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Attacking midfielder",
+            "order": 6,
+            "side": "centre",
+            "slot": "AM_C"
+          },
+          {
+            "fm": "M L",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Left midfielder",
+            "order": 7,
+            "side": "left",
+            "slot": "M_L"
+          },
+          {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "order": 8,
+            "side": "right",
+            "slot": "M_R"
+          },
+          {
+            "fm": "AM L",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Left winger",
+            "order": 9,
+            "side": "left",
+            "slot": "AM_L"
+          },
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "order": 10,
+            "side": "right",
+            "slot": "AM_R"
+          },
+          {
+            "fm": "ST C",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Centre forward",
+            "order": 11,
+            "side": "centre",
+            "slot": "ST_C"
+          },
+          {
+            "fm": "GK",
+            "groups": [
+              "goalkeeper"
+            ],
+            "label": "Goalkeeper",
+            "order": 999,
+            "side": null,
+            "slot": "GK"
+          }
+        ],
+        "slots": [
+          {
+            "fm": "D/WB L",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Left back / left wing-back",
+            "share": 1.0,
+            "side": "left",
+            "slot": "D_WB_L",
+            "starts": 12,
+            "tier": "primary",
+            "weighted_starts": 12.0
+          }
+        ],
+        "starts_total": 14,
+        "starts_with_role": 12,
+        "status": "observed",
+        "stretch_slots": [],
+        "top_families": [
+          {
+            "family": "wing_back",
+            "label": "Wing-back",
+            "share": 0.6667,
+            "starts": 8
+          },
+          {
+            "family": "full_back",
+            "label": "Full-back",
+            "share": 0.3333,
+            "starts": 4
+          }
+        ],
+        "unknown_reason": null
+      },
+      "display_role": {
+        "career_dominant": {
+          "code": "LWB",
+          "family": "wing_back",
+          "family_label": "Wing-back",
+          "label": "Left wing-back",
+          "provisional": false,
+          "share": 1.0,
+          "side": "left",
+          "starts": 12,
+          "weighted_starts": 12.0
+        },
+        "code": "LWB",
+        "conditions": {
+          "career_family": "wing_back",
+          "career_family_share": 0.0,
+          "career_seasons": 1,
+          "career_starts": 12,
+          "career_status": "observed",
+          "current_family": null,
+          "current_share": 0.0,
+          "current_starts": 0,
+          "different_family": false,
+          "different_group": false,
+          "enabled": true,
+          "passes": false
+        },
+        "family": "wing_back",
+        "family_label": "Wing-back",
+        "label": "Left wing-back",
+        "reason": "Career position is the dominant role across the recent seasons.",
+        "share": 1.0,
+        "side": "left",
+        "source": "career",
+        "starts": 12
+      },
+      "firstname": null,
+      "full_name": "E. Gyamfi",
+      "href": "/players/550363/",
+      "injured": false,
+      "lastname": null,
+      "loan": null,
+      "name": "E. Gyamfi",
+      "nationality": null,
+      "number": 77,
+      "other_stats": [],
+      "player_id": 550363,
+      "player_key": "api:player:550363",
+      "playing_time": {
+        "by_competition": [
+          {
+            "competition": "Scottish Premiership",
+            "minutes": 14,
+            "minutes_as_sub": 14,
+            "minutes_started": 0,
+            "starts": 0,
+            "sub_apps": 1
+          }
+        ],
+        "coverage": "available",
+        "minutes": 14,
+        "minutes_as_sub": 14,
+        "minutes_started": 0,
+        "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
+        "starts": 0,
+        "sub_apps": 1
+      },
+      "position": "Midfielder",
+      "position_group": "MID",
+      "position_stats": [
+        {
+          "clean_sheets": 0,
+          "competition": "Scottish Premiership",
+          "conceded_on_pitch": 0,
+          "matches": 1,
+          "minutes_on_pitch": 14,
+          "own_goals": 0,
+          "player_id": 550363,
+          "player_key": "api:player:550363"
+        }
+      ],
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
+      "position_totals": {
+        "clean_sheets": 0,
+        "conceded_on_pitch": 0,
+        "matches": 1,
+        "minutes_on_pitch": 14,
+        "own_goals": 0
+      },
+      "provider_flag": false,
+      "role": {
+        "broad_groups": [],
+        "code": null,
+        "coverage": "0/0",
+        "family": null,
+        "fm_label": "",
+        "primary": null,
+        "primary_slot": null,
+        "roles": [],
+        "side": null,
+        "sides": [],
+        "slots": [],
+        "source": null,
+        "starts_total": 0,
+        "starts_with_role": 0,
+        "status": "unknown",
+        "unknown_reason": "no_starting_xi_role"
+      },
+      "stats": [
+        {
+          "appearances": 1,
+          "assists": 0,
+          "blocks": 0,
+          "competition": "Premiership",
+          "conceded": 0,
+          "dribbles_attempts": 2,
+          "dribbles_success": 0,
+          "duels_total": 6,
+          "duels_won": 1,
+          "fouls_committed": 2,
+          "fouls_drawn": 1,
+          "goals": 0,
+          "interceptions": 1,
+          "minutes": 14,
+          "pass_accuracy": 100.0,
+          "passes_key": 0,
+          "passes_total": 3,
+          "penalty_committed": null,
+          "penalty_missed": null,
+          "penalty_saved": null,
+          "penalty_scored": 0,
+          "penalty_won": null,
+          "rating": 6.07,
+          "red_cards": 0,
+          "saves": 0,
+          "scope": "club",
+          "season": 2026,
+          "shots_on": 0,
+          "shots_total": 0,
+          "starts": 0,
+          "tackles": 0,
+          "team_name": "Aberdeen",
+          "yellow_cards": 0
+        }
+      ],
+      "stats_coverage": "available",
+      "stats_note": "Current-season statistics from the licensed feed.",
+      "status": "squad",
+      "tactical_notes": [],
+      "totals": {
+        "appearances": 1,
+        "assists": 0,
+        "blocks": 0,
+        "dribbles_success": 0,
+        "duels_won": 1,
+        "fouls_committed": 2,
+        "goals": 0,
+        "interceptions": 1,
+        "minutes": 14,
+        "passes_key": 0,
+        "penalty_saved": 0,
+        "penalty_scored": 0,
+        "rating": 6.07,
+        "red_cards": 0,
+        "saves": 0,
+        "shots_on": 0,
+        "shots_total": 0,
+        "starts": 0,
+        "tackles": 0,
+        "yellow_cards": 0
       }
     },
     {
@@ -13157,7 +13157,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 19,
             "minutes_as_sub": 19,
             "minutes_started": 0,
@@ -13165,7 +13165,7 @@
             "sub_apps": 2
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 265,
             "minutes_as_sub": 54,
             "minutes_started": 211,
@@ -13186,7 +13186,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 2,
           "matches": 5,
           "minutes_on_pitch": 265,
@@ -13196,7 +13196,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 2,
           "minutes_on_pitch": 19,
@@ -13206,7 +13206,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 2,
@@ -13335,6 +13335,687 @@
         "shots_total": 4,
         "starts": 3,
         "tackles": 3,
+        "yellow_cards": 0
+      }
+    },
+    {
+      "age": 25,
+      "attributes": {
+        "coverage": "unknown",
+        "preferred_foot": {
+          "conflict_sources": [],
+          "conflict_state": "none",
+          "source": null,
+          "status": "unknown",
+          "unknown_reason": "not_sourced",
+          "value": null
+        }
+      },
+      "availability": {
+        "confidence": "unknown",
+        "conflict": false,
+        "note": "No verified official team-news entry.",
+        "source_id": "none",
+        "source_url": null,
+        "stale": false,
+        "status": "unknown",
+        "verified_at": null
+      },
+      "career_role": {
+        "broad_groups": [
+          "midfielder",
+          "attacker"
+        ],
+        "coverage": "3/10",
+        "dominant": {
+          "code": "RM",
+          "family": "wide_midfield",
+          "family_label": "Wide midfield",
+          "label": "Right midfielder",
+          "provisional": true,
+          "share": 0.6667,
+          "side": "right",
+          "starts": 2,
+          "weighted_starts": 2.0
+        },
+        "eligibility": [
+          {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "share": 0.6667,
+            "side": "right",
+            "slot": "M_R",
+            "starts": 2,
+            "tier": "primary",
+            "weighted_starts": 2.0
+          },
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "share": 0.3333,
+            "side": "right",
+            "slot": "AM_R",
+            "starts": 1,
+            "tier": "stretch",
+            "weighted_starts": 1.0
+          }
+        ],
+        "family_shares": [
+          {
+            "family": "wide_midfield",
+            "label": "Wide midfield",
+            "share": 0.6667,
+            "starts": 2,
+            "weighted_starts": 2.0
+          },
+          {
+            "family": "wide_forward",
+            "label": "Wide forward",
+            "share": 0.3333,
+            "starts": 1,
+            "weighted_starts": 1.0
+          }
+        ],
+        "fm_label": "M R (stretch: AM R)",
+        "history": [
+          {
+            "competition": "Premiership",
+            "role_code": "RW",
+            "role_family": "wide_forward",
+            "role_label": "Right winger",
+            "scope": "aberdeen",
+            "season": "2026-27",
+            "share": 0.3333,
+            "starts": 1,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          },
+          {
+            "competition": "Premiership",
+            "role_code": "RM",
+            "role_family": "wide_midfield",
+            "role_label": "Right midfielder",
+            "scope": "aberdeen",
+            "season": "2026-27",
+            "share": 0.6667,
+            "starts": 1,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          },
+          {
+            "competition": "League Cup",
+            "role_code": "RM",
+            "role_family": "wide_midfield",
+            "role_label": "Right midfielder",
+            "scope": "aberdeen",
+            "season": "2026-27",
+            "share": 0.6667,
+            "starts": 1,
+            "team_id": 252,
+            "team_name": "Aberdeen"
+          }
+        ],
+        "note": "Career starts are starting-XI observations from lineups, equal-weighted across the configured seasons. Substitute appearances are excluded; unknown-role starts count for coverage but not for shares.",
+        "policy": {
+          "min_family_share": 0.4,
+          "min_family_starts": 5,
+          "min_margin": 0.15,
+          "seasons": 3,
+          "weights": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "policy_version": "4a37ee71ce63",
+        "primary_slot": {
+          "code": "RM",
+          "family": "wide_midfield",
+          "fm": "M R",
+          "groups": [
+            "midfielder"
+          ],
+          "label": "Right midfielder",
+          "role_label": "Right midfielder",
+          "share": 0.6667,
+          "side": "right",
+          "slot": "M_R",
+          "starts": 2,
+          "weighted_starts": 2.0
+        },
+        "role_shares": [
+          {
+            "code": "RM",
+            "family": "wide_midfield",
+            "label": "Right midfielder",
+            "share": 0.6667,
+            "starts": 2,
+            "weighted_starts": 2.0
+          },
+          {
+            "code": "RW",
+            "family": "wide_forward",
+            "label": "Right winger",
+            "share": 0.3333,
+            "starts": 1,
+            "weighted_starts": 1.0
+          }
+        ],
+        "scopes": [
+          {
+            "label": "Aberdeen",
+            "scope": "aberdeen",
+            "share": 1.0,
+            "starts": 3
+          }
+        ],
+        "seasons": [
+          {
+            "families": [
+              {
+                "family": "wide_midfield",
+                "label": "Wide midfield",
+                "share": 0.6667,
+                "starts": 2
+              },
+              {
+                "family": "wide_forward",
+                "label": "Wide forward",
+                "share": 0.3333,
+                "starts": 1
+              }
+            ],
+            "scopes": [
+              {
+                "scope": "aberdeen",
+                "share": 1.0,
+                "starts": 3
+              }
+            ],
+            "season": "2026-27",
+            "season_year": 2026,
+            "slots": [
+              {
+                "fm": "M R",
+                "groups": [
+                  "midfielder"
+                ],
+                "label": "Right midfielder",
+                "share": 0.6667,
+                "side": "right",
+                "slot": "M_R",
+                "starts": 2
+              },
+              {
+                "fm": "AM R",
+                "groups": [
+                  "attacker"
+                ],
+                "label": "Right winger",
+                "share": 0.3333,
+                "side": "right",
+                "slot": "AM_R",
+                "starts": 1
+              }
+            ],
+            "starts_with_role": 3
+          }
+        ],
+        "seasons_with_role": 1,
+        "secondary": [
+          {
+            "family": "wide_forward",
+            "label": "Wide forward",
+            "share": 0.3333,
+            "starts": 1,
+            "weighted_starts": 1.0
+          }
+        ],
+        "secondary_slots": [],
+        "sides": [
+          "right"
+        ],
+        "slot_definitions": [
+          {
+            "fm": "D C",
+            "groups": [
+              "defender"
+            ],
+            "label": "Centre back",
+            "order": 1,
+            "side": "centre",
+            "slot": "D_C"
+          },
+          {
+            "fm": "D/WB L",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Left back / left wing-back",
+            "order": 2,
+            "side": "left",
+            "slot": "D_WB_L"
+          },
+          {
+            "fm": "D/WB R",
+            "groups": [
+              "defender",
+              "midfielder"
+            ],
+            "label": "Right back / right wing-back",
+            "order": 3,
+            "side": "right",
+            "slot": "D_WB_R"
+          },
+          {
+            "fm": "DM C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Defensive midfielder",
+            "order": 4,
+            "side": "centre",
+            "slot": "DM_C"
+          },
+          {
+            "fm": "M C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Centre midfielder",
+            "order": 5,
+            "side": "centre",
+            "slot": "M_C"
+          },
+          {
+            "fm": "AM C",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Attacking midfielder",
+            "order": 6,
+            "side": "centre",
+            "slot": "AM_C"
+          },
+          {
+            "fm": "M L",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Left midfielder",
+            "order": 7,
+            "side": "left",
+            "slot": "M_L"
+          },
+          {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "order": 8,
+            "side": "right",
+            "slot": "M_R"
+          },
+          {
+            "fm": "AM L",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Left winger",
+            "order": 9,
+            "side": "left",
+            "slot": "AM_L"
+          },
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "order": 10,
+            "side": "right",
+            "slot": "AM_R"
+          },
+          {
+            "fm": "ST C",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Centre forward",
+            "order": 11,
+            "side": "centre",
+            "slot": "ST_C"
+          },
+          {
+            "fm": "GK",
+            "groups": [
+              "goalkeeper"
+            ],
+            "label": "Goalkeeper",
+            "order": 999,
+            "side": null,
+            "slot": "GK"
+          }
+        ],
+        "slots": [
+          {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "share": 0.6667,
+            "side": "right",
+            "slot": "M_R",
+            "starts": 2,
+            "tier": "primary",
+            "weighted_starts": 2.0
+          },
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "share": 0.3333,
+            "side": "right",
+            "slot": "AM_R",
+            "starts": 1,
+            "tier": "stretch",
+            "weighted_starts": 1.0
+          }
+        ],
+        "starts_total": 10,
+        "starts_with_role": 3,
+        "status": "low_evidence",
+        "stretch_slots": [
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "share": 0.3333,
+            "side": "right",
+            "slot": "AM_R",
+            "starts": 1,
+            "tier": "stretch",
+            "weighted_starts": 1.0
+          }
+        ],
+        "top_families": [
+          {
+            "family": "wide_midfield",
+            "label": "Wide midfield",
+            "share": 0.6667,
+            "starts": 2
+          },
+          {
+            "family": "wide_forward",
+            "label": "Wide forward",
+            "share": 0.3333,
+            "starts": 1
+          }
+        ],
+        "unknown_reason": null
+      },
+      "display_role": {
+        "career_dominant": {
+          "code": "RM",
+          "family": "wide_midfield",
+          "family_label": "Wide midfield",
+          "label": "Right midfielder",
+          "provisional": true,
+          "share": 0.6667,
+          "side": "right",
+          "starts": 2,
+          "weighted_starts": 2.0
+        },
+        "code": "RM",
+        "conditions": {
+          "career_family": "wide_midfield",
+          "career_family_share": 0.6667,
+          "career_seasons": 1,
+          "career_starts": 3,
+          "career_status": "low_evidence",
+          "current_family": "wide_midfield",
+          "current_share": 0.6667,
+          "current_starts": 3,
+          "different_family": false,
+          "different_group": false,
+          "enabled": true,
+          "passes": false
+        },
+        "family": "wide_midfield",
+        "family_label": "Wide midfield",
+        "label": "Right midfielder",
+        "reason": "Career evidence is not strong enough to override the established Aberdeen role.",
+        "share": 0.6667,
+        "side": "right",
+        "source": "current_season",
+        "starts": 3
+      },
+      "firstname": "Lewis",
+      "full_name": "Lewis Smith",
+      "href": "/players/44982/",
+      "injured": false,
+      "lastname": "Smith",
+      "loan": null,
+      "name": "L. Smith",
+      "nationality": "Scotland",
+      "number": 11,
+      "other_stats": [],
+      "player_id": 44982,
+      "player_key": "api:player:44982",
+      "playing_time": {
+        "by_competition": [
+          {
+            "competition": "Premier Sports Cup",
+            "minutes": 167,
+            "minutes_as_sub": 13,
+            "minutes_started": 154,
+            "starts": 3,
+            "sub_apps": 1
+          },
+          {
+            "competition": "Scottish Premiership",
+            "minutes": 325,
+            "minutes_as_sub": 187,
+            "minutes_started": 138,
+            "starts": 2,
+            "sub_apps": 5
+          }
+        ],
+        "coverage": "available",
+        "minutes": 492,
+        "minutes_as_sub": 200,
+        "minutes_started": 292,
+        "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
+        "starts": 5,
+        "sub_apps": 6
+      },
+      "position": "Midfielder",
+      "position_group": "MID",
+      "position_stats": [
+        {
+          "clean_sheets": 1,
+          "competition": "Scottish Premiership",
+          "conceded_on_pitch": 3,
+          "matches": 7,
+          "minutes_on_pitch": 325,
+          "own_goals": 0,
+          "player_id": 44982,
+          "player_key": "api:player:44982"
+        },
+        {
+          "clean_sheets": 0,
+          "competition": "Premier Sports Cup",
+          "conceded_on_pitch": 2,
+          "matches": 4,
+          "minutes_on_pitch": 167,
+          "own_goals": 0,
+          "player_id": 44982,
+          "player_key": "api:player:44982"
+        }
+      ],
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
+      "position_totals": {
+        "clean_sheets": 1,
+        "conceded_on_pitch": 5,
+        "matches": 11,
+        "minutes_on_pitch": 492,
+        "own_goals": 0
+      },
+      "provider_flag": false,
+      "role": {
+        "broad_groups": [
+          "midfielder",
+          "attacker"
+        ],
+        "code": "RM",
+        "coverage": "3/5",
+        "family": "wide_midfield",
+        "fm_label": "M/AM R",
+        "primary": "Right midfielder",
+        "primary_slot": {
+          "fm": "M R",
+          "groups": [
+            "midfielder"
+          ],
+          "label": "Right midfielder",
+          "share": 0.6667,
+          "side": "right",
+          "slot": "M_R",
+          "starts": 2,
+          "tier": "primary"
+        },
+        "roles": [
+          {
+            "code": "RM",
+            "family": "wide_midfield",
+            "label": "Right midfielder",
+            "minutes": 124,
+            "starts": 2
+          },
+          {
+            "code": "RW",
+            "family": "wide_forward",
+            "label": "Right winger",
+            "minutes": 76,
+            "starts": 1
+          }
+        ],
+        "side": "right",
+        "sides": [
+          "right"
+        ],
+        "slots": [
+          {
+            "fm": "M R",
+            "groups": [
+              "midfielder"
+            ],
+            "label": "Right midfielder",
+            "share": 0.6667,
+            "side": "right",
+            "slot": "M_R",
+            "starts": 2,
+            "tier": "primary"
+          },
+          {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "share": 0.3333,
+            "side": "right",
+            "slot": "AM_R",
+            "starts": 1,
+            "tier": "secondary"
+          }
+        ],
+        "source": {
+          "fixtures_covered": 13,
+          "id": "api_football",
+          "method": "starting_xi_grid",
+          "starts_with_role": 3
+        },
+        "starts_total": 5,
+        "starts_with_role": 3,
+        "status": "partial",
+        "unknown_reason": null
+      },
+      "stats": [
+        {
+          "appearances": 5,
+          "assists": 0,
+          "blocks": 1,
+          "competition": "Premiership",
+          "conceded": 0,
+          "dribbles_attempts": 7,
+          "dribbles_success": 3,
+          "duels_total": 39,
+          "duels_won": 16,
+          "fouls_committed": 4,
+          "fouls_drawn": 5,
+          "goals": 0,
+          "interceptions": 2,
+          "minutes": 196,
+          "pass_accuracy": 69.0,
+          "passes_key": 2,
+          "passes_total": 59,
+          "penalty_committed": null,
+          "penalty_missed": 0,
+          "penalty_saved": null,
+          "penalty_scored": 0,
+          "penalty_won": null,
+          "rating": 6.56,
+          "red_cards": 0,
+          "saves": null,
+          "scope": "club",
+          "season": 2026,
+          "shots_on": 1,
+          "shots_total": 3,
+          "starts": 1,
+          "tackles": 6,
+          "team_name": "Aberdeen",
+          "yellow_cards": 0
+        }
+      ],
+      "stats_coverage": "available",
+      "stats_note": "Current-season statistics from the licensed feed.",
+      "status": "squad",
+      "tactical_notes": [],
+      "totals": {
+        "appearances": 5,
+        "assists": 0,
+        "blocks": 1,
+        "dribbles_success": 3,
+        "duels_won": 16,
+        "fouls_committed": 4,
+        "goals": 0,
+        "interceptions": 2,
+        "minutes": 196,
+        "passes_key": 2,
+        "penalty_saved": 0,
+        "penalty_scored": 0,
+        "rating": 6.56,
+        "red_cards": 0,
+        "saves": 0,
+        "shots_on": 1,
+        "shots_total": 3,
+        "starts": 1,
+        "tackles": 6,
         "yellow_cards": 0
       }
     },
@@ -14165,7 +14846,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 228,
             "minutes_as_sub": 47,
             "minutes_started": 181,
@@ -14173,7 +14854,7 @@
             "sub_apps": 2
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 455,
             "minutes_as_sub": 185,
             "minutes_started": 270,
@@ -14194,7 +14875,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 7,
           "matches": 9,
           "minutes_on_pitch": 455,
@@ -14204,7 +14885,7 @@
         },
         {
           "clean_sheets": 1,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 4,
           "minutes_on_pitch": 228,
@@ -14214,7 +14895,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
         "conceded_on_pitch": 8,
@@ -15191,7 +15872,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 312,
             "minutes_as_sub": 148,
             "minutes_started": 164,
@@ -15199,7 +15880,7 @@
             "sub_apps": 4
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 572,
             "minutes_as_sub": 88,
             "minutes_started": 484,
@@ -15220,7 +15901,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 6,
           "matches": 8,
           "minutes_on_pitch": 572,
@@ -15230,7 +15911,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 1,
           "matches": 6,
           "minutes_on_pitch": 312,
@@ -15240,7 +15921,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 7,
@@ -15664,7 +16345,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 16,
             "minutes_as_sub": 16,
             "minutes_started": 0,
@@ -15672,7 +16353,7 @@
             "sub_apps": 1
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 3,
             "minutes_as_sub": 3,
             "minutes_started": 0,
@@ -15693,7 +16374,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 0,
           "matches": 1,
           "minutes_on_pitch": 3,
@@ -15703,7 +16384,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 1,
           "minutes_on_pitch": 16,
@@ -15713,7 +16394,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -16173,7 +16854,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 80,
             "minutes_as_sub": 80,
             "minutes_started": 0,
@@ -16181,7 +16862,7 @@
             "sub_apps": 5
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 254,
             "minutes_as_sub": 173,
             "minutes_started": 81,
@@ -16202,7 +16883,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 5,
           "matches": 9,
           "minutes_on_pitch": 254,
@@ -16212,7 +16893,7 @@
         },
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 5,
           "minutes_on_pitch": 80,
@@ -16222,7 +16903,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 5,
@@ -16723,7 +17404,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 22,
             "minutes_as_sub": 22,
             "minutes_started": 0,
@@ -16744,7 +17425,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 0,
           "matches": 1,
           "minutes_on_pitch": 22,
@@ -16754,7 +17435,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -17466,7 +18147,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 499,
             "minutes_as_sub": 0,
             "minutes_started": 499,
@@ -17474,7 +18155,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 722,
             "minutes_as_sub": 0,
             "minutes_started": 722,
@@ -17495,7 +18176,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 10,
           "matches": 9,
           "minutes_on_pitch": 722,
@@ -17505,7 +18186,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 3,
           "matches": 6,
           "minutes_on_pitch": 499,
@@ -17515,7 +18196,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 13,
@@ -17645,687 +18326,6 @@
         "starts": 9,
         "tackles": 6,
         "yellow_cards": 2
-      }
-    },
-    {
-      "age": 25,
-      "attributes": {
-        "coverage": "unknown",
-        "preferred_foot": {
-          "conflict_sources": [],
-          "conflict_state": "none",
-          "source": null,
-          "status": "unknown",
-          "unknown_reason": "not_sourced",
-          "value": null
-        }
-      },
-      "availability": {
-        "confidence": "unknown",
-        "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
-        "stale": false,
-        "status": "unknown",
-        "verified_at": null
-      },
-      "career_role": {
-        "broad_groups": [
-          "midfielder",
-          "attacker"
-        ],
-        "coverage": "3/10",
-        "dominant": {
-          "code": "RM",
-          "family": "wide_midfield",
-          "family_label": "Wide midfield",
-          "label": "Right midfielder",
-          "provisional": true,
-          "share": 0.6667,
-          "side": "right",
-          "starts": 2,
-          "weighted_starts": 2.0
-        },
-        "eligibility": [
-          {
-            "fm": "M R",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Right midfielder",
-            "share": 0.6667,
-            "side": "right",
-            "slot": "M_R",
-            "starts": 2,
-            "tier": "primary",
-            "weighted_starts": 2.0
-          },
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "share": 0.3333,
-            "side": "right",
-            "slot": "AM_R",
-            "starts": 1,
-            "tier": "stretch",
-            "weighted_starts": 1.0
-          }
-        ],
-        "family_shares": [
-          {
-            "family": "wide_midfield",
-            "label": "Wide midfield",
-            "share": 0.6667,
-            "starts": 2,
-            "weighted_starts": 2.0
-          },
-          {
-            "family": "wide_forward",
-            "label": "Wide forward",
-            "share": 0.3333,
-            "starts": 1,
-            "weighted_starts": 1.0
-          }
-        ],
-        "fm_label": "M R (stretch: AM R)",
-        "history": [
-          {
-            "competition": "Premiership",
-            "role_code": "RW",
-            "role_family": "wide_forward",
-            "role_label": "Right winger",
-            "scope": "aberdeen",
-            "season": "2026-27",
-            "share": 0.3333,
-            "starts": 1,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          },
-          {
-            "competition": "Premiership",
-            "role_code": "RM",
-            "role_family": "wide_midfield",
-            "role_label": "Right midfielder",
-            "scope": "aberdeen",
-            "season": "2026-27",
-            "share": 0.6667,
-            "starts": 1,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          },
-          {
-            "competition": "League Cup",
-            "role_code": "RM",
-            "role_family": "wide_midfield",
-            "role_label": "Right midfielder",
-            "scope": "aberdeen",
-            "season": "2026-27",
-            "share": 0.6667,
-            "starts": 1,
-            "team_id": 252,
-            "team_name": "Aberdeen"
-          }
-        ],
-        "note": "Career starts are starting-XI observations from lineups, equal-weighted across the configured seasons. Substitute appearances are excluded; unknown-role starts count for coverage but not for shares.",
-        "policy": {
-          "min_family_share": 0.4,
-          "min_family_starts": 5,
-          "min_margin": 0.15,
-          "seasons": 3,
-          "weights": [
-            1.0,
-            1.0,
-            1.0
-          ]
-        },
-        "policy_version": "4a37ee71ce63",
-        "primary_slot": {
-          "code": "RM",
-          "family": "wide_midfield",
-          "fm": "M R",
-          "groups": [
-            "midfielder"
-          ],
-          "label": "Right midfielder",
-          "role_label": "Right midfielder",
-          "share": 0.6667,
-          "side": "right",
-          "slot": "M_R",
-          "starts": 2,
-          "weighted_starts": 2.0
-        },
-        "role_shares": [
-          {
-            "code": "RM",
-            "family": "wide_midfield",
-            "label": "Right midfielder",
-            "share": 0.6667,
-            "starts": 2,
-            "weighted_starts": 2.0
-          },
-          {
-            "code": "RW",
-            "family": "wide_forward",
-            "label": "Right winger",
-            "share": 0.3333,
-            "starts": 1,
-            "weighted_starts": 1.0
-          }
-        ],
-        "scopes": [
-          {
-            "label": "Aberdeen",
-            "scope": "aberdeen",
-            "share": 1.0,
-            "starts": 3
-          }
-        ],
-        "seasons": [
-          {
-            "families": [
-              {
-                "family": "wide_midfield",
-                "label": "Wide midfield",
-                "share": 0.6667,
-                "starts": 2
-              },
-              {
-                "family": "wide_forward",
-                "label": "Wide forward",
-                "share": 0.3333,
-                "starts": 1
-              }
-            ],
-            "scopes": [
-              {
-                "scope": "aberdeen",
-                "share": 1.0,
-                "starts": 3
-              }
-            ],
-            "season": "2026-27",
-            "season_year": 2026,
-            "slots": [
-              {
-                "fm": "M R",
-                "groups": [
-                  "midfielder"
-                ],
-                "label": "Right midfielder",
-                "share": 0.6667,
-                "side": "right",
-                "slot": "M_R",
-                "starts": 2
-              },
-              {
-                "fm": "AM R",
-                "groups": [
-                  "attacker"
-                ],
-                "label": "Right winger",
-                "share": 0.3333,
-                "side": "right",
-                "slot": "AM_R",
-                "starts": 1
-              }
-            ],
-            "starts_with_role": 3
-          }
-        ],
-        "seasons_with_role": 1,
-        "secondary": [
-          {
-            "family": "wide_forward",
-            "label": "Wide forward",
-            "share": 0.3333,
-            "starts": 1,
-            "weighted_starts": 1.0
-          }
-        ],
-        "secondary_slots": [],
-        "sides": [
-          "right"
-        ],
-        "slot_definitions": [
-          {
-            "fm": "D C",
-            "groups": [
-              "defender"
-            ],
-            "label": "Centre back",
-            "order": 1,
-            "side": "centre",
-            "slot": "D_C"
-          },
-          {
-            "fm": "D/WB L",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Left back / left wing-back",
-            "order": 2,
-            "side": "left",
-            "slot": "D_WB_L"
-          },
-          {
-            "fm": "D/WB R",
-            "groups": [
-              "defender",
-              "midfielder"
-            ],
-            "label": "Right back / right wing-back",
-            "order": 3,
-            "side": "right",
-            "slot": "D_WB_R"
-          },
-          {
-            "fm": "DM C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Defensive midfielder",
-            "order": 4,
-            "side": "centre",
-            "slot": "DM_C"
-          },
-          {
-            "fm": "M C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Centre midfielder",
-            "order": 5,
-            "side": "centre",
-            "slot": "M_C"
-          },
-          {
-            "fm": "AM C",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Attacking midfielder",
-            "order": 6,
-            "side": "centre",
-            "slot": "AM_C"
-          },
-          {
-            "fm": "M L",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Left midfielder",
-            "order": 7,
-            "side": "left",
-            "slot": "M_L"
-          },
-          {
-            "fm": "M R",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Right midfielder",
-            "order": 8,
-            "side": "right",
-            "slot": "M_R"
-          },
-          {
-            "fm": "AM L",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Left winger",
-            "order": 9,
-            "side": "left",
-            "slot": "AM_L"
-          },
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "order": 10,
-            "side": "right",
-            "slot": "AM_R"
-          },
-          {
-            "fm": "ST C",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Centre forward",
-            "order": 11,
-            "side": "centre",
-            "slot": "ST_C"
-          },
-          {
-            "fm": "GK",
-            "groups": [
-              "goalkeeper"
-            ],
-            "label": "Goalkeeper",
-            "order": 999,
-            "side": null,
-            "slot": "GK"
-          }
-        ],
-        "slots": [
-          {
-            "fm": "M R",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Right midfielder",
-            "share": 0.6667,
-            "side": "right",
-            "slot": "M_R",
-            "starts": 2,
-            "tier": "primary",
-            "weighted_starts": 2.0
-          },
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "share": 0.3333,
-            "side": "right",
-            "slot": "AM_R",
-            "starts": 1,
-            "tier": "stretch",
-            "weighted_starts": 1.0
-          }
-        ],
-        "starts_total": 10,
-        "starts_with_role": 3,
-        "status": "low_evidence",
-        "stretch_slots": [
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "share": 0.3333,
-            "side": "right",
-            "slot": "AM_R",
-            "starts": 1,
-            "tier": "stretch",
-            "weighted_starts": 1.0
-          }
-        ],
-        "top_families": [
-          {
-            "family": "wide_midfield",
-            "label": "Wide midfield",
-            "share": 0.6667,
-            "starts": 2
-          },
-          {
-            "family": "wide_forward",
-            "label": "Wide forward",
-            "share": 0.3333,
-            "starts": 1
-          }
-        ],
-        "unknown_reason": null
-      },
-      "display_role": {
-        "career_dominant": {
-          "code": "RM",
-          "family": "wide_midfield",
-          "family_label": "Wide midfield",
-          "label": "Right midfielder",
-          "provisional": true,
-          "share": 0.6667,
-          "side": "right",
-          "starts": 2,
-          "weighted_starts": 2.0
-        },
-        "code": "RM",
-        "conditions": {
-          "career_family": "wide_midfield",
-          "career_family_share": 0.6667,
-          "career_seasons": 1,
-          "career_starts": 3,
-          "career_status": "low_evidence",
-          "current_family": "wide_midfield",
-          "current_share": 0.6667,
-          "current_starts": 3,
-          "different_family": false,
-          "different_group": false,
-          "enabled": true,
-          "passes": false
-        },
-        "family": "wide_midfield",
-        "family_label": "Wide midfield",
-        "label": "Right midfielder",
-        "reason": "Career evidence is not strong enough to override the established Aberdeen role.",
-        "share": 0.6667,
-        "side": "right",
-        "source": "current_season",
-        "starts": 3
-      },
-      "firstname": "Lewis",
-      "full_name": "Lewis Smith",
-      "href": "/players/44982/",
-      "injured": false,
-      "lastname": "Smith",
-      "loan": null,
-      "name": "L. Smith",
-      "nationality": "Scotland",
-      "number": 11,
-      "other_stats": [],
-      "player_id": 44982,
-      "player_key": "api:player:44982",
-      "playing_time": {
-        "by_competition": [
-          {
-            "competition": "League Cup",
-            "minutes": 167,
-            "minutes_as_sub": 13,
-            "minutes_started": 154,
-            "starts": 3,
-            "sub_apps": 1
-          },
-          {
-            "competition": "Premiership",
-            "minutes": 325,
-            "minutes_as_sub": 187,
-            "minutes_started": 138,
-            "starts": 2,
-            "sub_apps": 5
-          }
-        ],
-        "coverage": "available",
-        "minutes": 492,
-        "minutes_as_sub": 200,
-        "minutes_started": 292,
-        "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
-        "starts": 5,
-        "sub_apps": 6
-      },
-      "position": "Attacker",
-      "position_group": "FWD",
-      "position_stats": [
-        {
-          "clean_sheets": 1,
-          "competition": "Premiership",
-          "conceded_on_pitch": 3,
-          "matches": 7,
-          "minutes_on_pitch": 325,
-          "own_goals": 0,
-          "player_id": 44982,
-          "player_key": "api:player:44982"
-        },
-        {
-          "clean_sheets": 0,
-          "competition": "League Cup",
-          "conceded_on_pitch": 2,
-          "matches": 4,
-          "minutes_on_pitch": 167,
-          "own_goals": 0,
-          "player_id": 44982,
-          "player_key": "api:player:44982"
-        }
-      ],
-      "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
-      "position_totals": {
-        "clean_sheets": 1,
-        "conceded_on_pitch": 5,
-        "matches": 11,
-        "minutes_on_pitch": 492,
-        "own_goals": 0
-      },
-      "provider_flag": false,
-      "role": {
-        "broad_groups": [
-          "midfielder",
-          "attacker"
-        ],
-        "code": "RM",
-        "coverage": "3/5",
-        "family": "wide_midfield",
-        "fm_label": "M/AM R",
-        "primary": "Right midfielder",
-        "primary_slot": {
-          "fm": "M R",
-          "groups": [
-            "midfielder"
-          ],
-          "label": "Right midfielder",
-          "share": 0.6667,
-          "side": "right",
-          "slot": "M_R",
-          "starts": 2,
-          "tier": "primary"
-        },
-        "roles": [
-          {
-            "code": "RM",
-            "family": "wide_midfield",
-            "label": "Right midfielder",
-            "minutes": 124,
-            "starts": 2
-          },
-          {
-            "code": "RW",
-            "family": "wide_forward",
-            "label": "Right winger",
-            "minutes": 76,
-            "starts": 1
-          }
-        ],
-        "side": "right",
-        "sides": [
-          "right"
-        ],
-        "slots": [
-          {
-            "fm": "M R",
-            "groups": [
-              "midfielder"
-            ],
-            "label": "Right midfielder",
-            "share": 0.6667,
-            "side": "right",
-            "slot": "M_R",
-            "starts": 2,
-            "tier": "primary"
-          },
-          {
-            "fm": "AM R",
-            "groups": [
-              "attacker"
-            ],
-            "label": "Right winger",
-            "share": 0.3333,
-            "side": "right",
-            "slot": "AM_R",
-            "starts": 1,
-            "tier": "secondary"
-          }
-        ],
-        "source": {
-          "fixtures_covered": 13,
-          "id": "api_football",
-          "method": "starting_xi_grid",
-          "starts_with_role": 3
-        },
-        "starts_total": 5,
-        "starts_with_role": 3,
-        "status": "partial",
-        "unknown_reason": null
-      },
-      "stats": [
-        {
-          "appearances": 5,
-          "assists": 0,
-          "blocks": 1,
-          "competition": "Premiership",
-          "conceded": 0,
-          "dribbles_attempts": 7,
-          "dribbles_success": 3,
-          "duels_total": 39,
-          "duels_won": 16,
-          "fouls_committed": 4,
-          "fouls_drawn": 5,
-          "goals": 0,
-          "interceptions": 2,
-          "minutes": 196,
-          "pass_accuracy": 69.0,
-          "passes_key": 2,
-          "passes_total": 59,
-          "penalty_committed": null,
-          "penalty_missed": 0,
-          "penalty_saved": null,
-          "penalty_scored": 0,
-          "penalty_won": null,
-          "rating": 6.56,
-          "red_cards": 0,
-          "saves": null,
-          "scope": "club",
-          "season": 2026,
-          "shots_on": 1,
-          "shots_total": 3,
-          "starts": 1,
-          "tackles": 6,
-          "team_name": "Aberdeen",
-          "yellow_cards": 0
-        }
-      ],
-      "stats_coverage": "available",
-      "stats_note": "Current-season statistics from the licensed feed.",
-      "status": "squad",
-      "tactical_notes": [],
-      "totals": {
-        "appearances": 5,
-        "assists": 0,
-        "blocks": 1,
-        "dribbles_success": 3,
-        "duels_won": 16,
-        "fouls_committed": 4,
-        "goals": 0,
-        "interceptions": 2,
-        "minutes": 196,
-        "passes_key": 2,
-        "penalty_saved": 0,
-        "penalty_scored": 0,
-        "rating": 6.56,
-        "red_cards": 0,
-        "saves": 0,
-        "shots_on": 1,
-        "shots_total": 3,
-        "starts": 1,
-        "tackles": 6,
-        "yellow_cards": 0
       }
     },
     {
@@ -18968,7 +18968,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 112,
             "minutes_as_sub": 0,
             "minutes_started": 112,
@@ -18976,7 +18976,7 @@
             "sub_apps": 0
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 153,
             "minutes_as_sub": 44,
             "minutes_started": 109,
@@ -18997,7 +18997,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 0,
           "matches": 3,
           "minutes_on_pitch": 153,
@@ -19007,7 +19007,7 @@
         },
         {
           "clean_sheets": 1,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 2,
           "minutes_on_pitch": 112,
@@ -19017,7 +19017,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 0,
@@ -19896,7 +19896,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 349,
             "minutes_as_sub": 44,
             "minutes_started": 305,
@@ -19904,7 +19904,7 @@
             "sub_apps": 1
           },
           {
-            "competition": "Premiership",
+            "competition": "Scottish Premiership",
             "minutes": 286,
             "minutes_as_sub": 75,
             "minutes_started": 211,
@@ -19925,7 +19925,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "Premiership",
+          "competition": "Scottish Premiership",
           "conceded_on_pitch": 2,
           "matches": 6,
           "minutes_on_pitch": 286,
@@ -19935,7 +19935,7 @@
         },
         {
           "clean_sheets": 2,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
           "matches": 5,
           "minutes_on_pitch": 349,
@@ -19945,7 +19945,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
         "conceded_on_pitch": 4,
@@ -21138,7 +21138,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 148,
             "minutes_as_sub": 0,
             "minutes_started": 148,
@@ -21159,7 +21159,7 @@
       "position_stats": [
         {
           "clean_sheets": 1,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 2,
           "minutes_on_pitch": 148,
@@ -21169,7 +21169,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 0,
@@ -22620,7 +22620,7 @@
       "playing_time": {
         "by_competition": [
           {
-            "competition": "League Cup",
+            "competition": "Premier Sports Cup",
             "minutes": 9,
             "minutes_as_sub": 9,
             "minutes_started": 0,
@@ -22641,7 +22641,7 @@
       "position_stats": [
         {
           "clean_sheets": 0,
-          "competition": "League Cup",
+          "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
           "matches": 1,
           "minutes_on_pitch": 9,
@@ -22651,7 +22651,7 @@
         }
       ],
       "position_stats_coverage": "available",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches.",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -24235,11 +24235,14 @@
     "coverage": "available",
     "fixtures_covered": 15,
     "fixtures_total": 15,
-    "ingested_at": "2026-10-21T22:15:37+00:00",
+    "ingested_at": "2026-10-23T18:12:26+00:00",
     "missing_fixtures": [],
-    "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 played matches."
+    "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
+    "scope": "competitive"
   },
   "role_meta": {
+    "bench_complete_sides": 29,
+    "bench_incomplete_sides": 1,
     "coverage": "partial",
     "fixtures_total": 15,
     "fixtures_with_grid": 13,
@@ -24254,7 +24257,7 @@
       "5-3-2": 3,
       "unknown": 2
     },
-    "ingested_at": "2026-10-21T22:15:37+00:00",
+    "ingested_at": "2026-10-23T18:12:26+00:00",
     "note": "Roles are derived from the starting-XI formation grid. Starts without a grid, unmapped formations and invalid slots are unknown, not inferred. Substitute appearances carry playing time but no role.",
     "players_with_role": 23,
     "players_with_starts": 24,
@@ -24271,10 +24274,10 @@
     "attributes_unknown": 37,
     "average_age": 24.6,
     "by_position": {
-      "DEF": 12,
-      "FWD": 9,
+      "DEF": 11,
+      "FWD": 8,
       "GK": 4,
-      "MID": 11,
+      "MID": 13,
       "Unknown": 2
     },
     "by_primary_group": {

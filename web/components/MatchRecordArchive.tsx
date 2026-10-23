@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SeasonSelect } from "@/components/SeasonSelect";
 import { formatDate } from "@/lib/format";
-import type { FixtureIndexRow } from "@/lib/data";
+import type { FixtureIndexRow, ScheduledFixtureRow } from "@/lib/data";
 
 function resultLabel(row: FixtureIndexRow) {
   if (row.home_penalties == null || row.away_penalties == null) {
@@ -21,9 +21,11 @@ function resultLabel(row: FixtureIndexRow) {
 
 export function MatchRecordArchive({
   seasons,
+  scheduled,
   current,
 }: {
   seasons: Array<{ season: string; rows: FixtureIndexRow[] }>;
+  scheduled: Array<{ season: string; rows: ScheduledFixtureRow[] }>;
   current: string;
 }) {
   const [selected, setSelected] = useState(current);
@@ -40,6 +42,9 @@ export function MatchRecordArchive({
 
   const active = seasons.find((group) => group.season === selected) ?? seasons[0];
   if (!active) return null;
+  const upcoming =
+    scheduled.find((group) => group.season === active.season)?.rows ?? [];
+  const upcomingCount = upcoming.filter((row) => !row.conflict_review).length;
 
   function choose(season: string) {
     setSelected(season);
@@ -64,12 +69,65 @@ export function MatchRecordArchive({
         <div className="section-head">
           <div>
             <p className="eyebrow">{active.season}</p>
-            <h2>{active.rows.length} played fixtures</h2>
+            <h2>
+              {active.rows.length} played · {upcomingCount} to play
+            </h2>
           </div>
           {active.season === current ? (
             <span className="badge badge-ok">Current season</span>
           ) : null}
         </div>
+        {upcoming.length ? (
+          <>
+          <h3>Upcoming fixtures</h3>
+          <div className="table-wrap" data-contract="matches.upcoming">
+            <table className="league-table">
+              <caption className="fine-print">
+                {active.season}: {upcomingCount} remaining fixtures. Conflict-review
+                rows are shown for the record but are not counted as playable. Neutral
+                venues are marked; kickoff status is the source status.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Competition</th>
+                  <th scope="col">Home</th>
+                  <th scope="col">Away</th>
+                  <th scope="col">Venue</th>
+                  <th scope="col">Kickoff</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {upcoming.map((row) => (
+                  <tr key={String(row.fixture_id)}>
+                    <td>{formatDate(row.date)}</td>
+                    <td>{row.competition_name}</td>
+                    <td>{row.home_team_name}</td>
+                    <td>{row.away_team_name}</td>
+                    <td>
+                      {row.neutral
+                        ? `${row.venue ?? "Neutral"} (neutral)`
+                        : row.venue ?? (row.aberdeen_is_home ? "H" : "A")}
+                    </td>
+                    <td>
+                      {row.kickoff ?? "TBC"}
+                      {row.kickoff_status === "provisional" ? " (provisional)" : ""}
+                    </td>
+                    <td>
+                      {row.status === "conflict_review" ? "Conflict — review" : "Scheduled"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          </>
+        ) : (
+          <p className="fine-print" data-contract="matches.upcoming">
+            No remaining fixtures are published for this season.
+          </p>
+        )}
         <div className="table-wrap">
           <table className="league-table">
             <caption className="fine-print">

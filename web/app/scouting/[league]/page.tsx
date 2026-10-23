@@ -114,7 +114,11 @@ export default async function ScoutingLeaguePage({
               {formatPercentValue(document.coverage.role_coverage * 100, 1)}
             </span>
           </div>
-          <ScoutingBoard document={document} archetypes={archetypes} />
+          <ScoutingBoard
+            document={document}
+            archetypes={archetypes}
+            priority={hub?.priority}
+          />
         </section>
       )}
 

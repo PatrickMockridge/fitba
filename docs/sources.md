@@ -25,8 +25,8 @@ gate passes for both results and required stats; the layer truth table is in
 |---|---|
 | Cost | Pro subscription; the provider's published price and plan limits should be checked at checkout, not treated as a site fact |
 | Coverage | All four Scottish leagues, Scottish Cup and League Cup; the provider advertises 1,200+ competitions, but only the Scottish coverage below is key-tested |
-| Fields | Fixtures, rounds, AET/PEN status, penalty scores, standings, team-sheet lineups with formation and starting-XI grid, events, basic player stats, transfers/loans |
-| Gaps | **No preferred foot, event coordinates, heat maps, market values or wages**; provider xG is partial (`expected_goals` in some Premiership statistics responses; 2026-27 SC0 `HxG`/`AxG`), not a historical location model; League Cup **group standings are not provided**; Scottish Cup feed is partial; current lower-tier player stats were empty at test time; **current-season Scottish injuries coverage is false**, so `/injuries` is not used as a team-news feed |
+| Fields | Fixtures, full-season team schedule, rounds, AET/PEN status, penalty scores, standings, team-sheet lineups with formation and starting-XI grid and named substitutes, events/cards, basic player stats, UEFA league-phase player appearances, transfers/loans |
+| Gaps | **No preferred foot, event coordinates, heat maps, market values or wages**; provider xG is partial (`expected_goals` in some Premiership statistics responses; 2026-27 SC0 `HxG`/`AxG`), not a historical location model; League Cup **group standings are not provided**; Scottish Cup feed is partial; current lower-tier player stats were empty at test time; **current-season Scottish injuries coverage is false**, so `/injuries` is not used as a team-news feed; the season `/players` endpoint has no round dimension, so the UEFA league-phase flag uses per-fixture player data |
 | Public display | Non-commercial apps/websites are contemplated in API-Sports terms; raw resale prohibited; derived pages fine. The provider does not grant underlying fixture IP; confirm terms in writing. |
 | Key-test | Passed with gaps: see below |
 
@@ -41,6 +41,10 @@ gate passes for both results and required stats; the layer truth table is in
 - **Scottish Cup:** 50 fixtures — 20 "Round of 128" (mapped to **Second Round**
   by date) and 30 "1st Round" (**First Round**). The official format has 136
   ties; the preliminary rounds and later rounds are not provided.
+- **European league phase:** the 2026-27 Champions League, Europa League and
+  Conference League league phases are covered through their fixtures and the
+  per-fixture player endpoint. Qualifiers and play-offs are excluded. The
+  season `/players` endpoint mixes them, so it is not used for the flag.
 - **Player stats:** Premiership and top European leagues (Eredivisie, Swiss
   Super League, Danish Superliga, Portuguese Primeira Liga, Belgian Pro League,
   Hungarian NB I) return player stats. Championship, League One, League Two,
@@ -56,6 +60,9 @@ gate passes for both results and required stats; the layer truth table is in
   City, Cove Rangers, Peterhead and Inverness CT returned none; the feed still
   listed Aberdeen rows for two loanees and Cerezo Osaka/Australia for a third.
   These gaps are labelled on `/squad/` and the player pages, never zero-filled.
+  Named substitutes, including unused substitutes, are stored in
+  `player_squads.parquet`; the full season schedule comes from the normalized
+  history fixtures plus the SPFL club feed.
 - **Roles and position context:** `/fixtures/lineups` and `/fixtures/events`
   cover the current season's played Premiership and League Cup matches (15 of
   15 at the last check). The lineup supplies the formation and starting-XI grid,
@@ -184,9 +191,9 @@ XI available. Opponent API ids live in `reference/source_ids.yaml`; an id is
 never inferred from a club name, and a provider search is a bounded fallback
 recorded as a warning, not written back automatically.
 
-## Data analysis and provider ratings
+## Season overview and provider ratings
 
-Data analysis (`/analysis/`) is derived from the same local data as the rest of the site:
+The season overview (`/analysis/`) is derived from the same local data as the rest of the site:
 
 - provider per-match ratings and goals from `/fixtures/players` for Aberdeen's
   Premiership fixtures (current season only; the historical player-match-stat

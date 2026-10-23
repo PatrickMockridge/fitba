@@ -3279,3 +3279,57 @@ a.card:hover {
     flex-direction: column;
   }
 }
+
+/* Nightingale player-profile roses */
+.rose-block {
+  margin: 16px 0 24px;
+}
+.rose-grid {
+  align-items: start;
+}
+.rose-figure {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.rose-figure figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.rose-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+}
+.rose-ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-dasharray: 2 4;
+}
+.rose-spoke {
+  stroke: var(--line);
+  stroke-width: 0.6;
+}
+.rose-petal {
+  fill: var(--accent);
+  fill-opacity: 0.55;
+  stroke: var(--accent);
+  stroke-width: 0.8;
+}
+.rose-axis-label {
+  font-size: 9px;
+  fill: var(--muted);
+}
+.rose-table {
+  margin-top: 8px;
+}
+@media (max-width: 820px) {
+  .rose-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -9,7 +9,9 @@ midfield fallback.
 
 from __future__ import annotations
 
+import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -21,7 +23,16 @@ GENERATED = ROOT / "web" / "data" / "generated"
 PAGES = GENERATED / "players"
 SCHEMA = ROOT / "contracts" / "player-page.schema.json"
 SQUAD = GENERATED / "squad" / "aberdeen.json"
-PANEL_ORDER = ["position", "playing_time", "performance", "records"]
+OUT = ROOT / "web" / "out"
+PANEL_ORDER = [
+    "profile",
+    "position",
+    "playing_time",
+    "performance",
+    "availability",
+    "recent_matches",
+    "records",
+]
 PANEL_IDS = set(PANEL_ORDER)
 OLD_DUPLICATE_TITLES = {
     "Role this season",
@@ -35,7 +46,53 @@ def _load(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def check_pages() -> list[str]:
+    errors: list[str] = []
+    squad = _load(SQUAD) if SQUAD.exists() else {}
+    current = {
+        int(player["player_id"])
+        for player in squad.get("players", [])
+        if player.get("status") == "squad"
+    }
+    markers = (
+        "player-profile.header",
+        "player-profile.rose",
+        "player-profile.summary",
+        "player-profile.output",
+        "player-profile.context",
+        "player-profile.coverage",
+    )
+    pages = sorted((OUT / "players").glob("*/index.html")) if (OUT / "players").exists() else []
+    if len(pages) != len(squad.get("players", [])):
+        errors.append("rendered player pages do not match the squad size")
+    for page in pages:
+        html = page.read_text(encoding="utf-8")
+        player_id = int(page.parent.name)
+        if len(re.findall(r"<h1[ >]", html)) != 1:
+            errors.append(f"{player_id}: expected exactly one H1")
+        if 'data-contract-page="player-profile"' not in html:
+            errors.append(f"{player_id}: missing the player-profile contract page marker")
+        for marker in markers:
+            if f'data-contract="{marker}"' not in html:
+                errors.append(f"{player_id}: missing {marker} marker")
+        if html.count('data-rose-figure="overall"') != 1:
+            errors.append(f"{player_id}: missing the overall rose figure")
+        if html.count('data-rose-figure="position"') != 1:
+            errors.append(f"{player_id}: missing the position rose figure")
+        for phrase in ("Overall profile", "Position profile"):
+            if phrase not in html:
+                errors.append(f"{player_id}: missing {phrase!r}")
+        if player_id in current:
+            for phrase in ("Availability and team news", "Recent match log"):
+                if phrase not in html:
+                    errors.append(f"{player_id}: current squad profile missing {phrase!r}")
+    return errors
+
+
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--pages", action="store_true", help="also check the rendered HTML")
+    args = parser.parse_args()
     errors: list[str] = []
     if not PAGES.exists():
         print(f"missing {PAGES}; run `uv run fitba publish`")
@@ -94,6 +151,32 @@ def main() -> int:
             errors.append(f"{pid}: no history but status is {history_status!r}")
         if career.get("history") and history_status == "no_role_evidence":
             errors.append(f"{pid}: role history present but status is no_role_evidence")
+
+        profile = document.panels["profile"].data or {}
+        if profile.get("tier") not in {"extended", "standard"}:
+            errors.append(f"{pid}: invalid profile tier {profile.get('tier')!r}")
+        rose = profile.get("rose") or {}
+        figures = rose.get("figures") or []
+        if [figure.get("id") for figure in figures] != ["overall", "position"]:
+            errors.append(f"{pid}: rose figures are not overall, position")
+        for figure in figures:
+            for axis in figure.get("axes") or []:
+                percentile = axis.get("percentile")
+                if percentile is not None and not 0 <= float(percentile) <= 100:
+                    errors.append(f"{pid}: rose percentile out of range {percentile!r}")
+        availability = document.panels["availability"].data or {}
+        if profile.get("current_squad") and not availability:
+            errors.append(f"{pid}: current squad has no availability projection")
+        recent = document.panels["recent_matches"].data or []
+        if (
+            profile.get("current_squad")
+            and not recent
+            and document.panels["recent_matches"].status == "available"
+        ):
+            errors.append(f"{pid}: available recent-match panel has no rows")
+
+    if args.pages:
+        errors.extend(check_pages())
 
     if errors:
         print("Player-page check failed:")

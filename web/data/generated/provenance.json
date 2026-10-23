@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-23T14:41:26+00:00",
+  "generated_at": "2026-10-23T18:35:21+00:00",
   "layers": [
     {
       "fallback": [
@@ -232,13 +232,15 @@
       "fields": [
         "fixtures",
         "results",
-        "kickoff"
+        "kickoff",
+        "status",
+        "venue"
       ],
       "gate": null,
       "id": "club_fixtures",
       "kind": "provider",
       "label": "Aberdeen club fixture list",
-      "note": "SPFL club feed; API-Football remains a cross-check.",
+      "note": "The SPFL club feed supplies the short horizon; the normalized API-Football season schedule supplies the remaining fixtures. Rows are merged and conflicts are labelled; /matches/ keeps the played record plus scheduled rows without pages.",
       "primary": "spfl",
       "primary_source": {
         "attribution": "SPFL",
@@ -253,7 +255,7 @@
         {
           "name": "SPFL official club feed",
           "role": "primary",
-          "rows": 6,
+          "rows": 11,
           "source_id": "spfl",
           "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
           "verified_at": "2026-10-21"
@@ -270,7 +272,9 @@
       "status": "active",
       "surfaces": [
         "/fixtures/",
-        "/matchday/"
+        "/matchday/",
+        "/matches/",
+        "/analysis/"
       ]
     },
     {
@@ -353,6 +357,127 @@
         "/themes/",
         "/squad/",
         "/matchday/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "starters",
+        "used substitutes",
+        "unused substitutes",
+        "bench completeness"
+      ],
+      "gate": null,
+      "id": "player_squads",
+      "kind": "provider",
+      "label": "Named matchday squads",
+      "note": "Every starter and named substitute from the cached lineup response, including unused substitutes. Bench completeness is published per side and gates omission inference; a missing bench is unknown, not empty.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "Aberdeen competitive fixtures, current season",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/analysis/",
+        "/sources/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "player",
+        "transfer_date",
+        "transfer_type",
+        "current_team"
+      ],
+      "gate": null,
+      "id": "scouting_current_clubs",
+      "kind": "provider",
+      "label": "Current club resolution for the scouting pool",
+      "note": "The stats row names the club where the season statistics were produced. The current club comes from the latest recorded transfer on or before the snapshot date. A player with no later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing, so the page labels the source.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "transfer feed for every team represented in the scouting pool",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/scouting/",
+        "/scouting/search/",
+        "/scouting/player/",
+        "/sources/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "fixtures",
+        "lineups",
+        "player_minutes",
+        "appearances",
+        "rating"
+      ],
+      "gate": null,
+      "id": "scouting_europe",
+      "kind": "provider",
+      "label": "European league-phase player appearances",
+      "note": "League-phase fixtures only; qualifiers and play-offs are excluded. The season /players endpoint mixes rounds, so the flag comes from the per-fixture player endpoint. A player not found is unknown unless the run is complete; unknown is never discounted.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "2026-27 league phases of the Champions League, Europa League and Conference League",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/scouting/",
+        "/sources/",
+        "/methodology/"
       ]
     },
     {
@@ -964,6 +1089,9 @@
         "event_layer",
         "lineups_roles",
         "player_match_stats",
+        "player_squads",
+        "scouting_current_clubs",
+        "scouting_europe",
         "scouting_pool",
         "squad_identity",
         "transfers_candidate"
@@ -1008,7 +1136,7 @@
       "primary_layers": [
         "club_fixtures"
       ],
-      "rows": 6,
+      "rows": 11,
       "rows_basis": "primary contributions only",
       "url": "https://spfl.co.uk/clubs/aberdeen/fixtures"
     },

@@ -1422,7 +1422,71 @@
     "reference_league": "sco:premiership"
   },
   "cohort_minutes": 450,
-  "generated_at": "2026-10-23T14:41:26+00:00",
+  "current_clubs": {
+    "budget": 1000,
+    "errors": [],
+    "generated_at": "2026-10-23T15:41:12+00:00",
+    "note": "Current club from the provider transfer feed for pool teams. A player without a later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing.",
+    "players": 9670,
+    "requests": 0,
+    "schema_version": "1.0.0",
+    "snapshot_date": "2026-10-23",
+    "teams_fetched": 391,
+    "teams_total": 391,
+    "transfer_players": 51962
+  },
+  "europe": {
+    "budget": 2000,
+    "competitions": [
+      {
+        "competition": "UEFA Champions League",
+        "competition_id": "uefa:champions-league",
+        "complete": true,
+        "error": null,
+        "fetched": 54,
+        "fixtures_total": 234,
+        "league_phase": 144,
+        "missing": 0,
+        "played": 54,
+        "players": 733,
+        "provider_league_id": 2
+      },
+      {
+        "competition": "UEFA Europa League",
+        "competition_id": "uefa:europa-league",
+        "complete": true,
+        "error": null,
+        "fetched": 54,
+        "fixtures_total": 224,
+        "league_phase": 144,
+        "missing": 0,
+        "played": 54,
+        "players": 753,
+        "provider_league_id": 3
+      },
+      {
+        "competition": "UEFA Conference League",
+        "competition_id": "uefa:conference-league",
+        "complete": true,
+        "error": null,
+        "fetched": 36,
+        "fixtures_total": 366,
+        "league_phase": 108,
+        "missing": 0,
+        "played": 36,
+        "players": 644,
+        "provider_league_id": 848
+      }
+    ],
+    "coverage_complete": true,
+    "generated_at": "2026-10-23T15:15:35+00:00",
+    "players": 2130,
+    "requests": 147,
+    "schema_version": "1.0.0",
+    "season": "2026-27",
+    "stopped_on_budget": false
+  },
+  "generated_at": "2026-10-23T18:35:21+00:00",
   "known_gaps": [
     "7 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
     "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",

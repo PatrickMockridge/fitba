@@ -97,3 +97,27 @@ path reads local data only.
 - A player's fitness or “trust” from minutes.
 
 No blame narratives and no “confirmed team news” claims.
+
+## Derived selection signals (season overview)
+
+The `/analysis/` availability block separates three evidence tiers:
+
+1. **Official team news** — the curated AFC ledger only, with source URL,
+   confidence and verification date. “Available” is a ledger entry, not a
+   medical clearance.
+2. **Derived selection signals** — competition-scoped suspension watch and
+   inferred absence. These are not official team news.
+3. **No verified news** — a count, never a fit list.
+
+Suspension rules live in `config/suspensions.yaml` with `verified` flags. Until
+the current SFA protocol is sourced and signed off, a row is `watch` or
+`review_required`, never a player-level ban. Second yellows are derived from
+same-match yellow+red events; the provider’s flag is not trusted.
+
+Inferred absence uses named-squad membership from
+`data/normalized/matches/player_squads.parquet` (starters and named substitutes,
+including unused). It requires two consecutive omissions over a six-fixture
+window with complete bench coverage, established squad inclusion, and no
+official override. It is labelled “not in the last two matchday squads — reason
+not published” and is never an injury diagnosis. AFC team news remains the only
+injury source.

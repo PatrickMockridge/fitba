@@ -93,7 +93,7 @@ export default function HomePage() {
             News &amp; rumours
           </Link>
           <Link className="button button-ghost" href="/analysis/">
-            Data analysis
+            Season overview
           </Link>
         </div>
       </section>

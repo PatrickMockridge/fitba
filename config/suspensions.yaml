@@ -1,0 +1,54 @@
+# Suspension rule register.
+#
+# A player-level ban is a disciplinary claim. Publish only rules whose current
+# protocol version and effective date are sourced and marked verified. Until
+# then, the analysis page publishes a caution/red-card watch or
+# `review_required`, never a ban.
+version: 1
+reviewed: 2026-10-23
+competitions:
+  sco:premiership:
+    label: Scottish Premiership
+    yellow_thresholds:
+      - { count: 6, matches: 1, by_match: 19 }
+      - { count: 12, matches: 2 }
+      - { count: 18, matches: 3 }
+    effective_days: 7
+    same_competition: true
+    verified: false
+    source_id: sfa_judicial_panel_protocol
+    source_url: https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf
+    note: >
+      Historical SFA protocol. Re-check the current protocol and effective date
+      before publishing a projected ban.
+  sco:league-cup:
+    label: Premier Sports Cup
+    yellow_thresholds: []
+    same_competition: true
+    verified: false
+    source_id: sfa_judicial_panel_protocol
+    source_url: https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf
+    note: Cup accumulation, reset points and red-card lengths are not verified.
+  sco:scottish-cup:
+    label: Scottish Gas Men's Scottish Cup
+    yellow_thresholds: []
+    same_competition: true
+    verified: false
+    source_id: sfa_judicial_panel_protocol
+    source_url: https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf
+    note: Cup accumulation, reset points and red-card lengths are not verified.
+red_cards:
+  categories:
+    second_yellow: 1
+    serious_foul_play: 2
+    violent_conduct: 2
+    spitting: 2
+    other: 1
+  same_competition: true
+  verified: false
+  source_id: sfa_judicial_panel_protocol
+  source_url: https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf
+  note: >
+    The provider does not expose the offence category. Derive second yellows
+    from same-match yellow+red rows; leave other reds as review_required until
+    the category is sourced.

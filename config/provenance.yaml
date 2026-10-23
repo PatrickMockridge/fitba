@@ -79,9 +79,13 @@ layers:
     fallback: [api_football]
     status: active
     scope: current season
-    fields: [fixtures, results, kickoff]
-    surfaces: [/fixtures/, /matchday/]
-    note: SPFL club feed; API-Football remains a cross-check.
+    fields: [fixtures, results, kickoff, status, venue]
+    surfaces: [/fixtures/, /matchday/, /matches/, /analysis/]
+    note: >
+      The SPFL club feed supplies the short horizon; the normalized API-Football
+      season schedule supplies the remaining fixtures. Rows are merged and
+      conflicts are labelled; /matches/ keeps the played record plus scheduled
+      rows without pages.
 
   - id: lineups_roles
     label: Lineups, formations and starting roles
@@ -106,6 +110,50 @@ layers:
     note: >
       Premiership coverage; lower-tier current-season player stats were empty
       at the key-test. Historical player-match-stat files are empty.
+  - id: player_squads
+    label: Named matchday squads
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: Aberdeen competitive fixtures, current season
+    fields: [starters, used substitutes, unused substitutes, bench completeness]
+    surfaces: [/analysis/, /sources/]
+    note: >
+      Every starter and named substitute from the cached lineup response,
+      including unused substitutes. Bench completeness is published per side
+      and gates omission inference; a missing bench is unknown, not empty.
+
+  - id: scouting_current_clubs
+    label: Current club resolution for the scouting pool
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: transfer feed for every team represented in the scouting pool
+    fields: [player, transfer_date, transfer_type, current_team]
+    surfaces: [/scouting/, /scouting/search/, /scouting/player/, /sources/]
+    note: >
+      The stats row names the club where the season statistics were produced.
+      The current club comes from the latest recorded transfer on or before the
+      snapshot date. A player with no later transfer keeps the stats club with
+      source stats_snapshot. A subsequent move that does not involve a pool team
+      may be missing, so the page labels the source.
+
+  - id: scouting_europe
+    label: European league-phase player appearances
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: 2026-27 league phases of the Champions League, Europa League and Conference League
+    fields: [fixtures, lineups, player_minutes, appearances, rating]
+    surfaces: [/scouting/, /sources/, /methodology/]
+    note: >
+      League-phase fixtures only; qualifiers and play-offs are excluded. The
+      season /players endpoint mixes rounds, so the flag comes from the
+      per-fixture player endpoint. A player not found is unknown unless the run
+      is complete; unknown is never discounted.
 
   - id: scouting_pool
     label: Scouting player pool and starting-XI roles

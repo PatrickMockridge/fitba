@@ -90,7 +90,15 @@ def _player(**overrides):
 
 def test_player_page_has_fixed_panels_and_no_foot_fallback():
     page = build_player_page(_player(), season="2026-27", generated_at="2026-10-21T00:00:00Z")
-    assert page["panel_order"] == ["position", "playing_time", "performance", "records"]
+    assert page["panel_order"] == [
+        "profile",
+        "position",
+        "playing_time",
+        "performance",
+        "availability",
+        "recent_matches",
+        "records",
+    ]
     assert set(page["panels"]) == set(page["panel_order"])
     assert page["identity"]["preferred_foot"]["status"] == "unknown"
     assert page["identity"]["preferred_foot"]["value"] is None

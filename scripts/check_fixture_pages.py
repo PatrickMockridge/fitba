@@ -239,6 +239,27 @@ def main() -> int:
     alias_rows = index.get("aliases") or []
     if index.get("count") != len(rows):
         errors.append("fixtures/index.json count does not match its rows")
+    scheduled = index.get("scheduled") or []
+    if int(index.get("scheduled_count") or 0) != len(scheduled):
+        errors.append("fixtures/index.json scheduled_count does not match its rows")
+    played_ids = {str(row.get("fixture_id")) for row in rows}
+    scheduled_ids = {str(row.get("fixture_id")) for row in scheduled}
+    if played_ids & scheduled_ids:
+        errors.append("fixtures/index.json schedules a played fixture")
+    for row in scheduled:
+        if row.get("href"):
+            errors.append("scheduled fixture must not have a page link")
+        if not row.get("date") or not row.get("competition_id"):
+            errors.append("scheduled fixture is missing date or competition")
+        if row.get("status") not in {
+            "scheduled",
+            "conflict_review",
+            "postponed",
+            "cancelled",
+            "abandoned",
+            "unknown",
+        }:
+            errors.append("scheduled fixture has an invalid status")
     if not rows:
         errors.append("fixtures/index.json has no played fixtures")
 

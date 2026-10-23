@@ -33,6 +33,9 @@ STATUSES = {"ok", "partial", "no_player_stats", "error", "stale", "unknown"}
 FAMILY_STATUS = {"below", "at", "above", "insufficient"}
 READINGS = {"structural", "cover", "hold", "none", "insufficient"}
 COHORT_BASES = {"role_family", "provider_group", "insufficient"}
+EUROPE_STATUSES = {"qualified", "below_threshold", "none", "unknown"}
+CLUB_STATUSES = {"stats", "transferred", "loan", "free_agent", "retired", "unknown"}
+CLUB_SOURCES = {"transfer_feed", "stats_snapshot"}
 AVAILABILITY_STATUSES = {"out", "doubtful", "suspended", "returned", "available", "unknown"}
 FORBIDDEN_KEYS = {
     "contract",
@@ -163,6 +166,10 @@ def check_data() -> list[str]:
         document = _load(path)
         if document.get("state") not in {"full", "no_player_stats", "stale"}:
             errors.append(f"{path.name}: invalid state")
+        rose_meta = document.get("rose_meta") or {}
+        if not rose_meta.get("catalogue"):
+            errors.append(f"{path.name}: missing rose catalogue")
+        _check_number(errors, rose_meta.get("min_petals"), 1, 20, f"{path.name} min petals")
         for player in document.get("players") or []:
             label = f"{path.name}:{player.get('player_id')}"
             if (player.get("minutes") or 0) < 450:
@@ -170,11 +177,69 @@ def check_data() -> list[str]:
             _check_number(errors, player.get("rating"), 0, 10, f"{label} rating")
             _check_number(errors, player.get("rating_percentile"), 0, 100, f"{label} percentile")
             _check_number(errors, player.get("role_family_share"), 0, 1, f"{label} role share")
+            _check_number(errors, player.get("scouting_priority"), 0, 130, f"{label} priority")
+            _check_number(errors, player.get("age_multiplier"), 0, 2, f"{label} age multiplier")
+            _check_number(
+                errors, player.get("europe_multiplier"), 0, 2, f"{label} Europe multiplier"
+            )
+            _check_number(
+                errors,
+                player.get("european_league_phase_minutes"),
+                0,
+                100_000,
+                f"{label} Europe minutes",
+            )
+            _check_number(
+                errors,
+                player.get("european_league_phase_appearances"),
+                0,
+                1_000,
+                f"{label} Europe appearances",
+            )
+            if player.get("european_status") not in EUROPE_STATUSES:
+                errors.append(f"{label}: invalid European status")
+            if player.get("current_club_status") not in CLUB_STATUSES:
+                errors.append(f"{label}: invalid current-club status")
+            if player.get("current_club_source") not in CLUB_SOURCES:
+                errors.append(f"{label}: invalid current-club source")
+            if not player.get("club") or not player.get("stats_club"):
+                errors.append(f"{label}: missing current or stats club")
             if player.get("cohort_basis") not in COHORT_BASES:
                 errors.append(f"{label}: invalid cohort basis")
             for feature, value in (player.get("archetypes") or {}).items():
                 _check_number(errors, value.get("score"), 0, 100, f"{label} {feature} score")
                 _check_number(errors, value.get("coverage"), 0, 1, f"{label} {feature} coverage")
+            rose = player.get("rose") or {}
+            if not rose:
+                errors.append(f"{label}: missing rose profile")
+                continue
+            if rose.get("status") not in {"available", "partial", "unavailable"}:
+                errors.append(f"{label}: invalid rose status")
+            if rose.get("basis") not in COHORT_BASES:
+                errors.append(f"{label}: invalid rose basis")
+            figures = rose.get("figures") or []
+            if [figure.get("id") for figure in figures] != ["overall", "position"]:
+                errors.append(f"{label}: rose figures are not overall, position")
+            for figure in figures:
+                for axis in figure.get("axes") or []:
+                    _check_number(
+                        errors,
+                        axis.get("percentile"),
+                        0,
+                        100,
+                        f"{label} {figure.get('id')} {axis.get('metric')} percentile",
+                    )
+                    _check_number(
+                        errors,
+                        axis.get("cohort_n"),
+                        0,
+                        100_000,
+                        f"{label} {figure.get('id')} {axis.get('metric')} cohort n",
+                    )
+                    if axis.get("value") is not None and not isinstance(
+                        axis.get("value"), (int, float)
+                    ):
+                        errors.append(f"{label}: rose axis value is not a number")
 
     search = _load(SEARCH) if SEARCH.exists() else {}
     if not search:
@@ -193,6 +258,40 @@ def check_data() -> list[str]:
             _check_number(errors, player.get("rt"), 0, 10, f"{label} rating")
             _check_number(errors, player.get("p"), 0, 100, f"{label} percentile")
             _check_number(errors, player.get("m"), 450, 100_000, f"{label} minutes")
+            _check_number(errors, player.get("em"), 0, 100_000, f"{label} Europe minutes")
+            _check_number(errors, player.get("ea"), 0, 1_000, f"{label} Europe apps")
+            if player.get("es") not in EUROPE_STATUSES:
+                errors.append(f"{label}: invalid European status")
+            if not player.get("c") or not player.get("sc"):
+                errors.append(f"{label}: missing current or stats club")
+            if not isinstance(player.get("eu"), list):
+                errors.append(f"{label}: Europe competitions is not a list")
+        priority = hub.get("priority") or {}
+        _check_number(errors, priority.get("u23_max_age"), 0, 60, "priority u23 max age")
+        _check_number(errors, priority.get("u23_multiplier"), 0, 3, "priority u23 multiplier")
+        _check_number(
+            errors,
+            priority.get("europe_minutes_threshold"),
+            0,
+            100_000,
+            "priority Europe threshold",
+        )
+        _check_number(errors, priority.get("europe_multiplier"), 0, 3, "priority Europe multiplier")
+        current_clubs = coverage.get("current_clubs") or {}
+        if current_clubs:
+            _check_number(errors, current_clubs.get("players"), 0, 100_000, "current-club players")
+            _check_number(
+                errors, current_clubs.get("teams_fetched"), 0, 10_000, "current-club teams"
+            )
+        europe = coverage.get("europe") or {}
+        if europe:
+            if europe.get("coverage_complete") not in {True, False}:
+                errors.append("Europe coverage completeness is not a boolean")
+            for item in europe.get("competitions") or []:
+                _check_number(errors, item.get("played"), 0, 10_000, "Europe played")
+                _check_number(errors, item.get("fetched"), 0, 10_000, "Europe fetched")
+                if int(item.get("fetched") or 0) > int(item.get("played") or 0):
+                    errors.append(f"{item.get('competition')}: fetched more than played")
         for document in [hub, coverage, search]:
             for location, key, _ in _walk(document):
                 if key in FORBIDDEN_KEYS:
@@ -222,6 +321,8 @@ def check_pages() -> list[str]:
             "Pct",
             "Adj Pct",
             "Value index",
+            "Priority",
+            "Europe",
             "Profile",
         ):
             if header not in html:
@@ -238,6 +339,8 @@ def check_pages() -> list[str]:
         "Pct",
         "Adj Pct",
         "Value index",
+        "Priority",
+        "Europe",
         "G+A/90",
         "Duels won %",
     ]
@@ -267,6 +370,44 @@ def check_pages() -> list[str]:
         for header in required:
             if header not in html:
                 errors.append(f"{slug}: missing column {header!r}")
+
+    search = _load(SEARCH) if SEARCH.exists() else {}
+    player_ids = sorted({int(row["i"]) for row in search.get("players") or []})
+    for player_id in player_ids:
+        page = OUT / "scouting" / "player" / str(player_id) / "index.html"
+        if not page.exists():
+            errors.append(f"missing scouting profile page for {player_id}")
+            continue
+        html = page.read_text(encoding="utf-8")
+        if len(re.findall(r"<h1[ >]", html)) != 1:
+            errors.append(f"player {player_id}: expected exactly one H1")
+        for marker in (
+            "player-profile.header",
+            "player-profile.rose",
+            "player-profile.summary",
+            "player-profile.output",
+            "player-profile.context",
+            "player-profile.coverage",
+        ):
+            if f'data-contract="{marker}"' not in html:
+                errors.append(f"player {player_id}: missing {marker} marker")
+        if html.count('data-rose-figure="overall"') != 1:
+            errors.append(f"player {player_id}: missing the overall rose figure")
+        if html.count('data-rose-figure="position"') != 1:
+            errors.append(f"player {player_id}: missing the position rose figure")
+        for phrase in (
+            "Overall profile",
+            "Position profile",
+            "Scouting priority",
+            "League-phase shop window",
+            "Current club",
+            "Raw and adjusted archetype scores",
+            "not a target",
+        ):
+            if phrase not in html:
+                errors.append(f"player {player_id}: missing {phrase!r}")
+        if not re.search(r'href="[^"]*scouting/"', html):
+            errors.append(f"player {player_id}: missing link back to the scouting board")
     return errors
 
 

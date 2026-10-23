@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:da692a1bf94a7bab286db092470e8b9beedad83ec23b5c34154d99d62896de06",
+  "checksum": "sha256:f4468ef8b8597c572f5b99d6f3f5e6d6026d68021cd9861c4c799c3363c5bb7f",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -585,8 +585,14 @@
       "displayed_surfaces": [
         "/matchday/"
       ],
-      "fields": [],
-      "formula": "Upcoming club fixtures from the SPFL/API feed, ordered by date; one row per fixture.",
+      "fields": [
+        "date",
+        "competition",
+        "opponent",
+        "venue",
+        "kickoff"
+      ],
+      "formula": "Upcoming competitive club fixtures from the merged season schedule, ordered by local date and kickoff; current plus the next five are rendered on matchday. Conflict-review and friendly rows are excluded from the lookahead.",
       "home_payload": "matchday/upcoming.json",
       "home_surface": "/matchday/",
       "id": "matchday.next-fixtures",
@@ -618,7 +624,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -1706,31 +1712,55 @@
     {
       "aggregation": "family",
       "basis": "mixed",
-      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "confidence_rule": "Declared by the source metric; see docs/methodology.md. A rose percentile is null when the cohort minimum, player minutes gate or feature value is missing; a missing match-log value is null, never zero.",
       "coverage_tier": "event",
       "denominator": null,
-      "description": "Per-player page panels and records.",
+      "description": "Per-player page panels, two-figure Nightingale rose, availability projection and recent match log.",
       "displayed_surfaces": [
         "/players/"
       ],
-      "fields": [],
-      "formula": "Document envelope: player totals, playing time, role evidence, position stats, availability and source notes for one player.",
+      "fields": [
+        "tier",
+        "current_squad",
+        "minutes",
+        "appearances",
+        "rating",
+        "rating_percentile",
+        "cohort_basis",
+        "cohort_n",
+        "rose",
+        "figures",
+        "axes",
+        "value",
+        "percentile",
+        "availability",
+        "recent_matches"
+      ],
+      "formula": "Document envelope: player totals, playing time, role evidence, position stats, the published rose axes, the curated availability projection and the latest competitive match rows for one player. The rose uses league-only rates from the provider season totals; each percentile is the midrank rank of the raw value in the player's league and role cohort (provider-group fallback), with conceded_p90 ranked on negated values. The percentile is null when the cohort or value is unavailable. The match log is a projection of the normalized player-match rows joined to the fixture date, opponent and score; it is not recomputed in React.\n",
       "home_payload": "players/*.json",
       "home_surface": "/players/",
       "id": "player.page",
       "implementation": null,
       "inputs": [
-        "published payload"
+        "published payload",
+        "data/normalized/matches/player_match_stats.parquet",
+        "data/normalized/matches/player_appearances.parquet",
+        "availability/aberdeen.json",
+        "config/player-rose.yaml"
       ],
       "label": "Player pages",
       "limitations": [
-        "Player page rows; provenance checked, not recomputed."
+        "Player page rows; provenance checked, not recomputed.",
+        "The provider rating is opaque and league-relative; it is not a verdict.",
+        "Rose percentiles are within one league and role cohort; there is no cross-league ranking.",
+        "Availability is the curated ledger projection, not an inferred injury.",
+        "The recent match log is limited to the latest 10 competitive current-season rows with provider coverage; missing values are a dash."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "players/*.json#/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-10-23",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -1746,7 +1776,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -2691,19 +2721,93 @@
     },
     {
       "aggregation": "document",
+      "basis": "mixed",
+      "confidence_rule": "Official availability is ledger-only; derived availability is labelled inferred or projected and capped at medium; unknown is never zero. A card rule that is not verified publishes watch/review_required, not a ban.\n",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Current position and form, next fixtures, official and derived availability, measured aims, squad-decision lenses and the category bridges.",
+      "displayed_surfaces": [
+        "/analysis/"
+      ],
+      "fields": [
+        "position",
+        "played",
+        "points",
+        "goal_difference",
+        "form",
+        "next_up",
+        "counts",
+        "official",
+        "suspensions",
+        "inferred",
+        "selection",
+        "aims",
+        "squad_decisions",
+        "coverage"
+      ],
+      "formula": "A projection of the current table row, the merged season schedule, the AFC availability ledger, sourced card rules, named-squad membership, matchday contenders, the season expectations and factual squad-decision lenses. No value, fee, wage, contract expiry or medical diagnosis is derived. Counts sum to the active universe (current squad plus ledger-only players); the nine loan-outs are separate. Aims are analyst-set targets with a measured current value and status; they are not club targets.\n",
+      "home_payload": "analysis/summary.json",
+      "home_surface": "/analysis/",
+      "id": "analysis.summary",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "data/normalized/matches/player_squads.parquet",
+        "data/normalized/matches/events.parquet",
+        "data/normalized/history/season=*/fixtures.parquet",
+        "availability/aberdeen.json",
+        "scouting/aberdeen.json",
+        "needs/aberdeen.json",
+        "history/seasons/<season>.json",
+        "config/analysis.yaml",
+        "config/suspensions.yaml"
+      ],
+      "label": "Season overview",
+      "limitations": [
+        "Inferred absence is not a medical diagnosis; cause is not published.",
+        "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
+        "No contract-expiry, free-agent, wage, fee or release-clause data is held.",
+        "Market/value language is not used; squad decisions are measured lenses only."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "analysis/summary.json#/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "document",
       "basis": "measured",
       "confidence_rule": "Declared by the payload fields and the source row; see docs/methodology.md.",
       "coverage_tier": "match",
       "denominator": null,
-      "description": "The played-fixture index: count, scores, depth and links.",
+      "description": "The fixture index: played results plus the remaining scheduled fixtures.",
       "displayed_surfaces": [
         "/matches/"
       ],
       "fields": [
         "count",
-        "fixtures"
+        "fixtures",
+        "scheduled",
+        "scheduled_count"
       ],
-      "formula": "count = canonical played fixtures (duplicate aliases excluded); each row carries score, result, depth and href; depth is derived from the coverage booleans.",
+      "formula": "count = canonical played fixtures (duplicate aliases excluded); each played row carries score, result, depth and href. scheduled = remaining canonical fixtures after the played registry and conflict handling; scheduled_count = len(scheduled). A conflict-review row is retained but excluded from forward-looking surfaces.",
       "home_payload": "fixtures/index.json",
       "home_surface": "/matches/",
       "id": "fixtures.index",
@@ -2735,7 +2839,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "document",
@@ -2745,7 +2849,6 @@
       "denominator": null,
       "description": "fxG model, rates, intervals, provider-xG estimate, league manager splits, aggregates and coverage.",
       "displayed_surfaces": [
-        "/analysis/",
         "/analysis/xg/",
         "/matches/"
       ],
@@ -2792,7 +2895,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 3
+      "version": 4
     },
     {
       "aggregation": "per_match",
@@ -2877,10 +2980,24 @@
         "conversion_pct",
         "save_pct",
         "conceded_p90",
+        "saves_p90",
+        "rose",
+        "rose_meta",
+        "percentile",
         "archetype_score",
-        "archetype_coverage"
+        "archetype_coverage",
+        "scouting_priority",
+        "age_multiplier",
+        "europe_multiplier",
+        "european_league_phase_minutes",
+        "european_league_phase_appearances",
+        "european_status",
+        "current_club_status",
+        "stats_club",
+        "current_club_source",
+        "transferred_at"
       ],
-      "formula": "Per-90 values are stat * 90 / minutes. Completed passes are passes_total * pass_accuracy / 100. Duel and dribble percentages divide by their provider attempts; conversion divides goals by shots; save percentage divides saves by saves + conceded. The rating percentile is the midrank percentile of the provider rating within the league and role family at 450+ minutes; the provider-group fallback is used only when the role cohort is below its minimum. Archetype scores are 100 * Phi(sum(w * shrunk robust z) / sum(abs(w))), with winsorisation at 1/99, median/MAD scaling, minutes shrinkage and weight renormalisation.\n",
+      "formula": "Per-90 values are stat * 90 / minutes. Completed passes are passes_total * pass_accuracy / 100. Duel and dribble percentages divide by their provider attempts; conversion divides goals by shots; save percentage divides saves by saves + conceded. The rating percentile is the midrank percentile of the provider rating within the league and role family at 450+ minutes; the provider-group fallback is used only when the role cohort is below its minimum. Archetype scores are 100 * Phi(sum(w * shrunk robust z) / sum(abs(w))), with winsorisation at 1/99, median/MAD scaling, minutes shrinkage and weight renormalisation. The rose uses the same league-only rates: each axis is the midrank percentile of the raw value in the same role-family cohort (provider group fallback), with conceded_p90 ranked on negated values. Missing values and insufficient cohorts are null.\n",
       "home_payload": "scouting/pool/sco-premiership.json",
       "home_surface": "/scouting/",
       "id": "scouting.pool",
@@ -2888,13 +3005,17 @@
       "inputs": [
         "published payload",
         "config/scouting/model.yaml",
-        "config/scouting/archetypes.yaml"
+        "config/scouting/archetypes.yaml",
+        "config/player-rose.yaml"
       ],
       "label": "Scouting player pool",
       "limitations": [
         "Provider ratings are opaque and relative to a league and role cohort; no cross-league ranking is published.",
         "The feed has no xG/xA, progressive passes, carries, pressures, aerial wins or crosses, so those features are absent rather than inferred.",
-        "Role families need starting-XI grids; leagues without grids use the provider position group and say so."
+        "Role families need starting-XI grids; leagues without grids use the provider position group and say so.",
+        "Scouting priority is an Aberdeen preference, not a measured quality term.",
+        "The current club comes from the provider transfer feed; the stats club is kept where it differs. A subsequent move outside a pool team may be missing.",
+        "Rose percentiles are within the league and role cohort, not a cross-league rank. A missing or insufficient cohort is null, never zero."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
@@ -2917,7 +3038,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 4
     },
     {
       "aggregation": "role_family",
@@ -2985,16 +3106,21 @@
       "confidence_rule": "A profile is published only for its applicable role families and with at least 70% of the absolute weight present; otherwise null.",
       "coverage_tier": "derived",
       "denominator": "minutes",
-      "description": "Weighted player-profile scores, their feature weights, coverage and the double-pivot comparison.",
+      "description": "Weighted player-profile scores, their feature weights, coverage, the attacker assist/goal split and the dedicated goal-scoring list.",
       "displayed_surfaces": [
         "/scouting/"
       ],
       "fields": [
         "score",
+        "adjusted_score",
         "coverage",
         "minutes",
         "rating",
-        "rating_percentile"
+        "rating_percentile",
+        "bias",
+        "assist_score",
+        "goal_score",
+        "goal_scoring"
       ],
       "formula": "Each archetype is a weighted composite of winsorised, robust z-scores within league and role family: z = (x - median) / (1.4826 * MAD), shrunk by minutes / (minutes + 450), combined with signed weights and mapped to 0-100 by the normal CDF. Missing features are removed and the remaining absolute weights renormalised; below 70% coverage the score is null. Weights are in config/scouting/archetypes.yaml and are published with the score.\n",
       "home_payload": "scouting/aberdeen.json",
@@ -3009,12 +3135,14 @@
       "label": "Scouting archetype profiles",
       "limitations": [
         "A profile is not a position, a target or a recommendation.",
-        "The pivot pairing is a hypothesis; the data can show a profile gap, not a causal effect on goals conceded."
+        "Assist bias and goal bias are separate attacker profiles. Each leader list is ordered by its own adjusted profile score multiplied by the U23 and European preferences; the goal-scoring table is ordered by goals per 90, not by a composite.",
+        "The assist profile weights passes, key passes, pass accuracy and dribbles. The feed carries no crosses or chance-creation data, so those are absent rather than inferred.",
+        "The goal profile deliberately excludes pass and dribble volume so it does not reproduce the assist order."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "scouting/aberdeen.json#/archetypes/**",
-        "scouting/aberdeen.json#/pivot/**"
+        "scouting/aberdeen.json#/attackers/**"
       ],
       "reviewed": "2026-10-23",
       "rounding": {
@@ -3032,7 +3160,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 3
     },
     {
       "aggregation": "per_player",
@@ -3062,9 +3190,11 @@
         "tackles_p90",
         "interceptions_p90",
         "pass_completion_pct",
-        "duel_win_pct"
+        "duel_win_pct",
+        "saves_p90",
+        "rose"
       ],
-      "formula": "The same per-90 and percentage formulas as scouting.pool, applied to the registered Aberdeen squad in competitive matches only (friendlies and loan-club rows excluded), at 180+ minutes. The rating is appearance-weighted; the percentile is within the Premiership role cohort.\n",
+      "formula": "The same per-90 and percentage formulas as scouting.pool, applied to the registered Aberdeen squad in competitive matches only (friendlies and loan-club rows excluded), at 180+ minutes. The rating is appearance-weighted; the percentile is within the Premiership role cohort. The rose uses Premiership-only rates against the same league and role cohort.\n",
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.squad",
@@ -3098,7 +3228,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "league",
@@ -3120,7 +3250,9 @@
         "role_players",
         "role_coverage",
         "lineups_fetched",
-        "fixtures_played"
+        "fixtures_played",
+        "europe",
+        "current_clubs"
       ],
       "formula": "Counts of provider player-season rows, rated rows, rows at 450+ minutes, players with at least one starting-XI role, played fixtures and lineups fetched. Role coverage is role players divided by the league pool. Searchable requires at least 25 rated players.\n",
       "home_payload": "scouting/coverage.json",
@@ -3135,7 +3267,8 @@
       "label": "Scouting coverage",
       "limitations": [
         "Coverage is a provider fact at the last sync, not a permanent statement.",
-        "Scottish lower tiers have lineups but no player season statistics."
+        "Scottish lower tiers have lineups but no player season statistics.",
+        "Current-club coverage comes from the team transfer feed and may miss a later move outside a pool team."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
@@ -3159,7 +3292,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 3
     },
     {
       "aggregation": "per_player",
@@ -3225,6 +3358,73 @@
       ],
       "status": "active",
       "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "inferred",
+      "confidence_rule": "Priority is published only where the value index exists. European status unknown is never discounted. The weight is a scouting preference, not a measured quality equivalence.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "U23 and European shop-window weighting on top of the value index.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/",
+        "/scouting/player/"
+      ],
+      "fields": [
+        "scouting_priority",
+        "age_multiplier",
+        "europe_multiplier",
+        "european_league_phase_minutes",
+        "european_league_phase_appearances",
+        "european_status"
+      ],
+      "formula": "scouting_priority = value_index * age_multiplier * europe_multiplier. age_multiplier = u23_multiplier when age <= u23_max_age, else 1.0. europe_multiplier = europe_multiplier when european league-phase minutes >= europe_minutes_threshold, else 1.0. The European flag is built from the league-phase fixtures of the Champions League, Europa League and Conference League and the per-fixture player endpoint; qualifiers and play-offs are excluded. A player not found is none only when coverage is complete; otherwise the status is unknown and the multiplier is 1.0.\n",
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.priority",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "config/scouting/value.yaml",
+        "data/normalized/scouting/europe_appearances.parquet"
+      ],
+      "label": "Scouting priority",
+      "limitations": [
+        "The U23 boost and the European shop-window discount are Aberdeen scouting preferences, not measured quality.",
+        "Only the league phase of the three UEFA competitions is used; qualifiers, play-offs and domestic Europe are not.",
+        "A player with fewer than 90 league-phase minutes is shown but not discounted. Unknown European status is not discounted.",
+        "Priority is not a transfer value or a fee."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/pool/*.json#/**",
+        "scouting/search-index.json#/**",
+        "scouting/aberdeen.json#/priority/**",
+        "scouting/aberdeen.json#/europe_coverage/**",
+        "scouting/aberdeen.json#/archetypes/**",
+        "scouting/aberdeen.json#/pivot/**",
+        "scouting/coverage.json#/europe/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 1,
+        "display": "0.0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [
+        "data/normalized/scouting/europe_appearances.parquet"
+      ],
+      "status": "active",
+      "unit": "index",
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
@@ -4185,6 +4385,7 @@
     {
       "config_keys": [
         "index",
+        "priority",
         "fit"
       ],
       "config_path": "scouting/value",
@@ -4195,7 +4396,8 @@
       "reviewed": "2026-10-23",
       "unit": "mixed",
       "used_by": [
-        "scouting.value-model"
+        "scouting.value-model",
+        "scouting.priority"
       ],
       "value": {
         "fit": {
@@ -4247,13 +4449,86 @@
             "performance": 0.55,
             "profile": 0.15
           }
+        },
+        "priority": {
+          "europe_minutes_threshold": 90,
+          "europe_multiplier": 0.6,
+          "u23_max_age": 23,
+          "u23_multiplier": 1.3
+        }
+      },
+      "verification": "config_match",
+      "version": 2
+    },
+    {
+      "config_keys": [
+        "min_petals"
+      ],
+      "config_path": "player-rose",
+      "id": "param.player.rose",
+      "kind": "matrix",
+      "label": "Player rose policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-23",
+      "unit": "mixed",
+      "used_by": [
+        "player.page",
+        "scouting.pool",
+        "scouting.squad"
+      ],
+      "value": {
+        "min_petals": 4
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "next_up",
+        "matchday_lookahead",
+        "selection_watch",
+        "squad_decisions",
+        "suspensions",
+        "absence"
+      ],
+      "config_path": "analysis",
+      "id": "param.analysis",
+      "kind": "matrix",
+      "label": "Season overview policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-23",
+      "unit": "mixed",
+      "used_by": [
+        "analysis.summary"
+      ],
+      "value": {
+        "absence": {
+          "confidence_cap": "medium",
+          "consecutive_omissions": 2,
+          "min_squad_inclusions": 5,
+          "min_starts_or_bench": 3,
+          "window_fixtures": 6
+        },
+        "matchday_lookahead": 6,
+        "next_up": 3,
+        "selection_watch": 3,
+        "squad_decisions": {
+          "low_minutes_age_min": 23,
+          "low_minutes_share_max": 0.25,
+          "max_per_lens": 3,
+          "peak_age_min": 27,
+          "peak_minutes_min": 450,
+          "percentile_min_cohort": 8
+        },
+        "suspensions": {
+          "require_verified_rule": true
         }
       },
       "verification": "config_match",
       "version": 1
     }
   ],
-  "registry_version": "2.6.0",
+  "registry_version": "3.1.0",
   "reviewed": "2026-10-23",
   "schema_version": 1,
   "structural_number_patterns": [

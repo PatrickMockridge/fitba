@@ -3,6 +3,7 @@ import {
   getFixtureIndex,
   getHistory,
   getScoutingCoverage,
+  getScoutingPlayerIds,
   getSquad,
 } from "@/lib/data";
 
@@ -52,6 +53,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
   for (const league of getScoutingCoverage()?.leagues ?? []) {
     urls.add(`${SITE_URL}${league.href}`);
+  }
+  for (const playerId of getScoutingPlayerIds()) {
+    urls.add(`${SITE_URL}/scouting/player/${playerId}/`);
   }
   return [...urls].sort().map((url) => ({ url, lastModified: undefined }));
 }

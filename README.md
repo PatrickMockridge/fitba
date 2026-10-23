@@ -25,7 +25,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Design foundation](docs/design.md) | The System 7 grammar, the four themes and the visual rules. |
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
-| [Data analysis](docs/analysis.md) | The owner's view, the chairman's frame, six claims and the fxG block. |
+| [Season overview](docs/analysis.md) | Next fixtures, availability, season aims, squad decisions and the route to the evidence. |
 | [Match record](docs/fixtures.md) | One page per played Cormack-era fixture, with events, lineups, stats and the deterministic read. |
 | [fxG](docs/xg.md) | The experimental shot-on-target expected-goals model, interval and provider-xG gate. |
 | [Match scoreboard](docs/match-scoreboard.md) | The top-level score, goal and red-card widget and the Aberdeen/opposition split. |
@@ -93,13 +93,12 @@ full documentation index is [docs/README.md](docs/README.md).
   and the keys to the match. It is explicitly predicted, not team news. The old
   `/clubs/aberdeen/` dashboard is retired to a moved notice. Fixtures, results,
   tables and competitions remain one click away.
-- **Data analysis**: `/analysis/` is the evidence-led bridge between the
-  matchday lookahead, the squad, recruitment and the Cormack-era mission. It
-  starts with the owner's view, framed by the chairman's stated approach, then
-  tests six claims about the team, the squad and the Cormack-era record. Each
-  claim has a count, a status, an evidence table and what would change the view.
-  Provider ratings are labelled, minutes-weighted and never an individual
-  verdict; there are no blame narratives or invented availability claims.
+- **Season overview**: `/analysis/` is the bridge between the next matchday, the
+  results and form record, the squad and scouting. It shows the next three
+  fixtures, official and derived availability, measured season aims, factual
+  squad-decision lenses and the route to the evidence. Inferred absence is
+  labelled as cause-not-published, never a medical diagnosis; contract, fee and
+  wage data are explicitly unavailable.
 - **Provenance, availability and needs**: `/sources/` publishes a layer
   truth table (API-Football primary for cups, lineups, player stats and squad;
   Football-Data primary for league results/stats until the migration gate
@@ -129,7 +128,7 @@ full documentation index is [docs/README.md](docs/README.md).
   pages for name mentions, cross-reference labels and rule-based sentiment. No
   raw posts or usernames are published. The active links produce an advisory
   recruitment profile; community engagement is a deferred separate project.
-- **Static Next.js app**: the matchday dashboard, Data analysis,
+- **Static Next.js app**: the matchday dashboard, Season overview,
   two hub pages, the squad and player profiles, competitions, fixtures,
   transfers, the Cormack-era history and season reviews, rumours, news,
   pyramid, tier tables, scouting, loans, methodology, metrics/audit and

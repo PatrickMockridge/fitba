@@ -282,8 +282,10 @@ def standings(
     )
 
 
-def fixtures_players(fixture_id: int, *, force: bool = False) -> list[dict[str, Any]]:
-    return request("/fixtures/players", ttl_hours=12, force=force, fixture=fixture_id)
+def fixtures_players(
+    fixture_id: int, *, ttl_hours: float = 12, force: bool = False
+) -> list[dict[str, Any]]:
+    return request("/fixtures/players", ttl_hours=ttl_hours, force=force, fixture=fixture_id)
 
 
 def fixtures_lineups(

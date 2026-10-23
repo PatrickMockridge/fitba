@@ -32,7 +32,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Fan signal | AFC Chat sample | Derived aggregates; no raw posts |
 | History | Mixed | API-Football backfill, Football-Data style, AFC/Wikipedia curation |
 | Valuation | Curated anchors + model | Ranges and confidence |
-| Data analysis | Derived | Local match/squad/history data |
+| Season overview | Derived | Local match/squad/history data |
 | Needs | Derived | Case evidence + availability + squad/transfers |
 | Odds | Not published | No betting content |
 

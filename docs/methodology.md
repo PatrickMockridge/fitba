@@ -1,6 +1,6 @@
 # Methodology
 
-**Status:** reference. Last reviewed 2026-10-21.
+**Status:** reference. Last reviewed 2026-10-23.
 
 This page defines how numbers are produced and how uncertainty is shown. It is
 the technical companion to the [product strategy](product-strategy.md).
@@ -89,7 +89,15 @@ summary:
   and labelled as a model;
 - archetype scores from winsorised robust z-scores, with minutes shrinkage and a
   70% weight-coverage floor;
+- a separate scouting priority: U23 (≤23) ×1.30 and European league-phase
+  (≥90 minutes in the Champions League, Europa League or Conference League)
+  ×0.60, applied to the value index;
 - no composite when the applicable weight coverage is below the floor.
+
+The scouting priority is an Aberdeen recruitment preference, not measured
+quality. Unknown European status is never discounted. The league-phase flag is
+built from the three competitions' league-phase fixtures and the per-fixture
+player endpoint; qualifiers and play-offs are excluded.
 
 ## Uncertainty
 
@@ -179,29 +187,18 @@ The matchday dashboard is described in [matchday.md](matchday.md). In summary:
   refresh carries the previous snapshot as stale, or degrades to league-only
   context with the opponent XI unavailable.
 
-## Analysis
+## Season overview
 
-Data analysis is described in [analysis.md](analysis.md). In summary:
-
-- **Family balance:** minutes-weighted provider ratings for Premiership starters,
-  grouped by role family, with starts, minutes, goals, assists, sample and
-  confidence. The provider rating is labelled and is not a fitba rating.
-- **Shape trade-off:** two-CB vs three-CB kick-off shapes, with wing-back and
-  wide-forward starts, named bench rows and substitute minutes. Association,
-  not causation; the sample is small.
-- **Cover and rotation:** CB and FB/WB depth, concentration and recent arrivals.
-  Minutes cannot distinguish selection from curated availability; there is no
-  provider injury/suspension feed.
-- **Attack-defence balance:** league goals, shots and points, plus goals by
-  primary family. fxG is a separate descriptive block; it is not a performance
-  verdict while the provider-xG gate fails.
-- **Mission context:** the documented Cormack-era trading pillars and the
-  current-season turnover/selection record. Ratings are not used for history.
-
-The register spans matchday, off the pitch and the chairman's record; there is no fixed weighting. It uses two role
-bases explicitly: observed starting roles for family ratings and shape, and the
-squad's primary role for bench/goal attribution. Duplicate provider identities
-are mapped before aggregation.
+`/analysis/` is described in [analysis.md](analysis.md) and the review record in
+[analysis-review.md](analysis-review.md). It projects the current table row,
+the next three fixtures, official AFC team news, derived selection signals,
+measured season aims and factual squad-decision lenses. The active availability
+universe is the current squad plus ledger-only players; loan-outs are separate.
+Derived absence is not a medical diagnosis, and suspension rules are
+watch/review-only until a current sourced protocol is verified. Squad decisions
+use age, minutes, role and cohort percentile; no value, fee, wage or contract
+expiry is inferred. The old thematic case analytics remain in the warehouse for
+the matchday strip and needs model, but are not rendered on `/analysis/`.
 
 ## fxG
 
@@ -272,7 +269,10 @@ See [transfers.md](transfers.md).
   events. A fixture missing either is excluded and the coverage is labelled.
 - Provider player stats and event-reconstructed position stats can cover
   different competitions; they are shown separately and not merged.
-- Player pages are current-season only and publish no photographs.
+- Player pages are current-season only and publish no photographs. The shared
+  player-profile standard adds two Nightingale rose figures, league-only role
+  percentiles, and an explicit unavailable state; see
+  `docs/player-profile-standard.md`.
 
 See [squad.md](squad.md) and [roles.md](roles.md).
 

@@ -17,7 +17,7 @@ format:
 typecheck:
 	uv run pyright
 
-check: lint typecheck test docs-check corrections-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+check: lint typecheck test docs-check corrections-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check analysis-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
 
 check-all: check web-contract-check
 
@@ -26,6 +26,7 @@ web-contract-check:
 	uv run python scripts/check_web_contract.py --ci --base-path "$(BASE_PATH)"
 	uv run python scripts/check_fixture_pages.py --base-path "$(BASE_PATH)"
 	uv run python scripts/check_scouting.py --pages
+	uv run python scripts/check_player_page.py --pages
 	uv run python scripts/check_seo.py
 	uv run python scripts/check_accessibility.py
 
@@ -64,6 +65,9 @@ matchday-check:
 
 themes-check:
 	uv run python scripts/check_themes.py
+
+analysis-check:
+	uv run python scripts/check_analysis.py
 
 provenance-check:
 	uv run python scripts/check_provenance.py

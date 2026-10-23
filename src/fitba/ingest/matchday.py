@@ -18,16 +18,16 @@ from typing import Any
 
 import polars as pl
 
-from fitba.ingest.fixtures import load_club_fixtures
 from fitba.ingest.history import competition_id
 from fitba.ingest.match_data import compute_match_data
 from fitba.ingest.team_stats import parse_team_stats
+from fitba.normalize.schedule import load_schedule
 from fitba.normalize.teams import TeamRegistry
 from fitba.settings import NORMALIZED_DIR, ensure_dirs, source_ids
 from fitba.settings import matchday as matchday_policy
 from fitba.settings import roles as roles_config
 from fitba.sources import api_football
-from fitba.util.dates import season_start_year, utc_now_iso
+from fitba.util.dates import current_season, season_start_year, utc_now_iso
 
 MATCHDAY_DIR = NORMALIZED_DIR / "matchday"
 PLAYED_STATUSES = {"FT", "AET", "PEN"}
@@ -289,31 +289,36 @@ def next_fixture(
     club_slug: str = "aberdeen",
     club_id: str = "sco:aberdeen",
     today: date | None = None,
+    season: str | None = None,
 ) -> dict[str, Any] | None:
-    """Earliest scheduled Aberdeen fixture, club feed first, cups second."""
+    """Earliest scheduled Aberdeen fixture from the merged season schedule."""
     today = today or date.today()
-    fixture = _next_from_frame(
-        load_club_fixtures(club_slug),
-        club_id=club_id,
-        today=today,
-    )
-    if fixture:
-        return fixture
-    cups_dir = NORMALIZED_DIR / "cups"
-    frames = []
-    if cups_dir.exists():
-        for path in sorted(cups_dir.glob("*.parquet")):
-            frame = pl.read_parquet(path)
-            if {"home_team_id", "away_team_id", "date"} <= set(frame.columns):
-                frames.append(frame)
-    if not frames:
-        return None
-    combined = pl.concat(frames, how="vertical_relaxed")
-    return _next_from_frame(
-        combined,
-        club_id=club_id,
-        today=today,
-    )
+    season = season or current_season()
+    for row in load_schedule(season):
+        if row.get("status") != "scheduled" or row.get("conflict_review"):
+            continue
+        if row.get("is_friendly") or str(row.get("date") or "") < str(today):
+            continue
+        return {
+            "match_id": str(
+                row.get("fixture_id") or row.get("match_id") or row.get("schedule_key")
+            ),
+            "competition_id": row.get("competition_id"),
+            "competition_name": row.get("competition_name"),
+            "stage": row.get("stage"),
+            "date": row.get("date"),
+            "kickoff": row.get("kickoff"),
+            "home_team_id": row.get("home_team_id"),
+            "home_team_name": row.get("home_team_name"),
+            "away_team_id": row.get("away_team_id"),
+            "away_team_name": row.get("away_team_name"),
+            "venue": "N" if row.get("neutral") else "H" if row.get("is_home") else "A",
+            "opponent_id": row.get("opponent_id"),
+            "opponent_name": row.get("opponent_name"),
+            "status": row.get("status"),
+            "source_id": "spfl" if "spfl" in (row.get("sources") or []) else "api_football",
+        }
+    return None
 
 
 def load_meta(out_dir: Path | None = None) -> dict[str, Any]:

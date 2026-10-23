@@ -17,7 +17,7 @@ export default function XgPage() {
     return (
       <ContractPage surface="analysis-xg" state="empty">
         <section className="page-head" data-contract="xg.hero">
-          <p className="eyebrow">Data analysis</p>
+          <p className="eyebrow">Season overview</p>
           <h1>fxG</h1>
           <p className="lede">
             No fxG document is published in this build. Run{" "}
@@ -41,7 +41,7 @@ export default function XgPage() {
         </p>
         <p className="fine-print">
           <Link className="text-link" href="/analysis/">
-            Data analysis →
+            Season overview →
           </Link>{" "}
           <Link className="text-link" href="/methodology/">
             Method →

@@ -14,7 +14,7 @@ from fitba.analytics.scouting import (
     build_board,
     build_pool_rows,
     build_squad_profile,
-    top_profiles,
+    build_squad_roses,
 )
 from fitba.analytics.scouting_value import fit_value_model, value_for_row
 from fitba.ingest.scouting import (
@@ -23,15 +23,24 @@ from fitba.ingest.scouting import (
     POOL_META_PATH,
     ROLES_STATE_PATH,
 )
-from fitba.settings import (
-    roles as roles_config,
+from fitba.ingest.scouting_clubs import (
+    load_current_clubs,
+    load_current_clubs_meta,
+)
+from fitba.ingest.scouting_europe import (
+    load_europe_appearances,
+    load_europe_meta,
 )
 from fitba.settings import (
+    player_rose,
     scouting_archetypes,
     scouting_leagues,
     scouting_model,
     scouting_teams,
     scouting_value,
+)
+from fitba.settings import (
+    roles as roles_config,
 )
 from fitba.settings import (
     teams as teams_config,
@@ -163,7 +172,12 @@ def _pool_player(
         "player_id": row.get("player_id"),
         "name": row.get("name"),
         "full_name": row.get("full_name"),
-        "club": resolve_team(row.get("team_name"), row.get("team_id")),
+        "club": resolve_team(row.get("current_club"), row.get("current_club_id")),
+        "stats_club": resolve_team(row.get("stats_club"), row.get("team_id")),
+        "current_club_status": row.get("current_club_status"),
+        "current_club_source": row.get("current_club_source"),
+        "transferred_at": row.get("transferred_at"),
+        "current_league_name": row.get("current_league_name"),
         "age": row.get("age"),
         "nationality": row.get("nationality"),
         "position_group": row.get("position_group"),
@@ -181,9 +195,17 @@ def _pool_player(
         "value_index_coverage": row.get("value_index_coverage"),
         "value_index_drivers": row.get("value_index_drivers") or [],
         "value_index_basis": row.get("value_index_basis"),
+        "scouting_priority": row.get("scouting_priority"),
+        "age_multiplier": row.get("age_multiplier"),
+        "europe_multiplier": row.get("europe_multiplier"),
+        "european_league_phase_minutes": row.get("european_league_phase_minutes"),
+        "european_league_phase_appearances": row.get("european_league_phase_appearances"),
+        "european_league_phase_competitions": row.get("european_league_phase_competitions") or [],
+        "european_status": row.get("european_status"),
         **value_for_row(value_model, row),
         "cohort_basis": row.get("cohort_basis"),
         "cohort_n": row.get("cohort_n"),
+        "rose": row.get("rose"),
         "flags": row.get("flags") or [],
         **{field: (row.get("rates") or {}).get(field) for field in RATE_FIELDS},
         "archetypes": {
@@ -213,6 +235,7 @@ def _squad_row(
         "rating_percentile": row.get("rating_percentile"),
         "goals": row.get("goals"),
         "assists": row.get("assists"),
+        "rose": row.get("rose"),
         **{field: (row.get("rates") or {}).get(field) for field in RATE_FIELDS},
         "archetypes": {
             key: {
@@ -300,15 +323,68 @@ def _layer_zero(board: dict[str, Any]) -> list[dict[str, Any]]:
     return items
 
 
+def _profile_rank(row: dict[str, Any], archetype_id: str) -> float | None:
+    """Profile score with the published scouting preference multipliers applied.
+
+    The rank keeps the profile itself as the ordering signal: a player is
+    ordered by how well they fit *this* profile, then adjusted by the U23 and
+    European league-phase preferences. Ranking by the value-index priority
+    alone made the assist and goal-scoring profiles collapse into the same
+    order.
+    """
+    profile = (row.get("archetypes") or {}).get(archetype_id) or {}
+    score = profile.get("adjusted_score")
+    if score is None:
+        return None
+    age_multiplier = row.get("age_multiplier")
+    europe_multiplier = row.get("europe_multiplier")
+    return (
+        float(score)
+        * (float(age_multiplier) if age_multiplier is not None else 1.0)
+        * (float(europe_multiplier) if europe_multiplier is not None else 1.0)
+    )
+
+
+def _profile_leaders(
+    rows: list[dict[str, Any]],
+    archetype_id: str,
+    *,
+    limit: int = 5,
+    min_coverage: float = 0.7,
+) -> list[dict[str, Any]]:
+    candidates = []
+    for row in rows:
+        profile = (row.get("archetypes") or {}).get(archetype_id) or {}
+        if profile.get("adjusted_score") is None:
+            continue
+        if (profile.get("coverage") or 0) < min_coverage:
+            continue
+        candidates.append(row)
+    candidates.sort(
+        key=lambda row: (
+            -(_profile_rank(row, archetype_id) or 0.0),
+            -float(row["archetypes"][archetype_id]["adjusted_score"]),
+            -int(row.get("minutes") or 0),
+        )
+    )
+    return candidates[:limit]
+
+
 def _leader(row: dict[str, Any], *, resolve_team, archetype_id: str) -> dict[str, Any]:
     archetype = (row.get("archetypes") or {}).get(archetype_id, {})
     return {
         "player_id": row.get("player_id"),
         "name": row.get("name"),
-        "club": resolve_team(row.get("team_name"), row.get("team_id")),
+        "club": resolve_team(
+            row.get("current_club") or row.get("team_name"),
+            row.get("current_club_id") or row.get("team_id"),
+        ),
         "league_id": row.get("competition_id"),
         "league_slug": row.get("league_slug"),
         "league_name": row.get("competition"),
+        "stats_club": resolve_team(row.get("stats_club"), row.get("team_id")),
+        "current_club_status": row.get("current_club_status"),
+        "age": row.get("age"),
         "minutes": row.get("minutes"),
         "rating": row.get("rating"),
         "rating_percentile": row.get("rating_percentile"),
@@ -318,66 +394,128 @@ def _leader(row: dict[str, Any], *, resolve_team, archetype_id: str) -> dict[str
         "coverage": archetype.get("coverage"),
         "value_index": row.get("value_index"),
         "value_index_coverage": row.get("value_index_coverage"),
+        "scouting_priority": row.get("scouting_priority"),
+        "age_multiplier": row.get("age_multiplier"),
+        "europe_multiplier": row.get("europe_multiplier"),
+        "european_league_phase_minutes": row.get("european_league_phase_minutes"),
+        "european_league_phase_competitions": row.get("european_league_phase_competitions") or [],
+        "european_status": row.get("european_status"),
     }
 
 
-def _pivot(
+def _goal_scorer(row: dict[str, Any], resolve_team) -> dict[str, Any]:
+    rates = row.get("rates") or {}
+    return {
+        "player_id": row.get("player_id"),
+        "name": row.get("name"),
+        "club": resolve_team(row.get("current_club"), row.get("current_club_id")),
+        "stats_club": resolve_team(row.get("stats_club"), row.get("team_id")),
+        "league_id": row.get("competition_id"),
+        "league_slug": row.get("league_slug"),
+        "league_name": row.get("competition"),
+        "age": row.get("age"),
+        "minutes": row.get("minutes"),
+        "goals": row.get("goals"),
+        "assists": row.get("assists"),
+        "goals_p90": rates.get("goals_p90"),
+        "assists_p90": rates.get("assists_p90"),
+        "goals_assists_p90": rates.get("goals_assists_p90"),
+        "shots_p90": rates.get("shots_p90"),
+        "conversion_pct": rates.get("conversion_pct"),
+        "scouting_priority": row.get("scouting_priority"),
+        "value_index": row.get("value_index"),
+        "european_status": row.get("european_status"),
+        "european_league_phase_minutes": row.get("european_league_phase_minutes"),
+        "current_club_status": row.get("current_club_status"),
+    }
+
+
+def _attackers(
+    rows: list[dict[str, Any]],
     *,
-    squad_profile: list[dict[str, Any]],
-    pool_rows: list[dict[str, Any]],
     resolve_team,
     archetype_labels: dict[str, str],
 ) -> dict[str, Any]:
-    current: dict[str, Any] = {}
-    for archetype_id in ("ball_winning_pivot", "deep_lying_playmaker"):
-        candidates = [
-            row
-            for row in squad_profile
-            if (row.get("archetypes") or {}).get(archetype_id, {}).get("score") is not None
-        ]
-        best = (
-            max(
-                candidates,
-                key=lambda row: (
-                    float(row["archetypes"][archetype_id]["score"]),
-                    int(row.get("minutes") or 0),
-                ),
-            )
-            if candidates
-            else None
+    attack_families = {"centre_forward", "wide_forward", "attacking_midfield"}
+
+    def bias(row: dict[str, Any]) -> float | None:
+        assist = (row.get("archetypes") or {}).get("assist_creator", {})
+        goal = (row.get("archetypes") or {}).get("goal_scorer", {})
+        assist_score = assist.get("adjusted_score")
+        goal_score = goal.get("adjusted_score")
+        if assist_score is None or goal_score is None:
+            return None
+        return float(assist_score) - float(goal_score)
+
+    assist_rows: list[tuple[float, dict[str, Any]]] = []
+    goal_rows: list[tuple[float, dict[str, Any]]] = []
+    for row in rows:
+        if row.get("role_family") not in attack_families:
+            continue
+        value = bias(row)
+        if value is None:
+            continue
+        if value > 0:
+            assist_rows.append((value, row))
+        elif value < 0:
+            goal_rows.append((value, row))
+    assist_rows.sort(
+        key=lambda item: (
+            -(_profile_rank(item[1], "assist_creator") or 0.0),
+            -float(item[0]),
+            -float(item[1].get("scouting_priority") or 0),
         )
-        current[archetype_id] = (
-            {
-                "player_id": best.get("player_id"),
-                "name": best.get("name"),
-                "role_label": best.get("role_label"),
-                "minutes": best.get("minutes"),
-                "score": best["archetypes"][archetype_id]["score"],
-                "coverage": best["archetypes"][archetype_id].get("coverage"),
-            }
-            if best
-            else None
+    )
+    goal_rows.sort(
+        key=lambda item: (
+            -(_profile_rank(item[1], "goal_scorer") or 0.0),
+            float(item[0]),
+            -float(item[1].get("scouting_priority") or 0),
         )
-    pool = {
-        archetype_id: [
-            _leader(row, resolve_team=resolve_team, archetype_id=archetype_id)
-            for row in top_profiles(pool_rows, archetype_id, limit=5, score_key="adjusted_score")
-        ]
-        for archetype_id in ("ball_winning_pivot", "deep_lying_playmaker")
-    }
+    )
+
+    def attacker_leader(row: dict[str, Any], archetype_id: str, value: float) -> dict[str, Any]:
+        leader = _leader(row, resolve_team=resolve_team, archetype_id=archetype_id)
+        leader["bias"] = round(float(value), 1)
+        leader["assist_score"] = (
+            (row.get("archetypes") or {}).get("assist_creator", {}).get("adjusted_score")
+        )
+        leader["goal_score"] = (
+            (row.get("archetypes") or {}).get("goal_scorer", {}).get("adjusted_score")
+        )
+        return leader
+
+    scoring_rows = [
+        row
+        for row in rows
+        if row.get("role_family") in attack_families
+        and (row.get("rates") or {}).get("goals_p90") is not None
+    ]
+    scoring_rows.sort(
+        key=lambda row: (
+            -float(row["rates"]["goals_p90"]),
+            -float(row["rates"].get("goals_assists_p90") or 0),
+            -int(row.get("minutes") or 0),
+        )
+    )
     return {
-        "label": "The double pivot",
-        "current": current,
-        "pool": pool,
-        "archetype_labels": {
-            key: archetype_labels.get(key, key)
-            for key in ("ball_winning_pivot", "deep_lying_playmaker")
+        "assist_bias": {
+            "profile_id": "assist_creator",
+            "label": archetype_labels.get("assist_creator", "Assist-biased contributor"),
+            "leaders": [
+                attacker_leader(row, "assist_creator", value) for value, row in assist_rows[:8]
+            ],
         },
-        "hypothesis": (
-            "A ball-winning pivot plus a deep-lying playmaker is a testable way to "
-            "shield a centre-back line and still offer a short forward pass. This "
-            "page measures the profile gap; it cannot show that a signing would "
-            "reduce goals conceded. It is a hypothesis, not a recommendation."
+        "goal_bias": {
+            "profile_id": "goal_scorer",
+            "label": archetype_labels.get("goal_scorer", "Goal-scoring forward"),
+            "leaders": [attacker_leader(row, "goal_scorer", value) for value, row in goal_rows[:8]],
+        },
+        "goal_scoring": [_goal_scorer(row, resolve_team) for row in scoring_rows[:12]],
+        "note": (
+            "Assist bias and goal bias are separate profile scores. The "
+            "goal-scoring list is ordered by goals per 90 at the pool minutes "
+            "threshold, not by the composite profile."
         ),
     }
 
@@ -455,6 +593,16 @@ def _pool_document(
         },
         "state": state,
         "min_minutes": 450,
+        "rose_meta": {
+            "catalogue": (player_rose() or {}).get("catalogue") or {},
+            "min_petals": (player_rose() or {}).get("min_petals") or 4,
+            "method_note": (
+                "Two Nightingale rose figures: an all-round overall set and a "
+                "role-specific position set, both against the same league and "
+                "role-family cohort. Percentiles are directional; missing "
+                "values are not zero."
+            ),
+        },
         "players": players,
         "coverage": {
             "players": summary["players"],
@@ -509,9 +657,15 @@ def build_scouting_bundle(
     season_label = season or current_season()
     model = scouting_model()
     archetypes = scouting_archetypes()
+    rose_config = player_rose()
     roles = roles_config()
     pool = _load_parquet(PLAYER_SEASON_PATH)
     role_rows = _load_parquet(PLAYER_ROLES_PATH)
+    europe_rows = load_europe_appearances()
+    europe_meta = load_europe_meta()
+    current_clubs = load_current_clubs()
+    current_clubs_meta = load_current_clubs_meta()
+    priority_config = scouting_value().get("priority") or {}
     meta = _load_json(POOL_META_PATH) or {}
     state = _load_json(ROLES_STATE_PATH) or {}
     meta_by_id = {str(item.get("id")): item for item in meta.get("leagues") or []}
@@ -527,6 +681,10 @@ def build_scouting_bundle(
         archetypes=archetypes,
         model=model,
         value_config=scouting_value(),
+        rose_config=rose_config,
+        europe_rows=europe_rows,
+        europe_meta=europe_meta,
+        current_clubs=current_clubs,
     )
     all_rows = [row for rows in pools.values() for row in rows]
     premiership_rows = pools.get("sco:premiership", [])
@@ -542,25 +700,35 @@ def build_scouting_bundle(
         model=model,
         availability_entries=(availability or {}).get("entries") or [],
     )
+    squad_roses = build_squad_roses(
+        squad_data=squad_data,
+        index=index,
+        model=model,
+        config=rose_config,
+    )
     squad_profile = build_squad_profile(
         squad_data=squad_data,
         index=index,
         roles=roles,
         archetypes=archetypes,
         model=model,
+        roses=squad_roses,
     )
     value_model = fit_value_model()
     layer_zero = _layer_zero(board)
-    pivot = _pivot(
-        squad_profile=squad_profile,
-        pool_rows=all_rows,
+    attackers = _attackers(
+        all_rows,
         resolve_team=resolve_team,
         archetype_labels=archetype_labels,
     )
     leaders = {
         definition["id"]: [
             _leader(row, resolve_team=resolve_team, archetype_id=definition["id"])
-            for row in top_profiles(all_rows, definition["id"], limit=5, score_key="adjusted_score")
+            for row in _profile_leaders(
+                all_rows,
+                definition["id"],
+                limit=5,
+            )
         ]
         for definition in archetype_defs
     }
@@ -636,6 +804,8 @@ def build_scouting_bundle(
         "leagues": league_list,
         "totals": totals,
         "adjustment": adjustment,
+        "europe": europe_meta,
+        "current_clubs": current_clubs_meta,
         "known_gaps": known_gaps,
         "sources": [
             {
@@ -665,8 +835,10 @@ def build_scouting_bundle(
             {**definition, "leaders": leaders.get(definition["id"], [])}
             for definition in archetype_defs
         ],
-        "pivot": pivot,
+        "attackers": attackers,
         "value_model": value_model,
+        "priority": priority_config,
+        "europe_coverage": europe_meta,
         "leagues": league_list,
         "coverage": {
             "totals": totals,
@@ -676,7 +848,7 @@ def build_scouting_bundle(
         "limitations": [
             "Provider ratings are relative to a league and role cohort; they are not a verdict.",
             "The model cannot separate selection, availability and quality.",
-            "The pivot card is a hypothesis, not a causal claim.",
+            "Assist bias and goal bias are profile descriptions, not causal claims.",
             "No contracts, wages, fees or release clauses are claimed.",
             "No target list and no Aberdeen FC recommendation.",
         ],
@@ -692,6 +864,7 @@ def build_scouting_bundle(
                     "i": player.get("player_id"),
                     "n": player.get("name"),
                     "c": player.get("club"),
+                    "sc": player.get("stats_club"),
                     "l": league.get("slug"),
                     "na": player.get("nationality"),
                     "rf": player.get("role_family"),
@@ -702,11 +875,18 @@ def build_scouting_bundle(
                     "ap": player.get("adjusted_percentile"),
                     "vi": player.get("value_index"),
                     "vc": player.get("value_index_coverage"),
+                    "em": player.get("european_league_phase_minutes"),
+                    "ea": player.get("european_league_phase_appearances"),
+                    "es": player.get("european_status"),
+                    "eu": [
+                        {
+                            "UEFA Champions League": "ucl",
+                            "UEFA Europa League": "uel",
+                            "UEFA Conference League": "uecl",
+                        }.get(str(name), str(name))
+                        for name in (player.get("european_league_phase_competitions") or [])
+                    ],
                     "ab": player.get("adjustment_basis"),
-                    "vl": player.get("value_low_gbp"),
-                    "vh": player.get("value_high_gbp"),
-                    "vconf": player.get("value_confidence"),
-                    "vm": player.get("value_method"),
                     "ga": player.get("goals_assists_p90"),
                     "dr": player.get("dribbles_success_p90"),
                     "ps": player.get("passes_completed_p90"),
@@ -718,7 +898,7 @@ def build_scouting_bundle(
                     "pr": profile.get("id"),
                     "psc": profile.get("score"),
                     "ar": {
-                        key: [value.get("score"), value.get("adjusted_score")]
+                        key: value.get("adjusted_score")
                         for key, value in (player.get("archetypes") or {}).items()
                     },
                     "f": [
@@ -748,6 +928,8 @@ def build_scouting_bundle(
         ],
         "role_labels": family_labels,
         "profile_labels": archetype_labels,
+        "priority": priority_config,
+        "europe_coverage": europe_meta,
         "players": search_players,
         "limitations": [
             "Adjusted percentiles are an empirical alignment to the Premiership cohort, "
@@ -763,6 +945,7 @@ def build_scouting_bundle(
         "coverage": coverage,
         "pools": pool_documents,
         "search": search_document,
+        "squad_roses": squad_roses,
     }
 
 
@@ -804,6 +987,7 @@ def fallback_scouting_bundle(
                 "players": [],
                 "limitations": ["No scouting search data is available in this build."],
             },
+            "squad_roses": {},
         }
     empty = {
         "schema_version": SCHEMA_VERSION,
@@ -848,6 +1032,7 @@ def fallback_scouting_bundle(
             "sources": [],
         },
         "pools": {},
+        "squad_roses": {},
     }
 
 

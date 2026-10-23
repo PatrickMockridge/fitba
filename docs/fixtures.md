@@ -5,12 +5,15 @@
 
 ## Purpose
 
-Every played Aberdeen fixture in the Cormack era has one address. The page shows
+Every Aberdeen fixture in the Cormack era has one address. Played fixtures have
+a full page; the remaining scheduled fixtures are listed on `/matches/` but do
+not have a page. The page shows
 what the record actually supports: the score first, then events, lineups, team
 statistics, player statistics, fxG and coverage. Missing data is labelled; it is
 never filled with a zero or a guess.
 
-The scope is 2019-20 to 2026-27: 367 canonical played fixtures at the
+The scope is 2019-20 to 2026-27: 367 canonical played fixtures at the last
+check, plus the remaining scheduled fixtures from the merged season schedule at the
 2026-10-22 publish, including 16 friendlies. Three provider duplicate records
 (different fixture ids for the same match) are retained as labelled alias pages
 but excluded from counts, search and navigation. Friendlies are marked and

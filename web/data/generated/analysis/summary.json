@@ -1,0 +1,896 @@
+{
+  "aims": [
+    {
+      "basis": "measured",
+      "current": "7th, 11 points after 9",
+      "gap": 1,
+      "id": "league",
+      "label": "Top six by the split",
+      "note": "Analyst-set baseline, not a published club target. A top-six baseline after ninth place, with a new manager's first full season and a squad rebuilt over the summer.",
+      "status": "below",
+      "target": "Top six"
+    },
+    {
+      "basis": "measured",
+      "current": "Semi-final v Rangers, 2026-10-31 at Hampden Park",
+      "gap": null,
+      "id": "cup",
+      "label": "League Cup run",
+      "note": "The League Cup carries no European place.",
+      "status": "pending",
+      "target": "Final"
+    },
+    {
+      "basis": "measured",
+      "current": "5 points behind 3rd",
+      "gap": 5,
+      "id": "europe",
+      "label": "European route",
+      "note": "Scotland has four UEFA places; 4th only qualifies if the Scottish Cup winner is already in the top three. Subject to the final access list.",
+      "status": "context",
+      "target": "League places 1-3; 4th conditional"
+    }
+  ],
+  "availability": {
+    "counts": {
+      "active": 30,
+      "available": 1,
+      "doubtful": 0,
+      "loans_out": 9,
+      "out_official": 1,
+      "returned": 0,
+      "suspended_official": 0,
+      "unknown": 28
+    },
+    "coverage": {
+      "bench": {
+        "fixtures": 6,
+        "named_bench_complete": 15
+      },
+      "cards": {
+        "sco:league-cup": {
+          "complete": true,
+          "covered": 6,
+          "played": 6
+        },
+        "sco:premiership": {
+          "complete": true,
+          "covered": 9,
+          "played": 9
+        },
+        "sco:scottish-cup": {
+          "complete": true,
+          "covered": 0,
+          "played": 0
+        }
+      },
+      "ledger": {
+        "conflicts": 0,
+        "doubtful": 0,
+        "entries": 39,
+        "known": 2,
+        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
+        "out": 1,
+        "provider_snapshot": {
+          "coverage": {
+            "fixtures": {
+              "events": true,
+              "lineups": true,
+              "statistics_fixtures": true,
+              "statistics_players": true
+            },
+            "injuries": false,
+            "odds": true,
+            "players": true,
+            "predictions": true,
+            "standings": true,
+            "top_assists": true,
+            "top_cards": true,
+            "top_scorers": true
+          },
+          "reason": "provider_declares_injuries_false",
+          "rows": 0,
+          "status": "unavailable"
+        },
+        "returned": 0,
+        "stale": 0,
+        "status": "partial",
+        "suspended": 0,
+        "unknown": 37
+      },
+      "window_fixtures": [
+        1556676,
+        1556670,
+        1556665,
+        1556643,
+        1629022,
+        1556658
+      ]
+    },
+    "inferred": [],
+    "note": "Available means a verified ledger entry, not fit. Inferred rows are cause-not-published, not diagnosis.",
+    "official": [
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
+        "player_id": 68534,
+        "player_name": "K. Tobers",
+        "reason": "Knee injury; not yet involved in matchday squads.",
+        "reason_category": "injury",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+        "status": "out",
+        "verified_at": "2026-10-23"
+      },
+      {
+        "confidence": "reported",
+        "expected_return": null,
+        "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+        "player_id": 37253,
+        "player_name": "M. Knoester",
+        "reason": "Returned from injury; player reports fit.",
+        "reason_category": "injury",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
+        "status": "available",
+        "verified_at": "2026-10-23"
+      }
+    ],
+    "selection": [
+      {
+        "basis": "projection",
+        "confidence": "medium",
+        "note": "Predicted contender; not team news.",
+        "player_id": 379662,
+        "player_name": "F. Marshall",
+        "role_label": "Centre midfielder",
+        "score": 0.513
+      }
+    ],
+    "suspensions": [
+      {
+        "cautions": 5,
+        "competition_id": "sco:premiership",
+        "competition_name": "Scottish Premiership",
+        "effective_days": 7,
+        "last_card_date": "2026-09-15",
+        "next_fixture": {
+          "competition_id": "sco:premiership",
+          "date": "2026-10-24",
+          "fixture_id": 1556682,
+          "opponent_name": "Dundee United"
+        },
+        "player_id": 125695,
+        "player_name": "L. Mayo",
+        "reason": "accumulation",
+        "red_type": null,
+        "reds": 0,
+        "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
+        "rule_verified": false,
+        "status": "watch",
+        "threshold": 6
+      },
+      {
+        "cautions": 2,
+        "competition_id": "sco:league-cup",
+        "competition_name": "Premier Sports Cup",
+        "effective_days": null,
+        "last_card_date": "2026-09-12",
+        "next_fixture": {
+          "competition_id": "sco:league-cup",
+          "date": "2026-10-31",
+          "fixture_id": 1639572,
+          "opponent_name": "Rangers"
+        },
+        "player_id": 18068,
+        "player_name": "D. Happe",
+        "reason": "red_card",
+        "red_type": "second_yellow",
+        "reds": 1,
+        "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
+        "rule_verified": false,
+        "status": "review_required",
+        "threshold": null
+      }
+    ]
+  },
+  "bridges": [
+    {
+      "href": "/matchday/",
+      "label": "Matchday",
+      "summary": "Predicted XI, next six and the match read."
+    },
+    {
+      "href": "/matches/",
+      "label": "Matches",
+      "summary": "Results and the full remaining schedule."
+    },
+    {
+      "href": "/squad/",
+      "label": "Squad",
+      "summary": "Full roster, minutes, loans and role evidence."
+    },
+    {
+      "href": "/scouting/",
+      "label": "Scouting",
+      "summary": "Cross-league search and measured role gaps."
+    }
+  ],
+  "coverage": {
+    "availability": {
+      "active": 30,
+      "known": 2,
+      "unknown": 28
+    },
+    "bench": {
+      "fixtures": 6,
+      "named_bench_complete": 15
+    },
+    "cards": {
+      "sco:league-cup": {
+        "complete": true,
+        "covered": 6,
+        "played": 6
+      },
+      "sco:premiership": {
+        "complete": true,
+        "covered": 9,
+        "played": 9
+      },
+      "sco:scottish-cup": {
+        "complete": true,
+        "covered": 0,
+        "played": 0
+      }
+    },
+    "limitations": [
+      "No medical diagnosis is inferred from selection patterns.",
+      "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
+      "No contract-expiry, free-agent, wage or fee data is held.",
+      "Provider ratings are opaque and league-relative."
+    ],
+    "qualification": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.",
+    "schedule": {
+      "conflicts": 1,
+      "overdue": 0,
+      "rows": 45,
+      "scheduled": 24
+    }
+  },
+  "generated_at": "2026-10-23T18:35:21+00:00",
+  "hero": {
+    "form": "WLDWD",
+    "goal_difference": 0,
+    "league_name": "Scottish Premiership",
+    "played": 9,
+    "points": 11,
+    "position": 7
+  },
+  "next_up": [
+    {
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "conflict_review": false,
+      "date": "2026-10-24",
+      "fixture_id": 1556682,
+      "kickoff": "15:00",
+      "kickoff_status": "confirmed",
+      "kickoff_tz": "Europe/London",
+      "match_id": "spfl-premiership-2026-10-24-dundee-united-aberdeen",
+      "neutral": false,
+      "opponent_name": "Dundee United",
+      "source_id": "spfl",
+      "stage": null,
+      "status": "scheduled",
+      "venue": "A"
+    },
+    {
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "conflict_review": false,
+      "date": "2026-10-28",
+      "fixture_id": 1556688,
+      "kickoff": "19:45",
+      "kickoff_status": "confirmed",
+      "kickoff_tz": "Europe/London",
+      "match_id": "spfl-premiership-2026-10-28-aberdeen-falkirk",
+      "neutral": false,
+      "opponent_name": "Falkirk",
+      "source_id": "spfl",
+      "stage": null,
+      "status": "scheduled",
+      "venue": "H"
+    },
+    {
+      "competition_id": "sco:league-cup",
+      "competition_name": "Premier Sports Cup",
+      "conflict_review": false,
+      "date": "2026-10-31",
+      "fixture_id": 1639572,
+      "kickoff": "17:30",
+      "kickoff_status": "confirmed",
+      "kickoff_tz": "Europe/London",
+      "match_id": "spfl-league-cup-2026-10-31-rangers-aberdeen",
+      "neutral": true,
+      "opponent_name": "Rangers",
+      "source_id": "spfl",
+      "stage": "Semi-final",
+      "status": "scheduled",
+      "venue": "N"
+    }
+  ],
+  "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
+  "schema_version": "1.0.0",
+  "season": "2026-27",
+  "sources": [
+    "afc_news",
+    "api_football",
+    "spfl"
+  ],
+  "squad_decisions": {
+    "contract": {
+      "note": "No licensed contract-expiry, free-agent, wage, fee or release-clause data is held. Age is not a proxy for contract length.",
+      "status": "unavailable"
+    },
+    "coverage": {
+      "active_players": 29,
+      "loans_out": 9,
+      "with_percentile": 12,
+      "without_stats": 11
+    },
+    "denominator": {
+      "definition": "player league minutes / (team league matches x 90)",
+      "team_matches": 9,
+      "team_minutes": 810
+    },
+    "lenses": {
+      "low_minutes": {
+        "count": 7,
+        "definition": "age 23+ and below 25% of team minutes",
+        "label": "Low minutes share",
+        "rows": [
+          {
+            "age": 24,
+            "cohort_n": null,
+            "minutes": 0,
+            "minutes_share": 0.0,
+            "needs_priority": null,
+            "player_id": 163064,
+            "player_name": "D. Klein",
+            "rating_percentile": null,
+            "role_depth": 0,
+            "role_family": null,
+            "role_label": null
+          },
+          {
+            "age": 32,
+            "cohort_n": null,
+            "minutes": 0,
+            "minutes_share": 0.0,
+            "needs_priority": null,
+            "player_id": 20422,
+            "player_name": "N. Devlin",
+            "rating_percentile": null,
+            "role_depth": 3,
+            "role_family": "full_back",
+            "role_label": "Right back"
+          },
+          {
+            "age": 23,
+            "cohort_n": null,
+            "minutes": 0,
+            "minutes_share": 0.0,
+            "needs_priority": null,
+            "player_id": 271395,
+            "player_name": "A. Briedl",
+            "rating_percentile": null,
+            "role_depth": 1,
+            "role_family": "attacking_midfield",
+            "role_label": "Attacking midfielder"
+          }
+        ]
+      },
+      "peak_age_minutes": {
+        "count": 6,
+        "definition": "age 27+ and 450+ league minutes",
+        "label": "Peak-age minutes",
+        "rows": [
+          {
+            "age": 32,
+            "cohort_n": 11,
+            "minutes": 810,
+            "minutes_share": 1.0,
+            "needs_priority": null,
+            "player_id": 1141,
+            "player_name": "M. Müller",
+            "rating_percentile": 54.5,
+            "role_depth": 1,
+            "role_family": "goalkeeper",
+            "role_label": "Goalkeeper"
+          },
+          {
+            "age": 29,
+            "cohort_n": 1,
+            "minutes": 792,
+            "minutes_share": 0.978,
+            "needs_priority": null,
+            "player_id": 44921,
+            "player_name": "C. Cadden",
+            "rating_percentile": null,
+            "role_depth": 2,
+            "role_family": "wing_back",
+            "role_label": "Right wing-back"
+          },
+          {
+            "age": 28,
+            "cohort_n": 5,
+            "minutes": 719,
+            "minutes_share": 0.888,
+            "needs_priority": null,
+            "player_id": 97896,
+            "player_name": "K. Nisbet",
+            "rating_percentile": null,
+            "role_depth": 3,
+            "role_family": "centre_forward",
+            "role_label": "Centre forward"
+          }
+        ]
+      }
+    },
+    "loans": [
+      {
+        "club": "Ross County",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 6973,
+        "player_name": "N. Suman",
+        "status": "out on loan"
+      },
+      {
+        "club": "Dunfermline Athletic",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 340027,
+        "player_name": "D. Lobban",
+        "status": "out on loan"
+      },
+      {
+        "club": "Cove Rangers",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 644159,
+        "player_name": "J. Mercer",
+        "status": "out on loan"
+      },
+      {
+        "club": "Elgin City",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 625768,
+        "player_name": "Aaron Cummings",
+        "status": "out on loan"
+      },
+      {
+        "club": "Žilina",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 395743,
+        "player_name": "K. Bilalovic",
+        "status": "out on loan"
+      },
+      {
+        "club": "Inverness Caledonian Thistle",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 361406,
+        "player_name": "A. Bavidge",
+        "status": "out on loan"
+      },
+      {
+        "club": "Sanfrecce Hiroshima",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 153645,
+        "player_name": "K. Yengi",
+        "status": "out on loan"
+      },
+      {
+        "club": "Peterhead",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 477991,
+        "player_name": "L. Carroll",
+        "status": "out on loan"
+      },
+      {
+        "club": "Elgin City",
+        "end_date": null,
+        "note": "Loan end date is not held.",
+        "player_id": 674621,
+        "player_name": "Sam McLean",
+        "status": "out on loan"
+      }
+    ],
+    "rows": [
+      {
+        "age": 24,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 163064,
+        "player_name": "D. Klein",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
+      },
+      {
+        "age": 32,
+        "cohort_n": 11,
+        "minutes": 810,
+        "minutes_share": 1.0,
+        "needs_priority": null,
+        "player_id": 1141,
+        "player_name": "M. Müller",
+        "rating_percentile": 54.5,
+        "role_depth": 1,
+        "role_family": "goalkeeper",
+        "role_label": "Goalkeeper"
+      },
+      {
+        "age": 18,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 430030,
+        "player_name": "R. Vītols",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
+      },
+      {
+        "age": 29,
+        "cohort_n": 1,
+        "minutes": 792,
+        "minutes_share": 0.978,
+        "needs_priority": null,
+        "player_id": 44921,
+        "player_name": "C. Cadden",
+        "rating_percentile": null,
+        "role_depth": 2,
+        "role_family": "wing_back",
+        "role_label": "Right wing-back"
+      },
+      {
+        "age": 27,
+        "cohort_n": 22,
+        "minutes": 382,
+        "minutes_share": 0.472,
+        "needs_priority": null,
+        "player_id": 18068,
+        "player_name": "D. Happe",
+        "rating_percentile": 0.0,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 24,
+        "cohort_n": 22,
+        "minutes": 384,
+        "minutes_share": 0.474,
+        "needs_priority": null,
+        "player_id": 161806,
+        "player_name": "G. Molloy",
+        "rating_percentile": 9.1,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 22,
+        "cohort_n": 22,
+        "minutes": 248,
+        "minutes_share": 0.306,
+        "needs_priority": null,
+        "player_id": 321860,
+        "player_name": "J. Milne",
+        "rating_percentile": 0.0,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 25,
+        "cohort_n": 22,
+        "minutes": 560,
+        "minutes_share": 0.691,
+        "needs_priority": null,
+        "player_id": 125695,
+        "player_name": "L. Mayo",
+        "rating_percentile": 13.6,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 19,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 394703,
+        "player_name": "M. Frame",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "full_back",
+        "role_label": "Left back"
+      },
+      {
+        "age": 27,
+        "cohort_n": 22,
+        "minutes": 483,
+        "minutes_share": 0.596,
+        "needs_priority": null,
+        "player_id": 37253,
+        "player_name": "M. Knoester",
+        "rating_percentile": 45.5,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 32,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 20422,
+        "player_name": "N. Devlin",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "full_back",
+        "role_label": "Right back"
+      },
+      {
+        "age": 26,
+        "cohort_n": 19,
+        "minutes": 765,
+        "minutes_share": 0.944,
+        "needs_priority": null,
+        "player_id": 108465,
+        "player_name": "N. Guinness-Walker",
+        "rating_percentile": 68.4,
+        "role_depth": 3,
+        "role_family": "full_back",
+        "role_label": "Left back"
+      },
+      {
+        "age": 26,
+        "cohort_n": 19,
+        "minutes": 587,
+        "minutes_share": 0.725,
+        "needs_priority": null,
+        "player_id": 57248,
+        "player_name": "A. Aremu",
+        "rating_percentile": 5.3,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 23,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 271395,
+        "player_name": "A. Briedl",
+        "rating_percentile": null,
+        "role_depth": 1,
+        "role_family": "attacking_midfield",
+        "role_label": "Attacking midfielder"
+      },
+      {
+        "age": 25,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 14344,
+        "player_name": "A. Palaversa",
+        "rating_percentile": null,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 28,
+        "cohort_n": 19,
+        "minutes": 225,
+        "minutes_share": 0.278,
+        "needs_priority": null,
+        "player_id": 45010,
+        "player_name": "B. Lyons",
+        "rating_percentile": 94.7,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 17,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 496904,
+        "player_name": "C. Masson",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
+      },
+      {
+        "age": 27,
+        "cohort_n": 19,
+        "minutes": 446,
+        "minutes_share": 0.551,
+        "needs_priority": null,
+        "player_id": 61178,
+        "player_name": "C. Ronan",
+        "rating_percentile": 86.8,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 21,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 550363,
+        "player_name": "E. Gyamfi",
+        "rating_percentile": null,
+        "role_depth": 2,
+        "role_family": "wing_back",
+        "role_label": "Left wing-back"
+      },
+      {
+        "age": 19,
+        "cohort_n": 19,
+        "minutes": 265,
+        "minutes_share": 0.327,
+        "needs_priority": null,
+        "player_id": 379662,
+        "player_name": "F. Marshall",
+        "rating_percentile": 0.0,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 25,
+        "cohort_n": 3,
+        "minutes": 196,
+        "minutes_share": 0.242,
+        "needs_priority": null,
+        "player_id": 44982,
+        "player_name": "L. Smith",
+        "rating_percentile": null,
+        "role_depth": 1,
+        "role_family": "wide_midfield",
+        "role_label": "Right midfielder"
+      },
+      {
+        "age": 33,
+        "cohort_n": 19,
+        "minutes": 458,
+        "minutes_share": 0.565,
+        "needs_priority": null,
+        "player_id": 18945,
+        "player_name": "S. Armstrong",
+        "rating_percentile": 47.4,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
+        "age": 28,
+        "cohort_n": 14,
+        "minutes": 574,
+        "minutes_share": 0.709,
+        "needs_priority": null,
+        "player_id": 231195,
+        "player_name": "T. Olusanya",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "wide_forward",
+        "role_label": "Right winger"
+      },
+      {
+        "age": 15,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 670299,
+        "player_name": "A. Fasanya",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
+      },
+      {
+        "age": 23,
+        "cohort_n": 5,
+        "minutes": 255,
+        "minutes_share": 0.315,
+        "needs_priority": null,
+        "player_id": 303519,
+        "player_name": "A. Mouloua",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "centre_forward",
+        "role_label": "Centre forward"
+      },
+      {
+        "age": 26,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 84126,
+        "player_name": "H. Mahou",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "wide_forward",
+        "role_label": "Right winger"
+      },
+      {
+        "age": 28,
+        "cohort_n": 5,
+        "minutes": 719,
+        "minutes_share": 0.888,
+        "needs_priority": null,
+        "player_id": 97896,
+        "player_name": "K. Nisbet",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "centre_forward",
+        "role_label": "Centre forward"
+      },
+      {
+        "age": 24,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 267727,
+        "player_name": "M. Ntelo",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "centre_forward",
+        "role_label": "Centre forward"
+      },
+      {
+        "age": 20,
+        "cohort_n": 14,
+        "minutes": 284,
+        "minutes_share": 0.351,
+        "needs_priority": null,
+        "player_id": 388510,
+        "player_name": "Tony Yogane",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "wide_forward",
+        "role_label": "Left winger"
+      }
+    ]
+  },
+  "state": "full"
+}

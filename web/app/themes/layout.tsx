@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Data analysis (moved) · fitba",
-  description: "The themes page has moved to Data analysis.",
+  title: "Season overview (moved) · fitba",
+  description: "The themes page has moved to Season overview.",
   alternates: { canonical: "/analysis/" },
   robots: { index: false, follow: true },
 };

@@ -17,14 +17,15 @@ export.
 ## Panel order
 
 1. **Fixture header** — competition, stage, date, kickoff, venue, home/away,
-   freshness and the next three fixtures.
+   freshness and the **Next six** lookahead (current fixture plus the next five
+   competitive matches).
 2. **The read** — 3–5 evidence-backed bullets and the keys to the match.
 3. **Predicted XIs** — side-by-side pitches, XI, 4–6 contenders, confidence and
    the disclaimer.
 4. **Form guide** — last five league results and season home/away splits.
 5. **Style matchup** — the three-way lean and the measured evidence.
 6. **Relative strength** — league position and shot percentiles.
-7. **Data analysis strip** — a compact selection of the claims about the team, with
+7. **Case archive strip** — a compact selection of the claims about the team, with
    a link to `/analysis/` for the full case. Claims are computed independently of
    the opponent snapshot; a missing lineup does not remove them. See
    [analysis.md](analysis.md).
@@ -48,7 +49,8 @@ slots or a small sample; the coverage fraction is shown.
 
 ## Sources and refresh
 
-- **Fixtures and results:** the SPFL club feed for the next Aberdeen fixture;
+- **Fixtures and results:** the merged season schedule (history fixtures plus
+  the SPFL club feed) for the next fixture and the six-game lookahead;
   football-data.co.uk for league match rows and the venue splits.
 - **Opponent lineups and events:** API-Football, bounded to the next opponent
   only. The refresh fetches the opponent's recent finished fixtures, then

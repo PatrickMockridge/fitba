@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
 import { ScoutingArchetypes } from "@/components/ScoutingArchetypes";
+import { ScoutingAttackers } from "@/components/ScoutingAttackers";
 import { ScoutingCoverage } from "@/components/ScoutingCoverage";
 import { ScoutingLayerZeroTable } from "@/components/ScoutingLayerZero";
 import { ScoutingLeagueIndex } from "@/components/ScoutingLeagueIndex";
 import { ScoutingSquadTable } from "@/components/ScoutingSquadTable";
 import { ScoutingWeaknessTable } from "@/components/ScoutingWeaknessTable";
+import { ScoutingWeightsCard } from "@/components/ScoutingWeights";
 import { getScouting } from "@/lib/data";
 import { formatInteger, formatPercentValue } from "@/lib/format";
 
@@ -127,7 +129,18 @@ export default function ScoutingPage() {
           within the league and role cohort. Missing features are removed and the remaining
           weights renormalised; a profile below the coverage floor is null, not zero.
         </p>
-        <ScoutingArchetypes archetypes={scouting.archetypes} pivot={scouting.pivot} />
+        <ScoutingArchetypes
+          archetypes={scouting.archetypes}
+          priority={scouting.priority}
+        />
+        <ScoutingAttackers
+          attackers={scouting.attackers}
+          priority={scouting.priority}
+        />
+      </section>
+
+      <section className="card" data-contract="scouting.weights">
+        <ScoutingWeightsCard priority={scouting.priority} europe={scouting.europe_coverage} />
       </section>
 
       <section className="section" data-contract="scouting.league-index">
@@ -194,7 +207,7 @@ export default function ScoutingPage() {
         {" · "}
         <Link href="/squad/">Squad →</Link>
         {" · "}
-        <Link href="/analysis/">Data analysis →</Link>
+        <Link href="/analysis/">Season overview →</Link>
         {" · "}
         <Link href="/methodology/">Method →</Link>
       </p>

@@ -25,6 +25,14 @@ index:
     - { max_age: 31, factor: 0.55 }
     - { max_age: 120, factor: 0.30 }
 
+priority:
+  # Aberdeen scouting preferences, not measured quality. Applied after the
+  # value index; unknown European status is never discounted.
+  u23_max_age: 23
+  u23_multiplier: 1.30
+  europe_minutes_threshold: 90
+  europe_multiplier: 0.60
+
 fit:
   # Do not lower these to force a GBP publication.
   min_anchors: 60

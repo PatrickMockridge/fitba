@@ -287,7 +287,7 @@ sources:
       - transfers
       - loans
     url: https://www.api-football.com
-    coverage: [all four SPFL tiers, Scottish Cup, League Cup, and the configured scouting universe (season player statistics and starting-XI lineups)]
+    coverage: [all four SPFL tiers, Scottish Cup, League Cup, the configured scouting universe (season player statistics and starting-XI lineups), and the 2026-27 league phases of the Champions League, Europa League and Conference League]
     pricing_note: Pro subscription; check the provider's current plan and price at checkout.
     known_gaps: >
       League Cup group standings are not provided (compute from group fixtures);
@@ -296,7 +296,10 @@ sources:
       time; no preferred foot, event coordinates, heat maps, market values or
       wages, contracts or release clauses. In the scouting universe, seven enabled
       leagues return no player season statistics, and some lineups omit the
-      formation and grid; both are labelled per league and never inferred.
+      formation and grid; both are labelled per league and never inferred. The
+      European league-phase player flag uses per-fixture player data; the season
+      /players endpoint has no round dimension. Current clubs come from the
+      team transfer feed; a later move outside a pool team may be missing.
       Provider xG is partial: expected_goals appears in some Premiership
       statistics responses, not as a historical location feed. Roles are
       derived from the starting-XI formation grid in the

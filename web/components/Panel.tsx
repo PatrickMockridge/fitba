@@ -4,14 +4,16 @@ import type { Panel as PanelModel } from "@/lib/player-page";
 export function Panel({
   panel,
   id,
+  contract,
   children,
 }: {
   panel: PanelModel<unknown>;
   id?: string;
+  contract?: string;
   children: ReactNode;
 }) {
   return (
-    <section className="data-panel" id={id}>
+    <section className="data-panel" id={id} data-contract={contract}>
       <div className="data-panel-head">
         <div>
           <p className="eyebrow">{panel.eyebrow}</p>

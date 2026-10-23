@@ -1,0 +1,26 @@
+# Season overview policy.
+#
+# These are screening thresholds and display limits, not valuations, targets or
+# predictions. All numbers are published in analysis/summary.json and registered
+# in config/metrics.yaml.
+version: 1
+reviewed: 2026-10-23
+next_up: 3
+matchday_lookahead: 6
+selection_watch: 3
+squad_decisions:
+  peak_age_min: 27
+  peak_minutes_min: 450
+  low_minutes_share_max: 0.25
+  low_minutes_age_min: 23
+  percentile_min_cohort: 8
+  max_per_lens: 3
+suspensions:
+  # Until a rule is verified, publish watch/review_required only.
+  require_verified_rule: true
+absence:
+  window_fixtures: 6
+  consecutive_omissions: 2
+  min_squad_inclusions: 5
+  min_starts_or_bench: 3
+  confidence_cap: medium

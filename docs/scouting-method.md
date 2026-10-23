@@ -19,8 +19,10 @@ coverage and the uncertainty. Every number is registered in
 2. **Layer 1 — measured gaps.** Aberdeen's competitive provider rating by role
    family is compared with the other Scottish Premiership players in the same
    role family. Aberdeen are excluded from their own cohort.
-3. **Layer 2 — profiles.** Six archetypes show the types of player that add
-   options. The double-pivot card is a labelled hypothesis, not a causal claim.
+3. **Layer 2 — profiles.** Seven archetypes show the types of player that add
+   options. The attacker section splits assist-biased contribution from
+   goal-scoring contribution; a separate goal-scoring lens orders forwards by
+   goals per 90. These are profiles, not recommendations.
 
 ## Universe
 
@@ -90,7 +92,7 @@ build-up and press resistance; they are not a complete answer.
 
 ## Archetypes
 
-`config/scouting/archetypes.yaml` defines six profiles:
+`config/scouting/archetypes.yaml` defines seven profiles:
 
 | Profile | Families | Inputs |
 |---|---|---|
@@ -98,7 +100,8 @@ build-up and press resistance; they are not a complete answer.
 | Deep-lying playmaker | DM, CM | completed passes/90, pass completion, key passes/90, assists/90 |
 | Build-up defender | CB, FB, WB | completed passes/90, pass completion, key passes/90, successful dribbles/90 |
 | Wide dribbler | WM, WF, AM | successful dribbles/90, dribble success %, key passes/90, G+A/90 |
-| Goal contributor | ST, WF, AM | G+A/90, shots/90, conversion % |
+| Assist-biased contributor | ST, WF, AM, WM | completed passes/90 (0.25), key passes/90 (0.30), pass completion (0.05), assists/90 (0.25), successful dribbles/90 (0.15) |
+| Goal-scoring forward | ST, WF, AM | goals/90 (0.50), shots/90 (0.20), conversion (0.20), G+A/90 (0.10); pass and dribble volume excluded |
 | Goalkeeper shot-stopper | GK | save %, goals conceded/90 |
 
 Each score is a weighted composite of winsorised robust z-scores within the
@@ -107,11 +110,42 @@ league and role cohort, shrunk by `minutes / (minutes + 450)` and mapped to
 absolute weights renormalised. If less than 70% of the absolute weight is
 present, the score is null, not zero.
 
-Layer 2 and the pivot card use the top league-adjusted profiles across every
-league, not the Premiership only. Each leader shows the league and club, the raw
-score and the adjusted score. The pivot card shows the current squad's best
-ball-winner and deep playmaker and the all-league profiles. It answers "what
-profile is missing?", not "would this signing reduce goals?".
+Layer 2 uses the top league-adjusted profiles across every league, not the
+Premiership only. Each leader shows the league and club, the raw score and the
+adjusted score. Leaders are ordered by `adjusted profile score × U23 multiplier
+× European league-phase multiplier`; the U23 and shop-window preferences still
+apply, but the profile itself sets the order. Ordering by the value-index
+priority alone reproduced the same names in every attacking profile. The
+attacker card splits assist bias from goal bias, and the goal-scoring table
+orders forwards and attacking midfielders by goals per 90. The feed carries no
+crosses, so key passes are the closest available creation signal. These answer
+"what profile is missing?", not "would this signing reduce goals?".
+
+## Player roses
+
+Every dedicated player profile carries two Nightingale rose figures:
+
+- **Overall profile** — the shared all-round outfield set (or the goalkeeper
+  set): goals, assists, shots, key passes, successful dribbles, completed
+  passes, pass completion, tackles, interceptions and duels won.
+- **Position profile** — the role-specific set from
+  `config/player-rose.yaml`: for example scoring and creation for a centre
+  forward, passing and retention for a centre back, shot-stopping and
+  distribution for a goalkeeper.
+
+Both figures use the same cohort: the player's league and role family at the
+450-minute pool threshold, falling back to the provider position group when the
+role cohort is below its minimum (15; 8 for goalkeepers). Aberdeen uses
+Premiership-only statistics so the comparison is like-for-like; the scouting
+pool uses the row's league statistics. There is no cross-league percentile.
+
+Each axis is a midrank percentile from 0 to 100. Higher is better:
+`conceded_p90` is ranked on negated values. Sector radius is
+`sqrt(percentile / 100)`, so sector area is proportional to the percentile.
+A missing value or an insufficient cohort is null and appears as a dash in the
+companion table; it is never zero. The companion table carries the raw value,
+percentile and per-axis cohort n, and is the accessible alternative to the
+chart.
 
 ## Value
 
@@ -196,5 +230,7 @@ never published.
   data.
 - Lower-tier player detail where the provider returns no statistics.
 - Whether a profile would change results. The data can show a gap, not a cause.
+- Whether the U23 or European shop-window preference is correct for Aberdeen;
+  they are published as preferences, not as measured effects.
 - A calibrated transfer value. The public-source anchor register is the missing
   input; until it passes the gate, only the value index is published.

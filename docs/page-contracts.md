@@ -1,6 +1,6 @@
 # Page contracts
 
-**Status:** normative for the contracted routes. Last reviewed 2026-10-22.
+**Status:** normative for the contracted routes. Last reviewed 2026-10-23.
 **Machine-readable source:** `web/contracts/surfaces.json`.
 **Guard:** `scripts/check_web_contract.py`, run after `npm run build` in CI and
 before the Pages artifact is uploaded.
@@ -62,8 +62,10 @@ Must remain visible:
 - Form guide: last five, overall/home/away split, P/W-D-L/Pts/PPG/GF/GA/Shots.
 - Style: lean, evidence, venue split, shot metrics, possession-unknown note.
 - Strength: percentile comparison, table gap, confidence and cross-tier flag.
-- Themes strip, head-to-head table with Date/Match/Score/Aberdeen, and the
-  coverage/limits card with snapshot counts and source/method links.
+- Themes strip, a Next six table (current fixture plus the next five
+  competitive matches; Date/Competition/Opponent/Venue/Kickoff), the
+  head-to-head table with Date/Match/Score/Aberdeen, and the coverage/limits
+  card with snapshot counts and source/method links.
 
 May be disclosed: long method notes. The XIs, selection weights, form, style and
 not-considered data are visible.
@@ -71,38 +73,39 @@ not-considered data are visible.
 Forbidden: "Who imposes what?", "Who starts?", bare form rows without GF/GA/
 shots, strength bars without percentiles, a predicted XI without confidence.
 
-### `/analysis/` — Data analysis
+### `/analysis/` — Season overview
 
 Must remain visible:
 
-- The chairman's frame, sourced and labelled as a summary.
-- The site owner's view, attributed as opinion.
-- The thesis.
-- Every published claim with its title, claim, count, status, status reason,
-  evidence table, what better data would do and what would change the view.
-- The evidence table columns: Claim, Count, Sample, Period, Status, Source.
-- The peer benchmark table and its note that other clubs' transfer and wage
-  models are not in the public record.
-- The compact fxG aggregate table and the link to `/analysis/xg/`.
-- The fxG/provider-xG season tiles, the "where the numbers come from" panel,
-  the manager comparison table and the provider coverage note.
-- The manager table columns: Manager, Stint, Season, Matches, fxG for,
-  fxG against, Goals for, Goals against, Goals − fxG for, Goals − fxG against,
-  Provider xG for, Provider xG against, Provider basis.
-- Coverage: availability, historical appearances and the missing data classes.
-- Links to matchday, matches, squad, recruitment, transfers, history,
-  methodology, metrics and sources.
+- The hero: position, played, points, goal difference and last-five form, with
+  one freshness/source line. No opinion thesis and no duplicate fixture row.
+- Next up: the next three competitive, non-conflict fixtures with Date,
+  Competition, Opponent, Venue, Kickoff and Status, plus links to the six-game
+  matchday lookahead and the full `/matches/` schedule.
+- Availability and selection: counts (known unavailable, reported available,
+  no verified news, loans out); official AFC team news with source and
+  verification date; competition-scoped derived suspension watch; inferred
+  absence rows with basis and the exact two fixture dates; a capped selection
+  watch. Full roster stays on `/squad/`.
+- Season aims: at most three aims with Aim, Target, Current and Status, and the
+  visible label “Analyst-set baseline, not a published club target”.
+- Squad decisions: measured age, minutes, role and percentile lenses with the
+  denominator and sample count; loan-out count and role/needs context; one
+  block-level note that contract, fee and wage data is unavailable.
+- Bridges to matchday, matches, squad, scouting, fxG, methodology and sources.
+- Coverage: known/unknown availability, card and bench coverage, fixture
+  conflicts and limitations.
 
-May be disclosed: method, definitions, long caveats and the full data-science
-supporting content. They are linked, not repeated before the argument.
+The active availability universe is the current squad plus ledger-only players;
+loan-outs are separate. Counts must sum to that universe. “Available” means a
+verified ledger entry, not fit; inferred absence is “not in the last two
+matchday squads — reason not published”, never injury.
 
-Forbidden: the old five-card/five-panel grid, the 80/20 split, a question
-heading, a claim without a count or status, a causal claim from a small sample,
-a proxy presented as a measured set-play/error claim, hidden contracted data, a
-provider-style estimate presented as provider xG, actual and estimated provider
-values summed into one number, or an unlabelled actual-versus-estimate
-comparison.
-
+Forbidden: owner view, chairman frame, thesis, claim cards, benchmark, xG
+tables (they stay on `/analysis/xg/`), a medical diagnosis from selection
+patterns, a ban from an unverified rule, a global suspension state, a value or
+transfer recommendation, a fee/wage/contract-expiry claim, “will leave”,
+“sell-high”, a question heading, or hiding unknown/coverage states.
 
 ### `/analysis/xg/` — fxG model
 
@@ -115,7 +118,7 @@ Must remain visible:
   Goals − fxG, 80% interval.
 - Coverage: played fixtures, with fxG, with provider xG, missing team stats.
 - The model card: what it does, what it does not do and the gate result.
-- Links to Data analysis, methodology and the match record.
+- Links to Season overview, methodology and the match record.
 
 Forbidden: calling fxG provider xG, hiding the gate failure, a point estimate
 without its interval, or a result prediction.
@@ -126,11 +129,14 @@ Must remain visible:
 
 - Every played fixture grouped by season, with Date, Competition, Home, Score,
   Away, Result and Depth.
+- The remaining scheduled fixtures for the selected season in an Upcoming table
+  with Date, Competition, Home, Away, Venue, Kickoff and Status. Scheduled rows
+  have no fixture page and are never in the sitemap.
 - A season selector bar that defaults to the current season and shows one
   season at a time; every earlier season remains reachable from the bar.
-- Links to each fixture page.
+- Links to each played fixture page.
 - The depth labels and the note that missing classes are unavailable.
-- Links to Data analysis, fxG, matchday and the Cormack era.
+- Links to Season overview, fxG, matchday and the Cormack era.
 
 Forbidden: a fixed "featured match" that hides the rest, a result without a
 depth label, or a match page link that does not resolve.
@@ -245,6 +251,43 @@ Forbidden: removing the stats-unavailable or coverage labels; zero-filling
 missing stats; presenting provider ratings as verdicts; hiding per-player data
 behind a default-closed disclosure.
 
+### `/players/<playerId>/` — Aberdeen player profile
+
+The extended tier of the player-profile standard. Must remain visible:
+
+- The shared profile header: name, role, age, nationality, squad number,
+  status/loan badges and the role-inference link.
+- The statistical profile: **Overall profile** and **Position profile**
+  Nightingale roses, each with labelled axes and an accessible title/description
+  carrying the exact values and cohort n. The cohort basis, cohort n, league,
+  minutes threshold and the higher-is-better rule are visible; an unavailable or
+  partial figure says why and does not draw zero petals. There is no duplicate
+  rose table.
+- Key facts: Premiership minutes, appearances, provider rating and cohort
+  percentile with the cohort basis and n.
+- The Position panel: role inference, career evidence and club history.
+- Playing time: starts, sub apps, minutes started, minutes as sub and the
+  per-competition table.
+- Performance: role-relevant tiles, provider table, detail table and defensive
+  context where applicable.
+- Availability and team news for the current squad: status, reason, expected
+  return, confidence, source and verification date, with an explicit unknown
+  state and no inferred injury.
+- Recent matches for the current squad: date, competition, opponent, venue,
+  score, result, minutes, rating, goals and assists; latest 10 competitive
+  current-season rows, with a dash for missing values.
+- Records outside the main scope when present.
+- Coverage and limits, the source, and the squad/matchday/recruitment back
+  links.
+
+The profile is a projection of `players/<playerId>.json`; React does not
+derive or merge new facts. Loan-out players keep their role and loan record but
+show Availability and Recent matches as not applicable.
+
+Forbidden: zero-filling a missing petal, hiding a missing cohort, presenting a
+provider rating as a verdict, an injury claim without the verified ledger, a
+contract/wage/fee claim, or removing a panel to fit a layout.
+
 ### `/scouting/` — scouting board
 
 Must remain visible:
@@ -256,9 +299,18 @@ Must remain visible:
 - Layer 1: one row per role family with players, minutes, Aberdeen rating,
   cohort median and n, percentile, availability summary and the reading
   (structural, cover, hold, none, insufficient).
-- Layer 2: the six archetype definitions with their feature weights and
-  all-league adjusted leaders (league, club, raw score, adjusted score, value
-  index), and the double-pivot hypothesis card with all-league profiles.
+- Layer 2: the seven archetype definitions with their feature weights and
+  all-league profile leaders (league, club, raw score, adjusted score, value
+  index, priority, U23/Europe badges). Leaders are ordered by the adjusted
+  profile score multiplied by the U23 and European league-phase multipliers, so
+  each profile ranks its own fit rather than the shared value-index order.
+- The attacker sections: assist-biased leaders, goal-biased leaders and the
+  goal-scoring table with Player, Club, League, Age, Mins, Goals, Assists,
+  Goals/90, G+A/90, Shots/90, Conversion, Priority. The table is ordered by
+  goals per 90; it is not a recommendation.
+- The scouting-weights card: U23 cutoff and multiplier, European league-phase
+  threshold and multiplier, the priority formula, the preference caveat and the
+  European coverage.
 - The value index is a scouting ordering, not a transfer value; a GBP band is
   deferred until a public-source anchor register is available.
 - The league index: every enabled league with players, rated, 450+, role
@@ -282,9 +334,9 @@ One static page per enabled league. Must remain visible:
 
 - The league name, country, season and source.
 - The search filters and the ranked table at 450+ minutes: Player, Club, Role,
-  Age, Mins, Rating, Pct, Adj Pct, Value index, G+A/90, Dribbles/90,
-  Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %,
-  Profile.
+  Age, Mins, Rating, Pct, Adj Pct, Value index, Priority, Europe, G+A/90,
+  Dribbles/90, Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90,
+  Duels won %, Profile.
 - A caption stating that percentiles are within the league and role, and a
   visible link back to `/scouting/`.
 - Coverage: played fixtures, players with a role, the 450+ pool, rated players
@@ -301,8 +353,11 @@ Must remain visible:
 - The hero counts: ranked players, leagues with players and the season.
 - The filters: text, league, role, nationality, profile, minimum minutes, maximum age and sort.
 - The full table: Player, Club, League, Nationality, Role, Age, Mins, Rating, Pct,
-  Adj Pct, Value index, G+A/90, Dribbles/90, Passes/90, Pass %, Key passes/90,
-  Tackles/90, Interceptions/90, Duels won %, Profile.
+  Adj Pct, Value index, Priority, Europe, G+A/90, Dribbles/90, Passes/90,
+  Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %, Profile.
+  Club is the current club from the provider transfer feed; League is where the
+  2026-27 statistics were produced. When the two clubs differ, the stats club is
+  visible beside the current club.
 - The league column and a visible statement that percentiles are within each
   league and role, never a cross-league ranking.
 - Coverage: ranked players, leagues with players, leagues without stats and the
@@ -312,6 +367,36 @@ Must remain visible:
 Forbidden: a raw percentile presented as a cross-league rank; hiding the league;
 a GBP value claim; a contract, wage or fee claim; an empty table without an
 explicit state.
+
+### `/scouting/player/<playerId>/` — scouting profile
+
+One static page for every unique ranked player. Must remain visible:
+
+- Name, current club, stats club, league, nationality, age with U23 badge and
+  role. The profile must state when the current club and the stats club differ
+  and show the transfer date and source.
+- The shared statistical profile: **Overall profile** and **Position profile**
+  Nightingale roses with labelled axes, an accessible title/description carrying
+  the exact values and cohort n, the cohort basis and n, and the
+  higher-is-better rule. No duplicate rose table.
+- Minutes, appearances, provider rating, within-league percentile, adjusted
+  percentile and value index.
+- Scouting priority with the value index × age multiplier × Europe multiplier
+  arithmetic, and the preference caveat.
+- Europe: status, competitions, league-phase minutes and appearances, the
+  90-minute threshold and the unknown-not-discounted rule.
+- The seven archetype scores, raw and adjusted, with coverage.
+- The role/cohort basis, coverage and limitations. The per-90 values are encoded
+  by the rose axes and their accessible descriptions; there is no duplicate
+  per-90 table.
+- The statement that this is not a target, recommendation, fee or contract
+  claim.
+- Links back to the league search, the full search, the scouting board, method
+  and sources.
+
+Forbidden: a contract, wage or fee claim; a recommendation or target language;
+a missing European status shown as zero; a profile without the priority
+arithmetic or the profile scores.
 
 ### `/history/` — the Cormack era
 

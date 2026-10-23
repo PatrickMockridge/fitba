@@ -562,6 +562,8 @@ def _mart_rows(mart_id: str, payload: Any) -> int | None:
         return len(payload.get("managers") or [])
     if mart_id.startswith("needs."):
         return len(payload.get("families") or [])
+    if mart_id == "analysis.summary":
+        return 1
     if mart_id.startswith("analysis."):
         return len(payload.get("analyses") or [])
     if mart_id.startswith("rumours.sco"):

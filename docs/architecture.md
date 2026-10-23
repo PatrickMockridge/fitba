@@ -108,9 +108,12 @@ Implemented:
 - `squad/aberdeen.json` — squad, current role, career eligibility and
   playing-time blocks, current-season provider stats, position context and
   preferred-foot provenance.
-- `players/<id>.json` — the typed player-page result: identity plus Position,
-  Playing time, Performance and Records panels, validated against
-  `contracts/player-page.schema.json`.
+- `players/<id>.json` — the typed player-page result: identity plus Profile,
+  Availability, Position, Playing time, Performance, Recent matches and
+  Records panels, validated against `contracts/player-page.schema.json`. The
+  Profile panel carries the two Nightingale rose figures, summary facts and the
+  catalogue; current squad members also carry the availability projection and
+  recent match log.
 - `search-index.json`, `coverage.json`, `seasons.json`, `manifest.json`.
 
 Implemented:
@@ -137,12 +140,15 @@ Implemented:
   predicted XIs with contenders, the matchup read and coverage. Opponent
   lineups come from the bounded `data/normalized/matchday/` snapshot; league
   facts join from the tables and club payload at build time.
-- `themes/aberdeen.json` — The case: the owner's view, the chairman's frame and
-  six claims on the team, squad and Cormack-era record.
-  Cormack-era mission context. Derived from local match, squad, transfer and
-  history payloads; no new network ingest.
-- `fixtures/index.json` — one row per played Cormack-era fixture with score,
-  depth and link. Built from `normalize/fixture_registry.py`.
+- `analysis/summary.json` — Season overview: current table/form, next three
+  fixtures, official and derived availability, season aims, factual
+  squad-decision lenses and bridges. Built from local payloads and the merged
+  season schedule.
+- `themes/aberdeen.json` — the retained case archive used by the compact
+  matchday evidence strip; it is not rendered on `/analysis/`.
+- `fixtures/index.json` — played rows with score, depth and link plus a
+  `scheduled` array for the remaining schedule. Built from
+  `normalize/fixture_registry.py` and `normalize/schedule.py`.
 - `matches/<fixture_id>.json` — one document per played fixture: score, summary,
   stats, fxG, timeline, lineups, player stats, form and coverage. Events and
   lineups come from the normalized history backfill; league stats join from the
@@ -172,7 +178,7 @@ Implemented:
 web/app/
   page.tsx                 home (two doors + bridge)
   matchday/                upcoming-matchday dashboard
-  analysis/                Data analysis: owner view, chairman frame and six claims
+  analysis/                Season overview: fixtures, availability, aims, squad decisions
   recruitment/             off-the-pitch hub + squad needs board
   scouting/                method + priority role profiles
   sources/                 layer truth table and source policy
@@ -205,7 +211,7 @@ Components: `LeagueTable`, `FixtureList`, `CompetitionStrip`, `NewsGrid`,
 ## File map
 
 ```text
-config/            sources, competitions, cups, matchday, themes (Data analysis), publication, scouting, Aberdeen
+config/            sources, competitions, cups, matchday, themes (case archive), publication, scouting, Aberdeen
 reference/         teams, loans, market values, disciplinary
 reference/history/ era, staff, honours, markets and season reviews
 src/fitba/

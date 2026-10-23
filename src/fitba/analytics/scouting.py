@@ -21,6 +21,7 @@ import polars as pl
 
 from fitba.normalize.scope import is_friendly_competition
 from fitba.settings import NORMALIZED_DIR
+from fitba.settings import player_rose as load_player_rose
 from fitba.settings import scouting_value as load_scouting_value
 
 RATE_FIELDS = [
@@ -39,6 +40,7 @@ RATE_FIELDS = [
     "conversion_pct",
     "save_pct",
     "conceded_p90",
+    "saves_p90",
 ]
 
 COUNT_FIELDS = [
@@ -112,6 +114,7 @@ def player_rates(row: dict[str, Any]) -> dict[str, float | None]:
             else (row.get("saves") or 0) + (row.get("conceded") or 0),
         ),
         "conceded_p90": per90(row.get("conceded"), minutes),
+        "saves_p90": per90(row.get("saves"), minutes),
     }
 
 
@@ -167,11 +170,17 @@ class CohortIndex:
     def __init__(self, rows: list[dict[str, Any]], model: dict[str, Any]):
         self.model = model
         self.rows: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+        self.groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+        self._values_cache: dict[tuple[str, str, str, int], list[float]] = {}
+        self._group_values_cache: dict[tuple[str, str, str, int], list[float]] = {}
         for row in rows:
             family = row.get("role_family")
             league = row.get("competition_id")
+            group = _ROSE_GROUP_KEYS.get(str(row.get("position_group") or "").upper())
             if family and league:
                 self.rows[(str(league), str(family))].append(row)
+            if group and league:
+                self.groups[(str(league), group)].append(row)
 
     def players(
         self,
@@ -191,11 +200,33 @@ class CohortIndex:
         return out
 
     def values(self, league: str, family: str, feature: str, *, min_minutes: int) -> list[float]:
-        return [
+        key = (league, family, feature, min_minutes)
+        cached = self._values_cache.get(key)
+        if cached is not None:
+            return cached
+        values = [
             float(row["rates"][feature])
             for row in self.players(league, family, min_minutes=min_minutes, feature=feature)
             if row.get("rates", {}).get(feature) is not None
         ]
+        self._values_cache[key] = values
+        return values
+
+    def group_values(
+        self, league: str, group: str, feature: str, *, min_minutes: int
+    ) -> list[float]:
+        key = (league, group, feature, min_minutes)
+        cached = self._group_values_cache.get(key)
+        if cached is not None:
+            return cached
+        values = [
+            float(row["rates"][feature])
+            for row in self.groups.get((league, group), [])
+            if int(row.get("minutes") or 0) >= min_minutes
+            and row.get("rates", {}).get(feature) is not None
+        ]
+        self._group_values_cache[key] = values
+        return values
 
 
 def rating_cohort(
@@ -216,6 +247,234 @@ def _min_cohort(model: dict[str, Any], family: str | None) -> int:
     pool = model.get("pool") or {}
     by_family = pool.get("min_cohort_by_family") or {}
     return int(by_family.get(family) or pool.get("min_cohort") or 25)
+
+
+_ROSE_GROUP_KEYS = {
+    "GK": "goalkeeper",
+    "DEF": "defender",
+    "MID": "midfielder",
+    "FWD": "forward",
+    "GOALKEEPER": "goalkeeper",
+    "DEFENDER": "defender",
+    "MIDFIELDER": "midfielder",
+    "FORWARD": "forward",
+}
+
+
+def _rose_group(position_group: str | None) -> str | None:
+    if not position_group:
+        return None
+    return _ROSE_GROUP_KEYS.get(str(position_group).upper())
+
+
+def _rose_basis(
+    *,
+    league: str,
+    family: str | None,
+    group: str | None,
+    index: CohortIndex,
+    model: dict[str, Any],
+    cohort_min_minutes: int,
+) -> tuple[str, int]:
+    pool = model.get("pool") or {}
+    if family:
+        size = len(index.players(league, family, min_minutes=cohort_min_minutes))
+        if size >= _min_cohort(model, family):
+            return "role_family", size
+    if group:
+        fallback_min = int(pool.get("fallback_group_min") or pool.get("min_cohort") or 15)
+        size = len(
+            [
+                row
+                for row in index.groups.get((league, group), [])
+                if int(row.get("minutes") or 0) >= cohort_min_minutes
+            ]
+        )
+        if size >= fallback_min:
+            return "provider_group", size
+    return "insufficient", 0
+
+
+def _rose_axes(
+    metrics: list[str],
+    *,
+    rates: dict[str, Any],
+    league: str,
+    family: str | None,
+    group: str | None,
+    basis: str,
+    index: CohortIndex,
+    model: dict[str, Any],
+    catalogue: dict[str, Any],
+    cohort_min_minutes: int,
+) -> list[dict[str, Any]]:
+    fallback_min = int(
+        (model.get("pool") or {}).get("fallback_group_min")
+        or (model.get("pool") or {}).get("min_cohort")
+        or 15
+    )
+    axes: list[dict[str, Any]] = []
+    for metric in metrics:
+        definition = catalogue.get(metric) or {}
+        value = rates.get(metric)
+        percentile = None
+        cohort_n = 0
+        if value is not None and basis != "insufficient":
+            if basis == "role_family" and family:
+                cohort = index.values(league, family, metric, min_minutes=cohort_min_minutes)
+                required = _min_cohort(model, family)
+            elif basis == "provider_group" and group:
+                cohort = index.group_values(league, group, metric, min_minutes=cohort_min_minutes)
+                required = fallback_min
+            else:
+                cohort = []
+                required = fallback_min
+            cohort_n = len(cohort)
+            point = -float(value) if definition.get("direction") == "negative" else float(value)
+            values = (
+                [-item for item in cohort] if definition.get("direction") == "negative" else cohort
+            )
+            if len(values) >= required:
+                percentile = midrank_percentile(point, values)
+        axes.append(
+            {
+                "metric": metric,
+                "value": value,
+                "percentile": percentile,
+                "cohort_n": cohort_n,
+            }
+        )
+    return axes
+
+
+def _rose_figure(
+    figure_id: str,
+    label: str,
+    axes: list[dict[str, Any]],
+    *,
+    min_petals: int,
+    blocked: str | None,
+) -> dict[str, Any]:
+    available = sum(1 for axis in axes if axis.get("percentile") is not None)
+    if blocked:
+        status = "unavailable"
+    elif available >= min_petals:
+        status = "available"
+    elif available:
+        status = "partial"
+    else:
+        status = "unavailable"
+    return {
+        "id": figure_id,
+        "label": label,
+        "status": status,
+        "axes": axes,
+    }
+
+
+def build_rose(
+    rates: dict[str, Any],
+    *,
+    minutes: int,
+    league: str,
+    league_label: str,
+    family: str | None,
+    position_group: str | None,
+    index: CohortIndex,
+    model: dict[str, Any],
+    config: dict[str, Any],
+    player_min_minutes: int,
+    cohort_min_minutes: int,
+) -> dict[str, Any]:
+    """Build the two-petal-set rose block for one player.
+
+    Both figures use the same cohort. Values are league-only rates; missing
+    values stay null and missing petals are not drawn at zero.
+    """
+    catalogue = config.get("catalogue") or {}
+    group = _rose_group(position_group)
+    overall_key = "goalkeeper" if family == "goalkeeper" or group == "goalkeeper" else "outfield"
+    overall_metrics = list((config.get("overall") or {}).get(overall_key) or [])
+    if family and family in (config.get("positions") or {}):
+        position_metrics = list((config["positions"] or {}).get(family) or [])
+    elif group and group in (config.get("groups") or {}):
+        position_metrics = list((config["groups"] or {}).get(group) or [])
+    else:
+        position_metrics = []
+
+    if minutes < player_min_minutes:
+        reason = "below_min_minutes"
+        basis, cohort_n = "insufficient", 0
+    elif not family and not group:
+        reason = "no_role"
+        basis, cohort_n = "insufficient", 0
+    else:
+        reason = None
+        basis, cohort_n = _rose_basis(
+            league=league,
+            family=family,
+            group=group,
+            index=index,
+            model=model,
+            cohort_min_minutes=cohort_min_minutes,
+        )
+        if basis == "insufficient":
+            reason = "cohort_too_small"
+
+    blocked = reason if basis == "insufficient" or minutes < player_min_minutes else None
+    overall_axes = _rose_axes(
+        overall_metrics,
+        rates=rates,
+        league=league,
+        family=family,
+        group=group,
+        basis=basis,
+        index=index,
+        model=model,
+        catalogue=catalogue,
+        cohort_min_minutes=cohort_min_minutes,
+    )
+    position_axes = _rose_axes(
+        position_metrics,
+        rates=rates,
+        league=league,
+        family=family,
+        group=group,
+        basis=basis,
+        index=index,
+        model=model,
+        catalogue=catalogue,
+        cohort_min_minutes=cohort_min_minutes,
+    )
+    min_petals = int(config.get("min_petals") or 4)
+    figures = [
+        _rose_figure(
+            "overall", "Overall profile", overall_axes, min_petals=min_petals, blocked=blocked
+        ),
+        _rose_figure(
+            "position", "Position profile", position_axes, min_petals=min_petals, blocked=blocked
+        ),
+    ]
+    if all(figure["status"] == "available" for figure in figures):
+        status = "available"
+    elif any(figure["status"] in {"available", "partial"} for figure in figures):
+        status = "partial"
+    else:
+        status = "unavailable"
+    if status == "unavailable" and reason is None:
+        reason = "no_values"
+    return {
+        "status": status,
+        "reason": reason,
+        "league": league,
+        "league_label": league_label,
+        "minutes": minutes,
+        "min_minutes": player_min_minutes,
+        "cohort_min_minutes": cohort_min_minutes,
+        "basis": basis,
+        "cohort_n": cohort_n,
+        "figures": figures,
+    }
 
 
 def archetype_scores(
@@ -272,11 +531,17 @@ def archetype_scores(
     return out
 
 
-def _squad_stats(player: dict[str, Any]) -> dict[str, Any]:
+def _squad_stats(
+    player: dict[str, Any],
+    *,
+    competition: str | None = None,
+) -> dict[str, Any]:
     rows = [
         row
         for row in player.get("stats") or []
-        if row.get("scope") == "club" and not is_friendly_competition(row.get("competition"))
+        if row.get("scope") == "club"
+        and not is_friendly_competition(row.get("competition"))
+        and (competition is None or row.get("competition") == competition)
     ]
     totals: dict[str, Any] = {}
     for field in COUNT_FIELDS:
@@ -612,6 +877,7 @@ def build_squad_profile(
     roles: dict[str, Any],
     archetypes: dict[str, Any],
     model: dict[str, Any],
+    roses: dict[int, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     min_minutes = int((model.get("squad") or {}).get("min_minutes") or 180)
     pool_min = int((model.get("pool") or {}).get("min_minutes") or 450)
@@ -650,6 +916,7 @@ def build_squad_profile(
                 "goals": totals.get("goals"),
                 "assists": totals.get("assists"),
                 "rates": rates,
+                "rose": (roses or {}).get(int(player["player_id"])),
                 "archetypes": archetype_scores(
                     rates,
                     league="sco:premiership",
@@ -672,6 +939,44 @@ def build_squad_profile(
             str(item["name"]),
         )
     )
+    return out
+
+
+def build_squad_roses(
+    *,
+    squad_data: dict[str, Any],
+    index: CohortIndex,
+    model: dict[str, Any],
+    config: dict[str, Any],
+) -> dict[int, dict[str, Any]]:
+    """Build a rose block for every Aberdeen player, including unavailable states.
+
+    The rose uses Premiership-only stats so it compares like with like against
+    the pool cohort. Players below the squad minutes gate still get a block with
+    raw axes and an explicit below-minimum reason, never zero petals.
+    """
+    player_min = int((model.get("squad") or {}).get("min_minutes") or 180)
+    cohort_min = int((model.get("pool") or {}).get("min_minutes") or 450)
+    out: dict[int, dict[str, Any]] = {}
+    for player in squad_data.get("players") or []:
+        display = player.get("display_role") or {}
+        role = player.get("role") or {}
+        family = display.get("family") or role.get("family")
+        totals = _squad_stats(player, competition="Premiership")
+        minutes = int(totals.get("minutes") or 0)
+        out[int(player["player_id"])] = build_rose(
+            player_rates(totals),
+            minutes=minutes,
+            league="sco:premiership",
+            league_label="Scottish Premiership",
+            family=family,
+            position_group=player.get("position_group"),
+            index=index,
+            model=model,
+            config=config,
+            player_min_minutes=player_min,
+            cohort_min_minutes=cohort_min,
+        )
     return out
 
 
@@ -875,6 +1180,33 @@ def scouting_value_index(
     }
 
 
+def scouting_priority_for(
+    *,
+    value_index: float | None,
+    age: int | None,
+    europe_status: str,
+    config: dict[str, Any],
+) -> dict[str, Any]:
+    """Aberdeen scouting preferences: U23 boost and European shop-window discount."""
+    params = config.get("priority") or {}
+    age_multiplier = 1.0
+    if age is not None and int(age) <= int(params.get("u23_max_age") or 23):
+        age_multiplier = float(params.get("u23_multiplier") or 1.0)
+    europe_multiplier = (
+        float(params.get("europe_multiplier") or 1.0) if europe_status == "qualified" else 1.0
+    )
+    priority = (
+        round(float(value_index) * age_multiplier * europe_multiplier, 1)
+        if value_index is not None
+        else None
+    )
+    return {
+        "age_multiplier": age_multiplier,
+        "europe_multiplier": europe_multiplier,
+        "scouting_priority": priority,
+    }
+
+
 def build_pool_rows(
     pool: pl.DataFrame,
     role_rows: pl.DataFrame,
@@ -883,6 +1215,10 @@ def build_pool_rows(
     archetypes: dict[str, Any],
     model: dict[str, Any],
     value_config: dict[str, Any] | None = None,
+    rose_config: dict[str, Any] | None = None,
+    europe_rows: pl.DataFrame | None = None,
+    europe_meta: dict[str, Any] | None = None,
+    current_clubs: pl.DataFrame | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Prepare compact per-league search rows, rates, percentiles and profiles."""
     if pool.height == 0:
@@ -909,6 +1245,41 @@ def build_pool_rows(
     index = CohortIndex(rows, model)
     alignment = build_alignment(rows, model)
     value_settings = value_config or load_scouting_value()
+    rose_settings = rose_config or load_player_rose()
+    priority_settings = value_settings.get("priority") or {}
+    europe_minutes_threshold = int(priority_settings.get("europe_minutes_threshold") or 90)
+    europe_complete = bool((europe_meta or {}).get("coverage_complete"))
+    club_map: dict[int, dict[str, Any]] = {}
+    if current_clubs is not None and current_clubs.height:
+        for item in current_clubs.to_dicts():
+            player_id = item.get("player_id")
+            if player_id is not None:
+                club_map[int(player_id)] = item
+    europe_map: dict[int, dict[str, Any]] = {}
+    if europe_rows is not None and europe_rows.height:
+        grouped: dict[int, list[dict[str, Any]]] = defaultdict(list)
+        for item in europe_rows.to_dicts():
+            grouped[int(item["player_id"])].append(item)
+        for player_id, items in grouped.items():
+            minutes = sum(int(item.get("minutes") or 0) for item in items)
+            appearances = sum(int(item.get("appearances") or 0) for item in items)
+            competitions = sorted({str(item.get("competition")) for item in items})
+            rated = [item for item in items if item.get("rating") is not None]
+            rating = (
+                round(
+                    sum(float(item["rating"]) * int(item.get("minutes") or 1) for item in rated)
+                    / max(1, sum(int(item.get("minutes") or 1) for item in rated)),
+                    2,
+                )
+                if rated
+                else None
+            )
+            europe_map[player_id] = {
+                "minutes": minutes,
+                "appearances": appearances,
+                "competitions": competitions,
+                "rating": rating,
+            }
     by_league: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         league = str(row["competition_id"])
@@ -952,6 +1323,19 @@ def build_pool_rows(
             adjusted = percentile
         row["adjusted_percentile"] = adjusted
         row["adjustment_basis"] = adjustment_basis
+        row["rose"] = build_rose(
+            row["rates"],
+            minutes=minutes,
+            league=league,
+            league_label=str(row.get("competition") or league),
+            family=family,
+            position_group=row.get("position_group"),
+            index=index,
+            model=model,
+            config=rose_settings,
+            player_min_minutes=min_minutes,
+            cohort_min_minutes=min_minutes,
+        )
         row["archetypes"] = archetype_scores(
             row["rates"],
             league=league,
@@ -977,12 +1361,63 @@ def build_pool_rows(
                 config=value_settings,
             )
         )
+        europe = europe_map.get(int(row["player_id"]))
+        if europe is not None:
+            raw_minutes = europe["minutes"]
+            europe_minutes = int(raw_minutes) if raw_minutes is not None else 0
+            europe_status = (
+                "qualified" if europe_minutes >= europe_minutes_threshold else "below_threshold"
+            )
+            europe_competitions = europe["competitions"]
+            europe_appearances: int | None = europe["appearances"]
+        elif europe_complete:
+            europe_minutes = 0
+            europe_status = "none"
+            europe_competitions = []
+            europe_appearances = 0
+        else:
+            europe_minutes = None
+            europe_status = "unknown"
+            europe_competitions = []
+            europe_appearances = None
+        current = club_map.get(int(row["player_id"]))
+        stats_club = str(row.get("team_name") or "Unknown club")
+        if current and current.get("current_team_name"):
+            row["current_club"] = str(current["current_team_name"])
+            row["current_club_id"] = current.get("current_team_id")
+            row["current_league_id"] = current.get("current_league_id")
+            row["current_league_name"] = current.get("current_league_name")
+            row["current_club_status"] = current.get("status") or "transferred"
+            row["current_club_source"] = "transfer_feed"
+            row["transferred_at"] = current.get("transfer_date")
+        else:
+            row["current_club"] = stats_club
+            row["current_club_id"] = row.get("team_id")
+            row["current_league_id"] = row.get("competition_id")
+            row["current_league_name"] = row.get("competition")
+            row["current_club_status"] = "stats"
+            row["current_club_source"] = "stats_snapshot"
+            row["transferred_at"] = None
+        row["stats_club"] = stats_club
+        row["european_league_phase_minutes"] = europe_minutes
+        row["european_league_phase_appearances"] = europe_appearances
+        row["european_league_phase_competitions"] = europe_competitions
+        row["european_status"] = europe_status
+        row.update(
+            scouting_priority_for(
+                value_index=row.get("value_index"),
+                age=row.get("age"),
+                europe_status=europe_status,
+                config=value_settings,
+            )
+        )
         row["flags"] = [
             flag
             for flag, present in (
                 ("low_minutes", minutes < low_minutes),
                 ("role_unknown", not family),
                 ("no_rating", row.get("rating") is None),
+                ("european_shop_window", europe_status == "qualified"),
             )
             if present
         ]
@@ -1005,6 +1440,7 @@ def top_profiles(
     limit: int = 5,
     min_coverage: float = 0.7,
     score_key: str = "score",
+    rank_key: str | None = None,
 ) -> list[dict[str, Any]]:
     candidates = [
         row
@@ -1012,8 +1448,10 @@ def top_profiles(
         if (row.get("archetypes") or {}).get(archetype_id, {}).get(score_key) is not None
         and (row["archetypes"][archetype_id].get("coverage") or 0) >= min_coverage
     ]
+    ranking = rank_key or score_key
     candidates.sort(
         key=lambda row: (
+            -(float(row[ranking]) if row.get(ranking) is not None else -1.0),
             -float(row["archetypes"][archetype_id][score_key]),
             -int(row["minutes"]),
         )
@@ -1027,7 +1465,9 @@ __all__ = [
     "archetype_scores",
     "build_board",
     "build_pool_rows",
+    "build_rose",
     "build_squad_profile",
+    "build_squad_roses",
     "midrank_percentile",
     "per90",
     "player_rates",

@@ -78,6 +78,29 @@ APPEARANCE_COLUMNS = [
     "ingested_at",
 ]
 
+SQUAD_COLUMNS = [
+    "player_id",
+    "player_key",
+    "player_name",
+    "shirt_number",
+    "position",
+    "team_id",
+    "team_name",
+    "fixture_id",
+    "competition",
+    "season",
+    "date",
+    "opponent",
+    "squad_status",
+    "started",
+    "minutes",
+    "role_code",
+    "role_family",
+    "role_status",
+    "bench_complete",
+    "ingested_at",
+]
+
 PLAYER_MATCH_COLUMNS = [
     "player_id",
     "player_key",
@@ -311,6 +334,7 @@ def compute_match_data(
 ) -> dict[str, Any]:
     role_config = config or roles_config()
     appearances: list[dict[str, Any]] = []
+    squad_rows: list[dict[str, Any]] = []
     match_stats: list[dict[str, Any]] = []
     team_shapes: list[dict[str, Any]] = []
     role_aggregates: dict[tuple[int, int, int, str], dict[str, Any]] = {}
@@ -322,6 +346,8 @@ def compute_match_data(
     fixtures_with_players = 0
     starts_total = 0
     starts_with_role = 0
+    bench_complete_fixtures = 0
+    bench_incomplete_fixtures = 0
     formations_seen: Counter[str] = Counter()
     unmapped_formations: set[str] = set()
     mismatches: list[dict[str, Any]] = []
@@ -532,6 +558,65 @@ def compute_match_data(
                     playing_row["minutes_as_sub"] += minutes
                 playing_row["minutes"] += minutes
 
+            named_subs = {
+                _int((entry.get("player") or {}).get("id"))
+                for entry in (lineup.get("substitutes") or [])
+                if _int((entry.get("player") or {}).get("id")) is not None
+            }
+            bench_complete = len(named_subs) >= 7
+            if bench_complete:
+                bench_complete_fixtures += 1
+            else:
+                bench_incomplete_fixtures += 1
+            for squad_player_id, squad_entry in lineup_entries.items():
+                started_squad = squad_player_id in starter_ids
+                interval = intervals.get(squad_player_id)
+                squad_minutes = max(0, interval[1] - interval[0]) if interval else 0
+                squad_role_code = None
+                squad_role_family = None
+                squad_role_status = "unknown"
+                if started_squad:
+                    start_entry = start_entries.get(squad_player_id) or {}
+                    grid = start_entry.get("grid")
+                    if grid and mapped:
+                        squad_role_code = role_for_grid(role_config, key, grid)
+                        if squad_role_code:
+                            squad_role_status = "observed"
+                    elif start_entry.get("pos") == "G":
+                        squad_role_code = "GK"
+                        squad_role_status = "observed"
+                    squad_role_family = role_family(role_config, squad_role_code)
+                squad_rows.append(
+                    {
+                        "player_id": squad_player_id,
+                        "player_key": f"api:player:{squad_player_id}",
+                        "player_name": squad_entry.get("name"),
+                        "shirt_number": squad_entry.get("number"),
+                        "position": squad_entry.get("pos"),
+                        "team_id": team_id,
+                        "team_name": team_name,
+                        "fixture_id": fixture_id,
+                        "competition": competition,
+                        "season": season,
+                        "date": date,
+                        "opponent": _opponent(fixture, team_id),
+                        "squad_status": (
+                            "starter"
+                            if started_squad
+                            else "sub_used"
+                            if squad_player_id in intervals
+                            else "sub_unused"
+                        ),
+                        "started": started_squad,
+                        "minutes": squad_minutes,
+                        "role_code": squad_role_code,
+                        "role_family": squad_role_family,
+                        "role_status": squad_role_status,
+                        "bench_complete": bench_complete,
+                        "ingested_at": ingested_at,
+                    }
+                )
+
             goals_for, goals_against, result = _scores(fixture, team_id)
             team_shapes.append(
                 {
@@ -590,6 +675,8 @@ def compute_match_data(
         "fixtures_with_lineups": fixtures_with_lineups,
         "fixtures_with_grid": fixtures_with_grid,
         "fixtures_with_players": fixtures_with_players,
+        "bench_complete_sides": bench_complete_fixtures,
+        "bench_incomplete_sides": bench_incomplete_fixtures,
         "starts_total": starts_total,
         "starts_with_role": starts_with_role,
         "players_with_starts": len(starts_players),
@@ -624,6 +711,7 @@ def compute_match_data(
     }
     return {
         "appearances": appearances,
+        "squad_rows": squad_rows,
         "match_stats": match_stats,
         "team_shapes": team_shapes,
         "roles": roles,
@@ -681,6 +769,9 @@ def ingest_match_data(
         _frame(data["appearances"], APPEARANCE_COLUMNS).write_parquet(
             output_dir / "player_appearances.parquet"
         )
+        _frame(data["squad_rows"], SQUAD_COLUMNS).write_parquet(
+            output_dir / "player_squads.parquet"
+        )
         _frame(data["match_stats"], PLAYER_MATCH_COLUMNS).write_parquet(
             output_dir / "player_match_stats.parquet"
         )
@@ -731,6 +822,10 @@ def load_player_appearances() -> pl.DataFrame:
 
 def load_player_match_stats() -> pl.DataFrame:
     return _load_frame("player_match_stats.parquet", PLAYER_MATCH_COLUMNS)
+
+
+def load_player_squads() -> pl.DataFrame:
+    return _load_frame("player_squads.parquet", SQUAD_COLUMNS)
 
 
 def load_team_shapes() -> pl.DataFrame:
@@ -913,6 +1008,7 @@ __all__ = [
     "load_player_appearances",
     "load_player_match_stats",
     "load_player_roles",
+    "load_player_squads",
     "load_playing_time",
     "load_team_shapes",
     "playing_time_for",

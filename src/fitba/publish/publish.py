@@ -45,8 +45,10 @@ from fitba.metrics.audit import (
     load_corpus,
 )
 from fitba.metrics.registry import load_registry, registry_checksum
+from fitba.normalize.schedule import load_schedule
 from fitba.normalize.teams import TeamRegistry
 from fitba.normalize.transfer_audit import build_transfer_audit
+from fitba.publish.analysis import build_analysis_payload
 from fitba.publish.availability import build_availability_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
 from fitba.publish.fixture import build_fixture_payloads
@@ -56,7 +58,7 @@ from fitba.publish.matchday import (
     fallback_matchday_payload,
 )
 from fitba.publish.needs import build_needs_payload, fallback_needs_payload
-from fitba.publish.player_page import build_player_page
+from fitba.publish.player_page import build_player_page, build_recent_matches
 from fitba.publish.provenance import build_provenance_payload
 from fitba.publish.rumours import (
     forum_payload,
@@ -76,6 +78,7 @@ from fitba.settings import (
     WEB_DATA_DIR,
     ensure_dirs,
     history_markets,
+    player_rose,
     source_registry,
 )
 from fitba.settings import (
@@ -306,10 +309,33 @@ def _aberdeen_payload(
             )
         return item
 
-    fixtures = sorted(
-        [fixture_row(row) for row in fixture_rows if row["status"] == "scheduled"],
-        key=lambda item: (str(item["date"]), item.get("kickoff") or ""),
-    )
+    schedule = load_schedule(season)
+    schedule_fixtures = []
+    for row in schedule:
+        if row.get("status") != "scheduled" or row.get("conflict_review"):
+            continue
+        if row.get("is_friendly"):
+            continue
+        schedule_fixtures.append(
+            {
+                "match_id": str(
+                    row.get("fixture_id") or row.get("match_id") or row.get("schedule_key")
+                ),
+                "competition_id": row.get("competition_id"),
+                "competition_name": row.get("competition_name"),
+                "stage": row.get("stage"),
+                "date": row.get("date"),
+                "kickoff": row.get("kickoff"),
+                "opponent_id": row.get("opponent_id"),
+                "opponent_name": row.get("opponent_name"),
+                "venue": "N" if row.get("neutral") else "H" if row.get("is_home") else "A",
+                "neutral": bool(row.get("neutral")),
+                "status": row.get("status"),
+                "source_id": "spfl" if "spfl" in (row.get("sources") or []) else "api_football",
+            }
+        )
+    schedule_fixtures.sort(key=lambda item: (str(item["date"]), item.get("kickoff") or ""))
+    fixtures = schedule_fixtures[:8]
     recent_results = sorted(
         [fixture_row(row) for row in fixture_rows if row["status"] == "played"],
         key=lambda item: str(item["date"]),
@@ -1189,14 +1215,6 @@ def publish(
     player_index = PlayerLinkIndex.from_payload(squad_data)
     squad_info = _write(temp / "squad" / "aberdeen.json", squad_data)
     written.append(squad_info)
-    for player in squad_data["players"]:
-        page = build_player_page(
-            player,
-            season=target_season,
-            generated_at=generated_at,
-        )
-        page_info = _write(temp / "players" / f"{player['player_id']}.json", page)
-        written.append(page_info)
     marts.append(
         {
             "id": "squad.sco:aberdeen",
@@ -1462,6 +1480,58 @@ def publish(
             season=target_season,
             generated_at=generated_at,
         )
+    squad_roses = scouting_bundle.get("squad_roses") or {}
+    hub_for_summary = scouting_bundle.get("hub") or {}
+    squad_rows = (
+        {
+            int(row["player_id"]): row
+            for row in hub_for_summary.get("squad") or []
+            if row.get("player_id") is not None
+        }
+        if hub_for_summary.get("state") == "full"
+        else {}
+    )
+    rose_catalogue = (player_rose() or {}).get("catalogue") or {}
+    availability_by_id = {
+        int(entry["player_id"]): entry
+        for entry in availability_payload.get("entries") or []
+        if entry.get("player_id") is not None
+    }
+    player_stats_rows = load_player_match_stats().to_dicts()
+    appearance_rows = load_player_appearances().to_dicts()
+    match_rows = matches.to_dicts()
+    for player in squad_data["players"]:
+        player_id = int(player["player_id"])
+        current_squad = player.get("status") == "squad"
+        summary_row = squad_rows.get(player_id) or {}
+        recent_matches = (
+            build_recent_matches(
+                appearance_rows,
+                player_stats_rows,
+                match_rows,
+                player_id=player_id,
+                team_id=252,
+                season=target_season,
+            )
+            if current_squad
+            else []
+        )
+        page = build_player_page(
+            player,
+            season=target_season,
+            generated_at=generated_at,
+            rose=squad_roses.get(player_id),
+            rose_catalogue=rose_catalogue,
+            availability=availability_by_id.get(player_id) if current_squad else None,
+            recent_matches=recent_matches,
+            rating_percentile=summary_row.get("rating_percentile"),
+            cohort_basis=(summary_row.get("cohort") or {}).get("basis"),
+            cohort_n=(summary_row.get("cohort") or {}).get("n"),
+            current_squad=current_squad,
+        )
+        page_info = _write(temp / "players" / f"{player_id}.json", page)
+        written.append(page_info)
+
     hub = scouting_bundle["hub"]
     hub_info = _write(temp / "scouting" / "aberdeen.json", hub)
     written.append(hub_info)
@@ -1558,6 +1628,54 @@ def publish(
     if fixture_payloads.get("state"):
         fixture_index["state"] = fixture_payloads["state"]
         fixture_index["stale_reason"] = fixture_payloads.get("stale_reason")
+    try:
+        schedule_rows = load_schedule(
+            target_season,
+            today=date.fromisoformat(str(generated_at)[:10]),
+        )
+    except Exception:  # noqa: BLE001 - keep the played record if the schedule is missing
+        schedule_rows = []
+    played_ids = {str(row.get("fixture_id")) for row in fixture_index["fixtures"]}
+    scheduled_rows = []
+    for row in schedule_rows:
+        if row.get("status") not in {"scheduled", "conflict_review"}:
+            continue
+        fixture_key = str(row.get("fixture_id") or row.get("schedule_key"))
+        if fixture_key in played_ids:
+            continue
+        scheduled_rows.append(
+            {
+                "fixture_id": row.get("fixture_id") or row.get("schedule_key"),
+                "season": target_season,
+                "date": row.get("date"),
+                "kickoff": row.get("kickoff"),
+                "kickoff_status": row.get("kickoff_status"),
+                "competition_id": row.get("competition_id"),
+                "competition_name": row.get("competition_name"),
+                "stage": row.get("stage"),
+                "home_team_name": row.get("home_team_name"),
+                "away_team_name": row.get("away_team_name"),
+                "aberdeen_is_home": bool(row.get("is_home")),
+                "opponent_name": row.get("opponent_name"),
+                "venue": row.get("venue"),
+                "neutral": bool(row.get("neutral")),
+                "status": row.get("status"),
+                "conflict_review": bool(row.get("conflict_review")),
+                "source_id": "spfl" if "spfl" in (row.get("sources") or []) else "api_football",
+            }
+        )
+    scheduled_rows.sort(
+        key=lambda item: (str(item.get("date") or ""), str(item.get("kickoff") or ""))
+    )
+    fixture_index["scheduled"] = scheduled_rows
+    fixture_index["scheduled_count"] = len(scheduled_rows)
+    fixture_index["schedule_coverage"] = {
+        "schedule_rows": len(schedule_rows),
+        "scheduled": sum(1 for row in schedule_rows if row.get("status") == "scheduled"),
+        "conflicts": sum(1 for row in schedule_rows if row.get("conflict_review")),
+        "overdue": sum(1 for row in schedule_rows if row.get("status") == "overdue"),
+        "source": "history fixtures + SPFL club feed",
+    }
     fixtures_info = _write(temp / "fixtures" / "index.json", fixture_index)
     written.append(fixtures_info)
     marts.append(
@@ -1580,6 +1698,68 @@ def publish(
             "checksum": None,
             "season": target_season,
             "row_basis": "one canonical file per played fixture; duplicate aliases separate",
+        }
+    )
+
+    table_frame = (tables_by_season.get(target_season) or {}).get("sco:premiership")
+    table_rows = table_frame.to_dicts() if table_frame is not None and table_frame.height else []
+    club_id = str(aberdeen_config()["club_id"])
+    table_row = next((row for row in table_rows if row.get("team_id") == club_id), {})
+    try:
+        analysis_payload = build_analysis_payload(
+            season=target_season,
+            generated_at=generated_at,
+            squad_data=squad_data,
+            availability=availability_payload,
+            matchday=matchday_payload,
+            needs=needs_payload,
+            scouting_hub=scouting_bundle.get("hub") or {},
+            history_season=(history_payloads.get("seasons") or {}).get(target_season) or {},
+            table_rows=table_rows,
+            table_row=table_row,
+        )
+    except Exception as error:  # noqa: BLE001 - the summary must not fail the publish
+        analysis_payload = {
+            "schema_version": "1.0.0",
+            "season": target_season,
+            "generated_at": generated_at,
+            "state": "unavailable",
+            "stale_reason": f"analysis_build_failed:{type(error).__name__}",
+            "hero": {},
+            "next_up": [],
+            "availability": {
+                "counts": {},
+                "official": [],
+                "suspensions": [],
+                "inferred": [],
+                "selection": [],
+                "coverage": {},
+            },
+            "aims": [],
+            "squad_decisions": {
+                "rows": [],
+                "lenses": {},
+                "loans": [],
+                "contract": {},
+                "coverage": {},
+            },
+            "bridges": [],
+            "coverage": {
+                "availability": {"known": 0, "unknown": 0, "active": 0},
+                "limitations": ["Season overview unavailable in this build."],
+            },
+            "sources": [],
+            "notes": "Season overview unavailable in this build.",
+        }
+    analysis_info = _write(temp / "analysis" / "summary.json", analysis_payload)
+    written.append(analysis_info)
+    marts.append(
+        {
+            "id": "analysis.summary",
+            "path": "analysis/summary.json",
+            "rows": 1,
+            "checksum": analysis_info["checksum"],
+            "season": target_season,
         }
     )
 

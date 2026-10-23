@@ -26,13 +26,19 @@ export default function MatchesPage() {
       </ContractPage>
     );
   }
-  const seasons = Array.from(new Set(index.fixtures.map((row) => row.season))).sort(
-    (a, b) => b.localeCompare(a),
-  );
+  const scheduledRows = index.scheduled ?? [];
+  const upcomingCount = scheduledRows.filter((row) => !row.conflict_review).length;
+  const seasons = Array.from(
+    new Set([...index.fixtures.map((row) => row.season), ...scheduledRows.map((row) => row.season)]),
+  ).sort((a, b) => b.localeCompare(a));
   const currentSeason = seasons[0];
   const seasonGroups = seasons.map((season) => ({
     season,
     rows: index.fixtures.filter((row) => row.season === season),
+  }));
+  const scheduledGroups = seasons.map((season) => ({
+    season,
+    rows: scheduledRows.filter((row) => row.season === season),
   }));
   return (
     <ContractPage surface="matches">
@@ -40,17 +46,18 @@ export default function MatchesPage() {
         <p className="eyebrow">Cormack era</p>
         <h1>Match record</h1>
         <p className="lede">
-          Every played Aberdeen fixture, one season at a time, with the score,
-          the events, the lineups and the measured stats. The depth label says
-          what the feed can show; it is not a claim that the rest does not exist.
+          Every Aberdeen fixture, one season at a time: results with the score,
+          events, lineups and measured stats, plus the remaining fixtures where
+          the schedule is known. The depth label says what the feed can show; it
+          is not a claim that the rest does not exist.
         </p>
         <p className="fine-print">
-          {index.count} played fixtures.{" "}
+          {index.count} played fixtures · {upcomingCount} to play.{" "}
           <Link className="text-link" href="/analysis/xg/">
             fxG model and aggregates →
           </Link>{" "}
           <Link className="text-link" href="/analysis/">
-            Data analysis →
+            Season overview →
           </Link>{" "}
           <Link className="text-link" href="/matchday/">
             Matchday →
@@ -61,7 +68,7 @@ export default function MatchesPage() {
         </p>
       </section>
 
-      <MatchRecordArchive seasons={seasonGroups} current={currentSeason} />
+      <MatchRecordArchive seasons={seasonGroups} scheduled={scheduledGroups} current={currentSeason} />
     </ContractPage>
   );
 }

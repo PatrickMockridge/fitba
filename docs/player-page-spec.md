@@ -1,6 +1,6 @@
 # Player page specification
 
-**Status:** normative. Last reviewed 2026-10-21.
+**Status:** normative. Last reviewed 2026-10-23.
 
 This document defines what a player page is allowed to contain. Where a
 component, comment or habit disagrees with this page, this page wins.
@@ -13,8 +13,11 @@ sources, choose between statistics or infer positions in React.
 1. **One page, one player, one document.** The route reads a single
    `players/<player_id>.json` result. The squad table is a different result and
    is not merged into the page.
-2. **Named panels, fixed order.** Identity, Position, Playing time, Performance,
-   Records. Only Records is conditional on having rows.
+2. **Named panels, fixed order.** Identity, Profile, Position, Playing time,
+   Performance, Availability, Recent matches, Records. Availability and Recent
+   matches are not applicable to loan-out players; Records is shown only when
+   it has rows. The shared player-profile standard is
+   `docs/player-profile-standard.md`.
 3. **One fact, one home.** A fact is not rendered as a primary value in two
    panels. A season summary and its per-competition breakdown may live in the
    same panel, labelled as summary and breakdown.
@@ -62,7 +65,7 @@ interface KnownValue<T> {
 }
 
 interface Panel<T> {
-  id: "position" | "playing_time" | "performance" | "records";
+  id: "profile" | "availability" | "position" | "playing_time" | "performance" | "recent_matches" | "records";
   eyebrow: string;
   title: string;
   status: DataStatus;
@@ -77,15 +80,18 @@ interface Panel<T> {
 
 ```ts
 interface PlayerPageDocument {
-  schema_version: "1.0.0";
+  schema_version: "1.1.0";
   player_id: number;
   season: string;
   generated_at: string;
   identity: IdentityBlock;
   panels: {
+    profile: Panel<ProfilePanel>;
+    availability: Panel<AvailabilityPanel>;
     position: Panel<PositionPanel>;
     playing_time: Panel<PlayingTimePanel>;
     performance: Panel<PerformancePanel>;
+    recent_matches: Panel<RecentMatchRow[]>;
     records: Panel<RecordRow[]>;
   };
   warnings: Warning[];
@@ -137,6 +143,19 @@ Time concepts are distinct:
 - **matches / minutes on pitch** — defensive context subtable in Performance;
   labelled “matches”, not “starts”.
 
+## Profile panel
+
+The first panel carries the published two-figure Nightingale rose block, the
+Premiership summary facts and the catalogue. See
+`docs/player-profile-standard.md` for the rose rules, cohort and unavailable
+states. React renders the published axes; it does not compute percentiles.
+
+## Availability panel
+
+Current-squad only. Status, reason, expected return, confidence, source and
+verification date from the curated ledger; unknown stays unknown. Loan-out
+profiles mark the panel not applicable.
+
 ## Playing time panel
 
 - Tiles: appearance starts, substitute appearances, minutes started, minutes as
@@ -160,6 +179,13 @@ Time concepts are distinct:
   another panel.
 - If position is unknown: no role-specific tiles or detail columns; the panel
   says `position_unavailable` rather than defaulting to midfield.
+
+## Recent matches panel
+
+Current-squad only. Latest 10 competitive current-season rows: date,
+competition, opponent, venue, score, result, minutes, rating, goals and
+assists. Missing values are a dash, not zero. Loan-out profiles mark the panel
+not applicable.
 
 ## Records panel
 

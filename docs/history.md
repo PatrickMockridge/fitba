@@ -4,7 +4,7 @@
 
 This document defines the `/history/` layer: what it records, how each panel is
 produced and what it deliberately does not claim. It is the companion to
-[the trading model](trading-model.md), [Data analysis](analysis.md) and
+[the trading model](trading-model.md), [Season overview](analysis.md) and
 [the methodology](methodology.md).
 
 ## Purpose

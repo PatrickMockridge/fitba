@@ -1,0 +1,212 @@
+# Nightingale rose profile definitions.
+#
+# Each figure is a set of league-only rates. Percentiles are computed in the
+# same role-family cohort for both figures (provider-group fallback); the
+# overall figure is the broad all-round set, the position figure is the
+# role-specific set. Thresholds live in config/scouting/model.yaml; this file
+# only defines the catalogue and axis sets.
+version: 1
+reviewed: 2026-10-23
+min_petals: 4
+
+catalogue:
+  goals_p90:
+    label: Goals /90
+    short: Goals
+    unit: per90
+    direction: positive
+  assists_p90:
+    label: Assists /90
+    short: Assists
+    unit: per90
+    direction: positive
+  goals_assists_p90:
+    label: G+A /90
+    short: G+A
+    unit: per90
+    direction: positive
+  shots_p90:
+    label: Shots /90
+    short: Shots
+    unit: per90
+    direction: positive
+  dribbles_success_p90:
+    label: Dribbles /90
+    short: Dribbles
+    unit: per90
+    direction: positive
+  dribble_success_pct:
+    label: Dribble success
+    short: Dribble %
+    unit: percent
+    direction: positive
+  passes_completed_p90:
+    label: Passes /90
+    short: Passes
+    unit: per90
+    direction: positive
+  key_passes_p90:
+    label: Key passes /90
+    short: Key
+    unit: per90
+    direction: positive
+  tackles_p90:
+    label: Tackles /90
+    short: Tackles
+    unit: per90
+    direction: positive
+  interceptions_p90:
+    label: Interceptions /90
+    short: Intercepts
+    unit: per90
+    direction: positive
+  pass_completion_pct:
+    label: Pass completion
+    short: Pass %
+    unit: percent
+    direction: positive
+  duel_win_pct:
+    label: Duels won
+    short: Duels %
+    unit: percent
+    direction: positive
+  conversion_pct:
+    label: Conversion
+    short: Conv.
+    unit: percent
+    direction: positive
+  save_pct:
+    label: Save %
+    short: Save %
+    unit: percent
+    direction: positive
+  conceded_p90:
+    label: Conceded /90
+    short: Conceded
+    unit: per90
+    direction: negative
+  saves_p90:
+    label: Saves /90
+    short: Saves
+    unit: per90
+    direction: positive
+
+overall:
+  outfield:
+    - goals_p90
+    - assists_p90
+    - shots_p90
+    - key_passes_p90
+    - dribbles_success_p90
+    - passes_completed_p90
+    - pass_completion_pct
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+  goalkeeper:
+    - saves_p90
+    - save_pct
+    - conceded_p90
+    - passes_completed_p90
+    - pass_completion_pct
+
+positions:
+  goalkeeper:
+    - saves_p90
+    - save_pct
+    - conceded_p90
+    - pass_completion_pct
+  centre_back:
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+    - passes_completed_p90
+    - pass_completion_pct
+  full_back:
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+    - passes_completed_p90
+    - pass_completion_pct
+    - key_passes_p90
+    - dribbles_success_p90
+  wing_back:
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+    - passes_completed_p90
+    - pass_completion_pct
+    - key_passes_p90
+    - dribbles_success_p90
+  defensive_midfield:
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+    - passes_completed_p90
+    - pass_completion_pct
+    - key_passes_p90
+  central_midfield:
+    - passes_completed_p90
+    - pass_completion_pct
+    - key_passes_p90
+    - assists_p90
+    - tackles_p90
+    - interceptions_p90
+    - goals_assists_p90
+  attacking_midfield:
+    - goals_p90
+    - assists_p90
+    - shots_p90
+    - key_passes_p90
+    - dribbles_success_p90
+    - pass_completion_pct
+    - conversion_pct
+  wide_midfield:
+    - goals_p90
+    - assists_p90
+    - key_passes_p90
+    - dribbles_success_p90
+    - dribble_success_pct
+    - pass_completion_pct
+  wide_forward:
+    - goals_p90
+    - assists_p90
+    - key_passes_p90
+    - dribbles_success_p90
+    - dribble_success_pct
+    - pass_completion_pct
+  centre_forward:
+    - goals_p90
+    - assists_p90
+    - shots_p90
+    - conversion_pct
+    - goals_assists_p90
+    - key_passes_p90
+    - duel_win_pct
+
+groups:
+  goalkeeper:
+    - saves_p90
+    - save_pct
+    - conceded_p90
+    - pass_completion_pct
+  defender:
+    - tackles_p90
+    - interceptions_p90
+    - duel_win_pct
+    - passes_completed_p90
+    - pass_completion_pct
+  midfielder:
+    - passes_completed_p90
+    - pass_completion_pct
+    - key_passes_p90
+    - tackles_p90
+    - interceptions_p90
+    - dribbles_success_p90
+  forward:
+    - goals_p90
+    - assists_p90
+    - shots_p90
+    - conversion_pct
+    - key_passes_p90
+    - pass_completion_pct

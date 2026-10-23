@@ -52,6 +52,18 @@ from fitba.ingest.scouting import (
 from fitba.ingest.scouting import (
     scouting_status as load_scouting_status,
 )
+from fitba.ingest.scouting_clubs import (
+    ingest_current_clubs as ingest_scouting_clubs,
+)
+from fitba.ingest.scouting_clubs import (
+    load_current_clubs_meta,
+)
+from fitba.ingest.scouting_europe import (
+    ingest_europe as ingest_scouting_europe,
+)
+from fitba.ingest.scouting_europe import (
+    load_europe_meta,
+)
 from fitba.ingest.squad import ingest_squad
 from fitba.ingest.transfer_audit import run_transfer_audit
 from fitba.ingest.transfers import ingest_transfer_history, ingest_transfers
@@ -746,6 +758,47 @@ def scouting_roles(
             )
 
 
+@scouting_app.command("clubs")
+def scouting_clubs(
+    budget: Annotated[int, typer.Option(help="Network request budget for this run")] = 1000,
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+) -> None:
+    """Resolve each pool player's current club from the provider transfer feed."""
+    meta = ingest_scouting_clubs(budget=budget, refresh=refresh)
+    console.print(
+        f"scouting clubs: {meta['players']} players from "
+        f"{meta['teams_fetched']}/{meta['teams_total']} pool teams, "
+        f"{meta['requests']}/{meta['budget']} requests"
+    )
+    for error in meta.get("errors") or []:
+        console.print(f"  [red]{error}[/red]")
+
+
+@scouting_app.command("europe")
+def scouting_europe(
+    season: Annotated[str, typer.Option(help="current or a season like 2025-26")] = "current",
+    budget: Annotated[int, typer.Option(help="Network request budget for this run")] = 2000,
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+) -> None:
+    """Ingest Champions League, Europa League and Conference League league-phase players."""
+    label = current_season() if season == "current" else season
+    meta = ingest_scouting_europe(season=label, budget=budget, refresh=refresh)
+    console.print(
+        f"scouting europe {meta['season']}: {meta['players']} players, "
+        f"{meta['requests']}/{meta['budget']} requests, "
+        f"complete={meta['coverage_complete']}"
+    )
+    for item in meta.get("competitions") or []:
+        console.print(
+            f"  {item['competition']}: {item['fetched']}/{item['played']} played "
+            f"league-phase fixtures, missing {item['missing']}"
+        )
+        if item.get("error"):
+            console.print(f"    [red]{item['error']}[/red]")
+    if meta.get("stopped_on_budget"):
+        console.print("[yellow]stopped on the request budget; rerun to continue[/yellow]")
+
+
 @scouting_app.command("values")
 def scouting_values(
     status: Annotated[bool, typer.Option("--status", help="Show the anchor gate")] = False,
@@ -831,6 +884,18 @@ def scouting_status_command() -> None:
         f"{totals.get('role_players', 0)} players, "
         f"{totals.get('requests', 0)} requests"
     )
+    europe = load_europe_meta()
+    if europe:
+        console.print(
+            f"europe {europe.get('season')}: {europe.get('players', 0)} players, "
+            f"complete={europe.get('coverage_complete')}"
+        )
+    clubs = load_current_clubs_meta()
+    if clubs:
+        console.print(
+            f"current clubs: {clubs.get('players', 0)} players from "
+            f"{clubs.get('teams_fetched', 0)}/{clubs.get('teams_total', 0)} teams"
+        )
     unmapped = {
         item["id"]: item["unmapped_formations"]
         for item in roles.get("leagues") or []
