@@ -759,9 +759,7 @@ def _league_stats(
     return league_row.get("all") or {}, "league_all_roles"
 
 
-def _reference_values(
-    alignment: dict[str, Any], family: str | None
-) -> list[float]:
+def _reference_values(alignment: dict[str, Any], family: str | None) -> list[float]:
     values = alignment.get("reference_values") or {}
     if family:
         family_values = (values.get("families") or {}).get(family) or []
@@ -788,12 +786,7 @@ def adjusted_percentile_for(
     ref_scale = reference.get("scale")
     league_scale = league_stats.get("scale")
     values = _reference_values(alignment, family)
-    if (
-        ref_median is None
-        or ref_scale is None
-        or league_scale is None
-        or not values
-    ):
+    if ref_median is None or ref_scale is None or league_scale is None or not values:
         return None, "unavailable"
     scale_factor = float(ref_scale) / float(league_scale)
     equivalent = float(ref_median) + (float(rating) - float(ref_median)) * scale_factor
@@ -827,7 +820,7 @@ def adjusted_profile_for(
 def age_curve(age: int | None, config: dict[str, Any]) -> float | None:
     if age is None:
         return None
-    bands = ((config.get("index") or {}).get("age_curve") or [])
+    bands = (config.get("index") or {}).get("age_curve") or []
     for band in bands:
         if int(age) <= int(band.get("max_age") or 999):
             return float(band.get("factor") or 0.0)
