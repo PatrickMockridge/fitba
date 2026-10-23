@@ -47,11 +47,7 @@ def _age_multiplier(row: dict, priority: dict) -> float:
 
 
 def _europe_multiplier(row: dict, priority: dict) -> float:
-    return (
-        float(priority["europe_multiplier"])
-        if row.get("es") == "qualified"
-        else 1.0
-    )
+    return float(priority["europe_multiplier"]) if row.get("es") == "qualified" else 1.0
 
 
 def _profile_entry(row: dict, profile_id: str, order: dict[str, int]) -> list | None:
@@ -197,9 +193,7 @@ def test_profile_leaders_reproduce(hub: dict, search: dict) -> None:
             if entry[3] is not None and float(entry[3]) < min_coverage:
                 continue
             rank = (
-                float(entry[1])
-                * _age_multiplier(row, priority)
-                * _europe_multiplier(row, priority)
+                float(entry[1]) * _age_multiplier(row, priority) * _europe_multiplier(row, priority)
             )
             candidates.append((rank, float(entry[1]), int(row.get("m") or 0), row))
         candidates.sort(key=lambda item: (-item[0], -item[1], -item[2]))
@@ -267,12 +261,10 @@ def test_goal_scoring_reproduces(hub: dict, search: dict) -> None:
         )
     )
     expected = [
-        (int(row["i"]), str(row["l"]))
-        for row in rows[: len(hub["attackers"]["goal_scoring"])]
+        (int(row["i"]), str(row["l"])) for row in rows[: len(hub["attackers"]["goal_scoring"])]
     ]
     actual = [
-        (int(row["player_id"]), str(row["league_slug"]))
-        for row in hub["attackers"]["goal_scoring"]
+        (int(row["player_id"]), str(row["league_slug"])) for row in hub["attackers"]["goal_scoring"]
     ]
     assert actual == expected
 
@@ -295,12 +287,8 @@ def test_team_lens_reproduces(hub: dict, search: dict) -> None:
             -int(row.get("m") or 0),
         )
     )
-    expected = [
-        (int(row["i"]), str(row["l"]))
-        for row in rows[: len(hub["team_lens"]["leaders"])]
-    ]
+    expected = [(int(row["i"]), str(row["l"])) for row in rows[: len(hub["team_lens"]["leaders"])]]
     actual = [
-        (int(row["player_id"]), str(row["league_slug"]))
-        for row in hub["team_lens"]["leaders"]
+        (int(row["player_id"]), str(row["league_slug"])) for row in hub["team_lens"]["leaders"]
     ]
     assert actual == expected

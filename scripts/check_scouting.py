@@ -106,9 +106,7 @@ def check_data() -> list[str]:
     for archetype in hub.get("archetypes") or []:
         leaders = archetype.get("leaders") or []
         if len(leaders) > 5:
-            errors.append(
-                f"{archetype.get('id')}: {len(leaders)} leaders, expected at most 5"
-            )
+            errors.append(f"{archetype.get('id')}: {len(leaders)} leaders, expected at most 5")
     attackers = hub.get("attackers") or {}
     for key in ("assist_bias", "goal_bias"):
         leaders = (attackers.get(key) or {}).get("leaders") or []
