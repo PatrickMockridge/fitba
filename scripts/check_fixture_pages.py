@@ -331,14 +331,8 @@ def main() -> int:
         expected_href = f"{base}/matches/{fixture_id}/"
         if row.get("href") != f"/matches/{fixture_id}/":
             errors.append(f"{fixture_id}: index href is not canonical")
-        if (
-            index_html
-            and row.get("season") == default_season
-            and expected_href not in index_html
-        ):
-            errors.append(
-                f"{fixture_id}: match index does not link the default-season page"
-            )
+        if index_html and row.get("season") == default_season and expected_href not in index_html:
+            errors.append(f"{fixture_id}: match index does not link the default-season page")
 
         page_path = out_matches / str(fixture_id) / "index.html"
         if not page_path.exists():
