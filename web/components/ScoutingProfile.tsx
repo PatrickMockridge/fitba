@@ -134,6 +134,50 @@ export function ScoutingProfile({
       </ProfileSection>
 
       <ProfileSection
+        eyebrow="Team context"
+        title="Outperforming a struggling team"
+        badge={player.team_underperforming ? "Bottom 40% by PPG" : "Context"}
+        contract="player-profile.context"
+      >
+        {player.team_context_status === "available" ? (
+          <>
+            <div className="stat-row four">
+              <div className="stat-tile">
+                <span className="stat-label">League position</span>
+                <span className="stat-value">
+                  {player.team_rank ?? "—"}
+                  <span className="muted">/{player.team_count ?? "—"}</span>
+                </span>
+                <span className="stat-note">points per game table</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Team points</span>
+                <span className="stat-value">{player.team_points ?? "—"}</span>
+                <span className="stat-note">{player.team_played ?? "—"} played</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Team PPG percentile</span>
+                <span className="stat-value">{pct(player.team_points_percentile)}</span>
+                <span className="stat-note">within the league</span>
+              </div>
+              <div className="stat-tile">
+                <span className="stat-label">Team lift</span>
+                <span className="stat-value">{value(player.team_lift, 1)}</span>
+                <span className="stat-note">role-adjusted percentile minus team PPG percentile</span>
+              </div>
+            </div>
+            <p className="fine-print">
+              Team context is a contrast, not a valuation, forecast or recommendation. A
+              team is treated as underperforming at or below the configured PPG percentile;
+              a league without a table is unknown, not zero-strength.
+            </p>
+          </>
+        ) : (
+          <p className="fine-print">No current league table is available for this team.</p>
+        )}
+      </ProfileSection>
+
+      <ProfileSection
         eyebrow="Profiles"
         title="Raw and adjusted archetype scores"
         badge={`${profileEntries.length} applicable`}

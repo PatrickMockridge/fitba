@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { ScoutingLensSelector } from "@/components/ScoutingLensSelector";
 import type {
   ScoutingArchetypeDefinition,
   ScoutingPlayer,
@@ -18,7 +19,8 @@ type SortKey =
   | "rating"
   | "minutes"
   | "goals_assists"
-  | "archetype";
+  | "archetype"
+  | "team_lift";
 
 type Row = ScoutingPlayer & { priority: number | null };
 
@@ -31,6 +33,7 @@ const SORT_LABELS: Record<SortKey, string> = {
   minutes: "Minutes",
   goals_assists: "Goals + assists /90",
   archetype: "Profile score",
+  team_lift: "Team lift",
 };
 
 const EUROPE_LABELS: Record<string, string> = {
@@ -77,6 +80,7 @@ function sortValue(player: Row, key: SortKey, archetype: string): number | null 
   if (key === "rating") return player.rating;
   if (key === "minutes") return player.minutes;
   if (key === "goals_assists") return player.goals_assists_p90;
+  if (key === "team_lift") return player.team_lift;
   return player.archetypes[archetype]?.score ?? null;
 }
 
@@ -115,6 +119,7 @@ export function ScoutingBoard({
   const [u23Only, setU23Only] = useState(false);
   const [europeDiscount, setEuropeDiscount] = useState(true);
   const [excludeEurope, setExcludeEurope] = useState(false);
+  const [underperformingOnly, setUnderperformingOnly] = useState(false);
   const [sort, setSort] = useState<SortKey>("priority");
 
   useEffect(() => {
@@ -152,6 +157,7 @@ export function ScoutingBoard({
           return false;
         }
         if (excludeEurope && player.european_status === "qualified") return false;
+        if (underperformingOnly && !player.team_underperforming) return false;
         return true;
       })
       .map((player) => ({
@@ -178,6 +184,7 @@ export function ScoutingBoard({
     u23Only,
     europeDiscount,
     excludeEurope,
+    underperformingOnly,
     sort,
     weights,
   ]);
@@ -185,6 +192,35 @@ export function ScoutingBoard({
   return (
     <div>
       <div className="board-controls">
+        <ScoutingLensSelector
+          priorityActive={sort === "priority"}
+          onPriorityChange={(active) => setSort(active ? "priority" : "adjusted")}
+          u23Boost={u23Boost}
+          setU23Boost={setU23Boost}
+          u23Only={u23Only}
+          setU23Only={setU23Only}
+          europeDiscount={europeDiscount}
+          setEuropeDiscount={setEuropeDiscount}
+          excludeEurope={excludeEurope}
+          setExcludeEurope={setExcludeEurope}
+          underperformingOnly={underperformingOnly}
+          setUnderperformingOnly={setUnderperformingOnly}
+          archetype={archetype}
+          setArchetype={(value) => {
+            setArchetype(value);
+            if (value !== "all") setSort("archetype");
+            else if (sort === "archetype") setSort("priority");
+          }}
+          role={role}
+          setRole={setRole}
+          league="all"
+          setLeague={() => {}}
+          leagues={[]}
+          roles={roles}
+          archetypes={archetypes}
+          priority={weights}
+          includeLeague={false}
+        />
         <label>
           Search
           <input
@@ -193,34 +229,6 @@ export function ScoutingBoard({
             placeholder="Name or club"
             onChange={(event) => setQuery(event.target.value)}
           />
-        </label>
-        <label>
-          Role
-          <select value={role} onChange={(event) => setRole(event.target.value)}>
-            <option value="all">All roles</option>
-            {roles.map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Profile
-          <select
-            value={archetype}
-            onChange={(event) => {
-              setArchetype(event.target.value);
-              if (event.target.value !== "all") setSort("archetype");
-            }}
-          >
-            <option value="all">All profiles</option>
-            {archetypes.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.label}
-              </option>
-            ))}
-          </select>
         </label>
         <label>
           Minimum minutes
@@ -239,38 +247,6 @@ export function ScoutingBoard({
             <option value="27">27</option>
             <option value="30">30</option>
           </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={u23Boost}
-            onChange={(event) => setU23Boost(event.target.checked)}
-          />{" "}
-          U23 boost
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={u23Only}
-            onChange={(event) => setU23Only(event.target.checked)}
-          />{" "}
-          U23 only
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={europeDiscount}
-            onChange={(event) => setEuropeDiscount(event.target.checked)}
-          />{" "}
-          Europe discount
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={excludeEurope}
-            onChange={(event) => setExcludeEurope(event.target.checked)}
-          />{" "}
-          Exclude 90+ Europe
         </label>
         <label>
           Sort
@@ -304,6 +280,8 @@ export function ScoutingBoard({
             <tr>
               <th scope="col">Player</th>
               <th scope="col">Club</th>
+              <th scope="col">Team</th>
+              <th className="num" scope="col">Lift</th>
               <th scope="col">Role</th>
               <th className="num" scope="col">Age</th>
               <th className="num" scope="col">Mins</th>
@@ -338,6 +316,15 @@ export function ScoutingBoard({
                     <span className="muted"> · stats at {player.stats_club}</span>
                   ) : null}
                 </td>
+                <td>
+                  {player.team_rank === null || player.team_count === null
+                    ? "—"
+                    : `${player.team_rank}/${player.team_count}`}
+                  {player.team_points !== null ? (
+                    <span className="muted"> · {player.team_points} pts</span>
+                  ) : null}
+                </td>
+                <td className="num">{value(player.team_lift, 1)}</td>
                 <td>
                   {player.role_label}
                   {player.flags.includes("role_unknown") ? (

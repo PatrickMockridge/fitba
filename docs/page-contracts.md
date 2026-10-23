@@ -118,12 +118,12 @@ Must remain visible:
   Goals − fxG, 80% interval.
 - Coverage: played fixtures, with fxG, with provider xG, missing team stats.
 - The model card: what it does, what it does not do and the gate result.
-- Links to Season overview, methodology and the match record.
+- Links to Season overview, methodology and the results and fixtures page.
 
 Forbidden: calling fxG provider xG, hiding the gate failure, a point estimate
 without its interval, or a result prediction.
 
-### `/matches/` — match record
+### `/matches/` — results and fixtures
 
 Must remain visible:
 
@@ -134,6 +134,9 @@ Must remain visible:
   have no fixture page and are never in the sitemap.
 - A season selector bar that defaults to the current season and shows one
   season at a time; every earlier season remains reachable from the bar.
+- The current-season remaining count is a minimum, shown as “N+ to play”:
+  cup progression and the post-split league fixtures can add to the known
+  schedule.
 - Links to each played fixture page.
 - The depth labels and the note that missing classes are unavailable.
 - Links to Season overview, fxG, matchday and the Cormack era.
@@ -304,13 +307,25 @@ Must remain visible:
   index, priority, U23/Europe badges). Leaders are ordered by the adjusted
   profile score multiplied by the U23 and European league-phase multipliers, so
   each profile ranks its own fit rather than the shared value-index order.
+- The simple lens bar: priority rank, U23 (with only-U23), Europe shop window
+  (with exclude-90+), struggling team, profile, role and league. The bar is
+  always visible. With no lens active the published defaults are shown; any
+  active lens selects from the full pool and is labelled **Reader scenario**
+  with a visible reset. The reader scenario never replaces or relabels the
+  published default order and never changes a published value or the audit.
 - The attacker sections: assist-biased leaders, goal-biased leaders and the
   goal-scoring table with Player, Club, League, Age, Mins, Goals, Assists,
   Goals/90, G+A/90, Shots/90, Conversion, Priority. The table is ordered by
   goals per 90; it is not a recommendation.
+- The team-context lens: **Outperforming struggling teams**. Teams at or below
+  the configured points-per-game percentile, ranked by team lift (player
+  role-adjusted percentile minus the team points percentile). Columns: Player,
+  Club, League, Team, Team PPG %, Adj %, Lift, Priority. It is a contrast, not a
+  valuation, forecast or recommendation; a league without a table is unknown.
 - The scouting-weights card: U23 cutoff and multiplier, European league-phase
   threshold and multiplier, the priority formula, the preference caveat and the
-  European coverage.
+  European coverage. The card is the published reference; numeric weight
+  controls live only on the full search.
 - The value index is a scouting ordering, not a transfer value; a GBP band is
   deferred until a public-source anchor register is available.
 - The league index: every enabled league with players, rated, 450+, role
@@ -333,10 +348,11 @@ league with no player statistics.
 One static page per enabled league. Must remain visible:
 
 - The league name, country, season and source.
-- The search filters and the ranked table at 450+ minutes: Player, Club, Role,
-  Age, Mins, Rating, Pct, Adj Pct, Value index, Priority, Europe, G+A/90,
-  Dribbles/90, Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90,
-  Duels won %, Profile.
+- The lens selector and the search filters, with a single or layered lens summary.
+- The ranked table at 450+ minutes: Player, Club, Team, Lift, Role, Age, Mins,
+  Rating, Pct, Adj Pct, Value index, Priority, Europe, G+A/90, Dribbles/90,
+  Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %,
+  Profile.
 - A caption stating that percentiles are within the league and role, and a
   visible link back to `/scouting/`.
 - Coverage: played fixtures, players with a role, the 450+ pool, rated players
@@ -351,10 +367,20 @@ missing role shown as a guessed role; hiding the no-player-statistics state.
 Must remain visible:
 
 - The hero counts: ranked players, leagues with players and the season.
-- The filters: text, league, role, nationality, profile, minimum minutes, maximum age and sort.
-- The full table: Player, Club, League, Nationality, Role, Age, Mins, Rating, Pct,
-  Adj Pct, Value index, Priority, Europe, G+A/90, Dribbles/90, Passes/90,
-  Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %, Profile.
+- The basic lens selector (priority rank, U23, Europe, struggling team, profile,
+  role, league) in single or layered mode, plus sort.
+- The always-visible **Advanced filters** panel: reader-set U23 cutoff and
+  multiplier, European minutes threshold and multiplier; reader-set value-index
+  weights (performance, age, minutes, profile) with the normalised share; reader
+  team-context thresholds (underperforming PPG percentile and minimum lift);
+  and eligibility filters (text, nationality, minimum minutes, maximum age,
+  European status, role-known only, minimum value-index coverage). The panel
+  carries a visible **Published defaults** / **Reader scenario** label and a
+  reset. Reader weights recompute the displayed value index and priority only;
+  they do not change the published values, registry or audit.
+- The full table: Player, Club, Team, Lift, League, Nationality, Role, Age, Mins,
+  Rating, Pct, Adj Pct, Value index, Priority, Europe, G+A/90, Dribbles/90,
+  Passes/90, Pass %, Key passes/90, Tackles/90, Interceptions/90, Duels won %, Profile.
   Club is the current club from the provider transfer feed; League is where the
   2026-27 statistics were produced. When the two clubs differ, the stats club is
   visible beside the current club.
@@ -366,7 +392,8 @@ Must remain visible:
 
 Forbidden: a raw percentile presented as a cross-league rank; hiding the league;
 a GBP value claim; a contract, wage or fee claim; an empty table without an
-explicit state.
+explicit state; presenting a reader scenario as the published default; hiding
+the advanced filters or reset.
 
 ### `/scouting/player/<playerId>/` — scouting profile
 
@@ -381,6 +408,10 @@ One static page for every unique ranked player. Must remain visible:
   higher-is-better rule. No duplicate rose table.
 - Minutes, appearances, provider rating, within-league percentile, adjusted
   percentile and value index.
+- Team context: league position, points/played, team points-per-game percentile
+  and team lift (role-adjusted percentile minus team PPG percentile), or an
+  explicit no-table state. The lift is a contrast, not a valuation or
+  recommendation.
 - Scouting priority with the value index × age multiplier × Europe multiplier
   arithmetic, and the preference caveat.
 - Europe: status, competitions, league-phase minutes and appearances, the

@@ -26,7 +26,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
 | [Season overview](docs/analysis.md) | Next fixtures, availability, season aims, squad decisions and the route to the evidence. |
-| [Match record](docs/fixtures.md) | One page per played Cormack-era fixture, with events, lineups, stats and the deterministic read. |
+| [Results and fixtures](docs/fixtures.md) | Played and remaining Cormack-era fixtures, with one page per played fixture and the deterministic read. |
 | [fxG](docs/xg.md) | The experimental shot-on-target expected-goals model, interval and provider-xG gate. |
 | [Match scoreboard](docs/match-scoreboard.md) | The top-level score, goal and red-card widget and the Aberdeen/opposition split. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
@@ -57,7 +57,7 @@ full documentation index is [docs/README.md](docs/README.md).
 - **Matchday dashboard**: the next fixture, both predicted XIs, form and style,
   a compact case strip, and a squad-needs board with a
   fee-only budget envelope. The old Aberdeen dashboard is a moved notice.
-- **Match record**: every played Cormack-era fixture has a page with a top-level
+- **Results and fixtures**: every played Cormack-era fixture has a page with a top-level
   scoreboard (goals, scorers, assists, penalties, straight-red vs second-yellow
   cards), timeline, lineups, league/API stats, player stats where available and
   fxG. Aberdeen is red and the opposition neutral throughout; missing data is

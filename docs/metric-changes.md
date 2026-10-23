@@ -496,3 +496,31 @@ Also included in this publish, carried from the uncommitted 3.0.0 rose work:
 `param.player.rose` and the `param.scouting.value` priority block. These
 identifiers are listed here because this is the first registry version
 validated against `origin/main`; their definitions are in the 3.0.0 entry above.
+
+## 3.2.0 — 2026-10-23
+
+Team-context scouting lens. Owner approval recorded in the reviewed request.
+Registry version 3.2.0.
+
+- New `scouting.team-lens` metric covers league team standings, team points
+  percentile and `team_lift` (player role-adjusted percentile minus team points
+  percentile). A team is underperforming at or below the configured points-per-game
+  percentile; a league without a table is unknown.
+- The pool and search payloads gain `team_rank`, `team_points`, `team_played`,
+  `team_ppg`, `team_count`, `team_points_percentile`, `team_underperforming` and
+  `team_lift`; `scouting.pool` moves to version 5.
+- `scouting.coverage` gains the standings coverage block; version 4.
+- New `param.scouting.team-context` registers the threshold, minimum lift, lens
+  limit and note.
+- New provenance layer: provider league tables for every enabled scouting
+  league, one request per league; groups choose the table with the most played
+  rounds. Missing tables are `unknown`, not zero-strength.
+- A new `/scouting/` section, search filter/sort and player-profile team-context
+  card consume the lens. The lens is a contrast, not a valuation or
+  recommendation.
+- Affected surfaces: `/scouting/`, `/scouting/search/`, `/scouting/<league>/`,
+  `/scouting/player/<id>/`, `/sources/`, `/methodology/`, `/metrics/`.
+- Audit impact: the new payload paths cover the team-context leaves; the audit
+  is regenerated. Existing scouting values other than additive fields are
+  unchanged.
+

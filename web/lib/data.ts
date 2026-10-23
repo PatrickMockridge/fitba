@@ -2761,7 +2761,15 @@ export interface FixtureIndex {
   fixtures: FixtureIndexRow[];
   scheduled?: ScheduledFixtureRow[];
   scheduled_count?: number;
-  schedule_coverage?: Record<string, unknown>;
+  schedule_coverage?: {
+    schedule_rows?: number;
+    scheduled?: number;
+    conflicts?: number;
+    overdue?: number;
+    remaining_is_minimum?: boolean;
+    remaining_note?: string;
+    source?: string;
+  };
   aliases?: FixtureIndexAlias[];
   state?: string;
   stale_reason?: string;
@@ -3217,6 +3225,15 @@ export interface ScoutingPlayer extends ScoutingRates {
   value_method: string;
   cohort_basis: string;
   cohort_n: number;
+  team_context_status: string;
+  team_rank: number | null;
+  team_points: number | null;
+  team_played: number | null;
+  team_ppg: number | null;
+  team_count: number | null;
+  team_points_percentile: number | null;
+  team_underperforming: boolean | null;
+  team_lift: number | null;
   flags: string[];
   archetypes: Record<string, ScoutingArchetypeScore>;
   profile: ScoutingProfile | null;
@@ -3237,6 +3254,13 @@ export interface ScoutingSearchRow {
   p: number | null;
   ap: number | null;
   vi: number | null;
+  vc: number | null;
+  cs: string | null;
+  gl: number | null;
+  ast: number | null;
+  g90: number | null;
+  sh90: number | null;
+  cv: number | null;
   em: number | null;
   es: string | null;
   eu: string[];
@@ -3248,9 +3272,15 @@ export interface ScoutingSearchRow {
   tk: number | null;
   it: number | null;
   dw: number | null;
+  tr: number | null;
+  tpts: number | null;
+  tpc: number | null;
+  tl: number | null;
+  tc: number | null;
+  tu: boolean | null;
   pr: string | null;
   psc: number | null;
-  ar: Record<string, number | null>;
+  arp: Array<[number, number | null, number | null, number | null]>;
   f: string[];
 }
 
@@ -3272,7 +3302,19 @@ export interface ScoutingSearchDocument {
   }>;
   role_labels: Record<string, string>;
   profile_labels: Record<string, string>;
+  profile_order: string[];
   priority: ScoutingPriorityConfig;
+  archetype_min_coverage: number;
+  value_model: {
+    weights: Record<string, number>;
+    min_weight_coverage: number;
+    minutes_full: number;
+    age_curve: Array<{ max_age: number; factor: number }>;
+  };
+  team_context: {
+    underperforming_ppg_percentile_max: number;
+    min_lift: number;
+  };
   europe_coverage: ScoutingEuropeCoverage;
   players: ScoutingSearchRow[];
   limitations: string[];
@@ -3435,6 +3477,15 @@ export interface ScoutingLeader {
   coverage: number | null;
   value_index: number | null;
   value_index_coverage: number | null;
+  team_context_status?: string;
+  team_rank?: number | null;
+  team_points?: number | null;
+  team_played?: number | null;
+  team_ppg?: number | null;
+  team_count?: number | null;
+  team_points_percentile?: number | null;
+  team_underperforming?: boolean | null;
+  team_lift?: number | null;
   scouting_priority: number | null;
   bias?: number | null;
   assist_score?: number | null;
@@ -3615,6 +3666,13 @@ export interface ScoutingDocument {
   squad: ScoutingSquadRow[];
   archetypes: ScoutingArchetypeDefinition[];
   attackers: ScoutingAttackers;
+  team_lens?: {
+    label: string;
+    definition: string;
+    threshold: number | null;
+    leaders: ScoutingLeader[];
+    coverage: Record<string, number>;
+  };
   value_model: ScoutingValueModel;
   priority: ScoutingPriorityConfig;
   europe_coverage: ScoutingEuropeCoverage;

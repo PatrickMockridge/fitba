@@ -384,7 +384,7 @@ export default function MethodologyPage() {
             fxG model card →
           </Link>{" "}
           <Link className="text-link" href="/matches/">
-            Match record →
+            Results and fixtures →
           </Link>
         </p>
       </section>

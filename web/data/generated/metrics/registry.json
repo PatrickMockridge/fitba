@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:f4468ef8b8597c572f5b99d6f3f5e6d6026d68021cd9861c4c799c3363c5bb7f",
+  "checksum": "sha256:d85a329c931bcb809f6b361ed871e26b82a52ec284b58b7d953c7191dbb70758",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2983,6 +2983,14 @@
         "saves_p90",
         "rose",
         "rose_meta",
+        "team_rank",
+        "team_points",
+        "team_played",
+        "team_ppg",
+        "team_count",
+        "team_points_percentile",
+        "team_underperforming",
+        "team_lift",
         "percentile",
         "archetype_score",
         "archetype_coverage",
@@ -3038,7 +3046,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 4
+      "version": 5
     },
     {
       "aggregation": "role_family",
@@ -3164,6 +3172,69 @@
     },
     {
       "aggregation": "per_player",
+      "basis": "inferred",
+      "confidence_rule": "Published only where the league table and team row exist; missing standings are unknown. The lift is a contrast, not a valuation, forecast or recommendation.\n",
+      "coverage_tier": "derived",
+      "denominator": "team matches played",
+      "description": "Players outperforming teams that are underperforming in their league.",
+      "displayed_surfaces": [
+        "/scouting/",
+        "/scouting/search/",
+        "/scouting/player/"
+      ],
+      "fields": [
+        "team_rank",
+        "team_points",
+        "team_played",
+        "team_ppg",
+        "team_count",
+        "team_points_percentile",
+        "team_underperforming",
+        "team_lift",
+        "leaders"
+      ],
+      "formula": "Team points per game = points / played in the provider's current league table. The team points percentile is the midrank percentile of that value among the league's teams. team_lift = player role-adjusted percentile - team points percentile. A team is underperforming when its percentile is at or below the configured maximum (default 40). The lens keeps players with a positive lift at those teams, ordered by lift then scouting priority. A league without a table is unknown, never zero-strength.\n",
+      "home_payload": "scouting/aberdeen.json",
+      "home_surface": "/scouting/",
+      "id": "scouting.team-lens",
+      "implementation": null,
+      "inputs": [
+        "published payload",
+        "data/normalized/scouting/team_standings.parquet",
+        "config/scouting/team-context.yaml"
+      ],
+      "label": "Scouting team-context lens",
+      "limitations": [
+        "Team underperformance is a within-league points-per-game contrast, not a budget, wage or resource model.",
+        "A player's role-adjusted percentile and a team's points percentile are different units; the lift is a descriptive ranking aid, not a causal claim.",
+        "A league without a current table is unknown, not zero-strength."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "scouting/aberdeen.json#/team_lens/**",
+        "scouting/pool/*.json#/players/**/team_**",
+        "scouting/coverage.json#/team_context/**"
+      ],
+      "reviewed": "2026-10-23",
+      "rounding": {
+        "decimals": 1,
+        "display": "0.0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
       "basis": "mixed",
       "confidence_rule": "A player is listed at 180+ competitive minutes; a missing provider value is null, never zero.",
       "coverage_tier": "match",
@@ -3252,7 +3323,8 @@
         "lineups_fetched",
         "fixtures_played",
         "europe",
-        "current_clubs"
+        "current_clubs",
+        "team_context"
       ],
       "formula": "Counts of provider player-season rows, rated rows, rows at 450+ minutes, players with at least one starting-XI role, played fixtures and lineups fetched. Role coverage is role players divided by the league pool. Searchable requires at least 25 rated players.\n",
       "home_payload": "scouting/coverage.json",
@@ -3292,7 +3364,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 3
+      "version": 4
     },
     {
       "aggregation": "per_player",
@@ -4526,9 +4598,35 @@
       },
       "verification": "config_match",
       "version": 1
+    },
+    {
+      "config_keys": [
+        "underperforming_ppg_percentile_max",
+        "min_lift",
+        "lens_limit",
+        "note"
+      ],
+      "config_path": "scouting/team-context",
+      "id": "param.scouting.team-context",
+      "kind": "matrix",
+      "label": "Scouting team-context policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-23",
+      "unit": "mixed",
+      "used_by": [
+        "scouting.team-lens"
+      ],
+      "value": {
+        "lens_limit": 12,
+        "min_lift": 0,
+        "note": "A team is treated as underperforming when its points-per-game percentile is at or below the threshold. A player must have a positive lift. Empty leagues or teams without a current table stay unknown, never zero-strength.\n",
+        "underperforming_ppg_percentile_max": 40
+      },
+      "verification": "config_match",
+      "version": 1
     }
   ],
-  "registry_version": "3.1.0",
+  "registry_version": "3.2.0",
   "reviewed": "2026-10-23",
   "schema_version": 1,
   "structural_number_patterns": [

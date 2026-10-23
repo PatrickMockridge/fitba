@@ -2,12 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { ScoutingLensSelector } from "@/components/ScoutingLensSelector";
 import type {
   ScoutingArchetypeDefinition,
   ScoutingPriorityConfig,
   ScoutingSearchDocument,
 } from "@/lib/data";
-import { formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
+import {
+  defaultValueWeights,
+  isDefaultValueWeights,
+  readerValueIndexFor,
+  type ScoutingValueWeights,
+} from "@/lib/scouting-filters";
+import {
+  formatDecimal,
+  formatInteger,
+  formatPercentValue,
+  roundHalfEven,
+} from "@/lib/format";
 
 type SortKey =
   | "priority"
@@ -19,13 +31,20 @@ type SortKey =
   | "rating"
   | "minutes"
   | "goals_assists"
-  | "archetype";
+  | "archetype"
+  | "team_lift";
 
 type Row = {
   player_id: number;
   name: string;
   club: string;
   stats_club: string;
+  team_rank: number | null;
+  team_points: number | null;
+  team_count: number | null;
+  team_points_percentile: number | null;
+  team_underperforming: boolean | null;
+  team_lift: number | null;
   league_slug: string;
   league_name: string;
   nationality: string | null;
@@ -37,6 +56,8 @@ type Row = {
   rating_percentile: number | null;
   adjusted_percentile: number | null;
   value_index: number | null;
+  display_value_index: number | null;
+  value_index_coverage: number | null;
   european_status: string;
   european_minutes: number | null;
   european_competitions: string[];
@@ -77,7 +98,16 @@ const SORT_LABELS: Record<SortKey, string> = {
   minutes: "Minutes",
   goals_assists: "Goals + assists /90",
   archetype: "Profile score",
+  team_lift: "Team lift",
 };
+
+const EUROPE_STATUS_OPTIONS = [
+  ["any", "Any European status"],
+  ["qualified", "League-phase qualified"],
+  ["below_threshold", "Below the minutes threshold"],
+  ["none", "No European league phase"],
+  ["unknown", "Unknown"],
+] as const;
 
 function value(value: number | null | undefined, digits = 2): string {
   return value === null || value === undefined ? "—" : formatDecimal(value, digits);
@@ -91,33 +121,47 @@ function percentage(value: number | null): string {
   return value === null || value === undefined ? "—" : formatPercentValue(value, 1);
 }
 
+function qualifiesForEurope(player: Row, threshold: number): boolean {
+  if (player.european_status === "unknown") return false;
+  return (player.european_minutes ?? 0) >= threshold;
+}
+
+function effectiveEuropeStatus(player: Row, threshold: number): string {
+  if (player.european_status === "unknown") return "unknown";
+  const minutes = player.european_minutes ?? 0;
+  if (minutes >= threshold) return "qualified";
+  return minutes > 0 ? "below_threshold" : "none";
+}
+
 function priorityFor(
   player: Row,
   weights: ScoutingPriorityConfig,
   u23Boost: boolean,
   europeDiscount: boolean,
+  valueIndex: number | null,
 ): number | null {
-  if (player.value_index === null) return null;
+  if (valueIndex === null) return null;
   const ageMultiplier =
     u23Boost && player.age !== null && player.age <= weights.u23_max_age
       ? weights.u23_multiplier
       : 1;
   const europeMultiplier =
-    europeDiscount && player.european_status === "qualified"
+    europeDiscount && qualifiesForEurope(player, weights.europe_minutes_threshold)
       ? weights.europe_multiplier
       : 1;
-  return player.value_index * ageMultiplier * europeMultiplier;
+  return roundHalfEven(valueIndex * ageMultiplier * europeMultiplier, 1);
 }
 
 function sortValue(player: Row, key: SortKey, archetype: string): number | null {
   if (key === "priority") return player.priority;
   if (key === "percentile") return player.rating_percentile;
   if (key === "adjusted") return player.adjusted_percentile;
-  if (key === "value_index") return player.value_index;
+  if (key === "value_index") return player.display_value_index;
   if (key === "rating") return player.rating;
   if (key === "minutes") return player.minutes;
   if (key === "goals_assists") return player.goals_assists_p90;
   if (key === "archetype") return player.archetypes[archetype] ?? null;
+  if (key === "team_lift") return player.team_lift;
   return null;
 }
 
@@ -138,29 +182,96 @@ export function ScoutingGlobalSearch({
   document: ScoutingSearchDocument;
   archetypes: ScoutingArchetypeDefinition[];
 }) {
-  const weights: ScoutingPriorityConfig = document.priority ?? {
+  const publishedWeights: ScoutingPriorityConfig = document.priority ?? {
     u23_max_age: 23,
     u23_multiplier: 1.3,
     europe_minutes_threshold: 90,
     europe_multiplier: 0.6,
   };
+  const publishedValueWeights = defaultValueWeights(document);
+
   const [query, setQuery] = useState("");
   const [league, setLeague] = useState("all");
   const [role, setRole] = useState("all");
   const [nationality, setNationality] = useState("all");
   const [archetype, setArchetype] = useState("all");
-  const [minMinutes, setMinMinutes] = useState("450");
+  const [minMinutes, setMinMinutes] = useState(String(document.min_minutes));
   const [maxAge, setMaxAge] = useState("all");
+  const [europeStatus, setEuropeStatus] = useState("any");
+  const [roleKnownOnly, setRoleKnownOnly] = useState(false);
+  const [minValueCoverage, setMinValueCoverage] = useState("any");
   const [u23Boost, setU23Boost] = useState(true);
   const [u23Only, setU23Only] = useState(false);
   const [europeDiscount, setEuropeDiscount] = useState(true);
   const [excludeEurope, setExcludeEurope] = useState(false);
-  const [sort, setSort] = useState<SortKey>("priority");
+  const [underperformingOnly, setUnderperformingOnly] = useState(false);
+  const [sort, setSort] = useState<SortKey>("mix");
   const [limit, setLimit] = useState(100);
+
+  const [u23MaxAge, setU23MaxAge] = useState(publishedWeights.u23_max_age);
+  const [u23Multiplier, setU23Multiplier] = useState(publishedWeights.u23_multiplier);
+  const [europeThreshold, setEuropeThreshold] = useState(
+    publishedWeights.europe_minutes_threshold,
+  );
+  const [europeMultiplier, setEuropeMultiplier] = useState(
+    publishedWeights.europe_multiplier,
+  );
+  const [valueWeights, setValueWeights] =
+    useState<ScoutingValueWeights>(publishedValueWeights);
+  const [teamThreshold, setTeamThreshold] = useState(
+    document.team_context.underperforming_ppg_percentile_max,
+  );
+  const [teamMinLift, setTeamMinLift] = useState(document.team_context.min_lift);
+
+  const weights = useMemo<ScoutingPriorityConfig>(
+    () => ({
+      u23_max_age: u23MaxAge,
+      u23_multiplier: u23Multiplier,
+      europe_minutes_threshold: europeThreshold,
+      europe_multiplier: europeMultiplier,
+    }),
+    [u23MaxAge, u23Multiplier, europeThreshold, europeMultiplier],
+  );
+  const valueWeightTotal =
+    valueWeights.performance +
+    valueWeights.age +
+    valueWeights.minutes +
+    valueWeights.profile;
+  const valueWeightsValid = valueWeightTotal > 0;
+  const advancedDefault =
+    u23MaxAge === publishedWeights.u23_max_age &&
+    u23Multiplier === publishedWeights.u23_multiplier &&
+    europeThreshold === publishedWeights.europe_minutes_threshold &&
+    europeMultiplier === publishedWeights.europe_multiplier &&
+    isDefaultValueWeights(valueWeights, document) &&
+    teamThreshold === document.team_context.underperforming_ppg_percentile_max &&
+    teamMinLift === document.team_context.min_lift;
+  const basicDefault =
+    query.trim() === "" &&
+    league === "all" &&
+    role === "all" &&
+    nationality === "all" &&
+    archetype === "all" &&
+    minMinutes === String(document.min_minutes) &&
+    maxAge === "all" &&
+    europeStatus === "any" &&
+    !roleKnownOnly &&
+    minValueCoverage === "any" &&
+    u23Boost &&
+    !u23Only &&
+    europeDiscount &&
+    !excludeEurope &&
+    !underperformingOnly &&
+    sort === "mix";
+  const isDefault = advancedDefault && basicDefault;
 
   const leagueBySlug = useMemo(
     () => new Map(document.leagues.map((league) => [league.slug, league])),
     [document.leagues],
+  );
+  const profileIds = useMemo(
+    () => document.profile_order ?? Object.keys(document.profile_labels),
+    [document.profile_order, document.profile_labels],
   );
   const players = useMemo<Row[]>(
     () =>
@@ -169,33 +280,45 @@ export function ScoutingGlobalSearch({
         name: row.n,
         club: row.c,
         stats_club: row.sc ?? row.c,
+        team_rank: row.tr ?? null,
+        team_points: row.tpts ?? null,
+        team_count: row.tc ?? null,
+        team_points_percentile: row.tpc ?? null,
+        team_underperforming: row.tu ?? null,
+        team_lift: row.tl ?? null,
         league_slug: row.l,
         league_name: leagueBySlug.get(row.l)?.name ?? row.l,
-        nationality: row.na,
-        role_family: row.rf,
+        nationality: row.na ?? null,
+        role_family: row.rf ?? null,
         role_label: row.rf
           ? document.role_labels[row.rf] ?? "Role unknown"
           : "Role unknown",
-        age: row.a,
+        age: row.a ?? null,
         minutes: row.m,
-        rating: row.rt,
-        rating_percentile: row.p,
-        adjusted_percentile: row.ap,
-        value_index: row.vi,
+        rating: row.rt ?? null,
+        rating_percentile: row.p ?? null,
+        adjusted_percentile: row.ap ?? null,
+        value_index: row.vi ?? null,
+        display_value_index: row.vi ?? null,
+        value_index_coverage: row.vc ?? null,
         european_status: row.es ?? "unknown",
-        european_minutes: row.em,
+        european_minutes: row.em ?? null,
         european_competitions: row.eu ?? [],
         priority: null,
-        goals_assists_p90: row.ga,
-        dribbles_success_p90: row.dr,
-        passes_completed_p90: row.ps,
-        pass_completion_pct: row.pa,
-        key_passes_p90: row.kp,
-        tackles_p90: row.tk,
-        interceptions_p90: row.it,
-        duel_win_pct: row.dw,
-        flags: row.f.map((code) => FLAG_CODES[code] ?? code),
-        archetypes: row.ar ?? {},
+        goals_assists_p90: row.ga ?? null,
+        dribbles_success_p90: row.dr ?? null,
+        passes_completed_p90: row.ps ?? null,
+        pass_completion_pct: row.pa ?? null,
+        key_passes_p90: row.kp ?? null,
+        tackles_p90: row.tk ?? null,
+        interceptions_p90: row.it ?? null,
+        duel_win_pct: row.dw ?? null,
+        flags: (row.f ?? []).map((code) => FLAG_CODES[code] ?? code),
+        archetypes: Object.fromEntries(
+          (row.arp ?? [])
+            .filter(([index]) => profileIds[index] !== undefined)
+            .map(([index, adjusted]) => [profileIds[index], adjusted]),
+        ),
         profile: row.pr
           ? {
               id: row.pr,
@@ -204,7 +327,7 @@ export function ScoutingGlobalSearch({
             }
           : null,
       })),
-    [document.players, document.role_labels, document.profile_labels, leagueBySlug],
+    [document.players, document.role_labels, profileIds, leagueBySlug],
   );
 
   useEffect(() => {
@@ -217,11 +340,22 @@ export function ScoutingGlobalSearch({
     archetype,
     minMinutes,
     maxAge,
+    europeStatus,
+    roleKnownOnly,
+    minValueCoverage,
     u23Boost,
     u23Only,
     europeDiscount,
     excludeEurope,
+    underperformingOnly,
     sort,
+    u23MaxAge,
+    u23Multiplier,
+    europeThreshold,
+    europeMultiplier,
+    valueWeights,
+    teamThreshold,
+    teamMinLift,
   ]);
 
   useEffect(() => {
@@ -261,6 +395,8 @@ export function ScoutingGlobalSearch({
     const needle = query.trim().toLowerCase();
     const minimum = Number(minMinutes);
     const ageLimit = maxAge === "all" ? null : Number(maxAge);
+    const coverageLimit =
+      minValueCoverage === "any" ? null : Number(minValueCoverage);
     const matched = players
       .filter((player) => {
         if (needle) {
@@ -273,16 +409,58 @@ export function ScoutingGlobalSearch({
         if (archetype !== "all" && player.archetypes[archetype] == null) return false;
         if (player.minutes < minimum) return false;
         if (ageLimit !== null && (player.age ?? 99) > ageLimit) return false;
+        if (
+          europeStatus !== "any" &&
+          effectiveEuropeStatus(player, weights.europe_minutes_threshold) !==
+            europeStatus
+        ) {
+          return false;
+        }
+        if (roleKnownOnly && player.role_family === null) return false;
+        if (
+          coverageLimit !== null &&
+          (player.value_index_coverage ?? 0) < coverageLimit
+        ) {
+          return false;
+        }
         if (u23Only && (player.age === null || player.age > weights.u23_max_age)) {
           return false;
         }
-        if (excludeEurope && player.european_status === "qualified") return false;
+        if (
+          excludeEurope &&
+          qualifiesForEurope(player, weights.europe_minutes_threshold)
+        ) {
+          return false;
+        }
+        if (underperformingOnly) {
+          if (
+            player.team_points_percentile === null ||
+            player.team_points_percentile > teamThreshold ||
+            (player.team_lift ?? 0) <= teamMinLift
+          ) {
+            return false;
+          }
+        }
         return true;
       })
-      .map((player) => ({
-        ...player,
-        priority: priorityFor(player, weights, u23Boost, europeDiscount),
-      }));
+      .map((player) => {
+        const readerValue = valueWeightsValid
+          ? isDefaultValueWeights(valueWeights, document)
+            ? player.value_index
+            : readerValueIndexFor(player, valueWeights, document.value_model)
+          : null;
+        return {
+          ...player,
+          display_value_index: readerValue,
+          priority: priorityFor(
+            player,
+            weights,
+            u23Boost,
+            europeDiscount,
+            readerValue,
+          ),
+        };
+      });
     if (sort === "mix") {
       const groups = new Map<string, Row[]>();
       for (const player of matched) {
@@ -334,131 +512,82 @@ export function ScoutingGlobalSearch({
     archetype,
     minMinutes,
     maxAge,
+    europeStatus,
+    roleKnownOnly,
+    minValueCoverage,
     u23Boost,
     u23Only,
     europeDiscount,
     excludeEurope,
+    underperformingOnly,
     sort,
     weights,
+    valueWeights,
+    valueWeightsValid,
+    teamThreshold,
+    document,
   ]);
 
   const visible = filtered.slice(0, limit);
 
+  const resetAll = () => {
+    setQuery("");
+    setLeague("all");
+    setRole("all");
+    setNationality("all");
+    setArchetype("all");
+    setMinMinutes(String(document.min_minutes));
+    setMaxAge("all");
+    setEuropeStatus("any");
+    setRoleKnownOnly(false);
+    setMinValueCoverage("any");
+    setU23Boost(true);
+    setU23Only(false);
+    setEuropeDiscount(true);
+    setExcludeEurope(false);
+    setUnderperformingOnly(false);
+    setSort("mix");
+    setU23MaxAge(publishedWeights.u23_max_age);
+    setU23Multiplier(publishedWeights.u23_multiplier);
+    setEuropeThreshold(publishedWeights.europe_minutes_threshold);
+    setEuropeMultiplier(publishedWeights.europe_multiplier);
+    setValueWeights(publishedValueWeights);
+    setTeamThreshold(document.team_context.underperforming_ppg_percentile_max);
+    setTeamMinLift(document.team_context.min_lift);
+  };
+
   return (
     <div>
       <div className="board-controls">
-        <label>
-          Search
-          <input
-            type="search"
-            value={query}
-            placeholder="Name, club or league"
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </label>
-        <label>
-          League
-          <select value={league} onChange={(event) => setLeague(event.target.value)}>
-            <option value="all">All leagues</option>
-            {leagues.map((item) => (
-              <option key={item.slug} value={item.slug}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Role
-          <select value={role} onChange={(event) => setRole(event.target.value)}>
-            <option value="all">All roles</option>
-            {roles.map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Nationality
-          <select
-            value={nationality}
-            onChange={(event) => setNationality(event.target.value)}
-          >
-            <option value="all">All nationalities</option>
-            {nationalities.map((item) => (
-              <option key={item} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Top profile
-          <select
-            value={archetype}
-            onChange={(event) => {
-              setArchetype(event.target.value);
-              if (event.target.value !== "all") setSort("archetype");
-            }}
-          >
-            <option value="all">All profiles</option>
-            {archetypes.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Minimum minutes
-          <select value={minMinutes} onChange={(event) => setMinMinutes(event.target.value)}>
-            <option value="450">450</option>
-            <option value="600">600</option>
-            <option value="900">900</option>
-          </select>
-        </label>
-        <label>
-          Maximum age
-          <select value={maxAge} onChange={(event) => setMaxAge(event.target.value)}>
-            <option value="all">Any</option>
-            <option value="21">21</option>
-            <option value="24">24</option>
-            <option value="27">27</option>
-            <option value="30">30</option>
-          </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={u23Boost}
-            onChange={(event) => setU23Boost(event.target.checked)}
-          />{" "}
-          U23 boost
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={u23Only}
-            onChange={(event) => setU23Only(event.target.checked)}
-          />{" "}
-          U23 only
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={europeDiscount}
-            onChange={(event) => setEuropeDiscount(event.target.checked)}
-          />{" "}
-          Europe discount
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={excludeEurope}
-            onChange={(event) => setExcludeEurope(event.target.checked)}
-          />{" "}
-          Exclude 90+ Europe
-        </label>
+        <ScoutingLensSelector
+          priorityActive={sort === "priority"}
+          onPriorityChange={(active) => setSort(active ? "priority" : "adjusted")}
+          u23Boost={u23Boost}
+          setU23Boost={setU23Boost}
+          u23Only={u23Only}
+          setU23Only={setU23Only}
+          europeDiscount={europeDiscount}
+          setEuropeDiscount={setEuropeDiscount}
+          excludeEurope={excludeEurope}
+          setExcludeEurope={setExcludeEurope}
+          underperformingOnly={underperformingOnly}
+          setUnderperformingOnly={setUnderperformingOnly}
+          archetype={archetype}
+          setArchetype={(value) => {
+            setArchetype(value);
+            if (value !== "all") setSort("archetype");
+            else if (sort === "archetype") setSort("priority");
+          }}
+          role={role}
+          setRole={setRole}
+          league={league}
+          setLeague={setLeague}
+          leagues={leagues}
+          roles={roles}
+          archetypes={archetypes}
+          priority={weights}
+          isDefault={isDefault}
+        />
         <label>
           Sort
           <select value={sort} onChange={(event) => setSort(event.target.value as SortKey)}>
@@ -470,6 +599,247 @@ export function ScoutingGlobalSearch({
           </select>
         </label>
       </div>
+
+      <section className="card advanced-filters" data-contract="scouting.advanced-filters">
+        <div className="card-head">
+          <div>
+            <p className="eyebrow">Reader controls</p>
+            <h3>Advanced filters</h3>
+          </div>
+          <div className="advanced-actions">
+            <span className={`badge ${isDefault ? "badge-neutral" : "badge-warn"}`}>
+              {isDefault ? "Published defaults" : "Reader scenario"}
+            </span>
+            <button type="button" className="button button-ghost" onClick={resetAll}>
+              Reset all filters and lenses
+            </button>
+          </div>
+        </div>
+
+        <div className="advanced-grid">
+          <fieldset className="advanced-group">
+            <legend>U23 and Europe weights</legend>
+            <label>
+              U23 cutoff
+              <span className="advanced-value">{formatInteger(u23MaxAge)}</span>
+              <input
+                type="range"
+                min={18}
+                max={27}
+                step={1}
+                value={u23MaxAge}
+                onChange={(event) => setU23MaxAge(Number(event.target.value))}
+              />
+            </label>
+            <label>
+              U23 multiplier
+              <span className="advanced-value">{formatDecimal(u23Multiplier, 2)}</span>
+              <input
+                type="range"
+                min={1}
+                max={2}
+                step={0.05}
+                value={u23Multiplier}
+                onChange={(event) => setU23Multiplier(Number(event.target.value))}
+              />
+            </label>
+            <label>
+              Europe minutes threshold
+              <span className="advanced-value">{formatInteger(europeThreshold)}</span>
+              <input
+                type="range"
+                min={0}
+                max={450}
+                step={45}
+                value={europeThreshold}
+                onChange={(event) => setEuropeThreshold(Number(event.target.value))}
+              />
+            </label>
+            <label>
+              Europe multiplier
+              <span className="advanced-value">{formatDecimal(europeMultiplier, 2)}</span>
+              <input
+                type="range"
+                min={0.2}
+                max={1}
+                step={0.05}
+                value={europeMultiplier}
+                onChange={(event) => setEuropeMultiplier(Number(event.target.value))}
+              />
+            </label>
+            <p className="fine-print">
+              The U23 and Europe chips in the lens bar switch these preferences on
+              or off; these controls set their values.
+            </p>
+          </fieldset>
+
+          <fieldset className="advanced-group">
+            <legend>Value-index weights</legend>
+            {(
+              [
+                ["performance", "Performance"],
+                ["age", "Age curve"],
+                ["minutes", "Minutes reliability"],
+                ["profile", "Profile fit"],
+              ] as const
+            ).map(([key, label]) => (
+              <label key={key}>
+                {label}
+                <span className="advanced-value">
+                  {formatDecimal(valueWeights[key], 2)}
+                  {valueWeightTotal > 0
+                    ? ` (${formatPercentValue((valueWeights[key] / valueWeightTotal) * 100, 0)})`
+                    : ""}
+                </span>
+                <input
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  value={valueWeights[key]}
+                  onChange={(event) =>
+                    setValueWeights((current) => ({
+                      ...current,
+                      [key]: Number(event.target.value),
+                    }))
+                  }
+                />
+              </label>
+            ))}
+            {!valueWeightsValid ? (
+              <p className="fine-print" role="status">
+                At least one value-index weight must be positive; the published
+                value index is shown.
+              </p>
+            ) : (
+              <p className="fine-print">
+                Weights are renormalised over the components present; the
+                published index is unchanged.
+              </p>
+            )}
+          </fieldset>
+
+          <fieldset className="advanced-group">
+            <legend>Team-context thresholds</legend>
+            <label>
+              Underperforming PPG percentile max
+              <span className="advanced-value">{formatInteger(teamThreshold)}</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                step={5}
+                value={teamThreshold}
+                onChange={(event) => setTeamThreshold(Number(event.target.value))}
+              />
+            </label>
+            <label>
+              Minimum team lift
+              <span className="advanced-value">{formatDecimal(teamMinLift, 1)}</span>
+              <input
+                type="range"
+                min={0}
+                max={50}
+                step={1}
+                value={teamMinLift}
+                onChange={(event) => setTeamMinLift(Number(event.target.value))}
+              />
+            </label>
+            <p className="fine-print">
+              The Struggling team chip uses this threshold. Lift is a contrast,
+              not a valuation.
+            </p>
+          </fieldset>
+
+          <fieldset className="advanced-group">
+            <legend>Eligibility filters</legend>
+            <label>
+              Search
+              <input
+                type="search"
+                value={query}
+                placeholder="Name, club or league"
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </label>
+            <label>
+              Nationality
+              <select
+                value={nationality}
+                onChange={(event) => setNationality(event.target.value)}
+              >
+                <option value="all">All nationalities</option>
+                {nationalities.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Minimum minutes
+              <select
+                value={minMinutes}
+                onChange={(event) => setMinMinutes(event.target.value)}
+              >
+                <option value="450">450</option>
+                <option value="600">600</option>
+                <option value="900">900</option>
+              </select>
+            </label>
+            <label>
+              Maximum age
+              <select value={maxAge} onChange={(event) => setMaxAge(event.target.value)}>
+                <option value="all">Any</option>
+                <option value="21">21</option>
+                <option value="24">24</option>
+                <option value="27">27</option>
+                <option value="30">30</option>
+              </select>
+            </label>
+            <label>
+              European status
+              <select
+                value={europeStatus}
+                onChange={(event) => setEuropeStatus(event.target.value)}
+              >
+                {EUROPE_STATUS_OPTIONS.map(([key, label]) => (
+                  <option key={key} value={key}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Minimum value-index coverage
+              <select
+                value={minValueCoverage}
+                onChange={(event) => setMinValueCoverage(event.target.value)}
+              >
+                <option value="any">Any</option>
+                <option value="0.5">0.50</option>
+                <option value="0.7">0.70</option>
+                <option value="0.85">0.85</option>
+                <option value="1">1.00</option>
+              </select>
+            </label>
+            <label className="advanced-check">
+              <input
+                type="checkbox"
+                checked={roleKnownOnly}
+                onChange={(event) => setRoleKnownOnly(event.target.checked)}
+              />
+              Role known only
+            </label>
+          </fieldset>
+        </div>
+        <p className="fine-print" aria-live="polite" data-contract-indicator="basis">
+          {isDefault
+            ? `Published defaults: U23 ≤${formatInteger(publishedWeights.u23_max_age)} ×${formatDecimal(publishedWeights.u23_multiplier, 2)}; Europe ≥${formatInteger(publishedWeights.europe_minutes_threshold)} min ×${formatDecimal(publishedWeights.europe_multiplier, 2)}.`
+            : "Reader scenario: the active filters and weights change the displayed value index and priority only; the published values and audit are unchanged."}
+        </p>
+      </section>
+
       <p className="fine-print" aria-live="polite" data-contract-indicator="basis">
         Showing {formatInteger(visible.length)} of {formatInteger(filtered.length)} matches from{" "}
         {formatInteger(players.length)} ranked players across {formatInteger(leagues.length)}{" "}
@@ -494,6 +864,8 @@ export function ScoutingGlobalSearch({
             <tr>
               <th scope="col">Player</th>
               <th scope="col">Club</th>
+              <th scope="col">Team</th>
+              <th className="num" scope="col">Lift</th>
               <th scope="col">League</th>
               <th scope="col">Nationality</th>
               <th scope="col">Role</th>
@@ -530,6 +902,15 @@ export function ScoutingGlobalSearch({
                     <span className="muted"> · stats at {player.stats_club}</span>
                   ) : null}
                 </td>
+                <td>
+                  {player.team_rank === null || player.team_count === null
+                    ? "—"
+                    : `${player.team_rank}/${player.team_count}`}
+                  {player.team_points !== null ? (
+                    <span className="muted"> · {player.team_points} pts</span>
+                  ) : null}
+                </td>
+                <td className="num">{value(player.team_lift, 1)}</td>
                 <td>{player.league_name}</td>
                 <td>{player.nationality ?? "—"}</td>
                 <td>
@@ -553,11 +934,11 @@ export function ScoutingGlobalSearch({
                 <td className="num">{value(player.rating)}</td>
                 <td className="num">{percentile(player.rating_percentile)}</td>
                 <td className="num">{percentile(player.adjusted_percentile)}</td>
-                <td className="num">{value(player.value_index, 1)}</td>
+                <td className="num">{value(player.display_value_index, 1)}</td>
                 <td className="num">{value(player.priority, 1)}</td>
                 <td>
                   {europeLabel(player)}
-                  {player.european_status === "qualified" ? (
+                  {qualifiesForEurope(player, weights.europe_minutes_threshold) ? (
                     <span className="badge badge-warn"> shop window</span>
                   ) : null}
                 </td>

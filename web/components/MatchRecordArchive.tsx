@@ -23,10 +23,12 @@ export function MatchRecordArchive({
   seasons,
   scheduled,
   current,
+  remainingIsMinimum = false,
 }: {
   seasons: Array<{ season: string; rows: FixtureIndexRow[] }>;
   scheduled: Array<{ season: string; rows: ScheduledFixtureRow[] }>;
   current: string;
+  remainingIsMinimum?: boolean;
 }) {
   const [selected, setSelected] = useState(current);
   // Preserve the old `#season-YYYY-YY` deep links without making them the
@@ -45,6 +47,7 @@ export function MatchRecordArchive({
   const upcoming =
     scheduled.find((group) => group.season === active.season)?.rows ?? [];
   const upcomingCount = upcoming.filter((row) => !row.conflict_review).length;
+  const remainingLabel = `${upcomingCount}${remainingIsMinimum && active.season === current ? "+" : ""}`;
 
   function choose(season: string) {
     setSelected(season);
@@ -70,7 +73,7 @@ export function MatchRecordArchive({
           <div>
             <p className="eyebrow">{active.season}</p>
             <h2>
-              {active.rows.length} played · {upcomingCount} to play
+              {active.rows.length} played · {remainingLabel} to play
             </h2>
           </div>
           {active.season === current ? (
@@ -83,9 +86,10 @@ export function MatchRecordArchive({
           <div className="table-wrap" data-contract="matches.upcoming">
             <table className="league-table">
               <caption className="fine-print">
-                {active.season}: {upcomingCount} remaining fixtures. Conflict-review
-                rows are shown for the record but are not counted as playable. Neutral
-                venues are marked; kickoff status is the source status.
+                {active.season}: {remainingLabel} known remaining fixtures. Conflict-review
+                rows are shown for the record but are not counted as playable. Cup
+                progression and post-split league fixtures can add to this count.
+                Neutral venues are marked; kickoff status is the source status.
               </caption>
               <thead>
                 <tr>

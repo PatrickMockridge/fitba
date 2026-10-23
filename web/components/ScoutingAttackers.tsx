@@ -17,9 +17,11 @@ function pct(value: number | null | undefined): string {
 export function ScoutingAttackers({
   attackers,
   priority,
+  scenario = false,
 }: {
   attackers: ScoutingAttackers;
   priority: ScoutingPriorityConfig;
+  scenario?: boolean;
 }) {
   return (
     <>
@@ -29,9 +31,14 @@ export function ScoutingAttackers({
             <p className="eyebrow">Attackers</p>
             <h2>Assist bias and goal bias</h2>
           </div>
-          <span className="badge badge-neutral">Separate profiles</span>
+          <span className={`badge ${scenario ? "badge-warn" : "badge-neutral"}`}>
+            {scenario ? "Reader scenario" : "Separate profiles"}
+          </span>
         </div>
         <p>
+          {scenario
+            ? "Reader scenario: the active lenses select these players; they are not the published default leaders. "
+            : ""}
           The attack is split into two explainable lenses rather than one combined
           “goal contributor” score. The assist-biased profile weights completed passes, key
           passes, pass completion, assists and successful dribbles; the goal-biased profile
@@ -45,7 +52,11 @@ export function ScoutingAttackers({
           <section className="mini-block">
             <p className="eyebrow">Assist-biased contributor</p>
             <h3>{attackers.assist_bias.label}</h3>
-            {leaderList(attackers.assist_bias.leaders, priority)}
+            {leaderList(
+              attackers.assist_bias.leaders,
+              priority,
+              scenario ? "No player meets these lenses." : undefined,
+            )}
             <Link className="text-link" href="/scouting/search/#assist_creator">
               Filter by this profile →
             </Link>
@@ -53,7 +64,11 @@ export function ScoutingAttackers({
           <section className="mini-block">
             <p className="eyebrow">Goal-scoring contributor</p>
             <h3>{attackers.goal_bias.label}</h3>
-            {leaderList(attackers.goal_bias.leaders, priority)}
+            {leaderList(
+              attackers.goal_bias.leaders,
+              priority,
+              scenario ? "No player meets these lenses." : undefined,
+            )}
             <Link className="text-link" href="/scouting/search/#goal_scorer">
               Filter by this profile →
             </Link>
@@ -70,6 +85,9 @@ export function ScoutingAttackers({
           <span className="badge badge-neutral">Ordered by goals /90</span>
         </div>
         <p>
+          {scenario
+            ? "Reader scenario: the active lenses select these players; the order remains goals per 90. "
+            : ""}
           A dedicated scoring lens for forwards and attacking midfielders at the pool minutes
           threshold. The order is goals per 90, then goal contribution and minutes; it is not
           the composite profile and not a recommendation.
@@ -118,8 +136,8 @@ export function ScoutingAttackers({
                     ) : null}
                   </td>
                   <td className="num">{formatInteger(player.minutes)}</td>
-                  <td className="num">{formatInteger(player.goals ?? 0)}</td>
-                  <td className="num">{formatInteger(player.assists ?? 0)}</td>
+                  <td className="num">{value(player.goals, 0)}</td>
+                  <td className="num">{value(player.assists, 0)}</td>
                   <td className="num">{value(player.goals_p90)}</td>
                   <td className="num">{value(player.goals_assists_p90)}</td>
                   <td className="num">{value(player.shots_p90)}</td>

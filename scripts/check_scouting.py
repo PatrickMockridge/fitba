@@ -103,6 +103,21 @@ def check_data() -> list[str]:
         errors.append("hub and coverage season disagree")
     if hub.get("state") not in {"full", "stale", "empty"}:
         errors.append(f"invalid hub state {hub.get('state')!r}")
+    for archetype in hub.get("archetypes") or []:
+        leaders = archetype.get("leaders") or []
+        if len(leaders) > 5:
+            errors.append(
+                f"{archetype.get('id')}: {len(leaders)} leaders, expected at most 5"
+            )
+    attackers = hub.get("attackers") or {}
+    for key in ("assist_bias", "goal_bias"):
+        leaders = (attackers.get(key) or {}).get("leaders") or []
+        if len(leaders) > 8:
+            errors.append(f"attackers.{key}: {len(leaders)} leaders, expected at most 8")
+    if len(attackers.get("goal_scoring") or []) > 12:
+        errors.append("attackers.goal_scoring: more than 12 rows")
+    if len((hub.get("team_lens") or {}).get("leaders") or []) > 12:
+        errors.append("team_lens: more than 12 leaders")
 
     availability = _load(AVAILABILITY) if AVAILABILITY.exists() else {}
     ledger_status = {
@@ -209,6 +224,21 @@ def check_data() -> list[str]:
             for feature, value in (player.get("archetypes") or {}).items():
                 _check_number(errors, value.get("score"), 0, 100, f"{label} {feature} score")
                 _check_number(errors, value.get("coverage"), 0, 1, f"{label} {feature} coverage")
+            _check_number(errors, player.get("team_rank"), 1, 1000, f"{label} team rank")
+            _check_number(errors, player.get("team_points"), 0, 1000, f"{label} team points")
+            _check_number(errors, player.get("team_played"), 0, 1000, f"{label} team played")
+            _check_number(errors, player.get("team_ppg"), 0, 10, f"{label} team ppg")
+            _check_number(errors, player.get("team_count"), 1, 1000, f"{label} team count")
+            _check_number(
+                errors,
+                player.get("team_points_percentile"),
+                0,
+                100,
+                f"{label} team points percentile",
+            )
+            _check_number(errors, player.get("team_lift"), -100, 100, f"{label} team lift")
+            if player.get("team_context_status") not in {"available", "unknown"}:
+                errors.append(f"{label}: invalid team context status")
             rose = player.get("rose") or {}
             if not rose:
                 errors.append(f"{label}: missing rose profile")
@@ -246,6 +276,7 @@ def check_data() -> list[str]:
         errors.append("missing scouting search-index.json")
     else:
         search_players = search.get("players") or []
+        profile_order = search.get("profile_order") or []
         if int(search.get("count") or 0) != len(search_players):
             errors.append("search count does not match its player rows")
         expected_rows = sum(len(_load(path).get("players") or []) for path in pool_files)
@@ -264,8 +295,78 @@ def check_data() -> list[str]:
                 errors.append(f"{label}: invalid European status")
             if not player.get("c") or not player.get("sc"):
                 errors.append(f"{label}: missing current or stats club")
-            if not isinstance(player.get("eu"), list):
+            if player.get("eu") is not None and not isinstance(player.get("eu"), list):
                 errors.append(f"{label}: Europe competitions is not a list")
+            _check_number(errors, player.get("gl"), 0, 10_000, f"{label} goals")
+            _check_number(errors, player.get("ast"), 0, 10_000, f"{label} assists")
+            _check_number(errors, player.get("g90"), 0, 100, f"{label} goals per 90")
+            _check_number(errors, player.get("sh90"), 0, 1_000, f"{label} shots per 90")
+            _check_number(errors, player.get("cv"), 0, 1_000, f"{label} conversion")
+            if player.get("cs") is not None and player.get("cs") not in CLUB_STATUSES:
+                errors.append(f"{label}: invalid current-club status")
+            arp = player.get("arp")
+            if arp is not None:
+                if not isinstance(arp, list):
+                    errors.append(f"{label}: profile scores are not a list")
+                else:
+                    for entry in arp:
+                        if not isinstance(entry, list) or len(entry) != 4:
+                            errors.append(f"{label}: malformed profile score entry")
+                            continue
+                        index, adjusted, raw, profile_coverage = entry
+                        if not isinstance(index, int) or not 0 <= index < len(profile_order):
+                            errors.append(f"{label}: invalid profile index")
+                        _check_number(errors, adjusted, 0, 100, f"{label} adjusted profile")
+                        _check_number(errors, raw, 0, 100, f"{label} raw profile")
+                        _check_number(
+                            errors,
+                            profile_coverage,
+                            0,
+                            1,
+                            f"{label} profile coverage",
+                        )
+        profile_order = search.get("profile_order") or []
+        if sorted(profile_order) != sorted((search.get("profile_labels") or {}).keys()):
+            errors.append("search profile order does not match the profile labels")
+        _check_number(
+            errors,
+            search.get("archetype_min_coverage"),
+            0,
+            1,
+            "search archetype min coverage",
+        )
+        value_model = search.get("value_model") or {}
+        for key in ("performance", "age", "minutes", "profile"):
+            _check_number(
+                errors,
+                (value_model.get("weights") or {}).get(key),
+                0,
+                1,
+                f"search value weight {key}",
+            )
+        _check_number(
+            errors,
+            value_model.get("min_weight_coverage"),
+            0,
+            1,
+            "search value min coverage",
+        )
+        _check_number(errors, value_model.get("minutes_full"), 1, 10_000, "search minutes full")
+        age_curve = value_model.get("age_curve") or []
+        if not age_curve:
+            errors.append("search value age curve is empty")
+        for band in age_curve:
+            _check_number(errors, band.get("max_age"), 1, 200, "search age band max")
+            _check_number(errors, band.get("factor"), 0, 1, "search age band factor")
+        team_context = search.get("team_context") or {}
+        _check_number(
+            errors,
+            team_context.get("underperforming_ppg_percentile_max"),
+            0,
+            100,
+            "search team threshold",
+        )
+        _check_number(errors, team_context.get("min_lift"), 0, 100, "search team min lift")
         priority = hub.get("priority") or {}
         _check_number(errors, priority.get("u23_max_age"), 0, 60, "priority u23 max age")
         _check_number(errors, priority.get("u23_multiplier"), 0, 3, "priority u23 multiplier")
@@ -303,6 +404,16 @@ def check_pages() -> list[str]:
     errors: list[str] = []
     if not OUT.exists():
         return [f"missing static export {OUT}"]
+    hub_page = OUT / "scouting" / "index.html"
+    if not hub_page.exists():
+        errors.append("missing /scouting/ page")
+    else:
+        html = hub_page.read_text(encoding="utf-8")
+        for marker in ("scouting.filters", "scouting.lenses"):
+            if f'data-contract="{marker}"' not in html:
+                errors.append(f"scouting hub: missing {marker} marker")
+        if "Published defaults" not in html:
+            errors.append("scouting hub: missing the published-defaults label")
     search_page = OUT / "scouting" / "search" / "index.html"
     if not search_page.exists():
         errors.append("missing /scouting/search/ page")
@@ -310,6 +421,10 @@ def check_pages() -> list[str]:
         html = search_page.read_text(encoding="utf-8")
         if len(re.findall(r"<h1[ >]", html)) != 1:
             errors.append("scouting search: expected exactly one H1")
+        if 'data-contract="scouting.advanced-filters"' not in html:
+            errors.append("scouting search: missing the advanced-filters marker")
+        if "Published defaults" not in html:
+            errors.append("scouting search: missing the published-defaults label")
         if not re.search(r"<caption", html):
             errors.append("scouting search: missing table caption")
         for header in (
@@ -333,6 +448,8 @@ def check_pages() -> list[str]:
     required = [
         "Player",
         "Club",
+        "Team",
+        "Lift",
         "Role",
         "Mins",
         "Rating",
@@ -365,6 +482,8 @@ def check_pages() -> list[str]:
             if "No player statistics" not in html and "No ranked player" not in html:
                 errors.append(f"{slug}: missing the empty-state explanation")
             continue
+        if 'data-contract="scouting.lenses"' not in html:
+            errors.append(f"{slug}: missing the scouting lens selector")
         if not re.search(r"<caption", html):
             errors.append(f"{slug}: missing table caption")
         for header in required:

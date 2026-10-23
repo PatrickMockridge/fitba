@@ -588,7 +588,7 @@ export default async function HistorySeasonPage({
         {" · "}
         <Link href="/history/">The record</Link>
         {" · "}
-        <Link href="/matches/">Match record</Link>
+        <Link href="/matches/">Results and fixtures</Link>
       </p>
     </>
   );

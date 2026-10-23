@@ -1,0 +1,15 @@
+# Team-context lens: players outperforming struggling teams.
+#
+# The team filter uses points per game within the league's current table. The
+# player lift is the existing role- and league-adjusted percentile minus the
+# team's points-per-game percentile. It is a contrast, not a valuation,
+# prediction or recommendation.
+version: 1
+reviewed: 2026-10-23
+underperforming_ppg_percentile_max: 40
+min_lift: 0
+lens_limit: 12
+note: >
+  A team is treated as underperforming when its points-per-game percentile is
+  at or below the threshold. A player must have a positive lift. Empty leagues
+  or teams without a current table stay unknown, never zero-strength.

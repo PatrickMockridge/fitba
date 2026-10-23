@@ -124,6 +124,20 @@ layers:
       including unused substitutes. Bench completeness is published per side
       and gates omission inference; a missing bench is unknown, not empty.
 
+  - id: scouting_team_context
+    label: Scouting league tables for team context
+    kind: provider
+    primary: api_football
+    fallback: []
+    status: partial
+    scope: current table for every enabled scouting league
+    fields: [rank, points, played, goal_difference, ppg, group]
+    surfaces: [/scouting/, /scouting/search/, /scouting/player/, /sources/, /methodology/]
+    note: >
+      One standings request per enabled league. The group with the most played
+      rounds is used; a league without a table is unknown, never
+      zero-strength. The team points percentile is within the league only.
+
   - id: scouting_current_clubs
     label: Current club resolution for the scouting pool
     kind: provider

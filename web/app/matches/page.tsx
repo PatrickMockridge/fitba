@@ -5,9 +5,9 @@ import { getFixtureIndex } from "@/lib/data";
 
 export const metadata = {
   alternates: { canonical: "/matches/" },
-  title: "Match record · fitba",
+  title: "Results and fixtures · fitba",
   description:
-    "Every played Aberdeen fixture in the Cormack era, with the depth the record supports.",
+    "Every Aberdeen result and known remaining fixture, with the depth the record supports.",
 };
 
 export default function MatchesPage() {
@@ -17,7 +17,7 @@ export default function MatchesPage() {
       <ContractPage surface="matches" state="empty">
         <section className="page-head" data-contract="matches.hero">
           <p className="eyebrow">Matches</p>
-          <h1>Match record</h1>
+          <h1>Results and fixtures</h1>
           <p className="lede">
             No played fixtures are published in this build. Run{" "}
             <code>uv run fitba publish</code> to generate the record.
@@ -44,15 +44,15 @@ export default function MatchesPage() {
     <ContractPage surface="matches">
       <section className="page-head" data-contract="matches.hero">
         <p className="eyebrow">Cormack era</p>
-        <h1>Match record</h1>
+        <h1>Results and fixtures</h1>
         <p className="lede">
           Every Aberdeen fixture, one season at a time: results with the score,
-          events, lineups and measured stats, plus the remaining fixtures where
-          the schedule is known. The depth label says what the feed can show; it
-          is not a claim that the rest does not exist.
+          events, lineups and measured stats, plus the known remaining fixtures.
+          Cup progression and the post-split league games will add to the
+          schedule; the count below is therefore a minimum.
         </p>
         <p className="fine-print">
-          {index.count} played fixtures · {upcomingCount} to play.{" "}
+          {index.count} played fixtures · {upcomingCount}+ to play (minimum).{" "}
           <Link className="text-link" href="/analysis/xg/">
             fxG model and aggregates →
           </Link>{" "}
@@ -68,7 +68,12 @@ export default function MatchesPage() {
         </p>
       </section>
 
-      <MatchRecordArchive seasons={seasonGroups} scheduled={scheduledGroups} current={currentSeason} />
+      <MatchRecordArchive
+        seasons={seasonGroups}
+        scheduled={scheduledGroups}
+        current={currentSeason}
+        remainingIsMinimum={Boolean(index.schedule_coverage?.remaining_is_minimum)}
+      />
     </ContractPage>
   );
 }
