@@ -32,8 +32,18 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
 | [Sources](docs/sources.md) | Every source, its licence position, coverage and known gaps. |
-| [Architecture](docs/architecture.md) | How ingestion, analytics, publication and the web app fit together. |
+| [Scouting method](docs/scouting-method.md) | Archetypes, league alignment, the value index, U23/European priority, the team-context lens, reader lenses and advanced filters. |
+| [Metrics](docs/metrics.md) | The metric registry, verification modes, audit and change process. |
+| [Metric changes](docs/metric-changes.md) | The append-only metric and parameter change log. |
+| [Player profile standard](docs/player-profile-standard.md) | The normative two-figure player-profile standard. |
+| [Documentation book](docs/docs-book.md) | The mdBook source, Merkland/Aurora themes and build. |
+| [Architecture](docs/architecture.md) | How ingestion, analytics, publication, the web app and the docs book fit together. |
 | [Roadmap](docs/roadmap.md) | What is live, what is next and what is deliberately out of scope. |
+
+The Markdown in `docs/` is also rendered as a local mdBook book in the
+Merkland (light) and Aurora (dark) palettes (`mdbook build`, `mdbook serve`).
+The book is a repository artifact, not a route on the fitba website; the
+Markdown remains the source of truth.
 
 ## Principles
 
@@ -99,6 +109,17 @@ full documentation index is [docs/README.md](docs/README.md).
   squad-decision lenses and the route to the evidence. Inferred absence is
   labelled as cause-not-published, never a medical diagnosis; contract, fee and
   wage data are explicitly unavailable.
+- **Scouting board and full search**: `/scouting/` starts with the players
+  already at the club, the measured role-family gaps and seven all-league
+  profiles. Simple reader lenses (priority rank, U23, Europe shop window,
+  struggling team, profile, role, league) recompute the profile, attacker,
+  goal-scoring and team-context lists from the full ranked pool; the published
+  default lists remain the audited view. `/scouting/search/` carries the full
+  cross-league pool with the same lenses and advanced reader controls for
+  U23/Europe weights, value-index weights, team-context thresholds and
+  eligibility. The value index is a scouting ordering, not a transfer value;
+  the U23 and European preferences, the team-context lift and every coverage
+  limit are labelled. Every ranked player has a scouting profile page.
 - **Provenance, availability and needs**: `/sources/` publishes a layer
   truth table (API-Football primary for cups, lineups, player stats and squad;
   Football-Data primary for league results/stats until the migration gate
@@ -139,18 +160,22 @@ full documentation index is [docs/README.md](docs/README.md).
   in `config/metrics.yaml`; the generated audit and the registry are on
   `/metrics/`, with the build summary on `/status/`.
 
-## Next: scouting and the trading-club layer
+## Next: style fit, budget bands and the trading-club layer
 
-The next phase turns the licensed basic stats into the fan-facing scouting and
-trading-club views: position-aware percentiles, budget bands, squad age/value,
-opposition comparisons and loanee tracking with explicit coverage labels. See
+The scouting board and full search are live, including the value index,
+U23/European priority, the team-context lens, reader-selectable lenses and the
+advanced search filters. The next work is the style and budget-fit layer, GBP
+value bands once the public-source anchor gate passes, trading analytics,
+opposition comparisons and the remaining coverage work. See the
 [scouting method](docs/scouting-method.md), [trading model](docs/trading-model.md)
-and the [roadmap](docs/roadmap.md).
+and [roadmap](docs/roadmap.md).
 
 ## Requirements
 
 - Python 3.12+ and [uv](https://docs.astral.sh/uv/)
 - Node.js 20+ for the static Next.js app
+- mdBook 0.5.4+ for the documentation book (a Rust toolchain or a prebuilt
+  binary; the main site build does not need it)
 
 ## Quick start
 
@@ -173,6 +198,9 @@ uv run fitba tables --season current
 uv run fitba publish --season current
 
 cd web && npm install && npm run dev
+
+mdbook build               # build the documentation book into book/
+mdbook serve               # preview the book at http://localhost:3000
 ```
 
 ## Quality checks
@@ -180,6 +208,7 @@ cd web && npm install && npm run dev
 ```bash
 make check                 # Ruff, Pyright, pytest and every publication guard
 cd web && npm run build    # static export; fails on a broken route
+make check-all             # everything above, plus the root web contract
 ```
 
 CI runs the publication guards against the committed payloads; guards that
@@ -193,6 +222,7 @@ GitHub Pages serves the project site at
 **https://patrickmockridge.github.io/fitba/**. The
 [`deploy-pages`](.github/workflows/deploy-pages.yml) workflow builds `web` with
 `NEXT_PUBLIC_BASE_PATH=/fitba`, writes `.nojekyll` and publishes `web/out`.
+The documentation book is not deployed; it is a local repository artifact.
 
 - Every push to `main` deploys.
 - Completed `update-daily` and `update-weekly` runs deploy the fresh data commit
@@ -212,9 +242,13 @@ src/fitba/       sources → ingest → normalize → warehouse → analytics �
 sql/             DuckDB views
 contracts/       dataframe and published-JSON contracts
 docs/            product strategy, formats, methodology, scouting, sources
+docs/SUMMARY.md  the documentation book's chapter order
+book.toml        mdBook configuration (src = docs, output = book/)
+theme/           the local mdBook template and Merkland/Aurora palettes
 scripts/         source probes, publication and documentation guards
 tests/           pytest fixtures and unit tests
 web/             Next.js app (static export)
+book/            gitignored mdBook output; not deployed
 data/, .cache/   gitignored raw/normalized/warehouse data
 ```
 

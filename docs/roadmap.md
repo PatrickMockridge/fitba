@@ -1,6 +1,6 @@
 # Roadmap
 
-**Status:** staged plan. Last reviewed 2026-10-21.
+**Status:** staged plan. Last reviewed 2026-10-24.
 
 The order is deliberate: prove the audience and the analysis before buying
 expensive data, and never let an unlicensed feed become the foundation.
@@ -22,6 +22,7 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4g. Provenance, availability and needs | **Live.** Layer truth table at `/sources/`, curated availability ledger in the predicted XI, and a squad-needs board on `/recruitment/` that feeds the scouting method. |
 | 4h. Results, fixtures and fxG | **Live.** `/matches/` shows results and the known remaining schedule, with one page per played fixture and an experimental fxG model at `/analysis/xg/`. The provider gate is failing, so fxG is descriptive only. |
 | 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and seven profiles, including split assist/goal attacker lenses. An empirical league alignment, a value index, U23/European scouting priority, a team-context lens for outperforming struggling teams, simple reader-selectable lenses on the hub, advanced reader filters (U23/Europe and value-index weights, team thresholds and eligibility) on the full search, and one profile page per ranked player are live; GBP value bands, style fit and budget bands are deferred. |
+| 4j. Documentation book | **Live in the repository.** The Markdown docs are rendered with mdBook in the Merkland (light) and Aurora (dark) palettes, with search and accessibility markup. The book is not deployed to the website. |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |
@@ -65,13 +66,17 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
 - Current-stage callouts and "awaiting draw" states; the full pyramid remains
   on `/scotland/`.
 
-## Phase 4 — Fan-facing insight layer (next)
+## Phase 4 — Fan-facing insight layer (scouting delivered)
+
+The scouting board, full search, value index, U23/European priority,
+team-context lens, reader-selectable lenses and advanced filters are live; see
+row 4i. The documentation book is live; see row 4j. What remains from this
+phase:
 
 - Trading-club dashboard: squad age/value, minutes by age, inferred transfer
   balance, sell-on candidates, contracts and loans.
 - Opposition briefings using the same framework.
-- Basic scouting board: position-aware percentiles, minutes reliability,
-  league-strength adjustment, style fit, budget bands and coverage labels.
+- Style fit, budget bands and the remaining coverage labels for scouting.
 - Explainer cards, glossary and a clearer methodology layer.
 - Progressive-disclosure components on every insight.
 
@@ -141,6 +146,16 @@ Full coverage requires Sportmonks or an enterprise provider; it is not assumed.
   role profiles. No targets, fees or wages.
 - See [provenance.md](provenance.md), [availability.md](availability.md) and
   [needs.md](needs.md).
+
+## Phase 4j — Documentation book (live)
+
+- `book.toml`, `docs/SUMMARY.md` and the local `theme/` turn the canonical
+  Markdown into a local mdBook book.
+- Two named palettes, Merkland (light) and Aurora (dark), plus Auto; the theme
+  keeps the System 7 grammar and the club-red accent.
+- The book is built locally with `mdbook build`; it is not copied into the Pages
+  artifact and is not a route on the website.
+- See [docs-book.md](docs-book.md).
 
 ## Phase 5 — Local rich-visual prototype
 

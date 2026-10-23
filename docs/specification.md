@@ -2,7 +2,7 @@
 
 **Status:** canonical product, audience and number-governance specification.
 **Version:** 1.0.
-**Last reviewed:** 2026-10-22.
+**Last reviewed:** 2026-10-24.
 **Precedence:** this document governs intent, audience, essentiality, number
 semantics and change control. [identity.md](identity.md) governs voice and
 editorial stance. [page-contracts.md](page-contracts.md) governs route
@@ -224,3 +224,15 @@ A change is done when:
   detailed method and provenance.
 - [product-strategy.md](product-strategy.md) and [roadmap.md](roadmap.md): scope
   and sequencing. They defer intent, audience and number rules here.
+- [docs-book.md](docs-book.md): the local mdBook rendering of this documentation.
+
+## Documentation book
+
+The documentation is also rendered as a local mdBook book in the repository. It
+is a rendering of the canonical Markdown, not a second product or a second
+source of numbers, and it is not deployed to the website. It serves the same
+audience with the same evidence: no chapter may hide contracted data, present a
+reader scenario as a published value, or invent a number. The book carries the
+Merkland (light) and Aurora (dark) palettes plus Auto, search and a skip link.
+Documentation changes follow this document's change control for any number; a
+docs-book build failure fails the docs check, not the site deploy.

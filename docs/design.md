@@ -1,6 +1,6 @@
 # Design foundation: fitba
 
-**Status:** canonical design foundation. Last reviewed 2026-10-22.
+**Status:** canonical design foundation. Last reviewed 2026-10-24.
 **Precedence:** [identity.md](identity.md) governs what fitba is, who it is for
 and how it speaks. [page-contracts.md](page-contracts.md) governs what each route
 must keep visible. This document governs how the record should look and feel.
@@ -278,6 +278,26 @@ These are the moves that produced the reverted passes:
 - Let a decorative element sit above the evidence in the hierarchy.
 - Change the visual system without a written reason tied to this document and a
   page-contract check.
+
+## The documentation book
+
+The docs are rendered as a local mdBook book in the repository. The book uses
+the same System 7 grammar as the app: square geometry, 1px rules, no soft
+shadows, mono labels, tabular numbers and club red as the accent. The palette is
+limited to the two standard themes:
+
+- **Merkland** (light) is mapped onto mdBook's `.light` class: paper
+  `#f0f0ed`, surface `#fcfcfa`, ink `#17181a`, club `#c8102e`.
+- **Aurora** (dark) is mapped onto mdBook's `.coal` class: paper `#0b1020`,
+  surface `#121a2e`, ink `#eef1f8`, club `#ff5a6e`.
+- **Auto** follows `prefers-color-scheme`.
+
+The theme switcher is labelled Merkland, Aurora and Auto. The book does not
+offer the Red Matchday or Floodlight alt themes; they remain app themes. The
+palette mapping and component overrides live in `theme/fitba.css`, and the
+canonical tokens remain in `web/app/system.css`. The book keeps the identity
+line on its landing page and a skip link; it does not repeat the line on every
+chapter. The palettes and the skip link are part of the local theme.
 
 ## Implementation order
 

@@ -1,6 +1,6 @@
 # Scouting method
 
-**Status:** live. Last reviewed 2026-10-23.
+**Status:** live. Last reviewed 2026-10-24.
 
 The scouting section is deliberately explainable. It does not produce a single
 "good player" verdict or a target list. It shows the components, the cohort, the
@@ -122,6 +122,32 @@ attacker card splits assist bias from goal bias, and the goal-scoring table
 orders forwards and attacking midfielders by goals per 90. The feed carries no
 crosses, so key passes are the closest available creation signal. These answer
 "what profile is missing?", not "would this signing reduce goals?".
+
+## Published default lists
+
+The published hub lists are capped at:
+
+- five leaders for each of the seven archetype profiles;
+- eight leaders for each of the assist-bias and goal-bias attacker lists;
+- twelve rows in the goal-scoring table;
+- twelve leaders in the team-context lens.
+
+The caps are part of the published shape, not a display accident. The reader
+scenario uses the same limits: a lens or a reader weight can change which
+players qualify and their order, but it cannot widen a list beyond the published
+length. The defaults are the audited publisher output.
+
+## Full pool payload
+
+`/scouting/pool.json` is a static route that publishes the full ranked pool
+(the same data as the search index) for the reader scenarios. The hub does not
+embed that payload in the initial page. It is fetched only when a lens becomes
+active, with a loading state, an explicit error state and a retry. If the fetch
+fails, the published lists remain visible and unchanged; the page does not
+pretend the lens was applied.
+
+The reader scenario is computed in the browser from this published payload. It
+does not write to the payload, the registry or the audit.
 
 ## Player roses
 
@@ -249,11 +275,12 @@ team_lift = player role-adjusted percentile − team points-per-game percentile
 ```
 
 A team is treated as underperforming at or below the configured percentile
-(default 40). The lens keeps players with a positive lift at those teams,
-ordered by lift and then scouting priority. The contrast is descriptive, not a
-valuation, prediction or recommendation. A league or team without a current
-table is `unknown`, never zero-strength; coverage is published in the hub and
-the player profile.
+(default 40), with a minimum lift of 0 and a lens limit of 12 rows; the
+parameters live in `config/scouting/team-context.yaml`. The lens keeps players
+with a positive lift at those teams, ordered by lift and then scouting priority.
+The contrast is descriptive, not a valuation, prediction or recommendation. A
+league or team without a current table is `unknown`, never zero-strength;
+coverage is published in the hub and the player profile.
 
 The recent Aberdeen examples fit the team side of the lens: Kilmarnock finished
 11th of 12 in the 2025-26 Premiership, and Northampton finished 24th of 24 in
@@ -280,9 +307,10 @@ The selector states whether one lens or a layered set is active.
 On the hub, no active lens renders the published default lists exactly. Any
 active lens recomputes the seven profile lists, the assist/goal lists, the
 goal-scoring table and the team-context lens from the published full-pool
-search index. The result is labelled **Reader scenario** and is reset to the
-published defaults with one control. The hub exposes no numeric weights and no
-separate player table; the full table stays on `/scouting/search/`.
+payload at `/scouting/pool.json`. The result is labelled **Reader scenario** and
+is reset to the published defaults with one control. The hub exposes no numeric
+weights and no separate player table; the full table stays on
+`/scouting/search/`.
 
 ## Advanced filters on the full search
 

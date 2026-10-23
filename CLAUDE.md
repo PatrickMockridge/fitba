@@ -18,3 +18,6 @@
 - The identity line is "Aberdeen FC, without the noise." The primary reader is a
   highly engaged, literate, numerate Aberdeen fan, not an imagined median user.
 - Do not use word-count budgets to justify removing data.
+- Docs are source-first: edit `docs/*.md`, add the page to `docs/SUMMARY.md`, then
+  run `mdbook build`. The mdBook themes are in `theme/`; the book output is
+  generated and gitignored.

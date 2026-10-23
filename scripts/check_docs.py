@@ -18,6 +18,9 @@ DOCS = ROOT / "docs"
 
 REQUIRED = [
     "README.md",
+    "SUMMARY.md",
+    "docs-book.md",
+    "player-profile-standard.md",
     "identity.md",
     "specification.md",
     "metrics.md",
@@ -69,6 +72,10 @@ IN_APP = [
     "web/app/analysis/xg/page.tsx",
     "web/app/recruitment/page.tsx",
     "web/app/scouting/page.tsx",
+    "web/app/scouting/search/page.tsx",
+    "web/app/scouting/[league]/page.tsx",
+    "web/app/scouting/player/[playerId]/page.tsx",
+    "web/app/scouting/pool.json/route.ts",
     "web/app/sources/page.tsx",
     "web/app/rumours/page.tsx",
     "web/app/squad/page.tsx",

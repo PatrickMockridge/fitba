@@ -3,7 +3,7 @@
 **Status:** technical companion to [specification.md](specification.md).
 **Registry:** `config/metrics.yaml` (canonical). **Public view:** `/metrics/`.
 **Audit:** `web/data/generated/audit/metrics.json`.
-**Last reviewed:** 2026-10-22.
+**Last reviewed:** 2026-10-24.
 
 Every published number has a registry entry. The registry defines the metric;
 the generated audit proves what was checked against the published payloads.
@@ -102,7 +102,8 @@ Every `recompute` metric names an implementation in
 `src/fitba/metrics/checks.py`. A test asserts every such metric has a function.
 `cross_surface` metrics declare the two payload locations. `config_match`
 parameters are checked against their `config_path`. `source_checksum` metrics record digests for their declared `source_paths`.
-No active metric uses this mode at registry 1.x.
+No active metric uses this mode in the current registry; the checker keeps the
+mode for future source digests.
 
 ## Change process
 
