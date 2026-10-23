@@ -208,6 +208,21 @@ Components: `LeagueTable`, `FixtureList`, `CompetitionStrip`, `NewsGrid`,
 `ShapeSplitTable`, `DepthChart`, `BalancePanel`, `MissionPanel`, `NeedsBoard`,
 `PriorityProfiles`, `AvailabilityBadge`.
 
+## Refresh cadence
+
+- `update-daily` runs at 06:17 UTC: current-season ingest, match detail,
+  matchday, squad, availability, build, validation, publication and checks. It
+  commits the generated payloads.
+- `update-weekly` runs on Monday at 07:23 UTC: source probes, all-season ingest
+  and validation, with no generated-data commit.
+- `update-matchday` runs every two hours. It compares the committed fixture
+  schedule and manifest; when a scheduled Aberdeen fixture has finished and the
+  manifest predates that finish, it dispatches `update-daily`. Empty checks do
+  no data work. The dispatched run follows the daily path, including checks and
+  the commit.
+- Data commits in the daily path trigger the Pages deployment through the
+  `workflow_run` hook in `deploy-pages.yml`.
+
 ## Documentation book
 
 The documentation is a local mdBook built from the same Markdown as the

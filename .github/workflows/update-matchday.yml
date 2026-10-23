@@ -1,0 +1,49 @@
+name: update-matchday
+
+# Check every two hours for an Aberdeen fixture that has finished since the
+# published data was generated. When one is due, dispatch the full daily data
+# update; that update commits the refreshed payloads and the existing
+# deploy-pages workflow-run hook publishes them.
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: matchday-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Is a post-match update due?
+        id: due
+        run: python3 scripts/matchday_refresh_due.py
+
+      - name: Is a daily update already running?
+        id: running
+        if: steps.due.outputs.update == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count=$(gh run list --workflow=update-daily.yml --limit 20 --json status \
+            -q '[.[] | select(.status == "in_progress" or .status == "queued" or .status == "waiting" or .status == "pending" or .status == "requested")] | length')
+          if [ "$count" != "0" ]; then
+            echo "running=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "running=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Dispatch the daily update
+        if: steps.due.outputs.update == 'true' && steps.running.outputs.running != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-daily.yml --ref main

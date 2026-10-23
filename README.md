@@ -216,6 +216,21 @@ need the local warehouse (roles, shapes) run in full after a build. The
 warehouse and raw feeds live in `data/` and `.cache/` and are gitignored.
 The published web data lives in `web/data/generated/` and is committed.
 
+## Data refresh cadence
+
+- **Daily full update:** `update-daily` at 06:17 UTC runs the current-season
+  ingest, match detail, matchday, squad, availability, build, validation,
+  publication and checks, then commits `web/data/generated/`.
+- **Weekly source and history check:** `update-weekly` on Monday at 07:23 UTC
+  runs source probes, all-season ingest and validation. It does not commit
+  generated data.
+- **After every Aberdeen game:** `update-matchday` checks every two hours. If a
+  scheduled Aberdeen fixture has finished and the published data predates it,
+  the check dispatches the full daily update. Data is normally refreshed within
+  about two hours of full time; empty checks do no data work.
+- A data commit triggers the Pages deployment through the existing
+  `workflow_run` hook.
+
 ## Deployment
 
 GitHub Pages serves the project site at
