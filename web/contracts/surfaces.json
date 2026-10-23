@@ -833,9 +833,12 @@
         "web/components/ScoutingLayerZero.tsx",
         "web/components/ScoutingWeaknessTable.tsx",
         "web/components/ScoutingArchetypes.tsx",
+        "web/components/ScoutingHubLenses.tsx",
+        "web/components/ScoutingLensSelector.tsx",
         "web/components/ScoutingLeagueIndex.tsx",
         "web/components/ScoutingSquadTable.tsx",
-        "web/components/ScoutingCoverage.tsx"
+        "web/components/ScoutingCoverage.tsx",
+        "web/lib/scouting-filters.ts"
       ],
       "ci_states": [
         "full"
@@ -860,6 +863,14 @@
               "min": 1
             },
             {
+              "id": "scouting.filters",
+              "min": 1
+            },
+            {
+              "id": "scouting.lenses",
+              "min": 1
+            },
+            {
               "id": "scouting.attackers",
               "min": 1
             },
@@ -881,6 +892,10 @@
             },
             {
               "id": "scouting.coverage",
+              "min": 1
+            },
+            {
+              "id": "scouting.team-lens",
               "min": 1
             }
           ],
@@ -934,6 +949,16 @@
               "Tackles/90",
               "Interceptions/90",
               "Duels won %"
+            ],
+            "scouting.team-lens": [
+              "Player",
+              "Club",
+              "League",
+              "Team",
+              "Team PPG %",
+              "Adj %",
+              "Lift",
+              "Priority"
             ]
           },
           "indicators": {
@@ -977,7 +1002,8 @@
       "path": "/scouting/search/",
       "owners": [
         "web/app/scouting/search/page.tsx",
-        "web/components/ScoutingGlobalSearch.tsx"
+        "web/components/ScoutingGlobalSearch.tsx",
+        "web/lib/scouting-filters.ts"
       ],
       "ci_states": [
         "full"
@@ -987,6 +1013,14 @@
           "markers": [
             {
               "id": "scouting.search.hero",
+              "min": 1
+            },
+            {
+              "id": "scouting.lenses",
+              "min": 1
+            },
+            {
+              "id": "scouting.advanced-filters",
               "min": 1
             },
             {
@@ -1002,6 +1036,8 @@
             "scouting.search.board": [
               "Player",
               "Club",
+              "Team",
+              "Lift",
               "League",
               "Nationality",
               "Role",
@@ -1619,10 +1655,10 @@
               "h2",
               "h3"
             ],
-            "h1": "Match record"
+            "h1": "Results and fixtures"
           },
           "metadata": {
-            "title_contains": "Match record",
+            "title_contains": "Results and fixtures",
             "description_contains": "Aberdeen"
           }
         },

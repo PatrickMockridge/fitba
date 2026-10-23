@@ -1674,6 +1674,11 @@ def publish(
         "scheduled": sum(1 for row in schedule_rows if row.get("status") == "scheduled"),
         "conflicts": sum(1 for row in schedule_rows if row.get("conflict_review")),
         "overdue": sum(1 for row in schedule_rows if row.get("status") == "overdue"),
+        "remaining_is_minimum": True,
+        "remaining_note": (
+            "Known scheduled fixtures only. Cup progression and post-split league "
+            "fixtures are not yet fixed in the schedule."
+        ),
         "source": "history fixtures + SPFL club feed",
     }
     fixtures_info = _write(temp / "fixtures" / "index.json", fixture_index)

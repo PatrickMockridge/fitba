@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.1.0
+registry_version: 3.2.0
 reviewed: '2026-10-23'
 owner: patrickmockridge
 change_policy:
@@ -2421,6 +2421,14 @@ metrics:
   - saves_p90
   - rose
   - rose_meta
+  - team_rank
+  - team_points
+  - team_played
+  - team_ppg
+  - team_count
+  - team_points_percentile
+  - team_underperforming
+  - team_lift
   - percentile
   - archetype_score
   - archetype_coverage
@@ -2491,7 +2499,7 @@ metrics:
     rank. A missing or insufficient cohort is null, never zero.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 4
+  version: 5
   status: active
 - id: scouting.board
   label: Scouting weakness board
@@ -2617,6 +2625,69 @@ metrics:
   reviewed: '2026-10-23'
   version: 3
   status: active
+- id: scouting.team-lens
+  label: Scouting team-context lens
+  description: Players outperforming teams that are underperforming in their league.
+  value_type: object
+  fields:
+  - team_rank
+  - team_points
+  - team_played
+  - team_ppg
+  - team_count
+  - team_points_percentile
+  - team_underperforming
+  - team_lift
+  - leaders
+  formula: >
+    Team points per game = points / played in the provider's current league
+    table. The team points percentile is the midrank percentile of that value
+    among the league's teams. team_lift = player role-adjusted percentile -
+    team points percentile. A team is underperforming when its percentile is at
+    or below the configured maximum (default 40). The lens keeps players with a
+    positive lift at those teams, ordered by lift then scouting priority. A
+    league without a table is unknown, never zero-strength.
+  inputs:
+  - published payload
+  - data/normalized/scouting/team_standings.parquet
+  - config/scouting/team-context.yaml
+  unit: mixed
+  aggregation: per_player
+  denominator: team matches played
+  rounding:
+    method: half_even
+    decimals: 1
+    display: '0.0'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: >
+    Published only where the league table and team row exist; missing standings
+    are unknown. The lift is a contrast, not a valuation, forecast or
+    recommendation.
+  home_payload: scouting/aberdeen.json
+  payload_paths:
+  - scouting/aberdeen.json#/team_lens/**
+  - scouting/pool/*.json#/players/**/team_**
+  - scouting/coverage.json#/team_context/**
+  home_surface: /scouting/
+  displayed_surfaces:
+  - /scouting/
+  - /scouting/search/
+  - /scouting/player/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Team underperformance is a within-league points-per-game contrast, not a
+    budget, wage or resource model.
+  - A player's role-adjusted percentile and a team's points percentile are
+    different units; the lift is a descriptive ranking aid, not a causal claim.
+  - A league without a current table is unknown, not zero-strength.
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 1
+  status: active
 - id: scouting.squad
   label: Scouting squad profile
   description: Aberdeen registered-squad position-specific per-90 output, competitive
@@ -2698,6 +2769,7 @@ metrics:
   - fixtures_played
   - europe
   - current_clubs
+  - team_context
   formula: >
     Counts of provider player-season rows, rated rows, rows at 450+ minutes,
     players with at least one starting-XI role, played fixtures and lineups
@@ -2737,7 +2809,7 @@ metrics:
     move outside a pool team.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 3
+  version: 4
   status: active
 
 - id: scouting.value-model
@@ -3746,6 +3818,31 @@ parameters:
   - squad_decisions
   - suspensions
   - absence
+  verification: config_match
+  owner: patrickmockridge
+  reviewed: '2026-10-23'
+  version: 1
+- id: param.scouting.team-context
+  label: Scouting team-context policy
+  kind: matrix
+  value:
+    lens_limit: 12
+    min_lift: 0
+    note: 'A team is treated as underperforming when its points-per-game percentile is
+      at or below the threshold. A player must have a positive lift. Empty leagues or
+      teams without a current table stay unknown, never zero-strength.
+    
+      '
+    underperforming_ppg_percentile_max: 40
+  unit: mixed
+  used_by:
+  - scouting.team-lens
+  config_path: scouting/team-context
+  config_keys:
+  - underperforming_ppg_percentile_max
+  - min_lift
+  - lens_limit
+  - note
   verification: config_match
   owner: patrickmockridge
   reviewed: '2026-10-23'

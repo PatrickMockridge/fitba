@@ -17,7 +17,7 @@ check a number.
 | [Product strategy](product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. Defers identity and voice to `identity.md`. |
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |
 | [Season overview](analysis.md) | The next fixtures, availability, season aims, squad decisions and the bridge to matchday, squad and scouting. |
-| [Match record](fixtures.md) | One page per played Cormack-era fixture: canonical ids, depth states, timeline, lineups, stats and the deterministic read. |
+| [Results and fixtures](fixtures.md) | Played and remaining Cormack-era fixtures, plus one page per played fixture with canonical ids, depth states, timeline, lineups, stats and the deterministic read. |
 | [fxG](xg.md) | The experimental shot-on-target expected-goals model, interval, provider-xG evaluation gate and limitations. |
 | [Match scoreboard](match-scoreboard.md) | The top-level score, goal and red-card widget, event semantics and the Aberdeen/opposition split. |
 | [Data provenance](provenance.md) | The layer-by-layer source truth table, API-Football coverage, the league migration gate and manifest attribution. |

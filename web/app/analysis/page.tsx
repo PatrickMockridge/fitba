@@ -442,7 +442,7 @@ export default function AnalysisPage() {
           ))}
         </div>
         <p className="back-link">
-          <Link href="/matches/">Full match record →</Link>
+          <Link href="/matches/">Results and fixtures →</Link>
           {" · "}
           <Link href="/analysis/xg/">fxG model →</Link>
           {" · "}

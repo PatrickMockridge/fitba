@@ -312,3 +312,13 @@ metrics/visuals; never raw or source-shaped rows. `no_publication` — may be re
 manually as a finding aid, but never ingested automatically, cited or
 republished. The public profile publishes `open` + `derived_display`; the
 publication guard rejects a `no_publication` source id or URL in committed JSON.
+
+## Scouting team context
+
+The team-context lens uses the licensed provider's league tables, one request
+per enabled scouting league. The current group is the one with the most played
+rounds; team points per game is `points / played`, and the team percentile is
+within that league only. The full season scope and per-league coverage are in
+`data/normalized/scouting/team_standings_meta.json` and the `/scouting/`
+coverage block. A league without a table is shown as unknown, not a
+zero-strength team. The lens does not use budgets, wages or market values.

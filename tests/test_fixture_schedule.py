@@ -1,6 +1,17 @@
 from datetime import date
 
+import pytest
+
 from fitba.normalize.schedule import load_schedule
+from fitba.settings import NORMALIZED_DIR
+
+pytestmark = pytest.mark.skipif(
+    not (
+        (NORMALIZED_DIR / "history" / "season=2026-27" / "fixtures.parquet").exists()
+        and (NORMALIZED_DIR / "club_fixtures" / "aberdeen.parquet").exists()
+    ),
+    reason="requires the local normalized history and club-fixture feeds",
+)
 
 
 def test_schedule_uses_local_kickoff_and_keeps_31_october_conflict():

@@ -22,7 +22,9 @@ coverage and the uncertainty. Every number is registered in
 3. **Layer 2 — profiles.** Seven archetypes show the types of player that add
    options. The attacker section splits assist-biased contribution from
    goal-scoring contribution; a separate goal-scoring lens orders forwards by
-   goals per 90. These are profiles, not recommendations.
+   goals per 90. The team-context lens compares the player's role-adjusted
+   percentile with the team's points-per-game percentile. These are profiles,
+   not recommendations.
 
 ## Universe
 
@@ -208,6 +210,7 @@ terms and release clauses are not claimed.
 ```bash
 uv run fitba scouting pool  --season current
 uv run fitba scouting roles --season current --budget 6500
+uv run fitba scouting standings --season current
 uv run fitba scouting status
 uv run fitba scouting values --status
 uv run fitba scouting values --validate
@@ -234,3 +237,88 @@ never published.
   they are published as preferences, not as measured effects.
 - A calibrated transfer value. The public-source anchor register is the missing
   input; until it passes the gate, only the value index is published.
+
+## Team context: outperforming struggling teams
+
+The team-context lens uses the licensed league tables. One current table is
+fetched per enabled league; the group with the most played rounds is used. A
+team's points-per-game percentile is its rank among the teams in that table.
+
+```text
+team_lift = player role-adjusted percentile − team points-per-game percentile
+```
+
+A team is treated as underperforming at or below the configured percentile
+(default 40). The lens keeps players with a positive lift at those teams,
+ordered by lift and then scouting priority. The contrast is descriptive, not a
+valuation, prediction or recommendation. A league or team without a current
+table is `unknown`, never zero-strength; coverage is published in the hub and
+the player profile.
+
+The recent Aberdeen examples fit the team side of the lens: Kilmarnock finished
+11th of 12 in the 2025-26 Premiership, and Northampton finished 24th of 24 in
+2025-26 League One. The lens is not a claim that either player was signed for
+that reason.
+
+## Simple lenses on the hub
+
+The `/scouting/` hub, the global search and the per-league searches share one
+lens selector. Each selected lens is visible as an active layer:
+
+- **Priority rank** — rank by the value-index priority.
+- **U23** — apply the ×1.30 preference, optionally restrict to U23 only.
+- **Europe shop window** — apply the ×0.60 preference, optionally exclude
+  players with 90+ league-phase minutes.
+- **Struggling team** — restrict to teams at or below the team PPG percentile.
+- **Profile** — restrict to an archetype and its coverage floor.
+- **Role** — restrict to a role family.
+- **League** — restrict to one league.
+
+Eligibility lenses intersect; preference lenses multiply the priority score.
+The selector states whether one lens or a layered set is active.
+
+On the hub, no active lens renders the published default lists exactly. Any
+active lens recomputes the seven profile lists, the assist/goal lists, the
+goal-scoring table and the team-context lens from the published full-pool
+search index. The result is labelled **Reader scenario** and is reset to the
+published defaults with one control. The hub exposes no numeric weights and no
+separate player table; the full table stays on `/scouting/search/`.
+
+## Advanced filters on the full search
+
+`/scouting/search/` keeps the simple lens bar and adds an always-visible
+**Advanced filters** panel. The reader can set:
+
+- the U23 cutoff and multiplier and the European league-phase minutes threshold
+  and multiplier;
+- the four value-index weights (performance, age, minutes, profile fit), with
+  the normalised share shown;
+- the underperforming PPG percentile and the minimum team lift;
+- eligibility filters: text, nationality, minimum minutes, maximum age,
+  European status, role-known only and minimum value-index coverage.
+
+The reader U23 cutoff and European minutes threshold are applied to the
+player's age and league-phase minutes, so lowering the European threshold can
+treat a below-threshold player as qualified and raising it can remove the
+discount from a qualified player. The published status remains visible in the
+Europe column; the reader discount and the shop-window badge use the active
+threshold.
+
+The reader value index uses the registered formula with the reader weights:
+
+```text
+performance = adjusted percentile / 100
+age         = the published age-curve band factor for the player's age
+minutes     = min(1, minutes / 1800)
+profile     = best adjusted profile score / 100
+coverage    = sum(weights of present components) / sum(all weights)
+if coverage < 0.70: null
+reader_value_index = 100 × Σ(weight × component) / Σ(weights of present)
+reader_priority    = reader value index × U23 factor × Europe factor
+```
+
+The default weights reproduce the published value index and priority. Any
+change is labelled **Reader scenario** and a single reset restores the published
+defaults. Reader scenarios are computed in the browser from the published
+search index; they never change a published value, the registry or the audit.
+The published value index, priority and audit remain the source of truth.

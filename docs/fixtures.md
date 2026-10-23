@@ -1,4 +1,4 @@
-# Match record: fixtures and match pages
+# Results and fixtures: fixtures and match pages
 
 **Status:** page specification for `/matches/` and `/matches/<fixture_id>/`.
 **Last reviewed:** 2026-10-22.

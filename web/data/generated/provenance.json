@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-23T18:35:21+00:00",
+  "generated_at": "2026-10-23T22:08:09+00:00",
   "layers": [
     {
       "fallback": [
@@ -396,6 +396,50 @@
       "surfaces": [
         "/analysis/",
         "/sources/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "rank",
+        "points",
+        "played",
+        "goal_difference",
+        "ppg",
+        "group"
+      ],
+      "gate": null,
+      "id": "scouting_team_context",
+      "kind": "provider",
+      "label": "Scouting league tables for team context",
+      "note": "One standings request per enabled league. The group with the most played rounds is used; a league without a table is unknown, never zero-strength. The team points percentile is within the league only.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "current table for every enabled scouting league",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "partial",
+      "surfaces": [
+        "/scouting/",
+        "/scouting/search/",
+        "/scouting/player/",
+        "/sources/",
+        "/methodology/"
       ]
     },
     {
@@ -1093,6 +1137,7 @@
         "scouting_current_clubs",
         "scouting_europe",
         "scouting_pool",
+        "scouting_team_context",
         "squad_identity",
         "transfers_candidate"
       ],

@@ -47,7 +47,7 @@ export default function XgPage() {
             Method →
           </Link>{" "}
           <Link className="text-link" href="/matches/">
-            Match record →
+            Results and fixtures →
           </Link>
         </p>
       </section>

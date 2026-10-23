@@ -1219,6 +1219,8 @@ def build_pool_rows(
     europe_rows: pl.DataFrame | None = None,
     europe_meta: dict[str, Any] | None = None,
     current_clubs: pl.DataFrame | None = None,
+    team_standings: pl.DataFrame | None = None,
+    team_context_config: dict[str, Any] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Prepare compact per-league search rows, rates, percentiles and profiles."""
     if pool.height == 0:
@@ -1229,6 +1231,30 @@ def build_pool_rows(
             role_map[(int(row["player_id"]), str(row["league_id"]))] = row
     min_minutes = int((model.get("pool") or {}).get("min_minutes") or 450)
     low_minutes = int((model.get("pool") or {}).get("low_minutes") or 900)
+    team_settings = team_context_config or {}
+    team_threshold = float(team_settings.get("underperforming_ppg_percentile_max") or 40)
+    team_map: dict[tuple[int, int], dict[str, Any]] = {}
+    if team_standings is not None and team_standings.height:
+        teams_by_league: dict[int, list[dict[str, Any]]] = defaultdict(list)
+        for standing in team_standings.to_dicts():
+            if standing.get("ppg") is not None:
+                teams_by_league[int(standing.get("provider_league_id") or 0)].append(standing)
+        for provider_league_id, team_cohort in teams_by_league.items():
+            values = [float(item["ppg"]) for item in team_cohort]
+            for standing in team_cohort:
+                percentile = midrank_percentile(float(standing["ppg"]), values)
+                team_map[(provider_league_id, int(standing["team_id"]))] = {
+                    "team_rank": standing.get("rank"),
+                    "team_points": standing.get("points"),
+                    "team_played": standing.get("played"),
+                    "team_ppg": standing.get("ppg"),
+                    "team_count": len(team_cohort),
+                    "team_points_percentile": percentile,
+                    "team_underperforming": (
+                        percentile is not None and percentile <= team_threshold
+                    ),
+                    "team_context_status": "available" if percentile is not None else "unknown",
+                }
     rows: list[dict[str, Any]] = []
     for raw in pool.to_dicts():
         minutes = int(raw.get("minutes") or 0)
@@ -1323,6 +1349,17 @@ def build_pool_rows(
             adjusted = percentile
         row["adjusted_percentile"] = adjusted
         row["adjustment_basis"] = adjustment_basis
+        team = team_map.get((int(row.get("provider_league_id") or 0), int(row.get("team_id") or 0)))
+        if team is None:
+            row["team_context_status"] = "unknown"
+            row["team_lift"] = None
+        else:
+            row.update(team)
+            row["team_lift"] = (
+                round(float(adjusted) - float(team["team_points_percentile"]), 1)
+                if adjusted is not None and team.get("team_points_percentile") is not None
+                else None
+            )
         row["rose"] = build_rose(
             row["rates"],
             minutes=minutes,

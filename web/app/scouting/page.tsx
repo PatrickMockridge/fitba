@@ -3,12 +3,14 @@ import { ContractPage } from "@/components/ContractPage";
 import { ScoutingArchetypes } from "@/components/ScoutingArchetypes";
 import { ScoutingAttackers } from "@/components/ScoutingAttackers";
 import { ScoutingCoverage } from "@/components/ScoutingCoverage";
+import { ScoutingHubLenses } from "@/components/ScoutingHubLenses";
 import { ScoutingLayerZeroTable } from "@/components/ScoutingLayerZero";
 import { ScoutingLeagueIndex } from "@/components/ScoutingLeagueIndex";
 import { ScoutingSquadTable } from "@/components/ScoutingSquadTable";
+import { ScoutingTeamLens } from "@/components/ScoutingTeamLens";
 import { ScoutingWeaknessTable } from "@/components/ScoutingWeaknessTable";
 import { ScoutingWeightsCard } from "@/components/ScoutingWeights";
-import { getScouting } from "@/lib/data";
+import { getScouting, getScoutingSearch } from "@/lib/data";
 import { formatInteger, formatPercentValue } from "@/lib/format";
 
 export const metadata = {
@@ -44,6 +46,7 @@ export default function ScoutingPage() {
   const board = scouting.board;
   const coverage = scouting.coverage;
   const totals = coverage.totals;
+  const search = getScoutingSearch();
 
   return (
     <ContractPage surface="scouting">
@@ -129,14 +132,35 @@ export default function ScoutingPage() {
           within the league and role cohort. Missing features are removed and the remaining
           weights renormalised; a profile below the coverage floor is null, not zero.
         </p>
-        <ScoutingArchetypes
-          archetypes={scouting.archetypes}
-          priority={scouting.priority}
-        />
-        <ScoutingAttackers
-          attackers={scouting.attackers}
-          priority={scouting.priority}
-        />
+        {search ? (
+          <ScoutingHubLenses
+            archetypes={scouting.archetypes}
+            attackers={scouting.attackers}
+            teamLens={scouting.team_lens ?? null}
+            priority={scouting.priority}
+            searchMeta={{ ...search, players: [] }}
+          />
+        ) : (
+          <>
+            <ScoutingArchetypes
+              archetypes={scouting.archetypes}
+              priority={scouting.priority}
+            />
+            <ScoutingAttackers
+              attackers={scouting.attackers}
+              priority={scouting.priority}
+            />
+            {scouting.team_lens ? (
+              <ScoutingTeamLens
+                label={scouting.team_lens.label}
+                definition={scouting.team_lens.definition}
+                threshold={scouting.team_lens.threshold}
+                leaders={scouting.team_lens.leaders}
+                coverage={scouting.team_lens.coverage}
+              />
+            ) : null}
+          </>
+        )}
       </section>
 
       <section className="card" data-contract="scouting.weights">

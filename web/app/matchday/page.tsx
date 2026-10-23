@@ -429,7 +429,7 @@ export default function MatchdayPage() {
           <Link className="text-link" href="/sources/">Sources →</Link>
         </p>
         <p className="back-link">
-          <Link href="/matches/">Match record</Link>
+          <Link href="/matches/">Results and fixtures</Link>
           {" · "}
           <Link href="/fixtures/">All fixtures</Link>
           {" · "}

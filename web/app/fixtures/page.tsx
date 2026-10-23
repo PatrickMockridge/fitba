@@ -100,7 +100,7 @@ export default function FixturesPage() {
           Matchday dashboard →
         </Link>{" "}
         <Link className="text-link" href="/matches/">
-          Match record →
+          Results and fixtures →
         </Link>
       </section>
     </>

@@ -64,6 +64,7 @@ from fitba.ingest.scouting_europe import (
 from fitba.ingest.scouting_europe import (
     load_europe_meta,
 )
+from fitba.ingest.scouting_standings import ingest_standings as ingest_scouting_standings
 from fitba.ingest.squad import ingest_squad
 from fitba.ingest.transfer_audit import run_transfer_audit
 from fitba.ingest.transfers import ingest_transfer_history, ingest_transfers
@@ -772,6 +773,25 @@ def scouting_clubs(
     )
     for error in meta.get("errors") or []:
         console.print(f"  [red]{error}[/red]")
+
+
+@scouting_app.command("standings")
+def scouting_standings(
+    season: Annotated[str, typer.Option(help="current or a season like 2025-26")] = "current",
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+) -> None:
+    """Fetch league tables for the scouting team-context lens."""
+    label = current_season() if season == "current" else season
+    meta = ingest_scouting_standings(season=label, refresh=refresh)
+    totals = meta["totals"]
+    console.print(
+        f"scouting standings {meta['season']}: {totals['teams']} teams from "
+        f"{totals['with_standings']}/{totals['leagues']} leagues, "
+        f"{totals['requests']} requests"
+    )
+    for item in meta["leagues"]:
+        if item.get("status") != "ok":
+            console.print(f"  [yellow]{item.get('id')}[/yellow]: {item.get('status')}")
 
 
 @scouting_app.command("europe")

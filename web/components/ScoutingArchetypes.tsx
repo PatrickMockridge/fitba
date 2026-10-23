@@ -39,9 +39,10 @@ function featureList(features: Record<string, number>): string {
 export function leaderList(
   leaders: ScoutingLeader[],
   weights: ScoutingPriorityConfig,
+  emptyMessage = "No qualifying profile in the pool at the minutes threshold.",
 ) {
   if (!leaders.length) {
-    return <p className="muted">No qualifying profile in the pool at the minutes threshold.</p>;
+    return <p className="muted">{emptyMessage}</p>;
   }
   return (
     <ul className="plain-list">
@@ -56,7 +57,11 @@ export function leaderList(
             · {leader.league_name}
           </span>{" "}
           <span className="badge badge-neutral">
-            priority {formatDecimal(leader.scouting_priority ?? 0, 1)}
+            priority{" "}
+            {leader.scouting_priority === null ||
+            leader.scouting_priority === undefined
+              ? "—"
+              : formatDecimal(leader.scouting_priority, 1)}
           </span>{" "}
           {leader.bias !== undefined && leader.bias !== null ? (
             <span className="badge badge-neutral">
@@ -64,8 +69,14 @@ export function leaderList(
             </span>
           ) : null}{" "}
           <span className="muted">
-            adjusted {formatDecimal(leader.adjusted_score ?? 0, 1)} · raw{" "}
-            {formatDecimal(leader.raw_score ?? 0, 1)} · {formatInteger(leader.minutes)} mins
+            adjusted{" "}
+            {leader.adjusted_score === null || leader.adjusted_score === undefined
+              ? "—"
+              : formatDecimal(leader.adjusted_score, 1)}
+            {leader.raw_score !== null && leader.raw_score !== undefined
+              ? ` · raw ${formatDecimal(leader.raw_score, 1)}`
+              : ""}{" "}
+            · {formatInteger(leader.minutes)} mins
           </span>
           {leader.age !== null && leader.age <= weights.u23_max_age ? (
             <span className="badge badge-neutral"> U23</span>
@@ -88,13 +99,18 @@ export function leaderList(
 export function ScoutingArchetypes({
   archetypes,
   priority,
+  scenario = false,
 }: {
   archetypes: ScoutingArchetypeDefinition[];
   priority: ScoutingPriorityConfig;
+  scenario?: boolean;
 }) {
   return (
     <>
       <p className="fine-print" data-contract-indicator="basis">
+        {scenario
+          ? "Reader scenario: the active lenses select and order these players; they are not the published default leaders. "
+          : ""}
         Leaders are filtered for the profile and its coverage, then ordered by the profile score
         with the Aberdeen preferences applied: adjusted profile × U23 multiplier × European
         league-phase multiplier. U23 ≤{formatInteger(priority.u23_max_age)} ×
@@ -111,8 +127,14 @@ export function ScoutingArchetypes({
             <h3>{archetype.label}</h3>
             <p>{archetype.description}</p>
             <p className="fine-print">{featureList(archetype.features)}</p>
-            <p className="eyebrow">All-league priority leaders</p>
-            {leaderList(archetype.leaders, priority)}
+            <p className="eyebrow">
+              {scenario ? "Reader-scenario leaders" : "All-league priority leaders"}
+            </p>
+            {leaderList(
+              archetype.leaders,
+              priority,
+              scenario ? "No player meets these lenses." : undefined,
+            )}
             <Link className="text-link" href={`/scouting/search/#${archetype.id}`}>
               Open this profile in the full search →
             </Link>

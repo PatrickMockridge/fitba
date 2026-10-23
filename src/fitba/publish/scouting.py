@@ -31,11 +31,16 @@ from fitba.ingest.scouting_europe import (
     load_europe_appearances,
     load_europe_meta,
 )
+from fitba.ingest.scouting_standings import (
+    load_standings,
+    load_standings_meta,
+)
 from fitba.settings import (
     player_rose,
     scouting_archetypes,
     scouting_leagues,
     scouting_model,
+    scouting_team_context,
     scouting_teams,
     scouting_value,
 )
@@ -205,6 +210,15 @@ def _pool_player(
         **value_for_row(value_model, row),
         "cohort_basis": row.get("cohort_basis"),
         "cohort_n": row.get("cohort_n"),
+        "team_context_status": row.get("team_context_status") or "unknown",
+        "team_rank": row.get("team_rank"),
+        "team_points": row.get("team_points"),
+        "team_played": row.get("team_played"),
+        "team_ppg": row.get("team_ppg"),
+        "team_count": row.get("team_count"),
+        "team_points_percentile": row.get("team_points_percentile"),
+        "team_underperforming": row.get("team_underperforming"),
+        "team_lift": row.get("team_lift"),
         "rose": row.get("rose"),
         "flags": row.get("flags") or [],
         **{field: (row.get("rates") or {}).get(field) for field in RATE_FIELDS},
@@ -394,6 +408,15 @@ def _leader(row: dict[str, Any], *, resolve_team, archetype_id: str) -> dict[str
         "coverage": archetype.get("coverage"),
         "value_index": row.get("value_index"),
         "value_index_coverage": row.get("value_index_coverage"),
+        "team_context_status": row.get("team_context_status") or "unknown",
+        "team_rank": row.get("team_rank"),
+        "team_points": row.get("team_points"),
+        "team_played": row.get("team_played"),
+        "team_ppg": row.get("team_ppg"),
+        "team_count": row.get("team_count"),
+        "team_points_percentile": row.get("team_points_percentile"),
+        "team_underperforming": row.get("team_underperforming"),
+        "team_lift": row.get("team_lift"),
         "scouting_priority": row.get("scouting_priority"),
         "age_multiplier": row.get("age_multiplier"),
         "europe_multiplier": row.get("europe_multiplier"),
@@ -518,6 +541,37 @@ def _attackers(
             "threshold, not by the composite profile."
         ),
     }
+
+
+def _team_lens(
+    rows: list[dict[str, Any]],
+    *,
+    resolve_team,
+    config: dict[str, Any],
+) -> list[dict[str, Any]]:
+    threshold = float(config.get("underperforming_ppg_percentile_max") or 40)
+    min_lift = float(config.get("min_lift") or 0)
+    limit = int(config.get("lens_limit") or 12)
+    candidates = [
+        row
+        for row in rows
+        if row.get("team_context_status") == "available"
+        and row.get("team_lift") is not None
+        and float(row["team_lift"]) > min_lift
+        and row.get("team_points_percentile") is not None
+        and float(row["team_points_percentile"]) <= threshold
+    ]
+    candidates.sort(
+        key=lambda row: (
+            -float(row["team_lift"]),
+            -float(row.get("scouting_priority") or 0),
+            -int(row.get("minutes") or 0),
+        )
+    )
+    return [
+        _leader(row, resolve_team=resolve_team, archetype_id=row.get("profile_id") or "")
+        for row in candidates[:limit]
+    ]
 
 
 def _league_summary(
@@ -646,6 +700,20 @@ def _search_sort_key(row: dict[str, Any]) -> tuple[str, float, int, str]:
     return (str(row.get("l") or ""), -pct, -int(row.get("m") or 0), str(row.get("n") or ""))
 
 
+def _compact_search_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Drop nulls and empty collections; unknown stays absent, never zero."""
+    compact: dict[str, Any] = {}
+    for key, value in row.items():
+        if value is None:
+            continue
+        if isinstance(value, (list, dict)) and not value:
+            continue
+        if key == "em" and value == 0:
+            continue
+        compact[key] = value
+    return compact
+
+
 def build_scouting_bundle(
     *,
     season: str | None = None,
@@ -663,9 +731,14 @@ def build_scouting_bundle(
     role_rows = _load_parquet(PLAYER_ROLES_PATH)
     europe_rows = load_europe_appearances()
     europe_meta = load_europe_meta()
+    standings = load_standings()
+    standings_meta = load_standings_meta()
+    team_context_config = scouting_team_context()
     current_clubs = load_current_clubs()
     current_clubs_meta = load_current_clubs_meta()
-    priority_config = scouting_value().get("priority") or {}
+    value_config = scouting_value()
+    priority_config = value_config.get("priority") or {}
+    index_config = value_config.get("index") or {}
     meta = _load_json(POOL_META_PATH) or {}
     state = _load_json(ROLES_STATE_PATH) or {}
     meta_by_id = {str(item.get("id")): item for item in meta.get("leagues") or []}
@@ -685,6 +758,8 @@ def build_scouting_bundle(
         europe_rows=europe_rows,
         europe_meta=europe_meta,
         current_clubs=current_clubs,
+        team_standings=standings,
+        team_context_config=team_context_config,
     )
     all_rows = [row for rows in pools.values() for row in rows]
     premiership_rows = pools.get("sco:premiership", [])
@@ -732,6 +807,12 @@ def build_scouting_bundle(
         ]
         for definition in archetype_defs
     }
+
+    team_lens = _team_lens(
+        all_rows,
+        resolve_team=resolve_team,
+        config=team_context_config,
+    )
 
     league_list = []
     for league in scouting_leagues().get("pool") or []:
@@ -806,6 +887,13 @@ def build_scouting_bundle(
         "adjustment": adjustment,
         "europe": europe_meta,
         "current_clubs": current_clubs_meta,
+        "team_context": {
+            "standings": standings_meta,
+            "underperforming_ppg_percentile_max": team_context_config.get(
+                "underperforming_ppg_percentile_max"
+            ),
+            "min_lift": team_context_config.get("min_lift"),
+        },
         "known_gaps": known_gaps,
         "sources": [
             {
@@ -836,6 +924,16 @@ def build_scouting_bundle(
             for definition in archetype_defs
         ],
         "attackers": attackers,
+        "team_lens": {
+            "label": "Outperforming struggling teams",
+            "definition": (
+                "Team points-per-game percentile at or below the threshold; player "
+                "lift is the role-adjusted percentile minus the team points percentile."
+            ),
+            "threshold": team_context_config.get("underperforming_ppg_percentile_max"),
+            "leaders": team_lens,
+            "coverage": (standings_meta or {}).get("totals") or {},
+        },
         "value_model": value_model,
         "priority": priority_config,
         "europe_coverage": europe_meta,
@@ -844,6 +942,7 @@ def build_scouting_bundle(
             "totals": totals,
             "known_gaps": known_gaps,
             "sources": coverage["sources"],
+            "team_context": (standings_meta or {}).get("totals") or {},
         },
         "limitations": [
             "Provider ratings are relative to a league and role cohort; they are not a verdict.",
@@ -855,56 +954,92 @@ def build_scouting_bundle(
     }
     search_players: list[dict[str, Any]] = []
     flag_codes = {"low_minutes": "l", "role_unknown": "r", "no_rating": "n"}
+    goal_counts = {
+        (int(row["player_id"]), str(row.get("league_slug"))): (
+            row.get("goals"),
+            row.get("assists"),
+        )
+        for row in all_rows
+        if row.get("player_id") is not None
+    }
+    profile_order_list = list(archetype_labels)
+    profile_order = {key: index for index, key in enumerate(profile_order_list)}
     for document in pool_documents.values():
         league = document["league"]
         for player in document["players"]:
             profile = player.get("profile") or {}
+            player_id = player.get("player_id")
+            goals, assists = (
+                goal_counts.get((int(player_id), str(league.get("slug"))), (None, None))
+                if player_id is not None
+                else (None, None)
+            )
             search_players.append(
-                {
-                    "i": player.get("player_id"),
-                    "n": player.get("name"),
-                    "c": player.get("club"),
-                    "sc": player.get("stats_club"),
-                    "l": league.get("slug"),
-                    "na": player.get("nationality"),
-                    "rf": player.get("role_family"),
-                    "a": player.get("age"),
-                    "m": player.get("minutes"),
-                    "rt": player.get("rating"),
-                    "p": player.get("rating_percentile"),
-                    "ap": player.get("adjusted_percentile"),
-                    "vi": player.get("value_index"),
-                    "vc": player.get("value_index_coverage"),
-                    "em": player.get("european_league_phase_minutes"),
-                    "ea": player.get("european_league_phase_appearances"),
-                    "es": player.get("european_status"),
-                    "eu": [
-                        {
-                            "UEFA Champions League": "ucl",
-                            "UEFA Europa League": "uel",
-                            "UEFA Conference League": "uecl",
-                        }.get(str(name), str(name))
-                        for name in (player.get("european_league_phase_competitions") or [])
-                    ],
-                    "ab": player.get("adjustment_basis"),
-                    "ga": player.get("goals_assists_p90"),
-                    "dr": player.get("dribbles_success_p90"),
-                    "ps": player.get("passes_completed_p90"),
-                    "pa": player.get("pass_completion_pct"),
-                    "kp": player.get("key_passes_p90"),
-                    "tk": player.get("tackles_p90"),
-                    "it": player.get("interceptions_p90"),
-                    "dw": player.get("duel_win_pct"),
-                    "pr": profile.get("id"),
-                    "psc": profile.get("score"),
-                    "ar": {
-                        key: value.get("adjusted_score")
-                        for key, value in (player.get("archetypes") or {}).items()
-                    },
-                    "f": [
-                        flag_codes[flag] for flag in player.get("flags") or [] if flag in flag_codes
-                    ],
-                }
+                _compact_search_row(
+                    {
+                        "i": player.get("player_id"),
+                        "n": player.get("name"),
+                        "c": player.get("club"),
+                        "sc": player.get("stats_club"),
+                        "l": league.get("slug"),
+                        "na": player.get("nationality"),
+                        "rf": player.get("role_family"),
+                        "a": player.get("age"),
+                        "m": player.get("minutes"),
+                        "rt": player.get("rating"),
+                        "p": player.get("rating_percentile"),
+                        "ap": player.get("adjusted_percentile"),
+                        "vi": player.get("value_index"),
+                        "vc": player.get("value_index_coverage"),
+                        "cs": player.get("current_club_status"),
+                        "gl": goals,
+                        "ast": assists,
+                        "g90": player.get("goals_p90"),
+                        "sh90": player.get("shots_p90"),
+                        "cv": player.get("conversion_pct"),
+                        "em": player.get("european_league_phase_minutes"),
+                        "es": player.get("european_status"),
+                        "eu": [
+                            {
+                                "UEFA Champions League": "ucl",
+                                "UEFA Europa League": "uel",
+                                "UEFA Conference League": "uecl",
+                            }.get(str(name), str(name))
+                            for name in (player.get("european_league_phase_competitions") or [])
+                        ],
+                        "ga": player.get("goals_assists_p90"),
+                        "dr": player.get("dribbles_success_p90"),
+                        "ps": player.get("passes_completed_p90"),
+                        "pa": player.get("pass_completion_pct"),
+                        "kp": player.get("key_passes_p90"),
+                        "tk": player.get("tackles_p90"),
+                        "it": player.get("interceptions_p90"),
+                        "dw": player.get("duel_win_pct"),
+                        "tr": player.get("team_rank"),
+                        "tpts": player.get("team_points"),
+                        "tpc": player.get("team_points_percentile"),
+                        "tl": player.get("team_lift"),
+                        "tc": player.get("team_count"),
+                        "tu": player.get("team_underperforming"),
+                        "pr": profile.get("id"),
+                        "psc": profile.get("score"),
+                        "arp": [
+                            [
+                                profile_order[key],
+                                value.get("adjusted_score"),
+                                value.get("score"),
+                                value.get("coverage"),
+                            ]
+                            for key, value in (player.get("archetypes") or {}).items()
+                            if key in profile_order
+                        ],
+                        "f": [
+                            flag_codes[flag]
+                            for flag in player.get("flags") or []
+                            if flag in flag_codes
+                        ],
+                    }
+                )
             )
     search_players.sort(key=_search_sort_key)
     search_document = {
@@ -928,7 +1063,23 @@ def build_scouting_bundle(
         ],
         "role_labels": family_labels,
         "profile_labels": archetype_labels,
+        "profile_order": profile_order_list,
         "priority": priority_config,
+        "archetype_min_coverage": float(
+            (model.get("archetypes") or {}).get("min_weight_coverage") or 0.7
+        ),
+        "value_model": {
+            "weights": index_config.get("weights") or {},
+            "min_weight_coverage": index_config.get("min_weight_coverage"),
+            "minutes_full": index_config.get("minutes_full"),
+            "age_curve": index_config.get("age_curve") or [],
+        },
+        "team_context": {
+            "underperforming_ppg_percentile_max": team_context_config.get(
+                "underperforming_ppg_percentile_max"
+            ),
+            "min_lift": team_context_config.get("min_lift"),
+        },
         "europe_coverage": europe_meta,
         "players": search_players,
         "limitations": [

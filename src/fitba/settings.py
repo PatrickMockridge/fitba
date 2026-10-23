@@ -77,6 +77,11 @@ def scouting_value() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def scouting_team_context() -> dict[str, Any]:
+    return load_yaml(CONFIG_DIR / "scouting" / "team-context.yaml")
+
+
+@lru_cache(maxsize=1)
 def player_rose() -> dict[str, Any]:
     return load_yaml(CONFIG_DIR / "player-rose.yaml")
 

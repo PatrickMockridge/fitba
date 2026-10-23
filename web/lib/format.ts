@@ -32,6 +32,22 @@ export function formatDecimal(value: number, digits = 2): string {
   return value.toFixed(digits);
 }
 
+/**
+ * Half-even rounding for reader-scenario values. Published values are rounded
+ * in the pipeline; this mirrors the registry's `half_even` mode for values
+ * computed in the browser. Never use Math.round/toFixed outside this module.
+ */
+export function roundHalfEven(value: number, digits = 0): number {
+  const factor = 10 ** digits;
+  const scaled = value * factor;
+  const floor = Math.floor(scaled);
+  const difference = scaled - floor;
+  if (Math.abs(difference - 0.5) < 1e-9) {
+    return (floor % 2 === 0 ? floor : floor + 1) / factor;
+  }
+  return Math.round(scaled) / factor;
+}
+
 export function formatSigned(value: number, digits = 2): string {
   const text = value.toFixed(digits);
   return value > 0 ? `+${text}` : text;
