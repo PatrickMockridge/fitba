@@ -230,7 +230,12 @@ Must remain visible:
 - The squad summary: size, loans out, role evidence, stats unavailable.
 - The roster table: Player, Role, Age, Status, Starts, Sub, Mins, Conc, CS, G,
   A, OG, Rating, Stats, with loan status and availability labels.
-- The role-mix card and the "what is measured and what is missing" card.
+- The role-mix card: squad profile tiles (average age, registered players,
+  role evidence, starts with a role) and absolute-count bars for primary
+  position group and primary role family.
+- The "what is measured and what is missing" card as a compact data-class
+  table: Current-season output, Position and role, Minutes, Loan status, and
+  Context and links.
 - The coverage note and the source/method link.
 
 May be disclosed: the role-inference dialog and its career heat map, and long

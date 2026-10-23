@@ -4,6 +4,7 @@ import { ContractPage } from "@/components/ContractPage";
 import { SquadBoard } from "@/components/SquadBoard";
 import { StatTile } from "@/components/StatTile";
 import { getSquad } from "@/lib/data";
+import { FAMILY_LABELS } from "@/lib/roles";
 
 export const metadata = {
   alternates: { canonical: "/squad/" }, title: "Current squad · fitba" };
@@ -19,6 +20,12 @@ const GROUP_LABELS: Record<string, string> = {
 function groupBuckets(buckets: Record<string, number>): Record<string, number> {
   return Object.fromEntries(
     Object.entries(buckets).map(([key, value]) => [GROUP_LABELS[key] ?? key, value]),
+  );
+}
+
+function familyBuckets(buckets: Record<string, number>): Record<string, number> {
+  return Object.fromEntries(
+    Object.entries(buckets).map(([key, value]) => [FAMILY_LABELS[key] ?? key, value]),
   );
 }
 
@@ -107,78 +114,112 @@ export default function SquadPage() {
       <div className="grid two-col">
         <section className="card" data-contract="squad.role-mix">
           <p className="eyebrow">Shape</p>
-          <h2>Role mix</h2>
+          <h2>Role mix and squad profile</h2>
+          <div className="stat-row four">
+            <StatTile
+              label="Average age"
+              value={squad.summary.average_age ?? "—"}
+              note="all players"
+            />
+            <StatTile
+              label="Registered"
+              value={squad.summary.squad_size}
+              note={`${squad.summary.loans_out} loaned out`}
+            />
+            <StatTile
+              label="Role evidence (all)"
+              value={squad.summary.roles_observed + squad.summary.roles_partial}
+              note={`${squad.summary.roles_unknown} unknown, incl. ${squad.summary.loans_out} loanees out`}
+            />
+            <StatTile
+              label="Starts with a role"
+              value={`${squad.role_meta.starts_with_role}/${squad.role_meta.starts_total}`}
+              note={`${squad.role_meta.role_coverage} coverage`}
+            />
+          </div>
           <BucketBars
             title="Registered squad by primary position group"
             buckets={groupBuckets(squad.summary.by_primary_group)}
+            absolute
+          />
+          <BucketBars
+            title="Registered squad by primary role family"
+            buckets={familyBuckets(squad.summary.by_role_family_squad)}
+            absolute
           />
           <p className="fine-print">
-            Primary group only; the filter above uses the full eligibility set,
-            so a full-back or wing-back can appear under both defenders and
-            midfielders. Registered squad only; the {squad.summary.loans_out}{" "}
-            loanees out are excluded because loan-club lineups are not ingested.
-            Positions come from the starting-XI formation grid. A player with no
-            role evidence is shown separately rather than forced into a generic
-            defender or midfielder bucket. The two early League Cup matches had
-            no formation grid and are reported in the coverage note, not guessed.
+            Primary group and role family come from the starting-XI grid. The
+            filter above uses every eligible slot, so a full-back counts as both
+            a defender and a midfielder. Registered squad only; the{" "}
+            {squad.summary.loans_out} loanees out are excluded because loan-club
+            lineups are not ingested. No role evidence is shown as unknown, not
+            forced into a bucket.
           </p>
         </section>
         <section className="card" data-contract="squad.how-to">
           <p className="eyebrow">How to read the page</p>
           <h2>What is measured and what is missing</h2>
-          <ul className="plain-list">
-            <li>
-              <strong>Available:</strong> the licensed feed has current-season
-              rows for the player at Aberdeen or at the loan club.
-            </li>
-            <li>
-              <strong>Unavailable:</strong> no current-season rows for the
-              relevant club. The page says so rather than showing zeroes.
-            </li>
-            <li>
-              <strong>On loan:</strong> the tag comes from the confirmed
-              register. Loan-club stats are used when the feed covers that club;
-              otherwise the loan-club section is explicitly unavailable.
-            </li>
-            <li>
-              <strong>Position:</strong> the starting-XI formation grid gives
-              FM-style position slots, not one label. A full-back / wing-back is
-              one slot and counts as both a defender and a midfielder; a DM is a
-              midfielder; a winger is an attacker. The Group and Side filters
-              use every eligible slot. A stretch slot is a low-evidence
-              emergency option, not a new primary. No role is inferred from
-              foot, shirt number or a substitute&apos;s entry.
-            </li>
-            <li>
-              <strong>Starts and substitutions:</strong> starts, substitute
-              appearances and on-pitch minutes are reconstructed from lineups and
-              substitution events, so the split is visible. Provider per-match
-              time fields are not used as the headline.
-            </li>
-            <li>
-              <strong>Position stats:</strong> for goalkeepers and defensive
-              roles, goals conceded while on the pitch, clean sheets and own goals
-              come before goals and assists. Midfielders lead with goals, assists
-              and key passes; wide players and forwards lead with goals, assists
-              and shots. Position context is reconstructed from fixture lineups
-              and events.
-            </li>
-            <li>
-              <strong>Foot:</strong> preferred foot is the one field the team
-              sheet does not contain. It is on the player profile only, with its
-              source or an explicit unknown; it is never inferred from role or
-              side.
-            </li>
-            <li>
-              <strong>Cards:</strong> the yellow and red card marks sit in the
-              column headings; the row cells are counts. Red includes second
-              yellows.
-            </li>
-            <li>
-              <strong>Links:</strong> current players link to their profile
-              everywhere on the site. Former players and rumour targets do not.
-            </li>
-          </ul>
+          <div className="table-wrap">
+            <table className="league-table compact">
+              <caption className="fine-print">
+                Data classes on this page, what they show and how missing values
+                are labelled.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Class</th>
+                  <th scope="col">What is shown</th>
+                  <th scope="col">Missing state</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="strong">Current-season output</td>
+                  <td>Provider rows for Aberdeen or the loan club.</td>
+                  <td>Unavailable, never zero.</td>
+                </tr>
+                <tr>
+                  <td className="strong">Position and role</td>
+                  <td>
+                    Starting-XI grid, multi-position eligibility, and
+                    primary/secondary/stretch slots.
+                  </td>
+                  <td>
+                    Unknown when no grid or formation; never inferred from foot,
+                    shirt number or the bench.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="strong">Minutes</td>
+                  <td>
+                    Starts, substitute appearances and on-pitch minutes from
+                    lineups and substitution events.
+                  </td>
+                  <td>
+                    Provider per-match time is not used as the headline.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="strong">Loan status</td>
+                  <td>Loan tag from the confirmed transfer register.</td>
+                  <td>
+                    Loan-club stats only where the feed covers that club.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="strong">Context and links</td>
+                  <td>
+                    Defensive position stats, provider cards, preferred foot on
+                    the player profile, and profile links for current players.
+                  </td>
+                  <td>
+                    Foot is sourced or explicitly unknown; former players and
+                    rumour targets stay plain text.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <Link
             className="text-link"
             href="/methodology/"
