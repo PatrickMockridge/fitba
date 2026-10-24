@@ -35,7 +35,8 @@ Options:
 
 ## Ordered steps
 
-Required steps are `ingest.results`, `warehouse.build`, `validate`, `publish`,
+Required steps are `ingest.results`, `ingest.api_results` (when the provider key
+is present), `warehouse.build`, `validate`, `publish`,
 `guard.results`, `guard.consistency`, `guard.freshness` and `guard.metrics`. A
 required failure stops the run before publish and leaves the previous published
 directory in place.

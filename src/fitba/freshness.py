@@ -39,6 +39,12 @@ SOURCE_SPECS: list[dict[str, Any]] = [
         "required": True,
     },
     {
+        "id": "api_results",
+        "paths": [NORMALIZED_DIR / "api_results" / "meta.json"],
+        "ttl_hours": 1,
+        "required": False,
+    },
+    {
         "id": "api_football",
         "paths": [CACHE_DIR / "api_football" / "**" / "*.json"],
         "ttl_hours": 24,

@@ -20,6 +20,7 @@ GENERATED = ROOT / "web" / "data" / "generated"
 RUMOURS = GENERATED / "rumours" / "aberdeen.json"
 PROFILE = GENERATED / "rumours" / "profile.json"
 FORUM = GENERATED / "forum" / "afc_chat.json"
+SCOUTING_POOL = GENERATED / "scouting" / "pool"
 TRANSFERS = GENERATED / "transfers" / "aberdeen.json"
 FORMER = GENERATED / "former-players" / "aberdeen.json"
 SQUAD = GENERATED / "squad" / "aberdeen.json"
@@ -34,6 +35,14 @@ VALID_AFFILIATIONS = {
     "former_player",
     "external_target",
     "unknown",
+}
+VALID_LOOKUPS = {
+    "local",
+    "former_player",
+    "scouted_player",
+    "api_match",
+    "api_not_found",
+    "ambiguous",
 }
 FORBIDDEN_KEYS = {
     "text",
@@ -73,6 +82,13 @@ def main() -> int:
     transfers = json.loads(TRANSFERS.read_text(encoding="utf-8"))
     former = json.loads(FORMER.read_text(encoding="utf-8")) if FORMER.exists() else {}
     squad = json.loads(SQUAD.read_text(encoding="utf-8"))
+    scouted_keys: set[str] = set()
+    if SCOUTING_POOL.exists():
+        for path in SCOUTING_POOL.glob("*.json"):
+            document = json.loads(path.read_text(encoding="utf-8"))
+            for row in document.get("players", []):
+                if row.get("player_id") is not None:
+                    scouted_keys.add(f"api:player:{row['player_id']}")
     transfer_ids = {row.get("transfer_id") for row in transfers.get("transfers", [])}
     former_keys = {str(row.get("player_key")) for row in former.get("players", [])}
     former_hrefs = {str(row.get("href")) for row in former.get("players", []) if row.get("href")}
@@ -163,6 +179,20 @@ def main() -> int:
         if affiliation not in VALID_AFFILIATIONS:
             errors.append(
                 f"forum signal {signal.get('player_name')}: invalid affiliation {affiliation!r}"
+            )
+        lookup = signal.get("lookup_status")
+        if lookup not in VALID_LOOKUPS:
+            errors.append(
+                f"forum signal {signal.get('player_name')}: invalid lookup status {lookup!r}"
+            )
+        key = str(signal.get("player_key") or "")
+        if lookup == "former_player" and key not in former_keys:
+            errors.append(
+                f"forum signal {signal.get('player_name')}: former lookup does not resolve"
+            )
+        if lookup == "scouted_player" and key not in scouted_keys:
+            errors.append(
+                f"forum signal {signal.get('player_name')}: scouted lookup does not resolve"
             )
         if signal.get("former_href") and signal["former_href"] not in former_hrefs:
             errors.append(f"forum signal {signal.get('player_name')}: unknown former_href")

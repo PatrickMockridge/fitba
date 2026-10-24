@@ -384,6 +384,16 @@ def players_search(
     return request("/players", ttl_hours=168, force=force, **params)
 
 
+def player_profiles_search(search: str, *, force: bool = False) -> list[dict[str, Any]]:
+    """Search the global player catalogue by name.
+
+    Unlike ``players_search``, ``/players/profiles`` does not need a league or
+    team. It returns identity only (no club), so callers that need a club make
+    a second transfer-history request for the chosen player.
+    """
+    return request("/players/profiles", ttl_hours=168, force=force, search=search)
+
+
 def player(
     player_id: int,
     season: int = CURRENT_SEASON,

@@ -78,7 +78,7 @@ No scraping fallback.
 
 | Source | Coverage | Access | Terms | Status |
 |---|---|---|---|---|
-| football-data.co.uk | All four SPFL tiers (`SC0`–`SC3`) | Free CSV | Private/non-commercial research; site cautions against automated/AI data products | **Current league results and team match stats**; fallback/cross-check if the API-Football gate passes |
+| football-data.co.uk | All four SPFL tiers (`SC0`–`SC3`) | Free CSV | Private/non-commercial research; site cautions against automated/AI data products | **Current league results and team match stats**; API-Football fills a current result football-data has not published yet |
 | SPFL club feed | Aberdeen's league fixtures/results | Server-rendered HTML, 1 request/run, cached 1h | SPFL copyright; used for the club page | **Current Aberdeen club fixtures and the official result overlay**; API-Football is a cross-check |
 | AFC news listing | Club news, interviews, galleries, women's team, partners | Server-rendered HTML, 1 request/run, cached 1h | Official club content; listing metadata only | **Keep** for headlines, categories, dates and links |
 | AFC men's team roster | Canonical current roster, position sections, shirt numbers and On loan section | Server-rendered HTML, one listed page/run, cached 12h | Official club content; names, numbers, positions and links only | **Canonical roster inclusion/status source**; API-Football remains the statistics and identity spine |

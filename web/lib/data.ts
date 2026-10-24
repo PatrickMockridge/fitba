@@ -895,6 +895,8 @@ export interface ForumSignal {
   credibility: string;
   affiliation?: string;
   affiliation_source?: string;
+  lookup_status?: string | null;
+  lookup_source?: string | null;
   former_href?: string | null;
   current_club?: string | null;
   current_league?: string | null;

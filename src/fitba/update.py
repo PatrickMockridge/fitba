@@ -100,6 +100,15 @@ def _run_ingest_results(ctx: UpdateContext) -> dict[str, Any]:
     return {"rows": report.rows, "artifacts": report.written}
 
 
+def _run_ingest_api_results(ctx: UpdateContext) -> dict[str, Any]:
+    from fitba.ingest.api_results import ingest_api_results
+
+    result = ingest_api_results(ctx.season, force=ctx.force_results)
+    if result.status != "ok":
+        raise RuntimeError(f"API league results failed: {result.errors}")
+    return {"rows": result.rows, "artifacts": [str(result.path)] if result.path else []}
+
+
 def _run_ingest_cups(ctx: UpdateContext) -> dict[str, Any]:
     from fitba.ingest.cups import ingest_cups
 
@@ -384,6 +393,15 @@ def _run_guard_metrics(ctx: UpdateContext) -> dict[str, Any]:
 
 STEP_SPECS: list[StepSpec] = [
     StepSpec("ingest.results", _run_ingest_results, required=True, network=True, ttl_hours=6),
+    StepSpec(
+        "ingest.api_results",
+        _run_ingest_api_results,
+        required=True,
+        network=True,
+        api_only=True,
+        ttl_hours=1,
+        affects="complete current-season league results for every SPFL tier",
+    ),
     StepSpec("ingest.cups", _run_ingest_cups, network=True, api_only=True, ttl_hours=1),
     StepSpec(
         "ingest.fixtures",
@@ -444,6 +462,7 @@ STEP_IDS = [spec.id for spec in STEP_SPECS]
 
 CORE_MATCHDAY_IDS = {
     "ingest.results",
+    "ingest.api_results",
     "ingest.fixtures",
     "ingest.news",
     "ingest.availability",

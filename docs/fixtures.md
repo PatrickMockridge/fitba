@@ -55,8 +55,14 @@ league fixture. The official score wins; a disagreement is recorded in
 `audit/results.json` and reported by `fitba validate --strict` for the current
 season. The appended row is a complete match row with
 `phase = "regular"`, `status = "played"` and `result_source = "spfl"`; the
-football-data identity and statistics are kept when they arrive later. The
-matcher never appends another club's fixture or a cup tie.
+football-data identity and statistics are kept when they arrive later.
+
+The same canonical layer fills missing results for every other club from the
+API-Football current-season fixture snapshot. That fallback never overrides an
+existing football-data score: it fills a null or absent row, records a provider
+disagreement, and labels the result `result_source = "api_football"`. Without
+it a league table could show ten clubs with nine matches after a matchweek. It
+never appends a cup tie.
 
 ## Page order
 

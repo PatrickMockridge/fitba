@@ -15,6 +15,7 @@ from fitba.normalize.results import (
     ensure_match_columns,
     normalise_phase,
     overlay_club_results,
+    overlay_league_results,
 )
 from fitba.normalize.teams import TeamRegistry, UnknownTeamError
 from fitba.settings import NORMALIZED_DIR, REPORTS_DIR, ensure_dirs
@@ -233,6 +234,11 @@ def load_matches(
     if seasons:
         frame = frame.filter(pl.col("season").is_in(seasons))
     frame = overlay_club_results(
+        frame,
+        seasons=seasons,
+        report=report,
+    )
+    frame = overlay_league_results(
         frame,
         seasons=seasons,
         report=report,

@@ -293,8 +293,10 @@ data/, .cache/     gitignored
 11. One canonical result frame (`normalize/results.py` via `load_matches`)
     feeds tables, form, history, coverage, analysis and the fixture registry.
     An official overlay row is a complete match row; a missing `phase` is never
-    allowed to hide a result. A finished official fixture absent from the
-    canonical frame or the league table blocks publish.
+    allowed to hide a result. The official SPFL result wins for Aberdeen and
+    API-Football fills a missing current result for every other club, so a
+    league table or form string cannot be a partial matchweek. A finished
+    provider or official fixture absent from the canonical frame blocks publish.
 12. Every published document is on the current dataset epoch or is explicitly
     stale with a reason. The manifest lists every file and checksum;
     `scripts/check_freshness.py --strict` enforces both.

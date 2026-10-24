@@ -114,6 +114,32 @@ Priority: press → confirmed rumour → current squad → recent confirmed tran
 club output → fan only. The payload exposes the individual cross-reference flags
 as well, so the reader can see the full set.
 
+## Identity lookup
+
+A capitalised name in a sampled post is resolved in this order:
+
+1. the current squad, curated register and transfer register, as before;
+2. the **former-player register**;
+3. the **published scouted pool** (players at or above the scouting
+   `pool.min_minutes` threshold, so the name has a public scouting profile);
+4. if it is in none of those, one **API-Football player-profile search**
+   (`/players/profiles?search=`) for the surname, accepted only when the
+   surname and first name (or initial) leave exactly one identity.
+
+The lookup label is published on each signal:
+
+| Lookup | Meaning |
+|---|---|
+| `local` | A current squad or register identity. |
+| `former_player` | Resolved in the former-player register. |
+| `scouted_player` | Resolved in the published scouted pool. |
+| `api_match` | Found only through the provider profile search. |
+| `api_not_found` / `ambiguous` | Checked but not published as a resolved player; ambiguous names are never guessed. |
+
+The lookup result is identity and current-club context, not a probability or a
+transfer claim. A name that resolves in the scouted pool is still an external
+name, not automatically a target.
+
 ## Affiliation
 
 Every curated row and fan-signal name carries a canonical affiliation:

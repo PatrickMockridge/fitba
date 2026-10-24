@@ -149,6 +149,13 @@ pretend the lens was applied.
 The reader scenario is computed in the browser from this published payload. It
 does not write to the payload, the registry or the audit.
 
+The published pool is also a local identity source for the rumour mill. A forum
+name is matched against former players and this pool before any provider lookup;
+the pool uses the configured `pool.min_minutes` threshold so every scouted
+identity named on `/rumours/` has a public scouting profile. A name found in
+neither source is looked up once through API-Football's profile search; an
+ambiguous result is not published as resolved.
+
 ## Player roses
 
 Every dedicated player profile carries two Nightingale rose figures:

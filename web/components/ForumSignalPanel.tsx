@@ -33,6 +33,13 @@ const AFFILIATION_CLASS: Record<string, string> = {
   unknown: "badge-neutral",
 };
 
+const LOOKUP_LABEL: Record<string, string> = {
+  former_player: "Former register",
+  scouted_player: "Scouted pool",
+  api_match: "API lookup",
+  local: "Local",
+};
+
 const CREDIBILITY_CLASS: Record<string, string> = {
   fan_only: "badge-neutral",
   club_player: "badge-neutral",
@@ -114,6 +121,15 @@ function SignalRow({ signal }: { signal: ForumSignal }) {
           {AFFILIATION_LABEL[signal.affiliation ?? "unknown"] ?? "Unknown"}
         </span>
         {signal.at_rival ? <span className="badge badge-warn"> rival</span> : null}
+      </td>
+      <td>
+        {signal.lookup_status ? (
+          <span className="badge badge-neutral">
+            {LOOKUP_LABEL[signal.lookup_status] ?? signal.lookup_status}
+          </span>
+        ) : (
+          "—"
+        )}
       </td>
       <td>
         <span className={`badge ${CREDIBILITY_CLASS[signal.credibility] ?? "badge-neutral"}`}>
@@ -208,6 +224,7 @@ export function ForumSignalPanel({
                 <th className="num">Mentions</th>
                 <th className="num">Topics</th>
                 <th>Affiliation</th>
+                <th>Lookup</th>
                 <th>Cross-reference</th>
               </tr>
             </thead>
@@ -230,6 +247,13 @@ export function ForumSignalPanel({
         curated press rumour;{" "}
         <strong>Club output cross-ref</strong> — surname appears in AFC news;{" "}
         <strong>Confirmed rumour</strong> — the curated rumour is confirmed.
+      </p>
+      <p className="fine-print">
+        Lookup: <strong>Former register</strong> — the name resolves to a
+        confirmed former Aberdeen player; <strong>Scouted pool</strong> — the
+        name is in the scouted player universe; <strong>API lookup</strong> —
+        the name was found in neither, so it was resolved once through the
+        provider&apos;s player-profile search. An ambiguous name is not guessed.
       </p>
 
       <div className="grid two-col">

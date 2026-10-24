@@ -6,8 +6,14 @@ import polars as pl
 import pytest
 
 from fitba.analytics.tables import build_tables
+from fitba.ingest import api_results
 from fitba.normalize import results
 from fitba.validate.checks import validate_results
+
+
+@pytest.fixture(autouse=True)
+def _no_api_snapshot(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(api_results, "load_api_results", lambda _season: pl.DataFrame())
 
 
 def _matches() -> pl.DataFrame:

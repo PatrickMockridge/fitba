@@ -301,6 +301,53 @@ def validate_results(
         )
     )
 
+    try:
+        from fitba.ingest.api_results import load_api_results
+
+        api_rows = load_api_results(season)
+    except Exception:  # noqa: BLE001 - the provider snapshot is optional locally
+        api_rows = pl.DataFrame()
+    api_missing: list[str] = []
+    api_mismatched: list[str] = []
+    if api_rows.height:
+        for item in api_rows.to_dicts():
+            row = by_key.get(canonical_key(item))
+            if row is None:
+                api_missing.append(
+                    f"{item.get('date')} {item.get('home_team_id')} v "
+                    f"{item.get('away_team_id')}"
+                )
+                continue
+            if row.get("home_goals") is None or row.get("away_goals") is None:
+                api_missing.append(f"{item.get('date')}: canonical score missing")
+                continue
+            if (int(row["home_goals"]), int(row["away_goals"])) != (
+                int(item["home_goals"]),
+                int(item["away_goals"]),
+            ):
+                api_mismatched.append(
+                    f"{item.get('date')}: canonical {row['home_goals']}-{row['away_goals']} "
+                    f"!= API {item['home_goals']}-{item['away_goals']}"
+                )
+    checks.append(
+        _result(
+            "results.api_represented",
+            not api_missing,
+            f"{len(api_missing)} provider result(s) missing from canonical results: "
+            f"{api_missing[:5]}",
+            value=api_missing,
+        )
+    )
+    checks.append(
+        _result(
+            "results.api_score",
+            not api_mismatched,
+            f"{len(api_mismatched)} provider score mismatch(es): {api_mismatched[:5]}",
+            warning=True,
+            value=api_mismatched,
+        )
+    )
+
     playable = playable_matches(subset)
     for competition_id in sorted(official_competition_ids()):
         table = tables.get(competition_id)

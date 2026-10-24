@@ -19,10 +19,13 @@ layers:
     gate: config/league_migration.yaml
     surfaces: [/sources/, /methodology/, /scotland/]
     note: >
-      Football-Data is primary until the current-season API-Football coverage
-      gate passes for all four leagues. API-Football does not currently supply
-      all-tier team match stats, so a result-only migration would split the
-      source silently. The gate checks results and required stats.
+      Football-Data is primary for results and team match stats. API-Football
+      is the fallback for a current-season result football-data has not
+      published yet; it fills every SPFL tier, while the official SPFL club
+      feed still wins for Aberdeen. The provider result is never used to
+      override an existing football-data score: a disagreement is recorded.
+      API-Football does not currently supply all-tier team match stats, so the
+      result fallback is kept separate from the stats source.
 
   - id: league_results_history
     label: League results, historical

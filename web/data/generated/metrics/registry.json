@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:b002cbcdf4b0ef4d44eb6515935d69f5e0568cdd63b652292b09d2491ddeb2d7",
-  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "checksum": "sha256:a8142a51d8ab0f0d5425513646c84b21926bae82d1c971b36b3e49f66376041c",
+  "dataset_id": "2026-10-24T23:04:18+00:00-db10675",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-24T22:29:20+00:00",
+  "generated_at": "2026-10-24T23:04:18+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -5012,7 +5012,7 @@
       "kind": "matrix",
       "label": "Competition policy",
       "owner": "patrickmockridge",
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-10-25",
       "unit": "mixed",
       "used_by": [
         "table.record",
@@ -5021,6 +5021,7 @@
       ],
       "value": [
         {
+          "api_football_id": 179,
           "code": "SC0",
           "cutoffs": [
             {
@@ -5058,6 +5059,7 @@
           "tier": 1
         },
         {
+          "api_football_id": 180,
           "code": "SC1",
           "cutoffs": [
             {
@@ -5094,6 +5096,7 @@
           "tier": 2
         },
         {
+          "api_football_id": 183,
           "code": "SC2",
           "cutoffs": [
             {
@@ -5130,6 +5133,7 @@
           "tier": 3
         },
         {
+          "api_football_id": 184,
           "code": "SC3",
           "cutoffs": [
             {
@@ -5161,7 +5165,7 @@
         }
       ],
       "verification": "config_match",
-      "version": 1
+      "version": 2
     },
     {
       "config_keys": [],
@@ -5821,16 +5825,17 @@
       "version": 1
     }
   ],
-  "published_at": "2026-10-24T22:29:20+00:00",
-  "registry_version": "3.8.0",
+  "published_at": "2026-10-24T23:04:18+00:00",
+  "registry_version": "3.9.0",
   "reviewed": "2026-10-24",
   "schema_version": 1,
-  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "served_by_update_id": "2026-10-24T23:04:12+00:00-2456601",
   "source_snapshots": {
-    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "api_football": "2026-10-24T23:04:15.082536+00:00",
+    "api_results": "2026-10-24T23:04:15+00:00",
     "availability": "2026-10-24T22:15:22+00:00",
     "career": "2026-10-24T22:15:22+00:00",
-    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "football_data_uk": "2026-10-24T23:04:13+00:00",
     "former_players": "2026-10-24T22:15:20+00:00",
     "history_backfill": "2026-10-24T22:15:19+00:00",
     "matchday_snapshot": "2026-10-24T20:01:12+00:00",
@@ -5866,5 +5871,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-10-24T22:29:17+00:00-2281097"
+  "update_id": "2026-10-24T23:04:12+00:00-2456601"
 }

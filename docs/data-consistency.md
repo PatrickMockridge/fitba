@@ -54,6 +54,7 @@ also shows another scope.
 | Former-player universe, tenure and post-career record | `analytics/former_players.py` |
 | Sell-on event and receipt | `analytics/former_players.py`, clauses in the transfer register |
 | Rumour/forum affiliation | `analytics/affiliation.py` |
+| Forum name identity lookup | `ingest/forum.py` (former register → scouted pool → provider profile search) |
 
 The display layer reads the published value. It does not sum, re-filter,
 re-rank or re-round a published fact. The only permitted client calculation is

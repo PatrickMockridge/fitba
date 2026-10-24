@@ -2257,13 +2257,22 @@ def publish(
                 ),
                 "expected_matches": competition["matches_per_season"],
                 "coverage": "match",
-                "results_source": (
-                    matches.filter(pl.col("competition_id") == competition["id"])
-                    .get_column("source_id")
-                    .unique()
-                    .to_list()
-                    or [None]
-                )[0],
+                "results_source": "+".join(
+                    sorted(
+                        {
+                            str(value)
+                            for value in matches.filter(
+                                pl.col("competition_id") == competition["id"]
+                            )
+                            .get_column("result_source")
+                            .drop_nulls()
+                            .unique()
+                            .to_list()
+                            if value
+                        }
+                    )
+                )
+                or None,
                 "team_stats_source": (
                     matches.filter(
                         (pl.col("competition_id") == competition["id"])
@@ -2478,13 +2487,21 @@ def publish(
         "schema_version": "1.0.0",
         "generated_at": generated_at,
         "season": target_season,
-        "status": "pass" if not overlay_report.conflicts else "warning",
+        "status": (
+            "pass"
+            if not overlay_report.conflicts and not overlay_report.api_conflicts
+            else "warning"
+        ),
         "source_precedence": overlay_report.precedence,
         "official_fixtures": overlay_report.official_fixtures,
         "canonical_fixtures": target_playable.height,
         "matched": overlay_report.matched,
         "filled": overlay_report.filled,
         "appended": overlay_report.appended,
+        "api_matched": overlay_report.api_matched,
+        "api_filled": overlay_report.api_filled,
+        "api_appended": overlay_report.api_appended,
+        "api_conflicts": overlay_report.api_conflicts,
         "duplicates_merged": overlay_report.duplicates_merged,
         "table_played": table_played,
         "table_matches": table_played // 2,

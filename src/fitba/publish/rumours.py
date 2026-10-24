@@ -531,18 +531,22 @@ def forum_payload(
                 "credibility": row.get("credibility"),
                 "affiliation": row.get("affiliation") or "unknown",
                 "affiliation_source": row.get("affiliation_source") or "none",
+                "lookup_status": row.get("lookup_status"),
+                "lookup_source": row.get("lookup_source"),
                 "former_href": player_index.former_href(row.get("player_key")),
                 "current_club": (
                     (former_by_key.get(str(row.get("player_key"))) or {})
                     .get("post_career", {})
                     .get("current", {})
                     .get("club_name")
+                    or row.get("current_club")
                 ),
                 "current_league": (
                     (former_by_key.get(str(row.get("player_key"))) or {})
                     .get("post_career", {})
                     .get("current", {})
                     .get("league")
+                    or row.get("current_league")
                 ),
                 "at_rival": bool(
                     (former_by_key.get(str(row.get("player_key"))) or {})

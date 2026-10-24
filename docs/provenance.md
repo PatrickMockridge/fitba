@@ -12,7 +12,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 
 | Layer | Primary | Fallback / note |
 |---|---|---|
-| League results, current season | Football-Data.co.uk; official SPFL club result overlay for Aberdeen | The official club feed fills or corrects a finished Aberdeen league result; the conflict is published in `audit/results.json`. API-Football only after the strict migration gate passes |
+| League results, current season | Football-Data.co.uk; official SPFL club result overlay for Aberdeen; API-Football fallback for every tier | The official club feed fills or corrects a finished Aberdeen league result. API-Football fills a current result football-data has not published for any club; it never overrides an existing football-data score, and a disagreement is published in `audit/results.json` |
 | League results, historical | Football-Data.co.uk | Back to 2013-14 |
 | League team match stats | Football-Data.co.uk | Shots, corners, fouls and cards; API-Football does not supply every tier |
 | League tables | Computed | Split, deductions and tie-breaks |

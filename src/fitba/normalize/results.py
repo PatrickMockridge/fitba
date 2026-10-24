@@ -115,6 +115,10 @@ class OverlayReport:
     filled: int = 0
     appended: int = 0
     conflicts: list[dict[str, Any]] = field(default_factory=list)
+    api_matched: int = 0
+    api_filled: int = 0
+    api_appended: int = 0
+    api_conflicts: list[dict[str, Any]] = field(default_factory=list)
     duplicates_merged: int = 0
     duplicate_ids: list[str] = field(default_factory=list)
     unmatched_official: list[dict[str, Any]] = field(default_factory=list)
@@ -139,6 +143,10 @@ class OverlayReport:
             "filled": self.filled,
             "appended": self.appended,
             "conflicts": self.conflicts,
+            "api_matched": self.api_matched,
+            "api_filled": self.api_filled,
+            "api_appended": self.api_appended,
+            "api_conflicts": self.api_conflicts,
             "duplicates_merged": self.duplicates_merged,
             "duplicate_ids": self.duplicate_ids,
             "unmatched_official": self.unmatched_official,
@@ -450,6 +458,87 @@ def overlay_club_results(
     if not changed:
         return frame
     return pl.DataFrame(rows, infer_schema_length=None)
+
+
+def overlay_league_results(
+    frame: pl.DataFrame,
+    *,
+    seasons: Iterable[str] | None = None,
+    report: OverlayReport | None = None,
+) -> pl.DataFrame:
+    """Fill missing league results from the provider fixture snapshot.
+
+    The provider rows are a fallback, never an override. An existing
+    football-data result is kept; the official SPFL result already won for
+    Aberdeen in the previous overlay. A disagreement is recorded rather than
+    silently replacing a published score.
+    """
+    from fitba.ingest.api_results import load_api_results
+
+    report = report or OverlayReport()
+    if frame.height == 0 or "season" not in frame.columns:
+        return frame
+    allowed = {str(item) for item in seasons} if seasons else set(
+        frame["season"].unique().to_list()
+    )
+    rows = frame.to_dicts()
+    by_key = {canonical_key(row): index for index, row in enumerate(rows)}
+    changed = False
+    for season in sorted(allowed):
+        api = load_api_results(season)
+        if api.height == 0:
+            continue
+        for item in api.to_dicts():
+            api_goals = _goals(item)
+            if api_goals is None:
+                continue
+            index = by_key.get(canonical_key(item))
+            if index is None:
+                new_row = dict(item)
+                parsed = _date_value(new_row.get("date"))
+                if parsed is not None:
+                    new_row["date"] = parsed
+                new_row.update(
+                    {
+                        "phase": new_row.get("phase") or "regular",
+                        "status": "played",
+                        "result_source": "api_football",
+                        "stats_source": None,
+                    }
+                )
+                rows.append(new_row)
+                by_key[canonical_key(new_row)] = len(rows) - 1
+                report.api_appended += 1
+                changed = True
+                continue
+            row = rows[index]
+            base_goals = _goals(row)
+            if base_goals is None:
+                row.update(
+                    {
+                        "home_goals": api_goals[0],
+                        "away_goals": api_goals[1],
+                        "result": _result_for(*api_goals),
+                        "status": "played",
+                        "phase": row.get("phase") or "regular",
+                        "result_source": "api_football",
+                    }
+                )
+                report.api_filled += 1
+                changed = True
+            elif base_goals == api_goals:
+                report.api_matched += 1
+            else:
+                report.api_conflicts.append(
+                    {
+                        "date": str(item.get("date"))[:10],
+                        "home_team_id": item.get("home_team_id"),
+                        "away_team_id": item.get("away_team_id"),
+                        "canonical_goals": list(base_goals),
+                        "api_goals": list(api_goals),
+                    }
+                )
+    return pl.DataFrame(rows, infer_schema_length=None) if changed else frame
 
 
 def dedupe_matches(

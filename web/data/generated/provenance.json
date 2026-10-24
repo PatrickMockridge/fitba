@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_id": "2026-10-24T23:04:18+00:00-db10675",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-10-24T22:29:20+00:00",
+  "generated_at": "2026-10-24T23:04:18+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -110,7 +110,7 @@
       "id": "league_results_current",
       "kind": "provider",
       "label": "League results, current season",
-      "note": "Football-Data is primary until the current-season API-Football coverage gate passes for all four leagues. API-Football does not currently supply all-tier team match stats, so a result-only migration would split the source silently. The gate checks results and required stats.",
+      "note": "Football-Data is primary for results and team match stats. API-Football is the fallback for a current-season result football-data has not published yet; it fills every SPFL tier, while the official SPFL club feed still wins for Aberdeen. The provider result is never used to override an existing football-data score: a disagreement is recorded. API-Football does not currently supply all-tier team match stats, so the result fallback is kept separate from the stats source.",
       "primary": "football_data_uk",
       "primary_source": {
         "attribution": "Football-Data.co.uk",
@@ -138,7 +138,7 @@
           "name": "football-data.co.uk",
           "published_at": null,
           "role": "primary",
-          "rows": 218,
+          "rows": 229,
           "served_by_update_id": null,
           "source_id": "football_data_uk",
           "source_snapshots": null,
@@ -1893,10 +1893,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-10-24T22:29:20+00:00",
+  "published_at": "2026-10-24T23:04:18+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "served_by_update_id": "2026-10-24T23:04:12+00:00-2456601",
   "source_snapshots": null,
   "sources": [
     {
@@ -1913,7 +1913,7 @@
         "league_team_stats"
       ],
       "published_at": null,
-      "rows": 10058,
+      "rows": 10069,
       "rows_basis": "primary contributions only",
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -2073,5 +2073,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "2026-10-24T22:29:17+00:00-2281097"
+  "update_id": "2026-10-24T23:04:12+00:00-2456601"
 }

@@ -27,6 +27,7 @@ from fitba.analytics.affiliation import AffiliationIndex
 from fitba.analytics.former_players import former_player_rows
 from fitba.ingest.cache import cache_path
 from fitba.ingest.news import load_news
+from fitba.ingest.scouting import PLAYER_SEASON_PATH
 from fitba.ingest.transfers import published_transfers
 from fitba.normalize.players import normalize_player_name
 from fitba.normalize.positions import position_group
@@ -84,6 +85,10 @@ SIGNAL_COLUMNS = [
     "credibility",
     "affiliation",
     "affiliation_source",
+    "lookup_status",
+    "lookup_source",
+    "current_club",
+    "current_league",
     "cross_confirmed",
     "cross_historic",
     "cross_press",
@@ -240,8 +245,12 @@ class GazetteerEntry:
     name: str
     player_key: str | None = None
     position: str | None = None
+    position_group: str | None = None
     nationality: str | None = None
     age: int | None = None
+    club: str | None = None
+    league: str | None = None
+    lookup_status: str | None = None
     source: str = "local"
 
     @property
@@ -258,18 +267,36 @@ class GazetteerEntry:
 class Gazetteer:
     by_full: dict[str, GazetteerEntry] = field(default_factory=dict)
     by_surname: dict[str, list[GazetteerEntry]] = field(default_factory=dict)
+    ambiguous_full: set[str] = field(default_factory=set)
+    meta: dict[str, int] = field(default_factory=dict)
 
     def add(self, entry: GazetteerEntry) -> None:
         if not entry.norm:
             return
 
         def merge(target: GazetteerEntry) -> None:
-            for attribute in ("position", "nationality", "age"):
+            for attribute in (
+                "position",
+                "position_group",
+                "nationality",
+                "age",
+                "club",
+                "league",
+                "lookup_status",
+            ):
                 if getattr(target, attribute) is None and getattr(entry, attribute) is not None:
                     setattr(target, attribute, getattr(entry, attribute))
 
         existing = self.by_full.get(entry.norm)
         if existing is not None:
+            if (
+                existing.player_key
+                and entry.player_key
+                and existing.player_key != entry.player_key
+            ):
+                # A full name shared by two identities must not be guessed.
+                self.ambiguous_full.add(entry.norm)
+                return
             merge(existing)
             return
         self.by_full[entry.norm] = entry
@@ -283,7 +310,10 @@ class Gazetteer:
             bucket.append(entry)
 
     def match_full(self, value: str) -> GazetteerEntry | None:
-        return self.by_full.get(normalize_player_name(value))
+        normalized = normalize_player_name(value)
+        if normalized in self.ambiguous_full:
+            return None
+        return self.by_full.get(normalized)
 
     def match_surname(self, value: str) -> GazetteerEntry | None:
         bucket = self.by_surname.get(normalize_player_name(value), [])
@@ -344,65 +374,214 @@ def _save_search_cache(payload: dict[str, Any]) -> None:
     SEARCH_CACHE.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
-SCOTTISH_LEAGUE_IDS = (179, 180, 183, 184)
+LOOKUP_FORMER = "former_player"
+LOOKUP_SCOUTED = "scouted_player"
+LOOKUP_API = "api_match"
+LOOKUP_NOT_FOUND = "api_not_found"
+LOOKUP_AMBIGUOUS = "ambiguous"
 
 
-def _search_player(phrase: str, cache: dict[str, Any]) -> dict[str, Any] | None:
-    """Validate a capitalised name against Scottish league squads.
+def _local_identity_entries(season: str) -> list[GazetteerEntry]:
+    """Former Aberdeen players and the scouted pool, as local identities."""
+    from fitba.publish.squad import squad_payload
 
-    The catalogue search is by surname. A candidate is accepted when the
-    surname matches and, where the API returns an initial, the initial matches
-    the phrase. Ambiguous surnames are rejected rather than guessed.
+    entries: list[GazetteerEntry] = []
+    try:
+        squad = squad_payload(season)
+        for row in former_player_rows(published_transfers(), squad):
+            departure = row.get("departure") or {}
+            name = str(departure.get("player_name") or "").strip()
+            if not name:
+                continue
+            entries.append(
+                GazetteerEntry(
+                    name=name,
+                    player_key=str(row.get("player_key") or ""),
+                    position=departure.get("position"),
+                    nationality=departure.get("nationality"),
+                    club=departure.get("to_club_name"),
+                    lookup_status=LOOKUP_FORMER,
+                    source="former_player",
+                )
+            )
+    except Exception:  # noqa: BLE001 - local enrichment is optional
+        pass
+
+    try:
+        if PLAYER_SEASON_PATH.exists():
+            from fitba.settings import scouting_model
+
+            min_minutes = int((scouting_model().get("pool") or {}).get("min_minutes") or 450)
+            frame = pl.read_parquet(PLAYER_SEASON_PATH)
+            best: dict[str, dict[str, Any]] = {}
+            for row in frame.to_dicts():
+                key = str(row.get("player_key") or "")
+                if not key:
+                    continue
+                minutes = int(row.get("minutes") or 0)
+                if minutes < min_minutes:
+                    continue
+                if key not in best or minutes > int(best[key].get("minutes") or 0):
+                    best[key] = row
+            for row in best.values():
+                key = str(row.get("player_key") or "")
+                full_name = str(row.get("full_name") or "").strip()
+                short_name = str(row.get("name") or "").strip()
+                primary = full_name or short_name
+                if not primary:
+                    continue
+                club = row.get("team_name")
+                league = row.get("competition")
+                position_group_value = row.get("position_group")
+                for name in {primary, short_name} - {""}:
+                    entries.append(
+                        GazetteerEntry(
+                            name=name,
+                            player_key=key,
+                            position_group=position_group_value,
+                            nationality=row.get("nationality"),
+                            age=row.get("age"),
+                            club=club,
+                            league=league,
+                            lookup_status=LOOKUP_SCOUTED,
+                            source="scouted_player",
+                        )
+                    )
+    except Exception:  # noqa: BLE001 - local enrichment is optional
+        pass
+    return entries
+
+
+def _first_matches(phrase: str, candidate: str) -> bool:
+    left = phrase.split()[0].casefold() if phrase.split() else ""
+    right = candidate.split()[0].casefold() if candidate.split() else ""
+    if not left or not right:
+        return False
+    return right == left or right[:1] == left[:1]
+
+
+def _resolve_local(name: str, entries: list[GazetteerEntry]) -> GazetteerEntry | None:
+    """Resolve a post phrase against former players and the scouted pool."""
+    tokens = name.split()
+    if len(tokens) < 2:
+        return None
+    surname = normalize_player_name(tokens[-1])
+    matches: dict[str, GazetteerEntry] = {}
+    for entry in entries:
+        if entry.surname != surname:
+            continue
+        if not _first_matches(name, entry.name):
+            continue
+        if entry.player_key:
+            matches.setdefault(entry.player_key, entry)
+    return next(iter(matches.values())) if len(matches) == 1 else None
+
+
+def _latest_club(player_id: int) -> tuple[str | None, str | None]:
+    try:
+        payload = api_football.transfers(player_id=player_id)
+    except Exception:  # noqa: BLE001 - identity remains usable without a club
+        return None, None
+    moves: list[dict[str, Any]] = []
+    for item in payload:
+        for move in item.get("transfers") or []:
+            if move.get("date"):
+                moves.append(move)
+    if not moves:
+        return None, None
+    latest = max(moves, key=lambda move: str(move.get("date") or ""))
+    teams = latest.get("teams") or {}
+    club = (teams.get("in") or {}).get("name")
+    return (str(club) if club else None), None
+
+
+def _lookup_player(phrase: str, cache: dict[str, Any]) -> dict[str, Any] | None:
+    """Look up a name that is in neither local identity source.
+
+    ``/players/profiles`` searches the global catalogue by name without needing
+    a league. A candidate is accepted only when the surname matches and the
+    first name is an exact match or shares the initial, and exactly one identity
+    survives. Ambiguity is recorded, never guessed. A club is attached from the
+    player's latest transfer when the provider returns one.
     """
     key = phrase.casefold()
-    if key in cache:
-        return cache[key]
+    cached = cache.get(key)
+    if isinstance(cached, dict):
+        if cached.get("lookup_status") == LOOKUP_API:
+            return cached
+        if cached.get("lookup_status") in {LOOKUP_NOT_FOUND, LOOKUP_AMBIGUOUS}:
+            return None
+        if cached.get("player_key") and not cached.get("lookup_status"):
+            # Earlier cache entry from the Scottish-league name check.
+            cached["lookup_status"] = LOOKUP_API
+            cached["source"] = "api_lookup"
+            return cached
 
     tokens = phrase.split()
     if len(tokens) != 2:
         return None
-    first_initial = tokens[0][0].casefold()
+    first = tokens[0].casefold()
     surname = normalize_player_name(tokens[-1])
     if not surname.isalpha() or len(surname) < 3:
         return None
 
-    matches: list[dict[str, Any]] = []
-    failures = 0
-    for league_id in SCOTTISH_LEAGUE_IDS:
-        try:
-            results = api_football.players_search(surname, league_id=league_id)
-        except Exception:  # noqa: BLE001 - enrichment is optional
-            failures += 1
-            continue
-        for item in results:
-            player = item.get("player") or {}
-            found = str(player.get("name") or "")
-            parts = found.split()
-            if not parts or normalize_player_name(parts[-1]) != surname:
-                continue
-            if len(parts) > 1 and parts[0] and parts[0][0].casefold() != first_initial:
-                continue
-            position = None
-            for statistic in item.get("statistics", []):
-                position = (statistic.get("games") or {}).get("position") or position
-                if position:
-                    break
-            matches.append(
-                {
-                    "player_key": f"api:player:{player.get('id')}",
-                    "name": found,
-                    "age": player.get("age"),
-                    "nationality": player.get("nationality"),
-                    "position": position,
-                }
-            )
-
-    if failures == len(SCOTTISH_LEAGUE_IDS):
-        # Do not cache a transient API failure as a negative match.
+    try:
+        results = api_football.player_profiles_search(surname)
+    except Exception:  # noqa: BLE001 - optional enrichment; do not cache a failure
         return None
-    chosen = matches[0] if len(matches) == 1 else None
-    cache[key] = chosen
-    return chosen
+
+    matches: dict[str, dict[str, Any]] = {}
+    for item in results:
+        player = item.get("player") or {}
+        found = str(player.get("name") or "")
+        parts = found.split()
+        if not parts or normalize_player_name(parts[-1]) != surname:
+            continue
+        profile_first = str(player.get("firstname") or parts[0] or "").casefold()
+        if not _first_matches(phrase, profile_first or found):
+            continue
+        player_id = player.get("id")
+        if player_id is None:
+            continue
+        matches[str(player_id)] = {
+            "player_key": f"api:player:{player_id}",
+            "name": found,
+            "age": player.get("age"),
+            "nationality": player.get("nationality"),
+            "position": player.get("position"),
+            "position_group": position_group(player.get("position")),
+        }
+
+    ambiguous = len(matches) > 1
+    if ambiguous:
+        exact = {
+            player_id: value
+            for player_id, value in matches.items()
+            if value["name"].split()[0].casefold() == first
+        }
+        if len(exact) == 1:
+            matches = exact
+            ambiguous = False
+        else:
+            matches = {}
+            ambiguous = True
+    if len(matches) == 1:
+        chosen = next(iter(matches.values()))
+        club, league = _latest_club(int(chosen["player_key"].split(":")[-1]))
+        chosen.update(
+            {
+                "club": club,
+                "league": league,
+                "lookup_status": LOOKUP_API,
+                "source": "api_lookup",
+            }
+        )
+        cache[key] = chosen
+        return chosen
+    cache[key] = {
+        "lookup_status": LOOKUP_AMBIGUOUS if ambiguous else LOOKUP_NOT_FOUND,
+    }
+    return None
 
 
 def build_gazetteer(
@@ -412,11 +591,14 @@ def build_gazetteer(
 ) -> Gazetteer:
     """Build the player gazetteer from local sources plus the Aberdeen squad.
 
-    ``candidates`` are unmatched capitalised bigrams from the sampled posts.
-    They are validated one by one against API-Football, capped, and cached; this
-    is a name check, not a bulk roster download.
+    Former Aberdeen players and the scouted pool are local first-class sources:
+    a rumour-mill name is cross-referenced against them before any network call.
+    ``candidates`` that resolve in neither are looked up one by one through
+    API-Football's global player-profile search, capped and cached. This is a
+    name check, not a bulk roster download.
     """
     gazetteer = Gazetteer()
+    season = current_season()
 
     # The current squad goes in first so surname matches carry position and age
     # even when the transfer register only has an abbreviated name.
@@ -472,21 +654,68 @@ def build_gazetteer(
                 )
             )
 
+    local_entries = _local_identity_entries(season)
+    for entry in local_entries:
+        gazetteer.add(entry)
+    gazetteer.meta["former_identities"] = len(
+        {
+            entry.player_key
+            for entry in local_entries
+            if entry.lookup_status == LOOKUP_FORMER and entry.player_key
+        }
+    )
+    gazetteer.meta["scouted_identities"] = len(
+        {
+            entry.player_key
+            for entry in local_entries
+            if entry.lookup_status == LOOKUP_SCOUTED and entry.player_key
+        }
+    )
+
     if enrich and candidates:
         cache = _load_search_cache()
         for name in candidates[:20]:
-            found = _search_player(name, cache)
+            local = _resolve_local(name, local_entries)
+            if local is not None:
+                gazetteer.add(
+                    GazetteerEntry(
+                        name=name,
+                        player_key=local.player_key,
+                        position=local.position,
+                        position_group=local.position_group,
+                        nationality=local.nationality,
+                        age=local.age,
+                        club=local.club,
+                        league=local.league,
+                        lookup_status=local.lookup_status,
+                        source=local.source,
+                    )
+                )
+                gazetteer.meta[local.lookup_status or "local"] = (
+                    gazetteer.meta.get(local.lookup_status or "local", 0) + 1
+                )
+                continue
+            found = _lookup_player(name, cache)
             if found:
                 gazetteer.add(
                     GazetteerEntry(
                         name=name,
                         player_key=found.get("player_key"),
                         position=found.get("position"),
+                        position_group=found.get("position_group"),
                         nationality=found.get("nationality"),
                         age=found.get("age"),
-                        source="api_name_check",
+                        club=found.get("club"),
+                        league=found.get("league"),
+                        lookup_status=found.get("lookup_status"),
+                        source="api_lookup",
                     )
                 )
+                gazetteer.meta[LOOKUP_API] = gazetteer.meta.get(LOOKUP_API, 0) + 1
+            else:
+                status = str((cache.get(name.casefold()) or {}).get("lookup_status") or "")
+                if status in {LOOKUP_NOT_FOUND, LOOKUP_AMBIGUOUS}:
+                    gazetteer.meta[status] = gazetteer.meta.get(status, 0) + 1
         _save_search_cache(cache)
 
     return gazetteer
@@ -666,21 +895,44 @@ def build_signals(
         if not text:
             continue
         for entry in extract_mentions(text, gazetteer):
+            signal_key = entry.player_key or entry.norm
             signal = signals.setdefault(
-                entry.norm,
+                signal_key,
                 {
                     "player_name": entry.name,
                     "player_key": entry.player_key,
                     "position": entry.position,
-                    "position_group": position_group(entry.position),
+                    "position_group": entry.position_group or position_group(entry.position),
                     "nationality": entry.nationality,
                     "age": entry.age,
+                    "lookup_status": entry.lookup_status or "local",
+                    "lookup_source": {
+                        LOOKUP_FORMER: "former_player",
+                        LOOKUP_SCOUTED: "scouted_player",
+                        LOOKUP_API: "api_lookup",
+                    }.get(entry.lookup_status or "", entry.source),
+                    "current_club": entry.club,
+                    "current_league": entry.league,
                     "gazetteer_source": entry.source,
                     "mentions": 0,
                     "topics": set(),
                     "compounds": [],
                 },
             )
+            if entry.player_key and len(entry.name) > len(str(signal.get("player_name") or "")):
+                signal["player_name"] = entry.name
+            for attribute, value in (
+                ("position", entry.position),
+                ("position_group", entry.position_group),
+                ("nationality", entry.nationality),
+                ("age", entry.age),
+                ("lookup_status", entry.lookup_status),
+                ("lookup_source", entry.source),
+                ("current_club", entry.club),
+                ("current_league", entry.league),
+            ):
+                if signal.get(attribute) is None and value is not None:
+                    signal[attribute] = value
             signal["mentions"] += 1
             signal["topics"].add(str(row.get("topic_id")))
             signal["compounds"].append(float(row.get("compound") or 0.0))
@@ -798,6 +1050,10 @@ def signal_frame(signals: list[dict[str, Any]], now: str) -> pl.DataFrame:
                 "credibility": signal.get("credibility"),
                 "affiliation": signal.get("affiliation"),
                 "affiliation_source": signal.get("affiliation_source"),
+                "lookup_status": signal.get("lookup_status"),
+                "lookup_source": signal.get("lookup_source"),
+                "current_club": signal.get("current_club"),
+                "current_league": signal.get("current_league"),
                 "cross_confirmed": bool(refs.get("confirmed_transfer")),
                 "cross_historic": bool(refs.get("historic_transfer")),
                 "cross_press": bool(refs.get("press_rumour")),
@@ -911,6 +1167,11 @@ def ingest_forum(
                 "gazetteer_size": len(gazetteer.by_full),
                 "signals": len(signals),
                 "name_checks": len(repeated),
+                "former_identities": gazetteer.meta.get("former_identities", 0),
+                "scouted_identities": gazetteer.meta.get("scouted_identities", 0),
+                "lookup_matches": gazetteer.meta.get(LOOKUP_API, 0),
+                "lookup_not_found": gazetteer.meta.get(LOOKUP_NOT_FOUND, 0),
+                "lookup_ambiguous": gazetteer.meta.get(LOOKUP_AMBIGUOUS, 0),
                 "sentiment": summarize_sentiment([float(row["compound"]) for row in post_rows]),
             },
         )

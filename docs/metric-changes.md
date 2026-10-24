@@ -8,6 +8,29 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.9.0 — 2026-10-25
+
+Complete league results. Owner-directed: a league table and its form guide must
+be a result type with a justified input for every club, not only Aberdeen.
+
+- `param.competitions` v2 adds the provider league id for each SPFL tier
+  (`179`, `180`, `183`, `184`) so API-Football can fill a current-season result
+  football-data.co.uk has not published yet.
+- `ingest.api_results` stores the complete provider fixture list for all four
+  tiers. The canonical layer uses it as a **fallback only**: an existing
+  football-data score is kept, the official SPFL result still wins for
+  Aberdeen, and a disagreement is recorded in `audit/results.json` and
+  `results.api_score`.
+- `results.api_represented` is a new validation check: every finished provider
+  league result must be present in the canonical frame before publish.
+- Expected value correction: the other clubs' matchweek-10 results are now in
+  the tables and form strings (for example St Mirren 2–1 Dundee, Rangers 4–0
+  St Johnstone, Falkirk 3–0 Kilmarnock). Aberdeen's record is unchanged from
+  3.8.0.
+
+No existing metric definition, denominator, rounding mode or source precedence
+changed. Registry version moves 3.8.0 → 3.9.0.
+
 ## 3.8.0 — 2026-10-24
 
 Refresh-integrity correction. Owner approved the canonical-results layer, the
