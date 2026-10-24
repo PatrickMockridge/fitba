@@ -218,18 +218,21 @@ The published web data lives in `web/data/generated/` and is committed.
 
 ## Data refresh cadence
 
-- **Daily full update:** `update-daily` at 06:17 UTC runs the current-season
+The data cadence runs **on this machine** using the gitignored `.env` key; the
+GitHub Actions data workflows are manual only because Actions has no key.
+
+- **Daily full update:** cron at 06:17 local time runs the current-season
   ingest, match detail, matchday, squad, availability, build, validation,
   publication and checks, then commits `web/data/generated/`.
-- **Weekly source and history check:** `update-weekly` on Monday at 07:23 UTC
-  runs source probes, all-season ingest and validation. It does not commit
-  generated data.
-- **After every Aberdeen game:** `update-matchday` checks every two hours. If a
-  scheduled Aberdeen fixture has finished and the published data predates it,
-  the check dispatches the full daily update. Data is normally refreshed within
-  about two hours of full time; empty checks do no data work.
-- A data commit triggers the Pages deployment through the existing
-  `workflow_run` hook.
+- **After every Aberdeen game:** cron checks every two hours. If a scheduled
+  Aberdeen fixture has finished and the published data predates it, the full
+  update runs. Empty checks do no data work.
+- Both jobs call `scripts/local_update.sh`. They only run on `main`, commit
+  generated data and push; the push triggers the Pages deployment. Logs are in
+  `~/.local/state/fitba/update.log`.
+- Install the cron entries with `scripts/install_local_cadence.sh`.
+- `update-daily` and `update-weekly` remain available as manual
+  `workflow_dispatch` workflows.
 
 ## Deployment
 
@@ -239,9 +242,10 @@ GitHub Pages serves the project site at
 `NEXT_PUBLIC_BASE_PATH=/fitba`, writes `.nojekyll` and publishes `web/out`.
 The documentation book is not deployed; it is a local repository artifact.
 
-- Every push to `main` deploys.
-- Completed `update-daily` and `update-weekly` runs deploy the fresh data commit
-  even though a bot push made with `GITHUB_TOKEN` does not trigger `on: push`.
+- Every push to `main` deploys, including the local data-cadence push.
+- Manual `update-daily` and `update-weekly` runs deploy through the
+  `workflow_run` hook even though a bot push made with `GITHUB_TOKEN` does not
+  trigger `on: push`.
 - Local builds and the CI check use no base path and serve from the root.
 
 The project site sits under `/fitba/`, so a new hard-coded internal link must

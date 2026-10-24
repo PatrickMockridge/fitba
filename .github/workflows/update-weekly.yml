@@ -1,8 +1,8 @@
 name: update-weekly
 
+# Manual only. The scheduled data cadence runs locally from `.env`; GitHub
+# Actions has no API-Football key.
 on:
-  schedule:
-    - cron: "23 7 * * 1"
   workflow_dispatch:
 
 permissions:
