@@ -728,3 +728,84 @@ are unchanged from that entry.
 - Audit impact: new squad and player-page payload paths are registered; the
   registry, audit and generated payloads are regenerated. Squad counts, the
   squad table order and player-page rose blocks change.
+
+## 3.7.0 — 2026-10-24
+
+Former-player register, post-Aberdeen careers, sell-on watch and rumour
+affiliation. Owner decisions recorded in the reviewed request: 2019-20 onward,
+full API-Football backfill, rivals Celtic/Rangers/Dundee United, receipts only
+with fully evidenced inputs, and affiliation filtering with current/former
+players excluded from the target profile. Registry version 3.7.0.
+
+### Carried forward from 3.6.0
+
+This release also contains the metric changes first recorded under 3.6.0. The
+identifiers are repeated here so the change-control comparison against
+`origin/main` has one complete current-version entry: `analysis.summary`,
+`consistency.summary`, `fixtures.index`, `manifest.freshness`,
+`matches.document`, `player.page`, `squad.loan-scope`, `squad.meta`,
+`squad.players`, `squad.summary`, `xg.document`, `xg.goals-minus`,
+`xg.goals-range`, `xg.model-range`, `xg.per-shot`, `xg.shot-profile` and
+`param.xg`. Their formulas, values and audit impact are unchanged from that
+entry.
+
+### Former players
+
+- New metrics: `former.definition`, `former.summary`, `former.players`,
+  `former.post-seasons`, `former.sell-on`, `former.scorecard`,
+  `former.coverage`, `forum.former-profile` and `rumours.former-lane`.
+  New parameters: `param.former-rivals`, `param.former-developed`,
+  `param.former-scorecard`, `param.former-sell-on` and
+  `param.former-backfill`.
+- The published universe at this publish is 76 canonical players: 71 with an
+  API id and 5 curated-only; 32 permanent and 44 free exits. One cross-source
+  duplicate (`D. McGeouch`) is merged to the API key. These are measured
+  outputs, not page constants.
+- Aberdeen tenure is covered from 2019-20; players who joined before the record
+  have an unknown early-career proxy, not an inferred one.
+- Post-career totals use league competitions only. Cup and European provider
+  rows are stored locally but excluded because some repeat league totals. The
+  first publish has 174 of 233 expected player-seasons present; missing seasons
+  are labelled gaps.
+- The sell-on watch has 3 clauses, 0 computable receipts, 1 detected but
+  unpriced trigger (Miovski to Rangers) and 2 with no trigger. Known receipts
+  are `null`, not zero. Missing inputs are published.
+- New surfaces: `/former-players/`; `/transfers/`, `/recruitment/`, `/squad/`,
+  `/loans/`, `/home/` and `/rumours/` gain links.
+
+### Rumours and forum
+
+- `rumours.summary` v2 adds `by_affiliation`, `targets` and `return_links`.
+  `rumours.profile` v3 is restricted to active incoming external targets and
+  adds the basis, candidate rows, excluded counts and return links.
+  `forum.signal` v3 adds affiliation and an external-only profile. `needs.family`
+  v3 restricts replace evidence to an official current-squad player.
+- The old fan-signal profile counted all 42 signals. The new profile counts 5
+  external-target names: position mix changes from CM 18 / FB 9 / GK 6 / ST 8 to
+  CM 3 / FB 1; the age mix becomes empty because those names have no age; the
+  source mix remains cross-referenced transfer 24 / club player 16 / fan only 2.
+  The affiliation mix is current squad 16, loan out 5, former player 15,
+  current non-official 1 and external target 5.
+- The curated rumour register remains empty, so the target profile is still
+  empty; its scope is now explicit. Needs is unchanged live (4 strengthen, 0
+  replace).
+- `/rumours/` becomes a contracted surface. `/recruitment/` gains
+  `recruitment.rumour-affiliation`.
+
+### Scouting profiles
+
+Former players use the standard `/scouting/player/<id>/` profile, not a second
+player view. The scouting search gains 64 `former_player_only` rows plus the 7
+former players already in the current pool, whose profiles gain the additive
+Former Aberdeen player section. The `former` pool is a labelled fallback, not a
+league and not part of the scouting board or league counts. No cross-league
+percentile, value index or scouting priority is inferred for the fallback rows.
+
+### Surfaces and audit
+
+- Affected surfaces: `/former-players/`, `/transfers/`, `/rumours/`,
+  `/recruitment/`, `/squad/`, `/loans/`, `/`, `/status/`, `/sources/`,
+  `/methodology/`.
+- New consistency checks: `former.register`, `former.post`, `former.sell_on`,
+  `former.affiliation` and `former.coverage`. The audit now runs 16 checks.
+- No transfer fee, squad count, xG value or match result changes.

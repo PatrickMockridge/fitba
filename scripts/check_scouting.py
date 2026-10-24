@@ -32,10 +32,27 @@ OUT = ROOT / "web" / "out"
 STATUSES = {"ok", "partial", "no_player_stats", "error", "stale", "unknown"}
 FAMILY_STATUS = {"below", "at", "above", "insufficient"}
 READINGS = {"structural", "cover", "hold", "none", "insufficient"}
-COHORT_BASES = {"role_family", "provider_group", "insufficient"}
+COHORT_BASES = {"role_family", "provider_group", "insufficient", "former_player_only"}
 EUROPE_STATUSES = {"qualified", "below_threshold", "none", "unknown"}
-CLUB_STATUSES = {"stats", "transferred", "loan", "free_agent", "retired", "unknown"}
-CLUB_SOURCES = {"transfer_feed", "stats_snapshot"}
+CLUB_STATUSES = {
+    "stats",
+    "transferred",
+    "loan",
+    "free_agent",
+    "retired",
+    "unknown",
+    "former_player",
+}
+CLUB_SOURCES = {
+    "transfer_feed",
+    "stats_snapshot",
+    "former_register",
+    "current_season_stats",
+    "transfer_history",
+    "latest_season",
+    "register_destination",
+    "curated_override",
+}
 AVAILABILITY_STATUSES = {"out", "doubtful", "suspended", "returned", "available", "unknown"}
 FORBIDDEN_KEYS = {
     "contract",
@@ -173,7 +190,7 @@ def check_data() -> list[str]:
             errors.append(f"{item.get('slug')}: searchable with fewer than 25 rated players")
 
     pool_files = sorted(POOL_DIR.glob("*.json")) if POOL_DIR.exists() else []
-    if {path.stem for path in pool_files} != expected_slugs:
+    if {path.stem for path in pool_files} - {"former"} != expected_slugs:
         errors.append("pool files do not match the enabled league slugs")
     for path in pool_files:
         document = _load(path)
@@ -185,7 +202,7 @@ def check_data() -> list[str]:
         _check_number(errors, rose_meta.get("min_petals"), 1, 20, f"{path.name} min petals")
         for player in document.get("players") or []:
             label = f"{path.name}:{player.get('player_id')}"
-            if (player.get("minutes") or 0) < 450:
+            if path.stem != "former" and (player.get("minutes") or 0) < 450:
                 errors.append(f"{label}: below the ranked minutes threshold")
             _check_number(errors, player.get("rating"), 0, 10, f"{label} rating")
             _check_number(errors, player.get("rating_percentile"), 0, 100, f"{label} percentile")
@@ -235,11 +252,12 @@ def check_data() -> list[str]:
                 f"{label} team points percentile",
             )
             _check_number(errors, player.get("team_lift"), -100, 100, f"{label} team lift")
-            if player.get("team_context_status") not in {"available", "unknown"}:
+            if player.get("team_context_status") not in {"available", "unknown", "unavailable"}:
                 errors.append(f"{label}: invalid team context status")
             rose = player.get("rose") or {}
             if not rose:
-                errors.append(f"{label}: missing rose profile")
+                if path.stem != "former":
+                    errors.append(f"{label}: missing rose profile")
                 continue
             if rose.get("status") not in {"available", "partial", "unavailable"}:
                 errors.append(f"{label}: invalid rose status")
@@ -282,11 +300,14 @@ def check_data() -> list[str]:
             errors.append(f"search has {len(search_players)} rows, pool files have {expected_rows}")
         for player in search_players:
             label = f"search:{player.get('i')}:{player.get('l')}"
-            if player.get("l") not in expected_slugs:
+            if player.get("l") not in expected_slugs | {"former"}:
                 errors.append(f"{label}: unknown league slug")
             _check_number(errors, player.get("rt"), 0, 10, f"{label} rating")
             _check_number(errors, player.get("p"), 0, 100, f"{label} percentile")
-            _check_number(errors, player.get("m"), 450, 100_000, f"{label} minutes")
+            if player.get("l") == "former":
+                _check_number(errors, player.get("m"), 0, 100_000, f"{label} minutes")
+            else:
+                _check_number(errors, player.get("m"), 450, 100_000, f"{label} minutes")
             _check_number(errors, player.get("em"), 0, 100_000, f"{label} Europe minutes")
             _check_number(errors, player.get("ea"), 0, 1_000, f"{label} Europe apps")
             if player.get("es") not in EUROPE_STATUSES:

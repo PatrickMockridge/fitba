@@ -106,13 +106,34 @@ appears**, not whether the rumour is true:
 | `fan_only` | Mentioned on the forum, no matching press, club or confirmed record. |
 | `cross_referenced_press` | The player has a curated press/journalist rumour row. |
 | `cross_referenced_club` | The surname appears in official AFC news titles. |
-| `cross_referenced_transfer` | The player appears in confirmed business in the last 550 days. |
+| `cross_referenced_transfer` | The player appears in the confirmed register in the last 550 days; this is a register cross-reference, not a current deal. |
 | `club_player` | The player is in the current Aberdeen squad. |
 | `official_confirmed` | A curated rumour row for the player is confirmed and linked. |
 
 Priority: press → confirmed rumour → current squad → recent confirmed transfer →
 club output → fan only. The payload exposes the individual cross-reference flags
 as well, so the reader can see the full set.
+
+## Affiliation
+
+Every curated row and fan-signal name carries a canonical affiliation:
+
+| Affiliation | Meaning |
+|---|---|
+| `current_squad` | An official current squad player. |
+| `loan_out` | An official player out on loan. |
+| `current_non_official` | An excluded API profile still at Aberdeen; not an official squad member. |
+| `former_player` | A player in the former-player register. |
+| `external_target` | A resolved player who is not at Aberdeen. |
+| `unknown` | No resolved key or unique full-name match. |
+
+Affiliation is derived from the current squad payload and the former-player
+register, never from a transfer guess. A former player named as an incoming
+link is a **return link** and is listed separately. The curated recruitment
+profile and the fan-signal position/age mixes count `external_target` only;
+current squad, current non-official and former players are excluded. The fan
+table still shows every affiliation, so the split is visible rather than hidden.
+A name-only row is unknown, not a target.
 
 ## Sentiment
 
@@ -133,8 +154,10 @@ sample is shown with its count.
 
 ## Recruitment profile
 
-The advisory profile is derived from **active** curated rumours only. Confirmed,
-denied and stale rows do not shape it.
+The advisory profile is derived from **active incoming external-target** curated
+rumours only. Confirmed, denied and stale rows do not shape it, and current
+squad, current non-official and former players are excluded. Return links are
+published separately.
 
 Each active row is weighted by:
 

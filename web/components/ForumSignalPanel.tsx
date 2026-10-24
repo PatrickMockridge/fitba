@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import { BucketBars } from "@/components/BucketBars";
 import { PlayerLink } from "@/components/PlayerLink";
 import type { ForumSignal, ForumSignalFile, SentimentSummary } from "@/lib/data";
@@ -6,10 +9,28 @@ import { formatDate } from "@/lib/format";
 const CREDIBILITY_LABEL: Record<string, string> = {
   fan_only: "Fan only",
   club_player: "Aberdeen player",
-  cross_referenced_transfer: "Confirmed business",
+  cross_referenced_transfer: "Register cross-ref",
   cross_referenced_press: "Press cross-ref",
   cross_referenced_club: "Club output cross-ref",
   official_confirmed: "Confirmed rumour",
+};
+
+const AFFILIATION_LABEL: Record<string, string> = {
+  current_squad: "Current squad",
+  loan_out: "On loan out",
+  current_non_official: "At Aberdeen (not official)",
+  former_player: "Former player",
+  external_target: "External target",
+  unknown: "Unknown",
+};
+
+const AFFILIATION_CLASS: Record<string, string> = {
+  current_squad: "badge-neutral",
+  loan_out: "badge-warn",
+  current_non_official: "badge-neutral",
+  former_player: "badge-warn",
+  external_target: "badge-ok",
+  unknown: "badge-neutral",
 };
 
 const CREDIBILITY_CLASS: Record<string, string> = {
@@ -74,7 +95,13 @@ function SignalRow({ signal }: { signal: ForumSignal }) {
     <tr>
       <td>
         <strong>
-          <PlayerLink name={signal.player_name} href={signal.player_href} />
+          <PlayerLink
+            name={signal.player_name}
+            href={signal.player_href ?? signal.former_href}
+          />
+          {signal.current_club ? (
+            <span className="muted"> · {signal.current_club}</span>
+          ) : null}
         </strong>
         {signal.nationality ? <span className="muted"> · {signal.nationality}</span> : null}
       </td>
@@ -82,6 +109,12 @@ function SignalRow({ signal }: { signal: ForumSignal }) {
       <td className="num">{signal.age ?? "—"}</td>
       <td className="num">{signal.mentions}</td>
       <td className="num">{signal.topic_count}</td>
+      <td>
+        <span className={`badge ${AFFILIATION_CLASS[signal.affiliation ?? "unknown"] ?? "badge-neutral"}`}>
+          {AFFILIATION_LABEL[signal.affiliation ?? "unknown"] ?? "Unknown"}
+        </span>
+        {signal.at_rival ? <span className="badge badge-warn"> rival</span> : null}
+      </td>
       <td>
         <span className={`badge ${CREDIBILITY_CLASS[signal.credibility] ?? "badge-neutral"}`}>
           {CREDIBILITY_LABEL[signal.credibility] ?? signal.credibility}
@@ -115,7 +148,17 @@ export function ForumSignalPanel({
     );
   }
 
-  const signals = data.signals.slice(0, limit);
+  const [affiliation, setAffiliation] = useState("all");
+  const signals = useMemo(
+    () =>
+      data.signals
+        .filter(
+          (signal) =>
+            affiliation === "all" || (signal.affiliation ?? "unknown") === affiliation,
+        )
+        .slice(0, limit),
+    [data.signals, affiliation, limit],
+  );
 
   return (
     <div className="forum-panel">
@@ -138,6 +181,21 @@ export function ForumSignalPanel({
         cross-reference is not a probability.
       </p>
 
+      <div className="board-controls">
+        <label>
+          Affiliation
+          <select value={affiliation} onChange={(event) => setAffiliation(event.target.value)}>
+            <option value="all">All affiliations</option>
+            <option value="external_target">External target</option>
+            <option value="former_player">Former player</option>
+            <option value="current_squad">Current squad</option>
+            <option value="loan_out">On loan out</option>
+            <option value="current_non_official">At Aberdeen (not official)</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+      </div>
+
       {signals.length ? (
         <div className="table-wrap">
           <table className="league-table compact">
@@ -149,6 +207,7 @@ export function ForumSignalPanel({
                 <th className="num">Age</th>
                 <th className="num">Mentions</th>
                 <th className="num">Topics</th>
+                <th>Affiliation</th>
                 <th>Cross-reference</th>
               </tr>
             </thead>
@@ -166,17 +225,27 @@ export function ForumSignalPanel({
       <p className="fine-print">
         Labels: <strong>Fan only</strong> — no other source;{" "}
         <strong>Aberdeen player</strong> — current squad;{" "}
-        <strong>Confirmed business</strong> — in the confirmed register within 550
-        days; <strong>Press cross-ref</strong> — a curated press rumour;{" "}
+        <strong>Register cross-ref</strong> — in the confirmed register within
+        550 days, not a current deal; <strong>Press cross-ref</strong> — a
+        curated press rumour;{" "}
         <strong>Club output cross-ref</strong> — surname appears in AFC news;{" "}
         <strong>Confirmed rumour</strong> — the curated rumour is confirmed.
       </p>
 
       <div className="grid two-col">
-        <BucketBars title="Mentioned positions" buckets={data.profile.position_mix} />
-        <BucketBars title="Mentioned age bands" buckets={data.profile.age_mix} />
+        <BucketBars
+          title="External names mentioned — positions"
+          buckets={data.profile.position_mix}
+        />
+        <BucketBars
+          title="External names mentioned — age bands"
+          buckets={data.profile.age_mix}
+        />
       </div>
-      <p className="fine-print">{data.profile.note}</p>
+      <p className="fine-print">
+        {data.profile.note} The table keeps every affiliation; the position and age bars
+        count external targets only.
+      </p>
 
       <p className="fine-print">
         No raw post bodies, usernames or quotes are published. The forum states{" "}

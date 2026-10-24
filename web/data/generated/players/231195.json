@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "identity": {
     "age": 28,
     "full_name": "Olutoyosi Tajudeen Olusanya",
@@ -74,9 +74,9 @@
           {
             "clean_sheets": 1,
             "competition": "Scottish Premiership",
-            "conceded_on_pitch": 6,
-            "matches": 8,
-            "minutes_on_pitch": 572,
+            "conceded_on_pitch": 7,
+            "matches": 9,
+            "minutes_on_pitch": 597,
             "own_goals": 0,
             "player_id": 231195,
             "player_key": "api:player:231195"
@@ -93,7 +93,7 @@
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -213,20 +213,20 @@
             },
             {
               "competition": "Scottish Premiership",
-              "minutes": 572,
-              "minutes_as_sub": 88,
+              "minutes": 597,
+              "minutes_as_sub": 113,
               "minutes_started": 484,
               "starts": 6,
-              "sub_apps": 2
+              "sub_apps": 3
             }
           ],
           "coverage": "available",
-          "minutes": 884,
-          "minutes_as_sub": 236,
+          "minutes": 909,
+          "minutes_as_sub": 261,
           "minutes_started": 648,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
           "starts": 8,
-          "sub_apps": 6
+          "sub_apps": 7
         }
       },
       "eyebrow": "Playing time",
@@ -1127,7 +1127,7 @@
             }
           ],
           "source": {
-            "fixtures_covered": 13,
+            "fixtures_covered": 14,
             "id": "api_football",
             "method": "starting_xi_grid",
             "starts_with_role": 7
@@ -1393,7 +1393,7 @@
           "league_minutes": 574,
           "league_rating": 6.2,
           "league_rating_percentile": null,
-          "minutes": 884,
+          "minutes": 909,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1419,6 +1419,20 @@
     "recent_matches": {
       "badge": "10 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-10-24",
+          "fixture_id": "1556682",
+          "goals": 0,
+          "minutes": 25,
+          "opponent": "Dundee United",
+          "rating": 6.29,
+          "result": "L",
+          "score_against": 3,
+          "score_for": 2,
+          "venue": "A"
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1544,20 +1558,6 @@
           "score_against": 2,
           "score_for": 0,
           "venue": "A"
-        },
-        {
-          "assists": 0,
-          "competition": "Scottish Premiership",
-          "date": "2026-08-01",
-          "fixture_id": "1556630",
-          "goals": null,
-          "minutes": 90,
-          "opponent": "Heart of Midlothian",
-          "rating": 7.0,
-          "result": "W",
-          "score_against": 1,
-          "score_for": 2,
-          "venue": "H"
         }
       ],
       "eyebrow": "Recent matches",

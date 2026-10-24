@@ -12,9 +12,10 @@ from __future__ import annotations
 import json
 import shutil
 from collections import Counter
-from datetime import date
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import polars as pl
 
@@ -284,6 +285,22 @@ def _next_from_frame(
     return rows[0]
 
 
+def _kickoff_passed(row: dict[str, Any], *, now: datetime | None = None) -> bool:
+    """True once the fixture's kickoff plus a finish buffer is in the past."""
+    date_value = str(row.get("date") or "").strip()
+    kickoff = str(row.get("kickoff") or "").strip()
+    if not date_value or not kickoff:
+        return False
+    try:
+        local = datetime.fromisoformat(f"{date_value}T{kickoff}:00").replace(
+            tzinfo=ZoneInfo("Europe/London")
+        )
+    except ValueError:
+        return False
+    current = now or datetime.now(UTC)
+    return current >= (local + timedelta(hours=3)).astimezone(UTC)
+
+
 def next_fixture(
     *,
     club_slug: str = "aberdeen",
@@ -293,11 +310,14 @@ def next_fixture(
 ) -> dict[str, Any] | None:
     """Earliest scheduled Aberdeen fixture from the merged season schedule."""
     today = today or date.today()
+    now = datetime.now(UTC)
     season = season or current_season()
     for row in load_schedule(season):
         if row.get("status") != "scheduled" or row.get("conflict_review"):
             continue
         if row.get("is_friendly") or str(row.get("date") or "") < str(today):
+            continue
+        if _kickoff_passed(row, now=now):
             continue
         return {
             "match_id": str(
@@ -306,6 +326,7 @@ def next_fixture(
             "competition_id": row.get("competition_id"),
             "competition_name": row.get("competition_name"),
             "stage": row.get("stage"),
+            "season": row.get("season") or season,
             "date": row.get("date"),
             "kickoff": row.get("kickoff"),
             "home_team_id": row.get("home_team_id"),

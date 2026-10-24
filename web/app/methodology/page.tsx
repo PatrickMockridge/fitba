@@ -316,7 +316,8 @@ export default function MethodologyPage() {
           published. The front end never infers a value. Side is derived from the
           role, not from preferred foot. Player photographs are not published.
           Current player names link to their profile wherever they appear in
-          structured data; former players and rumour targets do not link. The
+          structured data; former players link to the former-player register and
+          rumour targets do not link. The
           2026-27 rebuild and shape-instability context is recorded in
           <code>docs/context/aberdeen-2026-27.md</code>.
         </p>

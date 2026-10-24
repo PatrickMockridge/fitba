@@ -21,10 +21,20 @@ RUMOURS = GENERATED / "rumours" / "aberdeen.json"
 PROFILE = GENERATED / "rumours" / "profile.json"
 FORUM = GENERATED / "forum" / "afc_chat.json"
 TRANSFERS = GENERATED / "transfers" / "aberdeen.json"
+FORMER = GENERATED / "former-players" / "aberdeen.json"
+SQUAD = GENERATED / "squad" / "aberdeen.json"
 
 VALID_STATUS = {"active", "denied", "confirmed", "stale"}
 VALID_CONFIDENCE = {"low", "medium", "high"}
 VALID_SOURCE_TYPES = {"press", "journalist", "forum", "club"}
+VALID_AFFILIATIONS = {
+    "current_squad",
+    "loan_out",
+    "current_non_official",
+    "former_player",
+    "external_target",
+    "unknown",
+}
 FORBIDDEN_KEYS = {
     "text",
     "post_text",
@@ -61,7 +71,19 @@ def main() -> int:
     profile = json.loads(PROFILE.read_text(encoding="utf-8"))
     forum = json.loads(FORUM.read_text(encoding="utf-8"))
     transfers = json.loads(TRANSFERS.read_text(encoding="utf-8"))
+    former = json.loads(FORMER.read_text(encoding="utf-8")) if FORMER.exists() else {}
+    squad = json.loads(SQUAD.read_text(encoding="utf-8"))
     transfer_ids = {row.get("transfer_id") for row in transfers.get("transfers", [])}
+    former_keys = {str(row.get("player_key")) for row in former.get("players", [])}
+    former_hrefs = {str(row.get("href")) for row in former.get("players", []) if row.get("href")}
+    squad_keys = {
+        str(row.get("player_key")) for row in squad.get("players", []) if row.get("player_key")
+    }
+    non_official_keys = {
+        str(row.get("player_key"))
+        for row in squad.get("excluded_players", [])
+        if row.get("player_key")
+    }
 
     errors: list[str] = []
     rows = rumours.get("rumours", [])
@@ -82,6 +104,22 @@ def main() -> int:
             errors.append(f"{rid}: no source URLs")
         if row.get("engagement") is not None:
             errors.append(f"{rid}: engagement must stay null in this phase")
+        affiliation = row.get("affiliation") or "unknown"
+        if affiliation not in VALID_AFFILIATIONS:
+            errors.append(f"{rid}: invalid affiliation {affiliation!r}")
+        key = str(row.get("player_key") or "")
+        if affiliation == "former_player" and key not in former_keys:
+            errors.append(f"{rid}: former_player does not resolve in the former register")
+        if affiliation in {"current_squad", "loan_out"} and key not in squad_keys:
+            errors.append(f"{rid}: {affiliation} does not resolve in the current squad")
+        if affiliation == "current_non_official" and key not in non_official_keys:
+            errors.append(f"{rid}: current_non_official does not resolve in excluded_players")
+        if affiliation == "external_target" and key in (
+            squad_keys | non_official_keys | former_keys
+        ):
+            errors.append(f"{rid}: external_target resolves to an Aberdeen player")
+        if row.get("former_href") and row["former_href"] not in former_hrefs:
+            errors.append(f"{rid}: unknown former_href")
         if row.get("status") == "confirmed":
             if row.get("linked_transfer_id") not in transfer_ids:
                 errors.append(f"{rid}: confirmed row links no transfer")
@@ -90,6 +128,9 @@ def main() -> int:
 
     if rumours.get("summary", {}).get("total") != len(rows):
         errors.append("rumour summary total does not match rows")
+    by_affiliation = (rumours.get("summary") or {}).get("by_affiliation") or {}
+    if sum(int(value) for value in by_affiliation.values()) != len(rows):
+        errors.append("rumour summary by_affiliation does not sum to rows")
 
     opinion_ids = {row.get("rumour_id") for row in rows}
     for opinion in rumours.get("opinions", []):
@@ -99,10 +140,49 @@ def main() -> int:
             if item not in opinion_ids:
                 errors.append(f"{opinion.get('opinion_id')}: unknown evidence {item}")
 
+    target_ids = {
+        row.get("rumour_id")
+        for row in rows
+        if row.get("status") == "active"
+        and row.get("direction") == "in"
+        and (row.get("affiliation") or "unknown") == "external_target"
+    }
+    if profile.get("sample_size") != len(target_ids):
+        errors.append("rumour profile sample_size != active incoming external targets")
+    for signal in profile.get("signals", []):
+        if signal.get("rumour_id") not in target_ids:
+            errors.append(f"profile contains a non-target row {signal.get('rumour_id')}")
     if profile.get("sample_size", 0) < 5 and not profile.get("low_confidence"):
         errors.append("small rumour cohort is not flagged low_confidence")
     if profile.get("low_confidence") and profile.get("sample_size", 0) >= 5:
         errors.append("large rumour cohort is wrongly flagged low_confidence")
+
+    forum_signals = forum.get("signals", [])
+    for signal in forum_signals:
+        affiliation = signal.get("affiliation") or "unknown"
+        if affiliation not in VALID_AFFILIATIONS:
+            errors.append(
+                f"forum signal {signal.get('player_name')}: invalid affiliation {affiliation!r}"
+            )
+        if signal.get("former_href") and signal["former_href"] not in former_hrefs:
+            errors.append(f"forum signal {signal.get('player_name')}: unknown former_href")
+    affiliation_mix = (forum.get("profile") or {}).get("affiliation_mix") or {}
+    if sum(int(value) for value in affiliation_mix.values()) != len(forum_signals):
+        errors.append("forum affiliation_mix does not sum to signals")
+    external_count = sum(
+        1
+        for signal in forum_signals
+        if (signal.get("affiliation") or "unknown") == "external_target"
+    )
+    if (forum.get("profile") or {}).get("external_sample_size") != external_count:
+        errors.append("forum external_sample_size != external-target signals")
+    former_count = sum(
+        1 for signal in forum_signals if (signal.get("affiliation") or "unknown") == "former_player"
+    )
+    if ((forum.get("profile") or {}).get("former_player_profile") or {}).get(
+        "sample_size"
+    ) != former_count:
+        errors.append("forum former_player_profile sample_size != former signals")
 
     coverage = forum.get("coverage", {})
     if coverage.get("raw_posts_published") is not False:

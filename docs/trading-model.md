@@ -88,7 +88,8 @@ The app will show public-data proxies, not the club's internal models:
 | Squad age/value curve | Age distribution and curated market-value bands | Public/curated proxy |
 | Minutes by age | Who is actually playing, and how much | Measured |
 | Transfer balance | Disclosed/reported fee anchors plus a modelled range for undisclosed moves | Curated/measured/inferred, with unknown flags |
-| Sell-on candidates | Age, minutes, output and value trend | Inferred, explicitly modelled |
+| Former players | Departure, Aberdeen record, post-Aberdeen league seasons, rival spells | Measured/curated; gaps labelled |
+| Sell-on watch | Clause, subsequent move, evidenced receipt or missing inputs | Curated/measured; never inferred |
 | Contract expiry | Public contract end dates where known | Curated |
 | Wage-band discipline | Club-level envelope, not individual wages | Modelled/unknown |
 | Loan pathway | Minutes and output of Aberdeen loanees | Measured/curated by tier |

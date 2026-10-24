@@ -8,7 +8,7 @@ import type {
   ScoutingPriorityConfig,
   ScoutingSearchRow,
 } from "@/lib/data";
-import { formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
+import { formatDate, formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
 import type { RoseCatalogue } from "@/lib/rose";
 
 
@@ -55,6 +55,7 @@ export function ScoutingProfile({
   const profileEntries = Object.entries(player.archetypes ?? {});
   const u23 = player.age !== null && player.age <= priority.u23_max_age;
   const displayName = player.full_name || player.name;
+  const former = player.former_aberdeen ?? null;
 
   return (
     <section className="section">
@@ -62,11 +63,27 @@ export function ScoutingProfile({
         eyebrow={`Scouting profile · ${player.club} · ${player.role_label}`}
         name={displayName}
         lede={
-          <>
-            A licensed-feed scouting profile for {player.name}. Current club: {player.club}. The
-            statistics were produced at {player.stats_club} in the {leagueName}. It is not a
-            target, a recommendation, a fee or a contract claim.
-          </>
+          former ? (
+            <>
+              A standard scouting profile for {player.name}, shown with the additional
+              former-Aberdeen record. Current or last known club: {player.club}. Statistical
+              basis:{" "}
+              {former.stats_basis === "post_career_league"
+                ? `the latest post-Aberdeen league season at ${player.stats_club}`
+                : former.stats_basis === "aberdeen_last_season"
+                  ? "the last covered Aberdeen season"
+                  : former.stats_basis === "scouting_current_season"
+                    ? `the current scouting season at ${player.stats_club}`
+                    : "no measured league season"}. It is not a target, a recommendation, a
+              fee or a contract claim.
+            </>
+          ) : (
+            <>
+              A licensed-feed scouting profile for {player.name}. Current club: {player.club}. The
+              statistics were produced at {player.stats_club} in the {leagueName}. It is not a
+              target, a recommendation, a fee or a contract claim.
+            </>
+          )
         }
         badges={
           <>
@@ -75,6 +92,7 @@ export function ScoutingProfile({
             </span>
             <span className="badge badge-neutral">Age {value(player.age, 0)}</span>
             {u23 ? <span className="badge badge-neutral">U23</span> : null}
+            {former ? <span className="badge badge-warn">Former Aberdeen player</span> : null}
             <span className="badge badge-neutral">{player.role_label}</span>
             {player.stats_club && player.stats_club !== player.club ? (
               <span className="badge badge-warn">
@@ -132,6 +150,115 @@ export function ScoutingProfile({
           </div>
         </div>
       </ProfileSection>
+
+      {player.former_aberdeen ? (
+        <ProfileSection
+          id="former-aberdeen"
+          eyebrow="Former Aberdeen player"
+          title="Aberdeen and after"
+          badge="Former-player register"
+          indicator="unknown"
+          contract="player-profile.former"
+          note={
+            player.former_aberdeen.stats_basis === "aberdeen_last_season"
+              ? "No measured post-Aberdeen league season is available at the profile threshold; the statistical profile above uses the last covered Aberdeen season."
+              : player.former_aberdeen.stats_basis === "post_career_league"
+                ? "The statistical profile above uses the latest measured post-Aberdeen league season."
+                : player.former_aberdeen.stats_basis === "scouting_current_season"
+                  ? "The statistical profile above is the current scouting season. The former-Aberdeen record is additional context, not a second statistical profile."
+                  : "No measured league season is available; only the former-player record is published."
+          }
+        >
+          <p>
+            Left Aberdeen on{" "}
+            {player.former_aberdeen.departure.date
+              ? formatDate(player.former_aberdeen.departure.date)
+              : "an unknown date"}{" "}
+            for {player.former_aberdeen.departure.to_club_name ?? "an unknown club"} ·{" "}
+            {player.former_aberdeen.departure.kind ?? "move"} ·{" "}
+            {player.former_aberdeen.departure.fee_display ?? "fee unknown"}.
+          </p>
+          <div className="stat-row four">
+            <div className="stat-tile">
+              <span className="stat-label">Aberdeen apps</span>
+              <span className="stat-value">
+                {player.former_aberdeen.aberdeen.appearances === null
+                  ? "—"
+                  : formatInteger(player.former_aberdeen.aberdeen.appearances)}
+              </span>
+              <span className="stat-note">
+                {player.former_aberdeen.aberdeen.first_season ?? "—"} to{" "}
+                {player.former_aberdeen.aberdeen.last_season ?? "—"}
+              </span>
+            </div>
+            <div className="stat-tile">
+              <span className="stat-label">Aberdeen minutes</span>
+              <span className="stat-value">
+                {player.former_aberdeen.aberdeen.minutes === null
+                  ? "—"
+                  : formatInteger(player.former_aberdeen.aberdeen.minutes)}
+              </span>
+              <span className="stat-note">covered competitive record</span>
+            </div>
+            <div className="stat-tile">
+              <span className="stat-label">Post-Aberdeen league mins</span>
+              <span className="stat-value">
+                {player.former_aberdeen.post_career.totals.minutes === null ||
+                player.former_aberdeen.post_career.totals.minutes === undefined
+                  ? "—"
+                  : formatInteger(player.former_aberdeen.post_career.totals.minutes)}
+              </span>
+              <span className="stat-note">
+                {player.former_aberdeen.post_career.totals.seasons_with_data ?? 0} of{" "}
+                {player.former_aberdeen.post_career.totals.seasons_expected ?? 0} seasons
+              </span>
+            </div>
+            <div className="stat-tile">
+              <span className="stat-label">Current or last known</span>
+              <span className="stat-value">
+                {player.former_aberdeen.post_career.current.club_name ?? "Unknown"}
+              </span>
+              <span className="stat-note">
+                {player.former_aberdeen.post_career.current.coverage === "current"
+                  ? "current-season provider row"
+                  : "last known"}
+              </span>
+            </div>
+          </div>
+          <p className="fine-print">
+            {player.former_aberdeen.aberdeen.developed_here === "yes"
+              ? "Early-career Aberdeen proxy: yes. "
+              : player.former_aberdeen.aberdeen.developed_here === "unknown"
+                ? "Early-career Aberdeen proxy: unknown. "
+                : "Early-career Aberdeen proxy: no. "}
+            {player.former_aberdeen.post_career.at_rival
+              ? `Rival spell: ${player.former_aberdeen.post_career.rival_spells
+                  .map((spell) => `${spell.club} (${spell.from_season} to ${spell.to_season})`)
+                  .join(", ")}. `
+              : "No post-Aberdeen rival spell. "}
+            {player.former_aberdeen.sell_on
+              ? `Sell-on: ${
+                  player.former_aberdeen.sell_on.sell_on_pct === null
+                    ? "percentage undisclosed"
+                    : `${player.former_aberdeen.sell_on.sell_on_pct}%`
+                }, receipt ${player.former_aberdeen.sell_on.receipt.status.replaceAll("_", " ")}${
+                  player.former_aberdeen.sell_on.receipt.missing_inputs.length
+                    ? ` (missing: ${player.former_aberdeen.sell_on.receipt.missing_inputs.join(", ")})`
+                    : ""
+                }.`
+              : "No sell-on clause recorded."}
+          </p>
+          <p className="fine-print">
+            <Link href={player.former_aberdeen.href}>
+              Former-player register entry
+            </Link>
+            {" · "}
+            <Link href="/former-players/">All former players</Link>
+            {" · "}
+            <Link href="/methodology/">Method</Link>
+          </p>
+        </ProfileSection>
+      ) : null}
 
       <ProfileSection
         eyebrow="Team context"
@@ -220,41 +347,61 @@ export function ScoutingProfile({
         <ProfileSection
           eyebrow="Scouting context"
           title="Scouting priority"
-          badge={formatDecimal(player.scouting_priority ?? 0, 1)}
+          badge={
+            player.cohort_basis === "former_player_only"
+              ? "Not ranked"
+              : formatDecimal(player.scouting_priority ?? 0, 1)
+          }
           indicator="basis"
           contract="player-profile.context"
         >
-          <p>
-            Value index {formatDecimal(player.value_index ?? 0, 1)} × age multiplier{" "}
-            {formatDecimal(player.age_multiplier ?? 1, 2)} × Europe multiplier{" "}
-            {formatDecimal(player.europe_multiplier ?? 1, 2)} ={" "}
-            {formatDecimal(player.scouting_priority ?? 0, 1)}.
-          </p>
-          <p className="fine-print">
-            U23 ≤{formatInteger(priority.u23_max_age)} ×
-            {formatDecimal(priority.u23_multiplier, 2)}; European league phase ≥
-            {formatInteger(priority.europe_minutes_threshold)} min ×
-            {formatDecimal(priority.europe_multiplier, 2)}. These are Aberdeen scouting
-            preferences, not measured quality. The value index is not a transfer value.
-          </p>
+          {player.cohort_basis === "former_player_only" ? (
+            <p>
+              This former-player profile is not in the current scouting pool, so no value index,
+              scouting priority or Europe discount is inferred. The standard profile is shown for
+              the record.
+            </p>
+          ) : (
+            <>
+              <p>
+                Value index {formatDecimal(player.value_index ?? 0, 1)} × age multiplier{" "}
+                {formatDecimal(player.age_multiplier ?? 1, 2)} × Europe multiplier{" "}
+                {formatDecimal(player.europe_multiplier ?? 1, 2)} ={" "}
+                {formatDecimal(player.scouting_priority ?? 0, 1)}.
+              </p>
+              <p className="fine-print">
+                U23 ≤{formatInteger(priority.u23_max_age)} ×
+                {formatDecimal(priority.u23_multiplier, 2)}; European league phase ≥
+                {formatInteger(priority.europe_minutes_threshold)} min ×
+                {formatDecimal(priority.europe_multiplier, 2)}. These are Aberdeen scouting
+                preferences, not measured quality. The value index is not a transfer value.
+              </p>
+            </>
+          )}
         </ProfileSection>
 
         <ProfileSection
           eyebrow="Scouting context"
           title="League-phase shop window"
-          badge={player.european_status}
+          badge={player.cohort_basis === "former_player_only" ? "unknown" : player.european_status}
           contract="player-profile.context"
         >
-          <p>{STATUS_LABELS[player.european_status] ?? player.european_status}</p>
-          <p className="fine-print">
-            {player.european_league_phase_minutes ?? 0} league-phase minutes across{" "}
-            {player.european_league_phase_appearances ?? 0} appearances.
-            {player.european_league_phase_competitions.length
-              ? ` Competitions: ${player.european_league_phase_competitions
-                  .map((name) => EUROPE_LABELS[name] ?? name)
-                  .join(", ")}.`
-              : ""}
+          <p>
+            {player.cohort_basis === "former_player_only"
+              ? "No league-phase coverage is inferred for this former-player profile."
+              : STATUS_LABELS[player.european_status] ?? player.european_status}
           </p>
+          {player.cohort_basis === "former_player_only" ? null : (
+            <p className="fine-print">
+              {player.european_league_phase_minutes ?? 0} league-phase minutes across{" "}
+              {player.european_league_phase_appearances ?? 0} appearances.
+              {player.european_league_phase_competitions.length
+                ? ` Competitions: ${player.european_league_phase_competitions
+                    .map((name) => EUROPE_LABELS[name] ?? name)
+                    .join(", ")}.`
+                : ""}
+            </p>
+          )}
           <p className="fine-print">
             Only the league phase of the Champions League, Europa League and Conference League is
             covered; qualifiers and play-offs are excluded. Unknown is not “not in Europe” and is
@@ -274,7 +421,7 @@ export function ScoutingProfile({
           {player.current_league_name ? ` (${player.current_league_name})` : ""}; 2026-27
           statistics at {player.stats_club} in the {leagueName}; {player.role_label}; role family{" "}
           {player.role_family ?? "unknown"}; cohort basis {player.cohort_basis}; cohort n{" "}
-          {formatInteger(player.cohort_n)}.
+          {player.cohort_n ? formatInteger(player.cohort_n) : "—"}.
         </p>
         <p className="fine-print">
           The provider rating is opaque and relative to the player&apos;s league and role cohort.
@@ -291,7 +438,11 @@ export function ScoutingProfile({
           </p>
         ) : null}
         <p className="back-link">
-          <Link href={`/scouting/${leagueSlug}/`}>← League search</Link>
+          {leagueSlug === "former" ? (
+            <Link href="/former-players/">← Former-player register</Link>
+          ) : (
+            <Link href={`/scouting/${leagueSlug}/`}>← League search</Link>
+          )}
           {" · "}
           <Link href="/scouting/search/">Full search →</Link>
           {" · "}

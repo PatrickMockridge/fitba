@@ -78,7 +78,7 @@ def test_team_now_uses_plain_record(payload) -> None:
     claim = _claim(payload, "team_now")
     text = " ".join(item["count"] for item in claim["evidence"])
     assert "3 wins, 2 draws and 4 defeats" in text
-    assert "15 competitive fixtures" in text
+    assert "16 competitive fixtures" in text
     assert "2 unknown" in text
 
 

@@ -125,7 +125,8 @@ The site is organised around the question a fan actually arrives with:
   and the keys to the match. Fixtures, results, tables, cup rounds and the
   cut-offs that decide Europe, the split and relegation are one click away.
 - **Off the pitch** (`/recruitment/`) — confirmed transfers and loans, the
-  scouting method and the rumour mill.
+  scouting method, the rumour mill and the former-player register. Former
+  players are a separate lane from transfer targets.
 - **Squad** (`/squad/`) — the structural bridge: every current player and
   current loanee, with current-season output, loan tags and a profile page. The
   same player is the destination from matchday, transfers, rumours and news.

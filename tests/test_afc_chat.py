@@ -139,6 +139,8 @@ def test_profile_flags_small_cohort_and_weights_confidence():
             "player_name": "A Player",
             "status": "active",
             "confidence": "high",
+            "affiliation": "external_target",
+            "direction": "in",
             "position": "W",
             "age": 22,
             "league": "Premiership",
@@ -150,6 +152,8 @@ def test_profile_flags_small_cohort_and_weights_confidence():
             "player_name": "B Player",
             "status": "active",
             "confidence": "low",
+            "affiliation": "external_target",
+            "direction": "in",
             "position": "ST",
             "age": 29,
             "league": "Championship",
@@ -161,6 +165,8 @@ def test_profile_flags_small_cohort_and_weights_confidence():
             "player_name": "C Player",
             "status": "stale",
             "confidence": "high",
+            "affiliation": "external_target",
+            "direction": "in",
             "position": "CB",
             "age": 24,
             "league": "Premiership",
@@ -168,8 +174,25 @@ def test_profile_flags_small_cohort_and_weights_confidence():
             "last_seen": date.today().isoformat(),
         },
     ]
+    rows.append(
+        {
+            "rumour_id": "rum:current",
+            "player_name": "Current Player",
+            "status": "active",
+            "confidence": "high",
+            "affiliation": "current_squad",
+            "direction": "out",
+            "position": "CM",
+            "age": 25,
+            "league": "Premiership",
+            "value_band": "unknown",
+            "last_seen": date.today().isoformat(),
+        }
+    )
     profile = profile_payload(rows, PlayerLinkIndex.from_payload({"players": []}))
     assert profile["sample_size"] == 2
+    assert profile["excluded"]["current_squad"] == 1
+    assert all(signal["rumour_id"] != "rum:current" for signal in profile["signals"])
     assert profile["low_confidence"] is True
     assert profile["buckets"]["position"]["W"] > profile["buckets"]["position"]["ST"]
     assert profile["weighted_total"] > 0

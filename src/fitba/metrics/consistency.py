@@ -93,8 +93,7 @@ def _check_squad_counts(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     if (
         summary.get("official_players") is not None
         and summary.get("official_squad_size") is not None
-        and summary["official_squad_size"] + summary["loans_out"]
-        != summary["official_players"]
+        and summary["official_squad_size"] + summary["loans_out"] != summary["official_players"]
     ):
         outcome.fail("official_squad_size + loans_out != official_players")
     for field_name, attr in (
@@ -119,9 +118,7 @@ def _check_roster(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     if meta.get("status") != "available":
         return
     expected = sum(
-        1
-        for player in players
-        if player.get("roster_status") in {"official", "official_loan"}
+        1 for player in players if player.get("roster_status") in {"official", "official_loan"}
     )
     if meta.get("official_players") != expected:
         outcome.fail(f"roster_meta official_players {meta.get('official_players')} != {expected}")
@@ -160,17 +157,13 @@ def _check_loans(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     if official.get("out_count") != squad_loans:
         outcome.fail(f"official loan count {official.get('out_count')} != squad {squad_loans}")
     register_keys = {
-        str(item.get("player_key"))
-        for item in current.get("out") or []
-        if item.get("player_key")
+        str(item.get("player_key")) for item in current.get("out") or [] if item.get("player_key")
     }
     for player in _players(squad):
         if player.get("status") != "loan_out":
             continue
         if str(player.get("player_key")) not in register_keys:
-            outcome.fail(
-                f"official loanee {player.get('name')} is not in the current register"
-            )
+            outcome.fail(f"official loanee {player.get('name')} is not in the current register")
 
 
 def _totals_from_stats(rows: list[dict[str, Any]], scope: str) -> dict[str, Any] | None:
@@ -292,9 +285,7 @@ def _check_xg(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
             "fxg": round(sum(float(row["fxg_for"]) for row in rows), 2),
             "goals": sum(int(row.get("goals_for") or 0) for row in rows),
             "shots": sum(int(row.get("shots_for") or 0) for row in rows),
-            "shots_on_target": sum(
-                int(row.get("shots_on_target_for") or 0) for row in rows
-            ),
+            "shots_on_target": sum(int(row.get("shots_on_target_for") or 0) for row in rows),
             "penalties": sum(int(row.get("penalties_for") or 0) for row in rows),
         }
         for field_name, expected in checks.items():
@@ -339,9 +330,7 @@ def _check_xg_fixtures(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
                     and expected is not None
                     and abs(float(value) - float(expected)) > 0.001
                 ):
-                    outcome.fail(
-                        f"fixture {fixture_id} xg {side} {value} != payload {expected}"
-                    )
+                    outcome.fail(f"fixture {fixture_id} xg {side} {value} != payload {expected}")
 
 
 def _check_results(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
@@ -375,21 +364,13 @@ def _check_schedule(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
         outcome.fail(
             f"scheduled_count {fixtures.get('scheduled_count')} != scheduled rows {expected}"
         )
-    expected_conflicts = sum(
-        1 for row in scheduled if row.get("status") == "conflict_review"
-    )
+    expected_conflicts = sum(1 for row in scheduled if row.get("status") == "conflict_review")
     if fixtures.get("conflict_count") != expected_conflicts:
-        outcome.fail(
-            f"conflict_count {fixtures.get('conflict_count')} != {expected_conflicts}"
-        )
+        outcome.fail(f"conflict_count {fixtures.get('conflict_count')} != {expected_conflicts}")
     matchday = _payload(corpus, "matchday/upcoming.json") or {}
     fixture = matchday.get("fixture") or {}
     if fixture and scheduled:
-        confirmed = [
-            row
-            for row in scheduled
-            if row.get("status") == "scheduled"
-        ]
+        confirmed = [row for row in scheduled if row.get("status") == "scheduled"]
         if confirmed:
             first = min(
                 confirmed,
@@ -440,6 +421,133 @@ def _check_coverage(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     availability = coverage.get("availability") or {}
     if not availability.get("universes"):
         outcome.fail("coverage availability universes are missing")
+
+
+def _check_former_register(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    former = _payload(corpus, "former-players/aberdeen.json") or {}
+    transfers = _payload(corpus, "transfers/aberdeen.json") or {}
+    squad = _payload(corpus, "squad/aberdeen.json") or {}
+    players = former.get("players") or []
+    summary = former.get("summary") or {}
+    transfer_rows = {str(row.get("transfer_id")): row for row in transfers.get("transfers") or []}
+    official = {
+        str(row.get("player_key")) for row in squad.get("players") or [] if row.get("player_key")
+    }
+    outcome.rows_checked = len(players)
+    outcome.fields_checked = 5
+    if summary.get("total") != len(players):
+        outcome.fail("former summary total != player rows")
+    keys = [str(row.get("player_key")) for row in players]
+    if len(keys) != len(set(keys)):
+        outcome.fail("former player keys are not unique")
+    for row in players:
+        key = str(row.get("player_key") or "")
+        if key in official:
+            outcome.fail(f"former player {key} is in the official squad")
+        departure = row.get("departure") or {}
+        transfer = transfer_rows.get(str(departure.get("transfer_id")))
+        if not transfer:
+            outcome.fail(f"former player {key} has no published departure")
+            continue
+        if transfer.get("direction") != "out" or transfer.get("transfer_kind") not in {
+            "permanent",
+            "free",
+        }:
+            outcome.fail(f"former player {key} departure is not permanent/free")
+
+
+def _check_former_post(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    former = _payload(corpus, "former-players/aberdeen.json") or {}
+    detail = _payload(corpus, "former-players/seasons.json") or {}
+    players = {str(row.get("player_key")): row for row in former.get("players") or []}
+    seasons = detail.get("seasons") or {}
+    outcome.rows_checked = len(seasons)
+    outcome.fields_checked = 3
+    if set(seasons) != set(players):
+        outcome.fail("former season detail keys do not match the index")
+    for key, block in seasons.items():
+        rows = block.get("post_seasons") or []
+        totals = ((players.get(key) or {}).get("post_career") or {}).get("totals") or {}
+        for field_name in ("appearances", "starts", "minutes", "goals", "assists"):
+            expected = totals.get(field_name)
+            if expected is None:
+                continue
+            actual = sum(int(row.get(field_name) or 0) for row in rows)
+            if actual != int(expected):
+                outcome.fail(f"former {key} {field_name} {actual} != {expected}")
+
+
+def _check_former_sell_on(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    former = _payload(corpus, "former-players/aberdeen.json") or {}
+    transfers = _payload(corpus, "transfers/aberdeen.json") or {}
+    watch = former.get("sell_on_watch") or {}
+    clauses = watch.get("clauses") or []
+    summary = watch.get("summary") or {}
+    transfer_ids = {str(row.get("clause_id")) for row in transfers.get("sell_on_clauses") or []}
+    outcome.rows_checked = len(clauses)
+    outcome.fields_checked = 3
+    if {str(row.get("clause_id")) for row in clauses} != transfer_ids:
+        outcome.fail("sell-on watch clauses do not match the transfer register")
+    computed = 0
+    for row in clauses:
+        receipt = row.get("receipt") or {}
+        if receipt.get("status") == "computed":
+            computed += 1
+            if receipt.get("receipt_gbp") is None:
+                outcome.fail(f"sell-on {row.get('clause_id')} computed without a receipt")
+        elif receipt.get("receipt_gbp") is not None:
+            outcome.fail(f"sell-on {row.get('clause_id')} has a receipt without computed status")
+    if summary.get("computed") != computed:
+        outcome.fail("sell-on summary computed != clauses")
+
+
+def _check_former_affiliation(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    rumours = _payload(corpus, "rumours/aberdeen.json") or {}
+    forum = _payload(corpus, "forum/afc_chat.json") or {}
+    profile = _payload(corpus, "rumours/profile.json") or {}
+    rows = rumours.get("rumours") or []
+    signals = forum.get("signals") or []
+    outcome.rows_checked = len(rows) + len(signals)
+    outcome.fields_checked = 4
+    for row in rows:
+        affiliation = str(row.get("affiliation") or "unknown")
+        if (
+            row.get("direction") == "in"
+            and row.get("is_target")
+            and affiliation != "external_target"
+        ):
+            outcome.fail(f"rumour {row.get('rumour_id')} is a target outside external_target")
+        if row.get("is_return_link") and affiliation != "former_player":
+            outcome.fail(f"rumour {row.get('rumour_id')} return link is not former_player")
+    target_ids = {
+        str(row.get("rumour_id"))
+        for row in rows
+        if row.get("status") == "active"
+        and row.get("direction") == "in"
+        and str(row.get("affiliation") or "unknown") == "external_target"
+    }
+    profile_ids = {str(row.get("rumour_id")) for row in profile.get("signals") or []}
+    if profile_ids - target_ids:
+        outcome.fail("target profile contains a non-external row")
+    mix = (forum.get("profile") or {}).get("affiliation_mix") or {}
+    if sum(int(value) for value in mix.values()) != len(signals):
+        outcome.fail("forum affiliation_mix does not sum to signals")
+
+
+def _check_former_coverage(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    former = _payload(corpus, "former-players/aberdeen.json") or {}
+    coverage_payload = _payload(corpus, "coverage.json") or {}
+    counts = (former.get("coverage") or {}).get("counts") or {}
+    players = former.get("players") or []
+    outcome.rows_checked = len(players)
+    outcome.fields_checked = 3
+    if counts.get("players") != len(players):
+        outcome.fail("former coverage players != player rows")
+    if int(counts.get("with_api_id") or 0) + int(counts.get("without_api_id") or 0) != len(players):
+        outcome.fail("former coverage API ids do not sum to players")
+    block = coverage_payload.get("former_players") or {}
+    if block.get("count") != len(players):
+        outcome.fail("coverage.json former count != former rows")
 
 
 CHECKS = [
@@ -508,6 +616,36 @@ CHECKS = [
         "Coverage counts equal the payloads they summarise",
         ["coverage.json", "squad/aberdeen.json", "transfers/aberdeen.json"],
         _check_coverage,
+    ),
+    (
+        "former.register",
+        "Former-player rows reconcile to published permanent/free departures",
+        ["former-players/aberdeen.json", "transfers/aberdeen.json", "squad/aberdeen.json"],
+        _check_former_register,
+    ),
+    (
+        "former.post",
+        "Former-player post-career totals reconcile to their season rows",
+        ["former-players/aberdeen.json", "former-players/seasons.json"],
+        _check_former_post,
+    ),
+    (
+        "former.sell_on",
+        "Sell-on clauses and receipts reconcile across former and transfer payloads",
+        ["former-players/aberdeen.json", "transfers/aberdeen.json"],
+        _check_former_sell_on,
+    ),
+    (
+        "former.affiliation",
+        "Rumour and forum affiliations keep former players out of the target profile",
+        ["rumours/aberdeen.json", "rumours/profile.json", "forum/afc_chat.json"],
+        _check_former_affiliation,
+    ),
+    (
+        "former.coverage",
+        "Former-player coverage counts equal the payload and coverage document",
+        ["former-players/aberdeen.json", "coverage.json"],
+        _check_former_coverage,
     ),
 ]
 

@@ -1,0 +1,55 @@
+# Former-player register and post-Aberdeen career policy.
+#
+# Every threshold here is a published parameter; changing one requires owner
+# approval, a metrics registry version bump and an entry in
+# docs/metric-changes.md. The definitions are documented in
+# docs/former-players.md.
+version: 1
+reviewed: 2026-10-24
+coverage:
+  # The confirmed transfer register starts here. Earlier departures are outside
+  # the register and are named as a coverage limit, not inferred.
+  register_from: "2019-20"
+  source: confirmed_transfer_register
+post_career:
+  source: api_football
+  current_season_ttl_hours: 24
+  historical_ttl_hours: 720
+  transfers_ttl_hours: 168
+  request_interval_seconds: 0.3
+  max_requests_per_run: 400
+  backfill_max_requests: 400
+  refresh_max_requests: 180
+  # Per-90 rates are published only above this many minutes in a season.
+  min_minutes_for_rates: 180
+  # Top-flight leagues outside the scouting universe, for the known top-flight
+  # count. A league not listed here stays tier-unknown, never tier 1.
+  league_tiers:
+    "39": { country: England, tier: 1 }
+    "61": { country: France, tier: 1 }
+    "78": { country: Germany, tier: 1 }
+    "135": { country: Italy, tier: 1 }
+    "140": { country: Spain, tier: 1 }
+rivals:
+  - { club_id: sco:celtic, name: Celtic }
+  - { club_id: sco:rangers, name: Rangers }
+  - { club_id: sco:dundee-united, name: Dundee United }
+development:
+  # A permanent/free exit at this age or younger is a young exit.
+  young_exit_age_max: 23
+  # Early-career proxy: first Aberdeen appearance at this age or younger and at
+  # least this many starts, only when the arrival is inside the covered record.
+  debut_age_max: 21
+  min_starts: 10
+scorecard:
+  # A post-Aberdeen season counts towards the player's distribution at this
+  # many minutes; lower-minute seasons stay visible but are labelled.
+  min_post_minutes: 90
+  min_post_seasons: 1
+sell_on:
+  fx_to_gbp: { GBP: 1.0, EUR: 0.85, USD: 0.78 }
+  # A receipt is computed only when every required input is publicly evidenced.
+  require_percentage: true
+  require_basis: true
+  require_public_fee: true
+  allowed_basis: [gross_fee, profit]

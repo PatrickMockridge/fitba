@@ -8,12 +8,21 @@ type StatusFilter = "all" | RumourStatus;
 type ConfidenceFilter = "all" | "high" | "medium" | "low";
 type SourceFilter = "all" | "press" | "journalist" | "forum" | "club";
 type DirectionFilter = "all" | "in" | "out";
+type AffiliationFilter =
+  | "all"
+  | "external_target"
+  | "former_player"
+  | "current_squad"
+  | "loan_out"
+  | "current_non_official"
+  | "unknown";
 
 export function RumourBoard({ data }: { data: RumoursFile }) {
   const [status, setStatus] = useState<StatusFilter>("all");
   const [confidence, setConfidence] = useState<ConfidenceFilter>("all");
   const [source, setSource] = useState<SourceFilter>("all");
   const [direction, setDirection] = useState<DirectionFilter>("all");
+  const [affiliation, setAffiliation] = useState<AffiliationFilter>("all");
 
   const filtered = useMemo(
     () =>
@@ -22,9 +31,12 @@ export function RumourBoard({ data }: { data: RumoursFile }) {
         if (confidence !== "all" && rumour.confidence !== confidence) return false;
         if (source !== "all" && !rumour.source_types.includes(source)) return false;
         if (direction !== "all" && rumour.direction !== direction) return false;
+        if (affiliation !== "all" && (rumour.affiliation ?? "unknown") !== affiliation) {
+          return false;
+        }
         return true;
       }),
-    [data.rumours, status, confidence, source, direction],
+    [data.rumours, status, confidence, source, direction, affiliation],
   );
 
   if (data.rumours.length === 0) {
@@ -75,6 +87,22 @@ export function RumourBoard({ data }: { data: RumoursFile }) {
             <option value="journalist">Journalist</option>
             <option value="forum">Forum</option>
             <option value="club">Club</option>
+          </select>
+        </label>
+
+        <label>
+          Affiliation
+          <select
+            value={affiliation}
+            onChange={(event) => setAffiliation(event.target.value as AffiliationFilter)}
+          >
+            <option value="all">All affiliations</option>
+            <option value="external_target">External target</option>
+            <option value="former_player">Former player</option>
+            <option value="current_squad">Current squad</option>
+            <option value="loan_out">On loan out</option>
+            <option value="current_non_official">At Aberdeen (not official)</option>
+            <option value="unknown">Unknown</option>
           </select>
         </label>
 

@@ -20,7 +20,7 @@
     }
   ],
   "conflict_count": 1,
-  "count": 367,
+  "count": 368,
   "fixtures": [
     {
       "aberdeen_is_home": true,
@@ -8829,38 +8829,43 @@
       "result_label": "W",
       "season": "2026-27",
       "shootout_result": null
+    },
+    {
+      "aberdeen_is_home": false,
+      "aberdeen_outcome": "L",
+      "aberdeen_result": "L",
+      "aberdeen_result_label": "L",
+      "away_goals": 2,
+      "away_penalties": null,
+      "away_team_name": "Aberdeen",
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "date": "2026-10-24",
+      "decided_by": "regulation",
+      "depth": "partial",
+      "fixture_id": 1556682,
+      "home_goals": 3,
+      "home_penalties": null,
+      "home_team_name": "Dundee United",
+      "href": "/matches/1556682/",
+      "outcome": "W",
+      "result": "W",
+      "result_label": "W",
+      "season": "2026-27",
+      "shootout_result": null
     }
   ],
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "schedule_coverage": {
     "conflicts": 1,
     "overdue": 0,
     "remaining_is_minimum": true,
     "remaining_note": "Known scheduled fixtures only. Cup progression and post-split league fixtures are not yet fixed in the schedule.",
     "schedule_rows": 45,
-    "scheduled": 24,
+    "scheduled": 23,
     "source": "history fixtures + SPFL club feed"
   },
   "scheduled": [
-    {
-      "aberdeen_is_home": false,
-      "away_team_name": "Aberdeen",
-      "competition_id": "sco:premiership",
-      "competition_name": "Scottish Premiership",
-      "conflict_review": false,
-      "date": "2026-10-24",
-      "fixture_id": 1556682,
-      "home_team_name": "Dundee United",
-      "kickoff": "15:00",
-      "kickoff_status": "confirmed",
-      "neutral": false,
-      "opponent_name": "Dundee United",
-      "season": "2026-27",
-      "source_id": "spfl",
-      "stage": null,
-      "status": "scheduled",
-      "venue": "Tannadice Park"
-    },
     {
       "aberdeen_is_home": true,
       "away_team_name": "Falkirk",
@@ -8927,12 +8932,12 @@
       "date": "2026-11-07",
       "fixture_id": 1556700,
       "home_team_name": "Aberdeen",
-      "kickoff": "15:00",
-      "kickoff_status": "provisional",
+      "kickoff": "17:45",
+      "kickoff_status": "confirmed",
       "neutral": false,
       "opponent_name": "Hibernian",
       "season": "2026-27",
-      "source_id": "api_football",
+      "source_id": "spfl",
       "stage": null,
       "status": "scheduled",
       "venue": "Pittodrie Stadium"
@@ -9318,7 +9323,7 @@
       "venue": "Pittodrie Stadium"
     }
   ],
-  "scheduled_count": 24,
-  "scheduled_rows_total": 25,
+  "scheduled_count": 23,
+  "scheduled_rows_total": 24,
   "schema_version": "1.2.0"
 }

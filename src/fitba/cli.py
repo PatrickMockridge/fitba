@@ -31,6 +31,12 @@ from fitba.ingest.career_roles import (
 )
 from fitba.ingest.cups import ingest_cups
 from fitba.ingest.fixtures import ingest_club_fixtures
+from fitba.ingest.former_players import (
+    ingest_former_players,
+    load_former_meta,
+    load_former_players,
+    load_post_seasons,
+)
 from fitba.ingest.forum import ingest_forum
 from fitba.ingest.history import (
     STAGES,
@@ -669,6 +675,101 @@ def status() -> None:
 
 career_app = typer.Typer(no_args_is_help=True, help="Career role history.")
 app.add_typer(career_app, name="career")
+former_players_app = typer.Typer(
+    no_args_is_help=True,
+    help="Former-player post-Aberdeen seasons and transfer histories.",
+)
+app.add_typer(former_players_app, name="former-players")
+
+
+@former_players_app.command("backfill")
+def former_players_backfill(
+    max_requests: Annotated[
+        int, typer.Option("--max-requests", help="Request budget for this run")
+    ] = 400,
+    player: Annotated[
+        list[str] | None,
+        typer.Option("--player", help="Restrict to a player key; repeatable"),
+    ] = None,
+    dry_run: Annotated[
+        bool, typer.Option("--dry-run", help="Report planned calls without fetching")
+    ] = False,
+    force: Annotated[bool, typer.Option("--force", help="Ignore cache and state")] = False,
+) -> None:
+    """Backfill every covered season and the full transfer history."""
+    result = ingest_former_players(
+        mode="backfill",
+        max_requests=max_requests,
+        player_keys=player,
+        dry_run=dry_run,
+        force=force,
+    )
+    if result.errors:
+        console.print(
+            f"[red]former-player backfill finished with errors[/red]: "
+            f"{result.errors[:3]}"
+        )
+    console.print(
+        f"former players: {result.status} · {result.rows} players · "
+        f"{result.details.get('network_requests', 0)} requests"
+        if result.details
+        else f"former players: {result.status} · {result.rows} players"
+    )
+    if result.details and result.details.get("budget_exhausted"):
+        console.print("[yellow]stopped on the request budget; rerun to continue[/yellow]")
+
+
+@former_players_app.command("refresh")
+def former_players_refresh(
+    max_requests: Annotated[
+        int, typer.Option("--max-requests", help="Request budget for this run")
+    ] = 180,
+    force: Annotated[bool, typer.Option("--force", help="Ignore cache and state")] = False,
+) -> None:
+    """Refresh the current season and transfer histories."""
+    result = ingest_former_players(
+        mode="refresh",
+        max_requests=max_requests,
+        force=force,
+    )
+    if result.errors:
+        console.print(f"[red]former-player refresh finished with errors[/red]: {result.errors[:3]}")
+    console.print(
+        f"former players: {result.status} · {result.rows} players · "
+        f"{result.details.get('network_requests', 0)} requests"
+        if result.details
+        else f"former players: {result.status} · {result.rows} players"
+    )
+
+
+@former_players_app.command("status")
+def former_players_status() -> None:
+    """Show former-player backfill coverage without fetching."""
+    meta = load_former_meta()
+    if not meta:
+        console.print("former-player backfill has not run")
+        return
+    console.print(
+        f"former players {meta.get('season')}: {meta.get('players_total', 0)} total, "
+        f"{meta.get('players_with_api_id', 0)} with API ids, "
+        f"{meta.get('players_without_api_id', 0)} curated-only"
+    )
+    console.print(
+        f"  seasons {meta.get('player_seasons_present', 0)}/"
+        f"{meta.get('player_seasons_expected', 0)} present · "
+        f"{meta.get('transfer_histories_present', 0)} transfer histories · "
+        f"{meta.get('players_error', 0)} errors"
+    )
+    console.print(
+        f"  requests {meta.get('network_requests', 0)}/{meta.get('budget', 0)} · "
+        f"budget_exhausted={meta.get('budget_exhausted')}"
+    )
+    console.print(
+        f"  local players {load_former_players().height}, "
+        f"seasons {load_post_seasons().height}"
+    )
+
+
 
 
 @career_app.command("backfill")

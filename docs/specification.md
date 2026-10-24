@@ -78,6 +78,8 @@ reworded or reorganised if the evidence and source remain visible.
 | `/transfers/` | verification badges, net range, position/fee/loan/source, sell-on table, completeness, coverage | how-to-read, fee method | card styling |
 | `/loans/` | in/out counts, every loan card with terms or unknown, coverage, sources | coverage prose | styling |
 | `/squad/` | summary, roster columns, role mix, coverage | role dialog, method | styling |
+| `/former-players/` | register table, links to standard scouting profiles, rival badge, sell-on watch, development scorecard, coverage | method, long source notes | layout |
+| `/rumours/` | affiliation counts, curated register, target profile, former lane, forum signals, coverage | sentiment caveats | layout |
 | `/history/` | scorecard, thesis, season table, managers, baseline, honours, read, coverage | full staff timeline, method | layout |
 | `/sources/` | layer table, source registry, migration, availability, excluded, derived/no-raw | attribution notes | styling |
 | `/methodology/` | source table, all method sections, indicators | long method detail | styling |
@@ -87,6 +89,19 @@ reworded or reorganised if the evidence and source remain visible.
 
 The exhaustive visible-surface list remains in [page-contracts.md](page-contracts.md)
 and `web/contracts/surfaces.json`.
+
+## One player profile framework
+
+There is no third player-profile pathway. Current squad members use
+`/players/<id>/`; every other player, including a former Aberdeen player, uses
+`/scouting/player/<id>/`. A former player is a standard scouting profile with an
+additive **Former Aberdeen player** section: departure, Aberdeen record,
+post-Aberdeen summary, rival spell and sell-on status.
+
+Do not add a bespoke player route, dialog, drawer, card or component that
+re-renders a player profile. New player facts are added as a section to the
+shared profile and as fields to its published document. A register may list and
+link players; it must not become a second profile view.
 
 ## Number governance
 

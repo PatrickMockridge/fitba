@@ -432,3 +432,13 @@ vocabulary and the full check list.
 If a source, format or calculation changes, update the config, this document and
 the in-app page in the same change. The last-reviewed date and sources are part
 of the page. Do not leave a stale claim in one place and fix it in another.
+
+
+## Former-player aggregation
+
+The former-player register is the latest published permanent/free departure per
+player, excluding current squad, returns and loans. Aberdeen tenure is counted
+from covered competitive appearances; bench selections are separate. Post-career
+totals use league competitions only and are not zero-filled. Sell-on receipts
+use only publicly evidenced percentage, basis and fees; missing inputs are
+published instead. The development cohorts are descriptive, not a model score.

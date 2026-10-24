@@ -7,7 +7,7 @@ Where a component, page or habit disagrees with this page, this page wins.
 
 ## Profile types and tiers
 
-There are two dedicated profile routes:
+There are exactly two dedicated profile routes. Do not add a third.
 
 - `/players/<playerId>/` — Aberdeen profile, **extended** tier. It uses
   `PlayerPageDocument` and adds the role, playing-time, performance and records
@@ -15,7 +15,15 @@ There are two dedicated profile routes:
   and Recent matches.
 - `/scouting/player/<playerId>/` — licensed-feed scouting profile, **standard**
   tier. It uses the pool/search model and adds scouting context: current and
-  stats club, priority, Europe, value index and archetypes.
+  stats club, priority, Europe, value index and archetypes. Every non-squad
+  player uses this route, including former Aberdeen players.
+
+A former Aberdeen player uses the scouting profile plus an additive **Former
+Aberdeen player** section. The section carries the departure, Aberdeen record,
+post-Aberdeen summary, rival spell and sell-on status. It does not replace or
+duplicate the standard sections, and it is not a separate route, dialog, drawer
+or card. A player register may link to the profile; it must not render a second
+profile view.
 
 Loan-out Aberdeen players keep their role and loan record; Availability and
 Recent matches are not applicable to them.
@@ -52,6 +60,11 @@ Aberdeen squad members.
    limitations.
 10. **Back links** — the relevant squad, matchday, recruitment, scouting,
     method and sources links.
+
+For a former player, an additive **Former Aberdeen player** section appears
+after Key facts. It carries the departure, Aberdeen record, post-Aberdeen
+summary, rival spell and sell-on status. The standard scouting sections remain
+and are not replaced.
 
 The Aberdeen extended panels keep their existing ids and order after the
 profile, availability and recent-match sections.

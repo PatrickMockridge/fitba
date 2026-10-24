@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "identity": {
     "age": 24,
     "full_name": "Gavin Molloy",
@@ -87,9 +87,9 @@
           {
             "clean_sheets": 1,
             "competition": "Scottish Premiership",
-            "conceded_on_pitch": 5,
-            "matches": 6,
-            "minutes_on_pitch": 375,
+            "conceded_on_pitch": 8,
+            "matches": 7,
+            "minutes_on_pitch": 465,
             "own_goals": 0,
             "player_id": 161806,
             "player_key": "api:player:161806"
@@ -106,7 +106,7 @@
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 15 of 15 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -182,7 +182,7 @@
             "key": "conceded",
             "label": "Conceded",
             "note": "on pitch",
-            "value": 6
+            "value": 9
           },
           {
             "key": "clean_sheets",
@@ -226,19 +226,19 @@
             },
             {
               "competition": "Scottish Premiership",
-              "minutes": 375,
+              "minutes": 465,
               "minutes_as_sub": 23,
-              "minutes_started": 352,
-              "starts": 4,
+              "minutes_started": 442,
+              "starts": 5,
               "sub_apps": 2
             }
           ],
           "coverage": "available",
-          "minutes": 499,
+          "minutes": 589,
           "minutes_as_sub": 101,
-          "minutes_started": 398,
+          "minutes_started": 488,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
-          "starts": 5,
+          "starts": 6,
           "sub_apps": 5
         }
       },
@@ -257,17 +257,17 @@
             "defender",
             "midfielder"
           ],
-          "coverage": "38/46",
+          "coverage": "39/47",
           "dominant": {
             "code": "CB",
             "family": "centre_back",
             "family_label": "Centre back",
             "label": "Centre back",
             "provisional": false,
-            "share": 0.8947,
+            "share": 0.8974,
             "side": "central",
-            "starts": 34,
-            "weighted_starts": 34.0
+            "starts": 35,
+            "weighted_starts": 35.0
           },
           "eligibility": [
             {
@@ -276,12 +276,12 @@
                 "defender"
               ],
               "label": "Centre back",
-              "share": 0.8947,
+              "share": 0.8974,
               "side": "centre",
               "slot": "D_C",
-              "starts": 34,
+              "starts": 35,
               "tier": "primary",
-              "weighted_starts": 34.0
+              "weighted_starts": 35.0
             },
             {
               "fm": "D/WB L",
@@ -290,7 +290,7 @@
                 "midfielder"
               ],
               "label": "Left back / left wing-back",
-              "share": 0.1053,
+              "share": 0.1026,
               "side": "left",
               "slot": "D_WB_L",
               "starts": 4,
@@ -302,21 +302,21 @@
             {
               "family": "centre_back",
               "label": "Centre back",
-              "share": 0.8947,
-              "starts": 34,
-              "weighted_starts": 34.0
+              "share": 0.8974,
+              "starts": 35,
+              "weighted_starts": 35.0
             },
             {
               "family": "full_back",
               "label": "Full-back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "weighted_starts": 2.0
             },
             {
               "family": "wing_back",
               "label": "Wing-back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "weighted_starts": 2.0
             }
@@ -330,8 +330,8 @@
               "role_label": "Centre back",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.8947,
-              "starts": 4,
+              "share": 0.8974,
+              "starts": 5,
               "team_id": 252,
               "team_name": "Aberdeen"
             },
@@ -342,7 +342,7 @@
               "role_label": "Left wing-back",
               "scope": "aberdeen",
               "season": "2025-26",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -354,7 +354,7 @@
               "role_label": "Left back",
               "scope": "aberdeen",
               "season": "2025-26",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -366,7 +366,7 @@
               "role_label": "Centre back",
               "scope": "aberdeen",
               "season": "2025-26",
-              "share": 0.8947,
+              "share": 0.8974,
               "starts": 8,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -378,7 +378,7 @@
               "role_label": "Centre back",
               "scope": "aberdeen",
               "season": "2024-25",
-              "share": 0.8947,
+              "share": 0.8974,
               "starts": 19,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -390,7 +390,7 @@
               "role_label": "Centre back",
               "scope": "aberdeen",
               "season": "2024-25",
-              "share": 0.8947,
+              "share": 0.8974,
               "starts": 3,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -418,26 +418,26 @@
             ],
             "label": "Centre back",
             "role_label": "Centre back",
-            "share": 0.8947,
+            "share": 0.8974,
             "side": "centre",
             "slot": "D_C",
-            "starts": 34,
-            "weighted_starts": 34.0
+            "starts": 35,
+            "weighted_starts": 35.0
           },
           "role_shares": [
             {
               "code": "CB",
               "family": "centre_back",
               "label": "Centre back",
-              "share": 0.8947,
-              "starts": 34,
-              "weighted_starts": 34.0
+              "share": 0.8974,
+              "starts": 35,
+              "weighted_starts": 35.0
             },
             {
               "code": "LB",
               "family": "full_back",
               "label": "Left back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "weighted_starts": 2.0
             },
@@ -445,7 +445,7 @@
               "code": "LWB",
               "family": "wing_back",
               "label": "Left wing-back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2,
               "weighted_starts": 2.0
             }
@@ -455,7 +455,7 @@
               "label": "Aberdeen",
               "scope": "aberdeen",
               "share": 1.0,
-              "starts": 38
+              "starts": 39
             }
           ],
           "seasons": [
@@ -465,14 +465,14 @@
                   "family": "centre_back",
                   "label": "Centre back",
                   "share": 1.0,
-                  "starts": 4
+                  "starts": 5
                 }
               ],
               "scopes": [
                 {
                   "scope": "aberdeen",
                   "share": 1.0,
-                  "starts": 4
+                  "starts": 5
                 }
               ],
               "season": "2026-27",
@@ -487,10 +487,10 @@
                   "share": 1.0,
                   "side": "centre",
                   "slot": "D_C",
-                  "starts": 4
+                  "starts": 5
                 }
               ],
-              "starts_with_role": 4
+              "starts_with_role": 5
             },
             {
               "families": [
@@ -721,12 +721,12 @@
                 "defender"
               ],
               "label": "Centre back",
-              "share": 0.8947,
+              "share": 0.8974,
               "side": "centre",
               "slot": "D_C",
-              "starts": 34,
+              "starts": 35,
               "tier": "primary",
-              "weighted_starts": 34.0
+              "weighted_starts": 35.0
             },
             {
               "fm": "D/WB L",
@@ -735,7 +735,7 @@
                 "midfielder"
               ],
               "label": "Left back / left wing-back",
-              "share": 0.1053,
+              "share": 0.1026,
               "side": "left",
               "slot": "D_WB_L",
               "starts": 4,
@@ -743,8 +743,8 @@
               "weighted_starts": 4.0
             }
           ],
-          "starts_total": 46,
-          "starts_with_role": 38,
+          "starts_total": 47,
+          "starts_with_role": 39,
           "status": "observed",
           "stretch_slots": [
             {
@@ -754,7 +754,7 @@
                 "midfielder"
               ],
               "label": "Left back / left wing-back",
-              "share": 0.1053,
+              "share": 0.1026,
               "side": "left",
               "slot": "D_WB_L",
               "starts": 4,
@@ -766,19 +766,19 @@
             {
               "family": "centre_back",
               "label": "Centre back",
-              "share": 0.8947,
-              "starts": 34
+              "share": 0.8974,
+              "starts": 35
             },
             {
               "family": "full_back",
               "label": "Full-back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2
             },
             {
               "family": "wing_back",
               "label": "Wing-back",
-              "share": 0.0526,
+              "share": 0.0513,
               "starts": 2
             }
           ],
@@ -801,21 +801,21 @@
             "family_label": "Centre back",
             "label": "Centre back",
             "provisional": false,
-            "share": 0.8947,
+            "share": 0.8974,
             "side": "centre",
-            "starts": 34,
-            "weighted_starts": 34.0
+            "starts": 35,
+            "weighted_starts": 35.0
           },
           "code": "CB",
           "conditions": {
             "career_family": "centre_back",
-            "career_family_share": 0.8947,
+            "career_family_share": 0.8974,
             "career_seasons": 3,
-            "career_starts": 38,
+            "career_starts": 39,
             "career_status": "observed",
             "current_family": "centre_back",
             "current_share": 1.0,
-            "current_starts": 4,
+            "current_starts": 5,
             "different_family": false,
             "different_group": false,
             "enabled": true,
@@ -825,10 +825,10 @@
           "family_label": "Centre back",
           "label": "Centre back",
           "reason": "Career position is the dominant role across the recent seasons.",
-          "share": 0.8947,
+          "share": 0.8974,
           "side": "centre",
           "source": "career",
-          "starts": 34
+          "starts": 35
         },
         "history_status": "observed",
         "role": {
@@ -836,7 +836,7 @@
             "defender"
           ],
           "code": "CB",
-          "coverage": "4/5",
+          "coverage": "5/6",
           "family": "centre_back",
           "fm_label": "D C",
           "primary": "Centre back",
@@ -849,7 +849,7 @@
             "share": 1.0,
             "side": "centre",
             "slot": "D_C",
-            "starts": 4,
+            "starts": 5,
             "tier": "primary"
           },
           "roles": [
@@ -857,8 +857,8 @@
               "code": "CB",
               "family": "centre_back",
               "label": "Centre back",
-              "minutes": 352,
-              "starts": 4
+              "minutes": 442,
+              "starts": 5
             }
           ],
           "side": "central",
@@ -875,18 +875,18 @@
               "share": 1.0,
               "side": "centre",
               "slot": "D_C",
-              "starts": 4,
+              "starts": 5,
               "tier": "primary"
             }
           ],
           "source": {
-            "fixtures_covered": 13,
+            "fixtures_covered": 14,
             "id": "api_football",
             "method": "starting_xi_grid",
-            "starts_with_role": 4
+            "starts_with_role": 5
           },
-          "starts_total": 5,
-          "starts_with_role": 4,
+          "starts_total": 6,
+          "starts_with_role": 5,
           "status": "partial",
           "unknown_reason": null
         },
@@ -1133,7 +1133,7 @@
           "league_minutes": 384,
           "league_rating": 5.83,
           "league_rating_percentile": 9.1,
-          "minutes": 499,
+          "minutes": 589,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1159,6 +1159,20 @@
     "recent_matches": {
       "badge": "10 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "date": "2026-10-24",
+          "fixture_id": "1556682",
+          "goals": 0,
+          "minutes": 90,
+          "opponent": "Dundee United",
+          "rating": 6.68,
+          "result": "L",
+          "score_against": 3,
+          "score_for": 2,
+          "venue": "A"
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1279,20 +1293,6 @@
           "goals": null,
           "minutes": 28,
           "opponent": "Queen's Park",
-          "rating": null,
-          "result": null,
-          "score_against": null,
-          "score_for": null,
-          "venue": null
-        },
-        {
-          "assists": null,
-          "competition": "Premier Sports Cup",
-          "date": "2026-07-14",
-          "fixture_id": "1548122",
-          "goals": null,
-          "minutes": 24,
-          "opponent": "Brora Rangers",
           "rating": null,
           "result": null,
           "score_against": null,

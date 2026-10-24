@@ -310,3 +310,13 @@ attribution. See [DATA_LICENSE.md](DATA_LICENSE.md) and
 
 fitba is an independent, non-commercial research project. It is not affiliated
 with Aberdeen FC, the SPFL, the SFA or any data provider.
+
+
+## Former players
+
+```bash
+uv run fitba former-players status
+uv run fitba former-players backfill --dry-run
+uv run fitba former-players backfill --max-requests 400
+uv run fitba former-players refresh --max-requests 180
+```

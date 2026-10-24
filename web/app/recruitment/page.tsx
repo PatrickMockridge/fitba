@@ -166,6 +166,52 @@ export default function RecruitmentPage() {
         </div>
       </section>
 
+      <section className="section" data-contract="recruitment.rumour-affiliation">
+        <div className="card">
+          <div className="card-head">
+            <div>
+              <p className="eyebrow">Affiliation</p>
+              <h2>Former players and targets are different lanes</h2>
+            </div>
+            <Link className="text-link" href="/former-players/">
+              Former-player register →
+            </Link>
+          </div>
+          <p>
+            The fan signal now separates external targets from current squad, current
+            non-official and former players. The target profile counts active incoming
+            external links only; a former player linked back is a return link, not a
+            normal target.
+          </p>
+          <div className="stat-row four">
+            <StatTile
+              label="External targets"
+              value={forum?.profile.affiliation_mix?.external_target ?? 0}
+              note="fan-signal names"
+            />
+            <StatTile
+              label="Former players"
+              value={forum?.profile.affiliation_mix?.former_player ?? 0}
+              note="separate lane"
+            />
+            <StatTile
+              label="Current squad"
+              value={
+                (forum?.profile.affiliation_mix?.current_squad ?? 0) +
+                (forum?.profile.affiliation_mix?.loan_out ?? 0) +
+                (forum?.profile.affiliation_mix?.current_non_official ?? 0)
+              }
+              note="not targets"
+            />
+            <StatTile
+              label="Target-profile sample"
+              value={profile?.sample_size ?? 0}
+              note="active incoming external"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="section" data-contract="recruitment.profile">
         <div className="section-head">
           <div>

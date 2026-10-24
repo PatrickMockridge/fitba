@@ -56,6 +56,7 @@ run_optional uv run fitba history --backfill --season current \
   --stages fixtures,lineups,events,rosters,players,team_stats --max-requests 80
 run_optional uv run fitba matchday --refresh --max-requests 24
 run_optional uv run fitba transfers
+run_optional uv run fitba former-players refresh --max-requests 180
 run_optional uv run fitba squad
 run_optional uv run fitba availability --refresh
 run_optional uv run fitba career refresh
@@ -69,6 +70,7 @@ uv run fitba publish --season current --profile public --require-validation
 uv run python scripts/check_publication.py
 uv run python scripts/check_metrics.py --strict
 uv run python scripts/check_transfers.py
+uv run python scripts/check_former_players.py
 uv run python scripts/check_names.py
 uv run python scripts/check_history.py
 uv run python scripts/check_matchday.py

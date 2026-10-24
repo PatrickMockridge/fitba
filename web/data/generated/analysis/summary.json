@@ -45,7 +45,7 @@
     "coverage": {
       "bench": {
         "fixtures": 6,
-        "named_bench_complete": 15
+        "named_bench_complete": 16
       },
       "cards": {
         "sco:league-cup": {
@@ -54,9 +54,9 @@
           "played": 6
         },
         "sco:premiership": {
-          "complete": true,
+          "complete": false,
           "covered": 9,
-          "played": 9
+          "played": 10
         },
         "sco:scottish-cup": {
           "complete": true,
@@ -99,12 +99,12 @@
         "unknown": 32
       },
       "window_fixtures": [
+        1556682,
         1556676,
         1556670,
         1556665,
         1556643,
-        1629022,
-        1556658
+        1629022
       ]
     },
     "inferred": [],
@@ -142,10 +142,28 @@
         "basis": "projection",
         "confidence": "medium",
         "note": "Predicted contender; not team news.",
-        "player_id": 379662,
-        "player_name": "F. Marshall",
-        "role_label": "Centre midfielder",
-        "score": 0.513
+        "player_id": 321860,
+        "player_name": "J. Milne",
+        "role_label": "Centre back",
+        "score": 0.558
+      },
+      {
+        "basis": "projection",
+        "confidence": "medium",
+        "note": "Predicted contender; not team news.",
+        "player_id": 231195,
+        "player_name": "T. Olusanya",
+        "role_label": "Centre forward",
+        "score": 0.48
+      },
+      {
+        "basis": "projection",
+        "confidence": "medium",
+        "note": "Predicted contender; not team news.",
+        "player_id": 125695,
+        "player_name": "L. Mayo",
+        "role_label": "Centre back",
+        "score": 0.478
       }
     ],
     "suspensions": [
@@ -157,9 +175,9 @@
         "last_card_date": "2026-09-15",
         "next_fixture": {
           "competition_id": "sco:premiership",
-          "date": "2026-10-24",
-          "fixture_id": 1556682,
-          "opponent_name": "Dundee United"
+          "date": "2026-10-28",
+          "fixture_id": 1556688,
+          "opponent_name": "Falkirk"
         },
         "player_id": 125695,
         "player_name": "L. Mayo",
@@ -168,7 +186,7 @@
         "reds": 0,
         "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
         "rule_verified": false,
-        "status": "watch",
+        "status": "review_required",
         "threshold": 6
       },
       {
@@ -225,7 +243,7 @@
     },
     "bench": {
       "fixtures": 6,
-      "named_bench_complete": 15
+      "named_bench_complete": 16
     },
     "cards": {
       "sco:league-cup": {
@@ -234,9 +252,9 @@
         "played": 6
       },
       "sco:premiership": {
-        "complete": true,
+        "complete": false,
         "covered": 9,
-        "played": 9
+        "played": 10
       },
       "sco:scottish-cup": {
         "complete": true,
@@ -255,10 +273,10 @@
       "conflicts": 1,
       "overdue": 0,
       "rows": 45,
-      "scheduled": 24
+      "scheduled": 23
     }
   },
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "hero": {
     "form": "WLDWD",
     "goal_difference": 0,
@@ -268,23 +286,6 @@
     "position": 7
   },
   "next_up": [
-    {
-      "competition_id": "sco:premiership",
-      "competition_name": "Scottish Premiership",
-      "conflict_review": false,
-      "date": "2026-10-24",
-      "fixture_id": 1556682,
-      "kickoff": "15:00",
-      "kickoff_status": "confirmed",
-      "kickoff_tz": "Europe/London",
-      "match_id": "spfl-premiership-2026-10-24-dundee-united-aberdeen",
-      "neutral": false,
-      "opponent_name": "Dundee United",
-      "source_id": "spfl",
-      "stage": null,
-      "status": "scheduled",
-      "venue": "A"
-    },
     {
       "competition_id": "sco:premiership",
       "competition_name": "Scottish Premiership",
@@ -318,6 +319,23 @@
       "stage": "Semi-final",
       "status": "scheduled",
       "venue": "N"
+    },
+    {
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "conflict_review": false,
+      "date": "2026-11-07",
+      "fixture_id": 1556700,
+      "kickoff": "17:45",
+      "kickoff_status": "confirmed",
+      "kickoff_tz": "Europe/London",
+      "match_id": "spfl-premiership-2026-11-07-aberdeen-hibernian",
+      "neutral": false,
+      "opponent_name": "Hibernian",
+      "source_id": "spfl",
+      "stage": null,
+      "status": "scheduled",
+      "venue": "H"
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",

@@ -1,0 +1,14 @@
+# Public fee evidence for subsequent transfers that can trigger a sell-on.
+#
+# Detection is automatic from the player's full transfer history. This file adds
+# the public fee anchor and verifies the event. A receipt is computed only when
+# the clause percentage, basis and subsequent fee are all publicly evidenced.
+# Never infer a percentage or fee.
+#
+# Fields per event:
+#   event_id, clause_id, player_key, subsequent_transfer_date,
+#   from_club_id, from_club_name, to_club_id, to_club_name,
+#   fee_status (disclosed|reported|free), fee_amount, fee_currency,
+#   source_urls (at least one allowed public URL), confidence
+#   (confirmed|reported), verified_at, notes.
+events: []

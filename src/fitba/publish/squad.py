@@ -595,9 +595,14 @@ class PlayerLinkIndex:
     excluded: list[dict[str, Any]]
     full_names: dict[str, dict[str, Any]]
     surnames: dict[str, dict[str, Any]]
+    former_by_key: dict[str, str] | None = None
 
     @classmethod
-    def from_payload(cls, payload: dict[str, Any]) -> PlayerLinkIndex:
+    def from_payload(
+        cls,
+        payload: dict[str, Any],
+        former_players: dict[str, Any] | None = None,
+    ) -> PlayerLinkIndex:
         players = payload.get("players", [])
         excluded = payload.get("excluded_players", []) or []
         by_key = {
@@ -616,18 +621,29 @@ class PlayerLinkIndex:
                 key = _alias_key(alias)
                 if len(key) >= 5:
                     full_names.setdefault(key, player)
+        former_by_key = {
+            str(player["player_key"]): str(player["href"])
+            for player in (former_players or {}).get("players", [])
+            if player.get("player_key") and player.get("href")
+        }
         return cls(
             by_key=by_key,
             players=players,
             excluded=excluded,
             full_names=full_names,
             surnames=_unique_surnames(players),
+            former_by_key=former_by_key,
         )
 
     def href(self, player_key: Any) -> str | None:
         if not player_key:
             return None
         return self.by_key.get(str(player_key))
+
+    def former_href(self, player_key: Any) -> str | None:
+        if not player_key or not self.former_by_key:
+            return None
+        return self.former_by_key.get(str(player_key))
 
     def mentions(self, text: Any, *, limit: int = 5) -> list[dict[str, str]]:
         """Find current players named in free text.

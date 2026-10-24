@@ -344,6 +344,35 @@ layers:
     surfaces: [/transfers/, /methodology/]
     note: Disclosed/reported anchors plus a transparent age/position/market model.
 
+  - id: former_player_record
+    label: Former-player record
+    kind: derived
+    primary: api_football
+    fallback: [wikipedia]
+    status: active
+    scope: 2019-20 to current
+    fields: [departure, tenure, post_career, sell_on_watch, development]
+    surfaces: [/former-players/, /transfers/, /status/]
+    note: >
+      Derived from the confirmed transfer register, the covered Aberdeen history
+      and licensed API-Football player seasons. Post-career league rows are
+      measured where covered; missing seasons and curated-only identities are
+      explicit gaps.
+
+  - id: sell_on_events
+    label: Sell-on event evidence
+    kind: curated
+    primary: curated
+    fallback: []
+    status: active
+    scope: 2019-20 to current
+    fields: [subsequent_transfer, fee_anchor, receipt]
+    surfaces: [/former-players/, /transfers/]
+    note: >
+      A subsequent transfer is detected from the provider history; a receipt is
+      computed only when the clause percentage, basis and every required public
+      fee are evidenced. Missing inputs are published, never inferred.
+
   - id: themes
     label: Medium and long-term themes
     kind: derived

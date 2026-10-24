@@ -27,6 +27,10 @@ publishers silently applied different filters to the same scope.
 | `provider` | The licensed provider's season rows. |
 | `regulation` | The 90/120-minute result, used for W-D-L and league points. |
 | `outcome` | The result including a penalty shootout; published separately. |
+| `former_register` | Confirmed permanent/free departures from 2019-20, excluding current squad, returns and loans. |
+| `post_career` | Provider league seasons after the departure; missing seasons are gaps. |
+| `sell_on_receipt` | A clause event and receipt only where every required input is publicly evidenced. |
+| `affiliation` | The canonical relation vocabulary used by rumours, forum signals and needs. |
 
 `config/scopes.yaml` is the machine-readable vocabulary. A published block
 should carry its scope id; a table column or caption must name it when the page
@@ -46,6 +50,9 @@ also shows another scope.
 | Availability universes | `analytics/availability_facts.py` |
 | Next fixture | `analytics/schedule.py` |
 | Role family and group | `config/roles.yaml` through `normalize/roles.py` |
+| Former-player universe, tenure and post-career record | `analytics/former_players.py` |
+| Sell-on event and receipt | `analytics/former_players.py`, clauses in the transfer register |
+| Rumour/forum affiliation | `analytics/affiliation.py` |
 
 The display layer reads the published value. It does not sum, re-filter,
 re-rank or re-round a published fact. The only permitted client calculation is
@@ -90,7 +97,10 @@ checks:
 - fixtures, match pages and shootout labels agree;
 - scheduled counts and the matchday fixture use the same schedule rule;
 - availability counts sum to their declared universes;
-- coverage counts equal the payloads they summarise.
+- coverage counts equal the payloads they summarise;
+- former-player rows map to published permanent/free departures, post-career
+  totals equal their league season rows, sell-on clauses and receipts reconcile,
+  and affiliations keep current/former players out of the target profile.
 
 The same checks run inside `fitba publish`; a failure writes
 `audit/consistency.json` and blocks the atomic swap. CI also runs

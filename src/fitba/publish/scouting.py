@@ -3,20 +3,28 @@
 from __future__ import annotations
 
 import json
+from datetime import date
 from typing import Any
 
 import polars as pl
 
 from fitba.analytics.scouting import (
     RATE_FIELDS,
+    ROSE_LEAGUE,
+    ROSE_LEAGUE_LABEL,
     CohortIndex,
     build_alignment,
     build_board,
     build_pool_rows,
+    build_rose,
     build_squad_profile,
     build_squad_roses,
+    history_player_totals,
+    load_rose_history_indices,
+    player_rates,
 )
 from fitba.analytics.scouting_value import fit_value_model, value_for_row
+from fitba.analytics.valuation import age_at
 from fitba.ingest.scouting import (
     PLAYER_ROLES_PATH,
     PLAYER_SEASON_PATH,
@@ -35,6 +43,7 @@ from fitba.ingest.scouting_standings import (
     load_standings,
     load_standings_meta,
 )
+from fitba.normalize.positions import position_group
 from fitba.settings import (
     player_rose,
     scouting_archetypes,
@@ -157,6 +166,293 @@ def _profile(
         "score": score,
         "raw_score": value.get("score"),
         "adjusted_score": value.get("adjusted_score"),
+    }
+
+
+def _former_aberdeen_block(
+    player: dict[str, Any], clause: dict[str, Any] | None, *, stats_basis: str | None = None
+) -> dict[str, Any]:
+    departure = player.get("departure") or {}
+    aberdeen = player.get("aberdeen") or {}
+    post = player.get("post_career") or {}
+    return {
+        "player_key": player.get("player_key"),
+        "name": player.get("name"),
+        "href": player.get("href"),
+        "transfer_href": player.get("transfer_href"),
+        "departure": {
+            key: departure.get(key)
+            for key in (
+                "transfer_id",
+                "date",
+                "season",
+                "window",
+                "kind",
+                "fee_status",
+                "fee_display",
+                "to_club_name",
+                "to_market",
+                "to_country",
+                "is_rival",
+                "rival_name",
+                "source_urls",
+            )
+        },
+        "aberdeen": {
+            key: aberdeen.get(key)
+            for key in (
+                "first_season",
+                "last_season",
+                "appearances",
+                "starts",
+                "sub_apps",
+                "minutes",
+                "goals",
+                "assists",
+                "rating",
+                "tenure_coverage",
+                "developed_here",
+                "developed_basis",
+                "final_season",
+            )
+        },
+        "post_career": {
+            key: post.get(key)
+            for key in (
+                "status",
+                "totals",
+                "current",
+                "at_rival",
+                "rival_current",
+                "rival_spells",
+                "top_flight_abroad",
+            )
+        },
+        "sell_on": clause,
+        "stats_basis": stats_basis,
+    }
+
+
+def _former_stats(
+    player: dict[str, Any], detail: dict[str, Any]
+) -> tuple[dict[str, Any] | None, str, str, str, str | None]:
+    post_rows = list(detail.get("post_seasons") or [])
+    post_rows = [row for row in post_rows if int(row.get("minutes") or 0) > 0]
+    if post_rows:
+        row = max(
+            post_rows,
+            key=lambda item: (str(item.get("season") or ""), int(item.get("minutes") or 0)),
+        )
+        return (
+            row,
+            "post_career_league",
+            str(row.get("team_name") or ""),
+            str(row.get("competition") or ""),
+            row.get("country"),
+        )
+    aberdeen_rows = [
+        row for row in detail.get("aberdeen_by_season") or [] if int(row.get("minutes") or 0) > 0
+    ]
+    if aberdeen_rows:
+        row = max(aberdeen_rows, key=lambda item: str(item.get("season") or ""))
+        return row, "aberdeen_last_season", "Aberdeen", "Aberdeen record", "Scotland"
+    return None, "unavailable", "", "Former-player record", None
+
+
+def _unavailable_rose(
+    *, minutes: int, reason: str, label: str = "Former-player record"
+) -> dict[str, Any]:
+    return {
+        "status": "unavailable",
+        "reason": reason,
+        "league": ROSE_LEAGUE,
+        "league_label": label,
+        "minutes": minutes,
+        "min_minutes": 180,
+        "cohort_min_minutes": 450,
+        "basis": "insufficient",
+        "cohort_n": 0,
+        "figures": [
+            {"id": "overall", "label": "Overall profile", "status": "unavailable", "axes": []},
+            {"id": "position", "label": "Position profile", "status": "unavailable", "axes": []},
+        ],
+        "season_used": None,
+        "cohort_season": None,
+        "fallback": False,
+        "fallback_reason": reason,
+        "fallback_note": (
+            "No same-season Premiership cohort is available for this former-player "
+            "record; the rose is unavailable rather than zero-filled."
+        ),
+    }
+
+
+def _former_position_group(position: Any) -> str | None:
+    value = str(position or "").casefold()
+    if "goalkeeper" in value:
+        return "GK"
+    if "defender" in value or "back" in value:
+        return "DEF"
+    if "midfielder" in value:
+        return "MID"
+    if "attacker" in value or "forward" in value or "winger" in value:
+        return "FWD"
+    group = position_group(position)
+    mapping = {
+        "GK": "GK",
+        "CB": "DEF",
+        "FB": "DEF",
+        "DM": "MID",
+        "CM": "MID",
+        "AM": "MID",
+        "W": "FWD",
+        "ST": "FWD",
+    }
+    return mapping.get(group or "")
+
+
+def _former_rose(
+    player: dict[str, Any],
+    detail: dict[str, Any],
+    *,
+    rose_history: dict[str, CohortIndex],
+    model: dict[str, Any],
+    rose_config: dict[str, Any],
+) -> dict[str, Any]:
+    player_id = player.get("player_id")
+    if player_id is None:
+        return _unavailable_rose(minutes=0, reason="no_player_id")
+    seasons = [
+        str(row.get("season"))
+        for row in reversed(detail.get("aberdeen_by_season") or [])
+        if row.get("season")
+    ]
+    if not seasons:
+        seasons = [str((player.get("aberdeen") or {}).get("last_season") or "")]
+    player_min = int((model.get("squad") or {}).get("min_minutes") or 180)
+    cohort_min = int((model.get("pool") or {}).get("min_minutes") or 450)
+    for season in [value for value in seasons if value]:
+        if season not in rose_history:
+            continue
+        totals = history_player_totals(int(player_id), season)
+        minutes = int(totals.get("minutes") or 0)
+        if minutes < player_min:
+            continue
+        rose = build_rose(
+            player_rates(totals),
+            minutes=minutes,
+            league=ROSE_LEAGUE,
+            league_label=ROSE_LEAGUE_LABEL,
+            family=None,
+            position_group=_former_position_group(player.get("position")),
+            index=rose_history[season],
+            model=model,
+            config=rose_config,
+            player_min_minutes=player_min,
+            cohort_min_minutes=cohort_min,
+        )
+        rose.update(
+            {
+                "season_used": season,
+                "cohort_season": season,
+                "fallback": True,
+                "fallback_reason": "former_player_last_aberdeen_season",
+                "fallback_note": (
+                    f"Former-player profile: {season} Aberdeen season against that "
+                    "season's Premiership cohort. It is not a current-season ranking."
+                ),
+            }
+        )
+        return rose
+    return _unavailable_rose(
+        minutes=int((player.get("aberdeen") or {}).get("minutes") or 0),
+        reason="no_prior_premiership_season",
+    )
+
+
+def _former_scouting_player(
+    player: dict[str, Any],
+    detail: dict[str, Any],
+    clause: dict[str, Any] | None,
+    *,
+    today: date,
+    rose_history: dict[str, CohortIndex],
+    model: dict[str, Any],
+    rose_config: dict[str, Any],
+) -> dict[str, Any]:
+    stats, stats_basis, stats_club, competition, _country = _former_stats(player, detail)
+    post = player.get("post_career") or {}
+    current = post.get("current") or {}
+    minutes = int((stats or {}).get("minutes") or 0)
+    appearances = (stats or {}).get("appearances")
+    rating = (stats or {}).get("rating")
+    birth_date = player.get("birth_date")
+    club = current.get("club_name") or stats_club or "Unknown club"
+    league_name = current.get("league") or competition or "Former-player record"
+    role_label = player.get("position") or "Role unknown"
+    return {
+        "player_id": player.get("player_id"),
+        "name": player.get("name"),
+        "full_name": player.get("name"),
+        "club": club,
+        "stats_club": stats_club or "Unknown club",
+        "current_club_status": "former_player",
+        "current_club_source": current.get("source") or "former_register",
+        "transferred_at": (player.get("departure") or {}).get("date"),
+        "current_league_name": league_name,
+        "age": age_at(birth_date, today.isoformat()) if birth_date else None,
+        "nationality": player.get("nationality"),
+        "position_group": position_group(player.get("position")) or "UNKNOWN",
+        "role_family": None,
+        "role_label": role_label,
+        "role_status": "unknown",
+        "role_family_share": None,
+        "minutes": minutes,
+        "appearances": appearances,
+        "goals": (stats or {}).get("goals"),
+        "assists": (stats or {}).get("assists"),
+        "rating": rating,
+        "rating_percentile": None,
+        "adjusted_percentile": None,
+        "adjustment_basis": "former_player_only",
+        "value_index": None,
+        "value_index_coverage": None,
+        "value_index_drivers": [],
+        "value_index_basis": None,
+        "scouting_priority": None,
+        "age_multiplier": None,
+        "europe_multiplier": None,
+        "european_league_phase_minutes": None,
+        "european_league_phase_appearances": None,
+        "european_league_phase_competitions": [],
+        "european_status": "unknown",
+        "value_low_gbp": None,
+        "value_high_gbp": None,
+        "value_confidence": "unknown",
+        "value_method": "not_applicable",
+        "cohort_basis": "former_player_only",
+        "cohort_n": 0,
+        "team_context_status": "unavailable",
+        "team_rank": None,
+        "team_points": None,
+        "team_played": None,
+        "team_ppg": None,
+        "team_count": None,
+        "team_points_percentile": None,
+        "team_underperforming": None,
+        "team_lift": None,
+        "rose": _former_rose(
+            player,
+            detail,
+            rose_history=rose_history,
+            model=model,
+            rose_config=rose_config,
+        ),
+        "flags": ["former_player"],
+        "archetypes": {},
+        "profile": None,
+        **{field: None for field in RATE_FIELDS},
+        "former_aberdeen": _former_aberdeen_block(player, clause, stats_basis=stats_basis),
     }
 
 
@@ -720,6 +1016,8 @@ def build_scouting_bundle(
     squad_data: dict[str, Any],
     availability: dict[str, Any] | None,
     generated_at: str,
+    former_players: dict[str, Any] | None = None,
+    former_seasons: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build the hub, coverage and every per-league pool document."""
     season_label = season or current_season()
@@ -853,6 +1151,91 @@ def build_scouting_bundle(
             generated_at=generated_at,
         )
 
+    former_document = former_players or {}
+    former_detail = (former_seasons or {}).get("seasons") or {}
+    former_list = former_document.get("players") or []
+    former_by_id = {
+        int(player["player_id"]): player
+        for player in former_list
+        if player.get("player_id") is not None
+    }
+    former_clauses = {
+        str(clause.get("player_key")): clause
+        for clause in (former_document.get("sell_on_watch") or {}).get("clauses") or []
+        if clause.get("player_key")
+    }
+    existing_ids = {
+        int(player["player_id"])
+        for document in pool_documents.values()
+        for player in document.get("players") or []
+        if player.get("player_id") is not None
+    }
+    rose_history = load_rose_history_indices(model) if former_by_id else {}
+    if former_by_id:
+        for document in pool_documents.values():
+            for player in document.get("players") or []:
+                player_id = player.get("player_id")
+                if player_id is None or int(player_id) not in former_by_id:
+                    continue
+                source = former_by_id[int(player_id)]
+                player["former_aberdeen"] = _former_aberdeen_block(
+                    source,
+                    former_clauses.get(str(source.get("player_key"))),
+                    stats_basis="scouting_current_season",
+                )
+                if (player.get("rose") or {}).get("status") != "available":
+                    detail = former_detail.get(str(source.get("player_key"))) or {}
+                    player["rose"] = _former_rose(
+                        source,
+                        detail,
+                        rose_history=rose_history,
+                        model=model,
+                        rose_config=rose_config,
+                    )
+        today = date.today()
+        fallback_players = [
+            _former_scouting_player(
+                player,
+                former_detail.get(str(player.get("player_key"))) or {},
+                former_clauses.get(str(player.get("player_key"))),
+                today=today,
+                rose_history=rose_history,
+                model=model,
+                rose_config=rose_config,
+            )
+            for player in former_list
+            if player.get("player_id") is not None and int(player["player_id"]) not in existing_ids
+        ]
+        if fallback_players:
+            fallback_players.sort(key=lambda row: str(row.get("name") or ""))
+            former_league = {
+                "id": "sco:former-players",
+                "slug": "former",
+                "name": "Former-player record",
+                "country": "Scotland",
+                "tier": None,
+            }
+            former_summary = {
+                "status": "full",
+                "provider_league_id": 0,
+                "players": len(fallback_players),
+                "rated": sum(1 for row in fallback_players if row.get("rating") is not None),
+                "with_minutes_450": sum(
+                    1 for row in fallback_players if int(row.get("minutes") or 0) >= 450
+                ),
+                "role_players": 0,
+                "role_coverage": 0,
+                "lineups_fetched": 0,
+                "fixtures_played": 0,
+            }
+            pool_documents["former"] = _pool_document(
+                league=former_league,
+                summary=former_summary,
+                players=fallback_players,
+                season=season_label,
+                generated_at=generated_at,
+            )
+
     totals = {
         "leagues": len(league_list),
         "searchable": sum(1 for league in league_list if league["searchable"]),
@@ -963,6 +1346,14 @@ def build_scouting_bundle(
         for row in all_rows
         if row.get("player_id") is not None
     }
+    if "former" in pool_documents:
+        for player in pool_documents["former"].get("players") or []:
+            player_id = player.get("player_id")
+            if player_id is not None:
+                goal_counts[(int(player_id), "former")] = (
+                    player.get("goals"),
+                    player.get("assists"),
+                )
     profile_order_list = list(archetype_labels)
     profile_order = {key: index for index, key in enumerate(profile_order_list)}
     for document in pool_documents.values():
@@ -1092,6 +1483,28 @@ def build_scouting_bundle(
             "No xG/xA, progressive passes, carries, pressures, aerial wins or crosses.",
         ],
     }
+    if "former" in pool_documents:
+        search_document["leagues"].append(
+            {
+                "id": "sco:former-players",
+                "slug": "former",
+                "name": "Former-player record",
+                "country": "Scotland",
+                "players": len(pool_documents["former"].get("players") or []),
+                "searchable": True,
+                "href": "/former-players/",
+            }
+        )
+        coverage["former_profiles"] = {
+            "players": len(pool_documents["former"].get("players") or []),
+            "note": (
+                "Former Aberdeen players use the standard scouting profile. Their "
+                "statistical profile is their latest league season, falling back to "
+                "their last Aberdeen season and labelled. Cup/European provider rows "
+                "and cross-league percentiles are not published."
+            ),
+        }
+
     return {
         "hub": hub,
         "coverage": coverage,

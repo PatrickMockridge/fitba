@@ -1,15 +1,25 @@
 {
+  "basis": "active_incoming_external",
   "buckets": {
     "age_band": {},
     "league": {},
     "position": {},
     "value_band": {}
   },
+  "candidate_rows": 0,
   "club_id": "sco:aberdeen",
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "excluded": {
+    "current_non_official": 0,
+    "current_squad": 0,
+    "former_player": 0,
+    "outgoing": 0,
+    "unknown_identity": 0
+  },
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "low_confidence": true,
   "narrative": "No active, curated links yet. The profile activates when the rumour register has sourced rows; until then it is deliberately empty.",
-  "note": "Advisory only. The data-driven scouting fit stays primary; a small rumour cohort must never override it. The club's internal target list is not public and is not implied.",
+  "note": "Advisory only, from active incoming external targets. Current squad, current non-official and former players are excluded; return links are listed separately. The data-driven scouting fit stays primary and the club's internal target list is not public.",
+  "return_links": [],
   "sample_size": 0,
   "signals": [],
   "weighted_total": 0,

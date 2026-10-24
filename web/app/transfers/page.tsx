@@ -52,6 +52,9 @@ export default function TransfersPage() {
           <Link className="button button-ghost" href="/history/">
             The Cormack era
           </Link>
+          <Link className="button button-ghost" href="/former-players/">
+            Former players
+          </Link>
         </div>
         <p className="fine-print">
           Audited from {data.coverage.audited_from ?? "2024-25"}; earlier windows
@@ -133,7 +136,8 @@ export default function TransfersPage() {
           <p className="fine-print">
             A reported clause is not a confirmed contract term. The register
             tracks it so future sale proceeds are not invisible; it does not
-            assume the percentage or the basis.
+            assume the percentage or the basis.{" "}
+            <Link href="/former-players/">Sell-on watch and former-player record →</Link>
           </p>
         </section>
       ) : null}

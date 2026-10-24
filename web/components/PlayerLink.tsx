@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 /**
- * A current player's name links to their profile. Names without an href are
- * former players, rumour targets or fan-only mentions and stay plain text.
+ * A current player's name links to their profile; a former player links to the
+ * former-player register anchor. Names without an href are rumour targets or
+ * fan-only mentions and stay plain text.
  */
 export function PlayerLink({
   name,

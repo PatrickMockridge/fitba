@@ -38,6 +38,7 @@
 - [Player data and provenance](player-data.md)
 - [Injuries and availability](availability.md)
 - [Squad needs](needs.md)
+- [Former players](former-players.md)
 - [Transfers and loans](transfers.md)
 - [Rumour mill and fan signal](rumours.md)
 - [Trading model](trading-model.md)

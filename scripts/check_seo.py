@@ -46,7 +46,13 @@ def main() -> int:
         errors.append("no sitemap.xml")
     else:
         sitemap_text = sitemap.read_text(encoding="utf-8")
-        for required in ("/matchday/", "/matches/", "/analysis/", "/corrections/"):
+        for required in (
+            "/matchday/",
+            "/matches/",
+            "/analysis/",
+            "/former-players/",
+            "/corrections/",
+        ):
             if required not in sitemap_text:
                 errors.append(f"sitemap is missing {required}")
     if not (OUT / "icon.svg").exists():

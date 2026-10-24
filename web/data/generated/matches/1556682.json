@@ -1,0 +1,211 @@
+{
+  "coverage": {
+    "depth": "partial",
+    "events": false,
+    "lineups": false,
+    "note": "Missing classes are unavailable, not zero.",
+    "player_stats": false,
+    "team_stats": true,
+    "xg": false
+  },
+  "depth": "partial",
+  "fixture": {
+    "aberdeen_outcome": "L",
+    "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
+    "away_goals": 2,
+    "away_ht_goals": null,
+    "away_penalties": null,
+    "away_team_id": "sco:aberdeen",
+    "away_team_name": "Aberdeen",
+    "competition_id": "sco:premiership",
+    "competition_name": "Scottish Premiership",
+    "date": "2026-10-24",
+    "decided_by": "regulation",
+    "duplicate_of": null,
+    "extra_time": false,
+    "fixture_id": 1556682,
+    "home_goals": 3,
+    "home_ht_goals": null,
+    "home_penalties": null,
+    "home_team_id": "sco:dundee-united",
+    "home_team_name": "Dundee United",
+    "href": "/matches/1556682/",
+    "outcome": "W",
+    "referee": null,
+    "result": "W",
+    "result_label": "W",
+    "round": "Regular Season - 10",
+    "season": "2026-27",
+    "shootout_result": null,
+    "status": "FT",
+    "venue": "A",
+    "venue_name": "Tannadice Park"
+  },
+  "form": {
+    "after": [],
+    "before": [
+      {
+        "date": "2026-09-05",
+        "fixture_id": 1556658,
+        "goals_against": 0,
+        "goals_for": 0,
+        "href": "/matches/1556658/",
+        "opponent_name": "Kilmarnock",
+        "venue": "H"
+      },
+      {
+        "date": "2026-09-15",
+        "fixture_id": 1556643,
+        "goals_against": 0,
+        "goals_for": 4,
+        "href": "/matches/1556643/",
+        "opponent_name": "Motherwell",
+        "venue": "A"
+      },
+      {
+        "date": "2026-09-19",
+        "fixture_id": 1556665,
+        "goals_against": 1,
+        "goals_for": 1,
+        "href": "/matches/1556665/",
+        "opponent_name": "Hibernian",
+        "venue": "A"
+      },
+      {
+        "date": "2026-10-11",
+        "fixture_id": 1556670,
+        "goals_against": 1,
+        "goals_for": 0,
+        "href": "/matches/1556670/",
+        "opponent_name": "St Johnstone",
+        "venue": "H"
+      },
+      {
+        "date": "2026-10-17",
+        "fixture_id": 1556676,
+        "goals_against": 1,
+        "goals_for": 3,
+        "href": "/matches/1556676/",
+        "opponent_name": "St Mirren",
+        "venue": "H"
+      }
+    ]
+  },
+  "generated_at": "2026-10-24T20:09:33+00:00",
+  "lineups": {
+    "away": null,
+    "home": null
+  },
+  "links": {
+    "competition": "/competitions/",
+    "matches": "/matches/",
+    "next": null,
+    "previous": "/matches/1556676/",
+    "season": "/history/2026-27/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "available": false,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "strengths": []
+  },
+  "player_stats": [],
+  "schema_version": "1.2.0",
+  "scoreboard": {
+    "away": {
+      "goals": [],
+      "is_aberdeen": true,
+      "red_cards": [],
+      "side": "away",
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen"
+    },
+    "events_available": false,
+    "goals_complete": false,
+    "home": {
+      "goals": [],
+      "is_aberdeen": false,
+      "red_cards": [],
+      "side": "home",
+      "team_id": "sco:dundee-united",
+      "team_name": "Dundee United"
+    },
+    "note": "The event feed is unavailable; the final score is authoritative.",
+    "shootout": null
+  },
+  "sources": [
+    {
+      "id": "api_football",
+      "layer": "match_events_and_lineups",
+      "name": "API-Football",
+      "note": "Events, lineups, formations, player match stats and cup/European team stats."
+    },
+    {
+      "id": "football_data_uk",
+      "layer": "league_match_stats",
+      "name": "football-data.co.uk",
+      "note": "League shots, shots on target, corners, fouls, cards and provider xG."
+    }
+  ],
+  "stats": {
+    "away": {
+      "corners": null,
+      "expected_goals": null,
+      "fouls": null,
+      "red_cards": null,
+      "shots": null,
+      "shots_on_target": null,
+      "xg": null,
+      "yellow_cards": null
+    },
+    "coverage": {
+      "possession": "unavailable",
+      "shots": "available"
+    },
+    "home": {
+      "corners": null,
+      "expected_goals": null,
+      "fouls": null,
+      "red_cards": null,
+      "shots": null,
+      "shots_on_target": null,
+      "xg": null,
+      "yellow_cards": null
+    },
+    "rows": []
+  },
+  "summary": {
+    "basis": "measured",
+    "bullets": [
+      {
+        "basis": "unknown",
+        "text": "The event feed is unavailable; the final score is authoritative."
+      }
+    ],
+    "events_available": false,
+    "goals_complete": false,
+    "headline": "Dundee United beat Aberdeen 3-2",
+    "note": "The read describes measured events and model output. It is not a result prediction and not a verdict on performance.",
+    "reconciliation": {
+      "event_goals": null,
+      "event_score": null,
+      "final_score": {
+        "away": 2,
+        "home": 3
+      },
+      "matched": null
+    }
+  },
+  "timeline": [],
+  "xg": {
+    "available": false
+  }
+}

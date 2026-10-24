@@ -9,7 +9,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "web" / "out"
-REQUIRED_PAGES = ["index.html", "matches/index.html", "analysis/index.html", "squad/index.html"]
+REQUIRED_PAGES = [
+    "index.html",
+    "matches/index.html",
+    "analysis/index.html",
+    "squad/index.html",
+    "former-players/index.html",
+]
 
 
 def main() -> int:

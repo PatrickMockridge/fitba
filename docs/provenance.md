@@ -74,3 +74,12 @@ results and team stats, and the page says so.
 5. Run `uv run python scripts/check_provenance.py`.
 
 No source may be described as primary for a layer it does not supply.
+
+
+## Former-player layers
+
+`former_player_record` is derived from the confirmed transfer register, the
+covered Aberdeen history and licensed API-Football player seasons.
+`sell_on_events` is curated: a subsequent move is detected automatically, but a
+public fee anchor is required before any receipt is computed. Both layers keep
+missing seasons, leagues and identities explicit.

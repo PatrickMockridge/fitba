@@ -33,7 +33,7 @@ def test_schedule_converts_utc_to_london_across_dst():
     october = next(row for row in rows if row["date"] == "2026-10-24")
     assert october["kickoff"] == "15:00"
     assert october["kickoff_tz"] == "Europe/London"
-    assert october["kickoff_status"] == "confirmed"
+    assert october["kickoff_status"] == "provisional"
 
 
 def test_schedule_excludes_played_rows_from_lookahead_and_marks_overdue():

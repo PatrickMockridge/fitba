@@ -9,9 +9,10 @@ states; it never fabricates a lineup or a possession value.
 
 from __future__ import annotations
 
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Literal
+from zoneinfo import ZoneInfo
 
 import polars as pl
 from pydantic import BaseModel, ConfigDict
@@ -326,6 +327,27 @@ def _frame_or_none(path: Path) -> pl.DataFrame | None:
 
 def _read_snapshot(name: str, snapshot_dir: Path | None = None) -> pl.DataFrame | None:
     return _frame_or_none((snapshot_dir or MATCHDAY_DIR) / name)
+
+
+def _fixture_passed(fixture: dict[str, Any]) -> bool:
+    """True when the snapshot fixture's kickoff plus a finish buffer has passed."""
+    fixture_date = str(fixture.get("date") or "")[:10]
+    if not fixture_date:
+        return False
+    if fixture_date < date.today().isoformat():
+        return True
+    if fixture_date > date.today().isoformat():
+        return False
+    kickoff = str(fixture.get("kickoff") or "").strip()
+    if not kickoff:
+        return False
+    try:
+        local = datetime.fromisoformat(f"{fixture_date}T{kickoff}:00").replace(
+            tzinfo=ZoneInfo("Europe/London")
+        )
+    except ValueError:
+        return False
+    return datetime.now(UTC) >= (local + timedelta(hours=3)).astimezone(UTC)
 
 
 def _fixture_from_snapshot(snapshot_dir: Path | None = None) -> dict[str, Any] | None:
@@ -805,7 +827,7 @@ def build_matchday_payload(
 
     fixture_date = str(fixture.get("date") or "")[:10]
     fixture_source = "snapshot"
-    if fixture_date and fixture_date < date.today().isoformat():
+    if fixture_date and _fixture_passed(fixture):
         # The snapshot is a cache. Prefer the live merged schedule before
         # declaring that there is no fixture.
         live = next_fixture(season=season)
@@ -1069,7 +1091,7 @@ def fallback_matchday_payload(
     if previous:
         fixture = previous.get("fixture") or {}
         fixture_date = str(fixture.get("date") or "")[:10]
-        if fixture_date and fixture_date < date.today().isoformat():
+        if fixture_date and _fixture_passed(fixture):
             return _empty_document(
                 season=season,
                 generated_at=generated_at,

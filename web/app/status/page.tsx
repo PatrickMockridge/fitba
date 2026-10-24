@@ -263,6 +263,28 @@ export default function StatusPage() {
         </section>
       ) : null}
 
+      {manifest.coverage.former_players ? (
+        <section className="card">
+          <div className="card-head">
+            <div>
+              <p className="eyebrow">Former players</p>
+              <h2>Post-Aberdeen coverage</h2>
+            </div>
+            <span className="badge badge-neutral">
+              {manifest.coverage.former_players.state}
+            </span>
+          </div>
+          <p>
+            {manifest.coverage.former_players.count} players ·{" "}
+            {manifest.coverage.former_players.with_api_id ?? 0} with an API id ·{" "}
+            {manifest.coverage.former_players.with_post_seasons ?? 0} with post-career league
+            rows · {manifest.coverage.former_players.sell_on_computed ?? 0} sell-on receipts
+            computed.
+          </p>
+          <p className="fine-print">{manifest.coverage.former_players.note}</p>
+        </section>
+      ) : null}
+
       {manifest.coverage.history ? (
         <section className="card">
           <div className="section-head">

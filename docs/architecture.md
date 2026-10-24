@@ -306,3 +306,16 @@ After the API-Football key-test passes:
 - Doc check verifies links and the key competition-format facts.
 - `mdbook build` is the docs book build check.
 - `npm run build` is the end-to-end static build check.
+
+
+## Former-player modules
+
+- `normalize/transfer_history.py` — provider transfer type parsing and event
+  sequencing.
+- `analytics/former_players.py` — universe, Aberdeen tenure, post-career record,
+  sell-on watch and development scorecard.
+- `analytics/affiliation.py` — canonical affiliation for rumours, forum signals
+  and needs.
+- `ingest/former_players.py` — bounded/cache-first backfill and refresh.
+- `publish/former_players.py` — strict result documents for
+  `former-players/aberdeen.json` and `former-players/seasons.json`.

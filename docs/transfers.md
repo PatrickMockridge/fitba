@@ -198,6 +198,16 @@ source. A blank percentage is never inferred. The current register has Calvin
 Ramsay's 17.5% (Wikipedia-confirmed), Lewis Ferguson's reported 20% and Bojan
 Miovski's reported clause with an undisclosed percentage.
 
+## Sell-on watch and former players
+
+The register is the clause home; the trigger and any computed receipt live on
+the [former-player register](former-players.md) and `/former-players/`.
+Detection is automatic from the player's full provider transfer history. A
+receipt is computed only when the percentage, basis, subsequent fee and (for a
+profit basis) the original fee are all publicly evidenced. Otherwise the watch
+publishes the missing inputs. A modelled fee is never used as a receipt input.
+Instalments, add-ons, agent and solidarity terms remain unknown.
+
 ## Plausibility screen
 
 A citation alone does not make a transfer real. A curated row is withheld when

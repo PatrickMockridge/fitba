@@ -4,7 +4,7 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:f75f3bd05285934871d573ebed76d35ff0fcb51d1dee499390eb83b2b0acbf3b",
+  "checksum": "sha256:d6a20b78071ed71d628be434d75df072264b0fe045a87ce6f9721466507f9abd",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -728,7 +728,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -1870,7 +1870,8 @@
       "denominator": null,
       "description": "Curated rumour counts and status.",
       "displayed_surfaces": [
-        "/rumours/"
+        "/rumours/",
+        "/recruitment/"
       ],
       "fields": [
         "total",
@@ -1878,12 +1879,18 @@
         "confirmed",
         "by_confidence",
         "by_status",
-        "by_direction"
+        "by_direction",
+        "by_affiliation",
+        "targets",
+        "return_links"
       ],
       "formula": {
+        "by_affiliation": "count rumours by canonical affiliation",
         "by_confidence": "count rumours by confidence",
         "by_direction": "count rumours by direction",
         "by_status": "count rumours by status",
+        "return_links": "active incoming former_player rows",
+        "targets": "active incoming external_target rows",
         "total": "len(rumours)"
       },
       "home_payload": "rumours/aberdeen.json",
@@ -1918,7 +1925,7 @@
       "value_type": "object",
       "verification": "recompute",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "family",
@@ -1928,10 +1935,11 @@
       "denominator": null,
       "description": "Advisory recruitment profile weights and buckets.",
       "displayed_surfaces": [
-        "/recruitment/"
+        "/recruitment/",
+        "/rumours/"
       ],
       "fields": [],
-      "formula": "Advisory profile weights by position, age and mention volume; buckets are descriptive, not probabilities or recommendations.",
+      "formula": "Advisory profile from active incoming external_target rows only; current squad, current non-official and former players are excluded, and return links are listed separately. Buckets are descriptive, not probabilities or recommendations.",
       "home_payload": "rumours/profile.json",
       "home_surface": "/recruitment/",
       "id": "rumours.profile",
@@ -1963,7 +1971,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -1973,10 +1981,13 @@
       "denominator": null,
       "description": "Fan-signal coverage, sentiment and profile.",
       "displayed_surfaces": [
-        "/news/"
+        "/news/",
+        "/rumours/",
+        "/recruitment/",
+        "/former-players/"
       ],
       "fields": [],
-      "formula": "Mention counts from sampled first pages; topic-level VADER sentiment only; no per-player sentiment score is published; n posts and topics are shown.",
+      "formula": "Mention counts from sampled first pages; each name is labelled by canonical affiliation; the position and age profile counts external_target only; topic-level VADER sentiment only; no per-player sentiment score is published.",
       "home_payload": "forum/afc_chat.json",
       "home_surface": "/news/",
       "id": "forum.signal",
@@ -2008,7 +2019,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -2101,7 +2112,523 @@
       "value_type": "object",
       "verification": "cross_surface",
       "verification_checks": [],
-      "version": 3
+      "version": 4
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "The definition is the policy actually used by the publisher; it is not a measurement.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Configured former-player universe, rival list, development proxy and sell-on policy.",
+      "displayed_surfaces": [
+        "/former-players/"
+      ],
+      "fields": [
+        "start_season",
+        "include_kinds",
+        "exclude_kinds",
+        "rivals",
+        "developed_proxy",
+        "scorecard",
+        "sell_on_policy"
+      ],
+      "formula": "Read from config/former_players.yaml; the universe is the latest published permanent/free departure, excluding current squad, returns and loan-outs.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.definition",
+      "implementation": null,
+      "inputs": [
+        "config",
+        "published payload"
+      ],
+      "label": "Former-player definition",
+      "limitations": [
+        "The register covers 2019-20 onward; earlier departures are outside the record.",
+        "A definition is a policy, not a claim that every departure is captured."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/definition/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Counts reconcile to the player rows; unknown states are kept visible.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Former-player counts by departure, destination, current status, rival spell and coverage.",
+      "displayed_surfaces": [
+        "/former-players/",
+        "/status/"
+      ],
+      "fields": [
+        "total",
+        "by_exit_kind",
+        "by_fee_status",
+        "by_fee_basis",
+        "by_exit_season",
+        "by_destination",
+        "by_current_league",
+        "by_current_country",
+        "by_current_status",
+        "by_current_coverage",
+        "at_rival_now",
+        "rival_spell",
+        "at_club",
+        "on_loan",
+        "free_agent",
+        "retired",
+        "current_unknown",
+        "in_covered_feed",
+        "not_in_covered_feed",
+        "top_flight_abroad",
+        "current_club_unknown",
+        "young_exits",
+        "developed_here",
+        "developed_here_with_fee",
+        "sell_on_clauses",
+        "sell_on_triggers",
+        "sell_on_computable"
+      ],
+      "formula": "One row per canonical former player; buckets count those rows; a missing value is unknown, never zero.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.summary",
+      "implementation": "fitba.metrics.checks:verify_former_summary",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Former-player summary",
+      "limitations": [
+        "A later career is context, not proof that a sale was right or a fee was good."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/summary/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "count",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "mixed",
+      "confidence_rule": "Every row maps to a published outgoing transfer; missing seasons are gaps, not zero.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "One row per canonical former player with departure, Aberdeen record, post-career summary and sell-on reference.",
+      "displayed_surfaces": [
+        "/former-players/"
+      ],
+      "fields": [
+        "player_key",
+        "identity_status",
+        "age_at_exit",
+        "departure",
+        "aberdeen",
+        "post_career",
+        "sell_on_clause_id"
+      ],
+      "formula": "The universe rule, then one Aberdeen tenure aggregation and one post-career league aggregation per player. Provider ratings stay league-relative.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.players",
+      "implementation": "fitba.metrics.checks:verify_former_players",
+      "inputs": [
+        "published payload",
+        "data/normalized/former_players/**"
+      ],
+      "label": "Former-player rows",
+      "limitations": [
+        "Post-career ratings are provider values and are not comparable across leagues.",
+        "A player without an API id has no measured post-career record."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/players",
+        "former-players/aberdeen.json#/players/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_player",
+      "basis": "measured",
+      "confidence_rule": "A missing season is a gap, not zero; cup and European provider rows are excluded from totals.",
+      "coverage_tier": "match",
+      "denominator": "minutes",
+      "description": "League season rows and per-season rates after the Aberdeen departure.",
+      "displayed_surfaces": [
+        "/former-players/"
+      ],
+      "fields": [
+        "season",
+        "team_name",
+        "competition",
+        "country",
+        "league_tier",
+        "appearances",
+        "starts",
+        "minutes",
+        "goals",
+        "assists",
+        "rating",
+        "goals_p90",
+        "assists_p90"
+      ],
+      "formula": "League-only provider seasons after departure; per-90 rates only above the configured minutes gate; no cross-league percentile.",
+      "home_payload": "former-players/seasons.json",
+      "home_surface": "/former-players/",
+      "id": "former.post-seasons",
+      "implementation": "fitba.metrics.checks:verify_former_post_seasons",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Former-player post-Aberdeen seasons",
+      "limitations": [
+        "Cup and European provider rows are stored locally but excluded because some repeat league totals.",
+        "The provider does not cover every league."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/seasons.json#/seasons",
+        "former-players/seasons.json#/seasons/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "No percentage or fee is inferred; zero computed is not zero future income.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Sell-on clause event, receipt and missing-input state.",
+      "displayed_surfaces": [
+        "/former-players/",
+        "/transfers/"
+      ],
+      "fields": [
+        "clauses",
+        "summary"
+      ],
+      "formula": "Detect the first permanent/free move away from the buyer; compute a receipt only when percentage, basis and every required public fee are evidenced; otherwise return the missing inputs.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.sell-on",
+      "implementation": "fitba.metrics.checks:verify_former_sell_on",
+      "inputs": [
+        "published payload",
+        "reference/sell_on_clauses.yaml",
+        "reference/sell_on_events.yaml"
+      ],
+      "label": "Former-player sell-on watch",
+      "limitations": [
+        "Instalments, add-ons, agent fees and solidarity terms are unknown.",
+        "A receipt is an implied gross share before deductions, not confirmed cash."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/sell_on_watch",
+        "former-players/aberdeen.json#/sell_on_watch/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "sell_on_events",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "Descriptive only; no causal claim about the trading model or a sale.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Descriptive exit cohorts and post-Aberdeen distributions.",
+      "displayed_surfaces": [
+        "/former-players/"
+      ],
+      "fields": [
+        "definitions",
+        "cohorts",
+        "by_exit_season",
+        "vs_aberdeen",
+        "note"
+      ],
+      "formula": "Counts and distributions over the canonical former players; young exits at the configured age, developed proxy at the configured debut age and starts; no composite score.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.scorecard",
+      "implementation": "fitba.metrics.checks:verify_former_scorecard",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Former-player development scorecard",
+      "limitations": [
+        "The counterfactual is unobservable; later success does not prove a sale was wrong.",
+        "The developed proxy is not an academy register."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/development_scorecard/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "measured",
+      "confidence_rule": "Missing seasons and missing API ids are explicit gaps; failure never zero-fills.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Backfill counts, gaps and current-club coverage.",
+      "displayed_surfaces": [
+        "/former-players/",
+        "/status/"
+      ],
+      "fields": [
+        "status",
+        "as_of",
+        "register_from",
+        "post_career_source",
+        "post_career_updated_at",
+        "backfill",
+        "counts",
+        "gaps"
+      ],
+      "formula": "Expected player-seasons from departure to current; present league seasons; gaps and provider budget from the local backfill meta.",
+      "home_payload": "former-players/aberdeen.json",
+      "home_surface": "/former-players/",
+      "id": "former.coverage",
+      "implementation": "fitba.metrics.checks:verify_former_coverage",
+      "inputs": [
+        "published payload",
+        "data/normalized/former_players/meta.json"
+      ],
+      "label": "Former-player coverage",
+      "limitations": [
+        "Provider coverage varies by league and season."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "former-players/aberdeen.json#/coverage/**",
+        "former-players/seasons.json#/coverage/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "former_player_record",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "cross_surface",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
+      "confidence_rule": "A mention is not a transfer link; the affiliation is canonical, the mention count is a sample.",
+      "coverage_tier": "derived",
+      "denominator": null,
+      "description": "Former-player mention lane and external-target profile counts.",
+      "displayed_surfaces": [
+        "/rumours/",
+        "/recruitment/",
+        "/former-players/"
+      ],
+      "fields": [
+        "total_signals",
+        "external_sample_size",
+        "affiliation_mix",
+        "excluded_counts",
+        "lanes",
+        "former_player_profile"
+      ],
+      "formula": "Signals are labelled by affiliation from the current squad and former register; position and age mixes count external_target only; the former lane is a filtered view of the same signal rows.",
+      "home_payload": "forum/afc_chat.json",
+      "home_surface": "/rumours/",
+      "id": "forum.former-profile",
+      "implementation": "fitba.metrics.checks:verify_forum_former_profile",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Former-player forum profile",
+      "limitations": [
+        "Sampled first pages only; a mention is not a target or a probability."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "forum/afc_chat.json#/profile/total_signals",
+        "forum/afc_chat.json#/profile/external_sample_size",
+        "forum/afc_chat.json#/profile/affiliation_mix/**",
+        "forum/afc_chat.json#/profile/excluded_counts/**",
+        "forum/afc_chat.json#/profile/lanes/**",
+        "forum/afc_chat.json#/profile/former_player_profile/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "forum_signal",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "curated",
+      "confidence_rule": "The row must resolve in the former register; a name-only row is unknown, not former.",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "Curated rumours whose subject is a former player.",
+      "displayed_surfaces": [
+        "/rumours/",
+        "/former-players/"
+      ],
+      "fields": [
+        "former_player_mentions"
+      ],
+      "formula": "Rows whose canonical affiliation is former_player; a return link is a former player named as an incoming target and is shown separately.",
+      "home_payload": "rumours/aberdeen.json",
+      "home_surface": "/rumours/",
+      "id": "rumours.former-lane",
+      "implementation": "fitba.metrics.checks:verify_rumours_former_lane",
+      "inputs": [
+        "published payload"
+      ],
+      "label": "Curated former-player rumour lane",
+      "limitations": [
+        "The curated register is currently empty until a sourced row is added."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "rumours/aberdeen.json#/former_player_mentions",
+        "rumours/aberdeen.json#/former_player_mentions/**"
+      ],
+      "reviewed": "2026-10-24",
+      "rounding": {
+        "decimals": 0,
+        "display": "0",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "rumours",
+      "source_paths": [],
+      "status": "active",
+      "unit": "count",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
     },
     {
       "aggregation": "sum",
@@ -2109,7 +2636,7 @@
       "confidence_rule": "A failed check blocks publish; the audit is not a quality score.",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Pass/fail counts for the published cross-surface consistency checks.",
+      "description": "Pass/fail counts for the published cross-surface consistency checks, including the former-player and affiliation checks.",
       "displayed_surfaces": [
         "/status/"
       ],
@@ -2152,7 +2679,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "family",
@@ -2160,15 +2687,17 @@
       "confidence_rule": "Config match; the client does not hardcode a threshold.",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Dataset and availability staleness thresholds exposed to the client.",
+      "description": "Dataset, availability and former-player staleness thresholds exposed to the client.",
       "displayed_surfaces": [
         "/status/"
       ],
       "fields": [
         "dataset_stale_after_hours",
-        "availability_stale_after_days"
+        "availability_stale_after_days",
+        "former_players_refreshed_at",
+        "former_players_stale_after_hours"
       ],
-      "formula": "Read from config/matchday.yaml stale_after_hours and config/availability.yaml policy.max_age_days.",
+      "formula": "Read from config/matchday.yaml stale_after_hours, config/availability.yaml policy.max_age_days and the former-player refresh timestamp.",
       "home_payload": "manifest.json",
       "home_surface": "/status/",
       "id": "manifest.freshness",
@@ -2201,7 +2730,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "family",
@@ -5112,9 +5641,180 @@
       },
       "verification": "config_match",
       "version": 1
+    },
+    {
+      "config_keys": [
+        "rivals"
+      ],
+      "config_path": "former_players",
+      "id": "param.former-rivals",
+      "kind": "matrix",
+      "label": "Former-player rival list",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-24",
+      "unit": "mixed",
+      "used_by": [
+        "former.definition",
+        "former.summary",
+        "former.players",
+        "former.scorecard"
+      ],
+      "value": {
+        "rivals": [
+          {
+            "club_id": "sco:celtic",
+            "name": "Celtic"
+          },
+          {
+            "club_id": "sco:rangers",
+            "name": "Rangers"
+          },
+          {
+            "club_id": "sco:dundee-united",
+            "name": "Dundee United"
+          }
+        ]
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "development"
+      ],
+      "config_path": "former_players",
+      "id": "param.former-developed",
+      "kind": "matrix",
+      "label": "Former-player development proxy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-24",
+      "unit": "mixed",
+      "used_by": [
+        "former.players",
+        "former.scorecard"
+      ],
+      "value": {
+        "development": {
+          "debut_age_max": 21,
+          "min_starts": 10,
+          "young_exit_age_max": 23
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "scorecard"
+      ],
+      "config_path": "former_players",
+      "id": "param.former-scorecard",
+      "kind": "matrix",
+      "label": "Former-player scorecard thresholds",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-24",
+      "unit": "mixed",
+      "used_by": [
+        "former.scorecard"
+      ],
+      "value": {
+        "scorecard": {
+          "min_post_minutes": 90,
+          "min_post_seasons": 1
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "sell_on"
+      ],
+      "config_path": "former_players",
+      "id": "param.former-sell-on",
+      "kind": "matrix",
+      "label": "Former-player sell-on policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-24",
+      "unit": "mixed",
+      "used_by": [
+        "former.sell-on"
+      ],
+      "value": {
+        "sell_on": {
+          "allowed_basis": [
+            "gross_fee",
+            "profit"
+          ],
+          "fx_to_gbp": {
+            "EUR": 0.85,
+            "GBP": 1.0,
+            "USD": 0.78
+          },
+          "require_basis": true,
+          "require_percentage": true,
+          "require_public_fee": true
+        }
+      },
+      "verification": "config_match",
+      "version": 1
+    },
+    {
+      "config_keys": [
+        "post_career"
+      ],
+      "config_path": "former_players",
+      "id": "param.former-backfill",
+      "kind": "matrix",
+      "label": "Former-player backfill policy",
+      "owner": "patrickmockridge",
+      "reviewed": "2026-10-24",
+      "unit": "mixed",
+      "used_by": [
+        "former.players",
+        "former.post-seasons",
+        "former.coverage"
+      ],
+      "value": {
+        "post_career": {
+          "backfill_max_requests": 400,
+          "current_season_ttl_hours": 24,
+          "historical_ttl_hours": 720,
+          "league_tiers": {
+            "135": {
+              "country": "Italy",
+              "tier": 1
+            },
+            "140": {
+              "country": "Spain",
+              "tier": 1
+            },
+            "39": {
+              "country": "England",
+              "tier": 1
+            },
+            "61": {
+              "country": "France",
+              "tier": 1
+            },
+            "78": {
+              "country": "Germany",
+              "tier": 1
+            }
+          },
+          "max_requests_per_run": 400,
+          "min_minutes_for_rates": 180,
+          "refresh_max_requests": 180,
+          "request_interval_seconds": 0.3,
+          "source": "api_football",
+          "transfers_ttl_hours": 168
+        }
+      },
+      "verification": "config_match",
+      "version": 1
     }
   ],
-  "registry_version": "3.6.0",
+  "registry_version": "3.7.0",
   "reviewed": "2026-10-24",
   "schema_version": 1,
   "structural_number_patterns": [

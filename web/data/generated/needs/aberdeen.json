@@ -65,7 +65,7 @@
           "basis": "measured",
           "label": "Expected slots",
           "note": "formation-weighted",
-          "value": 1.08
+          "value": 1.14
         },
         {
           "basis": "measured",
@@ -86,7 +86,7 @@
           "value": 0.3
         }
       ],
-      "expected_slots": 1.08,
+      "expected_slots": 1.14,
       "family": "AM/WM",
       "label": "Attacking / wide midfield",
       "links": [
@@ -221,7 +221,7 @@
           "basis": "measured",
           "label": "Expected slots",
           "note": "formation-weighted",
-          "value": 0.92
+          "value": 0.86
         },
         {
           "basis": "measured",
@@ -233,7 +233,7 @@
           "basis": "measured",
           "label": "Top share",
           "note": "share of family minutes",
-          "value": 0.57
+          "value": 0.58
         },
         {
           "basis": "curated",
@@ -242,7 +242,7 @@
           "value": 0.7
         }
       ],
-      "expected_slots": 0.92,
+      "expected_slots": 0.86,
       "family": "W",
       "label": "Wide forwards",
       "links": [
@@ -276,21 +276,21 @@
         "availability_risk": null,
         "availability_unknown": 1,
         "available_players": 3,
-        "concentration": 0.57,
+        "concentration": 0.58,
         "depth_gap": 0.3333333333333333,
         "fringe": 1,
         "players": 3,
         "projected_shortfall": 0,
-        "quality_gap": 0.01777777777777778,
+        "quality_gap": 0.0,
         "ready_count": 2,
         "rotation": 0,
         "starters": 2,
         "status": "available",
-        "top_share": 0.57,
-        "total_minutes": 1541,
+        "top_share": 0.58,
+        "total_minutes": 1580,
         "trusted_count": 2
       },
-      "measured_score": 21.4,
+      "measured_score": 21.1,
       "outgoing_risk": {
         "evidence": [],
         "level": "unknown",
@@ -319,13 +319,13 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "fringe",
-          "minutes": 22,
+          "minutes": 36,
           "name": "H. Mahou",
           "note": null,
           "player_id": 84126,
           "role_family": "W",
           "starts": 0,
-          "sub_apps": 1
+          "sub_apps": 2
         },
         {
           "arrival": "2026-06-30",
@@ -334,13 +334,13 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 884,
+          "minutes": 909,
           "name": "T. Olusanya",
           "note": null,
           "player_id": 231195,
           "role_family": "W",
           "starts": 8,
-          "sub_apps": 6
+          "sub_apps": 7
         }
       ],
       "priority": 2,
@@ -383,14 +383,15 @@
       "confidence": "low",
       "curated_prior": 0.5,
       "drivers": [
-        "concentration"
+        "concentration",
+        "family_rating"
       ],
       "evidence": [
         {
           "basis": "measured",
           "label": "Expected slots",
           "note": "formation-weighted",
-          "value": 1.46
+          "value": 1.5
         },
         {
           "basis": "measured",
@@ -402,7 +403,7 @@
           "basis": "measured",
           "label": "Top share",
           "note": "share of family minutes",
-          "value": 0.67
+          "value": 0.66
         },
         {
           "basis": "curated",
@@ -411,7 +412,7 @@
           "value": 0.5
         }
       ],
-      "expected_slots": 1.46,
+      "expected_slots": 1.5,
       "family": "ST",
       "label": "Centre-forwards",
       "links": [
@@ -443,23 +444,23 @@
         "age_risk": 0.0,
         "availability_known": 0,
         "availability_risk": null,
-        "availability_unknown": 1,
+        "availability_unknown": 2,
         "available_players": 3,
-        "concentration": 0.67,
+        "concentration": 0.66,
         "depth_gap": 0.0,
         "fringe": 0,
         "players": 3,
         "projected_shortfall": 0,
-        "quality_gap": 0.0,
+        "quality_gap": 0.050000000000000044,
         "ready_count": 3,
         "rotation": 2,
         "starters": 1,
         "status": "available",
-        "top_share": 0.67,
-        "total_minutes": 1820,
-        "trusted_count": 2
+        "top_share": 0.66,
+        "total_minutes": 1975,
+        "trusted_count": 3
       },
-      "measured_score": 8.9,
+      "measured_score": 10.1,
       "outgoing_risk": {
         "evidence": [],
         "level": "unknown",
@@ -473,12 +474,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "rotation",
-          "minutes": 334,
+          "minutes": 399,
           "name": "A. Mouloua",
           "note": null,
           "player_id": 303519,
           "role_family": "ST",
-          "starts": 2,
+          "starts": 3,
           "sub_apps": 12
         },
         {
@@ -488,12 +489,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 1221,
+          "minutes": 1311,
           "name": "K. Nisbet",
           "note": null,
           "player_id": 97896,
           "role_family": "ST",
-          "starts": 15,
+          "starts": 16,
           "sub_apps": 0
         },
         {
@@ -571,7 +572,7 @@
           "basis": "measured",
           "label": "Top share",
           "note": "share of family minutes",
-          "value": 0.54
+          "value": 0.53
         },
         {
           "basis": "curated",
@@ -614,7 +615,7 @@
         "availability_risk": null,
         "availability_unknown": 2,
         "available_players": 5,
-        "concentration": 0.54,
+        "concentration": 0.53,
         "depth_gap": 0.0,
         "fringe": 3,
         "players": 5,
@@ -624,11 +625,11 @@
         "rotation": 0,
         "starters": 2,
         "status": "available",
-        "top_share": 0.54,
-        "total_minutes": 2252,
+        "top_share": 0.53,
+        "total_minutes": 2432,
         "trusted_count": 2
       },
-      "measured_score": 7.2,
+      "measured_score": 7.1,
       "outgoing_risk": {
         "evidence": [],
         "level": "unknown",
@@ -672,12 +673,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 1207,
+          "minutes": 1297,
           "name": "N. Guinness-Walker",
           "note": null,
           "player_id": 108465,
           "role_family": "FB/WB",
-          "starts": 14,
+          "starts": 15,
           "sub_apps": 1
         },
         {
@@ -687,12 +688,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 999,
+          "minutes": 1089,
           "name": "C. Cadden",
           "note": null,
           "player_id": 44921,
           "role_family": "FB/WB",
-          "starts": 11,
+          "starts": 12,
           "sub_apps": 0
         },
         {
@@ -765,7 +766,7 @@
           "basis": "measured",
           "label": "Expected slots",
           "note": "formation-weighted",
-          "value": 2.31
+          "value": 2.29
         },
         {
           "basis": "measured",
@@ -777,7 +778,7 @@
           "basis": "measured",
           "label": "Top share",
           "note": "share of family minutes",
-          "value": 0.32
+          "value": 0.31
         },
         {
           "basis": "curated",
@@ -786,7 +787,7 @@
           "value": 0.8
         }
       ],
-      "expected_slots": 2.31,
+      "expected_slots": 2.29,
       "family": "CB",
       "label": "Centre-backs",
       "links": [
@@ -818,21 +819,21 @@
         "availability_risk": null,
         "availability_unknown": 2,
         "available_players": 5,
-        "concentration": 0.32,
+        "concentration": 0.31,
         "depth_gap": 0.0,
         "fringe": 0,
         "players": 5,
         "projected_shortfall": 0,
         "quality_gap": 0.0,
         "ready_count": 5,
-        "rotation": 1,
-        "starters": 4,
+        "rotation": 0,
+        "starters": 5,
         "status": "available",
-        "top_share": 0.32,
-        "total_minutes": 3399,
+        "top_share": 0.31,
+        "total_minutes": 3579,
         "trusted_count": 5
       },
-      "measured_score": 4.3,
+      "measured_score": 4.1,
       "outgoing_risk": {
         "evidence": [],
         "level": "unknown",
@@ -861,12 +862,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 499,
+          "minutes": 589,
           "name": "G. Molloy",
           "note": null,
           "player_id": 161806,
           "role_family": "CB",
-          "starts": 5,
+          "starts": 6,
           "sub_apps": 5
         },
         {
@@ -875,13 +876,13 @@
           "availability_conflict": false,
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
-          "category": "rotation",
-          "minutes": 438,
+          "category": "starter",
+          "minutes": 528,
           "name": "J. Milne",
           "note": null,
           "player_id": 321860,
           "role_family": "CB",
-          "starts": 4,
+          "starts": 5,
           "sub_apps": 4
         },
         {
@@ -962,7 +963,7 @@
           "basis": "measured",
           "label": "Expected slots",
           "note": "formation-weighted",
-          "value": 2.23
+          "value": 2.21
         },
         {
           "basis": "measured",
@@ -974,7 +975,7 @@
           "basis": "measured",
           "label": "Top share",
           "note": "share of family minutes",
-          "value": 0.29
+          "value": 0.28
         },
         {
           "basis": "curated",
@@ -983,7 +984,7 @@
           "value": 0.55
         }
       ],
-      "expected_slots": 2.23,
+      "expected_slots": 2.21,
       "family": "MID",
       "label": "Central midfield",
       "links": [
@@ -1015,7 +1016,7 @@
         "availability_risk": null,
         "availability_unknown": 2,
         "available_players": 6,
-        "concentration": 0.29,
+        "concentration": 0.28,
         "depth_gap": 0.0,
         "fringe": 1,
         "players": 6,
@@ -1025,11 +1026,11 @@
         "rotation": 1,
         "starters": 4,
         "status": "available",
-        "top_share": 0.29,
-        "total_minutes": 3388,
+        "top_share": 0.28,
+        "total_minutes": 3689,
         "trusted_count": 5
       },
-      "measured_score": 3.9,
+      "measured_score": 3.7,
       "outgoing_risk": {
         "evidence": [
           {
@@ -1051,12 +1052,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 570,
+          "minutes": 660,
           "name": "B. Lyons",
           "note": null,
           "player_id": 45010,
           "role_family": "MID",
-          "starts": 7,
+          "starts": 8,
           "sub_apps": 0
         },
         {
@@ -1066,12 +1067,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 683,
+          "minutes": 759,
           "name": "S. Armstrong",
           "note": null,
           "player_id": 18945,
           "role_family": "MID",
-          "starts": 5,
+          "starts": 6,
           "sub_apps": 8
         },
         {
@@ -1096,12 +1097,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 868,
+          "minutes": 958,
           "name": "C. Ronan",
           "note": null,
           "player_id": 61178,
           "role_family": "MID",
-          "starts": 11,
+          "starts": 12,
           "sub_apps": 2
         },
         {
@@ -1111,12 +1112,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 983,
+          "minutes": 1028,
           "name": "A. Aremu",
           "note": null,
           "player_id": 57248,
           "role_family": "MID",
-          "starts": 13,
+          "starts": 14,
           "sub_apps": 1
         },
         {
@@ -1247,7 +1248,7 @@
         "starters": 1,
         "status": "available",
         "top_share": 1.0,
-        "total_minutes": 1260,
+        "total_minutes": 1350,
         "trusted_count": 1
       },
       "measured_score": 0.0,
@@ -1272,12 +1273,12 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 1260,
+          "minutes": 1350,
           "name": "M. Müller",
           "note": null,
           "player_id": 1141,
           "role_family": "GK",
-          "starts": 14,
+          "starts": 15,
           "sub_apps": 0
         },
         {
@@ -1341,7 +1342,7 @@
       "urgency": "none"
     }
   ],
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "notes": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
   "roster_space": {
     "net_add_allowed": null,

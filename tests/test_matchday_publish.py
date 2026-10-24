@@ -137,6 +137,7 @@ def test_document_builds_and_validates(monkeypatch, tmp_path):
     )
     monkeypatch.setattr("fitba.publish.matchday.load_meta", lambda snapshot_dir=None: dict(META))
     monkeypatch.setattr("fitba.publish.matchday._age_hours", lambda value: 1.0)
+    monkeypatch.setattr("fitba.publish.matchday._fixture_passed", lambda fixture: False)
     document = build_matchday_payload(
         season="2026-27",
         generated_at="2026-10-22T10:00:00+00:00",
@@ -201,7 +202,8 @@ def test_passed_fixture_is_not_presented_as_upcoming(monkeypatch, tmp_path):
     assert document["stale_reason"] == "fixture_date_passed"
 
 
-def test_fallback_carries_previous_as_stale():
+def test_fallback_carries_previous_as_stale(monkeypatch):
+    monkeypatch.setattr("fitba.publish.matchday._fixture_passed", lambda fixture: False)
     previous = MatchdayDocument(
         generated_at="2026-10-21T12:00:00+00:00",
         season="2026-27",

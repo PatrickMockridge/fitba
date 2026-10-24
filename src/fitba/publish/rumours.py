@@ -10,6 +10,12 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import TYPE_CHECKING, Any
 
+from fitba.analytics.affiliation import (
+    AFFILIATION_LABELS,
+    AffiliationIndex,
+    is_return_link,
+    is_target,
+)
 from fitba.ingest.forum import (
     build_profile,
     load_forum_posts,
@@ -68,16 +74,32 @@ def _validate(row: dict[str, Any]) -> None:
         raise ValueError(f"{rumour_id}: linked_transfer_id is only valid when confirmed")
 
 
-def load_rumour_rows() -> list[dict[str, Any]]:
+def load_rumour_rows(
+    affiliations: AffiliationIndex | None = None,
+) -> list[dict[str, Any]]:
     rows = []
     for row in rumours_config().get("rumours", []) or []:
         _validate(row)
+        if affiliations is not None:
+            affiliation, affiliation_source = affiliations.affiliation_for(
+                row.get("player_key"), row.get("player_name")
+            )
+        else:
+            affiliation, affiliation_source = "unknown", "none"
+        declared = row.get("affiliation")
+        if declared and declared != affiliation:
+            raise ValueError(
+                f"{row.get('rumour_id')}: declared affiliation {declared!r} "
+                f"does not match the canonical {affiliation!r}"
+            )
         rows.append(
             {
                 "rumour_id": row.get("rumour_id"),
                 "player_key": row.get("player_key"),
                 "linked_player_key": row.get("linked_player_key") or row.get("player_key"),
                 "player_name": row.get("player_name"),
+                "affiliation": affiliation,
+                "affiliation_source": affiliation_source,
                 "linked_club": row.get("linked_club", "sco:aberdeen"),
                 "direction": row.get("direction"),
                 "current_club": row.get("current_club"),
@@ -162,6 +184,18 @@ def rumours_payload(
                 "player_href": player_index.href(
                     row.get("player_key") or row.get("linked_player_key")
                 ),
+                "former_href": player_index.former_href(
+                    row.get("player_key") or row.get("linked_player_key")
+                ),
+                "affiliation_label": AFFILIATION_LABELS.get(
+                    str(row.get("affiliation") or "unknown"), "Unknown"
+                ),
+                "is_target": is_target(
+                    str(row.get("affiliation") or "unknown"), row.get("direction")
+                ),
+                "is_return_link": is_return_link(
+                    str(row.get("affiliation") or "unknown"), row.get("direction")
+                ),
                 "player_mentions": player_index.mentions(row.get("claim")),
             }
             for row in rows
@@ -173,7 +207,48 @@ def rumours_payload(
             "by_confidence": _counts(rows, "confidence"),
             "by_source_type": _counts(rows, "source_types"),
             "by_direction": _counts(rows, "direction"),
+            "by_affiliation": _counts(rows, "affiliation"),
+            "targets": sum(
+                1
+                for row in rows
+                if is_target(str(row.get("affiliation") or "unknown"), row.get("direction"))
+            ),
+            "return_links": sum(
+                1
+                for row in rows
+                if is_return_link(str(row.get("affiliation") or "unknown"), row.get("direction"))
+            ),
         },
+        "lanes": {
+            affiliation: {
+                "count": sum(
+                    1 for row in rows if str(row.get("affiliation") or "unknown") == affiliation
+                ),
+                "rumour_ids": [
+                    row.get("rumour_id")
+                    for row in rows
+                    if str(row.get("affiliation") or "unknown") == affiliation
+                ],
+            }
+            for affiliation in sorted({str(row.get("affiliation") or "unknown") for row in rows})
+        },
+        "former_player_mentions": [
+            {
+                "rumour_id": row.get("rumour_id"),
+                "player_key": row.get("player_key"),
+                "player_name": row.get("player_name"),
+                "direction": row.get("direction"),
+                "status": row.get("status"),
+                "confidence": row.get("confidence"),
+                "claim": row.get("claim"),
+                "current_club": row.get("current_club"),
+                "last_seen": row.get("last_seen"),
+                "player_href": player_index.href(row.get("player_key")),
+                "former_href": player_index.former_href(row.get("player_key")),
+            }
+            for row in rows
+            if str(row.get("affiliation") or "unknown") == "former_player"
+        ],
         "coverage": {
             "status": "curated",
             "note": (
@@ -263,7 +338,38 @@ def profile_payload(
     player_index: PlayerLinkIndex,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
-    active = [row for row in rows if row.get("status") == "active"]
+    active_all = [row for row in rows if row.get("status") == "active"]
+    active = [
+        row
+        for row in active_all
+        if row.get("direction") == "in"
+        and str(row.get("affiliation") or "unknown") == "external_target"
+    ]
+    excluded = {
+        "outgoing": sum(1 for row in active_all if row.get("direction") == "out"),
+        "current_squad": sum(
+            1
+            for row in active_all
+            if str(row.get("affiliation") or "unknown") in {"current_squad", "loan_out"}
+        ),
+        "current_non_official": sum(
+            1
+            for row in active_all
+            if str(row.get("affiliation") or "unknown") == "current_non_official"
+        ),
+        "former_player": sum(
+            1 for row in active_all if str(row.get("affiliation") or "unknown") == "former_player"
+        ),
+        "unknown_identity": sum(
+            1 for row in active_all if str(row.get("affiliation") or "unknown") == "unknown"
+        ),
+    }
+    return_links = [
+        row
+        for row in active_all
+        if row.get("direction") == "in"
+        and str(row.get("affiliation") or "unknown") == "former_player"
+    ]
 
     def weight_of(row: dict[str, Any]) -> float:
         return CONFIDENCE_WEIGHT.get(str(row.get("confidence")), 0.3) * _recency_weight(
@@ -289,6 +395,19 @@ def profile_payload(
         "generated_at": generated_at or utc_now_iso(),
         "sample_size": len(active),
         "weighted_total": round(total, 2),
+        "basis": "active_incoming_external",
+        "candidate_rows": len(active_all),
+        "excluded": excluded,
+        "return_links": [
+            {
+                "rumour_id": row.get("rumour_id"),
+                "player_name": row.get("player_name"),
+                "claim": row.get("claim"),
+                "player_href": player_index.href(row.get("player_key")),
+                "former_href": player_index.former_href(row.get("player_key")),
+            }
+            for row in return_links
+        ],
         "low_confidence": len(active) < 5,
         "weights": {
             "confidence": CONFIDENCE_WEIGHT,
@@ -314,9 +433,10 @@ def profile_payload(
             for row in active
         ],
         "note": (
-            "Advisory only. The data-driven scouting fit stays primary; a small "
-            "rumour cohort must never override it. The club's internal target "
-            "list is not public and is not implied."
+            "Advisory only, from active incoming external targets. Current squad, "
+            "current non-official and former players are excluded; return links are "
+            "listed separately. The data-driven scouting fit stays primary and the "
+            "club's internal target list is not public."
         ),
     }
 
@@ -346,7 +466,11 @@ def _forum_sentiment() -> dict[str, Any]:
     }
 
 
-def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None) -> dict[str, Any]:
+def forum_payload(
+    player_index: PlayerLinkIndex,
+    generated_at: str | None = None,
+    former_players: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     topics = load_forum_topics()
     signals = load_forum_signals()
     posts = load_forum_posts()
@@ -356,6 +480,11 @@ def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None
     generated = None
     if topic_rows:
         generated = max(str(row.get("ingested_at") or "") for row in topic_rows) or None
+    former_by_key = {
+        str(player.get("player_key")): player
+        for player in (former_players or {}).get("players", [])
+        if player.get("player_key")
+    }
     return {
         "source": {
             "id": "afc_chat",
@@ -400,6 +529,38 @@ def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None
                 "mentions": row.get("mentions"),
                 "topic_count": row.get("topic_count"),
                 "credibility": row.get("credibility"),
+                "affiliation": row.get("affiliation") or "unknown",
+                "affiliation_source": row.get("affiliation_source") or "none",
+                "former_href": player_index.former_href(row.get("player_key")),
+                "current_club": (
+                    (former_by_key.get(str(row.get("player_key"))) or {})
+                    .get("post_career", {})
+                    .get("current", {})
+                    .get("club_name")
+                ),
+                "current_league": (
+                    (former_by_key.get(str(row.get("player_key"))) or {})
+                    .get("post_career", {})
+                    .get("current", {})
+                    .get("league")
+                ),
+                "at_rival": bool(
+                    (former_by_key.get(str(row.get("player_key"))) or {})
+                    .get("post_career", {})
+                    .get("at_rival")
+                ),
+                "rival_club": next(
+                    (
+                        spell.get("club")
+                        for spell in (
+                            (former_by_key.get(str(row.get("player_key"))) or {})
+                            .get("post_career", {})
+                            .get("rival_spells", [])
+                        )
+                        if spell.get("current")
+                    ),
+                    None,
+                ),
                 "player_href": player_index.href(row.get("player_key")),
                 "cross_references": {
                     "confirmed_transfer": row.get("cross_confirmed"),
@@ -413,10 +574,10 @@ def forum_payload(player_index: PlayerLinkIndex, generated_at: str | None = None
         "profile": build_profile(signal_rows),
         "sentiment": _forum_sentiment(),
         "notes": (
-            "A mention count is not a transfer link. A cross-reference label "
-            "records whether the same name also appears in the press rumour "
-            "register, the club's output or the confirmed register; it is not a "
-            "probability."
+            "A mention count is not a transfer link. Affiliation separates current "
+            "squad, current non-official, former players and external targets; the "
+            "position and age mixes count external names only. A cross-reference "
+            "label records source coverage, not a probability."
         ),
     }
 

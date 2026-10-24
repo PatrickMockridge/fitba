@@ -53,10 +53,28 @@ export function RumourCard({ rumour }: { rumour: Rumour }) {
           {rumour.confidence} confidence
         </span>
         <span className="badge badge-neutral">{inbound ? "IN" : "OUT"}</span>
+        {rumour.affiliation ? (
+          <span className="badge badge-neutral">
+            {rumour.affiliation === "former_player"
+              ? "Former player"
+              : rumour.affiliation === "current_squad"
+                ? "Current squad"
+                : rumour.affiliation === "loan_out"
+                  ? "On loan out"
+                  : rumour.affiliation === "current_non_official"
+                    ? "At Aberdeen (not official)"
+                    : rumour.affiliation === "external_target"
+                      ? "External target"
+                      : "Unknown affiliation"}
+          </span>
+        ) : null}
       </div>
 
       <h3>
-        <PlayerLink name={rumour.player_name} href={rumour.player_href} />
+        <PlayerLink
+          name={rumour.player_name}
+          href={rumour.player_href ?? rumour.former_href}
+        />
       </h3>
       <p className="rumour-meta">
         {rumour.position ?? "Position unknown"} ·{" "}

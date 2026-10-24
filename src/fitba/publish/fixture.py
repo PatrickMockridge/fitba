@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict
 
 from fitba.analytics.records import match_result
 from fitba.analytics.summary import build_summary
+from fitba.ingest.fixtures import load_club_fixtures
 from fitba.ingest.history import (
     HISTORY_DIR,
     load_history_appearances,
@@ -385,6 +386,51 @@ def _float(value: Any) -> float | None:
         return None
 
 
+def _overlay_club_fixtures(fixtures: pl.DataFrame, *, season: str) -> pl.DataFrame:
+    """Overlay the official SPFL result for Aberdeen onto a history fixture frame."""
+    if not fixtures.height:
+        return fixtures
+    try:
+        club = load_club_fixtures("aberdeen")
+    except Exception:  # noqa: BLE001 - optional overlay
+        return fixtures
+    if not club.height:
+        return fixtures
+    played = club.filter(
+        (pl.col("status") == "played")
+        & (pl.col("season") == season)
+        & pl.col("home_goals").is_not_null()
+        & pl.col("away_goals").is_not_null()
+    )
+    if not played.height:
+        return fixtures
+    teams = TeamRegistry()
+    rows = fixtures.to_dicts()
+    changed = False
+    for item in played.to_dicts():
+        date_value = str(item.get("date"))
+        home = teams.display_name(str(item.get("home_team_name") or ""))
+        away = teams.display_name(str(item.get("away_team_name") or ""))
+        for row in rows:
+            if str(row.get("date"))[:10] != date_value[:10]:
+                continue
+            if (
+                teams.display_name(str(row.get("home_team_name") or "")) != home
+                or teams.display_name(str(row.get("away_team_name") or "")) != away
+            ):
+                continue
+            row.update(
+                {
+                    "status": "FT",
+                    "home_goals": int(item["home_goals"]),
+                    "away_goals": int(item["away_goals"]),
+                }
+            )
+            changed = True
+            break
+    return pl.DataFrame(rows, infer_schema_length=None) if changed else fixtures
+
+
 def _load_season_data() -> dict[str, dict[str, Any]]:
     output: dict[str, dict[str, Any]] = {}
     if not HISTORY_DIR.exists():
@@ -394,7 +440,7 @@ def _load_season_data() -> dict[str, dict[str, Any]]:
             continue
         season = path.name.split("=", 1)[1]
         output[season] = {
-            "fixtures": load_history_fixtures(season),
+            "fixtures": _overlay_club_fixtures(load_history_fixtures(season), season=season),
             "events": load_events(season),
             "lineups": load_lineups(season),
             "appearances": load_history_appearances(season),
@@ -1000,6 +1046,7 @@ def _xg_block(
 ) -> dict[str, Any]:
     if not xg_row:
         return {"available": False}
+
     def side(prefix: str, goals: int | None) -> dict[str, Any]:
         penalties = xg_row.get(f"penalties_{prefix}")
         return {
@@ -1013,8 +1060,7 @@ def _xg_block(
             "goals_position": xg_row.get(f"goals_position_{prefix}"),
             "provider": xg_row.get(f"provider_xg_{prefix}"),
             "provider_source": (
-                xg_row.get(f"provider_xg_source_{prefix}")
-                or xg_row.get("provider_xg_source")
+                xg_row.get(f"provider_xg_source_{prefix}") or xg_row.get("provider_xg_source")
                 if xg_row.get(f"provider_xg_{prefix}") is not None
                 else None
             ),
@@ -1088,10 +1134,16 @@ def build_fixture_payloads(
     config = fixtures_policy()
     page_config = config.get("pages") or {}
     summary_config = page_config.get("summary") or {}
-    registry = build_fixture_registry()
+    season_data = _load_season_data()
+    registry = build_fixture_registry(
+        history_frames={
+            season: payload["fixtures"]
+            for season, payload in season_data.items()
+            if payload.get("fixtures") is not None and payload["fixtures"].height
+        }
+    )
     teams = TeamRegistry()
     aberdeen_api_id = int(source_ids()["teams"]["sco:aberdeen"]["api_football"])
-    season_data = _load_season_data()
     league_stats_path = MARTS_DIR / "team_match_stats.parquet"
     league_stats = (
         pl.read_parquet(league_stats_path) if league_stats_path.exists() else pl.DataFrame()

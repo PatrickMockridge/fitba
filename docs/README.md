@@ -66,8 +66,9 @@ for scope, and the metrics and sources when you need to check a number.
 | [Player data and provenance](player-data.md) | Preferred-foot source hierarchy, explicit-statement rules, conflict and unknown policy, Wikipedia last-resort conditions and the Sportmonks gate. |
 | [Injuries and availability](availability.md) | The curated team-news ledger, provider snapshot policy, status taxonomy, staleness and predicted-XI confidence. |
 | [Squad needs](needs.md) | The seven role families, measured depth, cover/replace/strengthen logic, market routes and roster caveats. |
+| [Former players](former-players.md) | The confirmed departure register, Aberdeen and post-Aberdeen records, rival spells, sell-on watch and the descriptive development scorecard. |
 | [Transfers and loans](transfers.md) | The confirmed-business register, four-window and out-of-window views, position provenance, completeness audit, verification statuses, fee and loan-term policy and known gaps. |
-| [Rumour mill and fan signal](rumours.md) | The curated rumour register, status/confidence policy, AFC Chat reference use, cross-reference labels, sentiment limits, the advisory profile and the deferred engagement project. |
+| [Rumour mill and fan signal](rumours.md) | The curated rumour register, status/confidence policy, AFC Chat reference use, affiliation, cross-reference labels, sentiment limits, the advisory profile and the deferred engagement project. |
 | [Trading model](trading-model.md) | Aberdeen's buy-low/sell-high and youth-development context, and how the app represents it without pretending to know the club's internal models. |
 | [Scouting method](scouting-method.md) | Position groups, archetypes, shrinkage, league-strength adjustment, the value index, U23/European priority, the team-context lens, reader-selectable lenses, advanced search filters and the coverage limits. |
 

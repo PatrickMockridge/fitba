@@ -8,6 +8,7 @@ from pathlib import Path
 
 import polars as pl
 
+from fitba.ingest.fixtures import load_club_fixtures
 from fitba.normalize.teams import TeamRegistry, UnknownTeamError
 from fitba.settings import NORMALIZED_DIR, REPORTS_DIR, ensure_dirs
 from fitba.sources import football_data_uk
@@ -237,6 +238,102 @@ def ingest_season(
     return report
 
 
+def _overlay_club_results(frame: pl.DataFrame) -> pl.DataFrame:
+    """Overlay confirmed SPFL results for Aberdeen onto the league match frame.
+
+    The football-data source can lag a same-day result. The official SPFL club
+    fixture feed is the schedule source and has the result earlier; it fills or
+    updates only the matching Aberdeen league fixture and never invents a row
+    for any other club.
+    """
+    try:
+        club = load_club_fixtures("aberdeen")
+    except Exception:  # noqa: BLE001 - optional overlay; the base frame remains valid
+        return frame
+    if not club.height:
+        return frame
+    played = club.filter(
+        (pl.col("status") == "played")
+        & pl.col("home_goals").is_not_null()
+        & pl.col("away_goals").is_not_null()
+        & (pl.col("competition_id") == "sco:premiership")
+    )
+    if not played.height:
+        return frame
+    rows = frame.to_dicts()
+    by_key = {
+        (str(row.get("date")), str(row.get("home_team_id")), str(row.get("away_team_id"))): index
+        for index, row in enumerate(rows)
+    }
+    changed = False
+    for item in played.to_dicts():
+        key = (
+            str(item.get("date")),
+            str(item.get("home_team_id")),
+            str(item.get("away_team_id")),
+        )
+        goals_home = int(item["home_goals"])
+        goals_away = int(item["away_goals"])
+        result = "H" if goals_home > goals_away else "A" if goals_home < goals_away else "D"
+        index = by_key.get(key)
+        if index is not None:
+            row = rows[index]
+            row.update(
+                {
+                    "home_goals": goals_home,
+                    "away_goals": goals_away,
+                    "result": result,
+                    "source_id": item.get("source_id") or "spfl",
+                    "ingested_at": item.get("ingested_at"),
+                }
+            )
+            changed = True
+            continue
+        if str(item.get("season")) != str(frame["season"].max()):
+            continue
+        rows.append(
+            {
+                "match_id": str(item.get("match_id") or f"spfl-{item.get('date')}-aberdeen"),
+                "competition_id": item.get("competition_id"),
+                "competition_name": item.get("competition_name"),
+                "season": item.get("season"),
+                "division": "SC0",
+                "date": item.get("date"),
+                "kickoff": item.get("kickoff"),
+                "phase": None,
+                "home_team_id": item.get("home_team_id"),
+                "home_team_name": item.get("home_team_name"),
+                "away_team_id": item.get("away_team_id"),
+                "away_team_name": item.get("away_team_name"),
+                "home_goals": goals_home,
+                "away_goals": goals_away,
+                "result": result,
+                "home_ht_goals": None,
+                "away_ht_goals": None,
+                "ht_result": None,
+                "referee": None,
+                "home_shots": None,
+                "away_shots": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_xg": None,
+                "away_xg": None,
+                "home_fouls": None,
+                "away_fouls": None,
+                "home_corners": None,
+                "away_corners": None,
+                "home_yellow": None,
+                "away_yellow": None,
+                "home_red": None,
+                "away_red": None,
+                "source_id": item.get("source_id") or "spfl",
+                "ingested_at": item.get("ingested_at"),
+            }
+        )
+        changed = True
+    return pl.DataFrame(rows, infer_schema_length=None) if changed else frame
+
+
 def load_matches(seasons: list[str] | None = None) -> pl.DataFrame:
     root = NORMALIZED_DIR / "matches"
     files = sorted(root.glob("season=*/division=*/matches.parquet"))
@@ -245,4 +342,4 @@ def load_matches(seasons: list[str] | None = None) -> pl.DataFrame:
     frame = pl.concat([pl.read_parquet(path) for path in files], how="vertical_relaxed")
     if seasons:
         frame = frame.filter(pl.col("season").is_in(seasons))
-    return frame
+    return _overlay_club_results(frame)

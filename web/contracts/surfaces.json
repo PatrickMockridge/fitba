@@ -121,7 +121,8 @@
             "/analysis/",
             "/history/",
             "/transfers/",
-            "/loans/"
+            "/loans/",
+            "/former-players/"
           ],
           "headings": {
             "forbid_question": [
@@ -417,6 +418,10 @@
             {
               "id": "recruitment.forum-signals",
               "min": 1
+            },
+            {
+              "id": "recruitment.rumour-affiliation",
+              "min": 1
             }
           ],
           "columns": {
@@ -440,7 +445,8 @@
             "/rumours/",
             "/scouting/",
             "/squad/",
-            "/analysis/"
+            "/analysis/",
+            "/former-players/"
           ],
           "headings": {
             "forbid_question": [
@@ -537,7 +543,8 @@
           "links": [
             "/history/",
             "/sources/",
-            "/methodology/"
+            "/methodology/",
+            "/former-players/"
           ],
           "anchor_patterns": {
             "^transfer-": 1
@@ -811,7 +818,8 @@
             "/transfers/",
             "/loans/",
             "/methodology/",
-            "/analysis/"
+            "/analysis/",
+            "/former-players/"
           ],
           "headings": {
             "forbid_question": [
@@ -1814,6 +1822,185 @@
             "title_contains": "Corrections",
             "description_contains": "corrections policy"
           }
+        }
+      }
+    },
+    {
+      "id": "former-players",
+      "path": "/former-players/",
+      "owners": [
+        "web/app/former-players/page.tsx",
+        "web/components/FormerPlayersBoard.tsx",
+        "web/components/SellOnTable.tsx",
+        "web/components/FormerPlayerMentions.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "former.hero",
+              "min": 1
+            },
+            {
+              "id": "former.summary",
+              "min": 1
+            },
+            {
+              "id": "former.board",
+              "min": 1
+            },
+            {
+              "id": "former.register",
+              "min": 1
+            },
+            {
+              "id": "former.row",
+              "min": 50
+            },
+            {
+              "id": "former.scorecard",
+              "min": 1
+            },
+            {
+              "id": "former.sell-on",
+              "min": 1
+            },
+            {
+              "id": "former.mentions",
+              "min": 1
+            },
+            {
+              "id": "former.coverage",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "former.register": [
+              "Player",
+              "Left",
+              "To",
+              "Type",
+              "Fee",
+              "Age",
+              "Aberdeen apps",
+              "Aberdeen starts",
+              "Post seasons",
+              "Post mins",
+              "Current club",
+              "Rival",
+              "Status"
+            ]
+          },
+          "indicators": {
+            "unknown": 2,
+            "confidence": 2,
+            "source": 1
+          },
+          "links": [
+            "/transfers/",
+            "/rumours/",
+            "/recruitment/",
+            "/squad/",
+            "/loans/",
+            "/sources/",
+            "/methodology/"
+          ],
+          "anchor_patterns": {
+            "^former-": 1
+          },
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "former.empty",
+              "min": 1
+            }
+          ],
+          "columns": {}
+        }
+      }
+    },
+    {
+      "id": "rumours",
+      "path": "/rumours/",
+      "owners": [
+        "web/app/rumours/page.tsx",
+        "web/components/RumourBoard.tsx",
+        "web/components/RumourCard.tsx",
+        "web/components/ForumSignalPanel.tsx",
+        "web/components/FormerPlayerMentions.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "rumours.hero",
+              "min": 1
+            },
+            {
+              "id": "rumours.affiliation",
+              "min": 1
+            },
+            {
+              "id": "rumours.register",
+              "min": 1
+            },
+            {
+              "id": "rumours.profile",
+              "min": 1
+            },
+            {
+              "id": "rumours.former-lane",
+              "min": 1
+            },
+            {
+              "id": "rumours.forum-signals",
+              "min": 1
+            },
+            {
+              "id": "rumours.coverage",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "unknown": 1,
+            "confidence": 1,
+            "source": 1
+          },
+          "links": [
+            "/transfers/",
+            "/recruitment/",
+            "/former-players/",
+            "/scouting/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ]
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "rumours.empty",
+              "min": 1
+            }
+          ]
         }
       }
     }

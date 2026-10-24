@@ -155,14 +155,34 @@ def _cover_group(themes: dict[str, Any] | None, group: str) -> dict[str, Any] | 
     return None
 
 
-def _active_outgoing_rumours(rumours: Iterable[dict[str, Any]] | None) -> list[dict[str, Any]]:
-    return [
-        row
-        for row in (rumours or [])
-        if row.get("direction") == "out"
-        and row.get("status") == "active"
-        and str(row.get("confidence") or "").lower() in {"medium", "high"}
-    ]
+def _active_outgoing_rumours(
+    rumours: Iterable[dict[str, Any]] | None,
+    *,
+    squad_keys: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Active outgoing rumours that can create a replace need.
+
+    Only official current squad players qualify. A loan-out, a former player or
+    an excluded current profile is not a sellable first-team asset for this
+    purpose, even if the name appears in the rumour mill.
+    """
+    rows = []
+    for row in rumours or []:
+        if row.get("direction") != "out" or row.get("status") != "active":
+            continue
+        if str(row.get("confidence") or "").lower() not in {"medium", "high"}:
+            continue
+        affiliation = str(row.get("affiliation") or "")
+        if affiliation and affiliation != "current_squad":
+            continue
+        if (
+            not affiliation
+            and squad_keys is not None
+            and str(row.get("player_key") or "") not in squad_keys
+        ):
+            continue
+        rows.append(row)
+    return rows
 
 
 def _squad_players(
@@ -233,7 +253,12 @@ def build_needs_document(
     }
     players = _squad_players(squad_data, availability_entries)
     slots = _formation_slots(team_shapes, season_year=season_year)
-    outgoing = _active_outgoing_rumours(rumours)
+    squad_keys = {
+        str(player.get("player_key"))
+        for player in (squad_data or {}).get("players", [])
+        if player.get("player_key") and player.get("status") != "loan_out"
+    }
+    outgoing = _active_outgoing_rumours(rumours, squad_keys=squad_keys)
     arrivals = {
         str(item.get("player_key") or ""): item
         for item in (transfers or [])
@@ -373,6 +398,7 @@ def build_needs_document(
                     replace_evidence.append(
                         {
                             "type": "active_outgoing_rumour",
+                            "affiliation": "current_squad",
                             "player_id": player["player_id"],
                             "player_name": player["name"],
                             "note": str(rumour.get("claim") or ""),

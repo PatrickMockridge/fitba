@@ -27,6 +27,10 @@
 #   linked_transfer_id  set only for status: confirmed
 #   linked_player_key    same as player_key; kept for the scouting join
 #   analysis_tags    descriptive tags only (e.g. wide-forward, left-footed, loan)
+#   affiliation      optional; derived at publish from the current squad and the
+#                    former-player register. If declared, it must match the
+#                    canonical value. former_player rows are shown in a separate
+#                    lane; an incoming former player is a return link.
 #   engagement       reserved; always null until the engagement project ships
 #
 # Rules:

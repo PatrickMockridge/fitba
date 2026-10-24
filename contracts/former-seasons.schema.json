@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "partial",
+        "stale",
+        "unavailable"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "seasons": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Seasons",
+      "type": "object"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "season",
+    "club_id",
+    "state",
+    "seasons",
+    "coverage"
+  ],
+  "title": "FormerSeasonsDocument",
+  "type": "object"
+}

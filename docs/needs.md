@@ -108,3 +108,10 @@ club budget has no public ceiling. Wages are not public.
   appear only with an active public rumour.
 - Unknown availability stays unknown; it is not assumed fit.
 - The model can say “strengthen”; it cannot decide the club's risk appetite.
+
+
+## Replace evidence
+
+A `replace` category requires an active outgoing rumour about an official
+current-squad player. Loan-outs, excluded current profiles, former players and
+external targets never create a replace need; they belong to their own lanes.

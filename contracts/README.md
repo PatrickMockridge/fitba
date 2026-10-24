@@ -36,3 +36,7 @@ Planned contracts for the ingestion and publication layers:
 Phase 1 implements the equivalent checks in `src/fitba/validate/checks.py` and the
 publication guard in `scripts/check_publication.py`. The YAML contracts will be wired
 to Pandera/Pydantic when the player/event layer lands.
+
+
+- `former-players.schema.json` — former-player index document.
+- `former-seasons.schema.json` — former-player per-season detail document.

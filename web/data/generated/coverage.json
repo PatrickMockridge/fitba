@@ -83,11 +83,11 @@
       "events": 0,
       "expected_matches": 228,
       "id": "sco:premiership",
-      "matches": 54,
+      "matches": 55,
       "name": "Scottish Premiership",
       "player_stats": 0,
       "results_source": "football_data_uk",
-      "team_stats_source": "football_data_uk"
+      "team_stats_source": "spfl"
     },
     {
       "coverage": "match",
@@ -142,11 +142,20 @@
     }
   ],
   "fixtures": {
-    "count": 367,
+    "count": 368,
     "full": 232,
     "note": "One page per played Cormack-era fixture; depth is the data actually available.",
     "result": 99,
     "score": 6
+  },
+  "former_players": {
+    "club": "sco:aberdeen",
+    "count": 76,
+    "note": "The register covers 2019-20 onward. Post-career league seasons are measured where the provider covers them; missing seasons are gaps, not zero. Cup and European provider rows are excluded from totals because some repeat league totals. Ratings are league-relative.",
+    "sell_on_computed": 0,
+    "state": "partial",
+    "with_api_id": 71,
+    "with_post_seasons": 52
   },
   "forum": {
     "first_page_only": true,
@@ -172,16 +181,16 @@
   },
   "matchday": {
     "club": "sco:aberdeen",
-    "date": "2026-10-24",
-    "fixture": "spfl-premiership-2026-10-24-dundee-united-aberdeen",
+    "date": "2026-10-28",
+    "fixture": "1556688",
     "lineups": {
       "aberdeen": "available",
       "opponent": "available"
     },
     "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
-    "opponent": "Dundee United",
-    "snapshot_at": "2026-10-21T23:05:03+00:00",
-    "state": "stale"
+    "opponent": "Falkirk",
+    "snapshot_at": "2026-10-24T20:01:12+00:00",
+    "state": "fresh"
   },
   "needs": {
     "club": "sco:aberdeen",
@@ -249,7 +258,7 @@
       "reason": "provider_declares_injuries_false",
       "status": "partial"
     },
-    "layers": 29,
+    "layers": 31,
     "migration": {
       "active_source": "football_data_uk",
       "enabled": false,

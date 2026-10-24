@@ -161,3 +161,12 @@ win over resolver values, but they are reported as
 - Wikipedia may be incomplete or wrong; the resolver records the revision and
   publishes unknown rather than guessing.
 - Side is not a foot field and is not sourced here. See [roles.md](roles.md).
+
+
+## Former players
+
+Former players are not current player profiles. They have a register anchor and
+a post-Aberdeen record on `/former-players/`, not a `/players/<id>/` page. Their
+post-career league seasons come from the licensed provider backfill; missing
+seasons and curated-only identities are explicit gaps. Ratings stay
+league-relative and are not compared across leagues.

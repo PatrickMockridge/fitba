@@ -113,6 +113,13 @@ def main() -> int:
                 item.get("type") == "active_outgoing_rumour" for item in evidence
             ):
                 errors.append(f"{family_name}: replace without active outgoing evidence")
+            for item in evidence:
+                if item.get("type") == "active_outgoing_rumour" and item.get(
+                    "affiliation"
+                ) not in {None, "current_squad"}:
+                    errors.append(
+                        f"{family_name}: replace evidence is not a current-squad player"
+                    )
         if category == "unknown" and measured.get("status") != "unavailable":
             errors.append(f"{family_name}: unknown category with measured depth")
         route = family.get("market_route") or {}

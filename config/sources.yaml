@@ -276,6 +276,7 @@ sources:
       - player_match_stats
       - squad_identity
       - transfers_candidate
+      - former_player_career
     cost: paid
     key_test_required: true
     key_tested_at: 2026-10-21
@@ -288,6 +289,8 @@ sources:
       - player_roles
       - events
       - player_match_stats
+      - player_seasons
+      - player_transfers
       - transfers
       - loans
     url: https://www.api-football.com
@@ -314,7 +317,9 @@ sources:
       coverage is false, so /injuries is not used as a team-news feed. Team
       match stats are not available for every SPFL tier, which is why league
       results and stats remain on Football-Data.co.uk until the strict
-      migration gate passes.
+      migration gate passes. Some provider cup rows repeat season totals inside
+      a cup competition; the former-player record therefore publishes league
+      rows only and stores cup/European rows locally.
     public_display: >
       Non-commercial apps/websites are contemplated in API-Sports terms; raw
       resale is prohibited; derived pages are permitted. The provider does not

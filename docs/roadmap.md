@@ -23,6 +23,7 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4h. Results, fixtures and fxG | **Live.** `/matches/` shows results and the known remaining schedule, with one page per played fixture and an experimental fxG model at `/analysis/xg/`. The provider gate is failing, so fxG is descriptive only. |
 | 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and seven profiles, including split assist/goal attacker lenses. An empirical league alignment, a value index, U23/European scouting priority, a team-context lens for outperforming struggling teams, simple reader-selectable lenses on the hub, advanced reader filters (U23/Europe and value-index weights, team thresholds and eligibility) on the full search, and one profile page per ranked player are live; GBP value bands, style fit and budget bands are deferred. |
 | 4j. Documentation book | **Live in the repository.** The Markdown docs are rendered with mdBook in the Merkland (light) and Aurora (dark) palettes, with search and accessibility markup. The book is not deployed to the website. |
+| 4k. Former players | **Live.** `/former-players/` carries the confirmed departure register, Aberdeen and post-Aberdeen records, rival spells, sell-on watch and the development scorecard. Rumour affiliation separates former players from targets. |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |
@@ -156,6 +157,22 @@ phase:
 - The book is built locally with `mdbook build`; it is not copied into the Pages
   artifact and is not a route on the website.
 - See [docs-book.md](docs-book.md).
+
+## Phase 4k — Former players (live)
+
+- `/former-players/` is a register of confirmed permanent and free departures
+  from 2019-20, with filters and links to the standard scouting profile for each
+  player. The scouting profile carries an additive Former Aberdeen player
+  section; there is no separate former-player profile route.
+- The Aberdeen record comes from the covered history; post-Aberdeen league
+  seasons and transfer histories come from a bounded API-Football backfill.
+- A sell-on watch detects subsequent moves and computes a receipt only when
+  every required input is public.
+- The development scorecard is descriptive; it is not a good-price or
+  should-have-kept verdict.
+- The rumour mill labels current squad, current non-official, former players and
+  external targets, and excludes current/former players from the target profile.
+- See [former-players.md](former-players.md).
 
 ## Phase 5 — Local rich-visual prototype
 

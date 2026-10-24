@@ -18,6 +18,7 @@ const STATIC_ROUTES = [
   "/analysis/",
   "/analysis/xg/",
   "/squad/",
+  "/former-players/",
   "/players/",
   "/scouting/",
   "/scouting/search/",

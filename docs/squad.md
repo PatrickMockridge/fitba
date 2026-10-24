@@ -250,8 +250,9 @@ data:
   line so the article link is not nested inside a profile link.
 
 Links are precomputed in the published JSON (`player_href`, `player_mentions`) so
-client-side filters never need to read files. Only current players link. Former
-players, rumour targets and fan-only names stay plain text.
+client-side filters never need to read files. Current players link to their
+profile; former players link to the former-player register anchor; rumour
+targets and fan-only names stay plain text.
 
 Free-text matching uses full names and unique surnames, accent-folded, with
 ambiguous surnames rejected. Players whose provider profile has no full name

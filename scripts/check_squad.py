@@ -76,17 +76,37 @@ def _href_set(squad: dict[str, Any]) -> set[str]:
     }
 
 
-def _check_hrefs(payload: Any, hrefs: set[str], where: str, errors: list[str]) -> None:
+def _former_href_set(payload: dict[str, Any] | None) -> set[str]:
+    return {
+        str(player["href"])
+        for player in (payload or {}).get("players", [])
+        if player.get("href")
+    }
+
+
+def _check_hrefs(
+    payload: Any,
+    hrefs: set[str],
+    former_hrefs: set[str],
+    where: str,
+    errors: list[str],
+) -> None:
     if not isinstance(payload, dict):
         return
     for player in payload.get("transfers", []):
         href = player.get("player_href")
         if href and href not in hrefs:
             errors.append(f"{where}: unknown transfer player_href {href}")
+        former = player.get("former_href")
+        if former and former not in former_hrefs:
+            errors.append(f"{where}: unknown transfer former_href {former}")
     for rumour in payload.get("rumours", []):
         href = rumour.get("player_href")
         if href and href not in hrefs:
             errors.append(f"{where}: unknown rumour player_href {href}")
+        former = rumour.get("former_href")
+        if former and former not in former_hrefs:
+            errors.append(f"{where}: unknown rumour former_href {former}")
         for mention in rumour.get("player_mentions", []):
             if mention.get("href") not in hrefs:
                 errors.append(f"{where}: unknown rumour mention {mention.get('href')}")
@@ -94,6 +114,9 @@ def _check_hrefs(payload: Any, hrefs: set[str], where: str, errors: list[str]) -
         href = signal.get("player_href")
         if href and href not in hrefs:
             errors.append(f"{where}: unknown signal player_href {href}")
+        former = signal.get("former_href")
+        if former and former not in former_hrefs:
+            errors.append(f"{where}: unknown signal former_href {former}")
     for topic in payload.get("topics", []):
         for mention in topic.get("player_mentions", []):
             if mention.get("href") not in hrefs:
@@ -268,6 +291,8 @@ def main() -> int:
     ids = [player.get("player_id") for player in players]
     keys = [player.get("player_key") for player in players]
     hrefs = _href_set(squad)
+    former_payload = _load(GENERATED / "former-players" / "aberdeen.json")
+    former_hrefs = _former_href_set(former_payload)
     if len(ids) != len(set(ids)):
         errors.append("duplicate player ids")
     if len(keys) != len(set(keys)):
@@ -566,7 +591,7 @@ def main() -> int:
     ):
         payload = _load(path)
         if payload is not None:
-            _check_hrefs(payload, hrefs, where, errors)
+            _check_hrefs(payload, hrefs, former_hrefs, where, errors)
 
     if errors:
         print("Squad publication check failed:")

@@ -63,7 +63,11 @@ If unsure, treat the change as essential.
   change a formula, denominator, rounding mode, source, coverage or parameter
   without owner approval and a registry version bump.
 - Do not add a direct client-side `Math.round` or `toFixed` call outside
-  `web/lib/format.ts`. `config/client-formatting.yaml` is a shrinking baseline;
+  `web/lib/format.ts`.
+- Do not invent a player-profile pathway. Current squad members use
+  `/players/<id>/`; every other player, including a former Aberdeen player,
+  uses `/scouting/player/<id>/`. Add facts as sections to the shared profile;
+  never add a bespoke profile route, dialog, drawer or card. `config/client-formatting.yaml` is a shrinking baseline;
   a file may not exceed its allowance and a new file may not add one.
 
 ## Before changing a number

@@ -1,4 +1,4 @@
-.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check consistency-check data-coverage-check docs-check corrections-check metrics-check publication-check names-check transfers-check history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check scouting-check scouting-pages-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check consistency-check data-coverage-check docs-check corrections-check metrics-check publication-check names-check transfers-check former-players-check former-players-refresh history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check scouting-check scouting-pages-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
 
 BASE_PATH ?=
 
@@ -17,7 +17,7 @@ format:
 typecheck:
 	uv run pyright
 
-check: lint typecheck test docs-check corrections-check metrics-check consistency-check publication-check names-check transfers-check history-check matchday-check themes-check analysis-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+check: lint typecheck test docs-check corrections-check metrics-check consistency-check publication-check names-check transfers-check former-players-check history-check matchday-check themes-check analysis-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
 
 check-all: check web-contract-check
 
@@ -59,6 +59,12 @@ names-check:
 
 transfers-check:
 	uv run python scripts/check_transfers.py
+
+former-players-check:
+	uv run python scripts/check_former_players.py
+
+former-players-refresh:
+	uv run fitba former-players refresh --max-requests 180
 
 history-check:
 	uv run python scripts/check_history.py

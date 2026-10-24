@@ -6,40 +6,137 @@
     "raw_posts_published": false,
     "topics_sampled": 4
   },
-  "generated_at": "2026-10-24T15:28:14+00:00",
-  "notes": "A mention count is not a transfer link. A cross-reference label records whether the same name also appears in the press rumour register, the club's output or the confirmed register; it is not a probability.",
+  "generated_at": "2026-10-24T20:09:33+00:00",
+  "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
-    "age_mix": {
-      "21-23": 3,
-      "24-26": 5,
-      "27-29": 6,
-      "30-plus": 1,
-      "under-21": 4
+    "affiliation_mix": {
+      "current_non_official": 1,
+      "current_squad": 16,
+      "external_target": 5,
+      "former_player": 15,
+      "loan_out": 5
+    },
+    "age_mix": {},
+    "excluded_counts": {
+      "current_non_official": 1,
+      "current_squad": 16,
+      "former_player": 15,
+      "loan_out": 5
+    },
+    "external_sample_size": 5,
+    "former_player_profile": {
+      "mentions": 31,
+      "players": [
+        "D. Mitov",
+        "G. Shinnie",
+        "K. Kjartansson",
+        "Killian Phillips",
+        "L. Clarkson",
+        "M. Lazetić",
+        "N. Milanovic",
+        "P. Ambrose",
+        "P. Kristian Bråtveit",
+        "R. Doohan",
+        "R. Duncan",
+        "Ross Doohan",
+        "S. Heltne Nilsen",
+        "T. Keskinen",
+        "T. Mcintyre"
+      ],
+      "sample_size": 15
+    },
+    "lanes": {
+      "current_non_official": {
+        "count": 1,
+        "players": [
+          "C. Masson"
+        ]
+      },
+      "current_squad": {
+        "count": 16,
+        "players": [
+          "A. Aremu",
+          "A. Briedl",
+          "A. Palaversa",
+          "C. Ronan",
+          "F. Marshall",
+          "G. Molloy",
+          "J. Milne",
+          "K. Nisbet",
+          "K. Tobers",
+          "L. Mayo",
+          "M. Frame",
+          "M. Knoester",
+          "M. Ntelo",
+          "R. Vītols",
+          "S. Armstrong",
+          "T. Olusanya"
+        ]
+      },
+      "external_target": {
+        "count": 5,
+        "players": [
+          "A. Stewart",
+          "D. Geiger",
+          "J. Teasdale",
+          "L. Cameron",
+          "L. Morrison"
+        ]
+      },
+      "former_player": {
+        "count": 15,
+        "players": [
+          "D. Mitov",
+          "G. Shinnie",
+          "K. Kjartansson",
+          "Killian Phillips",
+          "L. Clarkson",
+          "M. Lazetić",
+          "N. Milanovic",
+          "P. Ambrose",
+          "P. Kristian Bråtveit",
+          "R. Doohan",
+          "R. Duncan",
+          "Ross Doohan",
+          "S. Heltne Nilsen",
+          "T. Keskinen",
+          "T. Mcintyre"
+        ]
+      },
+      "loan_out": {
+        "count": 5,
+        "players": [
+          "A. Bavidge",
+          "D. Lobban",
+          "K. Bilalovic",
+          "K. Yengi",
+          "N. Suman"
+        ]
+      }
     },
     "low_confidence": false,
-    "note": "This is a descriptive profile of names mentioned in sampled first pages of AFC Chat Rumour Mill topics. It is not a claim about the club's recruitment list.",
+    "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
     "position_mix": {
-      "CM": 18,
-      "FB": 9,
-      "GK": 6,
-      "ST": 8
+      "CM": 3,
+      "FB": 1
     },
-    "sample_size": 42,
+    "sample_size": 5,
     "source_mix": {
       "club_player": 16,
       "cross_referenced_transfer": 24,
       "fan_only": 2
-    }
+    },
+    "total_signals": 42
   },
-  "sampled_at": "2026-10-24T05:17:31+00:00",
+  "sampled_at": "2026-10-24T20:02:42+00:00",
   "sentiment": {
     "club": {
-      "count": 22,
-      "mean": 0.135,
+      "count": 26,
+      "mean": 0.121,
       "median": 0.0,
-      "negative_share": 0.045,
-      "neutral_share": 0.636,
-      "positive_share": 0.318
+      "negative_share": 0.115,
+      "neutral_share": 0.538,
+      "positive_share": 0.346
     },
     "forum": {
       "count": 83,
@@ -61,7 +158,10 @@
   },
   "signals": [
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -69,6 +169,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "FC St. Pauli",
+      "current_league": "2. Bundesliga",
+      "former_href": "/former-players/#former-17939",
       "mentions": 9,
       "nationality": "Bulgaria",
       "player_href": null,
@@ -76,10 +179,14 @@
       "player_name": "D. Mitov",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": null,
       "topic_count": 3
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -87,6 +194,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Blackpool",
+      "current_league": "EFL League One",
+      "former_href": "/former-players/#former-151754",
       "mentions": 4,
       "nationality": "England",
       "player_href": null,
@@ -94,10 +204,14 @@
       "player_name": "L. Clarkson",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "loan_out",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -105,6 +219,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 3,
       "nationality": null,
       "player_href": "/players/6973/",
@@ -112,10 +229,14 @@
       "player_name": "N. Suman",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -123,6 +244,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Neuchatel Xamax FC",
+      "current_league": null,
+      "former_href": "/former-players/#former-351317",
       "mentions": 3,
       "nationality": "Nigeria",
       "player_href": null,
@@ -130,10 +254,14 @@
       "player_name": "P. Ambrose",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 26,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -141,6 +269,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 2,
       "nationality": null,
       "player_href": "/players/57248/",
@@ -148,10 +279,14 @@
       "player_name": "A. Aremu",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 19,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -159,6 +294,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 2,
       "nationality": null,
       "player_href": "/players/379662/",
@@ -166,10 +304,14 @@
       "player_name": "F. Marshall",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -177,6 +319,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Inverness Caledonian Thistle",
+      "current_league": null,
+      "former_href": "/former-players/#former-44812",
       "mentions": 2,
       "nationality": "Scotland",
       "player_href": null,
@@ -184,10 +329,14 @@
       "player_name": "G. Shinnie",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 19,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -195,6 +344,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 2,
       "nationality": null,
       "player_href": "/players/394703/",
@@ -202,10 +354,14 @@
       "player_name": "M. Frame",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": 27,
+      "at_rival": true,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -213,6 +369,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Celtic",
+      "current_league": "Scottish Premiership",
+      "former_href": "/former-players/#former-45150",
       "mentions": 2,
       "nationality": "Scotland",
       "player_href": null,
@@ -220,10 +379,14 @@
       "player_name": "R. Doohan",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": "Celtic",
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 18,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -231,6 +394,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 2,
       "nationality": null,
       "player_href": "/players/430030/",
@@ -238,10 +404,14 @@
       "player_name": "R. Vītols",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 33,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": true,
@@ -249,6 +419,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 2,
       "nationality": null,
       "player_href": "/players/18945/",
@@ -256,10 +429,14 @@
       "player_name": "S. Armstrong",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -267,6 +444,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "FK Haugesund",
+      "current_league": null,
+      "former_href": "/former-players/#former-15644",
       "mentions": 2,
       "nationality": null,
       "player_href": null,
@@ -274,10 +454,14 @@
       "player_name": "S. Heltne Nilsen",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 2
     },
     {
+      "affiliation": "loan_out",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -285,6 +469,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": "/players/361406/",
@@ -292,10 +479,14 @@
       "player_name": "A. Bavidge",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 23,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -303,6 +494,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/271395/",
@@ -310,10 +504,14 @@
       "player_name": "A. Briedl",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 25,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -321,6 +519,9 @@
         "historic_transfer": true,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/14344/",
@@ -328,10 +529,14 @@
       "player_name": "A. Palaversa",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -339,6 +544,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -346,10 +554,14 @@
       "player_name": "A. Stewart",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_non_official",
+      "affiliation_source": "key",
       "age": 17,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -357,6 +569,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/496904/",
@@ -364,10 +579,14 @@
       "player_name": "C. Masson",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 27,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -375,6 +594,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/61178/",
@@ -382,10 +604,14 @@
       "player_name": "C. Ronan",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -393,6 +619,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Germany",
       "player_href": null,
@@ -400,10 +629,14 @@
       "player_name": "D. Geiger",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "loan_out",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -411,6 +644,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/340027/",
@@ -418,10 +654,14 @@
       "player_name": "D. Lobban",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 24,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -429,6 +669,9 @@
         "historic_transfer": true,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/161806/",
@@ -436,10 +679,14 @@
       "player_name": "G. Molloy",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 22,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -447,6 +694,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/321860/",
@@ -454,10 +704,14 @@
       "player_name": "J. Milne",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -465,6 +719,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": null,
@@ -472,10 +729,14 @@
       "player_name": "J. Teasdale",
       "position": null,
       "position_group": null,
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "loan_out",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -483,6 +744,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/395743/",
@@ -490,10 +754,14 @@
       "player_name": "K. Bilalovic",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -501,6 +769,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Brann",
+      "current_league": "Eliteserien",
+      "former_href": "/former-players/#former-373297",
       "mentions": 1,
       "nationality": null,
       "player_href": null,
@@ -508,10 +779,14 @@
       "player_name": "K. Kjartansson",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 28,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -519,6 +794,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/97896/",
@@ -526,10 +804,14 @@
       "player_name": "K. Nisbet",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
         "club_output": false,
@@ -537,6 +819,9 @@
         "historic_transfer": true,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Latvia",
       "player_href": "/players/68534/",
@@ -544,10 +829,14 @@
       "player_name": "K. Tobers",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "loan_out",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -555,6 +844,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/153645/",
@@ -562,10 +854,14 @@
       "player_name": "K. Yengi",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": 23,
+      "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
         "club_output": false,
@@ -573,6 +869,9 @@
         "historic_transfer": true,
         "press_rumour": false
       },
+      "current_club": "St Mirren",
+      "current_league": "Scottish Premiership",
+      "former_href": "/former-players/#former-270357",
       "mentions": 1,
       "nationality": "Republic of Ireland",
       "player_href": null,
@@ -580,10 +879,14 @@
       "player_name": "Killian Phillips",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -591,6 +894,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -598,10 +904,14 @@
       "player_name": "L. Cameron",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 25,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -609,6 +919,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/125695/",
@@ -616,10 +929,14 @@
       "player_name": "L. Mayo",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -627,6 +944,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -634,10 +954,14 @@
       "player_name": "L. Morrison",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 27,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": true,
@@ -645,6 +969,9 @@
         "historic_transfer": true,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/37253/",
@@ -652,10 +979,14 @@
       "player_name": "M. Knoester",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -663,6 +994,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "FC Noah",
+      "current_league": null,
+      "former_href": "/former-players/#former-162045",
       "mentions": 1,
       "nationality": "Serbia",
       "player_href": null,
@@ -670,10 +1004,14 @@
       "player_name": "M. Lazetić",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 24,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -681,6 +1019,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/267727/",
@@ -688,10 +1029,14 @@
       "player_name": "M. Ntelo",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -699,6 +1044,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Western Sydney Wanderers",
+      "current_league": "A-League",
+      "former_href": "/former-players/#former-262960",
       "mentions": 1,
       "nationality": "Australia",
       "player_href": null,
@@ -706,10 +1054,14 @@
       "player_name": "N. Milanovic",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -717,6 +1069,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Haugesund",
+      "current_league": null,
+      "former_href": "/former-players/#former-48034",
       "mentions": 1,
       "nationality": "Norway",
       "player_href": null,
@@ -724,10 +1079,14 @@
       "player_name": "P. Kristian Bråtveit",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -735,6 +1094,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Inverness Caledonian Thistle",
+      "current_league": null,
+      "former_href": "/former-players/#former-291984",
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -742,10 +1104,14 @@
       "player_name": "R. Duncan",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": 27,
+      "at_rival": true,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -753,6 +1119,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Celtic",
+      "current_league": "Scottish Premiership",
+      "former_href": "/former-players/#former-45150",
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -760,10 +1129,14 @@
       "player_name": "Ross Doohan",
       "position": "Goalkeeper",
       "position_group": "GK",
+      "rival_club": "Celtic",
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -771,6 +1144,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Odense",
+      "current_league": "Danish Superliga",
+      "former_href": "/former-players/#former-195870",
       "mentions": 1,
       "nationality": null,
       "player_href": null,
@@ -778,10 +1154,14 @@
       "player_name": "T. Keskinen",
       "position": "Attacker",
       "position_group": "ST",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
       "age": null,
+      "at_rival": false,
       "credibility": "cross_referenced_transfer",
       "cross_references": {
         "club_output": false,
@@ -789,6 +1169,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": "Free agent",
+      "current_league": null,
+      "former_href": "/former-players/#former-19605",
       "mentions": 1,
       "nationality": "Scotland",
       "player_href": null,
@@ -796,10 +1179,14 @@
       "player_name": "T. Mcintyre",
       "position": "Defender",
       "position_group": "FB",
+      "rival_club": null,
       "topic_count": 1
     },
     {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
       "age": 28,
+      "at_rival": false,
       "credibility": "club_player",
       "cross_references": {
         "club_output": false,
@@ -807,6 +1194,9 @@
         "historic_transfer": false,
         "press_rumour": false
       },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
       "mentions": 1,
       "nationality": null,
       "player_href": "/players/231195/",
@@ -814,6 +1204,7 @@
       "player_name": "T. Olusanya",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
       "topic_count": 1
     }
   ],

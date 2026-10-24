@@ -506,6 +506,255 @@ export interface TransferAudit {
   gaps: TransferAuditGap[];
 }
 
+export interface FormerDeparture {
+  transfer_id: string;
+  date: string;
+  season: string;
+  window: string;
+  kind: string;
+  fee_status: string;
+  fee_amount: number | null;
+  fee_currency: string | null;
+  fee_display: string;
+  fee_estimate?: TransferFeeEstimate | null;
+  to_club_id?: string | null;
+  to_club_name: string | null;
+  to_market: string;
+  to_country: string | null;
+  is_scottish_club: boolean | null;
+  is_rival: boolean;
+  rival_name: string | null;
+  verification_status: string;
+  source_urls: string[];
+}
+
+export interface FormerCurrent {
+  club_id?: string | number | null;
+  club_name: string | null;
+  parent_club_name?: string | null;
+  league: string | null;
+  country: string | null;
+  league_tier: number | null;
+  status: "at_club" | "on_loan" | "free_agent" | "retired" | "unknown" | string;
+  source: string;
+  coverage: "current" | "historical" | "unknown" | string;
+  market?: string;
+  is_scottish_club?: boolean | null;
+  is_rival?: boolean;
+  rival_name?: string | null;
+  rival_current?: boolean;
+  as_of?: string | null;
+}
+
+export interface FormerSeasonRow {
+  season: string;
+  team_name: string;
+  competition: string;
+  country: string | null;
+  league_tier: number | null;
+  appearances: number | null;
+  starts: number | null;
+  minutes: number | null;
+  goals: number | null;
+  assists: number | null;
+  rating: number | null;
+  goals_p90: number | null;
+  assists_p90: number | null;
+  source: string;
+}
+
+export interface FormerPlayer {
+  player_key: string;
+  player_id: number | null;
+  identity_status: string;
+  alias_keys: string[];
+  name: string;
+  position: string | null;
+  nationality: string | null;
+  birth_date: string | null;
+  age_at_exit: number | null;
+  href: string;
+  transfer_href: string | null;
+  departure: FormerDeparture;
+  aberdeen: {
+    coverage: string;
+    first_season: string | null;
+    last_season: string | null;
+    seasons: string[];
+    squad_selections: number | null;
+    appearances: number | null;
+    starts: number | null;
+    sub_apps: number | null;
+    minutes: number | null;
+    goals: number | null;
+    assists: number | null;
+    rating: number | null;
+    rating_note: string;
+    final_season: Record<string, unknown>;
+    history_from: string;
+    tenure_coverage: string;
+    first_appearance_covered: string | null;
+    age_at_first_appearance_covered: number | null;
+    developed_here: string;
+    developed_basis: string;
+  };
+  post_career: {
+    status: string;
+    coverage_note: string;
+    seasons_expected: number;
+    seasons_with_data: number;
+    first_season: string | null;
+    last_season: string | null;
+    totals: {
+      seasons_expected: number;
+      seasons_with_data: number;
+      appearances: number | null;
+      starts: number | null;
+      minutes: number | null;
+      goals: number | null;
+      assists: number | null;
+    };
+    clubs: { club: string; minutes: number }[];
+    countries: { country: string; minutes: number }[];
+    current: FormerCurrent;
+    top_flight: boolean | null;
+    top_flight_abroad: boolean | null;
+    at_rival: boolean;
+    rival_current: boolean;
+    rival_spells: {
+      club: string;
+      from_season: string;
+      to_season: string;
+      current: boolean;
+    }[];
+  };
+  sell_on_clause_id: string | null;
+}
+
+export interface FormerReceipt {
+  status: string;
+  receipt_gbp: number | null;
+  gross_fee_gbp: number | null;
+  original_fee_gbp: number | null;
+  profit_gbp: number | null;
+  currency: string;
+  method: string | null;
+  inputs: Record<string, unknown>;
+  missing_inputs: string[];
+  confidence: string | null;
+}
+
+export interface FormerSellOnClause {
+  clause_id: string;
+  player_key: string;
+  player_name: string;
+  buyer_club_name: string;
+  sale_date: string;
+  sell_on_pct: number | null;
+  basis: string;
+  confidence: string;
+  source_urls: string[];
+  notes?: string | null;
+  event: {
+    date: string;
+    from_club_name: string | null;
+    to_club_name: string | null;
+    kind: string;
+    fee_status: string;
+    fee_display: string | null;
+    source_urls: string[];
+  } | null;
+  event_status: string;
+  receipt: FormerReceipt;
+}
+
+export interface FormerPlayersFile {
+  schema_version: string;
+  club_id: string;
+  name: string;
+  season: string;
+  generated_at: string;
+  state: "available" | "partial" | "stale" | "unavailable" | string;
+  served_generated_at: string | null;
+  definition: Record<string, unknown>;
+  coverage: {
+    status: string;
+    as_of: string;
+    register_from: string;
+    post_career_source: string;
+    post_career_updated_at: string | null;
+    backfill: Record<string, unknown>;
+    counts: Record<string, number>;
+    gaps: { player_key: string; season?: string; reason: string }[];
+    note: string;
+  };
+  summary: Record<string, number | Record<string, number> | null>;
+  players: FormerPlayer[];
+  sell_on_watch: {
+    clauses: FormerSellOnClause[];
+    summary: Record<string, number | string | null>;
+  };
+  development_scorecard: {
+    definitions: Record<string, number | string>;
+    cohorts: Record<string, Record<string, number | null>>;
+    by_exit_season: Record<string, number | string>[];
+    vs_aberdeen: Record<string, number>;
+    note: string;
+  };
+  sources: { id: string; name: string; url: string | null; verified_at: string | null; note: string }[];
+  notes: string;
+}
+
+export interface FormerPlayerSeasons {
+  coverage: {
+    status: string;
+    expected_seasons: string[];
+    present_seasons: string[];
+    missing_seasons: string[];
+  };
+  aberdeen_by_season: {
+    season: string;
+    squad_selections: number;
+    appearances: number;
+    starts: number;
+    sub_apps: number;
+    minutes: number;
+    goals: number | null;
+    assists: number | null;
+    rating: number | null;
+  }[];
+  post_seasons: FormerSeasonRow[];
+  transfer_chain: {
+    date: string;
+    from_club_name: string | null;
+    to_club_name: string | null;
+    kind: string;
+  }[];
+  vs_aberdeen: {
+    coverage: string;
+    appearances: number;
+    starts: number;
+    minutes: number;
+    goals: number | null;
+    assists: number | null;
+    note: string;
+  };
+}
+
+export interface FormerSeasonsFile {
+  schema_version: string;
+  generated_at: string;
+  season: string;
+  club_id: string;
+  state: string;
+  seasons: Record<string, FormerPlayerSeasons>;
+  coverage: {
+    players_with_detail: number;
+    players_without_detail: number;
+    note: string;
+  };
+}
+
 export type RumourStatus = "active" | "denied" | "confirmed" | "stale";
 export type RumourConfidence = "low" | "medium" | "high";
 
@@ -533,6 +782,11 @@ export interface Rumour {
   analysis_tags: string[];
   engagement: null;
   player_href?: string | null;
+  former_href?: string | null;
+  affiliation?: string;
+  affiliation_source?: string;
+  is_target?: boolean;
+  is_return_link?: boolean;
   player_mentions?: PlayerMention[];
 }
 
@@ -562,6 +816,8 @@ export interface RumoursFile {
     by_direction: Record<string, number>;
   };
   coverage: { status: string; note: string };
+  lanes?: Record<string, { count: number; rumour_ids: string[] }>;
+  former_player_mentions?: Rumour[];
   notes: string;
 }
 
@@ -581,6 +837,16 @@ export interface RumourProfile {
   club_id: string;
   generated_at: string;
   sample_size: number;
+  basis?: string;
+  candidate_rows?: number;
+  excluded?: Record<string, number>;
+  return_links?: {
+    rumour_id: string;
+    player_name: string;
+    claim: string;
+    player_href?: string | null;
+    former_href?: string | null;
+  }[];
   weighted_total: number;
   low_confidence: boolean;
   weights: {
@@ -627,6 +893,13 @@ export interface ForumSignal {
   mentions: number;
   topic_count: number;
   credibility: string;
+  affiliation?: string;
+  affiliation_source?: string;
+  former_href?: string | null;
+  current_club?: string | null;
+  current_league?: string | null;
+  at_rival?: boolean;
+  rival_club?: string | null;
   cross_references: {
     confirmed_transfer: boolean;
     historic_transfer?: boolean;
@@ -645,6 +918,7 @@ export interface ForumSignalFile {
     content_signal: string | null;
   };
   generated_at: string;
+  sampled_at?: string | null;
   coverage: {
     topics_sampled: number;
     posts_sampled: number;
@@ -656,9 +930,19 @@ export interface ForumSignalFile {
   signals: ForumSignal[];
   profile: {
     sample_size: number;
+    total_signals?: number;
+    external_sample_size?: number;
     position_mix: Record<string, number>;
     age_mix: Record<string, number>;
     source_mix: Record<string, number>;
+    affiliation_mix?: Record<string, number>;
+    excluded_counts?: Record<string, number>;
+    lanes?: Record<string, { count: number; players: string[] }>;
+    former_player_profile?: {
+      sample_size: number;
+      mentions: number;
+      players: string[];
+    };
     low_confidence: boolean;
     note: string;
   };
@@ -2204,6 +2488,15 @@ export interface Manifest {
       curated: number;
       note: string;
     };
+    former_players?: {
+      club: string;
+      count: number;
+      with_api_id: number | null;
+      with_post_seasons: number | null;
+      sell_on_computed: number | null;
+      state: string;
+      note: string;
+    };
     rumours?: {
       club: string;
       count: number;
@@ -2613,6 +2906,14 @@ export function getScottishCup(): ScottishCupFile | null {
 
 export function getTransfers(): TransfersFile | null {
   return readJson<TransfersFile>("transfers", "aberdeen.json");
+}
+
+export function getFormerPlayers(): FormerPlayersFile | null {
+  return readJson<FormerPlayersFile>("former-players", "aberdeen.json");
+}
+
+export function getFormerSeasons(): FormerSeasonsFile | null {
+  return readJson<FormerSeasonsFile>("former-players", "seasons.json");
 }
 
 export function getTransferAudit(): TransferAudit | null {
@@ -3455,6 +3756,59 @@ export interface ScoutingRates {
   saves_p90: number | null;
 }
 
+export interface FormerAberdeenProfile {
+  player_key: string;
+  name: string;
+  href: string;
+  transfer_href: string | null;
+  departure: {
+    transfer_id: string | null;
+    date: string | null;
+    season: string | null;
+    window: string | null;
+    kind: string | null;
+    fee_status: string | null;
+    fee_display: string | null;
+    to_club_name: string | null;
+    to_market: string | null;
+    to_country: string | null;
+    is_rival: boolean;
+    rival_name: string | null;
+    source_urls: string[];
+  };
+  aberdeen: {
+    first_season: string | null;
+    last_season: string | null;
+    appearances: number | null;
+    starts: number | null;
+    sub_apps: number | null;
+    minutes: number | null;
+    goals: number | null;
+    assists: number | null;
+    rating: number | null;
+    tenure_coverage: string | null;
+    developed_here: string | null;
+    developed_basis: string | null;
+    final_season: Record<string, unknown> | null;
+  };
+  post_career: {
+    status: string;
+    totals: Record<string, number | null>;
+    current: FormerCurrent;
+    at_rival: boolean;
+    rival_current: boolean;
+    rival_spells: {
+      club: string;
+      from_season: string;
+      to_season: string;
+      current: boolean;
+    }[];
+    top_flight_abroad: boolean | null;
+  };
+  sell_on: FormerSellOnClause | null;
+  stats_basis: string | null;
+}
+
 export interface ScoutingPlayer extends ScoutingRates {
   player_id: number;
   name: string;
@@ -3508,6 +3862,7 @@ export interface ScoutingPlayer extends ScoutingRates {
   archetypes: Record<string, ScoutingArchetypeScore>;
   profile: ScoutingProfile | null;
   rose?: RoseBlock | null;
+  former_aberdeen?: FormerAberdeenProfile | null;
 }
 
 export interface ScoutingSearchRow {

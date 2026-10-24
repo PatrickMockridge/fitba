@@ -323,3 +323,15 @@ within that league only. The full season scope and per-league coverage are in
 `data/normalized/scouting/team_standings_meta.json` and the `/scouting/`
 coverage block. A league without a table is shown as unknown, not a
 zero-strength team. The lens does not use budgets, wages or market values.
+
+
+## Former players and post-Aberdeen careers
+
+The former-player universe and departure facts come from the confirmed transfer
+register. Aberdeen tenure comes from the covered historical record. Post-career
+league seasons and transfer histories come from the licensed API-Football
+`/players?id=&season=` and `/transfers?player=` endpoints. Cup and European
+provider rows are stored locally but excluded from published league totals
+because the provider repeats season totals across some cup entries. Missing
+seasons, leagues and curated-only identities are labelled gaps. No raw provider
+response, logo, photograph or fee hint is published.

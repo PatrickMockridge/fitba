@@ -1,0 +1,249 @@
+{
+  "$defs": {
+    "FormerPlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "player_key": {
+          "title": "Player Key",
+          "type": "string"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "identity_status": {
+          "title": "Identity Status",
+          "type": "string"
+        },
+        "alias_keys": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Alias Keys",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position"
+        },
+        "nationality": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Nationality"
+        },
+        "birth_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Birth Date"
+        },
+        "age_at_exit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Age At Exit"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "transfer_href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transfer Href"
+        },
+        "departure": {
+          "additionalProperties": true,
+          "title": "Departure",
+          "type": "object"
+        },
+        "aberdeen": {
+          "additionalProperties": true,
+          "title": "Aberdeen",
+          "type": "object"
+        },
+        "post_career": {
+          "additionalProperties": true,
+          "title": "Post Career",
+          "type": "object"
+        },
+        "sell_on_clause_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sell On Clause Id"
+        }
+      },
+      "required": [
+        "player_key",
+        "identity_status",
+        "name",
+        "href",
+        "departure",
+        "aberdeen",
+        "post_career"
+      ],
+      "title": "FormerPlayer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "partial",
+        "stale",
+        "unavailable"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "served_generated_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served Generated At"
+    },
+    "definition": {
+      "additionalProperties": true,
+      "title": "Definition",
+      "type": "object"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    },
+    "players": {
+      "items": {
+        "$ref": "#/$defs/FormerPlayer"
+      },
+      "title": "Players",
+      "type": "array"
+    },
+    "sell_on_watch": {
+      "additionalProperties": true,
+      "title": "Sell On Watch",
+      "type": "object"
+    },
+    "development_scorecard": {
+      "additionalProperties": true,
+      "title": "Development Scorecard",
+      "type": "object"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "club_id",
+    "name",
+    "season",
+    "generated_at",
+    "state",
+    "definition",
+    "coverage",
+    "summary",
+    "players",
+    "sell_on_watch",
+    "development_scorecard",
+    "sources",
+    "notes"
+  ],
+  "title": "FormerPlayersDocument",
+  "type": "object"
+}

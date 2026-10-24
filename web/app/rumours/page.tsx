@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { BucketBars } from "@/components/BucketBars";
+import { ContractPage } from "@/components/ContractPage";
+import { FormerPlayerMentions } from "@/components/FormerPlayerMentions";
 import { ForumSignalPanel } from "@/components/ForumSignalPanel";
 import { PlayerLink } from "@/components/PlayerLink";
 import { RumourBoard } from "@/components/RumourBoard";
@@ -21,19 +23,21 @@ export default function RumoursPage() {
 
   if (!rumours) {
     return (
-      <section className="empty-state">
-        <h1>Rumour mill not published</h1>
-        <p>
-          Run <code>uv run fitba publish</code> to generate the rumour register and
-          fan-signal payloads.
-        </p>
-      </section>
+      <ContractPage surface="rumours" state="empty">
+        <section className="empty-state" data-contract="rumours.empty">
+          <h1>Rumour mill not published</h1>
+          <p>
+            Run <code>uv run fitba publish</code> to generate the rumour register and
+            fan-signal payloads.
+          </p>
+        </section>
+      </ContractPage>
     );
   }
 
   return (
-    <>
-      <section className="page-head">
+    <ContractPage surface="rumours">
+      <section className="page-head" data-contract="rumours.hero">
         <p className="eyebrow">Off the pitch · Season {rumours.season}</p>
         <h1>The rumour mill</h1>
         <p className="lede">
@@ -74,6 +78,46 @@ export default function RumoursPage() {
         </ul>
       </section>
 
+      <section className="card" data-contract="rumours.affiliation" data-contract-indicator="unknown">
+        <p className="eyebrow">Who the names are</p>
+        <h2 data-contract-indicator="confidence">Former players are not transfer targets</h2>
+        <div className="stat-row four">
+          <div className="stat-tile">
+            <span className="stat-label">External targets</span>
+            <span className="stat-value">
+              {forum?.profile.affiliation_mix?.external_target ?? 0}
+            </span>
+            <span className="stat-note">fan-signal names, not a target list</span>
+          </div>
+          <div className="stat-tile">
+            <span className="stat-label">Former players</span>
+            <span className="stat-value">
+              {forum?.profile.affiliation_mix?.former_player ?? 0}
+            </span>
+            <span className="stat-note">separate lane below</span>
+          </div>
+          <div className="stat-tile">
+            <span className="stat-label">Current squad</span>
+            <span className="stat-value">
+              {(forum?.profile.affiliation_mix?.current_squad ?? 0) +
+                (forum?.profile.affiliation_mix?.loan_out ?? 0) +
+                (forum?.profile.affiliation_mix?.current_non_official ?? 0)}
+            </span>
+            <span className="stat-note">official and retained profiles</span>
+          </div>
+          <div className="stat-tile">
+            <span className="stat-label">Target-profile sample</span>
+            <span className="stat-value">{profile?.sample_size ?? 0}</span>
+            <span className="stat-note">active incoming external links</span>
+          </div>
+        </div>
+        <p className="fine-print">
+          A fan mention is not a transfer link. The target profile excludes current squad,
+          current non-official and former players; a former player linked back is a return
+          link, not a normal target.
+        </p>
+      </section>
+
       <section className="card separation-banner">
         <h2>Rumours and confirmed business are different registers</h2>
         <p>
@@ -88,7 +132,7 @@ export default function RumoursPage() {
         </p>
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="rumours.register">
         <div className="section-head">
           <div>
             <p className="eyebrow">Curated register</p>
@@ -135,7 +179,7 @@ export default function RumoursPage() {
         </section>
       ) : null}
 
-      <section className="section">
+      <section className="section" data-contract="rumours.profile">
         <div className="section-head">
           <div>
             <p className="eyebrow">Recruitment profile</p>
@@ -198,7 +242,11 @@ export default function RumoursPage() {
         ) : null}
       </section>
 
-      <section className="section">
+      <section className="section" data-contract="rumours.former-lane">
+        <FormerPlayerMentions forum={forum} rumours={rumours} />
+      </section>
+
+      <section className="section" data-contract="rumours.forum-signals">
         <ForumSignalPanel data={forum} limit={16} />
       </section>
 
@@ -220,6 +268,16 @@ export default function RumoursPage() {
         </div>
       </section>
 
+      <section className="card" data-contract="rumours.coverage" data-contract-indicator="source">
+        <p className="eyebrow">Coverage</p>
+        <h2>What this page can and cannot say</h2>
+        <p className="fine-print">
+          {rumours.coverage.note} {forum?.coverage.note ?? ""} The affiliation table
+          is derived from the current squad and the former-player register; a name
+          outside the gazetteer is unknown, not a target.
+        </p>
+      </section>
+
       <p className="back-link">
         <Link href="/recruitment/">← Off the pitch</Link>
         {transfers ? (
@@ -229,6 +287,6 @@ export default function RumoursPage() {
           </>
         ) : null}
       </p>
-    </>
+    </ContractPage>
   );
 }

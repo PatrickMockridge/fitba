@@ -231,6 +231,17 @@ The licensed feed has no contract expiry field. The curated
 No contract column, filter or ranking input is published. Wages, fees, sell-on
 terms and release clauses are not claimed.
 
+## Former Aberdeen players
+
+A former Aberdeen player uses the same scouting profile route and component as
+any other non-squad player. The profile adds a **Former Aberdeen player** section
+with the departure, Aberdeen record, post-Aberdeen summary, rival spell and
+sell-on status. The standard scouting sections remain. Former players outside
+the current scouting pool use a `former_player_only` cohort: their latest
+measured league season, falling back to the last covered Aberdeen season, with
+no value index, scouting priority, Europe discount or cross-league percentile
+inferred. They are not added to the league pool counts or the scouting board.
+
 ## Prior-season rose cohorts
 
 `data/normalized/scouting/rose_history.parquet` holds full-season Premiership

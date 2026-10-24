@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/matches/", label: "Matches" },
   { href: "/analysis/", label: "Season overview" },
   { href: "/squad/", label: "Squad" },
+  { href: "/former-players/", label: "Former players" },
   { href: "/scouting/", label: "Scouting" },
   { href: "/recruitment/", label: "Off the pitch" },
   { href: "/history/", label: "The Cormack era" },

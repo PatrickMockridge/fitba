@@ -23,6 +23,8 @@ from typing import Any
 import polars as pl
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+from fitba.analytics.affiliation import AffiliationIndex
+from fitba.analytics.former_players import former_player_rows
 from fitba.ingest.cache import cache_path
 from fitba.ingest.news import load_news
 from fitba.ingest.transfers import published_transfers
@@ -40,7 +42,7 @@ from fitba.settings import (
 )
 from fitba.sources import afc_chat, api_football
 from fitba.sources.base import IngestResult
-from fitba.util.dates import utc_now_iso
+from fitba.util.dates import current_season, utc_now_iso
 
 POST_COLUMNS = [
     "post_key",
@@ -80,6 +82,8 @@ SIGNAL_COLUMNS = [
     "neutral_share",
     "negative_share",
     "credibility",
+    "affiliation",
+    "affiliation_source",
     "cross_confirmed",
     "cross_historic",
     "cross_press",
@@ -654,6 +658,7 @@ def build_signals(
     transfers: list[dict[str, Any]],
     rumours: list[dict[str, Any]],
     news_titles: list[str],
+    affiliations: AffiliationIndex | None = None,
 ) -> list[dict[str, Any]]:
     signals: dict[str, dict[str, Any]] = {}
     for row in posts.to_dicts():
@@ -698,32 +703,72 @@ def build_signals(
         signal["topic_count"] = len(topics)
         signal["sentiment"] = summarize_sentiment(compounds)
         signal.update(reference)
+        if affiliations is not None:
+            affiliation, affiliation_source = affiliations.affiliation_for(
+                signal.get("player_key"), signal.get("player_name")
+            )
+        else:
+            affiliation, affiliation_source = "unknown", "none"
+        signal["affiliation"] = affiliation
+        signal["affiliation_source"] = affiliation_source
         output.append(signal)
     return sorted(output, key=lambda row: (-row["mentions"], row["player_name"]))
 
 
 def build_profile(signals: list[dict[str, Any]]) -> dict[str, Any]:
-    """A descriptive profile of the players the sampled fan posts mention."""
+    """A descriptive profile of external names, separate from Aberdeen players."""
+    external = [
+        signal
+        for signal in signals
+        if str(signal.get("affiliation") or "unknown") == "external_target"
+    ]
     positions: dict[str, int] = {}
     ages: dict[str, int] = {}
     sources: dict[str, int] = {}
+    affiliation_mix: dict[str, int] = {}
     for signal in signals:
+        affiliation = str(signal.get("affiliation") or "unknown")
+        affiliation_mix[affiliation] = affiliation_mix.get(affiliation, 0) + 1
+        sources[signal["credibility"]] = sources.get(signal["credibility"], 0) + 1
+    for signal in external:
         if signal.get("position_group"):
             positions[signal["position_group"]] = positions.get(signal["position_group"], 0) + 1
         band = _age_band(signal.get("age"))
         if band:
             ages[band] = ages.get(band, 0) + 1
-        sources[signal["credibility"]] = sources.get(signal["credibility"], 0) + 1
+    former = [signal for signal in signals if signal.get("affiliation") == "former_player"]
     return {
-        "sample_size": len(signals),
+        "sample_size": len(external),
+        "total_signals": len(signals),
+        "external_sample_size": len(external),
         "position_mix": positions,
         "age_mix": ages,
         "source_mix": sources,
-        "low_confidence": len(signals) < 5,
+        "affiliation_mix": dict(sorted(affiliation_mix.items())),
+        "excluded_counts": {
+            key: value for key, value in sorted(affiliation_mix.items()) if key != "external_target"
+        },
+        "lanes": {
+            key: {
+                "count": value,
+                "players": sorted(
+                    str(signal.get("player_name"))
+                    for signal in signals
+                    if str(signal.get("affiliation") or "unknown") == key
+                ),
+            }
+            for key, value in sorted(affiliation_mix.items())
+        },
+        "former_player_profile": {
+            "sample_size": len(former),
+            "mentions": sum(int(signal.get("mentions") or 0) for signal in former),
+            "players": sorted(str(signal.get("player_name")) for signal in former),
+        },
+        "low_confidence": len(external) < 5,
         "note": (
-            "This is a descriptive profile of names mentioned in sampled first "
-            "pages of AFC Chat Rumour Mill topics. It is not a claim about the "
-            "club's recruitment list."
+            "The position and age mixes count external names only, not current squad "
+            "or former players. This is still a descriptive profile of sampled first "
+            "pages, not the club's recruitment list."
         ),
     }
 
@@ -751,6 +796,8 @@ def signal_frame(signals: list[dict[str, Any]], now: str) -> pl.DataFrame:
                 "neutral_share": sentiment.get("neutral_share"),
                 "negative_share": sentiment.get("negative_share"),
                 "credibility": signal.get("credibility"),
+                "affiliation": signal.get("affiliation"),
+                "affiliation_source": signal.get("affiliation_source"),
                 "cross_confirmed": bool(refs.get("confirmed_transfer")),
                 "cross_historic": bool(refs.get("historic_transfer")),
                 "cross_press": bool(refs.get("press_rumour")),
@@ -834,12 +881,22 @@ def ingest_forum(
         posts_frame.write_parquet(output_dir / "afc_chat_posts.parquet")
         topics_frame.write_parquet(output_dir / "afc_chat_topics.parquet")
 
+        from fitba.publish.squad import squad_payload
+
+        transfers = published_transfers()
+        squad = squad_payload(current_season())
+        former = former_player_rows(transfers, squad)
+        affiliations = AffiliationIndex.from_payloads(
+            squad=squad,
+            former_keys={str(row["player_key"]) for row in former},
+        )
         signals = build_signals(
             posts_frame,
             gazetteer,
-            transfers=published_transfers(),
+            transfers=transfers,
             rumours=list(rumours_config().get("rumours", [])),
             news_titles=[str(row["title"]) for row in load_news(limit=50).to_dicts()],
+            affiliations=affiliations,
         )
         signal_frame(signals, now).write_parquet(output_dir / "afc_chat_signals.parquet")
 

@@ -1,8 +1,8 @@
 {
-  "checks": 11,
+  "checks": 16,
   "failed": 0,
-  "generated_at": "2026-10-24T15:28:14+00:00",
-  "passed": 11,
+  "generated_at": "2026-10-24T20:09:33+00:00",
+  "passed": 16,
   "results": [
     {
       "description": "Squad summary and role buckets reconcile with player rows",
@@ -87,13 +87,13 @@
     {
       "description": "Fixture results and shootout labels agree with match pages",
       "errors": [],
-      "fields_checked": 1101,
+      "fields_checked": 1104,
       "id": "results.shootouts",
       "payloads": [
         "fixtures/index.json",
         "matches/*.json"
       ],
-      "rows_checked": 367,
+      "rows_checked": 368,
       "status": "pass"
     },
     {
@@ -105,7 +105,7 @@
         "fixtures/index.json",
         "matchday/upcoming.json"
       ],
-      "rows_checked": 25,
+      "rows_checked": 24,
       "status": "pass"
     },
     {
@@ -130,6 +130,68 @@
         "transfers/aberdeen.json"
       ],
       "rows_checked": 0,
+      "status": "pass"
+    },
+    {
+      "description": "Former-player rows reconcile to published permanent/free departures",
+      "errors": [],
+      "fields_checked": 5,
+      "id": "former.register",
+      "payloads": [
+        "former-players/aberdeen.json",
+        "transfers/aberdeen.json",
+        "squad/aberdeen.json"
+      ],
+      "rows_checked": 76,
+      "status": "pass"
+    },
+    {
+      "description": "Former-player post-career totals reconcile to their season rows",
+      "errors": [],
+      "fields_checked": 3,
+      "id": "former.post",
+      "payloads": [
+        "former-players/aberdeen.json",
+        "former-players/seasons.json"
+      ],
+      "rows_checked": 76,
+      "status": "pass"
+    },
+    {
+      "description": "Sell-on clauses and receipts reconcile across former and transfer payloads",
+      "errors": [],
+      "fields_checked": 3,
+      "id": "former.sell_on",
+      "payloads": [
+        "former-players/aberdeen.json",
+        "transfers/aberdeen.json"
+      ],
+      "rows_checked": 3,
+      "status": "pass"
+    },
+    {
+      "description": "Rumour and forum affiliations keep former players out of the target profile",
+      "errors": [],
+      "fields_checked": 4,
+      "id": "former.affiliation",
+      "payloads": [
+        "rumours/aberdeen.json",
+        "rumours/profile.json",
+        "forum/afc_chat.json"
+      ],
+      "rows_checked": 42,
+      "status": "pass"
+    },
+    {
+      "description": "Former-player coverage counts equal the payload and coverage document",
+      "errors": [],
+      "fields_checked": 3,
+      "id": "former.coverage",
+      "payloads": [
+        "former-players/aberdeen.json",
+        "coverage.json"
+      ],
+      "rows_checked": 76,
       "status": "pass"
     }
   ],

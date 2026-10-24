@@ -117,8 +117,14 @@ export default function NewsPage() {
               <ul className="signal-list">
                 {forum.signals.slice(0, 8).map((signal) => (
                   <li key={`${signal.player_name}-${signal.player_key ?? ""}`}>
-                    <PlayerLink name={signal.player_name} href={signal.player_href} />
-                    <span className="muted">{signal.mentions} mentions</span>
+                    <PlayerLink
+                      name={signal.player_name}
+                      href={signal.player_href ?? signal.former_href}
+                    />
+                    <span className="muted">
+                      {signal.affiliation ? `${signal.affiliation.replaceAll("_", " ")} · ` : ""}
+                      {signal.mentions} mentions
+                    </span>
                   </li>
                 ))}
               </ul>

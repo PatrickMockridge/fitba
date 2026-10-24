@@ -212,6 +212,7 @@ export default function HomePage() {
 
           <div className="door-links">
             <Link href="/transfers/">Transfers</Link>
+            <Link href="/former-players/">Former players</Link>
             <Link href="/loans/">Loans</Link>
             <Link href="/scouting/">Scouting</Link>
             <Link href="/rumours/">Rumours</Link>

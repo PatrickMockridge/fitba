@@ -211,6 +211,24 @@ Forbidden: a six-column needs table that drops expected slots, ready/trusted,
 market route, roster, curated prior or availability; player tables hidden by
 default; confidence badges removed.
 
+### `/rumours/` — rumour mill and fan signal
+
+Must remain visible:
+
+- The hero, affiliation counts (external targets, former players, current
+  squad), curated register, target profile, former-player lane, forum signals
+  and coverage.
+- The statement that former players are not transfer targets and that a return
+  link is separate.
+- The target-profile sample size, basis and excluded counts.
+- The fan-signal table with affiliation and cross-reference labels.
+
+May be disclosed: method notes, sentiment caveats and sampled-topic prose.
+
+Forbidden: current or former players inside the target profile; a former player
+shown as an ordinary target; raw forum posts, usernames or quotes; a mention
+treated as a transfer link.
+
 ### `/transfers/` — transfers and loans
 
 Must remain visible:
@@ -245,6 +263,30 @@ May be disclosed: the coverage prose and long method notes.
 
 Forbidden: loan cards without terms, a single "terms often unknown" badge with
 no per-card unknown state, removal of the in/out split.
+
+### `/former-players/` — former-player register
+
+Must remain visible:
+
+- The register size, sell-on clause count, rival-spell count and the visible
+  `2019-20 onward` coverage line.
+- Summary counts: permanent/free exits, current coverage, known top-flight
+  abroad, rival spells, young exits and early-career proxy.
+- The register table: Player, Left, To, Type, Fee, Age, Aberdeen apps, Aberdeen
+  starts, Post seasons, Post mins, Current club, Rival, Status.
+- A row link to the player's standard `/scouting/player/<id>/` profile, which
+  carries the shared scouting sections plus a former-Aberdeen section. Former
+  players without an API player id stay plain text with an explicit reason.
+- The sell-on watch, development scorecard and former-player rumour lane.
+- The development scorecard with its definitions and by-exit-season table.
+- The sell-on watch with the missing-input reason where no receipt is computable.
+- The former-player rumour lane and the coverage/limits card.
+
+May be disclosed: long method notes and source prose.
+
+Forbidden: presenting a former player as a transfer target; hiding a last-known
+club behind a current label; a good/bad-price or should-have-kept verdict;
+zero-filling a missing post-career season or a sell-on receipt.
 
 ### `/squad/` — current squad
 

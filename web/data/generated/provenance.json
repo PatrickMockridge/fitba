@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-24T15:28:14+00:00",
+  "generated_at": "2026-10-24T20:09:33+00:00",
   "layers": [
     {
       "fallback": [
@@ -65,7 +65,7 @@
         {
           "name": "football-data.co.uk",
           "role": "primary",
-          "rows": 217,
+          "rows": 218,
           "source_id": "football_data_uk",
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
@@ -255,7 +255,7 @@
         {
           "name": "SPFL official club feed",
           "role": "primary",
-          "rows": 11,
+          "rows": 12,
           "source_id": "spfl",
           "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
           "verified_at": "2026-10-21"
@@ -305,7 +305,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 461,
+          "rows": 489,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
@@ -346,7 +346,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 360,
+          "rows": 400,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
@@ -590,7 +590,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 461,
+          "rows": 489,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
@@ -876,7 +876,7 @@
         {
           "name": "Aberdeen FC news",
           "role": "primary",
-          "rows": 22,
+          "rows": 24,
           "source_id": "afc_news",
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
@@ -1081,6 +1081,79 @@
       ]
     },
     {
+      "fallback": [
+        "wikipedia"
+      ],
+      "fields": [
+        "departure",
+        "tenure",
+        "post_career",
+        "sell_on_watch",
+        "development"
+      ],
+      "gate": null,
+      "id": "former_player_record",
+      "kind": "derived",
+      "label": "Former-player record",
+      "note": "Derived from the confirmed transfer register, the covered Aberdeen history and licensed API-Football player seasons. Post-career league rows are measured where covered; missing seasons and curated-only identities are explicit gaps.",
+      "primary": "api_football",
+      "primary_source": {
+        "attribution": null,
+        "id": "api_football",
+        "lane": "derived_display",
+        "name": "API-Football",
+        "url": "https://www.api-football.com",
+        "verified_at": "2026-10-23"
+      },
+      "scope": "2019-20 to current",
+      "sources": [
+        {
+          "name": "API-Football",
+          "role": "primary",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        },
+        {
+          "name": "Wikipedia",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org",
+          "verified_at": "2026-10-21"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/former-players/",
+        "/transfers/",
+        "/status/"
+      ]
+    },
+    {
+      "fallback": [],
+      "fields": [
+        "subsequent_transfer",
+        "fee_anchor",
+        "receipt"
+      ],
+      "gate": null,
+      "id": "sell_on_events",
+      "kind": "curated",
+      "label": "Sell-on event evidence",
+      "note": "A subsequent transfer is detected from the provider history; a receipt is computed only when the clause percentage, basis and every required public fee are evidenced. Missing inputs are published, never inferred.",
+      "primary": "curated",
+      "primary_source": null,
+      "scope": "2019-20 to current",
+      "sources": [],
+      "status": "active",
+      "surfaces": [
+        "/former-players/",
+        "/transfers/"
+      ]
+    },
+    {
       "fallback": [],
       "fields": [
         "family_balance",
@@ -1167,7 +1240,7 @@
         "league_results_history",
         "league_team_stats"
       ],
-      "rows": 10057,
+      "rows": 10058,
       "rows_basis": "primary contributions only",
       "url": "https://www.football-data.co.uk/mmz4281"
     },
@@ -1180,6 +1253,7 @@
       "primary_layers": [
         "cup_fixtures",
         "event_layer",
+        "former_player_record",
         "lineups_roles",
         "player_match_stats",
         "player_squads",
@@ -1190,7 +1264,7 @@
         "squad_identity",
         "transfers_candidate"
       ],
-      "rows": 1630,
+      "rows": 1726,
       "rows_basis": "primary contributions only",
       "url": "https://www.api-football.com"
     },
@@ -1217,7 +1291,7 @@
         "availability",
         "news"
       ],
-      "rows": 24,
+      "rows": 26,
       "rows_basis": "primary contributions only",
       "url": "https://www.afc.co.uk/en/news"
     },
@@ -1230,7 +1304,7 @@
       "primary_layers": [
         "club_fixtures"
       ],
-      "rows": 11,
+      "rows": 12,
       "rows_basis": "primary contributions only",
       "url": "https://spfl.co.uk/clubs/aberdeen/fixtures"
     },

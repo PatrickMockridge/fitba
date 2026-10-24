@@ -272,8 +272,9 @@ export default function SquadPage() {
                     the player profile, and profile links for current players.
                   </td>
                   <td>
-                    Foot is sourced or explicitly unknown; former players and
-                    rumour targets stay plain text.
+                    Foot is sourced or explicitly unknown; former players link
+                    to the former-player register, while rumour targets stay
+                    plain text.
                   </td>
                 </tr>
               </tbody>
@@ -295,6 +296,8 @@ export default function SquadPage() {
         <Link href="/analysis/">Season overview →</Link>
         {" · "}
         <Link href="/recruitment/">Off the pitch →</Link>
+        {" · "}
+        <Link href="/former-players/">Former players →</Link>
       </p>
     </ContractPage>
   );

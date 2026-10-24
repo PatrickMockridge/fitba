@@ -20,6 +20,7 @@ from typing import Any
 import orjson
 import polars as pl
 
+from fitba.analytics.affiliation import AffiliationIndex
 from fitba.analytics.loans import loan_scope
 from fitba.analytics.records import match_result
 from fitba.analytics.tables import build_tables
@@ -55,6 +56,7 @@ from fitba.publish.analysis import build_analysis_payload
 from fitba.publish.availability import build_availability_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
 from fitba.publish.fixture import build_fixture_payloads
+from fitba.publish.former_players import build_former_bundle
 from fitba.publish.history import build_history_payloads
 from fitba.publish.matchday import (
     build_matchday_payload,
@@ -861,6 +863,9 @@ def _transfer_payload(
     payload["player_href"] = (
         player_index.href(row.get("player_key")) if player_index is not None else None
     )
+    payload["former_href"] = (
+        player_index.former_href(row.get("player_key")) if player_index is not None else None
+    )
     return payload
 
 
@@ -1202,6 +1207,21 @@ def publish(
         except orjson.JSONDecodeError:
             previous_needs = None
 
+    previous_former_index = None
+    previous_former_path = target / "former-players" / "aberdeen.json"
+    if previous_former_path.exists():
+        try:
+            previous_former_index = orjson.loads(previous_former_path.read_bytes())
+        except orjson.JSONDecodeError:
+            previous_former_index = None
+    previous_former_seasons = None
+    previous_former_seasons_path = target / "former-players" / "seasons.json"
+    if previous_former_seasons_path.exists():
+        try:
+            previous_former_seasons = orjson.loads(previous_former_seasons_path.read_bytes())
+        except orjson.JSONDecodeError:
+            previous_former_seasons = None
+
     temp = target.with_name(target.name + ".tmp")
     if temp.exists():
         shutil.rmtree(temp)
@@ -1229,7 +1249,6 @@ def publish(
         )
 
     squad_data = squad_payload(target_season, generated_at=generated_at)
-    player_index = PlayerLinkIndex.from_payload(squad_data)
 
     transfer_rows = published_transfers()
     transfer_valuation = value_transfers(
@@ -1238,6 +1257,15 @@ def publish(
         markets=(history_markets() or {}).get("markets", []),
         fx=((transfer_policy_config() or {}).get("valuation") or {}).get("fx_to_gbp"),
     )
+    former_index, former_seasons = build_former_bundle(
+        season=target_season,
+        squad=squad_data,
+        transfers=transfer_rows,
+        generated_at=generated_at,
+        previous_index=previous_former_index,
+        previous_seasons=previous_former_seasons,
+    )
+    player_index = PlayerLinkIndex.from_payload(squad_data, former_index)
     transfers_payload = _transfers_payload(
         transfer_rows,
         target_season,
@@ -1333,6 +1361,31 @@ def publish(
         }
     )
 
+    former_info = _write(temp / "former-players" / "aberdeen.json", former_index)
+    written.append(former_info)
+    marts.append(
+        {
+            "id": "former-players.sco:aberdeen",
+            "path": "former-players/aberdeen.json",
+            "rows": len(former_index.get("players") or []),
+            "checksum": former_info["checksum"],
+            "season": target_season,
+        }
+    )
+    former_seasons_info = _write(
+        temp / "former-players" / "seasons.json", former_seasons
+    )
+    written.append(former_seasons_info)
+    marts.append(
+        {
+            "id": "former-players.seasons.sco:aberdeen",
+            "path": "former-players/seasons.json",
+            "rows": len(former_seasons.get("seasons") or {}),
+            "checksum": former_seasons_info["checksum"],
+            "season": target_season,
+        }
+    )
+
     policy = transfer_policy_config() or {}
     gaps = (transfer_gaps_config() or {}).get("gaps", []) or []
     audit = build_transfer_audit(
@@ -1405,7 +1458,15 @@ def publish(
             season=target_season,
             reason=f"themes_build_failed:{type(error).__name__}",
         )
-    rumour_rows = load_rumour_rows()
+    affiliations = AffiliationIndex.from_payloads(
+        squad=squad_data,
+        former_keys={
+            str(player.get("player_key"))
+            for player in former_index.get("players") or []
+            if player.get("player_key")
+        },
+    )
+    rumour_rows = load_rumour_rows(affiliations)
     try:
         needs_payload = build_needs_payload(
             season=target_season,
@@ -1494,6 +1555,8 @@ def publish(
             squad_data=squad_data,
             availability=availability_payload,
             generated_at=generated_at,
+            former_players=former_index,
+            former_seasons=former_seasons,
         )
     except Exception as error:  # noqa: BLE001 - scouting must not fail the publish
         scouting_bundle = fallback_scouting_bundle(
@@ -1807,7 +1870,9 @@ def publish(
         rumour_rows, target_season, player_index, generated_at=generated_at
     )
     profile_data = profile_payload(rumour_rows, player_index, generated_at=generated_at)
-    forum_data = forum_payload(player_index, generated_at=generated_at)
+    forum_data = forum_payload(
+        player_index, generated_at=generated_at, former_players=former_index
+    )
     for relative, payload, mart_id, rows in (
         ("rumours/aberdeen.json", rumours_data, "rumours.sco:aberdeen", len(rumour_rows)),
         ("rumours/profile.json", profile_data, "rumours.profile", profile_data["sample_size"]),
@@ -1990,6 +2055,25 @@ def publish(
             "href": player["href"],
         }
         for player in squad_data["players"]
+    )
+    search.extend(
+        {
+            "type": "former-player",
+            "id": player["player_key"],
+            "name": player["name"],
+            "slug": player["href"].rsplit("#", 1)[-1],
+            "href": player["href"],
+        }
+        for player in former_index.get("players") or []
+    )
+    search.append(
+        {
+            "type": "page",
+            "id": "former-players",
+            "name": "Former players",
+            "slug": "former-players",
+            "href": "/former-players/",
+        }
     )
     search.extend(
         {
@@ -2201,6 +2285,21 @@ def publish(
             "curated": transfers_payload["summary"]["curated"],
             "note": transfers_payload["coverage"]["note"],
         },
+        "former_players": {
+            "club": "sco:aberdeen",
+            "count": len(former_index.get("players") or []),
+            "with_api_id": (former_index.get("coverage") or {})
+            .get("counts", {})
+            .get("with_api_id"),
+            "with_post_seasons": (former_index.get("coverage") or {})
+            .get("counts", {})
+            .get("with_post_career_rows"),
+            "sell_on_computed": (former_index.get("sell_on_watch") or {})
+            .get("summary", {})
+            .get("computed"),
+            "state": former_index.get("state"),
+            "note": (former_index.get("coverage") or {}).get("note"),
+        },
         "squad": {
             "club": "sco:aberdeen",
             "count": len(squad_data["players"]),
@@ -2403,6 +2502,10 @@ def publish(
             "availability_stale_after_days": int(
                 (availability_policy() or {}).get("max_age_days") or 21
             ),
+            "former_players_refreshed_at": (
+                (former_index.get("coverage") or {}).get("post_career_updated_at")
+            ),
+            "former_players_stale_after_hours": 24,
         }
     }
     audit_payload = build_audit(
@@ -2489,6 +2592,10 @@ def publish(
             "availability_stale_after_days": int(
                 (availability_policy() or {}).get("max_age_days") or 21
             ),
+            "former_players_refreshed_at": (
+                (former_index.get("coverage") or {}).get("post_career_updated_at")
+            ),
+            "former_players_stale_after_hours": 24,
         },
         "sources": sources,
         "provenance": {

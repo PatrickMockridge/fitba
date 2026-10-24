@@ -406,6 +406,7 @@ def verify_rumours_summary(corpus: dict[str, Any], _: Any = None) -> Verificatio
         ("by_status", "status"),
         ("by_confidence", "confidence"),
         ("by_direction", "direction"),
+        ("by_affiliation", "affiliation"),
     ):
         actual: dict[str, int] = {}
         for row in rows:
@@ -414,7 +415,69 @@ def verify_rumours_summary(corpus: dict[str, Any], _: Any = None) -> Verificatio
         expected = summary.get(summary_key) or {}
         if expected != actual:
             result.fail(f"rumour summary {summary_key} mismatch")
+    targets = sum(
+        1
+        for row in rows
+        if row.get("direction") == "in" and row.get("affiliation") == "external_target"
+    )
+    if summary.get("targets") != targets:
+        result.fail("rumour summary targets mismatch")
+    returns = sum(
+        1
+        for row in rows
+        if row.get("direction") == "in" and row.get("affiliation") == "former_player"
+    )
+    if summary.get("return_links") != returns:
+        result.fail("rumour summary return_links mismatch")
     result.note("rumours.summary", result.status == "pass", f"{len(rows)} rumours checked")
+    return result
+
+
+def verify_forum_former_profile(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    data = _payload(corpus, "forum/afc_chat.json") or {}
+    signals = data.get("signals") or []
+    profile = data.get("profile") or {}
+    result.rows_checked = len(signals)
+    result.fields_checked = 3
+    mix = profile.get("affiliation_mix") or {}
+    if sum(int(value) for value in mix.values()) != len(signals):
+        result.fail("forum affiliation_mix does not sum to signals")
+    external = sum(
+        1 for signal in signals if (signal.get("affiliation") or "unknown") == "external_target"
+    )
+    if profile.get("external_sample_size") != external:
+        result.fail("forum external_sample_size mismatch")
+    former = sum(
+        1 for signal in signals if (signal.get("affiliation") or "unknown") == "former_player"
+    )
+    former_profile = profile.get("former_player_profile") or {}
+    if former_profile.get("sample_size") != former:
+        result.fail("forum former_player_profile sample_size mismatch")
+    if former_profile.get("mentions") != sum(
+        int(signal.get("mentions") or 0)
+        for signal in signals
+        if (signal.get("affiliation") or "unknown") == "former_player"
+    ):
+        result.fail("forum former_player_profile mentions mismatch")
+    result.note("forum.former_profile", result.status == "pass", f"{len(signals)} signals checked")
+    return result
+
+
+def verify_rumours_former_lane(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    data = _payload(corpus, "rumours/aberdeen.json") or {}
+    rows = data.get("rumours") or []
+    lane = data.get("former_player_mentions") or []
+    result.rows_checked = len(lane)
+    result.fields_checked = 2
+    expected = [row for row in rows if (row.get("affiliation") or "unknown") == "former_player"]
+    if len(lane) != len(expected):
+        result.fail("former_player_mentions does not match former rows")
+    for row in lane:
+        if row.get("former_href") is None and row.get("player_href") is None:
+            result.fail(f"former lane {row.get('rumour_id')} has no link")
+    result.note("rumours.former_lane", result.status == "pass", f"{len(lane)} rows checked")
     return result
 
 
@@ -472,6 +535,205 @@ def verify_loan_scope(corpus: dict[str, Any]) -> VerificationResult:
     return result
 
 
+def verify_former_summary(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    data = _payload(corpus, "former-players/aberdeen.json") or {}
+    players = data.get("players") or []
+    summary = data.get("summary") or {}
+    result.rows_checked = len(players)
+    result.fields_checked = 10
+    if summary.get("total") != len(players):
+        result.fail("former summary total != player rows")
+    for bucket in (
+        "by_exit_kind",
+        "by_fee_status",
+        "by_fee_basis",
+        "by_exit_season",
+        "by_destination",
+        "by_current_status",
+        "by_current_coverage",
+    ):
+        values = summary.get(bucket) or {}
+        if values and sum(int(value) for value in values.values()) != len(players):
+            result.fail(f"former summary {bucket} does not sum to players")
+    for field_name in (
+        "at_rival_now",
+        "rival_spell",
+        "at_club",
+        "on_loan",
+        "free_agent",
+        "retired",
+        "current_unknown",
+        "in_covered_feed",
+        "not_in_covered_feed",
+    ):
+        if summary.get(field_name) is not None and int(summary[field_name]) < 0:
+            result.fail(f"former summary {field_name} is negative")
+    if summary.get("at_club") is not None and summary.get("at_club") != sum(
+        1
+        for row in players
+        if (row.get("post_career") or {}).get("current", {}).get("status") == "at_club"
+    ):
+        result.fail("former summary at_club != player rows")
+    if summary.get("rival_spell") != sum(
+        1 for row in players if (row.get("post_career") or {}).get("at_rival")
+    ):
+        result.fail("former summary rival_spell != player rows")
+    result.note("former.summary", result.status == "pass", f"{len(players)} players checked")
+    return result
+
+
+def verify_former_players(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    data = _payload(corpus, "former-players/aberdeen.json") or {}
+    transfers = _payload(corpus, "transfers/aberdeen.json") or {}
+    squad = _payload(corpus, "squad/aberdeen.json") or {}
+    players = data.get("players") or []
+    transfer_rows = {str(row.get("transfer_id")): row for row in transfers.get("transfers") or []}
+    official = {
+        str(row.get("player_key")) for row in squad.get("players") or [] if row.get("player_key")
+    }
+    keys: set[str] = set()
+    result.rows_checked = len(players)
+    result.fields_checked = 4
+    for row in players:
+        key = str(row.get("player_key") or "")
+        if not key or key in keys:
+            result.fail(f"former player key missing or duplicated: {key!r}")
+            continue
+        keys.add(key)
+        if key in official:
+            result.fail(f"former player {key} is in the official squad")
+        departure = row.get("departure") or {}
+        transfer = transfer_rows.get(str(departure.get("transfer_id")))
+        if not transfer:
+            result.fail(f"former player {key} has no published departure transfer")
+            continue
+        if transfer.get("direction") != "out" or transfer.get("transfer_kind") not in {
+            "permanent",
+            "free",
+        }:
+            result.fail(f"former player {key} departure is not a permanent/free out")
+        if not row.get("href", "").startswith("/former-players/#"):
+            result.fail(f"former player {key} has no board anchor")
+    result.note("former.players", result.status == "pass", f"{len(players)} players checked")
+    return result
+
+
+def verify_former_post_seasons(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    index = _payload(corpus, "former-players/aberdeen.json") or {}
+    detail = _payload(corpus, "former-players/seasons.json") or {}
+    players = {str(row.get("player_key")): row for row in index.get("players") or []}
+    seasons = detail.get("seasons") or {}
+    result.rows_checked = len(seasons)
+    result.fields_checked = 3
+    if set(seasons) != set(players):
+        result.fail("former season detail keys do not match the player index")
+    for key, block in seasons.items():
+        rows = block.get("post_seasons") or []
+        totals = ((players.get(key) or {}).get("post_career") or {}).get("totals") or {}
+        for field_name in ("appearances", "starts", "minutes", "goals", "assists"):
+            expected = totals.get(field_name)
+            if expected is None:
+                continue
+            actual = sum(int(row.get(field_name) or 0) for row in rows)
+            if actual != int(expected):
+                result.fail(f"former {key} post {field_name} {actual} != {expected}")
+        present = {str(row.get("season")) for row in rows}
+        coverage = block.get("coverage") or {}
+        if set(coverage.get("present_seasons") or []) != present:
+            result.fail(f"former {key} present_seasons do not match rows")
+    result.note("former.post", result.status == "pass", f"{len(seasons)} players checked")
+    return result
+
+
+def verify_former_sell_on(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    index = _payload(corpus, "former-players/aberdeen.json") or {}
+    transfers = _payload(corpus, "transfers/aberdeen.json") or {}
+    watch = index.get("sell_on_watch") or {}
+    clauses = watch.get("clauses") or []
+    summary = watch.get("summary") or {}
+    transfer_clauses = {str(row.get("clause_id")) for row in transfers.get("sell_on_clauses") or []}
+    result.rows_checked = len(clauses)
+    result.fields_checked = 4
+    if {str(row.get("clause_id")) for row in clauses} != transfer_clauses:
+        result.fail("sell-on watch clauses do not match the transfer register")
+    computed = 0
+    known: list[float] = []
+    for row in clauses:
+        receipt = row.get("receipt") or {}
+        if receipt.get("status") == "computed":
+            computed += 1
+            value = receipt.get("receipt_gbp")
+            if value is None:
+                result.fail(f"sell-on {row.get('clause_id')} computed without a receipt")
+            else:
+                known.append(float(value))
+        elif receipt.get("receipt_gbp") is not None:
+            result.fail(f"sell-on {row.get('clause_id')} has a receipt without computed status")
+        if receipt.get("status") == "missing_inputs" and not receipt.get("missing_inputs"):
+            result.fail(f"sell-on {row.get('clause_id')} missing inputs but no reason")
+    if summary.get("computed") != computed:
+        result.fail("sell-on summary computed != clause rows")
+    expected_known = round(sum(known), -3) if known else None
+    if summary.get("known_receipts_gbp") != expected_known:
+        result.fail("sell-on summary known receipts != computed rows")
+    result.note("former.sell_on", result.status == "pass", f"{len(clauses)} clauses checked")
+    return result
+
+
+def verify_former_scorecard(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    index = _payload(corpus, "former-players/aberdeen.json") or {}
+    players = index.get("players") or []
+    scorecard = index.get("development_scorecard") or {}
+    result.rows_checked = len(players)
+    result.fields_checked = 3
+    cohorts = scorecard.get("cohorts") or {}
+    if int((cohorts.get("all") or {}).get("players") or 0) != len(players):
+        result.fail("development scorecard all cohort != players")
+    by_season = scorecard.get("by_exit_season") or []
+    if by_season and sum(int(row.get("players") or 0) for row in by_season) != len(players):
+        result.fail("development scorecard by_exit_season does not sum to players")
+    young = sum(
+        1
+        for row in players
+        if row.get("age_at_exit") is not None
+        and int(row["age_at_exit"])
+        <= int((scorecard.get("definitions") or {}).get("young_exit_age_max") or 23)
+    )
+    if int((cohorts.get("young") or {}).get("players") or 0) != young:
+        result.fail("development scorecard young cohort mismatch")
+    result.note("former.scorecard", result.status == "pass", f"{len(players)} players checked")
+    return result
+
+
+def verify_former_coverage(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    index = _payload(corpus, "former-players/aberdeen.json") or {}
+    coverage_payload = _payload(corpus, "coverage.json") or {}
+    coverage = index.get("coverage") or {}
+    counts = coverage.get("counts") or {}
+    players = index.get("players") or []
+    result.rows_checked = len(players)
+    result.fields_checked = 4
+    if counts.get("players") != len(players):
+        result.fail("former coverage players != player rows")
+    if int(counts.get("with_api_id") or 0) + int(counts.get("without_api_id") or 0) != len(players):
+        result.fail("former coverage API ids do not sum to players")
+    if int(counts.get("with_post_career_rows") or 0) + int(
+        counts.get("without_post_career_rows") or 0
+    ) != len(players):
+        result.fail("former coverage post rows do not sum to players")
+    block = coverage_payload.get("former_players") or {}
+    if block.get("count") != len(players):
+        result.fail("coverage.json former count != former player rows")
+    result.note("former.coverage", result.status == "pass", f"{len(players)} players checked")
+    return result
+
+
 CHECKS = {
     "fitba.metrics.checks:verify_table_record": verify_table_record,
     "fitba.metrics.checks:verify_matchday_form": verify_matchday_form,
@@ -486,6 +748,14 @@ CHECKS = {
     "fitba.metrics.checks:verify_history_coverage": verify_history_coverage,
     "fitba.metrics.checks:verify_squad_summary": verify_squad_summary,
     "fitba.metrics.checks:verify_loan_scope": verify_loan_scope,
+    "fitba.metrics.checks:verify_former_summary": verify_former_summary,
+    "fitba.metrics.checks:verify_former_players": verify_former_players,
+    "fitba.metrics.checks:verify_former_post_seasons": verify_former_post_seasons,
+    "fitba.metrics.checks:verify_former_sell_on": verify_former_sell_on,
+    "fitba.metrics.checks:verify_former_scorecard": verify_former_scorecard,
+    "fitba.metrics.checks:verify_former_coverage": verify_former_coverage,
     "fitba.metrics.checks:verify_rumours_summary": verify_rumours_summary,
+    "fitba.metrics.checks:verify_forum_former_profile": verify_forum_former_profile,
+    "fitba.metrics.checks:verify_rumours_former_lane": verify_rumours_former_lane,
     "fitba.metrics.checks:verify_coverage": verify_coverage,
 }
