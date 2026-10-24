@@ -137,12 +137,22 @@ export interface ProfileSummary {
   league: string;
   league_label: string;
   role_label: string | null;
+  scope: string;
+  output_coverage: string;
+  output_missing_competitions: string[];
   minutes: number;
+  minutes_season: string;
   appearances: number | null;
   rating: number | null;
+  league_minutes: number | null;
+  league_appearances: number | null;
+  league_rating: number | null;
   rating_percentile: number | null;
+  league_rating_percentile: number | null;
   cohort_basis: string | null;
   cohort_n: number | null;
+  rose_season: string | null;
+  rose_fallback: boolean;
 }
 
 export interface ProfilePanelData {
@@ -187,10 +197,12 @@ export interface RecentMatch {
 }
 
 export interface PlayerPageDocument {
-  schema_version: "1.1.0";
+  schema_version: "1.2.0";
   player_id: number;
   season: string;
   generated_at: string;
+  out_of_squad: boolean;
+  out_of_squad_reason: string | null;
   identity: IdentityBlock;
   panel_order: PanelId[];
   panels: {

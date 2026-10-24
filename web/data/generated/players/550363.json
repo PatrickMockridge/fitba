@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "identity": {
     "age": 21,
     "full_name": "E. Gyamfi",
@@ -21,6 +21,8 @@
     "side": "left",
     "status": "squad"
   },
+  "out_of_squad": false,
+  "out_of_squad_reason": null,
   "panel_order": [
     "profile",
     "position",
@@ -673,6 +675,10 @@
           "basis": "insufficient",
           "cohort_min_minutes": 450,
           "cohort_n": 0,
+          "cohort_season": "2026-27",
+          "fallback": false,
+          "fallback_note": "No prior Premiership season met the 180-minute profile threshold.",
+          "fallback_reason": "no_prior_premiership_season",
           "figures": [
             {
               "axes": [
@@ -796,6 +802,7 @@
           "min_minutes": 180,
           "minutes": 14,
           "reason": "below_min_minutes",
+          "season_used": "2026-27",
           "status": "unavailable"
         },
         "rose_catalogue": {
@@ -901,18 +908,28 @@
           "cohort_basis": null,
           "cohort_n": null,
           "league": "sco:premiership",
+          "league_appearances": 1,
           "league_label": "Scottish Premiership",
+          "league_minutes": 14,
+          "league_rating": 6.07,
+          "league_rating_percentile": null,
           "minutes": 14,
+          "minutes_season": "2026-27",
+          "output_coverage": "available",
+          "output_missing_competitions": [],
           "rating": 6.07,
           "rating_percentile": null,
           "role_label": "Left wing-back",
+          "rose_fallback": false,
+          "rose_season": "2026-27",
+          "scope": "all_competitions",
           "season": "2026-27"
         },
         "tier": "extended"
       },
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort insufficient n=0; percentiles 0-100, higher is better.",
+      "note": "League-only rates; cohort insufficient n=0; percentiles 0-100, higher is better. No prior Premiership season met the 180-minute profile threshold.",
       "status": "unavailable",
       "title": "Overall and position profile",
       "warnings": []
@@ -954,7 +971,7 @@
     }
   },
   "player_id": 550363,
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "season": "2026-27",
   "warnings": []
 }

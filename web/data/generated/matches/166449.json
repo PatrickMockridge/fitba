@@ -10,7 +10,9 @@
   },
   "depth": "result",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2019-12-14",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 166449,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/166449/",
+    "outcome": "W",
     "referee": "W. Collum",
     "result": "W",
+    "result_label": "W",
     "round": "Regular Season - 18",
     "season": "2019-20",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Rice",
@@ -408,8 +414,38 @@
     "previous": "/matches/166444/",
     "season": "/history/2019-20/"
   },
+  "performance": {
+    "aberdeen": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "strengths": [
+      {
+        "aberdeen": 17,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 4,
+        "source": "football_data_uk",
+        "unit": ""
+      },
+      {
+        "aberdeen": 5,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 0,
+        "source": "football_data_uk",
+        "unit": ""
+      }
+    ]
+  },
   "player_stats": [],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -554,7 +590,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.634 (0.0-3.753), Hamilton Academical 0.0 (0.0-0.0)."
+        "text": "Shot expectation: Aberdeen 1.63, Hamilton Academical 0.00."
       }
     ],
     "events_available": true,
@@ -779,22 +815,67 @@
   "xg": {
     "available": true,
     "away": {
+      "basis": "conversion",
+      "goals": 0,
+      "goals_high": 0,
+      "goals_low": 0,
+      "goals_minus": 0.0,
+      "goals_position": "within",
       "high": 0.0,
       "low": 0.0,
+      "penalties": null,
+      "penalties_known": false,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.0
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": null,
+        "penalty_goals": null,
+        "shots": 4,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": null,
+        "shots_on_target": 0,
+        "shots_outsidebox": null
+      },
+      "value": 0.0,
+      "xg_per_shot": 0.0
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.753,
+      "basis": "conversion",
+      "goals": 1,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -0.632,
+      "goals_position": "within",
+      "high": 3.751,
       "low": 0.0,
+      "penalties": null,
+      "penalties_known": false,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.634
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": null,
+        "penalty_goals": null,
+        "shots": 17,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": null,
+        "shots_on_target": 5,
+        "shots_outsidebox": null
+      },
+      "value": 1.632,
+      "xg_per_shot": 0.096
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

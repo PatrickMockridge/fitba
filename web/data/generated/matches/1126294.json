@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "D",
     "aberdeen_result": "D",
+    "aberdeen_result_label": "D",
     "away_goals": 2,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:conference-league",
     "competition_name": "UEFA Conference League",
     "date": "2023-11-09",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1126294,
@@ -28,10 +31,13 @@
     "home_team_id": "other:paok",
     "home_team_name": "Paok",
     "href": "/matches/1126294/",
+    "outcome": "D",
     "referee": "J. Xhaja",
     "result": "D",
+    "result_label": "D",
     "round": "Group Stage - 4",
     "season": "2023-24",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Stadio Toumbas"
@@ -87,7 +93,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -386,6 +392,123 @@
     "next": "/matches/1094504/",
     "previous": "/matches/1136353/",
     "season": "/history/2023-24/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 85,
+          "pass_accuracy": 3,
+          "passes_total": 5,
+          "player_id": 162944,
+          "player_name": "Luís Henriques de Barros Lopes",
+          "rating": 7.3,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 18,
+          "player_id": 45800,
+          "player_name": "Slobodan Rubežić",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 78,
+          "pass_accuracy": 15,
+          "passes_total": 19,
+          "player_id": 69243,
+          "player_name": "Jamie McGrath",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 9,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 55,
+          "passes_total": 66,
+          "player_id": 684,
+          "player_name": "Taison",
+          "rating": 9.0,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Paok"
+        },
+        {
+          "assists": null,
+          "duels_won": 2,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 25,
+          "pass_accuracy": 4,
+          "passes_total": 4,
+          "player_id": 1945,
+          "player_name": "Mbwana Ally Samatta",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Paok"
+        },
+        {
+          "assists": 1,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 58,
+          "passes_total": 68,
+          "player_id": 2773,
+          "player_name": "William Troost-Ekong",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Paok"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1309,7 +1432,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1608,8 +1731,8 @@
         "text": "Possession: Paok 70.0%, Aberdeen 30.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: Paok 1.641 (0.0-3.764), Aberdeen 0.656 (0.0-1.999)."
+        "basis": "measured",
+        "text": "Provider xG: Paok 2.10, Aberdeen 0.17."
       }
     ],
     "events_available": true,
@@ -2084,22 +2207,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.999,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 1,
+      "goals_low": 0,
+      "goals_minus": 1.707,
+      "goals_position": "above",
+      "high": 0.809,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 0.17,
-      "value": 0.656
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 2,
+        "shots_blocked": 0,
+        "shots_insidebox": 1,
+        "shots_off": 0,
+        "shots_on_target": 2,
+        "shots_outsidebox": 1
+      },
+      "value": 0.293,
+      "xg_per_shot": 0.147
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.764,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.294,
+      "goals_position": "within",
+      "high": 2.222,
+      "low": 0.985,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 2.1,
-      "value": 1.641
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 20,
+        "shots_blocked": 10,
+        "shots_insidebox": 13,
+        "shots_off": 5,
+        "shots_on_target": 5,
+        "shots_outsidebox": 7
+      },
+      "value": 1.706,
+      "xg_per_shot": 0.085
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

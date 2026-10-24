@@ -50,6 +50,9 @@ from fitba.ingest.scouting import (
     ingest_roles as ingest_scouting_roles,
 )
 from fitba.ingest.scouting import (
+    ingest_rose_history as ingest_scouting_rose_history,
+)
+from fitba.ingest.scouting import (
     scouting_status as load_scouting_status,
 )
 from fitba.ingest.scouting_clubs import (
@@ -586,6 +589,51 @@ def xg(
 
 
 @app.command()
+def xg_enrich(
+    season: Annotated[str, typer.Option(help="Season like 2026-27")] = "2026-27",
+    max_requests: Annotated[
+        int, typer.Option(help="Maximum live API requests for this run")
+    ] = 120,
+    refresh: Annotated[bool, typer.Option("--refresh", help="Refresh the fixture list")] = False,
+) -> None:
+    """Fetch league-wide shot-zone and penalty inputs for the fxG calibration."""
+    from fitba.ingest.xg_enrichment import enrich_premiership
+    from fitba.sources.api_football import MissingAPIKeyError
+
+    try:
+        report = enrich_premiership(
+            season,
+            max_requests=max_requests,
+            refresh=refresh,
+        )
+    except MissingAPIKeyError as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(code=1) from exc
+    table = RichTable(title=f"fxG enrichment {season}")
+    table.add_column("Field")
+    table.add_column("Value", justify="right")
+    for key in (
+        "fixtures_total",
+        "fixtures_finished",
+        "fixtures_with_rows",
+        "team_rows",
+        "stats_available",
+        "events_available",
+        "zones_available",
+        "penalties_available",
+        "provider_xg_fdco",
+        "network_requests",
+        "stopped_at_budget",
+    ):
+        table.add_row(key.replace("_", " "), str(report.get(key)))
+    console.print(table)
+    unmatched = report.get("unmatched_fixtures") or []
+    if unmatched:
+        console.print(f"[yellow]{len(unmatched)} fixture(s) unmatched; see the meta file.[/yellow]")
+    console.print(f"Wrote {report.get('feature_path')}")
+
+
+@app.command()
 def publish(
     season: Annotated[str, typer.Option(help="current or a season like 2026-27")] = "current",
     out: Annotated[Path | None, typer.Option(help="Override the output directory")] = None,
@@ -723,6 +771,32 @@ def scouting_pool(
     failed = [item for item in meta["leagues"] if item["status"] == "error"]
     for item in failed:
         console.print(f"  [red]{item['id']}[/red]: {item['error']}")
+
+
+@scouting_app.command("rose-history")
+def scouting_rose_history(
+    seasons: Annotated[
+        str, typer.Option(help="comma-separated API years, default 2024,2025")
+    ] = "2024,2025",
+    refresh: Annotated[bool, typer.Option(help="Ignore the download cache")] = False,
+) -> None:
+    """Fetch full-season Premiership pools for the player-rose fallback."""
+    years = [int(part.strip()) for part in seasons.split(",") if part.strip()]
+    meta = ingest_scouting_rose_history(seasons=years, refresh=refresh)
+    console.print(
+        f"rose history: {meta['totals']['rows']} rows; "
+        f"{meta['totals']['seasons_ok']}/{len(meta['seasons'])} seasons available"
+    )
+    for item in meta["seasons"]:
+        if item.get("status") == "ok":
+            console.print(
+                f"  {item['label']}: {item['rows']} rows, {item['with_minutes']} with minutes"
+            )
+        else:
+            console.print(
+                f"  [yellow]{item['label']}[/yellow]: "
+                f"{item.get('status')} {item.get('error') or ''}"
+            )
 
 
 @scouting_app.command("roles")

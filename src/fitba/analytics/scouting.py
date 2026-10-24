@@ -19,7 +19,8 @@ from typing import Any
 
 import polars as pl
 
-from fitba.normalize.scope import is_friendly_competition
+from fitba.analytics.percentiles import midrank_percentile
+from fitba.analytics.player_facts import club_totals, stat_rows, totals
 from fitba.settings import NORMALIZED_DIR
 from fitba.settings import player_rose as load_player_rose
 from fitba.settings import scouting_value as load_scouting_value
@@ -43,24 +44,6 @@ RATE_FIELDS = [
     "saves_p90",
 ]
 
-COUNT_FIELDS = [
-    "appearances",
-    "starts",
-    "minutes",
-    "goals",
-    "assists",
-    "shots_total",
-    "passes_total",
-    "passes_key",
-    "tackles",
-    "interceptions",
-    "duels_total",
-    "duels_won",
-    "dribbles_attempts",
-    "dribbles_success",
-    "saves",
-    "conceded",
-]
 
 
 def per90(value: Any, minutes: Any) -> float | None:
@@ -127,15 +110,6 @@ def quantile(values: Iterable[float], q: float) -> float | None:
     high = min(low + 1, len(items) - 1)
     fraction = position - low
     return items[low] + (items[high] - items[low]) * fraction
-
-
-def midrank_percentile(value: float, values: Iterable[float]) -> float | None:
-    items = [float(item) for item in values]
-    if not items:
-        return None
-    below = sum(1 for item in items if item < value)
-    equal = sum(1 for item in items if item == value)
-    return round((below + 0.5 * equal) / len(items) * 100.0, 1)
 
 
 def robust_z(
@@ -536,42 +510,10 @@ def _squad_stats(
     *,
     competition: str | None = None,
 ) -> dict[str, Any]:
-    rows = [
-        row
-        for row in player.get("stats") or []
-        if row.get("scope") == "club"
-        and not is_friendly_competition(row.get("competition"))
-        and (competition is None or row.get("competition") == competition)
-    ]
-    totals: dict[str, Any] = {}
-    for field in COUNT_FIELDS:
-        values = [row.get(field) for row in rows if row.get(field) is not None]
-        totals[field] = sum(int(value) for value in values) if values else None
-    rated = [
-        (float(row["rating"]), int(row.get("appearances") or 0))
-        for row in rows
-        if row.get("rating") is not None and int(row.get("appearances") or 0) > 0
-    ]
-    if rated:
-        weight = sum(appearances for _, appearances in rated)
-        totals["rating"] = round(
-            sum(rating * appearances for rating, appearances in rated) / weight, 2
-        )
-    else:
-        totals["rating"] = None
-    weighted_passes = 0
-    weighted_accuracy = 0.0
-    for row in rows:
-        total = row.get("passes_total")
-        accuracy = row.get("pass_accuracy")
-        if total is None or accuracy is None:
-            continue
-        weighted_passes += int(total)
-        weighted_accuracy += float(total) * float(accuracy)
-    totals["pass_accuracy"] = (
-        round(weighted_accuracy / weighted_passes, 2) if weighted_passes else None
-    )
-    return totals
+    if competition is None:
+        return club_totals(player) or {"rating": None}
+    rows = stat_rows(player, scope="club", competition=competition)
+    return totals(rows, scope="league") or {"rating": None}
 
 
 def _history_seasons(current: str, limit: int) -> list[str]:
@@ -583,6 +525,222 @@ def _history_seasons(current: str, limit: int) -> list[str]:
         reverse=True,
     )
     return [season for season in seasons if season < current][:limit]
+
+
+ROSE_HISTORY_PATH = NORMALIZED_DIR / "scouting" / "rose_history.parquet"
+ROSE_LEAGUE = "sco:premiership"
+ROSE_LEAGUE_LABEL = "Scottish Premiership"
+ROSE_HISTORY_COMPETITIONS = ("Premiership", "Scottish Premiership")
+
+
+def season_label(year: int) -> str:
+    return f"{int(year)}-{str(int(year) + 1)[-2:]}"
+
+
+def _history_season_year(season: str) -> int | None:
+    try:
+        return int(str(season)[:4])
+    except ValueError:
+        return None
+
+
+def _history_role(player_id: int, season: str) -> str | None:
+    path = NORMALIZED_DIR / "history" / f"season={season}" / "appearances.parquet"
+    if not path.exists():
+        return None
+    frame = pl.read_parquet(path).filter(
+        (pl.col("player_id") == int(player_id)) & pl.col("role_family").is_not_null()
+    )
+    if not frame.height:
+        return None
+    counts = (
+        frame.group_by(["role_family", "role_code"])
+        .agg(pl.len().alias("starts"))
+        .sort(["starts", "role_code"], descending=[True, False])
+    )
+    return str(counts.row(0, named=True)["role_family"])
+
+
+def _history_position_group(player_id: int, season: str) -> str | None:
+    year = _history_season_year(season)
+    if year is not None and ROSE_HISTORY_PATH.exists():
+        frame = pl.read_parquet(ROSE_HISTORY_PATH).filter(
+            (pl.col("player_id") == int(player_id))
+            & (pl.col("season") == year)
+        )
+        if frame.height:
+            group = frame.row(0, named=True).get("position_group")
+            if group and group != "UNKNOWN":
+                return str(group)
+    path = NORMALIZED_DIR / "history" / f"season={season}" / "player_match_stats.parquet"
+    if path.exists():
+        frame = pl.read_parquet(path).filter(pl.col("player_id") == int(player_id))
+        if frame.height:
+            position = str(frame.row(0, named=True).get("position") or "").upper()
+            mapping = {"G": "GK", "D": "DEF", "M": "MID", "F": "FWD"}
+            return mapping.get(position[0] if position else "")
+    return None
+
+
+def history_player_totals(player_id: int, season: str) -> dict[str, Any]:
+    """Player totals for a prior season, preferring the full Premiership pool."""
+    year = _history_season_year(season)
+    if year is not None and ROSE_HISTORY_PATH.exists():
+        pool = pl.read_parquet(ROSE_HISTORY_PATH).filter(
+            (pl.col("player_id") == int(player_id))
+            & (pl.col("season") == year)
+            & (pl.col("competition_id") == ROSE_LEAGUE)
+        )
+        if pool.height:
+            row = pool.row(0, named=True)
+            return {**row, "source": "provider_pool"}
+    path = NORMALIZED_DIR / "history" / f"season={season}" / "player_match_stats.parquet"
+    if not path.exists():
+        return {"source": "unavailable"}
+    frame = pl.read_parquet(path).filter(
+        (pl.col("player_id") == int(player_id))
+        & pl.col("competition").is_in(ROSE_HISTORY_COMPETITIONS)
+    )
+    if not frame.height:
+        return {"source": "unavailable"}
+    totals: dict[str, Any] = {}
+    for field in (
+        "appearances",
+        "starts",
+        "minutes",
+        "goals",
+        "assists",
+        "yellow_cards",
+        "red_cards",
+        "shots_total",
+        "shots_on",
+        "passes_total",
+        "passes_key",
+        "saves",
+        "conceded",
+        "tackles",
+        "blocks",
+        "interceptions",
+        "duels_won",
+        "dribbles_attempts",
+        "dribbles_success",
+        "fouls_drawn",
+        "fouls_committed",
+        "penalty_scored",
+        "penalty_saved",
+    ):
+        if field in frame.columns:
+            values = frame[field].drop_nulls()
+            totals[field] = int(values.sum()) if values.len() else None
+    totals["duels_total"] = None
+    total_passes = 0.0
+    weighted_accuracy = 0.0
+    if "passes_total" in frame.columns and "pass_accuracy" in frame.columns:
+        for row in frame.to_dicts():
+            passes = row.get("passes_total")
+            accuracy = row.get("pass_accuracy")
+            if passes is not None and accuracy is not None:
+                total_passes += float(passes)
+                weighted_accuracy += float(passes) * float(accuracy)
+    totals["pass_accuracy"] = (
+        round(weighted_accuracy / total_passes, 2) if total_passes else None
+    )
+    ratings = frame["rating"].drop_nulls() if "rating" in frame.columns else []
+    totals["rating"] = (
+        round(fmean([float(value) for value in ratings]), 2)
+        if len(ratings)
+        else None
+    )
+    totals["source"] = "aberdeen_fixtures"
+    return totals
+
+
+def load_rose_history_indices(model: dict[str, Any]) -> dict[str, CohortIndex]:
+    if not ROSE_HISTORY_PATH.exists():
+        return {}
+    frame = pl.read_parquet(ROSE_HISTORY_PATH)
+    output: dict[str, CohortIndex] = {}
+    for year in frame["season"].unique().to_list():
+        rows: list[dict[str, Any]] = []
+        season_rows = frame.filter(
+            (pl.col("season") == year)
+            & (pl.col("competition_id") == ROSE_LEAGUE)
+            & (pl.col("team_id") != 252)
+        )
+        for row in season_rows.to_dicts():
+            if row.get("position_group") in {None, "UNKNOWN"}:
+                continue
+            rows.append(
+                {
+                    **row,
+                    "competition_id": ROSE_LEAGUE,
+                    "season": season_label(int(year)),
+                    "role_family": None,
+                    "rates": player_rates(row),
+                }
+            )
+        if rows:
+            output[season_label(int(year))] = CohortIndex(rows, model)
+    return output
+
+
+def _fallback_rose(
+    player: dict[str, Any],
+    *,
+    season: str,
+    current_rose: dict[str, Any],
+    history: dict[str, CohortIndex],
+    model: dict[str, Any],
+    config: dict[str, Any],
+    player_min: int,
+    cohort_min: int,
+) -> dict[str, Any]:
+    if (
+        current_rose.get("status") != "unavailable"
+        or current_rose.get("reason") != "below_min_minutes"
+    ):
+        return current_rose
+    limit = int((model.get("board") or {}).get("prior_seasons") or 3)
+    prior = _history_seasons(season, limit)
+    for prior_season in prior:
+        totals = history_player_totals(int(player["player_id"]), prior_season)
+        if int(totals.get("minutes") or 0) < player_min:
+            continue
+        index = history.get(prior_season)
+        if index is None:
+            continue
+        family = _history_role(int(player["player_id"]), prior_season)
+        group = _history_position_group(int(player["player_id"]), prior_season)
+        group = group or player.get("position_group")
+        rose = build_rose(
+            player_rates(totals),
+            minutes=int(totals.get("minutes") or 0),
+            league=ROSE_LEAGUE,
+            league_label=ROSE_LEAGUE_LABEL,
+            family=family,
+            position_group=group,
+            index=index,
+            model=model,
+            config=config,
+            player_min_minutes=player_min,
+            cohort_min_minutes=cohort_min,
+        )
+        if rose.get("status") == "unavailable":
+            continue
+        rose.update(
+            {
+                "season_used": prior_season,
+                "cohort_season": prior_season,
+                "fallback": True,
+                "fallback_reason": "current_season_below_min_minutes",
+                "fallback_note": (
+                    f"Showing {prior_season} statistics — no {season} Premiership "
+                    f"minutes above the {player_min}-minute threshold."
+                ),
+            }
+        )
+        return rose
+    return current_rose
 
 
 def prior_seasons(
@@ -892,15 +1050,16 @@ def build_squad_profile(
         role = player.get("role") or {}
         family = display.get("family") or role.get("family")
         totals = _squad_stats(player)
-        minutes = int(totals.get("minutes") or 0)
+        league = _squad_stats(player, competition="Premiership")
+        minutes = int(league.get("minutes") or 0)
         if minutes < min_minutes:
             continue
         cohort = (
             rating_cohort(index, "sco:premiership", family, min_minutes=pool_min) if family else []
         )
         percentile = (
-            midrank_percentile(float(totals["rating"]), cohort)
-            if totals.get("rating") is not None and len(cohort) >= _min_cohort(model, family)
+            midrank_percentile(float(league["rating"]), cohort)
+            if league.get("rating") is not None and len(cohort) >= _min_cohort(model, family)
             else None
         )
         rates = player_rates(totals)
@@ -910,8 +1069,11 @@ def build_squad_profile(
                 "name": player.get("name"),
                 "role_family": family,
                 "role_label": display.get("label") or role.get("label"),
-                "minutes": minutes,
+                "minutes": totals.get("minutes") or minutes,
+                "minutes_scope": "all_competitions",
+                "league_minutes": minutes,
                 "rating": totals.get("rating"),
+                "league_rating": league.get("rating"),
                 "rating_percentile": percentile,
                 "goals": totals.get("goals"),
                 "assists": totals.get("assists"),
@@ -948,23 +1110,28 @@ def build_squad_roses(
     index: CohortIndex,
     model: dict[str, Any],
     config: dict[str, Any],
+    season: str,
 ) -> dict[int, dict[str, Any]]:
-    """Build a rose block for every Aberdeen player, including unavailable states.
+    """Build a rose block for every squad player, with a prior-season fallback.
 
-    The rose uses Premiership-only stats so it compares like with like against
-    the pool cohort. Players below the squad minutes gate still get a block with
-    raw axes and an explicit below-minimum reason, never zero petals.
+    The current-season rose is always preferred. A player below the current
+    minutes gate may use the most recent prior Premiership season with a
+    same-season cohort; the season is stamped on the block and shown in the UI.
     """
     player_min = int((model.get("squad") or {}).get("min_minutes") or 180)
     cohort_min = int((model.get("pool") or {}).get("min_minutes") or 450)
+    history = load_rose_history_indices(model)
     out: dict[int, dict[str, Any]] = {}
-    for player in squad_data.get("players") or []:
+    for player in [
+        *(squad_data.get("players") or []),
+        *(squad_data.get("excluded_players") or []),
+    ]:
         display = player.get("display_role") or {}
         role = player.get("role") or {}
         family = display.get("family") or role.get("family")
         totals = _squad_stats(player, competition="Premiership")
         minutes = int(totals.get("minutes") or 0)
-        out[int(player["player_id"])] = build_rose(
+        current = build_rose(
             player_rates(totals),
             minutes=minutes,
             league="sco:premiership",
@@ -977,6 +1144,33 @@ def build_squad_roses(
             player_min_minutes=player_min,
             cohort_min_minutes=cohort_min,
         )
+        current.update(
+            {
+                "season_used": season,
+                "cohort_season": season,
+                "fallback": False,
+                "fallback_reason": None,
+                "fallback_note": None,
+            }
+        )
+        if current.get("status") == "unavailable" and current.get("reason") == "below_min_minutes":
+            current = _fallback_rose(
+                player,
+                season=season,
+                current_rose=current,
+                history=history,
+                model=model,
+                config=config,
+                player_min=player_min,
+                cohort_min=cohort_min,
+            )
+            if not current.get("fallback") and current.get("status") == "unavailable":
+                current["fallback_reason"] = "no_prior_premiership_season"
+                current["fallback_note"] = (
+                    f"No prior Premiership season met the {player_min}-minute "
+                    "profile threshold."
+                )
+        out[int(player["player_id"])] = current
     return out
 
 

@@ -1,0 +1,36 @@
+# Canonical fact scopes. Labels are used in payloads and page copy.
+version: 1
+scopes:
+  league:
+    label: League
+    description: One competition, current season, club rows only.
+  all_competitions:
+    label: All competitions
+    description: Aberdeen league, cup and European club rows; friendlies and loan-club rows excluded.
+  loan:
+    label: Loan club
+    description: The registered loan club only.
+  official_list:
+    label: Official list
+    description: The official AFC men's team page, including the On loan section.
+  active_squad:
+    label: Active squad
+    description: The official list minus players out on loan.
+  register_current:
+    label: Current register
+    description: Confirmed transfer-register loan rows for the current season.
+  register_all_time:
+    label: All-time register
+    description: Every confirmed loan row in the transfer register.
+  event_reconstructed:
+    label: Event reconstructed
+    description: Starts, substitute appearances and minutes reconstructed from lineups and events.
+  provider:
+    label: Provider
+    description: The licensed provider's season rows.
+  regulation:
+    label: Regulation
+    description: The 90/120-minute result used for W-D-L and league points.
+  outcome:
+    label: Outcome
+    description: The result including a penalty shootout.

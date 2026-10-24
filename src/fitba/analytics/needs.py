@@ -684,10 +684,13 @@ def build_needs_document(
             "top_priority": families[0]["family"] if families else None,
             "availability_known": known,
             "availability_unknown": unknown,
+            "availability_universe": "official_list",
             "note": ("Role profiles and market routes only. No targets, fees or wages."),
         },
         "coverage": {
             "status": "partial" if known < len(squad_ids) else "available",
+            "availability_universe": "official_list",
+            "availability_universes": (availability or {}).get("universes") or {},
             "measured_families": sum(
                 1 for row in families if row["measured"]["status"] != "unavailable"
             ),

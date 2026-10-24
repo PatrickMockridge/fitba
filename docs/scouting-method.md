@@ -231,11 +231,22 @@ The licensed feed has no contract expiry field. The curated
 No contract column, filter or ranking input is published. Wages, fees, sell-on
 terms and release clauses are not claimed.
 
+## Prior-season rose cohorts
+
+`data/normalized/scouting/rose_history.parquet` holds full-season Premiership
+pools for 2024-25 and 2025-26, used only by the player-page rose fallback. It is
+a separate file and never replaces the current-season pool. The cohort builder
+excludes Aberdeen from the comparison values but keeps the Aberdeen row so a
+player's own season totals are available. A season the provider does not return
+is omitted and reported; the fallback never uses the current-season cohort for
+a prior-season rate.
+
 ## Commands
 
 ```bash
 uv run fitba scouting pool  --season current
 uv run fitba scouting roles --season current --budget 6500
+uv run fitba scouting rose-history --seasons 2024,2025
 uv run fitba scouting standings --season current
 uv run fitba scouting status
 uv run fitba scouting values --status

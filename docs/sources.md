@@ -1,6 +1,6 @@
 # Data sources
 
-**Checked:** 2026-10-22. Re-run `uv run fitba probe` before relying on any claim.
+**Checked:** 2026-10-24. Re-run `uv run fitba probe` before relying on any claim.
 The machine-readable registry is `config/sources.yaml`.
 
 ## The public-source rule
@@ -81,6 +81,7 @@ No scraping fallback.
 | football-data.co.uk | All four SPFL tiers (`SC0`–`SC3`) | Free CSV | Private/non-commercial research; site cautions against automated/AI data products | **Current league results and team match stats**; fallback/cross-check if the API-Football gate passes |
 | SPFL club feed | Aberdeen's league fixtures/results | Server-rendered HTML, 1 request/run, cached 1h | SPFL copyright; used for the club page | **Current Aberdeen club fixtures**; API-Football is a cross-check |
 | AFC news listing | Club news, interviews, galleries, women's team, partners | Server-rendered HTML, 1 request/run, cached 1h | Official club content; listing metadata only | **Keep** for headlines, categories, dates and links |
+| AFC men's team roster | Canonical current roster, position sections, shirt numbers and On loan section | Server-rendered HTML, one listed page/run, cached 12h | Official club content; names, numbers, positions and links only | **Canonical roster inclusion/status source**; API-Football remains the statistics and identity spine |
 | SFA Scottish Cup format/rules | Round calendar, entry rules, 137 clubs/136 ties | Official HTML/PDF | SFA copyright; reference use | **Keep** as format source |
 
 URL pattern for the current league data:

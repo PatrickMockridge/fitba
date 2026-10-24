@@ -1,6 +1,6 @@
 schema_version: 1
-registry_version: 3.2.0
-reviewed: '2026-10-23'
+registry_version: 3.6.0
+reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
   owner_approval_required: true
@@ -330,8 +330,8 @@ metrics:
   limitations:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 3
+  reviewed: '2026-10-24'
+  version: 4
   status: active
 - id: matchday.style
   label: Matchday style
@@ -367,8 +367,8 @@ metrics:
   limitations:
   - Shot-profile derivatives; provenance checked, not independently recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-24'
+  version: 3
   status: active
 - id: matchday.lineup
   label: Predicted XI
@@ -1249,10 +1249,15 @@ metrics:
   status: active
 - id: squad.summary
   label: Squad summary
-  description: Squad size, loans, role evidence and coverage counts.
+  description: Squad size, official-roster reconciliation, loans, role evidence
+    and coverage counts.
   value_type: object
   fields:
   - squad_size
+  - official_squad_size
+  - official_players
+  - official_only
+  - excluded_api
   - loans_out
   - loans_in
   - roles_observed
@@ -1290,14 +1295,61 @@ metrics:
   limitations:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
+  reviewed: '2026-10-24'
+  version: 3
+  status: active
+- id: squad.loan-scope
+  label: Loan scopes
+  description: Official team-list loans, current-register loans and all-time register
+    loans, with the reconciliation between them.
+  value_type: object
+  fields: [official_list, register_current, register_all_time, reconciliation]
+  formula: official_list counts status loan_out in the official squad rows; register_current
+    counts confirmed loan rows for the current season; register_all_time counts every
+    confirmed loan row. The three are published separately and never substituted
+    for one another.
+  inputs:
+  - published squad and transfer payloads
+  unit: count
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: loans
+  coverage_tier: curated
+  confidence_rule: Official list for inclusion; confirmed transfer register for
+    register loans. Register-only loanees are not squad members.
+  home_payload: squad/aberdeen.json
+  payload_paths:
+  - squad/aberdeen.json#/loan_scope/**
+  - transfers/aberdeen.json#/loan_scope/**
+  home_surface: /squad/
+  displayed_surfaces:
+  - /squad/
+  - /loans/
+  - /recruitment/
+  - /transfers/
+  verification: cross_surface
+  implementation: fitba.metrics.checks:verify_loan_scope
+  source_paths: []
+  limitations:
+  - The official team list and the transfer register are different scopes; both
+    counts are shown.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
   version: 1
   status: active
 - id: squad.players
   label: Squad players
-  description: Per-player totals, playing time, role and position stats.
+  description: Per-player totals, playing time, role, position and official-roster
+    reconciliation fields.
   value_type: object
-  fields: []
+  fields: [roster_status, squad_member, exclusion_reason, official_order,
+    official_section, official_href, official_position, official_number,
+    official_only, roster_conflict, identity_source]
   formula: Playing time reconstructed from lineups and substitution events; starts
     and minutes are competitive-only; role shares use starting-XI observations; totals
     sum competition rows.
@@ -1317,6 +1369,7 @@ metrics:
   home_payload: squad/aberdeen.json
   payload_paths:
   - squad/aberdeen.json#/players/**
+  - squad/aberdeen.json#/excluded_players/**
   home_surface: /squad/
   displayed_surfaces:
   - /squad/
@@ -1326,8 +1379,8 @@ metrics:
   limitations:
   - Per-player rows; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-24'
+  version: 5
   status: active
 - id: squad.meta
   label: Squad metadata
@@ -1356,6 +1409,9 @@ metrics:
   - squad/aberdeen.json#/position_stats_meta/**
   - squad/aberdeen.json#/attributes_meta/**
   - squad/aberdeen.json#/availability_meta/**
+  - squad/aberdeen.json#/roster_meta/**
+  - squad/aberdeen.json#/roster_only/**
+  - squad/aberdeen.json#/excluded_players/**
   - squad/aberdeen.json#/coverage/**
   home_surface: /squad/
   displayed_surfaces:
@@ -1366,8 +1422,8 @@ metrics:
   limitations:
   - Coverage metadata; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-24'
+  version: 4
   status: active
 - id: player.page
   label: Player pages
@@ -1377,13 +1433,23 @@ metrics:
   fields:
   - tier
   - current_squad
+  - out_of_squad
+  - out_of_squad_reason
   - minutes
+  - minutes_season
   - appearances
   - rating
   - rating_percentile
   - cohort_basis
   - cohort_n
+  - rose_season
+  - rose_fallback
   - rose
+  - season_used
+  - cohort_season
+  - fallback
+  - fallback_reason
+  - fallback_note
   - figures
   - axes
   - value
@@ -1397,9 +1463,13 @@ metrics:
     rates from the provider season totals; each percentile is the midrank rank
     of the raw value in the player's league and role cohort (provider-group
     fallback), with conceded_p90 ranked on negated values. The percentile is
-    null when the cohort or value is unavailable. The match log is a projection
-    of the normalized player-match rows joined to the fixture date, opponent and
-    score; it is not recomputed in React.
+    null when the cohort or value is unavailable. Where current-season
+    Premiership minutes are below the squad threshold, the rose uses the most
+    recent prior Premiership season with at least 180 league minutes and a
+    same-season cohort; season_used, cohort_season, fallback and fallback_note
+    are published and visible. The summary minutes remain current-season. The
+    match log is a projection of the normalized player-match rows joined to the
+    fixture date, opponent and score; it is not recomputed in React.
   inputs:
   - published payload
   - data/normalized/matches/player_match_stats.parquet
@@ -1437,8 +1507,8 @@ metrics:
   - The recent match log is limited to the latest 10 competitive current-season
     rows with provider coverage; missing values are a dash.
   owner: patrickmockridge
-  reviewed: '2026-10-23'
-  version: 3
+  reviewed: '2026-10-24'
+  version: 5
   status: active
 - id: rumours.summary
   label: Rumour summary
@@ -1625,8 +1695,79 @@ metrics:
   limitations:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-24'
+  version: 3
+  status: active
+- id: consistency.summary
+  label: Cross-surface consistency audit
+  description: Pass/fail counts for the published cross-surface consistency checks.
+  value_type: object
+  fields: [checks, passed, failed, rows_checked, fields_checked]
+  formula: One record per named consistency check; passed + failed = checks.
+  inputs:
+  - published corpus
+  unit: count
+  aggregation: sum
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: mixed
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: A failed check blocks publish; the audit is not a quality score.
+  home_payload: audit/consistency.json
+  payload_paths:
+  - audit/consistency.json#/**
+  home_surface: /status/
+  displayed_surfaces:
+  - /status/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Generated from the same published corpus; it catches disagreement, not an
+    incorrect shared formula.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
+  status: active
+- id: manifest.freshness
+  label: Freshness thresholds
+  description: Dataset and availability staleness thresholds exposed to the client.
+  value_type: object
+  fields: [dataset_stale_after_hours, availability_stale_after_days]
+  formula: Read from config/matchday.yaml stale_after_hours and
+    config/availability.yaml policy.max_age_days.
+  inputs:
+  - config
+  - published manifest
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: measured
+  source_layer: computed
+  coverage_tier: derived
+  confidence_rule: Config match; the client does not hardcode a threshold.
+  home_payload: manifest.json
+  payload_paths:
+  - manifest.json#/freshness/**
+  home_surface: /status/
+  displayed_surfaces:
+  - /status/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Config-backed thresholds, not a measurement of source freshness.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
   status: active
 - id: clubs.aberdeen
   label: Club payload
@@ -1695,8 +1836,8 @@ metrics:
   limitations:
   - Curated team news; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-24'
+  version: 3
   status: active
 - id: case.document
   label: The case document
@@ -2134,8 +2275,9 @@ metrics:
   status: active
 - id: matches.document
   label: Match document
-  description: 'One played-fixture document: score, summary, scoreboard, stats, fxG,
-    timeline, lineups, player stats, form and coverage.'
+  description: 'One played-fixture document: score, summary, scoreboard, stats,
+    fxG with model and goals ranges, timeline, lineups, player stats, performance,
+    form and coverage.'
   value_type: object
   fields:
   - fixture
@@ -2149,9 +2291,12 @@ metrics:
   - form
   - coverage
   - links
-  formula: One document per canonical played fixture; final score is authoritative;
-    summary, timeline and scoreboard use regular goals only; missing classes are null
-    with coverage labels; duplicate aliases are separate.
+  formula: 'One document per canonical played fixture; final score is
+    authoritative; summary, timeline and scoreboard use regular goals only;
+    missing classes are null with coverage labels; duplicate aliases are
+    separate. The xg block carries fxG, an 80% model range, an 80% goals range,
+    provider xG with its source, shots, penalties, xG per shot and the
+    over/underperformance position.'
   inputs:
   - published payload
   unit: mixed
@@ -2177,11 +2322,13 @@ metrics:
   implementation: null
   source_paths: []
   limitations:
-  - The document family is checked for presence and source; individual model intervals
-    are not independently recomputed in this release.
+  - The document family is checked for presence and source; the two ranges are
+    checked for arithmetic and ordering, not independently recalibrated per page.
+  - fxG is a team-match estimate, not provider xG, xGOT or a shot-level location
+    model; provider xG is a different model and is never blended into it.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 3
+  reviewed: '2026-10-24'
+  version: 4
   status: active
 - id: analysis.summary
   label: Season overview
@@ -2208,8 +2355,8 @@ metrics:
     availability ledger, sourced card rules, named-squad membership, matchday
     contenders, the season expectations and factual squad-decision lenses. No
     value, fee, wage, contract expiry or medical diagnosis is derived. Counts
-    sum to the active universe (current squad plus ledger-only players); the
-    nine loan-outs are separate. Aims are analyst-set targets with a measured
+    sum to the active universe (official list minus loanees out); the five
+    official loan-outs are separate. Aims are analyst-set targets with a measured
     current value and status; they are not club targets.
   inputs:
   - published payload
@@ -2251,8 +2398,8 @@ metrics:
   - No contract-expiry, free-agent, wage, fee or release-clause data is held.
   - Market/value language is not used; squad decisions are measured lenses only.
   owner: patrickmockridge
-  reviewed: '2026-10-23'
-  version: 1
+  reviewed: '2026-10-24'
+  version: 2
   status: active
 - id: fixtures.index
   label: Fixture index
@@ -2263,10 +2410,14 @@ metrics:
   - fixtures
   - scheduled
   - scheduled_count
+  - scheduled_rows_total
+  - conflict_count
   formula: count = canonical played fixtures (duplicate aliases excluded); each played
     row carries score, result, depth and href. scheduled = remaining canonical fixtures
-    after the played registry and conflict handling; scheduled_count = len(scheduled).
-    A conflict-review row is retained but excluded from forward-looking surfaces.
+    after the played registry and conflict handling. scheduled_count = rows with
+    status scheduled; scheduled_rows_total includes conflict_review rows;
+    conflict_count = conflict_review rows. Conflict-review rows are retained but
+    excluded from forward-looking surfaces.
   inputs:
   - published payload
   unit: mixed
@@ -2293,28 +2444,38 @@ metrics:
   - Index rows are checked for presence; the fixture pages carry the detailed source
     coverage.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 3
+  reviewed: '2026-10-24'
+  version: 4
   status: active
 - id: xg.document
   label: fxG document
-  description: fxG model, rates, intervals, provider-xG estimate, league manager splits,
-    aggregates and coverage.
+  description: Team-match expected goals from open-play shot zones, shots on
+    target, blocked shots and penalties; a model range, a goals range,
+    provider-xG calibration, transfer check, provider-style estimate, manager
+    splits, aggregates and coverage.
   value_type: object
   fields:
   - model
   - evaluation
+  - transfer_evaluation
   - matches
   - aggregates
   - coverage
   - provider_estimate
   - manager_splits
-  formula: fxG = 1 - exp(-rate * shots_on_target), rate from competition-season shot
-    conversion with a prior; interval level 0.8; evaluation matches = distinct match
-    keys, team_rows = one pair per team. provider_estimate = max(0, intercept + slope
-    * fxg), OLS fitted on 2026-27 league team rows where provider xG exists. manager_splits
-    sum league match rows by date-attributed manager stint, for and against separately.
-    Actual and estimated provider values are never summed.
+  formula: 'open_play_sot = max(0, shots_on_target - penalty_sot_subtracted);
+    open_play_insidebox = max(0, shots_insidebox - penalty_attempts); fxG_open =
+    a selected linear model on open-play inside-box, outside-box, shots on
+    target, off-target and blocked counts; fxG = fxG_open + 0.76 * penalty_attempts.
+    Coefficients are fitted by OLS to 2026-27 Premiership team rows where
+    provider xG exists. The 80% model range is the 10th-90th percentile of
+    match-clustered bootstrap predictions plus the leave-one-match-out residual
+    pool. The 80% goals range is the convolution of a beta-binomial open-play
+    distribution and a binomial penalty distribution. Aggregate variances are
+    combined, never summed as intervals. provider_estimate = max(0, intercept +
+    slope * fxg) for rows without provider xG; actual and estimated provider
+    values are never summed. manager_splits sum league match rows by
+    date-attributed manager stint, for and against separately.'
   inputs:
   - published payload
   unit: mixed
@@ -2339,15 +2500,229 @@ metrics:
   implementation: null
   source_paths: []
   limitations:
-  - fxG is a shot-on-target model. The provider-xG gate currently fails, so the values
-    are descriptive and are not a performance verdict.
-  - The provider-style estimate is a calibration, not provider xG; the record has
-    no shot locations.
-  - The estimate is fitted on 2026-27 league rows and applied to earlier league rows
-    as a labelled estimate.
+  - fxG is a team-match estimate from shots, shot zones and penalties. It is not
+    a location model, not xGOT and not provider xG. The record has no shot
+    coordinates, distance, angle, body part, pressure or goalkeeper position.
+  - The coefficients are calibrated to 2026-27 football-data provider xG. The
+    gate is leave-one-match-out inside that season; the 2025-26 API-Football
+    check crosses season and provider and is informational, not a clean holdout.
+  - Penalties are priced at a fixed 0.76 xG and removed from open-play counts.
+    Own goals, deflections and shootouts are outside the model.
+  - The two ranges answer different questions. Neither is a confidence interval
+    for team quality, a result prediction or proof of finishing skill. A discrete
+    goals range can cover more than its nominal level.
+  - The provider-style estimate is a separate calibration for rows without
+    provider xG, not provider xG itself.
   owner: patrickmockridge
-  reviewed: '2026-10-23'
-  version: 4
+  reviewed: '2026-10-24'
+  version: 7
+  status: active
+- id: xg.per-shot
+  label: xG per shot
+  description: Expected goals divided by shots for a team match or aggregate.
+  value_type: scalar
+  fields: []
+  formula: fxg_per_shot = fxg / shots; null when shots is zero or unavailable.
+  inputs:
+  - published payload
+  unit: xG per shot
+  aggregation: per_match_and_aggregate
+  denominator: shots
+  rounding:
+    method: half_even
+    decimals: 3
+    display: '0.000'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: Requires a published fxG and a positive shot count; otherwise unavailable.
+  home_payload: xg/aberdeen.json
+  payload_paths:
+  - xg/aberdeen.json#/matches/*/fxg_per_shot_for
+  - xg/aberdeen.json#/matches/*/fxg_per_shot_against
+  - xg/aberdeen.json#/aggregates/*/xg_per_shot
+  - matches/*.json#/xg/*/xg_per_shot
+  home_surface: /analysis/xg/
+  displayed_surfaces:
+  - /analysis/xg/
+  - /matches/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Penalties are included in the numerator and denominator; the value is a
+    descriptive scale, not a shot-level probability.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
+  status: active
+- id: xg.goals-minus
+  label: Goals minus fxG
+  description: Observed goals minus the team-match fxG estimate, with a shifted
+    goals range.
+  value_type: scalar
+  fields: []
+  formula: goals_minus_fxg = goals - fxg. The shifted goals range is
+    goals_low - fxg to goals_high - fxg.
+  inputs:
+  - published payload
+  unit: goals
+  aggregation: per_match_and_aggregate
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: Requires a published fxG and goals; the range is descriptive.
+  home_payload: xg/aberdeen.json
+  payload_paths:
+  - xg/aberdeen.json#/matches/*/goals_minus_fxg_for
+  - xg/aberdeen.json#/matches/*/goals_minus_fxg_against
+  - xg/aberdeen.json#/aggregates/*/goals_minus_fxg
+  - matches/*.json#/xg/*/goals_minus
+  home_surface: /analysis/xg/
+  displayed_surfaces:
+  - /analysis/xg/
+  - /matches/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - One match or one season is not proof of finishing skill; overperformance
+    usually regresses and style changes the chance profile.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
+  status: active
+- id: xg.model-range
+  label: fxG model range
+  description: The 80% range for the fxG estimate.
+  value_type: object
+  fields: [low, high]
+  formula: 10th-90th percentile of match-clustered bootstrap predictions plus a
+    draw from the leave-one-match-out residual pool. Aggregates sum per draw;
+    per-match ranges are never summed as intervals.
+  inputs:
+  - published payload
+  unit: goals
+  aggregation: per_match_and_aggregate
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: Requires fitted coefficients and a valid bootstrap; otherwise
+    residual-only or unavailable.
+  home_payload: xg/aberdeen.json
+  payload_paths:
+  - xg/aberdeen.json#/matches/*/fxg_for_low
+  - xg/aberdeen.json#/matches/*/fxg_for_high
+  - xg/aberdeen.json#/aggregates/*/low
+  - xg/aberdeen.json#/aggregates/*/high
+  - matches/*.json#/xg/*/low
+  - matches/*.json#/xg/*/high
+  home_surface: /analysis/xg/
+  displayed_surfaces:
+  - /analysis/xg/
+  - /matches/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - This is model uncertainty, not a result prediction or a confidence interval
+    for team quality.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
+  status: active
+- id: xg.goals-range
+  label: Goals range
+  description: The 80% range of goals from the same chances.
+  value_type: object
+  fields: [goals_low, goals_high]
+  formula: Convolution of a beta-binomial open-play goal distribution and a
+    binomial penalty distribution; aggregate distributions are convolved across
+    matches. The range is the 10th-90th percentile.
+  inputs:
+  - published payload
+  unit: goals
+  aggregation: per_match_and_aggregate
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: inferred
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: Requires shot and penalty counts; a discrete range can cover
+    more than its nominal level.
+  home_payload: xg/aberdeen.json
+  payload_paths:
+  - xg/aberdeen.json#/matches/*/goals_for_low
+  - xg/aberdeen.json#/matches/*/goals_for_high
+  - xg/aberdeen.json#/aggregates/*/goals_low
+  - xg/aberdeen.json#/aggregates/*/goals_high
+  - matches/*.json#/xg/*/goals_low
+  - matches/*.json#/xg/*/goals_high
+  home_surface: /analysis/xg/
+  displayed_surfaces:
+  - /analysis/xg/
+  - /matches/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Shot quality is heterogeneous; the binomial approximation is conservative.
+  - The range is not a prediction of the score and not a verdict on finishing.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
+  status: active
+- id: xg.shot-profile
+  label: fxG shot profile
+  description: Measured shots, shots on target, off-target, blocked, inside-box,
+    outside-box and penalty counts behind a team-match fxG value.
+  value_type: object
+  fields: [shots, shots_on_target, shots_off, shots_blocked, shots_insidebox,
+    shots_outsidebox, penalties, penalty_goals]
+  formula: Counts are carried from the licensed team statistics and event feed;
+    missing values are null, never zero.
+  inputs:
+  - published payload
+  unit: counts
+  aggregation: per_match
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 0
+    display: '0'
+  basis: measured
+  source_layer: league_team_stats
+  coverage_tier: match
+  confidence_rule: Requires provider statistics; missing classes are unavailable.
+  home_payload: xg/aberdeen.json
+  payload_paths:
+  - matches/*.json#/xg/*/shot_profile/**
+  - xg/aberdeen.json#/matches/*/shots_*
+  home_surface: /matches/
+  displayed_surfaces:
+  - /matches/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Provider shot counts can disagree slightly across sources; the source row is
+    named on the match page.
+  owner: patrickmockridge
+  reviewed: '2026-10-24'
+  version: 1
   status: active
 - id: history.defeats
   label: Heavy defeats
@@ -3594,12 +3969,39 @@ parameters:
       prior_strength_sot: 250
       exclude_competition_prefixes:
       - sco:other:friendlies
+    calibration:
+      season: 2026-27
+      competition_id: sco:premiership
+      league_id: 179
+      min_team_rows: 90
+      min_matches: 45
+      min_zone_coverage: 0.8
+      features:
+      - inside_box
+      - outside_box
+      - shots_on_target
+      - blocked
+    penalty:
+      xg: 0.76
+      missed_on_target: true
+      source: fixed historical penalty conversion prior; see docs/xg.md
     interval:
       level: 0.8
       draws: 10000
+      bootstrap_draws: 2000
       seed: 20261022
       z: 1.2816
+    goals_range:
+      level: 0.8
+      method: binomial_penalty
+      max_support: 5000
+      max_dispersion: 3.0
+    transfer_check:
+      season: 2025-26
+      competition_id: sco:premiership
+      source: api_football
     evaluation:
+      method: leave_one_match_out
       validation_season: 2026-27
       max_abs_bias: 0.15
       max_mae: 0.55
@@ -3611,12 +4013,16 @@ parameters:
   config_path: xg
   config_keys:
   - fit
+  - calibration
+  - penalty
   - interval
+  - goals_range
+  - transfer_check
   - evaluation
   verification: config_match
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 1
+  reviewed: '2026-10-24'
+  version: 3
 - id: param.fixtures
   label: Fixture record policy
   kind: matrix
@@ -3784,7 +4190,7 @@ parameters:
   verification: config_match
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 2
 - id: param.analysis
   label: Season overview policy
   kind: matrix

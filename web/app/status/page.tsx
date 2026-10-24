@@ -1,5 +1,10 @@
 import { ContractPage } from "@/components/ContractPage";
-import { getManifest, getMetricsAudit, getValidationReport } from "@/lib/data";
+import {
+  getConsistencyReport,
+  getManifest,
+  getMetricsAudit,
+  getValidationReport,
+} from "@/lib/data";
 
 export const metadata = {
   alternates: { canonical: "/status/" }, title: "Data status · fitba" };
@@ -16,6 +21,7 @@ export default function StatusPage() {
   }
   const totalBytes = manifest.files.reduce((sum, file) => sum + file.bytes, 0);
   const audit = getMetricsAudit();
+  const consistency = getConsistencyReport();
   const validation = getValidationReport();
   return (
     <ContractPage surface="status">
@@ -124,6 +130,40 @@ export default function StatusPage() {
           ) : null}
         </section>
       </div>
+
+      <section className="card" data-contract="status.consistency">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Cross-surface audit</p>
+            <h2>One fact, one value</h2>
+          </div>
+          <span
+            className={
+              consistency?.status === "pass" ? "badge badge-ok" : "badge badge-warn"
+            }
+          >
+            {consistency?.status ?? "not run"}
+          </span>
+        </div>
+        <p>
+          {consistency?.passed ?? 0}/{consistency?.checks ?? 0} checks passed ·{" "}
+          {consistency?.failed ?? 0} failed.
+        </p>
+        <p className="fine-print">
+          The check compares published payloads: squad counts, loan scopes,
+          player totals, xG aggregates, fixture results, scheduled counts and
+          availability universes. It catches disagreement, not an incorrect
+          shared formula; the metric audit covers the formula.
+        </p>
+        {consistency?.results
+          ?.filter((result) => result.status !== "pass")
+          .slice(0, 3)
+          .map((result) => (
+            <p className="fine-print" key={result.id}>
+              {result.id}: {result.errors[0] ?? "failed"}
+            </p>
+          ))}
+      </section>
 
       <section className="card" data-contract="status.coverage">
         <div className="section-head">

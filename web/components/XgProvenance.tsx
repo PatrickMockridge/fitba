@@ -31,20 +31,26 @@ export function XgProvenance({
         <section className="mini-block">
           <h3>fitba fxG</h3>
           <p>
-            Shots on target multiplied by an empirical-Bayes competition-season
-            conversion rate, with an 80% interval and match-to-match
-            overdispersion.
+            A provider-calibrated team-match expectation from open-play shot
+            zones, shots on target, blocked shots and penalties, with an 80%
+            model range from a match-clustered bootstrap and residual pool and a
+            separate 80% goals range. The coefficients are fitted to provider
+            xG.
           </p>
           <p className="fine-print">
             League shots come from football-data.co.uk; cup and European shots
-            from API-Football. The model has no shot locations, opponent
-            adjustment or home advantage. The provider-xG gate is{" "}
+            and league-wide zones from API-Football. The model has no shot
+            coordinates, distance, angle, pressure, goalkeeper position or
+            opponent adjustment. The calibration gate is{" "}
             <strong>
-              {evaluation?.status === "fail"
-                ? "failed"
-                : evaluation?.status ?? "unavailable"}
+              {evaluation?.status === "pass"
+                ? "passed (leave-one-match-out, in-season)"
+                : evaluation?.status === "fail"
+                  ? "failed"
+                  : evaluation?.status ?? "unavailable"}
             </strong>
-            , so fxG remains descriptive.
+            ; it is not an out-of-season holdout, so fxG remains a descriptive
+            calibration.
           </p>
         </section>
         <section className="mini-block">
@@ -89,9 +95,10 @@ export function XgProvenance({
             </p>
           )}
           <p className="fine-print">
-            This is an estimate, not provider xG. Provider xG uses shot locations
-            and a provider model; this record has no shot coordinates. Using the
-            calibration does not mean the gate has passed.
+            This is a separate estimate for rows where provider xG is missing,
+            not provider xG. Provider xG uses shot locations and a provider
+            model; this record has no shot coordinates. It does not replace the
+            fxG calibration gate above.
           </p>
         </section>
       </div>

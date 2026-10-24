@@ -5,6 +5,7 @@ import { SquadBoard } from "@/components/SquadBoard";
 import { StatTile } from "@/components/StatTile";
 import { getSquad } from "@/lib/data";
 import { FAMILY_LABELS } from "@/lib/roles";
+import { formatDate } from "@/lib/format";
 
 export const metadata = {
   alternates: { canonical: "/squad/" }, title: "Current squad · fitba" };
@@ -71,14 +72,40 @@ export default function SquadPage() {
             Role grid: {squad.role_meta.fixtures_with_grid}/{squad.role_meta.fixtures_total} matches
           </span>
         </div>
+        <p className="fine-print" data-contract="squad.source">
+          Canonical roster:{" "}
+          <a
+            className="text-link"
+            href={squad.roster_meta?.source_url ?? "https://www.afc.co.uk/en/teams/mens"}
+            rel="noreferrer"
+          >
+            Aberdeen FC men&apos;s team
+          </a>
+          {squad.roster_meta?.fetched_at
+            ? ` · checked ${formatDate(squad.roster_meta.fetched_at)}`
+            : " · official list unavailable; using the API-Football snapshot with a visible fallback"}
+          . Inclusion, section, order and shirt number come from the official
+          page; API-Football supplies statistics and identity. Rows not on the
+          official list are not squad players.
+        </p>
       </section>
 
       <div className="stat-row four" data-contract="squad.summary">
-        <StatTile label="Squad" value={squad.summary.squad_size} note="registered players" />
+        <StatTile
+          label="Squad"
+          value={squad.summary.official_squad_size ?? squad.summary.squad_size}
+          note={`official list; ${squad.summary.excluded_api ?? 0} API-only rows excluded`}
+        />
         <StatTile
           label="On loan out"
           value={squad.summary.loans_out}
-          note={squad.summary.loans_in ? `${squad.summary.loans_in} loaned in` : "tagged below"}
+          note={
+            squad.loan_scope
+              ? `official list; ${squad.loan_scope.register_current.out_count} in the 2026-27 register`
+              : squad.summary.loans_in
+                ? `${squad.summary.loans_in} loaned in`
+                : "official list"
+          }
         />
         <StatTile
           label="Role evidence"
@@ -105,10 +132,41 @@ export default function SquadPage() {
         </div>
         <SquadBoard players={squad.players} />
         <p className="fine-print" data-contract="squad.coverage">
-          {squad.coverage.note} Loan tags come from the confirmed transfer
-          register; a loanee&apos;s parent-club rows are never shown as loan-club
-          output.
+          {squad.coverage.note} Loan tags come from the official roster section
+          and the confirmed transfer register; a loanee&apos;s parent-club rows
+          are never shown as loan-club output. The table follows the official
+          section order; API-only rows outside that list are excluded from the
+          squad and its counts.
         </p>
+        {squad.roster_only?.length ? (
+          <div className="mini-block" data-contract="squad.roster-only">
+            <p className="eyebrow">Official list only</p>
+            <p className="fine-print">
+              The official page lists these players, but no unique API-Football
+              player id was found. They are shown here rather than dropped.
+            </p>
+            <ul className="plain-list">
+              {squad.roster_only.map((player) => (
+                <li key={`${player.name}-${player.number}`}>
+                  {player.name ?? "Unknown"} · {player.position ?? "position unknown"}
+                  {player.number ? ` · ${player.number}` : ""}
+                  {player.official_href ? (
+                    <>
+                      {" "}
+                      <a
+                        className="text-link"
+                        href={`https://www.afc.co.uk${player.official_href}`}
+                        rel="noreferrer"
+                      >
+                        official profile
+                      </a>
+                    </>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </section>
 
       <div className="grid two-col">
@@ -139,7 +197,7 @@ export default function SquadPage() {
           </div>
           <BucketBars
             title="Registered squad by primary position group"
-            buckets={groupBuckets(squad.summary.by_primary_group)}
+            buckets={groupBuckets(squad.summary.by_primary_group_squad)}
             absolute
           />
           <BucketBars
@@ -148,9 +206,10 @@ export default function SquadPage() {
             absolute
           />
           <p className="fine-print">
-            Primary group and role family come from the starting-XI grid. The
-            filter above uses every eligible slot, so a full-back counts as both
-            a defender and a midfielder. Registered squad only; the{" "}
+            Primary group and role family come from the starting-XI grid. Primary
+            group counts each player once by the first broad group of their primary
+            slot; the filter above uses every eligible slot, so a full-back can
+            appear under both defender and midfielder. Registered squad only; the{" "}
             {squad.summary.loans_out} loanees out are excluded because loan-club
             lineups are not ingested. No role evidence is shown as unknown, not
             forced into a bucket.

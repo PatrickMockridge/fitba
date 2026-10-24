@@ -63,8 +63,12 @@ def check_pages() -> list[str]:
         "player-profile.coverage",
     )
     pages = sorted((OUT / "players").glob("*/index.html")) if (OUT / "players").exists() else []
-    if len(pages) != len(squad.get("players", [])):
-        errors.append("rendered player pages do not match the squad size")
+    expected_pages = len(squad.get("players", [])) + len(squad.get("excluded_players") or [])
+    if len(pages) != expected_pages:
+        errors.append("rendered player pages do not match the squad plus retained profiles")
+    excluded_ids = {
+        int(player["player_id"]) for player in (squad.get("excluded_players") or [])
+    }
     for page in pages:
         html = page.read_text(encoding="utf-8")
         player_id = int(page.parent.name)
@@ -86,6 +90,13 @@ def check_pages() -> list[str]:
             for phrase in ("Availability and team news", "Recent match log"):
                 if phrase not in html:
                     errors.append(f"{player_id}: current squad profile missing {phrase!r}")
+        if player_id in excluded_ids and 'data-contract="player-profile.excluded"' not in html:
+            errors.append(f"{player_id}: retained profile has no excluded marker")
+        if (
+            player_id not in excluded_ids
+            and 'data-contract="player-profile.excluded"' in html
+        ):
+            errors.append(f"{player_id}: official profile is marked excluded")
     return errors
 
 
@@ -104,7 +115,13 @@ def main() -> int:
         errors.append("contracts/player-page.schema.json is stale; regenerate it")
 
     squad = _load(SQUAD) if SQUAD.exists() else {}
-    expected_ids = {str(player["player_id"]) for player in squad.get("players", [])}
+    expected_ids = {
+        str(player["player_id"])
+        for player in [
+            *(squad.get("players") or []),
+            *(squad.get("excluded_players") or []),
+        ]
+    }
     files = sorted(PAGES.glob("*.json"))
     if expected_ids != {path.stem for path in files}:
         errors.append("player-page files do not match the squad player ids")
@@ -164,6 +181,35 @@ def main() -> int:
                 percentile = axis.get("percentile")
                 if percentile is not None and not 0 <= float(percentile) <= 100:
                     errors.append(f"{pid}: rose percentile out of range {percentile!r}")
+        if rose.get("fallback"):
+            if not rose.get("season_used") or rose.get("season_used") == document.season:
+                errors.append(f"{pid}: fallback rose has no prior season")
+            if rose.get("cohort_season") != rose.get("season_used"):
+                errors.append(f"{pid}: fallback cohort season does not match season_used")
+            if int(rose.get("minutes") or 0) < int(rose.get("min_minutes") or 180):
+                errors.append(f"{pid}: fallback rose is below the minimum minutes")
+            if not rose.get("fallback_reason") or not rose.get("fallback_note"):
+                errors.append(f"{pid}: fallback rose has no reason/note")
+        elif rose.get("status") in {"available", "partial"}:
+            if rose.get("season_used") != document.season:
+                errors.append(f"{pid}: current rose season does not match the document")
+        elif rose.get("status") == "unavailable" and rose.get("reason") == "below_min_minutes":
+            if rose.get("fallback_reason") not in {
+                "no_prior_premiership_season",
+                "prior_cohort_unavailable",
+            }:
+                errors.append(f"{pid}: no-fallback rose has no explicit fallback reason")
+        if document.out_of_squad and "EXCLUDED_FROM_SQUAD" not in {
+            warning.code for warning in document.warnings
+        }:
+            errors.append(f"{pid}: retained profile has no EXCLUDED_FROM_SQUAD warning")
+        if (
+            document.out_of_squad
+            and int(document.panels["profile"].data.get("summary", {}).get("minutes") or 0)
+            >= int(rose.get("min_minutes") or 180)
+        ):
+            errors.append(f"{pid}: excluded profile has current squad minutes")
+
         availability = document.panels["availability"].data or {}
         if profile.get("current_squad") and not availability:
             errors.append(f"{pid}: current squad has no availability projection")

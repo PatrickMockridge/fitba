@@ -36,6 +36,9 @@ from fitba.util.dates import current_season, utc_now_iso
 SCOUTING_DIR = NORMALIZED_DIR / "scouting"
 PLAYER_SEASON_PATH = SCOUTING_DIR / "player_season.parquet"
 POOL_META_PATH = SCOUTING_DIR / "meta.json"
+ROSE_HISTORY_PATH = SCOUTING_DIR / "rose_history.parquet"
+ROSE_HISTORY_META_PATH = SCOUTING_DIR / "rose_history_meta.json"
+ROSE_HISTORY_SEASONS = (2024, 2025)
 LINEUPS_PATH = SCOUTING_DIR / "lineups.parquet"
 PLAYER_ROLES_PATH = SCOUTING_DIR / "player_roles.parquet"
 ROLES_STATE_PATH = SCOUTING_DIR / "roles_state.json"
@@ -543,6 +546,90 @@ def _aggregate_roles(rows: list[dict[str, Any]], *, year: int) -> list[dict[str,
             }
         )
     return out
+
+
+def ingest_rose_history(
+    *,
+    seasons: list[int] | None = None,
+    refresh: bool = False,
+) -> dict[str, Any]:
+    """Fetch full-season Premiership pools for the player-rose fallback.
+
+    The fallback needs a same-season cohort, not the current-season scouting
+    pool. Keep every team, including Aberdeen, so the player's own row is
+    available; the cohort builder excludes Aberdeen from the comparison set.
+    """
+    ensure_dirs()
+    SCOUTING_DIR.mkdir(parents=True, exist_ok=True)
+    years = list(seasons or ROSE_HISTORY_SEASONS)
+    leagues = _select_leagues("sco:premiership")
+    if not leagues:
+        raise ValueError("sco:premiership is not configured for scouting")
+    league = leagues[0]
+    provider_id = int((league.get("provider") or {})["api_football_id"])
+    generated_at = utc_now_iso()
+    all_rows: list[dict[str, Any]] = []
+    coverage: list[dict[str, Any]] = []
+    for year in years:
+        record: dict[str, Any] = {
+            "season": int(year),
+            "label": f"{int(year)}-{str(int(year) + 1)[-2:]}",
+            "status": "ok",
+            "pages": 0,
+            "rows": 0,
+            "rated": 0,
+            "with_minutes": 0,
+            "error": None,
+        }
+        try:
+            raw_rows, pages = _fetch_players(provider_id, int(year), refresh=refresh)
+            parsed = [
+                row
+                for row in (
+                    _pool_row(item, league, year=int(year), ingested_at=generated_at)
+                    for item in raw_rows
+                )
+                if row is not None and row.get("competition_id") == "sco:premiership"
+            ]
+            record["pages"] = pages
+            record["rows"] = len(parsed)
+            record["rated"] = sum(1 for row in parsed if row.get("rating") is not None)
+            record["with_minutes"] = sum(1 for row in parsed if (row.get("minutes") or 0) > 0)
+            if not parsed:
+                record["status"] = "no_player_stats"
+            all_rows.extend(parsed)
+        except Exception as error:  # noqa: BLE001 - one season must not stop the run
+            record["status"] = "error"
+            record["error"] = f"{type(error).__name__}: {error}"
+        coverage.append(record)
+
+    frame = pl.DataFrame(all_rows, infer_schema_length=None) if all_rows else pl.DataFrame()
+    if frame.height:
+        for column in POOL_COLUMNS:
+            if column not in frame.columns:
+                frame = frame.with_columns(pl.lit(None).alias(column))
+        frame = frame.select(POOL_COLUMNS).unique(
+            subset=["player_id", "competition_id", "season"],
+            keep="first",
+            maintain_order=True,
+        )
+    if frame.height:
+        frame.write_parquet(ROSE_HISTORY_PATH)
+    meta = {
+        "schema_version": "1.0.0",
+        "league": str(league["id"]),
+        "provider_league_id": provider_id,
+        "generated_at": generated_at,
+        "seasons": coverage,
+        "totals": {
+            "seasons_ok": sum(1 for item in coverage if item["status"] == "ok"),
+            "seasons_failed": sum(1 for item in coverage if item["status"] != "ok"),
+            "rows": frame.height,
+        },
+        "path": str(ROSE_HISTORY_PATH),
+    }
+    ROSE_HISTORY_META_PATH.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    return meta
 
 
 def ingest_roles(

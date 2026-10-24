@@ -32,9 +32,12 @@ Aberdeen squad members.
    **Overall profile** and **Position profile**, in that order. Each figure has
    labelled axes and an accessible title/description carrying the exact values
    and cohort n; there is no duplicate rose table.
-3. **Key facts** — minutes, appearances, provider rating and cohort percentile,
-   with the cohort basis and n. The provider rating is labelled opaque and not a
-   verdict.
+3. **Key facts** — all-competition minutes, appearances, provider rating and a
+   separately labelled Premiership-cohort percentile, with the cohort basis and
+   n. The percentile is computed from the league-only rating, not from the
+   all-competition headline. If a competition has no provider player stats, the
+   block says so and names it; minutes and starts still cover all competitions.
+   The provider rating is labelled opaque and not a verdict.
 4. **Role and cohort basis** — the Aberdeen Position panel, or the scouting
    role family/share/status and cohort basis.
 5. **Output** — the Aberdeen Playing time and Performance panels, or the
@@ -59,6 +62,13 @@ profile, availability and recent-match sections.
   position group when the role cohort is below its minimum), at the league
   cohort minutes threshold. Aberdeen uses Premiership-only statistics; scouting
   uses the row's league statistics. No cross-league percentiles.
+- **Season:** the current season is always preferred. When current-season
+  Premiership minutes are below the 180-minute gate, the rose uses the most
+  recent prior Premiership season with at least 180 league minutes and compares
+  against that season's own Premiership cohort. The season and a visible
+  fallback note are published; prior-season rates are never ranked against the
+  current-season cohort. If no prior season qualifies, the rose stays
+  unavailable with an explicit reason.
 - **Axes:** the overall figure is the shared all-round set; the position figure
   is the role-specific set from `config/player-rose.yaml`.
 - **Encoding:** equal-angle sectors; radius is `sqrt(percentile / 100)`, so
@@ -70,8 +80,8 @@ profile, availability and recent-match sections.
   the accessible description. It is never zero, imputed or drawn as a zero petal.
 - **Status:** `available` at four or more non-null petals, `partial` at one to
   three, `unavailable` at none. An unavailable figure states why
-  (`below_min_minutes`, `no_role`, `cohort_too_small`, `no_values` or
-  `not_built`).
+  (`below_min_minutes`, `no_role`, `cohort_too_small`, `no_values`,
+  `no_prior_premiership_season` or `not_built`).
 - **Text alternative:** the chart is `role="img"` with a unique title and a
   description that lists the raw value, percentile and per-axis cohort n. The
   page keeps its existing per-90/performance tables; the rose does not repeat

@@ -75,10 +75,15 @@ Every publish writes:
   locations, row/field counts, checks and errors.
 - `web/data/generated/audit/validation.json` — the compact validation report.
 
-The manifest carries `manifest.metrics` and `manifest.validation` with paths,
-checksums, status and counts. A failed audit blocks the atomic publish. The
-public `/status/` page shows the audit status; `/metrics/` shows the definitions,
-verification modes and audit results.
+The manifest carries `manifest.metrics`, `manifest.validation` and
+`manifest.consistency` with paths, checksums, status and counts. A failed audit
+blocks the atomic publish. The public `/status/` page shows the audit status;
+`/metrics/` shows the definitions, verification modes and audit results.
+
+`audit/consistency.json` is the cross-surface report. It is generated from the
+same corpus and run inside publish; `scripts/check_consistency.py` exposes it
+in CI. It proves that two pages do not disagree about the same fact. It does not
+prove that their shared formula is right; that is the metric audit.
 
 ## Numeric-leaf coverage
 

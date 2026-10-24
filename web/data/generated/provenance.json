@@ -30,7 +30,7 @@
       "reason": "No licence stated; local research only, never published."
     }
   ],
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "layers": [
     {
       "fallback": [
@@ -603,6 +603,55 @@
       ]
     },
     {
+      "fallback": [
+        "api_football"
+      ],
+      "fields": [
+        "name",
+        "shirt_number",
+        "position",
+        "loan_section",
+        "roster_inclusion"
+      ],
+      "gate": null,
+      "id": "squad_roster",
+      "kind": "source",
+      "label": "Official squad roster",
+      "note": "The official AFC men's team page is canonical for inclusion, position section, shirt number and the On loan section. It does not label injuries; no injury is inferred. API-Football remains the statistics and identity spine. API rows outside the official list are retained only for existing player links and are not squad players.",
+      "primary": "afc_official",
+      "primary_source": {
+        "attribution": "Aberdeen FC",
+        "id": "afc_official",
+        "lane": "derived_display",
+        "name": "Aberdeen FC men's team roster",
+        "url": "https://www.afc.co.uk/en/teams/mens",
+        "verified_at": "2026-10-24"
+      },
+      "scope": "current men's team, one listed page per refresh",
+      "sources": [
+        {
+          "name": "Aberdeen FC men's team roster",
+          "role": "primary",
+          "rows": null,
+          "source_id": "afc_official",
+          "url": "https://www.afc.co.uk/en/teams/mens",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "name": "API-Football",
+          "role": "fallback",
+          "rows": null,
+          "source_id": "api_football",
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "status": "active",
+      "surfaces": [
+        "/squad/"
+      ]
+    },
+    {
       "fallback": [],
       "fields": [
         "player_id",
@@ -616,8 +665,8 @@
       "gate": null,
       "id": "squad_identity",
       "kind": "provider",
-      "label": "Current squad",
-      "note": "Curated player overrides correct identity or youth gaps.",
+      "label": "Current squad identity and statistics",
+      "note": "Curated player overrides correct identity or youth gaps; the official roster layer owns roster inclusion and loan-section status.",
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
@@ -632,7 +681,7 @@
         {
           "name": "API-Football",
           "role": "primary",
-          "rows": 38,
+          "rows": 34,
           "source_id": "api_football",
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
@@ -655,7 +704,7 @@
       "id": "preferred_foot",
       "kind": "provider",
       "label": "Preferred foot",
-      "note": "Sportmonks is gated; AFC official yields no foot values today; Wikipedia is last resort with a revision permalink. 1 known, 37 unknown.",
+      "note": "Sportmonks is gated; AFC official yields no foot values today; Wikipedia is last resort with a revision permalink. One value is known; every other player is unknown rather than inferred.",
       "primary": "sportmonks",
       "primary_source": {
         "attribution": "Sportmonks",
@@ -676,12 +725,12 @@
           "verified_at": "2026-10-21"
         },
         {
-          "name": "Aberdeen FC player profiles",
+          "name": "Aberdeen FC men's team roster",
           "role": "fallback",
           "rows": null,
           "source_id": "afc_official",
           "url": "https://www.afc.co.uk/en/teams/mens",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-24"
         },
         {
           "name": "Wikipedia",
@@ -1141,7 +1190,7 @@
         "squad_identity",
         "transfers_candidate"
       ],
-      "rows": 1634,
+      "rows": 1630,
       "rows_basis": "primary contributions only",
       "url": "https://www.api-football.com"
     },
@@ -1213,9 +1262,11 @@
       "attribution": "Aberdeen FC",
       "id": "afc_official",
       "lane": "derived_display",
-      "last_verified": "2026-10-21",
-      "name": "Aberdeen FC player profiles",
-      "primary_layers": [],
+      "last_verified": "2026-10-24",
+      "name": "Aberdeen FC men's team roster",
+      "primary_layers": [
+        "squad_roster"
+      ],
       "rows": 0,
       "rows_basis": "primary contributions only",
       "url": "https://www.afc.co.uk/en/teams/mens"

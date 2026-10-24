@@ -367,17 +367,18 @@ export default function MethodologyPage() {
           <span className="badge badge-neutral">experimental</span>
         </div>
         <p>
-          fxG is fitba&apos;s own shot-on-target expected-goals model. It estimates a
-          competition-season conversion rate with an empirical-Bayes prior,
-          multiplies by shots on target, and publishes an 80% interval that
-          carries conversion uncertainty and match-to-match overdispersion. It
-          does not see shot location, opponent strength or game state.
+          fxG is fitba&apos;s own team-match expected-goals estimate. It uses
+          open-play inside/outside-box shots, shots on target, blocked shots and
+          a fixed penalty value, fitted to provider xG. It publishes an 80%
+          model range for the estimate and a separate 80% goals range for the
+          same chances. It has no shot coordinates, distance, angle, pressure,
+          goalkeeper position or game state.
         </p>
         <p>
           Provider xG is carried separately where available and is never blended
-          into fxG. The model is validated against 2026-27 provider xG; at this
-          publish the gate fails, so fxG is descriptive and is not a performance
-          verdict.
+          into fxG. The model is validated against 2026-27 provider xG; the gate
+          is an in-season calibration, not an out-of-season holdout, and the
+          values are descriptive rather than a performance verdict.
         </p>
         <p className="fine-print">
           <Link className="text-link" href="/analysis/xg/">

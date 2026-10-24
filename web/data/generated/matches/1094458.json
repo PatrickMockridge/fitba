@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2023-09-16",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1094458,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:heart-of-midlothian",
     "home_team_name": "Heart of Midlothian",
     "href": "/matches/1094458/",
+    "outcome": "W",
     "referee": "K. Clancy",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 5",
     "season": "2023-24",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Tynecastle Park"
@@ -123,7 +129,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -414,6 +420,132 @@
     "next": "/matches/1126245/",
     "previous": "/matches/1094450/",
     "season": "/history/2023-24/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 57,
+          "pass_accuracy": 11,
+          "passes_total": 19,
+          "player_id": 36782,
+          "player_name": "James McGarry",
+          "rating": 7.3,
+          "shots_on": 3,
+          "shots_total": 3,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 26,
+          "passes_total": 38,
+          "player_id": 15605,
+          "player_name": "Stefan Gartenmann",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 4,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 12,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 31,
+          "passes_total": 42,
+          "player_id": 45800,
+          "player_name": "Slobodan Rubežić",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 12,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 58,
+          "passes_total": 67,
+          "player_id": 6832,
+          "player_name": "Cameron Devlin",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 3,
+          "team_name": "Heart of Midlothian"
+        },
+        {
+          "assists": null,
+          "duels_won": null,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 41,
+          "player_id": 44885,
+          "player_name": "Zander Clark",
+          "rating": 7.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Heart of Midlothian"
+        },
+        {
+          "assists": 1,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 65,
+          "pass_accuracy": 11,
+          "passes_total": 16,
+          "player_id": 20037,
+          "player_name": "Liam Boyce",
+          "rating": 7.6,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Heart of Midlothian"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 5,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 4,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1217,7 +1349,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1484,7 +1616,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Heart of Midlothian 1.28 (0.0-3.16), Aberdeen 1.6 (0.0-3.702)."
+        "text": "Shot expectation: Heart of Midlothian 1.14, Aberdeen 1.06."
       }
     ],
     "events_available": true,
@@ -1909,22 +2041,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 3.702,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -1.058,
+      "goals_position": "within",
+      "high": 1.574,
+      "low": 0.337,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.6
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 3,
+        "shots_insidebox": 6,
+        "shots_off": 3,
+        "shots_on_target": 5,
+        "shots_outsidebox": 5
+      },
+      "value": 1.058,
+      "xg_per_shot": 0.096
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.16,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.857,
+      "goals_position": "within",
+      "high": 1.659,
+      "low": 0.422,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.28
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 12,
+        "shots_blocked": 4,
+        "shots_insidebox": 8,
+        "shots_off": 4,
+        "shots_on_target": 4,
+        "shots_outsidebox": 4
+      },
+      "value": 1.143,
+      "xg_per_shot": 0.095
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

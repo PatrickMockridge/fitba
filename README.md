@@ -27,7 +27,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
 | [Season overview](docs/analysis.md) | Next fixtures, availability, season aims, squad decisions and the route to the evidence. |
 | [Results and fixtures](docs/fixtures.md) | Played and remaining Cormack-era fixtures, with one page per played fixture and the deterministic read. |
-| [fxG](docs/xg.md) | The experimental shot-on-target expected-goals model, interval and provider-xG gate. |
+| [fxG](docs/xg.md) | The experimental team-match expected-goals model, two ranges, penalties and provider-xG gate. |
 | [Match scoreboard](docs/match-scoreboard.md) | The top-level score, goal and red-card widget and the Aberdeen/opposition split. |
 | [Methodology](docs/methodology.md) | How every number is produced and how uncertainty is shown. |
 | [Data provenance](docs/provenance.md) | The layer-by-layer source truth table and the league migration gate. |
@@ -72,8 +72,9 @@ Markdown remains the source of truth.
   cards), timeline, lineups, league/API stats, player stats where available and
   fxG. Aberdeen is red and the opposition neutral throughout; missing data is
   labelled, never zero-filled.
-- **fxG**: an experimental shot-on-target xG model with an 80% interval and a
-  provider-xG gate. The gate currently fails, so fxG is descriptive only.
+- **fxG**: an experimental team-match expected-goals estimate from open-play
+  shot zones, shots on target, blocked shots and penalties, with an 80% model
+  range, a separate 80% goals range and a provider-xG calibration gate.
 - **Results & fixtures across all three Scottish competitions**: league results
   and team match stats from Football-Data.co.uk (clearly labelled, with a gated
   API-Football migration); League Cup and Scottish Cup fixtures from

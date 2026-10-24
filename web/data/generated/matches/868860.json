@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2023-04-08",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 868860,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/868860/",
+    "outcome": "W",
     "referee": "Don Robertson, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 31",
     "season": "2022-23",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -407,6 +413,148 @@
     "next": "/matches/868871/",
     "previous": "/matches/868858/",
     "season": "/history/2022-23/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 5,
+          "goals": 2,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 77,
+          "pass_accuracy": 15,
+          "passes_total": 18,
+          "player_id": 162944,
+          "player_name": "Luís Henriques de Barros Lopes",
+          "rating": 8.3,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 18,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 23,
+          "passes_total": 45,
+          "player_id": 69450,
+          "player_name": "Liam Scales",
+          "rating": 7.6,
+          "shots_on": null,
+          "shots_total": 2,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 5,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 24,
+          "passes_total": 40,
+          "player_id": 151754,
+          "player_name": "Leighton Clarkson",
+          "rating": 7.6,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 12,
+          "goals": null,
+          "href": "/players/125695/",
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 19,
+          "passes_total": 34,
+          "player_id": 125695,
+          "player_name": "Lewis Mayo",
+          "rating": 7.6,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 8,
+          "team_name": "Kilmarnock"
+        },
+        {
+          "assists": null,
+          "duels_won": 13,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 10,
+          "passes_total": 26,
+          "player_id": 44914,
+          "player_name": "Liam Donnelly",
+          "rating": 7.5,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": 6,
+          "team_name": "Kilmarnock"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 72,
+          "pass_accuracy": 8,
+          "passes_total": 15,
+          "player_id": 44788,
+          "player_name": "Jordan Jones",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 4,
+          "team_name": "Kilmarnock"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 3,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 2,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 55.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 45.0,
+        "source": "api_football",
+        "unit": "%"
+      },
+      {
+        "aberdeen": 64.0,
+        "key": "passes_pct",
+        "label": "Pass accuracy",
+        "opponent": 53.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1210,7 +1358,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1477,7 +1625,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.05 (0.0-2.737), Kilmarnock 0.7 (0.0-2.077)."
+        "text": "Shot expectation: Aberdeen 1.23, Kilmarnock 1.31."
       }
     ],
     "events_available": true,
@@ -1752,22 +1900,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 2.077,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -1.313,
+      "goals_position": "within",
+      "high": 1.829,
+      "low": 0.592,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.7
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 16,
+        "shots_blocked": 6,
+        "shots_insidebox": 12,
+        "shots_off": 8,
+        "shots_on_target": 2,
+        "shots_outsidebox": 4
+      },
+      "value": 1.313,
+      "xg_per_shot": 0.082
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 2.737,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.772,
+      "goals_position": "within",
+      "high": 1.744,
+      "low": 0.507,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.05
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 13,
+        "shots_blocked": 5,
+        "shots_insidebox": 10,
+        "shots_off": 5,
+        "shots_on_target": 3,
+        "shots_outsidebox": 3
+      },
+      "value": 1.228,
+      "xg_per_shot": 0.094
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

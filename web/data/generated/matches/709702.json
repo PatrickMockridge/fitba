@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 2,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2021-10-03",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 709702,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/709702/",
+    "outcome": "L",
     "referee": "B. Madden",
     "result": "L",
+    "result_label": "L",
     "round": "1st Phase - 8",
     "season": "2021-22",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "A. Postecoglou",
@@ -399,6 +405,148 @@
     "next": "/matches/709708/",
     "previous": "/matches/709701/",
     "season": "/history/2021-22/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 31,
+          "passes_total": 37,
+          "player_id": 44814,
+          "player_name": "Lewis Ferguson",
+          "rating": 7.7,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 72,
+          "pass_accuracy": 27,
+          "passes_total": 38,
+          "player_id": 1123,
+          "player_name": "Scott Brown",
+          "rating": 7.5,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 12,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 25,
+          "passes_total": 28,
+          "player_id": 44810,
+          "player_name": "Jack Mackenzie",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 7,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 22,
+          "passes_total": 26,
+          "player_id": 581,
+          "player_name": "Jota",
+          "rating": 7.3,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": 1,
+          "team_name": "Celtic"
+        },
+        {
+          "assists": 1,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 60,
+          "passes_total": 69,
+          "player_id": 304851,
+          "player_name": "Adam Montgomery",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Celtic"
+        },
+        {
+          "assists": 1,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 43,
+          "passes_total": 52,
+          "player_id": 44929,
+          "player_name": "David Turnbull",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Celtic"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 11,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 7,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 5,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 2,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 6,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 5,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1122,7 +1270,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1398,7 +1546,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.534 (0.0-3.6), Celtic 0.614 (0.0-1.92)."
+        "text": "Shot expectation: Aberdeen 1.06, Celtic 0.66."
       }
     ],
     "events_available": true,
@@ -1698,22 +1846,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.92,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 1.336,
+      "goals_position": "within",
+      "high": 1.18,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.614
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 7,
+        "shots_blocked": 1,
+        "shots_insidebox": 5,
+        "shots_off": 4,
+        "shots_on_target": 2,
+        "shots_outsidebox": 2
+      },
+      "value": 0.664,
+      "xg_per_shot": 0.095
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.6,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.058,
+      "goals_position": "within",
+      "high": 1.574,
+      "low": 0.337,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.534
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 2,
+        "shots_insidebox": 6,
+        "shots_off": 4,
+        "shots_on_target": 5,
+        "shots_outsidebox": 5
+      },
+      "value": 1.058,
+      "xg_per_shot": 0.096
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

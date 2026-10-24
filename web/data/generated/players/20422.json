@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "identity": {
     "age": 32,
     "full_name": "Nicholas Devlin",
@@ -21,6 +21,8 @@
     "side": "right",
     "status": "squad"
   },
+  "out_of_squad": false,
+  "out_of_squad_reason": null,
   "panel_order": [
     "profile",
     "position",
@@ -182,7 +184,7 @@
             "key": "tackles",
             "label": "Tackles",
             "note": "provider",
-            "value": 0
+            "value": null
           },
           {
             "key": "own_goals",
@@ -882,137 +884,130 @@
       "warnings": []
     },
     "profile": {
-      "badge": "below_min_minutes",
+      "badge": "provider_group",
       "data": {
         "current_squad": true,
         "rose": {
-          "basis": "insufficient",
+          "basis": "provider_group",
           "cohort_min_minutes": 450,
-          "cohort_n": 0,
+          "cohort_n": 83,
+          "cohort_season": "2025-26",
+          "fallback": true,
+          "fallback_note": "Showing 2025-26 statistics — no 2026-27 Premiership minutes above the 180-minute threshold.",
+          "fallback_reason": "current_season_below_min_minutes",
           "figures": [
             {
               "axes": [
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "goals_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 53.6,
+                  "value": 0.04
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "assists_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 24.7,
+                  "value": 0.0
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 80,
                   "metric": "shots_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 13.1,
+                  "value": 0.25
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 79,
                   "metric": "key_passes_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 36.7,
+                  "value": 0.33
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 76,
                   "metric": "dribbles_success_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 50.7,
+                  "value": 0.33
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "passes_completed_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 16.9,
+                  "value": 24.96
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "pass_completion_pct",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 53.6,
+                  "value": 80.0
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "tackles_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 50.6,
+                  "value": 1.48
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "interceptions_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 22.3,
+                  "value": 0.74
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "duel_win_pct",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 48.2,
+                  "value": 57.84
                 }
               ],
               "id": "overall",
               "label": "Overall profile",
-              "status": "unavailable"
+              "status": "available"
             },
             {
               "axes": [
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "tackles_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 50.6,
+                  "value": 1.48
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "interceptions_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 22.3,
+                  "value": 0.74
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "duel_win_pct",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 48.2,
+                  "value": 57.84
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "passes_completed_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 16.9,
+                  "value": 24.96
                 },
                 {
-                  "cohort_n": 0,
+                  "cohort_n": 83,
                   "metric": "pass_completion_pct",
-                  "percentile": null,
-                  "value": null
-                },
-                {
-                  "cohort_n": 0,
-                  "metric": "key_passes_p90",
-                  "percentile": null,
-                  "value": null
-                },
-                {
-                  "cohort_n": 0,
-                  "metric": "dribbles_success_p90",
-                  "percentile": null,
-                  "value": null
+                  "percentile": 53.6,
+                  "value": 80.0
                 }
               ],
               "id": "position",
               "label": "Position profile",
-              "status": "unavailable"
+              "status": "available"
             }
           ],
           "league": "sco:premiership",
           "league_label": "Scottish Premiership",
           "min_minutes": 180,
-          "minutes": 0,
-          "reason": "below_min_minutes",
-          "status": "unavailable"
+          "minutes": 2189,
+          "reason": null,
+          "season_used": "2025-26",
+          "status": "available"
         },
         "rose_catalogue": {
           "assists_p90": {
@@ -1113,23 +1108,35 @@
           }
         },
         "summary": {
-          "appearances": null,
+          "appearances": 0,
           "cohort_basis": null,
           "cohort_n": null,
           "league": "sco:premiership",
+          "league_appearances": 0,
           "league_label": "Scottish Premiership",
-          "minutes": 0,
+          "league_minutes": null,
+          "league_rating": null,
+          "league_rating_percentile": null,
+          "minutes": 32,
+          "minutes_season": "2026-27",
+          "output_coverage": "partial",
+          "output_missing_competitions": [
+            "Premier Sports Cup"
+          ],
           "rating": null,
           "rating_percentile": null,
           "role_label": "Right back",
+          "rose_fallback": true,
+          "rose_season": "2025-26",
+          "scope": "all_competitions",
           "season": "2026-27"
         },
         "tier": "extended"
       },
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort insufficient n=0; percentiles 0-100, higher is better.",
-      "status": "unavailable",
+      "note": "League-only rates; cohort provider group n=83; percentiles 0-100, higher is better. Showing 2025-26 statistics — no 2026-27 Premiership minutes above the 180-minute threshold.",
+      "status": "available",
       "title": "Overall and position profile",
       "warnings": []
     },
@@ -1170,7 +1177,7 @@
     }
   },
   "player_id": 20422,
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "season": "2026-27",
   "warnings": []
 }

@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2021-01-16",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 569602,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:ross-county",
     "home_team_name": "Ross County",
     "href": "/matches/569602/",
+    "outcome": "W",
     "referee": "B. Madden",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 24",
     "season": "2020-21",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Global Energy Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -399,6 +405,148 @@
     "next": "/matches/569605/",
     "previous": "/matches/569593/",
     "season": "/history/2020-21/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 64,
+          "pass_accuracy": 24,
+          "passes_total": 33,
+          "player_id": 1128,
+          "player_name": "Jonny Hayes",
+          "rating": 7.5,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 9,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 36,
+          "passes_total": 49,
+          "player_id": 44814,
+          "player_name": "Lewis Ferguson",
+          "rating": 7.0,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 1,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 8,
+          "passes_total": 16,
+          "player_id": 44807,
+          "player_name": "Tommie Hoban",
+          "rating": 6.9,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": 2,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 88,
+          "pass_accuracy": 11,
+          "passes_total": 17,
+          "player_id": 44854,
+          "player_name": "Oli Shaw",
+          "rating": 8.5,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": null,
+          "team_name": "Ross County"
+        },
+        {
+          "assists": 1,
+          "duels_won": 3,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 18,
+          "passes_total": 24,
+          "player_id": 18105,
+          "player_name": "Jermaine Hylton",
+          "rating": 8.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Ross County"
+        },
+        {
+          "assists": null,
+          "duels_won": 3,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 6,
+          "passes_total": 16,
+          "player_id": 19529,
+          "player_name": "Charlie Lakin",
+          "rating": 7.5,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 3,
+          "team_name": "Ross County"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 15,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 9,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 7,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 4,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 59.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 41.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1202,7 +1350,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1524,7 +1672,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Ross County 1.6 (0.0-3.701), Aberdeen 1.6 (0.0-3.701)."
+        "text": "Shot expectation: Ross County 0.87, Aberdeen 1.15."
       }
     ],
     "events_available": true,
@@ -1874,22 +2022,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 3.701,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -0.15,
+      "goals_position": "within",
+      "high": 1.666,
+      "low": 0.429,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.6
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 15,
+        "shots_blocked": 4,
+        "shots_insidebox": 7,
+        "shots_off": 6,
+        "shots_on_target": 5,
+        "shots_outsidebox": 8
+      },
+      "value": 1.15,
+      "xg_per_shot": 0.077
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.701,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 4,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 3.128,
+      "goals_position": "above",
+      "high": 1.388,
+      "low": 0.151,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.6
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 9,
+        "shots_blocked": 2,
+        "shots_insidebox": 4,
+        "shots_off": 2,
+        "shots_on_target": 5,
+        "shots_outsidebox": 5
+      },
+      "value": 0.872,
+      "xg_per_shot": 0.097
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

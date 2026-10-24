@@ -52,6 +52,75 @@ def main() -> int:
     if coverage.get("with_fxg", 0) <= 0:
         errors.append("no fixture has fxG")
 
+    if not model.get("specification"):
+        errors.append("missing model specification")
+    if not model.get("coefficients"):
+        errors.append("missing model coefficients")
+    if model.get("penalty_xg") is None:
+        errors.append("missing penalty_xg")
+    if not model.get("selection"):
+        errors.append("missing candidate selection")
+    transfer = model.get("transfer_check") or payload.get("transfer_evaluation") or {}
+    if transfer.get("tuned_on_holdout") is not False:
+        errors.append("transfer check is missing or was tuned on the holdout")
+    if evaluation.get("model_interval_coverage") is None:
+        errors.append("missing model-range coverage")
+    if evaluation.get("goals_range_coverage") is None:
+        errors.append("missing goals-range coverage")
+
+    for row in payload.get("aggregates") or []:
+        label = f"{row.get('scope')} {row.get('season')}"
+        fxg = row.get("fxg")
+        low = row.get("low")
+        high = row.get("high")
+        goals_low = row.get("goals_low")
+        goals_high = row.get("goals_high")
+        if fxg is None or low is None or high is None:
+            errors.append(f"{label}: missing fxG/model range")
+            continue
+        if not low <= fxg <= high:
+            errors.append(f"{label}: model range does not contain fxG")
+        if high - low > 0.5 * fxg + 5:
+            errors.append(f"{label}: model range looks like summed intervals")
+        if goals_low is None or goals_high is None or goals_low > goals_high:
+            errors.append(f"{label}: invalid goals range")
+        if row.get("goals_minus_low") is not None and abs(
+            float(row["goals_minus_low"]) - (float(goals_low) - float(fxg))
+        ) > 0.01:
+            errors.append(f"{label}: goals-minus lower bound does not equal goals_low - fxG")
+        if row.get("goals_minus_high") is not None and abs(
+            float(row["goals_minus_high"]) - (float(goals_high) - float(fxg))
+        ) > 0.01:
+            errors.append(f"{label}: goals-minus upper bound does not equal goals_high - fxG")
+        if (
+            row.get("shots")
+            and row.get("xg_per_shot") is not None
+            and abs(float(row["xg_per_shot"]) - float(fxg) / float(row["shots"])) > 0.002
+        ):
+            errors.append(f"{label}: xG per shot does not match fxG / shots")
+
+    for row in payload.get("matches") or []:
+        for side in ("for", "against"):
+            fxg = row.get(f"fxg_{side}")
+            low = row.get(f"fxg_{side}_low")
+            high = row.get(f"fxg_{side}_high")
+            goals_low = row.get(f"goals_{side}_low")
+            goals_high = row.get(f"goals_{side}_high")
+            if fxg is None:
+                continue
+            if low is None or high is None or not low <= fxg <= high:
+                errors.append(f"{row.get('fixture_id')} {side}: invalid model range")
+            if goals_low is None or goals_high is None or goals_low > goals_high:
+                errors.append(f"{row.get('fixture_id')} {side}: invalid goals range")
+            minus = row.get(f"goals_minus_fxg_{side}")
+            goals = row.get("goals_for" if side == "for" else "goals_against")
+            if (
+                minus is not None
+                and goals is not None
+                and abs(float(minus) - (float(goals) - float(fxg))) > 0.01
+            ):
+                errors.append(f"{row.get('fixture_id')} {side}: goals minus fxG mismatch")
+
     estimate = payload.get("provider_estimate") or {}
     if not estimate:
         errors.append("missing provider_estimate")

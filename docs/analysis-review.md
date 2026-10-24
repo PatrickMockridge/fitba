@@ -23,11 +23,10 @@ dashboard.
   implementation must keep both rows, mark the league row `conflict_review`,
   prefer the SPFL cup row, exclude the conflict from all lookaheads and publish
   the conflict count. No silent dedupe.
-- **Availability universe.** The ledger has 39 entries but the active squad
-  universe is 29 current squad players plus ledger-only Tobers = 30; nine
-  loan-outs are separate. Counts must sum to 30: one out (Tobers), one reported
-  available (Knoester, not a medical clearance), 28 no verified entry. Never
-  render a 37-name “available” roster; “available” means a ledger entry, not fit.
+- **Availability universe.** The official list has 34 players: 29 in the active
+  squad and 5 on loan. Analysis counts the active universe (29); the
+  availability and needs surfaces count the official list (34). Both name their
+  universe. “Available” means a verified ledger entry, not fit.
 - **Suspensions.** Every state is competition- and fixture-scoped. Publish
   watch/review-required states until the current SFA rule version and effective
   date are sourced; do not publish a player-level cup ban or overlay an

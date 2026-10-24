@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 2,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2020-10-20",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 569474,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/569474/",
+    "outcome": "W",
     "referee": "N. Walsh",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 3",
     "season": "2020-21",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Rice",
@@ -423,6 +429,148 @@
     "next": "/matches/569527/",
     "previous": "/matches/569520/",
     "season": "/history/2020-21/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 1,
+          "duels_won": 3,
+          "goals": 2,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 56,
+          "pass_accuracy": 12,
+          "passes_total": 21,
+          "player_id": 19137,
+          "player_name": "Ryan Edmondson",
+          "rating": 8.3,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 13,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 20,
+          "passes_total": 36,
+          "player_id": 44807,
+          "player_name": "Tommie Hoban",
+          "rating": 7.9,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 26,
+          "passes_total": 35,
+          "player_id": 44814,
+          "player_name": "Lewis Ferguson",
+          "rating": 7.7,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 1,
+          "duels_won": 2,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 80,
+          "pass_accuracy": 34,
+          "passes_total": 41,
+          "player_id": 44897,
+          "player_name": "Ross Callachan",
+          "rating": 7.9,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": 2,
+          "team_name": "Hamilton Academical"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 15,
+          "passes_total": 25,
+          "player_id": 118776,
+          "player_name": "David Moyo",
+          "rating": 7.5,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": null,
+          "team_name": "Hamilton Academical"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 30,
+          "passes_total": 50,
+          "player_id": 44946,
+          "player_name": "Hakeem Odofin",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Hamilton Academical"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 18,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 11,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 6,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 5,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 12,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 6,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1226,7 +1374,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1566,7 +1714,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.92 (0.0-4.222), Hamilton Academical 1.92 (0.0-4.222)."
+        "text": "Shot expectation: Aberdeen 1.71, Hamilton Academical 1.62."
       }
     ],
     "events_available": true,
@@ -1991,22 +2139,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 4.222,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 1,
+      "goals_minus": 0.375,
+      "goals_position": "within",
+      "high": 2.141,
+      "low": 0.904,
+      "penalties": 1,
+      "penalties_known": true,
+      "penalty_xg": 0.76,
       "provider": null,
-      "value": 1.92
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 1,
+        "penalty_goals": 1,
+        "shots": 11,
+        "shots_blocked": 3,
+        "shots_insidebox": 6,
+        "shots_off": 3,
+        "shots_on_target": 5,
+        "shots_outsidebox": 5
+      },
+      "value": 1.625,
+      "xg_per_shot": 0.148
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 4.222,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 4,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 2.286,
+      "goals_position": "above",
+      "high": 2.23,
+      "low": 0.993,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.92
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 18,
+        "shots_blocked": 9,
+        "shots_insidebox": 12,
+        "shots_off": 3,
+        "shots_on_target": 6,
+        "shots_outsidebox": 6
+      },
+      "value": 1.714,
+      "xg_per_shot": 0.095
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

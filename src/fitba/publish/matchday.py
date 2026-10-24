@@ -138,7 +138,7 @@ class StyleBlock(StrictModel):
     shot_accuracy: float | None = None
     goals_per_shot: float | None = None
     goals_per_shot_on_target: float | None = None
-    percentiles: dict[str, int | None] = {}
+    percentiles: dict[str, float | None] = {}
     possession_for_pm: float | None = None
     possession_against_pm: float | None = None
     possession_unknown_reason: str | None = None
@@ -193,7 +193,7 @@ class StrengthTeam(StrictModel):
     shots_for_pm: float | None = None
     shots_against_pm: float | None = None
     shot_share: float | None = None
-    percentiles: dict[str, int | None] = {}
+    percentiles: dict[str, float | None] = {}
     ranks: dict[str, int | None] = {}
     league_size: int | None = None
     coverage: str | None = None
@@ -804,15 +804,22 @@ def build_matchday_payload(
         ).model_dump()
 
     fixture_date = str(fixture.get("date") or "")[:10]
+    fixture_source = "snapshot"
     if fixture_date and fixture_date < date.today().isoformat():
-        # The last snapshot is for a match that has already been played and no
-        # newer fixture is known locally. Do not present it as upcoming.
-        return _empty_document(
-            season=season,
-            generated_at=generated_at,
-            state="no_fixture",
-            reason="fixture_date_passed",
-        ).model_dump()
+        # The snapshot is a cache. Prefer the live merged schedule before
+        # declaring that there is no fixture.
+        live = next_fixture(season=season)
+        if live:
+            fixture = live
+            fixture_date = str(live.get("date") or "")[:10]
+            fixture_source = "live_schedule"
+        else:
+            return _empty_document(
+                season=season,
+                generated_at=generated_at,
+                state="no_fixture",
+                reason="fixture_date_passed",
+            ).model_dump()
 
     meta = load_meta(snapshot_dir)
     opponent_id = str(fixture.get("opponent_id") or "")
@@ -982,6 +989,7 @@ def build_matchday_payload(
     }
     coverage = {
         "state": state,
+        "fixture_source": fixture_source,
         "snapshot": {
             "state": snapshot_state,
             "generated_at": meta.get("generated_at"),

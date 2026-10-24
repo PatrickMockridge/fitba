@@ -23,9 +23,11 @@ export function ScoutingSquadTable({ rows }: { rows: ScoutingSquadRow[] }) {
       <div className="table-wrap">
         <table className="league-table compact">
           <caption className="fine-print">
-            Aberdeen&apos;s registered squad by role family, competitive matches only. Rates
-            are per 90 minutes; pass completion and duel wins are provider percentages. A dash
-            means the value is unavailable, not zero.
+            Players with at least 180 Premiership minutes, by role family. Output and
+            rates are all competitions; the percentile is a Premiership-cohort
+            comparison of the league-only rating. Rates are per 90 minutes; pass
+            completion and duel wins are provider percentages. A dash means the value
+            is unavailable, not zero.
           </caption>
           <thead>
             <tr>

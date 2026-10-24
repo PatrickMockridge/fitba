@@ -10,7 +10,9 @@
   },
   "depth": "result",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 1,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:scottish-cup",
     "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2025-03-08",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1349962,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/1349962/",
+    "outcome": "W",
     "referee": "D. Dickinson",
     "result": "W",
+    "result_label": "W",
     "round": "Quarter-finals",
     "season": "2024-25",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -78,7 +84,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "C. Davidson",
@@ -296,8 +302,21 @@
     "previous": "/matches/1220278/",
     "season": "/history/2024-25/"
   },
+  "performance": {
+    "aberdeen": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "available": false,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "strengths": []
+  },
   "player_stats": [],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -840,22 +859,67 @@
   "xg": {
     "available": false,
     "away": {
+      "basis": null,
+      "goals": 1,
+      "goals_high": null,
+      "goals_low": null,
+      "goals_minus": null,
+      "goals_position": null,
       "high": null,
       "low": null,
+      "penalties": null,
+      "penalties_known": false,
+      "penalty_xg": null,
       "provider": null,
-      "value": null
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": null,
+        "penalty_goals": null,
+        "shots": null,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": null,
+        "shots_on_target": null,
+        "shots_outsidebox": null
+      },
+      "value": null,
+      "xg_per_shot": null
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
+      "basis": null,
+      "goals": 4,
+      "goals_high": null,
+      "goals_low": null,
+      "goals_minus": null,
+      "goals_position": null,
       "high": null,
       "low": null,
+      "penalties": null,
+      "penalties_known": false,
+      "penalty_xg": null,
       "provider": null,
-      "value": null
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": null,
+        "penalty_goals": null,
+        "shots": null,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": null,
+        "shots_on_target": null,
+        "shots_outsidebox": null
+      },
+      "value": null,
+      "xg_per_shot": null
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

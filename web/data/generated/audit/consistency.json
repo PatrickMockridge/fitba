@@ -1,0 +1,138 @@
+{
+  "checks": 11,
+  "failed": 0,
+  "generated_at": "2026-10-24T15:28:14+00:00",
+  "passed": 11,
+  "results": [
+    {
+      "description": "Squad summary and role buckets reconcile with player rows",
+      "errors": [],
+      "fields_checked": 6,
+      "id": "squad.counts",
+      "payloads": [
+        "squad/aberdeen.json"
+      ],
+      "rows_checked": 39,
+      "status": "pass"
+    },
+    {
+      "description": "Official roster metadata reconciles with player rows",
+      "errors": [],
+      "fields_checked": 4,
+      "id": "squad.roster",
+      "payloads": [
+        "squad/aberdeen.json"
+      ],
+      "rows_checked": 34,
+      "status": "pass"
+    },
+    {
+      "description": "Official and register loan counts are separate and reconciled",
+      "errors": [],
+      "fields_checked": 6,
+      "id": "loans.scopes",
+      "payloads": [
+        "squad/aberdeen.json",
+        "transfers/aberdeen.json"
+      ],
+      "rows_checked": 5,
+      "status": "pass"
+    },
+    {
+      "description": "Squad totals and playing time reconcile with their source rows",
+      "errors": [],
+      "fields_checked": 170,
+      "id": "players.totals",
+      "payloads": [
+        "squad/aberdeen.json"
+      ],
+      "rows_checked": 34,
+      "status": "pass"
+    },
+    {
+      "description": "Player pages use the same minutes and rating as the squad payload",
+      "errors": [],
+      "fields_checked": 4,
+      "id": "players.pages",
+      "payloads": [
+        "squad/aberdeen.json",
+        "players/*.json"
+      ],
+      "rows_checked": 39,
+      "status": "pass"
+    },
+    {
+      "description": "xG aggregates equal the sum of their match rows",
+      "errors": [],
+      "fields_checked": 6,
+      "id": "xg.aggregates",
+      "payloads": [
+        "xg/aberdeen.json"
+      ],
+      "rows_checked": 292,
+      "status": "pass"
+    },
+    {
+      "description": "Fixture xG equals the xG payload row",
+      "errors": [],
+      "fields_checked": 734,
+      "id": "xg.fixtures",
+      "payloads": [
+        "xg/aberdeen.json",
+        "matches/*.json"
+      ],
+      "rows_checked": 367,
+      "status": "pass"
+    },
+    {
+      "description": "Fixture results and shootout labels agree with match pages",
+      "errors": [],
+      "fields_checked": 1101,
+      "id": "results.shootouts",
+      "payloads": [
+        "fixtures/index.json",
+        "matches/*.json"
+      ],
+      "rows_checked": 367,
+      "status": "pass"
+    },
+    {
+      "description": "Scheduled counts and the matchday fixture use the same schedule rule",
+      "errors": [],
+      "fields_checked": 3,
+      "id": "fixtures.schedule",
+      "payloads": [
+        "fixtures/index.json",
+        "matchday/upcoming.json"
+      ],
+      "rows_checked": 25,
+      "status": "pass"
+    },
+    {
+      "description": "Availability counts reconcile to their declared universes",
+      "errors": [],
+      "fields_checked": 4,
+      "id": "availability.universes",
+      "payloads": [
+        "availability/aberdeen.json"
+      ],
+      "rows_checked": 34,
+      "status": "pass"
+    },
+    {
+      "description": "Coverage counts equal the payloads they summarise",
+      "errors": [],
+      "fields_checked": 3,
+      "id": "coverage.counts",
+      "payloads": [
+        "coverage.json",
+        "squad/aberdeen.json",
+        "transfers/aberdeen.json"
+      ],
+      "rows_checked": 0,
+      "status": "pass"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "status": "pass"
+}

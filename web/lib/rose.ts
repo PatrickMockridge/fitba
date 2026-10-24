@@ -29,6 +29,11 @@ export interface RoseBlock {
   basis: "role_family" | "provider_group" | "insufficient";
   cohort_n: number;
   figures: RoseFigure[];
+  season_used: string | null;
+  cohort_season: string | null;
+  fallback: boolean;
+  fallback_reason: string | null;
+  fallback_note: string | null;
 }
 
 export interface RoseCatalogueEntry {

@@ -79,8 +79,16 @@ export default function RecruitmentPage() {
               value={transfers?.summary.confirmed ?? 0}
               note="official announcement"
             />
-            <StatTile label="Loans out" value={transfers?.loans_out.length ?? 0} note="register" />
-            <StatTile label="Loans in" value={transfers?.loans_in.length ?? 0} note="register" />
+            <StatTile
+              label="Loans out"
+              value={transfers?.loan_scope?.register_current.out_count ?? 0}
+              note={`${transfers?.loan_scope?.season ?? "current"} register`}
+            />
+            <StatTile
+              label="Loans in"
+              value={transfers?.loan_scope?.register_current.in_count ?? 0}
+              note="current register"
+            />
           </div>
           {transfers ? (
             <p className="fine-print">

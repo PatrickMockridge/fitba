@@ -1,6 +1,6 @@
 # Data provenance
 
-**Status:** live. Last reviewed 2026-10-22.
+**Status:** live. Last reviewed 2026-10-24.
 
 `/sources/` publishes a layer-by-layer truth table from
 `config/provenance.yaml`. The rule is simple: **a source is called primary only
@@ -21,8 +21,9 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Lineups, roles, starts | API-Football | Starting-XI grid and events |
 | Player match stats and ratings | API-Football | Premiership, current season |
 | Event-derived Aberdeen stats | API-Football | Lineups + events; not tracking |
-| Current squad | API-Football | Curated player overrides for identity gaps |
-| Preferred foot | Sportmonks (gated) | AFC official, then Wikipedia; 1 known / 37 unknown |
+| Official squad roster | AFC official men's team page | Canonical inclusion, position section, shirt number and On loan section; no injury inference |
+| Current squad identity and statistics | API-Football | Curated player overrides for identity gaps; API rows outside the official list are retained only for player links |
+| Preferred foot | Sportmonks (gated) | AFC official, then Wikipedia; one value known, every other player unknown |
 | Transfer candidate feed | API-Football | Discovery only; it has no fees or loan terms |
 | Transfer register | Curated | AFC announcements + Wikipedia + API candidates |
 | Loans | Curated | Loan tags; end/recall/obligation terms unknown |

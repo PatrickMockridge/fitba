@@ -775,17 +775,23 @@
             {
               "id": "squad.how-to",
               "min": 1
+            },
+            {
+              "id": "squad.source",
+              "min": 1
             }
           ],
           "columns": {
             "squad.roster": [
               "Player",
+              "No.",
               "Role",
               "Age",
               "Status",
-              "Starts",
-              "Sub",
-              "Mins",
+              "Starts (all)",
+              "Sub (all)",
+              "Mins (all)",
+              "League mins",
               "Conc",
               "CS",
               "G",
@@ -1478,6 +1484,10 @@
             {
               "id": "status.coverage",
               "min": 1
+            },
+            {
+              "id": "status.consistency",
+              "min": 1
             }
           ],
           "links": [
@@ -1702,6 +1712,22 @@
             {
               "id": "xg.coverage",
               "min": 1
+            },
+            {
+              "id": "xg.uncertainty",
+              "min": 1
+            },
+            {
+              "id": "xg.overperformance",
+              "min": 1
+            },
+            {
+              "id": "xg.style",
+              "min": 1
+            },
+            {
+              "id": "xg.provider",
+              "min": 1
             }
           ],
           "columns": {
@@ -1709,10 +1735,11 @@
               "Scope",
               "Matches",
               "fxG",
-              "80% interval",
+              "80% model range",
+              "xG per shot",
               "Goals",
-              "Goals \u2212 fxG",
-              "80% interval"
+              "80% goals range",
+              "Goals \u2212 fxG"
             ]
           },
           "links": [

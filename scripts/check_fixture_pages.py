@@ -40,6 +40,7 @@ REQUIRED_MARKERS = {
     "match.timeline": 1,
     "match.lineup": 2,
     "match.player-stats": 1,
+    "match.performance": 1,
     "match.coverage": 1,
     "match.links": 1,
 }
@@ -240,8 +241,14 @@ def main() -> int:
     if index.get("count") != len(rows):
         errors.append("fixtures/index.json count does not match its rows")
     scheduled = index.get("scheduled") or []
-    if int(index.get("scheduled_count") or 0) != len(scheduled):
-        errors.append("fixtures/index.json scheduled_count does not match its rows")
+    confirmed = sum(1 for row in scheduled if row.get("status") == "scheduled")
+    conflicts = sum(1 for row in scheduled if row.get("status") == "conflict_review")
+    if int(index.get("scheduled_count") or 0) != confirmed:
+        errors.append("fixtures/index.json scheduled_count does not match confirmed rows")
+    if int(index.get("scheduled_rows_total") or 0) != len(scheduled):
+        errors.append("fixtures/index.json scheduled_rows_total does not match its rows")
+    if int(index.get("conflict_count") or 0) != conflicts:
+        errors.append("fixtures/index.json conflict_count does not match conflict rows")
     played_ids = {str(row.get("fixture_id")) for row in rows}
     scheduled_ids = {str(row.get("fixture_id")) for row in scheduled}
     if played_ids & scheduled_ids:
@@ -377,6 +384,17 @@ def main() -> int:
             and _marker_count(page, "match.xg.gate") < 1
         ):
             errors.append(f"{fixture_id}: fxG gate failure is not shown on the page")
+        if xg.get("available"):
+            for marker in (
+                "match.xg.model-range",
+                "match.xg.goals-range",
+                "match.xg.overperformance",
+                "match.xg.penalties",
+                "match.xg.provider",
+                "match.xg.shot-profile",
+            ):
+                if _marker_count(page, marker) < 1:
+                    errors.append(f"{fixture_id}: {marker} is not visible")
 
         title = _h1(page)
         if "?" in title:

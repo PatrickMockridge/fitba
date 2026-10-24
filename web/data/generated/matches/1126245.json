@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:conference-league",
     "competition_name": "UEFA Conference League",
     "date": "2023-09-21",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1126245,
@@ -28,10 +31,13 @@
     "home_team_id": "other:eintracht-frankfurt",
     "home_team_name": "Eintracht Frankfurt",
     "href": "/matches/1126245/",
+    "outcome": "W",
     "referee": "C. Theouli",
     "result": "W",
+    "result_label": "W",
     "round": "Group Stage - 1",
     "season": "2023-24",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Deutsche Bank Park"
@@ -86,7 +92,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -393,6 +399,123 @@
     "next": "/matches/1094463/",
     "previous": "/matches/1094458/",
     "season": "/history/2023-24/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 1,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 71,
+          "pass_accuracy": 10,
+          "passes_total": 13,
+          "player_id": 350876,
+          "player_name": "Dante Polvara",
+          "rating": 6.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 1,
+          "duels_won": 7,
+          "goals": null,
+          "href": "/players/20422/",
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 5,
+          "passes_total": 11,
+          "player_id": 20422,
+          "player_name": "Nicky Devlin",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": null,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 12,
+          "passes_total": 32,
+          "player_id": 19199,
+          "player_name": "Kelle Roos",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 43,
+          "passes_total": 49,
+          "player_id": 90594,
+          "player_name": "Junior Dina Ebimbe",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Eintracht Frankfurt"
+        },
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 113,
+          "passes_total": 121,
+          "player_id": 26238,
+          "player_name": "Robin Koch",
+          "rating": 7.6,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Eintracht Frankfurt"
+        },
+        {
+          "assists": 1,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 45,
+          "pass_accuracy": 13,
+          "passes_total": 17,
+          "player_id": 276670,
+          "player_name": "Farès Chaïbi",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Eintracht Frankfurt"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1316,7 +1439,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1597,8 +1720,8 @@
         "text": "Possession: Eintracht Frankfurt 78.0%, Aberdeen 22.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: Eintracht Frankfurt 1.641 (0.0-3.764), Aberdeen 0.328 (0.0-1.278)."
+        "basis": "measured",
+        "text": "Provider xG: Eintracht Frankfurt 1.16, Aberdeen 0.81."
       }
     ],
     "events_available": true,
@@ -1998,22 +2121,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.278,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.436,
+      "goals_position": "within",
+      "high": 1.08,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 0.81,
-      "value": 0.328
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 7,
+        "shots_blocked": 2,
+        "shots_insidebox": 5,
+        "shots_off": 4,
+        "shots_on_target": 1,
+        "shots_outsidebox": 2
+      },
+      "value": 0.564,
+      "xg_per_shot": 0.081
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.764,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.85,
+      "goals_position": "within",
+      "high": 1.666,
+      "low": 0.429,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 1.16,
-      "value": 1.641
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 10,
+        "shots_blocked": 3,
+        "shots_insidebox": 7,
+        "shots_off": 2,
+        "shots_on_target": 5,
+        "shots_outsidebox": 3
+      },
+      "value": 1.15,
+      "xg_per_shot": 0.115
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

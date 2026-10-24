@@ -2,8 +2,39 @@
   "club_id": "sco:aberdeen",
   "coverage": {
     "availability": {
-      "known": 1,
-      "unknown": 37
+      "known": 2,
+      "unknown": 32
+    },
+    "availability_universe": "official_list",
+    "availability_universes": {
+      "active_squad": {
+        "counts": {
+          "available": 1,
+          "doubtful": 0,
+          "out": 1,
+          "returned": 0,
+          "suspended": 0,
+          "unknown": 27
+        },
+        "known": 2,
+        "players": 29,
+        "universe": "active_squad",
+        "unknown": 27
+      },
+      "official_list": {
+        "counts": {
+          "available": 1,
+          "doubtful": 0,
+          "out": 1,
+          "returned": 0,
+          "suspended": 0,
+          "unknown": 32
+        },
+        "known": 2,
+        "players": 34,
+        "universe": "official_list",
+        "unknown": 32
+      }
     },
     "basis": "measured + curated prior",
     "measured_families": 7,
@@ -268,18 +299,18 @@
       "players": [
         {
           "arrival": "2026-06-30",
-          "arrival_kind": "free",
+          "arrival_kind": "permanent",
           "availability_conflict": false,
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 884,
-          "name": "T. Olusanya",
+          "minutes": 635,
+          "name": "Tony Yogane",
           "note": null,
-          "player_id": 231195,
+          "player_id": 388510,
           "role_family": "W",
           "starts": 8,
-          "sub_apps": 6
+          "sub_apps": 3
         },
         {
           "arrival": "2026-09-08",
@@ -298,18 +329,18 @@
         },
         {
           "arrival": "2026-06-30",
-          "arrival_kind": "permanent",
+          "arrival_kind": "free",
           "availability_conflict": false,
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 635,
-          "name": "Tony Yogane",
+          "minutes": 884,
+          "name": "T. Olusanya",
           "note": null,
-          "player_id": 388510,
+          "player_id": 231195,
           "role_family": "W",
           "starts": 8,
-          "sub_apps": 3
+          "sub_apps": 6
         }
       ],
       "priority": 2,
@@ -605,19 +636,19 @@
       },
       "players": [
         {
-          "arrival": "2026-07-30",
-          "arrival_kind": "permanent",
+          "arrival": null,
+          "arrival_kind": null,
           "availability_conflict": false,
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
-          "category": "starter",
-          "minutes": 999,
-          "name": "C. Cadden",
+          "category": "fringe",
+          "minutes": 32,
+          "name": "N. Devlin",
           "note": null,
-          "player_id": 44921,
+          "player_id": 20422,
           "role_family": "FB/WB",
-          "starts": 11,
-          "sub_apps": 0
+          "starts": 0,
+          "sub_apps": 1
         },
         {
           "arrival": null,
@@ -635,21 +666,6 @@
           "sub_apps": 0
         },
         {
-          "arrival": null,
-          "arrival_kind": null,
-          "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
-          "category": "fringe",
-          "minutes": 32,
-          "name": "N. Devlin",
-          "note": null,
-          "player_id": 20422,
-          "role_family": "FB/WB",
-          "starts": 0,
-          "sub_apps": 1
-        },
-        {
           "arrival": "2026-07-07",
           "arrival_kind": "free",
           "availability_conflict": false,
@@ -663,6 +679,21 @@
           "role_family": "FB/WB",
           "starts": 14,
           "sub_apps": 1
+        },
+        {
+          "arrival": "2026-07-30",
+          "arrival_kind": "permanent",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 999,
+          "name": "C. Cadden",
+          "note": null,
+          "player_id": 44921,
+          "role_family": "FB/WB",
+          "starts": 11,
+          "sub_apps": 0
         },
         {
           "arrival": null,
@@ -809,19 +840,19 @@
       },
       "players": [
         {
-          "arrival": "2026-06-30",
-          "arrival_kind": "free",
+          "arrival": null,
+          "arrival_kind": null,
           "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
+          "availability_note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+          "availability_status": "available",
           "category": "starter",
-          "minutes": 789,
-          "name": "D. Happe",
+          "minutes": 573,
+          "name": "M. Knoester",
           "note": null,
-          "player_id": 18068,
+          "player_id": 37253,
           "role_family": "CB",
-          "starts": 9,
-          "sub_apps": 2
+          "starts": 6,
+          "sub_apps": 1
         },
         {
           "arrival": null,
@@ -869,19 +900,19 @@
           "sub_apps": 0
         },
         {
-          "arrival": null,
-          "arrival_kind": null,
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
           "availability_conflict": false,
-          "availability_note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
-          "availability_status": "available",
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
           "category": "starter",
-          "minutes": 573,
-          "name": "M. Knoester",
+          "minutes": 789,
+          "name": "D. Happe",
           "note": null,
-          "player_id": 37253,
+          "player_id": 18068,
           "role_family": "CB",
-          "starts": 6,
-          "sub_apps": 1
+          "starts": 9,
+          "sub_apps": 2
         }
       ],
       "priority": 5,
@@ -1014,19 +1045,34 @@
       },
       "players": [
         {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 570,
+          "name": "B. Lyons",
+          "note": null,
+          "player_id": 45010,
+          "role_family": "MID",
+          "starts": 7,
+          "sub_apps": 0
+        },
+        {
           "arrival": null,
           "arrival_kind": null,
           "availability_conflict": false,
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 983,
-          "name": "A. Aremu",
+          "minutes": 683,
+          "name": "S. Armstrong",
           "note": null,
-          "player_id": 57248,
+          "player_id": 18945,
           "role_family": "MID",
-          "starts": 13,
-          "sub_apps": 1
+          "starts": 5,
+          "sub_apps": 8
         },
         {
           "arrival": null,
@@ -1050,21 +1096,6 @@
           "availability_note": "No verified official team-news entry.",
           "availability_status": "unknown",
           "category": "starter",
-          "minutes": 570,
-          "name": "B. Lyons",
-          "note": null,
-          "player_id": 45010,
-          "role_family": "MID",
-          "starts": 7,
-          "sub_apps": 0
-        },
-        {
-          "arrival": "2026-06-30",
-          "arrival_kind": "free",
-          "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
-          "category": "starter",
           "minutes": 868,
           "name": "C. Ronan",
           "note": null,
@@ -1072,6 +1103,21 @@
           "role_family": "MID",
           "starts": 11,
           "sub_apps": 2
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "starter",
+          "minutes": 983,
+          "name": "A. Aremu",
+          "note": null,
+          "player_id": 57248,
+          "role_family": "MID",
+          "starts": 13,
+          "sub_apps": 1
         },
         {
           "arrival": null,
@@ -1087,21 +1133,6 @@
           "role_family": "MID",
           "starts": 3,
           "sub_apps": 5
-        },
-        {
-          "arrival": null,
-          "arrival_kind": null,
-          "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
-          "category": "starter",
-          "minutes": 683,
-          "name": "S. Armstrong",
-          "note": null,
-          "player_id": 18945,
-          "role_family": "MID",
-          "starts": 5,
-          "sub_apps": 8
         }
       ],
       "priority": 6,
@@ -1235,21 +1266,6 @@
       },
       "players": [
         {
-          "arrival": "2026-09-03",
-          "arrival_kind": "free",
-          "availability_conflict": false,
-          "availability_note": "No verified official team-news entry.",
-          "availability_status": "unknown",
-          "category": "fringe",
-          "minutes": 0,
-          "name": "D. Klein",
-          "note": null,
-          "player_id": 163064,
-          "role_family": "GK",
-          "starts": 0,
-          "sub_apps": 0
-        },
-        {
           "arrival": "2026-07-15",
           "arrival_kind": "permanent",
           "availability_conflict": false,
@@ -1262,6 +1278,21 @@
           "player_id": 1141,
           "role_family": "GK",
           "starts": 14,
+          "sub_apps": 0
+        },
+        {
+          "arrival": "2026-09-03",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_note": "No verified official team-news entry.",
+          "availability_status": "unknown",
+          "category": "fringe",
+          "minutes": 0,
+          "name": "D. Klein",
+          "note": null,
+          "player_id": 163064,
+          "role_family": "GK",
+          "starts": 0,
           "sub_apps": 0
         },
         {
@@ -1310,7 +1341,7 @@
       "urgency": "none"
     }
   ],
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "notes": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
   "roster_space": {
     "net_add_allowed": null,
@@ -1345,8 +1376,9 @@
   ],
   "state": "fresh",
   "summary": {
-    "availability_known": 1,
-    "availability_unknown": 37,
+    "availability_known": 2,
+    "availability_universe": "official_list",
+    "availability_unknown": 32,
     "counts": {
       "none": 3,
       "strengthen": 4

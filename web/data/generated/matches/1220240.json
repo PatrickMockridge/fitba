@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2025-01-05",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1220240,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:motherwell",
     "home_team_name": "Motherwell",
     "href": "/matches/1220240/",
+    "outcome": "W",
     "referee": "N. Walsh",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 22",
     "season": "2024-25",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Fir Park"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Thelin",
@@ -439,6 +445,148 @@
     "next": "/matches/1220242/",
     "previous": "/matches/1220230/",
     "season": "/history/2024-25/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 10,
+          "goals": null,
+          "href": "/players/14344/",
+          "is_aberdeen": true,
+          "minutes": 80,
+          "pass_accuracy": 61,
+          "passes_total": 72,
+          "player_id": 14344,
+          "player_name": "Ante Palaversa",
+          "rating": 7.7,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 12,
+          "passes_total": 18,
+          "player_id": 162944,
+          "player_name": "Luís Henriques de Barros Lopes",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 10,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 40,
+          "passes_total": 51,
+          "player_id": 44812,
+          "player_name": "Graeme Shinnie",
+          "rating": 7.0,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 78,
+          "pass_accuracy": 10,
+          "passes_total": 11,
+          "player_id": 278116,
+          "player_name": "Tawanda Maswanhise",
+          "rating": 7.5,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": null,
+          "team_name": "Motherwell"
+        },
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 33,
+          "passes_total": 42,
+          "player_id": 1752,
+          "player_name": "Andy Halliday",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Motherwell"
+        },
+        {
+          "assists": 0,
+          "duels_won": 2,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 21,
+          "passes_total": 27,
+          "player_id": 321992,
+          "player_name": "Ewan Wilson",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Motherwell"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 12,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 11,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 59.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 41.0,
+        "source": "api_football",
+        "unit": "%"
+      },
+      {
+        "aberdeen": 79.0,
+        "key": "passes_pct",
+        "label": "Pass accuracy",
+        "opponent": 71.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1242,7 +1390,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1523,7 +1671,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Motherwell 1.022 (0.0-2.691), Aberdeen 0.681 (0.0-2.044)."
+        "text": "Shot expectation: Motherwell 1.04, Aberdeen 0.66."
       }
     ],
     "events_available": true,
@@ -1973,22 +2121,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 2.044,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.664,
+      "goals_position": "within",
+      "high": 1.18,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.681
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 12,
+        "shots_blocked": 5,
+        "shots_insidebox": 5,
+        "shots_off": 5,
+        "shots_on_target": 2,
+        "shots_outsidebox": 7
+      },
+      "value": 0.664,
+      "xg_per_shot": 0.055
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 2.691,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.958,
+      "goals_position": "within",
+      "high": 1.558,
+      "low": 0.321,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.022
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 6,
+        "shots_insidebox": 8,
+        "shots_off": 2,
+        "shots_on_target": 3,
+        "shots_outsidebox": 3
+      },
+      "value": 1.042,
+      "xg_per_shot": 0.095
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

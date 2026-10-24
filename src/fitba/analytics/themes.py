@@ -16,6 +16,7 @@ import polars as pl
 
 from fitba.analytics.history import club_match_rows
 from fitba.analytics.matchday import form_block
+from fitba.analytics.percentiles import nearest_rank_quantile
 from fitba.settings import aberdeen as aberdeen_config
 from fitba.settings import themes as themes_config
 from fitba.util.dates import current_season
@@ -68,14 +69,6 @@ def _median(values: Iterable[float]) -> float | None:
         if len(clean) % 2
         else round((clean[middle - 1] + clean[middle]) / 2, 2)
     )
-
-
-def _percentile(values: Iterable[float], share: float) -> float | None:
-    clean = sorted(float(value) for value in values if value is not None)
-    if not clean:
-        return None
-    index = max(0, min(len(clean) - 1, round((len(clean) - 1) * share)))
-    return round(clean[index], 2)
 
 
 def _ratio(numerator: float | None, denominator: int | float | None) -> float | None:
@@ -336,7 +329,7 @@ def family_balance(
                 "matches": len(bucket["matches"]),
                 "provider_rating": provider_rating,
                 "rating_median": _median(bucket["rating_values"]),
-                "rating_p25": _percentile(bucket["rating_values"], 0.25),
+                "rating_p25": nearest_rank_quantile(bucket["rating_values"], 0.25),
                 "rating_sample": {
                     "player_matches": len(bucket["rating_values"]),
                     "players": len(bucket["players"]),

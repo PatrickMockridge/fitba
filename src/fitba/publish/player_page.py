@@ -11,6 +11,11 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from fitba.analytics.player_facts import (
+    club_totals,
+    league_totals,
+    missing_output_competitions,
+)
 from fitba.normalize.teams import TeamRegistry
 
 DataStatus = Literal["available", "partial", "unavailable", "not_applicable"]
@@ -20,6 +25,7 @@ WarningCode = Literal[
     "NO_ROLE_EVIDENCE",
     "POSITION_UNKNOWN",
     "OTHER_RECORDS_ONLY",
+    "EXCLUDED_FROM_SQUAD",
 ]
 
 
@@ -98,6 +104,11 @@ class RoseBlock(StrictModel):
     basis: Literal["role_family", "provider_group", "insufficient"]
     cohort_n: int
     figures: list[RoseFigure]
+    season_used: str | None = None
+    cohort_season: str | None = None
+    fallback: bool = False
+    fallback_reason: str | None = None
+    fallback_note: str | None = None
 
 
 class ProfileSummary(StrictModel):
@@ -105,12 +116,22 @@ class ProfileSummary(StrictModel):
     league: str
     league_label: str
     role_label: str | None
+    scope: str = "all_competitions"
+    output_coverage: str = "unavailable"
+    output_missing_competitions: list[str] = []
     minutes: int
+    minutes_season: str
     appearances: int | None
     rating: float | None
+    league_minutes: int | None = None
+    league_appearances: int | None = None
+    league_rating: float | None = None
     rating_percentile: float | None
+    league_rating_percentile: float | None = None
     cohort_basis: str | None
     cohort_n: int | None
+    rose_season: str | None
+    rose_fallback: bool
 
 
 class AvailabilityBlock(StrictModel):
@@ -193,10 +214,12 @@ PANEL_ORDER: list[PanelId] = [
 
 
 class PlayerPageDocument(StrictModel):
-    schema_version: Literal["1.1.0"] = "1.1.0"
+    schema_version: Literal["1.2.0"] = "1.2.0"
     player_id: int
     season: str
     generated_at: str
+    out_of_squad: bool = False
+    out_of_squad_reason: str | None = None
     identity: IdentityBlock
     panel_order: list[PanelId] = Field(default_factory=lambda: list(PANEL_ORDER))
     panels: dict[
@@ -508,7 +531,7 @@ def _status(value: str | None, *, not_applicable: bool = False) -> DataStatus:
     return "unavailable"
 
 
-def _unavailable_rose(reason: str = "not_built") -> dict[str, Any]:
+def _unavailable_rose(season: str, reason: str = "not_built") -> dict[str, Any]:
     return {
         "status": "unavailable",
         "reason": reason,
@@ -519,6 +542,11 @@ def _unavailable_rose(reason: str = "not_built") -> dict[str, Any]:
         "cohort_min_minutes": 450,
         "basis": "insufficient",
         "cohort_n": 0,
+        "season_used": season,
+        "cohort_season": season,
+        "fallback": False,
+        "fallback_reason": None,
+        "fallback_note": None,
         "figures": [
             {"id": "overall", "label": "Overall profile", "status": "unavailable", "axes": []},
             {"id": "position", "label": "Position profile", "status": "unavailable", "axes": []},
@@ -526,40 +554,35 @@ def _unavailable_rose(reason: str = "not_built") -> dict[str, Any]:
     }
 
 
-def _league_summary(player: dict[str, Any], rose: dict[str, Any] | None) -> dict[str, Any]:
-    rows = [
-        row
-        for row in player.get("stats") or []
-        if row.get("scope") == "club" and row.get("competition") == "Premiership"
-    ]
-    minutes = sum(int(row.get("minutes") or 0) for row in rows)
-    appearances = sum(int(row.get("appearances") or 0) for row in rows)
-    rated = [
-        (float(row["rating"]), int(row.get("appearances") or 0))
-        for row in rows
-        if row.get("rating") is not None and int(row.get("appearances") or 0) > 0
-    ]
-    rating = (
-        round(
-            sum(value * apps for value, apps in rated) / sum(apps for _, apps in rated),
-            2,
-        )
-        if rated
-        else None
-    )
+def _summary_values(player: dict[str, Any], rose: dict[str, Any] | None) -> dict[str, Any]:
+    club = club_totals(player) or {}
+    league = league_totals(player) or {}
+    playing = player.get("playing_time") or {}
     display = player.get("display_role") or {}
     role = player.get("role") or {}
+    minutes = int(playing.get("minutes") or club.get("minutes") or 0)
+    missing = missing_output_competitions(player)
     return {
         "season": str(player.get("season") or ""),
         "league": "sco:premiership",
         "league_label": "Scottish Premiership",
         "role_label": display.get("label") or role.get("label"),
-        "minutes": int((rose or {}).get("minutes") or minutes),
-        "appearances": appearances or None,
-        "rating": rating,
+        "scope": "all_competitions",
+        "output_coverage": "partial" if missing else "available" if club else "unavailable",
+        "output_missing_competitions": missing,
+        "minutes": minutes,
+        "minutes_season": str(player.get("season") or ""),
+        "appearances": club.get("appearances"),
+        "rating": club.get("rating"),
+        "league_minutes": league.get("minutes"),
+        "league_appearances": league.get("appearances"),
+        "league_rating": league.get("rating"),
         "rating_percentile": None,
+        "league_rating_percentile": None,
         "cohort_basis": None,
         "cohort_n": None,
+        "rose_season": (rose or {}).get("season_used"),
+        "rose_fallback": bool((rose or {}).get("fallback")),
     }
 
 
@@ -576,6 +599,8 @@ def build_player_page(
     cohort_basis: str | None = None,
     cohort_n: int | None = None,
     current_squad: bool | None = None,
+    out_of_squad: bool = False,
+    out_of_squad_reason: str | None = None,
 ) -> dict[str, Any]:
     """Project one squad player into the player-page result document."""
     role = player.get("role") or {}
@@ -614,6 +639,17 @@ def build_player_page(
                 code="COVERAGE_PARTIAL",
                 message="Some provider stat fields are missing.",
                 field="performance",
+            )
+        )
+    if out_of_squad:
+        warnings.append(
+            PageWarning(
+                code="EXCLUDED_FROM_SQUAD",
+                message=(
+                    "Not on the official AFC men's team list; retained so existing "
+                    "links resolve and excluded from squad counts."
+                ),
+                field="profile",
             )
         )
     if (player.get("attributes") or {}).get("preferred_foot", {}).get("status") == "known":
@@ -658,12 +694,14 @@ def build_player_page(
         position_status = "partial"
 
     current = bool(player.get("status") == "squad") if current_squad is None else current_squad
-    rose_block = RoseBlock.model_validate(rose or _unavailable_rose())
-    summary_values = _league_summary(player, rose_block.model_dump())
+    rose_block = RoseBlock.model_validate(rose or _unavailable_rose(season))
+    summary_values = _summary_values(player, rose_block.model_dump())
     summary_values.update(
         {
             "season": season,
-            "rating_percentile": rating_percentile,
+            "minutes_season": season,
+            "rating_percentile": None,
+            "league_rating_percentile": rating_percentile,
             "cohort_basis": cohort_basis,
             "cohort_n": cohort_n,
         }
@@ -720,6 +758,7 @@ def build_player_page(
         note=(
             f"League-only rates; cohort {rose_block.basis.replace('_', ' ')} "
             f"n={rose_block.cohort_n}; percentiles 0-100, higher is better."
+            + (f" {rose_block.fallback_note}" if rose_block.fallback_note else "")
         ),
         warnings=[],
     )
@@ -862,6 +901,8 @@ def build_player_page(
         player_id=int(player["player_id"]),
         season=season,
         generated_at=generated_at,
+        out_of_squad=out_of_squad,
+        out_of_squad_reason=out_of_squad_reason,
         identity=identity,
         panels={
             "profile": profile_panel,

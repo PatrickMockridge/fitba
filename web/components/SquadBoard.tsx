@@ -5,13 +5,7 @@ import { CardMark } from "@/components/CardMark";
 import { PlayerLink } from "@/components/PlayerLink";
 import { RoleInferenceDialog } from "@/components/RoleInference";
 import type { SquadPlayer } from "@/lib/data";
-import {
-  FAMILY_ORDER,
-  SLOT_ORDER,
-  familyBroadGroups,
-  familyLabel,
-  familySide,
-} from "@/lib/roles";
+import { familyBroadGroups, familyLabel, familySide } from "@/lib/roles";
 
 type GroupFilter = "all" | "goalkeeper" | "defender" | "midfielder" | "attacker";
 type SideFilter = "all" | "left" | "centre" | "right";
@@ -59,12 +53,6 @@ function playerSlots(player: SquadPlayer): Array<{
       side: familySide(family, player.display_role?.side ?? player.role?.side),
     },
   ];
-}
-
-function primarySlotOrder(player: SquadPlayer): number {
-  const slot = player.career_role?.primary_slot?.slot;
-  if (slot && slot in SLOT_ORDER) return SLOT_ORDER[slot];
-  return (FAMILY_ORDER[displayFamily(player)] ?? 99) + 100;
 }
 
 function defensive(player: SquadPlayer): boolean {
@@ -170,8 +158,10 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
         const statusDelta =
           (STATUS_ORDER[left.status] ?? 9) - (STATUS_ORDER[right.status] ?? 9);
         if (statusDelta !== 0) return statusDelta;
-        const slotDelta = primarySlotOrder(left) - primarySlotOrder(right);
-        if (slotDelta !== 0) return slotDelta;
+        const orderDelta =
+          (left.official_order ?? Number.MAX_SAFE_INTEGER) -
+          (right.official_order ?? Number.MAX_SAFE_INTEGER);
+        if (orderDelta !== 0) return orderDelta;
         return (left.full_name || left.name).localeCompare(right.full_name || right.name);
       });
   }, [players, group, side, status, query]);
@@ -235,16 +225,26 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
 
       <div className="table-wrap">
         <table className="league-table compact squad-table">
-<caption className="fine-print">Current squad with roles, minutes and output.</caption>
+<caption className="fine-print">
+              Current squad with roles and output. Starts, substitute apps and
+              minutes are Aberdeen all competitions; League mins is the
+              Premiership subset; goals, assists, cards and rating use the
+              Aberdeen all-competition provider rows. A partial badge means a
+              competition has no provider player statistics; the gap is named
+              on the player profile. Loan-club output stays on the player
+              profile.
+            </caption>
           <thead>
             <tr>
               <th>Player</th>
+              <th className="num">No.</th>
               <th>Role</th>
               <th className="num">Age</th>
               <th>Status</th>
-              <th className="num">Starts</th>
-              <th className="num">Sub</th>
-              <th className="num">Mins</th>
+              <th className="num">Starts (all)</th>
+              <th className="num">Sub (all)</th>
+              <th className="num">Mins (all)</th>
+              <th className="num">League mins</th>
               <th className="num">Conc</th>
               <th className="num">CS</th>
               <th className="num">G</th>
@@ -279,6 +279,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
                       </span>
                     ) : null}
                   </td>
+                  <td className="num">{player.number ?? "—"}</td>
                   <td>
                     <button
                       className="role-inference-trigger"
@@ -295,6 +296,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
                   <td className="num">{timeShown ? value(timeShown.starts) : "—"}</td>
                   <td className="num">{timeShown ? value(timeShown.sub_apps) : "—"}</td>
                   <td className="num">{timeShown ? value(timeShown.minutes) : "—"}</td>
+                  <td className="num">{value(player.league_totals?.minutes)}</td>
                   <td className="num">
                     {defensive(player) ? value(player.position_totals?.conceded_on_pitch) : "—"}
                   </td>
@@ -316,14 +318,20 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
                   <td>
                     <span
                       className={
-                        player.stats_coverage === "available"
+                        player.stats_coverage === "available" &&
+                        !player.output_missing_competitions?.length
                           ? "badge badge-ok"
-                          : player.stats_coverage === "partial"
+                          : player.stats_coverage === "partial" ||
+                              player.output_missing_competitions?.length
                             ? "badge badge-warn"
                             : "badge badge-neutral"
                       }
                     >
-                      {player.stats_coverage}
+                      {player.stats_scope === "loan"
+                        ? "loan club"
+                        : player.output_missing_competitions?.length
+                          ? "partial"
+                          : player.stats_coverage}
                     </span>
                   </td>
                 </tr>

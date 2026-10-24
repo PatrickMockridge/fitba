@@ -7,6 +7,9 @@ import { formatDate } from "@/lib/format";
 import type { FixtureIndexRow, ScheduledFixtureRow } from "@/lib/data";
 
 function resultLabel(row: FixtureIndexRow) {
+  if (row.aberdeen_result_label) {
+    return row.aberdeen_result_label;
+  }
   if (row.home_penalties == null || row.away_penalties == null) {
     return row.aberdeen_result;
   }

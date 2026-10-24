@@ -3,13 +3,9 @@
     "AvailabilityCoverage": {
       "additionalProperties": false,
       "properties": {
-        "conflicts": {
-          "title": "Conflicts",
-          "type": "integer"
-        },
-        "doubtful": {
-          "title": "Doubtful",
-          "type": "integer"
+        "status": {
+          "title": "Status",
+          "type": "string"
         },
         "entries": {
           "title": "Entries",
@@ -19,19 +15,21 @@
           "title": "Known",
           "type": "integer"
         },
-        "note": {
-          "title": "Note",
-          "type": "string"
+        "unknown": {
+          "title": "Unknown",
+          "type": "integer"
         },
         "out": {
           "title": "Out",
           "type": "integer"
         },
-        "provider_snapshot": {
-          "additionalProperties": true,
-          "default": {},
-          "title": "Provider Snapshot",
-          "type": "object"
+        "suspended": {
+          "title": "Suspended",
+          "type": "integer"
+        },
+        "doubtful": {
+          "title": "Doubtful",
+          "type": "integer"
         },
         "returned": {
           "title": "Returned",
@@ -41,17 +39,19 @@
           "title": "Stale",
           "type": "integer"
         },
-        "status": {
-          "title": "Status",
+        "conflicts": {
+          "title": "Conflicts",
+          "type": "integer"
+        },
+        "provider_snapshot": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Provider Snapshot",
+          "type": "object"
+        },
+        "note": {
+          "title": "Note",
           "type": "string"
-        },
-        "suspended": {
-          "title": "Suspended",
-          "type": "integer"
-        },
-        "unknown": {
-          "title": "Unknown",
-          "type": "integer"
         }
       },
       "required": [
@@ -73,69 +73,6 @@
     "AvailabilityEntry": {
       "additionalProperties": false,
       "properties": {
-        "confidence": {
-          "default": "unknown",
-          "title": "Confidence",
-          "type": "string"
-        },
-        "conflict": {
-          "default": false,
-          "title": "Conflict",
-          "type": "boolean"
-        },
-        "effective_from": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Effective From"
-        },
-        "effective_to": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Effective To"
-        },
-        "expected_return": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Expected Return"
-        },
-        "in_squad": {
-          "default": true,
-          "title": "In Squad",
-          "type": "boolean"
-        },
-        "note": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Note"
-        },
         "player_id": {
           "anyOf": [
             {
@@ -172,69 +109,6 @@
           "default": null,
           "title": "Player Name"
         },
-        "provider_signal": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Provider Signal"
-        },
-        "reason": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Reason"
-        },
-        "reason_category": {
-          "default": "unknown",
-          "title": "Reason Category",
-          "type": "string"
-        },
-        "source_id": {
-          "default": "none",
-          "title": "Source Id",
-          "type": "string"
-        },
-        "source_title": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Source Title"
-        },
-        "source_url": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Source Url"
-        },
-        "stale": {
-          "default": false,
-          "title": "Stale",
-          "type": "boolean"
-        },
         "status": {
           "default": "unknown",
           "enum": [
@@ -248,6 +122,88 @@
           "title": "Status",
           "type": "string"
         },
+        "reason_category": {
+          "default": "unknown",
+          "title": "Reason Category",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "expected_return": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Return"
+        },
+        "effective_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective From"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "source_id": {
+          "default": "none",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "source_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Title"
+        },
         "verified_at": {
           "anyOf": [
             {
@@ -259,6 +215,50 @@
           ],
           "default": null,
           "title": "Verified At"
+        },
+        "confidence": {
+          "default": "unknown",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        },
+        "provider_signal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Signal"
+        },
+        "conflict": {
+          "default": false,
+          "title": "Conflict",
+          "type": "boolean"
+        },
+        "in_squad": {
+          "default": true,
+          "title": "In Squad",
+          "type": "boolean"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
         }
       },
       "title": "AvailabilityEntry",
@@ -298,6 +298,27 @@
   },
   "additionalProperties": false,
   "properties": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "club_id": {
+      "title": "Club Id",
+      "type": "string"
+    },
+    "state": {
+      "title": "State",
+      "type": "string"
+    },
     "as_of": {
       "anyOf": [
         {
@@ -310,12 +331,18 @@
       "default": null,
       "title": "As Of"
     },
-    "club_id": {
-      "title": "Club Id",
+    "policy_version": {
+      "title": "Policy Version",
       "type": "string"
     },
     "coverage": {
       "$ref": "#/$defs/AvailabilityCoverage"
+    },
+    "universes": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Universes",
+      "type": "object"
     },
     "entries": {
       "items": {
@@ -323,27 +350,6 @@
       },
       "title": "Entries",
       "type": "array"
-    },
-    "generated_at": {
-      "title": "Generated At",
-      "type": "string"
-    },
-    "notes": {
-      "title": "Notes",
-      "type": "string"
-    },
-    "policy_version": {
-      "title": "Policy Version",
-      "type": "string"
-    },
-    "schema_version": {
-      "default": "1.0.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
     },
     "sources": {
       "default": [],
@@ -353,8 +359,8 @@
       "title": "Sources",
       "type": "array"
     },
-    "state": {
-      "title": "State",
+    "notes": {
+      "title": "Notes",
       "type": "string"
     }
   },

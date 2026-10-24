@@ -10,7 +10,9 @@
   },
   "depth": "result",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:scottish-cup",
     "competition_name": "Scottish Gas Men's Scottish Cup",
     "date": "2026-02-18",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1509662,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/1509662/",
+    "outcome": "W",
     "referee": "J. Beaton",
     "result": "W",
+    "result_label": "W",
     "round": "Round of 16",
     "season": "2025-26",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -60,7 +66,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "Jens Askou",
@@ -360,8 +366,30 @@
     "previous": "/matches/1382826/",
     "season": "/history/2025-26/"
   },
+  "performance": {
+    "aberdeen": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "strengths": [
+      {
+        "aberdeen": 9,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 4,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
+  },
   "player_stats": [],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -581,7 +609,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 2.954 (0.106-5.802), Motherwell 1.313 (0.0-3.212)."
+        "text": "Shot expectation: Aberdeen 2.95, Motherwell 1.31."
       }
     ],
     "events_available": true,
@@ -1081,22 +1109,67 @@
   "xg": {
     "available": true,
     "away": {
+      "basis": "conversion",
+      "goals": 0,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -1.313,
+      "goals_position": "within",
       "high": 3.212,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.313
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": null,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": 2,
+        "shots_on_target": 4,
+        "shots_outsidebox": null
+      },
+      "value": 1.313,
+      "xg_per_shot": null
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
+      "basis": "conversion",
+      "goals": 2,
+      "goals_high": 5,
+      "goals_low": 1,
+      "goals_minus": -0.954,
+      "goals_position": "within",
       "high": 5.802,
       "low": 0.106,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 2.954
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": null,
+        "shots_blocked": null,
+        "shots_insidebox": null,
+        "shots_off": 3,
+        "shots_on_target": 9,
+        "shots_outsidebox": null
+      },
+      "value": 2.954,
+      "xg_per_shot": null
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

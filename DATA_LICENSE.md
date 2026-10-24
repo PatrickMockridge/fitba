@@ -1,6 +1,6 @@
 # Data licence and publication policy
 
-**Last reviewed:** 2026-10-22.
+**Last reviewed:** 2026-10-24.
 
 The GNU Affero General Public License v3.0 or later in `LICENSE` covers the code
 and documentation in this repository only. It does not grant rights to any
@@ -23,7 +23,10 @@ Only derived outputs are committed:
 - percentile and scouting scores computed by this project;
 - curated fee bands and contract/loan status with citations;
 - AFC news headlines, categories, dates and links;
-- a manifest recording freshness, coverage and provenance.
+- a manifest recording freshness, coverage and provenance;
+- team-match shot-zone and penalty features derived from the licensed feed for
+  the fxG calibration. Raw team-statistics responses are not committed; the
+  model coefficients, ranges and evaluation are derived outputs.
 
 Raw source payloads, full event feeds, source-shaped tables and raw market-value
 feeds are never committed. They live in gitignored `data/` and `.cache/`.
@@ -37,6 +40,10 @@ feeds are never committed. They live in gitignored `data/` and `.cache/`.
 - The provider does not grant a licence to the underlying fixture IP of leagues
   or broadcasters; that remains the user's responsibility.
 - No attribution requirement is stated, but the app attributes all sources.
+- Team statistics include shot zones, blocked shots and expected goals where
+  returned; they do not include shot coordinates, pressure or xGOT. The
+  league-wide 2026-27 enrichment is used only for model calibration and is not
+  redistributed as raw provider data.
 - League Cup group standings are not provided; the app computes them from the
   fixtures and labels them as computed.
 - Key-tested 2026-10-21. Coverage is partial: the Scottish Cup feed had 50 of

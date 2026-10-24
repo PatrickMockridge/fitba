@@ -195,8 +195,24 @@ layers:
     surfaces: [/squad/, /themes/]
     note: Reconstructed from lineups and events; not tracking data.
 
+  - id: squad_roster
+    label: Official squad roster
+    kind: source
+    primary: afc_official
+    fallback: [api_football]
+    status: active
+    scope: current men's team, one listed page per refresh
+    fields: [name, shirt_number, position, loan_section, roster_inclusion]
+    surfaces: [/squad/]
+    note: >
+      The official AFC men's team page is canonical for inclusion, position
+      section, shirt number and the On loan section. It does not label injuries;
+      no injury is inferred. API-Football remains the statistics and identity
+      spine. API rows outside the official list are retained only for existing
+      player links and are not squad players.
+
   - id: squad_identity
-    label: Current squad
+    label: Current squad identity and statistics
     kind: provider
     primary: api_football
     fallback: []
@@ -204,7 +220,8 @@ layers:
     scope: current season
     fields: [player_id, name, age, nationality, position, shirt_number, status]
     surfaces: [/squad/]
-    note: Curated player overrides correct identity or youth gaps.
+    note: Curated player overrides correct identity or youth gaps; the official
+      roster layer owns roster inclusion and loan-section status.
 
   - id: preferred_foot
     label: Preferred foot
@@ -217,7 +234,8 @@ layers:
     surfaces: [/squad/, /sources/]
     note: >
       Sportmonks is gated; AFC official yields no foot values today; Wikipedia
-      is last resort with a revision permalink. 1 known, 37 unknown.
+      is last resort with a revision permalink. One value is known; every other
+      player is unknown rather than inferred.
 
   - id: transfers_candidate
     label: Transfer candidate feed

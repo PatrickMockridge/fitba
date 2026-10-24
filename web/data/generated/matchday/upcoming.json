@@ -1,5 +1,6 @@
 {
   "coverage": {
+    "fixture_source": "snapshot",
     "form": "league",
     "lineups": {
       "aberdeen": "available",
@@ -8,7 +9,7 @@
     "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
     "possession": "unknown",
     "snapshot": {
-      "age_hours": 54.2,
+      "age_hours": 64.4,
       "fixtures": 6,
       "fixtures_with_lineups": 6,
       "generated_at": "2026-10-21T23:05:03+00:00",
@@ -72,12 +73,12 @@
       "form": "WLDWD",
       "form_points": 8,
       "home": {
-        "conversion": 0.071,
+        "conversion": 0.07,
         "corners_against_pm": 5.4,
         "corners_for_pm": 6.2,
         "drawn": 1,
         "fouls_against_pm": 14.2,
-        "fouls_for_pm": 14.0,
+        "fouls_for_pm": 13.8,
         "ga": 4,
         "ga_pg": 0.8,
         "gd": 1,
@@ -91,10 +92,10 @@
         "played": 5,
         "points": 7,
         "ppg": 1.4,
-        "shot_accuracy": 0.271,
-        "shot_share": 0.507,
-        "shots_against_pm": 13.6,
-        "shots_for_pm": 14.0,
+        "shot_accuracy": 0.268,
+        "shot_share": 0.514,
+        "shots_against_pm": 13.4,
+        "shots_for_pm": 14.2,
         "shots_on_target_against_pm": 4.2,
         "shots_on_target_for_pm": 3.8,
         "won": 2
@@ -163,7 +164,7 @@
       ],
       "note": "League only. Home and away splits use every league match in the sample, not just the last five.",
       "recent": {
-        "conversion": 0.116,
+        "conversion": 0.114,
         "corners_against_pm": 5.2,
         "corners_for_pm": 6.4,
         "drawn": 2,
@@ -182,10 +183,10 @@
         "played": 5,
         "points": 8,
         "ppg": 1.6,
-        "shot_accuracy": 0.29,
-        "shot_share": 0.566,
-        "shots_against_pm": 10.6,
-        "shots_for_pm": 13.8,
+        "shot_accuracy": 0.286,
+        "shot_share": 0.565,
+        "shots_against_pm": 10.8,
+        "shots_for_pm": 14.0,
         "shots_on_target_against_pm": 3.8,
         "shots_on_target_for_pm": 4.0,
         "won": 2
@@ -199,12 +200,12 @@
         "season_matches": 9
       },
       "season_record": {
-        "conversion": 0.093,
+        "conversion": 0.092,
         "corners_against_pm": 6.44,
         "corners_for_pm": 5.67,
         "drawn": 2,
         "fouls_against_pm": 12.11,
-        "fouls_for_pm": 12.44,
+        "fouls_for_pm": 12.33,
         "ga": 10,
         "ga_pg": 1.11,
         "gd": 0,
@@ -218,10 +219,10 @@
         "played": 9,
         "points": 11,
         "ppg": 1.22,
-        "shot_accuracy": 0.278,
-        "shot_share": 0.441,
-        "shots_against_pm": 15.22,
-        "shots_for_pm": 12.0,
+        "shot_accuracy": 0.275,
+        "shot_share": 0.445,
+        "shots_against_pm": 15.11,
+        "shots_for_pm": 12.11,
         "shots_on_target_against_pm": 5.22,
         "shots_on_target_for_pm": 3.33,
         "won": 3
@@ -284,7 +285,7 @@
         "shot_share": 0.568,
         "shots_against_pm": 15.0,
         "shots_for_pm": 19.75,
-        "shots_on_target_against_pm": 4.5,
+        "shots_on_target_against_pm": 4.75,
         "shots_on_target_for_pm": 6.25,
         "won": 1
       },
@@ -411,13 +412,13 @@
         "shot_share": 0.514,
         "shots_against_pm": 14.89,
         "shots_for_pm": 15.78,
-        "shots_on_target_against_pm": 4.67,
+        "shots_on_target_against_pm": 4.78,
         "shots_on_target_for_pm": 5.56,
         "won": 3
       }
     }
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "head_to_head": [
     {
       "away_goals": 0,
@@ -455,11 +456,11 @@
     "bullets": [
       {
         "basis": "inferred",
-        "text": "Dundee United profile as attack at home: 15.8 shots per match (64th percentile)."
+        "text": "Dundee United profile as attack at home: 15.8 shots per match (62nd percentile)."
       },
       {
         "basis": "inferred",
-        "text": "Venue effect: their approach index is 64.5 (overall 64.9); Aberdeen's is 17.8."
+        "text": "Venue effect: their approach index is 63.1 (overall 63.3); Aberdeen's is 19.3."
       },
       {
         "basis": "measured",
@@ -600,9 +601,9 @@
         "as_of": "2026-10-24T05:17:24+00:00",
         "conflicts": 0,
         "doubtful": 0,
-        "known": 1,
+        "known": 2,
         "note": "Curated team-news availability. A provider injury boolean is not team news.",
-        "out": 0,
+        "out": 1,
         "returned": 0,
         "source_ids": [
           "afc_news",
@@ -610,7 +611,7 @@
         ],
         "state": "partial",
         "suspended": 0,
-        "unknown": 37
+        "unknown": 32
       },
       "basis": "local_lineups",
       "contenders": [
@@ -1278,7 +1279,13 @@
       "status": "available",
       "team_confidence": "low",
       "team_id": 252,
-      "unavailable": [],
+      "unavailable": [
+        {
+          "name": "Kristers Tobers",
+          "player_id": 68534,
+          "reason": "availability_out"
+        }
+      ],
       "unknowns": [
         "Curated AFC team news as of 2026-10-24T05:17:24+00:00; provider injuries unavailable/empty."
       ]
@@ -2008,12 +2015,12 @@
       "gf_pg": 1.11,
       "league_size": 12,
       "percentiles": {
-        "ga_pg": 77,
-        "gd_pg": 59,
-        "gf_pg": 32,
-        "ppg": 45,
-        "shot_share": 36,
-        "shots_for_pm": 27
+        "ga_pg": 75.0,
+        "gd_pg": 58.3,
+        "gf_pg": 33.3,
+        "ppg": 45.8,
+        "shot_share": 37.5,
+        "shots_for_pm": 29.2
       },
       "played": 9,
       "points": 11,
@@ -2029,9 +2036,9 @@
       },
       "reason": null,
       "sample_note": "9 league matches.",
-      "shot_share": 0.441,
-      "shots_against_pm": 15.22,
-      "shots_for_pm": 12.0,
+      "shot_share": 0.445,
+      "shots_against_pm": 15.11,
+      "shots_for_pm": 12.11,
       "status": "available",
       "team_id": "sco:aberdeen",
       "team_name": "Aberdeen",
@@ -2050,12 +2057,12 @@
       "gf_pg": 1.22,
       "league_size": 12,
       "percentiles": {
-        "ga_pg": 50,
-        "gd_pg": 45,
-        "gf_pg": 55,
-        "ppg": 59,
-        "shot_share": 64,
-        "shots_for_pm": 64
+        "ga_pg": 50.0,
+        "gd_pg": 45.8,
+        "gf_pg": 54.2,
+        "ppg": 58.3,
+        "shot_share": 62.5,
+        "shots_for_pm": 62.5
       },
       "played": 9,
       "points": 12,
@@ -2095,13 +2102,13 @@
     "aberdeen": {
       "lean": {
         "approach": "sit_deep_counter",
-        "approach_index": 17.8,
+        "approach_index": 19.3,
         "basis": "measured",
         "confidence": "low",
         "evidence": [
-          "12.0 shots per match (27th percentile)",
+          "12.1 shots per match (29th percentile)",
           "shot share 44%",
-          "1.11 goals per match (32nd percentile)",
+          "1.11 goals per match (33rd percentile)",
           "away: 9.5 shots per match in 4 matches",
           "Low volume and low shot share, but the counter punch is not established by goals or shot quality."
         ],
@@ -2109,10 +2116,10 @@
         "label": "Sit deep and counter",
         "missing_metrics": [],
         "note": "Shot proxies only. Not xG, not a tactical model, and possession is unknown. The lean describes the measured profile; it is not a prediction of the result.",
-        "overall_index": 27.0,
+        "overall_index": 29.0,
         "reason": null,
         "shot_share": 0.355,
-        "venue_index": 11.6,
+        "venue_index": 12.9,
         "venue_matches": 4,
         "venue_used": true
       },
@@ -2122,25 +2129,25 @@
         "corners_for_pm": 5.67,
         "coverage": "available",
         "fouls_against_pm": 12.11,
-        "fouls_for_pm": 12.44,
+        "fouls_for_pm": 12.33,
         "goals_against_pm": 1.11,
         "goals_for_pm": 1.11,
-        "goals_per_shot": 0.093,
+        "goals_per_shot": 0.092,
         "goals_per_shot_on_target": 0.333,
         "matches": 9,
         "missing_stats": [],
         "note": "Opponent-unadjusted shot proxies from league match rows. Not xG and not a tactical model. Possession is unknown and is not used.",
         "percentiles": {
-          "conversion": 55,
-          "corners_for_pm": 55,
-          "fouls_for_pm": 55,
-          "goals_against_pm": 23,
-          "goals_for_pm": 32,
-          "shot_accuracy": 9,
-          "shot_share": 36,
-          "shots_against_pm": 55,
-          "shots_for_pm": 27,
-          "shots_on_target_for_pm": 5
+          "conversion": 54.2,
+          "corners_for_pm": 54.2,
+          "fouls_for_pm": 54.2,
+          "goals_against_pm": 25.0,
+          "goals_for_pm": 33.3,
+          "shot_accuracy": 12.5,
+          "shot_share": 37.5,
+          "shots_against_pm": 54.2,
+          "shots_for_pm": 29.2,
+          "shots_on_target_for_pm": 8.3
         },
         "possession_against_pm": null,
         "possession_for_pm": null,
@@ -2148,7 +2155,7 @@
         "reason": null,
         "recent_shot_shares": [
           0.567,
-          0.815,
+          0.793,
           0.429,
           0.478,
           0.476
@@ -2156,10 +2163,10 @@
         "red_against_pm": 0.22,
         "red_for_pm": 0.0,
         "season": "2026-27",
-        "shot_accuracy": 0.278,
-        "shot_share": 0.441,
-        "shots_against_pm": 15.22,
-        "shots_for_pm": 12.0,
+        "shot_accuracy": 0.275,
+        "shot_share": 0.445,
+        "shots_against_pm": 15.11,
+        "shots_for_pm": 12.11,
         "shots_on_target_against_pm": 5.22,
         "shots_on_target_for_pm": 3.33,
         "venue": "all",
@@ -2181,16 +2188,16 @@
         "missing_stats": [],
         "note": "Opponent-unadjusted shot proxies from league match rows. Not xG and not a tactical model. Possession is unknown and is not used.",
         "percentiles": {
-          "conversion": 100,
-          "corners_for_pm": 50,
-          "fouls_for_pm": 9,
-          "goals_against_pm": 55,
-          "goals_for_pm": 41,
-          "shot_accuracy": 36,
-          "shot_share": 0,
-          "shots_against_pm": 82,
-          "shots_for_pm": 5,
-          "shots_on_target_for_pm": 9
+          "conversion": 95.8,
+          "corners_for_pm": 50.0,
+          "fouls_for_pm": 12.5,
+          "goals_against_pm": 54.2,
+          "goals_for_pm": 41.7,
+          "shot_accuracy": 37.5,
+          "shot_share": 4.2,
+          "shots_against_pm": 79.2,
+          "shots_for_pm": 4.2,
+          "shots_on_target_for_pm": 12.5
         },
         "possession_against_pm": null,
         "possession_for_pm": null,
@@ -2219,23 +2226,23 @@
     "opponent": {
       "lean": {
         "approach": "attack",
-        "approach_index": 64.5,
+        "approach_index": 63.1,
         "basis": "measured",
         "confidence": "high",
         "evidence": [
-          "15.8 shots per match (64th percentile)",
+          "15.8 shots per match (62nd percentile)",
           "shot share 52%",
-          "1.22 goals per match (55th percentile)",
+          "1.22 goals per match (54th percentile)",
           "at home: 19.8 shots per match in 4 matches"
         ],
         "interpretation": "inferred",
         "label": "Attack",
         "missing_metrics": [],
         "note": "Shot proxies only. Not xG, not a tactical model, and possession is unknown. The lean describes the measured profile; it is not a prediction of the result.",
-        "overall_index": 64.9,
+        "overall_index": 63.3,
         "reason": null,
         "shot_share": 0.568,
-        "venue_index": 64.3,
+        "venue_index": 62.9,
         "venue_matches": 4,
         "venue_used": true
       },
@@ -2254,16 +2261,16 @@
         "missing_stats": [],
         "note": "Opponent-unadjusted shot proxies from league match rows. Not xG and not a tactical model. Possession is unknown and is not used.",
         "percentiles": {
-          "conversion": 27,
-          "corners_for_pm": 64,
-          "fouls_for_pm": 68,
-          "goals_against_pm": 50,
-          "goals_for_pm": 55,
-          "shot_accuracy": 64,
-          "shot_share": 64,
-          "shots_against_pm": 45,
-          "shots_for_pm": 64,
-          "shots_on_target_for_pm": 82
+          "conversion": 29.2,
+          "corners_for_pm": 62.5,
+          "fouls_for_pm": 66.7,
+          "goals_against_pm": 50.0,
+          "goals_for_pm": 54.2,
+          "shot_accuracy": 66.7,
+          "shot_share": 62.5,
+          "shots_against_pm": 45.8,
+          "shots_for_pm": 62.5,
+          "shots_on_target_for_pm": 79.2
         },
         "possession_against_pm": null,
         "possession_for_pm": null,
@@ -2283,7 +2290,7 @@
         "shot_share": 0.515,
         "shots_against_pm": 14.89,
         "shots_for_pm": 15.78,
-        "shots_on_target_against_pm": 4.67,
+        "shots_on_target_against_pm": 4.78,
         "shots_on_target_for_pm": 5.56,
         "venue": "all",
         "yellow_against_pm": 2.11,
@@ -2304,16 +2311,16 @@
         "missing_stats": [],
         "note": "Opponent-unadjusted shot proxies from league match rows. Not xG and not a tactical model. Possession is unknown and is not used.",
         "percentiles": {
-          "conversion": 0,
-          "corners_for_pm": 68,
-          "fouls_for_pm": 86,
-          "goals_against_pm": 36,
-          "goals_for_pm": 5,
-          "shot_accuracy": 55,
-          "shot_share": 64,
-          "shots_against_pm": 64,
-          "shots_for_pm": 91,
-          "shots_on_target_for_pm": 73
+          "conversion": 4.2,
+          "corners_for_pm": 66.7,
+          "fouls_for_pm": 87.5,
+          "goals_against_pm": 37.5,
+          "goals_for_pm": 8.3,
+          "shot_accuracy": 54.2,
+          "shot_share": 62.5,
+          "shots_against_pm": 62.5,
+          "shots_for_pm": 87.5,
+          "shots_on_target_for_pm": 70.8
         },
         "possession_against_pm": null,
         "possession_for_pm": null,
@@ -2332,7 +2339,7 @@
         "shot_share": 0.568,
         "shots_against_pm": 15.0,
         "shots_for_pm": 19.75,
-        "shots_on_target_against_pm": 4.5,
+        "shots_on_target_against_pm": 4.75,
         "shots_on_target_for_pm": 6.25,
         "venue": "H",
         "yellow_against_pm": 2.5,

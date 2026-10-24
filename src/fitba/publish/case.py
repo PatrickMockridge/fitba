@@ -509,7 +509,7 @@ def _defence_claim(
                 f"{defensive_known} known / {defensive_unknown} unknown defensive players; "
                 "Knoester "
                 f"{knoester.get('starts', 0)} starts / {knoester.get('minutes', 0)} minutes; "
-                "Tobers is not in the current squad"
+                "Tobers is in the official squad list; no 2026-27 appearance record"
             ),
             sample="Official team-news entries",
             period="2026-27",

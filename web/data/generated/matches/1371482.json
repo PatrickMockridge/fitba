@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 5,
     "away_ht_goals": 2,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2025-05-14",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1371482,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/1371482/",
+    "outcome": "L",
     "referee": "S. McLean",
     "result": "L",
+    "result_label": "L",
     "round": "2nd Phase - 4",
     "season": "2024-25",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -96,7 +102,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Rodgers",
@@ -403,6 +409,123 @@
     "next": "/matches/1371489/",
     "previous": "/matches/1371481/",
     "season": "/history/2024-25/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 1,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 32,
+          "passes_total": 40,
+          "player_id": 17939,
+          "player_name": "Dimitar Mitov",
+          "rating": 7.7,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 1,
+          "goals": 1,
+          "href": "/players/97896/",
+          "is_aberdeen": true,
+          "minutes": 70,
+          "pass_accuracy": 9,
+          "passes_total": 15,
+          "player_id": 97896,
+          "player_name": "Kevin Nisbet",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 2,
+          "goals": null,
+          "href": "/players/321860/",
+          "is_aberdeen": true,
+          "minutes": 33,
+          "pass_accuracy": 12,
+          "passes_total": 13,
+          "player_id": 321860,
+          "player_name": "Jack Milne",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 2,
+          "duels_won": 4,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 81,
+          "pass_accuracy": 36,
+          "passes_total": 43,
+          "player_id": 45169,
+          "player_name": "Luke McCowan",
+          "rating": 9.2,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 4,
+          "team_name": "Celtic"
+        },
+        {
+          "assists": 1,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 32,
+          "passes_total": 43,
+          "player_id": 1127,
+          "player_name": "James Forrest",
+          "rating": 8.2,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Celtic"
+        },
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 71,
+          "pass_accuracy": 26,
+          "passes_total": 32,
+          "player_id": 304958,
+          "player_name": "Yang Hyun-Jun",
+          "rating": 7.9,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": 1,
+          "team_name": "Celtic"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1206,7 +1329,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1560,7 +1683,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.363 (0.0-3.29), Celtic 4.77 (1.164-8.375)."
+        "text": "Shot expectation: Aberdeen 1.14, Celtic 3.26."
       }
     ],
     "events_available": true,
@@ -2110,22 +2233,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 8.375,
-      "low": 1.164,
+      "basis": "zones",
+      "goals": 5,
+      "goals_high": 5,
+      "goals_low": 1,
+      "goals_minus": 1.742,
+      "goals_position": "within",
+      "high": 3.774,
+      "low": 2.537,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 4.77
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 25,
+        "shots_blocked": 4,
+        "shots_insidebox": 20,
+        "shots_off": 7,
+        "shots_on_target": 14,
+        "shots_outsidebox": 5
+      },
+      "value": 3.258,
+      "xg_per_shot": 0.13
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.29,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.143,
+      "goals_position": "within",
+      "high": 1.659,
+      "low": 0.422,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.363
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 12,
+        "shots_blocked": 5,
+        "shots_insidebox": 8,
+        "shots_off": 3,
+        "shots_on_target": 4,
+        "shots_outsidebox": 4
+      },
+      "value": 1.143,
+      "xg_per_shot": 0.095
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

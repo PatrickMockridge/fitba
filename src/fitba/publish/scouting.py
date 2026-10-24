@@ -780,6 +780,7 @@ def build_scouting_bundle(
         index=index,
         model=model,
         config=rose_config,
+        season=season_label,
     )
     squad_profile = build_squad_profile(
         squad_data=squad_data,

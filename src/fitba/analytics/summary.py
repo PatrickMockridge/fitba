@@ -284,15 +284,28 @@ def build_summary(
             }
         )
     if xg and xg.get("home") is not None and xg.get("away") is not None:
-        bullets.append(
-            {
-                "text": _sentence(
-                    f"fxG: {home} {xg['home']} ({xg.get('home_low')}-{xg.get('home_high')}), "
-                    f"{away} {xg['away']} ({xg.get('away_low')}-{xg.get('away_high')})."
-                ),
-                "basis": "inferred",
-            }
-        )
+        home_provider = xg.get("home_provider")
+        away_provider = xg.get("away_provider")
+        if home_provider is not None and away_provider is not None:
+            bullets.append(
+                {
+                    "text": _sentence(
+                        f"Provider xG: {home} {float(home_provider):.2f}, "
+                        f"{away} {float(away_provider):.2f}."
+                    ),
+                    "basis": "measured",
+                }
+            )
+        else:
+            bullets.append(
+                {
+                    "text": _sentence(
+                        f"Shot expectation: {home} {float(xg['home']):.2f}, "
+                        f"{away} {float(xg['away']):.2f}."
+                    ),
+                    "basis": "inferred",
+                }
+            )
 
     complete = (
         bool(goals_complete) if goals_complete is not None else (reconciled if available else False)

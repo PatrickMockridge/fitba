@@ -6,6 +6,178 @@
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed.",
     "status": "curated"
   },
+  "loan_scope": {
+    "official_list": {
+      "in": [],
+      "in_count": 0,
+      "out": [
+        {
+          "club": "Ross County",
+          "end_date": null,
+          "player_id": 6973,
+          "player_key": "api:player:6973",
+          "player_name": "N. Suman",
+          "since": "2026-09-27"
+        },
+        {
+          "club": "Dunfermline Athletic",
+          "end_date": null,
+          "player_id": 340027,
+          "player_key": "api:player:340027",
+          "player_name": "D. Lobban",
+          "since": "2026-08-13"
+        },
+        {
+          "club": "Sanfrecce Hiroshima",
+          "end_date": null,
+          "player_id": 153645,
+          "player_key": "api:player:153645",
+          "player_name": "K. Yengi",
+          "since": "2026-08-30"
+        },
+        {
+          "club": "Inverness Caledonian Thistle",
+          "end_date": null,
+          "player_id": 361406,
+          "player_key": "api:player:361406",
+          "player_name": "A. Bavidge",
+          "since": "2026-06-30"
+        },
+        {
+          "club": "Žilina",
+          "end_date": null,
+          "player_id": 395743,
+          "player_key": "api:player:395743",
+          "player_name": "K. Bilalovic",
+          "since": "2026-09-03"
+        }
+      ],
+      "out_count": 5
+    },
+    "reconciliation": {
+      "matched_out": 5,
+      "note": "The official list and the transfer register are different scopes. The official On loan section is the squad count; the register also includes development loans the first-team page does not list.",
+      "official_only_out": [],
+      "register_only_out": [
+        {
+          "club": "Elgin City",
+          "date_effective": "2026-09-03",
+          "player_id": null,
+          "player_key": "api:player:674621",
+          "player_name": "Sam McLean",
+          "season": "2026-27"
+        },
+        {
+          "club": "Cove Rangers",
+          "date_effective": "2026-08-20",
+          "player_id": null,
+          "player_key": "api:player:644159",
+          "player_name": "J. Mercer",
+          "season": "2026-27"
+        },
+        {
+          "club": "Peterhead",
+          "date_effective": "2026-07-12",
+          "player_id": null,
+          "player_key": "api:player:477991",
+          "player_name": "L. Carroll",
+          "season": "2026-27"
+        },
+        {
+          "club": "Elgin City",
+          "date_effective": "2026-07-08",
+          "player_id": null,
+          "player_key": "api:player:625768",
+          "player_name": "Aaron Cummings",
+          "season": "2026-27"
+        }
+      ]
+    },
+    "register_all_time": {
+      "in_count": 31,
+      "out_count": 31
+    },
+    "register_current": {
+      "in": [],
+      "in_count": 0,
+      "out": [
+        {
+          "club": "Ross County",
+          "date_effective": "2026-09-27",
+          "player_id": null,
+          "player_key": "api:player:6973",
+          "player_name": "N. Suman",
+          "season": "2026-27"
+        },
+        {
+          "club": "Elgin City",
+          "date_effective": "2026-09-03",
+          "player_id": null,
+          "player_key": "api:player:674621",
+          "player_name": "Sam McLean",
+          "season": "2026-27"
+        },
+        {
+          "club": "Žilina",
+          "date_effective": "2026-09-03",
+          "player_id": null,
+          "player_key": "api:player:395743",
+          "player_name": "K. Bilalovic",
+          "season": "2026-27"
+        },
+        {
+          "club": "Sanfrecce Hiroshima",
+          "date_effective": "2026-08-30",
+          "player_id": null,
+          "player_key": "api:player:153645",
+          "player_name": "K. Yengi",
+          "season": "2026-27"
+        },
+        {
+          "club": "Cove Rangers",
+          "date_effective": "2026-08-20",
+          "player_id": null,
+          "player_key": "api:player:644159",
+          "player_name": "J. Mercer",
+          "season": "2026-27"
+        },
+        {
+          "club": "Dunfermline Athletic",
+          "date_effective": "2026-08-13",
+          "player_id": null,
+          "player_key": "api:player:340027",
+          "player_name": "D. Lobban",
+          "season": "2026-27"
+        },
+        {
+          "club": "Peterhead",
+          "date_effective": "2026-07-12",
+          "player_id": null,
+          "player_key": "api:player:477991",
+          "player_name": "L. Carroll",
+          "season": "2026-27"
+        },
+        {
+          "club": "Elgin City",
+          "date_effective": "2026-07-08",
+          "player_id": null,
+          "player_key": "api:player:625768",
+          "player_name": "Aaron Cummings",
+          "season": "2026-27"
+        },
+        {
+          "club": "Inverness Caledonian Thistle",
+          "date_effective": "2026-06-30",
+          "player_id": null,
+          "player_key": "api:player:361406",
+          "player_name": "A. Bavidge",
+          "season": "2026-27"
+        }
+      ],
+      "out_count": 9
+    },
+    "season": "2026-27"
+  },
   "loans_in": [
     {
       "date_announced": "2026-02-01",
@@ -8499,7 +8671,7 @@
       "notes": "Curated from the API-Football candidate feed and the Wikipedia season table; official club announcement not found for this row.",
       "obligation_to_buy": null,
       "option_to_buy": null,
-      "player_href": null,
+      "player_href": "/players/68534/",
       "player_key": "api:player:68534",
       "player_name": "K. Tobers",
       "position": "Defender",

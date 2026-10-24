@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2023-12-03",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1094516,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:hibernian",
     "home_team_name": "Hibernian",
     "href": "/matches/1094516/",
+    "outcome": "W",
     "referee": "W. Collum",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 15",
     "season": "2023-24",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Easter Road Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -423,6 +429,148 @@
     "next": "/matches/1094522/",
     "previous": "/matches/1126312/",
     "season": "/history/2023-24/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 25,
+          "passes_total": 37,
+          "player_id": 69243,
+          "player_name": "Jamie McGrath",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 79,
+          "pass_accuracy": 30,
+          "passes_total": 33,
+          "player_id": 44812,
+          "player_name": "Graeme Shinnie",
+          "rating": 7.5,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 43,
+          "passes_total": 54,
+          "player_id": 15605,
+          "player_name": "Stefan Gartenmann",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 4,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 1,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 26,
+          "passes_total": 47,
+          "player_id": 19407,
+          "player_name": "David Marshall",
+          "rating": 8.6,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Hibernian"
+        },
+        {
+          "assists": null,
+          "duels_won": 10,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 37,
+          "passes_total": 48,
+          "player_id": 153434,
+          "player_name": "William Fish",
+          "rating": 8.3,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 2,
+          "team_name": "Hibernian"
+        },
+        {
+          "assists": 2,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 7,
+          "passes_total": 10,
+          "player_id": 44843,
+          "player_name": "Martin Boyle",
+          "rating": 8.0,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Hibernian"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 23,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 11,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 6,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 3,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 21,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 8,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1226,7 +1374,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1493,7 +1641,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Hibernian 0.96 (0.0-2.588), Aberdeen 1.6 (0.0-3.702)."
+        "text": "Shot expectation: Hibernian 1.04, Aberdeen 2.55."
       }
     ],
     "events_available": true,
@@ -1893,22 +2041,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 3.702,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 5,
+      "goals_low": 1,
+      "goals_minus": -2.548,
+      "goals_position": "below",
+      "high": 3.064,
+      "low": 1.827,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.6
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 23,
+        "shots_blocked": 6,
+        "shots_insidebox": 21,
+        "shots_off": 11,
+        "shots_on_target": 6,
+        "shots_outsidebox": 2
+      },
+      "value": 2.548,
+      "xg_per_shot": 0.111
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 2.588,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.958,
+      "goals_position": "within",
+      "high": 1.558,
+      "low": 0.321,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.96
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 6,
+        "shots_insidebox": 8,
+        "shots_off": 2,
+        "shots_on_target": 3,
+        "shots_outsidebox": 3
+      },
+      "value": 1.042,
+      "xg_per_shot": 0.095
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

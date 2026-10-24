@@ -49,7 +49,7 @@ for scope, and the metrics and sources when you need to check a number.
 | [Matchday dashboard](matchday.md) | The next fixture, both predicted XIs, form, venue splits, the three-way style lean, relative strength, data states and the bounded opponent refresh. |
 | [Season overview](analysis.md) | The next fixtures, availability, season aims, squad decisions and the bridge to matchday, squad and scouting. |
 | [Results and fixtures](fixtures.md) | Played and remaining Cormack-era fixtures, plus one page per played fixture with canonical ids, depth states, timeline, lineups, stats and the deterministic read. |
-| [fxG](xg.md) | The experimental shot-on-target expected-goals model, interval, provider-xG evaluation gate and limitations. |
+| [fxG](xg.md) | The experimental team-match expected-goals model, model and goals ranges, penalties, provider-xG gate and limitations. |
 | [Match scoreboard](match-scoreboard.md) | The top-level score, goal and red-card widget, event semantics and the Aberdeen/opposition split. |
 | [Competition formats](competition-formats.md) | League Cup and Scottish Cup structure, entry rules, group points, rounds and dates, with sources and the "top six" correction. |
 | [The Cormack era](history.md) | Managers, backroom and board changes, honours, season reviews, historical transfers, style and selection from 2019-20, with coverage and editorial rules. |

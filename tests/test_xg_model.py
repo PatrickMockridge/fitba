@@ -145,3 +145,141 @@ def test_provider_estimate_clamps_and_handles_unknowns() -> None:
 def test_empty_fit_raises() -> None:
     with pytest.raises(ValueError, match="no rows"):
         fit_fxg([], CONFIG)
+
+
+CALIBRATED_CONFIG = {
+    **CONFIG,
+    "model_id": "test-fxg-2",
+    "calibration": {
+        "season": "2026-27",
+        "competition_id": "sco:premiership",
+        "min_team_rows": 6,
+        "min_matches": 3,
+    },
+    "evaluation": {
+        "method": "leave_one_match_out",
+        "validation_season": "2026-27",
+        "max_abs_bias": 1.0,
+        "max_mae": 1.0,
+        "calibration_slope_min": 0.1,
+        "calibration_slope_max": 3.0,
+    },
+}
+
+
+def _calibration_rows() -> list[dict]:
+    rows = _rows()
+    samples = [
+        (5, 4, 1.8),
+        (4, 2, 1.4),
+        (6, 5, 2.1),
+        (3, 3, 1.0),
+        (5, 1, 1.5),
+        (4, 6, 1.6),
+    ]
+    for index, (sot, off, provider) in enumerate(samples):
+        rows.append(
+            {
+                "match_key": f"match-{index // 2}",
+                "season": "2026-27",
+                "competition_id": "sco:premiership",
+                "goals_for": 1,
+                "shots": sot + off,
+                "shots_on_target": sot,
+                "provider_xg": provider,
+            }
+        )
+    return rows
+
+
+def test_calibrated_model_differentiates_equal_sot() -> None:
+    model = fit_fxg(_calibration_rows(), CALIBRATED_CONFIG)
+    assert model.model_id == "test-fxg-2"
+    assert model.coefficients is not None
+    assert model.fit_team_rows == 6
+    assert model.fit_season == "2026-27"
+    assert model.calibration_evaluation is not None
+    assert model.calibration_evaluation["method"] == "leave_one_match_out"
+    low_sot = {"shots": 9, "shots_on_target": 5, "goals_for": 1}
+    high_sot = {"shots": 13, "shots_on_target": 5, "goals_for": 1}
+    low_prediction = predict_fxg(model, low_sot)
+    high_prediction = predict_fxg(model, high_sot)
+    assert low_prediction["basis"] in {"calibrated_shot_volume", "volume"}
+    assert low_prediction["fxg"] != high_prediction["fxg"]
+    assert low_prediction["low"] <= low_prediction["fxg"] <= low_prediction["high"]
+    evaluation = evaluate_fxg(model, _calibration_rows(), CALIBRATED_CONFIG)
+    assert evaluation["team_rows"] == 6
+    assert evaluation["matches"] == 3
+
+
+ENRICHED_CONFIG = {
+    **CALIBRATED_CONFIG,
+    "model_id": "test-fxg-3",
+    "calibration": {
+        "season": "2026-27",
+        "competition_id": "sco:premiership",
+        "min_team_rows": 6,
+        "min_matches": 3,
+        "min_zone_coverage": 0.8,
+    },
+    "penalty": {"xg": 0.76},
+    "interval": {"level": 0.8, "bootstrap_draws": 20, "seed": 7, "z": 1.2816},
+}
+
+
+def _enriched_rows() -> list[dict]:
+    rows = _rows()
+    samples = [
+        (6, 4, 2, 1, 0, 0),
+        (4, 3, 2, 1, 0, 0),
+        (7, 5, 2, 1, 0, 1),
+        (3, 2, 3, 2, 1, 0),
+        (5, 3, 3, 2, 1, 0),
+        (8, 6, 2, 1, 0, 0),
+    ]
+    for index, (inside, outside, sot, off, blocked, penalties) in enumerate(samples):
+        shots = inside + outside
+        provider = 0.76 * penalties + 0.1 * inside + 0.08 * outside + 0.05 * sot
+        rows.append(
+            {
+                "match_key": f"enriched-{index}",
+                "season": "2026-27",
+                "competition_id": "sco:premiership",
+                "goals_for": 1,
+                "shots": shots,
+                "shots_on_target": sot,
+                "shots_off": off,
+                "shots_blocked": blocked,
+                "shots_insidebox": inside,
+                "shots_outsidebox": outside,
+                "penalty_attempts": penalties,
+                "penalty_goals": penalties,
+                "penalty_missed": 0,
+                "penalty_status": "available",
+                "open_play_shots": shots - penalties,
+                "open_play_sot": max(0, sot - penalties),
+                "open_play_off": off,
+                "open_play_blocked": blocked,
+                "open_play_insidebox": max(0, inside - penalties),
+                "open_play_outsidebox": outside,
+                "zone_status": "available",
+                "reconciliation_status": "ok",
+                "provider_xg": provider,
+                "provider_xg_open_play_fdco": provider - 0.76 * penalties,
+            }
+        )
+    return rows
+
+
+def test_enriched_model_has_penalties_and_two_ranges() -> None:
+    model = fit_fxg(_enriched_rows(), ENRICHED_CONFIG)
+    assert model.model_id == "test-fxg-3"
+    assert model.specification in {"C", "A", "Z", "D", "E"}
+    assert model.penalty_xg == pytest.approx(0.76)
+    prediction = predict_fxg(model, _enriched_rows()[-1])
+    assert prediction["goals_low"] <= prediction["goals_high"]
+    assert prediction["low"] <= prediction["fxg"] <= prediction["high"]
+    assert prediction["basis"] in {"zones", "volume"}
+    aggregate = aggregate_fxg(model, _enriched_rows())
+    assert aggregate["goals_low"] <= aggregate["goals_high"]
+    assert aggregate["model_range_width"] is not None

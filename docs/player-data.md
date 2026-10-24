@@ -101,8 +101,9 @@ The Wikipedia adapter is deliberately narrow:
 - a 403 stops the fallback for the run rather than rotating identities;
 - no category or link traversal, no bulk crawl.
 
-At the last check the adapter resolved **1 preferred foot** out of 38 players.
-Only 2 of 89 cached Wikipedia player pages contain any foot phrase. This is a
+At the last check the adapter resolved one preferred-foot value; every other
+player in the official list is unknown. Only 2 of 89 cached Wikipedia player
+pages contain any foot phrase. This is a
 source limitation, not a parsing choice: foot coverage cannot be fixed from the
 free team sheet or from Wikipedia. It needs the licensed Sportmonks feed or an
 explicit statement per player.

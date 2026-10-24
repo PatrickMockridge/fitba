@@ -4,7 +4,7 @@
   "coverage": {
     "conflicts": 0,
     "doubtful": 0,
-    "entries": 39,
+    "entries": 34,
     "known": 2,
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
     "out": 1,
@@ -33,7 +33,7 @@
     "stale": 0,
     "status": "partial",
     "suspended": 0,
-    "unknown": 37
+    "unknown": 32
   },
   "entries": [
     {
@@ -170,27 +170,6 @@
       "expected_return": null,
       "in_squad": true,
       "note": "No verified official team-news entry.",
-      "player_id": 625768,
-      "player_key": "api:player:625768",
-      "player_name": "Aaron Cummings",
-      "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
-      "stale": false,
-      "status": "unknown",
-      "verified_at": null
-    },
-    {
-      "confidence": "unknown",
-      "conflict": false,
-      "effective_from": null,
-      "effective_to": null,
-      "expected_return": null,
-      "in_squad": true,
-      "note": "No verified official team-news entry.",
       "player_id": 45010,
       "player_key": "api:player:45010",
       "player_name": "B. Lyons",
@@ -215,27 +194,6 @@
       "player_id": 44921,
       "player_key": "api:player:44921",
       "player_name": "C. Cadden",
-      "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
-      "stale": false,
-      "status": "unknown",
-      "verified_at": null
-    },
-    {
-      "confidence": "unknown",
-      "conflict": false,
-      "effective_from": null,
-      "effective_to": null,
-      "expected_return": null,
-      "in_squad": true,
-      "note": "No verified official team-news entry.",
-      "player_id": 496904,
-      "player_key": "api:player:496904",
-      "player_name": "C. Masson",
       "provider_signal": null,
       "reason": null,
       "reason_category": "unknown",
@@ -422,27 +380,6 @@
       "expected_return": null,
       "in_squad": true,
       "note": "No verified official team-news entry.",
-      "player_id": 644159,
-      "player_key": "api:player:644159",
-      "player_name": "J. Mercer",
-      "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
-      "stale": false,
-      "status": "unknown",
-      "verified_at": null
-    },
-    {
-      "confidence": "unknown",
-      "conflict": false,
-      "effective_from": null,
-      "effective_to": null,
-      "expected_return": null,
-      "in_squad": true,
-      "note": "No verified official team-news entry.",
       "player_id": 321860,
       "player_key": "api:player:321860",
       "player_name": "J. Milne",
@@ -504,7 +441,7 @@
       "effective_from": "2026-10-08",
       "effective_to": null,
       "expected_return": null,
-      "in_squad": false,
+      "in_squad": true,
       "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
       "player_id": 68534,
       "player_key": "api:player:68534",
@@ -530,27 +467,6 @@
       "player_id": 153645,
       "player_key": "api:player:153645",
       "player_name": "K. Yengi",
-      "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
-      "stale": false,
-      "status": "unknown",
-      "verified_at": null
-    },
-    {
-      "confidence": "unknown",
-      "conflict": false,
-      "effective_from": null,
-      "effective_to": null,
-      "expected_return": null,
-      "in_squad": true,
-      "note": "No verified official team-news entry.",
-      "player_id": 477991,
-      "player_key": "api:player:477991",
-      "player_name": "L. Carroll",
       "provider_signal": null,
       "reason": null,
       "reason_category": "unknown",
@@ -800,27 +716,6 @@
       "expected_return": null,
       "in_squad": true,
       "note": "No verified official team-news entry.",
-      "player_id": 674621,
-      "player_key": "api:player:674621",
-      "player_name": "Sam McLean",
-      "provider_signal": null,
-      "reason": null,
-      "reason_category": "unknown",
-      "source_id": "none",
-      "source_title": null,
-      "source_url": null,
-      "stale": false,
-      "status": "unknown",
-      "verified_at": null
-    },
-    {
-      "confidence": "unknown",
-      "conflict": false,
-      "effective_from": null,
-      "effective_to": null,
-      "expected_return": null,
-      "in_squad": true,
-      "note": "No verified official team-news entry.",
       "player_id": 231195,
       "player_key": "api:player:231195",
       "player_name": "T. Olusanya",
@@ -856,7 +751,7 @@
       "verified_at": null
     }
   ],
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "notes": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
   "policy_version": "1.0.0",
   "schema_version": "1.0.0",
@@ -873,5 +768,35 @@
       "url": "https://www.api-football.com"
     }
   ],
-  "state": "partial"
+  "state": "partial",
+  "universes": {
+    "active_squad": {
+      "counts": {
+        "available": 1,
+        "doubtful": 0,
+        "out": 1,
+        "returned": 0,
+        "suspended": 0,
+        "unknown": 27
+      },
+      "known": 2,
+      "players": 29,
+      "universe": "active_squad",
+      "unknown": 27
+    },
+    "official_list": {
+      "counts": {
+        "available": 1,
+        "doubtful": 0,
+        "out": 1,
+        "returned": 0,
+        "suspended": 0,
+        "unknown": 32
+      },
+      "known": 2,
+      "players": 34,
+      "universe": "official_list",
+      "unknown": 32
+    }
+  }
 }

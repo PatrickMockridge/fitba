@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "W",
     "aberdeen_result": "W",
+    "aberdeen_result_label": "W",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2023-04-23",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 868872,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/868872/",
+    "outcome": "W",
     "referee": "Nick Walsh, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 33",
     "season": "2022-23",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "M. Beale",
@@ -383,6 +389,132 @@
     "next": "/matches/1023325/",
     "previous": "/matches/868871/",
     "season": "/history/2022-23/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 7,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 27,
+          "player_id": 69450,
+          "player_name": "Liam Scales",
+          "rating": 8.2,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 1,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 21,
+          "player_id": 151754,
+          "player_name": "Leighton Clarkson",
+          "rating": 8.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 6,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 9,
+          "passes_total": 19,
+          "player_id": 109564,
+          "player_name": "Bojan Miovski",
+          "rating": 7.7,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 7,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 65,
+          "passes_total": 71,
+          "player_id": 19437,
+          "player_name": "Ben Davies",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Rangers"
+        },
+        {
+          "assists": null,
+          "duels_won": 5,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 42,
+          "passes_total": 50,
+          "player_id": 1738,
+          "player_name": "Borna Barišić",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Rangers"
+        },
+        {
+          "assists": null,
+          "duels_won": 14,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 82,
+          "passes_total": 100,
+          "player_id": 44865,
+          "player_name": "John Souttar",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Rangers"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 4,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 3,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1186,7 +1318,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1453,7 +1585,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Aberdeen 1.4 (0.0-3.348), Rangers 1.05 (0.0-2.737)."
+        "text": "Shot expectation: Aberdeen 1.24, Rangers 1.51."
       }
     ],
     "events_available": true,
@@ -1678,22 +1810,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 2.737,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -1.506,
+      "goals_position": "within",
+      "high": 2.022,
+      "low": 0.785,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.05
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 20,
+        "shots_blocked": 8,
+        "shots_insidebox": 13,
+        "shots_off": 9,
+        "shots_on_target": 3,
+        "shots_outsidebox": 7
+      },
+      "value": 1.506,
+      "xg_per_shot": 0.075
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.348,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.765,
+      "goals_position": "within",
+      "high": 1.751,
+      "low": 0.514,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.4
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 4,
+        "shots_insidebox": 9,
+        "shots_off": 3,
+        "shots_on_target": 4,
+        "shots_outsidebox": 2
+      },
+      "value": 1.235,
+      "xg_per_shot": 0.112
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

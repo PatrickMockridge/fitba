@@ -4,7 +4,7 @@
     "coverage": {
       "conflicts": 0,
       "doubtful": 0,
-      "entries": 39,
+      "entries": 34,
       "known": 2,
       "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
       "out": 1,
@@ -33,10 +33,40 @@
       "stale": 0,
       "status": "partial",
       "suspended": 0,
-      "unknown": 37
+      "unknown": 32
     },
     "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
-    "state": "partial"
+    "state": "partial",
+    "universes": {
+      "active_squad": {
+        "counts": {
+          "available": 1,
+          "doubtful": 0,
+          "out": 1,
+          "returned": 0,
+          "suspended": 0,
+          "unknown": 27
+        },
+        "known": 2,
+        "players": 29,
+        "universe": "active_squad",
+        "unknown": 27
+      },
+      "official_list": {
+        "counts": {
+          "available": 1,
+          "doubtful": 0,
+          "out": 1,
+          "returned": 0,
+          "suspended": 0,
+          "unknown": 32
+        },
+        "known": 2,
+        "players": 34,
+        "universe": "official_list",
+        "unknown": 32
+      }
+    }
   },
   "case": {
     "benchmark_rows": 8,
@@ -157,8 +187,39 @@
     "club": "sco:aberdeen",
     "coverage": {
       "availability": {
-        "known": 1,
-        "unknown": 37
+        "known": 2,
+        "unknown": 32
+      },
+      "availability_universe": "official_list",
+      "availability_universes": {
+        "active_squad": {
+          "counts": {
+            "available": 1,
+            "doubtful": 0,
+            "out": 1,
+            "returned": 0,
+            "suspended": 0,
+            "unknown": 27
+          },
+          "known": 2,
+          "players": 29,
+          "universe": "active_squad",
+          "unknown": 27
+        },
+        "official_list": {
+          "counts": {
+            "available": 1,
+            "doubtful": 0,
+            "out": 1,
+            "returned": 0,
+            "suspended": 0,
+            "unknown": 32
+          },
+          "known": 2,
+          "players": 34,
+          "universe": "official_list",
+          "unknown": 32
+        }
       },
       "basis": "measured + curated prior",
       "measured_families": 7,
@@ -170,8 +231,9 @@
     "note": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
     "state": "fresh",
     "summary": {
-      "availability_known": 1,
-      "availability_unknown": 37,
+      "availability_known": 2,
+      "availability_universe": "official_list",
+      "availability_unknown": 32,
       "counts": {
         "none": 3,
         "strengthen": 4
@@ -187,7 +249,7 @@
       "reason": "provider_declares_injuries_false",
       "status": "partial"
     },
-    "layers": 28,
+    "layers": 29,
     "migration": {
       "active_source": "football_data_uk",
       "enabled": false,
@@ -207,11 +269,11 @@
   "season": "2026-27",
   "squad": {
     "club": "sco:aberdeen",
-    "count": 38,
-    "loans_out": 9,
-    "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. Loan tags come from the confirmed transfer register. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
+    "count": 34,
+    "loans_out": 5,
+    "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "squad": 29,
-    "stats_unavailable": 10
+    "stats_unavailable": 7
   },
   "transfers": {
     "club": "sco:aberdeen",
@@ -221,12 +283,12 @@
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
   },
   "xg": {
-    "evaluation": "fail",
+    "evaluation": "pass",
     "matches": 367,
-    "model": "fxg-1",
+    "model": "fxg-3",
     "note": "fxG needs shots on target. Missing provider team statistics are shown as unavailable, not zero.",
     "state": "available",
     "with_fxg": 292,
-    "with_provider_xg": 21
+    "with_provider_xg": 47
   }
 }

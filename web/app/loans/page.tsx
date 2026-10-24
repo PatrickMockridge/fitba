@@ -33,8 +33,17 @@ export default function LoansPage() {
           official source records them.
         </p>
         <div className="hero-actions">
-          <span className="badge badge-neutral">{data.loans_out.length} out</span>
-          <span className="badge badge-neutral">{data.loans_in.length} in</span>
+          <span className="badge badge-neutral">
+            {data.loan_scope?.register_current.out_count ?? data.loans_out.length} out
+            in {data.loan_scope?.season ?? data.season}
+          </span>
+          <span className="badge badge-neutral">
+            {data.loan_scope?.register_all_time.out_count ?? data.loans_out.length} out
+            all-time
+          </span>
+          <span className="badge badge-neutral">
+            {data.loan_scope?.official_list.out_count ?? "—"} on the official list
+          </span>
           <span className="badge badge-warn" data-contract-indicator="unknown">
             terms often unknown
           </span>
@@ -96,6 +105,21 @@ export default function LoansPage() {
           match log; the page labels the coverage rather than pretending all tiers
           are equal.
         </p>
+        {data.loan_scope?.reconciliation.register_only_out.length ? (
+          <p className="fine-print">
+            The register also lists{" "}
+            {data.loan_scope.reconciliation.register_only_out
+              .map((item) => item.player_name)
+              .filter(Boolean)
+              .join(", ")}{" "}
+            on loan; they are not on the official men&apos;s team page and are not
+            counted in the squad. See the{" "}
+            <Link className="text-link" href="/squad/">
+              squad page
+            </Link>
+            .
+          </p>
+        ) : null}
         <p className="fine-print" data-contract-indicator="unknown">
           Loan duration, recall and obligation terms are not in the transfer feed.
           They are shown only when confirmed by the club or a public record.

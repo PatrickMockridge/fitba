@@ -16,6 +16,7 @@ import polars as pl
 
 from fitba.analytics.records import record_totals
 from fitba.analytics.tables import league_row, playable_matches
+from fitba.analytics.team_stats import overlay_current_stats
 from fitba.util.dates import seasons_between
 
 LEAGUE_COMPETITION_IDS = {
@@ -100,6 +101,7 @@ def club_match_rows(matches: pl.DataFrame, club_id: str) -> pl.DataFrame:
             continue
         item: dict[str, Any] = {
             "match_id": row.get("match_id"),
+            "team_id": club_id,
             "date": str(row.get("date") or ""),
             "season": row.get("season"),
             "competition_id": row.get("competition_id"),
@@ -120,6 +122,7 @@ def club_match_rows(matches: pl.DataFrame, club_id: str) -> pl.DataFrame:
         rows.append(item)
     if not rows:
         return pl.DataFrame()
+    rows = overlay_current_stats(rows)
     return pl.DataFrame(rows).sort("date")
 
 

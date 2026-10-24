@@ -20,6 +20,8 @@ from typing import Any
 import orjson
 import polars as pl
 
+from fitba.analytics.loans import loan_scope
+from fitba.analytics.records import match_result
 from fitba.analytics.tables import build_tables
 from fitba.analytics.valuation import (
     summarise_valuations,
@@ -44,6 +46,7 @@ from fitba.metrics.audit import (
     build_validation_payload,
     load_corpus,
 )
+from fitba.metrics.consistency import run_consistency
 from fitba.metrics.registry import load_registry, registry_checksum
 from fitba.normalize.schedule import load_schedule
 from fitba.normalize.teams import TeamRegistry
@@ -76,6 +79,7 @@ from fitba.publish.themes import build_themes_payload, fallback_themes_payload
 from fitba.publish.xg import build_xg_payload, fallback_xg_payload
 from fitba.settings import (
     WEB_DATA_DIR,
+    availability_policy,
     ensure_dirs,
     history_markets,
     player_rose,
@@ -92,6 +96,9 @@ from fitba.settings import (
 )
 from fitba.settings import (
     european_competitions as european_config,
+)
+from fitba.settings import (
+    matchday as matchday_config,
 )
 from fitba.settings import (
     sell_on_clauses as sell_on_config,
@@ -263,6 +270,14 @@ def _aberdeen_payload(
         is_home = row["home_team_id"] == club_id
         goals_for = row["home_goals"] if is_home else row["away_goals"]
         goals_against = row["away_goals"] if is_home else row["home_goals"]
+        home_penalties = row.get("home_penalties")
+        away_penalties = row.get("away_penalties")
+        result = match_result(
+            goals_for,
+            goals_against,
+            shootout_for=home_penalties if is_home else away_penalties,
+            shootout_against=away_penalties if is_home else home_penalties,
+        )
         return {
             "match_id": row["match_id"],
             "date": row["date"],
@@ -272,11 +287,7 @@ def _aberdeen_payload(
             "venue": "H" if is_home else "A",
             "goals_for": goals_for,
             "goals_against": goals_against,
-            "result": "W"
-            if goals_for > goals_against
-            else "D"
-            if goals_for == goals_against
-            else "L",
+            **result,
         }
 
     results = [result_row(row) for row in club_matches.to_dicts()]
@@ -302,11 +313,17 @@ def _aberdeen_payload(
         if row["status"] == "played":
             goals_for = row["home_goals"] if is_home else row["away_goals"]
             goals_against = row["away_goals"] if is_home else row["home_goals"]
+            home_penalties = row.get("home_penalties")
+            away_penalties = row.get("away_penalties")
+            result = match_result(
+                goals_for,
+                goals_against,
+                shootout_for=home_penalties if is_home else away_penalties,
+                shootout_against=away_penalties if is_home else home_penalties,
+            )
             item["goals_for"] = goals_for
             item["goals_against"] = goals_against
-            item["result"] = (
-                "W" if goals_for > goals_against else "D" if goals_for == goals_against else "L"
-            )
+            item.update(result)
         return item
 
     schedule = load_schedule(season)
@@ -1213,6 +1230,24 @@ def publish(
 
     squad_data = squad_payload(target_season, generated_at=generated_at)
     player_index = PlayerLinkIndex.from_payload(squad_data)
+
+    transfer_rows = published_transfers()
+    transfer_valuation = value_transfers(
+        transfer_rows,
+        birth_dates=_valuation_birth_dates(),
+        markets=(history_markets() or {}).get("markets", []),
+        fx=((transfer_policy_config() or {}).get("valuation") or {}).get("fx_to_gbp"),
+    )
+    transfers_payload = _transfers_payload(
+        transfer_rows,
+        target_season,
+        player_index,
+        valuation=transfer_valuation,
+    )
+    loans = loan_scope(squad_data, transfers_payload, target_season)
+    squad_data["loan_scope"] = loans
+    transfers_payload["loan_scope"] = loans
+
     squad_info = _write(temp / "squad" / "aberdeen.json", squad_data)
     written.append(squad_info)
     marts.append(
@@ -1286,19 +1321,6 @@ def publish(
         }
     )
 
-    transfer_rows = published_transfers()
-    transfer_valuation = value_transfers(
-        transfer_rows,
-        birth_dates=_valuation_birth_dates(),
-        markets=(history_markets() or {}).get("markets", []),
-        fx=((transfer_policy_config() or {}).get("valuation") or {}).get("fx_to_gbp"),
-    )
-    transfers_payload = _transfers_payload(
-        transfer_rows,
-        target_season,
-        player_index,
-        valuation=transfer_valuation,
-    )
     transfer_info = _write(temp / "transfers" / "aberdeen.json", transfers_payload)
     written.append(transfer_info)
     marts.append(
@@ -1500,9 +1522,14 @@ def publish(
     player_stats_rows = load_player_match_stats().to_dicts()
     appearance_rows = load_player_appearances().to_dicts()
     match_rows = matches.to_dicts()
-    for player in squad_data["players"]:
+    page_players = [
+        *squad_data.get("players", []),
+        *squad_data.get("excluded_players", []),
+    ]
+    for player in page_players:
         player_id = int(player["player_id"])
-        current_squad = player.get("status") == "squad"
+        squad_member = bool(player.get("squad_member", True))
+        current_squad = player.get("status") == "squad" and squad_member
         summary_row = squad_rows.get(player_id) or {}
         recent_matches = (
             build_recent_matches(
@@ -1528,6 +1555,8 @@ def publish(
             cohort_basis=(summary_row.get("cohort") or {}).get("basis"),
             cohort_n=(summary_row.get("cohort") or {}).get("n"),
             current_squad=current_squad,
+            out_of_squad=not squad_member,
+            out_of_squad_reason=player.get("exclusion_reason"),
         )
         page_info = _write(temp / "players" / f"{player_id}.json", page)
         written.append(page_info)
@@ -1668,7 +1697,13 @@ def publish(
         key=lambda item: (str(item.get("date") or ""), str(item.get("kickoff") or ""))
     )
     fixture_index["scheduled"] = scheduled_rows
-    fixture_index["scheduled_count"] = len(scheduled_rows)
+    fixture_index["scheduled_count"] = sum(
+        1 for row in scheduled_rows if row.get("status") == "scheduled"
+    )
+    fixture_index["scheduled_rows_total"] = len(scheduled_rows)
+    fixture_index["conflict_count"] = sum(
+        1 for row in scheduled_rows if row.get("status") == "conflict_review"
+    )
     fixture_index["schedule_coverage"] = {
         "schedule_rows": len(schedule_rows),
         "scheduled": sum(1 for row in schedule_rows if row.get("status") == "scheduled"),
@@ -2252,6 +2287,7 @@ def publish(
             "club": "sco:aberdeen",
             "state": availability_payload.get("state"),
             "coverage": availability_payload.get("coverage"),
+            "universes": availability_payload.get("universes") or {},
             "note": availability_payload.get("notes"),
         },
         "needs": {
@@ -2312,7 +2348,63 @@ def publish(
     registry_info = _write(temp / "metrics" / "registry.json", registry_payload)
     written.append(registry_info)
 
+    consistency_results = run_consistency(load_corpus(temp))
+    consistency_failures = [
+        result for result in consistency_results if result.status != "pass"
+    ]
+    consistency_payload = {
+        "schema_version": "1.0.0",
+        "generated_at": generated_at,
+        "status": "fail" if consistency_failures else "pass",
+        "checks": len(consistency_results),
+        "passed": len(consistency_results) - len(consistency_failures),
+        "failed": len(consistency_failures),
+        "results": [
+            {
+                "id": result.id,
+                "description": result.description,
+                "status": result.status,
+                "rows_checked": result.rows_checked,
+                "fields_checked": result.fields_checked,
+                "errors": result.errors,
+                "payloads": result.payloads,
+            }
+            for result in consistency_results
+        ],
+    }
+    consistency_info = _write(temp / "audit" / "consistency.json", consistency_payload)
+    written.append(consistency_info)
+    marts.append(
+        {
+            "id": "audit.consistency",
+            "path": "audit/consistency.json",
+            "rows": len(consistency_results),
+            "checksum": consistency_info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per consistency check",
+        }
+    )
+    if consistency_failures:
+        messages = [
+            f"{result.id}: {error}"
+            for result in consistency_failures
+            for error in result.errors
+        ]
+        raise RuntimeError("cross-surface consistency failed: " + "; ".join(messages[:5]))
+
     corpus = load_corpus(temp)
+    # The audit needs the freshness block before the final manifest is written;
+    # the final manifest is a superset with the audit checksum.
+    corpus["manifest.json"] = {
+        "freshness": {
+            "dataset_stale_after_hours": int(
+                (matchday_config() or {}).get("stale_after_hours") or 48
+            ),
+            "availability_stale_after_days": int(
+                (availability_policy() or {}).get("max_age_days") or 21
+            ),
+        }
+    }
     audit_payload = build_audit(
         corpus=corpus,
         registry=registry,
@@ -2390,6 +2482,14 @@ def publish(
         "generated_at": generated_at,
         "season": target_season,
         "profile": profile,
+        "freshness": {
+            "dataset_stale_after_hours": int(
+                (matchday_config() or {}).get("stale_after_hours") or 48
+            ),
+            "availability_stale_after_days": int(
+                (availability_policy() or {}).get("max_age_days") or 21
+            ),
+        },
         "sources": sources,
         "provenance": {
             "path": "provenance.json",
@@ -2409,6 +2509,14 @@ def publish(
             "errors": validation_payload["errors"],
             "warnings": validation_payload["warnings"],
             "checks": len(validation_payload["checks"]),
+        },
+        "consistency": {
+            "path": "audit/consistency.json",
+            "checksum": consistency_info["checksum"],
+            "status": consistency_payload["status"],
+            "checks": consistency_payload["checks"],
+            "passed": consistency_payload["passed"],
+            "failed": consistency_payload["failed"],
         },
         "metrics": {
             "registry_path": "metrics/registry.json",

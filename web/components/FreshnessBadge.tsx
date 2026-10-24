@@ -16,11 +16,12 @@ export function FreshnessBadge({ manifest }: { manifest: Manifest | null }) {
       </span>
     );
   }
-  const stale = age > 48;
+  const threshold = manifest.freshness?.dataset_stale_after_hours ?? 48;
+  const stale = age > threshold;
   const label =
     age < 1
       ? "updated this hour"
-      : age < 48
+      : age < threshold
         ? `updated ${Math.round(age)}h ago`
         : `updated ${Math.round(age / 24)}d ago`;
   return (

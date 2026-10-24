@@ -24,7 +24,9 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const squad = getSquad();
-  return (squad?.players ?? []).map((player) => ({ playerId: String(player.player_id) }));
+  return [...(squad?.players ?? []), ...(squad?.excluded_players ?? [])].map((player) => ({
+    playerId: String(player.player_id),
+  }));
 }
 
 export async function generateMetadata({
@@ -275,30 +277,46 @@ function KeyFacts({ page }: { page: PlayerPageDocument }) {
   if (!summary) return null;
   return (
     <div className="stat-row four">
-      <StatTile label="League minutes" value={summary.minutes} note="Premiership" />
+      <StatTile
+        label="All-comp minutes"
+        value={summary.minutes}
+        note={
+          summary.rose_fallback
+            ? `${summary.minutes_season} · rose ${summary.rose_season}`
+            : `${summary.minutes_season} · ${summary.league_minutes ?? "—"} league`
+        }
+      />
       <StatTile
         label="Appearances"
         value={summary.appearances ?? "—"}
-        note="Premiership"
+        note="all competitions"
       />
       <StatTile
         label="Provider rating"
         value={summary.rating === null ? "—" : formatDecimal(summary.rating)}
-        note="opaque; not a verdict"
+        note="all comps; opaque, not a verdict"
       />
       <StatTile
-        label="Cohort percentile"
+        label="League percentile"
         value={
-          summary.rating_percentile === null
+          summary.league_rating_percentile === null
             ? "—"
-            : formatPercentValue(summary.rating_percentile, 1)
+            : formatPercentValue(summary.league_rating_percentile, 1)
         }
         note={
           summary.cohort_n
-            ? `${summary.cohort_basis ?? "role"} cohort, n=${summary.cohort_n}`
-            : "cohort unavailable"
+            ? `Premiership cohort, n=${summary.cohort_n}`
+            : "league comparison unavailable"
         }
       />
+      {summary.output_missing_competitions?.length ? (
+        <p className="fine-print" data-contract="player-profile.output-scope">
+          Provider output is partial: no player statistics for{" "}
+          {summary.output_missing_competitions.join(", ")}. Minutes and starts
+          still cover all Aberdeen competitions; goals, assists and rating cover
+          the competitions listed on the performance panel.
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -408,6 +426,13 @@ export default async function PlayerPage({
 
   return (
     <ContractPage surface="player-profile" state="full">
+      {page.out_of_squad ? (
+        <p className="fine-print" data-contract="player-profile.excluded">
+          Retained profile: this player is not on the official AFC men&apos;s team
+          list and is not counted in the squad. The page is kept so existing
+          transfer and news links continue to resolve.
+        </p>
+      ) : null}
       <ProfileHeader
         eyebrow={`Aberdeen profile · Season ${identity.season}`}
         name={identity.full_name || identity.name}
@@ -456,7 +481,9 @@ export default async function PlayerPage({
         }
         badges={
           <>
-            <span className={statusClass(identity.status)}>{statusText(identity)}</span>
+            <span className={statusClass(identity.status)}>
+              {page.out_of_squad ? "Not in the official squad" : statusText(identity)}
+            </span>
             {identity.injured ? <span className="badge badge-warn">Injured</span> : null}
             {identity.loan?.since ? (
               <span className="badge badge-neutral">
@@ -537,9 +564,12 @@ export default async function PlayerPage({
       >
         <p>
           The rose uses Premiership-only rates and compares with the same league and role
-          cohort at the cohort minutes threshold. Provider values are opaque and league-relative;
-          the cohort percentile is not a cross-league verdict. Availability comes from the
-          curated ledger and keeps its source and verification date. No contracts, wages, fees or
+          cohort at the cohort minutes threshold. Where current-season Premiership minutes
+          are below the profile threshold, it uses the most recent prior Premiership season
+          with at least 180 league minutes and compares against that season&apos;s cohort; the
+          season is labelled. Provider values are opaque and league-relative; the cohort
+          percentile is not a cross-league verdict. Availability comes from the curated
+          ledger and keeps its source and verification date. No contracts, wages, fees or
           recommendations are claimed.
         </p>
       </ProfileSection>

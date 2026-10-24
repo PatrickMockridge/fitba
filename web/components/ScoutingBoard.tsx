@@ -10,6 +10,7 @@ import type {
   ScoutingPriorityConfig,
 } from "@/lib/data";
 import { formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
+import { priorityFor as priorityForValues } from "@/lib/scouting-filters";
 
 type SortKey =
   | "priority"
@@ -52,24 +53,6 @@ function percentile(value: number | null): string {
 
 function percentage(value: number | null): string {
   return value === null || value === undefined ? "—" : formatPercentValue(value, 1);
-}
-
-function priorityFor(
-  player: ScoutingPlayer,
-  weights: ScoutingPriorityConfig,
-  u23Boost: boolean,
-  europeDiscount: boolean,
-): number | null {
-  if (player.value_index === null) return null;
-  const ageMultiplier =
-    u23Boost && player.age !== null && player.age <= weights.u23_max_age
-      ? weights.u23_multiplier
-      : 1;
-  const europeMultiplier =
-    europeDiscount && player.european_status === "qualified"
-      ? weights.europe_multiplier
-      : 1;
-  return player.value_index * ageMultiplier * europeMultiplier;
 }
 
 function sortValue(player: Row, key: SortKey, archetype: string): number | null {
@@ -162,7 +145,23 @@ export function ScoutingBoard({
       })
       .map((player) => ({
         ...player,
-        priority: priorityFor(player, weights, u23Boost, europeDiscount),
+        priority: priorityForValues(
+          player.value_index,
+          player.age,
+          player.european_status,
+          weights,
+          {
+            priorityActive: true,
+            u23Boost,
+            u23Only,
+            europeDiscount,
+            excludeEurope,
+            underperformingOnly,
+            archetype,
+            role,
+            league: "",
+          },
+        ),
       }));
     return matched.sort((left, right) => {
       const leftValue = sortValue(left, sort, archetype);

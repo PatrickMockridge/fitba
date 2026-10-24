@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2022-09-17",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 868722,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:hibernian",
     "home_team_name": "Hibernian",
     "href": "/matches/868722/",
+    "outcome": "W",
     "referee": "David Dickinson, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 8",
     "season": "2022-23",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Easter Road Stadium"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -423,6 +429,123 @@
     "next": "/matches/868728/",
     "previous": "/matches/868714/",
     "season": "/history/2022-23/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 3,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 45,
+          "pass_accuracy": 3,
+          "passes_total": 5,
+          "player_id": 162944,
+          "player_name": "Duk",
+          "rating": 7.3,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 1,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 55,
+          "pass_accuracy": 8,
+          "passes_total": 13,
+          "player_id": 17942,
+          "player_name": "Hayden Coulson",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 13,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 20,
+          "passes_total": 27,
+          "player_id": 1743,
+          "player_name": "Ross McCrorie",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 37,
+          "passes_total": 43,
+          "player_id": 19668,
+          "player_name": "Joe Newell",
+          "rating": 8.3,
+          "shots_on": 2,
+          "shots_total": 4,
+          "tackles": 4,
+          "team_name": "Hibernian"
+        },
+        {
+          "assists": null,
+          "duels_won": 5,
+          "goals": 2,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 85,
+          "pass_accuracy": 16,
+          "passes_total": 23,
+          "player_id": 107091,
+          "player_name": "Josh Campbell",
+          "rating": 8.2,
+          "shots_on": 3,
+          "shots_total": 3,
+          "tackles": 1,
+          "team_name": "Hibernian"
+        },
+        {
+          "assists": 1,
+          "duels_won": 4,
+          "goals": null,
+          "href": "/players/44921/",
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 53,
+          "passes_total": 57,
+          "player_id": 44921,
+          "player_name": "Christopher Cadden",
+          "rating": 7.9,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Hibernian"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1226,7 +1349,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1544,7 +1667,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Hibernian 2.8 (0.045-5.554), Aberdeen 0.35 (0.0-1.324)."
+        "text": "Shot expectation: Hibernian 3.13, Aberdeen 0.47."
       }
     ],
     "events_available": true,
@@ -2094,22 +2217,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.324,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 1,
+      "goals_low": 0,
+      "goals_minus": 0.529,
+      "goals_position": "within",
+      "high": 0.987,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.35
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 5,
+        "shots_blocked": 2,
+        "shots_insidebox": 4,
+        "shots_off": 2,
+        "shots_on_target": 1,
+        "shots_outsidebox": 1
+      },
+      "value": 0.471,
+      "xg_per_shot": 0.094
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 5.554,
-      "low": 0.045,
+      "basis": "zones",
+      "goals": 3,
+      "goals_high": 5,
+      "goals_low": 1,
+      "goals_minus": -0.13,
+      "goals_position": "within",
+      "high": 3.646,
+      "low": 2.409,
+      "penalties": 1,
+      "penalties_known": true,
+      "penalty_xg": 0.76,
       "provider": null,
-      "value": 2.8
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 1,
+        "penalty_goals": 1,
+        "shots": 25,
+        "shots_blocked": 6,
+        "shots_insidebox": 19,
+        "shots_off": 11,
+        "shots_on_target": 8,
+        "shots_outsidebox": 6
+      },
+      "value": 3.13,
+      "xg_per_shot": 0.125
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

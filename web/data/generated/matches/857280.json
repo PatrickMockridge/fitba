@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2022-05-11",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 857280,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:st-johnstone",
     "home_team_name": "St Johnstone",
     "href": "/matches/857280/",
+    "outcome": "W",
     "referee": "D. Munro",
     "result": "W",
+    "result_label": "W",
     "round": "Championship Round - 4",
     "season": "2021-22",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "McDiarmid Park"
@@ -96,7 +102,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -379,6 +385,140 @@
     "next": "/matches/857285/",
     "previous": "/matches/857272/",
     "season": "/history/2021-22/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 10,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 75,
+          "passes_total": 86,
+          "player_id": 44814,
+          "player_name": "Lewis Ferguson",
+          "rating": 7.7,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 11,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 68,
+          "passes_total": 77,
+          "player_id": 24865,
+          "player_name": "David Bates",
+          "rating": 7.5,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 5,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 45,
+          "passes_total": 56,
+          "player_id": 138460,
+          "player_name": "Connor Barron",
+          "rating": 7.3,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 85,
+          "pass_accuracy": 9,
+          "passes_total": 15,
+          "player_id": 44905,
+          "player_name": "Callum Hendry",
+          "rating": 7.3,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": 4,
+          "team_name": "St Johnstone"
+        },
+        {
+          "assists": null,
+          "duels_won": null,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 12,
+          "passes_total": 25,
+          "player_id": 44885,
+          "player_name": "Zander Clark",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "St Johnstone"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 20,
+          "passes_total": 34,
+          "player_id": 45128,
+          "player_name": "Jamie McCart",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "St Johnstone"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 69.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 31.0,
+        "source": "api_football",
+        "unit": "%"
+      },
+      {
+        "aberdeen": 84.0,
+        "key": "passes_pct",
+        "label": "Pass accuracy",
+        "opponent": 66.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1162,7 +1302,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1411,7 +1551,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: St Johnstone 0.614 (0.0-1.92), Aberdeen 0.614 (0.0-1.92)."
+        "text": "Shot expectation: St Johnstone 0.66, Aberdeen 0.57."
       }
     ],
     "events_available": true,
@@ -1811,22 +1951,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.92,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.571,
+      "goals_position": "within",
+      "high": 1.087,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.614
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 9,
+        "shots_blocked": 3,
+        "shots_insidebox": 4,
+        "shots_off": 4,
+        "shots_on_target": 2,
+        "shots_outsidebox": 5
+      },
+      "value": 0.571,
+      "xg_per_shot": 0.063
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 1.92,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.336,
+      "goals_position": "within",
+      "high": 1.18,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.614
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 9,
+        "shots_blocked": 1,
+        "shots_insidebox": 5,
+        "shots_off": 6,
+        "shots_on_target": 2,
+        "shots_outsidebox": 4
+      },
+      "value": 0.664,
+      "xg_per_shot": 0.074
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

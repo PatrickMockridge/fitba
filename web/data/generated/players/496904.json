@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "identity": {
     "age": 17,
     "full_name": "C. Masson",
@@ -21,6 +21,8 @@
     "side": null,
     "status": "squad"
   },
+  "out_of_squad": true,
+  "out_of_squad_reason": "not_on_official_list",
   "panel_order": [
     "profile",
     "position",
@@ -32,26 +34,12 @@
   ],
   "panels": {
     "availability": {
-      "badge": "unknown",
-      "data": {
-        "availability": {
-          "confidence": "unknown",
-          "expected_return": null,
-          "in_squad": true,
-          "note": "No verified official team-news entry.",
-          "reason": null,
-          "reason_category": "unknown",
-          "source_id": "none",
-          "source_title": null,
-          "source_url": null,
-          "status": "unknown",
-          "verified_at": null
-        }
-      },
+      "badge": null,
+      "data": null,
       "eyebrow": "Availability",
       "id": "availability",
-      "note": "No verified official team-news entry.",
-      "status": "partial",
+      "note": "Current-squad team news is not applicable to this loan profile.",
+      "status": "not_applicable",
       "title": "Availability and team news",
       "warnings": []
     },
@@ -390,11 +378,15 @@
     "profile": {
       "badge": "below_min_minutes",
       "data": {
-        "current_squad": true,
+        "current_squad": false,
         "rose": {
           "basis": "insufficient",
           "cohort_min_minutes": 450,
           "cohort_n": 0,
+          "cohort_season": "2026-27",
+          "fallback": false,
+          "fallback_note": "No prior Premiership season met the 180-minute profile threshold.",
+          "fallback_reason": "no_prior_premiership_season",
           "figures": [
             {
               "axes": [
@@ -512,6 +504,7 @@
           "min_minutes": 180,
           "minutes": 0,
           "reason": "below_min_minutes",
+          "season_used": "2026-27",
           "status": "unavailable"
         },
         "rose_catalogue": {
@@ -613,22 +606,32 @@
           }
         },
         "summary": {
-          "appearances": null,
+          "appearances": 0,
           "cohort_basis": null,
           "cohort_n": null,
           "league": "sco:premiership",
+          "league_appearances": 0,
           "league_label": "Scottish Premiership",
+          "league_minutes": null,
+          "league_rating": null,
+          "league_rating_percentile": null,
           "minutes": 0,
+          "minutes_season": "2026-27",
+          "output_coverage": "available",
+          "output_missing_competitions": [],
           "rating": null,
           "rating_percentile": null,
           "role_label": null,
+          "rose_fallback": false,
+          "rose_season": "2026-27",
+          "scope": "all_competitions",
           "season": "2026-27"
         },
         "tier": "extended"
       },
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort insufficient n=0; percentiles 0-100, higher is better.",
+      "note": "League-only rates; cohort insufficient n=0; percentiles 0-100, higher is better. No prior Premiership season met the 180-minute profile threshold.",
       "status": "unavailable",
       "title": "Overall and position profile",
       "warnings": []
@@ -638,8 +641,8 @@
       "data": [],
       "eyebrow": "Recent matches",
       "id": "recent_matches",
-      "note": "Current season, competitive matches only; latest 10. Missing provider values are shown as a dash, not zero.",
-      "status": "unavailable",
+      "note": "Recent Aberdeen matches are not applicable to this loan profile.",
+      "status": "not_applicable",
       "title": "Recent match log",
       "warnings": []
     },
@@ -655,13 +658,18 @@
     }
   },
   "player_id": 496904,
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "season": "2026-27",
   "warnings": [
     {
       "code": "POSITION_UNKNOWN",
       "field": "position",
       "message": "No starting-XI role evidence was found."
+    },
+    {
+      "code": "EXCLUDED_FROM_SQUAD",
+      "field": "profile",
+      "message": "Not on the official AFC men's team list; retained so existing links resolve and excluded from squad counts."
     }
   ]
 }

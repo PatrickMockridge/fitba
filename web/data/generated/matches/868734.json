@@ -10,7 +10,9 @@
   },
   "depth": "partial",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2022-10-08",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 868734,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:dundee-united",
     "home_team_name": "Dundee United",
     "href": "/matches/868734/",
+    "outcome": "W",
     "referee": "William Collum, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 10",
     "season": "2022-23",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Tannadice Park"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -291,6 +297,123 @@
     "next": "/matches/868740/",
     "previous": "/matches/868728/",
     "season": "/history/2022-23/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 11,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 77,
+          "passes_total": 92,
+          "player_id": 69450,
+          "player_name": "Liam Scales",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 81,
+          "pass_accuracy": 50,
+          "passes_total": 58,
+          "player_id": 15673,
+          "player_name": "Ylber Ramadani",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 1,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 33,
+          "pass_accuracy": 16,
+          "passes_total": 22,
+          "player_id": 151754,
+          "player_name": "Leighton Clarkson",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 9,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 16,
+          "passes_total": 28,
+          "player_id": 20388,
+          "player_name": "Ryan Edwards",
+          "rating": 7.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Dundee United"
+        },
+        {
+          "assists": null,
+          "duels_won": 10,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 85,
+          "pass_accuracy": 14,
+          "passes_total": 20,
+          "player_id": 69243,
+          "player_name": "Jamie McGrath",
+          "rating": 7.7,
+          "shots_on": 2,
+          "shots_total": 3,
+          "tackles": 3,
+          "team_name": "Dundee United"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 87,
+          "pass_accuracy": 7,
+          "passes_total": 20,
+          "player_id": 44909,
+          "player_name": "Tony Watt",
+          "rating": 7.6,
+          "shots_on": 3,
+          "shots_total": 3,
+          "tackles": null,
+          "team_name": "Dundee United"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1094,7 +1217,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1383,7 +1506,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Dundee United 2.8 (0.045-5.554), Aberdeen 0.35 (0.0-1.324)."
+        "text": "Shot expectation: Dundee United 2.39, Aberdeen 0.84."
       }
     ],
     "events_available": true,
@@ -1808,22 +1931,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.324,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.842,
+      "goals_position": "within",
+      "high": 1.358,
+      "low": 0.121,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.35
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 14,
+        "shots_blocked": 8,
+        "shots_insidebox": 8,
+        "shots_off": 5,
+        "shots_on_target": 1,
+        "shots_outsidebox": 6
+      },
+      "value": 0.842,
+      "xg_per_shot": 0.06
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 5.554,
-      "low": 0.045,
+      "basis": "zones",
+      "goals": 4,
+      "goals_high": 4,
+      "goals_low": 1,
+      "goals_minus": 1.611,
+      "goals_position": "within",
+      "high": 2.905,
+      "low": 1.668,
+      "penalties": 1,
+      "penalties_known": true,
+      "penalty_xg": 0.76,
       "provider": null,
-      "value": 2.8
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 1,
+        "penalty_goals": 1,
+        "shots": 14,
+        "shots_blocked": 1,
+        "shots_insidebox": 11,
+        "shots_off": 5,
+        "shots_on_target": 8,
+        "shots_outsidebox": 3
+      },
+      "value": 2.389,
+      "xg_per_shot": 0.171
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

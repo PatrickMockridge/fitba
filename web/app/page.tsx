@@ -135,7 +135,8 @@ export default function HomePage() {
                     : `${lastResult.opponent_name} ${lastResult.goals_against}–${lastResult.goals_for} Aberdeen`}
                 </strong>{" "}
                 <span className="muted">
-                  · {lastResult.competition_name} · {formatDate(lastResult.date)}
+                  · {lastResult.result_label ?? lastResult.result} ·{" "}
+                  {lastResult.competition_name} · {formatDate(lastResult.date)}
                 </span>
               </p>
             </div>
@@ -265,7 +266,7 @@ export default function HomePage() {
                     <li key={player.player_id}>
                       <PlayerLink name={player.full_name || player.name} href={player.href} />
                       <span className="muted">
-                        {player.position_group ?? "—"} · {player.totals?.minutes ?? 0} mins
+                        {player.position_group ?? "—"} · {player.totals?.minutes ?? 0} all-comp mins
                       </span>
                     </li>
                   ))}

@@ -111,17 +111,26 @@ transfer recommendation, a fee/wage/contract-expiry claim, “will leave”,
 
 Must remain visible:
 
-- The model id, label, experimental status and fit size.
-- The provider-xG evaluation: status, validation season, matches, bias, MAE and
-  calibration slope.
-- The aggregate table with columns Scope, Matches, fxG, 80% interval, Goals,
-  Goals − fxG, 80% interval.
+- The model id, label, experimental status and fit size (matches and team rows).
+- The provider-xG calibration: method, status, validation season, matches, team
+  rows, bias, MAE and calibration slope.
+- The aggregate table with columns Scope, Matches, fxG, 80% model range, xG per
+  shot, Goals, 80% goals range, Goals − fxG.
+- The uncertainty card: the model range, the goals range, bootstrap and
+  dispersion, and why per-match intervals are never summed.
+- The overperformance and style cards: Goals − fxG and its position, xG per
+  shot, shot volume, penalties and the no-style-adjustment caveat.
+- The provider card: provider xG sources, separation from fxG, and the absence
+  of xGOT and shot coordinates.
 - Coverage: played fixtures, with fxG, with provider xG, missing team stats.
-- The model card: what it does, what it does not do and the gate result.
+- The model card: what it does, what it does not do, the selected specification,
+  coefficients, candidate table, calibration result and transfer check.
 - Links to Season overview, methodology and the results and fixtures page.
 
-Forbidden: calling fxG provider xG, hiding the gate failure, a point estimate
-without its interval, or a result prediction.
+Forbidden: calling fxG provider xG, hiding the calibration status, a point
+estimate without its model and goals ranges, summing per-match intervals,
+calling either range a confidence interval for team quality, or a result
+prediction.
 
 ### `/matches/` — results and fixtures
 
@@ -154,16 +163,21 @@ Must remain visible:
   marker; red cards with explicit "Straight red" and "Second yellow" labels;
   shootout score; the team key; and the event-feed completeness note.
 - Aberdeen in red and the opposition neutral across the scoreboard, stats, fxG,
-  timeline, lineups and player stats. Team names and a visible team key remain;
-  colour is never the only cue.
+  timeline, lineups, player stats and performance. Team names and a visible team
+  key remain; colour is never the only cue.
 - The deterministic read with measured/inferred/unknown basis.
 - Match stats table with source and basis per row.
-- fxG and provider xG separately, or an explicit unavailable state. When the
-  fxG gate has failed, the gate status and a link to the model page are visible
+- fxG, its 80% model range, its 80% goals range and provider xG separately, or
+  an explicit unavailable state. Goals, Goals − fxG and the below/within/above
+  position, xG per shot, the shot profile, penalties and the model basis are
+  visible. The calibration status and a link to the model page are visible
   beside the number.
 - Timeline with goals, cards, substitutions and VAR where available.
 - Both lineups and the substitutes.
 - Player match stats where available.
+- The performance block: standout measured output for both teams (top provider
+  ratings with goals, assists, shots on target, passes, tackles and duels) and
+  the measured team strengths, labelled provider/measured and not a verdict.
 - Coverage and the depth state.
 - Previous/next match, season and match-record links.
 - A duplicate record carries a visible notice and a link to the canonical match;
@@ -237,8 +251,8 @@ no per-card unknown state, removal of the in/out split.
 Must remain visible:
 
 - The squad summary: size, loans out, role evidence, stats unavailable.
-- The roster table: Player, Role, Age, Status, Starts, Sub, Mins, Conc, CS, G,
-  A, OG, Rating, Stats, with loan status and availability labels.
+- The roster table: Player, No., Role, Age, Status, Starts, Sub, Mins, Conc, CS,
+  G, A, OG, Rating, Stats, with loan status and availability labels.
 - The role-mix card: squad profile tiles (average age, registered players,
   role evidence, starts with a role) and absolute-count bars for primary
   position group and primary role family.
@@ -246,6 +260,9 @@ Must remain visible:
   table: Current-season output, Position and role, Minutes, Loan status, and
   Context and links.
 - The coverage note and the source/method link.
+- The canonical official roster source link and fetched-at note; API-only rows
+  outside the official list are retained profiles, not squad rows, and official
+  loanees with an unknown club say so.
 
 May be disclosed: the role-inference dialog and its career heat map, and long
 method notes. The roster table stays visible.
@@ -267,7 +284,10 @@ The extended tier of the player-profile standard. Must remain visible:
   partial figure says why and does not draw zero petals. There is no duplicate
   rose table.
 - Key facts: Premiership minutes, appearances, provider rating and cohort
-  percentile with the cohort basis and n.
+  percentile with the cohort basis and n. Key facts remain current-season when
+  the rose uses a prior-season fallback.
+- The rose's season label and visible fallback note when a prior season is used;
+  the note must not imply that the prior season is current form.
 - The Position panel: role inference, career evidence and club history.
 - Playing time: starts, sub apps, minutes started, minutes as sub and the
   per-competition table.
@@ -288,8 +308,9 @@ derive or merge new facts. Loan-out players keep their role and loan record but
 show Availability and Recent matches as not applicable.
 
 Forbidden: zero-filling a missing petal, hiding a missing cohort, presenting a
-provider rating as a verdict, an injury claim without the verified ledger, a
-contract/wage/fee claim, or removing a panel to fit a layout.
+provider rating as a verdict, presenting a prior-season fallback as current-season
+form, an injury claim without the verified ledger, a contract/wage/fee claim, or
+removing a panel to fit a layout.
 
 ### `/scouting/` — scouting board
 
@@ -543,6 +564,8 @@ Must remain visible:
 - Validation status, check count, errors and warnings.
 - Metric-audit status, registry version and checksum, metric and parameter
   counts, and the `provenance_only` count.
+- Cross-surface consistency status, passed/failed check counts, and any first
+  failures.
 - Source freshness and the published mart list.
 - Coverage for competitions, cups, transfers, history, rumours and forum.
 

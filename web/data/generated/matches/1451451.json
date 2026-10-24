@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:conference-league",
     "competition_name": "UEFA Conference League",
     "date": "2025-12-18",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1451451,
@@ -28,10 +31,13 @@
     "home_team_id": "other:sparta-praha",
     "home_team_name": "Sparta Praha",
     "href": "/matches/1451451/",
+    "outcome": "W",
     "referee": "D. Smajc",
     "result": "W",
+    "result_label": "W",
     "round": "League Stage - 6",
     "season": "2025-26",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "epet ARENA"
@@ -86,7 +92,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "Peter Leven",
@@ -393,6 +399,123 @@
     "next": "/matches/1382768/",
     "previous": "/matches/1382762/",
     "season": "/history/2025-26/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 9,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 86,
+          "pass_accuracy": 36,
+          "passes_total": 46,
+          "player_id": 137129,
+          "player_name": "Adil Aouchiche",
+          "rating": 7.0,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 2,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 8,
+          "pass_accuracy": 6,
+          "passes_total": 7,
+          "player_id": 15644,
+          "player_name": "Sivert Heltne Nilsen",
+          "rating": 6.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 45,
+          "pass_accuracy": 7,
+          "passes_total": 12,
+          "player_id": 162045,
+          "player_name": "Marko Lazetić",
+          "rating": 6.6,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 8,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 88,
+          "pass_accuracy": 28,
+          "passes_total": 32,
+          "player_id": 40446,
+          "player_name": "Lukáš Haraslín",
+          "rating": 8.5,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Sparta Praha"
+        },
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 45,
+          "pass_accuracy": 22,
+          "passes_total": 27,
+          "player_id": 237122,
+          "player_name": "John Mercado",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Sparta Praha"
+        },
+        {
+          "assists": 1,
+          "duels_won": 10,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 38,
+          "passes_total": 47,
+          "player_id": 709,
+          "player_name": "Pavel Kadeřábek",
+          "rating": 7.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 6,
+          "team_name": "Sparta Praha"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1316,7 +1439,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1606,8 +1729,8 @@
         "text": "Possession: Sparta Praha 61.0%, Aberdeen 39.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: Sparta Praha 1.969 (0.0-4.295), Aberdeen 0.0 (0.0-0.0)."
+        "basis": "measured",
+        "text": "Provider xG: Sparta Praha 1.09, Aberdeen 0.10."
       }
     ],
     "events_available": true,
@@ -2007,22 +2130,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 0,
+      "goals_low": 0,
+      "goals_minus": -0.093,
+      "goals_position": "within",
+      "high": 0.609,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 0.1,
-      "value": 0.0
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 3,
+        "shots_blocked": 0,
+        "shots_insidebox": 1,
+        "shots_off": 3,
+        "shots_on_target": 0,
+        "shots_outsidebox": 2
+      },
+      "value": 0.093,
+      "xg_per_shot": 0.031
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 4.295,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 3,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 1.471,
+      "goals_position": "within",
+      "high": 2.045,
+      "low": 0.808,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 1.09,
-      "value": 1.969
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 13,
+        "shots_blocked": 3,
+        "shots_insidebox": 10,
+        "shots_off": 4,
+        "shots_on_target": 6,
+        "shots_outsidebox": 3
+      },
+      "value": 1.529,
+      "xg_per_shot": 0.118
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

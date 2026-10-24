@@ -50,11 +50,13 @@ function RoseChart({
   idPrefix,
   playerName,
   catalogue,
+  seasonNote,
 }: {
   figure: RoseFigure;
   idPrefix: string;
   playerName: string;
   catalogue: RoseCatalogue;
+  seasonNote?: string | null;
 }) {
   const axes = figure.axes;
   const step = (Math.PI * 2) / Math.max(1, axes.length);
@@ -93,11 +95,13 @@ function RoseChart({
           {playerName} {figure.label.toLowerCase()}
         </title>
         <desc id={descId}>
-          {available
-            ? `Nightingale rose of percentile ranks against the player's comparison cohort. ${
-                top ? `Highest axes: ${top}. ` : ""
-              } ${values || "No configured axes."}`
-            : `No comparable cohort was available for the ${figure.label.toLowerCase()}.`}
+          {`${seasonNote ? `${seasonNote} ` : ""}${
+            available
+              ? `Nightingale rose of percentile ranks against the player's comparison cohort. ${
+                  top ? `Highest axes: ${top}. ` : ""
+                } ${values || "No configured axes."}`
+              : `No comparable cohort was available for the ${figure.label.toLowerCase()}.`
+          }`}
         </desc>
         <g aria-hidden="true">
           {[25, 50, 75, 100].map((ring) => (
@@ -179,8 +183,21 @@ export function PlayerRose({
           <p className="eyebrow">Statistical profile</p>
           <h2>Overall and position profile</h2>
         </div>
-        <span className="badge badge-neutral">{rose.league_label}</span>
+        <span className="badge badge-neutral">
+          {rose.league_label}
+          {rose.fallback && rose.season_used ? ` · ${rose.season_used}` : ""}
+        </span>
       </div>
+      {rose.fallback ? (
+        <p className="fine-print" data-contract="player-profile.rose-season">
+          {rose.fallback_note ??
+            `Showing ${rose.season_used} statistics; the current season is below the profile threshold.`}
+        </p>
+      ) : rose.status === "unavailable" && rose.fallback_note ? (
+        <p className="fine-print" data-contract="player-profile.rose-season">
+          {rose.fallback_note}
+        </p>
+      ) : null}
       <p className="fine-print" data-contract-indicator="basis">
         {`League-only rates. Both figures compare with the same ${
           rose.basis === "provider_group"
@@ -203,6 +220,7 @@ export function PlayerRose({
             idPrefix={idPrefix}
             playerName={playerName}
             catalogue={catalogue}
+            seasonNote={rose.fallback_note}
           />
         ))}
       </div>

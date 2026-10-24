@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:conference-league",
     "competition_name": "UEFA Conference League",
     "date": "2025-10-23",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1452160,
@@ -28,10 +31,13 @@
     "home_team_id": "other:aek-athens",
     "home_team_name": "AEK Athens FC",
     "href": "/matches/1452160/",
+    "outcome": "W",
     "referee": "Jasper Vergoote, Belgium",
     "result": "W",
+    "result_label": "W",
     "round": "League Stage - 2",
     "season": "2025-26",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "OPAP Arena"
@@ -87,7 +93,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "Bo Jimmy Thelin",
@@ -394,6 +400,123 @@
     "next": "/matches/1382714/",
     "previous": "/matches/1382713/",
     "season": "/history/2025-26/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 58,
+          "pass_accuracy": 12,
+          "passes_total": 13,
+          "player_id": 311817,
+          "player_name": "Alfie Dorrington",
+          "rating": 8.0,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 72,
+          "pass_accuracy": 14,
+          "passes_total": 19,
+          "player_id": 48079,
+          "player_name": "Jesper Karlsson",
+          "rating": 6.7,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 1,
+          "goals": null,
+          "href": "/players/18945/",
+          "is_aberdeen": true,
+          "minutes": 62,
+          "pass_accuracy": 17,
+          "passes_total": 18,
+          "player_id": 18945,
+          "player_name": "Stuart Armstrong",
+          "rating": 6.7,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 6,
+          "goals": 2,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 65,
+          "pass_accuracy": 23,
+          "passes_total": 25,
+          "player_id": 8543,
+          "player_name": "Aboubakary Koita",
+          "rating": 9.9,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "AEK Athens FC"
+        },
+        {
+          "assists": 2,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 84,
+          "passes_total": 88,
+          "player_id": 35576,
+          "player_name": "Orbelín Pineda",
+          "rating": 8.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 3,
+          "team_name": "AEK Athens FC"
+        },
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 30,
+          "passes_total": 38,
+          "player_id": 19270,
+          "player_name": "Niclas Eliasson",
+          "rating": 8.3,
+          "shots_on": 2,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "AEK Athens FC"
+        }
+      ]
+    },
+    "strengths": []
   },
   "player_stats": [
     {
@@ -1277,7 +1400,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1621,8 +1744,8 @@
         "text": "Possession: AEK Athens FC 73.0%, Aberdeen 27.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: AEK Athens FC 3.282 (0.28-6.284), Aberdeen 0.656 (0.0-1.999)."
+        "basis": "measured",
+        "text": "Provider xG: AEK Athens FC 5.13, Aberdeen 0.45."
       }
     ],
     "events_available": true,
@@ -2097,22 +2220,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.999,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.664,
+      "goals_position": "within",
+      "high": 1.18,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 0.45,
-      "value": 0.656
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 8,
+        "shots_blocked": 4,
+        "shots_insidebox": 5,
+        "shots_off": 2,
+        "shots_on_target": 2,
+        "shots_outsidebox": 3
+      },
+      "value": 0.664,
+      "xg_per_shot": 0.083
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 6.284,
-      "low": 0.28,
+      "basis": "zones",
+      "goals": 6,
+      "goals_high": 5,
+      "goals_low": 1,
+      "goals_minus": 3.236,
+      "goals_position": "above",
+      "high": 3.28,
+      "low": 2.043,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 5.13,
-      "value": 3.282
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 27,
+        "shots_blocked": 3,
+        "shots_insidebox": 19,
+        "shots_off": 14,
+        "shots_on_target": 10,
+        "shots_outsidebox": 8
+      },
+      "value": 2.764,
+      "xg_per_shot": 0.102
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

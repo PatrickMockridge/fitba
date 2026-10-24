@@ -10,6 +10,53 @@ from collections.abc import Iterable
 from typing import Any
 
 
+def match_result(
+    goals_for: int | None,
+    goals_against: int | None,
+    *,
+    shootout_for: int | None = None,
+    shootout_against: int | None = None,
+) -> dict[str, Any]:
+    """Return the regulation result and, separately, the shootout outcome.
+
+    ``result`` is the 90/120-minute result used for W-D-L and league points.
+    ``outcome`` includes a penalty shootout; it is the result a supporter would
+    call the tie. A shootout is never collapsed into a bare league-style draw.
+    """
+    gf = int(goals_for or 0)
+    ga = int(goals_against or 0)
+    result = "W" if gf > ga else "L" if gf < ga else "D"
+    if shootout_for is None or shootout_against is None:
+        return {
+            "result": result,
+            "outcome": result,
+            "result_label": result,
+            "shootout_result": None,
+            "decided_by": "regulation",
+        }
+    penalties_for = int(shootout_for)
+    penalties_against = int(shootout_against)
+    if penalties_for == penalties_against:
+        return {
+            "result": result,
+            "outcome": result,
+            "result_label": f"{result} ({penalties_for}-{penalties_against} pens)",
+            "shootout_result": "level",
+            "decided_by": "penalties",
+        }
+    won = penalties_for > penalties_against
+    return {
+        "result": result,
+        "outcome": "W" if won else "L",
+        "result_label": (
+            f"{result} ({'won' if won else 'lost'} "
+            f"{penalties_for}-{penalties_against} pens)"
+        ),
+        "shootout_result": "won" if won else "lost",
+        "decided_by": "penalties",
+    }
+
+
 def record_totals(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
     """Return played, W-D-L, goals, points, goal difference and PPG."""
     items = list(rows)
@@ -33,4 +80,4 @@ def record_totals(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-__all__ = ["record_totals"]
+__all__ = ["match_result", "record_totals"]

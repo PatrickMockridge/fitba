@@ -146,9 +146,17 @@ Time concepts are distinct:
 ## Profile panel
 
 The first panel carries the published two-figure Nightingale rose block, the
-Premiership summary facts and the catalogue. See
-`docs/player-profile-standard.md` for the rose rules, cohort and unavailable
-states. React renders the published axes; it does not compute percentiles.
+all-competition season summary and the catalogue. The summary's headline
+minutes, appearances and provider rating are Aberdeen all competitions; the
+league comparison is published as a separate labelled tile. If a competition
+has no provider player stats, the summary says `partial` and names it; minutes
+and starts still cover all Aberdeen competitions. The percentile is a
+Premiership-cohort comparison of the league-only rating, not a percentile of the
+all-competition headline. See `docs/player-profile-standard.md` for the rose
+rules, cohort and unavailable states. When current-season minutes are below the
+gate, the block names the prior season used and shows a visible fallback note;
+key facts remain current-season. React renders the published axes; it does not
+compute percentiles.
 
 ## Availability panel
 

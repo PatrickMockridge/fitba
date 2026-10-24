@@ -3,6 +3,24 @@
     "AvailabilityPanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -34,16 +52,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "availability",
-          "default": "availability",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -56,26 +64,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "availability",
+          "default": "availability",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -90,6 +90,37 @@
     "IdentityBlock": {
       "additionalProperties": false,
       "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "full_name": {
+          "title": "Full Name",
+          "type": "string"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role"
+        },
         "age": {
           "anyOf": [
             {
@@ -100,34 +131,6 @@
             }
           ],
           "title": "Age"
-        },
-        "full_name": {
-          "title": "Full Name",
-          "type": "string"
-        },
-        "href": {
-          "title": "Href",
-          "type": "string"
-        },
-        "injured": {
-          "title": "Injured",
-          "type": "boolean"
-        },
-        "loan": {
-          "anyOf": [
-            {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "title": "Loan"
-        },
-        "name": {
-          "title": "Name",
-          "type": "string"
         },
         "nationality": {
           "anyOf": [
@@ -151,27 +154,25 @@
           ],
           "title": "Number"
         },
-        "player_id": {
-          "title": "Player Id",
-          "type": "integer"
+        "status": {
+          "title": "Status",
+          "type": "string"
         },
-        "preferred_foot": {
-          "$ref": "#/$defs/KnownValue"
+        "injured": {
+          "title": "Injured",
+          "type": "boolean"
         },
-        "role": {
+        "loan": {
           "anyOf": [
             {
-              "type": "string"
+              "additionalProperties": true,
+              "type": "object"
             },
             {
               "type": "null"
             }
           ],
-          "title": "Role"
-        },
-        "season": {
-          "title": "Season",
-          "type": "string"
+          "title": "Loan"
         },
         "side": {
           "anyOf": [
@@ -184,9 +185,8 @@
           ],
           "title": "Side"
         },
-        "status": {
-          "title": "Status",
-          "type": "string"
+        "preferred_foot": {
+          "$ref": "#/$defs/KnownValue"
         }
       },
       "required": [
@@ -211,6 +211,27 @@
     "KnownValue": {
       "additionalProperties": false,
       "properties": {
+        "status": {
+          "enum": [
+            "known",
+            "unknown",
+            "conflict"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
         "reason": {
           "anyOf": [
             {
@@ -233,27 +254,6 @@
             }
           ],
           "default": null
-        },
-        "status": {
-          "enum": [
-            "known",
-            "unknown",
-            "conflict"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "value": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Value"
         }
       },
       "required": [
@@ -271,9 +271,14 @@
             "SOURCE_MISSING",
             "NO_ROLE_EVIDENCE",
             "POSITION_UNKNOWN",
-            "OTHER_RECORDS_ONLY"
+            "OTHER_RECORDS_ONLY",
+            "EXCLUDED_FROM_SQUAD"
           ],
           "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
           "type": "string"
         },
         "field": {
@@ -287,10 +292,6 @@
           ],
           "default": null,
           "title": "Field"
-        },
-        "message": {
-          "title": "Message",
-          "type": "string"
         }
       },
       "required": [
@@ -303,6 +304,24 @@
     "PerformancePanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -334,16 +353,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "performance",
-          "default": "performance",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -356,26 +365,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "performance",
+          "default": "performance",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -390,6 +391,24 @@
     "PlayingTimePanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -421,16 +440,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "playing_time",
-          "default": "playing_time",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -443,26 +452,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "playing_time",
+          "default": "playing_time",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -477,6 +478,24 @@
     "PositionPanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -508,16 +527,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "position",
-          "default": "position",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -530,26 +539,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "position",
+          "default": "position",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -564,6 +565,24 @@
     "ProfilePanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -588,16 +607,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "profile",
-          "default": "profile",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -610,26 +619,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "profile",
+          "default": "profile",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -644,6 +645,24 @@
     "RecentMatchesPanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -675,16 +694,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "recent_matches",
-          "default": "recent_matches",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -697,26 +706,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "recent_matches",
+          "default": "recent_matches",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -731,6 +732,24 @@
     "RecordsPanel": {
       "additionalProperties": false,
       "properties": {
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
         "badge": {
           "anyOf": [
             {
@@ -762,16 +781,6 @@
           ],
           "title": "Data"
         },
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "id": {
-          "const": "records",
-          "default": "records",
-          "title": "Id",
-          "type": "string"
-        },
         "note": {
           "anyOf": [
             {
@@ -784,26 +793,18 @@
           "default": null,
           "title": "Note"
         },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
+        },
+        "id": {
+          "const": "records",
+          "default": "records",
+          "title": "Id",
+          "type": "string"
         }
       },
       "required": [
@@ -856,9 +857,40 @@
   },
   "additionalProperties": false,
   "properties": {
+    "schema_version": {
+      "const": "1.2.0",
+      "default": "1.2.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "player_id": {
+      "title": "Player Id",
+      "type": "integer"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
     "generated_at": {
       "title": "Generated At",
       "type": "string"
+    },
+    "out_of_squad": {
+      "default": false,
+      "title": "Out Of Squad",
+      "type": "boolean"
+    },
+    "out_of_squad_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out Of Squad Reason"
     },
     "identity": {
       "$ref": "#/$defs/IdentityBlock"
@@ -907,20 +939,6 @@
       },
       "title": "Panels",
       "type": "object"
-    },
-    "player_id": {
-      "title": "Player Id",
-      "type": "integer"
-    },
-    "schema_version": {
-      "const": "1.1.0",
-      "default": "1.1.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
     },
     "warnings": {
       "items": {

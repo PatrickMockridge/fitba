@@ -1,6 +1,6 @@
 # Squad and player profiles
 
-**Status:** live for the 2026-27 season. Last reviewed 2026-10-21.
+**Status:** live for the 2026-27 season. Last reviewed 2026-10-24.
 
 The squad page is the structural bridge between **On the pitch** (`/matchday/`)
 and **Off the pitch** (`/recruitment/`). It is the roster, the current-season
@@ -34,7 +34,10 @@ Machine-readable path:
   player/season/team/scope/competition/role.
 - `data/normalized/career/career_backfill_state.parquet` — resumable backfill
   state; `career_roles_meta.json` records coverage and request budget.
-- `web/data/generated/squad/aberdeen.json` — published payload.
+- `data/normalized/squad/roster_meta.json` — official roster metadata and
+  any unmatched official names (gitignored).
+- `web/data/generated/squad/aberdeen.json` — published payload, including
+  `roster_meta` and `roster_only`.
 - `web/data/generated/players` routes are generated from the payload
   (`/players/<api_id>/`).
 
@@ -50,29 +53,61 @@ Town transfer.
 
 ## Squad universe
 
-The squad is the union of:
+The canonical roster reference is the official Aberdeen FC men's team page,
+https://www.afc.co.uk/en/teams/mens. It determines squad inclusion, the position
+section, the shirt number, the **On loan** section and the display order. The
+current page lists 34 players: 29 in position sections and 5 on loan. Staff are
+excluded.
 
-1. the current API-Football squad (`/players/squads?team=252`); and
-2. current-season **loans out** from the confirmed transfer register.
+API-Football remains the statistics and identity spine. A player on the official
+list is included even when the API-Football squad omits him; Kristers Tobers is
+the current example, with no 2026-27 statistics. A player with no unique
+API-Football id is listed in the formal `roster_only` state; it is not dropped.
 
-The current-season move is the latest move per player, not merely the presence of
-a loan row. A player who returned from a loan or left permanently is not tagged
-as a current loanee.
+API-Football squad or transfer-loan rows that are **not** on the official list
+are not squad players. They are retained in `excluded_players` with
+`squad_member = false`, `roster_status = excluded_api` and
+`exclusion_reason = not_on_official_list`, so existing player profiles and
+transfer/news links still resolve. They are excluded from the squad table,
+summary, search, matchday and every squad count. The page states the excluded
+count; it does not present a separate "surfaced" squad list.
 
 Statuses:
 
-- `squad` — registered at Aberdeen.
-- `loan_out` — on loan elsewhere; tagged with the loan club and date.
+- `squad` — in the official position sections.
+- `loan_out` — in the official On loan section; the loan club and dates come
+  from the confirmed transfer register where present, otherwise the club is
+  unknown and shown as such.
 - `loan_in` — borrowed by Aberdeen; supported for future windows. There are no
   loan-ins in the 2026-27 register.
+- `provider_fallback` — only when the official page is unavailable and the page
+  visibly falls back to the API-Football snapshot; never presented as official.
 
-Former players in the 2024/25–2026/27 transfer history are not part of the
-current squad and are not linked as current players.
+Roster status is `official`, `official_loan` or `excluded_api`. The official
+`official_order` is the presentation order. A conflict between the official
+section and the confirmed loan register is surfaced, not silently resolved. No
+injury is inferred from absence or from the official page: the page does not
+label injuries.
 
 ## Statistics
 
 Source: API-Football `/players?id=<id>&season=2026`. Statistics are
 **current season only**, per competition.
+
+The squad row's headline output is **all Aberdeen competitions** (league, cup
+and Europe; friendlies excluded). The player profile also publishes the
+Premiership-only comparison. Loan-club rows are never mixed into an Aberdeen
+total; they stay on the player profile, labelled. The roster table names
+`Starts (all)`, `Sub (all)`, `Mins (all)` and `League mins`, and its G/A/cards/
+rating columns use the all-competition club rows. If a competition has no
+player statistics, the total is marked partial and the gap is named; it is not
+filled from another competition.
+
+Loan counts are scoped: the official team list's **On loan** section is the
+squad count (currently 5). The current-season transfer register has 9, because
+four development loanees are not on the official first-team page. The all-time
+register has 31. The squad, loans and recruitment pages publish these as
+separate scopes and link to one another.
 
 Fields published:
 
@@ -224,12 +259,14 @@ only match by their available display name.
 
 ## Publication and guards
 
-- `uv run fitba squad` refreshes the normalized squad, position, appearance,
-  role, playing-time and shape tables and their metadata.
+- `uv run fitba squad` refreshes the official roster, normalized squad,
+  position, appearance, role, playing-time and shape tables and their metadata.
+  The official page is read once per refresh; no other AFC pages are crawled.
 - `uv run fitba publish` writes `squad/aberdeen.json`, adds the player links to
   transfers, rumours, forum signals and news, and adds player entries to the
   search index.
-- `scripts/check_squad.py` verifies unique ids and hrefs, valid statuses and
+- `scripts/check_squad.py` verifies unique ids and hrefs, valid statuses,
+  official-order and excluded-row labels, roster metadata and
   coverage, loan tagging, totals arithmetic, role/playing-time arithmetic, no
   photos, no parent-club rows in loan stats, summary counts and every
   cross-payload player href.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "identity": {
     "age": 24,
     "full_name": "Gavin Molloy",
@@ -21,6 +21,8 @@
     "side": "centre",
     "status": "squad"
   },
+  "out_of_squad": false,
+  "out_of_squad_reason": null,
   "panel_order": [
     "profile",
     "position",
@@ -905,6 +907,10 @@
           "basis": "role_family",
           "cohort_min_minutes": 450,
           "cohort_n": 22,
+          "cohort_season": "2026-27",
+          "fallback": false,
+          "fallback_note": null,
+          "fallback_reason": null,
           "figures": [
             {
               "axes": [
@@ -1016,6 +1022,7 @@
           "min_minutes": 180,
           "minutes": 384,
           "reason": null,
+          "season_used": "2026-27",
           "status": "available"
         },
         "rose_catalogue": {
@@ -1121,11 +1128,23 @@
           "cohort_basis": "role_family",
           "cohort_n": 22,
           "league": "sco:premiership",
+          "league_appearances": 6,
           "league_label": "Scottish Premiership",
-          "minutes": 384,
+          "league_minutes": 384,
+          "league_rating": 5.83,
+          "league_rating_percentile": 9.1,
+          "minutes": 499,
+          "minutes_season": "2026-27",
+          "output_coverage": "partial",
+          "output_missing_competitions": [
+            "Premier Sports Cup"
+          ],
           "rating": 5.83,
-          "rating_percentile": 9.1,
+          "rating_percentile": null,
           "role_label": "Centre back",
+          "rose_fallback": false,
+          "rose_season": "2026-27",
+          "scope": "all_competitions",
           "season": "2026-27"
         },
         "tier": "extended"
@@ -1300,7 +1319,7 @@
     }
   },
   "player_id": 161806,
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "season": "2026-27",
   "warnings": []
 }

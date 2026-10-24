@@ -27,6 +27,13 @@ At 2026-10-23 the curated ledger has two verified entries: Kristers Tobers
 scouting layer reads them through the same resolved availability payload; it does
 not keep a second ledger.
 
+The published payload carries two universes. The **official list** covers all 34
+players including loanees out (2 known / 32 unknown at the last check). The
+**active squad** covers the 29 players not out on loan (2 known / 27 unknown).
+Analysis uses the active universe; the availability and needs surfaces use the
+official universe. Every count names its universe, so the two numbers are not
+mistaken for a contradiction.
+
 ## Ledger
 
 `reference/availability.yaml`:

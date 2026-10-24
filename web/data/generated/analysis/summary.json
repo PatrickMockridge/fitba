@@ -33,14 +33,14 @@
   ],
   "availability": {
     "counts": {
-      "active": 30,
+      "active": 29,
       "available": 1,
       "doubtful": 0,
-      "loans_out": 9,
+      "loans_out": 5,
       "out_official": 1,
       "returned": 0,
       "suspended_official": 0,
-      "unknown": 28
+      "unknown": 27
     },
     "coverage": {
       "bench": {
@@ -67,7 +67,7 @@
       "ledger": {
         "conflicts": 0,
         "doubtful": 0,
-        "entries": 39,
+        "entries": 34,
         "known": 2,
         "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
         "out": 1,
@@ -96,7 +96,7 @@
         "stale": 0,
         "status": "partial",
         "suspended": 0,
-        "unknown": 37
+        "unknown": 32
       },
       "window_fixtures": [
         1556676,
@@ -219,9 +219,9 @@
   ],
   "coverage": {
     "availability": {
-      "active": 30,
+      "active": 29,
       "known": 2,
-      "unknown": 28
+      "unknown": 27
     },
     "bench": {
       "fixtures": 6,
@@ -258,7 +258,7 @@
       "scheduled": 24
     }
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "hero": {
     "form": "WLDWD",
     "goal_difference": 0,
@@ -335,7 +335,7 @@
     },
     "coverage": {
       "active_players": 29,
-      "loans_out": 9,
+      "loans_out": 5,
       "with_percentile": 12,
       "without_stats": 11
     },
@@ -456,27 +456,11 @@
         "status": "out on loan"
       },
       {
-        "club": "Cove Rangers",
+        "club": "Sanfrecce Hiroshima",
         "end_date": null,
         "note": "Loan end date is not held.",
-        "player_id": 644159,
-        "player_name": "J. Mercer",
-        "status": "out on loan"
-      },
-      {
-        "club": "Elgin City",
-        "end_date": null,
-        "note": "Loan end date is not held.",
-        "player_id": 625768,
-        "player_name": "Aaron Cummings",
-        "status": "out on loan"
-      },
-      {
-        "club": "Žilina",
-        "end_date": null,
-        "note": "Loan end date is not held.",
-        "player_id": 395743,
-        "player_name": "K. Bilalovic",
+        "player_id": 153645,
+        "player_name": "K. Yengi",
         "status": "out on loan"
       },
       {
@@ -488,44 +472,15 @@
         "status": "out on loan"
       },
       {
-        "club": "Sanfrecce Hiroshima",
+        "club": "Žilina",
         "end_date": null,
         "note": "Loan end date is not held.",
-        "player_id": 153645,
-        "player_name": "K. Yengi",
-        "status": "out on loan"
-      },
-      {
-        "club": "Peterhead",
-        "end_date": null,
-        "note": "Loan end date is not held.",
-        "player_id": 477991,
-        "player_name": "L. Carroll",
-        "status": "out on loan"
-      },
-      {
-        "club": "Elgin City",
-        "end_date": null,
-        "note": "Loan end date is not held.",
-        "player_id": 674621,
-        "player_name": "Sam McLean",
+        "player_id": 395743,
+        "player_name": "K. Bilalovic",
         "status": "out on loan"
       }
     ],
     "rows": [
-      {
-        "age": 24,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
-        "needs_priority": null,
-        "player_id": 163064,
-        "player_name": "D. Klein",
-        "rating_percentile": null,
-        "role_depth": 0,
-        "role_family": null,
-        "role_label": null
-      },
       {
         "age": 32,
         "cohort_n": 11,
@@ -538,6 +493,19 @@
         "role_depth": 1,
         "role_family": "goalkeeper",
         "role_label": "Goalkeeper"
+      },
+      {
+        "age": 24,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 163064,
+        "player_name": "D. Klein",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
       },
       {
         "age": 18,
@@ -553,27 +521,53 @@
         "role_label": null
       },
       {
-        "age": 29,
-        "cohort_n": 1,
-        "minutes": 792,
-        "minutes_share": 0.978,
+        "age": 32,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
         "needs_priority": null,
-        "player_id": 44921,
-        "player_name": "C. Cadden",
+        "player_id": 20422,
+        "player_name": "N. Devlin",
         "rating_percentile": null,
-        "role_depth": 2,
-        "role_family": "wing_back",
-        "role_label": "Right wing-back"
+        "role_depth": 3,
+        "role_family": "full_back",
+        "role_label": "Right back"
+      },
+      {
+        "age": 19,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 394703,
+        "player_name": "M. Frame",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "full_back",
+        "role_label": "Left back"
+      },
+      {
+        "age": null,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 68534,
+        "player_name": "Kristers Tobers",
+        "rating_percentile": null,
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
       },
       {
         "age": 27,
         "cohort_n": 22,
-        "minutes": 382,
-        "minutes_share": 0.472,
+        "minutes": 483,
+        "minutes_share": 0.596,
         "needs_priority": null,
-        "player_id": 18068,
-        "player_name": "D. Happe",
-        "rating_percentile": 0.0,
+        "player_id": 37253,
+        "player_name": "M. Knoester",
+        "rating_percentile": 45.5,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -618,45 +612,6 @@
         "role_label": "Centre back"
       },
       {
-        "age": 19,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
-        "needs_priority": null,
-        "player_id": 394703,
-        "player_name": "M. Frame",
-        "rating_percentile": null,
-        "role_depth": 3,
-        "role_family": "full_back",
-        "role_label": "Left back"
-      },
-      {
-        "age": 27,
-        "cohort_n": 22,
-        "minutes": 483,
-        "minutes_share": 0.596,
-        "needs_priority": null,
-        "player_id": 37253,
-        "player_name": "M. Knoester",
-        "rating_percentile": 45.5,
-        "role_depth": 5,
-        "role_family": "centre_back",
-        "role_label": "Centre back"
-      },
-      {
-        "age": 32,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
-        "needs_priority": null,
-        "player_id": 20422,
-        "player_name": "N. Devlin",
-        "rating_percentile": null,
-        "role_depth": 3,
-        "role_family": "full_back",
-        "role_label": "Right back"
-      },
-      {
         "age": 26,
         "cohort_n": 19,
         "minutes": 765,
@@ -670,14 +625,53 @@
         "role_label": "Left back"
       },
       {
-        "age": 26,
-        "cohort_n": 19,
-        "minutes": 587,
-        "minutes_share": 0.725,
+        "age": 27,
+        "cohort_n": 22,
+        "minutes": 382,
+        "minutes_share": 0.472,
         "needs_priority": null,
-        "player_id": 57248,
-        "player_name": "A. Aremu",
-        "rating_percentile": 5.3,
+        "player_id": 18068,
+        "player_name": "D. Happe",
+        "rating_percentile": 0.0,
+        "role_depth": 5,
+        "role_family": "centre_back",
+        "role_label": "Centre back"
+      },
+      {
+        "age": 29,
+        "cohort_n": 1,
+        "minutes": 792,
+        "minutes_share": 0.978,
+        "needs_priority": null,
+        "player_id": 44921,
+        "player_name": "C. Cadden",
+        "rating_percentile": null,
+        "role_depth": 2,
+        "role_family": "wing_back",
+        "role_label": "Right wing-back"
+      },
+      {
+        "age": 21,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
+        "needs_priority": null,
+        "player_id": 550363,
+        "player_name": "E. Gyamfi",
+        "rating_percentile": null,
+        "role_depth": 2,
+        "role_family": "wing_back",
+        "role_label": "Left wing-back"
+      },
+      {
+        "age": 28,
+        "cohort_n": 19,
+        "minutes": 225,
+        "minutes_share": 0.278,
+        "needs_priority": null,
+        "player_id": 45010,
+        "player_name": "B. Lyons",
+        "rating_percentile": 94.7,
         "role_depth": 6,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -696,6 +690,19 @@
         "role_label": "Attacking midfielder"
       },
       {
+        "age": 33,
+        "cohort_n": 19,
+        "minutes": 458,
+        "minutes_share": 0.565,
+        "needs_priority": null,
+        "player_id": 18945,
+        "player_name": "S. Armstrong",
+        "rating_percentile": 47.4,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
+      },
+      {
         "age": 25,
         "cohort_n": null,
         "minutes": 0,
@@ -707,32 +714,6 @@
         "role_depth": 6,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
-      },
-      {
-        "age": 28,
-        "cohort_n": 19,
-        "minutes": 225,
-        "minutes_share": 0.278,
-        "needs_priority": null,
-        "player_id": 45010,
-        "player_name": "B. Lyons",
-        "rating_percentile": 94.7,
-        "role_depth": 6,
-        "role_family": "central_midfield",
-        "role_label": "Centre midfielder"
-      },
-      {
-        "age": 17,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
-        "needs_priority": null,
-        "player_id": 496904,
-        "player_name": "C. Masson",
-        "rating_percentile": null,
-        "role_depth": 0,
-        "role_family": null,
-        "role_label": null
       },
       {
         "age": 27,
@@ -748,17 +729,17 @@
         "role_label": "Centre midfielder"
       },
       {
-        "age": 21,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
+        "age": 26,
+        "cohort_n": 19,
+        "minutes": 587,
+        "minutes_share": 0.725,
         "needs_priority": null,
-        "player_id": 550363,
-        "player_name": "E. Gyamfi",
-        "rating_percentile": null,
-        "role_depth": 2,
-        "role_family": "wing_back",
-        "role_label": "Left wing-back"
+        "player_id": 57248,
+        "player_name": "A. Aremu",
+        "rating_percentile": 5.3,
+        "role_depth": 6,
+        "role_family": "central_midfield",
+        "role_label": "Centre midfielder"
       },
       {
         "age": 19,
@@ -774,56 +755,17 @@
         "role_label": "Centre midfielder"
       },
       {
-        "age": 25,
-        "cohort_n": 3,
-        "minutes": 196,
-        "minutes_share": 0.242,
-        "needs_priority": null,
-        "player_id": 44982,
-        "player_name": "L. Smith",
-        "rating_percentile": null,
-        "role_depth": 1,
-        "role_family": "wide_midfield",
-        "role_label": "Right midfielder"
-      },
-      {
-        "age": 33,
-        "cohort_n": 19,
-        "minutes": 458,
-        "minutes_share": 0.565,
-        "needs_priority": null,
-        "player_id": 18945,
-        "player_name": "S. Armstrong",
-        "rating_percentile": 47.4,
-        "role_depth": 6,
-        "role_family": "central_midfield",
-        "role_label": "Centre midfielder"
-      },
-      {
-        "age": 28,
+        "age": 20,
         "cohort_n": 14,
-        "minutes": 574,
-        "minutes_share": 0.709,
+        "minutes": 284,
+        "minutes_share": 0.351,
         "needs_priority": null,
-        "player_id": 231195,
-        "player_name": "T. Olusanya",
+        "player_id": 388510,
+        "player_name": "Tony Yogane",
         "rating_percentile": null,
         "role_depth": 3,
         "role_family": "wide_forward",
-        "role_label": "Right winger"
-      },
-      {
-        "age": 15,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
-        "needs_priority": null,
-        "player_id": 670299,
-        "player_name": "A. Fasanya",
-        "rating_percentile": null,
-        "role_depth": 0,
-        "role_family": null,
-        "role_label": null
+        "role_label": "Left winger"
       },
       {
         "age": 23,
@@ -837,6 +779,19 @@
         "role_depth": 3,
         "role_family": "centre_forward",
         "role_label": "Centre forward"
+      },
+      {
+        "age": 25,
+        "cohort_n": 3,
+        "minutes": 196,
+        "minutes_share": 0.242,
+        "needs_priority": null,
+        "player_id": 44982,
+        "player_name": "L. Smith",
+        "rating_percentile": null,
+        "role_depth": 1,
+        "role_family": "wide_midfield",
+        "role_label": "Right midfielder"
       },
       {
         "age": 26,
@@ -865,6 +820,19 @@
         "role_label": "Centre forward"
       },
       {
+        "age": 28,
+        "cohort_n": 14,
+        "minutes": 574,
+        "minutes_share": 0.709,
+        "needs_priority": null,
+        "player_id": 231195,
+        "player_name": "T. Olusanya",
+        "rating_percentile": null,
+        "role_depth": 3,
+        "role_family": "wide_forward",
+        "role_label": "Right winger"
+      },
+      {
         "age": 24,
         "cohort_n": null,
         "minutes": 0,
@@ -878,17 +846,17 @@
         "role_label": "Centre forward"
       },
       {
-        "age": 20,
-        "cohort_n": 14,
-        "minutes": 284,
-        "minutes_share": 0.351,
+        "age": 15,
+        "cohort_n": null,
+        "minutes": 0,
+        "minutes_share": 0.0,
         "needs_priority": null,
-        "player_id": 388510,
-        "player_name": "Tony Yogane",
+        "player_id": 670299,
+        "player_name": "A. Fasanya",
         "rating_percentile": null,
-        "role_depth": 3,
-        "role_family": "wide_forward",
-        "role_label": "Left winger"
+        "role_depth": 0,
+        "role_family": null,
+        "role_label": null
       }
     ]
   },

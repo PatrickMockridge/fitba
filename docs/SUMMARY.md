@@ -7,6 +7,7 @@
 - [Specification](specification.md)
 - [Identity](identity.md)
 - [Metrics](metrics.md)
+- [Data consistency and scope](data-consistency.md)
 - [Page contracts](page-contracts.md)
 - [Design foundation](design.md)
 

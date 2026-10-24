@@ -1,12 +1,68 @@
 # Metric change log
 
 **Status:** append-only record of metric-definition and parameter changes.
-**Owner:** patrickmockridge. **Last reviewed:** 2026-10-22.
+**Owner:** patrickmockridge. **Last reviewed:** 2026-10-24.
 
 A semantic metric change is any change to an id, formula, input, denominator,
 aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
+
+## 3.6.0 — 2026-10-24
+
+Cross-surface consistency pass. Owner approved the direction: all-competition
+player output, API-Football current-season team shots, one midrank percentile
+definition, and a comprehensive fix. The registry adds `squad.loan-scope`,
+`consistency.summary` and `manifest.freshness`; the registry version moves to
+3.6.0.
+
+### Value and scope changes
+
+| Field | Before | After | Reason |
+|---|---:|---:|---|
+| `squad.summary.loans_out` | 5 | 5 | Official list count retained. The transfer register is published separately. |
+| `squad.loan-scope.official_list.out_count` | — | 5 | Official AFC On loan section. |
+| `squad.loan-scope.register_current.out_count` | — | 9 | Confirmed 2026-27 register loans, including four players not on the official first-team list. |
+| `squad.loan-scope.register_all_time.out_count` | — | 31 | All confirmed loan-out rows in the register. |
+| `squad.players.totals` | provider club+loan rows | Aberdeen club rows only | Loan-club output is no longer mixed into a squad row; it stays on the player profile. |
+| `player.page.summary.minutes` | Premiership | all Aberdeen competitions | Event-reconstructed all-competition minutes. |
+| `player.page.summary.rating` | Premiership | all Aberdeen club rows | Headline all-competition rating; league rating is a separate comparison. |
+| `player.page.summary.league_rating_percentile` | — | league-only percentile | Premiership cohort comparison; not a percentile of the all-comps headline. |
+| `player.page.summary.output_coverage` | — | `partial` when a competition lacks provider player stats | Names the missing competition; minutes and starts still cover all Aberdeen competitions. |
+| `matchday.styles.*.shots_for_pm` | 12.0 | 12.11 | Current-season API-Football shots replace football-data on matchday style. |
+| `matchday.styles.*.fouls_for_pm` | 12.44 | 12.33 | Same source alignment. |
+| `matchday.strength.*.percentiles` | n−1 ranks | midrank inclusive | One percentile definition across matchday, scouting and themes. |
+| `fixtures.index.scheduled_count` | 25 | 24 | Excludes `conflict_review`; `scheduled_rows_total` keeps 25 and `conflict_count` is 1. |
+| `fixtures.index.*.result_label` | absent | shootout-aware | Five shootout rows now show `D (won/lost X-Y pens)`; the regulation result stays `D`. |
+| `xg.matches.*.source` | football_data_uk | API-Football where zones are used | Shot-feature provenance corrected; provider xG source remains separate. |
+| `availability.universes` | absent | official 34 / active 29 | Availability counts name their universe; known/unknown remains 2/32 for the official list and 2/27 for the active squad. |
+| `audit/consistency.json` | absent | 11 checks | Cross-surface audit blocks publish on disagreement. |
+
+The xG model is not refitted: its league shot features were already
+API-Football. The matchday style surface moves to the same rows, so the two
+pages now share a shot denominator. No player or match value is changed merely
+to make a page look tidier.
+
+Carried-forward identifiers from the working-tree xG/official-first work that
+were not yet released: `matches.document` (description), `squad.meta`
+(payload paths), `xg.goals-minus`, `xg.goals-range`, `xg.model-range`,
+`xg.per-shot`, `xg.shot-profile` (added) and `param.xg` (value). They are
+recorded here so the change-control comparison against `origin/main` has one
+complete entry.
+
+### Audit impact
+
+`squad.summary`, `squad.players`, `player.page`, `matchday.style`,
+`matchday.strength`, `xg.document`, `analysis.summary` (v2) and
+`fixtures.index` (v4) and `availability.ledger` (v3) are re-reviewed; the
+analysis entry now describes the 29-player active universe, the fixture entry
+names scheduled_count, scheduled_rows_total and conflict_count separately, and
+the availability publisher overlays provider evidence onto the curated ledger
+instead of replacing the ledger with an empty-provider merge.
+`squad.loan-scope`, `consistency.summary` and `manifest.freshness` are new
+registered families. The audit reports pass with no unregistered numeric leaf.
+The cross-surface checks in `scripts/check_consistency.py` are a separate gate
+from the metric audit and run inside publish.
 
 ## 1.0.0 — 2026-10-22
 
@@ -524,3 +580,151 @@ Registry version 3.2.0.
   is regenerated. Existing scouting values other than additive fields are
   unchanged.
 
+## 3.3.0 — 2026-10-24
+
+Calibrated shot-volume fxG. Owner approval recorded in the reviewed request.
+Registry version 3.3.0.
+
+- `xg.document` v5: the model changes from `shots_on_target × competition-season
+  conversion rate` to `max(0, intercept + b_sot × shots_on_target + b_off ×
+  off-target shots)`. The coefficients are fitted by OLS to the 2026-27
+  Premiership team rows where provider xG exists: 54 matches, 108 team rows.
+  At the fit: intercept 0.1428, shots-on-target coefficient 0.1778, off-target
+  coefficient 0.0542.
+- The 80% interval changes to the empirical 10th–90th percentile of
+  leave-one-match-out residuals. The aggregate interval is the sum of the
+  per-match model intervals, not a simultaneous interval.
+- The evaluation method is leave-one-match-out inside 2026-27: bias −0.001, MAE
+  0.471, calibration slope 0.968 across 54 matches / 108 team rows. The
+  calibration gate passes, but it is an in-season calibration, not an
+  out-of-season holdout; the values remain descriptive.
+- Example value change: Aberdeen 3–1 St Mirren on 2026-10-17 was fxG
+  2.249/2.249; it is now 1.930/1.713. Provider xG remains 2.29/1.00. Other
+  matches and aggregates change wherever fxG is published.
+- `param.xg` v2 adds the calibration season, competition, minimum rows and
+  matches, and the leave-one-match-out evaluation method.
+- The provider-style estimate remains a separate calibration for rows without
+  provider xG; it is not provider xG and is not the fxG model.
+- Affected surfaces: `/analysis/xg/`, `/matches/<fixture_id>/`, `/analysis/`,
+  `/metrics/`.
+- Audit impact: the payload paths are unchanged; the published values and audit
+  are regenerated.
+
+
+## 3.4.0 — 2026-10-24
+
+Team-match expected goals with two ranges, plus the official-roster squad
+reconciliation. Owner approval recorded in the reviewed request.
+Registry version 3.4.0.
+
+### xG
+
+- `xg.document` v6: `fxg-3` replaces `fxg-2`. The selected specification is
+  zone volume plus on-target: `fxG_open = 0.092658 × open inside-box shots +
+  0.0 × open outside-box shots + 0.100354 × open shots on target`, plus
+  `0.76 × penalty attempts`. Penalties are removed from the open-play counts
+  before the fit and added back at a fixed 0.76 xG. The fit is 54 matches / 107
+  complete team rows (one row failed shot reconciliation) in the 2026-27
+  Premiership.
+- Leave-one-match-out: bias −0.013, MAE 0.383, calibration slope 0.969, R²
+  0.649. The calibration gate passes. The 2025-26 API-Football transfer check is
+  informational: 26 matches / 52 team rows, bias −0.183, MAE 0.342, slope 1.138.
+  It crosses season and provider and is never tuned on.
+- The 80% model range is now a match-clustered bootstrap plus the LOOCV residual
+  pool; the 80% goals range is a beta-binomial open-play distribution convolved
+  with a binomial penalty distribution. Aggregate variances are combined; the
+  old practice of summing per-match intervals is removed. Era model range is
+  305.36–334.22, not the old 142.98–503.00; era goals range is 296–338.
+- Example value change: Aberdeen 3–1 St Mirren on 2026-10-17 was fxG
+  1.930/1.713 with a model interval 1.197–2.569 / 0.980–2.352. It is now
+  2.196/1.444 with a model range 1.475–2.712 / 0.723–1.960 and a goals range
+  1–4 / 0–3. Provider xG remains 2.29/1.00.
+- `matches.document` v4 adds the expanded `xg` block and its ranges.
+- New metrics: `xg.per-shot` (fxG / shots), `xg.goals-minus`, `xg.model-range`,
+  `xg.goals-range` and `xg.shot-profile`. `param.xg` v3 adds the enrichment,
+  penalty, bootstrap, goals-range and transfer-check parameters.
+- The provider-style estimate remains a separate calibration for rows without
+  provider xG; it is not provider xG and is not the fxG model.
+
+### Squad
+
+- `squad.summary` v2 adds `official_squad_size`, `official_players`,
+  `official_only` and `provider_only`. `squad.players` v3 adds
+  `roster_status`, `official_href`, `official_position`, `official_number`,
+  `official_only`, `roster_conflict` and `identity_source`. `squad.meta` v3
+  registers `roster_meta` and `roster_only`.
+- The canonical roster source is `https://www.afc.co.uk/en/teams/mens`. At the
+  first fetch it lists 34 player rows, including five in the On loan section.
+  All 34 were resolved to an API-Football id; one (Kristers Tobers) is
+  official-only and has no current-season statistics. Five API-Football rows
+  are not on the official list and are labelled provider-only. Staff are
+  excluded. No injury is inferred.
+
+### Surfaces and audit
+
+- Affected surfaces: `/analysis/xg/`, `/matches/<fixture_id>/`,
+  `/squad/`, `/analysis/`, `/metrics/`, `/sources/`, `/methodology/`.
+- Audit impact: the new xG and squad payload paths are registered; the registry,
+  audit and generated payloads are regenerated. Existing provider-xG values are
+  unchanged; fxG values, aggregate ranges and squad counts change.
+
+## 3.5.0 — 2026-10-24
+
+Official-first squad list and prior-season player-rose fallback. Owner approval
+recorded in the reviewed request. Registry version 3.5.0.
+
+### xG carried forward
+
+This release also contains the xG model changes first recorded under 3.4.0:
+`xg.document`, `matches.document`, `param.xg`, `xg.per-shot`,
+`xg.goals-minus`, `xg.model-range`, `xg.goals-range` and `xg.shot-profile`. Their formulas, values and audit impact
+are unchanged from that entry.
+
+### Squad
+
+- The official AFC men's team page is the canonical squad universe. `players`
+  now contains the 34 official rows (29 position-section + 5 On loan), sorted
+  by status and the parser's `official_order`; Kristers Tobers is included in
+  the defenders even though API-Football omits him, with statistics
+  unavailable. The roster table gains a **No.** column using the official shirt
+  number; the role-mix bars use the registered-squad count, not the all-official
+  count including loanees.
+- API-Football rows not on the official list are moved to `excluded_players`
+  with `squad_member=false`, `roster_status="excluded_api"` and
+  `exclusion_reason="not_on_official_list"`. There are five current examples:
+  C. Masson, J. Mercer, Aaron Cummings, L. Carroll and Sam McLean. They are not
+  in the squad table, summary, search, matchday or squad counts; their retained
+  profiles and links remain available.
+- `squad.summary` v3 adds `excluded_api` and removes provider-only semantics.
+  `squad.players` v4 adds `squad_member`, `exclusion_reason`, `official_order`
+  and `official_section` and covers `excluded_players`. `squad.meta` v4 covers
+  the excluded/link layer.
+- At the first official fetch: 34 official players, 29 registered, 5 official
+  loans, 1 official-only player (Tobers), 5 excluded API rows, 4 excluded loans.
+
+### Player rose
+
+- `player.page` v4 adds `out_of_squad`, `out_of_squad_reason`,
+  `minutes_season`, `rose_season`, `rose_fallback`, `season_used`,
+  `cohort_season`, `fallback`, `fallback_reason` and `fallback_note`.
+  `param.player.rose` v2 records the fallback policy in its description.
+- When current-season Premiership minutes are below 180, the rose uses the most
+  recent prior Premiership season with at least 180 league minutes and a
+  same-season Premiership cohort. It never compares prior-season rates with the
+  current-season cohort.
+- Fallbacks at this publish: Palaversa 2025-26, Devlin 2025-26, Lobban 2025-26,
+  Frame 2025-26, Bilalovic 2025-26, Yengi 2025-26 (185 minutes, partial) and
+  Tobers 2024-25 (774 minutes; 2025-26 was 61). Players with no qualifying prior
+  season keep an explicit unavailable state and note.
+- Key facts continue to show current-season minutes; the rose names its
+  fallback season. The prior-season aggregate lacks `duels_total`, so that petal
+  is omitted, never zero.
+
+### Surfaces and audit
+
+- Affected surfaces: `/squad/`, `/players/<playerId>/`, `/players/`,
+  `/transfers/` and any page using the player-link index, `/sources/`,
+  `/methodology/`, `/metrics/`.
+- Audit impact: new squad and player-page payload paths are registered; the
+  registry, audit and generated payloads are regenerated. Squad counts, the
+  squad table order and player-page rose blocks change.

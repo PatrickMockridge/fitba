@@ -162,23 +162,27 @@ sources:
     last_verified: 2026-10-21
 
   afc_official:
-    name: Aberdeen FC player profiles
+    name: Aberdeen FC men's team roster
     lane: derived_display
     ingest_allowed: true
     publication_allowed: true
-    adapter_ready: false
+    adapter_ready: true
     required: false
     cost: free
-    capabilities: [player_attributes]
+    capabilities: [squad_roster, player_attributes]
     url: https://www.afc.co.uk/en/teams/mens
     attribution: Aberdeen FC
     notes: >
-      Official player profile pages state the shirt number, nationality and a
-      generic position (Goalkeeper/Defender/Midfielder/Forward). They do not
-      state preferred foot, so this source yields no attribute values today.
-      Reserved for an explicit statement if the club publishes one; no crawling
-      beyond a listed page.
-    last_verified: 2026-10-21
+      The official men's team page is the canonical roster inclusion, section,
+      order and roster-status source: position sections, shirt numbers, generic
+      positions, profile links and the On loan section. It does not label
+      injuries, so the site never infers injury from the page or from absence.
+      One listed page is read per refresh; no other AFC pages are crawled.
+      API-Football remains the statistics and identity spine. API rows not on
+      the official list are excluded from the squad and its counts but retained
+      in the player-link index for existing profile and transfer links. A
+      loanee without a confirmed club is shown as club unknown.
+    last_verified: 2026-10-24
 
   wikipedia:
     name: Wikipedia

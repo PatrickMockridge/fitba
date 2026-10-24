@@ -55,6 +55,10 @@ export interface ClubResult {
   goals_for: number;
   goals_against: number;
   result: "W" | "D" | "L";
+  result_label?: string;
+  outcome?: "W" | "D" | "L";
+  shootout_result?: string | null;
+  decided_by?: string;
 }
 
 export interface ClubHistory {
@@ -81,6 +85,10 @@ export interface ClubFixture {
   goals_for?: number;
   goals_against?: number;
   result?: "W" | "D" | "L";
+  result_label?: string;
+  outcome?: "W" | "D" | "L";
+  shootout_result?: string | null;
+  decided_by?: string;
 }
 
 export interface ClubCompetition {
@@ -407,6 +415,17 @@ export interface TransfersFile {
   transfers: TransferRecord[];
   loans_out: TransferRecord[];
   loans_in: TransferRecord[];
+  loan_scope?: {
+    season: string;
+    official_list: { out_count: number; in_count: number };
+    register_current: { out_count: number; in_count: number };
+    register_all_time: { out_count: number; in_count: number };
+    reconciliation: {
+      matched_out: number;
+      register_only_out: Array<{ player_name: string | null; club: string | null }>;
+      official_only_out: Array<{ player_name: string | null; club: string | null }>;
+    };
+  };
   summary: {
     total: number;
     confirmed: number;
@@ -1040,9 +1059,24 @@ export interface SquadPlayer {
     end_date: string | null;
   } | null;
   stats_coverage: "available" | "partial" | "unavailable" | string;
+  stats_scope?: "all_competitions" | "loan" | string;
+  output_missing_competitions?: string[];
   stats_note: string;
+  roster_status: "official" | "official_loan" | "excluded_api" | "provider_fallback" | string;
+  squad_member: boolean;
+  exclusion_reason: string | null;
+  official_order: number | null;
+  official_section: string | null;
+  official_href: string | null;
+  official_position: string | null;
+  official_number: number | null;
+  official_only: boolean;
+  roster_conflict: boolean;
+  identity_source: string;
   stats: SquadStat[];
   totals: SquadTotals | null;
+  league_totals?: SquadTotals | null;
+  loan_totals?: SquadTotals | null;
   attributes: PlayerAttributes;
   role: PlayerRole;
   career_role: CareerRole;
@@ -1081,9 +1115,49 @@ export interface SquadFile {
   season: string;
   generated_at: string;
   players: SquadPlayer[];
+  excluded_players?: SquadPlayer[];
+  loan_scope?: {
+    season: string;
+    official_list: { out_count: number; in_count: number };
+    register_current: { out_count: number; in_count: number };
+    register_all_time: { out_count: number; in_count: number };
+    reconciliation: {
+      matched_out: number;
+      register_only_out: Array<{ player_name: string | null; club: string | null }>;
+      official_only_out: Array<{ player_name: string | null; club: string | null }>;
+    };
+  };
+  roster_meta?: {
+    status: string;
+    source_url: string | null;
+    fetched_at: string | null;
+    official_players?: number;
+    matched?: number;
+    official_only?: number;
+    provider_only?: number;
+    ambiguous?: number;
+    loan_section?: number;
+    excluded_api?: number;
+    note?: string | null;
+  };
+  roster_only?: Array<{
+    name: string | null;
+    number: number | null;
+    position: string | null;
+    section: string | null;
+    official_href: string | null;
+    reason: string;
+  }>;
   summary: {
     total_players: number;
     squad_size: number;
+    official_squad_size?: number;
+    official_players?: number;
+    official_only?: number;
+    excluded_api?: number;
+    provider_only?: number;
+    official_source?: string | null;
+    official_fetched_at?: string | null;
     loans_out: number;
     loans_in: number;
     average_age: number | null;
@@ -1093,6 +1167,7 @@ export interface SquadFile {
     by_role_family: Record<string, number>;
     by_role_family_squad: Record<string, number>;
     by_primary_group: Record<string, number>;
+    by_primary_group_squad: Record<string, number>;
     by_primary_side: Record<string, number>;
     by_status: Record<string, number>;
     position_stats_coverage: string;
@@ -2077,6 +2152,10 @@ export interface Manifest {
   generated_at: string;
   season: string;
   profile: string;
+  freshness?: {
+    dataset_stale_after_hours: number;
+    availability_stale_after_days: number;
+  };
   sources: Array<{
     id: string;
     name: string;
@@ -2089,6 +2168,14 @@ export interface Manifest {
     rows_basis?: string;
   }>;
   marts: Array<{ id: string; path: string; rows: number; season: string }>;
+  consistency?: {
+    path: string;
+    checksum: string;
+    status: string;
+    checks: number;
+    passed: number;
+    failed: number;
+  };
   coverage: {
     season: string;
     competitions: Array<{
@@ -2331,6 +2418,24 @@ export interface MetricsAudit {
     expires: string | null;
   };
   errors: string[];
+}
+
+export interface ConsistencyReport {
+  schema_version: string;
+  generated_at: string;
+  status: string;
+  checks: number;
+  passed: number;
+  failed: number;
+  results: Array<{
+    id: string;
+    description: string;
+    status: string;
+    rows_checked: number;
+    fields_checked: number;
+    errors: string[];
+    payloads: string[];
+  }>;
 }
 
 export interface ValidationReport {
@@ -2723,6 +2828,12 @@ export interface FixtureIndexRow {
   away_penalties?: number | null;
   result: "W" | "D" | "L";
   aberdeen_result: "W" | "D" | "L";
+  result_label?: string;
+  aberdeen_result_label?: string;
+  shootout_result?: string | null;
+  decided_by?: string;
+  outcome?: "W" | "D" | "L";
+  aberdeen_outcome?: "W" | "D" | "L";
   depth: "full" | "result" | "partial" | "score";
   href: string;
 }
@@ -2890,6 +3001,54 @@ export interface FixturePlayerStat {
   red_cards: number | null;
 }
 
+export interface FixturePerformancePlayer {
+  player_id: number | null;
+  player_name: string | null;
+  href?: string | null;
+  team_name: string | null;
+  is_aberdeen: boolean | null;
+  rating: number | null;
+  minutes: number | null;
+  goals: number | null;
+  assists: number | null;
+  shots_total: number | null;
+  shots_on: number | null;
+  passes_total: number | null;
+  pass_accuracy: number | null;
+  tackles: number | null;
+  duels_won: number | null;
+}
+
+export interface FixtureXgShotProfile {
+  shots: number | null;
+  shots_on_target: number | null;
+  shots_off: number | null;
+  shots_blocked: number | null;
+  shots_insidebox: number | null;
+  shots_outsidebox: number | null;
+  penalties: number | null;
+  penalty_goals: number | null;
+}
+
+export interface FixtureXgSide {
+  value: number | null;
+  low: number | null;
+  high: number | null;
+  goals_low: number | null;
+  goals_high: number | null;
+  goals: number | null;
+  goals_minus: number | null;
+  goals_position: "below" | "within" | "above" | null;
+  provider: number | null;
+  provider_source: string | null;
+  xg_per_shot: number | null;
+  penalty_xg: number | null;
+  penalties: number | null;
+  penalties_known: boolean | null;
+  basis: string | null;
+  shot_profile: FixtureXgShotProfile | null;
+}
+
 export interface FixtureDocument {
   schema_version: string;
   generated_at: string;
@@ -2944,10 +3103,13 @@ export interface FixtureDocument {
   };
   xg: {
     available: boolean;
-    home?: { value: number | null; low: number | null; high: number | null; provider: number | null };
-    away?: { value: number | null; low: number | null; high: number | null; provider: number | null };
+    home?: FixtureXgSide;
+    away?: FixtureXgSide;
     model_id?: string;
     note?: string;
+    model_range_level?: number | null;
+    goals_range_level?: number | null;
+    goals_dispersion?: number | null;
     gate_status?: string | null;
     gate_passed?: boolean | null;
     gate_note?: string | null;
@@ -2956,6 +3118,20 @@ export interface FixtureDocument {
   timeline: FixtureTimelineRow[];
   lineups: { home: FixtureLineup | null; away: FixtureLineup | null };
   player_stats: FixturePlayerStat[];
+  performance?: {
+    available: boolean;
+    aberdeen: { basis: string; players: FixturePerformancePlayer[] };
+    opponent: { basis: string; players: FixturePerformancePlayer[] };
+    strengths: Array<{
+      key: string;
+      label: string;
+      aberdeen: number;
+      opponent: number;
+      unit: string;
+      source: string | null;
+    }>;
+    note: string;
+  };
   form: {
     before: Array<{
       fixture_id: number;
@@ -2990,10 +3166,21 @@ export interface XgAggregate {
   low: number | null;
   high: number | null;
   goals: number;
+  goals_low: number | null;
+  goals_high: number | null;
   goals_minus_fxg: number | null;
   goals_minus_low: number | null;
   goals_minus_high: number | null;
+  goals_position: "below" | "within" | "above" | null;
+  shots: number;
   shots_on_target: number;
+  penalties: number;
+  xg_per_shot: number | null;
+  model_range_width: number | null;
+  goals_range_width: number | null;
+  interval_method: string | null;
+  goals_range_method: string | null;
+  goals_dispersion: number | null;
 }
 
 export interface XgMatch {
@@ -3012,9 +3199,44 @@ export interface XgMatch {
   fxg_against: number | null;
   fxg_against_low: number | null;
   fxg_against_high: number | null;
+  goals_for_low: number | null;
+  goals_for_high: number | null;
+  goals_against_low: number | null;
+  goals_against_high: number | null;
+  goals_minus_fxg_for: number | null;
+  goals_minus_fxg_for_low: number | null;
+  goals_minus_fxg_for_high: number | null;
+  goals_minus_fxg_against: number | null;
+  goals_minus_fxg_against_low: number | null;
+  goals_minus_fxg_against_high: number | null;
+  goals_position_for: "below" | "within" | "above" | null;
+  goals_position_against: "below" | "within" | "above" | null;
+  fxg_per_shot_for: number | null;
+  fxg_per_shot_against: number | null;
+  shots_for: number | null;
+  shots_on_target_for: number | null;
+  shots_off_for: number | null;
+  shots_blocked_for: number | null;
+  shots_insidebox_for: number | null;
+  shots_outsidebox_for: number | null;
+  penalties_for: number | null;
+  penalty_goals_for: number | null;
+  shots_against: number | null;
+  shots_on_target_against: number | null;
+  shots_off_against: number | null;
+  shots_blocked_against: number | null;
+  shots_insidebox_against: number | null;
+  shots_outsidebox_against: number | null;
+  penalties_against: number | null;
+  penalty_goals_against: number | null;
+  basis_for: string | null;
+  basis_against: string | null;
+  interval_basis: string | null;
+  goals_range_basis: string | null;
   fxg_diff: number | null;
   provider_xg_for: number | null;
   provider_xg_against: number | null;
+  provider_xg_source: string | null;
   source: string | null;
 }
 
@@ -3103,28 +3325,62 @@ export interface XgDocument {
     model_id: string;
     label: string;
     status: string;
-    overdispersion: number;
+    method?: string;
+    specification?: string | null;
+    features?: string[];
+    coefficients?: Record<string, number> | null;
+    fallback_coefficients?: Record<string, number> | null;
+    penalty_xg?: number;
+    penalty_source?: string;
+    interval_level?: number;
+    interval_method?: string;
+    interval_basis?: string;
+    interval_low_offset?: number;
+    interval_high_offset?: number;
+    bootstrap?: {
+      draws: number;
+      seed: number;
+      valid_draws: number;
+      cluster: string;
+    } | null;
+    goals_range_method?: string;
+    goals_dispersion?: number;
+    model_interval_coverage?: number | null;
+    goals_range_coverage?: number | null;
+    fit_team_rows?: number;
+    fit_season?: string | null;
+    fit_competition?: string | null;
+    calibration?: Record<string, unknown> | null;
+    selection?: Record<string, unknown> | null;
+    transfer_check?: Record<string, unknown> | null;
+    overdispersion?: number;
     fit_matches: number;
     fit_seasons: string[];
-    global_rate: { rate: number; low: number; high: number };
-    rates: Array<Record<string, unknown>>;
-    competition_rates: Array<Record<string, unknown>>;
+    global_rate?: { rate: number; low: number; high: number };
+    rates?: Array<Record<string, unknown>>;
+    competition_rates?: Array<Record<string, unknown>>;
     evaluation: Record<string, unknown> | null;
   } | null;
   evaluation: {
     status: string;
+    method?: string;
     validation_season: string;
     matches: number;
     team_rows?: number;
     bias: number | null;
     mae: number | null;
     calibration_slope: number | null;
+    r2?: number | null;
+    model_interval_coverage?: number | null;
+    goals_range_coverage?: number | null;
+    goals_dispersion?: number | null;
     thresholds: Record<string, number>;
     passed: boolean;
     note: string;
   } | null;
   matches: XgMatch[];
   aggregates: XgAggregate[];
+  transfer_evaluation?: Record<string, unknown> | null;
   provider_estimate?: XgProviderEstimate | null;
   manager_splits?: XgManagerSplit[];
   coverage: {
@@ -3132,6 +3388,20 @@ export interface XgDocument {
     with_fxg: number;
     with_provider_xg: number;
     missing_team_stats: number;
+    with_zones?: number;
+    with_penalties?: number;
+    enrichment?: {
+      status: string;
+      season: string;
+      league_fixtures: number;
+      api_fixtures_matched: number;
+      stats_available: number;
+      events_available: number;
+      zones_available: number;
+      penalties_available: number;
+      provider_xg_fdco: number;
+      missing_feature_matches: number[];
+    } | null;
     provider_actual?: {
       total_matches: number;
       league_2026_27: number;
@@ -3449,7 +3719,10 @@ export interface ScoutingSquadRow extends ScoutingRates {
   role_family: string | null;
   role_label: string;
   minutes: number;
+  minutes_scope?: string;
+  league_minutes?: number | null;
   rating: number | null;
+  league_rating?: number | null;
   rating_percentile: number | null;
   goals: number | null;
   assists: number | null;
@@ -3776,6 +4049,10 @@ export function getMetricsRegistry(): MetricsRegistry | null {
 
 export function getMetricsAudit(): MetricsAudit | null {
   return readJson<MetricsAudit>("audit", "metrics.json");
+}
+
+export function getConsistencyReport(): ConsistencyReport | null {
+  return readJson<ConsistencyReport>("audit", "consistency.json");
 }
 
 export function getValidationReport(): ValidationReport | null {

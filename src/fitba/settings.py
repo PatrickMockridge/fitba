@@ -170,6 +170,12 @@ def source_ids() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def scopes() -> dict[str, Any]:
+    path = CONFIG_DIR / "scopes.yaml"
+    return load_yaml(path) if path.exists() else {"scopes": {}}
+
+
+@lru_cache(maxsize=1)
 def matchday() -> dict[str, Any]:
     path = CONFIG_DIR / "matchday.yaml"
     return load_yaml(path) if path.exists() else {}

@@ -11,8 +11,10 @@ from typing import Any, Literal, cast
 
 from pydantic import BaseModel, ConfigDict
 
+from fitba.analytics.availability_facts import availability_universes
 from fitba.ingest.availability import (
     _merge,
+    load_availability_frame,
     load_availability_meta,
 )
 from fitba.settings import source_registry
@@ -77,6 +79,7 @@ class AvailabilityDocument(StrictModel):
     as_of: str | None = None
     policy_version: str
     coverage: AvailabilityCoverage
+    universes: dict[str, Any] = {}
     entries: list[AvailabilityEntry]
     sources: list[AvailabilitySource] = []
     notes: str
@@ -111,6 +114,35 @@ def _date_text(value: Any) -> str | None:
     return str(value)
 
 
+def _snapshot_entries(squad_data: dict[str, Any] | None) -> list[dict[str, Any]]:
+    """Merge curated ledger statuses with the ingested provider evidence.
+
+    The snapshot supplies provider signals and conflicts. The curated ledger
+    remains the source of a confirmed team-news status; an older snapshot must
+    not roll a verified entry back to unknown.
+    """
+    entries = {
+        int(entry["player_id"]): entry
+        for entry in _merge(squad_data=squad_data, provider={"rows": []})
+        if entry.get("player_id") is not None
+    }
+    frame = load_availability_frame()
+    for row in frame.to_dicts() if frame.height else []:
+        player_id = row.get("player_id")
+        if player_id is None or int(player_id) not in entries:
+            continue
+        entry = entries[int(player_id)]
+        for key in ("provider_signal", "conflict"):
+            if row.get(key) is not None:
+                entry[key] = row.get(key)
+        if row.get("provider_signal") and not entry.get("source_url"):
+            entry["provider_signal"] = row.get("provider_signal")
+    return sorted(
+        entries.values(),
+        key=lambda row: (row.get("player_name") or "", row["player_id"]),
+    )
+
+
 def build_availability_payload(
     *,
     squad_data: dict[str, Any] | None,
@@ -119,10 +151,10 @@ def build_availability_payload(
 ) -> dict[str, Any]:
     meta = load_availability_meta()
     provider = meta.get("provider") or {}
-    entries = _merge(
-        squad_data=squad_data,
-        provider={"rows": []},
-    )
+    entries = _snapshot_entries(squad_data)
+    if not entries:
+        entries = _merge(squad_data=squad_data, provider={"rows": []})
+    universes = availability_universes(entries, squad_data)
     counts = {
         status: sum(1 for entry in entries if entry.get("status") == status)
         for status in ("out", "suspended", "doubtful", "returned", "available", "unknown")
@@ -161,6 +193,7 @@ def build_availability_payload(
                 "are optional and are not team news. Unknown stays unknown."
             ),
         ),
+        universes=universes,
         entries=[
             AvailabilityEntry(
                 player_id=entry.get("player_id"),

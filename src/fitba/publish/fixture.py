@@ -8,6 +8,7 @@ from typing import Any, Literal
 import polars as pl
 from pydantic import BaseModel, ConfigDict
 
+from fitba.analytics.records import match_result
 from fitba.analytics.summary import build_summary
 from fitba.ingest.history import (
     HISTORY_DIR,
@@ -22,7 +23,7 @@ from fitba.normalize.teams import TeamRegistry
 from fitba.settings import MARTS_DIR, fixtures_policy, source_ids
 from fitba.util.dates import utc_now_iso
 
-SCHEMA_VERSION = "1.1.0"
+SCHEMA_VERSION = "1.2.0"
 
 
 class StrictModel(BaseModel):
@@ -67,11 +68,34 @@ class StatsBlock(StrictModel):
     coverage: dict[str, str]
 
 
+class XgShotProfile(StrictModel):
+    shots: int | None = None
+    shots_on_target: int | None = None
+    shots_off: int | None = None
+    shots_blocked: int | None = None
+    shots_insidebox: int | None = None
+    shots_outsidebox: int | None = None
+    penalties: int | None = None
+    penalty_goals: int | None = None
+
+
 class XgSide(StrictModel):
     value: float | None = None
     low: float | None = None
     high: float | None = None
+    goals_low: int | None = None
+    goals_high: int | None = None
+    goals: int | None = None
+    goals_minus: float | None = None
+    goals_position: Literal["below", "within", "above"] | None = None
     provider: float | None = None
+    provider_source: str | None = None
+    xg_per_shot: float | None = None
+    penalty_xg: float | None = None
+    penalties: int | None = None
+    penalties_known: bool | None = None
+    basis: str | None = None
+    shot_profile: XgShotProfile | None = None
 
 
 class XgBlock(StrictModel):
@@ -80,6 +104,9 @@ class XgBlock(StrictModel):
     away: XgSide | None = None
     model_id: str | None = None
     note: str | None = None
+    model_range_level: float | None = None
+    goals_range_level: float | None = None
+    goals_dispersion: float | None = None
     gate_status: str | None = None
     gate_passed: bool | None = None
     gate_note: str | None = None
@@ -150,6 +177,46 @@ class PlayerStat(StrictModel):
     red_cards: int | None = None
 
 
+class PerformancePlayer(StrictModel):
+    player_id: int | None = None
+    player_name: str | None = None
+    href: str | None = None
+    team_name: str | None = None
+    is_aberdeen: bool | None = None
+    rating: float | None = None
+    minutes: int | None = None
+    goals: int | None = None
+    assists: int | None = None
+    shots_total: int | None = None
+    shots_on: int | None = None
+    passes_total: int | None = None
+    pass_accuracy: int | None = None
+    tackles: int | None = None
+    duels_won: int | None = None
+
+
+class PerformanceSide(StrictModel):
+    basis: str
+    players: list[PerformancePlayer]
+
+
+class PerformanceStrength(StrictModel):
+    key: str
+    label: str
+    aberdeen: float
+    opponent: float
+    unit: str = ""
+    source: str | None = None
+
+
+class PerformanceBlock(StrictModel):
+    available: bool
+    aberdeen: PerformanceSide
+    opponent: PerformanceSide
+    strengths: list[PerformanceStrength]
+    note: str
+
+
 class FormRow(StrictModel):
     fixture_id: int
     date: str
@@ -205,7 +272,13 @@ class FixtureInfo(StrictModel):
     away_penalties: int | None = None
     extra_time: bool | None = None
     result: str
+    outcome: str
+    result_label: str
     aberdeen_result: str
+    aberdeen_outcome: str
+    aberdeen_result_label: str
+    shootout_result: str | None = None
+    decided_by: str = "regulation"
     href: str
     duplicate_of: str | None = None
 
@@ -267,6 +340,7 @@ class FixtureDocument(StrictModel):
     timeline: list[TimelineRow]
     lineups: dict[str, LineupBlock | None]
     player_stats: list[PlayerStat]
+    performance: PerformanceBlock
     form: FormBlock
     coverage: CoverageBlock
     sources: list[SourceRef]
@@ -784,6 +858,114 @@ def _player_stats_block(
     return output
 
 
+def _performance_block(
+    player_rows: list[dict[str, Any]],
+    *,
+    home_stats: dict[str, Any],
+    away_stats: dict[str, Any],
+    stat_rows: list[dict[str, Any]],
+    aberdeen_is_home: bool,
+) -> dict[str, Any]:
+    """Select measured standouts and Aberdeen's measured team advantages.
+
+    This is a presentation selection over already-published values: the top
+    provider ratings (or measured output where ratings are absent) and the
+    fixed team categories where Aberdeen were higher. It is not an overall
+    performance verdict.
+    """
+    player_fields = (
+        "player_id",
+        "player_name",
+        "href",
+        "team_name",
+        "is_aberdeen",
+        "rating",
+        "minutes",
+        "goals",
+        "assists",
+        "shots_total",
+        "shots_on",
+        "passes_total",
+        "pass_accuracy",
+        "tackles",
+        "duels_won",
+    )
+
+    def pick(rows: list[dict[str, Any]]) -> dict[str, Any]:
+        eligible = [row for row in rows if (row.get("minutes") or 0) > 0]
+        rated = [row for row in eligible if row.get("rating") is not None]
+        if rated:
+            basis = "provider_rating"
+            ordered = sorted(
+                rated,
+                key=lambda row: (
+                    -float(row["rating"]),
+                    -((row.get("goals") or 0) + (row.get("assists") or 0)),
+                    -(row.get("shots_on") or 0),
+                    -(row.get("minutes") or 0),
+                ),
+            )
+        else:
+            basis = "measured_output"
+            ordered = sorted(
+                eligible,
+                key=lambda row: (
+                    -((row.get("goals") or 0) * 2 + (row.get("assists") or 0)),
+                    -(row.get("shots_on") or 0),
+                    -(row.get("minutes") or 0),
+                ),
+            )
+        return {
+            "basis": basis,
+            "players": [{field: row.get(field) for field in player_fields} for row in ordered[:3]],
+        }
+
+    aberdeen = pick([row for row in player_rows if row.get("is_aberdeen") is True])
+    opponent = pick([row for row in player_rows if row.get("is_aberdeen") is False])
+    aberdeen_stats = home_stats if aberdeen_is_home else away_stats
+    opponent_stats = away_stats if aberdeen_is_home else home_stats
+    stat_by_key = {row.get("key"): row for row in stat_rows}
+    strengths: list[dict[str, Any]] = []
+    for key, label in (
+        ("shots", "Shots"),
+        ("shots_on_target", "Shots on target"),
+        ("shots_insidebox", "Shots inside box"),
+        ("possession", "Possession"),
+        ("passes_pct", "Pass accuracy"),
+    ):
+        aberdeen_value = aberdeen_stats.get(key)
+        opponent_value = opponent_stats.get(key)
+        if not isinstance(aberdeen_value, (int, float)) or not isinstance(
+            opponent_value, (int, float)
+        ):
+            continue
+        if aberdeen_value <= opponent_value:
+            continue
+        source_row = stat_by_key.get(key) or {}
+        strengths.append(
+            {
+                "key": key,
+                "label": label,
+                "aberdeen": aberdeen_value,
+                "opponent": opponent_value,
+                "unit": "%" if key in {"possession", "passes_pct"} else "",
+                "source": source_row.get("source"),
+            }
+        )
+        if len(strengths) == 3:
+            break
+    return {
+        "available": bool(aberdeen["players"] or opponent["players"] or strengths),
+        "aberdeen": aberdeen,
+        "opponent": opponent,
+        "strengths": strengths,
+        "note": (
+            "Selected measured categories where Aberdeen were higher; this is a "
+            "comparison, not an overall performance verdict."
+        ),
+    }
+
+
 def _form_context(registry: Any, fixture: FixtureRecord) -> dict[str, Any]:
     played = [
         item
@@ -818,38 +1000,63 @@ def _xg_block(
 ) -> dict[str, Any]:
     if not xg_row:
         return {"available": False}
-    if fixture.is_aberdeen_home:
-        home = {
-            "value": xg_row.get("fxg_for"),
-            "low": xg_row.get("fxg_for_low"),
-            "high": xg_row.get("fxg_for_high"),
-            "provider": xg_row.get("provider_xg_for"),
+    def side(prefix: str, goals: int | None) -> dict[str, Any]:
+        penalties = xg_row.get(f"penalties_{prefix}")
+        return {
+            "value": xg_row.get(f"fxg_{prefix}"),
+            "low": xg_row.get(f"fxg_{prefix}_low"),
+            "high": xg_row.get(f"fxg_{prefix}_high"),
+            "goals_low": xg_row.get(f"goals_{prefix}_low"),
+            "goals_high": xg_row.get(f"goals_{prefix}_high"),
+            "goals": goals,
+            "goals_minus": xg_row.get(f"goals_minus_fxg_{prefix}"),
+            "goals_position": xg_row.get(f"goals_position_{prefix}"),
+            "provider": xg_row.get(f"provider_xg_{prefix}"),
+            "provider_source": (
+                xg_row.get(f"provider_xg_source_{prefix}")
+                or xg_row.get("provider_xg_source")
+                if xg_row.get(f"provider_xg_{prefix}") is not None
+                else None
+            ),
+            "xg_per_shot": xg_row.get(f"fxg_per_shot_{prefix}"),
+            "penalty_xg": xg_row.get(f"penalty_xg_{prefix}"),
+            "penalties": penalties,
+            "penalties_known": penalties is not None,
+            "basis": xg_row.get(f"basis_{prefix}"),
+            "shot_profile": {
+                "shots": xg_row.get(f"shots_{prefix}"),
+                "shots_on_target": xg_row.get(f"shots_on_target_{prefix}"),
+                "shots_off": xg_row.get(f"shots_off_{prefix}"),
+                "shots_blocked": xg_row.get(f"shots_blocked_{prefix}"),
+                "shots_insidebox": xg_row.get(f"shots_insidebox_{prefix}"),
+                "shots_outsidebox": xg_row.get(f"shots_outsidebox_{prefix}"),
+                "penalties": penalties,
+                "penalty_goals": xg_row.get(f"penalty_goals_{prefix}"),
+            },
         }
-        away = {
-            "value": xg_row.get("fxg_against"),
-            "low": xg_row.get("fxg_against_low"),
-            "high": xg_row.get("fxg_against_high"),
-            "provider": xg_row.get("provider_xg_against"),
-        }
-    else:
-        home = {
-            "value": xg_row.get("fxg_against"),
-            "low": xg_row.get("fxg_against_low"),
-            "high": xg_row.get("fxg_against_high"),
-            "provider": xg_row.get("provider_xg_against"),
-        }
-        away = {
-            "value": xg_row.get("fxg_for"),
-            "low": xg_row.get("fxg_for_low"),
-            "high": xg_row.get("fxg_for_high"),
-            "provider": xg_row.get("provider_xg_for"),
-        }
+
+    home = side(
+        "for" if fixture.is_aberdeen_home else "against",
+        fixture.home_goals,
+    )
+    away = side(
+        "against" if fixture.is_aberdeen_home else "for",
+        fixture.away_goals,
+    )
     return {
         "available": home["value"] is not None and away["value"] is not None,
         "home": home,
         "away": away,
         "model_id": xg_row.get("model_id"),
-        "note": "fxG is fitba's shot-on-target model; provider xG is shown separately.",
+        "model_range_level": xg_row.get("interval_level"),
+        "goals_range_level": xg_row.get("goals_range_level"),
+        "goals_dispersion": xg_row.get("goals_dispersion"),
+        "note": (
+            "fxG is a team-match estimate from shots, shot zones and penalties. "
+            "Provider xG is a different model and is shown separately. The model "
+            "range is uncertainty in the estimate; the goals range is the spread "
+            "of goals from the same chances. Neither is a result prediction."
+        ),
         "gate_status": (evaluation or {}).get("status"),
         "gate_passed": (evaluation or {}).get("passed"),
         "gate_note": (evaluation or {}).get("note"),
@@ -941,9 +1148,11 @@ def build_fixture_payloads(
                 "home": home_xg["home"]["value"],
                 "home_low": home_xg["home"]["low"],
                 "home_high": home_xg["home"]["high"],
+                "home_provider": home_xg["home"]["provider"],
                 "away": home_xg["away"]["value"],
                 "away_low": home_xg["away"]["low"],
                 "away_high": home_xg["away"]["high"],
+                "away_provider": home_xg["away"]["provider"],
             }
         timeline = _timeline(events_frame, fixture, teams=teams)
         scoreboard = _scoreboard(
@@ -987,6 +1196,14 @@ def build_fixture_payloads(
             aberdeen_api_id=aberdeen_api_id,
             player_index=player_index,
         )
+        stat_rows = _stat_rows(home_stats, away_stats, stat_source)
+        performance = _performance_block(
+            player_rows,
+            home_stats=home_stats,
+            away_stats=away_stats,
+            stat_rows=stat_rows,
+            aberdeen_is_home=fixture.is_aberdeen_home,
+        )
         available = {
             "events": bool(events_frame.height),
             "lineups": home_lineup is not None and away_lineup is not None,
@@ -995,21 +1212,21 @@ def build_fixture_payloads(
             "xg": bool(home_xg.get("available")),
         }
         depth = _depth(available)
-        result = (
-            "W"
-            if (fixture.home_goals or 0) > (fixture.away_goals or 0)
-            else "L"
-            if (fixture.home_goals or 0) < (fixture.away_goals or 0)
-            else "D"
+        home_penalties = fixture.home_penalties
+        away_penalties = fixture.away_penalties
+        result = match_result(
+            fixture.home_goals,
+            fixture.away_goals,
+            shootout_for=home_penalties,
+            shootout_against=away_penalties,
         )
         aberdeen_goals = fixture.home_goals if fixture.is_aberdeen_home else fixture.away_goals
         opponent_goals = fixture.away_goals if fixture.is_aberdeen_home else fixture.home_goals
-        aberdeen_result = (
-            "W"
-            if (aberdeen_goals or 0) > (opponent_goals or 0)
-            else "L"
-            if (aberdeen_goals or 0) < (opponent_goals or 0)
-            else "D"
+        aberdeen_result = match_result(
+            aberdeen_goals,
+            opponent_goals,
+            shootout_for=home_penalties if fixture.is_aberdeen_home else away_penalties,
+            shootout_against=away_penalties if fixture.is_aberdeen_home else home_penalties,
         )
         document = {
             "schema_version": SCHEMA_VERSION,
@@ -1036,8 +1253,14 @@ def build_fixture_payloads(
                 "home_penalties": fixture.home_penalties,
                 "away_penalties": fixture.away_penalties,
                 "extra_time": fixture.extra_time,
-                "result": result,
-                "aberdeen_result": aberdeen_result,
+                "result": result["result"],
+                "outcome": result["outcome"],
+                "result_label": result["result_label"],
+                "aberdeen_result": aberdeen_result["result"],
+                "aberdeen_outcome": aberdeen_result["outcome"],
+                "aberdeen_result_label": aberdeen_result["result_label"],
+                "shootout_result": aberdeen_result["shootout_result"],
+                "decided_by": aberdeen_result["decided_by"],
                 "href": fixture.href,
                 "duplicate_of": None,
             },
@@ -1047,7 +1270,7 @@ def build_fixture_payloads(
             "stats": {
                 "home": home_stats,
                 "away": away_stats,
-                "rows": _stat_rows(home_stats, away_stats, stat_source),
+                "rows": stat_rows,
                 "coverage": {
                     "shots": "available" if stats_available else "unavailable",
                     "possession": "available"
@@ -1059,6 +1282,7 @@ def build_fixture_payloads(
             "timeline": timeline,
             "lineups": {"home": home_lineup, "away": away_lineup},
             "player_stats": player_rows,
+            "performance": performance,
             "form": _form_context(registry, fixture),
             "coverage": {
                 **available,
@@ -1089,8 +1313,14 @@ def build_fixture_payloads(
                 "away_goals": fixture.away_goals,
                 "home_penalties": fixture.home_penalties,
                 "away_penalties": fixture.away_penalties,
-                "result": result,
-                "aberdeen_result": aberdeen_result,
+                "result": result["result"],
+                "outcome": result["outcome"],
+                "result_label": result["result_label"],
+                "aberdeen_result": aberdeen_result["result"],
+                "aberdeen_outcome": aberdeen_result["outcome"],
+                "aberdeen_result_label": aberdeen_result["result_label"],
+                "shootout_result": aberdeen_result["shootout_result"],
+                "decided_by": aberdeen_result["decided_by"],
                 "depth": depth,
                 "href": fixture.href,
             }

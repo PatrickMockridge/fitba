@@ -21,6 +21,7 @@ FORUM = GENERATED / "forum" / "afc_chat.json"
 CLUB = GENERATED / "clubs" / "aberdeen.json"
 
 VALID_STATUS = {"squad", "loan_out", "loan_in"}
+VALID_ROSTER_STATUS = {"official", "official_loan", "excluded_api", "provider_fallback"}
 VALID_COVERAGE = {"available", "partial", "unavailable"}
 VALID_SCOPE = {"club", "loan", "other"}
 TOTAL_FIELDS = [
@@ -66,7 +67,13 @@ def _load(path: Path) -> dict[str, Any] | None:
 
 
 def _href_set(squad: dict[str, Any]) -> set[str]:
-    return {str(player["href"]) for player in squad.get("players", [])}
+    return {
+        str(player["href"])
+        for player in [
+            *(squad.get("players") or []),
+            *(squad.get("excluded_players") or []),
+        ]
+    }
 
 
 def _check_hrefs(payload: Any, hrefs: set[str], where: str, errors: list[str]) -> None:
@@ -265,7 +272,7 @@ def main() -> int:
         errors.append("duplicate player ids")
     if len(keys) != len(set(keys)):
         errors.append("duplicate player keys")
-    if len(hrefs) != len(players):
+    if len(hrefs) != len(players) + len(squad.get("excluded_players") or []):
         errors.append("duplicate or missing player hrefs")
 
     for player in players:
@@ -303,8 +310,24 @@ def main() -> int:
         loan = player.get("loan")
         if status == "squad" and loan is not None:
             errors.append(f"{pid}: squad player has a loan object")
-        if status in {"loan_out", "loan_in"} and not (loan and loan.get("club")):
+        if (
+            status in {"loan_out", "loan_in"}
+            and not (loan and loan.get("club"))
+            and player.get("roster_status") != "official_loan"
+        ):
             errors.append(f"{pid}: loan player has no loan club")
+        roster_status = player.get("roster_status")
+        if roster_status not in VALID_ROSTER_STATUS:
+            errors.append(f"{pid}: invalid roster_status {roster_status!r}")
+        if not player.get("squad_member", True):
+            errors.append(f"{pid}: excluded row is in the official players list")
+        if roster_status in {"official", "official_loan"}:
+            if not player.get("official_href"):
+                errors.append(f"{pid}: official roster row has no official href")
+            if player.get("official_order") is None:
+                errors.append(f"{pid}: official roster row has no official order")
+        if roster_status == "provider_fallback" and player.get("official_href"):
+            errors.append(f"{pid}: provider fallback row has an official href")
 
         stats = player.get("stats", [])
         if any(row.get("scope") not in VALID_SCOPE for row in stats):
@@ -341,18 +364,75 @@ def main() -> int:
         }:
             errors.append(f"{pid}: invalid position stats coverage")
 
+        club_rows = [row for row in stats if row.get("scope") == "club"]
+        loan_rows = [row for row in stats if row.get("scope") == "loan"]
         totals = player.get("totals")
-        if player.get("stats_coverage") == "unavailable":
+        loan_totals = player.get("loan_totals")
+        if not club_rows:
             if totals is not None:
-                errors.append(f"{pid}: unavailable coverage has non-null totals")
+                errors.append(f"{pid}: club totals without club rows")
+        elif totals is None:
+            errors.append(f"{pid}: club rows without club totals")
         else:
-            if totals is None:
-                errors.append(f"{pid}: available coverage has null totals")
-            else:
-                for field in TOTAL_FIELDS:
-                    expected = sum(int(row.get(field) or 0) for row in stats)
-                    if int(totals.get(field) or 0) != expected:
-                        errors.append(f"{pid}: totals {field} mismatch")
+            for field in TOTAL_FIELDS:
+                expected = sum(int(row.get(field) or 0) for row in club_rows)
+                if int(totals.get(field) or 0) != expected:
+                    errors.append(f"{pid}: club totals {field} mismatch")
+        if not loan_rows:
+            if loan_totals is not None:
+                errors.append(f"{pid}: loan totals without loan rows")
+        elif loan_totals is None:
+            errors.append(f"{pid}: loan rows without loan totals")
+        else:
+            for field in TOTAL_FIELDS:
+                expected = sum(int(row.get(field) or 0) for row in loan_rows)
+                if int(loan_totals.get(field) or 0) != expected:
+                    errors.append(f"{pid}: loan totals {field} mismatch")
+
+    excluded = squad.get("excluded_players") or []
+    if squad.get("roster_meta", {}).get("status") == "available":
+        if len(excluded) != len({str(player.get("player_id")) for player in excluded}):
+            errors.append("excluded_players contains duplicate player ids")
+        if len(excluded) != len({str(player.get("player_key")) for player in excluded}):
+            errors.append("excluded_players contains duplicate player keys")
+        for player in excluded:
+            pid = player.get("player_id")
+            if player.get("squad_member") is not False:
+                errors.append(f"{pid}: excluded row is marked as a squad member")
+            if player.get("roster_status") != "excluded_api":
+                errors.append(f"{pid}: excluded row has invalid roster status")
+            if player.get("exclusion_reason") != "not_on_official_list":
+                errors.append(f"{pid}: excluded row has no exclusion reason")
+            if not player.get("href"):
+                errors.append(f"{pid}: excluded row has no retained href")
+        player_ids = {str(player.get("player_id")) for player in players}
+        excluded_ids = {str(player.get("player_id")) for player in excluded}
+        if player_ids & excluded_ids:
+            errors.append("official and excluded player ids overlap")
+
+    roster_meta = squad.get("roster_meta") or {}
+    if roster_meta.get("status") not in {"available", "unavailable"}:
+        errors.append("roster_meta has invalid status")
+    if roster_meta.get("status") == "available" and not roster_meta.get("source_url"):
+        errors.append("roster_meta is available without a source URL")
+    if roster_meta.get("status") == "available" and not roster_meta.get("fetched_at"):
+        errors.append("roster_meta is available without a fetched_at date")
+    if roster_meta.get("ambiguous") != len(squad.get("roster_only") or []):
+        errors.append("roster_meta ambiguous does not match roster_only rows")
+    if roster_meta.get("official_players") != sum(
+        1 for player in players if player.get("roster_status") in {"official", "official_loan"}
+    ):
+        errors.append("roster_meta official_players does not match player rows")
+    if int(roster_meta.get("matched") or 0) + int(
+        roster_meta.get("ambiguous") or 0
+    ) != int(roster_meta.get("official_players") or 0):
+        errors.append("roster_meta matched + ambiguous does not equal official_players")
+    if roster_meta.get("official_only") != sum(
+        1 for player in players if player.get("official_only")
+    ):
+        errors.append("roster_meta official_only does not match player rows")
+    if roster_meta.get("excluded_api") != len(squad.get("excluded_players") or []):
+        errors.append("roster_meta excluded_api does not match excluded rows")
 
     summary = squad.get("summary", {})
     expected = {
@@ -420,6 +500,7 @@ def main() -> int:
             for player in players
             if (player.get("display_role") or {}).get("source") == "aberdeen_override"
         ),
+        "excluded_api": len(squad.get("excluded_players") or []),
     }
     for field, value in expected.items():
         if summary.get(field) != value:
@@ -432,6 +513,8 @@ def main() -> int:
         errors.append("summary by_role_family_squad does not sum to the squad")
     if sum((summary.get("by_primary_group") or {}).values()) != len(players):
         errors.append("summary by_primary_group does not sum to players")
+    if sum((summary.get("by_primary_group_squad") or {}).values()) != summary.get("squad_size"):
+        errors.append("summary by_primary_group_squad does not sum to the squad")
     if sum((summary.get("by_primary_side") or {}).values()) != len(players):
         errors.append("summary by_primary_side does not sum to players")
     if sum((summary.get("by_status") or {}).values()) != len(players):

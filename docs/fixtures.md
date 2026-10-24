@@ -1,7 +1,7 @@
 # Results and fixtures: fixtures and match pages
 
 **Status:** page specification for `/matches/` and `/matches/<fixture_id>/`.
-**Last reviewed:** 2026-10-22.
+**Last reviewed:** 2026-10-24.
 
 ## Purpose
 
@@ -11,6 +11,13 @@ not have a page. The page shows
 what the record actually supports: the score first, then events, lineups, team
 statistics, player statistics, fxG and coverage. Missing data is labelled; it is
 never filled with a zero or a guess.
+
+`result` is the 90/120-minute result used for W-D-L and league points. A
+shootout is published separately as `shootout_result` and `result_label`
+(for example `D (won 3-1 pens)`); it is never collapsed into a bare draw. The
+fixture index's `scheduled_count` excludes `conflict_review` rows and
+`scheduled_rows_total` keeps the full list, so the two counts cannot be read as
+the same fact.
 
 The scope is 2019-20 to 2026-27: 367 canonical played fixtures at the last
 check, plus the remaining scheduled fixtures from the merged season schedule at the
@@ -49,13 +56,19 @@ remains on the history pages.
 3. The read: a deterministic summary from events and measured stats.
 4. Match stats: the shared league stat row first; API possession, passes, shot
    locations, saves and provider xG where available. Every row names its source.
-5. fxG and provider xG, separately. fxG is never blended with provider xG.
-6. Timeline: goals, assists, own goals, penalties, cards, substitutions, VAR
+5. Performance: a standout measured-output block for both teams and a measured
+   team-strengths block, labelled provider values and not verdicts.
+6. fxG, its 80% model range, its 80% goals range and provider xG, separately.
+   The block also shows goals, Goals − fxG and whether the goals are below,
+   within or above the range; the shot profile; penalties at a fixed 0.76 xG;
+   xG per shot; and the model basis (zones, volume or conversion). The read uses
+   provider xG where available, otherwise fxG; the two are never blended.
+7. Timeline: goals, assists, own goals, penalties, cards, substitutions, VAR
    and shootouts, with the score after each regular goal.
-7. Lineups: observed formation, starting XI, substitutes and coach.
-8. Player stats: provider rating and match output where available.
-9. Coverage: events, lineups, team stats, player stats and fxG availability.
-10. Form context and the previous/next links.
+8. Lineups: observed formation, starting XI, substitutes and coach.
+9. Player stats: provider rating and match output where available.
+10. Coverage: events, lineups, team stats, player stats and fxG availability.
+11. Form context and the previous/next links.
 
 Aberdeen is red throughout the scoreboard, stats, fxG sides, timeline, lineups
 and player stats. The opponent is neutral. Team names and a visible team key
@@ -80,8 +93,9 @@ missing.
 
 `src/fitba/analytics/summary.py` selects stock phrases from measured facts:
 score, shootout, comeback, decisive late goal, red card, own goal, penalty and
-every scoring event. The measured half is labelled `measured`; the fxG sentence
-is labelled `inferred`. A shootout is named before the draw branch. A late-win
+every scoring event. The measured half is labelled `measured`; provider xG is
+measured, the calibrated shot expectation is `inferred`. A shootout is named
+before the draw branch. A late-win
 phrase requires a one-goal margin and a decisive late goal; it is never used for a
 multi-goal defeat. When the event feed is absent the read says so and does not
 print "0 goals"; when it is partial, it says the record does not reconcile. Every
@@ -97,13 +111,19 @@ enforces this.
 - League scores and shots: football-data.co.uk.
 - Events, lineups, player match stats and cup/European team stats: API-Football.
 - Provider xG: football-data.co.uk 2026-27 SC0 and API-Football where returned.
-- Missing provider team statistics are `unavailable`, not zero.
+- Shot zones, blocked shots and penalty attempts: API-Football. The model uses
+  team-match zones, not shot coordinates; there is no xGOT or shot-level xG.
+- Missing provider team statistics, zones or penalties are `unavailable`, not
+  zero. Older matches fall back to volume or conversion and say so.
 
 ## Adding or changing a fixture page
 
 - Do not edit `web/data/generated` by hand. Run `uv run fitba publish`.
 - A new metric or a changed fixture field needs a registry entry, audit, test and
   `docs/metric-changes.md`.
+- The xG block's model range and goals range answer different questions. Do not
+  describe either as a confidence interval for team quality or a result
+  prediction, and never sum per-match intervals.
 - Run `uv run python scripts/check_fixture_pages.py` after a build. It checks
   every document and every built page, score/timeline reconciliation, required
   markers, summary-number containment and banned verdict language.

@@ -107,8 +107,10 @@ player endpoint; qualifiers and play-offs are excluded.
   the confidence is shown.
 - **Budget:** value bands, confidence and unknown states; no invented wages.
 - **Cups:** computed group tables are labelled; an unpublished draw is a state.
-- **fxG:** a shot-on-target model with an explicit interval, provider-xG
-  evaluation and a published gate. See [xg.md](xg.md).
+- **fxG:** a team-match expected-goals estimate from open-play shot zones,
+  shots on target, blocked shots and penalties, with an 80% model range and a
+  separate 80% goals range. Provider-xG calibration, a transfer check and a
+  published gate are visible. See [xg.md](xg.md).
 
 ## Transfers and loans
 
@@ -202,16 +204,38 @@ the matchday strip and needs model, but are not rendered on `/analysis/`.
 
 ## fxG
 
-fxG estimates a competition-season on-target conversion rate with an
-empirical-Bayes Beta prior and multiplies it by the match's shots on target. The
-80% interval carries conversion uncertainty and a match-level overdispersion
-term. It has no shot location, opponent adjustment or home advantage. Provider
-xG is carried separately where available and never blended in. Where the
-provider did not supply league xG, a calibrated provider-style estimate is
-published instead, clearly labelled as an estimate; it uses the 2026-27 provider
-rows as calibration and does not reconstruct the provider's shot-location
-model. The model card, evaluation gate and limitations are in
-[xg.md](xg.md).
+fxG is a **team-match expected-goals estimate**, not a shot-level model and not
+provider xG. The record has team counts and events, but no shot coordinates,
+distance, angle, body part, pressure, goalkeeper position or goalmouth
+trajectory.
+
+The selected model uses open-play inside-box shots, outside-box shots and shots
+on target, plus a fixed 0.76 xG for every non-shootout penalty attempt.
+Penalties are removed from the open-play counts before the fit and added back
+after it. If zones are missing, the model falls back to open-play volume; if
+shots on target are missing, it falls back to the competition-season conversion
+rate and labels the basis. The coefficients are fitted by OLS to the 2026-27
+Premiership team rows where football-data provider xG exists. Leave-one-match-out
+validation leaves out both team rows of a match.
+
+Two ranges are published:
+
+- The **80% model range** is the uncertainty in the fxG estimate: a
+  match-clustered bootstrap plus the leave-one-match-out residual pool.
+  Aggregates sum per-draw predictions and residuals; per-match intervals are
+  never added together.
+- The **80% goals range** is the spread of goals from the same chances: a
+  beta-binomial open-play distribution convolved with a binomial penalty
+  distribution. Aggregate distributions are convolved, so variance sums and
+  width grows roughly with the square root of matches.
+
+`Goals − fxG` is descriptive and is not a verdict on finishing. One match or one
+season is noisy; style, shot selection, game state, own goals, deflections and
+provider differences can move the difference. Provider xG is carried separately
+where available and is never blended into fxG. There is no xGOT, player xG or
+shot-level location model in this record. The model card, calibration gate,
+transfer check and limitations are in [xg.md](xg.md).
+
 
 ## Provenance and squad needs
 
@@ -387,6 +411,21 @@ pipeline in this phase.
 - Publishing is atomic: temp directory, validation, rename, manifest last.
 - The manifest records source, coverage, last success and freshness.
 - A failed source keeps its last-good data and is marked stale.
+
+## Cross-surface consistency
+
+Every shared fact has one production derivation. The squad, player, scouting,
+analysis, matchday, fixture and transfer publishers call the shared analytics
+helpers rather than re-filtering the same input. A page may show a different
+scope (league vs all competitions, official list vs register, current vs
+all-time), but it must name that scope beside the number.
+
+`scripts/check_consistency.py` reconciles the published payloads: squad counts,
+loan scopes, player totals and playing time, xG aggregates and fixture rows,
+shootout labels, scheduled counts, availability universes and coverage counts.
+The same checks run inside `fitba publish` and block the atomic swap on a
+failure. See [data-consistency.md](data-consistency.md) for the scope
+vocabulary and the full check list.
 
 ## Corrections
 

@@ -15,6 +15,7 @@ from typing import Any
 import polars as pl
 
 from fitba.analytics.history import club_match_rows
+from fitba.analytics.percentiles import midrank_percentile
 from fitba.analytics.records import record_totals
 from fitba.analytics.style import style_profile
 
@@ -116,21 +117,12 @@ def league_rank(
     return 1 + better
 
 
-def percentile_rank(values: Iterable[float | None], value: float | None) -> int | None:
-    """Percentile rank in a league distribution, 0-100.
+def percentile_rank(values: Iterable[float | None], value: float | None) -> float | None:
+    """League percentile using the shared midrank definition.
 
-    Ties take the midpoint. The maximum is 100 and the minimum is 0. A sample
-    smaller than two returns ``None`` rather than a made-up number.
+    A sample smaller than two returns ``None`` rather than a made-up number.
     """
-    if value is None:
-        return None
-    clean = [float(item) for item in values if item is not None]
-    if len(clean) < 2:
-        return None
-    below = sum(1 for item in clean if item < value)
-    equal = sum(1 for item in clean if item == value) - 1
-    rank = 100 * (below + 0.5 * max(equal, 0)) / (len(clean) - 1)
-    return max(0, min(100, round(rank)))
+    return midrank_percentile(value, values)
 
 
 def record(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
@@ -459,7 +451,7 @@ def _percentile_for_team(
     team_id: str,
     metric: str,
     venue: str | None,
-) -> int | None:
+) -> float | None:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in _rows(league_rows):
         if venue is not None and str(row.get("venue") or "").upper() != venue.upper():

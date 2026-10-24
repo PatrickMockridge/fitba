@@ -46,8 +46,9 @@ countdown. The old case page, owner view and xG tables are not rendered here;
 ## Availability rules
 
 - Official availability is the curated AFC ledger only: source, confidence and
-  verification date stay visible. The active universe is the current squad plus
-  ledger-only players; the nine loan-outs are separate.
+  verification date stay visible. The active universe is the 29-player squad
+  (official list minus loanees out); the 5 official loan-outs are separate, and
+  the availability and needs surfaces report the 34-player official universe.
 - The provider injured boolean is never team news.
 - Calculated suspensions are competition- and fixture-scoped. A rule is
   published only with its source and version; until then the row is `watch` or

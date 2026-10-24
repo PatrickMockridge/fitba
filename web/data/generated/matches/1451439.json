@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 1,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:conference-league",
     "competition_name": "UEFA Conference League",
     "date": "2025-12-11",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1451439,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:aberdeen",
     "home_team_name": "Aberdeen",
     "href": "/matches/1451439/",
+    "outcome": "L",
     "referee": "R. Schroder",
     "result": "L",
+    "result_label": "L",
     "round": "League Stage - 5",
     "season": "2025-26",
+    "shootout_result": null,
     "status": "FT",
     "venue": "H",
     "venue_name": "Pittodrie Stadium"
@@ -87,7 +93,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "Gary O'Neil",
@@ -394,6 +400,140 @@
     "next": "/matches/1382762/",
     "previous": "/matches/1382757/",
     "season": "/history/2025-26/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 4,
+          "goals": null,
+          "href": "/players/321860/",
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 28,
+          "passes_total": 34,
+          "player_id": 321860,
+          "player_name": "Jack Milne",
+          "rating": 7.9,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 3,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 4,
+          "goals": null,
+          "href": "/players/18945/",
+          "is_aberdeen": true,
+          "minutes": 78,
+          "pass_accuracy": 33,
+          "passes_total": 36,
+          "player_id": 18945,
+          "player_name": "Stuart Armstrong",
+          "rating": 7.5,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": null,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 28,
+          "player_id": 17939,
+          "player_name": "Dimitar Mitov",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 5,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 71,
+          "pass_accuracy": 13,
+          "passes_total": 15,
+          "player_id": 359386,
+          "player_name": "Martial Godo",
+          "rating": 8.5,
+          "shots_on": 3,
+          "shots_total": 3,
+          "tackles": null,
+          "team_name": "Strasbourg"
+        },
+        {
+          "assists": 1,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 26,
+          "passes_total": 34,
+          "player_id": 334035,
+          "player_name": "Samuel Amo-Ameyaw",
+          "rating": 8.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Strasbourg"
+        },
+        {
+          "assists": 0,
+          "duels_won": null,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 54,
+          "passes_total": 60,
+          "player_id": 340151,
+          "player_name": "Mike Penders",
+          "rating": 8.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Strasbourg"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 11,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 9,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 8,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 7,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1297,7 +1437,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1551,8 +1691,8 @@
         "text": "Possession: Aberdeen 40.0%, Strasbourg 60.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: Aberdeen 0.656 (0.0-1.999), Strasbourg 1.969 (0.0-4.295)."
+        "basis": "measured",
+        "text": "Provider xG: Aberdeen 0.88, Strasbourg 2.55."
       }
     ],
     "events_available": true,
@@ -2052,22 +2192,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 4.295,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -0.251,
+      "goals_position": "within",
+      "high": 1.767,
+      "low": 0.53,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 2.55,
-      "value": 1.969
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 9,
+        "shots_blocked": 2,
+        "shots_insidebox": 7,
+        "shots_off": 1,
+        "shots_on_target": 6,
+        "shots_outsidebox": 2
+      },
+      "value": 1.251,
+      "xg_per_shot": 0.139
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 1.999,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.942,
+      "goals_position": "within",
+      "high": 1.458,
+      "low": 0.221,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": 0.88,
-      "value": 0.656
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 5,
+        "shots_insidebox": 8,
+        "shots_off": 4,
+        "shots_on_target": 2,
+        "shots_outsidebox": 3
+      },
+      "value": 0.942,
+      "xg_per_shot": 0.086
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 0,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2025-08-04",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1382671,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:heart-of-midlothian",
     "home_team_name": "Heart of Midlothian",
     "href": "/matches/1382671/",
+    "outcome": "W",
     "referee": "Nick Walsh, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 1",
     "season": "2025-26",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Tynecastle Park"
@@ -86,7 +92,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "Bo Jimmy Thelin",
@@ -393,6 +399,140 @@
     "next": "/matches/1382677/",
     "previous": "/matches/1411584/",
     "season": "/history/2025-26/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 28,
+          "pass_accuracy": 13,
+          "passes_total": 16,
+          "player_id": 350876,
+          "player_name": "Dante Polvara",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 3,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 50,
+          "passes_total": 61,
+          "player_id": 151754,
+          "player_name": "Leighton Clarkson",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": 0,
+          "duels_won": 10,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 80,
+          "pass_accuracy": 11,
+          "passes_total": 15,
+          "player_id": 262960,
+          "player_name": "Nicolas Milanović",
+          "rating": 6.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": 0,
+          "duels_won": 8,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 28,
+          "passes_total": 37,
+          "player_id": 44781,
+          "player_name": "Stuart Findlay",
+          "rating": 9.3,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Heart of Midlothian"
+        },
+        {
+          "assists": 0,
+          "duels_won": 11,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 43,
+          "passes_total": 47,
+          "player_id": 44942,
+          "player_name": "Craig Halkett",
+          "rating": 8.0,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Heart of Midlothian"
+        },
+        {
+          "assists": 0,
+          "duels_won": 9,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 34,
+          "passes_total": 38,
+          "player_id": 6832,
+          "player_name": "Cameron Devlin",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 6,
+          "team_name": "Heart of Midlothian"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 52.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 48.0,
+        "source": "api_football",
+        "unit": "%"
+      },
+      {
+        "aberdeen": 75.0,
+        "key": "passes_pct",
+        "label": "Pass accuracy",
+        "opponent": 73.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1196,7 +1336,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [],
@@ -1470,8 +1610,8 @@
         "text": "Possession: Heart of Midlothian 48.0%, Aberdeen 52.0%."
       },
       {
-        "basis": "inferred",
-        "text": "fxG: Heart of Midlothian 0.964 (0.0-2.594), Aberdeen 0.321 (0.0-1.263)."
+        "basis": "measured",
+        "text": "Provider xG: Heart of Midlothian 1.77, Aberdeen 1.88."
       }
     ],
     "events_available": true,
@@ -1946,22 +2086,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 1.263,
-      "low": 0.0,
-      "provider": null,
-      "value": 0.321
+      "basis": "zones",
+      "goals": 0,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": -0.842,
+      "goals_position": "within",
+      "high": 1.358,
+      "low": 0.121,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
+      "provider": 1.88,
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 11,
+        "shots_blocked": 5,
+        "shots_insidebox": 8,
+        "shots_off": 5,
+        "shots_on_target": 1,
+        "shots_outsidebox": 3
+      },
+      "value": 0.842,
+      "xg_per_shot": 0.077
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 2.594,
-      "low": 0.0,
-      "provider": null,
-      "value": 0.964
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.772,
+      "goals_position": "within",
+      "high": 1.744,
+      "low": 0.507,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
+      "provider": 1.77,
+      "provider_source": "api_football",
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 13,
+        "shots_blocked": 3,
+        "shots_insidebox": 10,
+        "shots_off": 7,
+        "shots_on_target": 3,
+        "shots_outsidebox": 3
+      },
+      "value": 1.228,
+      "xg_per_shot": 0.094
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

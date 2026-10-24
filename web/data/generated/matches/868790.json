@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2022-12-28",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 868790,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:kilmarnock",
     "home_team_name": "Kilmarnock",
     "href": "/matches/868790/",
+    "outcome": "W",
     "referee": "Don Robertson, Scotland",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 19",
     "season": "2022-23",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "The BBSP Stadium Rugby Park"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Goodwin",
@@ -407,6 +413,140 @@
     "next": "/matches/868794/",
     "previous": "/matches/868787/",
     "season": "/history/2022-23/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 48,
+          "passes_total": 59,
+          "player_id": 69450,
+          "player_name": "Liam Scales",
+          "rating": 7.2,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 2,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 35,
+          "passes_total": 50,
+          "player_id": 44901,
+          "player_name": "Matthew Kennedy",
+          "rating": 6.9,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 4,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 47,
+          "passes_total": 58,
+          "player_id": 15673,
+          "player_name": "Ylber Ramadani",
+          "rating": 6.7,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 2,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 10,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 16,
+          "passes_total": 23,
+          "player_id": 19930,
+          "player_name": "Joe Wright",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 3,
+          "tackles": 2,
+          "team_name": "Kilmarnock"
+        },
+        {
+          "assists": 1,
+          "duels_won": 10,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 13,
+          "passes_total": 33,
+          "player_id": 17776,
+          "player_name": "Ash Taylor",
+          "rating": 7.6,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 1,
+          "team_name": "Kilmarnock"
+        },
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 15,
+          "passes_total": 26,
+          "player_id": 45063,
+          "player_name": "Danny Armstrong",
+          "rating": 7.6,
+          "shots_on": null,
+          "shots_total": 2,
+          "tackles": 4,
+          "team_name": "Kilmarnock"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 61.0,
+        "key": "possession",
+        "label": "Possession",
+        "opponent": 39.0,
+        "source": "api_football",
+        "unit": "%"
+      },
+      {
+        "aberdeen": 73.0,
+        "key": "passes_pct",
+        "label": "Pass accuracy",
+        "opponent": 61.0,
+        "source": "api_football",
+        "unit": "%"
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1210,7 +1350,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1496,7 +1636,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Kilmarnock 1.4 (0.0-3.348), Aberdeen 0.7 (0.0-2.077)."
+        "text": "Shot expectation: Kilmarnock 1.79, Aberdeen 0.57."
       }
     ],
     "events_available": true,
@@ -1846,22 +1986,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 2.077,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 0.429,
+      "goals_position": "within",
+      "high": 1.087,
       "low": 0.0,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 0.7
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 9,
+        "shots_blocked": 4,
+        "shots_insidebox": 4,
+        "shots_off": 3,
+        "shots_on_target": 2,
+        "shots_outsidebox": 5
+      },
+      "value": 0.571,
+      "xg_per_shot": 0.063
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.348,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.209,
+      "goals_position": "within",
+      "high": 2.307,
+      "low": 1.07,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.4
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 17,
+        "shots_blocked": 2,
+        "shots_insidebox": 15,
+        "shots_off": 11,
+        "shots_on_target": 4,
+        "shots_outsidebox": 2
+      },
+      "value": 1.791,
+      "xg_per_shot": 0.105
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

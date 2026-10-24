@@ -215,8 +215,41 @@
           "title": "Result",
           "type": "string"
         },
+        "outcome": {
+          "title": "Outcome",
+          "type": "string"
+        },
+        "result_label": {
+          "title": "Result Label",
+          "type": "string"
+        },
         "aberdeen_result": {
           "title": "Aberdeen Result",
+          "type": "string"
+        },
+        "aberdeen_outcome": {
+          "title": "Aberdeen Outcome",
+          "type": "string"
+        },
+        "aberdeen_result_label": {
+          "title": "Aberdeen Result Label",
+          "type": "string"
+        },
+        "shootout_result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shootout Result"
+        },
+        "decided_by": {
+          "default": "regulation",
+          "title": "Decided By",
           "type": "string"
         },
         "href": {
@@ -249,7 +282,11 @@
         "away_team_id",
         "away_team_name",
         "result",
+        "outcome",
+        "result_label",
         "aberdeen_result",
+        "aberdeen_outcome",
+        "aberdeen_result_label",
         "href"
       ],
       "title": "FixtureInfo",
@@ -498,6 +535,296 @@
         }
       },
       "title": "LineupPlayer",
+      "type": "object"
+    },
+    "PerformanceBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "title": "Available",
+          "type": "boolean"
+        },
+        "aberdeen": {
+          "$ref": "#/$defs/PerformanceSide"
+        },
+        "opponent": {
+          "$ref": "#/$defs/PerformanceSide"
+        },
+        "strengths": {
+          "items": {
+            "$ref": "#/$defs/PerformanceStrength"
+          },
+          "title": "Strengths",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "available",
+        "aberdeen",
+        "opponent",
+        "strengths",
+        "note"
+      ],
+      "title": "PerformanceBlock",
+      "type": "object"
+    },
+    "PerformancePlayer": {
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
+        },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "is_aberdeen": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Is Aberdeen"
+        },
+        "rating": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals"
+        },
+        "assists": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assists"
+        },
+        "shots_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Total"
+        },
+        "shots_on": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On"
+        },
+        "passes_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passes Total"
+        },
+        "pass_accuracy": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Accuracy"
+        },
+        "tackles": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tackles"
+        },
+        "duels_won": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duels Won"
+        }
+      },
+      "title": "PerformancePlayer",
+      "type": "object"
+    },
+    "PerformanceSide": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "players": {
+          "items": {
+            "$ref": "#/$defs/PerformancePlayer"
+          },
+          "title": "Players",
+          "type": "array"
+        }
+      },
+      "required": [
+        "basis",
+        "players"
+      ],
+      "title": "PerformanceSide",
+      "type": "object"
+    },
+    "PerformanceStrength": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "aberdeen": {
+          "title": "Aberdeen",
+          "type": "number"
+        },
+        "opponent": {
+          "title": "Opponent",
+          "type": "number"
+        },
+        "unit": {
+          "default": "",
+          "title": "Unit",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "aberdeen",
+        "opponent"
+      ],
+      "title": "PerformanceStrength",
       "type": "object"
     },
     "PlayerStat": {
@@ -1488,6 +1815,42 @@
           "default": null,
           "title": "Note"
         },
+        "model_range_level": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Range Level"
+        },
+        "goals_range_level": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Range Level"
+        },
+        "goals_dispersion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Dispersion"
+        },
         "gate_status": {
           "anyOf": [
             {
@@ -1543,6 +1906,109 @@
       "title": "XgBlock",
       "type": "object"
     },
+    "XgShotProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "shots": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots"
+        },
+        "shots_on_target": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target"
+        },
+        "shots_off": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Off"
+        },
+        "shots_blocked": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Blocked"
+        },
+        "shots_insidebox": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Insidebox"
+        },
+        "shots_outsidebox": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Outsidebox"
+        },
+        "penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalties"
+        },
+        "penalty_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalty Goals"
+        }
+      },
+      "title": "XgShotProfile",
+      "type": "object"
+    },
     "XgSide": {
       "additionalProperties": false,
       "properties": {
@@ -1582,6 +2048,71 @@
           "default": null,
           "title": "High"
         },
+        "goals_low": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Low"
+        },
+        "goals_high": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals High"
+        },
+        "goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals"
+        },
+        "goals_minus": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Minus"
+        },
+        "goals_position": {
+          "anyOf": [
+            {
+              "enum": [
+                "below",
+                "within",
+                "above"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Position"
+        },
         "provider": {
           "anyOf": [
             {
@@ -1593,6 +2124,89 @@
           ],
           "default": null,
           "title": "Provider"
+        },
+        "provider_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Source"
+        },
+        "xg_per_shot": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xg Per Shot"
+        },
+        "penalty_xg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalty Xg"
+        },
+        "penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalties"
+        },
+        "penalties_known": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalties Known"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis"
+        },
+        "shot_profile": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/XgShotProfile"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "XgSide",
@@ -1662,6 +2276,9 @@
       "title": "Player Stats",
       "type": "array"
     },
+    "performance": {
+      "$ref": "#/$defs/PerformanceBlock"
+    },
     "form": {
       "$ref": "#/$defs/FormBlock"
     },
@@ -1702,6 +2319,7 @@
     "timeline",
     "lineups",
     "player_stats",
+    "performance",
     "form",
     "coverage",
     "sources",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "identity": {
     "age": 28,
     "full_name": "Olutoyosi Tajudeen Olusanya",
@@ -21,6 +21,8 @@
     "side": "right",
     "status": "squad"
   },
+  "out_of_squad": false,
+  "out_of_squad_reason": null,
   "panel_order": [
     "profile",
     "position",
@@ -1159,6 +1161,10 @@
           "basis": "provider_group",
           "cohort_min_minutes": 450,
           "cohort_n": 35,
+          "cohort_season": "2026-27",
+          "fallback": false,
+          "fallback_note": null,
+          "fallback_reason": null,
           "figures": [
             {
               "axes": [
@@ -1276,6 +1282,7 @@
           "min_minutes": 180,
           "minutes": 574,
           "reason": null,
+          "season_used": "2026-27",
           "status": "available"
         },
         "rose_catalogue": {
@@ -1381,11 +1388,23 @@
           "cohort_basis": "role_family",
           "cohort_n": 14,
           "league": "sco:premiership",
+          "league_appearances": 8,
           "league_label": "Scottish Premiership",
-          "minutes": 574,
+          "league_minutes": 574,
+          "league_rating": 6.2,
+          "league_rating_percentile": null,
+          "minutes": 884,
+          "minutes_season": "2026-27",
+          "output_coverage": "partial",
+          "output_missing_competitions": [
+            "Premier Sports Cup"
+          ],
           "rating": 6.2,
           "rating_percentile": null,
           "role_label": "Right winger",
+          "rose_fallback": false,
+          "rose_season": "2026-27",
+          "scope": "all_competitions",
           "season": "2026-27"
         },
         "tier": "extended"
@@ -1560,7 +1579,7 @@
     }
   },
   "player_id": 231195,
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "season": "2026-27",
   "warnings": []
 }

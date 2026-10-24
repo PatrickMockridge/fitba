@@ -10,7 +10,9 @@
   },
   "depth": "result",
   "fixture": {
+    "aberdeen_outcome": "D",
     "aberdeen_result": "D",
+    "aberdeen_result_label": "D",
     "away_goals": 2,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "uefa:europa-league",
     "competition_name": "UEFA Europa League",
     "date": "2023-08-24",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 1119758,
@@ -28,10 +31,13 @@
     "home_team_id": "other:bk-hacken",
     "home_team_name": "BK Hacken",
     "href": "/matches/1119758/",
+    "outcome": "D",
     "referee": "F. Glova",
     "result": "D",
+    "result_label": "D",
     "round": "Play-offs",
     "season": "2023-24",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Bravida Arena"
@@ -50,7 +56,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -350,8 +356,21 @@
     "previous": "/matches/1102794/",
     "season": "/history/2023-24/"
   },
+  "performance": {
+    "aberdeen": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "available": false,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "measured_output",
+      "players": []
+    },
+    "strengths": []
+  },
   "player_stats": [],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -615,7 +634,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: BK Hacken 2.297 (0.0-4.809), Aberdeen 1.641 (0.0-3.764)."
+        "text": "Shot expectation: BK Hacken 2.08, Aberdeen 1.51."
       }
     ],
     "events_available": true,
@@ -1090,22 +1109,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 3.764,
-      "low": 0.0,
+      "basis": "volume",
+      "goals": 2,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": 0.485,
+      "goals_position": "within",
+      "high": 2.031,
+      "low": 0.794,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.641
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 15,
+        "shots_blocked": 4,
+        "shots_insidebox": null,
+        "shots_off": 6,
+        "shots_on_target": 5,
+        "shots_outsidebox": null
+      },
+      "value": 1.515,
+      "xg_per_shot": 0.101
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 4.809,
-      "low": 0.0,
+      "basis": "volume",
+      "goals": 2,
+      "goals_high": 4,
+      "goals_low": 0,
+      "goals_minus": -0.081,
+      "goals_position": "within",
+      "high": 2.597,
+      "low": 1.36,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 2.297
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 17,
+        "shots_blocked": 2,
+        "shots_insidebox": null,
+        "shots_off": 8,
+        "shots_on_target": 7,
+        "shots_outsidebox": null
+      },
+      "value": 2.081,
+      "xg_per_shot": 0.122
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

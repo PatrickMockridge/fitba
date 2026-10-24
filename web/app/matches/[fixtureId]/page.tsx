@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ContractPage } from "@/components/ContractPage";
 import { MatchCoverage } from "@/components/MatchCoverage";
 import { MatchHeader } from "@/components/MatchHeader";
+import { MatchPerformance } from "@/components/MatchPerformance";
 import { MatchPlayerTable } from "@/components/MatchPlayerTable";
 import { MatchScoreboard } from "@/components/MatchScoreboard";
 import { MatchStatsTable } from "@/components/MatchStatsTable";
@@ -10,7 +11,7 @@ import { MatchSummary } from "@/components/MatchSummary";
 import { MatchTimeline } from "@/components/MatchTimeline";
 import { ObservedLineup } from "@/components/ObservedLineup";
 import { getFixture, getFixtureIndex } from "@/lib/data";
-import { formatDate } from "@/lib/format";
+import { formatDate, formatDecimal, formatInteger, formatSigned } from "@/lib/format";
 
 export const dynamicParams = false;
 
@@ -75,6 +76,12 @@ export default async function MatchPage({
         away={away}
         aberdeenIsHome={aberdeenIsHome}
       />
+      <MatchPerformance
+        performance={data.performance}
+        home={home}
+        away={away}
+        aberdeenIsHome={aberdeenIsHome}
+      />
       <section
         className="card"
         data-contract="match.xg"
@@ -83,66 +90,121 @@ export default async function MatchPage({
         <div className="section-head">
           <div>
             <p className="eyebrow">Expected goals</p>
-            <h2>fxG and provider xG</h2>
+            <h2>fxG, its ranges and provider xG</h2>
           </div>
           <span className="badge badge-neutral">experimental</span>
         </div>
         {data.xg.available && data.xg.gate_passed === false ? (
           <p className="fine-print" data-contract="match.xg.gate">
-            <span className="badge badge-warn">fxG gate failed</span>{" "}
+            <span className="badge badge-warn">fxG calibration failed</span>{" "}
             {data.xg.gate_note ?? "The model is descriptive, not decision-grade."}{" "}
             <Link className="text-link" href={data.xg.evaluation_href ?? "/analysis/xg/"}>
-              Model and gate →
+              Model and calibration →
             </Link>
           </p>
         ) : null}
         {data.xg.available && data.xg.gate_passed === true ? (
           <p className="fine-print" data-contract="match.xg.gate">
-            <span className="badge badge-ok">fxG gate passed</span>{" "}
+            <span className="badge badge-ok">fxG calibration passed · in-season</span>{" "}
             <Link className="text-link" href={data.xg.evaluation_href ?? "/analysis/xg/"}>
-              Model and gate →
+              Model and calibration →
             </Link>
           </p>
         ) : null}
         {data.xg.available && data.xg.home && data.xg.away ? (
           <div className="match-xg-grid">
-            <div
-              className="match-xg-side"
-              data-team={aberdeenIsHome ? "aberdeen" : "opponent"}
-            >
-              <p className="eyebrow">{home}</p>
-              <p className="stat-value">{data.xg.home.value ?? "—"}</p>
-              <p className="fine-print">
-                fxG interval {data.xg.home.low ?? "—"}–{data.xg.home.high ?? "—"}
-              </p>
-              <p className="fine-print">
-                Provider xG {data.xg.home.provider ?? "unavailable"}
-              </p>
-            </div>
-            <div
-              className="match-xg-side"
-              data-team={aberdeenIsHome ? "opponent" : "aberdeen"}
-            >
-              <p className="eyebrow">{away}</p>
-              <p className="stat-value">{data.xg.away.value ?? "—"}</p>
-              <p className="fine-print">
-                fxG interval {data.xg.away.low ?? "—"}–{data.xg.away.high ?? "—"}
-              </p>
-              <p className="fine-print">
-                Provider xG {data.xg.away.provider ?? "unavailable"}
-              </p>
-            </div>
+            {[data.xg.home, data.xg.away].map((side, index) => {
+              const team = index === 0 ? home : away;
+              const isAberdeen = index === 0 ? aberdeenIsHome : !aberdeenIsHome;
+              const interval = (low: number | null, high: number | null) =>
+                low === null || high === null
+                  ? "unavailable"
+                  : `${formatDecimal(low, 2)}–${formatDecimal(high, 2)}`;
+              const goalInterval = (low: number | null, high: number | null) =>
+                low === null || high === null
+                  ? "unavailable"
+                  : `${formatInteger(low)}–${formatInteger(high)}`;
+              const position =
+                side.goals_position === "above"
+                  ? "above the 80% goals range"
+                  : side.goals_position === "below"
+                    ? "below the 80% goals range"
+                    : side.goals_position === "within"
+                      ? "within the 80% goals range"
+                      : "position unavailable";
+              return (
+                <div
+                  key={team}
+                  className="match-xg-side"
+                  data-team={isAberdeen ? "aberdeen" : "opponent"}
+                >
+                  <p className="eyebrow">{team}</p>
+                  <p className="stat-value">
+                    {side.value === null ? "—" : formatDecimal(side.value, 2)}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.model-range">
+                    <strong>80% model range</strong> {interval(side.low, side.high)}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.goals-range">
+                    <strong>80% goals range</strong>{" "}
+                    {goalInterval(side.goals_low, side.goals_high)}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.provider">
+                    <strong>Provider xG</strong>{" "}
+                    {side.provider === null
+                      ? "unavailable"
+                      : formatDecimal(side.provider, 2)}
+                    {side.provider_source
+                      ? ` · ${side.provider_source === "api_football" ? "API-Football" : "football-data.co.uk"}`
+                      : ""}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.overperformance">
+                    <strong>Goals − fxG</strong>{" "}
+                    {side.goals_minus === null ? "—" : formatSigned(side.goals_minus)} ·{" "}
+                    {position}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.penalties">
+                    <strong>Penalties</strong>{" "}
+                    {side.penalties_known === false || side.penalties === null
+                      ? "not available"
+                      : `${formatInteger(side.penalties)} · ${
+                          side.penalty_xg === null
+                            ? "—"
+                            : formatDecimal(side.penalty_xg, 2)
+                        } xG`}
+                  </p>
+                  <p className="fine-print" data-contract="match.xg.shot-profile">
+                    <strong>xG per shot</strong>{" "}
+                    {side.xg_per_shot === null
+                      ? "—"
+                      : formatDecimal(side.xg_per_shot, 3)}{" "}
+                    · {formatInteger(side.shot_profile?.shots ?? 0)} shots ·{" "}
+                    {formatInteger(side.shot_profile?.shots_on_target ?? 0)} on target ·{" "}
+                    {formatInteger(side.shot_profile?.shots_insidebox ?? 0)} inside box
+                  </p>
+                  <p className="fine-print">
+                    Basis: {side.basis ?? "unavailable"}. The model range is
+                    uncertainty in the estimate; the goals range is the spread of
+                    goals from the same chances. Neither is a result prediction.
+                  </p>
+                </div>
+              );
+            })}
           </div>
         ) : (
-          <p className="fine-print">
+          <p className="fine-print" data-contract="match.xg.unavailable">
             fxG is unavailable for this fixture because shots on target are not
             in the record. It is not shown as zero.
           </p>
         )}
         <p className="fine-print">
-          {data.xg.note ?? "fxG is a shot-on-target model, not provider xG."}
+          {data.xg.note ??
+            "fxG is a team-match estimate, not provider xG and not a shot-level model."}{" "}
+          Own goals and shootouts are outside the shot model. Provider xG is a
+          different model and is never blended into fxG.
         </p>
       </section>
+
       <MatchTimeline timeline={data.timeline} aberdeenIsHome={aberdeenIsHome} />
       <div className="match-lineups-grid" data-team-split="aberdeen-opponent">
         <ObservedLineup

@@ -12,6 +12,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from fitba.analytics.player_facts import missing_output_competitions, totals
 from fitba.ingest.availability import (
     load_availability_frame,
     load_availability_meta,
@@ -37,6 +38,9 @@ from fitba.normalize.career import (
     current_role_slots,
 )
 from fitba.normalize.names import strip_accents
+from fitba.settings import (
+    NORMALIZED_DIR,
+)
 from fitba.settings import (
     aberdeen as aberdeen_config,
 )
@@ -86,27 +90,6 @@ STAT_FIELDS = [
     "penalty_missed",
     "penalty_saved",
 ]
-TOTAL_FIELDS = [
-    "appearances",
-    "starts",
-    "minutes",
-    "goals",
-    "assists",
-    "yellow_cards",
-    "red_cards",
-    "saves",
-    "tackles",
-    "blocks",
-    "interceptions",
-    "duels_won",
-    "fouls_committed",
-    "penalty_scored",
-    "penalty_saved",
-    "shots_total",
-    "shots_on",
-    "passes_key",
-    "dribbles_success",
-]
 STATUS_ORDER = {"squad": 0, "loan_in": 1, "loan_out": 2}
 POSITION_ORDER = {"GK": 0, "DEF": 1, "MID": 2, "FWD": 3}
 
@@ -116,21 +99,7 @@ def _stat_payload(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _totals(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    totals: dict[str, Any] = {
-        field: sum(int(row.get(field) or 0) for row in rows) for field in TOTAL_FIELDS
-    }
-    rated = [
-        (float(row["rating"]), int(row.get("appearances") or 0))
-        for row in rows
-        if row.get("rating") is not None and int(row.get("appearances") or 0) > 0
-    ]
-    if rated:
-        weight = sum(appearances for _, appearances in rated)
-        weighted = sum(rating * appearances for rating, appearances in rated)
-        totals["rating"] = round(weighted / weight, 2)
-    else:
-        totals["rating"] = None
-    return totals
+    return totals(rows, scope="all_competitions") or {}
 
 
 def _summary(players: list[dict[str, Any]]) -> dict[str, Any]:
@@ -141,6 +110,7 @@ def _summary(players: list[dict[str, Any]]) -> dict[str, Any]:
     role_families: dict[str, int] = {}
     role_families_squad: dict[str, int] = {}
     primary_groups: dict[str, int] = {}
+    primary_groups_squad: dict[str, int] = {}
     primary_sides: dict[str, int] = {}
     for player in players:
         position = player.get("position_group") or "Unknown"
@@ -153,6 +123,8 @@ def _summary(players: list[dict[str, Any]]) -> dict[str, Any]:
         primary = (player.get("career_role") or {}).get("primary_slot") or {}
         group = (primary.get("groups") or ["unknown"])[0]
         primary_groups[str(group)] = primary_groups.get(str(group), 0) + 1
+        if player["status"] != "loan_out":
+            primary_groups_squad[str(group)] = primary_groups_squad.get(str(group), 0) + 1
         side = primary.get("side") or "unknown"
         primary_sides[str(side)] = primary_sides.get(str(side), 0) + 1
     return {
@@ -169,6 +141,7 @@ def _summary(players: list[dict[str, Any]]) -> dict[str, Any]:
         "by_role_family": dict(sorted(role_families.items())),
         "by_role_family_squad": dict(sorted(role_families_squad.items())),
         "by_primary_group": dict(sorted(primary_groups.items())),
+        "by_primary_group_squad": dict(sorted(primary_groups_squad.items())),
         "by_primary_side": dict(sorted(primary_sides.items())),
         "by_status": dict(sorted(statuses.items())),
     }
@@ -220,6 +193,16 @@ def _attribute_block(row: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
+def load_roster_meta() -> dict[str, Any]:
+    path = NORMALIZED_DIR / "squad" / "roster_meta.json"
+    if not path.exists():
+        return {"status": "unavailable", "source_url": None, "fetched_at": None}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"status": "unavailable", "source_url": None, "fetched_at": None}
+
+
 def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any]:
     players_frame = load_squad_players()
     stats_frame = load_squad_stats()
@@ -228,6 +211,7 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
     attribute_frame = load_player_attributes()
     attribute_meta = load_player_attributes_meta()
     match_meta = load_match_meta()
+    roster_meta = load_roster_meta()
     role_frame = load_player_roles()
     playing_frame = load_playing_time()
     role_rows = role_frame.to_dicts() if role_frame.height else []
@@ -281,7 +265,14 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
     for row in players_frame.to_dicts() if players_frame.height else []:
         player_id = int(row["player_id"])
         rows = stats_by_player.get(player_id, [])
-        relevant = [item for item in rows if item["scope"] in {"club", "loan"}]
+        club_rows = [item for item in rows if item["scope"] == "club"]
+        league_rows = [
+            item
+            for item in club_rows
+            if str(item.get("competition") or "") in {"Premiership", "Scottish Premiership"}
+        ]
+        loan_rows = [item for item in rows if item["scope"] == "loan"]
+        relevant = [*club_rows, *loan_rows]
         other = [item for item in rows if item["scope"] == "other"]
         status = str(row["status"])
         player_attributes = attributes_by_player.get(str(row["player_key"]), {})
@@ -403,6 +394,13 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                     else None
                 ),
                 "stats_coverage": row["stats_coverage"],
+                "stats_scope": "loan" if status == "loan_out" and loan_rows else "all_competitions",
+                "output_missing_competitions": missing_output_competitions(
+                    {
+                        "stats": relevant,
+                        "playing_time": playing,
+                    }
+                ),
                 "stats_note": row["stats_note"],
                 "attributes": {
                     "preferred_foot": foot,
@@ -414,7 +412,9 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                 "tactical_notes": tactical_notes.get(str(row["player_key"]), []),
                 "playing_time": playing,
                 "stats": [_stat_payload(item) for item in relevant],
-                "totals": _totals(relevant) if relevant else None,
+                "totals": _totals(club_rows) if club_rows else None,
+                "league_totals": _totals(league_rows) if league_rows else None,
+                "loan_totals": _totals(loan_rows) if loan_rows else None,
                 "position_stats": position_stats,
                 "position_totals": _position_totals(position_rows),
                 "position_stats_coverage": (
@@ -431,16 +431,32 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                     )
                 ),
                 "other_stats": [_stat_payload(item) for item in other],
+                "roster_status": row.get("roster_status") or "excluded_api",
+                "squad_member": bool(row.get("squad_member", True)),
+                "exclusion_reason": row.get("exclusion_reason"),
+                "official_order": row.get("official_order"),
+                "official_section": row.get("official_section"),
+                "official_href": row.get("official_href"),
+                "official_position": row.get("official_position"),
+                "official_number": row.get("official_number"),
+                "official_only": bool(row.get("official_only")),
+                "roster_conflict": bool(row.get("roster_conflict")),
+                "identity_source": row.get("identity_source") or "api_football",
             }
         )
 
+    excluded_players = [player for player in players if not player["squad_member"]]
+    players = [player for player in players if player["squad_member"]]
     players.sort(
         key=lambda player: (
             STATUS_ORDER.get(str(player["status"]), 9),
-            POSITION_ORDER.get(str(player["position_group"]), 9),
+            int(player["official_order"])
+            if player.get("official_order") is not None
+            else 10**6,
             str(player["name"]),
         )
     )
+    excluded_players.sort(key=lambda player: str(player["name"]))
 
     return {
         "club_id": str(aberdeen_config()["club_id"]),
@@ -448,8 +464,30 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
         "season": season,
         "generated_at": generated_at or utc_now_iso(),
         "players": players,
+        "excluded_players": excluded_players,
+        "roster_meta": roster_meta,
+        "roster_only": roster_meta.get("roster_only") or [],
         "summary": {
             **_summary(players),
+            "official_squad_size": (
+                sum(
+                    1
+                    for player in players
+                    if player.get("roster_status") == "official"
+                    and player.get("status") != "loan_out"
+                )
+                if roster_meta.get("status") == "available"
+                else None
+            ),
+            "official_players": sum(
+                1
+                for player in players
+                if player.get("roster_status") in {"official", "official_loan"}
+            ),
+            "official_only": sum(1 for player in players if player.get("official_only")),
+            "excluded_api": len(excluded_players),
+            "official_source": roster_meta.get("source_url"),
+            "official_fetched_at": roster_meta.get("fetched_at"),
             "position_stats_coverage": position_meta.get("coverage", "unavailable"),
             "fixtures_covered": position_meta.get("fixtures_covered", 0),
             "fixtures_total": position_meta.get("fixtures_total", 0),
@@ -517,10 +555,14 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                 "Current-season squad and per-competition statistics from "
                 "API-Football. Roles come from the starting-XI formation grid; "
                 "starts, substitute appearances and on-pitch minutes are "
-                "reconstructed from lineups and substitution events. Loan tags "
-                "come from the confirmed transfer register. Missing data is "
-                "labelled unavailable or partial and is never filled with "
-                "zeroes. Player photographs are not published."
+                "reconstructed from lineups and substitution events. The "
+                "official AFC men's team page is the canonical roster inclusion, "
+                "section, order and loan-section source; API-Football supplies "
+                "statistics and identity. API rows not on the official list are "
+                "not squad players and are excluded from these counts; they are "
+                "retained only for the player index and existing links. Missing "
+                "data is labelled unavailable or partial and is never filled "
+                "with zeroes. Player photographs are not published."
             ),
         },
     }
@@ -550,15 +592,17 @@ def _unique_surnames(players: list[dict[str, Any]]) -> dict[str, dict[str, Any]]
 class PlayerLinkIndex:
     by_key: dict[str, str]
     players: list[dict[str, Any]]
+    excluded: list[dict[str, Any]]
     full_names: dict[str, dict[str, Any]]
     surnames: dict[str, dict[str, Any]]
 
     @classmethod
     def from_payload(cls, payload: dict[str, Any]) -> PlayerLinkIndex:
         players = payload.get("players", [])
+        excluded = payload.get("excluded_players", []) or []
         by_key = {
             str(player["player_key"]): str(player["href"])
-            for player in players
+            for player in [*players, *excluded]
             if player.get("player_key")
         }
         full_names: dict[str, dict[str, Any]] = {}
@@ -575,6 +619,7 @@ class PlayerLinkIndex:
         return cls(
             by_key=by_key,
             players=players,
+            excluded=excluded,
             full_names=full_names,
             surnames=_unique_surnames(players),
         )

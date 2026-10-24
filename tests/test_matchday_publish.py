@@ -184,6 +184,10 @@ def test_passed_fixture_is_not_presented_as_upcoming(monkeypatch, tmp_path):
         "fitba.publish.matchday._fixture_from_snapshot",
         lambda snapshot_dir=None: dict(passed),
     )
+    monkeypatch.setattr(
+        "fitba.publish.matchday.next_fixture",
+        lambda **kwargs: None,
+    )
     document = build_matchday_payload(
         season="2026-27",
         generated_at="2026-10-22T10:00:00+00:00",

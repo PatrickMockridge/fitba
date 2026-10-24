@@ -48,12 +48,13 @@ def _row(**overrides):
 
 
 def test_percentile_rank_edges_and_ties():
-    assert percentile_rank([1, 2, 3], 3) == 100
-    assert percentile_rank([1, 2, 3], 1) == 0
-    assert percentile_rank([1, 2, 3], 2) == 50
-    assert percentile_rank([1, 2, 2, 3], 2) == 50
-    assert percentile_rank([1], 1) is None
+    assert percentile_rank([1, 2, 3], 3) == 83.3
+    assert percentile_rank([1, 2, 3], 1) == 16.7
+    assert percentile_rank([1, 2, 3], 2) == 50.0
+    assert percentile_rank([1, 2, 2, 3], 2) == 50.0
+    assert percentile_rank([1], 1) == 50.0
     assert percentile_rank([], 1) is None
+    assert percentile_rank([1, 2, 3], None) is None
 
 
 def test_form_block_orders_results_and_splits_venue():
@@ -172,10 +173,10 @@ def test_strength_block_percentiles_and_comparison():
         competition_name="Premiership",
         tier=1,
     )
-    assert first["percentiles"]["ppg"] == 100
-    assert last["percentiles"]["ppg"] == 0
-    assert first["percentiles"]["ga_pg"] == 100
-    assert last["percentiles"]["ga_pg"] == 0
+    assert first["percentiles"]["ppg"] == 87.5
+    assert last["percentiles"]["ppg"] == 12.5
+    assert first["percentiles"]["ga_pg"] == 87.5
+    assert last["percentiles"]["ga_pg"] == 12.5
     comparison = strength_comparison(first, last)
     assert comparison["edge"] == "aberdeen"
     assert comparison["cross_tier"] is False

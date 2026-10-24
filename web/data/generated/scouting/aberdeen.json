@@ -2323,7 +2323,7 @@
         "status": "at"
       },
       {
-        "absent_first_choice": 1,
+        "absent_first_choice": 0,
         "average_rating": 5.99,
         "cohort": {
           "basis": "role_family",
@@ -2334,60 +2334,11 @@
           "role_family": "centre_back"
         },
         "drivers": [
-          "rating_below_cohort",
-          "first_choice_out"
+          "rating_below_cohort"
         ],
         "family": "centre_back",
         "label": "Centre back",
         "layer0": [
-          {
-            "appearances": 0,
-            "availability": {
-              "confidence": "confirmed",
-              "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
-              "source_id": "afc_news",
-              "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
-              "stale": false,
-              "status": "out",
-              "verified_at": "2026-10-23"
-            },
-            "first_choice": true,
-            "minutes": 0,
-            "name": "K. Tobers",
-            "player_id": 68534,
-            "prior": {
-              "minutes": 774,
-              "rating": 6.97,
-              "role_code": "CB",
-              "role_family": "centre_back",
-              "role_starts": 11,
-              "season": "2024-25",
-              "starts": 10
-            },
-            "prior_history": [
-              {
-                "minutes": 61,
-                "rating": 7.2,
-                "role_code": "CB",
-                "role_family": "centre_back",
-                "role_starts": 1,
-                "season": "2025-26",
-                "starts": 1
-              },
-              {
-                "minutes": 774,
-                "rating": 6.97,
-                "role_code": "CB",
-                "role_family": "centre_back",
-                "role_starts": 11,
-                "season": "2024-25",
-                "starts": 10
-              }
-            ],
-            "rates": {},
-            "rating": null,
-            "role_label": "Centre back"
-          },
           {
             "appearances": 6,
             "availability": {
@@ -2701,7 +2652,7 @@
           }
         ],
         "rating_percentile": 13.6,
-        "reading": "cover",
+        "reading": "structural",
         "status": "below"
       },
       {
@@ -3312,11 +3263,11 @@
     "league_id": "sco:premiership",
     "summary": {
       "below_cohort": 2,
-      "cover_readings": 1,
+      "cover_readings": 0,
       "families": 10,
       "insufficient": 6,
-      "layer0_players": 2,
-      "structural_readings": 1
+      "layer0_players": 1,
+      "structural_readings": 2
     },
     "unassigned_layer0": []
   },
@@ -3412,33 +3363,8 @@
     "season": "2026-27",
     "stopped_on_budget": false
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "layer_zero": [
-    {
-      "confidence": "confirmed",
-      "family": "centre_back",
-      "family_label": "Centre back",
-      "first_choice": true,
-      "minutes": 0,
-      "name": "K. Tobers",
-      "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
-      "player_id": 68534,
-      "prior": {
-        "minutes": 774,
-        "rating": 6.97,
-        "role_code": "CB",
-        "role_family": "centre_back",
-        "role_starts": 11,
-        "season": "2024-25",
-        "starts": 10
-      },
-      "rating": null,
-      "role_label": "Centre back",
-      "source_id": "afc_news",
-      "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
-      "status": "out",
-      "verified_at": "2026-10-23"
-    },
     {
       "confidence": "reported",
       "family": "centre_back",
@@ -4153,6 +4079,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 11,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -4228,6 +4158,7 @@
         "min_minutes": 180,
         "minutes": 810,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": 82.22,
@@ -4278,6 +4209,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 22,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -4389,6 +4324,7 @@
         "min_minutes": 180,
         "minutes": 560,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -4439,6 +4375,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 22,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -4550,6 +4490,7 @@
         "min_minutes": 180,
         "minutes": 483,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -4600,6 +4541,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 22,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -4711,6 +4656,7 @@
         "min_minutes": 180,
         "minutes": 384,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -4761,6 +4707,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 22,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -4872,6 +4822,7 @@
         "min_minutes": 180,
         "minutes": 382,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -4922,6 +4873,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 22,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5033,6 +4988,7 @@
         "min_minutes": 180,
         "minutes": 248,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5083,6 +5039,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5206,6 +5166,7 @@
         "min_minutes": 180,
         "minutes": 765,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5250,6 +5211,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 40,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5373,6 +5338,7 @@
         "min_minutes": 180,
         "minutes": 792,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5427,6 +5393,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5550,6 +5520,7 @@
         "min_minutes": 180,
         "minutes": 587,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5604,6 +5575,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5727,6 +5702,7 @@
         "min_minutes": 180,
         "minutes": 458,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5781,6 +5757,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -5904,6 +5884,7 @@
         "min_minutes": 180,
         "minutes": 446,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -5958,6 +5939,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6081,6 +6066,7 @@
         "min_minutes": 180,
         "minutes": 265,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -6135,6 +6121,10 @@
         "basis": "role_family",
         "cohort_min_minutes": 450,
         "cohort_n": 19,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6258,6 +6248,7 @@
         "min_minutes": 180,
         "minutes": 225,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -6306,6 +6297,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 35,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6423,6 +6418,7 @@
         "min_minutes": 180,
         "minutes": 196,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -6481,6 +6477,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 35,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6598,6 +6598,7 @@
         "min_minutes": 180,
         "minutes": 574,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -6656,6 +6657,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 15,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6773,6 +6778,7 @@
         "min_minutes": 180,
         "minutes": 284,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -6827,6 +6833,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 15,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -6950,6 +6960,7 @@
         "min_minutes": 180,
         "minutes": 719,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,
@@ -7004,6 +7015,10 @@
         "basis": "provider_group",
         "cohort_min_minutes": 450,
         "cohort_n": 15,
+        "cohort_season": "2026-27",
+        "fallback": false,
+        "fallback_note": null,
+        "fallback_reason": null,
         "figures": [
           {
             "axes": [
@@ -7127,6 +7142,7 @@
         "min_minutes": 180,
         "minutes": 255,
         "reason": null,
+        "season_used": "2026-27",
         "status": "available"
       },
       "save_pct": null,

@@ -365,7 +365,14 @@ def build_analysis_payload(
     loans_out = sum(
         1 for player in squad_data.get("players") or [] if player.get("status") == "loan_out"
     )
-    unknown_count = max(0, len(active_ids) - len({entry["player_id"] for entry in official}))
+    active_universe = (availability.get("universes") or {}).get("active_squad") or {}
+    unknown_value = active_universe.get("unknown")
+    unknown_count = (
+        int(unknown_value)
+        if unknown_value is not None
+        else max(0, len(active_ids) - len({entry["player_id"] for entry in official}))
+    )
+    active_count = int(active_universe.get("players") or len(active_ids))
     next_up = _upcoming(schedule, int(policy.get("next_up") or 3))
     bridges = _bridges()
     competitions = competitions_config().get("competitions") or []
@@ -390,7 +397,7 @@ def build_analysis_payload(
         "next_up": next_up,
         "availability": {
             "counts": {
-                "active": len(active_ids),
+                "active": active_count,
                 "out_official": sum(1 for entry in official if entry["status"] == "out"),
                 "suspended_official": sum(
                     1 for entry in official if entry["status"] == "suspended"

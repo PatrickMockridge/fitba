@@ -434,11 +434,41 @@ def verify_coverage(corpus: dict[str, Any], _: Any = None) -> VerificationResult
         if expected is not None and expected != actual:
             result.fail("coverage transfers count != transfer summary total")
     if squad:
-        expected = (coverage.get("squad") or {}).get("players")
-        actual = (squad.get("summary") or {}).get("total_players")
+        squad_coverage = coverage.get("squad") or {}
+        summary = squad.get("summary") or {}
+        expected = squad_coverage.get("count")
+        actual = summary.get("total_players")
         if expected is not None and actual is not None and expected != actual:
-            result.fail("coverage squad players != squad summary total")
+            result.fail("coverage squad count != squad summary total_players")
+        if (
+            squad_coverage.get("squad") is not None
+            and summary.get("squad_size") is not None
+            and squad_coverage.get("squad") != summary.get("squad_size")
+        ):
+            result.fail("coverage squad size != squad summary squad_size")
     result.note("coverage.surfaces", result.status == "pass", "coverage cross-surface checks")
+    return result
+
+
+def verify_loan_scope(corpus: dict[str, Any]) -> VerificationResult:
+    result = VerificationResult()
+    squad = _payload(corpus, "squad/aberdeen.json") or {}
+    transfers = _payload(corpus, "transfers/aberdeen.json") or {}
+    left = squad.get("loan_scope") or {}
+    right = transfers.get("loan_scope") or {}
+    if not left or left != right:
+        result.fail("squad and transfer loan_scope blocks are missing or differ")
+        return result
+    official = left.get("official_list") or {}
+    active = sum(1 for player in squad.get("players") or [] if player.get("status") == "loan_out")
+    if official.get("out_count") != active:
+        result.fail("loan_scope official out_count != squad loan_out rows")
+    current = left.get("register_current") or {}
+    if current.get("out_count") != len(current.get("out") or []):
+        result.fail("loan_scope current out_count != rows")
+    result.rows_checked = int(official.get("out_count") or 0)
+    result.fields_checked = 4
+    result.note("loan.scope", result.status == "pass", "official and register scopes reconciled")
     return result
 
 
@@ -455,6 +485,7 @@ CHECKS = {
     "fitba.metrics.checks:verify_history_baseline": verify_history_baseline,
     "fitba.metrics.checks:verify_history_coverage": verify_history_coverage,
     "fitba.metrics.checks:verify_squad_summary": verify_squad_summary,
+    "fitba.metrics.checks:verify_loan_scope": verify_loan_scope,
     "fitba.metrics.checks:verify_rumours_summary": verify_rumours_summary,
     "fitba.metrics.checks:verify_coverage": verify_coverage,
 }

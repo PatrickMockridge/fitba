@@ -10,7 +10,9 @@
   },
   "depth": "full",
   "fixture": {
+    "aberdeen_outcome": "L",
     "aberdeen_result": "L",
+    "aberdeen_result_label": "L",
     "away_goals": 1,
     "away_ht_goals": 0,
     "away_penalties": null,
@@ -19,6 +21,7 @@
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "date": "2022-02-05",
+    "decided_by": "regulation",
     "duplicate_of": null,
     "extra_time": false,
     "fixture_id": 709806,
@@ -28,10 +31,13 @@
     "home_team_id": "sco:livingston",
     "home_team_name": "Livingston",
     "href": "/matches/709806/",
+    "outcome": "W",
     "referee": "K. Clancy",
     "result": "W",
+    "result_label": "W",
     "round": "1st Phase - 25",
     "season": "2021-22",
+    "shootout_result": null,
     "status": "FT",
     "venue": "A",
     "venue_name": "Tony Macaroni Arena"
@@ -132,7 +138,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T05:17:36+00:00",
+  "generated_at": "2026-10-24T15:28:14+00:00",
   "lineups": {
     "away": {
       "coach_name": "S. Glass",
@@ -415,6 +421,148 @@
     "next": "/matches/709810/",
     "previous": "/matches/709790/",
     "season": "/history/2021-22/"
+  },
+  "performance": {
+    "aberdeen": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 7,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 35,
+          "passes_total": 47,
+          "player_id": 1128,
+          "player_name": "Jonny Hayes",
+          "rating": 7.3,
+          "shots_on": null,
+          "shots_total": 1,
+          "tackles": 4,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": null,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 6,
+          "passes_total": 10,
+          "player_id": 51044,
+          "player_name": "Christian Ramirez",
+          "rating": 7.2,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": null,
+          "team_name": "Aberdeen"
+        },
+        {
+          "assists": null,
+          "duels_won": 11,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": true,
+          "minutes": 90,
+          "pass_accuracy": 46,
+          "passes_total": 61,
+          "player_id": 44814,
+          "player_name": "Lewis Ferguson",
+          "rating": 7.0,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Aberdeen"
+        }
+      ]
+    },
+    "available": true,
+    "note": "Selected measured categories where Aberdeen were higher; this is a comparison, not an overall performance verdict.",
+    "opponent": {
+      "basis": "provider_rating",
+      "players": [
+        {
+          "assists": null,
+          "duels_won": 6,
+          "goals": 1,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 84,
+          "pass_accuracy": 14,
+          "passes_total": 16,
+          "player_id": 45172,
+          "player_name": "Alan Forrest",
+          "rating": 7.9,
+          "shots_on": 1,
+          "shots_total": 2,
+          "tackles": 1,
+          "team_name": "Livingston"
+        },
+        {
+          "assists": null,
+          "duels_won": 8,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 90,
+          "pass_accuracy": 18,
+          "passes_total": 26,
+          "player_id": 20081,
+          "player_name": "Jason Holt",
+          "rating": 7.5,
+          "shots_on": 1,
+          "shots_total": 1,
+          "tackles": 4,
+          "team_name": "Livingston"
+        },
+        {
+          "assists": null,
+          "duels_won": 1,
+          "goals": null,
+          "href": null,
+          "is_aberdeen": false,
+          "minutes": 12,
+          "pass_accuracy": 1,
+          "passes_total": 2,
+          "player_id": 138825,
+          "player_name": "Morgan Boyes",
+          "rating": 7.5,
+          "shots_on": null,
+          "shots_total": null,
+          "tackles": null,
+          "team_name": "Livingston"
+        }
+      ]
+    },
+    "strengths": [
+      {
+        "aberdeen": 14,
+        "key": "shots",
+        "label": "Shots",
+        "opponent": 8,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 6,
+        "key": "shots_on_target",
+        "label": "Shots on target",
+        "opponent": 4,
+        "source": "api_football",
+        "unit": ""
+      },
+      {
+        "aberdeen": 7,
+        "key": "shots_insidebox",
+        "label": "Shots inside box",
+        "opponent": 6,
+        "source": "api_football",
+        "unit": ""
+      }
+    ]
   },
   "player_stats": [
     {
@@ -1218,7 +1366,7 @@
       "yellow_cards": 0
     }
   ],
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
       "goals": [
@@ -1518,7 +1666,7 @@
       },
       {
         "basis": "inferred",
-        "text": "fxG: Livingston 1.228 (0.0-3.075), Aberdeen 1.841 (0.0-4.104)."
+        "text": "Shot expectation: Livingston 0.96, Aberdeen 1.25."
       }
     ],
     "events_available": true,
@@ -2143,22 +2291,67 @@
   "xg": {
     "available": true,
     "away": {
-      "high": 4.104,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 1,
+      "goals_high": 3,
+      "goals_low": 0,
+      "goals_minus": -0.251,
+      "goals_position": "within",
+      "high": 1.767,
+      "low": 0.53,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.841
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 14,
+        "shots_blocked": 5,
+        "shots_insidebox": 7,
+        "shots_off": 3,
+        "shots_on_target": 6,
+        "shots_outsidebox": 7
+      },
+      "value": 1.251,
+      "xg_per_shot": 0.089
     },
     "evaluation_href": "/analysis/xg/",
-    "gate_note": "Provider xG is an external benchmark, not the model target. A failed gate keeps the numbers descriptive.",
-    "gate_passed": false,
-    "gate_status": "fail",
+    "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
+    "gate_passed": true,
+    "gate_status": "pass",
+    "goals_dispersion": 1.0,
+    "goals_range_level": 0.8,
     "home": {
-      "high": 3.075,
-      "low": 0.0,
+      "basis": "zones",
+      "goals": 2,
+      "goals_high": 2,
+      "goals_low": 0,
+      "goals_minus": 1.043,
+      "goals_position": "within",
+      "high": 1.473,
+      "low": 0.236,
+      "penalties": 0,
+      "penalties_known": true,
+      "penalty_xg": 0.0,
       "provider": null,
-      "value": 1.228
+      "provider_source": null,
+      "shot_profile": {
+        "penalties": 0,
+        "penalty_goals": 0,
+        "shots": 8,
+        "shots_blocked": 1,
+        "shots_insidebox": 6,
+        "shots_off": 3,
+        "shots_on_target": 4,
+        "shots_outsidebox": 2
+      },
+      "value": 0.957,
+      "xg_per_shot": 0.12
     },
-    "model_id": null,
-    "note": "fxG is fitba's shot-on-target model; provider xG is shown separately."
+    "model_id": "fxg-3",
+    "model_range_level": 0.8,
+    "note": "fxG is a team-match estimate from shots, shot zones and penalties. Provider xG is a different model and is shown separately. The model range is uncertainty in the estimate; the goals range is the spread of goals from the same chances. Neither is a result prediction."
   }
 }

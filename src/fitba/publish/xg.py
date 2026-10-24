@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date, timedelta
 from typing import Any
 
 import polars as pl
@@ -12,6 +13,7 @@ from fitba.analytics.xg import (
     aggregate_fxg,
     estimate_provider_xg,
     evaluate_fxg,
+    evaluate_transfer,
     fit_fxg,
     fit_provider_calibration,
     model_to_dict,
@@ -22,12 +24,19 @@ from fitba.ingest.history import (
     load_history_fixtures,
     load_history_team_stats,
 )
+from fitba.ingest.match_extras import load_events
 from fitba.ingest.runner import load_matches
+from fitba.ingest.xg_enrichment import (
+    derive_open_play_features,
+    derive_penalty_counts_from_rows,
+    enrichment_by_match_team,
+)
 from fitba.normalize.fixture_registry import ABERDEEN_ID, FixtureRecord, build_fixture_registry
+from fitba.normalize.teams import TeamRegistry
 from fitba.settings import history_staff, xg_policy
 from fitba.util.dates import current_season, previous_season, utc_now_iso
 
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "2.0.0"
 SOURCES = [
     {
         "id": "football_data_uk",
@@ -39,7 +48,11 @@ SOURCES = [
         "id": "api_football",
         "name": "API-Football",
         "layer": "match_statistics",
-        "note": "Cup and European team statistics, including provider xG where returned.",
+        "note": (
+            "Cup and European team statistics, including provider xG where "
+            "returned, plus league-wide 2026-27 shot zones and penalty events "
+            "for the fxG calibration."
+        ),
     },
 ]
 
@@ -62,8 +75,21 @@ def _float(value: Any) -> float | None:
         return None
 
 
-def _league_rows(matches: pl.DataFrame) -> list[dict[str, Any]]:
+def _common_source(*values: Any) -> str | None:
+    present = {str(value) for value in values if value}
+    if not present:
+        return None
+    return next(iter(present)) if len(present) == 1 else "mixed"
+
+
+def _league_rows(
+    matches: pl.DataFrame,
+    enrichment: dict[tuple[str, str], dict[str, Any]] | None = None,
+    history_features: dict[tuple[str, str, str, str], dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
+    enrichment = enrichment or {}
+    history_features = history_features or {}
     for row in matches.to_dicts():
         match_key = f"fdco:{row['match_id']}"
         common = {
@@ -73,28 +99,74 @@ def _league_rows(matches: pl.DataFrame) -> list[dict[str, Any]]:
             "source": "football_data_uk",
             "provider_xg": None,
         }
-        rows.append(
-            {
-                **common,
-                "team_id": str(row.get("home_team_id")),
-                "opponent_id": str(row.get("away_team_id")),
-                "goals_for": _num(row.get("home_goals")),
-                "shots": _num(row.get("home_shots")),
-                "shots_on_target": _num(row.get("home_shots_on_target")),
-                "provider_xg": _float(row.get("home_xg")),
-            }
-        )
-        rows.append(
-            {
-                **common,
-                "team_id": str(row.get("away_team_id")),
-                "opponent_id": str(row.get("home_team_id")),
-                "goals_for": _num(row.get("away_goals")),
-                "shots": _num(row.get("away_shots")),
-                "shots_on_target": _num(row.get("away_shots_on_target")),
-                "provider_xg": _float(row.get("away_xg")),
-            }
-        )
+        for side in ("home", "away"):
+            team_id = str(row.get(f"{side}_team_id"))
+            home_id = str(row.get("home_team_id"))
+            away_id = str(row.get("away_team_id"))
+            history = _find_history_features(
+                history_features,
+                match_date=str(row.get("date") or ""),
+                home_id=home_id,
+                away_id=away_id,
+                team_id=team_id,
+            ) or {}
+            features = dict(history)
+            features.update(
+                {
+                    key: value
+                    for key, value in enrichment.get(
+                        (str(row["match_id"]), team_id), {}
+                    ).items()
+                    if value is not None
+                }
+            )
+            provider = _float(row.get(f"{side}_xg"))
+            provider_source = "football_data_uk" if provider is not None else None
+            if provider is None and features.get("provider_xg_api") is not None:
+                provider = features.get("provider_xg_api")
+                provider_source = "api_football"
+            row_source = str(features.get("stats_source") or "football_data_uk")
+            rows.append(
+                {
+                    **common,
+                    "source": row_source,
+                    "team_id": team_id,
+                    "opponent_id": str(
+                        row.get("away_team_id" if side == "home" else "home_team_id")
+                    ),
+                    "goals_for": _num(row.get(f"{side}_goals")),
+                    "shots": _num(row.get(f"{side}_shots")),
+                    "shots_on_target": _num(row.get(f"{side}_shots_on_target")),
+                    "provider_xg": provider,
+                    "provider_xg_source": provider_source,
+                    **{
+                        key: features.get(key)
+                        for key in (
+                            "shots",
+                            "shots_on_target",
+                            "shots_off",
+                            "shots_blocked",
+                            "shots_insidebox",
+                            "shots_outsidebox",
+                            "penalty_attempts",
+                            "penalty_goals",
+                            "penalty_missed",
+                            "penalty_status",
+                            "open_play_shots",
+                            "open_play_sot",
+                            "open_play_off",
+                            "open_play_blocked",
+                            "open_play_insidebox",
+                            "open_play_outsidebox",
+                            "provider_xg_fdco",
+                            "provider_xg_open_play_fdco",
+                            "zone_status",
+                            "reconciliation_status",
+                        )
+                        if features.get(key) is not None
+                    },
+                }
+            )
     return rows
 
 
@@ -111,6 +183,13 @@ def _history_rows() -> list[dict[str, Any]]:
         if not fixtures.height or not stats.height:
             continue
         fixture_by_id = {int(row["fixture_id"]): row for row in fixtures.to_dicts()}
+        events = load_events(season)
+        teams = TeamRegistry()
+        penalty_counts = (
+            derive_penalty_counts_from_rows(events.to_dicts(), teams)
+            if events.height
+            else {}
+        )
         for row in stats.to_dicts():
             fixture = fixture_by_id.get(int(row["fixture_id"]))
             if fixture is None:
@@ -122,37 +201,223 @@ def _history_rows() -> list[dict[str, Any]]:
             if team_id is None:
                 continue
             home_id = _num(fixture.get("home_team_id"))
-            away_id = _num(fixture.get("away_team_id"))
+            team_name = str(row.get("team_name") or "")
+            canonical = teams.resolve(team_name) or f"other:{team_name.casefold()}"
+            opponent_name = str(
+                fixture.get("away_team_name")
+                if team_id == home_id
+                else fixture.get("home_team_name")
+            )
             goals_for = (
                 _num(fixture.get("home_goals"))
                 if team_id == home_id
                 else _num(fixture.get("away_goals"))
+            )
+            penalties = penalty_counts.get((int(row["fixture_id"]), canonical))
+            if events.height and penalties is None:
+                penalties = {
+                    "attempts": 0,
+                    "goals": 0,
+                    "missed": 0,
+                    "status": "measured_zero",
+                }
+            features = derive_open_play_features(
+                row, penalties, goals_for=goals_for
+            )
+            provider = _float(row.get("expected_goals"))
+            open_provider = (
+                max(0.0, provider - 0.76 * features["penalty_attempts"])
+                if provider is not None and features["penalty_attempts"] is not None
+                else None
             )
             rows.append(
                 {
                     "match_key": f"api:{fixture['fixture_id']}",
                     "season": season,
                     "competition_id": competition_id,
-                    "team_id": str(team_id),
-                    "team_name": str(row.get("team_name") or ""),
-                    "opponent_id": str(away_id if team_id == home_id else home_id),
-                    "opponent_name": str(
-                        fixture.get("away_team_name")
-                        if team_id == home_id
-                        else fixture.get("home_team_name")
-                    ),
+                    "team_id": canonical,
+                    "team_name": team_name,
+                    "opponent_id": teams.resolve(opponent_name)
+                    or f"other:{opponent_name.casefold()}",
+                    "opponent_name": opponent_name,
                     "goals_for": goals_for,
-                    "shots": _num(row.get("shots")),
-                    "shots_on_target": _num(row.get("shots_on_target")),
-                    "provider_xg": _float(row.get("expected_goals")),
+                    **features,
+                    "provider_xg": provider,
+                    "provider_xg_source": "api_football",
+                    "provider_xg_open_play_fdco": open_provider,
                     "source": "api_football",
                 }
             )
     return rows
 
 
+def _history_feature_map() -> dict[tuple[str, str, str, str], dict[str, Any]]:
+    """Zone/penalty features for Aberdeen fixtures from the normalized history."""
+    output: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    if not HISTORY_DIR.exists():
+        return output
+    teams = TeamRegistry()
+    for path in sorted(HISTORY_DIR.glob("season=*")):
+        if not path.is_dir():
+            continue
+        season = path.name.split("=", 1)[1]
+        fixtures = load_history_fixtures(season)
+        stats = load_history_team_stats(season)
+        if not fixtures.height or not stats.height:
+            continue
+        events = load_events(season)
+        penalty_counts = (
+            derive_penalty_counts_from_rows(events.to_dicts(), teams)
+            if events.height
+            else {}
+        )
+        fixture_by_id = {int(row["fixture_id"]): row for row in fixtures.to_dicts()}
+        for row in stats.to_dicts():
+            fixture = fixture_by_id.get(int(row["fixture_id"]))
+            if fixture is None:
+                continue
+            team_name = str(row.get("team_name") or "")
+            canonical = teams.resolve(team_name) or f"other:{team_name.casefold()}"
+            home_name = str(fixture.get("home_team_name") or "")
+            away_name = str(fixture.get("away_team_name") or "")
+            home_id = teams.resolve(home_name) or f"other:{home_name.casefold()}"
+            away_id = teams.resolve(away_name) or f"other:{away_name.casefold()}"
+            home_id_api = _num(fixture.get("home_team_id"))
+            team_id_api = _num(row.get("team_id"))
+            goals_for = (
+                _num(fixture.get("home_goals"))
+                if team_id_api == home_id_api
+                else _num(fixture.get("away_goals"))
+            )
+            penalties = penalty_counts.get((int(row["fixture_id"]), canonical))
+            if events.height and penalties is None:
+                penalties = {
+                    "attempts": 0,
+                    "goals": 0,
+                    "missed": 0,
+                    "status": "measured_zero",
+                }
+            features = derive_open_play_features(
+                row, penalties, goals_for=goals_for
+            )
+            provider = _float(row.get("expected_goals"))
+            if provider is not None:
+                features["provider_xg_api"] = provider
+                if features["penalty_attempts"] is not None:
+                    features["provider_xg_open_play_fdco"] = max(
+                        0.0, provider - 0.76 * features["penalty_attempts"]
+                    )
+            key = (
+                str(fixture.get("date") or "")[:10],
+                home_id,
+                away_id,
+                canonical,
+            )
+            output[key] = features
+    return output
+
+
+def _find_history_features(
+    features: dict[tuple[str, str, str, str], dict[str, Any]],
+    *,
+    match_date: str,
+    home_id: str,
+    away_id: str,
+    team_id: str,
+) -> dict[str, Any] | None:
+    day = str(match_date or "")[:10]
+    for offset in (0, -1, 1):
+        try:
+            target = str(date.fromisoformat(day) + timedelta(days=offset))
+        except ValueError:
+            continue
+        match = features.get((target, home_id, away_id, team_id))
+        if match is not None:
+            return match
+    return None
+
+
+def _transfer_rows() -> list[dict[str, Any]]:
+    """2025-26 Aberdeen league rows with API-Football provider xG."""
+    season = "2025-26"
+    if not HISTORY_DIR.exists():
+        return []
+    fixtures = load_history_fixtures(season)
+    stats = load_history_team_stats(season)
+    events = load_events(season)
+    if not fixtures.height or not stats.height:
+        return []
+    teams = TeamRegistry()
+    fixture_by_id = {int(row["fixture_id"]): row for row in fixtures.to_dicts()}
+    penalty_counts = (
+        derive_penalty_counts_from_rows(events.to_dicts(), teams)
+        if events.height
+        else {}
+    )
+    rows: list[dict[str, Any]] = []
+    for row in stats.to_dicts():
+        fixture = fixture_by_id.get(int(row["fixture_id"]))
+        if fixture is None or str(fixture.get("competition_id")) != "sco:premiership":
+            continue
+        fixture_id = int(row["fixture_id"])
+        team_id = _num(row.get("team_id"))
+        if team_id is None:
+            continue
+        team_name = str(row.get("team_name") or "")
+        canonical = teams.resolve(team_name) or f"other:{team_name.casefold()}"
+        home_id = _num(fixture.get("home_team_id"))
+        is_home = team_id == home_id
+        goals_for = _num(fixture.get("home_goals" if is_home else "away_goals"))
+        opponent_name = str(
+            fixture.get("away_team_name" if is_home else "home_team_name") or ""
+        )
+        penalties = penalty_counts.get((fixture_id, canonical))
+        if events.height and penalties is None:
+            penalties = {
+                "attempts": 0,
+                "goals": 0,
+                "missed": 0,
+                "status": "measured_zero",
+            }
+        features = derive_open_play_features(row, penalties, goals_for=goals_for)
+        provider = _float(row.get("expected_goals"))
+        if provider is None:
+            continue
+        open_provider = (
+            max(0.0, provider - 0.76 * features["penalty_attempts"])
+            if features["penalty_attempts"] is not None
+            else None
+        )
+        rows.append(
+            {
+                "match_key": f"api:{fixture_id}",
+                "match_id": f"api:{fixture_id}",
+                "season": season,
+                "competition_id": "sco:premiership",
+                "team_id": canonical,
+                "team_name": team_name,
+                "opponent_id": teams.resolve(opponent_name)
+                or f"other:{opponent_name.casefold()}",
+                "opponent_name": opponent_name,
+                "goals_for": goals_for,
+                **features,
+                "provider_xg": provider,
+                "provider_xg_open_play_fdco": open_provider,
+                "source": "api_football",
+            }
+        )
+    return rows
+
+
 def _model_rows() -> list[dict[str, Any]]:
-    return [*_league_rows(load_matches(None)), *_history_rows()]
+    return [
+        *_league_rows(
+            load_matches(None),
+            enrichment=enrichment_by_match_team("2026-27"),
+            history_features=_history_feature_map(),
+        ),
+        *_history_rows(),
+    ]
 
 
 def _team_rows(
@@ -190,11 +455,11 @@ def _match_rows(
         home_pred = _prediction(home_row, model)
         away_pred = _prediction(away_row, model)
         rows_for_side = (
-            (home_pred, away_pred)
+            (home_pred, away_pred, home_row, away_row)
             if fixture.home_team_id == ABERDEEN_ID
-            else (away_pred, home_pred)
+            else (away_pred, home_pred, away_row, home_row)
         )
-        for_pred, against_pred = rows_for_side
+        for_pred, against_pred, for_row, against_row = rows_for_side
         goals_for = fixture.home_goals if fixture.is_aberdeen_home else fixture.away_goals
         goals_against = fixture.away_goals if fixture.is_aberdeen_home else fixture.home_goals
         if fixture.is_aberdeen_home:
@@ -217,9 +482,91 @@ def _match_rows(
                 "fxg_for": for_pred["fxg"] if for_pred else None,
                 "fxg_for_low": for_pred["low"] if for_pred else None,
                 "fxg_for_high": for_pred["high"] if for_pred else None,
+                "goals_for_low": for_pred["goals_low"] if for_pred else None,
+                "goals_for_high": for_pred["goals_high"] if for_pred else None,
+                "goals_minus_fxg_for": for_pred["goals_minus"] if for_pred else None,
+                "goals_position_for": for_pred["goals_position"] if for_pred else None,
+                "goals_minus_fxg_for_low": (
+                    round(for_pred["goals_low"] - for_pred["fxg"], 3)
+                    if for_pred
+                    else None
+                ),
+                "goals_minus_fxg_for_high": (
+                    round(for_pred["goals_high"] - for_pred["fxg"], 3)
+                    if for_pred
+                    else None
+                ),
+                "fxg_per_shot_for": for_pred["xg_per_shot"] if for_pred else None,
+                "penalty_xg_for": for_pred["penalty_component"] if for_pred else None,
+                "shots_for": (for_row or {}).get("shots") if for_row else None,
+                "shots_on_target_for": (
+                    (for_row or {}).get("shots_on_target") if for_row else None
+                ),
+                "shots_off_for": (for_row or {}).get("shots_off") if for_row else None,
+                "shots_blocked_for": (
+                    (for_row or {}).get("shots_blocked") if for_row else None
+                ),
+                "shots_insidebox_for": (
+                    (for_row or {}).get("shots_insidebox") if for_row else None
+                ),
+                "shots_outsidebox_for": (
+                    (for_row or {}).get("shots_outsidebox") if for_row else None
+                ),
+                "penalties_for": (for_row or {}).get("penalty_attempts") if for_row else None,
+                "penalty_goals_for": (
+                    (for_row or {}).get("penalty_goals") if for_row else None
+                ),
+                "basis_for": for_pred.get("basis") if for_pred else None,
                 "fxg_against": against_pred["fxg"] if against_pred else None,
                 "fxg_against_low": against_pred["low"] if against_pred else None,
                 "fxg_against_high": against_pred["high"] if against_pred else None,
+                "goals_against_low": against_pred["goals_low"] if against_pred else None,
+                "goals_against_high": against_pred["goals_high"] if against_pred else None,
+                "goals_minus_fxg_against": against_pred["goals_minus"] if against_pred else None,
+                "goals_position_against": (
+                    against_pred["goals_position"] if against_pred else None
+                ),
+                "goals_minus_fxg_against_low": (
+                    round(against_pred["goals_low"] - against_pred["fxg"], 3)
+                    if against_pred
+                    else None
+                ),
+                "goals_minus_fxg_against_high": (
+                    round(against_pred["goals_high"] - against_pred["fxg"], 3)
+                    if against_pred
+                    else None
+                ),
+                "fxg_per_shot_against": against_pred["xg_per_shot"] if against_pred else None,
+                "penalty_xg_against": (
+                    against_pred["penalty_component"] if against_pred else None
+                ),
+                "shots_against": (against_row or {}).get("shots") if against_row else None,
+                "shots_on_target_against": (
+                    (against_row or {}).get("shots_on_target") if against_row else None
+                ),
+                "shots_off_against": (
+                    (against_row or {}).get("shots_off") if against_row else None
+                ),
+                "shots_blocked_against": (
+                    (against_row or {}).get("shots_blocked") if against_row else None
+                ),
+                "shots_insidebox_against": (
+                    (against_row or {}).get("shots_insidebox") if against_row else None
+                ),
+                "shots_outsidebox_against": (
+                    (against_row or {}).get("shots_outsidebox") if against_row else None
+                ),
+                "penalties_against": (
+                    (against_row or {}).get("penalty_attempts") if against_row else None
+                ),
+                "penalty_goals_against": (
+                    (against_row or {}).get("penalty_goals") if against_row else None
+                ),
+                "basis_against": against_pred.get("basis") if against_pred else None,
+                "interval_basis": for_pred.get("interval_basis") if for_pred else None,
+                "goals_range_basis": (
+                    for_pred.get("goals_range_basis") if for_pred else None
+                ),
                 "fxg_diff": (
                     round(for_pred["fxg"] - against_pred["fxg"], 3)
                     if for_pred and against_pred
@@ -237,7 +584,22 @@ def _match_rows(
                 ),
                 "provider_xg_for": provider_for,
                 "provider_xg_against": provider_against,
-                "source": (home_row or away_row or {}).get("source"),
+                "provider_xg_source_for": (for_row or {}).get("provider_xg_source"),
+                "provider_xg_source_against": (against_row or {}).get("provider_xg_source"),
+                "provider_xg_source": _common_source(
+                    (for_row or {}).get("provider_xg_source"),
+                    (against_row or {}).get("provider_xg_source"),
+                ),
+                "interval_level": model.interval_level,
+                "goals_range_level": model.interval_level,
+                "goals_dispersion": model.goals_dispersion,
+                "source_for": (for_row or {}).get("source"),
+                "source_against": (against_row or {}).get("source"),
+                "source": _common_source(
+                    (for_row or {}).get("source"),
+                    (against_row or {}).get("source"),
+                ),
+                "model_id": model.model_id,
             }
         )
     return output
@@ -340,10 +702,13 @@ def _provider_estimate_block(
             "has no shot coordinates."
         ),
         (
-            "The calibration is fit on 2026-27 league team rows only; applying "
+            "The estimate is fit on 2026-27 league team rows only; applying "
             "it to earlier seasons assumes a stable relationship."
         ),
-        "The calibration does not mean the provider-xG gate has passed.",
+        (
+            "This is a separate estimate for rows without provider xG; it is "
+            "not the fxg-3 calibration gate."
+        ),
     ]
     if calibration is None:
         return {
@@ -574,6 +939,7 @@ def build_xg_payload(
     rows = _model_rows()
     model = fit_fxg(rows, config)
     evaluation = evaluate_fxg(model, rows, config)
+    transfer = evaluate_transfer(model, _transfer_rows(), config)
     registry = build_fixture_registry()
     by_key_team = {(row["match_key"], row["team_id"]): row for row in rows}
     by_key_name = {
@@ -652,8 +1018,9 @@ def build_xg_payload(
         "generated_at": generated_at or utc_now_iso(),
         "season": target_season,
         "state": "available",
-        "model": model_to_dict(model, evaluation),
+        "model": {**model_to_dict(model, evaluation), "transfer_check": transfer},
         "evaluation": evaluation,
+        "transfer_evaluation": transfer,
         "matches": matches,
         "aggregates": aggregates,
         "provider_estimate": provider_estimate,
