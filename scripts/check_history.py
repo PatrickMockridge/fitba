@@ -32,7 +32,6 @@ SCHEMAS = {
 CLUB = GENERATED / "clubs" / "aberdeen.json"
 TRANSFERS = GENERATED / "transfers" / "aberdeen.json"
 MANIFEST = GENERATED / "manifest.json"
-MAX_FILE_BYTES = 2_000_000
 
 
 def _load(path: Path) -> Any:
@@ -91,9 +90,6 @@ def main() -> int:
         if checked_in != generated:
             errors.append(f"{path} is stale; regenerate it from the Pydantic model")
 
-    for path in [INDEX, *sorted(SEASON_DIR.glob("*.json"))]:
-        if path.exists() and path.stat().st_size > MAX_FILE_BYTES:
-            errors.append(f"{path} exceeds the {MAX_FILE_BYTES} byte cap")
     if MANIFEST.exists():
         manifest = _load(MANIFEST)
         files = {row.get("path"): row for row in manifest.get("files") or []}

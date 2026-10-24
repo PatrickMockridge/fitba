@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "D",
@@ -93,7 +95,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "Bo Jimmy Thelin",
@@ -1312,6 +1314,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1334,6 +1337,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1824,6 +1845,7 @@
       "team_name": "AEK Larnaca"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -1831,9 +1853,9 @@
       "goals": 0,
       "goals_high": 1,
       "goals_low": 0,
-      "goals_minus": -0.371,
+      "goals_minus": -0.366,
       "goals_position": "within",
-      "high": 0.887,
+      "high": 0.883,
       "low": 0.0,
       "penalties": 0,
       "penalties_known": true,
@@ -1850,8 +1872,8 @@
         "shots_on_target": 0,
         "shots_outsidebox": 1
       },
-      "value": 0.371,
-      "xg_per_shot": 0.074
+      "value": 0.366,
+      "xg_per_shot": 0.073
     },
     "evaluation_href": "/analysis/xg/",
     "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
@@ -1864,7 +1886,7 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.571,
+      "goals_minus": -0.57,
       "goals_position": "within",
       "high": 1.087,
       "low": 0.0,
@@ -1883,7 +1905,7 @@
         "shots_on_target": 2,
         "shots_outsidebox": 7
       },
-      "value": 0.571,
+      "value": 0.57,
       "xg_per_shot": 0.052
     },
     "model_id": "fxg-3",

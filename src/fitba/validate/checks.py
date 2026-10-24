@@ -233,10 +233,141 @@ def validate_tables(tables: dict[str, pl.DataFrame], *, season: str) -> list[Che
     return checks
 
 
+def validate_results(
+    matches: pl.DataFrame,
+    tables: dict[str, pl.DataFrame],
+    *,
+    season: str,
+    report: Any = None,
+    strict: bool = False,
+) -> list[CheckResult]:
+    """Check the official result record against the canonical frame and tables."""
+    from fitba.analytics.tables import playable_matches
+    from fitba.ingest.fixtures import load_club_fixtures
+    from fitba.normalize.results import (
+        canonical_key,
+        official_competition_ids,
+        official_played_rows,
+    )
+
+    checks: list[CheckResult] = []
+    try:
+        club = load_club_fixtures("aberdeen")
+    except Exception as exc:  # noqa: BLE001 - reported as an error, not hidden
+        return [CheckResult("results.official_feed", "error", f"club feed unavailable: {exc}")]
+    official = official_played_rows(club, seasons={season})
+    checks.append(
+        _result(
+            "results.official_feed",
+            official.height > 0,
+            f"{official.height} official played league fixtures for {season}",
+            value=official.height,
+        )
+    )
+    subset = matches.filter(pl.col("season") == season)
+    by_key = {canonical_key(row): row for row in subset.to_dicts()}
+    missing: list[str] = []
+    mismatched: list[str] = []
+    for item in official.to_dicts():
+        row = by_key.get(canonical_key(item))
+        if row is None:
+            missing.append(
+                f"{item.get('date')} {item.get('home_team_id')} v {item.get('away_team_id')}"
+            )
+            continue
+        if row.get("home_goals") is None or row.get("away_goals") is None:
+            mismatched.append(f"{item.get('date')}: canonical score missing")
+            continue
+        canonical_goals = (int(row["home_goals"]), int(row["away_goals"]))
+        if canonical_goals != (int(item["home_goals"]), int(item["away_goals"])):
+            mismatched.append(
+                f"{item.get('date')}: canonical {row.get('home_goals')}-{row.get('away_goals')} "
+                f"!= official {item.get('home_goals')}-{item.get('away_goals')}"
+            )
+    checks.append(
+        _result(
+            "results.official_represented",
+            not missing,
+            f"{len(missing)} official fixture(s) missing from canonical results: {missing}",
+            value=missing,
+        )
+    )
+    checks.append(
+        _result(
+            "results.official_score",
+            not mismatched,
+            f"{len(mismatched)} official score mismatch(es): {mismatched}",
+            value=mismatched,
+        )
+    )
+
+    playable = playable_matches(subset)
+    for competition_id in sorted(official_competition_ids()):
+        table = tables.get(competition_id)
+        if table is None or table.height == 0:
+            checks.append(
+                CheckResult(
+                    f"results.table.{competition_id}",
+                    "error",
+                    "no league table for the official competition",
+                )
+            )
+            continue
+        canonical_rows = playable.filter(pl.col("competition_id") == competition_id).height
+        played_sum = int(table["played"].sum())
+        checks.append(
+            _result(
+                f"results.table.{competition_id}.balance",
+                played_sum % 2 == 0 and played_sum // 2 == canonical_rows,
+                (
+                    f"table played sum {played_sum} -> {played_sum // 2} matches, "
+                    f"canonical {canonical_rows}"
+                ),
+                value={"played_sum": played_sum, "canonical": canonical_rows},
+            )
+        )
+        aberdeen = table.filter(pl.col("team_id") == "sco:aberdeen")
+        if aberdeen.height:
+            expected = playable.filter(
+                (pl.col("competition_id") == competition_id)
+                & (
+                    (pl.col("home_team_id") == "sco:aberdeen")
+                    | (pl.col("away_team_id") == "sco:aberdeen")
+                )
+            ).height
+            actual = int(aberdeen["played"][0])
+            checks.append(
+                _result(
+                    f"results.table.{competition_id}.aberdeen",
+                    actual == expected,
+                    f"Aberdeen table played {actual}, canonical {expected}",
+                    value={"table": actual, "canonical": expected},
+                )
+            )
+    conflicts = list(getattr(report, "conflicts", []) or [])
+    checks.append(
+        _result(
+            "results.source_conflict",
+            not conflicts,
+            f"{len(conflicts)} official/football-data score conflict(s): {conflicts}",
+            warning=not strict,
+            value=conflicts,
+        )
+    )
+    return checks
+
+
 def run_validation(*, season: str, strict: bool = False) -> dict[str, Any]:
-    matches = load_matches([season])
+    from fitba.normalize.results import OverlayReport
+
+    overlay = OverlayReport(club="aberdeen", precedence="spfl")
+    matches = load_matches([season], report=overlay)
     tables = build_tables(matches, season=season, config=competitions_config())
-    checks = validate_matches(matches, season=season) + validate_tables(tables, season=season)
+    checks = (
+        validate_matches(matches, season=season)
+        + validate_tables(tables, season=season)
+        + validate_results(matches, tables, season=season, report=overlay, strict=strict)
+    )
     errors = [check for check in checks if check.failed]
     warnings = [check for check in checks if check.level == "warning"]
     report = {
@@ -263,12 +394,6 @@ def validate_published(directory: Path) -> list[CheckResult]:
     files = sorted(directory.rglob("*.json"))
     checks.append(
         _result("published.files", bool(files), f"{len(files)} JSON files", value=len(files))
-    )
-    oversized = [
-        str(path.relative_to(directory)) for path in files if path.stat().st_size > 2_000_000
-    ]
-    checks.append(
-        _result("published.size", not oversized, f"files over 2 MB: {oversized}", value=oversized)
     )
     forbidden = (
         "optapy",

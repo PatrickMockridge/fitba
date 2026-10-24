@@ -12,7 +12,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 
 | Layer | Primary | Fallback / note |
 |---|---|---|
-| League results, current season | Football-Data.co.uk | API-Football only after the strict migration gate passes |
+| League results, current season | Football-Data.co.uk; official SPFL club result overlay for Aberdeen | The official club feed fills or corrects a finished Aberdeen league result; the conflict is published in `audit/results.json`. API-Football only after the strict migration gate passes |
 | League results, historical | Football-Data.co.uk | Back to 2013-14 |
 | League team match stats | Football-Data.co.uk | Shots, corners, fouls and cards; API-Football does not supply every tier |
 | League tables | Computed | Split, deductions and tie-breaks |
@@ -59,6 +59,10 @@ results and team stats, and the page says so.
   contributions and row counts.
 - `manifest.sources` is built from the provenance summary, not from a separate
   ad-hoc count. A source's rows are its **primary contributions only**.
+- `manifest.freshness.sources` records each snapshot's last refresh, age
+  against its TTL and state. The published payloads carry the same source
+  snapshot times and the dataset/update epoch; `check_freshness.py` verifies
+  both. A stale optional source is named, never silently mixed with fresh data.
 - Curated transfer rows are not counted as API-Football rows. A gated source
   can appear with zero rows.
 - Coverage now reports real fixtures-with-lineups and player-stat rows instead

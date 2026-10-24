@@ -195,6 +195,8 @@ PINNED_MARKERS = {
     "/status/": {
         "status.hero",
         "status.build",
+        "status.update",
+        "status.freshness",
         "status.validation",
         "status.metrics",
         "status.consistency",

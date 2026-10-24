@@ -59,7 +59,10 @@ Every panel follows the site-wide taxonomy:
 
 Numeric league facts are not stored in the history payload. The web joins
 `clubs/aberdeen.json` `history` by season. Manager career records live on the
-index staff stints; season documents hold only the season segment.
+index staff stints; season documents hold only the season segment. The manager
+records are computed from the same canonical result frame as the league table,
+so their played/won/drawn/lost/GF/GA/points totals and latest match date must
+equal the table row.
 
 The index also carries two visible measured blocks: defeats by four or more
 goals (date, season, competition, opponent, score, match link) and European

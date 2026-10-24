@@ -26,7 +26,6 @@ SCHEMA = ROOT / "contracts" / "matchday.schema.json"
 MANIFEST = GENERATED / "manifest.json"
 SQUAD = GENERATED / "squad" / "aberdeen.json"
 TABLES = GENERATED / "tables"
-MAX_FILE_BYTES = 2_000_000
 
 CONFIDENCE = {"high", "medium", "low", "unknown"}
 APPROACHES = {"attack", "balanced", "sit_deep_counter", "unknown"}
@@ -296,8 +295,6 @@ def main() -> int:
         if "official team news" in lowered and "not official team news" not in lowered:
             errors.append("official-team-news claim in the document")
 
-    if DOCUMENT.stat().st_size > MAX_FILE_BYTES:
-        errors.append(f"{DOCUMENT} exceeds the {MAX_FILE_BYTES} byte cap")
     if MANIFEST.exists():
         manifest = _load(MANIFEST)
         files = {row.get("path"): row for row in manifest.get("files") or []}

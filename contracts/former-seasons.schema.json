@@ -1,21 +1,107 @@
 {
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "title": "Schema Version",
+    "club_id": {
+      "title": "Club Id",
       "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
+    },
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
     },
     "generated_at": {
       "title": "Generated At",
+      "type": "string"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "schema_version": {
+      "title": "Schema Version",
       "type": "string"
     },
     "season": {
       "title": "Season",
       "type": "string"
     },
-    "club_id": {
-      "title": "Club Id",
-      "type": "string"
+    "seasons": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Seasons",
+      "type": "object"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
     },
     "state": {
       "enum": [
@@ -27,18 +113,17 @@
       "title": "State",
       "type": "string"
     },
-    "seasons": {
-      "additionalProperties": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Seasons",
-      "type": "object"
-    },
-    "coverage": {
-      "additionalProperties": true,
-      "title": "Coverage",
-      "type": "object"
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
     }
   },
   "required": [

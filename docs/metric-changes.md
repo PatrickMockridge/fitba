@@ -8,6 +8,57 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.8.0 — 2026-10-24
+
+Refresh-integrity correction. Owner approved the canonical-results layer, the
+single update path and the freshness guards. This is a **correctness
+correction, not a metric-definition change**: no formula, denominator,
+aggregation, rounding mode, source layer, coverage tier or parameter value
+changed.
+
+### Root cause
+
+The official SPFL overlay appended Aberdeen's 2026-10-24 result with
+`phase = null`; every table-driven surface filters `phase == "regular"` and
+silently dropped it. The canonical results layer now appends a complete row
+with `phase = "regular"`, `status = "played"` and an explicit `result_source`.
+
+### Value changes
+
+| Field | Before | After | Reason |
+|---|---:|---:|---|
+| `tables.premiership.aberdeen.played` | 9 | 10 | The omitted 2026-10-24 fixture is included. |
+| `tables.premiership.aberdeen.lost` | 4 | 5 | Same. |
+| `tables.premiership.aberdeen.gf` | 10 | 12 | Same. |
+| `tables.premiership.aberdeen.ga` | 10 | 13 | Same. |
+| `tables.premiership.aberdeen.gd` | 0 | −1 | Same. |
+| `tables.premiership.aberdeen.points` | 11 | 11 | Aberdeen lost; no points change. |
+| `tables.premiership.aberdeen.form` | `WLDWD` | `LWLDW` | Same. |
+| `coverage.competitions.sco:premiership.matches` | 54 in the table / 55 in coverage | 55 in both | Coverage and the table now count the same match. |
+| `history.seasons.2026-27.managers[].played` | 9 | 10 | Manager record reads the canonical table. |
+| `history.seasons.2026-27.managers[].last_match` | 2026-10-17 | 2026-10-24 | Same. |
+| `matchday.form_guide.aberdeen.form` | `WLDWD` | `LWLDW` | Same. |
+| `analysis.hero.form` / `clubs.aberdeen.summary.form` | `WLDWD` | `LWLDW` | Same. |
+
+### Registry changes
+
+- `consistency.summary` v3: the check set grows from 16 to 22 named checks
+  (`results.table`, `results.form`, `results.club`, `results.coverage`,
+  `rules.epoch`, `rules.manifest`, plus `rules.checksums` when a root is
+  supplied). A failure still blocks publish.
+- `manifest.freshness` v3: adds `dataset_id`, `update_id`, `sources` and
+  `stale_sources`. These are epoch and freshness metadata, not a quality score.
+- Registry version moves 3.7.0 → 3.8.0.
+
+### Audit impact
+
+`audit/results.json` is a new published audit artifact recording official and
+canonical fixture counts, matched/filled/appended rows, merged duplicates,
+conflicts and the table/coverage reconciliation. It is evidence, not a metric.
+The fourteen directly affected metrics (tables, coverage, club summary,
+history, analysis hero, matchday form/strength) keep their definitions and are
+recomputed from the corrected canonical frame.
+
 ## 3.6.0 — 2026-10-24
 
 Cross-surface consistency pass. Owner approved the direction: all-competition

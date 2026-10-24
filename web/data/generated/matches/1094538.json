@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "D",
@@ -138,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -1338,6 +1340,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1390,6 +1393,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -2018,6 +2039,7 @@
       "team_name": "St Johnstone"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -2027,8 +2049,8 @@
       "goals_low": 0,
       "goals_minus": -0.524,
       "goals_position": "within",
-      "high": 2.04,
-      "low": 0.803,
+      "high": 2.041,
+      "low": 0.798,
       "penalties": 1,
       "penalties_known": true,
       "penalty_xg": 0.76,
@@ -2045,7 +2067,7 @@
         "shots_outsidebox": 2
       },
       "value": 1.524,
-      "xg_per_shot": 0.191
+      "xg_per_shot": 0.19
     },
     "evaluation_href": "/analysis/xg/",
     "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
@@ -2058,10 +2080,10 @@
       "goals": 1,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": -0.521,
+      "goals_minus": -0.517,
       "goals_position": "within",
-      "high": 2.037,
-      "low": 0.8,
+      "high": 2.034,
+      "low": 0.792,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2077,8 +2099,8 @@
         "shots_on_target": 5,
         "shots_outsidebox": 3
       },
-      "value": 1.521,
-      "xg_per_shot": 0.109
+      "value": 1.517,
+      "xg_per_shot": 0.108
     },
     "model_id": "fxg-3",
     "model_range_level": 0.8,

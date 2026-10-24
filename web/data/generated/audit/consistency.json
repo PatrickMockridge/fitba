@@ -1,8 +1,11 @@
 {
-  "checks": 16,
+  "checks": 22,
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "failed": 0,
-  "generated_at": "2026-10-24T20:09:33+00:00",
-  "passed": 16,
+  "generated_at": "2026-10-24T22:29:20+00:00",
+  "passed": 22,
+  "published_at": "2026-10-24T22:29:20+00:00",
   "results": [
     {
       "description": "Squad summary and role buckets reconcile with player rows",
@@ -193,8 +196,101 @@
       ],
       "rows_checked": 76,
       "status": "pass"
+    },
+    {
+      "description": "League table record and form equal the published fixture results",
+      "errors": [],
+      "fields_checked": 9,
+      "id": "results.table",
+      "payloads": [
+        "tables/*.json",
+        "fixtures/index.json"
+      ],
+      "rows_checked": 10,
+      "status": "pass"
+    },
+    {
+      "description": "Matchday, analysis and club form equal the league table record",
+      "errors": [],
+      "fields_checked": 14,
+      "id": "results.form",
+      "payloads": [
+        "tables/*.json",
+        "matchday/upcoming.json",
+        "analysis/summary.json",
+        "clubs/aberdeen.json"
+      ],
+      "rows_checked": 3,
+      "status": "pass"
+    },
+    {
+      "description": "Club results, recent results and history equal the fixture record",
+      "errors": [],
+      "fields_checked": 74,
+      "id": "results.club",
+      "payloads": [
+        "clubs/aberdeen.json",
+        "fixtures/index.json",
+        "history/seasons/*.json"
+      ],
+      "rows_checked": 10,
+      "status": "pass"
+    },
+    {
+      "description": "Coverage match counts equal the league tables they summarise",
+      "errors": [],
+      "fields_checked": 8,
+      "id": "results.coverage",
+      "payloads": [
+        "coverage.json",
+        "tables/*.json"
+      ],
+      "rows_checked": 4,
+      "status": "pass"
+    },
+    {
+      "description": "Every payload belongs to the current dataset epoch or is explicitly stale",
+      "errors": [],
+      "fields_checked": 1458,
+      "id": "rules.epoch",
+      "payloads": [
+        "manifest.json",
+        "**/*.json"
+      ],
+      "rows_checked": 486,
+      "status": "pass"
+    },
+    {
+      "description": "The manifest lists every published file and every listed file exists",
+      "errors": [],
+      "fields_checked": 487,
+      "id": "rules.manifest",
+      "payloads": [
+        "manifest.json"
+      ],
+      "rows_checked": 487,
+      "status": "pass"
     }
   ],
   "schema_version": "1.0.0",
-  "status": "pass"
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
+  },
+  "status": "pass",
+  "update_id": "2026-10-24T22:29:17+00:00-2281097"
 }

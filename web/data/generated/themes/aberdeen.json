@@ -8,7 +8,10 @@
       "Median points",
       "Current position"
     ],
+    "dataset_id": null,
+    "dataset_state": null,
     "note": "League performance only. Other clubs' transfer and wage models are not in the public record held here; they are not invented.",
+    "published_at": null,
     "rows": [
       {
         "Best finish": 1,
@@ -53,7 +56,7 @@
       {
         "Best finish": 4,
         "Club": "Dundee United",
-        "Current position": 6,
+        "Current position": 4,
         "Median points": 45,
         "Seasons": 6,
         "Worst finish": 12
@@ -75,430 +78,800 @@
         "Worst finish": 10
       }
     ],
-    "title": "How the record compares"
+    "served_by_update_id": null,
+    "source_snapshots": null,
+    "stale_reason": null,
+    "title": "How the record compares",
+    "update_id": null
   },
   "chairman_frame": {
+    "dataset_id": null,
+    "dataset_state": null,
     "label": "The chairman's frame",
     "note": "A summary of the club's stated approach from the public record; not a direct quotation.",
+    "published_at": null,
+    "served_by_update_id": null,
     "source": "reference/history/era.yaml; docs/history.md",
-    "text": "Since Dave Cormack took over in December 2019, the club has described a trading model: buy low, develop, sell high, reinvest, and keep the squad and wage bill sustainable. The public record below shows what that approach has produced and what it has cost."
+    "source_snapshots": null,
+    "stale_reason": null,
+    "text": "Since Dave Cormack took over in December 2019, the club has described a trading model: buy low, develop, sell high, reinvest, and keep the squad and wage bill sustainable. The public record below shows what that approach has produced and what it has cost.",
+    "update_id": null
   },
   "claims": [
     {
       "better_data": "An event feed would separate style from results; it would not change the league record.",
       "change_mind": "A settled run of results and a stable shape.",
       "claim": "This is a rebuilt side with an unsettled shape, and the league record is mid-table.",
-      "count": "9 league matches; 16 competitive fixtures with a recorded shape",
+      "count": "10 league matches; 16 competitive fixtures with a recorded shape",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "matchday",
       "evidence": [
         {
-          "count": "3 wins, 2 draws and 4 defeats; 11 points; 10 goals for and 10 against",
+          "count": "3 wins, 2 draws and 5 defeats; 11 points; 12 goals for and 13 against",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "League record",
           "note": null,
           "period": "2026-27",
-          "sample": "9 league matches",
+          "published_at": null,
+          "sample": "10 league matches",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
-          "count": "8 points; 8 goals for and 3 against; 56.5% share of shots",
+          "count": "7 points; 10 goals for and 6 against; 58.4% share of shots",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Last five league matches",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "5 league matches",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "16 competitive fixtures with a recorded shape; 2 unknown; 6 formations",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Kick-off shapes",
           "note": "Shape is the kick-off formation only; mid-game switches are not recorded.",
           "period": "2026-27",
+          "published_at": null,
           "sample": "All competitive fixtures with a recorded shape",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         }
       ],
       "id": "team_now",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/matchday/",
-          "label": "Matchday"
+          "label": "Matchday",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/competitions/",
-          "label": "Competitions"
+          "label": "Competitions",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/fixtures/",
-          "label": "Fixtures"
+          "label": "Fixtures",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 1,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "supported",
       "status_reason": "The record and the shape churn are counted. What they mean is a separate question.",
-      "title": "The team now"
+      "title": "The team now",
+      "update_id": null
     },
     {
       "better_data": "Eight or more matches per shape, opponent strength, official team news and an event feed for set plays and errors would separate shape from personnel.",
       "change_mind": "A run of three centre-back games with the first-choice centre-backs available and goals conceded at or below the back four.",
       "claim": "Three at the back is protecting a new defence at the cost of width.",
       "count": "4 three-centre-back fixtures vs 10 two-centre-back; 2 known / 32 unknown availability",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "matchday",
       "evidence": [
         {
           "count": "4 matches, 1.00 points per game, 1.25 goals against per game",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Three centre-backs",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "4 competitive fixtures",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
           "count": "10 matches, 1.70 points per game, 1.00 goals against per game",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Two centre-backs",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "10 competitive fixtures",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
           "count": "2.00 wing-back starts per match in the three-centre-back set; 0.00 wide-forward starts. In the two-centre-back set: 0.00 and 1.20.",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Wide roles by shape",
           "note": "The selection cost is visible; the performance effect is not established.",
           "period": "2026-27",
+          "published_at": null,
           "sample": "Starts per match",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "2 known / 32 unknown squad entries; 1 known / 9 unknown defensive players; Knoester 6 starts / 573 minutes; Tobers is in the official squad list; no 2026-27 appearance record",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Defensive availability",
           "note": "Absence is not injury; the ledger has no verified entry for either player. Absent from the current-squad provider snapshot; no verified team-news entry. This is a squad-list gap, not a transfer, and no injury claim is made.",
           "period": "2026-27",
+          "published_at": null,
           "sample": "Official team-news entries",
+          "served_by_update_id": null,
           "source": "Aberdeen FC news",
-          "status": "cant_test"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "cant_test",
+          "update_id": null
         }
       ],
       "id": "defence",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/squad/",
-          "label": "Squad"
+          "label": "Squad",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/matchday/",
-          "label": "Matchday"
+          "label": "Matchday",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/transfers/",
-          "label": "Transfers"
+          "label": "Transfers",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 2,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "mixed",
       "status_reason": "The selection cost is supported: the wide forwards do not start in the three-centre-back set. Whether the shape itself helps or hurts is not established: four matches, the manager chooses the shape, and the opponents and competitions differ. Availability cannot be tested.",
-      "title": "The defence"
+      "title": "The defence",
+      "update_id": null
     },
     {
       "better_data": "A licensed event feed with set-piece goals, errors leading to shots or goals, and penalties would test the claim directly.",
       "change_mind": "Event data, or a run of clean sheets and lower goals against.",
       "claim": "The attack is keeping the team in games, but the balance is fragile; set plays and errors are part of the problem.",
-      "count": "10 goals for and 10 against in 9 league matches",
+      "count": "12 goals for and 13 against in 10 league matches",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "matchday",
       "evidence": [
         {
-          "count": "10 for and 10 against",
+          "count": "12 for and 13 against",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "League goals",
           "note": null,
           "period": "2026-27",
-          "sample": "9 league matches",
+          "published_at": null,
+          "sample": "10 league matches",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "50%",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Share of goals from wide forwards and strikers",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "12 league goals",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
-          "count": "44.5%",
+          "count": "46.2%",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Share of shots",
           "note": null,
           "period": "2026-27",
-          "sample": "9 league matches",
+          "published_at": null,
+          "sample": "10 league matches",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
-          "count": "8 points; 8 goals for and 3 against; 56.5% share of shots",
+          "count": "7 points; 10 goals for and 6 against; 58.4% share of shots",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Last five league matches",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "5 league matches",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "Not measured",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Set plays and errors",
           "note": "Corners and fouls are available; they are not a proxy for the claim.",
           "period": "2026-27",
+          "published_at": null,
           "sample": "No event feed for set-piece goals, errors or penalties",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "cant_test"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "cant_test",
+          "update_id": null
         }
       ],
       "id": "attack",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/fixtures/",
-          "label": "Fixtures"
+          "label": "Fixtures",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/matchday/",
-          "label": "Matchday"
+          "label": "Matchday",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/methodology/",
-          "label": "Methodology"
+          "label": "Methodology",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 3,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "mixed",
       "status_reason": "The goals are measured. The set-play and error claims cannot be tested with the current feed.",
-      "title": "The attack"
+      "title": "The attack",
+      "update_id": null
     },
     {
       "better_data": "A full season under Robinson, opponent strength and a pre-declared variance measure.",
       "change_mind": "A full season, or a sustained points and goals-against trend.",
       "claim": "Thelin's side had a high ceiling and a low floor; Robinson has steadied it, but 18 league matches is not enough to settle it.",
-      "count": "58 + 9 + 18 league matches",
+      "count": "58 + 9 + 19 league matches",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "chairman",
       "evidence": [
         {
           "count": "58 matches, 1.34 points per game",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Thelin league record",
           "note": "The aggregate record; the cup is separate.",
           "period": "2024-25 to January 2026",
+          "published_at": null,
           "sample": "League only",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
           "count": "7 straight league wins",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Thelin winning run",
           "note": "Not called a record; the covered league record has an 8-match run in 2014-15.",
           "period": "2024-08-05 to 2024-10-06",
+          "published_at": null,
           "sample": "League only",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
           "count": "14 league games without a win",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Thelin winless run",
           "note": null,
           "period": "2024-11-23 to 2025-02-01",
+          "published_at": null,
           "sample": "League only",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
           "count": "9 matches, 0.44 points per game",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Leven interim",
           "note": "A caretaker spell inherited mid-season.",
           "period": "January to March 2026",
+          "published_at": null,
           "sample": "League only",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         },
         {
-          "count": "18 matches, 1.22 points per game",
+          "count": "19 matches, 1.16 points per game",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Robinson league record",
           "note": "Two nine-match spells of three wins, two draws and four defeats; the sample is small.",
           "period": "March 2026 to date",
+          "published_at": null,
           "sample": "League only",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         }
       ],
       "id": "managers",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/history/",
-          "label": "The Cormack era"
+          "label": "The Cormack era",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/fixtures/",
-          "label": "Fixtures"
+          "label": "Fixtures",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/matchday/",
-          "label": "Matchday"
+          "label": "Matchday",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 4,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "mixed",
       "status_reason": "The manager records are measured. 'Steadying' and 'lower variance' are readings: 18 matches, two squads and no agreed measure of consistency.",
-      "title": "The managers"
+      "title": "The managers",
+      "update_id": null
     },
     {
       "better_data": "Disclosed fees, player output before and after the sale, and an event feed.",
       "change_mind": "A disclosed fee, a replacement's output, or a full season.",
       "claim": "The squad was rebuilt, but this window was experienced, not a youth project; Morris was sold and not directly replaced.",
       "count": "15 arrivals and 25 departures in 2026-27",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "off_pitch",
       "evidence": [
         {
           "count": "15 in and 25 out; 6 permanent in, 8 permanent out, 9 loans out",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Arrivals and departures",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "Confirmed transfer register",
+          "served_by_update_id": null,
           "source": "Aberdeen FC news",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "median 26",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Arrival age",
           "note": null,
           "period": "2026-27",
+          "published_at": null,
           "sample": "Arrivals with a known birth date",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "8%",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Under-21 minutes",
           "note": null,
           "period": "Cormack era",
+          "published_at": null,
           "sample": "League minutes",
+          "served_by_update_id": null,
           "source": "API-Football",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "2025-09-01; fee undisclosed; modelled £600,000 to £1,700,000",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Morris sale",
           "note": "Fees are mostly undisclosed; the fee range is modelled, not audited.",
           "period": "2025-26",
+          "published_at": null,
           "sample": "Confirmed transfer register",
+          "served_by_update_id": null,
           "source": "Aberdeen FC news",
-          "status": "mixed"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "mixed",
+          "update_id": null
         }
       ],
       "id": "squad",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/transfers/",
-          "label": "Transfers"
+          "label": "Transfers",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/recruitment/",
-          "label": "Recruitment"
+          "label": "Recruitment",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/squad/",
-          "label": "Squad"
+          "label": "Squad",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 5,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "mixed",
       "status_reason": "The turnover is measured. The squad is not young: median arrival age 26 and Under-21 minutes 8%. The goal-threat replacement effect cannot be tested with the current output data.",
-      "title": "The squad"
+      "title": "The squad",
+      "update_id": null
     },
     {
       "better_data": "Audited accounts, disclosed fees and wages would test the financial side; they are not public.",
       "change_mind": "Audited accounts, or a sustained league trend under a stable squad.",
       "claim": "The public record is consistent with the chairman's trading-club argument, and the sporting cost is visible; it cannot prove the argument.",
       "count": "7 seasons; 3rd to 10th; 1 major honour",
+      "dataset_id": null,
+      "dataset_state": null,
       "domain": "chairman",
       "evidence": [
         {
           "count": "7 seasons",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Completed seasons",
           "note": null,
           "period": "2019-20 to date",
+          "published_at": null,
           "sample": "Cormack era",
+          "served_by_update_id": null,
           "source": "Wikipedia",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "3 to 10; average 6",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "League range",
           "note": null,
           "period": "Cormack era",
+          "published_at": null,
           "sample": "Completed league seasons",
+          "served_by_update_id": null,
           "source": "football-data.co.uk",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "1 Scottish Cup",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Major honours",
           "note": "The 2023-24 League Cup runners-up is a cup run, not an honour.",
           "period": "2019-20 to date",
+          "published_at": null,
           "sample": "Cormack era",
+          "served_by_update_id": null,
           "source": "Wikipedia",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "9 people in charge",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Manager spells",
           "note": null,
           "period": "2019-20 to date",
+          "published_at": null,
           "sample": "Cormack era",
+          "served_by_update_id": null,
           "source": "Wikipedia",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "103 in and 86 out",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "Arrivals and departures",
           "note": null,
           "period": "Cormack era",
+          "published_at": null,
           "sample": "Confirmed transfer register",
+          "served_by_update_id": null,
           "source": "Aberdeen FC news",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         },
         {
           "count": "2",
+          "dataset_id": null,
+          "dataset_state": null,
           "metric": "European campaigns",
           "note": null,
           "period": "Cormack era",
+          "published_at": null,
           "sample": "Season documents",
+          "served_by_update_id": null,
           "source": "Wikipedia",
-          "status": "supported"
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
+          "update_id": null
         }
       ],
       "id": "chairman_record",
       "links": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/history/",
-          "label": "The Cormack era"
+          "label": "The Cormack era",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/transfers/",
-          "label": "Transfers"
+          "label": "Transfers",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "href": "/recruitment/",
-          "label": "Recruitment"
+          "label": "Recruitment",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
         }
       ],
       "order": 6,
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
       "status": "supported",
       "status_reason": "The record is measured. It cannot prove cause and effect, boardroom intent or that the trading model has made money.",
-      "title": "The chairman's record"
+      "title": "The chairman's record",
+      "update_id": null
     }
   ],
   "club_id": "sco:aberdeen",
   "coverage": {
     "availability_feed": "2 known / 32 unknown",
+    "dataset_id": null,
+    "dataset_state": null,
     "historical_appearances": "Local season files",
     "missing": [
       "Official team news and injury return dates",
@@ -509,41 +882,86 @@
       "Other clubs' transfer and wage models"
     ],
     "note": "The record is derived from local match, squad, history and transfer data. Missing layers are labelled; they are never zero.",
+    "published_at": null,
     "season": "2026-27",
-    "status": "fresh"
+    "served_by_update_id": null,
+    "source_snapshots": null,
+    "stale_reason": null,
+    "status": "fresh",
+    "update_id": null
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "notes": "The site owner's view is attributed opinion. Statuses are the record's answer: supported, mixed, not supported or can't test yet.",
   "owner_view": {
     "attribution": "Patrick Mockridge",
+    "dataset_id": null,
+    "dataset_state": null,
     "label": "The site owner's view",
-    "text": "I think the club is trying to lower its variance and become harder to beat: a high press, a direct and counter-attacking game, balls over the top for Olusanya, and three physical centre-backs at set plays. The cost has been unforced errors, cheap penalties and getting the players to gel. Thelin's side had a fast start, a long winless run, the Scottish Cup and then a recycled squad; Morris was sold and we lost a main goal threat; injuries and opponents adapting followed. Robinson steadied it. The question is whether the model is now producing a more resilient team, or just a different set of trade-offs."
+    "published_at": null,
+    "served_by_update_id": null,
+    "source_snapshots": null,
+    "stale_reason": null,
+    "text": "I think the club is trying to lower its variance and become harder to beat: a high press, a direct and counter-attacking game, balls over the top for Olusanya, and three physical centre-backs at set plays. The cost has been unforced errors, cheap penalties and getting the players to gel. Thelin's side had a fast start, a long winless run, the Scottish Cup and then a recycled squad; Morris was sold and we lost a main goal threat; injuries and opponents adapting followed. Robinson steadied it. The question is whether the model is now producing a more resilient team, or just a different set of trade-offs.",
+    "update_id": null
   },
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "3.0.0",
   "season": "2026-27",
-  "served_generated_at": "2026-10-24T20:09:33+00:00",
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "served_generated_at": "2026-10-24T22:29:20+00:00",
+  "source_snapshots": null,
   "sources": [
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "football_data_uk",
       "name": "football-data.co.uk",
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.football-data.co.uk/mmz4281",
       "verified_at": "2026-10-21"
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "api_football",
       "name": "API-Football",
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.api-football.com",
       "verified_at": "2026-10-23"
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "afc_news",
       "name": "Aberdeen FC news",
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.afc.co.uk/en/news",
       "verified_at": "2026-10-21"
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "wikipedia",
       "name": "Wikipedia",
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://en.wikipedia.org",
       "verified_at": "2026-10-21"
     }
@@ -551,5 +969,6 @@
   "stale_reason": null,
   "state": "fresh",
   "thesis": "The team on the pitch is the visible edge of a seven-year trading model. The question is what that model buys, what it costs, and what the record can prove.",
-  "title": "Data analysis"
+  "title": "Data analysis",
+  "update_id": "2026-10-24T22:29:17+00:00-2281097"
 }

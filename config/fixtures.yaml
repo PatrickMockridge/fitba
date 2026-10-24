@@ -20,6 +20,15 @@ matching:
   # api:fixture:<id>; values are football-data.co.uk match ids.
   overrides: {}
 
+results:
+  # The official SPFL club feed is the schedule source and can publish a
+  # finished result before football-data.co.uk. It fills or corrects only
+  # Aberdeen league fixtures; it never invents another club or a cup row.
+  official_competitions: [sco:premiership]
+  precedence: spfl
+  date_tolerance_days: 1
+  conflict_policy: official_wins_report
+
 pages:
   route_prefix: /matches
   # A page is generated for every played fixture. These are the data classes

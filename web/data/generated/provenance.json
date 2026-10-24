@@ -1,38 +1,91 @@
 {
   "availability": {
+    "dataset_id": null,
+    "dataset_state": null,
     "provider_snapshot": "unavailable",
+    "published_at": null,
     "reason": "provider_declares_injuries_false",
-    "status": "partial"
+    "served_by_update_id": null,
+    "source_snapshots": null,
+    "stale_reason": null,
+    "status": "partial",
+    "update_id": null
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "excluded": [
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "bbc_sport",
-      "reason": "Terms prohibit scraping or republication; manual finding aid only."
+      "published_at": null,
+      "reason": "Terms prohibit scraping or republication; manual finding aid only.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "transfermarkt",
-      "reason": "Scraping prohibited; not used for public data."
+      "published_at": null,
+      "reason": "Scraping prohibited; not used for public data.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "fotmob",
-      "reason": "Terms prohibit scraping or republication."
+      "published_at": null,
+      "reason": "Terms prohibit scraping or republication.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "sofascore",
-      "reason": "Terms prohibit scraping or republication."
+      "published_at": null,
+      "reason": "Terms prohibit scraping or republication.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "fbref",
-      "reason": "Scraping prohibited; written permission required."
+      "published_at": null,
+      "reason": "Scraping prohibited; written permission required.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "pannadata",
-      "reason": "No licence stated; local research only, never published."
+      "published_at": null,
+      "reason": "No licence stated; local research only, never published.",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     }
   ],
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "layers": [
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "api_football"
       ],
@@ -42,10 +95,17 @@
         "status"
       ],
       "gate": {
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "config/league_migration.yaml",
+        "published_at": null,
         "reason": null,
         "report": null,
-        "status": "configured"
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "status": "configured",
+        "update_id": null
       },
       "id": "league_results_current",
       "kind": "provider",
@@ -54,39 +114,67 @@
       "primary": "football_data_uk",
       "primary_source": {
         "attribution": "Football-Data.co.uk",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "football_data_uk",
         "lane": "derived_display",
         "name": "football-data.co.uk",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.football-data.co.uk/mmz4281",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "current season, all four SPFL tiers",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "football-data.co.uk",
+          "published_at": null,
           "role": "primary",
           "rows": 218,
+          "served_by_update_id": null,
           "source_id": "football_data_uk",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/sources/",
         "/methodology/",
         "/scotland/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "fixtures",
@@ -100,30 +188,51 @@
       "primary": "football_data_uk",
       "primary_source": {
         "attribution": "Football-Data.co.uk",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "football_data_uk",
         "lane": "derived_display",
         "name": "football-data.co.uk",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.football-data.co.uk/mmz4281",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "2013-14 to the season before the current one",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "football-data.co.uk",
+          "published_at": null,
           "role": "primary",
           "rows": 9623,
+          "served_by_update_id": null,
           "source_id": "football_data_uk",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/sources/",
         "/history/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "shots",
@@ -140,31 +249,52 @@
       "primary": "football_data_uk",
       "primary_source": {
         "attribution": "Football-Data.co.uk",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "football_data_uk",
         "lane": "derived_display",
         "name": "football-data.co.uk",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.football-data.co.uk/mmz4281",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "2013-14 to current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "football-data.co.uk",
+          "published_at": null,
           "role": "primary",
           "rows": 217,
+          "served_by_update_id": null,
           "source_id": "football_data_uk",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/sources/",
         "/themes/",
         "/scotland/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "points",
@@ -179,14 +309,21 @@
       "note": "Computed from league results with split and deduction rules.",
       "primary": "computed",
       "primary_source": null,
+      "published_at": null,
       "scope": "current and historical seasons",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/scotland/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "fixtures",
@@ -202,30 +339,51 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 144,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/competitions/",
         "/sources/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "api_football"
       ],
@@ -244,40 +402,68 @@
       "primary": "spfl",
       "primary_source": {
         "attribution": "SPFL",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "spfl",
         "lane": "derived_display",
         "name": "SPFL official club feed",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "SPFL official club feed",
+          "published_at": null,
           "role": "primary",
           "rows": 12,
+          "served_by_update_id": null,
           "source_id": "spfl",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/fixtures/",
         "/matchday/",
         "/matches/",
         "/analysis/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "formation",
@@ -294,31 +480,52 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "Aberdeen fixtures, current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 489,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/squad/",
         "/matchday/",
         "/themes/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "rating",
@@ -335,31 +542,52 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "Premiership, current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 400,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/themes/",
         "/squad/",
         "/matchday/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "starters",
@@ -375,30 +603,51 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "Aberdeen competitive fixtures, current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/analysis/",
         "/sources/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "rank",
@@ -416,23 +665,41 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "current table for every enabled scouting league",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/scouting/",
@@ -440,9 +707,12 @@
         "/scouting/player/",
         "/sources/",
         "/methodology/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "player",
@@ -458,32 +728,53 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "transfer feed for every team represented in the scouting pool",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/scouting/",
         "/scouting/search/",
         "/scouting/player/",
         "/sources/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "fixtures",
@@ -500,31 +791,52 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "2026-27 league phases of the Champions League, Europa League and Conference League",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/scouting/",
         "/sources/",
         "/methodology/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "player_season_statistics",
@@ -540,31 +852,52 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "configured scouting leagues, current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/scouting/",
         "/sources/",
         "/methodology/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "goals_conceded_on_pitch",
@@ -579,30 +912,51 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "Aberdeen fixtures with lineups and events",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 489,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/squad/",
         "/themes/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "api_football"
       ],
@@ -621,37 +975,65 @@
       "primary": "afc_official",
       "primary_source": {
         "attribution": "Aberdeen FC",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "afc_official",
         "lane": "derived_display",
         "name": "Aberdeen FC men's team roster",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.afc.co.uk/en/teams/mens",
         "verified_at": "2026-10-24"
       },
+      "published_at": null,
       "scope": "current men's team, one listed page per refresh",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC men's team roster",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "afc_official",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/teams/mens",
           "verified_at": "2026-10-24"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/squad/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "player_id",
@@ -670,29 +1052,50 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "current season",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 34,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/squad/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "afc_official",
         "wikipedia"
@@ -708,46 +1111,81 @@
       "primary": "sportmonks",
       "primary_source": {
         "attribution": "Sportmonks",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "sportmonks",
         "lane": "derived_display",
         "name": "Sportmonks",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://docs.sportmonks.com/v3/",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "current squad",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Sportmonks",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "sportmonks",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://docs.sportmonks.com/v3/",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC men's team roster",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "afc_official",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/teams/mens",
           "verified_at": "2026-10-24"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Wikipedia",
+          "published_at": null,
           "role": "fallback",
           "rows": 1,
+          "served_by_update_id": null,
           "source_id": "wikipedia",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "gated",
       "surfaces": [
         "/squad/",
         "/sources/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "date",
@@ -763,30 +1201,51 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "Aberdeen full transfer history",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": 170,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/transfers/",
         "/sources/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "confirmed_business",
@@ -801,31 +1260,52 @@
       "note": "Curated against AFC announcements and Wikipedia season records, with the API-Football candidate feed as discovery. Most rows are curated, not provider-confirmed; fees are mostly undisclosed.",
       "primary": "curated",
       "primary_source": null,
+      "published_at": null,
       "scope": "2019-20 to current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC news",
+          "published_at": null,
           "role": "corroboration",
           "rows": 4,
+          "served_by_update_id": null,
           "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Wikipedia",
+          "published_at": null,
           "role": "corroboration",
           "rows": 229,
+          "served_by_update_id": null,
           "source_id": "wikipedia",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/transfers/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "loan_club",
@@ -841,15 +1321,22 @@
       "note": "Loan-out tags come from the register; end/recall/obligation terms are unknown.",
       "primary": "curated",
       "primary_source": null,
+      "published_at": null,
       "scope": "current and historical",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/loans/",
         "/transfers/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "title",
@@ -865,29 +1352,50 @@
       "primary": "afc_news",
       "primary_source": {
         "attribution": "Aberdeen FC",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "afc_news",
         "lane": "derived_display",
         "name": "Aberdeen FC news",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.afc.co.uk/en/news",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC news",
+          "published_at": null,
           "role": "primary",
           "rows": 24,
+          "served_by_update_id": null,
           "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/news/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "api_football"
       ],
@@ -906,40 +1414,68 @@
       "primary": "afc_news",
       "primary_source": {
         "attribution": "Aberdeen FC",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "afc_news",
         "lane": "derived_display",
         "name": "Aberdeen FC news",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.afc.co.uk/en/news",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "current squad and next opponent",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC news",
+          "published_at": null,
           "role": "primary",
           "rows": 2,
+          "served_by_update_id": null,
           "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         }
       ],
+      "stale_reason": null,
       "status": "partial",
       "surfaces": [
         "/squad/",
         "/matchday/",
         "/themes/",
         "/recruitment/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "claim",
@@ -954,24 +1490,38 @@
       "note": "Unconfirmed links, separate from the confirmed register.",
       "primary": "curated",
       "primary_source": null,
+      "published_at": null,
       "scope": "current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC news",
+          "published_at": null,
           "role": "corroboration",
           "rows": 0,
+          "served_by_update_id": null,
           "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/rumours/",
         "/recruitment/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "mentions",
@@ -986,29 +1536,50 @@
       "primary": "afc_chat",
       "primary_source": {
         "attribution": "AFC Chat forum contributors",
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "afc_chat",
         "lane": "derived_display",
         "name": "AFC Chat — The Rumour Mill",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/",
         "verified_at": "2026-10-21"
       },
+      "published_at": null,
       "scope": "sampled first pages",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "AFC Chat — The Rumour Mill",
+          "published_at": null,
           "role": "primary",
           "rows": 83,
+          "served_by_update_id": null,
           "source_id": "afc_chat",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/rumours/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "staff",
@@ -1025,31 +1596,52 @@
       "note": "Mixed sources: API-Football backfill, football-data style proxies, AFC official and Wikipedia curation. The season documents label their basis.",
       "primary": "mixed",
       "primary_source": null,
+      "published_at": null,
       "scope": "2019-20 to current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Aberdeen FC news",
+          "published_at": null,
           "role": "corroboration",
           "rows": 7,
+          "served_by_update_id": null,
           "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
           "verified_at": "2026-10-21"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Wikipedia",
+          "published_at": null,
           "role": "corroboration",
           "rows": 30,
+          "served_by_update_id": null,
           "source_id": "wikipedia",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/history/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "fee_range",
@@ -1063,24 +1655,38 @@
       "note": "Disclosed/reported anchors plus a transparent age/position/market model.",
       "primary": "curated",
       "primary_source": null,
+      "published_at": null,
       "scope": "transfer register",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Wikipedia",
+          "published_at": null,
           "role": "corroboration",
           "rows": 14,
+          "served_by_update_id": null,
           "source_id": "wikipedia",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/transfers/",
         "/methodology/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [
         "wikipedia"
       ],
@@ -1099,39 +1705,67 @@
       "primary": "api_football",
       "primary_source": {
         "attribution": null,
+        "dataset_id": null,
+        "dataset_state": null,
         "id": "api_football",
         "lane": "derived_display",
         "name": "API-Football",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
         "url": "https://www.api-football.com",
         "verified_at": "2026-10-23"
       },
+      "published_at": null,
       "scope": "2019-20 to current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "API-Football",
+          "published_at": null,
           "role": "primary",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://www.api-football.com",
           "verified_at": "2026-10-23"
         },
         {
+          "dataset_id": null,
+          "dataset_state": null,
           "name": "Wikipedia",
+          "published_at": null,
           "role": "fallback",
           "rows": null,
+          "served_by_update_id": null,
           "source_id": "wikipedia",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
           "url": "https://en.wikipedia.org",
           "verified_at": "2026-10-21"
         }
       ],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/former-players/",
         "/transfers/",
         "/status/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "subsequent_transfer",
@@ -1145,15 +1779,22 @@
       "note": "A subsequent transfer is detected from the provider history; a receipt is computed only when the clause percentage, basis and every required public fee are evidenced. Missing inputs are published, never inferred.",
       "primary": "curated",
       "primary_source": null,
+      "published_at": null,
       "scope": "2019-20 to current",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/former-players/",
         "/transfers/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "family_balance",
@@ -1169,15 +1810,22 @@
       "note": "Derived from lineups, events, provider ratings, league rows and history.",
       "primary": "derived",
       "primary_source": null,
+      "published_at": null,
       "scope": "current season + Cormack era",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/themes/",
         "/matchday/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "cover",
@@ -1192,16 +1840,23 @@
       "note": "Derived from themes, availability, squad minutes, transfers and rumours. Role profiles only; no targets or invented fees.",
       "primary": "derived",
       "primary_source": null,
+      "published_at": null,
       "scope": "current squad",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "active",
       "surfaces": [
         "/recruitment/",
         "/scouting/",
         "/themes/"
-      ]
+      ],
+      "update_id": null
     },
     {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [],
       "gate": null,
@@ -1211,26 +1866,43 @@
       "note": "Not ingested or published.",
       "primary": "none",
       "primary_source": null,
+      "published_at": null,
       "scope": "n/a",
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "sources": [],
+      "stale_reason": null,
       "status": "not_published",
-      "surfaces": []
+      "surfaces": [],
+      "update_id": null
     }
   ],
   "migration": {
     "active_source": "football_data_uk",
+    "dataset_id": null,
+    "dataset_state": null,
     "enabled": false,
     "gate_status": "fail",
+    "published_at": null,
     "reason": "Gate failed: SC0: fixture_count (198); SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks); SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
     "report": "reports/league-migration/2026-27.json",
-    "season": "2026-27"
+    "season": "2026-27",
+    "served_by_update_id": null,
+    "source_snapshots": null,
+    "stale_reason": null,
+    "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": null,
   "sources": [
     {
       "attribution": "Football-Data.co.uk",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "football_data_uk",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
@@ -1240,12 +1912,19 @@
         "league_results_history",
         "league_team_stats"
       ],
+      "published_at": null,
       "rows": 10058,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.football-data.co.uk/mmz4281"
     },
     {
       "attribution": null,
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "api_football",
       "lane": "derived_display",
       "last_verified": "2026-10-23",
@@ -1264,12 +1943,19 @@
         "squad_identity",
         "transfers_candidate"
       ],
+      "published_at": null,
       "rows": 1726,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.api-football.com"
     },
     {
       "attribution": "AFC Chat forum contributors",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "afc_chat",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
@@ -1277,12 +1963,19 @@
       "primary_layers": [
         "forum_signal"
       ],
+      "published_at": null,
       "rows": 83,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
     },
     {
       "attribution": "Aberdeen FC",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "afc_news",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
@@ -1291,12 +1984,19 @@
         "availability",
         "news"
       ],
+      "published_at": null,
       "rows": 26,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.afc.co.uk/en/news"
     },
     {
       "attribution": "SPFL",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "spfl",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
@@ -1304,23 +2004,37 @@
       "primary_layers": [
         "club_fixtures"
       ],
+      "published_at": null,
       "rows": 12,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://spfl.co.uk/clubs/aberdeen/fixtures"
     },
     {
       "attribution": "Wikipedia contributors",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "wikipedia",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
       "name": "Wikipedia",
       "primary_layers": [],
+      "published_at": null,
       "rows": 0,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://en.wikipedia.org"
     },
     {
       "attribution": "Sportmonks",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "sportmonks",
       "lane": "derived_display",
       "last_verified": "2026-10-21",
@@ -1328,12 +2042,19 @@
       "primary_layers": [
         "preferred_foot"
       ],
+      "published_at": null,
       "rows": 0,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://docs.sportmonks.com/v3/"
     },
     {
       "attribution": "Aberdeen FC",
+      "dataset_id": null,
+      "dataset_state": null,
       "id": "afc_official",
       "lane": "derived_display",
       "last_verified": "2026-10-24",
@@ -1341,9 +2062,16 @@
       "primary_layers": [
         "squad_roster"
       ],
+      "published_at": null,
       "rows": 0,
       "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
       "url": "https://www.afc.co.uk/en/teams/mens"
     }
-  ]
+  ],
+  "stale_reason": null,
+  "update_id": "2026-10-24T22:29:17+00:00-2281097"
 }

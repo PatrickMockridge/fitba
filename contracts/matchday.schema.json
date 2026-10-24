@@ -3,8 +3,12 @@
     "FixtureBlock": {
       "additionalProperties": false,
       "properties": {
-        "match_id": {
-          "title": "Match Id",
+        "away_team_id": {
+          "title": "Away Team Id",
+          "type": "string"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
           "type": "string"
         },
         "competition_id": {
@@ -15,7 +19,7 @@
           "title": "Competition Name",
           "type": "string"
         },
-        "stage": {
+        "dataset_id": {
           "anyOf": [
             {
               "type": "string"
@@ -25,14 +29,30 @@
             }
           ],
           "default": null,
-          "title": "Stage"
+          "title": "Dataset Id"
         },
-        "season": {
-          "title": "Season",
-          "type": "string"
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
         },
         "date": {
           "title": "Date",
+          "type": "string"
+        },
+        "home_team_id": {
+          "title": "Home Team Id",
+          "type": "string"
+        },
+        "home_team_name": {
+          "title": "Home Team Name",
           "type": "string"
         },
         "kickoff": {
@@ -47,24 +67,8 @@
           "default": null,
           "title": "Kickoff"
         },
-        "home_team_id": {
-          "title": "Home Team Id",
-          "type": "string"
-        },
-        "home_team_name": {
-          "title": "Home Team Name",
-          "type": "string"
-        },
-        "away_team_id": {
-          "title": "Away Team Id",
-          "type": "string"
-        },
-        "away_team_name": {
-          "title": "Away Team Name",
-          "type": "string"
-        },
-        "venue": {
-          "title": "Venue",
+        "match_id": {
+          "title": "Match Id",
           "type": "string"
         },
         "opponent_id": {
@@ -75,9 +79,33 @@
           "title": "Opponent Name",
           "type": "string"
         },
-        "status": {
-          "title": "Status",
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "season": {
+          "title": "Season",
           "type": "string"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "source_id": {
           "anyOf": [
@@ -90,6 +118,63 @@
           ],
           "default": null,
           "title": "Source Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
         }
       },
       "required": [
@@ -113,13 +198,54 @@
     "FormBlock": {
       "additionalProperties": false,
       "properties": {
+        "away": {
+          "additionalProperties": true,
+          "title": "Away",
+          "type": "object"
+        },
         "basis": {
           "title": "Basis",
           "type": "string"
         },
-        "sample": {
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "form": {
+          "title": "Form",
+          "type": "string"
+        },
+        "form_points": {
+          "title": "Form Points",
+          "type": "integer"
+        },
+        "home": {
           "additionalProperties": true,
-          "title": "Sample",
+          "title": "Home",
           "type": "object"
         },
         "matches": {
@@ -129,41 +255,85 @@
           "title": "Matches",
           "type": "array"
         },
-        "form": {
-          "title": "Form",
+        "note": {
+          "title": "Note",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "recent": {
           "additionalProperties": true,
           "title": "Recent",
           "type": "object"
         },
-        "form_points": {
-          "title": "Form Points",
-          "type": "integer"
+        "sample": {
+          "additionalProperties": true,
+          "title": "Sample",
+          "type": "object"
         },
         "season_record": {
           "additionalProperties": true,
           "title": "Season Record",
           "type": "object"
         },
-        "home": {
-          "additionalProperties": true,
-          "title": "Home",
-          "type": "object"
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
-        "away": {
-          "additionalProperties": true,
-          "title": "Away",
-          "type": "object"
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
         },
-        "coverage": {
-          "title": "Coverage",
-          "type": "string"
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
-        "note": {
-          "title": "Note",
-          "type": "string"
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -185,6 +355,54 @@
     "FormMatch": {
       "additionalProperties": false,
       "properties": {
+        "competition_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Name"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "ga": {
+          "title": "Ga",
+          "type": "integer"
+        },
+        "gf": {
+          "title": "Gf",
+          "type": "integer"
+        },
         "match_id": {
           "anyOf": [
             {
@@ -196,10 +414,6 @@
           ],
           "default": null,
           "title": "Match Id"
-        },
-        "date": {
-          "title": "Date",
-          "type": "string"
         },
         "opponent_id": {
           "anyOf": [
@@ -225,7 +439,11 @@
           "default": null,
           "title": "Opponent Name"
         },
-        "venue": {
+        "points": {
+          "title": "Points",
+          "type": "integer"
+        },
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -235,15 +453,7 @@
             }
           ],
           "default": null,
-          "title": "Venue"
-        },
-        "gf": {
-          "title": "Gf",
-          "type": "integer"
-        },
-        "ga": {
-          "title": "Ga",
-          "type": "integer"
+          "title": "Published At"
         },
         "result": {
           "anyOf": [
@@ -257,11 +467,7 @@
           "default": null,
           "title": "Result"
         },
-        "points": {
-          "title": "Points",
-          "type": "integer"
-        },
-        "competition_name": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -271,7 +477,56 @@
             }
           ],
           "default": null,
-          "title": "Competition Name"
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Venue"
         }
       },
       "required": [
@@ -286,8 +541,20 @@
     "HeadToHead": {
       "additionalProperties": false,
       "properties": {
-        "date": {
-          "title": "Date",
+        "away_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Goals"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
           "type": "string"
         },
         "competition_name": {
@@ -302,12 +569,32 @@
           "default": null,
           "title": "Competition Name"
         },
-        "home_team_name": {
-          "title": "Home Team Name",
-          "type": "string"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
         },
-        "away_team_name": {
-          "title": "Away Team Name",
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "date": {
+          "title": "Date",
           "type": "string"
         },
         "home_goals": {
@@ -322,21 +609,21 @@
           "default": null,
           "title": "Home Goals"
         },
-        "away_goals": {
+        "home_team_name": {
+          "title": "Home Team Name",
+          "type": "string"
+        },
+        "published_at": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Away Goals"
-        },
-        "venue": {
-          "title": "Venue",
-          "type": "string"
+          "title": "Published At"
         },
         "result": {
           "anyOf": [
@@ -349,6 +636,59 @@
           ],
           "default": null,
           "title": "Result"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
         }
       },
       "required": [
@@ -367,14 +707,6 @@
           "title": "Approach",
           "type": "string"
         },
-        "label": {
-          "title": "Label",
-          "type": "string"
-        },
-        "confidence": {
-          "title": "Confidence",
-          "type": "string"
-        },
         "approach_index": {
           "anyOf": [
             {
@@ -387,17 +719,73 @@
           "default": null,
           "title": "Approach Index"
         },
-        "venue_index": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "confidence": {
+          "title": "Confidence",
+          "type": "string"
+        },
+        "dataset_id": {
           "anyOf": [
             {
-              "type": "number"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Venue Index"
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "missing_metrics": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Metrics",
+          "type": "array"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
         },
         "overall_index": {
           "anyOf": [
@@ -411,51 +799,17 @@
           "default": null,
           "title": "Overall Index"
         },
-        "shot_share": {
+        "published_at": {
           "anyOf": [
             {
-              "type": "number"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Shot Share"
-        },
-        "venue_matches": {
-          "default": 0,
-          "title": "Venue Matches",
-          "type": "integer"
-        },
-        "venue_used": {
-          "default": false,
-          "title": "Venue Used",
-          "type": "boolean"
-        },
-        "evidence": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "title": "Evidence",
-          "type": "array"
-        },
-        "basis": {
-          "title": "Basis",
-          "type": "string"
-        },
-        "interpretation": {
-          "title": "Interpretation",
-          "type": "string"
-        },
-        "missing_metrics": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "title": "Missing Metrics",
-          "type": "array"
+          "title": "Published At"
         },
         "reason": {
           "anyOf": [
@@ -469,7 +823,7 @@
           "default": null,
           "title": "Reason"
         },
-        "note": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -479,7 +833,78 @@
             }
           ],
           "default": null,
-          "title": "Note"
+          "title": "Served By Update Id"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Share"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue_index": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Venue Index"
+        },
+        "venue_matches": {
+          "default": 0,
+          "title": "Venue Matches",
+          "type": "integer"
+        },
+        "venue_used": {
+          "default": false,
+          "title": "Venue Used",
+          "type": "boolean"
         }
       },
       "required": [
@@ -495,11 +920,7 @@
     "LineupBlock": {
       "additionalProperties": false,
       "properties": {
-        "status": {
-          "title": "Status",
-          "type": "string"
-        },
-        "reason": {
+        "assignment_note": {
           "anyOf": [
             {
               "type": "string"
@@ -509,7 +930,13 @@
             }
           ],
           "default": null,
-          "title": "Reason"
+          "title": "Assignment Note"
+        },
+        "availability": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Availability",
+          "type": "object"
         },
         "basis": {
           "anyOf": [
@@ -523,11 +950,22 @@
           "default": null,
           "title": "Basis"
         },
-        "team_id": {
+        "contenders": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Contenders",
+          "type": "array"
+        },
+        "coverage": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Coverage",
+          "type": "object"
+        },
+        "dataset_id": {
           "anyOf": [
-            {
-              "type": "integer"
-            },
             {
               "type": "string"
             },
@@ -536,7 +974,28 @@
             }
           ],
           "default": null,
-          "title": "Team Id"
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "disclaimer": {
+          "title": "Disclaimer",
+          "type": "string"
+        },
+        "filled": {
+          "default": 0,
+          "title": "Filled",
+          "type": "integer"
         },
         "formation": {
           "anyOf": [
@@ -562,6 +1021,106 @@
           "default": null,
           "title": "Formation Confidence"
         },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "players": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/LineupPlayer"
+          },
+          "title": "Players",
+          "type": "array"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "selection": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Selection",
+          "type": "object"
+        },
+        "selection_risks": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Selection Risks",
+          "type": "array"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
         "team_confidence": {
           "anyOf": [
             {
@@ -574,26 +1133,20 @@
           "default": null,
           "title": "Team Confidence"
         },
-        "filled": {
-          "default": 0,
-          "title": "Filled",
-          "type": "integer"
-        },
-        "coverage": {
-          "additionalProperties": true,
-          "default": {},
-          "title": "Coverage",
-          "type": "object"
-        },
-        "selection": {
-          "additionalProperties": true,
-          "default": {},
-          "title": "Selection",
-          "type": "object"
-        },
-        "disclaimer": {
-          "title": "Disclaimer",
-          "type": "string"
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Id"
         },
         "unavailable": {
           "default": [],
@@ -612,38 +1165,7 @@
           "title": "Unknowns",
           "type": "array"
         },
-        "availability": {
-          "additionalProperties": true,
-          "default": {},
-          "title": "Availability",
-          "type": "object"
-        },
-        "selection_risks": {
-          "default": [],
-          "items": {
-            "additionalProperties": true,
-            "type": "object"
-          },
-          "title": "Selection Risks",
-          "type": "array"
-        },
-        "players": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/LineupPlayer"
-          },
-          "title": "Players",
-          "type": "array"
-        },
-        "contenders": {
-          "default": [],
-          "items": {
-            "$ref": "#/$defs/LineupPlayer"
-          },
-          "title": "Contenders",
-          "type": "array"
-        },
-        "note": {
+        "update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -653,19 +1175,7 @@
             }
           ],
           "default": null,
-          "title": "Note"
-        },
-        "assignment_note": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Assignment Note"
+          "title": "Update Id"
         }
       },
       "required": [
@@ -678,335 +1188,6 @@
     "LineupPlayer": {
       "additionalProperties": false,
       "properties": {
-        "player_id": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Player Id"
-        },
-        "player_key": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Player Key"
-        },
-        "name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Name"
-        },
-        "shirt_number": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shirt Number"
-        },
-        "href": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Href"
-        },
-        "slot": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Slot"
-        },
-        "grid": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Grid"
-        },
-        "role_code": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Role Code"
-        },
-        "role_label": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Role Label"
-        },
-        "role_family": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Role Family"
-        },
-        "role_fit": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Role Fit"
-        },
-        "score": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Score"
-        },
-        "confidence": {
-          "default": "unknown",
-          "title": "Confidence",
-          "type": "string"
-        },
-        "starts": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Starts"
-        },
-        "minutes": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Minutes"
-        },
-        "recency_start": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Recency Start"
-        },
-        "form": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Form"
-        },
-        "recent_rating": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Recent Rating"
-        },
-        "recent_rating_score": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Recent Rating Score"
-        },
-        "rating_count": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Rating Count"
-        },
-        "rating_coverage": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Rating Coverage"
-        },
-        "last_seen": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Last Seen"
-        },
-        "reason": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Reason"
-        },
-        "position_group": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Position Group"
-        },
-        "available": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Available"
-        },
-        "unavailable_reason": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Unavailable Reason"
-        },
-        "status": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Status"
-        },
-        "availability_status": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Availability Status"
-        },
         "availability_confidence": {
           "anyOf": [
             {
@@ -1018,6 +1199,42 @@
           ],
           "default": null,
           "title": "Availability Confidence"
+        },
+        "availability_conflict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Conflict"
+        },
+        "availability_downgrade": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Downgrade"
+        },
+        "availability_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Note"
         },
         "availability_source": {
           "anyOf": [
@@ -1043,6 +1260,18 @@
           "default": null,
           "title": "Availability Source Url"
         },
+        "availability_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Status"
+        },
         "availability_verified_at": {
           "anyOf": [
             {
@@ -1055,19 +1284,7 @@
           "default": null,
           "title": "Availability Verified At"
         },
-        "availability_note": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Availability Note"
-        },
-        "availability_conflict": {
+        "available": {
           "anyOf": [
             {
               "type": "boolean"
@@ -1077,9 +1294,86 @@
             }
           ],
           "default": null,
-          "title": "Availability Conflict"
+          "title": "Available"
         },
-        "availability_downgrade": {
+        "confidence": {
+          "default": "unknown",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "form": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Form"
+        },
+        "grid": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grid"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
+        },
+        "last_seen": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen"
+        },
+        "minutes": {
           "anyOf": [
             {
               "type": "integer"
@@ -1089,7 +1383,308 @@
             }
           ],
           "default": null,
-          "title": "Availability Downgrade"
+          "title": "Minutes"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "player_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Id"
+        },
+        "player_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Key"
+        },
+        "position_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position Group"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "rating_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating Count"
+        },
+        "rating_coverage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating Coverage"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "recency_start": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recency Start"
+        },
+        "recent_rating": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recent Rating"
+        },
+        "recent_rating_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recent Rating Score"
+        },
+        "role_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Code"
+        },
+        "role_family": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Family"
+        },
+        "role_fit": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Fit"
+        },
+        "role_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role Label"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "shirt_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shirt Number"
+        },
+        "slot": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Slot"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "starts": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Starts"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status"
+        },
+        "unavailable_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unavailable Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "title": "LineupPlayer",
@@ -1098,8 +1693,8 @@
     "MatchupRead": {
       "additionalProperties": false,
       "properties": {
-        "headline": {
-          "title": "Headline",
+        "basis": {
+          "title": "Basis",
           "type": "string"
         },
         "bullets": {
@@ -1109,6 +1704,34 @@
           "title": "Bullets",
           "type": "array"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
         "keys": {
           "items": {
             "$ref": "#/$defs/ReadKey"
@@ -1116,13 +1739,70 @@
           "title": "Keys",
           "type": "array"
         },
-        "basis": {
-          "title": "Basis",
-          "type": "string"
-        },
         "note": {
           "title": "Note",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1138,10 +1818,6 @@
     "ReadBullet": {
       "additionalProperties": false,
       "properties": {
-        "text": {
-          "title": "Text",
-          "type": "string"
-        },
         "basis": {
           "enum": [
             "measured",
@@ -1150,6 +1826,95 @@
           ],
           "title": "Basis",
           "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1162,14 +1927,6 @@
     "ReadKey": {
       "additionalProperties": false,
       "properties": {
-        "label": {
-          "title": "Label",
-          "type": "string"
-        },
-        "text": {
-          "title": "Text",
-          "type": "string"
-        },
         "basis": {
           "enum": [
             "measured",
@@ -1178,6 +1935,99 @@
           ],
           "title": "Basis",
           "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1191,6 +2041,30 @@
     "SourceRef": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "id": {
           "title": "Id",
           "type": "string"
@@ -1198,6 +2072,67 @@
         "name": {
           "title": "Name",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         },
         "url": {
           "anyOf": [
@@ -1234,26 +2169,6 @@
     "StrengthTeam": {
       "additionalProperties": false,
       "properties": {
-        "status": {
-          "title": "Status",
-          "type": "string"
-        },
-        "team_id": {
-          "title": "Team Id",
-          "type": "string"
-        },
-        "team_name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Team Name"
-        },
         "competition_id": {
           "anyOf": [
             {
@@ -1278,19 +2193,55 @@
           "default": null,
           "title": "Competition Name"
         },
-        "tier": {
+        "coverage": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Tier"
+          "title": "Coverage"
         },
-        "position": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "form": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Form"
+        },
+        "ga": {
           "anyOf": [
             {
               "type": "integer"
@@ -1300,7 +2251,94 @@
             }
           ],
           "default": null,
-          "title": "Position"
+          "title": "Ga"
+        },
+        "ga_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ga Pg"
+        },
+        "gd": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gd"
+        },
+        "gd_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gd Pg"
+        },
+        "gf": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gf"
+        },
+        "gf_pg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gf Pg"
+        },
+        "league_size": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "League Size"
+        },
+        "percentiles": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Percentiles",
+          "type": "object"
         },
         "played": {
           "anyOf": [
@@ -1326,6 +2364,18 @@
           "default": null,
           "title": "Points"
         },
+        "position": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position"
+        },
         "ppg": {
           "anyOf": [
             {
@@ -1338,79 +2388,7 @@
           "default": null,
           "title": "Ppg"
         },
-        "gf": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Gf"
-        },
-        "ga": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Ga"
-        },
-        "gd": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Gd"
-        },
-        "gf_pg": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Gf Pg"
-        },
-        "ga_pg": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Ga Pg"
-        },
-        "gd_pg": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Gd Pg"
-        },
-        "form": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -1420,58 +2398,7 @@
             }
           ],
           "default": null,
-          "title": "Form"
-        },
-        "shots_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots For Pm"
-        },
-        "shots_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots Against Pm"
-        },
-        "shot_share": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shot Share"
-        },
-        "percentiles": {
-          "additionalProperties": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "default": {},
-          "title": "Percentiles",
-          "type": "object"
+          "title": "Published At"
         },
         "ranks": {
           "additionalProperties": {
@@ -1488,19 +2415,7 @@
           "title": "Ranks",
           "type": "object"
         },
-        "league_size": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "League Size"
-        },
-        "coverage": {
+        "reason": {
           "anyOf": [
             {
               "type": "string"
@@ -1510,7 +2425,7 @@
             }
           ],
           "default": null,
-          "title": "Coverage"
+          "title": "Reason"
         },
         "sample_note": {
           "anyOf": [
@@ -1524,7 +2439,7 @@
           "default": null,
           "title": "Sample Note"
         },
-        "reason": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -1534,210 +2449,7 @@
             }
           ],
           "default": null,
-          "title": "Reason"
-        }
-      },
-      "required": [
-        "status",
-        "team_id"
-      ],
-      "title": "StrengthTeam",
-      "type": "object"
-    },
-    "StyleBlock": {
-      "additionalProperties": false,
-      "properties": {
-        "matches": {
-          "title": "Matches",
-          "type": "integer"
-        },
-        "coverage": {
-          "title": "Coverage",
-          "type": "string"
-        },
-        "venue": {
-          "title": "Venue",
-          "type": "string"
-        },
-        "season": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Season"
-        },
-        "shots_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots For Pm"
-        },
-        "shots_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots Against Pm"
-        },
-        "shots_on_target_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots On Target For Pm"
-        },
-        "shots_on_target_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots On Target Against Pm"
-        },
-        "corners_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Corners For Pm"
-        },
-        "corners_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Corners Against Pm"
-        },
-        "fouls_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Fouls For Pm"
-        },
-        "fouls_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Fouls Against Pm"
-        },
-        "yellow_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Yellow For Pm"
-        },
-        "yellow_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Yellow Against Pm"
-        },
-        "red_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Red For Pm"
-        },
-        "red_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Red Against Pm"
-        },
-        "goals_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals For Pm"
-        },
-        "goals_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals Against Pm"
+          "title": "Served By Update Id"
         },
         "shot_share": {
           "anyOf": [
@@ -1751,6 +2463,110 @@
           "default": null,
           "title": "Shot Share"
         },
+        "shots_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Against Pm"
+        },
+        "shots_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots For Pm"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "tier": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tier"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        }
+      },
+      "required": [
+        "status",
+        "team_id"
+      ],
+      "title": "StrengthTeam",
+      "type": "object"
+    },
+    "StyleBlock": {
+      "additionalProperties": false,
+      "properties": {
         "conversion": {
           "anyOf": [
             {
@@ -1763,7 +2579,7 @@
           "default": null,
           "title": "Conversion"
         },
-        "shot_accuracy": {
+        "corners_against_pm": {
           "anyOf": [
             {
               "type": "number"
@@ -1773,7 +2589,95 @@
             }
           ],
           "default": null,
-          "title": "Shot Accuracy"
+          "title": "Corners Against Pm"
+        },
+        "corners_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Corners For Pm"
+        },
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "fouls_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fouls Against Pm"
+        },
+        "fouls_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fouls For Pm"
+        },
+        "goals_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Against Pm"
+        },
+        "goals_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals For Pm"
         },
         "goals_per_shot": {
           "anyOf": [
@@ -1799,64 +2703,9 @@
           "default": null,
           "title": "Goals Per Shot On Target"
         },
-        "percentiles": {
-          "additionalProperties": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "default": {},
-          "title": "Percentiles",
-          "type": "object"
-        },
-        "possession_for_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Possession For Pm"
-        },
-        "possession_against_pm": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Possession Against Pm"
-        },
-        "possession_unknown_reason": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Possession Unknown Reason"
-        },
-        "recent_shot_shares": {
-          "default": [],
-          "items": {
-            "type": "number"
-          },
-          "title": "Recent Shot Shares",
-          "type": "array"
+        "matches": {
+          "title": "Matches",
+          "type": "integer"
         },
         "missing_stats": {
           "default": [],
@@ -1878,6 +2727,69 @@
           "default": null,
           "title": "Note"
         },
+        "percentiles": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "default": {},
+          "title": "Percentiles",
+          "type": "object"
+        },
+        "possession_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession Against Pm"
+        },
+        "possession_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession For Pm"
+        },
+        "possession_unknown_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Possession Unknown Reason"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
         "reason": {
           "anyOf": [
             {
@@ -1889,6 +2801,199 @@
           ],
           "default": null,
           "title": "Reason"
+        },
+        "recent_shot_shares": {
+          "default": [],
+          "items": {
+            "type": "number"
+          },
+          "title": "Recent Shot Shares",
+          "type": "array"
+        },
+        "red_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red Against Pm"
+        },
+        "red_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red For Pm"
+        },
+        "season": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Season"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "shot_accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Accuracy"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Share"
+        },
+        "shots_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Against Pm"
+        },
+        "shots_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots For Pm"
+        },
+        "shots_on_target_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target Against Pm"
+        },
+        "shots_on_target_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target For Pm"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        },
+        "yellow_against_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Yellow Against Pm"
+        },
+        "yellow_for_pm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Yellow For Pm"
         }
       },
       "required": [
@@ -1902,14 +3007,99 @@
     "StylePair": {
       "additionalProperties": false,
       "properties": {
-        "overall": {
-          "$ref": "#/$defs/StyleBlock"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
         },
-        "venue": {
-          "$ref": "#/$defs/StyleBlock"
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
         },
         "lean": {
           "$ref": "#/$defs/LeanBlock"
+        },
+        "overall": {
+          "$ref": "#/$defs/StyleBlock"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "$ref": "#/$defs/StyleBlock"
         }
       },
       "required": [
@@ -1923,10 +3113,6 @@
     "TeamRef": {
       "additionalProperties": false,
       "properties": {
-        "club_id": {
-          "title": "Club Id",
-          "type": "string"
-        },
         "api_team_id": {
           "anyOf": [
             {
@@ -1939,9 +3125,61 @@
           "default": null,
           "title": "Api Team Id"
         },
+        "club_id": {
+          "title": "Club Id",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "name": {
           "title": "Name",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "short_name": {
           "anyOf": [
@@ -1954,6 +3192,43 @@
           ],
           "default": null,
           "title": "Short Name"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1966,30 +3241,13 @@
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "default": "1.0.0",
-      "title": "Schema Version",
-      "type": "string"
+    "coverage": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Coverage",
+      "type": "object"
     },
-    "generated_at": {
-      "title": "Generated At",
-      "type": "string"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
-    },
-    "state": {
-      "enum": [
-        "fresh",
-        "stale",
-        "no_fixture",
-        "unavailable"
-      ],
-      "title": "State",
-      "type": "string"
-    },
-    "stale_reason": {
+    "dataset_id": {
       "anyOf": [
         {
           "type": "string"
@@ -1999,9 +3257,9 @@
         }
       ],
       "default": null,
-      "title": "Stale Reason"
+      "title": "Dataset Id"
     },
-    "served_generated_at": {
+    "dataset_state": {
       "anyOf": [
         {
           "type": "string"
@@ -2011,12 +3269,43 @@
         }
       ],
       "default": null,
-      "title": "Served Generated At"
+      "title": "Dataset State"
     },
     "fixture": {
       "anyOf": [
         {
           "$ref": "#/$defs/FixtureBlock"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "form_guide": {
+      "additionalProperties": {
+        "$ref": "#/$defs/FormBlock"
+      },
+      "default": {},
+      "title": "Form Guide",
+      "type": "object"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "head_to_head": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/HeadToHead"
+      },
+      "title": "Head To Head",
+      "type": "array"
+    },
+    "matchup_read": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MatchupRead"
         },
         {
           "type": "null"
@@ -2032,29 +3321,112 @@
       "title": "Next Fixtures",
       "type": "array"
     },
-    "teams": {
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "predicted_lineups": {
       "additionalProperties": {
-        "$ref": "#/$defs/TeamRef"
+        "anyOf": [
+          {
+            "$ref": "#/$defs/LineupBlock"
+          },
+          {
+            "type": "null"
+          }
+        ]
       },
       "default": {},
-      "title": "Teams",
+      "title": "Predicted Lineups",
       "type": "object"
     },
-    "form_guide": {
-      "additionalProperties": {
-        "$ref": "#/$defs/FormBlock"
-      },
-      "default": {},
-      "title": "Form Guide",
-      "type": "object"
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
     },
-    "head_to_head": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "served_generated_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served Generated At"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
+    "sources": {
       "default": [],
       "items": {
-        "$ref": "#/$defs/HeadToHead"
+        "$ref": "#/$defs/SourceRef"
       },
-      "title": "Head To Head",
+      "title": "Sources",
       "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "state": {
+      "enum": [
+        "fresh",
+        "stale",
+        "no_fixture",
+        "unavailable"
+      ],
+      "title": "State",
+      "type": "string"
     },
     "strength": {
       "additionalProperties": {
@@ -2078,49 +3450,25 @@
       "title": "Styles",
       "type": "object"
     },
-    "predicted_lineups": {
+    "teams": {
       "additionalProperties": {
-        "anyOf": [
-          {
-            "$ref": "#/$defs/LineupBlock"
-          },
-          {
-            "type": "null"
-          }
-        ]
+        "$ref": "#/$defs/TeamRef"
       },
       "default": {},
-      "title": "Predicted Lineups",
+      "title": "Teams",
       "type": "object"
     },
-    "matchup_read": {
+    "update_id": {
       "anyOf": [
         {
-          "$ref": "#/$defs/MatchupRead"
+          "type": "string"
         },
         {
           "type": "null"
         }
       ],
-      "default": null
-    },
-    "coverage": {
-      "additionalProperties": true,
-      "default": {},
-      "title": "Coverage",
-      "type": "object"
-    },
-    "sources": {
-      "default": [],
-      "items": {
-        "$ref": "#/$defs/SourceRef"
-      },
-      "title": "Sources",
-      "type": "array"
-    },
-    "notes": {
-      "title": "Notes",
-      "type": "string"
+      "default": null,
+      "title": "Update Id"
     }
   },
   "required": [

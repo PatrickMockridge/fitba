@@ -3,6 +3,34 @@
     "CoverageBlock": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "depth": {
+          "title": "Depth",
+          "type": "string"
+        },
         "events": {
           "title": "Events",
           "type": "boolean"
@@ -11,25 +39,82 @@
           "title": "Lineups",
           "type": "boolean"
         },
-        "team_stats": {
-          "title": "Team Stats",
-          "type": "boolean"
+        "note": {
+          "title": "Note",
+          "type": "string"
         },
         "player_stats": {
           "title": "Player Stats",
           "type": "boolean"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "team_stats": {
+          "title": "Team Stats",
+          "type": "boolean"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "xg": {
           "title": "Xg",
           "type": "boolean"
-        },
-        "depth": {
-          "title": "Depth",
-          "type": "string"
-        },
-        "note": {
-          "title": "Note",
-          "type": "string"
         }
       },
       "required": [
@@ -47,16 +132,60 @@
     "FixtureInfo": {
       "additionalProperties": false,
       "properties": {
-        "fixture_id": {
-          "title": "Fixture Id",
-          "type": "integer"
-        },
-        "season": {
-          "title": "Season",
+        "aberdeen_outcome": {
+          "title": "Aberdeen Outcome",
           "type": "string"
         },
-        "date": {
-          "title": "Date",
+        "aberdeen_result": {
+          "title": "Aberdeen Result",
+          "type": "string"
+        },
+        "aberdeen_result_label": {
+          "title": "Aberdeen Result Label",
+          "type": "string"
+        },
+        "away_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Goals"
+        },
+        "away_ht_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Ht Goals"
+        },
+        "away_penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Away Penalties"
+        },
+        "away_team_id": {
+          "title": "Away Team Id",
+          "type": "string"
+        },
+        "away_team_name": {
+          "title": "Away Team Name",
           "type": "string"
         },
         "competition_id": {
@@ -65,6 +194,151 @@
         },
         "competition_name": {
           "title": "Competition Name",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "decided_by": {
+          "default": "regulation",
+          "title": "Decided By",
+          "type": "string"
+        },
+        "duplicate_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duplicate Of"
+        },
+        "extra_time": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Time"
+        },
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "integer"
+        },
+        "home_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Goals"
+        },
+        "home_ht_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Ht Goals"
+        },
+        "home_penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Home Penalties"
+        },
+        "home_team_id": {
+          "title": "Home Team Id",
+          "type": "string"
+        },
+        "home_team_name": {
+          "title": "Home Team Name",
+          "type": "string"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "outcome": {
+          "title": "Outcome",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "referee": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Referee"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "result_label": {
+          "title": "Result Label",
           "type": "string"
         },
         "round": {
@@ -79,9 +353,74 @@
           "default": null,
           "title": "Round"
         },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "shootout_result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shootout Result"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
         "status": {
           "title": "Status",
           "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         },
         "venue": {
           "title": "Venue",
@@ -98,175 +437,6 @@
           ],
           "default": null,
           "title": "Venue Name"
-        },
-        "referee": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Referee"
-        },
-        "home_team_id": {
-          "title": "Home Team Id",
-          "type": "string"
-        },
-        "home_team_name": {
-          "title": "Home Team Name",
-          "type": "string"
-        },
-        "away_team_id": {
-          "title": "Away Team Id",
-          "type": "string"
-        },
-        "away_team_name": {
-          "title": "Away Team Name",
-          "type": "string"
-        },
-        "home_goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Home Goals"
-        },
-        "away_goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Away Goals"
-        },
-        "home_ht_goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Home Ht Goals"
-        },
-        "away_ht_goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Away Ht Goals"
-        },
-        "home_penalties": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Home Penalties"
-        },
-        "away_penalties": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Away Penalties"
-        },
-        "extra_time": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Extra Time"
-        },
-        "result": {
-          "title": "Result",
-          "type": "string"
-        },
-        "outcome": {
-          "title": "Outcome",
-          "type": "string"
-        },
-        "result_label": {
-          "title": "Result Label",
-          "type": "string"
-        },
-        "aberdeen_result": {
-          "title": "Aberdeen Result",
-          "type": "string"
-        },
-        "aberdeen_outcome": {
-          "title": "Aberdeen Outcome",
-          "type": "string"
-        },
-        "aberdeen_result_label": {
-          "title": "Aberdeen Result Label",
-          "type": "string"
-        },
-        "shootout_result": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shootout Result"
-        },
-        "decided_by": {
-          "default": "regulation",
-          "title": "Decided By",
-          "type": "string"
-        },
-        "href": {
-          "title": "Href",
-          "type": "string"
-        },
-        "duplicate_of": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Duplicate Of"
         }
       },
       "required": [
@@ -295,6 +465,13 @@
     "FormBlock": {
       "additionalProperties": false,
       "properties": {
+        "after": {
+          "items": {
+            "$ref": "#/$defs/FormRow"
+          },
+          "title": "After",
+          "type": "array"
+        },
         "before": {
           "items": {
             "$ref": "#/$defs/FormRow"
@@ -302,12 +479,90 @@
           "title": "Before",
           "type": "array"
         },
-        "after": {
-          "items": {
-            "$ref": "#/$defs/FormRow"
-          },
-          "title": "After",
-          "type": "array"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -320,33 +575,37 @@
     "FormRow": {
       "additionalProperties": false,
       "properties": {
-        "fixture_id": {
-          "title": "Fixture Id",
-          "type": "integer"
-        },
-        "date": {
-          "title": "Date",
-          "type": "string"
-        },
-        "opponent_name": {
-          "title": "Opponent Name",
-          "type": "string"
-        },
-        "venue": {
-          "title": "Venue",
-          "type": "string"
-        },
-        "goals_for": {
+        "dataset_id": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Goals For"
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "integer"
         },
         "goals_against": {
           "anyOf": [
@@ -360,8 +619,89 @@
           "default": null,
           "title": "Goals Against"
         },
+        "goals_for": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals For"
+        },
         "href": {
           "title": "Href",
+          "type": "string"
+        },
+        "opponent_name": {
+          "title": "Opponent Name",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "venue": {
+          "title": "Venue",
           "type": "string"
         }
       },
@@ -378,13 +718,41 @@
     "LineupBlock": {
       "additionalProperties": false,
       "properties": {
-        "team_id": {
-          "title": "Team Id",
-          "type": "string"
+        "coach_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coach Name"
         },
-        "team_name": {
-          "title": "Team Name",
-          "type": "string"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
         },
         "formation": {
           "anyOf": [
@@ -398,7 +766,7 @@
           "default": null,
           "title": "Formation"
         },
-        "coach_name": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -408,7 +776,44 @@
             }
           ],
           "default": null,
-          "title": "Coach Name"
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
         "starters": {
           "items": {
@@ -423,6 +828,26 @@
           },
           "title": "Substitutes",
           "type": "array"
+        },
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -437,6 +862,66 @@
     "LineupPlayer": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "grid": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Grid"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "on_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "On Minute"
+        },
         "player_id": {
           "anyOf": [
             {
@@ -461,18 +946,6 @@
           "default": null,
           "title": "Player Name"
         },
-        "shirt_number": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shirt Number"
-        },
         "position": {
           "anyOf": [
             {
@@ -484,6 +957,18 @@
           ],
           "default": null,
           "title": "Position"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "role": {
           "anyOf": [
@@ -497,19 +982,7 @@
           "default": null,
           "title": "Role"
         },
-        "minutes": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Minutes"
-        },
-        "grid": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -519,9 +992,9 @@
             }
           ],
           "default": null,
-          "title": "Grid"
+          "title": "Served By Update Id"
         },
-        "on_minute": {
+        "shirt_number": {
           "anyOf": [
             {
               "type": "integer"
@@ -531,7 +1004,44 @@
             }
           ],
           "default": null,
-          "title": "On Minute"
+          "title": "Shirt Number"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "title": "LineupPlayer",
@@ -540,15 +1050,92 @@
     "PerformanceBlock": {
       "additionalProperties": false,
       "properties": {
+        "aberdeen": {
+          "$ref": "#/$defs/PerformanceSide"
+        },
         "available": {
           "title": "Available",
           "type": "boolean"
         },
-        "aberdeen": {
-          "$ref": "#/$defs/PerformanceSide"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
         },
         "opponent": {
           "$ref": "#/$defs/PerformanceSide"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
         "strengths": {
           "items": {
@@ -557,9 +1144,17 @@
           "title": "Strengths",
           "type": "array"
         },
-        "note": {
-          "title": "Note",
-          "type": "string"
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -575,6 +1170,126 @@
     "PerformancePlayer": {
       "additionalProperties": false,
       "properties": {
+        "assists": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assists"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "duels_won": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duels Won"
+        },
+        "goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
+        },
+        "is_aberdeen": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Is Aberdeen"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "pass_accuracy": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Accuracy"
+        },
+        "passes_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passes Total"
+        },
         "player_id": {
           "anyOf": [
             {
@@ -599,7 +1314,7 @@
           "default": null,
           "title": "Player Name"
         },
-        "href": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -609,31 +1324,7 @@
             }
           ],
           "default": null,
-          "title": "Href"
-        },
-        "team_name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Team Name"
-        },
-        "is_aberdeen": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Is Aberdeen"
+          "title": "Published At"
         },
         "rating": {
           "anyOf": [
@@ -647,53 +1338,17 @@
           "default": null,
           "title": "Rating"
         },
-        "minutes": {
+        "served_by_update_id": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Minutes"
-        },
-        "goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals"
-        },
-        "assists": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Assists"
-        },
-        "shots_total": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots Total"
+          "title": "Served By Update Id"
         },
         "shots_on": {
           "anyOf": [
@@ -707,7 +1362,7 @@
           "default": null,
           "title": "Shots On"
         },
-        "passes_total": {
+        "shots_total": {
           "anyOf": [
             {
               "type": "integer"
@@ -717,19 +1372,32 @@
             }
           ],
           "default": null,
-          "title": "Passes Total"
+          "title": "Shots Total"
         },
-        "pass_accuracy": {
+        "source_snapshots": {
           "anyOf": [
             {
-              "type": "integer"
+              "additionalProperties": true,
+              "type": "object"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Pass Accuracy"
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
         "tackles": {
           "anyOf": [
@@ -743,17 +1411,29 @@
           "default": null,
           "title": "Tackles"
         },
-        "duels_won": {
+        "team_name": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Duels Won"
+          "title": "Team Name"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "title": "PerformancePlayer",
@@ -766,12 +1446,97 @@
           "title": "Basis",
           "type": "string"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "players": {
           "items": {
             "$ref": "#/$defs/PerformancePlayer"
           },
           "title": "Players",
           "type": "array"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -784,6 +1549,34 @@
     "PerformanceStrength": {
       "additionalProperties": false,
       "properties": {
+        "aberdeen": {
+          "title": "Aberdeen",
+          "type": "number"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "key": {
           "title": "Key",
           "type": "string"
@@ -792,18 +1585,33 @@
           "title": "Label",
           "type": "string"
         },
-        "aberdeen": {
-          "title": "Aberdeen",
-          "type": "number"
-        },
         "opponent": {
           "title": "Opponent",
           "type": "number"
         },
-        "unit": {
-          "default": "",
-          "title": "Unit",
-          "type": "string"
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "source": {
           "anyOf": [
@@ -816,6 +1624,48 @@
           ],
           "default": null,
           "title": "Source"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "unit": {
+          "default": "",
+          "title": "Unit",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -830,6 +1680,126 @@
     "PlayerStat": {
       "additionalProperties": false,
       "properties": {
+        "assists": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assists"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "duels_won": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duels Won"
+        },
+        "goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals"
+        },
+        "href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Href"
+        },
+        "is_aberdeen": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Is Aberdeen"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "pass_accuracy": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pass Accuracy"
+        },
+        "passes_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passes Total"
+        },
         "player_id": {
           "anyOf": [
             {
@@ -854,7 +1824,7 @@
           "default": null,
           "title": "Player Name"
         },
-        "href": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -864,7 +1834,104 @@
             }
           ],
           "default": null,
-          "title": "Href"
+          "title": "Published At"
+        },
+        "rating": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rating"
+        },
+        "red_cards": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red Cards"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "shots_on": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On"
+        },
+        "shots_total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Total"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "tackles": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tackles"
         },
         "team_id": {
           "anyOf": [
@@ -890,137 +1957,17 @@
           "default": null,
           "title": "Team Name"
         },
-        "is_aberdeen": {
+        "update_id": {
           "anyOf": [
             {
-              "type": "boolean"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Is Aberdeen"
-        },
-        "rating": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Rating"
-        },
-        "minutes": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Minutes"
-        },
-        "goals": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals"
-        },
-        "assists": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Assists"
-        },
-        "shots_total": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots Total"
-        },
-        "shots_on": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots On"
-        },
-        "passes_total": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Passes Total"
-        },
-        "pass_accuracy": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Pass Accuracy"
-        },
-        "tackles": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Tackles"
-        },
-        "duels_won": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Duels Won"
+          "title": "Update Id"
         },
         "yellow_cards": {
           "anyOf": [
@@ -1033,18 +1980,6 @@
           ],
           "default": null,
           "title": "Yellow Cards"
-        },
-        "red_cards": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Red Cards"
         }
       },
       "title": "PlayerStat",
@@ -1053,11 +1988,71 @@
     "ScoreboardBlock": {
       "additionalProperties": false,
       "properties": {
+        "away": {
+          "$ref": "#/$defs/ScoreboardSide"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "events_available": {
+          "title": "Events Available",
+          "type": "boolean"
+        },
+        "goals_complete": {
+          "title": "Goals Complete",
+          "type": "boolean"
+        },
         "home": {
           "$ref": "#/$defs/ScoreboardSide"
         },
-        "away": {
-          "$ref": "#/$defs/ScoreboardSide"
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "shootout": {
           "anyOf": [
@@ -1070,17 +2065,42 @@
           ],
           "default": null
         },
-        "events_available": {
-          "title": "Events Available",
-          "type": "boolean"
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
         },
-        "goals_complete": {
-          "title": "Goals Complete",
-          "type": "boolean"
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
-        "note": {
-          "title": "Note",
-          "type": "string"
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1096,17 +2116,41 @@
     "ScoreboardGoal": {
       "additionalProperties": false,
       "properties": {
-        "minute": {
+        "assist_name": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Minute"
+          "title": "Assist Name"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
         },
         "extra_minute": {
           "anyOf": [
@@ -1120,17 +2164,25 @@
           "default": null,
           "title": "Extra Minute"
         },
-        "side": {
-          "enum": [
-            "home",
-            "away"
-          ],
-          "title": "Side",
-          "type": "string"
+        "is_own_goal": {
+          "title": "Is Own Goal",
+          "type": "boolean"
         },
-        "team_name": {
-          "title": "Team Name",
-          "type": "string"
+        "is_penalty": {
+          "title": "Is Penalty",
+          "type": "boolean"
+        },
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minute"
         },
         "player_name": {
           "anyOf": [
@@ -1144,7 +2196,7 @@
           "default": null,
           "title": "Player Name"
         },
-        "assist_name": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -1154,15 +2206,7 @@
             }
           ],
           "default": null,
-          "title": "Assist Name"
-        },
-        "is_penalty": {
-          "title": "Is Penalty",
-          "type": "boolean"
-        },
-        "is_own_goal": {
-          "title": "Is Own Goal",
-          "type": "boolean"
+          "title": "Published At"
         },
         "score_after": {
           "additionalProperties": {
@@ -1170,6 +2214,67 @@
           },
           "title": "Score After",
           "type": "object"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "side": {
+          "enum": [
+            "home",
+            "away"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1185,17 +2290,49 @@
     "ScoreboardRedCard": {
       "additionalProperties": false,
       "properties": {
-        "minute": {
+        "card_type": {
+          "enum": [
+            "straight_red",
+            "second_yellow"
+          ],
+          "title": "Card Type",
+          "type": "string"
+        },
+        "dataset_id": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Minute"
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
         },
         "extra_minute": {
           "anyOf": [
@@ -1209,17 +2346,17 @@
           "default": null,
           "title": "Extra Minute"
         },
-        "side": {
-          "enum": [
-            "home",
-            "away"
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
           ],
-          "title": "Side",
-          "type": "string"
-        },
-        "team_name": {
-          "title": "Team Name",
-          "type": "string"
+          "default": null,
+          "title": "Minute"
         },
         "player_name": {
           "anyOf": [
@@ -1233,15 +2370,7 @@
           "default": null,
           "title": "Player Name"
         },
-        "card_type": {
-          "enum": [
-            "straight_red",
-            "second_yellow"
-          ],
-          "title": "Card Type",
-          "type": "string"
-        },
-        "detail": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -1251,7 +2380,68 @@
             }
           ],
           "default": null,
-          "title": "Detail"
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "side": {
+          "enum": [
+            "home",
+            "away"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "team_name": {
+          "title": "Team Name",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1265,13 +2455,98 @@
     "ScoreboardShootout": {
       "additionalProperties": false,
       "properties": {
+        "away": {
+          "title": "Away",
+          "type": "integer"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "home": {
           "title": "Home",
           "type": "integer"
         },
-        "away": {
-          "title": "Away",
-          "type": "integer"
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1284,6 +2559,72 @@
     "ScoreboardSide": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "goals": {
+          "items": {
+            "$ref": "#/$defs/ScoreboardGoal"
+          },
+          "title": "Goals",
+          "type": "array"
+        },
+        "is_aberdeen": {
+          "title": "Is Aberdeen",
+          "type": "boolean"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "red_cards": {
+          "items": {
+            "$ref": "#/$defs/ScoreboardRedCard"
+          },
+          "title": "Red Cards",
+          "type": "array"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
         "side": {
           "enum": [
             "home",
@@ -1291,6 +2632,31 @@
           ],
           "title": "Side",
           "type": "string"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
         },
         "team_id": {
           "title": "Team Id",
@@ -1300,23 +2666,17 @@
           "title": "Team Name",
           "type": "string"
         },
-        "is_aberdeen": {
-          "title": "Is Aberdeen",
-          "type": "boolean"
-        },
-        "goals": {
-          "items": {
-            "$ref": "#/$defs/ScoreboardGoal"
-          },
-          "title": "Goals",
-          "type": "array"
-        },
-        "red_cards": {
-          "items": {
-            "$ref": "#/$defs/ScoreboardRedCard"
-          },
-          "title": "Red Cards",
-          "type": "array"
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1333,21 +2693,106 @@
     "SourceRef": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "id": {
           "title": "Id",
-          "type": "string"
-        },
-        "name": {
-          "title": "Name",
           "type": "string"
         },
         "layer": {
           "title": "Layer",
           "type": "string"
         },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
         "note": {
           "title": "Note",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1362,15 +2807,58 @@
     "StatsBlock": {
       "additionalProperties": false,
       "properties": {
+        "away": {
+          "additionalProperties": true,
+          "title": "Away",
+          "type": "object"
+        },
+        "coverage": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Coverage",
+          "type": "object"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "home": {
           "additionalProperties": true,
           "title": "Home",
           "type": "object"
         },
-        "away": {
-          "additionalProperties": true,
-          "title": "Away",
-          "type": "object"
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "rows": {
           "items": {
@@ -1379,12 +2867,54 @@
           "title": "Rows",
           "type": "array"
         },
-        "coverage": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "title": "Coverage",
-          "type": "object"
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1399,6 +2929,42 @@
     "StatsRow": {
       "additionalProperties": false,
       "properties": {
+        "away": {
+          "default": null,
+          "title": "Away"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "home": {
+          "default": null,
+          "title": "Home"
+        },
         "key": {
           "title": "Key",
           "type": "string"
@@ -1407,21 +2973,70 @@
           "title": "Label",
           "type": "string"
         },
-        "home": {
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
           "default": null,
-          "title": "Home"
+          "title": "Published At"
         },
-        "away": {
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
           "default": null,
-          "title": "Away"
+          "title": "Served By Update Id"
         },
         "source": {
           "title": "Source",
           "type": "string"
         },
-        "basis": {
-          "title": "Basis",
-          "type": "string"
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1436,10 +3051,6 @@
     "SummaryBlock": {
       "additionalProperties": false,
       "properties": {
-        "headline": {
-          "title": "Headline",
-          "type": "string"
-        },
         "basis": {
           "title": "Basis",
           "type": "string"
@@ -1451,6 +3062,30 @@
           "title": "Bullets",
           "type": "array"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "events_available": {
           "title": "Events Available",
           "type": "boolean"
@@ -1458,6 +3093,26 @@
         "goals_complete": {
           "title": "Goals Complete",
           "type": "boolean"
+        },
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "reconciliation": {
           "anyOf": [
@@ -1470,9 +3125,54 @@
           ],
           "default": null
         },
-        "note": {
-          "title": "Note",
-          "type": "string"
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1489,13 +3189,98 @@
     "SummaryBullet": {
       "additionalProperties": false,
       "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
         "text": {
           "title": "Text",
           "type": "string"
         },
-        "basis": {
-          "title": "Basis",
-          "type": "string"
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1508,6 +3293,30 @@
     "SummaryReconciliation": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "event_goals": {
           "anyOf": [
             {
@@ -1553,6 +3362,67 @@
           ],
           "default": null,
           "title": "Matched"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1564,54 +3434,6 @@
     "TimelineRow": {
       "additionalProperties": false,
       "properties": {
-        "minute": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Minute"
-        },
-        "extra_minute": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Extra Minute"
-        },
-        "team_name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Team Name"
-        },
-        "player_name": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Player Name"
-        },
         "assist_name": {
           "anyOf": [
             {
@@ -1623,58 +3445,6 @@
           ],
           "default": null,
           "title": "Assist Name"
-        },
-        "event_type": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Event Type"
-        },
-        "detail": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Detail"
-        },
-        "comments": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Comments"
-        },
-        "side": {
-          "anyOf": [
-            {
-              "enum": [
-                "home",
-                "away"
-              ],
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Side"
         },
         "beneficiary_side": {
           "anyOf": [
@@ -1708,8 +3478,84 @@
           "default": null,
           "title": "Card Type"
         },
+        "comments": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Comments"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "event_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Type"
+        },
+        "extra_minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extra Minute"
+        },
         "is_goal": {
           "title": "Is Goal",
+          "type": "boolean"
+        },
+        "is_missed_penalty": {
+          "title": "Is Missed Penalty",
           "type": "boolean"
         },
         "is_own_goal": {
@@ -1720,10 +3566,6 @@
           "title": "Is Penalty",
           "type": "boolean"
         },
-        "is_shootout": {
-          "title": "Is Shootout",
-          "type": "boolean"
-        },
         "is_red_card": {
           "title": "Is Red Card",
           "type": "boolean"
@@ -1732,13 +3574,49 @@
           "title": "Is Second Yellow",
           "type": "boolean"
         },
-        "is_missed_penalty": {
-          "title": "Is Missed Penalty",
+        "is_shootout": {
+          "title": "Is Shootout",
           "type": "boolean"
         },
         "is_var": {
           "title": "Is Var",
           "type": "boolean"
+        },
+        "minute": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minute"
+        },
+        "player_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Name"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "score_after": {
           "additionalProperties": {
@@ -1746,6 +3624,83 @@
           },
           "title": "Score After",
           "type": "object"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "side": {
+          "anyOf": [
+            {
+              "enum": [
+                "home",
+                "away"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Side"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Name"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1769,7 +3724,7 @@
           "title": "Available",
           "type": "boolean"
         },
-        "home": {
+        "away": {
           "anyOf": [
             {
               "$ref": "#/$defs/XgSide"
@@ -1780,7 +3735,103 @@
           ],
           "default": null
         },
-        "away": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "evaluation_href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evaluation Href"
+        },
+        "gate_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Note"
+        },
+        "gate_passed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Passed"
+        },
+        "gate_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gate Status"
+        },
+        "goals_dispersion": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Dispersion"
+        },
+        "goals_range_level": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Goals Range Level"
+        },
+        "home": {
           "anyOf": [
             {
               "$ref": "#/$defs/XgSide"
@@ -1803,18 +3854,6 @@
           "default": null,
           "title": "Model Id"
         },
-        "note": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Note"
-        },
         "model_range_level": {
           "anyOf": [
             {
@@ -1827,31 +3866,7 @@
           "default": null,
           "title": "Model Range Level"
         },
-        "goals_range_level": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals Range Level"
-        },
-        "goals_dispersion": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Goals Dispersion"
-        },
-        "gate_status": {
+        "note": {
           "anyOf": [
             {
               "type": "string"
@@ -1861,21 +3876,9 @@
             }
           ],
           "default": null,
-          "title": "Gate Status"
+          "title": "Note"
         },
-        "gate_passed": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Gate Passed"
-        },
-        "gate_note": {
+        "published_at": {
           "anyOf": [
             {
               "type": "string"
@@ -1885,9 +3888,9 @@
             }
           ],
           "default": null,
-          "title": "Gate Note"
+          "title": "Published At"
         },
-        "evaluation_href": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -1897,7 +3900,44 @@
             }
           ],
           "default": null,
-          "title": "Evaluation Href"
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -1909,6 +3949,78 @@
     "XgShotProfile": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "penalties": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalties"
+        },
+        "penalty_goals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalty Goals"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
         "shots": {
           "anyOf": [
             {
@@ -1920,30 +4032,6 @@
           ],
           "default": null,
           "title": "Shots"
-        },
-        "shots_on_target": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots On Target"
-        },
-        "shots_off": {
-          "anyOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Shots Off"
         },
         "shots_blocked": {
           "anyOf": [
@@ -1969,6 +4057,30 @@
           "default": null,
           "title": "Shots Insidebox"
         },
+        "shots_off": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots Off"
+        },
+        "shots_on_target": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shots On Target"
+        },
         "shots_outsidebox": {
           "anyOf": [
             {
@@ -1981,29 +4093,42 @@
           "default": null,
           "title": "Shots Outsidebox"
         },
-        "penalties": {
+        "source_snapshots": {
           "anyOf": [
             {
-              "type": "integer"
+              "additionalProperties": true,
+              "type": "object"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Penalties"
+          "title": "Source Snapshots"
         },
-        "penalty_goals": {
+        "stale_reason": {
           "anyOf": [
             {
-              "type": "integer"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Penalty Goals"
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "title": "XgShotProfile",
@@ -2012,43 +4137,43 @@
     "XgSide": {
       "additionalProperties": false,
       "properties": {
-        "value": {
+        "basis": {
           "anyOf": [
             {
-              "type": "number"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Value"
+          "title": "Basis"
         },
-        "low": {
+        "dataset_id": {
           "anyOf": [
             {
-              "type": "number"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Low"
+          "title": "Dataset Id"
         },
-        "high": {
+        "dataset_state": {
           "anyOf": [
             {
-              "type": "number"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "High"
+          "title": "Dataset State"
         },
-        "goals_low": {
+        "goals": {
           "anyOf": [
             {
               "type": "integer"
@@ -2058,7 +4183,7 @@
             }
           ],
           "default": null,
-          "title": "Goals Low"
+          "title": "Goals"
         },
         "goals_high": {
           "anyOf": [
@@ -2072,7 +4197,7 @@
           "default": null,
           "title": "Goals High"
         },
-        "goals": {
+        "goals_low": {
           "anyOf": [
             {
               "type": "integer"
@@ -2082,7 +4207,7 @@
             }
           ],
           "default": null,
-          "title": "Goals"
+          "title": "Goals Low"
         },
         "goals_minus": {
           "anyOf": [
@@ -2113,7 +4238,7 @@
           "default": null,
           "title": "Goals Position"
         },
-        "provider": {
+        "high": {
           "anyOf": [
             {
               "type": "number"
@@ -2123,21 +4248,9 @@
             }
           ],
           "default": null,
-          "title": "Provider"
+          "title": "High"
         },
-        "provider_source": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Provider Source"
-        },
-        "xg_per_shot": {
+        "low": {
           "anyOf": [
             {
               "type": "number"
@@ -2147,19 +4260,7 @@
             }
           ],
           "default": null,
-          "title": "Xg Per Shot"
-        },
-        "penalty_xg": {
-          "anyOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Penalty Xg"
+          "title": "Low"
         },
         "penalties": {
           "anyOf": [
@@ -2185,7 +4286,31 @@
           "default": null,
           "title": "Penalties Known"
         },
-        "basis": {
+        "penalty_xg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Penalty Xg"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "provider_source": {
           "anyOf": [
             {
               "type": "string"
@@ -2195,7 +4320,31 @@
             }
           ],
           "default": null,
-          "title": "Basis"
+          "title": "Provider Source"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "shot_profile": {
           "anyOf": [
@@ -2207,6 +4356,67 @@
             }
           ],
           "default": null
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "xg_per_shot": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Xg Per Shot"
         }
       },
       "title": "XgSide",
@@ -2215,16 +4425,32 @@
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "title": "Schema Version",
-      "type": "string"
+    "coverage": {
+      "$ref": "#/$defs/CoverageBlock"
     },
-    "generated_at": {
-      "title": "Generated At",
-      "type": "string"
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
     },
-    "fixture": {
-      "$ref": "#/$defs/FixtureInfo"
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
     },
     "depth": {
       "enum": [
@@ -2236,24 +4462,15 @@
       "title": "Depth",
       "type": "string"
     },
-    "summary": {
-      "$ref": "#/$defs/SummaryBlock"
+    "fixture": {
+      "$ref": "#/$defs/FixtureInfo"
     },
-    "scoreboard": {
-      "$ref": "#/$defs/ScoreboardBlock"
+    "form": {
+      "$ref": "#/$defs/FormBlock"
     },
-    "stats": {
-      "$ref": "#/$defs/StatsBlock"
-    },
-    "xg": {
-      "$ref": "#/$defs/XgBlock"
-    },
-    "timeline": {
-      "items": {
-        "$ref": "#/$defs/TimelineRow"
-      },
-      "title": "Timeline",
-      "type": "array"
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
     },
     "lineups": {
       "additionalProperties": {
@@ -2269,29 +4486,6 @@
       "title": "Lineups",
       "type": "object"
     },
-    "player_stats": {
-      "items": {
-        "$ref": "#/$defs/PlayerStat"
-      },
-      "title": "Player Stats",
-      "type": "array"
-    },
-    "performance": {
-      "$ref": "#/$defs/PerformanceBlock"
-    },
-    "form": {
-      "$ref": "#/$defs/FormBlock"
-    },
-    "coverage": {
-      "$ref": "#/$defs/CoverageBlock"
-    },
-    "sources": {
-      "items": {
-        "$ref": "#/$defs/SourceRef"
-      },
-      "title": "Sources",
-      "type": "array"
-    },
     "links": {
       "additionalProperties": {
         "anyOf": [
@@ -2305,6 +4499,107 @@
       },
       "title": "Links",
       "type": "object"
+    },
+    "performance": {
+      "$ref": "#/$defs/PerformanceBlock"
+    },
+    "player_stats": {
+      "items": {
+        "$ref": "#/$defs/PlayerStat"
+      },
+      "title": "Player Stats",
+      "type": "array"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scoreboard": {
+      "$ref": "#/$defs/ScoreboardBlock"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRef"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "stats": {
+      "$ref": "#/$defs/StatsBlock"
+    },
+    "summary": {
+      "$ref": "#/$defs/SummaryBlock"
+    },
+    "timeline": {
+      "items": {
+        "$ref": "#/$defs/TimelineRow"
+      },
+      "title": "Timeline",
+      "type": "array"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
+    },
+    "xg": {
+      "$ref": "#/$defs/XgBlock"
     }
   },
   "required": [

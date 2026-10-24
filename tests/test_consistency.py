@@ -61,3 +61,62 @@ def test_scheduled_count_mutation_fails():
     results = run_consistency(corpus)
     failed = {result.id for result in results if result.status != "pass"}
     assert "fixtures.schedule" in failed
+
+
+def test_table_played_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    table = corpus["tables/premiership-2026-27.json"]
+    row = next(row for row in table["rows"] if row["team_id"] == "sco:aberdeen")
+    row["played"] += 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "results.table" in failed
+
+
+def test_matchday_form_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    form = corpus["matchday/upcoming.json"]["form_guide"]["aberdeen"]
+    form["form"] = "X" + form["form"][1:]
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "results.form" in failed
+
+
+def test_club_result_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    results_rows = corpus["clubs/aberdeen.json"]["results"]
+    results_rows[0]["goals_against"] = int(results_rows[0]["goals_against"] or 0) + 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "results.club" in failed
+
+
+def test_coverage_matches_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    row = next(
+        row
+        for row in corpus["coverage.json"]["competitions"]
+        if row["id"] == "sco:premiership"
+    )
+    row["matches"] += 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "results.coverage" in failed
+
+
+def test_epoch_mismatch_fails():
+    corpus = copy.deepcopy(_corpus())
+    corpus["squad/aberdeen.json"]["dataset_id"] = "not-the-current-dataset"
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "rules.epoch" in failed
+
+
+def test_stale_payload_is_allowed_with_a_reason():
+    corpus = copy.deepcopy(_corpus())
+    corpus["squad/aberdeen.json"]["dataset_state"] = "stale"
+    corpus["squad/aberdeen.json"]["dataset_id"] = "older-dataset"
+    corpus["squad/aberdeen.json"]["stale_reason"] = "test_carry_forward"
+    results = run_consistency(corpus)
+    epoch = next(result for result in results if result.id == "rules.epoch")
+    assert epoch.status == "pass"

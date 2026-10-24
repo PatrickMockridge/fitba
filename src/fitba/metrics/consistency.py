@@ -550,6 +550,331 @@ def _check_former_coverage(corpus: dict[str, Any], outcome: CheckOutcome) -> Non
         outcome.fail("coverage.json former count != former rows")
 
 
+def _table_documents(corpus: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
+    return sorted(
+        (path, payload)
+        for path, payload in corpus.items()
+        if path.startswith("tables/") and isinstance(payload, dict)
+    )
+
+
+def _aberdeen_table_row(corpus: dict[str, Any]) -> tuple[str, dict[str, Any]] | None:
+    for path, payload in _table_documents(corpus):
+        for row in payload.get("rows") or []:
+            if str(row.get("team_id")) == "sco:aberdeen":
+                return path, row
+    return None
+
+
+def _league_fixture_rows(corpus: dict[str, Any], season: str) -> list[dict[str, Any]]:
+    index = _payload(corpus, "fixtures/index.json") or {}
+    rows = []
+    for row in index.get("fixtures") or []:
+        if str(row.get("season")) != season:
+            continue
+        if str(row.get("competition_id")) != "sco:premiership":
+            continue
+        if row.get("home_goals") is None or row.get("away_goals") is None:
+            continue
+        home = bool(row.get("aberdeen_is_home"))
+        goals_for = int(row.get("home_goals") if home else row.get("away_goals"))
+        goals_against = int(row.get("away_goals") if home else row.get("home_goals"))
+        result = "W" if goals_for > goals_against else "D" if goals_for == goals_against else "L"
+        rows.append(
+            {
+                "date": str(row.get("date") or "")[:10],
+                "opponent_name": row.get("away_team_name") if home else row.get("home_team_name"),
+                "venue": "H" if home else "A",
+                "gf": goals_for,
+                "ga": goals_against,
+                "result": result,
+            }
+        )
+    rows.sort(key=lambda item: item["date"], reverse=True)
+    return rows
+
+
+def _record(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    recent = rows[:5]
+    return {
+        "played": len(rows),
+        "won": sum(1 for row in rows if row["result"] == "W"),
+        "drawn": sum(1 for row in rows if row["result"] == "D"),
+        "lost": sum(1 for row in rows if row["result"] == "L"),
+        "gf": sum(row["gf"] for row in rows),
+        "ga": sum(row["ga"] for row in rows),
+        "gd": sum(row["gf"] - row["ga"] for row in rows),
+        "points": sum(
+            3 if row["result"] == "W" else 1 if row["result"] == "D" else 0 for row in rows
+        ),
+        "form": "".join(row["result"] for row in recent),
+    }
+
+
+def _check_results_table(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    found = _aberdeen_table_row(corpus)
+    if found is None:
+        outcome.fail("no table contains an Aberdeen row")
+        return
+    path, row = found
+    season = str(row.get("season") or "")
+    rows = _league_fixture_rows(corpus, season)
+    expected = _record(rows)
+    for name, value in expected.items():
+        outcome.fields_checked += 1
+        if row.get(name) != value:
+            outcome.fail(f"{path}: Aberdeen {name} {row.get(name)!r} != fixtures {value!r}")
+    outcome.rows_checked = len(rows)
+
+
+def _check_results_form(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    found = _aberdeen_table_row(corpus)
+    if found is None:
+        outcome.fail("no table contains an Aberdeen row")
+        return
+    _, table_row = found
+    expected = _record(_league_fixture_rows(corpus, str(table_row.get("season") or "")))
+    surfaces: list[tuple[str, dict[str, Any]]] = []
+    matchday = _payload(corpus, "matchday/upcoming.json") or {}
+    form = (matchday.get("form_guide") or {}).get("aberdeen")
+    if isinstance(form, dict):
+        surfaces.append(("matchday/upcoming.json:form_guide", form))
+    analysis = _payload(corpus, "analysis/summary.json") or {}
+    hero = analysis.get("hero")
+    if isinstance(hero, dict):
+        surfaces.append(("analysis/summary.json:hero", hero))
+    club = _payload(corpus, "clubs/aberdeen.json") or {}
+    summary = club.get("summary")
+    if isinstance(summary, dict):
+        surfaces.append(("clubs/aberdeen.json:summary", summary))
+    for path, surface in surfaces:
+        for name in ("played", "won", "drawn", "lost", "gf", "ga", "form"):
+            if name not in surface:
+                continue
+            outcome.fields_checked += 1
+            if surface.get(name) != expected[name]:
+                outcome.fail(f"{path} {name} {surface.get(name)!r} != {expected[name]!r}")
+        if "gd" in surface:
+            outcome.fields_checked += 1
+            if surface.get("gd") != expected["gd"]:
+                outcome.fail(f"{path} gd {surface.get('gd')!r} != {expected['gd']!r}")
+        if "points" in surface:
+            outcome.fields_checked += 1
+            if surface.get("points") != expected["points"]:
+                outcome.fail(f"{path} points {surface.get('points')!r} != {expected['points']!r}")
+        outcome.rows_checked += 1
+    sample = (form or {}).get("sample") if isinstance(form, dict) else None
+    if isinstance(sample, dict) and "season_matches" in sample:
+        outcome.fields_checked += 1
+        if sample.get("season_matches") != expected["played"]:
+            outcome.fail(
+                f"matchday form sample {sample.get('season_matches')} "
+                f"!= table played {expected['played']}"
+            )
+
+
+def _check_results_club(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    club = _payload(corpus, "clubs/aberdeen.json") or {}
+    found = _aberdeen_table_row(corpus)
+    if found is None:
+        outcome.fail("no table contains an Aberdeen row")
+        return
+    _, table_row = found
+    season = str(table_row.get("season") or "")
+    expected_rows = _league_fixture_rows(corpus, season)
+    published = [
+        row
+        for row in club.get("results") or []
+        if str(row.get("competition_id")) == "sco:premiership"
+    ]
+    published.sort(key=lambda item: str(item.get("date") or "")[:10], reverse=True)
+    if len(published) != len(expected_rows):
+        outcome.fail(
+            f"clubs/aberdeen.json results {len(published)} league rows != fixtures "
+            f"{len(expected_rows)}"
+        )
+    for actual, expected in zip(published, expected_rows, strict=False):
+        outcome.rows_checked += 1
+        for name in ("date", "opponent_name", "venue", "gf", "ga", "result"):
+            outcome.fields_checked += 1
+            actual_name = (
+                "goals_for" if name == "gf" else "goals_against" if name == "ga" else name
+            )
+            if actual.get(actual_name) != expected[name]:
+                outcome.fail(
+                    f"clubs/aberdeen.json results {name} {actual.get(actual_name)!r} "
+                    f"!= fixtures {expected[name]!r}"
+                )
+    recent = [
+        row
+        for row in club.get("recent_results") or []
+        if str(row.get("competition_id")) == "sco:premiership"
+    ]
+    for index, row in enumerate(recent[: len(published)]):
+        outcome.fields_checked += 1
+        reference = published[index]
+        same = (
+            str(row.get("date") or "")[:10] == str(reference.get("date") or "")[:10]
+            and row.get("opponent_name") == reference.get("opponent_name")
+            and row.get("venue") == reference.get("venue")
+            and row.get("goals_for") == reference.get("goals_for")
+            and row.get("goals_against") == reference.get("goals_against")
+            and row.get("result") == reference.get("result")
+        )
+        if not same:
+            outcome.fail("clubs/aberdeen.json recent_results does not match results")
+            break
+    history_rows = [row for row in club.get("history") or [] if row.get("season") == season]
+    if history_rows:
+        for name in ("played", "won", "drawn", "lost", "gf", "ga", "points", "form"):
+            if name not in history_rows[0]:
+                continue
+            outcome.fields_checked += 1
+            if history_rows[0].get(name) != table_row.get(name):
+                outcome.fail(
+                    f"clubs/aberdeen.json history {name} "
+                    f"{history_rows[0].get(name)!r} != table {table_row.get(name)!r}"
+                )
+    else:
+        outcome.fail(f"clubs/aberdeen.json history has no {season} row")
+    season_doc = _payload(corpus, f"history/seasons/{season}.json") or {}
+    managers = season_doc.get("managers") or []
+    if managers:
+        totals = {
+            name: sum(int(row.get(name) or 0) for row in managers)
+            for name in ("played", "won", "drawn", "lost", "gf", "ga", "points")
+        }
+        for name, value in totals.items():
+            outcome.fields_checked += 1
+            if value != table_row.get(name):
+                outcome.fail(
+                    f"history/seasons/{season}.json managers {name} {value} "
+                    f"!= table {table_row.get(name)}"
+                )
+        latest = max((str(row.get("last_match") or "") for row in managers), default="")
+        if expected_rows and latest != expected_rows[0]["date"]:
+            outcome.fail(
+                f"history manager last_match {latest!r} "
+                f"!= latest fixture {expected_rows[0]['date']!r}"
+            )
+    else:
+        outcome.fail(f"history/seasons/{season}.json has no manager record")
+
+
+def _check_results_coverage(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    coverage = _payload(corpus, "coverage.json") or {}
+    table_docs = dict(_table_documents(corpus))
+    for row in coverage.get("competitions") or []:
+        competition_id = str(row.get("id") or "")
+        table = next(
+            (
+                payload
+                for payload in table_docs.values()
+                if str(payload.get("competition_id")) == competition_id
+            ),
+            None,
+        )
+        if table is None:
+            continue
+        played_sum = sum(int(team.get("played") or 0) for team in table.get("rows") or [])
+        outcome.rows_checked += 1
+        outcome.fields_checked += 2
+        if played_sum % 2 != 0:
+            outcome.fail(f"coverage {competition_id}: table played sum {played_sum} is odd")
+        matches = int(row.get("matches") or 0)
+        if matches != played_sum // 2:
+            outcome.fail(
+                f"coverage {competition_id} matches {matches} != table matches {played_sum // 2}"
+            )
+        if row.get("season") is not None and str(row.get("season")) != str(table.get("season")):
+            outcome.fail(f"coverage {competition_id} season != table season")
+
+
+def _parse_time(value: Any):
+    from datetime import UTC, datetime
+
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(UTC)
+
+
+def _check_rules_epoch(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    manifest = _payload(corpus, "manifest.json") or {}
+    dataset_id = str(manifest.get("dataset_version") or "")
+    update_id = str((manifest.get("update") or {}).get("id") or "")
+    manifest_time = _parse_time(manifest.get("generated_at"))
+    if not dataset_id or not update_id:
+        outcome.fail("manifest has no dataset_version or update id")
+        return
+    for path, payload in sorted(corpus.items()):
+        if path == "manifest.json" or not isinstance(payload, dict):
+            continue
+        state = str(payload.get("dataset_state") or "")
+        outcome.rows_checked += 1
+        if state == "stale":
+            outcome.fields_checked += 1
+            if not payload.get("stale_reason"):
+                outcome.fail(f"{path}: stale payload has no reason")
+        else:
+            outcome.fields_checked += 1
+            if payload.get("dataset_id") != dataset_id:
+                outcome.fail(
+                    f"{path}: dataset_id {payload.get('dataset_id')!r} != {dataset_id!r}"
+                )
+        served = payload.get("served_by_update_id")
+        if served:
+            outcome.fields_checked += 1
+            if served != update_id:
+                outcome.fail(f"{path}: served_by_update_id {served!r} != {update_id!r}")
+        generated = _parse_time(payload.get("generated_at"))
+        outcome.fields_checked += 1
+        if generated is None:
+            outcome.fail(f"{path}: generated_at is missing or unparseable")
+        elif manifest_time and generated > manifest_time:
+            outcome.fail(f"{path}: generated_at is later than the manifest")
+
+
+def _check_rules_manifest(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    manifest = _payload(corpus, "manifest.json") or {}
+    listed = {
+        str(entry.get("path"))
+        for entry in manifest.get("files") or []
+        if entry.get("path")
+    }
+    for path in sorted(corpus):
+        if path == "manifest.json":
+            continue
+        outcome.rows_checked += 1
+        if path not in listed:
+            outcome.fail(f"{path} is published but not listed in manifest.files")
+    for path in sorted(listed):
+        outcome.fields_checked += 1
+        if path not in corpus:
+            outcome.fail(f"manifest lists {path} but it is not in the corpus")
+
+
+def _check_epoch_with_root(corpus: dict[str, Any], outcome: CheckOutcome, root) -> None:
+    import hashlib
+
+    manifest = _payload(corpus, "manifest.json") or {}
+    for entry in manifest.get("files") or []:
+        path = root / str(entry.get("path") or "")
+        outcome.rows_checked += 1
+        outcome.fields_checked += 1
+        if not path.exists():
+            outcome.fail(f"manifest file does not exist: {entry.get('path')}")
+            continue
+        digest = "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+        if digest != entry.get("checksum"):
+            outcome.fail(f"checksum mismatch: {entry.get('path')}")
+
+
 CHECKS = [
     (
         "squad.counts",
@@ -647,14 +972,79 @@ CHECKS = [
         ["former-players/aberdeen.json", "coverage.json"],
         _check_former_coverage,
     ),
+    (
+        "results.table",
+        "League table record and form equal the published fixture results",
+        ["tables/*.json", "fixtures/index.json"],
+        _check_results_table,
+    ),
+    (
+        "results.form",
+        "Matchday, analysis and club form equal the league table record",
+        [
+            "tables/*.json",
+            "matchday/upcoming.json",
+            "analysis/summary.json",
+            "clubs/aberdeen.json",
+        ],
+        _check_results_form,
+    ),
+    (
+        "results.club",
+        "Club results, recent results and history equal the fixture record",
+        [
+            "clubs/aberdeen.json",
+            "fixtures/index.json",
+            "history/seasons/*.json",
+        ],
+        _check_results_club,
+    ),
+    (
+        "results.coverage",
+        "Coverage match counts equal the league tables they summarise",
+        ["coverage.json", "tables/*.json"],
+        _check_results_coverage,
+    ),
+    (
+        "rules.epoch",
+        "Every payload belongs to the current dataset epoch or is explicitly stale",
+        ["manifest.json", "**/*.json"],
+        _check_rules_epoch,
+    ),
+    (
+        "rules.manifest",
+        "The manifest lists every published file and every listed file exists",
+        ["manifest.json"],
+        _check_rules_manifest,
+    ),
 ]
 
 
-def run_consistency(corpus: dict[str, Any]) -> list[CheckResult]:
-    return [
+def run_consistency(
+    corpus: dict[str, Any], *, root: Any = None
+) -> list[CheckResult]:
+    results = [
         _check(check_id, description, corpus, payloads, function)
         for check_id, description, payloads, function in CHECKS
     ]
+    if root is not None:
+        outcome = CheckOutcome()
+        try:
+            _check_epoch_with_root(corpus, outcome, root)
+        except Exception as error:  # noqa: BLE001
+            outcome.fail(f"{type(error).__name__}: {error}")
+        results.append(
+            CheckResult(
+                id="rules.checksums",
+                description="Every manifest checksum matches the published bytes",
+                status=outcome.status,
+                rows_checked=outcome.rows_checked,
+                fields_checked=outcome.fields_checked,
+                errors=outcome.errors,
+                payloads=["manifest.json"],
+            )
+        )
+    return results
 
 
 __all__ = ["CHECKS", "CheckOutcome", "CheckResult", "run_consistency"]

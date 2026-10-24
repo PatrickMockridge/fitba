@@ -3,6 +3,8 @@
     "club": "sco:aberdeen",
     "coverage": {
       "conflicts": 0,
+      "dataset_id": null,
+      "dataset_state": null,
       "doubtful": 0,
       "entries": 34,
       "known": 2,
@@ -29,11 +31,16 @@
         "rows": 0,
         "status": "unavailable"
       },
+      "published_at": null,
       "returned": 0,
+      "served_by_update_id": null,
+      "source_snapshots": null,
       "stale": 0,
+      "stale_reason": null,
       "status": "partial",
       "suspended": 0,
-      "unknown": 32
+      "unknown": 32,
+      "update_id": null
     },
     "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
     "state": "partial",
@@ -141,6 +148,8 @@
       "ties": 50
     }
   ],
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "fixtures": {
     "count": 368,
     "full": 232,
@@ -165,6 +174,7 @@
     "source": "afc_chat",
     "topics": 4
   },
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "history": {
     "analytics": {
       "managers": "available",
@@ -254,21 +264,36 @@
   },
   "provenance": {
     "availability": {
+      "dataset_id": null,
+      "dataset_state": null,
       "provider_snapshot": "unavailable",
+      "published_at": null,
       "reason": "provider_declares_injuries_false",
-      "status": "partial"
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "status": "partial",
+      "update_id": null
     },
     "layers": 31,
     "migration": {
       "active_source": "football_data_uk",
+      "dataset_id": null,
+      "dataset_state": null,
       "enabled": false,
       "gate_status": "fail",
+      "published_at": null,
       "reason": "Gate failed: SC0: fixture_count (198); SC1: team_match_stats (metadata False; sample fixture 1556828: 0 team blocks); SC2: team_match_stats (metadata False; sample fixture 1557006: 0 team blocks)",
       "report": "reports/league-migration/2026-27.json",
-      "season": "2026-27"
+      "season": "2026-27",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
     },
     "note": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such."
   },
+  "published_at": "2026-10-24T22:29:20+00:00",
   "rumours": {
     "active": 0,
     "club": "sco:aberdeen",
@@ -276,6 +301,24 @@
     "note": "A curated register of Aberdeen-linked rumours, separate from the confirmed transfer register. Status is a lifecycle label, not a probability. Confidence is editorial and must be justified by the linked sources. Confirmed rows link to the transfer register and are then a historical record, not a second source of truth."
   },
   "season": "2026-27",
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
+  },
   "squad": {
     "club": "sco:aberdeen",
     "count": 34,
@@ -291,6 +334,7 @@
     "curated": 225,
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
   },
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "evaluation": "pass",
     "matches": 367,

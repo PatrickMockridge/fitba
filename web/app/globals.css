@@ -311,6 +311,12 @@ p {
   border-radius: var(--radius);
   padding: 1.25rem;
   box-shadow: var(--shadow);
+  min-width: 0;
+}
+
+.card code,
+.page-head code {
+  overflow-wrap: anywhere;
 }
 
 .section-head-spaced {
@@ -1012,7 +1018,20 @@ a.card:hover {
 /* Tables */
 .table-wrap {
   overflow-x: auto;
+  max-width: 100%;
   margin: 0.4rem 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .league-table {
@@ -1375,7 +1394,7 @@ a.card:hover {
   .two-col,
   .three-col,
   .comp-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .news-grid {
@@ -1667,9 +1686,59 @@ a.card:hover {
   color: var(--accent-strong);
 }
 
+.squad-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 980px;
+  font-size: 0.8rem;
+}
+
+.squad-table th,
 .squad-table td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding: 0.34rem 0.34rem;
+}
+
+.squad-table th {
+  font-size: 0.59rem;
+  letter-spacing: 0.055em;
+}
+
+/* Headers must wrap inside their fixed column; values stay on one line. */
+.squad-table th.num {
+  white-space: normal;
+}
+
+/* Compact badges so status and stats labels stay inside their columns. */
+.squad-table .badge {
+  padding: 0.12rem 0.3rem;
+  font-size: 0.55rem;
+  letter-spacing: 0;
+}
+
+.squad-table .num {
   white-space: nowrap;
 }
+
+.squad-table th:nth-child(1) { width: 15%; }
+.squad-table th:nth-child(2) { width: 3.5%; }
+.squad-table th:nth-child(3) { width: 11%; }
+.squad-table th:nth-child(4) { width: 3.5%; }
+.squad-table th:nth-child(5) { width: 6.5%; }
+.squad-table th:nth-child(6) { width: 5%; }
+.squad-table th:nth-child(7) { width: 5%; }
+.squad-table th:nth-child(8) { width: 5%; }
+.squad-table th:nth-child(9) { width: 6%; }
+.squad-table th:nth-child(10) { width: 4%; }
+.squad-table th:nth-child(11) { width: 3.5%; }
+.squad-table th:nth-child(12) { width: 3.5%; }
+.squad-table th:nth-child(13) { width: 3.5%; }
+.squad-table th:nth-child(14) { width: 3.5%; }
+.squad-table th:nth-child(15) { width: 3.5%; }
+.squad-table th:nth-child(16) { width: 3.5%; }
+.squad-table th:nth-child(17) { width: 5.5%; }
+.squad-table th:nth-child(18) { width: 9%; }
 
 .squad-table td:first-child {
   white-space: normal;

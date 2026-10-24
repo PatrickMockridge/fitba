@@ -25,6 +25,8 @@ REQUIRED = [
     "specification.md",
     "metrics.md",
     "metric-changes.md",
+    "update.md",
+    "refresh-audit.md",
     "design.md",
     "page-contracts.md",
     "identity-review-2026-10.md",

@@ -213,14 +213,17 @@ Components: `LeagueTable`, `FixtureList`, `CompetitionStrip`, `NewsGrid`,
 The data cadence runs on the operator's machine with the gitignored `.env` key;
 GitHub Actions has no API-Football key and its data workflows are manual only.
 
-- **Daily:** cron at 06:17 local time runs `scripts/local_update.sh daily`:
-  current-season ingest, match detail, matchday, squad, availability, build,
-  validation, publication and checks. It commits the generated payloads and
-  pushes to `main`.
-- **Post-match:** cron runs `scripts/local_update.sh matchday` every two hours.
-  The gate compares the committed fixture schedule and manifest; when a
-  scheduled Aberdeen fixture has finished and the manifest predates that
-  finish, the full daily path runs. Empty checks do no data work.
+- **One command:** `fitba update --mode daily|matchday|ci` owns the ordered
+  step list, required/optional classification, per-step state and guards.
+  `scripts/local_update.sh` and the manual CI workflow call it; they no longer
+  carry their own divergent lists. See `docs/update.md`.
+- **Daily:** cron at 06:17 local time runs the daily mode: every ingest area,
+  including scouting and xG enrichment, then build, validation, publication and
+  checks. It commits the generated payloads and pushes to `main`.
+- **Post-match:** cron runs the matchday mode every two hours. The gate checks
+  the canonical and published result, not only the manifest time; when a
+  finished Aberdeen fixture has no result, the results core runs. Other sources
+  keep their TTL and are published with their age.
 - Both jobs only run when the checkout is on `main`; logs are written to
   `~/.local/state/fitba/update.log`. `scripts/install_local_cadence.sh` installs
   the two cron entries.
@@ -287,6 +290,14 @@ data/, .cache/     gitignored
     Scottish clubs use `reference/teams.yaml`; `ST Johnstone` and
     `St. Johnstone` display as **St Johnstone**. `scripts/check_names.py`
     rejects all-caps Saint spellings and lower-case place names.
+11. One canonical result frame (`normalize/results.py` via `load_matches`)
+    feeds tables, form, history, coverage, analysis and the fixture registry.
+    An official overlay row is a complete match row; a missing `phase` is never
+    allowed to hide a result. A finished official fixture absent from the
+    canonical frame or the league table blocks publish.
+12. Every published document is on the current dataset epoch or is explicitly
+    stale with a reason. The manifest lists every file and checksum;
+    `scripts/check_freshness.py --strict` enforces both.
 
 ## Migration to one licensed source
 
@@ -302,7 +313,9 @@ After the API-Football key-test passes:
 
 - Parsers are pure functions with HTML/CSV fixtures in `tests/fixtures/`.
 - Table arithmetic and cup group tables are tested on in-memory frames.
-- Publication guard checks size, provenance and tracked raw data.
+- Publication guard checks provenance, forbidden fields and tracked raw data.
+  There is no arbitrary published-file size cap; the largest machine index
+  (`scouting/search-index.json`) grows with the refreshed player pool.
 - Doc check verifies links and the key competition-format facts.
 - `mdbook build` is the docs book build check.
 - `npm run build` is the end-to-end static build check.

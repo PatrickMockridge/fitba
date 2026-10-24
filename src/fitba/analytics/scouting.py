@@ -853,6 +853,7 @@ def build_board(
         for code, value in (roles.get("roles") or {}).items()
     }
     family_players: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    unassigned: list[dict[str, Any]] = []
     squad_ids: set[int] = set()
     for player in squad_data.get("players") or []:
         if player.get("status") == "loan_out":
@@ -861,32 +862,38 @@ def build_board(
         squad_ids.add(player_id)
         display = player.get("display_role") or {}
         role = player.get("role") or {}
-        family = display.get("family") or role.get("family")
-        if not family:
-            continue
         totals = _squad_stats(player)
         history = prior_seasons(player_id, current=season, model=model)
         prior = _prior_for_display(history, model)
-        family_players[family].append(
-            {
-                "player_id": player_id,
-                "name": player.get("name"),
-                "role_label": display.get("label") or role.get("label"),
-                "minutes": int(totals.get("minutes") or 0),
-                "appearances": totals.get("appearances"),
-                "rating": totals.get("rating"),
-                "rates": player_rates(totals),
-                "availability": _availability_payload(player),
-                "prior": prior,
-                "prior_history": history,
-                "first_choice": bool(prior and _first_choice(prior, model)),
-            }
-        )
+        family = display.get("family") or role.get("family")
+        if not family and prior:
+            family = prior.get("role_family")
+        row = {
+            "player_id": player_id,
+            "name": player.get("name"),
+            "role_label": display.get("label")
+            or role.get("label")
+            or (role_labels.get(str((prior or {}).get("role_code") or "")) if prior else None)
+            or (family_labels.get(str(family)) if family else "Role not observed"),
+            "minutes": int(totals.get("minutes") or 0),
+            "appearances": totals.get("appearances"),
+            "rating": totals.get("rating"),
+            "rates": player_rates(totals),
+            "availability": _availability_payload(player),
+            "prior": prior,
+            "prior_history": history,
+            "first_choice": bool(prior and _first_choice(prior, model)),
+        }
+        if family:
+            family_players[str(family)].append(row)
+        elif str((row["availability"] or {}).get("status") or "unknown") != "unknown":
+            # A verified absentee with no current or prior role still belongs in
+            # layer 0; hiding him because the role is unknown defeats the point.
+            unassigned.append({**row, "family": None, "family_label": "Role not observed"})
 
     # A verified absentee can be missing from the provider squad snapshot. The
     # ledger keeps him visible; his role comes from prior starting-XI evidence,
     # never from a generic position or a guess.
-    unassigned: list[dict[str, Any]] = []
     for entry in availability_entries or []:
         player_id = entry.get("player_id")
         if player_id is None or int(player_id) in squad_ids:

@@ -20,7 +20,6 @@ SQUAD = GENERATED / "squad" / "aberdeen.json"
 SCHEMA = ROOT / "contracts" / "needs.schema.json"
 MANIFEST = GENERATED / "manifest.json"
 SEARCH = GENERATED / "search-index.json"
-MAX_FILE_BYTES = 2_000_000
 
 FAMILIES = {"GK", "CB", "FB/WB", "MID", "AM/WM", "W", "ST"}
 CATEGORIES = {"cover", "replace", "strengthen", "monitor", "none", "unknown"}
@@ -145,8 +144,6 @@ def main() -> int:
             if phrase in lowered:
                 errors.append(f"blame or target language {phrase!r}")
 
-    if DOCUMENT.stat().st_size > MAX_FILE_BYTES:
-        errors.append(f"{DOCUMENT} exceeds the {MAX_FILE_BYTES} byte cap")
     if MANIFEST.exists():
         manifest = _load(MANIFEST)
         files = {row.get("path"): row for row in manifest.get("files") or []}

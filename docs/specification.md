@@ -103,6 +103,26 @@ re-renders a player profile. New player facts are added as a section to the
 shared profile and as fields to its published document. A register may list and
 link players; it must not become a second profile view.
 
+## Refresh integrity
+
+One update command refreshes every published data area. `fitba update` owns the
+ordered step list, required/optional classification, per-step state and the
+guards; the local cadence and CI call it rather than keeping separate lists. The
+rules:
+
+1. One canonical result frame feeds tables, form, history, coverage, analysis
+   and the fixture registry. An official SPFL result for an Aberdeen league
+   fixture is a complete match row, never a partial row with an unknown phase.
+2. Publish is blocked when a finished official result is missing from the
+   canonical frame or the league table. A timestamp-only publish is not
+   evidence that a result landed.
+3. Optional sources may be late, but they must publish their age and a stale
+   state. A stale optional source never blocks a correct core result.
+4. Every payload is on the current dataset epoch or explicitly stale with a
+   reason; the manifest lists every file and checksum. Array payloads carry
+   their epoch in the manifest entry.
+5. The matchday due gate checks the result, not only the manifest time.
+
 ## Number governance
 
 A **number** is any value, rate, percentage, count, rank, range, confidence,

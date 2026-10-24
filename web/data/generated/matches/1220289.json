@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "D",
@@ -138,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. Thelin",
@@ -1374,6 +1376,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1396,6 +1399,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1608,7 +1629,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: St Johnstone 0.86, Aberdeen 0.85."
+        "text": "Shot expectation: St Johnstone 0.85, Aberdeen 0.84."
       }
     ],
     "events_available": true,
@@ -1830,6 +1851,7 @@
       "team_name": "St Johnstone"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -1837,10 +1859,10 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.849,
+      "goals_minus": -0.845,
       "goals_position": "within",
-      "high": 1.365,
-      "low": 0.128,
+      "high": 1.361,
+      "low": 0.119,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -1856,7 +1878,7 @@
         "shots_on_target": 2,
         "shots_outsidebox": 4
       },
-      "value": 0.849,
+      "value": 0.845,
       "xg_per_shot": 0.077
     },
     "evaluation_href": "/analysis/xg/",
@@ -1870,10 +1892,10 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.857,
+      "goals_minus": -0.855,
       "goals_position": "within",
-      "high": 1.373,
-      "low": 0.136,
+      "high": 1.372,
+      "low": 0.13,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -1889,7 +1911,7 @@
         "shots_on_target": 3,
         "shots_outsidebox": 2
       },
-      "value": 0.857,
+      "value": 0.855,
       "xg_per_shot": 0.107
     },
     "model_id": "fxg-3",

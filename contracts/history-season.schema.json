@@ -1,18 +1,10 @@
 {
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "default": "1.0.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
-    },
-    "status": {
-      "title": "Status",
-      "type": "string"
+    "academy": {
+      "additionalProperties": true,
+      "title": "Academy",
+      "type": "object"
     },
     "as_of": {
       "anyOf": [
@@ -25,17 +17,81 @@
       ],
       "title": "As Of"
     },
-    "reviewed_at": {
-      "title": "Reviewed At",
-      "type": "string"
+    "coverage": {
+      "additionalProperties": true,
+      "title": "Coverage",
+      "type": "object"
+    },
+    "cup_runs": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Cup Runs",
+      "type": "array"
+    },
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
+    },
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
+    },
+    "europe": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Europe",
+      "type": "array"
+    },
+    "expectations": {
+      "additionalProperties": true,
+      "title": "Expectations",
+      "type": "object"
     },
     "headline": {
       "title": "Headline",
       "type": "string"
     },
-    "expectations": {
+    "honour_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Honour Ids",
+      "type": "array"
+    },
+    "interim_read": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Interim Read"
+    },
+    "key_transfers": {
       "additionalProperties": true,
-      "title": "Expectations",
+      "title": "Key Transfers",
       "type": "object"
     },
     "managers": {
@@ -46,66 +102,22 @@
       "title": "Managers",
       "type": "array"
     },
-    "cup_runs": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Cup Runs",
-      "type": "array"
-    },
-    "europe": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Europe",
-      "type": "array"
-    },
-    "honour_ids": {
-      "items": {
-        "type": "string"
-      },
-      "title": "Honour Ids",
-      "type": "array"
-    },
-    "key_transfers": {
-      "additionalProperties": true,
-      "title": "Key Transfers",
-      "type": "object"
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
     },
     "recruitment": {
       "additionalProperties": true,
       "title": "Recruitment",
       "type": "object"
-    },
-    "style": {
-      "additionalProperties": true,
-      "title": "Style",
-      "type": "object"
-    },
-    "selection": {
-      "additionalProperties": true,
-      "title": "Selection",
-      "type": "object"
-    },
-    "academy": {
-      "additionalProperties": true,
-      "title": "Academy",
-      "type": "object"
-    },
-    "tactical": {
-      "additionalProperties": true,
-      "title": "Tactical",
-      "type": "object"
-    },
-    "staff_changes": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Staff Changes",
-      "type": "array"
     },
     "review": {
       "anyOf": [
@@ -119,7 +131,25 @@
       ],
       "title": "Review"
     },
-    "interim_read": {
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "selection": {
+      "additionalProperties": true,
+      "title": "Selection",
+      "type": "object"
+    },
+    "served_by_update_id": {
       "anyOf": [
         {
           "type": "string"
@@ -128,12 +158,21 @@
           "type": "null"
         }
       ],
-      "title": "Interim Read"
+      "default": null,
+      "title": "Served By Update Id"
     },
-    "coverage": {
-      "additionalProperties": true,
-      "title": "Coverage",
-      "type": "object"
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
     },
     "sources": {
       "items": {
@@ -142,6 +181,52 @@
       },
       "title": "Sources",
       "type": "array"
+    },
+    "staff_changes": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Staff Changes",
+      "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "style": {
+      "additionalProperties": true,
+      "title": "Style",
+      "type": "object"
+    },
+    "tactical": {
+      "additionalProperties": true,
+      "title": "Tactical",
+      "type": "object"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
     }
   },
   "required": [

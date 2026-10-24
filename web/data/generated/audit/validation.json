@@ -108,11 +108,11 @@
     },
     {
       "level": "ok",
-      "message": "sum GF 149 != sum GA 149",
+      "message": "sum GF 154 != sum GA 154",
       "name": "table.sco:premiership.goals_balance",
       "value": {
-        "ga": 149,
-        "gf": 149
+        "ga": 154,
+        "gf": 154
       }
     },
     {
@@ -204,15 +204,51 @@
     },
     {
       "level": "ok",
-      "message": "484 JSON files",
-      "name": "published.files",
-      "value": 484
+      "message": "4 official played league fixtures for 2026-27",
+      "name": "results.official_feed",
+      "value": 4
     },
     {
       "level": "ok",
-      "message": "files over 2 MB: []",
-      "name": "published.size",
+      "message": "0 official fixture(s) missing from canonical results: []",
+      "name": "results.official_represented",
       "value": []
+    },
+    {
+      "level": "ok",
+      "message": "0 official score mismatch(es): []",
+      "name": "results.official_score",
+      "value": []
+    },
+    {
+      "level": "ok",
+      "message": "table played sum 110 -> 55 matches, canonical 55",
+      "name": "results.table.sco:premiership.balance",
+      "value": {
+        "canonical": 55,
+        "played_sum": 110
+      }
+    },
+    {
+      "level": "ok",
+      "message": "Aberdeen table played 10, canonical 10",
+      "name": "results.table.sco:premiership.aberdeen",
+      "value": {
+        "canonical": 10,
+        "table": 10
+      }
+    },
+    {
+      "level": "ok",
+      "message": "0 official/football-data score conflict(s): []",
+      "name": "results.source_conflict",
+      "value": []
+    },
+    {
+      "level": "ok",
+      "message": "485 JSON files",
+      "name": "published.files",
+      "value": 485
     },
     {
       "level": "ok",
@@ -227,11 +263,33 @@
       "value": []
     }
   ],
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "errors": 0,
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
+  },
   "status": "pass",
   "strict": true,
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "warnings": 0
 }

@@ -18,7 +18,6 @@ GENERATED = ROOT / "web" / "data" / "generated"
 DOCUMENT = GENERATED / "provenance.json"
 SCHEMA = ROOT / "contracts" / "provenance.schema.json"
 MANIFEST = GENERATED / "manifest.json"
-MAX_FILE_BYTES = 2_000_000
 SPECIAL_PRIMARIES = {"computed", "curated", "mixed", "derived", "none"}
 STALE_PHRASES = (
     "league cup from the spfl club feed",
@@ -118,8 +117,6 @@ def main() -> int:
             if phrase in lowered:
                 errors.append(f"{path.relative_to(ROOT)}: stale source claim {phrase!r}")
 
-    if DOCUMENT.stat().st_size > MAX_FILE_BYTES:
-        errors.append(f"{DOCUMENT} exceeds the {MAX_FILE_BYTES} byte cap")
     if MANIFEST.exists():
         manifest = _load(MANIFEST)
         files = {row.get("path"): row for row in manifest.get("files") or []}

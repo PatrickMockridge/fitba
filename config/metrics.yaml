@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.7.0
+registry_version: 3.8.0
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -2041,7 +2041,7 @@ metrics:
   status: active
 - id: consistency.summary
   label: Cross-surface consistency audit
-  description: Pass/fail counts for the published cross-surface consistency checks, including the former-player and affiliation checks.
+  description: Pass/fail counts for the published cross-surface consistency checks, including the former-player, result/form, epoch and manifest checks.
   value_type: object
   fields: [checks, passed, failed, rows_checked, fields_checked]
   formula: One record per named consistency check; passed + failed = checks.
@@ -2072,13 +2072,13 @@ metrics:
     incorrect shared formula.
   owner: patrickmockridge
   reviewed: '2026-10-24'
-  version: 2
+  version: 3
   status: active
 - id: manifest.freshness
   label: Freshness thresholds
-  description: Dataset, availability and former-player staleness thresholds exposed to the client.
+  description: Dataset, availability and per-source freshness states exposed to the client.
   value_type: object
-  fields: [dataset_stale_after_hours, availability_stale_after_days, former_players_refreshed_at, former_players_stale_after_hours]
+  fields: [dataset_stale_after_hours, availability_stale_after_days, former_players_refreshed_at, former_players_stale_after_hours, dataset_id, update_id, sources, stale_sources]
   formula: Read from config/matchday.yaml stale_after_hours,
     config/availability.yaml policy.max_age_days and the former-player
     refresh timestamp.
@@ -2106,10 +2106,10 @@ metrics:
   implementation: null
   source_paths: []
   limitations:
-  - Config-backed thresholds, not a measurement of source freshness.
+  - Config-backed thresholds plus measured source ages; not a quality verdict.
   owner: patrickmockridge
   reviewed: '2026-10-24'
-  version: 2
+  version: 3
   status: active
 - id: clubs.aberdeen
   label: Club payload

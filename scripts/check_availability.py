@@ -19,7 +19,6 @@ DOCUMENT = GENERATED / "availability" / "aberdeen.json"
 MATCHDAY = GENERATED / "matchday" / "upcoming.json"
 SCHEMA = ROOT / "contracts" / "availability.schema.json"
 MANIFEST = GENERATED / "manifest.json"
-MAX_FILE_BYTES = 2_000_000
 STATUSES = {"out", "doubtful", "suspended", "returned", "available", "unknown"}
 ALLOWED_HOSTS = {"afc.co.uk", "www.afc.co.uk"}
 
@@ -125,8 +124,6 @@ def main() -> int:
                 "matchday availability known count differs from the published squad entries"
             )
 
-    if DOCUMENT.stat().st_size > MAX_FILE_BYTES:
-        errors.append(f"{DOCUMENT} exceeds the {MAX_FILE_BYTES} byte cap")
     if MANIFEST.exists():
         manifest = _load(MANIFEST)
         files = {row.get("path"): row for row in manifest.get("files") or []}

@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "D",
@@ -138,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "P. Leven",
@@ -1286,6 +1288,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1308,6 +1311,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1520,7 +1541,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: Livingston 0.84, Aberdeen 0.58."
+        "text": "Shot expectation: Livingston 0.83, Aberdeen 0.58."
       }
     ],
     "events_available": true,
@@ -1792,6 +1813,7 @@
       "team_name": "Aberdeen"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -1799,9 +1821,9 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.579,
+      "goals_minus": -0.581,
       "goals_position": "within",
-      "high": 1.095,
+      "high": 1.098,
       "low": 0.0,
       "penalties": 0,
       "penalties_known": true,
@@ -1818,7 +1840,7 @@
         "shots_on_target": 3,
         "shots_outsidebox": 2
       },
-      "value": 0.579,
+      "value": 0.581,
       "xg_per_shot": 0.116
     },
     "evaluation_href": "/analysis/xg/",
@@ -1832,10 +1854,10 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.842,
+      "goals_minus": -0.834,
       "goals_position": "within",
-      "high": 1.358,
-      "low": 0.121,
+      "high": 1.351,
+      "low": 0.108,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -1851,8 +1873,8 @@
         "shots_on_target": 1,
         "shots_outsidebox": 1
       },
-      "value": 0.842,
-      "xg_per_shot": 0.094
+      "value": 0.834,
+      "xg_per_shot": 0.093
     },
     "model_id": "fxg-3",
     "model_range_level": 0.8,

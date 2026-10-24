@@ -1100,5 +1100,64 @@ def scouting_status_command() -> None:
         console.print(f"unmapped formations: {unmapped}")
 
 
+@app.command()
+def update(
+    mode: Annotated[
+        str, typer.Option(help="daily, matchday or ci")
+    ] = "daily",
+    force_results: Annotated[
+        bool,
+        typer.Option("--force-results", help="Bypass the results/fixtures caches"),
+    ] = False,
+    only: Annotated[str | None, typer.Option(help="Comma-separated step ids to run")] = None,
+    skip: Annotated[str | None, typer.Option(help="Comma-separated step ids to skip")] = None,
+    dry_run: Annotated[bool, typer.Option(help="Print the ordered plan only")] = False,
+    publish_after: Annotated[
+        bool, typer.Option("--publish/--no-publish", help="Publish after a successful build")
+    ] = True,
+    allow_stale: Annotated[
+        bool,
+        typer.Option("--allow-stale", help="Allow optional sources to be stale on publish"),
+    ] = False,
+    resume: Annotated[bool, typer.Option(help="Resume a previous interrupted run")] = False,
+    force_run: Annotated[
+        bool, typer.Option("--force", help="Run matchday mode even when the due gate says no")
+    ] = False,
+    json_output: Annotated[
+        bool, typer.Option("--json", help="Print the run report as JSON")
+    ] = False,
+) -> None:
+    """Run the single ordered data update."""
+    from fitba.update import run_update
+
+    if mode not in {"daily", "matchday", "ci"}:
+        raise typer.BadParameter("mode must be daily, matchday or ci")
+    state = run_update(
+        mode=mode,
+        force_results=force_results,
+        only=only,
+        skip=skip,
+        dry_run=dry_run,
+        publish=publish_after,
+        allow_stale=allow_stale,
+        resume=resume,
+        force_run=force_run,
+    )
+    if json_output:
+        console.print_json(data=state)
+    else:
+        console.print(
+            f"update {state.get('status')} · mode {state.get('mode')} · "
+            f"{state.get('update_id')}"
+        )
+        for step in state.get("steps") or []:
+            suffix = f" · {step.get('error')}" if step.get("error") else ""
+            console.print(f"  {step.get('id')}: {step.get('status')}{suffix}")
+        for source in state.get("stale_sources") or []:
+            console.print(f"  stale: {source.get('source')} ({source.get('reason')})")
+    if state.get("status") == "failed":
+        raise typer.Exit(code=1)
+
+
 if __name__ == "__main__":
     app()

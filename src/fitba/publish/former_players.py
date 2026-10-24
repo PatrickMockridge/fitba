@@ -29,6 +29,7 @@ from fitba.ingest.former_players import (
 )
 from fitba.ingest.history import load_all_history
 from fitba.normalize.teams import TeamRegistry
+from fitba.publish.epoch import EpochModel
 from fitba.settings import former_players as former_config
 from fitba.settings import (
     history_markets,
@@ -62,8 +63,7 @@ class FormerPlayer(BaseModel):
     sell_on_clause_id: str | None = None
 
 
-class FormerPlayersDocument(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+class FormerPlayersDocument(EpochModel):
 
     schema_version: str
     club_id: str
@@ -82,8 +82,7 @@ class FormerPlayersDocument(BaseModel):
     notes: str
 
 
-class FormerSeasonsDocument(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+class FormerSeasonsDocument(EpochModel):
 
     schema_version: str
     generated_at: str

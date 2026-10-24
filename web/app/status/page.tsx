@@ -1,4 +1,5 @@
 import { ContractPage } from "@/components/ContractPage";
+import { formatDecimal } from "@/lib/format";
 import {
   getConsistencyReport,
   getManifest,
@@ -59,6 +60,122 @@ export default function StatusPage() {
           <span className="stat-label">Profile</span>
           <span className="stat-value">{manifest.profile}</span>
         </div>
+      </div>
+
+      <div className="grid two-col">
+        <section className="card" data-contract="status.update">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Update</p>
+              <h2>What ran to build this dataset</h2>
+            </div>
+            <span
+              className={
+                manifest.update?.status === "ok"
+                  ? "badge badge-ok"
+                  : "badge badge-warn"
+              }
+            >
+              {manifest.update?.status ?? "publish only"}
+            </span>
+          </div>
+          <p>
+            Mode {manifest.update?.mode ?? "publish"} · run{" "}
+            <code>{manifest.update?.id ?? manifest.dataset_version}</code>
+            {manifest.update?.finished_at
+              ? ` · finished ${manifest.update.finished_at}`
+              : ""}
+          </p>
+          {manifest.update?.steps?.length ? (
+            <p className="fine-print">
+              {manifest.update.steps.length} recorded steps ·{" "}
+              {manifest.update.steps.filter((step) => step.status !== "ok").length}{" "}
+              not ok
+              {manifest.update.steps.some((step) => step.status !== "ok")
+                ? `: ${manifest.update.steps
+                    .filter((step) => step.status !== "ok")
+                    .map((step) => step.id)
+                    .join(", ")}`
+                : null}
+            </p>
+          ) : null}
+          {(manifest.freshness?.stale_sources?.length ?? 0) > 0 ? (
+            <p className="fine-print">
+              Stale optional sources, labelled in the payloads:{" "}
+              {manifest.freshness?.stale_sources?.join(", ")}
+            </p>
+          ) : null}
+          {manifest.update?.results_guard?.status ? (
+            <p className="fine-print">
+              Result guard: {manifest.update.results_guard.status}
+              {manifest.update.results_guard.conflicts?.length
+                ? ` · ${manifest.update.results_guard.conflicts.length} source conflict(s)`
+                : " · no source conflicts"}
+            </p>
+          ) : null}
+        </section>
+        <section className="card" data-contract="status.freshness">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Sources</p>
+              <h2>Per-source freshness</h2>
+            </div>
+            <span
+              className={
+                (manifest.freshness?.stale_sources?.length ?? 0) > 0
+                  ? "badge badge-warn"
+                  : "badge badge-ok"
+              }
+            >
+              {manifest.freshness?.stale_sources?.length ?? 0} stale
+            </span>
+          </div>
+          <p className="fine-print">
+            Every source the update consumes, with its age against its own
+            refresh window. Required sources must be fresh before publish.
+          </p>
+          <div className="table-wrap">
+            <table className="league-table compact">
+              <caption className="visually-hidden">Per-source freshness</caption>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th className="num">Age (h)</th>
+                  <th className="num">TTL (h)</th>
+                  <th>State</th>
+                  <th>Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(manifest.freshness?.sources ?? {}).map(
+                  ([sourceId, source]) => (
+                    <tr key={sourceId}>
+                      <td>{sourceId}</td>
+                      <td className="num">
+                        {source.age_hours == null
+                          ? "—"
+                          : formatDecimal(source.age_hours, 1)}
+                      </td>
+                      <td className="num">{formatDecimal(source.ttl_hours, 0)}</td>
+                      <td>
+                        <span
+                          className={
+                            source.state === "fresh"
+                              ? "badge badge-ok"
+                              : "badge badge-warn"
+                          }
+                        >
+                          {source.state}
+                        </span>
+                      </td>
+                      <td>{source.required ? "yes" : "no"}</td>
+                    </tr>
+                  ),
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
       <div className="grid two-col">

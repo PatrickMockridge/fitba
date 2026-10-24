@@ -243,6 +243,21 @@ def _check_parameters(registry: Any, report: Report) -> None:
         )
 
 
+EPOCH_FIELDS = {
+    "dataset_id",
+    "update_id",
+    "published_at",
+    "served_by_update_id",
+    "dataset_state",
+    "stale_reason",
+    "source_snapshots",
+}
+
+
+def _without_epoch(payload: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in payload.items() if key not in EPOCH_FIELDS}
+
+
 def _check_published_registry(registry: Any, data: Path, report: Report) -> dict[str, Any] | None:
     path = data / "metrics" / "registry.json"
     if not path.exists():
@@ -250,8 +265,10 @@ def _check_published_registry(registry: Any, data: Path, report: Report) -> dict
         return None
     published = _load_json(path)
     expected = build_registry_payload(registry)
+    comparable = _without_epoch(published)
+    comparable.pop("generated_at", None)
     report.check(
-        _canonical(published) == _canonical(expected),
+        _canonical(comparable) == _canonical(expected),
         "published.registry",
         "metrics/registry.json does not match config/metrics.yaml; republish",
     )
@@ -368,7 +385,7 @@ def _check_audit(data: Path, registry: Any, report: Report) -> dict[str, Any] | 
         allowlist=audit.get("allowlist"),
     )
     report.check(
-        _canonical(reproduced) == _canonical(audit),
+        _canonical(reproduced) == _canonical(_without_epoch(audit)),
         "audit.reproducible",
         "audit/metrics.json does not reproduce from the published corpus and registry",
     )

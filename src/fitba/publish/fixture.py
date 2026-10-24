@@ -20,6 +20,7 @@ from fitba.ingest.history import (
 )
 from fitba.ingest.match_extras import derive_second_yellows, load_events, load_lineups
 from fitba.normalize.fixture_registry import FixtureRecord, build_fixture_registry
+from fitba.normalize.results import official_played_rows, overlay_official_scores
 from fitba.normalize.teams import TeamRegistry
 from fitba.settings import MARTS_DIR, fixtures_policy, source_ids
 from fitba.util.dates import utc_now_iso
@@ -29,6 +30,14 @@ SCHEMA_VERSION = "1.2.0"
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", populate_by_name=True)
+
+    dataset_id: str | None = None
+    update_id: str | None = None
+    published_at: str | None = None
+    served_by_update_id: str | None = None
+    dataset_state: str | None = None
+    stale_reason: str | None = None
+    source_snapshots: dict[str, Any] | None = None
 
 
 class SummaryBullet(StrictModel):
@@ -387,7 +396,12 @@ def _float(value: Any) -> float | None:
 
 
 def _overlay_club_fixtures(fixtures: pl.DataFrame, *, season: str) -> pl.DataFrame:
-    """Overlay the official SPFL result for Aberdeen onto a history fixture frame."""
+    """Overlay official SPFL results onto the API-shaped history fixture frame.
+
+    This is the same precedence rule as the canonical match layer, but the
+    history frame carries API team names rather than football-data ids, so the
+    shared matcher is keyed on canonical display names.
+    """
     if not fixtures.height:
         return fixtures
     try:
@@ -396,39 +410,35 @@ def _overlay_club_fixtures(fixtures: pl.DataFrame, *, season: str) -> pl.DataFra
         return fixtures
     if not club.height:
         return fixtures
-    played = club.filter(
-        (pl.col("status") == "played")
-        & (pl.col("season") == season)
-        & pl.col("home_goals").is_not_null()
-        & pl.col("away_goals").is_not_null()
-    )
+    played = official_played_rows(club, seasons={season})
     if not played.height:
         return fixtures
     teams = TeamRegistry()
-    rows = fixtures.to_dicts()
-    changed = False
-    for item in played.to_dicts():
-        date_value = str(item.get("date"))
-        home = teams.display_name(str(item.get("home_team_name") or ""))
-        away = teams.display_name(str(item.get("away_team_name") or ""))
-        for row in rows:
-            if str(row.get("date"))[:10] != date_value[:10]:
-                continue
-            if (
-                teams.display_name(str(row.get("home_team_name") or "")) != home
-                or teams.display_name(str(row.get("away_team_name") or "")) != away
-            ):
-                continue
-            row.update(
-                {
-                    "status": "FT",
-                    "home_goals": int(item["home_goals"]),
-                    "away_goals": int(item["away_goals"]),
-                }
-            )
-            changed = True
-            break
-    return pl.DataFrame(rows, infer_schema_length=None) if changed else fixtures
+    normalised = played.with_columns(
+        pl.col("home_team_name")
+        .map_elements(teams.display_name, return_dtype=pl.String)
+        .alias("home_team_name"),
+        pl.col("away_team_name")
+        .map_elements(teams.display_name, return_dtype=pl.String)
+        .alias("away_team_name"),
+    )
+
+    def key(row: dict[str, Any]) -> tuple[str, str, str]:
+        return (
+            str(row.get("competition_id") or ""),
+            teams.display_name(str(row.get("home_team_name") or "")),
+            teams.display_name(str(row.get("away_team_name") or "")),
+        )
+
+    rows, _ = overlay_official_scores(
+        fixtures.to_dicts(),
+        normalised,
+        key_fn=key,
+        date_tolerance_days=fixtures_policy().get("results", {}).get("date_tolerance_days", 1),
+    )
+    if rows == fixtures.to_dicts():
+        return fixtures
+    return pl.DataFrame(rows, infer_schema_length=None)
 
 
 def _load_season_data() -> dict[str, dict[str, Any]]:

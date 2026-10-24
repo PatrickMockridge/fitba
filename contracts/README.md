@@ -6,7 +6,8 @@ Planned contracts for the ingestion and publication layers:
 - `player_match.yml` — minutes, goals/assists, shots and xG bounds.
 - `events.yml` — period, coordinates, event type, duplicate source event ids.
 - `published.yml` — JSON schema for each generated file, required fields, no
-  NaN/Infinity, foreign-key existence and file-size limits.
+  NaN/Infinity and foreign-key existence. Published file size is not capped
+  arbitrarily; provenance and checksums are the guard.
 - `player-page.schema.json` — **implemented**. Closed JSON Schema for the
   player-page result document (`identity`, fixed panel order, Position, Playing
   time, Performance and Records panels). Generated from the Pydantic result
@@ -32,6 +33,13 @@ Planned contracts for the ingestion and publication layers:
   optional provider snapshot with source/verified_at.
 - `needs.schema.json` — **implemented**. Seven role-family needs, categories,
   market routes, roster space and role profiles. No targets or fees.
+
+Every strict document schema accepts the additive epoch fields
+(`dataset_id`, `update_id`, `published_at`, `served_by_update_id`,
+`dataset_state`, `stale_reason`, `source_snapshots`) through the shared
+`EpochFields` mixin. A stale carry-forward keeps the content's old ids and names
+its reason. Array payloads carry their epoch in the manifest `files[]` entry.
+The manifest schema version moves to 1.1.0 for this additive change.
 
 Phase 1 implements the equivalent checks in `src/fitba/validate/checks.py` and the
 publication guard in `scripts/check_publication.py`. The YAML contracts will be wired

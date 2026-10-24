@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "W",
@@ -138,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "M. Mackay",
@@ -1390,6 +1392,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1469,6 +1472,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1693,7 +1714,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: Aberdeen 1.71, Ross County 0.76."
+        "text": "Shot expectation: Aberdeen 1.71, Ross County 0.75."
       }
     ],
     "events_available": true,
@@ -2165,6 +2186,7 @@
       "team_name": "Ross County"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -2172,10 +2194,10 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.757,
+      "goals_minus": -0.753,
       "goals_position": "within",
-      "high": 1.273,
-      "low": 0.036,
+      "high": 1.27,
+      "low": 0.028,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2191,8 +2213,8 @@
         "shots_on_target": 2,
         "shots_outsidebox": 5
       },
-      "value": 0.757,
-      "xg_per_shot": 0.069
+      "value": 0.753,
+      "xg_per_shot": 0.068
     },
     "evaluation_href": "/analysis/xg/",
     "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
@@ -2205,10 +2227,10 @@
       "goals": 4,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": 2.286,
+      "goals_minus": 2.289,
       "goals_position": "above",
-      "high": 2.23,
-      "low": 0.993,
+      "high": 2.228,
+      "low": 0.985,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2224,7 +2246,7 @@
         "shots_on_target": 6,
         "shots_outsidebox": 1
       },
-      "value": 1.714,
+      "value": 1.711,
       "xg_per_shot": 0.132
     },
     "model_id": "fxg-3",

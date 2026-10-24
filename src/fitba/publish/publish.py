@@ -49,12 +49,14 @@ from fitba.metrics.audit import (
 )
 from fitba.metrics.consistency import run_consistency
 from fitba.metrics.registry import load_registry, registry_checksum
+from fitba.normalize.results import OverlayReport, official_competition_ids
 from fitba.normalize.schedule import load_schedule
 from fitba.normalize.teams import TeamRegistry
 from fitba.normalize.transfer_audit import build_transfer_audit
 from fitba.publish.analysis import build_analysis_payload
 from fitba.publish.availability import build_availability_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
+from fitba.publish.epoch import DatasetStamp, current_stamp, set_stamp, stamp_payload
 from fitba.publish.fixture import build_fixture_payloads
 from fitba.publish.former_players import build_former_bundle
 from fitba.publish.history import build_history_payloads
@@ -115,10 +117,14 @@ from fitba.settings import (
     transfer_policy as transfer_policy_config,
 )
 from fitba.util.dates import current_season, seasons_between, utc_now_iso
-from fitba.validate.checks import validate_matches, validate_published, validate_tables
+from fitba.validate.checks import (
+    validate_matches,
+    validate_published,
+    validate_results,
+    validate_tables,
+)
 
-SCHEMA_VERSION = "1.0.0"
-MAX_FILE_BYTES = 2_000_000
+SCHEMA_VERSION = "1.1.0"
 
 
 @dataclass(slots=True)
@@ -137,28 +143,32 @@ def _dumps(payload: Any) -> bytes:
 
 def _write_compact(path: Path, payload: Any) -> dict[str, Any]:
     """Write a machine-oriented index without pretty-printing, under the same cap."""
-    data = orjson.dumps(payload, option=orjson.OPT_SORT_KEYS, default=str)
-    if len(data) > MAX_FILE_BYTES:
-        raise ValueError(f"{path} is {len(data)} bytes, over the {MAX_FILE_BYTES} cap")
+    stamped = stamp_payload(payload)
+    data = orjson.dumps(stamped, option=orjson.OPT_SORT_KEYS, default=str)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data)
-    return {
-        "path": str(path),
-        "bytes": len(data),
-        "checksum": "sha256:" + hashlib.sha256(data).hexdigest(),
-    }
+    return _write_info(path, data, stamped)
 
 
 def _write(path: Path, payload: Any) -> dict[str, Any]:
-    data = _dumps(payload)
-    if len(data) > MAX_FILE_BYTES:
-        raise ValueError(f"{path} is {len(data)} bytes, over the {MAX_FILE_BYTES} cap")
+    stamped = stamp_payload(payload)
+    data = _dumps(stamped)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data)
+    return _write_info(path, data, stamped)
+
+
+def _write_info(path: Path, data: bytes, payload: Any) -> dict[str, Any]:
+    stamp = current_stamp()
+    document = payload if isinstance(payload, dict) else {}
     return {
         "path": str(path),
         "bytes": len(data),
         "checksum": "sha256:" + hashlib.sha256(data).hexdigest(),
+        "dataset_id": document.get("dataset_id") or (stamp.dataset_id if stamp else None),
+        "update_id": document.get("update_id") or (stamp.update_id if stamp else None),
+        "generated_at": document.get("generated_at") or (stamp.published_at if stamp else None),
+        "dataset_state": document.get("dataset_state") or "fresh",
     }
 
 
@@ -1155,10 +1165,12 @@ def publish(
     out: Path | None = None,
     profile: str = "public",
     require_validation: bool = False,
+    update_id: str | None = None,
 ) -> PublishReport:
     ensure_dirs()
     target = out or WEB_DATA_DIR
-    all_matches = load_matches(None)
+    overlay_report = OverlayReport(club="aberdeen", precedence="spfl")
+    all_matches = load_matches(None, report=overlay_report)
     seasons = sorted(all_matches["season"].unique().to_list())
     target_season = season or current_season()
     if target_season not in seasons:
@@ -1172,6 +1184,23 @@ def publish(
     tables = tables_by_season[target_season]
     generated_at = utc_now_iso()
     dataset_version = f"{generated_at}-{_git_sha()}"
+    effective_update_id = update_id or f"publish-{generated_at}"
+    from fitba.freshness import collect_source_snapshots
+
+    source_freshness = collect_source_snapshots()
+    source_snapshots = {
+        source_id: source.get("refreshed_at")
+        for source_id, source in source_freshness.items()
+        if source.get("refreshed_at")
+    }
+    set_stamp(
+        DatasetStamp(
+            dataset_id=dataset_version,
+            update_id=effective_update_id,
+            published_at=generated_at,
+            source_snapshots=source_snapshots,
+        )
+    )
 
     previous_matchday = None
     previous_matchday_path = target / "matchday" / "upcoming.json"
@@ -2423,6 +2452,60 @@ def publish(
         }
     )
 
+    # The result audit is the published evidence for the official overlay and
+    # the canonical-vs-table reconciliation. It is written before validation so
+    # the manifest and the freshness report can reference the same facts.
+    competition_ids = sorted(official_competition_ids())
+    target_playable = matches.filter(
+        (pl.col("season") == target_season)
+        & pl.col("competition_id").is_in(competition_ids)
+        & pl.col("phase").eq("regular")
+        & pl.col("home_goals").is_not_null()
+        & pl.col("away_goals").is_not_null()
+    )
+    target_tables = tables_by_season.get(target_season) or {}
+    table_played = sum(
+        int(table["played"].sum())
+        for competition_id, table in target_tables.items()
+        if competition_id in competition_ids and table.height
+    )
+    coverage_matches = sum(
+        int(row.get("matches") or 0)
+        for row in (coverage.get("competitions") or [])
+        if str(row.get("id")) in competition_ids
+    )
+    results_audit = {
+        "schema_version": "1.0.0",
+        "generated_at": generated_at,
+        "season": target_season,
+        "status": "pass" if not overlay_report.conflicts else "warning",
+        "source_precedence": overlay_report.precedence,
+        "official_fixtures": overlay_report.official_fixtures,
+        "canonical_fixtures": target_playable.height,
+        "matched": overlay_report.matched,
+        "filled": overlay_report.filled,
+        "appended": overlay_report.appended,
+        "duplicates_merged": overlay_report.duplicates_merged,
+        "table_played": table_played,
+        "table_matches": table_played // 2,
+        "coverage_matches": coverage_matches,
+        "conflicts": overlay_report.conflicts,
+        "unmatched_official": overlay_report.unmatched_official,
+        "error": overlay_report.error,
+    }
+    results_info = _write(temp / "audit" / "results.json", results_audit)
+    written.append(results_info)
+    marts.append(
+        {
+            "id": "audit.results",
+            "path": "audit/results.json",
+            "rows": 1,
+            "checksum": results_info["checksum"],
+            "season": target_season,
+            "row_basis": "one result-overlay audit document",
+        }
+    )
+
     # Validation and audit run against the complete public corpus, before the
     # manifest. A failed audit blocks the atomic replace below.
     validation_checks = [
@@ -2430,6 +2513,13 @@ def publish(
         for check in (
             validate_matches(matches, season=target_season)
             + validate_tables(tables, season=target_season)
+            + validate_results(
+                matches,
+                tables,
+                season=target_season,
+                report=overlay_report,
+                strict=require_validation,
+            )
             + validate_published(temp)
         )
     ]
@@ -2447,7 +2537,20 @@ def publish(
     registry_info = _write(temp / "metrics" / "registry.json", registry_payload)
     written.append(registry_info)
 
-    consistency_results = run_consistency(load_corpus(temp))
+    # The manifest is written last, but the epoch and manifest checks need one.
+    # Build a provisional manifest over the files already written; its checksums
+    # are not needed here (the update guard re-runs the checks on the final
+    # corpus with the real manifest).
+    pre_corpus = load_corpus(temp)
+    pre_corpus["manifest.json"] = {
+        "dataset_version": dataset_version,
+        "generated_at": generated_at,
+        "update": {"id": effective_update_id},
+        "files": [
+            {"path": path} for path in pre_corpus if path != "manifest.json"
+        ],
+    }
+    consistency_results = run_consistency(pre_corpus)
     consistency_failures = [
         result for result in consistency_results if result.status != "pass"
     ]
@@ -2491,22 +2594,67 @@ def publish(
         ]
         raise RuntimeError("cross-surface consistency failed: " + "; ".join(messages[:5]))
 
+    from fitba.update import load_update_state
+
+    run_state = load_update_state()
+    if str(run_state.get("run_id") or "") != effective_update_id:
+        run_state = {}
+    stale_sources = sorted(
+        {
+            source_id
+            for source_id, source in source_freshness.items()
+            if str(source.get("state")) != "fresh"
+        }
+        | {
+            str(item.get("source"))
+            for item in run_state.get("stale_sources") or []
+            if item.get("source")
+        }
+    )
+    freshness_block = {
+        "dataset_stale_after_hours": int(
+            (matchday_config() or {}).get("stale_after_hours") or 48
+        ),
+        "availability_stale_after_days": int(
+            (availability_policy() or {}).get("max_age_days") or 21
+        ),
+        "former_players_refreshed_at": (
+            (former_index.get("coverage") or {}).get("post_career_updated_at")
+        ),
+        "former_players_stale_after_hours": 24,
+        "dataset_id": dataset_version,
+        "update_id": effective_update_id,
+        "sources": source_freshness,
+        "stale_sources": stale_sources,
+    }
+    update_block = {
+        "id": effective_update_id,
+        "mode": run_state.get("mode") or "publish",
+        "status": (
+            ("degraded" if stale_sources else "ok")
+            if run_state.get("status") in (None, "running")
+            else run_state.get("status")
+        ),
+        "started_at": run_state.get("started_at"),
+        "finished_at": run_state.get("finished_at") or generated_at,
+        "steps": run_state.get("steps") or [],
+        "omitted_steps": [],
+        "results_guard": {
+            "status": results_audit.get("status"),
+            "table_matches": results_audit.get("table_matches"),
+            "coverage_matches": results_audit.get("coverage_matches"),
+            "conflicts": results_audit.get("conflicts") or [],
+        },
+    }
+
     corpus = load_corpus(temp)
     # The audit needs the freshness block before the final manifest is written;
     # the final manifest is a superset with the audit checksum.
     corpus["manifest.json"] = {
-        "freshness": {
-            "dataset_stale_after_hours": int(
-                (matchday_config() or {}).get("stale_after_hours") or 48
-            ),
-            "availability_stale_after_days": int(
-                (availability_policy() or {}).get("max_age_days") or 21
-            ),
-            "former_players_refreshed_at": (
-                (former_index.get("coverage") or {}).get("post_career_updated_at")
-            ),
-            "former_players_stale_after_hours": 24,
-        }
+        "dataset_version": dataset_version,
+        "generated_at": generated_at,
+        "freshness": freshness_block,
+        "update": update_block,
     }
     audit_payload = build_audit(
         corpus=corpus,
@@ -2585,18 +2733,8 @@ def publish(
         "generated_at": generated_at,
         "season": target_season,
         "profile": profile,
-        "freshness": {
-            "dataset_stale_after_hours": int(
-                (matchday_config() or {}).get("stale_after_hours") or 48
-            ),
-            "availability_stale_after_days": int(
-                (availability_policy() or {}).get("max_age_days") or 21
-            ),
-            "former_players_refreshed_at": (
-                (former_index.get("coverage") or {}).get("post_career_updated_at")
-            ),
-            "former_players_stale_after_hours": 24,
-        },
+        "freshness": freshness_block,
+        "update": update_block,
         "sources": sources,
         "provenance": {
             "path": "provenance.json",
@@ -2650,6 +2788,10 @@ def publish(
                 "path": str(Path(info["path"]).relative_to(temp)),
                 "bytes": info["bytes"],
                 "checksum": info["checksum"],
+                "dataset_id": info.get("dataset_id"),
+                "update_id": info.get("update_id"),
+                "generated_at": info.get("generated_at"),
+                "dataset_state": info.get("dataset_state"),
             }
             for info in written
         ],

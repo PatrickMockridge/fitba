@@ -17,6 +17,9 @@ results and form record, the squad and scouting. It answers, in order:
 4. which squad decisions are coming;
 5. where the evidence lives.
 
+The hero record is the league table row, not a second derivation. A finished
+official result appears in the hero, the table and the form guide together.
+
 It is not a claim register, a second matchday dashboard or a transfer-window
 countdown. The old case page, owner view and xG tables are not rendered here;
 `/analysis/xg/` remains the xG deep page.

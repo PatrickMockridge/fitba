@@ -35,7 +35,7 @@ case "$MODE" in
   daily)
     ;;
   matchday)
-    due_output="$(python3 "$ROOT/scripts/matchday_refresh_due.py")"
+    due_output="$(uv run python "$ROOT/scripts/matchday_refresh_due.py")"
     echo "$due_output"
     echo "$due_output" | grep -q "due: true" || { echo "no post-match update due"; exit 0; }
     ;;
@@ -45,47 +45,8 @@ case "$MODE" in
     ;;
 esac
 
-run_optional() {
-  "$@" || echo "warning: $* failed; continuing"
-}
+uv run fitba update --mode "$MODE" --force-results --json >> "$STATE_DIR/update.jsonl"
 
-uv run fitba ingest --season current
-uv run fitba cups
-run_optional uv run fitba fixtures --club aberdeen
-run_optional uv run fitba history --backfill --season current \
-  --stages fixtures,lineups,events,rosters,players,team_stats --max-requests 80
-run_optional uv run fitba matchday --refresh --max-requests 24
-run_optional uv run fitba transfers
-run_optional uv run fitba former-players refresh --max-requests 180
-run_optional uv run fitba squad
-run_optional uv run fitba availability --refresh
-run_optional uv run fitba career refresh
-run_optional uv run fitba news
-run_optional uv run fitba forum --limit 6
-
-uv run fitba build --season all
-uv run fitba validate --season current --strict
-uv run fitba publish --season current --profile public --require-validation
-
-uv run python scripts/check_publication.py
-uv run python scripts/check_metrics.py --strict
-uv run python scripts/check_transfers.py
-uv run python scripts/check_former_players.py
-uv run python scripts/check_names.py
-uv run python scripts/check_history.py
-uv run python scripts/check_matchday.py
-uv run python scripts/check_themes.py
-uv run python scripts/check_xg.py --published
-uv run python scripts/check_provenance.py
-uv run python scripts/check_availability.py
-uv run python scripts/check_needs.py
-uv run python scripts/check_rumours.py
-uv run python scripts/check_squad.py
-uv run python scripts/check_roles.py
-uv run python scripts/check_shapes.py
-uv run python scripts/check_career_roles.py
-uv run python scripts/check_player_page.py
-uv run python scripts/check_player_attributes.py
 
 if [ -z "$(git status --porcelain web/data/generated)" ]; then
   echo "no data changes"

@@ -82,7 +82,9 @@ splits. The split table shows played, W-D-L, points, PPG, goals for/against and
 shots for/against per match.
 
 The opponent's form is measured with the same function as Aberdeen's. It is not
-a prediction and it does not mix cup and league matches silently.
+a prediction and it does not mix cup and league matches silently. Form and the
+strength block read the same canonical result frame as the league table; a
+finished official Aberdeen result cannot appear in one and not the other.
 
 ## Style and the three-way lean
 

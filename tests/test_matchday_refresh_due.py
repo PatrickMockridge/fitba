@@ -1,70 +1,132 @@
-"""Tests for the post-match refresh gate."""
+"""Tests for the result-aware post-match refresh gate."""
 
 from __future__ import annotations
 
-import importlib.util
-from datetime import UTC, datetime
-from pathlib import Path
+from datetime import UTC, date, datetime
 
-ROOT = Path(__file__).resolve().parents[1]
-SPEC = importlib.util.spec_from_file_location(
-    "matchday_refresh_due", ROOT / "scripts" / "matchday_refresh_due.py"
-)
-assert SPEC and SPEC.loader
-MODULE = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(MODULE)
+import polars as pl
+
+from fitba.update import refresh_due
 
 
 def _schedule(*rows: dict) -> dict:
     return {"scheduled": list(rows)}
 
 
-def test_refresh_after_a_finished_summer_fixture() -> None:
-    schedule = _schedule(
+def _fixture(
+    *,
+    date_value: str = "2026-10-24",
+    home: str = "sco:dundee-united",
+    away: str = "sco:aberdeen",
+) -> dict:
+    return {
+        "date": date_value,
+        "kickoff": "15:00",
+        "status": "scheduled",
+        "home_team_id": home,
+        "away_team_id": away,
+    }
+
+
+def _canonical(*rows: tuple[str, str, str]) -> pl.DataFrame:
+    return pl.DataFrame(
         {
-            "date": "2026-10-24",
-            "kickoff": "15:00",
-            "status": "scheduled",
+            "date": [date.fromisoformat(row[0]) for row in rows],
+            "home_team_id": [row[1] for row in rows],
+            "away_team_id": [row[2] for row in rows],
+            "home_goals": [3 for _ in rows],
+            "away_goals": [2 for _ in rows],
         }
     )
-    manifest = {"generated_at": "2026-10-24T10:00:00+00:00"}
-    # 15:00 Europe/London on 24 October is 14:00 UTC; three hours later is
-    # 17:00 UTC.
-    assert MODULE.refresh_due(schedule, manifest, datetime(2026, 10, 24, 18, 0, tzinfo=UTC))
+
+
+def test_due_when_a_finished_fixture_has_no_canonical_result() -> None:
+    schedule = _schedule(_fixture())
+    manifest = {"generated_at": "2026-10-24T19:00:00+00:00"}
+    # A newer manifest does not make a missing result current.
+    assert refresh_due(
+        now=datetime(2026, 10, 24, 20, 0, tzinfo=UTC),
+        fixtures_index=schedule,
+        manifest=manifest,
+        canonical_matches=_canonical(),
+    )
+
+
+def test_not_due_when_the_canonical_frame_has_the_result() -> None:
+    schedule = _schedule(_fixture())
+    manifest = {"generated_at": "2026-10-24T18:30:00+00:00"}
+    assert not refresh_due(
+        now=datetime(2026, 10, 24, 20, 0, tzinfo=UTC),
+        fixtures_index=schedule,
+        manifest=manifest,
+        canonical_matches=_canonical(("2026-10-24", "sco:dundee-united", "sco:aberdeen")),
+    )
+
+
+def test_not_due_when_only_the_published_index_has_the_result() -> None:
+    published = {
+        "scheduled": [_fixture()],
+        "fixtures": [
+            {
+                "date": "2026-10-24",
+                "home_team_id": "sco:dundee-united",
+                "away_team_id": "sco:aberdeen",
+                "home_goals": 3,
+                "away_goals": 2,
+            }
+        ],
+    }
+    assert not refresh_due(
+        now=datetime(2026, 10, 24, 20, 0, tzinfo=UTC),
+        fixtures_index=published,
+        manifest={"generated_at": "2026-10-24T18:30:00+00:00"},
+        canonical_matches=_canonical(),
+    )
 
 
 def test_no_refresh_before_the_finish_buffer() -> None:
-    schedule = _schedule({"date": "2026-10-24", "kickoff": "15:00", "status": "scheduled"})
-    manifest = {"generated_at": "2026-10-24T10:00:00+00:00"}
-    assert not MODULE.refresh_due(schedule, manifest, datetime(2026, 10, 24, 16, 0, tzinfo=UTC))
-
-
-def test_no_refresh_when_data_is_newer_than_the_finish() -> None:
-    schedule = _schedule({"date": "2026-10-24", "kickoff": "15:00", "status": "scheduled"})
-    manifest = {"generated_at": "2026-10-24T19:00:00+00:00"}
-    assert not MODULE.refresh_due(schedule, manifest, datetime(2026, 10, 24, 20, 0, tzinfo=UTC))
+    schedule = _schedule(_fixture())
+    assert not refresh_due(
+        now=datetime(2026, 10, 24, 16, 0, tzinfo=UTC),
+        fixtures_index=schedule,
+        manifest={"generated_at": "2026-10-24T10:00:00+00:00"},
+        canonical_matches=_canonical(),
+    )
 
 
 def test_refresh_uses_winter_time() -> None:
-    schedule = _schedule({"date": "2026-12-05", "kickoff": "15:00", "status": "scheduled"})
-    manifest = {"generated_at": "2026-12-05T10:00:00+00:00"}
-    # 15:00 Europe/London in December is 15:00 UTC; the finish is 18:00 UTC.
-    assert MODULE.refresh_due(schedule, manifest, datetime(2026, 12, 5, 19, 0, tzinfo=UTC))
+    schedule = _schedule(_fixture(date_value="2026-12-05"))
+    assert refresh_due(
+        now=datetime(2026, 12, 5, 19, 0, tzinfo=UTC),
+        fixtures_index=schedule,
+        manifest={"generated_at": "2026-12-05T10:00:00+00:00"},
+        canonical_matches=_canonical(),
+    )
 
 
 def test_no_refresh_for_a_future_fixture() -> None:
-    schedule = _schedule({"date": "2026-11-07", "kickoff": "15:00", "status": "scheduled"})
-    manifest = {"generated_at": "2026-10-24T10:00:00+00:00"}
-    assert not MODULE.refresh_due(schedule, manifest, datetime(2026, 10, 24, 20, 0, tzinfo=UTC))
+    schedule = _schedule(_fixture(date_value="2026-11-07"))
+    assert not refresh_due(
+        now=datetime(2026, 10, 24, 20, 0, tzinfo=UTC),
+        fixtures_index=schedule,
+        manifest={"generated_at": "2026-10-24T10:00:00+00:00"},
+        canonical_matches=_canonical(),
+    )
 
 
 def test_no_refresh_without_a_kickoff_or_a_schedule() -> None:
-    manifest = {"generated_at": "2026-10-24T10:00:00+00:00"}
     now = datetime(2026, 10, 24, 20, 0, tzinfo=UTC)
-    assert not MODULE.refresh_due(_schedule({"date": "2026-10-24", "kickoff": None}), manifest, now)
-    assert not MODULE.refresh_due({}, manifest, now)
-
-
-def test_missing_manifest_refreshes_a_finished_fixture() -> None:
-    schedule = _schedule({"date": "2026-10-24", "kickoff": "15:00", "status": "scheduled"})
-    assert MODULE.refresh_due(schedule, {}, datetime(2026, 10, 24, 18, 0, tzinfo=UTC))
+    row = _fixture()
+    row["kickoff"] = None
+    assert not refresh_due(
+        now=now,
+        fixtures_index=_schedule(row),
+        manifest={"generated_at": "2026-10-24T10:00:00+00:00"},
+        canonical_matches=_canonical(),
+    )
+    assert not refresh_due(
+        now=now,
+        fixtures_index={},
+        manifest={"generated_at": "2026-10-24T10:00:00+00:00"},
+        canonical_matches=_canonical(),
+    )

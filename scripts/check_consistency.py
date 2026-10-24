@@ -24,7 +24,7 @@ def main() -> int:
     if not args.data.exists():
         print(f"missing {args.data}; run `uv run fitba publish`")
         return 1
-    results = run_consistency(load_corpus(args.data))
+    results = run_consistency(load_corpus(args.data), root=args.data)
     failures = [result for result in results if result.status != "pass"]
     if args.json:
         print(

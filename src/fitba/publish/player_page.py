@@ -30,7 +30,15 @@ WarningCode = Literal[
 
 
 class StrictModel(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+
+    dataset_id: str | None = None
+    update_id: str | None = None
+    published_at: str | None = None
+    served_by_update_id: str | None = None
+    dataset_state: str | None = None
+    stale_reason: str | None = None
+    source_snapshots: dict[str, Any] | None = None
 
 
 class PageWarning(StrictModel):

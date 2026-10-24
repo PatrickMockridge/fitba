@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "W",
@@ -138,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -1382,6 +1384,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1490,6 +1493,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1722,7 +1743,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: Motherwell 0.85, Aberdeen 1.44."
+        "text": "Shot expectation: Motherwell 0.84, Aberdeen 1.44."
       }
     ],
     "events_available": true,
@@ -2294,6 +2315,7 @@
       "team_name": "Motherwell"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -2303,8 +2325,8 @@
       "goals_low": 0,
       "goals_minus": 2.564,
       "goals_position": "above",
-      "high": 1.952,
-      "low": 0.715,
+      "high": 1.953,
+      "low": 0.711,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2334,10 +2356,10 @@
       "goals": 2,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": 1.151,
+      "goals_minus": 1.155,
       "goals_position": "within",
-      "high": 1.365,
-      "low": 0.128,
+      "high": 1.361,
+      "low": 0.119,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2353,8 +2375,8 @@
         "shots_on_target": 2,
         "shots_outsidebox": 3
       },
-      "value": 0.849,
-      "xg_per_shot": 0.085
+      "value": 0.845,
+      "xg_per_shot": 0.084
     },
     "model_id": "fxg-3",
     "model_range_level": 0.8,

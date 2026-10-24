@@ -183,6 +183,7 @@ and [roadmap](docs/roadmap.md).
 ```bash
 uv sync
 uv run fitba probe                 # source reachability + coverage
+uv run fitba update --mode daily --force-results  # one ordered update
 uv run fitba ingest --season current
 uv run fitba cups
 uv run fitba fixtures --club aberdeen
@@ -208,6 +209,7 @@ mdbook serve               # preview the book at http://localhost:3000
 
 ```bash
 make check                 # Ruff, Pyright, pytest and every publication guard
+make freshness-check       # epoch, source TTLs and manifest checksums
 cd web && npm run build    # static export; fails on a broken route
 make check-all             # everything above, plus the root web contract
 ```
@@ -222,15 +224,17 @@ The published web data lives in `web/data/generated/` and is committed.
 The data cadence runs **on this machine** using the gitignored `.env` key; the
 GitHub Actions data workflows are manual only because Actions has no key.
 
-- **Daily full update:** cron at 06:17 local time runs the current-season
-  ingest, match detail, matchday, squad, availability, build, validation,
-  publication and checks, then commits `web/data/generated/`.
-- **After every Aberdeen game:** cron checks every two hours. If a scheduled
-  Aberdeen fixture has finished and the published data predates it, the full
-  update runs. Empty checks do no data work.
-- Both jobs call `scripts/local_update.sh`. They only run on `main`, commit
-  generated data and push; the push triggers the Pages deployment. Logs are in
-  `~/.local/state/fitba/update.log`.
+- **Daily full update:** cron at 06:17 local time runs
+  `fitba update --mode daily --force-results`. Every ingest area, including
+  scouting and xG enrichment, is refreshed before build, validation,
+  publication and checks.
+- **After every Aberdeen game:** cron runs the matchday mode every two hours.
+  The result-aware gate checks the canonical and published result, not only a
+  timestamp, so a finished game cannot be missed by a re-stamped publish.
+- Both jobs call `scripts/local_update.sh`, which calls the one update command.
+  They only run on `main`, commit generated data and push; the push triggers the
+  Pages deployment. Logs are in `~/.local/state/fitba/update.log`; per-step
+  state is in `data/normalized/update_state.json`.
 - Install the cron entries with `scripts/install_local_cadence.sh`.
 - `update-daily` and `update-weekly` remain available as manual
   `workflow_dispatch` workflows.

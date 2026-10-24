@@ -4,7 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:d6a20b78071ed71d628be434d75df072264b0fe045a87ce6f9721466507f9abd",
+  "checksum": "sha256:b002cbcdf4b0ef4d44eb6515935d69f5e0568cdd63b652292b09d2491ddeb2d7",
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2636,7 +2639,7 @@
       "confidence_rule": "A failed check blocks publish; the audit is not a quality score.",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Pass/fail counts for the published cross-surface consistency checks, including the former-player and affiliation checks.",
+      "description": "Pass/fail counts for the published cross-surface consistency checks, including the former-player, result/form, epoch and manifest checks.",
       "displayed_surfaces": [
         "/status/"
       ],
@@ -2679,7 +2682,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -2687,7 +2690,7 @@
       "confidence_rule": "Config match; the client does not hardcode a threshold.",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Dataset, availability and former-player staleness thresholds exposed to the client.",
+      "description": "Dataset, availability and per-source freshness states exposed to the client.",
       "displayed_surfaces": [
         "/status/"
       ],
@@ -2695,7 +2698,11 @@
         "dataset_stale_after_hours",
         "availability_stale_after_days",
         "former_players_refreshed_at",
-        "former_players_stale_after_hours"
+        "former_players_stale_after_hours",
+        "dataset_id",
+        "update_id",
+        "sources",
+        "stale_sources"
       ],
       "formula": "Read from config/matchday.yaml stale_after_hours, config/availability.yaml policy.max_age_days and the former-player refresh timestamp.",
       "home_payload": "manifest.json",
@@ -2708,7 +2715,7 @@
       ],
       "label": "Freshness thresholds",
       "limitations": [
-        "Config-backed thresholds, not a measurement of source freshness."
+        "Config-backed thresholds plus measured source ages; not a quality verdict."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
@@ -2730,7 +2737,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -5814,9 +5821,28 @@
       "version": 1
     }
   ],
-  "registry_version": "3.7.0",
+  "published_at": "2026-10-24T22:29:20+00:00",
+  "registry_version": "3.8.0",
   "reviewed": "2026-10-24",
   "schema_version": 1,
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
+  },
   "structural_number_patterns": [
     "**/player_id",
     "**/team_id",
@@ -5839,5 +5865,6 @@
     "**/stoppage",
     "**/shootout_home",
     "**/shootout_away"
-  ]
+  ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097"
 }

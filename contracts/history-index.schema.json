@@ -1,67 +1,44 @@
 {
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "default": "1.0.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "era": {
+    "baseline": {
       "additionalProperties": true,
-      "title": "Era",
+      "title": "Baseline",
       "type": "object"
-    },
-    "generated_at": {
-      "title": "Generated At",
-      "type": "string"
     },
     "coverage": {
       "additionalProperties": true,
       "title": "Coverage",
       "type": "object"
     },
-    "scorecard": {
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
+    },
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
+    },
+    "era": {
       "additionalProperties": true,
-      "title": "Scorecard",
+      "title": "Era",
       "type": "object"
-    },
-    "baseline": {
-      "additionalProperties": true,
-      "title": "Baseline",
-      "type": "object"
-    },
-    "staff": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Staff",
-      "type": "array"
-    },
-    "honours": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Honours",
-      "type": "array"
-    },
-    "seasons": {
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Seasons",
-      "type": "array"
-    },
-    "heavy_defeats": {
-      "default": [],
-      "items": {
-        "additionalProperties": true,
-        "type": "object"
-      },
-      "title": "Heavy Defeats",
-      "type": "array"
     },
     "europe": {
       "default": [],
@@ -72,6 +49,86 @@
       "title": "Europe",
       "type": "array"
     },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "heavy_defeats": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Heavy Defeats",
+      "type": "array"
+    },
+    "honours": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Honours",
+      "type": "array"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "scorecard": {
+      "additionalProperties": true,
+      "title": "Scorecard",
+      "type": "object"
+    },
+    "seasons": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Seasons",
+      "type": "array"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
     "sources": {
       "items": {
         "additionalProperties": true,
@@ -80,9 +137,37 @@
       "title": "Sources",
       "type": "array"
     },
-    "notes": {
-      "title": "Notes",
-      "type": "string"
+    "staff": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Staff",
+      "type": "array"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
     }
   },
   "required": [

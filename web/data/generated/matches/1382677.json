@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "L",
@@ -102,7 +104,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "Brendan Rodgers",
@@ -1329,6 +1331,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1380,6 +1383,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -2051,6 +2072,7 @@
       "team_name": "Aberdeen"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -2058,10 +2080,10 @@
       "goals": 2,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": 0.672,
+      "goals_minus": 0.677,
       "goals_position": "within",
-      "high": 1.844,
-      "low": 0.607,
+      "high": 1.84,
+      "low": 0.598,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2077,7 +2099,7 @@
         "shots_on_target": 4,
         "shots_outsidebox": 3
       },
-      "value": 1.328,
+      "value": 1.323,
       "xg_per_shot": 0.102
     },
     "evaluation_href": "/analysis/xg/",
@@ -2091,7 +2113,7 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.571,
+      "goals_minus": -0.57,
       "goals_position": "within",
       "high": 1.087,
       "low": 0.0,
@@ -2110,7 +2132,7 @@
         "shots_on_target": 2,
         "shots_outsidebox": 2
       },
-      "value": 0.571,
+      "value": 0.57,
       "xg_per_shot": 0.095
     },
     "model_id": "fxg-3",

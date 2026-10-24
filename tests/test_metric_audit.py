@@ -49,6 +49,21 @@ def test_audit_matches_manifest(manifest, audit) -> None:
     assert block["provenance_only"] == audit["summary"]["provenance_only"]
 
 
+EPOCH_FIELDS = {
+    "dataset_id",
+    "update_id",
+    "published_at",
+    "served_by_update_id",
+    "dataset_state",
+    "stale_reason",
+    "source_snapshots",
+}
+
+
+def _without_epoch(payload: dict) -> dict:
+    return {key: value for key, value in payload.items() if key not in EPOCH_FIELDS}
+
+
 def test_audit_is_reproducible(manifest, audit, registry) -> None:
     reproduced = build_audit(
         corpus=load_corpus(DATA),
@@ -59,12 +74,14 @@ def test_audit_is_reproducible(manifest, audit, registry) -> None:
         audited_at=audit["audited_at"],
         allowlist=audit["allowlist"],
     )
-    assert reproduced == audit
+    assert reproduced == _without_epoch(audit)
 
 
 def test_registry_artifact_matches_config(registry) -> None:
     published = json.loads((DATA / "metrics" / "registry.json").read_text(encoding="utf-8"))
-    assert published == build_registry_payload(registry)
+    comparable = _without_epoch(published)
+    comparable.pop("generated_at", None)
+    assert comparable == build_registry_payload(registry)
     assert published["checksum"] == registry_checksum(registry)
 
 

@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "result",
   "fixture": {
     "aberdeen_outcome": "D",
@@ -56,7 +58,7 @@
     ],
     "before": []
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "B. Robson",
@@ -370,6 +372,7 @@
     "strengths": []
   },
   "player_stats": [],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -460,6 +463,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -634,7 +655,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: BK Hacken 2.08, Aberdeen 1.51."
+        "text": "Shot expectation: BK Hacken 2.09, Aberdeen 1.52."
       }
     ],
     "events_available": true,
@@ -1106,6 +1127,7 @@
       "team_name": "BK Hacken"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -1113,10 +1135,10 @@
       "goals": 2,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": 0.485,
+      "goals_minus": 0.48,
       "goals_position": "within",
-      "high": 2.031,
-      "low": 0.794,
+      "high": 2.037,
+      "low": 0.795,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -1132,7 +1154,7 @@
         "shots_on_target": 5,
         "shots_outsidebox": null
       },
-      "value": 1.515,
+      "value": 1.52,
       "xg_per_shot": 0.101
     },
     "evaluation_href": "/analysis/xg/",
@@ -1146,10 +1168,10 @@
       "goals": 2,
       "goals_high": 4,
       "goals_low": 0,
-      "goals_minus": -0.081,
+      "goals_minus": -0.087,
       "goals_position": "within",
-      "high": 2.597,
-      "low": 1.36,
+      "high": 2.604,
+      "low": 1.362,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -1165,8 +1187,8 @@
         "shots_on_target": 7,
         "shots_outsidebox": null
       },
-      "value": 2.081,
-      "xg_per_shot": 0.122
+      "value": 2.087,
+      "xg_per_shot": 0.123
     },
     "model_id": "fxg-3",
     "model_range_level": 0.8,

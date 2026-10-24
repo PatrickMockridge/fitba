@@ -45,6 +45,7 @@ also shows another scope.
 | Player club totals and rating | `analytics/player_facts.py` |
 | Playing time | `ingest/match_data.py` via `player_facts` |
 | Percentile rank | `analytics/percentiles.py` |
+| Current-season match result and official overlay | `normalize/results.py` via `ingest.runner.load_matches` |
 | Match result and shootout outcome | `analytics/records.py` |
 | Current/historical team match stats | `analytics/team_stats.py` |
 | Availability universes | `analytics/availability_facts.py` |
@@ -100,7 +101,21 @@ checks:
 - coverage counts equal the payloads they summarise;
 - former-player rows map to published permanent/free departures, post-career
   totals equal their league season rows, sell-on clauses and receipts reconcile,
-  and affiliations keep current/former players out of the target profile.
+  and affiliations keep current/former players out of the target profile;
+- the league table record and last-five form equal the published fixture
+  results, and matchday, analysis and club summary carry the same record;
+- club results, recent results and history manager records equal the fixture
+  record and the table;
+- coverage match counts equal the league tables they summarise;
+- every payload is on the current dataset epoch or explicitly stale with a
+  reason; the manifest lists every published file and every checksum matches.
+
+The epoch contract is additive. A fresh document carries `dataset_id`,
+`update_id`, `published_at` and `served_by_update_id`; a stale carry-forward
+keeps the content's old ids, sets `dataset_state="stale"` and names
+`stale_reason`. Array payloads cannot carry keys and are covered by their
+`manifest.files[]` entry. `scripts/check_freshness.py --strict` enforces the
+contract, the per-source TTLs and the manifest checksums.
 
 The same checks run inside `fitba publish`; a failure writes
 `audit/consistency.json` and blocks the atomic swap. CI also runs
@@ -111,7 +126,9 @@ that a shared formula is correct; the metric audit covers formula verification.
 
 ```bash
 uv run python scripts/check_consistency.py
+uv run python scripts/check_freshness.py --strict
 make consistency-check
+make freshness-check
 uv run fitba publish --season current --profile public --require-validation
 uv run python scripts/check_metrics.py --strict
 make check

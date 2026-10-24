@@ -608,7 +608,11 @@ Must remain visible:
   counts, and the `provenance_only` count.
 - Cross-surface consistency status, passed/failed check counts, and any first
   failures.
-- Source freshness and the published mart list.
+- The update run: mode, run id, status, finished time, recorded step count and
+  any non-ok steps, plus the result guard and its conflicts.
+- Per-source freshness: age, TTL, state and whether the source is required,
+  with every stale optional source named and linked to its payload labelling.
+- The published mart list.
 - Coverage for competitions, cups, transfers, history, rumours and forum.
 
 ## What the guard checks

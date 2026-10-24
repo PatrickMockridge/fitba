@@ -3,9 +3,37 @@
     "AvailabilityCoverage": {
       "additionalProperties": false,
       "properties": {
-        "status": {
-          "title": "Status",
-          "type": "string"
+        "conflicts": {
+          "title": "Conflicts",
+          "type": "integer"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "doubtful": {
+          "title": "Doubtful",
+          "type": "integer"
         },
         "entries": {
           "title": "Entries",
@@ -15,32 +43,12 @@
           "title": "Known",
           "type": "integer"
         },
-        "unknown": {
-          "title": "Unknown",
-          "type": "integer"
+        "note": {
+          "title": "Note",
+          "type": "string"
         },
         "out": {
           "title": "Out",
-          "type": "integer"
-        },
-        "suspended": {
-          "title": "Suspended",
-          "type": "integer"
-        },
-        "doubtful": {
-          "title": "Doubtful",
-          "type": "integer"
-        },
-        "returned": {
-          "title": "Returned",
-          "type": "integer"
-        },
-        "stale": {
-          "title": "Stale",
-          "type": "integer"
-        },
-        "conflicts": {
-          "title": "Conflicts",
           "type": "integer"
         },
         "provider_snapshot": {
@@ -49,9 +57,86 @@
           "title": "Provider Snapshot",
           "type": "object"
         },
-        "note": {
-          "title": "Note",
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "returned": {
+          "title": "Returned",
+          "type": "integer"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale": {
+          "title": "Stale",
+          "type": "integer"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "title": "Status",
           "type": "string"
+        },
+        "suspended": {
+          "title": "Suspended",
+          "type": "integer"
+        },
+        "unknown": {
+          "title": "Unknown",
+          "type": "integer"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -73,6 +158,93 @@
     "AvailabilityEntry": {
       "additionalProperties": false,
       "properties": {
+        "confidence": {
+          "default": "unknown",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "conflict": {
+          "default": false,
+          "title": "Conflict",
+          "type": "boolean"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "effective_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective From"
+        },
+        "effective_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective To"
+        },
+        "expected_return": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Return"
+        },
+        "in_squad": {
+          "default": true,
+          "title": "In Squad",
+          "type": "boolean"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
         "player_id": {
           "anyOf": [
             {
@@ -109,23 +281,29 @@
           "default": null,
           "title": "Player Name"
         },
-        "status": {
-          "default": "unknown",
-          "enum": [
-            "out",
-            "doubtful",
-            "suspended",
-            "returned",
-            "available",
-            "unknown"
+        "provider_signal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
           ],
-          "title": "Status",
-          "type": "string"
+          "default": null,
+          "title": "Provider Signal"
         },
-        "reason_category": {
-          "default": "unknown",
-          "title": "Reason Category",
-          "type": "string"
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "reason": {
           "anyOf": [
@@ -139,19 +317,12 @@
           "default": null,
           "title": "Reason"
         },
-        "expected_return": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Expected Return"
+        "reason_category": {
+          "default": "unknown",
+          "title": "Reason Category",
+          "type": "string"
         },
-        "effective_from": {
+        "served_by_update_id": {
           "anyOf": [
             {
               "type": "string"
@@ -161,36 +332,25 @@
             }
           ],
           "default": null,
-          "title": "Effective From"
-        },
-        "effective_to": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Effective To"
+          "title": "Served By Update Id"
         },
         "source_id": {
           "default": "none",
           "title": "Source Id",
           "type": "string"
         },
-        "source_url": {
+        "source_snapshots": {
           "anyOf": [
             {
-              "type": "string"
+              "additionalProperties": true,
+              "type": "object"
             },
             {
               "type": "null"
             }
           ],
           "default": null,
-          "title": "Source Url"
+          "title": "Source Snapshots"
         },
         "source_title": {
           "anyOf": [
@@ -204,6 +364,60 @@
           "default": null,
           "title": "Source Title"
         },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "stale": {
+          "default": false,
+          "title": "Stale",
+          "type": "boolean"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "out",
+            "doubtful",
+            "suspended",
+            "returned",
+            "available",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "verified_at": {
           "anyOf": [
             {
@@ -215,50 +429,6 @@
           ],
           "default": null,
           "title": "Verified At"
-        },
-        "confidence": {
-          "default": "unknown",
-          "title": "Confidence",
-          "type": "string"
-        },
-        "stale": {
-          "default": false,
-          "title": "Stale",
-          "type": "boolean"
-        },
-        "provider_signal": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Provider Signal"
-        },
-        "conflict": {
-          "default": false,
-          "title": "Conflict",
-          "type": "boolean"
-        },
-        "in_squad": {
-          "default": true,
-          "title": "In Squad",
-          "type": "boolean"
-        },
-        "note": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Note"
         }
       },
       "title": "AvailabilityEntry",
@@ -267,6 +437,30 @@
     "AvailabilitySource": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "id": {
           "title": "Id",
           "type": "string"
@@ -274,6 +468,67 @@
         "name": {
           "title": "Name",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         },
         "url": {
           "anyOf": [
@@ -298,27 +553,6 @@
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "default": "1.0.0",
-      "title": "Schema Version",
-      "type": "string"
-    },
-    "generated_at": {
-      "title": "Generated At",
-      "type": "string"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
-    },
-    "club_id": {
-      "title": "Club Id",
-      "type": "string"
-    },
-    "state": {
-      "title": "State",
-      "type": "string"
-    },
     "as_of": {
       "anyOf": [
         {
@@ -331,18 +565,36 @@
       "default": null,
       "title": "As Of"
     },
-    "policy_version": {
-      "title": "Policy Version",
+    "club_id": {
+      "title": "Club Id",
       "type": "string"
     },
     "coverage": {
       "$ref": "#/$defs/AvailabilityCoverage"
     },
-    "universes": {
-      "additionalProperties": true,
-      "default": {},
-      "title": "Universes",
-      "type": "object"
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
+    },
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
     },
     "entries": {
       "items": {
@@ -350,6 +602,64 @@
       },
       "title": "Entries",
       "type": "array"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
     },
     "sources": {
       "default": [],
@@ -359,9 +669,39 @@
       "title": "Sources",
       "type": "array"
     },
-    "notes": {
-      "title": "Notes",
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "state": {
+      "title": "State",
       "type": "string"
+    },
+    "universes": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Universes",
+      "type": "object"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
     }
   },
   "required": [

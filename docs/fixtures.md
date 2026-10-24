@@ -46,6 +46,18 @@ remains on the history pages.
   `contracts/fixture-page.schema.json`; the every-page checker validates each
   document against it.
 
+## Official result precedence
+
+The SPFL club feed is the official schedule source and can publish a result
+before football-data.co.uk. One shared matcher
+(`src/fitba/normalize/results.py`) fills or corrects the matching Aberdeen
+league fixture. The official score wins; a disagreement is recorded in
+`audit/results.json` and reported by `fitba validate --strict` for the current
+season. The appended row is a complete match row with
+`phase = "regular"`, `status = "played"` and `result_source = "spfl"`; the
+football-data identity and statistics are kept when they arrive later. The
+matcher never appends another club's fixture or a cup tie.
+
 ## Page order
 
 1. Header: competition, round, date, venue, referee, score, half-time, extra
@@ -108,7 +120,8 @@ enforces this.
 
 ## Coverage and sources
 
-- League scores and shots: football-data.co.uk.
+- League scores: football-data.co.uk with the official SPFL club result
+  overlaid for Aberdeen; league shots and team stats: football-data.co.uk.
 - Events, lineups, player match stats and cup/European team stats: API-Football.
 - Provider xG: football-data.co.uk 2026-27 SC0 and API-Football where returned.
 - Shot zones, blocked shots and penalty attempts: API-Football. The model uses

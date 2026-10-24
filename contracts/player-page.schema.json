@@ -3,24 +3,6 @@
     "AvailabilityPanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -52,6 +34,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "availability",
+          "default": "availability",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -64,18 +80,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "availability",
-          "default": "availability",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -90,37 +175,6 @@
     "IdentityBlock": {
       "additionalProperties": false,
       "properties": {
-        "player_id": {
-          "title": "Player Id",
-          "type": "integer"
-        },
-        "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "full_name": {
-          "title": "Full Name",
-          "type": "string"
-        },
-        "href": {
-          "title": "Href",
-          "type": "string"
-        },
-        "season": {
-          "title": "Season",
-          "type": "string"
-        },
-        "role": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "title": "Role"
-        },
         "age": {
           "anyOf": [
             {
@@ -131,6 +185,58 @@
             }
           ],
           "title": "Age"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "full_name": {
+          "title": "Full Name",
+          "type": "string"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "injured": {
+          "title": "Injured",
+          "type": "boolean"
+        },
+        "loan": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Loan"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
         },
         "nationality": {
           "anyOf": [
@@ -154,25 +260,51 @@
           ],
           "title": "Number"
         },
-        "status": {
-          "title": "Status",
-          "type": "string"
+        "player_id": {
+          "title": "Player Id",
+          "type": "integer"
         },
-        "injured": {
-          "title": "Injured",
-          "type": "boolean"
+        "preferred_foot": {
+          "$ref": "#/$defs/KnownValue"
         },
-        "loan": {
+        "published_at": {
           "anyOf": [
             {
-              "additionalProperties": true,
-              "type": "object"
+              "type": "string"
             },
             {
               "type": "null"
             }
           ],
-          "title": "Loan"
+          "default": null,
+          "title": "Published At"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Role"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
         },
         "side": {
           "anyOf": [
@@ -185,8 +317,46 @@
           ],
           "title": "Side"
         },
-        "preferred_foot": {
-          "$ref": "#/$defs/KnownValue"
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -211,16 +381,7 @@
     "KnownValue": {
       "additionalProperties": false,
       "properties": {
-        "status": {
-          "enum": [
-            "known",
-            "unknown",
-            "conflict"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
-        "value": {
+        "dataset_id": {
           "anyOf": [
             {
               "type": "string"
@@ -230,7 +391,31 @@
             }
           ],
           "default": null,
-          "title": "Value"
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
         },
         "reason": {
           "anyOf": [
@@ -244,6 +429,18 @@
           "default": null,
           "title": "Reason"
         },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
         "source": {
           "anyOf": [
             {
@@ -254,6 +451,64 @@
             }
           ],
           "default": null
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "known",
+            "unknown",
+            "conflict"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
         }
       },
       "required": [
@@ -277,9 +532,29 @@
           "title": "Code",
           "type": "string"
         },
-        "message": {
-          "title": "Message",
-          "type": "string"
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
         },
         "field": {
           "anyOf": [
@@ -292,6 +567,71 @@
           ],
           "default": null,
           "title": "Field"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         }
       },
       "required": [
@@ -304,24 +644,6 @@
     "PerformancePanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -353,6 +675,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "performance",
+          "default": "performance",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -365,18 +721,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "performance",
-          "default": "performance",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -391,24 +816,6 @@
     "PlayingTimePanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -440,6 +847,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "playing_time",
+          "default": "playing_time",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -452,18 +893,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "playing_time",
-          "default": "playing_time",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -478,24 +988,6 @@
     "PositionPanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -527,6 +1019,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "position",
+          "default": "position",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -539,18 +1065,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "position",
-          "default": "position",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -565,24 +1160,6 @@
     "ProfilePanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -607,6 +1184,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "profile",
+          "default": "profile",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -619,18 +1230,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "profile",
-          "default": "profile",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -645,24 +1325,6 @@
     "RecentMatchesPanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -694,6 +1356,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "recent_matches",
+          "default": "recent_matches",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -706,18 +1402,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "recent_matches",
-          "default": "recent_matches",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -732,24 +1497,6 @@
     "RecordsPanel": {
       "additionalProperties": false,
       "properties": {
-        "eyebrow": {
-          "title": "Eyebrow",
-          "type": "string"
-        },
-        "title": {
-          "title": "Title",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "available",
-            "partial",
-            "unavailable",
-            "not_applicable"
-          ],
-          "title": "Status",
-          "type": "string"
-        },
         "badge": {
           "anyOf": [
             {
@@ -781,6 +1528,40 @@
           ],
           "title": "Data"
         },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "eyebrow": {
+          "title": "Eyebrow",
+          "type": "string"
+        },
+        "id": {
+          "const": "records",
+          "default": "records",
+          "title": "Id",
+          "type": "string"
+        },
         "note": {
           "anyOf": [
             {
@@ -793,18 +1574,87 @@
           "default": null,
           "title": "Note"
         },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "enum": [
+            "available",
+            "partial",
+            "unavailable",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        },
         "warnings": {
           "items": {
             "$ref": "#/$defs/PageWarning"
           },
           "title": "Warnings",
           "type": "array"
-        },
-        "id": {
-          "const": "records",
-          "default": "records",
-          "title": "Id",
-          "type": "string"
         }
       },
       "required": [
@@ -819,9 +1669,94 @@
     "SourceRef": {
       "additionalProperties": false,
       "properties": {
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
         "id": {
           "title": "Id",
           "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
         },
         "url": {
           "anyOf": [
@@ -857,23 +1792,36 @@
   },
   "additionalProperties": false,
   "properties": {
-    "schema_version": {
-      "const": "1.2.0",
-      "default": "1.2.0",
-      "title": "Schema Version",
-      "type": "string"
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
     },
-    "player_id": {
-      "title": "Player Id",
-      "type": "integer"
-    },
-    "season": {
-      "title": "Season",
-      "type": "string"
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
     },
     "generated_at": {
       "title": "Generated At",
       "type": "string"
+    },
+    "identity": {
+      "$ref": "#/$defs/IdentityBlock"
     },
     "out_of_squad": {
       "default": false,
@@ -891,9 +1839,6 @@
       ],
       "default": null,
       "title": "Out Of Squad Reason"
-    },
-    "identity": {
-      "$ref": "#/$defs/IdentityBlock"
     },
     "panel_order": {
       "items": {
@@ -939,6 +1884,81 @@
       },
       "title": "Panels",
       "type": "object"
+    },
+    "player_id": {
+      "title": "Player Id",
+      "type": "integer"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "schema_version": {
+      "const": "1.2.0",
+      "default": "1.2.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
     },
     "warnings": {
       "items": {

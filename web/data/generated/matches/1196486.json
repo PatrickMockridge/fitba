@@ -8,6 +8,8 @@
     "team_stats": true,
     "xg": true
   },
+  "dataset_id": "2026-10-24T22:29:20+00:00-b83d26d",
+  "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
     "aberdeen_outcome": "W",
@@ -102,7 +104,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-24T20:09:33+00:00",
+  "generated_at": "2026-10-24T22:29:20+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. Martindale",
@@ -1290,6 +1292,7 @@
       "yellow_cards": 0
     }
   ],
+  "published_at": "2026-10-24T22:29:20+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1398,6 +1401,24 @@
     },
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
+  },
+  "served_by_update_id": "2026-10-24T22:29:17+00:00-2281097",
+  "source_snapshots": {
+    "api_football": "2026-10-24T22:20:57.355866+00:00",
+    "availability": "2026-10-24T22:15:22+00:00",
+    "career": "2026-10-24T22:15:22+00:00",
+    "football_data_uk": "2026-10-24T22:15:18+00:00",
+    "former_players": "2026-10-24T22:15:20+00:00",
+    "history_backfill": "2026-10-24T22:15:19+00:00",
+    "matchday_snapshot": "2026-10-24T20:01:12+00:00",
+    "scouting_clubs": "2026-10-24T22:19:36+00:00",
+    "scouting_europe": "2026-10-24T22:19:24+00:00",
+    "scouting_pool": "2026-10-24T22:15:25+00:00",
+    "scouting_roles": "2026-10-24T22:18:20+00:00",
+    "scouting_rose_history": "2026-10-24T22:19:24+00:00",
+    "scouting_standings": "2026-10-24T22:19:25+00:00",
+    "spfl": "2026-10-24T22:15:19+00:00",
+    "xg_enrichment": "2026-10-24T22:20:43+00:00"
   },
   "sources": [
     {
@@ -1630,7 +1651,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: Aberdeen 1.72, Livingston 1.61."
+        "text": "Shot expectation: Aberdeen 1.72, Livingston 1.60."
       }
     ],
     "events_available": true,
@@ -2102,6 +2123,7 @@
       "team_name": "Aberdeen"
     }
   ],
+  "update_id": "2026-10-24T22:29:17+00:00-2281097",
   "xg": {
     "available": true,
     "away": {
@@ -2109,10 +2131,10 @@
       "goals": 1,
       "goals_high": 3,
       "goals_low": 1,
-      "goals_minus": -0.609,
+      "goals_minus": -0.605,
       "goals_position": "within",
-      "high": 2.125,
-      "low": 0.888,
+      "high": 2.121,
+      "low": 0.879,
       "penalties": 1,
       "penalties_known": true,
       "penalty_xg": 0.76,
@@ -2128,8 +2150,8 @@
         "shots_on_target": 3,
         "shots_outsidebox": 1
       },
-      "value": 1.609,
-      "xg_per_shot": 0.179
+      "value": 1.605,
+      "xg_per_shot": 0.178
     },
     "evaluation_href": "/analysis/xg/",
     "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
@@ -2142,10 +2164,10 @@
       "goals": 5,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": 3.278,
+      "goals_minus": 3.279,
       "goals_position": "above",
       "high": 2.238,
-      "low": 1.001,
+      "low": 0.996,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2161,7 +2183,7 @@
         "shots_on_target": 7,
         "shots_outsidebox": 6
       },
-      "value": 1.722,
+      "value": 1.721,
       "xg_per_shot": 0.101
     },
     "model_id": "fxg-3",

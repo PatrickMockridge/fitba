@@ -2439,6 +2439,37 @@ export interface Manifest {
   freshness?: {
     dataset_stale_after_hours: number;
     availability_stale_after_days: number;
+    dataset_id?: string;
+    update_id?: string;
+    stale_sources?: string[];
+    sources?: Record<
+      string,
+      {
+        refreshed_at: string | null;
+        age_hours: number | null;
+        ttl_hours: number;
+        state: string;
+        required: boolean;
+      }
+    >;
+  };
+  update?: {
+    id: string;
+    mode: string;
+    status: string;
+    started_at?: string | null;
+    finished_at?: string | null;
+    steps?: Array<{
+      id: string;
+      required?: boolean;
+      status: string;
+      error?: string | null;
+      rows?: number | null;
+    }>;
+    results_guard?: {
+      status?: string;
+      conflicts?: unknown[];
+    };
   };
   sources: Array<{
     id: string;
