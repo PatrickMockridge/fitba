@@ -141,14 +141,18 @@ def _patch_next_fixture(monkeypatch):
     monkeypatch.setattr(matchday_ingest, "next_fixture", lambda **kwargs: dict(FIXTURE))
 
 
-def test_fixture_ratings_reads_the_opponent_block():
+def test_fixture_ratings_propagates_the_opponent_values():
+    # These are synthetic provider values: the test is about which team block
+    # and which players the parser accepts, not about a real match rating.
+    home_rating = "7.1"
+    away_rating = "6.8"
     payload = [
         {
             "team": {"id": 1, "name": "Home Team"},
             "players": [
                 {
                     "player": {"id": 10, "name": "H. Player"},
-                    "statistics": [{"games": {"rating": "7.1"}}],
+                    "statistics": [{"games": {"rating": home_rating}}],
                 }
             ],
         },
@@ -157,7 +161,7 @@ def test_fixture_ratings_reads_the_opponent_block():
             "players": [
                 {
                     "player": {"id": 20, "name": "A. Player"},
-                    "statistics": [{"games": {"rating": "6.8"}}],
+                    "statistics": [{"games": {"rating": away_rating}}],
                 },
                 {
                     "player": {"id": 21, "name": "No Rating"},
@@ -166,7 +170,54 @@ def test_fixture_ratings_reads_the_opponent_block():
             ],
         },
     ]
-    assert matchday_ingest._fixture_ratings(payload, team_id=2) == {20: 6.8}
+    ratings = matchday_ingest._fixture_ratings(payload, team_id=2)
+    assert set(ratings) == {20}
+    assert ratings[20] == float(away_rating)
+
+
+def test_refresh_stores_opponent_ratings_without_asserting_a_value(
+    tmp_path, monkeypatch
+):
+    fixtures = [_api_fixture(1001, 1)]
+    _patch_api(monkeypatch, fixtures=fixtures)
+
+    provider_rating = "7.4"
+
+    def fixtures_players(fixture_id, **kwargs):
+        return [
+            {
+                "team": {"id": 1386},
+                "players": [
+                    {
+                        "player": {"id": player_id},
+                        "statistics": [{"games": {"rating": provider_rating}}],
+                    }
+                    for player_id in range(1, 13)
+                ],
+            },
+            {
+                "team": {"id": 252},
+                "players": [
+                    {
+                        "player": {"id": 101},
+                        "statistics": [{"games": {"rating": "8.0"}}],
+                    }
+                ],
+            },
+        ]
+
+    monkeypatch.setattr(api_football, "fixtures_players", fixtures_players)
+    matchday_ingest.refresh_matchday(
+        force=True,
+        out_dir=tmp_path / "matchday",
+        max_requests=20,
+    )
+    frame = pl.read_parquet(tmp_path / "matchday" / "opponent_lineups.parquet")
+    opponent = frame.filter(pl.col("team_id") == 1386)
+    home = frame.filter(pl.col("team_id") == 252)
+    assert opponent.height
+    assert opponent["rating"].null_count() == 0
+    assert home.height == 0  # only the opponent's lineup is stored
 
 
 def test_refresh_writes_snapshot(tmp_path, monkeypatch):
