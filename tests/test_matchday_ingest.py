@@ -144,19 +144,19 @@ def _patch_next_fixture(monkeypatch):
 def test_fixture_ratings_reads_the_opponent_block():
     payload = [
         {
-            "team": {"id": 1, "name": "Aberdeen"},
+            "team": {"id": 1, "name": "Home Team"},
             "players": [
                 {
-                    "player": {"id": 10, "name": "A. Aberdeen"},
+                    "player": {"id": 10, "name": "H. Player"},
                     "statistics": [{"games": {"rating": "7.1"}}],
                 }
             ],
         },
         {
-            "team": {"id": 2, "name": "Falkirk"},
+            "team": {"id": 2, "name": "Away Team"},
             "players": [
                 {
-                    "player": {"id": 20, "name": "S. Bain"},
+                    "player": {"id": 20, "name": "A. Player"},
                     "statistics": [{"games": {"rating": "6.8"}}],
                 },
                 {
