@@ -8,6 +8,21 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.9.1 — 2026-10-25
+
+Opponent match ratings. `matchday.lineup` v3. The next-opponent refresh now
+fetches `/fixtures/players`, so the predicted opponent XI carries the same
+provider recent-rating field as Aberdeen. The selection formula did not change;
+the rating was previously absent and its 15% weight was renormalised. When the
+provider returns no rating for a player, the field stays `unavailable` and the
+remaining weights are renormalised, as before.
+
+- `matchday.yaml` `include_players: true` (was `false`).
+- Expected published value: opponent `recent_rating` goes from `null` to the
+  provider weighted rating for players with coverage; `rating_coverage` changes
+  from `unavailable` to `available`/`partial` for the opponent XI.
+- Registry version 3.9.0 → 3.9.1.
+
 ## 3.9.0 — 2026-10-25
 
 Complete league results. Owner-directed: a league table and its form guide must

@@ -141,6 +141,34 @@ def _patch_next_fixture(monkeypatch):
     monkeypatch.setattr(matchday_ingest, "next_fixture", lambda **kwargs: dict(FIXTURE))
 
 
+def test_fixture_ratings_reads_the_opponent_block():
+    payload = [
+        {
+            "team": {"id": 1, "name": "Aberdeen"},
+            "players": [
+                {
+                    "player": {"id": 10, "name": "A. Aberdeen"},
+                    "statistics": [{"games": {"rating": "7.1"}}],
+                }
+            ],
+        },
+        {
+            "team": {"id": 2, "name": "Falkirk"},
+            "players": [
+                {
+                    "player": {"id": 20, "name": "S. Bain"},
+                    "statistics": [{"games": {"rating": "6.8"}}],
+                },
+                {
+                    "player": {"id": 21, "name": "No Rating"},
+                    "statistics": [{"games": {"rating": None}}],
+                },
+            ],
+        },
+    ]
+    assert matchday_ingest._fixture_ratings(payload, team_id=2) == {20: 6.8}
+
+
 def test_refresh_writes_snapshot(tmp_path, monkeypatch):
     fixtures = [
         _api_fixture(1001, 1),

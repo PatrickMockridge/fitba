@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.9.0
+registry_version: 3.9.1
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -401,10 +401,10 @@ metrics:
   implementation: null
   source_paths: []
   limitations:
-  - Selection and formation projections; provenance checked, not recomputed.
+  - Selection and formation projections; provenance checked, not recomputed. The opponent rating is only present when /fixtures/players returns one.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-10-25'
+  version: 3
   status: active
 - id: matchday.coverage
   label: Matchday coverage

@@ -52,10 +52,13 @@ slots or a small sample; the coverage fraction is shown.
 - **Fixtures and results:** the merged season schedule (history fixtures plus
   the SPFL club feed) for the next fixture and the six-game lookahead;
   football-data.co.uk for league match rows and the venue splits.
-- **Opponent lineups and events:** API-Football, bounded to the next opponent
-  only. The refresh fetches the opponent's recent finished fixtures, then
-  `/fixtures/lineups` and `/fixtures/events` for each, cache-first. Player and
-  team-statistics calls are optional and off by default.
+- **Opponent lineups, events and match ratings:** API-Football, bounded to the
+  next opponent only. The refresh fetches the opponent's recent finished
+  fixtures, then `/fixtures/lineups`, `/fixtures/events` and
+  `/fixtures/players` for each, cache-first. The player call supplies the
+  per-match provider ratings used in the opponent XI form line; without it the
+  rating is explicitly unavailable, never zero. Team-statistics calls remain
+  off by default.
 - **League table and form:** the same local match rows used by the rest of the
   site. The matchday document does not republish a full league table.
 

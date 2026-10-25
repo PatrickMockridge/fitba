@@ -104,6 +104,7 @@ LINEUP_COLUMNS = [
     "assists",
     "yellow_cards",
     "red_cards",
+    "rating",
     "source_id",
     "ingested_at",
 ]
@@ -450,6 +451,30 @@ def _lineup_players(
                     "position": player.get("pos"),
                 }
     return players
+
+
+def _fixture_ratings(payload: list[dict[str, Any]], *, team_id: int) -> dict[int, float]:
+    """Provider match ratings for one team's players in one fixture."""
+    ratings: dict[int, float] = {}
+    for block in payload:
+        team = block.get("team") or {}
+        if _int(team.get("id")) != team_id:
+            continue
+        for item in block.get("players") or []:
+            player = item.get("player") or {}
+            player_id = _int(player.get("id"))
+            if player_id is None:
+                continue
+            for statistic in item.get("statistics") or []:
+                raw = (statistic.get("games") or {}).get("rating")
+                if raw is None or raw == "":
+                    continue
+                try:
+                    ratings[player_id] = float(raw)
+                except (TypeError, ValueError):
+                    continue
+                break
+    return ratings
 
 
 def _event_totals(
@@ -830,6 +855,7 @@ def refresh_matchday(
             if lineups:
                 names = _lineup_players(lineups, team_id=opponent_api_id)
                 totals = _event_totals(events, fixture_id=fixture_id, team_id=opponent_api_id)
+                ratings = _fixture_ratings(players, team_id=opponent_api_id)
                 for lineup in lineups:
                     team = lineup.get("team") or {}
                     if _int(team.get("id")) != opponent_api_id:
@@ -874,6 +900,7 @@ def refresh_matchday(
                                     "assists": event.get("assists", 0),
                                     "yellow_cards": event.get("yellow_cards", 0),
                                     "red_cards": event.get("red_cards", 0),
+                                    "rating": ratings.get(player_id),
                                     "source_id": SOURCE_ID,
                                     "ingested_at": ingested_at,
                                 }

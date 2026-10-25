@@ -12,10 +12,11 @@ recent_fixtures: 6
 contenders: 6
 max_api_requests: 24
 
-# Optional provider stages. Events already carry goals, assists and cards, so
-# /fixtures/players is not needed for the v1 prediction. Possession from
-# /fixtures/statistics is not dependable at scale and is never a lean input.
-include_players: false
+# Optional provider stages. /fixtures/players supplies the opponent match
+# ratings used by the predicted-XI form line; without it the opponent rating is
+# explicitly unavailable. Possession from /fixtures/statistics is not
+# dependable at scale and is never a lean input.
+include_players: true
 include_statistics: false
 
 refresh_after_hours: 20
