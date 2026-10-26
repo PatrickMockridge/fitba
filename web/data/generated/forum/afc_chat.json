@@ -6,9 +6,9 @@
     "raw_posts_published": false,
     "topics_sampled": 4
   },
-  "dataset_id": "2026-10-25T16:11:47+00:00-f496242",
+  "dataset_id": "2026-10-26T06:23:28+00:00-438221d",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-25T16:11:47+00:00",
+  "generated_at": "2026-10-26T06:23:28+00:00",
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
@@ -81,13 +81,13 @@
           "Cieran Slicker",
           "Conor Hazard",
           "Darren Ambrose",
-          "Elijah Henry Just",
+          "E. Just",
           "Harvey Elliot",
+          "J. Robson",
           "J. Teasdale",
-          "Jamie Robson",
           "Julius Berthel Askou Harvey",
           "L. Morrison",
-          "Louie Shaun Watson"
+          "L. Watson"
         ]
       },
       "former_player": {
@@ -135,8 +135,8 @@
     },
     "total_signals": 41
   },
-  "published_at": "2026-10-25T16:11:47+00:00",
-  "sampled_at": "2026-10-25T06:17:40+00:00",
+  "published_at": "2026-10-26T06:23:28+00:00",
+  "sampled_at": "2026-10-26T06:18:47+00:00",
   "sentiment": {
     "club": {
       "count": 26,
@@ -164,7 +164,7 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "2026-10-25T16:11:43+00:00-1483561",
+  "served_by_update_id": "2026-10-26T06:17:02+00:00-3749814",
   "signals": [
     {
       "affiliation": "former_player",
@@ -349,7 +349,7 @@
       "nationality": "New Zealand",
       "player_href": null,
       "player_key": "api:player:94333",
-      "player_name": "Elijah Henry Just",
+      "player_name": "E. Just",
       "position": null,
       "position_group": "MID",
       "rival_club": null,
@@ -763,6 +763,33 @@
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Oldham",
+      "current_league": "EFL League Two",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:45095",
+      "player_name": "J. Robson",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
       "age": null,
       "at_rival": false,
       "credibility": "cross_referenced_transfer",
@@ -784,33 +811,6 @@
       "player_name": "J. Teasdale",
       "position": null,
       "position_group": null,
-      "rival_club": null,
-      "topic_count": 1
-    },
-    {
-      "affiliation": "external_target",
-      "affiliation_source": "key",
-      "age": 28,
-      "at_rival": false,
-      "credibility": "fan_only",
-      "cross_references": {
-        "club_output": false,
-        "confirmed_transfer": false,
-        "historic_transfer": false,
-        "press_rumour": false
-      },
-      "current_club": "Oldham",
-      "current_league": "EFL League Two",
-      "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
-      "mentions": 1,
-      "nationality": "Scotland",
-      "player_href": null,
-      "player_key": "api:player:45095",
-      "player_name": "Jamie Robson",
-      "position": null,
-      "position_group": "DEF",
       "rival_club": null,
       "topic_count": 1
     },
@@ -1051,7 +1051,7 @@
       "nationality": "Republic of Ireland",
       "player_href": null,
       "player_key": "api:player:154806",
-      "player_name": "Louie Shaun Watson",
+      "player_name": "L. Watson",
       "position": null,
       "position_group": "MID",
       "rival_club": null,
@@ -1282,22 +1282,22 @@
     "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
   },
   "source_snapshots": {
-    "api_football": "2026-10-25T16:05:14.454867+00:00",
-    "api_results": "2026-10-25T16:05:14+00:00",
-    "availability": "2026-10-25T06:17:35+00:00",
-    "career": "2026-10-25T06:17:35+00:00",
-    "football_data_uk": "2026-10-25T16:05:13+00:00",
-    "former_players": "2026-10-25T06:17:17+00:00",
-    "history_backfill": "2026-10-25T06:17:15+00:00",
+    "api_football": "2026-10-26T06:23:25.682591+00:00",
+    "api_results": "2026-10-26T06:17:06+00:00",
+    "availability": "2026-10-26T06:18:39+00:00",
+    "career": "2026-10-26T06:18:39+00:00",
+    "football_data_uk": "2026-10-26T06:17:05+00:00",
+    "former_players": "2026-10-26T06:17:18+00:00",
+    "history_backfill": "2026-10-26T06:17:17+00:00",
     "matchday_snapshot": "2026-10-25T16:02:56+00:00",
-    "scouting_clubs": "2026-10-25T06:18:01+00:00",
-    "scouting_europe": "2026-10-25T06:17:51+00:00",
-    "scouting_pool": "2026-10-25T06:17:41+00:00",
-    "scouting_roles": "2026-10-25T06:17:42+00:00",
-    "scouting_rose_history": "2026-10-25T06:17:51+00:00",
-    "scouting_standings": "2026-10-25T06:17:52+00:00",
-    "spfl": "2026-10-25T16:05:14+00:00",
-    "xg_enrichment": "2026-10-25T06:18:56+00:00"
+    "scouting_clubs": "2026-10-26T06:22:39+00:00",
+    "scouting_europe": "2026-10-26T06:22:29+00:00",
+    "scouting_pool": "2026-10-26T06:18:48+00:00",
+    "scouting_roles": "2026-10-26T06:21:45+00:00",
+    "scouting_rose_history": "2026-10-26T06:22:13+00:00",
+    "scouting_standings": "2026-10-26T06:22:30+00:00",
+    "spfl": "2026-10-26T06:17:07+00:00",
+    "xg_enrichment": "2026-10-26T06:23:10+00:00"
   },
   "topics": [
     {
@@ -1333,5 +1333,5 @@
       "url": "https://afc-chat.co.uk/forums/index.php?/topic/49303-new-keeper/"
     }
   ],
-  "update_id": "2026-10-25T16:11:43+00:00-1483561"
+  "update_id": "2026-10-26T06:17:02+00:00-3749814"
 }
