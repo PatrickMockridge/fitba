@@ -6,6 +6,7 @@ import { PlayerLink } from "@/components/PlayerLink";
 import { RoleInferenceDialog } from "@/components/RoleInference";
 import type { SquadPlayer } from "@/lib/data";
 import { familyBroadGroups, familyLabel, familySide } from "@/lib/roles";
+import { TableFrame } from "@/components/TableFrame";
 
 type GroupFilter = "all" | "goalkeeper" | "defender" | "midfielder" | "attacker";
 type SideFilter = "all" | "left" | "centre" | "right";
@@ -223,7 +224,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
         (own goals) are reconstructed from events and shown for defensive primary roles only.
       </p>
 
-      <div className="table-wrap">
+      <TableFrame label="Squad table">
         <table className="league-table compact squad-table">
 <caption className="fine-print">
               Current squad with roles and output. Starts, substitute apps and
@@ -339,7 +340,7 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
             })}
           </tbody>
         </table>
-      </div>
+      </TableFrame>
 
       {filtered.length === 0 ? (
         <p className="muted">No players match these filters.</p>

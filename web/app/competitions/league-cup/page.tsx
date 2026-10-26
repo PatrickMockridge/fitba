@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CupGroupTable } from "@/components/CupGroupTable";
 import { CupRound } from "@/components/CupRound";
+import { PageProvenance } from "@/components/PageProvenance";
 import { formatDate, getLeagueCup } from "@/lib/data";
 
 export const metadata = {
@@ -186,6 +187,8 @@ export default function LeagueCupPage() {
       <Link className="text-link" href="/competitions/">
         ← All competitions
       </Link>
+
+      <PageProvenance surface="competitions" />
     </>
   );
 }

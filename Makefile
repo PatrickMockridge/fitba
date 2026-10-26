@@ -1,4 +1,4 @@
-.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check consistency-check freshness-check results-check update data-coverage-check docs-check corrections-check metrics-check publication-check names-check transfers-check former-players-check former-players-refresh history-check matchday-check themes-check provenance-check availability-check needs-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check scouting-check scouting-pages-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
+.PHONY: sync test lint format typecheck check check-all web-contract-check fixtures-check xg-check consistency-check freshness-check results-check update data-coverage-check docs-check corrections-check metrics-check publication-check names-check transfers-check former-players-check former-players-refresh history-check matchday-check themes-check provenance-check availability-check needs-check semantic-check page-budget-check league-migration-probe history-backfill history-backfill-transfers rumours-check squad-check scouting-check scouting-pages-check roles-check shapes-check career-roles-check player-page-check career-backfill career-refresh player-attributes-check probe ingest fixtures news forum cups transfers squad availability build validate publish web api-test sportmonks-attributes-test
 
 BASE_PATH ?=
 
@@ -17,13 +17,15 @@ format:
 typecheck:
 	uv run pyright
 
-check: lint typecheck test docs-check corrections-check metrics-check consistency-check freshness-check results-check publication-check names-check transfers-check former-players-check history-check matchday-check themes-check analysis-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check
+check: lint typecheck test docs-check corrections-check metrics-check consistency-check freshness-check results-check publication-check names-check transfers-check former-players-check history-check matchday-check themes-check analysis-check xg-check provenance-check availability-check needs-check rumours-check squad-check scouting-check roles-check shapes-check career-roles-check player-page-check player-attributes-check semantic-check page-budget-check
 
 check-all: check web-contract-check
 
 web-contract-check:
 	cd web && NEXT_PUBLIC_BASE_PATH="$(BASE_PATH)" npm run build
 	uv run python scripts/check_web_contract.py --ci --base-path "$(BASE_PATH)"
+	uv run python scripts/check_semantic.py --pages --base-path "$(BASE_PATH)"
+	uv run python scripts/check_page_budget.py --out web/out
 	uv run python scripts/check_fixture_pages.py --base-path "$(BASE_PATH)"
 	uv run python scripts/check_scouting.py --pages
 	uv run python scripts/check_player_page.py --pages
@@ -56,6 +58,12 @@ docs-check:
 
 corrections-check:
 	uv run python scripts/check_corrections.py
+
+semantic-check:
+	uv run python scripts/check_semantic.py
+
+page-budget-check:
+	uv run python scripts/check_page_budget.py
 
 metrics-check:
 	uv run python scripts/check_metrics.py --strict

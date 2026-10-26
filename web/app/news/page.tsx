@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NewsGrid } from "@/components/NewsGrid";
+import { PageProvenance } from "@/components/PageProvenance";
 import { PlayerLink } from "@/components/PlayerLink";
 import { RumourCard } from "@/components/RumourCard";
 import { XTimeline } from "@/components/XTimeline";
@@ -163,6 +164,8 @@ export default function NewsPage() {
       <Link className="text-link" href="/matchday/">
         Matchday dashboard →
       </Link>
+
+      <PageProvenance surface="news" />
     </>
   );
 }

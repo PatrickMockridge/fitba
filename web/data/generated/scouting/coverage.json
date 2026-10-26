@@ -1425,17 +1425,17 @@
   "current_clubs": {
     "budget": 1000,
     "errors": [],
-    "generated_at": "2026-10-26T06:22:39+00:00",
+    "generated_at": "2026-10-26T17:02:20+00:00",
     "note": "Current club from the provider transfer feed for pool teams. A player without a later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing.",
-    "players": 4246,
-    "requests": 1000,
+    "players": 9754,
+    "requests": 379,
     "schema_version": "1.0.0",
     "snapshot_date": "2026-10-26",
-    "teams_fetched": 100,
+    "teams_fetched": 391,
     "teams_total": 391,
-    "transfer_players": 18197
+    "transfer_players": 51974
   },
-  "dataset_id": "2026-10-26T06:23:28+00:00-438221d",
+  "dataset_id": "2026-10-26T17:04:04+00:00-e41ef6c",
   "dataset_state": "fresh",
   "europe": {
     "budget": 2000,
@@ -1481,9 +1481,9 @@
       }
     ],
     "coverage_complete": true,
-    "generated_at": "2026-10-26T06:22:29+00:00",
+    "generated_at": "2026-10-26T17:02:09+00:00",
     "players": 2130,
-    "requests": 867,
+    "requests": 55,
     "schema_version": "1.0.0",
     "season": "2026-27",
     "stopped_on_budget": false
@@ -1492,7 +1492,7 @@
     "note": "Former Aberdeen players use the standard scouting profile. Their statistical profile is their latest league season, falling back to their last Aberdeen season and labelled. Cup/European provider rows and cross-league percentiles are not published.",
     "players": 63
   },
-  "generated_at": "2026-10-26T06:23:28+00:00",
+  "generated_at": "2026-10-26T17:04:04+00:00",
   "known_gaps": [
     "7 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
     "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",
@@ -1696,10 +1696,10 @@
     {
       "country": "Switzerland",
       "error": null,
-      "fixtures_played": 68,
+      "fixtures_played": 66,
       "href": "/scouting/sui-super-league/",
       "id": "sui:super-league",
-      "lineups_fetched": 68,
+      "lineups_fetched": 66,
       "name": "Swiss Super League",
       "players": 334,
       "provider_league_id": 207,
@@ -1924,10 +1924,10 @@
     {
       "country": "Bulgaria",
       "error": null,
-      "fixtures_played": 79,
+      "fixtures_played": 80,
       "href": "/scouting/bul-parva-liga/",
       "id": "bul:parva-liga",
-      "lineups_fetched": 79,
+      "lineups_fetched": 80,
       "name": "First Professional League",
       "players": 0,
       "provider_league_id": 172,
@@ -2132,27 +2132,27 @@
     }
   ],
   "provider": "api_football",
-  "published_at": "2026-10-26T06:23:28+00:00",
+  "published_at": "2026-10-26T17:04:04+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-26T06:17:02+00:00-3749814",
+  "served_by_update_id": "2026-10-26T17:01:33+00:00-1410219",
   "source_snapshots": {
-    "api_football": "2026-10-26T06:23:25.682591+00:00",
-    "api_results": "2026-10-26T06:17:06+00:00",
-    "availability": "2026-10-26T06:18:39+00:00",
-    "career": "2026-10-26T06:18:39+00:00",
-    "football_data_uk": "2026-10-26T06:17:05+00:00",
-    "former_players": "2026-10-26T06:17:18+00:00",
-    "history_backfill": "2026-10-26T06:17:17+00:00",
-    "matchday_snapshot": "2026-10-25T16:02:56+00:00",
-    "scouting_clubs": "2026-10-26T06:22:39+00:00",
-    "scouting_europe": "2026-10-26T06:22:29+00:00",
-    "scouting_pool": "2026-10-26T06:18:48+00:00",
-    "scouting_roles": "2026-10-26T06:21:45+00:00",
-    "scouting_rose_history": "2026-10-26T06:22:13+00:00",
-    "scouting_standings": "2026-10-26T06:22:30+00:00",
-    "spfl": "2026-10-26T06:17:07+00:00",
-    "xg_enrichment": "2026-10-26T06:23:10+00:00"
+    "api_football": "2026-10-26T17:04:01.612500+00:00",
+    "api_results": "2026-10-26T17:01:35+00:00",
+    "availability": "2026-10-26T17:01:54+00:00",
+    "career": "2026-10-26T17:01:54+00:00",
+    "football_data_uk": "2026-10-26T17:01:34+00:00",
+    "former_players": "2026-10-26T17:01:47+00:00",
+    "history_backfill": "2026-10-26T17:01:41+00:00",
+    "matchday_snapshot": "2026-10-26T17:01:41+00:00",
+    "scouting_clubs": "2026-10-26T17:02:20+00:00",
+    "scouting_europe": "2026-10-26T17:02:09+00:00",
+    "scouting_pool": "2026-10-26T17:01:59+00:00",
+    "scouting_roles": "2026-10-26T17:02:00+00:00",
+    "scouting_rose_history": "2026-10-26T17:02:09+00:00",
+    "scouting_standings": "2026-10-26T17:02:10+00:00",
+    "spfl": "2026-10-26T17:01:36+00:00",
+    "xg_enrichment": "2026-10-26T17:03:48+00:00"
   },
   "sources": [
     {
@@ -2171,7 +2171,7 @@
   "team_context": {
     "min_lift": 0,
     "standings": {
-      "generated_at": "2026-10-26T06:22:30+00:00",
+      "generated_at": "2026-10-26T17:02:10+00:00",
       "leagues": [
         {
           "group": "Premier League",
@@ -2458,5 +2458,5 @@
     "searchable": 25,
     "with_minutes_450": 4352
   },
-  "update_id": "2026-10-26T06:17:02+00:00-3749814"
+  "update_id": "2026-10-26T17:01:33+00:00-1410219"
 }

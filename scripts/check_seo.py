@@ -52,6 +52,8 @@ def main() -> int:
             "/analysis/",
             "/former-players/",
             "/corrections/",
+            "/search/",
+            "/claims/",
         ):
             if required not in sitemap_text:
                 errors.append(f"sitemap is missing {required}")

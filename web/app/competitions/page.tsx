@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageProvenance } from "@/components/PageProvenance";
 import { formatDate, getCompetitionIndex } from "@/lib/data";
 
 export const metadata = {
@@ -140,6 +141,8 @@ export default function CompetitionsPage() {
         with the preliminary rounds not provided. Every cup page labels what it
         has and what it does not.
       </p>
+
+      <PageProvenance surface="competitions" />
     </>
   );
 }

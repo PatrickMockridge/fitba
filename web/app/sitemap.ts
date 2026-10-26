@@ -39,6 +39,8 @@ const STATIC_ROUTES = [
   "/status/",
   "/about/",
   "/corrections/",
+  "/search/",
+  "/claims/",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

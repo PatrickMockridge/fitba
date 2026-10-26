@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FormStrip } from "@/components/FormStrip";
 import { ManagerRecordTable } from "@/components/ManagerRecordTable";
+import { PageProvenance } from "@/components/PageProvenance";
 import { StatTile } from "@/components/StatTile";
 import {
   formatDate,
@@ -590,6 +591,8 @@ export default async function HistorySeasonPage({
         {" · "}
         <Link href="/matches/">Results and fixtures</Link>
       </p>
+
+      <PageProvenance surface="history" />
     </>
   );
 }

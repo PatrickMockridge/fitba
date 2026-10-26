@@ -2435,6 +2435,7 @@ export interface NeedsDocument {
 export interface Manifest {
   schema_version: string;
   dataset_version: string;
+  dataset_state?: string;
   generated_at: string;
   season: string;
   profile: string;
@@ -2860,18 +2861,156 @@ export interface CaseDocument {
   notes: string;
 }
 
-export interface SearchEntry {
+export interface ReaderEntity {
+  entity_id: string;
   type: string;
-  id: string;
   name: string;
-  slug: string;
-  href?: string;
+  aliases: string[];
+  external_ids?: Record<string, string>;
+  href: string | null;
+  href_kind?: string;
+  routes?: Record<string, string>;
+  indexable: boolean;
+  no_href_reason?: string | null;
+  search_group: string;
+  sitemap: boolean;
+  source_layers: string[];
+  league?: string | null;
+  role_family?: string | null;
+}
+
+export interface EntityIndexDocument {
+  schema_version: string;
+  state: string;
+  entities: ReaderEntity[];
+  dataset_id?: string;
+  update_id?: string;
+  generated_at?: string;
+}
+
+export interface ScoutedEntity {
+  i: number | string;
+  n: string;
+  a: string[];
+  h: string;
+  l?: string | null;
+  rf?: string | null;
+}
+
+export interface ScoutedEntityDocument {
+  schema_version: string;
+  state: string;
+  entities: ScoutedEntity[];
+  dataset_id?: string;
+  update_id?: string;
+  generated_at?: string;
+}
+
+export interface PageSurfaceMeta {
+  label: string;
+  route_patterns: string[];
+  layers: string[];
+  metrics: string[];
+  no_layers_reason?: string | null;
+}
+
+export interface PageMetaDocument {
+  schema_version: string;
+  dataset_id: string;
+  update_id: string;
+  generated_at: string;
+  source_snapshots: Record<string, string | null>;
+  canonical_base_url: string;
+  registry_version: string;
+  registry_checksum: string;
+  surfaces: Record<string, PageSurfaceMeta>;
+}
+
+export interface DefinitionEntry {
+  id: string;
+  term: string;
+  aliases: string[];
+  short: string;
+  body: string;
+  category: string;
+  metric_ids: string[];
+  formula?: unknown;
+  unit?: string | null;
+  basis?: string | null;
+  coverage_tier?: string | null;
+  source_layer?: string | null;
+  limitations: string[];
+  href: string;
+  provenance: string;
+  registry_version: string;
+}
+
+export interface DefinitionsDocument {
+  schema_version: string;
+  registry_version: string;
+  registry_checksum: string;
+  reviewed: string;
+  owner: string;
+  entries: DefinitionEntry[];
+}
+
+export interface ChangelogEntry {
+  id: string;
+  date: string;
+  kind: string;
+  status: string;
+  title: string;
+  summary: string;
+  pages: string[];
+  entities: string[];
+  metric_ids: string[];
+  registry_version?: string;
+  doc_anchor?: string;
+  evidence: Array<{ label: string; url: string }>;
+  fixed_in_dataset?: string | null;
+}
+
+export interface ChangelogDocument {
+  schema_version: string;
+  last_reviewed: string;
+  contact_url: string;
+  note: string;
+  append_only: boolean;
+  entries: ChangelogEntry[];
 }
 
 function readJson<T>(...segments: string[]): T | null {
   const file = path.join(DATA_DIR, ...segments);
   if (!fs.existsSync(file)) return null;
   return JSON.parse(fs.readFileSync(file, "utf8")) as T;
+}
+
+export function getEntityIndex(): EntityIndexDocument | null {
+  return readJson<EntityIndexDocument>("entities", "index.json");
+}
+
+export function getScoutedEntityIndex(): ScoutedEntityDocument | null {
+  return readJson<ScoutedEntityDocument>("entities", "scouted.json");
+}
+
+export function getPageMeta(): PageMetaDocument | null {
+  return readJson<PageMetaDocument>("page-meta.json");
+}
+
+export function getPageMetaForSurface(surface: string): PageSurfaceMeta | null {
+  return getPageMeta()?.surfaces?.[surface] ?? null;
+}
+
+export function getDefinitions(): DefinitionsDocument | null {
+  return readJson<DefinitionsDocument>("definitions.json");
+}
+
+export function getDefinition(id: string): DefinitionEntry | null {
+  return getDefinitions()?.entries.find((entry) => entry.id === id) ?? null;
+}
+
+export function getChangelog(): ChangelogDocument | null {
+  return readJson<ChangelogDocument>("changelog.json");
 }
 
 export function getManifest(): Manifest | null {
@@ -2971,10 +3110,6 @@ export function getRumourProfile(): RumourProfile | null {
 
 export function getForumSignal(): ForumSignalFile | null {
   return readJson<ForumSignalFile>("forum", "afc_chat.json");
-}
-
-export function getSearchIndex(): SearchEntry[] {
-  return readJson<SearchEntry[]>("search-index.json") ?? [];
 }
 
 export function getCase(): CaseDocument | null {
@@ -4380,14 +4515,43 @@ export function getScoutingCoverage(): ScoutingCoverageDocument | null {
   return readJson<ScoutingCoverageDocument>("scouting", "coverage.json");
 }
 
+export const SCOUTING_SEARCH_SHARDS = 4;
+
+export type ScoutingSearchMeta = Omit<ScoutingSearchDocument, "players">;
+
+let scoutingSearchMetaCache: ScoutingSearchMeta | null | undefined;
 let scoutingSearchCache: ScoutingSearchDocument | null | undefined;
+
+export function getScoutingSearchMeta(): ScoutingSearchMeta | null {
+  if (scoutingSearchMetaCache !== undefined) return scoutingSearchMetaCache;
+  scoutingSearchMetaCache = readJson<ScoutingSearchMeta>(
+    "scouting",
+    "search",
+    "meta.json",
+  );
+  return scoutingSearchMetaCache;
+}
+
+export function getScoutingSearchShard(index: number): ScoutingSearchRow[] {
+  const document = readJson<{ players?: ScoutingSearchRow[] }>(
+    "scouting",
+    "search",
+    `players-${index}.json`,
+  );
+  return document?.players ?? [];
+}
 
 export function getScoutingSearch(): ScoutingSearchDocument | null {
   if (scoutingSearchCache !== undefined) return scoutingSearchCache;
-  scoutingSearchCache = readJson<ScoutingSearchDocument>(
-    "scouting",
-    "search-index.json",
-  );
+  const meta = getScoutingSearchMeta();
+  if (!meta) {
+    scoutingSearchCache = null;
+    return null;
+  }
+  const players = Array.from({ length: SCOUTING_SEARCH_SHARDS }, (_, index) =>
+    getScoutingSearchShard(index),
+  ).flat();
+  scoutingSearchCache = { ...meta, players };
   return scoutingSearchCache;
 }
 

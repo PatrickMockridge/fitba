@@ -65,8 +65,8 @@ private intent. The club is not a villain, and neither are its supporters.
 
 fitba is independent and non-commercial. No betting advertising, no paid club
 influence, no player abuse. Corrections are part of the product; the public
-corrections route is a tracked follow-up, and until it exists the methodology and
-sources pages carry the correction policy.
+corrections route records factual corrections, and the methodology and sources
+pages carry the correction policy.
 
 ## The Cormack era: player, manager, structure
 

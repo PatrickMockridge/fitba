@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CupRound } from "@/components/CupRound";
+import { PageProvenance } from "@/components/PageProvenance";
 import { formatDate, getScottishCup } from "@/lib/data";
 
 export const metadata = {
@@ -97,6 +98,8 @@ export default function ScottishCupPage() {
       <Link className="text-link" href="/competitions/">
         ← All competitions
       </Link>
+
+      <PageProvenance surface="competitions" />
     </>
   );
 }

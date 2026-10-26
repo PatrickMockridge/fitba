@@ -24,6 +24,9 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4i. Scouting board | **Live.** `/scouting/` and one page per league and a full cross-league search: role-family cohorts, verified availability and seven profiles, including split assist/goal attacker lenses. An empirical league alignment, a value index, U23/European scouting priority, a team-context lens for outperforming struggling teams, simple reader-selectable lenses on the hub, advanced reader filters (U23/Europe and value-index weights, team thresholds and eligibility) on the full search, and one profile page per ranked player are live; GBP value bands, style fit and budget bands are deferred. |
 | 4j. Documentation book | **Live in the repository.** The Markdown docs are rendered with mdBook in the Merkland (light) and Aurora (dark) palettes, with search and accessibility markup. The book is not deployed to the website. |
 | 4k. Former players | **Live.** `/former-players/` carries the confirmed departure register, Aberdeen and post-Aberdeen records, rival spells, sell-on watch and the development scorecard. Rumour affiliation separates former players from targets. |
+| 4l. Access, citation and trust layer | **Live (first phase).** `entities/index.json`, `page-meta.json`, `definitions.json` and `changelog.json`; `/search/` with lazy scouted group; `/claims/`; expanded `/corrections/`; page provenance, citations and as-of badges; sticky tables; scouting search sharded under a page budget. See [Semantic layer](semantic-layer.md) and the [UX audit](ux-audit-2026-10.md). |
+| 4m. Evidence navigation and comparison | **Partially complete.** Claims are rehomed at `/claims/`; metric definitions are published in `definitions.json`. Definitions/glossary UI, unknowns register, guarded comparison, role-family depth and era context remain planned. See the [UX audit](ux-audit-2026-10.md). |
+| 4n. Distribution and export | **Deferred.** Print/OG cards, export/embed and full current-player multi-season output, pending licence, design and payload decisions. See [UX audit](ux-audit-2026-10.md). |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
 | 6. Enterprise evaluation | Not started. |
@@ -80,6 +83,35 @@ phase:
 - Style fit, budget bands and the remaining coverage labels for scouting.
 - Explainer cards, glossary and a clearer methodology layer.
 - Progressive-disclosure components on every insight.
+
+### Phase 4l — reader-first data layer and UX serving (delivered)
+
+Source to serve, in order: the source adapters and TTLs are unchanged; the
+canonical entity namespace lands in `normalize/entities.py`; the semantic bundle
+publishes five documents; `/search/`, `/claims/` and an expanded `/corrections/`
+serve them. Scouting search is sharded into meta plus four payloads under a page
+budget. The change is documented in [Semantic layer](semantic-layer.md) and
+registered as registry 3.10.0.
+
+### Phase 4m — evidence navigation and comparison (planned)
+
+Next, with dependencies stated:
+
+- **Definitions and glossary:** a `/glossary/` route and `DefinitionTerm`
+  component over the published `definitions.json`; metric links move from
+  `/metrics/#metric-*` to `/glossary/#def-*`. Depends on definitions coverage
+  review.
+- **Unknowns register:** one page listing every published unknown by surface,
+  with the reason and the source that would resolve it. Depends on a source and
+  field inventory; no number is implied by an unknown.
+- **Guarded player comparison:** same league and role family, scouted-vs-scouted
+  only, no winner and no recommendation. Depends on a reviewed crosswalk before
+  any current-squad comparison.
+- **Role-family depth chart** and **sale chain** views. The depth chart depends
+  on the roles config; the sale chain depends on the former-player and sell-on
+  evidence.
+- **Match game-state context** and **era lookup**. Each needs its own registered
+  metric before it is published.
 
 ## Phase 4b — Two doors and the rumour mill (live)
 
@@ -173,6 +205,49 @@ phase:
 - The rumour mill labels current squad, current non-official, former players and
   external targets, and excludes current/former players from the target profile.
 - See [former-players.md](former-players.md).
+
+## Phase 4l — Access, citation and trust layer (recommended)
+
+From the [October 2026 UX persona audit](ux-audit-2026-10.md). These are
+recommendations, not delivered features.
+
+- **Site-wide search** over the published 565-entry index, with the 4,405-player
+  scouting index as a separate lazy-loaded group. Fix the 42 club entries without
+  destinations and the 6 dead `/analysis/#claim-*` links first.
+- **Shareable citation kit** — URL state, stable permalinks and copy-with-basis.
+  The copied text must carry basis, coverage, as-of and link, never a bare number.
+- **Trust layer** — as-of freshness beside tables and a per-page provenance
+  footer, using the existing manifest and provenance payloads.
+- **Corrections/what-changed log** — expand the existing `/corrections/` route
+  and log; date-ordered, evidence-linked, no "trending" ranking.
+- **Sticky table headers and first column** on dense tables; additive CSS only.
+
+No new data or metrics. Owner approval is required for `/search/` becoming a
+contracted route and for any expanded correction schema.
+
+## Phase 4m — Evidence navigation and comparison (recommended)
+
+- Definitions and glossary sourced from the metric registry; no paraphrase and no
+  hidden data.
+- Unknowns register aggregating existing coverage and provenance gaps.
+- Independent claim surface rehomed from the orphaned `themes` claims; fitba-owned
+  and including unflattering claims. A club-controlled register is rejected.
+- Guarded player comparison within the same league and role; no cross-league
+  ranking or winner.
+- Role-family depth chart, sale chain, match game-state context and Cormack-era
+  context lookup, all descriptive and without verdicts.
+
+R16 (full current-player multi-season output), R19/R20 (computed gaps or streaks)
+need new payloads or registered metrics before they can be published.
+
+## Phase 4n — Distribution and export (deferred)
+
+- Printable evidence briefs and OG share cards with basis baked in.
+- CSV/export and embed of visible rows only, after a licence review.
+- Full current-player multi-season output, saved filters and reader shortlists
+  (`localStorage` only).
+- Fan discussion trends, private decision memos and audience-question indexes are
+  not part of this roadmap; see the audit's rejected/deferred register.
 
 ## Phase 5 — Local rich-visual prototype
 

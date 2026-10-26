@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { FormStrip } from "@/components/FormStrip";
+import { TableFrame } from "@/components/TableFrame";
 import type { Cutoff, TableRow } from "@/lib/data";
 
 export function LeagueTable({
@@ -21,7 +22,7 @@ export function LeagueTable({
     cutoffs.map((cutoff) => [cutoff.after_position, cutoff]),
   );
   return (
-    <div className="table-wrap">
+    <TableFrame label={caption}>
       <table className="league-table">
         <caption className="fine-print">{caption}</caption>
         <thead>
@@ -63,7 +64,10 @@ export function LeagueTable({
             const cutoff = cutoffsByPosition.get(row.position);
             return (
               <Fragment key={row.team_id}>
-                <tr className={isAberdeen ? "is-highlight" : undefined}>
+                <tr
+                  id={`club-${row.team_id.split(":").pop()}`}
+                  className={isAberdeen ? "is-highlight" : undefined}
+                >
                   <td className="num">{row.position}</td>
                   <td>
                     {row.team_id === "sco:aberdeen" ? (
@@ -104,6 +108,6 @@ export function LeagueTable({
           })}
         </tbody>
       </table>
-    </div>
+    </TableFrame>
   );
 }

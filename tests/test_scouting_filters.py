@@ -1,7 +1,7 @@
 """Verify the reader-filter data contract and the published defaults.
 
 The hub and the advanced search recompute leader lists in the browser from
-`scouting/search-index.json`. These tests reproduce the published defaults from
+`scouting/search/meta.json` and its shards. These tests reproduce the published defaults from
 that index with the registered formulas, so the client cannot silently drift
 from the publisher.
 """
@@ -15,7 +15,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCOUTING = ROOT / "web" / "data" / "generated" / "scouting"
-SEARCH = SCOUTING / "search-index.json"
+SEARCH = SCOUTING / "search"
+SEARCH_SHARDS = 4
 HUB = SCOUTING / "aberdeen.json"
 POOL = SCOUTING / "pool"
 
@@ -28,8 +29,12 @@ def _load(path: Path) -> dict:
 
 @pytest.fixture(scope="module")
 def search() -> dict:
-    assert SEARCH.exists(), "run `uv run fitba publish` first"
-    return _load(SEARCH)
+    meta = _load(SEARCH / "meta.json")
+    players = []
+    for shard in range(SEARCH_SHARDS):
+        players.extend(_load(SEARCH / f"players-{shard}.json").get("players") or [])
+    assert players, "run `uv run fitba publish` first"
+    return {**meta, "players": players}
 
 
 @pytest.fixture(scope="module")

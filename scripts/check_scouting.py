@@ -24,7 +24,8 @@ SCOUTING = GENERATED / "scouting"
 HUB = SCOUTING / "aberdeen.json"
 COVERAGE = SCOUTING / "coverage.json"
 POOL_DIR = SCOUTING / "pool"
-SEARCH = SCOUTING / "search-index.json"
+SEARCH_DIR = SCOUTING / "search"
+SEARCH_SHARDS = 4
 AVAILABILITY = GENERATED / "availability" / "aberdeen.json"
 LEAGUES = ROOT / "config" / "scouting" / "leagues.yaml"
 OUT = ROOT / "web" / "out"
@@ -287,9 +288,9 @@ def check_data() -> list[str]:
                     ):
                         errors.append(f"{label}: rose axis value is not a number")
 
-    search = _load(SEARCH) if SEARCH.exists() else {}
+    search = _load_search()
     if not search:
-        errors.append("missing scouting search-index.json")
+        errors.append("missing scouting search meta/shards")
     else:
         search_players = search.get("players") or []
         profile_order = search.get("profile_order") or []
@@ -509,7 +510,7 @@ def check_pages() -> list[str]:
             if header not in html:
                 errors.append(f"{slug}: missing column {header!r}")
 
-    search = _load(SEARCH) if SEARCH.exists() else {}
+    search = _load_search()
     player_ids = sorted({int(row["i"]) for row in search.get("players") or []})
     for player_id in player_ids:
         page = OUT / "scouting" / "player" / str(player_id) / "index.html"
@@ -547,6 +548,17 @@ def check_pages() -> list[str]:
         if not re.search(r'href="[^"]*scouting/"', html):
             errors.append(f"player {player_id}: missing link back to the scouting board")
     return errors
+
+
+def _load_search() -> dict[str, Any]:
+    meta = _load(SEARCH_DIR / "meta.json")
+    if not meta:
+        return {}
+    players: list[dict[str, Any]] = []
+    for shard in range(SEARCH_SHARDS):
+        document = _load(SEARCH_DIR / f"players-{shard}.json")
+        players.extend(document.get("players") or [])
+    return {**meta, "players": players}
 
 
 def main() -> int:

@@ -55,6 +55,8 @@ also shows another scope.
 | Sell-on event and receipt | `analytics/former_players.py`, clauses in the transfer register |
 | Rumour/forum affiliation | `analytics/affiliation.py` |
 | Forum name identity lookup | `ingest/forum.py` (former register → scouted pool → provider profile search) |
+| Reader-facing entity id and href | `normalize/entities.py` through `publish/semantic.py` |
+| Surface layers, metrics and citation context | `config/pages.yaml` through `page-meta.json` |
 
 The display layer reads the published value. It does not sum, re-filter,
 re-rank or re-round a published fact. The only permitted client calculation is
@@ -108,6 +110,12 @@ checks:
 - club results, recent results and history manager records equal the fixture
   record and the table;
 - coverage match counts equal the league tables they summarise;
+- entity ids, aliases and external ids are unique, the core and scouted player
+  groups are disjoint, and every indexable entity has one internal href;
+- page metadata names published provenance layers and registered metrics only;
+- every claim entity resolves to a case claim and points at `/claims/`;
+- every definition references a registered metric and copies its basis,
+  coverage tier and source layer rather than overriding them;
 - every payload is on the current dataset epoch or explicitly stale with a
   reason; the manifest lists every published file and every checksum matches.
 

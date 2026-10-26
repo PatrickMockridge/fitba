@@ -357,6 +357,22 @@ def _run_guard_freshness(ctx: UpdateContext) -> dict[str, Any]:
     return {"rows": len(report.get("sources") or {})}
 
 
+def _run_guard_semantic(ctx: UpdateContext) -> dict[str, Any]:
+    scripts = [
+        ("check_semantic.py", []),
+        ("check_page_budget.py", []),
+    ]
+    commands = [[sys.executable, str(ROOT / "scripts" / name), *args] for name, args in scripts]
+    for command in commands:
+        completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+        if completed.returncode != 0:
+            raise RuntimeError(
+                f"{Path(command[1]).name} failed: {completed.stdout[-800:]}"
+                f"{completed.stderr[-800:]}"
+            )
+    return {"rows": None}
+
+
 def _run_guard_metrics(ctx: UpdateContext) -> dict[str, Any]:
     scripts = [
         ("check_publication.py", []),
@@ -455,6 +471,7 @@ STEP_SPECS: list[StepSpec] = [
     StepSpec("guard.results", _run_guard_results, required=True),
     StepSpec("guard.consistency", _run_guard_consistency, required=True),
     StepSpec("guard.freshness", _run_guard_freshness, required=True),
+    StepSpec("guard.semantic", _run_guard_semantic, required=True),
     StepSpec("guard.metrics", _run_guard_metrics, required=True),
 ]
 
@@ -473,6 +490,7 @@ CORE_MATCHDAY_IDS = {
     "guard.results",
     "guard.consistency",
     "guard.freshness",
+    "guard.semantic",
     "guard.metrics",
 }
 
@@ -619,6 +637,7 @@ def run_update(
                 "guard.results",
                 "guard.consistency",
                 "guard.freshness",
+                "guard.semantic",
                 "guard.metrics",
             }
         ]

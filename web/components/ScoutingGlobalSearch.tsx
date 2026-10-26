@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ScoutingLensSelector } from "@/components/ScoutingLensSelector";
+import { TableFrame } from "@/components/TableFrame";
 import type {
   ScoutingArchetypeDefinition,
   ScoutingPriorityConfig,
   ScoutingSearchDocument,
+  ScoutingSearchRow,
 } from "@/lib/data";
 import {
   defaultValueWeights,
@@ -178,9 +180,13 @@ function europeLabel(player: Row): string {
 export function ScoutingGlobalSearch({
   document,
   archetypes,
+  initialPlayers,
+  shardPaths,
 }: {
   document: ScoutingSearchDocument;
   archetypes: ScoutingArchetypeDefinition[];
+  initialPlayers?: ScoutingSearchRow[];
+  shardPaths?: string[];
 }) {
   const publishedWeights: ScoutingPriorityConfig = document.priority ?? {
     u23_max_age: 23,
@@ -207,6 +213,16 @@ export function ScoutingGlobalSearch({
   const [underperformingOnly, setUnderperformingOnly] = useState(false);
   const [sort, setSort] = useState<SortKey>("mix");
   const [limit, setLimit] = useState(100);
+  const [searchRows, setSearchRows] = useState<ScoutingSearchRow[]>(
+    initialPlayers ?? document.players,
+  );
+  const [shardState, setShardState] = useState<
+    "ready" | "loading" | "partial" | "error"
+  >(
+    shardPaths?.length && (initialPlayers?.length ?? 0) < document.count
+      ? "partial"
+      : "ready",
+  );
 
   const [u23MaxAge, setU23MaxAge] = useState(publishedWeights.u23_max_age);
   const [u23Multiplier, setU23Multiplier] = useState(publishedWeights.u23_multiplier);
@@ -265,6 +281,34 @@ export function ScoutingGlobalSearch({
     sort === "mix";
   const isDefault = advancedDefault && basicDefault;
 
+  useEffect(() => {
+    if (!shardPaths?.length) return;
+    if (searchRows.length >= document.count) return;
+    let cancelled = false;
+    setShardState("loading");
+    Promise.all(
+      shardPaths.map(async (path) => {
+        const response = await fetch(path, { cache: "force-cache" });
+        if (!response.ok) throw new Error(`shard ${response.status}`);
+        const payload = (await response.json()) as { players?: ScoutingSearchRow[] };
+        return payload.players ?? [];
+      }),
+    )
+      .then((parts) => {
+        if (cancelled) return;
+        setSearchRows(parts.flat());
+        setShardState("ready");
+      })
+      .catch(() => {
+        if (!cancelled) setShardState("error");
+      });
+    return () => {
+      cancelled = true;
+    };
+    // Fetch once after the first paint; filter changes operate on the loaded set.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shardPaths, document.count]);
+
   const leagueBySlug = useMemo(
     () => new Map(document.leagues.map((league) => [league.slug, league])),
     [document.leagues],
@@ -275,7 +319,7 @@ export function ScoutingGlobalSearch({
   );
   const players = useMemo<Row[]>(
     () =>
-      document.players.map((row) => ({
+      searchRows.map((row) => ({
         player_id: row.i,
         name: row.n,
         club: row.c,
@@ -327,7 +371,7 @@ export function ScoutingGlobalSearch({
             }
           : null,
       })),
-    [document.players, document.role_labels, profileIds, leagueBySlug],
+    [searchRows, document.role_labels, profileIds, leagueBySlug],
   );
 
   useEffect(() => {
@@ -841,6 +885,10 @@ export function ScoutingGlobalSearch({
       </section>
 
       <p className="fine-print" aria-live="polite" data-contract-indicator="basis">
+        {shardState === "loading" ? "Loading the full scouting pool. " : null}
+        {shardState === "error"
+          ? "The full pool could not be loaded; showing the initial rows only. "
+          : null}
         Showing {formatInteger(visible.length)} of {formatInteger(filtered.length)} matches from{" "}
         {formatInteger(players.length)} ranked players across {formatInteger(leagues.length)}{" "}
         leagues. Priority = value index × U23 multiplier × European league-phase multiplier.
@@ -850,7 +898,7 @@ export function ScoutingGlobalSearch({
         {formatDecimal(weights.europe_multiplier, 2)}. These are Aberdeen scouting preferences,
         not measured quality. Unknown Europe status is not discounted.
       </p>
-      <div className="table-wrap">
+      <TableFrame label="Scouting search results">
         <table className="league-table compact">
           <caption className="fine-print">
             The full licensed scouting pool at {formatInteger(document.min_minutes)}+ minutes.
@@ -959,7 +1007,7 @@ export function ScoutingGlobalSearch({
             ))}
           </tbody>
         </table>
-      </div>
+      </TableFrame>
       {visible.length < filtered.length ? (
         <p>
           <button className="button button-ghost" onClick={() => setLimit(limit + 100)}>

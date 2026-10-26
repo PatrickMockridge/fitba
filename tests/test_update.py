@@ -36,6 +36,8 @@ def test_dry_run_lists_the_ordered_plan(monkeypatch: pytest.MonkeyPatch):
     assert ids[0] == "ingest.results"
     assert "ingest.scouting_pool" in ids
     assert "xg.enrich" in ids
+    assert "guard.semantic" in ids
+    assert ids.index("guard.semantic") < ids.index("guard.metrics")
     assert ids[-1] == "guard.metrics"
 
 

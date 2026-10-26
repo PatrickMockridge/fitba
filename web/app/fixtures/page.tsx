@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CompetitionStrip } from "@/components/CompetitionStrip";
 import { FixtureList } from "@/components/FixtureList";
+import { PageProvenance } from "@/components/PageProvenance";
 import { formatDate, getAberdeen, getManifest } from "@/lib/data";
 
 export const metadata = {
@@ -103,6 +104,8 @@ export default function FixturesPage() {
           Results and fixtures →
         </Link>
       </section>
+
+      <PageProvenance surface="fixtures" />
     </>
   );
 }

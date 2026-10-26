@@ -63,7 +63,7 @@ export function CaseClaimCard({
         {compact ? (
           <Link
             className="text-link"
-            href={`/analysis/#claim-${claim.id.replaceAll("_", "-")}`}
+            href={`/claims/#claim-${claim.id.replaceAll("_", "-")}`}
           >
             Full evidence →
           </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { PriorityProfiles } from "@/components/PriorityProfiles";
 import { ScoutingArchetypes } from "@/components/ScoutingArchetypes";
 import { ScoutingAttackers } from "@/components/ScoutingAttackers";
 import { ScoutingCoverage } from "@/components/ScoutingCoverage";
@@ -10,7 +11,7 @@ import { ScoutingSquadTable } from "@/components/ScoutingSquadTable";
 import { ScoutingTeamLens } from "@/components/ScoutingTeamLens";
 import { ScoutingWeaknessTable } from "@/components/ScoutingWeaknessTable";
 import { ScoutingWeightsCard } from "@/components/ScoutingWeights";
-import { getScouting, getScoutingSearch } from "@/lib/data";
+import { getNeeds, getScouting, getScoutingSearch } from "@/lib/data";
 import { formatInteger, formatPercentValue } from "@/lib/format";
 
 export const metadata = {
@@ -47,6 +48,7 @@ export default function ScoutingPage() {
   const coverage = scouting.coverage;
   const totals = coverage.totals;
   const search = getScoutingSearch();
+  const needs = getNeeds();
 
   return (
     <ContractPage surface="scouting">
@@ -162,6 +164,8 @@ export default function ScoutingPage() {
           </>
         )}
       </section>
+
+      {needs ? <PriorityProfiles data={needs} /> : null}
 
       <section className="card" data-contract="scouting.weights">
         <ScoutingWeightsCard priority={scouting.priority} europe={scouting.europe_coverage} />

@@ -30,6 +30,7 @@ type TimelineEvent = {
   detail: string;
   badge?: string;
   href?: string;
+  anchor?: string;
 };
 
 export function HistoryTimeline({
@@ -42,6 +43,7 @@ export function HistoryTimeline({
   eraStart?: string;
 }) {
   const events: TimelineEvent[] = [];
+  const anchored = new Set<string>();
   for (const person of staff) {
     for (const stint of person.stints) {
       const overlapsEra =
@@ -63,7 +65,11 @@ export function HistoryTimeline({
         }`,
         badge: stint.end === null ? "In post" : startedBeforeEra ? "In post at start" : "Appointed",
         href: stint.source_urls?.[0],
+        anchor: anchored.has(person.person_id)
+          ? undefined
+          : `staff-${person.person_id}`,
       });
+      anchored.add(person.person_id);
       if (stint.end) {
         events.push({
           date: eventDate(stint.end, stint.end_precision),
@@ -98,7 +104,11 @@ export function HistoryTimeline({
   return (
     <ol className="history-timeline">
       {events.map((event, index) => (
-        <li className="timeline-item" key={`${event.kind}-${event.sort}-${event.title}-${index}`}>
+        <li
+          className="timeline-item"
+          id={event.anchor}
+          key={`${event.kind}-${event.sort}-${event.title}-${index}`}
+        >
           <span className={`timeline-dot timeline-dot-${event.kind}`} aria-hidden="true" />
           <div className="timeline-body">
             <div className="timeline-meta">

@@ -1,12 +1,37 @@
 # Metric change log
 
 **Status:** append-only record of metric-definition and parameter changes.
-**Owner:** patrickmockridge. **Last reviewed:** 2026-10-24.
+**Owner:** patrickmockridge. **Last reviewed:** 2026-10-26.
 
 A semantic metric change is any change to an id, formula, input, denominator,
 aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
+
+## 3.10.0 — 2026-10-26
+
+Reader-first semantic layer. Owner approved the canonical entity index, page
+metadata, definitions, public change log, `/search/`, `/claims/` and the
+scouting search sharding. **No published value, formula, denominator, rounding
+mode or source precedence changed.** The changes are payload paths, display
+surfaces and the consistency check set.
+
+- `scouting.pool` v5 → v6 and `scouting.priority` v1 → v2: the ad hoc
+  `scouting/search-index.json` is replaced by `scouting/search/meta.json` plus
+  four `scouting/search/players-*.json` shards. Every row and compact key is
+  preserved; the aggregate player and league counts are unchanged. The shards
+  exist so `/scouting/search/` can paint its first 100 rows and lazy-load the
+  rest under a page budget.
+- `case.*` v2 → v3 (all 11 case metrics): the claim register moves from the
+  retired `/themes/` route to `/claims/`. `home_surface` and
+  `displayed_surfaces` name `/claims/`; the six `case.claim.*` metrics also list
+  `/matchday/`, which renders the two matchday-domain claim cards. The payload
+  remains `themes/aberdeen.json`; no claim text, count, status or benchmark
+  value changed.
+- `consistency.summary` v3 → v4: the named check set grows from 22 to 26 with
+  `semantic.entities`, `semantic.pages`, `semantic.claims` and
+  `semantic.definitions`. A failure still blocks publish.
+- Registry version 3.9.1 → 3.10.0.
 
 ## 3.9.1 — 2026-10-25
 

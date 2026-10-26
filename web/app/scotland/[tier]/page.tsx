@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { LeagueTable } from "@/components/LeagueTable";
+import { PageProvenance } from "@/components/PageProvenance";
 import { getTable, getTableFiles } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -74,6 +75,8 @@ export default async function TierPage({ params }: { params: Promise<{ tier: str
       <p className="back-link">
         <Link href="/scotland/">← All tiers</Link>
       </p>
+
+      <PageProvenance surface="scotland" />
     </>
   );
 }

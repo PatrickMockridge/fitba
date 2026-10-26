@@ -400,6 +400,20 @@ layers:
       Derived from themes, availability, squad minutes, transfers and rumours.
       Role profiles only; no targets or invented fees.
 
+  - id: xg_model
+    label: fitba expected goals
+    kind: derived
+    primary: computed
+    fallback: [football_data_uk, api_football]
+    status: experimental
+    scope: current-season league matches with shot-zone inputs
+    fields: [fxg, fxg_range, evaluation]
+    surfaces: [/analysis/xg/, /matches/, /sources/, /methodology/]
+    note: >
+      The fxG model is derived from licensed shot and match features. It is
+      descriptive; the provider-xG evaluation gate is failing, so it is not a
+      confidence verdict or tracking data.
+
   - id: odds
     label: Betting odds
     kind: none

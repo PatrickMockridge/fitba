@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
 import { ScoutingGlobalSearch } from "@/components/ScoutingGlobalSearch";
-import { getScouting, getScoutingSearch } from "@/lib/data";
+import { getScouting, getScoutingSearch, SCOUTING_SEARCH_SHARDS } from "@/lib/data";
+import { assetPath } from "@/lib/asset-path";
 import { formatInteger } from "@/lib/format";
 
 export const metadata = {
@@ -36,6 +37,11 @@ export default function ScoutingSearchPage() {
   }
   const archetypes = hub?.archetypes ?? [];
   const leagues = document.leagues.filter((league) => league.players > 0);
+  const initialPlayers = document.players.slice(0, 100);
+  const documentMeta = { ...document, players: [] };
+  const shardPaths = Array.from({ length: SCOUTING_SEARCH_SHARDS }, (_, shard) =>
+    assetPath(`/scouting/search/shards/${shard}.json`),
+  );
 
   return (
     <ContractPage surface="scouting-search">
@@ -82,7 +88,12 @@ export default function ScoutingSearchPage() {
           the same as a 90th percentile in another; the page shows both the league and the
           percentile so the comparison is never implied to cross that line.
         </p>
-        <ScoutingGlobalSearch document={document} archetypes={archetypes} />
+        <ScoutingGlobalSearch
+          document={documentMeta}
+          archetypes={archetypes}
+          initialPlayers={initialPlayers}
+          shardPaths={shardPaths}
+        />
       </section>
 
       <section

@@ -1,0 +1,161 @@
+# Reader-facing definitions.
+#
+# Metric-backed definitions are generated from config/metrics.yaml. This file
+# adds the concepts that are not owned by a single metric. It may reference
+# metric ids, but it may not override a metric formula, unit, basis, source
+# layer or coverage tier. Every id must resolve to a generated definition.
+#
+# Keep definitions descriptive. Do not introduce a number that is not in the
+# metric registry; any numeric claim belongs in the registry and its audit.
+
+version: 1
+reviewed: 2026-10-26
+owner: patrickmockridge
+
+terms:
+  - id: basis
+    term: Basis
+    aliases: [measured, inferred, curated, unknown]
+    category: evidence
+    short: How a value was produced.
+    body: >
+      Measured values come from a licensed source or an event reconstruction.
+      Inferred values come from a model or a comparison. Curated values come
+      from a public record or an editorial decision. Unknown means the public
+      record does not support a value; it is not zero.
+    metric_ids: []
+    related: [coverage_tier, confidence]
+
+  - id: coverage_tier
+    term: Coverage tier
+    aliases: [coverage]
+    category: evidence
+    short: How much of the relevant record is present.
+    body: >
+      A coverage tier names the depth of the record behind a value, from event
+      data through match data, curated facts and value-only inputs. A missing
+      tier is labelled; it is never filled with a zero.
+    metric_ids: []
+    related: [basis, unknown]
+
+  - id: unknown
+    term: Unknown
+    aliases: []
+    category: evidence
+    short: The public record does not support a value.
+    body: >
+      Unknown is a published state, not a zero or a guess. A missing injury, fee,
+      contract term or provider field stays unknown until a public source
+      supports it.
+    metric_ids: []
+    related: [basis, coverage_tier]
+
+  - id: role_family
+    term: Role family
+    aliases: [role]
+    category: football
+    short: The grouping used to compare players with similar jobs.
+    body: >
+      A role family groups starting-XI roles that do the same job, such as centre
+      back, full back, centre midfield or centre forward. It comes from observed
+      starting-XI grids where available; a generic position label is not
+      promoted into a role.
+    metric_ids: []
+    related: [percentile, cohort_basis]
+
+  - id: percentile
+    term: Percentile
+    aliases: [percentile rank]
+    category: comparison
+    short: A player's position within a stated cohort.
+    body: >
+      A percentile compares a player with a named cohort, usually the same
+      league and role family. It is relative to that cohort and is not a
+      cross-league ranking or a verdict.
+    metric_ids: []
+    related: [cohort_basis, adjusted_percentile, role_family]
+
+  - id: adjusted_percentile
+    term: Adjusted percentile
+    aliases: [adjusted]
+    category: comparison
+    short: A percentile after the published league adjustment.
+    body: >
+      The adjusted percentile applies fitba's published league alignment to a
+      within-league percentile. The adjustment, its basis and the coverage are
+      visible; the value is still relative to the scouting universe, not a
+      cross-league winner.
+    metric_ids: [scouting.priority]
+    related: [percentile, cohort_basis]
+
+  - id: cohort_basis
+    term: Cohort basis
+    aliases: [cohort]
+    category: comparison
+    short: The group and sample behind a percentile or rate.
+    body: >
+      A cohort basis names the league, role family or provider group and the
+      number of players in the comparison. A small cohort is labelled rather
+      than hidden.
+    metric_ids: []
+    related: [percentile, role_family]
+
+  - id: fxg
+    term: fxG
+    aliases: [fitba expected goals]
+    category: football
+    short: fitba's expected-goals estimate from the available shot record.
+    body: >
+      fxG is a descriptive model built from the licensed shot and match record.
+      It is not provider xG, tracking data or a verdict on finishing. The model,
+      its range and its evaluation gate are published; while the provider gate
+      fails, fxG stays descriptive.
+    metric_ids: [xg.document, xg.per-shot, xg.goals-minus]
+    related: [provider_xg, basis]
+
+  - id: provider_xg
+    term: Provider xG
+    aliases: [provider expected goals]
+    category: football
+    short: The licensed provider's expected-goals value.
+    body: >
+      Provider xG is shown as its own source value, separate from fxG. It is not
+      mixed into fitba's model or used as a verdict on the result.
+    metric_ids: [xg.document]
+    related: [fxg, basis]
+
+  - id: provider_rating
+    term: Provider rating
+    aliases: [match rating, rating]
+    category: football
+    short: The licensed provider's match rating.
+    body: >
+      A provider rating is relative to the provider's own scale and league
+      context. It is a selection input, not a fitba rating, a cross-league
+      ranking or an individual verdict.
+    metric_ids: [player.page]
+    related: [percentile, basis]
+
+  - id: value_index
+    term: Value index
+    aliases: [value]
+    category: recruitment
+    short: A modelled index of scouting value, not a transfer fee.
+    body: >
+      The value index combines the published scouting features into a relative
+      index. It is not a GBP valuation, a transfer fee, a wage or a prediction of
+      a future sale.
+    metric_ids: [scouting.value-model]
+    related: [adjusted_percentile, basis]
+
+  - id: scouting_priority
+    term: Scouting priority
+    aliases: [priority]
+    category: recruitment
+    short: How strongly a scouted profile matches Aberdeen's current role needs.
+    body: >
+      Scouting priority is a relative profile match within the scouting
+      universe. It is not a target recommendation, a fee and not a claim that a
+      player is available.
+    metric_ids: [scouting.priority]
+    related: [value_index, role_family]

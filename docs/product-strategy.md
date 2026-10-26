@@ -247,6 +247,11 @@ usernames or quotes in the public payload.
 Engagement alone is not a success metric. A product that makes fans more certain
 and less accurate has failed.
 
+The [October 2026 UX persona audit](ux-audit-2026-10.md) applies these tests to
+four readers and filters their requests through the identity. It is a planning
+document: the accepted access, citation and trust features are recommendations,
+not delivered scope.
+
 ## Open questions
 
 - **Resolved:** the public name is "fitba", with the line "Aberdeen FC, without
@@ -256,5 +261,5 @@ and less accurate has failed.
 - How to present budget bands without implying a precision the public data does
   not have.
 - Which enterprise event/tracking provider, if any, is worth approaching later.
-- When to add a public corrections route; until then the methodology and sources
-  pages carry the correction policy.
+- How to expand the existing public corrections log into a dated what-changed
+  record without turning it into a news feed.

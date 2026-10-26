@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { FormerPlayer, FormerPlayersFile } from "@/lib/data";
 import { formatDate, formatInteger } from "@/lib/format";
+import { TableFrame } from "@/components/TableFrame";
 
 type Filters = {
   query: string;
@@ -201,7 +202,7 @@ export function FormerPlayersBoard({ data }: { data: FormerPlayersFile }) {
         fact, not a verdict on the player.
       </p>
 
-      <div className="table-wrap">
+      <TableFrame label="Former players table">
         <table className="league-table compact" data-contract="former.register">
           <caption className="fine-print">
             Former players from 2019-20 onward. Exit fee is disclosed, reported or modelled, never
@@ -291,7 +292,7 @@ export function FormerPlayersBoard({ data }: { data: FormerPlayersFile }) {
             })}
           </tbody>
         </table>
-      </div>
+      </TableFrame>
 
       {filtered.length === 0 ? <p className="muted">No former players match these filters.</p> : null}
 

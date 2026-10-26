@@ -560,9 +560,41 @@ Must remain visible:
 - The corrections policy and what information to include.
 - A public contact route and the last-reviewed date.
 - A dated log with the affected page, the claim, the correction and the status.
+- A change kind for every entry (correction, metric, source, page or data) and a
+  link to the metric-changes narrative for a metric entry.
 - Links to the method and source pages.
 
 Forbidden: claiming a corrections policy without a contact route or log.
+
+### `/search/` — search the record
+
+Must remain visible:
+
+- A flat, unranked index of published pages, matches, players, clubs, staff,
+  seasons and claims, grouped by type.
+- The scouting pool as a separate group that loads on request; the initial page
+  does not embed the full scouting index.
+- The statement that results link to the existing record and are not a ranking,
+  target list or supplementary player profile.
+- The source and as-of context on a result, and links to the scouting search,
+  metrics and sources.
+
+Forbidden: ranking by popularity or engagement; tracking queries or using
+reader history; a second player profile presented in the result list.
+
+### `/claims/` — claims and evidence
+
+Must remain visible:
+
+- Every published claim with its order, domain, status, evidence table, count,
+  sample and confidence.
+- The claim benchmark and the claim coverage block.
+- The statement that the claims are fitba-owned, include the unflattering
+  numbers and are not a club briefing.
+- Links to the season overview, matchday and metrics.
+
+Forbidden: removing an unflattering claim; a claim without its evidence or
+status; presenting interpretation as a measured count.
 
 ### `/about/` — identity and editorial standard
 

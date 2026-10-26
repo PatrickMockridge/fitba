@@ -1,0 +1,233 @@
+# Public correction and change log.
+#
+# Corrections are factual: a value or label changed against a public source.
+# A disagreement with fitba's reading is not a correction and does not enter
+# this log. Metric entries point at the narrative in docs/metric-changes.md;
+# the narrative remains the normative change-control record.
+#
+# The log is append-only. Generated web/data/generated/changelog.json is a
+# projection of this file and must not be hand-edited.
+
+version: 1
+last_reviewed: 2026-10-26
+contact_url: https://patrickmockridge.github.io/fitba/about/
+note: >
+  Report a factual error through the public issue tracker. Include the page,
+  the claim and a source. Corrections are recorded with the date, the affected
+  page and the status.
+append_only: true
+
+entries:
+  - id: metric-3.10.0-semantic-layer
+    date: 2026-10-26
+    kind: metric
+    status: published
+    title: Search, claims and the reader-first semantic layer
+    summary: >
+      Registry 3.10.0 adds the canonical entity index and page metadata,
+      publishes claims on /claims/ instead of the retired /themes/ route, and
+      splits the scouting search payload into meta plus four shards. No
+      published value, formula, denominator or source precedence changed; the
+      scouting pool and claim counts are the same records.
+    pages: ["/search/", "/claims/", "/scouting/search/", "/corrections/"]
+    entities: []
+    metric_ids: [scouting.pool, scouting.priority, consistency.summary]
+    registry_version: 3.10.0
+    doc_anchor: "3-10-0-2026-10-26"
+    evidence:
+      - {label: "Metrics and audit", url: "/metrics/"}
+      - {label: "Claims", url: "/claims/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-24-dundee-united-result
+    date: 2026-10-24
+    kind: correction
+    status: fixed
+    title: The Dundee United result was missing from the table and form
+    summary: >
+      The 2026-10-24 Dundee United 3-2 Aberdeen result appeared on the fixture
+      pages but not in the league table, form guide, analysis hero, history
+      record or club summary. The official SPFL overlay now writes a complete
+      league result row, and every table-driven surface reads the same canonical
+      result frame.
+    pages: ["/", "/analysis/", "/matchday/", "/history/2026-27/", "/matches/1556682/"]
+    entities: ["fixture:1556682"]
+    metric_ids: [consistency.summary]
+    evidence:
+      - {label: "Match page", url: "/matches/1556682/"}
+      - {label: "League table", url: "/scotland/premiership/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-scottish-cup-final-label
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: The 2024-25 Scottish Cup final was labelled FA Cup
+    summary: >
+      The final was labelled FA Cup and described as a draw. Competition labels
+      now resolve through the competition registry, and the shootout outcome is
+      named in the headline, H1 and honours record.
+    pages: ["/matches/1372545/"]
+    entities: ["fixture:1372545"]
+    metric_ids: []
+    evidence:
+      - {label: "Match page", url: "/matches/1372545/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-scottish-cup-fixtures
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: Scottish Cup fixtures carried the provider label FA Cup
+    summary: >
+      All fixture and player competition labels now use the canonical Scottish
+      Cup name.
+    pages: ["/matches/"]
+    entities: []
+    metric_ids: []
+    evidence:
+      - {label: "Match record", url: "/matches/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-second-yellow
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: A second yellow was shown as a straight red
+    summary: >
+      Second yellows are derived from prior yellow-card events and shown as a
+      second yellow.
+    pages: ["/matches/1629022/"]
+    entities: ["fixture:1629022"]
+    metric_ids: []
+    evidence:
+      - {label: "Match page", url: "/matches/1629022/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-heavy-defeat-headline
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: Heavy defeats were headlined as late wins
+    summary: >
+      The late-win phrase now requires a one-goal margin and a decisive late
+      goal; multi-goal defeats no longer receive it.
+    pages: ["/matches/868813/", "/history/"]
+    entities: ["fixture:868813"]
+    metric_ids: []
+    evidence:
+      - {label: "Match page", url: "/matches/868813/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-empty-event-feed
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: An unavailable event feed was described as zero goals
+    summary: >
+      The read now says the event feed is unavailable and does not print a zero.
+    pages: ["/matches/1584673/"]
+    entities: ["fixture:1584673"]
+    metric_ids: []
+    evidence:
+      - {label: "Match page", url: "/matches/1584673/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-duplicate-fixtures
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: Duplicate pre-season fixtures inflated the match record
+    summary: >
+      Duplicate records are aliases of the canonical match and are excluded from
+      counts, search and navigation.
+    pages: ["/matches/870984/", "/matches/891298/"]
+    entities: ["fixture:870984", "fixture:891298"]
+    metric_ids: []
+    evidence:
+      - {label: "Match page", url: "/matches/870984/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-unknown-availability
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: Unknown availability was rendered as zero
+    summary: >
+      Unknown availability is null and labelled unknown; opponent availability is
+      not modelled.
+    pages: ["/matchday/", "/recruitment/"]
+    entities: []
+    metric_ids: [availability.ledger, needs.family]
+    evidence:
+      - {label: "Matchday", url: "/matchday/"}
+    fixed_in_dataset: null
+
+  - id: corr-2026-10-22-relegation-fight
+    date: 2026-10-22
+    kind: correction
+    status: fixed
+    title: A season review described a relegation fight without the measured record
+    summary: >
+      The review states the measured finish: 10th on 41 points, in the bottom
+      six.
+    pages: ["/history/2021-22/"]
+    entities: []
+    metric_ids: []
+    evidence:
+      - {label: "Season review", url: "/history/2021-22/"}
+    fixed_in_dataset: null
+
+  - id: metric-3.9.1-opponent-ratings
+    date: 2026-10-25
+    kind: metric
+    status: published
+    title: Opponent match ratings in the predicted XI
+    summary: >
+      The matchday lineup metric version 3 and registry 3.9.1 enable the
+      opponent player-statistics stage, so the opponent XI carries the same
+      provider recent-rating field as Aberdeen. No formula changed.
+    pages: ["/matchday/", "/status/"]
+    entities: []
+    metric_ids: [matchday.lineup]
+    registry_version: 3.9.1
+    doc_anchor: "3-9-1-2026-10-25"
+    evidence:
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null
+
+  - id: metric-3.9.0-complete-league-results
+    date: 2026-10-25
+    kind: metric
+    status: published
+    title: Complete current-season league results
+    summary: >
+      API-Football fills a missing current-season result for every SPFL tier,
+      never overriding an existing football-data score. Registry 3.9.0 adds the
+      provider league ids and the result guard.
+    pages: ["/scotland/", "/analysis/", "/status/"]
+    entities: []
+    metric_ids: [coverage.surfaces]
+    registry_version: 3.9.0
+    doc_anchor: "3-9-0-2026-10-25"
+    evidence:
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null
+
+  - id: metric-3.8.0-refresh-integrity
+    date: 2026-10-24
+    kind: metric
+    status: published
+    title: Refresh integrity and canonical results
+    summary: >
+      Registry 3.8.0 corrects the omitted official result, adds the canonical
+      results layer, and adds the refresh, consistency and epoch guards. This is
+      a correctness correction, not a formula change.
+    pages: ["/status/", "/scotland/", "/analysis/"]
+    entities: []
+    metric_ids: [consistency.summary, manifest.freshness]
+    registry_version: 3.8.0
+    doc_anchor: "3-8-0-2026-10-24"
+    evidence:
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null

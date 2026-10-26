@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { ContractPage } from "@/components/ContractPage";
 
 export default function ThemesRedirectPage() {
   useEffect(() => {
@@ -13,7 +12,7 @@ export default function ThemesRedirectPage() {
   }, []);
 
   return (
-    <ContractPage surface="themes" state="redirect">
+    <div className="contract-page" data-contract-page="themes" data-contract-state="redirect">
       <section className="page-head" data-contract="themes.redirect">
         <p className="eyebrow">Moved</p>
         <h1>Season overview</h1>
@@ -27,6 +26,6 @@ export default function ThemesRedirectPage() {
           </Link>
         </p>
       </section>
-    </ContractPage>
+    </div>
   );
 }

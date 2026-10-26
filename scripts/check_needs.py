@@ -19,7 +19,7 @@ THEMES = GENERATED / "themes" / "aberdeen.json"
 SQUAD = GENERATED / "squad" / "aberdeen.json"
 SCHEMA = ROOT / "contracts" / "needs.schema.json"
 MANIFEST = GENERATED / "manifest.json"
-SEARCH = GENERATED / "search-index.json"
+SEARCH = GENERATED / "entities" / "index.json"
 
 FAMILIES = {"GK", "CB", "FB/WB", "MID", "AM/WM", "W", "ST"}
 CATEGORIES = {"cover", "replace", "strengthen", "monitor", "none", "unknown"}
@@ -160,7 +160,7 @@ def main() -> int:
         if "needs" not in (manifest.get("coverage") or {}):
             errors.append("manifest coverage missing needs")
     if SEARCH.exists():
-        search = _load(SEARCH)
+        search = (_load(SEARCH).get("entities") or [])
         if not any(entry.get("href") == "/recruitment/#squad-needs" for entry in search):
             errors.append("search index missing the squad-needs anchor")
         if not any(entry.get("href") == "/scouting/#priority-profiles" for entry in search):

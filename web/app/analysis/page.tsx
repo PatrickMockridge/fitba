@@ -318,7 +318,8 @@ export default function AnalysisPage() {
         <p className="fine-print">
           Evidence, coverage and unknown states are shown beside each block.{" "}
           <Link className="text-link" href="/methodology/">Method →</Link>{" "}
-          <Link className="text-link" href="/sources/">Sources →</Link>
+          <Link className="text-link" href="/sources/">Sources →</Link>{" "}
+          <Link className="text-link" href="/claims/">Claims and evidence →</Link>
         </p>
       </section>
 

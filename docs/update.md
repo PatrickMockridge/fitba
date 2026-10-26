@@ -37,9 +37,17 @@ Options:
 
 Required steps are `ingest.results`, `ingest.api_results` (when the provider key
 is present), `warehouse.build`, `validate`, `publish`,
-`guard.results`, `guard.consistency`, `guard.freshness` and `guard.metrics`. A
-required failure stops the run before publish and leaves the previous published
-directory in place.
+`guard.results`, `guard.consistency`, `guard.freshness`, `guard.semantic` and
+`guard.metrics`. A required failure stops the run before publish and leaves the
+previous published directory in place.
+
+`guard.semantic` runs `check_semantic.py` and `check_page_budget.py` in data
+mode after publish. It proves that every entity id, alias and external id is
+unique, the core and scouted groups are disjoint, every page-meta layer and
+metric resolves, every claim points at `/claims/`, every definition references a
+registered metric and every generated payload is inside its browser budget. It
+does not run the page-mode href check, which needs a build; that runs in
+`make web-contract-check`.
 
 Optional steps are cups, the official fixture overlay, history backfill,
 matchday, transfers, former players, squad, availability, career, news, forum,

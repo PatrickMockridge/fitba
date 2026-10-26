@@ -804,6 +804,147 @@ def _parse_time(value: Any):
     return parsed.astimezone(UTC)
 
 
+def _entity_id(entity: dict[str, Any]) -> str:
+    value = str(entity.get("entity_id") or "")
+    if value:
+        return value
+    compact = str(entity.get("i") or "")
+    return f"player:api:player:{compact}" if compact else ""
+
+
+def _entity_documents(corpus: dict[str, Any]) -> list[tuple[str, list[dict[str, Any]]]]:
+    index = _payload(corpus, "entities/index.json") or {}
+    scouted = _payload(corpus, "entities/scouted.json") or {}
+    return [
+        ("entities/index.json", list(index.get("entities") or [])),
+        ("entities/scouted.json", list(scouted.get("entities") or [])),
+    ]
+
+
+def _check_semantic_entities(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    seen: dict[str, str] = {}
+    aliases: dict[str, str] = {}
+    external: dict[tuple[str, str], str] = {}
+    core_ids: set[str] = set()
+    for name, entities in _entity_documents(corpus):
+        for entity in entities:
+            entity_id = _entity_id(entity)
+            outcome.rows_checked += 1
+            if not entity_id:
+                outcome.fail(f"{name}: entity without an id")
+                continue
+            if name == "entities/index.json":
+                core_ids.add(entity_id)
+            previous = seen.get(entity_id)
+            if previous is not None:
+                outcome.fail(f"{name}: duplicate entity id {entity_id}")
+            seen[entity_id] = name
+            kind = str(entity.get("type") or "player")
+            outcome.fields_checked += 2
+            if not entity_id.startswith(f"{kind}:"):
+                outcome.fail(f"{name}: {entity_id}: id does not match type {kind}")
+            href = entity.get("href")
+            if entity.get("indexable") and not (
+                isinstance(href, str) and href.startswith("/")
+            ):
+                outcome.fail(f"{name}: {entity_id}: indexable without an internal href")
+            for alias in entity.get("aliases") or []:
+                key = str(alias).casefold().strip()
+                if not key:
+                    continue
+                previous = aliases.get(key)
+                if previous is not None and previous != entity_id:
+                    outcome.fail(f"{name}: alias {alias!r} identifies {previous} and {entity_id}")
+                aliases[key] = entity_id
+            for source, value in (entity.get("external_ids") or {}).items():
+                key = (str(source), str(value))
+                previous = external.get(key)
+                if previous is not None and previous != entity_id:
+                    outcome.fail(f"{name}: external id {source}:{value} is duplicated")
+                external[key] = entity_id
+    scouted_ids = {
+        _entity_id(entity)
+        for name, entities in _entity_documents(corpus)
+        if name == "entities/scouted.json"
+        for entity in entities
+    }
+    overlap = core_ids & scouted_ids
+    if overlap:
+        outcome.fail(f"core and scouted entities overlap: {sorted(overlap)[:5]}")
+
+
+def _check_semantic_pages(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    meta = _payload(corpus, "page-meta.json") or {}
+    provenance = _payload(corpus, "provenance.json") or {}
+    registry = _payload(corpus, "metrics/registry.json") or {}
+    layers = {str(row.get("id")) for row in provenance.get("layers") or []}
+    metrics = {str(row.get("id")) for row in registry.get("metrics") or []}
+    surfaces = meta.get("surfaces") or {}
+    if not surfaces:
+        outcome.fail("page-meta: no surfaces")
+    for surface_id, surface in surfaces.items():
+        outcome.rows_checked += 1
+        outcome.fields_checked += 2
+        if not surface.get("route_patterns"):
+            outcome.fail(f"page-meta: {surface_id}: no route patterns")
+        surface_layers = surface.get("layers") or []
+        if not surface_layers and not surface.get("no_layers_reason"):
+            outcome.fail(f"page-meta: {surface_id}: no layers and no reason")
+        for layer in surface_layers:
+            if layer not in layers:
+                outcome.fail(f"page-meta: {surface_id}: unknown layer {layer}")
+        for metric in surface.get("metrics") or []:
+            if metric not in metrics:
+                outcome.fail(f"page-meta: {surface_id}: unknown metric {metric}")
+
+
+def _check_semantic_claims(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    case = _payload(corpus, "themes/aberdeen.json") or {}
+    known = {str(row.get("id")) for row in case.get("claims") or []}
+    for name, entities in _entity_documents(corpus):
+        for entity in entities:
+            if entity.get("type") != "claim":
+                continue
+            outcome.rows_checked += 1
+            entity_id = _entity_id(entity)
+            value = entity_id.split(":", 1)[-1]
+            if value not in known:
+                outcome.fail(f"{name}: claim {value}: not in themes/aberdeen.json")
+            href = str(entity.get("href") or "")
+            outcome.fields_checked += 1
+            if not href.startswith("/claims/#claim-"):
+                outcome.fail(f"{name}: claim {value}: href {href!r} is not the claims surface")
+    for entity in (_payload(corpus, "entities/index.json") or {}).get("entities") or []:
+        if "/analysis/#claim-" in str(entity.get("href") or ""):
+            outcome.fail(f"{_entity_id(entity)}: stale analysis claim href")
+
+
+def _check_semantic_definitions(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    definitions = _payload(corpus, "definitions.json") or {}
+    registry = _payload(corpus, "metrics/registry.json") or {}
+    metrics = {str(row.get("id")): row for row in registry.get("metrics") or []}
+    ids: set[str] = set()
+    for entry in definitions.get("entries") or []:
+        outcome.rows_checked += 1
+        entry_id = str(entry.get("id") or "")
+        if not entry_id or entry_id in ids:
+            outcome.fail(f"definitions: duplicate or missing id {entry_id!r}")
+        ids.add(entry_id)
+        for metric_id in entry.get("metric_ids") or []:
+            metric = metrics.get(str(metric_id))
+            outcome.fields_checked += 1
+            if metric is None:
+                outcome.fail(f"definitions: {entry_id}: unknown metric {metric_id}")
+                continue
+            if entry.get("provenance") == "registry":
+                for field in ("basis", "coverage_tier", "source_layer"):
+                    outcome.fields_checked += 1
+                    if entry.get(field) != metric.get(field):
+                        outcome.fail(f"definitions: {entry_id}: {field} does not match registry")
+        if entry.get("provenance") == "curated_overlay" and entry.get("formula"):
+            outcome.fail(f"definitions: {entry_id}: curated overlay may not override a formula")
+
+
 def _check_rules_epoch(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     manifest = _payload(corpus, "manifest.json") or {}
     dataset_id = str(manifest.get("dataset_version") or "")
@@ -1004,6 +1145,33 @@ CHECKS = [
         "Coverage match counts equal the league tables they summarise",
         ["coverage.json", "tables/*.json"],
         _check_results_coverage,
+    ),
+    (
+        "semantic.entities",
+        "Canonical entity ids, aliases and external ids are unique and disjoint",
+        [
+            "entities/index.json",
+            "entities/scouted.json",
+        ],
+        _check_semantic_entities,
+    ),
+    (
+        "semantic.pages",
+        "Page metadata references published provenance layers and registry metrics",
+        ["page-meta.json", "provenance.json", "metrics/registry.json"],
+        _check_semantic_pages,
+    ),
+    (
+        "semantic.claims",
+        "Claim entities resolve to the case payload and the claims surface",
+        ["entities/index.json", "entities/scouted.json", "themes/aberdeen.json"],
+        _check_semantic_claims,
+    ),
+    (
+        "semantic.definitions",
+        "Definition entries reference registry metrics without overriding them",
+        ["definitions.json", "metrics/registry.json"],
+        _check_semantic_definitions,
     ),
     (
         "rules.epoch",

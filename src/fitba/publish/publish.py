@@ -77,6 +77,7 @@ from fitba.publish.scouting import (
     build_scouting_bundle,
     fallback_scouting_bundle,
 )
+from fitba.publish.semantic import build_semantic_bundle
 from fitba.publish.shapes import shape_payload
 from fitba.publish.squad import PlayerLinkIndex, squad_payload
 from fitba.publish.themes import build_themes_payload, fallback_themes_payload
@@ -142,7 +143,11 @@ def _dumps(payload: Any) -> bytes:
 
 
 def _write_compact(path: Path, payload: Any) -> dict[str, Any]:
-    """Write a machine-oriented index without pretty-printing, under the same cap."""
+    """Write a machine-oriented index without pretty-printing.
+
+    There is no content cap; the browser payload budgets are enforced by
+    ``scripts/check_page_budget.py``, and a breach is sharded, not trimmed.
+    """
     stamped = stamp_payload(payload)
     data = orjson.dumps(stamped, option=orjson.OPT_SORT_KEYS, default=str)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1184,6 +1189,7 @@ def publish(
     tables = tables_by_season[target_season]
     generated_at = utc_now_iso()
     dataset_version = f"{generated_at}-{_git_sha()}"
+    registry = load_registry()
     effective_update_id = update_id or f"publish-{generated_at}"
     from fitba.freshness import collect_source_snapshots
 
@@ -1664,8 +1670,30 @@ def publish(
         pool_info = _write(temp / "scouting" / "pool" / f"{slug}.json", document)
         written.append(pool_info)
     search_document = scouting_bundle["search"]
-    search_info = _write_compact(temp / "scouting" / "search-index.json", search_document)
-    written.append(search_info)
+    search_meta = {key: value for key, value in search_document.items() if key != "players"}
+    search_meta_info = _write_compact(
+        temp / "scouting" / "search" / "meta.json", search_meta
+    )
+    written.append(search_meta_info)
+    shards: list[list[dict[str, Any]]] = [[] for _ in range(4)]
+    for row in search_document.get("players") or []:
+        try:
+            shard = int(row.get("i") or 0) % 4
+        except (TypeError, ValueError):
+            shard = 0
+        shards[shard].append(row)
+    for index, rows in enumerate(shards):
+        shard_info = _write_compact(
+            temp / "scouting" / "search" / f"players-{index}.json",
+            {
+                "schema_version": search_document.get("schema_version"),
+                "season": search_document.get("season"),
+                "shard": index,
+                "count": len(rows),
+                "players": rows,
+            },
+        )
+        written.append(shard_info)
     value_model_document = hub.get("value_model") or {"state": "unavailable"}
     value_model_info = _write(temp / "scouting" / "value-model.json", value_model_document)
     written.append(value_model_info)
@@ -1699,9 +1727,9 @@ def publish(
     marts.append(
         {
             "id": "scouting.search",
-            "path": "scouting/search-index.json",
+            "path": "scouting/search/",
             "rows": len(search_document.get("players") or []),
-            "checksum": search_info["checksum"],
+            "checksum": None,
             "season": target_season,
         }
     )
@@ -2041,206 +2069,8 @@ def publish(
         }
     )
 
-    team_ids = sorted(
-        set(matches["home_team_id"].drop_nulls().to_list())
-        | set(matches["away_team_id"].drop_nulls().to_list())
-    )
-    team_names = {
-        row["team_id"]: row["team_name"]
-        for row in matches.select(
-            pl.col("home_team_id").alias("team_id"),
-            pl.col("home_team_name").alias("team_name"),
-        )
-        .unique()
-        .to_dicts()
-    }
-    team_names.update(
-        {
-            row["team_id"]: row["team_name"]
-            for row in matches.select(
-                pl.col("away_team_id").alias("team_id"),
-                pl.col("away_team_name").alias("team_name"),
-            )
-            .unique()
-            .to_dicts()
-        }
-    )
-    search = [
-        {
-            "type": "club",
-            "id": team_id,
-            "name": team_names.get(team_id, team_id),
-            "slug": team_id.split(":", 1)[-1],
-        }
-        for team_id in team_ids
-        if not team_id.startswith("sco:provisional")
-    ]
-    search.extend(
-        {
-            "type": "player",
-            "id": player["player_key"],
-            "name": player["name"],
-            "slug": str(player["player_id"]),
-            "href": player["href"],
-        }
-        for player in squad_data["players"]
-    )
-    search.extend(
-        {
-            "type": "former-player",
-            "id": player["player_key"],
-            "name": player["name"],
-            "slug": player["href"].rsplit("#", 1)[-1],
-            "href": player["href"],
-        }
-        for player in former_index.get("players") or []
-    )
-    search.append(
-        {
-            "type": "page",
-            "id": "former-players",
-            "name": "Former players",
-            "slug": "former-players",
-            "href": "/former-players/",
-        }
-    )
-    search.extend(
-        {
-            "type": "history-season",
-            "id": item["season"],
-            "name": f"Aberdeen {item['season']}",
-            "slug": item["season"],
-            "href": item["href"],
-        }
-        for item in history_payloads["index"].get("seasons", [])
-    )
-    search.extend(
-        {
-            "type": "staff",
-            "id": person["person_id"],
-            "name": person["name"],
-            "slug": person["person_id"],
-            "href": "/history/",
-        }
-        for person in history_payloads["index"].get("staff", [])
-        if person.get("person_id")
-    )
-    matchday_fixture = matchday_payload.get("fixture")
-    if matchday_fixture:
-        search.append(
-            {
-                "type": "match",
-                "id": matchday_fixture.get("match_id"),
-                "name": (
-                    f"{matchday_fixture.get('home_team_name')} v "
-                    f"{matchday_fixture.get('away_team_name')}"
-                ),
-                "slug": str(matchday_fixture.get("match_id") or "next"),
-                "href": "/matchday/",
-            }
-        )
-    search.append(
-        {
-            "type": "page",
-            "id": "matches",
-            "name": "Match record",
-            "slug": "matches",
-            "href": "/matches/",
-        }
-    )
-    search.extend(
-        {
-            "type": "match",
-            "id": f"fixture:{item['fixture_id']}",
-            "name": (
-                f"{item.get('home_team_name')} {item.get('home_goals')}-"
-                f"{item.get('away_goals')} {item.get('away_team_name')}"
-            ),
-            "slug": str(item["fixture_id"]),
-            "href": item.get("href") or f"/matches/{item['fixture_id']}/",
-        }
-        for item in fixture_index.get("fixtures", [])
-        if item.get("fixture_id") is not None
-    )
-    if xg_payload.get("matches"):
-        search.append(
-            {
-                "type": "page",
-                "id": "analysis-xg",
-                "name": "fxG model and aggregates",
-                "slug": "analysis-xg",
-                "href": "/analysis/xg/",
-            }
-        )
-    search.append(
-        {
-            "type": "page",
-            "id": "sources",
-            "name": "Data sources and provenance",
-            "slug": "sources",
-            "href": "/sources/",
-        }
-    )
-    search.append(
-        {
-            "type": "page",
-            "id": "metrics",
-            "name": "Metrics and audit",
-            "slug": "metrics",
-            "href": "/metrics/",
-        }
-    )
-    if case_payload.get("claims"):
-        search.append(
-            {
-                "type": "page",
-                "id": "data-analysis",
-                "name": "Data analysis",
-                "slug": "analysis",
-                "href": "/analysis/",
-            }
-        )
-        search.extend(
-            {
-                "type": "analysis",
-                "id": claim.get("id"),
-                "name": claim.get("title") or claim.get("id"),
-                "slug": str(claim.get("id") or "claim").replace("_", "-"),
-                "href": "/analysis/#claim-" + str(claim.get("id") or "claim").replace("_", "-"),
-            }
-            for claim in case_payload.get("claims", [])
-        )
-    if needs_payload.get("families"):
-        search.extend(
-            [
-                {
-                    "type": "page",
-                    "id": "squad-needs",
-                    "name": "Squad needs",
-                    "slug": "squad-needs",
-                    "href": "/recruitment/#squad-needs",
-                },
-                {
-                    "type": "page",
-                    "id": "priority-profiles",
-                    "name": "Priority scouting profiles",
-                    "slug": "priority-profiles",
-                    "href": "/scouting/#priority-profiles",
-                },
-            ]
-        )
-    search_info = _write(temp / "search-index.json", search)
-    written.append(search_info)
-    marts.append(
-        {
-            "id": "search.index",
-            "path": "search-index.json",
-            "rows": len(search),
-            "checksum": search_info["checksum"],
-            "season": target_season,
-            "row_basis": "one row per indexed page, theme or player",
-        }
-    )
+    # The old ad hoc search-index block lived here. The semantic bundle
+    # (entities, page metadata, definitions and changelog) replaces it below.
 
     coverage = {
         "season": target_season,
@@ -2461,6 +2291,44 @@ def publish(
         }
     )
 
+    # Reader-facing semantic layer: identity, page metadata, definitions and
+    # the public change log. Built from existing payloads; no number is copied.
+    semantic = build_semantic_bundle(
+        squad=squad_data,
+        former=former_index,
+        scouting_bundle=scouting_bundle,
+        fixture_index=fixture_index,
+        history_index=history_payloads["index"],
+        case_payload=case_payload,
+        tables=tables_by_season.get(target_season) or {},
+        registry=registry,
+        registry_checksum=registry_checksum(registry),
+        generated_at=generated_at,
+        dataset_version=dataset_version,
+        update_id=effective_update_id,
+        source_snapshots=source_snapshots,
+    )
+    semantic_documents = (
+        ("entities/index.json", semantic.entities, "entities"),
+        ("entities/scouted.json", semantic.scouted, "entities.scouted"),
+        ("page-meta.json", semantic.page_meta, "page-meta"),
+        ("definitions.json", semantic.definitions, "definitions"),
+        ("changelog.json", semantic.changelog, "changelog"),
+    )
+    for relative, document, mart_id in semantic_documents:
+        info = _write_compact(temp / relative, document)
+        written.append(info)
+        marts.append(
+            {
+                "id": mart_id,
+                "path": relative,
+                "rows": len(document.get("entities") or document.get("entries") or []) or 1,
+                "checksum": info["checksum"],
+                "season": target_season,
+                "row_basis": "one row per semantic record",
+            }
+        )
+
     # The result audit is the published evidence for the official overlay and
     # the canonical-vs-table reconciliation. It is written before validation so
     # the manifest and the freshness report can reference the same facts.
@@ -2549,7 +2417,6 @@ def publish(
     validation_info = _write(temp / "audit" / "validation.json", validation_payload)
     written.append(validation_info)
 
-    registry = load_registry()
     registry_payload = build_registry_payload(registry)
     registry_info = _write(temp / "metrics" / "registry.json", registry_payload)
     written.append(registry_info)

@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.9.1
+registry_version: 3.10.0
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -2041,7 +2041,7 @@ metrics:
   status: active
 - id: consistency.summary
   label: Cross-surface consistency audit
-  description: Pass/fail counts for the published cross-surface consistency checks, including the former-player, result/form, epoch and manifest checks.
+  description: Pass/fail counts for the published cross-surface consistency checks, including the former-player, result/form, semantic, epoch and manifest checks.
   value_type: object
   fields: [checks, passed, failed, rows_checked, fields_checked]
   formula: One record per named consistency check; passed + failed = checks.
@@ -2071,8 +2071,8 @@ metrics:
   - Generated from the same published corpus; it catches disagreement, not an
     incorrect shared formula.
   owner: patrickmockridge
-  reviewed: '2026-10-24'
-  version: 3
+  reviewed: '2026-10-26'
+  version: 4
   status: active
 - id: manifest.freshness
   label: Freshness thresholds
@@ -2209,9 +2209,9 @@ metrics:
   - themes/aberdeen.json#/chairman_frame/**
   - themes/aberdeen.json#/thesis
   - themes/aberdeen.json#/state
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2219,7 +2219,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claims
   label: The case claims
@@ -2247,9 +2247,9 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2257,7 +2257,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.evidence
   label: Claim evidence
@@ -2284,9 +2284,9 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*/evidence/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2294,7 +2294,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.benchmark
   label: Peer benchmark
@@ -2324,9 +2324,9 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/benchmark/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2334,7 +2334,7 @@ metrics:
   - League performance only; other clubs transfer and wage models are not in the record.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.coverage
   label: Case coverage
@@ -2361,9 +2361,9 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/coverage/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2371,7 +2371,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.team-now
   label: The team now
@@ -2402,9 +2402,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=team_now]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2412,7 +2413,7 @@ metrics:
   - Case claim; provenance checked, not independently recomputed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.defence
   label: The defence
@@ -2443,9 +2444,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=defence]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2453,7 +2455,7 @@ metrics:
   - Four three-CB matches; association only. Availability is unknown.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.attack
   label: The attack
@@ -2483,9 +2485,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=attack]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2493,7 +2496,7 @@ metrics:
   - No event data for set-piece goals, errors or penalties.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.managers
   label: The managers
@@ -2522,9 +2525,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=managers]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2532,7 +2536,7 @@ metrics:
   - 18 Robinson matches; no pre-declared variance measure.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.squad
   label: The squad
@@ -2562,9 +2566,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=squad]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2572,7 +2577,7 @@ metrics:
   - Confirmed business only; fees are mostly undisclosed.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: case.claim.chairman-record
   label: The chairman's record
@@ -2603,9 +2608,10 @@ metrics:
   home_payload: themes/aberdeen.json
   payload_paths:
   - themes/aberdeen.json#/claims/*[id=chairman_record]/**
-  home_surface: /themes/
+  home_surface: /claims/
   displayed_surfaces:
-  - /themes/
+  - /claims/
+  - /matchday/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2613,7 +2619,7 @@ metrics:
   - The record cannot prove causation or boardroom intent.
   owner: patrickmockridge
   reviewed: '2026-10-22'
-  version: 2
+  version: 3
   status: active
 - id: matches.document
   label: Match document
@@ -3194,7 +3200,8 @@ metrics:
   home_payload: scouting/pool/sco-premiership.json
   payload_paths:
   - scouting/pool/*.json#/**
-  - scouting/search-index.json#/**
+  - scouting/search/meta.json#/**
+  - scouting/search/players-*.json#/**
   home_surface: /scouting/
   displayed_surfaces:
   - /scouting/
@@ -3216,7 +3223,7 @@ metrics:
     rank. A missing or insufficient cohort is null, never zero.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 5
+  version: 6
   status: active
 - id: scouting.board
   label: Scouting weakness board
@@ -3638,7 +3645,8 @@ metrics:
   home_payload: scouting/aberdeen.json
   payload_paths:
   - scouting/pool/*.json#/**
-  - scouting/search-index.json#/**
+  - scouting/search/meta.json#/**
+  - scouting/search/players-*.json#/**
   - scouting/aberdeen.json#/priority/**
   - scouting/aberdeen.json#/europe_coverage/**
   - scouting/aberdeen.json#/archetypes/**
@@ -3663,7 +3671,7 @@ metrics:
   - Priority is not a transfer value or a fee.
   owner: patrickmockridge
   reviewed: '2026-10-23'
-  version: 1
+  version: 2
   status: active
 
 parameters:

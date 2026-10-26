@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LeagueTable } from "@/components/LeagueTable";
+import { PageProvenance } from "@/components/PageProvenance";
 import { getManifest, getTableFiles } from "@/lib/data";
 
 export const metadata = {
@@ -51,6 +52,8 @@ export default function ScotlandPage() {
         and, for Europe, the current UEFA access list; see the{" "}
         <Link href="/methodology/">methodology</Link> for sources and caveats.
       </p>
+
+      <PageProvenance surface="scotland" />
     </>
   );
 }

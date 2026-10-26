@@ -26,7 +26,7 @@ PAYLOAD = DATA / "themes" / "aberdeen.json"
 SCHEMA = ROOT / "contracts" / "themes.schema.json"
 CONFIG = ROOT / "config" / "themes.yaml"
 MANIFEST = DATA / "manifest.json"
-SEARCH = DATA / "search-index.json"
+SEARCH = DATA / "entities" / "index.json"
 
 DOMAINS = {"matchday", "off_pitch", "chairman"}
 STATUSES = {"supported", "mixed", "not_supported", "cant_test"}
@@ -68,7 +68,7 @@ def main() -> int:
     data = args.data.resolve()
     payload_path = data / "themes" / "aberdeen.json"
     manifest_path = data / "manifest.json"
-    search_path = data / "search-index.json"
+    search_path = data / "entities" / "index.json"
     errors: list[str] = []
     warnings: list[str] = []
 
@@ -185,13 +185,13 @@ def main() -> int:
         warnings.append("manifest.json is missing; mart checks skipped")
 
     if search_path.exists():
-        entries = _load(search_path)
+        entries = (_load(search_path).get("entities") or [])
         if not any(
             isinstance(entry, dict) and entry.get("href") == "/analysis/" for entry in entries
         ):
-            errors.append("search-index.json has no /themes/ entry")
+            errors.append("entity index has no /analysis/ entry")
     else:
-        warnings.append("search-index.json is missing")
+        warnings.append("entity index is missing")
 
     for warning in warnings:
         print(f"warning: {warning}")

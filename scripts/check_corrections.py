@@ -10,10 +10,10 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "web" / "data" / "corrections.json"
+DATA = ROOT / "web" / "data" / "generated" / "changelog.json"
 PAGE = ROOT / "web" / "out" / "corrections" / "index.html"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-STATUSES = {"fixed", "reviewing", "withdrawn"}
+STATUSES = {"fixed", "reviewing", "withdrawn", "published"}
 
 
 def main() -> int:
@@ -32,17 +32,19 @@ def main() -> int:
         errors.append("correction log is empty")
     seen: set[tuple[str, str, str]] = set()
     for index, entry in enumerate(entries):
-        for field in ("date", "page", "claim", "correction", "status"):
+        for field in ("date", "title", "summary", "status", "kind"):
             if not str(entry.get(field) or "").strip():
                 errors.append(f"entry {index}: missing {field}")
+        if not entry.get("pages"):
+            errors.append(f"entry {index}: missing pages")
         if entry.get("date") and not DATE_RE.match(str(entry["date"])):
             errors.append(f"entry {index}: date must be YYYY-MM-DD")
         if entry.get("status") not in STATUSES:
             errors.append(f"entry {index}: invalid status {entry.get('status')!r}")
         key = (
             str(entry.get("date")),
-            str(entry.get("page")),
-            str(entry.get("claim")),
+            str(entry.get("id")),
+            str(entry.get("title")),
         )
         if key in seen:
             errors.append(f"entry {index}: duplicate correction")

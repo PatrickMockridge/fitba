@@ -49,12 +49,14 @@
 - [Methodology](methodology.md)
 - [Data update pipeline](update.md)
 - [Data refresh audit](refresh-audit.md)
+- [Semantic layer](semantic-layer.md)
 - [Data provenance](provenance.md)
 - [Sources](sources.md)
 - [Metric changes](metric-changes.md)
 
 # Records and context
 
+- [UX persona audit, October 2026](ux-audit-2026-10.md)
 - [Identity review, October 2026](identity-review-2026-10.md)
 - [Season overview review](analysis-review.md)
 - [2026-27 context diary](context/aberdeen-2026-27.md)

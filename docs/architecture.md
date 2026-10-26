@@ -114,7 +114,18 @@ Implemented:
   Profile panel carries the two Nightingale rose figures, summary facts and the
   catalogue; current squad members also carry the availability projection and
   recent match log.
-- `search-index.json`, `coverage.json`, `seasons.json`, `manifest.json`.
+- `entities/index.json` — the core canonical entity index: pages, clubs, current
+  and former players, fixtures, seasons, staff and claims, with aliases,
+  external ids, one href and a source-layer list.
+- `entities/scouted.json` — the compact scouted-only player index, disjoint from
+  the core entities and lazy-loaded by `/search/`.
+- `page-meta.json` — surface-id keyed route patterns, provenance layers, metric
+  ids, dataset epoch and registry version. References only; no copied value.
+- `definitions.json` — registry-backed metric definitions plus curated concept
+  terms from `reference/definitions.yaml`.
+- `changelog.json` — the append-only public correction and change log projected
+  from `reference/changelog.yaml`.
+- `coverage.json`, `seasons.json`, `manifest.json`.
 
 Implemented:
 
@@ -170,7 +181,9 @@ Implemented:
   and aggregate sentiment; no raw posts or usernames.
 - `squad/aberdeen.json` — roster, loan tags, per-competition stats, totals,
   coverage states and player hrefs.
-- `search-index.json` also carries player entries.
+- Scouting search is sharded: `scouting/search/meta.json` plus four
+  `scouting/search/players-*.json` payloads. The retired `search-index.json` is
+  not generated; the core index is `entities/index.json`.
 
 ## Web structure
 
@@ -300,6 +313,12 @@ data/, .cache/     gitignored
 12. Every published document is on the current dataset epoch or is explicitly
     stale with a reason. The manifest lists every file and checksum;
     `scripts/check_freshness.py --strict` enforces both.
+13. One entity id, one href. `normalize/entities.py` owns every reader-facing
+    page, club, player, fixture, season, staff and claim link. Current squad
+    players use `/players/<id>/`; every other player uses
+    `/scouting/player/<id>/` or the former-player register anchor. Core and
+    scouted entities are disjoint, and `check_semantic.py` rejects a duplicate
+    id, alias, external id or dead href. See [Semantic layer](semantic-layer.md).
 
 ## Migration to one licensed source
 

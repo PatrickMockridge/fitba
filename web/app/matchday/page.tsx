@@ -330,10 +330,10 @@ export default function MatchdayPage() {
             ))}
           </div>
           <p className="fine-print">
-            A selection of the claims about the team. The full case, the counts,
-            the status and what would change the view are on{" "}
-            <Link className="text-link" href="/analysis/">
-              Season overview
+            A selection of the claims about the team. Every claim, with its count,
+            status, evidence and what would change the view, is on{" "}
+            <Link className="text-link" href="/claims/">
+              Claims and evidence
             </Link>
             .
           </p>

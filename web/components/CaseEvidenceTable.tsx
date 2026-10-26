@@ -1,19 +1,22 @@
 import { CaseStatusBadge } from "@/components/CaseStatusBadge";
+import { TableFrame } from "@/components/TableFrame";
 import type { CaseEvidence } from "@/lib/data";
 
 export function CaseEvidenceTable({ evidence }: { evidence: CaseEvidence[] }) {
   return (
-    <div className="table-wrap" data-contract="case.claim.evidence">
-      <table className="league-table case-evidence">
-<caption className="fine-print">Claim evidence with count, sample, period, status and source.</caption>
+    <TableFrame label="Claim evidence" sticky={false}>
+      <table className="league-table case-evidence" data-contract="case.claim.evidence">
+        <caption className="fine-print">
+          Claim evidence with count, sample, period, status and source.
+        </caption>
         <thead>
           <tr>
-            <th>Claim</th>
-            <th>Count</th>
-            <th>Sample</th>
-            <th>Period</th>
-            <th>Status</th>
-            <th>Source</th>
+            <th scope="col">Claim</th>
+            <th scope="col">Count</th>
+            <th scope="col">Sample</th>
+            <th scope="col">Period</th>
+            <th scope="col">Status</th>
+            <th scope="col">Source</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +37,6 @@ export function CaseEvidenceTable({ evidence }: { evidence: CaseEvidence[] }) {
           ))}
         </tbody>
       </table>
-    </div>
+    </TableFrame>
   );
 }

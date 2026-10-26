@@ -1812,11 +1812,14 @@
             }
           ],
           "indicators": {
-            "source": 1
+            "source": 1,
+            "freshness": 1
           },
           "links": [
             "/methodology/",
-            "/sources/"
+            "/sources/",
+            "/claims/",
+            "/metrics/"
           ],
           "headings": {
             "forbid_question": [
@@ -2009,6 +2012,111 @@
               "min": 1
             }
           ]
+        }
+      }
+    },
+    {
+      "id": "search",
+      "path": "/search/",
+      "owners": [
+        "web/app/search/page.tsx",
+        "web/components/SiteSearch.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "search.hero",
+              "min": 1
+            },
+            {
+              "id": "search.board",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "source": 1,
+            "freshness": 1
+          },
+          "links": [
+            "/",
+            "/scouting/search/",
+            "/metrics/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Search fitba"
+          },
+          "metadata": {
+            "title_contains": "Search",
+            "description_contains": "published"
+          }
+        }
+      }
+    },
+    {
+      "id": "claims",
+      "path": "/claims/",
+      "owners": [
+        "web/app/claims/page.tsx",
+        "web/components/CaseClaimCard.tsx",
+        "web/components/CaseEvidenceTable.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "claims.hero",
+              "min": 1
+            },
+            {
+              "id": "claims.register",
+              "min": 1
+            },
+            {
+              "id": "claims.benchmark",
+              "min": 1
+            },
+            {
+              "id": "claims.coverage",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "source": 1,
+            "confidence": 1,
+            "unknown": 1,
+            "freshness": 1
+          },
+          "links": [
+            "/analysis/",
+            "/matchday/",
+            "/metrics/",
+            "/corrections/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Claims and evidence"
+          },
+          "metadata": {
+            "title_contains": "Claims",
+            "description_contains": "evidence"
+          }
         }
       }
     }

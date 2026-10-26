@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-10-26T06:23:28+00:00-438221d",
+  "dataset_id": "2026-10-26T17:04:04+00:00-e41ef6c",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-10-26T06:23:28+00:00",
+  "generated_at": "2026-10-26T17:04:04+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -363,7 +363,7 @@
           "name": "API-Football",
           "published_at": null,
           "role": "primary",
-          "rows": 144,
+          "rows": 159,
           "served_by_update_id": null,
           "source_id": "api_football",
           "source_snapshots": null,
@@ -1857,6 +1857,71 @@
     {
       "dataset_id": null,
       "dataset_state": null,
+      "fallback": [
+        "football_data_uk",
+        "api_football"
+      ],
+      "fields": [
+        "fxg",
+        "fxg_range",
+        "evaluation"
+      ],
+      "gate": null,
+      "id": "xg_model",
+      "kind": "derived",
+      "label": "fitba expected goals",
+      "note": "The fxG model is derived from licensed shot and match features. It is descriptive; the provider-xG evaluation gate is failing, so it is not a confidence verdict or tracking data.",
+      "primary": "computed",
+      "primary_source": null,
+      "published_at": null,
+      "scope": "current-season league matches with shot-zone inputs",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "sources": [
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "football-data.co.uk",
+          "published_at": null,
+          "role": "fallback",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "football_data_uk",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://www.football-data.co.uk/mmz4281",
+          "verified_at": "2026-10-21"
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "API-Football",
+          "published_at": null,
+          "role": "fallback",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
+        }
+      ],
+      "stale_reason": null,
+      "status": "experimental",
+      "surfaces": [
+        "/analysis/xg/",
+        "/matches/",
+        "/sources/",
+        "/methodology/"
+      ],
+      "update_id": null
+    },
+    {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [],
       "gate": null,
@@ -1893,10 +1958,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-10-26T06:23:28+00:00",
+  "published_at": "2026-10-26T17:04:04+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-26T06:17:02+00:00-3749814",
+  "served_by_update_id": "2026-10-26T17:01:33+00:00-1410219",
   "source_snapshots": null,
   "sources": [
     {
@@ -1944,7 +2009,7 @@
         "transfers_candidate"
       ],
       "published_at": null,
-      "rows": 1726,
+      "rows": 1741,
       "rows_basis": "primary contributions only",
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -2073,5 +2138,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "2026-10-26T06:17:02+00:00-3749814"
+  "update_id": "2026-10-26T17:01:33+00:00-1410219"
 }

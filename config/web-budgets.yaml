@@ -1,0 +1,22 @@
+# Browser payload budgets.
+#
+# These are performance thresholds for files the browser actually fetches, not
+# a content cap. A breach is fixed by sharding or lazy-loading; evidence is
+# never deleted to fit a budget.
+version: 1
+reviewed: 2026-10-26
+owner: patrickmockridge
+
+pages:
+  /search/: 400000
+  /scouting/search/: 350000
+  /claims/: 450000
+
+json:
+  scouting/search/players-*.json: 700000
+  entities/scouted.json: 700000
+
+# The same payloads as served by the static export routes.
+built_json:
+  search/scouted.json: 700000
+  scouting/search/shards/*: 700000

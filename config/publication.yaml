@@ -3,7 +3,6 @@ profiles:
     allow_lanes: [open, derived_display]
     require_publication_flag: true
     strip_source_fields: true
-    max_file_bytes: 2000000
     out: web/data/generated
     notes: >
       Only derived outputs. Raw payloads, source-shaped tables and full event

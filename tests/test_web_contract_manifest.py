@@ -192,6 +192,16 @@ PINNED_MARKERS = {
         "metrics.method",
         "metrics.links",
     },
+    "/search/": {
+        "search.hero",
+        "search.board",
+    },
+    "/claims/": {
+        "claims.hero",
+        "claims.register",
+        "claims.benchmark",
+        "claims.coverage",
+    },
     "/status/": {
         "status.hero",
         "status.build",

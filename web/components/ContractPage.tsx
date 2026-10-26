@@ -1,3 +1,5 @@
+import { PageProvenance } from "@/components/PageProvenance";
+
 export function ContractPage({
   surface,
   state = "full",
@@ -14,6 +16,7 @@ export function ContractPage({
       data-contract-state={state}
     >
       {children}
+      {state === "full" ? <PageProvenance surface={surface} /> : null}
     </div>
   );
 }

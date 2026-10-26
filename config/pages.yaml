@@ -1,0 +1,208 @@
+# Reader-facing page provenance registry.
+#
+# One entry per surface id used by ContractPage (and the non-contracted data
+# pages). Patterns are for citation/provenance display; layers are the
+# provenance layer ids that own the facts on that surface. Metric ids are
+# resolved from config/metrics.yaml by surface path, so they are not duplicated
+# here.
+#
+# This file is editorial data, not a source of truth for a number. A layer or
+# metric id that does not exist fails check_semantic.py.
+
+version: 1
+reviewed: 2026-10-26
+owner: patrickmockridge
+
+pages:
+  - id: home
+    label: Home
+    patterns: ["/"]
+    layers: [league_results_current, league_standings, transfer_register, rumours, forum_signal, squad_identity]
+
+  - id: matchday
+    label: Matchday
+    patterns: ["/matchday/"]
+    layers: [club_fixtures, lineups_roles, player_match_stats, availability, league_results_current, league_standings, themes, needs]
+
+  - id: matches
+    label: Match record
+    patterns: ["/matches/"]
+    layers: [club_fixtures, league_results_current, league_standings]
+
+  - id: match
+    label: Match page
+    patterns: ["/matches/{fixture_id}/"]
+    layers: [club_fixtures, lineups_roles, player_match_stats, event_layer, league_team_stats, xg_model]
+
+  - id: fixtures
+    label: Results and fixtures
+    patterns: ["/fixtures/"]
+    layers: [club_fixtures, league_results_current, league_standings]
+
+  - id: analysis
+    label: Season overview
+    patterns: ["/analysis/"]
+    layers: [league_results_current, league_standings, player_squads, availability, needs, history]
+
+  - id: analysis-xg
+    label: fxG analysis
+    patterns: ["/analysis/xg/"]
+    layers: [league_team_stats, event_layer, xg_model]
+
+  - id: squad
+    label: Squad
+    patterns: ["/squad/"]
+    layers: [squad_roster, squad_identity, lineups_roles, player_match_stats, availability, event_layer, preferred_foot]
+
+  - id: players
+    label: Player index
+    patterns: ["/players/"]
+    layers: [squad_roster, squad_identity]
+
+  - id: player-profile
+    label: Player profile
+    patterns: ["/players/{player_id}/"]
+    layers: [squad_roster, squad_identity, lineups_roles, player_match_stats, event_layer, availability, history, scouting_pool]
+
+  - id: scouting
+    label: Scouting board
+    patterns: ["/scouting/"]
+    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe, needs, availability]
+
+  - id: scouting-league
+    label: Scouting league
+    patterns: ["/scouting/{league}/"]
+    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe]
+
+  - id: scouting-player
+    label: Scouting player profile
+    patterns: ["/scouting/player/{player_id}/"]
+    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe, former_player_record]
+
+  - id: scouting-search
+    label: Scouting search
+    patterns: ["/scouting/search/"]
+    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe]
+
+  - id: transfers
+    label: Transfers
+    patterns: ["/transfers/"]
+    layers: [transfer_register, transfers_candidate, loans, valuation]
+
+  - id: loans
+    label: Loans
+    patterns: ["/loans/"]
+    layers: [loans, transfer_register]
+
+  - id: recruitment
+    label: Recruitment
+    patterns: ["/recruitment/"]
+    layers: [needs, availability, rumours, forum_signal, transfer_register]
+
+  - id: former-players
+    label: Former players
+    patterns: ["/former-players/"]
+    layers: [former_player_record, transfer_register, sell_on_events, scouting_pool, forum_signal, rumours]
+
+  - id: rumours
+    label: Rumours and fan signal
+    patterns: ["/rumours/"]
+    layers: [rumours, forum_signal, former_player_record, scouting_pool]
+
+  - id: history
+    label: Cormack era
+    patterns: ["/history/", "/history/{season}/"]
+    layers: [history, league_results_history, transfer_register, themes]
+
+  - id: scotland
+    label: Scottish pyramid
+    patterns: ["/scotland/", "/scotland/{tier}/"]
+    layers: [league_results_current, league_standings, league_team_stats]
+
+  - id: competitions
+    label: Competitions
+    patterns: ["/competitions/", "/competitions/{competition}/"]
+    layers: [cup_fixtures, league_results_current]
+
+  - id: news
+    label: News and fan signal
+    patterns: ["/news/"]
+    layers: [news, forum_signal]
+
+  - id: sources
+    label: Sources and provenance
+    patterns: ["/sources/"]
+    layers: []
+    no_layers_reason: "The source truth table describes the layers; it is not itself a derived fact surface."
+
+  - id: methodology
+    label: Methodology
+    patterns: ["/methodology/"]
+    layers: []
+    no_layers_reason: "Method notes describe the record; they are not a derived fact surface."
+
+  - id: metrics
+    label: Metrics and audit
+    patterns: ["/metrics/"]
+    layers: []
+    no_layers_reason: "The registry and audit describe definitions; they are not a data table."
+
+  - id: status
+    label: Data status
+    patterns: ["/status/"]
+    layers: []
+    no_layers_reason: "The status page reports the update and source state, not a data fact."
+
+  - id: about
+    label: About
+    patterns: ["/about/"]
+    layers: []
+    no_layers_reason: "Editorial identity page."
+
+  - id: corrections
+    label: Corrections and changes
+    patterns: ["/corrections/"]
+    layers: []
+    no_layers_reason: "The correction log records changes; it is not a derived fact surface."
+
+  - id: claims
+    label: Claims
+    patterns: ["/claims/"]
+    layers: [themes, history, transfer_register, availability]
+
+  - id: search
+    label: Search
+    patterns: ["/search/"]
+    layers: []
+    no_layers_reason: "Navigation over sourced records; source and as-of travel with each result."
+
+static_pages:
+  - {id: home, name: Home, path: /}
+  - {id: matchday, name: Matchday dashboard, path: /matchday/}
+  - {id: matches, name: Match record, path: /matches/}
+  - {id: fixtures, name: Results and fixtures, path: /fixtures/}
+  - {id: analysis, name: Season overview, path: /analysis/}
+  - {id: analysis-xg, name: fxG model and aggregates, path: /analysis/xg/}
+  - {id: squad, name: Current squad, path: /squad/}
+  - {id: players, name: Player profiles, path: /players/}
+  - {id: scouting, name: Scouting board, path: /scouting/}
+  - {id: scouting-search, name: Scouting search, path: /scouting/search/}
+  - {id: priority-profiles, name: Priority scouting profiles, path: /scouting/#priority-profiles}
+  - {id: transfers, name: Transfers, path: /transfers/}
+  - {id: loans, name: Loans, path: /loans/}
+  - {id: recruitment, name: Recruitment and needs, path: /recruitment/}
+  - {id: squad-needs, name: Squad needs, path: /recruitment/#squad-needs}
+  - {id: former-players, name: Former players, path: /former-players/}
+  - {id: rumours, name: Rumours and fan signal, path: /rumours/}
+  - {id: history, name: The Cormack era, path: /history/}
+  - {id: scotland, name: Scottish pyramid, path: /scotland/}
+  - {id: competitions, name: Competitions, path: /competitions/}
+  - {id: news, name: News and fan signal, path: /news/}
+  - {id: sources, name: Sources and provenance, path: /sources/}
+  - {id: methodology, name: Methodology, path: /methodology/}
+  - {id: metrics, name: Metrics and audit, path: /metrics/}
+  - {id: status, name: Data status, path: /status/}
+  - {id: about, name: About fitba, path: /about/}
+  - {id: corrections, name: Corrections and changes, path: /corrections/}
+  - {id: claims, name: Claims, path: /claims/}
+  - {id: search, name: Search, path: /search/}
