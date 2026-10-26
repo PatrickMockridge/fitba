@@ -181,3 +181,14 @@ uv run fitba former-players refresh --max-requests 180
 uv run fitba publish --season current --profile public --require-validation
 uv run python scripts/check_former_players.py
 ```
+
+## Sale chain
+
+The former-player register and the shared scouting profile carry a sale chain:
+Aberdeen departure → post-Aberdeen league seasons and moves → sell-on clause →
+subsequent-transfer trigger → receipt status → current or last-known club. Every
+step is a published fact joined by `player_key`/`transfer_id`/`clause_id`. A
+missing fee, percentage, basis, subsequent fee or original fee stays unknown with
+the published missing-input reason; no receipt, revenue or good/bad-sale verdict
+is inferred. The full chain is on the profile's Former Aberdeen section; the
+register keeps its existing sell-on table and links to the chain.

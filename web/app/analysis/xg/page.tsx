@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { DefinitionTerm } from "@/components/DefinitionTerm";
 import { XgTable } from "@/components/XgTable";
 import { getXg } from "@/lib/data";
 import { formatDecimal, formatInteger, formatSigned } from "@/lib/format";
@@ -87,10 +88,12 @@ export default function XgPage() {
         <p className="eyebrow">Model · {model.model_id}</p>
         <h1>fxG</h1>
         <p className="lede">
-          fitba&apos;s team-match expected goals: open-play shot zones, shots on
-          target and penalties, fitted to provider xG. It carries an 80% model
-          range for the estimate and a separate 80% goals range for the same
-          chances. It is not provider xG, not a shot-level location model and
+          fitba&apos;s team-match{" "}
+          <DefinitionTerm id="fxg">expected goals</DefinitionTerm>: open-play shot
+          zones, shots on target and penalties, fitted to{" "}
+          <DefinitionTerm id="provider_xg">provider xG</DefinitionTerm>. It carries
+          an 80% model range for the estimate and a separate 80% goals range for the
+          same chances. It is not provider xG, not a shot-level location model and
           not a result prediction.
         </p>
         <p className="fine-print">

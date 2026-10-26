@@ -38,6 +38,19 @@ terms:
     metric_ids: []
     related: [basis, unknown]
 
+  - id: confidence
+    term: Confidence
+    aliases: [confidence level]
+    category: evidence
+    short: How strongly the public record supports a published state.
+    body: >
+      A confidence label separates a confirmed fact from a reported or curated
+      one. It describes the evidence behind the row, not the probability that a
+      future event happens, and it is never used to promote an unknown into a
+      value.
+    metric_ids: []
+    related: [basis, unknown]
+
   - id: unknown
     term: Unknown
     aliases: []

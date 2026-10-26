@@ -183,6 +183,61 @@ def test_definitions_reject_an_unknown_metric(tmp_path: Path) -> None:
     assert any("unknown metric unknown.metric" in error for error in errors)
 
 
+def test_a_definition_must_resolve_its_anchor(tmp_path: Path) -> None:
+    data = _data(tmp_path, index_entities=[_page("page:home", "/")])
+    _write(
+        data / "definitions.json",
+        {
+            "entries": [
+                {
+                    "id": "def.example",
+                    "metric_ids": [],
+                    "provenance": "curated_overlay",
+                    "href": "/glossary/#def-example",
+                }
+            ]
+        },
+    )
+    out = tmp_path / "out"
+    glossary = out / "glossary" / "index.html"
+    glossary.parent.mkdir(parents=True, exist_ok=True)
+    glossary.write_text("<html><body>No anchor</body></html>", encoding="utf-8")
+    errors = CHECK.check_pages(data, out)
+    assert any("missing fragment #def-example" in error for error in errors)
+
+
+def test_definition_related_ids_must_resolve(tmp_path: Path) -> None:
+    data = _data(tmp_path, index_entities=[_page("page:home", "/")])
+    _write(
+        data / "definitions.json",
+        {
+            "entries": [
+                {
+                    "id": "def.basis",
+                    "metric_ids": [],
+                    "provenance": "curated_overlay",
+                    "related": ["def.missing"],
+                }
+            ]
+        },
+    )
+    errors = CHECK.check_data(data)
+    assert any("unknown related id def.missing" in error for error in errors)
+
+
+def test_an_inline_term_must_resolve_to_a_definition(tmp_path: Path) -> None:
+    data = _data(tmp_path, index_entities=[_page("page:home", "/")])
+    _write(data / "definitions.json", {"entries": []})
+    out = tmp_path / "out"
+    page = out / "index.html"
+    page.parent.mkdir(parents=True, exist_ok=True)
+    page.write_text(
+        '<span data-definition-term="def.nope">term</span>', encoding="utf-8"
+    )
+    errors = CHECK.check_pages(data, out)
+    assert any("unknown definition term def.nope" in error for error in errors)
+
+
 def test_changelog_requires_an_append_only_log(tmp_path: Path) -> None:
     data = _data(tmp_path, index_entities=[_page("page:home", "/")])
     _write(data / "changelog.json", {"append_only": False, "entries": []})

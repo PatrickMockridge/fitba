@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { DefinitionTerm } from "@/components/DefinitionTerm";
 import { PriorityProfiles } from "@/components/PriorityProfiles";
 import { ScoutingArchetypes } from "@/components/ScoutingArchetypes";
 import { ScoutingAttackers } from "@/components/ScoutingAttackers";
@@ -56,7 +57,8 @@ export default function ScoutingPage() {
         <p className="eyebrow">Recruitment · Season {scouting.season}</p>
         <h1>The scouting board</h1>
         <p className="lede">
-          Start with the players already at the club, then the role families where the
+          Start with the players already at the club, then the{" "}
+          <DefinitionTerm id="role_family">role families</DefinitionTerm> where the
           competitive record sits below the league cohort, then the profiles that would add
           options. Provider ratings are relative to a league and role; they are not a verdict.
         </p>

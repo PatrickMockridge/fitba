@@ -91,6 +91,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/about/">About</Link>
               <Link href="/sources/">Sources</Link>
               <Link href="/metrics/">Metrics</Link>
+              <Link href="/glossary/">Glossary</Link>
+              <Link href="/unknowns/">Unknowns</Link>
               <Link href="/claims/">Claims</Link>
               <Link href="/corrections/">Corrections</Link>
               <Link href="/status/">Data status</Link>

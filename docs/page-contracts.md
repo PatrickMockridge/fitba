@@ -280,6 +280,9 @@ Must remain visible:
 - The sell-on watch, development scorecard and former-player rumour lane.
 - The development scorecard with its definitions and by-exit-season table.
 - The sell-on watch with the missing-input reason where no receipt is computable.
+- The sale-chain section and, on each profile, the ordered chain from departure
+  through post-Aberdeen seasons and any clause, trigger and receipt. Every
+  missing input keeps its published reason.
 - The former-player rumour lane and the coverage/limits card.
 
 May be disclosed: long method notes and source prose.
@@ -295,6 +298,10 @@ Must remain visible:
 - The squad summary: size, loans out, role evidence, stats unavailable.
 - The roster table: Player, No., Role, Age, Status, Starts, Sub, Mins, Conc, CS,
   G, A, OG, Rating, Stats, with loan status and availability labels.
+- The role-family depth chart: every official squad player once across the ten
+  role families, Family, Player, Role, Mins (all), Availability, Status;
+  measured minutes order, unknown availability labelled, loan-outs included
+  with a visible loan badge, and no quality score.
 - The role-mix card: squad profile tiles (average age, registered players,
   role evidence, starts with a role) and absolute-count bars for primary
   position group and primary role family.
@@ -456,6 +463,10 @@ Must remain visible:
   visible beside the current club.
 - The league column and a visible statement that percentiles are within each
   league and role, never a cross-league ranking.
+- The guarded comparison panel: two players selectable from the published
+  scouting rows and the reviewed current-squad crosswalk; same league and role
+  only; minutes, percentile, cohort basis and cohort n visible; a not-comparable
+  reason; no winner, delta, ranking or recommendation.
 - Coverage: ranked players, leagues with players, leagues without stats and the
   cross-league limitation.
 - Links back to `/scouting/`, `/methodology/` and `/sources/`.
@@ -509,6 +520,9 @@ Must remain visible:
 - The thesis pillars, including the market-edge unknown share.
 - The season-by-season table: Season, Manager(s), League, Pos, Pts, Honours,
   Review.
+- The Cormack-era lookup: season, manager, honour and competition filters over
+  the published season records, with a reset and a matching-season table. It
+  navigates published rows only and does not rank or add a superlative.
 - The current staff and the manager records table: Manager, Dates, Pld, W-D-L,
   GF, GA, Pts, PPG, with interim spells and pre-era stints labelled.
 - The baseline table, labelled as a chosen comparison window rather than a
@@ -581,6 +595,41 @@ Must remain visible:
 
 Forbidden: ranking by popularity or engagement; tracking queries or using
 reader history; a second player profile presented in the result list.
+
+### `/glossary/` — glossary and definitions
+
+Must remain visible:
+
+- One entry per active registered metric with its formula, unit, basis,
+  coverage tier, source layer, limitations and registry version.
+- The curated concept entries, grouped by category, with their aliases and the
+  metric ids they explain.
+- The statement that a metric entry is copied from the registry and a curated
+  concept cannot override a registered definition.
+- Links to `/metrics/`, `/sources/`, `/methodology/` and `/corrections/`.
+- A stable `#def-<id>` anchor per entry so page provenance and future inline
+  terms resolve.
+
+Forbidden: a number outside the registry; a curated entry with a formula; a
+definition hidden behind a default-closed disclosure; a metric entry without its
+basis or coverage tier.
+
+### `/unknowns/` — unknowns register
+
+Must remain visible:
+
+- One entry per unknown class, grouped by domain, with the label, description
+  and the reason it is unknown.
+- The affected surfaces, linked to their pages.
+- Either a named public resolving source or an explicit **no public source**
+  state. A no-source class never carries a fabricated URL or an estimate.
+- A published count only where it already exists in a registered metric payload,
+  linked to that metric and its glossary entry.
+- The dedicated no-public-source section.
+- Links to `/sources/`, `/glossary/`, `/metrics/` and `/corrections/`.
+
+Forbidden: inventing a resolver; presenting an unknown as zero; a club-request
+framing; a new aggregate count; ranking or prioritising the gaps.
 
 ### `/claims/` — claims and evidence
 

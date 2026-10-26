@@ -25,7 +25,7 @@ expensive data, and never let an unlicensed feed become the foundation.
 | 4j. Documentation book | **Live in the repository.** The Markdown docs are rendered with mdBook in the Merkland (light) and Aurora (dark) palettes, with search and accessibility markup. The book is not deployed to the website. |
 | 4k. Former players | **Live.** `/former-players/` carries the confirmed departure register, Aberdeen and post-Aberdeen records, rival spells, sell-on watch and the development scorecard. Rumour affiliation separates former players from targets. |
 | 4l. Access, citation and trust layer | **Live (first phase).** `entities/index.json`, `page-meta.json`, `definitions.json` and `changelog.json`; `/search/` with lazy scouted group; `/claims/`; expanded `/corrections/`; page provenance, citations and as-of badges; sticky tables; scouting search sharded under a page budget. See [Semantic layer](semantic-layer.md) and the [UX audit](ux-audit-2026-10.md). |
-| 4m. Evidence navigation and comparison | **Partially complete.** Claims are rehomed at `/claims/`; metric definitions are published in `definitions.json`. Definitions/glossary UI, unknowns register, guarded comparison, role-family depth and era context remain planned. See the [UX audit](ux-audit-2026-10.md). |
+| 4m. Evidence navigation and comparison | **Live (except game state).** Claims at `/claims/`, definitions at `/glossary/`, the unknowns register at `/unknowns/`, first-use inline terms, a guarded comparison panel on `/scouting/search/` with a reviewed current-squad crosswalk, a ten-family depth chart on `/squad/`, the sale chain on `/former-players/` and profiles, and the Cormack-era lookup on `/history/`. Match game-state/streak context is deferred; no live or in-game updates. See the [UX audit](ux-audit-2026-10.md). |
 | 4n. Distribution and export | **Deferred.** Print/OG cards, export/embed and full current-player multi-season output, pending licence, design and payload decisions. See [UX audit](ux-audit-2026-10.md). |
 | 5. Fan-facing insight layer | **Next.** Trading analytics, richer opposition context and the style/budget fit layer. |
 | 5. Local rich-visual prototype | Not started. |
@@ -93,25 +93,22 @@ serve them. Scouting search is sharded into meta plus four payloads under a page
 budget. The change is documented in [Semantic layer](semantic-layer.md) and
 registered as registry 3.10.0.
 
-### Phase 4m — evidence navigation and comparison (planned)
+### Phase 4m — evidence navigation and comparison (delivered, except game state)
 
-Next, with dependencies stated:
-
-- **Definitions and glossary:** a `/glossary/` route and `DefinitionTerm`
-  component over the published `definitions.json`; metric links move from
-  `/metrics/#metric-*` to `/glossary/#def-*`. Depends on definitions coverage
-  review.
-- **Unknowns register:** one page listing every published unknown by surface,
-  with the reason and the source that would resolve it. Depends on a source and
-  field inventory; no number is implied by an unknown.
-- **Guarded player comparison:** same league and role family, scouted-vs-scouted
-  only, no winner and no recommendation. Depends on a reviewed crosswalk before
-  any current-squad comparison.
-- **Role-family depth chart** and **sale chain** views. The depth chart depends
-  on the roles config; the sale chain depends on the former-player and sell-on
-  evidence.
-- **Match game-state context** and **era lookup**. Each needs its own registered
-  metric before it is published.
+- **Definitions and glossary:** `/glossary/` over `definitions.json`, with
+  related concepts and first-use `DefinitionTerm` links.
+- **Unknowns register:** `/unknowns/` lists the curated unknown classes, the
+  reason, the affected surfaces and either a public resolver or an explicit
+  no-public-source state. Counts are existing registered coverage counts only.
+- **Guarded comparison:** on `/scouting/search/`. Same league and role only; a
+  reviewed `reference/comparison_crosswalk.yaml` gates current-squad selection;
+  no winner, delta or recommendation.
+- **Role-family depth chart:** ten families on `/squad/`, measured minutes and
+  availability, no quality score.
+- **Sale chain:** departure → post-Aberdeen → clause → trigger → receipt on the
+  former register and the shared profile; missing inputs name their reason.
+- **Era lookup:** season, manager, honour and competition filters on `/history/`.
+- **Deferred:** match game-state/streak context. No live or real-time updates.
 
 ## Phase 4b — Two doors and the rumour mill (live)
 

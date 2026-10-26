@@ -57,6 +57,8 @@ also shows another scope.
 | Forum name identity lookup | `ingest/forum.py` (former register → scouted pool → provider profile search) |
 | Reader-facing entity id and href | `normalize/entities.py` through `publish/semantic.py` |
 | Surface layers, metrics and citation context | `config/pages.yaml` through `page-meta.json` |
+| Unknown classes and their resolving source | `reference/unknowns.yaml` through `unknowns.json` |
+| Current-squad comparison identity and cohort gate | `reference/comparison_crosswalk.yaml` through `scouting/comparison.json` |
 
 The display layer reads the published value. It does not sum, re-filter,
 re-rank or re-round a published fact. The only permitted client calculation is

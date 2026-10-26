@@ -50,6 +50,7 @@
 - [Data update pipeline](update.md)
 - [Data refresh audit](refresh-audit.md)
 - [Semantic layer](semantic-layer.md)
+- [Unknowns register](unknowns.md)
 - [Data provenance](provenance.md)
 - [Sources](sources.md)
 - [Metric changes](metric-changes.md)

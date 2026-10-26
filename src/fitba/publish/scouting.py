@@ -1063,7 +1063,19 @@ def build_scouting_bundle(
     premiership_rows = pools.get("sco:premiership", [])
     adjustment = build_alignment(all_rows, model)
     adjustment.pop("reference_values", None)
-    index = CohortIndex(all_rows, model)
+    # Aberdeen is compared with the league, not with itself. The pool source
+    # already excludes team 252; this is the invariant guard, not a filter that
+    # changes today's published values.
+    squad_players = [
+        *(squad_data.get("players") or []),
+        *(squad_data.get("excluded_players") or []),
+    ]
+    squad_ids = {
+        int(player["player_id"])
+        for player in squad_players
+        if player.get("player_id") is not None
+    }
+    index = CohortIndex(all_rows, model, exclude_player_ids=squad_ids)
     board = build_board(
         squad_data=squad_data,
         pool_rows=premiership_rows,
@@ -1380,6 +1392,8 @@ def build_scouting_bundle(
                         "m": player.get("minutes"),
                         "rt": player.get("rating"),
                         "p": player.get("rating_percentile"),
+                        "cn": player.get("cohort_n"),
+                        "cb": player.get("cohort_basis"),
                         "ap": player.get("adjusted_percentile"),
                         "vi": player.get("value_index"),
                         "vc": player.get("value_index_coverage"),
@@ -1440,6 +1454,8 @@ def build_scouting_bundle(
         "generated_at": generated_at,
         "state": "full" if search_players else "empty",
         "min_minutes": 450,
+        "min_cohort": int((model.get("pool") or {}).get("min_cohort") or 15),
+        "min_cohort_by_family": (model.get("pool") or {}).get("min_cohort_by_family") or {},
         "count": len(search_players),
         "leagues": [
             {

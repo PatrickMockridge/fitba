@@ -246,6 +246,58 @@ export default function FormerPlayersPage() {
 
       <SellOnTable clauses={data.sell_on_watch.clauses} summary={data.sell_on_watch.summary} />
 
+      <section className="section" data-contract="former.sale-chain">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">Departure, after and sell-on</p>
+            <h2>Sale chain</h2>
+          </div>
+          <span className="badge badge-neutral">Published link by link</span>
+        </div>
+        <p>
+          Each former player&apos;s profile carries the chain from the Aberdeen
+          departure through the post-Aberdeen record to any evidenced sell-on
+          trigger and receipt. A missing fee, clause input or receipt stays
+          unknown; the chain does not infer money or call a sale good or bad.
+        </p>
+        {data.sell_on_watch.clauses.length ? (
+          <ul className="plain-list">
+            {data.sell_on_watch.clauses.map((clause) => {
+              const player = data.players.find(
+                (row) => row.player_key === clause.player_key,
+              );
+              return (
+                <li key={clause.clause_id}>
+                  {player ? (
+                    <Link
+                      className="text-link"
+                      href={`${player.href}#former-aberdeen`}
+                    >
+                      {clause.player_name}
+                    </Link>
+                  ) : (
+                    clause.player_name
+                  )}
+                  <span className="muted">
+                    {" "}
+                    · {clause.sell_on_pct === null
+                      ? "percentage undisclosed"
+                      : `${clause.sell_on_pct}%`}{" "}
+                    · basis {clause.basis} · trigger {clause.event_status} ·
+                    receipt {clause.receipt.status.replaceAll("_", " ")}
+                    {clause.receipt.missing_inputs.length
+                      ? ` (missing: ${clause.receipt.missing_inputs.join(", ")})`
+                      : ""}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p className="fine-print">No sell-on clause is recorded in this build.</p>
+        )}
+      </section>
+
       <FormerPlayerMentions forum={forum} rumours={rumours} />
 
       <ProfileSection

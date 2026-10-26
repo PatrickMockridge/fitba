@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { EraLookup } from "@/components/EraLookup";
 import { HonoursCabinet } from "@/components/HonoursCabinet";
 import { HistoryTimeline } from "@/components/HistoryTimeline";
 import { ManagerRecordTable } from "@/components/ManagerRecordTable";
@@ -76,6 +77,20 @@ export default function HistoryPage() {
   const managerStints = history.staff.flatMap((person) =>
     person.stints.filter((stint) => stint.role_group === "manager"),
   );
+  const managerIds = new Set(
+    history.seasons.flatMap((season) => season.manager_person_ids),
+  );
+  const lookupManagers = history.staff
+    .filter((person) => managerIds.has(person.person_id))
+    .map((person) => ({ id: person.person_id, name: person.name }))
+    .sort((left, right) => left.name.localeCompare(right.name));
+  const lookupHonours = history.honours
+    .map((honour) => ({
+      id: honour.honour_id,
+      label: `${honour.season} ${honour.competition}`,
+      season: honour.season,
+    }))
+    .sort((left, right) => right.season.localeCompare(left.season));
   const selection = (history.scorecard.selection ?? {}) as {
     u21_minutes_share?: number | null;
   };
@@ -293,6 +308,20 @@ export default function HistoryPage() {
           curated; the season page holds the within-season detail.
         </p>
       </section>
+
+      <EraLookup
+        seasons={history.seasons.map((season) => ({
+          season: season.season,
+          status: season.status,
+          href: season.href,
+          competition_name: season.competition_name ?? null,
+          headline: season.headline,
+          honour_ids: season.honour_ids,
+          manager_ids: season.manager_person_ids,
+        }))}
+        managers={lookupManagers}
+        honours={lookupHonours}
+      />
 
       <div className="grid two-col">
         <section className="card" data-contract="history.people">

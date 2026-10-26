@@ -192,13 +192,20 @@ def _check_definitions(
     definitions: dict[str, Any], registry: dict[str, Any], errors: list[str]
 ) -> None:
     registry_metrics = {str(row.get("id")): row for row in registry.get("metrics") or []}
+    entries = definitions.get("entries") or []
+    all_ids = {str(entry.get("id") or "") for entry in entries}
     ids: set[str] = set()
     aliases: dict[str, str] = {}
-    for entry in definitions.get("entries") or []:
+    for entry in entries:
         entry_id = str(entry.get("id") or "")
         if not entry_id or entry_id in ids:
             errors.append(f"definitions: duplicate or missing id {entry_id!r}")
         ids.add(entry_id)
+        for related in entry.get("related") or []:
+            if str(related) not in all_ids:
+                errors.append(f"definitions: {entry_id}: unknown related id {related}")
+            elif str(related) == entry_id:
+                errors.append(f"definitions: {entry_id}: related points at itself")
         for metric_id in entry.get("metric_ids") or []:
             metric = registry_metrics.get(str(metric_id))
             if metric is None:
@@ -349,10 +356,31 @@ def check_pages(data: Path, out: Path, base_path: str = "") -> list[str]:
                 html = page.read_text(encoding="utf-8", errors="ignore")
                 if not re.search(rf'id=["\']{re.escape(fragment)}["\']', html):
                     errors.append(f"{name}: {entity_id}: missing fragment #{fragment}")
+    definitions = _load(data / "definitions.json") or {}
+    definition_hrefs: dict[str, str] = {}
+    for entry in definitions.get("entries") or []:
+        href = str(entry.get("href") or "")
+        entry_id = str(entry.get("id") or entry.get("term"))
+        definition_hrefs[entry_id] = href
+        if not href.startswith("/"):
+            errors.append(f"definitions: {entry_id}: href is not internal")
+            continue
+        page = _built_page(out, href, base_path)
+        if page is None:
+            errors.append(f"definitions: {entry_id}: missing built page for {href}")
+            continue
+        _, fragment = _href_parts(href)
+        if fragment:
+            html = page.read_text(encoding="utf-8", errors="ignore")
+            if not re.search(rf'id=["\']{re.escape(fragment)}["\']', html):
+                errors.append(f"definitions: {entry_id}: missing fragment #{fragment}")
     for page in out.rglob("index.html"):
         html = page.read_text(encoding="utf-8", errors="ignore")
         if "/analysis/#claim-" in html:
             errors.append(f"{page.relative_to(out)}: stale analysis claim link")
+        for term in re.findall(r'data-definition-term=["\']([^"\']+)["\']', html):
+            if term not in definition_hrefs:
+                errors.append(f"{page.relative_to(out)}: unknown definition term {term}")
     return errors
 
 

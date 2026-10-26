@@ -1054,8 +1054,109 @@ a.card:hover {
   min-width: 680px;
 }
 
+/* Glossary entries: a two-column card grid that collapses to one column. */
+.definition-group + .definition-group {
+  margin-top: 1.5rem;
+}
+
+.definition-grid,
+.unknown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.unknown-domain + .unknown-domain {
+  margin-top: 1.5rem;
+}
+
+.definition-card {
+  scroll-margin-top: 1rem;
+}
+
+.definition-card h3 {
+  margin: 0.2rem 0 0.5rem;
+}
+
+.definition-term {
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+.definition-meta {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+}
+
+.definition-meta dt {
+  font-family: var(--mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.definition-meta dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 .corrections-table {
   min-width: 960px;
+}
+
+.depth-chart {
+  min-width: 720px;
+}
+
+.depth-chart .depth-empty td {
+  color: var(--muted);
+}
+
+/* Sale chain: an ordered list of published steps, not a valuation. */
+.sale-chain-list {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+}
+
+.sale-chain-list > li {
+  margin: 0.6rem 0;
+  padding-left: 0.25rem;
+}
+
+.chain-moves {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+}
+
+/* Guarded comparison: two published profiles, no winner or delta. */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0;
+}
+
+.comparison-card {
+  border: 1px solid var(--line);
+  padding: 0.9rem;
+}
+
+.comparison-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.comparison-candidates {
+  margin: 0.5rem 0 1rem;
 }
 
 .visually-hidden {

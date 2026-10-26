@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
+import { DefinitionTerm } from "@/components/DefinitionTerm";
+import { PlayerComparison } from "@/components/PlayerComparison";
 import { ScoutingGlobalSearch } from "@/components/ScoutingGlobalSearch";
-import { getScouting, getScoutingSearch, SCOUTING_SEARCH_SHARDS } from "@/lib/data";
+import {
+  getComparison,
+  getScouting,
+  getScoutingSearch,
+  SCOUTING_SEARCH_SHARDS,
+} from "@/lib/data";
 import { assetPath } from "@/lib/asset-path";
 import { formatInteger } from "@/lib/format";
 
@@ -40,8 +47,9 @@ export default function ScoutingSearchPage() {
   const initialPlayers = document.players.slice(0, 100);
   const documentMeta = { ...document, players: [] };
   const shardPaths = Array.from({ length: SCOUTING_SEARCH_SHARDS }, (_, shard) =>
-    assetPath(`/scouting/search/shards/${shard}.json`),
+    assetPath(`/scouting/search/shards/${shard}`),
   );
+  const comparison = getComparison();
 
   return (
     <ContractPage surface="scouting-search">
@@ -61,6 +69,9 @@ export default function ScoutingSearchPage() {
           <Link className="button" href="/scouting/">
             Scouting board
           </Link>
+          <a className="button button-ghost" href="#compare">
+            Compare players
+          </a>
           <Link className="button button-ghost" href="/methodology/">
             Method
           </Link>
@@ -84,9 +95,10 @@ export default function ScoutingSearchPage() {
           </span>
         </div>
         <p>
-          The league filter is the comparison boundary. A 90th percentile in one league is not
-          the same as a 90th percentile in another; the page shows both the league and the
-          percentile so the comparison is never implied to cross that line.
+          The league filter is the comparison boundary. A 90th{" "}
+          <DefinitionTerm id="percentile">percentile</DefinitionTerm> in one league is
+          not the same as a 90th percentile in another; the page shows both the league
+          and the percentile so the comparison is never implied to cross that line.
         </p>
         <ScoutingGlobalSearch
           document={documentMeta}
@@ -95,6 +107,13 @@ export default function ScoutingSearchPage() {
           shardPaths={shardPaths}
         />
       </section>
+
+      <PlayerComparison
+        currentPlayers={hub?.squad ?? []}
+        comparison={comparison}
+        meta={documentMeta}
+        shardPaths={shardPaths}
+      />
 
       <section
         className="card"

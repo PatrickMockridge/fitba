@@ -125,6 +125,11 @@ Implemented:
   terms from `reference/definitions.yaml`.
 - `changelog.json` — the append-only public correction and change log projected
   from `reference/changelog.yaml`.
+- `unknowns.json` — the public unknowns register: curated classes with a reason,
+  affected surfaces, a resolver or `no_public_source`, and only registered
+  published counts.
+- `scouting/comparison.json` — the reviewed current-squad comparison allowlist;
+  identity and cohort metadata only, no copied numbers.
 - `coverage.json`, `seasons.json`, `manifest.json`.
 
 Implemented:

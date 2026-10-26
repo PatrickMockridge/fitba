@@ -71,7 +71,7 @@ export function PageProvenance({ surface }: { surface: string }) {
           {shownMetrics.map((metricId, index) => (
             <span key={metricId}>
               {index ? " · " : null}
-              <Link className="text-link" href={`/metrics/#metric-${metricId}`}>
+              <Link className="text-link" href={`/glossary/#def-metric.${metricId}`}>
                 {metricId}
               </Link>
             </span>

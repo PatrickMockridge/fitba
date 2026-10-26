@@ -112,6 +112,7 @@ PINNED_MARKERS = {
         "history.scorecard",
         "history.thesis",
         "history.season-table",
+        "history.lookup",
         "history.people",
         "history.baseline",
         "history.managers",
@@ -123,6 +124,7 @@ PINNED_MARKERS = {
         "squad.hero",
         "squad.summary",
         "squad.roster",
+        "squad.depth-chart",
         "squad.coverage",
         "squad.role-mix",
         "squad.how-to",
@@ -148,6 +150,7 @@ PINNED_MARKERS = {
         "scouting.lenses",
         "scouting.advanced-filters",
         "scouting.search.board",
+        "scouting.search.comparison",
         "scouting.search.coverage",
     },
     "/sources/": {
@@ -201,6 +204,17 @@ PINNED_MARKERS = {
         "claims.register",
         "claims.benchmark",
         "claims.coverage",
+    },
+    "/glossary/": {
+        "glossary.hero",
+        "glossary.concepts",
+        "glossary.metrics",
+    },
+    "/unknowns/": {
+        "unknowns.hero",
+        "unknowns.register",
+        "unknowns.no-public-source",
+        "unknowns.sources",
     },
     "/status/": {
         "status.hero",

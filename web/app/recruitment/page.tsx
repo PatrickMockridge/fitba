@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BucketBars } from "@/components/BucketBars";
 import { ContractPage } from "@/components/ContractPage";
+import { DefinitionTerm } from "@/components/DefinitionTerm";
 import { ForumSignalPanel } from "@/components/ForumSignalPanel";
 import { NeedsBoard } from "@/components/NeedsBoard";
 import { RumourCard } from "@/components/RumourCard";
@@ -35,8 +36,9 @@ export default function RecruitmentPage() {
         <p className="lede">
           The trading side of the club: the squad needs behind the next window,
           confirmed business, the loan register, the scouting method and the
-          curated rumour register. Confirmed transfers and rumours stay in separate
-          registers; the needs board is where the themes meet recruitment.
+          <DefinitionTerm id="basis">curated</DefinitionTerm> rumour register.
+          Confirmed transfers and rumours stay in separate registers; the needs
+          board is where the themes meet recruitment.
         </p>
         <div className="hero-actions">
           <Link className="button" href="/transfers/">

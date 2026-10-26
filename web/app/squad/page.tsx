@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { BucketBars } from "@/components/BucketBars";
 import { ContractPage } from "@/components/ContractPage";
+import { DepthChart } from "@/components/DepthChart";
 import { SquadBoard } from "@/components/SquadBoard";
 import { StatTile } from "@/components/StatTile";
-import { getSquad } from "@/lib/data";
+import { getScouting, getSquad } from "@/lib/data";
 import { FAMILY_LABELS } from "@/lib/roles";
 import { formatDate } from "@/lib/format";
 
@@ -46,6 +47,8 @@ export default function SquadPage() {
       </ContractPage>
     );
   }
+
+  const scouting = getScouting();
 
   return (
     <ContractPage surface="squad">
@@ -168,6 +171,8 @@ export default function SquadPage() {
           </div>
         ) : null}
       </section>
+
+      <DepthChart players={squad.players} ledger={scouting?.layer_zero ?? []} />
 
       <div className="grid two-col">
         <section className="card" data-contract="squad.role-mix">

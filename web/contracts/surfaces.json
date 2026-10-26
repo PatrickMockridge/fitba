@@ -636,7 +636,8 @@
       "owners": [
         "web/app/history/page.tsx",
         "web/components/ManagerRecordTable.tsx",
-        "web/components/HonoursCabinet.tsx"
+        "web/components/HonoursCabinet.tsx",
+        "web/components/EraLookup.tsx"
       ],
       "ci_states": [
         "full"
@@ -658,6 +659,10 @@
             },
             {
               "id": "history.season-table",
+              "min": 1
+            },
+            {
+              "id": "history.lookup",
               "min": 1
             },
             {
@@ -751,7 +756,8 @@
       "path": "/squad/",
       "owners": [
         "web/app/squad/page.tsx",
-        "web/components/SquadBoard.tsx"
+        "web/components/SquadBoard.tsx",
+        "web/components/DepthChart.tsx"
       ],
       "ci_states": [
         "full"
@@ -769,6 +775,10 @@
             },
             {
               "id": "squad.roster",
+              "min": 1
+            },
+            {
+              "id": "squad.depth-chart",
               "min": 1
             },
             {
@@ -806,6 +816,14 @@
               "OG",
               "Rating",
               "Stats"
+            ],
+            "squad.depth-chart": [
+              "Family",
+              "Player",
+              "Role",
+              "Mins (all)",
+              "Availability",
+              "Status"
             ]
           },
           "indicators": {
@@ -1017,7 +1035,9 @@
       "owners": [
         "web/app/scouting/search/page.tsx",
         "web/components/ScoutingGlobalSearch.tsx",
-        "web/lib/scouting-filters.ts"
+        "web/components/PlayerComparison.tsx",
+        "web/lib/scouting-filters.ts",
+        "web/lib/comparison.ts"
       ],
       "ci_states": [
         "full"
@@ -1039,6 +1059,10 @@
             },
             {
               "id": "scouting.search.board",
+              "min": 1
+            },
+            {
+              "id": "scouting.search.comparison",
               "min": 1
             },
             {
@@ -1880,6 +1904,10 @@
               "min": 1
             },
             {
+              "id": "former.sale-chain",
+              "min": 1
+            },
+            {
               "id": "former.mentions",
               "min": 1
             },
@@ -2116,6 +2144,111 @@
           "metadata": {
             "title_contains": "Claims",
             "description_contains": "evidence"
+          }
+        }
+      }
+    },
+    {
+      "id": "glossary",
+      "path": "/glossary/",
+      "owners": [
+        "web/app/glossary/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "glossary.hero",
+              "min": 1
+            },
+            {
+              "id": "glossary.concepts",
+              "min": 1
+            },
+            {
+              "id": "glossary.metrics",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "source": 1,
+            "freshness": 1
+          },
+          "links": [
+            "/metrics/",
+            "/sources/",
+            "/methodology/",
+            "/corrections/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Glossary and definitions"
+          },
+          "metadata": {
+            "title_contains": "Glossary",
+            "description_contains": "definitions"
+          }
+        }
+      }
+    },
+    {
+      "id": "unknowns",
+      "path": "/unknowns/",
+      "owners": [
+        "web/app/unknowns/page.tsx"
+      ],
+      "ci_states": [
+        "full"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "unknowns.hero",
+              "min": 1
+            },
+            {
+              "id": "unknowns.register",
+              "min": 1
+            },
+            {
+              "id": "unknowns.no-public-source",
+              "min": 1
+            },
+            {
+              "id": "unknowns.sources",
+              "min": 1
+            }
+          ],
+          "indicators": {
+            "unknown": 1,
+            "source": 1,
+            "freshness": 1
+          },
+          "links": [
+            "/sources/",
+            "/glossary/",
+            "/metrics/",
+            "/corrections/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "Unknowns register"
+          },
+          "metadata": {
+            "title_contains": "Unknowns",
+            "description_contains": "public record"
           }
         }
       }

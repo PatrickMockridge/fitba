@@ -36,6 +36,8 @@ const STATIC_ROUTES = [
   "/sources/",
   "/methodology/",
   "/metrics/",
+  "/glossary/",
+  "/unknowns/",
   "/status/",
   "/about/",
   "/corrections/",

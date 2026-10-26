@@ -141,13 +141,27 @@ def robust_z(
 class CohortIndex:
     """Cohorts by league and role family, with rating and feature values."""
 
-    def __init__(self, rows: list[dict[str, Any]], model: dict[str, Any]):
+    def __init__(
+        self,
+        rows: list[dict[str, Any]],
+        model: dict[str, Any],
+        *,
+        exclude_player_ids: set[int] | None = None,
+    ):
         self.model = model
+        self.exclude_player_ids = exclude_player_ids or set()
         self.rows: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
         self.groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
         self._values_cache: dict[tuple[str, str, str, int], list[float]] = {}
         self._group_values_cache: dict[tuple[str, str, str, int], list[float]] = {}
         for row in rows:
+            player_id = row.get("player_id")
+            if (
+                self.exclude_player_ids
+                and player_id is not None
+                and int(player_id) in self.exclude_player_ids
+            ):
+                continue
             family = row.get("role_family")
             league = row.get("competition_id")
             group = _ROSE_GROUP_KEYS.get(str(row.get("position_group") or "").upper())

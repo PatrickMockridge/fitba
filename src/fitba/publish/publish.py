@@ -56,6 +56,7 @@ from fitba.normalize.transfer_audit import build_transfer_audit
 from fitba.publish.analysis import build_analysis_payload
 from fitba.publish.availability import build_availability_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
+from fitba.publish.comparison import build_comparison_crosswalk
 from fitba.publish.epoch import DatasetStamp, current_stamp, set_stamp, stamp_payload
 from fitba.publish.fixture import build_fixture_payloads
 from fitba.publish.former_players import build_former_bundle
@@ -81,12 +82,16 @@ from fitba.publish.semantic import build_semantic_bundle
 from fitba.publish.shapes import shape_payload
 from fitba.publish.squad import PlayerLinkIndex, squad_payload
 from fitba.publish.themes import build_themes_payload, fallback_themes_payload
+from fitba.publish.unknowns import build_unknowns
 from fitba.publish.xg import build_xg_payload, fallback_xg_payload
 from fitba.settings import (
+    CONFIG_DIR,
+    REFERENCE_DIR,
     WEB_DATA_DIR,
     availability_policy,
     ensure_dirs,
     history_markets,
+    load_yaml,
     player_rose,
     source_registry,
 )
@@ -1697,6 +1702,23 @@ def publish(
     value_model_document = hub.get("value_model") or {"state": "unavailable"}
     value_model_info = _write(temp / "scouting" / "value-model.json", value_model_document)
     written.append(value_model_info)
+    comparison_document = build_comparison_crosswalk(
+        config=load_yaml(REFERENCE_DIR / "comparison_crosswalk.yaml") or {},
+        squad_data=squad_data,
+        scouting_squad=list(hub.get("squad") or []),
+    )
+    comparison_info = _write(temp / "scouting" / "comparison.json", comparison_document)
+    written.append(comparison_info)
+    marts.append(
+        {
+            "id": "scouting.comparison",
+            "path": "scouting/comparison.json",
+            "rows": len(comparison_document["players"]),
+            "checksum": comparison_info["checksum"],
+            "season": target_season,
+            "row_basis": "one reviewed current-squad comparison row",
+        }
+    )
     marts.append(
         {
             "id": "scouting.sco:aberdeen",
@@ -2328,6 +2350,25 @@ def publish(
                 "row_basis": "one row per semantic record",
             }
         )
+
+    unknowns_document = build_unknowns(
+        classes_config=load_yaml(REFERENCE_DIR / "unknowns.yaml") or {},
+        data_dir=temp,
+        registry=registry,
+        pages_config=load_yaml(CONFIG_DIR / "pages.yaml") or {},
+    )
+    unknowns_info = _write(temp / "unknowns.json", unknowns_document)
+    written.append(unknowns_info)
+    marts.append(
+        {
+            "id": "unknowns",
+            "path": "unknowns.json",
+            "rows": len(unknowns_document["classes"]),
+            "checksum": unknowns_info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per unknown class",
+        }
+    )
 
     # The result audit is the published evidence for the official overlay and
     # the canonical-vs-table reconciliation. It is written before validation so

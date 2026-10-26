@@ -508,6 +508,20 @@ def build_definitions(
     definitions_config: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     config = definitions_config or _load_optional(DEFINITIONS_PATH)
+    known_metrics = {metric.id for metric in registry.metrics}
+    terms = [term for term in config.get("terms") or [] if term.get("id")]
+    known_ids = {f"metric.{metric.id}" for metric in registry.metrics if metric.status == "active"}
+    known_ids |= {f"def.{term['id']}" for term in terms}
+
+    def resolve_related(owner_id: str, value: Any) -> str:
+        raw = str(value or "").strip()
+        for candidate in (raw, f"def.{raw}", f"metric.{raw}"):
+            if candidate in known_ids:
+                if candidate == owner_id:
+                    raise ValueError(f"definition {owner_id}: related points at itself")
+                return candidate
+        raise ValueError(f"definition {owner_id}: unknown related id {raw!r}")
+
     entries: list[dict[str, Any]] = []
     for metric in registry.metrics:
         if metric.status != "active":
@@ -527,23 +541,23 @@ def build_definitions(
                 "coverage_tier": metric.coverage_tier,
                 "source_layer": metric.source_layer,
                 "limitations": metric.limitations,
-                "href": f"/metrics/#metric-{metric.id}",
+                "related": [],
+                "href": f"/glossary/#def-metric.{metric.id}",
                 "provenance": "registry",
                 "registry_version": registry.registry_version,
             }
         )
-    known_metrics = {metric.id for metric in registry.metrics}
-    for term in config.get("terms") or []:
-        term_id = str(term.get("id") or "")
-        if not term_id:
-            continue
+    for term in terms:
+        term_id = str(term["id"])
+        owner_id = f"def.{term_id}"
         metric_ids = [str(item) for item in term.get("metric_ids") or []]
         unknown = [item for item in metric_ids if item not in known_metrics]
         if unknown:
             raise ValueError(f"definition {term_id}: unknown metric ids {unknown}")
+        related = [resolve_related(owner_id, item) for item in term.get("related") or []]
         entries.append(
             {
-                "id": f"def.{term_id}",
+                "id": owner_id,
                 "term": str(term.get("term") or term_id),
                 "aliases": [str(item) for item in term.get("aliases") or []],
                 "short": str(term.get("short") or ""),
@@ -556,6 +570,7 @@ def build_definitions(
                 "coverage_tier": None,
                 "source_layer": None,
                 "limitations": [],
+                "related": related,
                 "href": f"/glossary/#def-{term_id}",
                 "provenance": "curated_overlay",
                 "registry_version": registry.registry_version,

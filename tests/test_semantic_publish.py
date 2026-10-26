@@ -214,6 +214,50 @@ def test_definitions_copy_registry_fields_and_load_curated_terms() -> None:
     assert entries["def.basis"]["metric_ids"] == ["league.table"]
 
 
+def test_related_ids_resolve_to_generated_entries() -> None:
+    registry = _fake_registry()
+    document = build_definitions(
+        registry=registry,
+        registry_checksum="sha256:0",
+        definitions_config={
+            "terms": [
+                {
+                    "id": "basis",
+                    "term": "Basis",
+                    "metric_ids": ["league.table"],
+                    "related": ["coverage_tier", "league.table"],
+                },
+                {"id": "coverage_tier", "term": "Coverage tier", "metric_ids": []},
+            ]
+        },
+    )
+    entries = {row["id"]: row for row in document["entries"]}
+    assert entries["def.basis"]["related"] == [
+        "def.coverage_tier",
+        "metric.league.table",
+    ]
+
+
+def test_related_rejects_unknown_and_self_reference() -> None:
+    registry = _fake_registry()
+    with pytest.raises(ValueError, match="unknown related id"):
+        build_definitions(
+            registry=registry,
+            registry_checksum="sha256:0",
+            definitions_config={
+                "terms": [{"id": "basis", "term": "Basis", "related": ["nope"]}]
+            },
+        )
+    with pytest.raises(ValueError, match="related points at itself"):
+        build_definitions(
+            registry=registry,
+            registry_checksum="sha256:0",
+            definitions_config={
+                "terms": [{"id": "basis", "term": "Basis", "related": ["basis"]}]
+            },
+        )
+
+
 def test_a_curated_definition_may_not_name_an_unknown_metric() -> None:
     registry = _fake_registry()
     with pytest.raises(ValueError, match="unknown metric ids"):

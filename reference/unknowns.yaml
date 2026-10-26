@@ -1,0 +1,287 @@
+# Public unknowns register.
+#
+# One entry per CLASS of unknown, not per missing row. Every class names the
+# reason, the affected surfaces and either the public source that would resolve
+# it or an explicit no_public_source. A count is optional and must already exist
+# in a registered metric payload; this file may not introduce a number.
+#
+# Do not add a resolver unless a public source exists. Do not add a count unless
+# it is already published and registered.
+
+version: 1
+reviewed: 2026-10-26
+owner: patrickmockridge
+note: >
+  Unknown is a published state, not zero. The register records gaps in the public
+  record and the source that could close them. It does not request data from the
+  club and does not treat a missing field as a zero.
+
+classes:
+  - id: availability.unverified-player
+    domain: availability
+    label: No verified team-news entry
+    description: >
+      The player has no verified official team-news entry, so availability stays
+      unknown. Absence of an injury report is not evidence of fitness.
+    reason: The curated ledger has no official AFC entry for this player.
+    affected_surfaces: [matchday, squad, player-profile, recruitment]
+    resolving_source:
+      label: Aberdeen FC official team news
+      url: https://www.afc.co.uk/en/teams/mens
+      note: Only an official club entry can change the availability state.
+    count:
+      payload: coverage.json
+      pointer: /availability/coverage/unknown
+      metric_id: coverage.surfaces
+
+  - id: availability.provider-injuries
+    domain: availability
+    label: Provider injury feed is unavailable
+    description: >
+      The licensed provider declares injuries false, so its injury endpoint is
+      not used as team news. The register cannot name a player from it.
+    reason: provider_declares_injuries_false.
+    affected_surfaces: [matchday, squad]
+    no_public_source: true
+
+  - id: transfers.undisclosed-fee
+    domain: transfers
+    label: Fee not disclosed
+    description: >
+      The move is confirmed but no public fee was disclosed. The register keeps
+      the fee undisclosed and does not turn an inferred range into an amount.
+    reason: No public disclosure accompanied the transfer.
+    affected_surfaces: [transfers, former-players]
+    resolving_source:
+      label: Official announcement or public season record
+      url: https://www.afc.co.uk/en/news
+      note: Only a disclosed or reported figure with a public source is added.
+    count:
+      payload: former-players/aberdeen.json
+      pointer: /summary/by_fee_status/undisclosed
+      metric_id: former.summary
+
+  - id: transfers.loan-terms
+    domain: transfers
+    label: Loan end, recall and obligation terms
+    description: >
+      Loan duration, recall and purchase-obligation terms are not in the
+      licensed feed unless a public announcement confirms them.
+    reason: The provider transfer row does not carry the terms.
+    affected_surfaces: [loans, transfers]
+    resolving_source:
+      label: Official club announcement
+      url: https://www.afc.co.uk/en/news
+      note: A confirmed term is curated; an unconfirmed term stays unknown.
+
+  - id: transfers.instalments-addons
+    domain: transfers
+    label: Instalments, add-ons and agent terms
+    description: >
+      A disclosed headline fee does not disclose instalments, add-ons, agent
+      payments or solidarity contributions.
+    reason: These terms are not made public.
+    affected_surfaces: [transfers, former-players]
+    no_public_source: true
+
+  - id: contracts.terms
+    domain: contracts
+    label: Contract length, wages and release clauses
+    description: >
+      The public record does not carry contract length, wages, release clauses
+      or agent fees, so none is inferred or estimated.
+    reason: Not in the licensed feed and not publicly disclosed.
+    affected_surfaces: [scouting, transfers, recruitment]
+    no_public_source: true
+
+  - id: sell-on.unavailable-receipt
+    domain: contracts
+    label: Sell-on receipt not computable
+    description: >
+      A clause exists but at least one required input is missing: an evidenced
+      percentage, an allowed basis, a public subsequent fee or the original fee
+      for a profit-basis clause.
+    reason: One or more required public inputs are missing.
+    affected_surfaces: [former-players, scouting-player]
+    resolving_source:
+      label: Public clause and subsequent-fee evidence
+      url: /sources/
+      note: A receipt is computed only when every required input is evidenced.
+    count:
+      payload: former-players/aberdeen.json
+      pointer: /sell_on_watch/summary/unavailable_count
+      metric_id: former.sell-on
+
+  - id: scouting.no-player-stats
+    domain: scouting
+    label: League without player season statistics
+    description: >
+      The league is searchable but the provider returns no player season
+      statistics, so no player from it can be ranked.
+    reason: No provider player-season rows for the league.
+    affected_surfaces: [scouting, scouting-search]
+    resolving_source:
+      label: Licensed provider player statistics
+      url: /sources/
+      note: The league is labelled, never filled with zero-strength players.
+    count:
+      payload: scouting/coverage.json
+      pointer: /totals/no_player_stats
+      metric_id: scouting.coverage
+
+  - id: scouting.advanced-events
+    domain: scouting
+    label: Advanced event data is not in the feed
+    description: >
+      Possession, progressive passes, carries, pressures, aerial wins, crosses,
+      xG/xA and event coordinates are not supplied by the licensed feed.
+    reason: Not in the licensed feed.
+    affected_surfaces: [scouting, analysis-xg, match]
+    no_public_source: true
+
+  - id: scouting.value-model
+    domain: scouting
+    label: Value model is not fitted
+    description: >
+      The value model waits for enough public-source fee anchors. Until the gate
+      passes, the value index is not a GBP valuation.
+    reason: Public-source anchor register below the model gate.
+    affected_surfaces: [scouting, methodology]
+    resolving_source:
+      label: Public-source fee anchors
+      url: /sources/
+      note: More disclosed or reported fees are the only route to a fitted model.
+
+  - id: player.role-unobserved
+    domain: player-profile
+    label: Role not observed
+    description: >
+      No starting-XI grid or observed role covers the player, so the role stays
+      unknown rather than being inferred from a generic position label.
+    reason: No observed starting-XI role.
+    affected_surfaces: [squad, player-profile, scouting]
+    resolving_source:
+      label: Observed starting-XI grid
+      url: /sources/
+      note: A role is added only from an observed grid, never guessed.
+    count:
+      payload: squad/aberdeen.json
+      pointer: /summary/roles_unknown
+      metric_id: squad.summary
+
+  - id: player.preferred-foot
+    domain: player-profile
+    label: Preferred foot not verified
+    description: >
+      No explicit public statement or licensed attribute confirms the preferred
+      foot, so the attribute stays unknown.
+    reason: No explicit statement in the covered sources.
+    affected_surfaces: [squad, player-profile]
+    resolving_source:
+      label: Explicit public statement
+      url: /sources/
+      note: An explicit statement is required; a guess is not accepted.
+    count:
+      payload: squad/aberdeen.json
+      pointer: /attributes_meta/by_attribute/preferred_foot/unknown
+      metric_id: squad.meta
+
+  - id: player.stats-unavailable
+    domain: player-profile
+    label: Player statistics unavailable
+    description: >
+      The provider has no current-season statistics for the player. The row is
+      labelled unavailable and is never filled with zeroes.
+    reason: No provider rows for the covered scope.
+    affected_surfaces: [player-profile, squad]
+    resolving_source:
+      label: Licensed provider player statistics
+      url: /sources/
+      note: A later provider row resolves the gap.
+    count:
+      payload: squad/aberdeen.json
+      pointer: /summary/stats_unavailable
+      metric_id: squad.summary
+
+  - id: former.current-club
+    domain: former-players
+    label: Current or last-known club unknown
+    description: >
+      The former player's current or last-known club is not in the covered
+      provider record.
+    reason: No current-season provider row and no curated public record.
+    affected_surfaces: [former-players, scouting-player]
+    resolving_source:
+      label: Public transfer or club record
+      url: /sources/
+      note: A club is added only with a public record.
+    count:
+      payload: former-players/aberdeen.json
+      pointer: /summary/current_unknown
+      metric_id: former.summary
+
+  - id: history.transfer-windows
+    domain: history
+    label: Pre-2024-25 transfer windows are curated partial
+    description: >
+      Earlier transfer windows are curated from public records and are not
+      audited to the same depth as the recent four.
+    reason: Historical register coverage is partial.
+    affected_surfaces: [history, transfers]
+    resolving_source:
+      label: Public season records
+      url: /sources/
+      note: A window is audited only when its rows can be checked against a source.
+
+  - id: sources.migration-gate
+    domain: sources
+    label: League migration gate is failing
+    description: >
+      The licensed league migration does not yet pass its fixture-count and
+      team-match-stat gate, so football-data remains the active league source.
+    reason: The provider gate failed at the last check.
+    affected_surfaces: [sources, status, match]
+    resolving_source:
+      label: Passing provider gate
+      url: /sources/
+      note: Migration is enabled only when the gate passes.
+
+  - id: matchday.possession
+    domain: matchday
+    label: Possession is not in the feed
+    description: >
+      Possession is not supplied for the covered fixtures, so it is not used in
+      the style read and never shown as zero.
+    reason: Not in the licensed feed.
+    affected_surfaces: [matchday, match, analysis-xg]
+    no_public_source: true
+
+  - id: rumours.identity
+    domain: rumours
+    label: Rumour name outside the gazetteer
+    description: >
+      A name that does not resolve to the former-player register, the scouted
+      pool or the provider profile search is not promoted to a target.
+    reason: No supported identity match.
+    affected_surfaces: [rumours, recruitment]
+    no_public_source: true
+
+  - id: club.intent
+    domain: club
+    label: Boardroom intent and internal valuations
+    description: >
+      fitba does not know the club's internal models, valuations or private
+      conversations. Only public proxies are shown.
+    reason: Not public.
+    affected_surfaces: [about, claims, recruitment]
+    no_public_source: true
+
+  - id: needs.fees-wages-targets
+    domain: recruitment
+    label: Needs fees, wages and targets
+    description: >
+      The needs board describes role profiles, not transfer targets. Fees and
+      wages are not public and are never invented.
+    reason: The club's budget and wage structure are not public.
+    affected_surfaces: [recruitment, scouting]
+    no_public_source: true

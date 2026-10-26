@@ -2940,9 +2940,45 @@ export interface DefinitionEntry {
   coverage_tier?: string | null;
   source_layer?: string | null;
   limitations: string[];
+  related: string[];
   href: string;
   provenance: string;
   registry_version: string;
+}
+
+export interface UnknownCount {
+  metric_id: string;
+  payload: string;
+  pointer: string;
+}
+
+export function readGeneratedJson<T>(relative: string): T | null {
+  return readJson<T>(...relative.split("/").filter(Boolean));
+}
+
+export interface UnknownClass {
+  id: string;
+  domain: string;
+  label: string;
+  description: string;
+  reason: string;
+  surfaces: Array<{ id: string; label: string; path: string }>;
+  resolving_source: { label: string; url: string; note: string } | null;
+  no_public_source: boolean;
+  count?: UnknownCount;
+}
+
+export interface UnknownsDocument {
+  schema_version: string;
+  state: string;
+  reviewed: string;
+  owner: string;
+  owner_note: string;
+  classes: UnknownClass[];
+}
+
+export function getUnknowns(): UnknownsDocument | null {
+  return readJson<UnknownsDocument>("unknowns.json");
 }
 
 export interface DefinitionsDocument {
@@ -4033,6 +4069,29 @@ export interface ScoutingPlayer extends ScoutingRates {
   former_aberdeen?: FormerAberdeenProfile | null;
 }
 
+export interface ComparisonRow {
+  player_id: number;
+  player_key: string;
+  league_slug: string;
+  role_family: string;
+  cohort_basis: string;
+  reviewed_by: string;
+  reviewed_at: string;
+  notes: string;
+}
+
+export interface ComparisonDocument {
+  schema_version: string;
+  state: "available" | "not_reviewed" | string;
+  reviewed: string;
+  owner: string;
+  players: ComparisonRow[];
+}
+
+export function getComparison(): ComparisonDocument | null {
+  return readJson<ComparisonDocument>("scouting", "comparison.json");
+}
+
 export interface ScoutingSearchRow {
   i: number;
   n: string;
@@ -4045,6 +4104,8 @@ export interface ScoutingSearchRow {
   m: number;
   rt: number | null;
   p: number | null;
+  cn: number | null;
+  cb: string | null;
   ap: number | null;
   vi: number | null;
   vc: number | null;
@@ -4083,6 +4144,8 @@ export interface ScoutingSearchDocument {
   generated_at: string;
   state: string;
   min_minutes: number;
+  min_cohort: number;
+  min_cohort_by_family: Record<string, number>;
   count: number;
   leagues: Array<{
     id: string;

@@ -28,6 +28,7 @@ REQUIRED = [
     "update.md",
     "refresh-audit.md",
     "semantic-layer.md",
+    "unknowns.md",
     "ux-audit-2026-10.md",
     "design.md",
     "page-contracts.md",
@@ -90,6 +91,8 @@ IN_APP = [
     "web/app/search/page.tsx",
     "web/app/search/scouted.json/route.ts",
     "web/app/claims/page.tsx",
+    "web/app/glossary/page.tsx",
+    "web/app/unknowns/page.tsx",
 ]
 
 LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")

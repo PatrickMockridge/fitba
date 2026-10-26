@@ -101,10 +101,12 @@ A bare number without that context is not a citation.
   or the value index. A curated term may name metric ids but may not override a
   formula, unit, basis, coverage tier or source layer.
 
-`check_semantic.py` fails an unknown metric id, a duplicate id or alias, and a
-curated entry that sets a formula. The `/glossary/` route and inline terms are
-the next phase; until then the definitions are published metadata and the
-metric links in page provenance point at `/metrics/#metric-<id>`.
+`check_semantic.py` fails an unknown metric id, a duplicate id or alias, an
+unknown related id, a self-reference, and a curated entry that sets a formula.
+`/glossary/` renders every entry at a stable `#def-<id>` anchor and lists its
+related concepts. Page provenance, the metric registry and the first-use
+`DefinitionTerm` links resolve to the same anchors; a missing term renders plain
+text, never a dead link.
 
 ## Public change log
 
@@ -128,6 +130,8 @@ hand-edited. `/corrections/` renders it.
 - `/search/` under 400 KB of initial HTML;
 - `/scouting/search/` under 350 KB of initial HTML;
 - `/claims/` under 450 KB;
+- `/glossary/` under 500 KB;
+- `/unknowns/` under 300 KB;
 - the scouted entity payload and every scouting shard under 700 KB.
 
 A breach is fixed by sharding or lazy loading. Deleting evidence to fit a

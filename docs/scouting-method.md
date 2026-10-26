@@ -63,6 +63,11 @@ minimum cohort of 15 (8 for goalkeepers). When the role cohort is too small, the
 page may use the provider position group and labels `cohort_basis:
 provider_group`. It never pools cohorts across leagues.
 
+Aberdeen is excluded from its own cohort by player id. The pool source already
+omits team 252, and `CohortIndex` applies the exclusion explicitly so a future
+pool-composition change cannot silently reintroduce Aberdeen into the
+comparison. The exclusion is an invariant, not a ranking adjustment.
+
 Provider ratings are opaque and league-relative, so the page also publishes an
 **empirical Premiership-equivalent percentile**. It maps a player's rating into
 the actual Premiership cohort distribution using the observed league/role
@@ -78,6 +83,15 @@ shows the league, club and nationality beside every row and filters by league,
 so the comparison boundary is explicit. The default sort is a league mix, not a
 cross-league quality rank; the adjusted percentile is available as a sort and
 is labelled as a model.
+
+The page also carries a guarded comparison panel. Two players are comparable
+only when they share a league slug and a non-null role family, both have a
+published within-league percentile, and both cohorts meet the published
+minimum (15, or 8 for goalkeepers). A current-squad player is selectable only
+through a reviewed `reference/comparison_crosswalk.yaml` row; the published
+scouting squad row remains the source for minutes, percentile and cohort. The
+panel shows the two published values side by side. It does not show a delta,
+declare a winner, rank the pair or recommend a signing.
 
 ## Per-90 and position-specific output
 

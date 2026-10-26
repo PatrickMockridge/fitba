@@ -7,6 +7,7 @@ import { PredictedLineupPanel } from "@/components/PredictedLineupPanel";
 import { StrengthComparison } from "@/components/StrengthComparison";
 import { StyleMatchup } from "@/components/StyleMatchup";
 import { CaseClaimCard } from "@/components/CaseClaimCard";
+import { DefinitionTerm } from "@/components/DefinitionTerm";
 import {
   formatDate,
   getMatchday,
@@ -412,8 +413,9 @@ export default function MatchdayPage() {
             formation and position fit. They are not team news.
           </li>
           <li>
-            <strong>Strength</strong> percentiles are within the same league.
-            Cross-tier comparisons show raw values only.
+            <strong>Strength</strong>{" "}
+            <DefinitionTerm id="percentile">percentiles</DefinitionTerm> are within
+            the same league. Cross-tier comparisons show raw values only.
           </li>
         </ul>
         <p className="fine-print">{data.coverage.note}</p>

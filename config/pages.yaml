@@ -52,7 +52,7 @@ pages:
   - id: squad
     label: Squad
     patterns: ["/squad/"]
-    layers: [squad_roster, squad_identity, lineups_roles, player_match_stats, availability, event_layer, preferred_foot]
+    layers: [squad_roster, squad_identity, lineups_roles, player_match_stats, availability, event_layer, preferred_foot, scouting_pool]
 
   - id: players
     label: Player index
@@ -82,7 +82,7 @@ pages:
   - id: scouting-search
     label: Scouting search
     patterns: ["/scouting/search/"]
-    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe]
+    layers: [scouting_pool, scouting_team_context, scouting_current_clubs, scouting_europe, squad_roster, squad_identity]
 
   - id: transfers
     label: Transfers
@@ -128,6 +128,18 @@ pages:
     label: News and fan signal
     patterns: ["/news/"]
     layers: [news, forum_signal]
+
+  - id: unknowns
+    label: Unknowns register
+    patterns: ["/unknowns/"]
+    layers: []
+    no_layers_reason: "The register records where the public record is silent; it is not a derived fact surface."
+
+  - id: glossary
+    label: Glossary and definitions
+    patterns: ["/glossary/"]
+    layers: []
+    no_layers_reason: "Definitions describe registered metrics and concepts; they are not a derived fact surface."
 
   - id: sources
     label: Sources and provenance
@@ -200,6 +212,8 @@ static_pages:
   - {id: news, name: News and fan signal, path: /news/}
   - {id: sources, name: Sources and provenance, path: /sources/}
   - {id: methodology, name: Methodology, path: /methodology/}
+  - {id: unknowns, name: Unknowns register, path: /unknowns/}
+  - {id: glossary, name: Glossary and definitions, path: /glossary/}
   - {id: metrics, name: Metrics and audit, path: /metrics/}
   - {id: status, name: Data status, path: /status/}
   - {id: about, name: About fitba, path: /about/}

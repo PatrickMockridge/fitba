@@ -133,8 +133,13 @@ def main() -> int:
     clauses = watch.get("clauses") or []
     if {str(row.get("clause_id")) for row in clauses} != transfer_clauses:
         errors.append("sell-on clauses do not match the transfer register")
+    player_keys = {str(row.get("player_key")) for row in players}
     computed = 0
     for clause in clauses:
+        if str(clause.get("player_key")) not in player_keys:
+            errors.append(
+                f"sell-on {clause.get('clause_id')} has no former-player row"
+            )
         receipt = clause.get("receipt") or {}
         if receipt.get("status") == "computed":
             computed += 1

@@ -210,3 +210,12 @@ guard rejects their ids and hosts.
 If a source, role, date or result changes, update the reference YAML, the
 season document, this document and the in-app page in the same change. Do not
 leave a stale claim in one place and fix it in another.
+
+## Cormack-era lookup
+
+`/history/` carries a lookup over the published season index, staff stints and
+honours. It filters by season, manager, honour and competition and links to the
+matching season pages; state lives in the URL hash so a view can be shared. The
+lookup only navigates published rows. It does not rank seasons, add a
+superlative or replace the season table, manager records or honours cabinet,
+which stay visible.

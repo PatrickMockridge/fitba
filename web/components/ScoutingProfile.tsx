@@ -2,11 +2,13 @@ import Link from "next/link";
 import { PlayerRose } from "@/components/PlayerRose";
 import { ProfileHeader } from "@/components/ProfileHeader";
 import { ProfileSection } from "@/components/ProfileSection";
-import type {
-  ScoutingArchetypeDefinition,
-  ScoutingPlayer,
-  ScoutingPriorityConfig,
-  ScoutingSearchRow,
+import { SaleChain } from "@/components/SaleChain";
+import {
+  getFormerSeasons,
+  type ScoutingArchetypeDefinition,
+  type ScoutingPlayer,
+  type ScoutingPriorityConfig,
+  type ScoutingSearchRow,
 } from "@/lib/data";
 import { formatDate, formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
 import type { RoseCatalogue } from "@/lib/rose";
@@ -56,6 +58,9 @@ export function ScoutingProfile({
   const u23 = player.age !== null && player.age <= priority.u23_max_age;
   const displayName = player.full_name || player.name;
   const former = player.former_aberdeen ?? null;
+  const formerSeasons = former
+    ? getFormerSeasons()?.seasons?.[former.player_key] ?? null
+    : null;
 
   return (
     <section className="section">
@@ -259,6 +264,8 @@ export function ScoutingProfile({
           </p>
         </ProfileSection>
       ) : null}
+
+      {former ? <SaleChain player={former} seasons={formerSeasons} /> : null}
 
       <ProfileSection
         eyebrow="Team context"

@@ -18,6 +18,42 @@ note: >
 append_only: true
 
 entries:
+  - id: page-2026-10-26-evidence-views
+    date: 2026-10-26
+    kind: page
+    status: published
+    title: Unknowns, comparison, depth, sale chain and era lookup
+    summary: >
+      The unknowns register, guarded comparison panel, ten-family depth chart,
+      sale chain and Cormack-era lookup are live. Every view reads published
+      records; the cohort exclusion is enforced by player id and no published
+      metric value changed. Current-squad comparison is limited to the reviewed
+      comparison crosswalk.
+    pages: ["/unknowns/", "/scouting/search/", "/squad/", "/former-players/", "/history/", "/glossary/"]
+    entities: []
+    metric_ids: []
+    evidence:
+      - {label: "Unknowns register", url: "/unknowns/"}
+      - {label: "Scouting search", url: "/scouting/search/"}
+    fixed_in_dataset: null
+
+  - id: page-2026-10-26-glossary
+    date: 2026-10-26
+    kind: page
+    status: published
+    title: Glossary and definitions published
+    summary: >
+      Every active registered metric and every curated concept now has one
+      definition at /glossary/, with its formula, unit, basis, coverage, source
+      layer and registry version. Page provenance links each metric name to its
+      entry. No value or definition changed.
+    pages: ["/glossary/", "/metrics/", "/search/"]
+    entities: []
+    metric_ids: []
+    evidence:
+      - {label: "Glossary", url: "/glossary/"}
+    fixed_in_dataset: null
+
   - id: metric-3.10.0-semantic-layer
     date: 2026-10-26
     kind: metric
