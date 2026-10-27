@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.10.0
+registry_version: 3.11.0
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -372,9 +372,9 @@ metrics:
   status: active
 - id: matchday.lineup
   label: Predicted XI
-  description: Predicted lineups, scores, selection weights and availability.
+  description: Predicted lineups, scores, selection weights, selection confidence and availability.
   value_type: object
-  fields: []
+  fields: [team_confidence, formation_confidence, filled, slot_count, availability, players]
   formula: Player score = 0.20*form + 0.10*minute_share + 0.15*recent_rating + 0.15*role_fit
     + 0.18*recency_start + 0.22*start_rate. Availability counts curated entries; opponent
     availability is not modelled.
@@ -390,7 +390,11 @@ metrics:
   basis: inferred
   source_layer: lineups_roles
   coverage_tier: event
-  confidence_rule: Declared by the source metric; see docs/methodology.md.
+  confidence_rule: Selection confidence is high, medium or low from the formation
+    confidence, the number of high/medium player picks and whether every slot is
+    filled. Unknown availability is displayed beside the pick and does not lower
+    the selection estimate; unknown means no estimate (an incomplete XI or missing
+    inputs), not one level below low. A downgrade floors at low.
   home_payload: matchday/upcoming.json
   payload_paths:
   - matchday/upcoming.json#/predicted_lineups/**
@@ -403,8 +407,8 @@ metrics:
   limitations:
   - Selection and formation projections; provenance checked, not recomputed. The opponent rating is only present when /fixtures/players returns one.
   owner: patrickmockridge
-  reviewed: '2026-10-25'
-  version: 3
+  reviewed: '2026-10-27'
+  version: 4
   status: active
 - id: matchday.coverage
   label: Matchday coverage

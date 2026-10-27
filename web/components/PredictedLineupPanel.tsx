@@ -74,9 +74,30 @@ export function PredictedLineupPanel({
       </div>
 
       <div className="mini-block">
-        <span className="stat-label">Team confidence</span>{" "}
+        <span className="stat-label">Selection confidence</span>{" "}
         <ConfidenceBadge confidence={block.team_confidence ?? "unknown"} />
-        <span className="fine-print"> · {coverageLabel(block)}</span>
+        <span className="fine-print">
+          {" "}
+          · {coverageLabel(block)}
+          {block.slot_count
+            ? ` · ${block.filled}/${block.slot_count} slots filled`
+            : ""}
+        </span>
+        {block.availability?.applicable &&
+        (block.availability.known ?? 0) + (block.availability.unknown ?? 0) > 0 ? (
+          <span className="fine-print">
+            {" "}
+            · team news {block.availability.known ?? 0} known,{" "}
+            {block.availability.unknown ?? 0} unknown
+          </span>
+        ) : null}
+        <p className="fine-print">
+          Confidence measures the selection evidence only: starts, minutes, role
+          fit, form and the observed formation.{" "}
+          {block.availability?.applicable
+            ? "Unknown team news is shown as a separate availability state and does not lower this estimate."
+            : "Opponent availability is not modelled."}
+        </p>
       </div>
 
       {block.selection ? (

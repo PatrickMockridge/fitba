@@ -1,6 +1,6 @@
 # Matchday dashboard
 
-**Status:** live. Last reviewed 2026-10-22.
+**Status:** live. Last reviewed 2026-10-27.
 
 `/matchday/` answers the question a fan arrives with before the next game:
 **what is this match going to look like, and why?** It is not a season hub and
@@ -158,10 +158,12 @@ The prediction is a projection from observed lineups, not team news.
    missing formation is `unavailable`; no shape is assumed. Unmapped shapes are
    low confidence or unavailable.
 2. **Candidates:** Aberdeen's current squad excluding loan-outs and
-   players marked out/suspended by the curated availability ledger (doubtful
-   players remain selectable with a confidence downgrade); the opponent's
-   players observed in the
-   fetched lineup window. The opponent has no curated availability record unless one is added; availability stays unknown.
+   players marked out/suspended by the curated availability ledger (doubtful,
+   conflicted or stale entries remain selectable with a selection-confidence
+   downgrade); the opponent's players observed in the fetched lineup window. An
+   unknown availability entry does not lower selection confidence: it stays
+   visible as a separate availability state. The opponent has no curated
+   availability record unless one is added; availability stays unknown.
 3. **Score:** start rate 22%, recency-weighted starts 18%, minute share 10%,
    role fit 15%, player form 20% and recent provider rating 15%. Form combines
    recency-weighted minutes with goals and assists from events. The recent
@@ -182,7 +184,11 @@ The prediction is a projection from observed lineups, not team news.
 6. **Confidence:** per-player margin over the next candidate, start rate and
    role fit; team confidence from the number of high/medium picks and the
    formation confidence. Coverage below 60% downgrades confidence; below 30%,
-   or fewer than three lineup matches, means no prediction.
+   or fewer than three lineup matches, means no prediction. A downgrade floors
+   at low: `unknown` means no estimate (an incomplete XI or missing inputs), not
+   one level below low. Unknown team news is shown separately and does not
+   lower the selection estimate. The panel shows the lineup coverage, slots
+   filled and the team-news known/unknown counts beside the confidence label.
 
 Contenders are the next 4–6 best unused players across slots. Aberdeen players
 link to their profile pages; opponent players do not.

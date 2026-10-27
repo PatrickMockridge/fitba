@@ -4,12 +4,12 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-10-27T06:18:15+00:00",
-  "dataset_id": "2026-10-27T06:18:15+00:00-6db2e1a",
+  "audited_at": "2026-10-27T12:06:31+00:00",
+  "dataset_id": "2026-10-27T12:06:31+00:00-c598315",
   "dataset_state": "fresh",
-  "dataset_version": "2026-10-27T06:18:15+00:00-6db2e1a",
+  "dataset_version": "2026-10-27T12:06:31+00:00-c598315",
   "errors": [],
-  "generated_at": "2026-10-27T06:18:15+00:00",
+  "generated_at": "2026-10-27T12:06:31+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -520,7 +520,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 409 numeric leaves",
+          "message": "1 location(s), 411 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -536,12 +536,12 @@
         }
       ],
       "coverage_tier": "event",
-      "description": "Predicted lineups, scores, selection weights and availability.",
+      "description": "Predicted lineups, scores, selection weights, selection confidence and availability.",
       "displayed_surfaces": [
         "/matchday/"
       ],
       "errors": [],
-      "fields_checked": 409,
+      "fields_checked": 411,
       "home_payload": "matchday/upcoming.json",
       "home_surface": "/matchday/",
       "id": "matchday.lineup",
@@ -551,13 +551,13 @@
       ],
       "locations": [
         {
-          "nodes": 1494,
-          "numeric_leaves": 409,
+          "nodes": 1496,
+          "numeric_leaves": 411,
           "payload": "matchday/upcoming.json",
           "pointer": "/predicted_lineups/**"
         }
       ],
-      "numeric_leaves": 409,
+      "numeric_leaves": 411,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -566,7 +566,7 @@
       "status": "pass",
       "value_type": "object",
       "verification": "provenance_only",
-      "version": 3
+      "version": 4
     },
     {
       "basis": "measured",
@@ -1787,7 +1787,7 @@
           "status": "pass"
         },
         {
-          "message": "8 location(s), 1744 numeric leaves",
+          "message": "8 location(s), 1746 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1808,7 +1808,7 @@
         "/history/"
       ],
       "errors": [],
-      "fields_checked": 1744,
+      "fields_checked": 1746,
       "home_payload": "history/seasons/*.json",
       "home_surface": "/history/",
       "id": "history.season-document",
@@ -1860,13 +1860,13 @@
           "pointer": "/**"
         },
         {
-          "nodes": 533,
-          "numeric_leaves": 204,
+          "nodes": 537,
+          "numeric_leaves": 206,
           "payload": "history/seasons/2026-27.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1744,
+      "numeric_leaves": 1746,
       "payloads": 8,
       "provenance_only": true,
       "rows_checked": 8,
@@ -2009,7 +2009,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 7028 numeric leaves",
+          "message": "2 location(s), 7033 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2030,7 +2030,7 @@
         "/squad/"
       ],
       "errors": [],
-      "fields_checked": 7028,
+      "fields_checked": 7033,
       "home_payload": "squad/aberdeen.json",
       "home_surface": "/squad/",
       "id": "squad.players",
@@ -2041,7 +2041,7 @@
       "locations": [
         {
           "nodes": 20823,
-          "numeric_leaves": 6814,
+          "numeric_leaves": 6819,
           "payload": "squad/aberdeen.json",
           "pointer": "/players/**"
         },
@@ -2052,7 +2052,7 @@
           "pointer": "/excluded_players/**"
         }
       ],
-      "numeric_leaves": 7028,
+      "numeric_leaves": 7033,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 2,
@@ -2177,7 +2177,7 @@
           "status": "pass"
         },
         {
-          "message": "39 location(s), 8425 numeric leaves",
+          "message": "39 location(s), 8430 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2198,7 +2198,7 @@
         "/players/"
       ],
       "errors": [],
-      "fields_checked": 8425,
+      "fields_checked": 8430,
       "home_payload": "players/*.json",
       "home_surface": "/players/",
       "id": "player.page",
@@ -2393,7 +2393,7 @@
         },
         {
           "nodes": 1664,
-          "numeric_leaves": 396,
+          "numeric_leaves": 401,
           "payload": "players/61178.json",
           "pointer": "/**"
         },
@@ -2446,7 +2446,7 @@
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 8425,
+      "numeric_leaves": 8430,
       "payloads": 39,
       "provenance_only": true,
       "rows_checked": 39,
@@ -2723,7 +2723,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 1263 numeric leaves",
+          "message": "2 location(s), 1266 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2744,7 +2744,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 1266,
+      "fields_checked": 1269,
       "home_payload": "coverage.json",
       "home_surface": "/status/",
       "id": "coverage.surfaces",
@@ -2761,12 +2761,12 @@
         },
         {
           "nodes": 2063,
-          "numeric_leaves": 1159,
+          "numeric_leaves": 1162,
           "payload": "scouting/coverage.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1263,
+      "numeric_leaves": 1266,
       "payloads": 2,
       "provenance_only": false,
       "rows_checked": 3,
@@ -2844,7 +2844,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 92 numeric leaves",
+          "message": "1 location(s), 85 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2866,7 +2866,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 102,
+      "fields_checked": 95,
       "home_payload": "former-players/aberdeen.json",
       "home_surface": "/former-players/",
       "id": "former.summary",
@@ -2876,13 +2876,13 @@
       ],
       "locations": [
         {
-          "nodes": 104,
-          "numeric_leaves": 92,
+          "nodes": 97,
+          "numeric_leaves": 85,
           "payload": "former-players/aberdeen.json",
           "pointer": "/summary/**"
         }
       ],
-      "numeric_leaves": 92,
+      "numeric_leaves": 85,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 77,
@@ -2902,7 +2902,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 4084 numeric leaves",
+          "message": "2 location(s), 3660 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2923,7 +2923,7 @@
         "/former-players/"
       ],
       "errors": [],
-      "fields_checked": 4088,
+      "fields_checked": 3664,
       "home_payload": "former-players/aberdeen.json",
       "home_surface": "/former-players/",
       "id": "former.players",
@@ -2934,19 +2934,19 @@
       ],
       "locations": [
         {
-          "nodes": 9235,
-          "numeric_leaves": 2042,
+          "nodes": 8926,
+          "numeric_leaves": 1830,
           "payload": "former-players/aberdeen.json",
           "pointer": "/players"
         },
         {
-          "nodes": 9235,
-          "numeric_leaves": 2042,
+          "nodes": 8926,
+          "numeric_leaves": 1830,
           "payload": "former-players/aberdeen.json",
           "pointer": "/players/**"
         }
       ],
-      "numeric_leaves": 4084,
+      "numeric_leaves": 3660,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 78,
@@ -2966,7 +2966,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 4988 numeric leaves",
+          "message": "2 location(s), 2876 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2987,7 +2987,7 @@
         "/former-players/"
       ],
       "errors": [],
-      "fields_checked": 4991,
+      "fields_checked": 2879,
       "home_payload": "former-players/seasons.json",
       "home_surface": "/former-players/",
       "id": "former.post-seasons",
@@ -2998,19 +2998,19 @@
       ],
       "locations": [
         {
-          "nodes": 7845,
-          "numeric_leaves": 2494,
+          "nodes": 5610,
+          "numeric_leaves": 1438,
           "payload": "former-players/seasons.json",
           "pointer": "/seasons"
         },
         {
-          "nodes": 7845,
-          "numeric_leaves": 2494,
+          "nodes": 5610,
+          "numeric_leaves": 1438,
           "payload": "former-players/seasons.json",
           "pointer": "/seasons/**"
         }
       ],
-      "numeric_leaves": 4988,
+      "numeric_leaves": 2876,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 78,
@@ -3515,7 +3515,7 @@
       ],
       "locations": [
         {
-          "nodes": 1152,
+          "nodes": 1155,
           "numeric_leaves": 301,
           "payload": "clubs/aberdeen.json",
           "pointer": "/**"
@@ -22649,7 +22649,7 @@
           "status": "pass"
         },
         {
-          "message": "39 location(s), 568913 numeric leaves",
+          "message": "39 location(s), 584252 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -22671,7 +22671,7 @@
         "/scouting/search/"
       ],
       "errors": [],
-      "fields_checked": 568913,
+      "fields_checked": 584252,
       "home_payload": "scouting/pool/sco-premiership.json",
       "home_surface": "/scouting/",
       "id": "scouting.pool",
@@ -22692,14 +22692,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 22665,
-          "numeric_leaves": 11798,
+          "nodes": 23433,
+          "numeric_leaves": 12207,
           "payload": "scouting/pool/aut-bundesliga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 31606,
-          "numeric_leaves": 16230,
+          "nodes": 32743,
+          "numeric_leaves": 16937,
           "payload": "scouting/pool/bel-pro-league.json",
           "pointer": "/**"
         },
@@ -22710,20 +22710,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 18369,
-          "numeric_leaves": 9488,
+          "nodes": 18909,
+          "numeric_leaves": 9770,
           "payload": "scouting/pool/cro-hnl.json",
           "pointer": "/**"
         },
         {
-          "nodes": 33233,
-          "numeric_leaves": 17387,
+          "nodes": 34959,
+          "numeric_leaves": 18307,
           "payload": "scouting/pool/cze-fortuna-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 26056,
-          "numeric_leaves": 13603,
+          "nodes": 27730,
+          "numeric_leaves": 14488,
           "payload": "scouting/pool/den-superliga.json",
           "pointer": "/**"
         },
@@ -22740,32 +22740,32 @@
           "pointer": "/**"
         },
         {
-          "nodes": 55108,
-          "numeric_leaves": 28906,
+          "nodes": 55495,
+          "numeric_leaves": 29113,
           "payload": "scouting/pool/eng-league-two.json",
           "pointer": "/**"
         },
         {
-          "nodes": 30401,
-          "numeric_leaves": 15407,
+          "nodes": 30396,
+          "numeric_leaves": 15408,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 12521,
-          "numeric_leaves": 2513,
+          "nodes": 12516,
+          "numeric_leaves": 2376,
           "payload": "scouting/pool/former.json",
           "pointer": "/**"
         },
         {
-          "nodes": 17070,
-          "numeric_leaves": 8666,
+          "nodes": 19977,
+          "numeric_leaves": 10165,
           "payload": "scouting/pool/gre-super-league.json",
           "pointer": "/**"
         },
         {
-          "nodes": 20482,
-          "numeric_leaves": 10481,
+          "nodes": 21767,
+          "numeric_leaves": 11142,
           "payload": "scouting/pool/hun-nb-i.json",
           "pointer": "/**"
         },
@@ -22782,8 +22782,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 33288,
-          "numeric_leaves": 17406,
+          "nodes": 34609,
+          "numeric_leaves": 18106,
           "payload": "scouting/pool/ned-eredivisie.json",
           "pointer": "/**"
         },
@@ -22794,32 +22794,32 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52560,
-          "numeric_leaves": 27542,
+          "nodes": 53296,
+          "numeric_leaves": 27935,
           "payload": "scouting/pool/nor-eliteserien.json",
           "pointer": "/**"
         },
         {
-          "nodes": 37974,
-          "numeric_leaves": 19860,
+          "nodes": 39694,
+          "numeric_leaves": 20769,
           "payload": "scouting/pool/pol-ekstraklasa.json",
           "pointer": "/**"
         },
         {
-          "nodes": 29360,
-          "numeric_leaves": 15311,
+          "nodes": 30670,
+          "numeric_leaves": 16009,
           "payload": "scouting/pool/por-primeira-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 36659,
-          "numeric_leaves": 19240,
+          "nodes": 37406,
+          "numeric_leaves": 19619,
           "payload": "scouting/pool/rou-liga-i.json",
           "pointer": "/**"
         },
         {
-          "nodes": 35137,
-          "numeric_leaves": 18426,
+          "nodes": 35705,
+          "numeric_leaves": 18736,
           "payload": "scouting/pool/rus-premier-liga.json",
           "pointer": "/**"
         },
@@ -22842,20 +22842,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 20187,
-          "numeric_leaves": 10441,
+          "nodes": 20941,
+          "numeric_leaves": 10866,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/**"
         },
         {
-          "nodes": 32061,
-          "numeric_leaves": 16805,
+          "nodes": 33014,
+          "numeric_leaves": 17309,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 24437,
-          "numeric_leaves": 12734,
+          "nodes": 25003,
+          "numeric_leaves": 13041,
           "payload": "scouting/pool/sui-super-league.json",
           "pointer": "/**"
         },
@@ -22872,20 +22872,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52116,
-          "numeric_leaves": 27403,
+          "nodes": 52307,
+          "numeric_leaves": 27505,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/**"
         },
         {
-          "nodes": 32248,
-          "numeric_leaves": 16543,
+          "nodes": 32960,
+          "numeric_leaves": 17039,
           "payload": "scouting/pool/tur-super-lig.json",
           "pointer": "/**"
         },
         {
-          "nodes": 15241,
-          "numeric_leaves": 6460,
+          "nodes": 16606,
+          "numeric_leaves": 7066,
           "payload": "scouting/pool/ukr-premier-liga.json",
           "pointer": "/**"
         },
@@ -22896,31 +22896,31 @@
           "pointer": "/**"
         },
         {
-          "nodes": 55167,
-          "numeric_leaves": 37333,
+          "nodes": 56531,
+          "numeric_leaves": 38280,
           "payload": "scouting/search/players-0.json",
           "pointer": "/**"
         },
         {
-          "nodes": 54434,
-          "numeric_leaves": 36791,
+          "nodes": 55974,
+          "numeric_leaves": 37847,
           "payload": "scouting/search/players-1.json",
           "pointer": "/**"
         },
         {
-          "nodes": 55455,
-          "numeric_leaves": 37449,
+          "nodes": 57263,
+          "numeric_leaves": 38667,
           "payload": "scouting/search/players-2.json",
           "pointer": "/**"
         },
         {
-          "nodes": 55513,
-          "numeric_leaves": 37506,
+          "nodes": 56738,
+          "numeric_leaves": 38361,
           "payload": "scouting/search/players-3.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 568913,
+      "numeric_leaves": 584252,
       "payloads": 39,
       "provenance_only": true,
       "rows_checked": 39,
@@ -23071,7 +23071,7 @@
           "status": "pass"
         },
         {
-          "message": "36 location(s), 419677 numeric leaves",
+          "message": "36 location(s), 430940 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23094,7 +23094,7 @@
         "/scouting/player/"
       ],
       "errors": [],
-      "fields_checked": 419677,
+      "fields_checked": 430940,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.team-lens",
@@ -23118,14 +23118,14 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 22526,
-          "numeric_leaves": 11787,
+          "nodes": 23294,
+          "numeric_leaves": 12196,
           "payload": "scouting/pool/aut-bundesliga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 31467,
-          "numeric_leaves": 16219,
+          "nodes": 32604,
+          "numeric_leaves": 16926,
           "payload": "scouting/pool/bel-pro-league.json",
           "pointer": "/players/**/team_**"
         },
@@ -23136,20 +23136,20 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 18230,
-          "numeric_leaves": 9477,
+          "nodes": 18770,
+          "numeric_leaves": 9759,
           "payload": "scouting/pool/cro-hnl.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 33094,
-          "numeric_leaves": 17376,
+          "nodes": 34820,
+          "numeric_leaves": 18296,
           "payload": "scouting/pool/cze-fortuna-liga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 25917,
-          "numeric_leaves": 13592,
+          "nodes": 27591,
+          "numeric_leaves": 14477,
           "payload": "scouting/pool/den-superliga.json",
           "pointer": "/players/**/team_**"
         },
@@ -23166,32 +23166,32 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 54969,
-          "numeric_leaves": 28895,
+          "nodes": 55356,
+          "numeric_leaves": 29102,
           "payload": "scouting/pool/eng-league-two.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 30262,
-          "numeric_leaves": 15396,
+          "nodes": 30257,
+          "numeric_leaves": 15397,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 12382,
-          "numeric_leaves": 2503,
+          "nodes": 12377,
+          "numeric_leaves": 2366,
           "payload": "scouting/pool/former.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 16931,
-          "numeric_leaves": 8655,
+          "nodes": 19838,
+          "numeric_leaves": 10154,
           "payload": "scouting/pool/gre-super-league.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 20343,
-          "numeric_leaves": 10470,
+          "nodes": 21628,
+          "numeric_leaves": 11131,
           "payload": "scouting/pool/hun-nb-i.json",
           "pointer": "/players/**/team_**"
         },
@@ -23208,8 +23208,8 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 33149,
-          "numeric_leaves": 17395,
+          "nodes": 34470,
+          "numeric_leaves": 18095,
           "payload": "scouting/pool/ned-eredivisie.json",
           "pointer": "/players/**/team_**"
         },
@@ -23220,32 +23220,32 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 52421,
-          "numeric_leaves": 27531,
+          "nodes": 53157,
+          "numeric_leaves": 27924,
           "payload": "scouting/pool/nor-eliteserien.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 37835,
-          "numeric_leaves": 19849,
+          "nodes": 39555,
+          "numeric_leaves": 20758,
           "payload": "scouting/pool/pol-ekstraklasa.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 29221,
-          "numeric_leaves": 15300,
+          "nodes": 30531,
+          "numeric_leaves": 15998,
           "payload": "scouting/pool/por-primeira-liga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 36520,
-          "numeric_leaves": 19229,
+          "nodes": 37267,
+          "numeric_leaves": 19608,
           "payload": "scouting/pool/rou-liga-i.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 34998,
-          "numeric_leaves": 18415,
+          "nodes": 35566,
+          "numeric_leaves": 18725,
           "payload": "scouting/pool/rus-premier-liga.json",
           "pointer": "/players/**/team_**"
         },
@@ -23268,20 +23268,20 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 20048,
-          "numeric_leaves": 10430,
+          "nodes": 20802,
+          "numeric_leaves": 10855,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 31922,
-          "numeric_leaves": 16794,
+          "nodes": 32875,
+          "numeric_leaves": 17298,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 24298,
-          "numeric_leaves": 12723,
+          "nodes": 24864,
+          "numeric_leaves": 13030,
           "payload": "scouting/pool/sui-super-league.json",
           "pointer": "/players/**/team_**"
         },
@@ -23298,20 +23298,20 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 51977,
-          "numeric_leaves": 27392,
+          "nodes": 52168,
+          "numeric_leaves": 27494,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 32109,
-          "numeric_leaves": 16532,
+          "nodes": 32821,
+          "numeric_leaves": 17028,
           "payload": "scouting/pool/tur-super-lig.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 15102,
-          "numeric_leaves": 6449,
+          "nodes": 16467,
+          "numeric_leaves": 7055,
           "payload": "scouting/pool/ukr-premier-liga.json",
           "pointer": "/players/**/team_**"
         },
@@ -23322,7 +23322,7 @@
           "pointer": "/team_context/**"
         }
       ],
-      "numeric_leaves": 419677,
+      "numeric_leaves": 430940,
       "payloads": 36,
       "provenance_only": true,
       "rows_checked": 36,
@@ -23401,7 +23401,7 @@
           "status": "pass"
         },
         {
-          "message": "3 location(s), 1467 numeric leaves",
+          "message": "3 location(s), 1470 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23422,7 +23422,7 @@
         "/scouting/"
       ],
       "errors": [],
-      "fields_checked": 1467,
+      "fields_checked": 1470,
       "home_payload": "scouting/coverage.json",
       "home_surface": "/scouting/",
       "id": "scouting.coverage",
@@ -23435,7 +23435,7 @@
       "locations": [
         {
           "nodes": 2063,
-          "numeric_leaves": 1159,
+          "numeric_leaves": 1162,
           "payload": "scouting/coverage.json",
           "pointer": "/**"
         },
@@ -23452,7 +23452,7 @@
           "pointer": "/coverage/**"
         }
       ],
-      "numeric_leaves": 1467,
+      "numeric_leaves": 1470,
       "payloads": 2,
       "provenance_only": true,
       "rows_checked": 3,
@@ -23538,7 +23538,7 @@
           "status": "pass"
         },
         {
-          "message": "43 location(s), 569762 numeric leaves",
+          "message": "43 location(s), 585101 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23561,7 +23561,7 @@
         "/scouting/player/"
       ],
       "errors": [],
-      "fields_checked": 569762,
+      "fields_checked": 585101,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.priority",
@@ -23580,14 +23580,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 22665,
-          "numeric_leaves": 11798,
+          "nodes": 23433,
+          "numeric_leaves": 12207,
           "payload": "scouting/pool/aut-bundesliga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 31606,
-          "numeric_leaves": 16230,
+          "nodes": 32743,
+          "numeric_leaves": 16937,
           "payload": "scouting/pool/bel-pro-league.json",
           "pointer": "/**"
         },
@@ -23598,20 +23598,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 18369,
-          "numeric_leaves": 9488,
+          "nodes": 18909,
+          "numeric_leaves": 9770,
           "payload": "scouting/pool/cro-hnl.json",
           "pointer": "/**"
         },
         {
-          "nodes": 33233,
-          "numeric_leaves": 17387,
+          "nodes": 34959,
+          "numeric_leaves": 18307,
           "payload": "scouting/pool/cze-fortuna-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 26056,
-          "numeric_leaves": 13603,
+          "nodes": 27730,
+          "numeric_leaves": 14488,
           "payload": "scouting/pool/den-superliga.json",
           "pointer": "/**"
         },
@@ -23628,32 +23628,32 @@
           "pointer": "/**"
         },
         {
-          "nodes": 55108,
-          "numeric_leaves": 28906,
+          "nodes": 55495,
+          "numeric_leaves": 29113,
           "payload": "scouting/pool/eng-league-two.json",
           "pointer": "/**"
         },
         {
-          "nodes": 30401,
-          "numeric_leaves": 15407,
+          "nodes": 30396,
+          "numeric_leaves": 15408,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 12521,
-          "numeric_leaves": 2513,
+          "nodes": 12516,
+          "numeric_leaves": 2376,
           "payload": "scouting/pool/former.json",
           "pointer": "/**"
         },
         {
-          "nodes": 17070,
-          "numeric_leaves": 8666,
+          "nodes": 19977,
+          "numeric_leaves": 10165,
           "payload": "scouting/pool/gre-super-league.json",
           "pointer": "/**"
         },
         {
-          "nodes": 20482,
-          "numeric_leaves": 10481,
+          "nodes": 21767,
+          "numeric_leaves": 11142,
           "payload": "scouting/pool/hun-nb-i.json",
           "pointer": "/**"
         },
@@ -23670,8 +23670,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 33288,
-          "numeric_leaves": 17406,
+          "nodes": 34609,
+          "numeric_leaves": 18106,
           "payload": "scouting/pool/ned-eredivisie.json",
           "pointer": "/**"
         },
@@ -23682,32 +23682,32 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52560,
-          "numeric_leaves": 27542,
+          "nodes": 53296,
+          "numeric_leaves": 27935,
           "payload": "scouting/pool/nor-eliteserien.json",
           "pointer": "/**"
         },
         {
-          "nodes": 37974,
-          "numeric_leaves": 19860,
+          "nodes": 39694,
+          "numeric_leaves": 20769,
           "payload": "scouting/pool/pol-ekstraklasa.json",
           "pointer": "/**"
         },
         {
-          "nodes": 29360,
-          "numeric_leaves": 15311,
+          "nodes": 30670,
+          "numeric_leaves": 16009,
           "payload": "scouting/pool/por-primeira-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 36659,
-          "numeric_leaves": 19240,
+          "nodes": 37406,
+          "numeric_leaves": 19619,
           "payload": "scouting/pool/rou-liga-i.json",
           "pointer": "/**"
         },
         {
-          "nodes": 35137,
-          "numeric_leaves": 18426,
+          "nodes": 35705,
+          "numeric_leaves": 18736,
           "payload": "scouting/pool/rus-premier-liga.json",
           "pointer": "/**"
         },
@@ -23730,20 +23730,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 20187,
-          "numeric_leaves": 10441,
+          "nodes": 20941,
+          "numeric_leaves": 10866,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/**"
         },
         {
-          "nodes": 32061,
-          "numeric_leaves": 16805,
+          "nodes": 33014,
+          "numeric_leaves": 17309,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 24437,
-          "numeric_leaves": 12734,
+          "nodes": 25003,
+          "numeric_leaves": 13041,
           "payload": "scouting/pool/sui-super-league.json",
           "pointer": "/**"
         },
@@ -23760,20 +23760,20 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52116,
-          "numeric_leaves": 27403,
+          "nodes": 52307,
+          "numeric_leaves": 27505,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/**"
         },
         {
-          "nodes": 32248,
-          "numeric_leaves": 16543,
+          "nodes": 32960,
+          "numeric_leaves": 17039,
           "payload": "scouting/pool/tur-super-lig.json",
           "pointer": "/**"
         },
         {
-          "nodes": 15241,
-          "numeric_leaves": 6460,
+          "nodes": 16606,
+          "numeric_leaves": 7066,
           "payload": "scouting/pool/ukr-premier-liga.json",
           "pointer": "/**"
         },
@@ -23784,26 +23784,26 @@
           "pointer": "/**"
         },
         {
-          "nodes": 55167,
-          "numeric_leaves": 37333,
+          "nodes": 56531,
+          "numeric_leaves": 38280,
           "payload": "scouting/search/players-0.json",
           "pointer": "/**"
         },
         {
-          "nodes": 54434,
-          "numeric_leaves": 36791,
+          "nodes": 55974,
+          "numeric_leaves": 37847,
           "payload": "scouting/search/players-1.json",
           "pointer": "/**"
         },
         {
-          "nodes": 55455,
-          "numeric_leaves": 37449,
+          "nodes": 57263,
+          "numeric_leaves": 38667,
           "payload": "scouting/search/players-2.json",
           "pointer": "/**"
         },
         {
-          "nodes": 55513,
-          "numeric_leaves": 37506,
+          "nodes": 56738,
+          "numeric_leaves": 38361,
           "payload": "scouting/search/players-3.json",
           "pointer": "/**"
         },
@@ -23832,7 +23832,7 @@
           "pointer": "/europe/**"
         }
       ],
-      "numeric_leaves": 569762,
+      "numeric_leaves": 585101,
       "payloads": 41,
       "provenance_only": true,
       "rows_checked": 43,
@@ -24367,34 +24367,34 @@
       "version": 1
     }
   ],
-  "published_at": "2026-10-27T06:18:15+00:00",
-  "registry_checksum": "sha256:4333ea8a117b094d0319823b1635590d4d7b476c6062b10f7e4771cf0e6afcdf",
+  "published_at": "2026-10-27T12:06:31+00:00",
+  "registry_checksum": "sha256:47f21daf427a0926a215591849c408fc3f0fab8495fc3e784803708449392cb7",
   "registry_reviewed": "2026-10-24",
-  "registry_version": "3.10.0",
+  "registry_version": "3.11.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T06:17:02+00:00-3344447",
+  "served_by_update_id": "2026-10-27T12:00:33+00:00-4124035",
   "source_snapshots": {
-    "api_football": "2026-10-27T06:18:12.443142+00:00",
-    "api_results": "2026-10-27T06:17:07+00:00",
-    "availability": "2026-10-27T06:17:20+00:00",
-    "career": "2026-10-27T06:17:20+00:00",
-    "football_data_uk": "2026-10-27T06:17:06+00:00",
-    "former_players": "2026-10-27T06:17:14+00:00",
-    "history_backfill": "2026-10-27T06:17:13+00:00",
+    "api_football": "2026-10-27T12:06:27.245531+00:00",
+    "api_results": "2026-10-27T12:00:36+00:00",
+    "availability": "2026-10-27T12:02:11+00:00",
+    "career": "2026-10-27T12:02:11+00:00",
+    "football_data_uk": "2026-10-27T12:00:34+00:00",
+    "former_players": "2026-10-27T12:00:47+00:00",
+    "history_backfill": "2026-10-27T12:00:45+00:00",
     "matchday_snapshot": "2026-10-26T17:01:41+00:00",
-    "scouting_clubs": "2026-10-27T06:17:55+00:00",
-    "scouting_europe": "2026-10-27T06:17:44+00:00",
-    "scouting_pool": "2026-10-27T06:17:32+00:00",
-    "scouting_roles": "2026-10-27T06:17:33+00:00",
-    "scouting_rose_history": "2026-10-27T06:17:44+00:00",
-    "scouting_standings": "2026-10-27T06:17:45+00:00",
-    "spfl": "2026-10-27T06:17:08+00:00",
-    "xg_enrichment": "2026-10-27T06:17:57+00:00"
+    "scouting_clubs": "2026-10-27T12:05:57+00:00",
+    "scouting_europe": "2026-10-27T12:05:57+00:00",
+    "scouting_pool": "2026-10-27T12:02:18+00:00",
+    "scouting_roles": "2026-10-27T12:05:40+00:00",
+    "scouting_rose_history": "2026-10-27T12:05:41+00:00",
+    "scouting_standings": "2026-10-27T12:05:57+00:00",
+    "spfl": "2026-10-27T12:00:37+00:00",
+    "xg_enrichment": "2026-10-27T12:06:29+00:00"
   },
   "status": "pass",
   "summary": {
-    "fields_checked": 1816315,
+    "fields_checked": 1855733,
     "metrics_failed": 0,
     "metrics_passed": 83,
     "metrics_total": 83,
@@ -24409,5 +24409,5 @@
       "recompute": 14
     }
   },
-  "update_id": "2026-10-27T06:17:02+00:00-3344447"
+  "update_id": "2026-10-27T12:00:33+00:00-4124035"
 }

@@ -13,6 +13,10 @@ function columnOf(player: LineupPlayer) {
   return Number.isFinite(column) ? column : 99;
 }
 
+function confidenceLabel(value: string | null | undefined): string {
+  return value && value !== "unknown" ? value : "no estimate";
+}
+
 export function PitchLineup({
   players,
   formation,
@@ -57,7 +61,7 @@ export function PitchLineup({
                     {player.role_code ?? player.role_label ?? "—"}
                   </span>
                   <span className="pitch-confidence">
-                    {player.confidence || "unknown"}
+                    {confidenceLabel(player.confidence)}
                   </span>
                 </div>
               ))}
@@ -88,7 +92,7 @@ export function PitchLineup({
               {player.recent_rating ?? "—"}
             </span>
             <span className={`lineup-confidence confidence-${player.confidence || "unknown"}`}>
-              {player.confidence || "unknown"}
+              {confidenceLabel(player.confidence)}
             </span>
           </li>
         ))}

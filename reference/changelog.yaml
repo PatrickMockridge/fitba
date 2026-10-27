@@ -18,6 +18,28 @@ note: >
 append_only: true
 
 entries:
+  - id: metric-3.11.0-selection-confidence
+    date: 2026-10-27
+    kind: metric
+    status: published
+    title: Selection confidence no longer erases at low
+    summary: >
+      Registry 3.11.0 changes matchday.lineup to v4. A confidence downgrade now
+      floors at low, and unknown team news no longer lowers selection
+      confidence; unknown means no estimate, not one level below low. Selection
+      scores, picks, formation and availability counts are unchanged. The panel
+      now shows slots filled and team-news known/unknown counts beside the
+      estimate.
+    pages: ["/matchday/", "/status/"]
+    entities: []
+    metric_ids: [matchday.lineup]
+    registry_version: 3.11.0
+    doc_anchor: "3-11-0-2026-10-27"
+    evidence:
+      - {label: "Matchday", url: "/matchday/"}
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null
+
   - id: page-2026-10-26-evidence-views
     date: 2026-10-26
     kind: page

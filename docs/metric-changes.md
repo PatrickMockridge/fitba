@@ -1,12 +1,43 @@
 # Metric change log
 
 **Status:** append-only record of metric-definition and parameter changes.
-**Owner:** patrickmockridge. **Last reviewed:** 2026-10-26.
+**Owner:** patrickmockridge. **Last reviewed:** 2026-10-27.
 
 A semantic metric change is any change to an id, formula, input, denominator,
 aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
+
+## 3.11.0 — 2026-10-27
+
+Selection-confidence semantics. Owner-directed: "unknown confidence" was
+erasing a real estimate. A downgrade now floors at **low**, and unknown team
+news no longer lowers selection confidence. Unknown availability remains a
+separate published state. **No selection score, weight, formation rule or
+availability count changed.**
+
+- `matchday.lineup` v3 → v4. The confidence rule is explicit: selection
+  confidence is high/medium/low from the formation confidence, the count of
+  high/medium picks and whether every slot is filled; `unknown` means no
+  estimate (incomplete XI or missing inputs), never "one level below low".
+  Unknown or partial availability no longer applies an availability downgrade;
+  doubtful, conflicted and stale entries still do. The old team-level
+  `known_share < 0.5` downgrade is removed.
+- `slot_count` is published on each lineup block (`filled` already existed), so
+  the panel can show `filled/slot_count` beside the estimate.
+- Expected published label changes for the current payload:
+
+| Field | Before | After |
+|---|---|---|
+| `predicted_lineups.aberdeen.team_confidence` | `unknown` | `medium` |
+| Aberdeen players `medium` → `high` | Müller, Guinness-Walker, Molloy, Cadden, Nisbet | 5 rows |
+| Aberdeen players `low` → `medium` | Aremu, Lyons | 2 rows |
+| Aberdeen players `unknown` → `low` | Ronan, Smith, Mouloua | 3 rows |
+| Aberdeen `availability_downgrade` | 1 for unknown entries | 0 |
+| `predicted_lineups.*.slot_count` | absent | 11 |
+
+Selection scores, picks, formation, coverage and availability counts are
+unchanged. Registry version 3.10.0 → 3.11.0.
 
 ## 3.10.0 — 2026-10-26
 

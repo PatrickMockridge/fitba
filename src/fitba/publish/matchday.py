@@ -257,6 +257,7 @@ class LineupBlock(StrictModel):
     formation_confidence: str | None = None
     team_confidence: str | None = None
     filled: int = 0
+    slot_count: int = 0
     coverage: dict[str, Any] = {}
     selection: dict[str, Any] = {}
     disclaimer: str
@@ -528,6 +529,7 @@ def _lineup_payload(block: dict[str, Any] | None, *, basis: str) -> LineupBlock 
         formation_confidence=block.get("formation_confidence"),
         team_confidence=block.get("team_confidence"),
         filled=int(block.get("filled") or 0),
+        slot_count=int(block.get("slot_count") or 0),
         coverage=block.get("coverage") or {},
         selection=block.get("selection") or {},
         disclaimer=str(block.get("disclaimer") or ""),

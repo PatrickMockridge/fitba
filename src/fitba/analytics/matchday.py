@@ -967,10 +967,11 @@ def score_players(
             availability_downgrade = 1
         elif availability_row.get("conflict"):
             availability_downgrade = 2
-        elif availability_row.get("stale") or (
-            availability_status == "unknown" and availability_state == "partial"
-        ):
+        elif availability_row.get("stale"):
             availability_downgrade = 1
+        # Unknown team news is not evidence against a selection. The availability
+        # status stays visible beside the pick; it does not lower selection
+        # confidence, which measures the selection evidence only.
         output.append(
             {
                 "player_id": entry["player_id"],
@@ -1319,8 +1320,12 @@ def assign_lineup(
 
 
 def _downgrade(confidence: str, levels: int = 1) -> str:
-    order = ["unknown", "low", "medium", "high"]
-    index = max(0, order.index(confidence) - levels) if confidence in order else 0
+    # A lower estimate floors at low. Unknown means "no estimate", not
+    # "one step below low"; only an unfilled lineup or missing inputs use it.
+    order = ["low", "medium", "high"]
+    if confidence not in order:
+        return "unknown"
+    index = max(0, order.index(confidence) - levels)
     return order[index]
 
 
@@ -1430,6 +1435,7 @@ def predict_lineup(
     base = {
         "team_id": team_id,
         "formation": formation.get("formation"),
+        "slot_count": 0,
         "selection": {
             "weights": policy.get("scoring") or {},
             "rating_coverage": dict(rating_coverage),
@@ -1531,14 +1537,8 @@ def predict_lineup(
         team_confidence = "low"
     if coverage is not None and coverage < 0.3:
         team_confidence = "low"
-    if availability_state == "partial":
-        known_share = (
-            availability_known / len(availability_entries) if availability_entries else 0.0
-        )
-        if known_share < 0.5:
-            team_confidence = _downgrade(team_confidence, 1)
-        if availability_conflicts:
-            team_confidence = _downgrade(team_confidence, 1)
+    if availability_conflicts:
+        team_confidence = _downgrade(team_confidence, 1)
     slot_count = int(assigned.get("slot_count") or 0)
     if assigned.get("filled", 0) < slot_count:
         team_confidence = "unknown"
@@ -1560,6 +1560,7 @@ def predict_lineup(
         "players": players,
         "contenders": assigned.get("contenders", []),
         "filled": assigned.get("filled", 0),
+        "slot_count": slot_count,
         "team_confidence": team_confidence,
         "selection_risks": selection_risks,
         "note": note,

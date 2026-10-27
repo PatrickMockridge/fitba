@@ -2116,6 +2116,7 @@ export interface LineupBlock {
   formation_confidence?: string | null;
   team_confidence?: string | null;
   filled: number;
+  slot_count?: number;
   coverage: {
     fixtures_with_lineups?: number;
     fixtures_total?: number | null;

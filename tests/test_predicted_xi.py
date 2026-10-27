@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import polars as pl
 
-from fitba.analytics.matchday import _score, predict_lineup, score_players, select_formation
+from fitba.analytics.matchday import (
+    _downgrade,
+    _score,
+    predict_lineup,
+    score_players,
+    select_formation,
+)
 from fitba.settings import matchday, roles
 
 FORMATION = "4-2-3-1"
@@ -218,6 +224,35 @@ def test_provider_injured_flag_alone_does_not_exclude():
     unavailable = {item["player_id"] for item in result["unavailable"]}
     assert 5 not in unavailable
     assert result["availability"]["state"] == "unavailable"
+
+
+def test_downgrade_floors_at_low_and_keeps_unknown_explicit():
+    assert _downgrade("high", 1) == "medium"
+    assert _downgrade("low", 1) == "low"
+    assert _downgrade("low", 3) == "low"
+    assert _downgrade("unknown", 1) == "unknown"
+
+
+def test_unknown_team_news_does_not_erase_selection_confidence():
+    availability = {player_id: {"status": "unknown"} for player_id in range(1, 16)}
+    result = predict_lineup(
+        _window(),
+        _shapes(),
+        team_id=252,
+        roles_config=roles(),
+        policy=matchday()["prediction"],
+        squad=_squad(),
+        fixtures_total=6,
+        include_squad_only=True,
+        availability=availability,
+        availability_state="partial",
+    )
+    filled = [player for player in result["players"] if player["player_id"] is not None]
+    assert filled
+    assert all(player["confidence"] != "unknown" for player in filled)
+    assert all(player["availability_downgrade"] == 0 for player in filled)
+    assert result["team_confidence"] in {"low", "medium", "high"}
+    assert result["slot_count"] == 11
 
 
 def test_low_coverage_downgrades_confidence():
