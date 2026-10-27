@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SeasonSelect } from "@/components/SeasonSelect";
 import { formatDate } from "@/lib/format";
-import type { FixtureIndexRow, ScheduledFixtureRow } from "@/lib/data";
+import { watchLabel } from "@/lib/broadcast";
+import type {
+  BroadcastFixture,
+  FixtureIndexRow,
+  ScheduledFixtureRow,
+} from "@/lib/data";
 
 function resultLabel(row: FixtureIndexRow) {
   if (row.aberdeen_result_label) {
@@ -27,11 +32,13 @@ export function MatchRecordArchive({
   scheduled,
   current,
   remainingIsMinimum = false,
+  watch = {},
 }: {
   seasons: Array<{ season: string; rows: FixtureIndexRow[] }>;
   scheduled: Array<{ season: string; rows: ScheduledFixtureRow[] }>;
   current: string;
   remainingIsMinimum?: boolean;
+  watch?: Record<string, BroadcastFixture>;
 }) {
   const [selected, setSelected] = useState(current);
   // Preserve the old `#season-YYYY-YY` deep links without making them the
@@ -93,6 +100,7 @@ export function MatchRecordArchive({
                 rows are shown for the record but are not counted as playable. Cup
                 progression and post-split league fixtures can add to this count.
                 Neutral venues are marked; kickoff status is the source status.
+                Watch is the domestic (UK &amp; Ireland) status only.
               </caption>
               <thead>
                 <tr>
@@ -103,6 +111,7 @@ export function MatchRecordArchive({
                   <th scope="col">Venue</th>
                   <th scope="col">Kickoff</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Watch</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,6 +133,7 @@ export function MatchRecordArchive({
                     <td>
                       {row.status === "conflict_review" ? "Conflict — review" : "Scheduled"}
                     </td>
+                    <td>{watchLabel(watch[String(row.fixture_id)])}</td>
                   </tr>
                 ))}
               </tbody>

@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
+  "dataset_id": "2026-10-27T19:05:13+00:00-0154e2c",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-10-27T17:25:23+00:00",
+  "generated_at": "2026-10-27T19:05:13+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -413,7 +413,7 @@
         "stale_reason": null,
         "update_id": null,
         "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-27"
       },
       "published_at": null,
       "scope": "current season",
@@ -433,7 +433,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         },
         {
           "dataset_id": null,
@@ -1278,7 +1278,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         },
         {
           "dataset_id": null,
@@ -1337,6 +1337,88 @@
     {
       "dataset_id": null,
       "dataset_state": null,
+      "fallback": [
+        "spfl"
+      ],
+      "fields": [
+        "domestic_status",
+        "international_status",
+        "platform",
+        "medium",
+        "access",
+        "source_url",
+        "verified_at"
+      ],
+      "gate": null,
+      "id": "broadcast_listings",
+      "kind": "curated",
+      "label": "Broadcast and streaming listings",
+      "note": "Curated from official club and SPFL pages. Broadcaster schedules are not scraped, no price or stream is published, and an absent listing is not a claim that a match is not televised.",
+      "primary": "afc_news",
+      "primary_source": {
+        "attribution": "Aberdeen FC",
+        "dataset_id": null,
+        "dataset_state": null,
+        "id": "afc_news",
+        "lane": "derived_display",
+        "name": "Aberdeen FC news",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
+        "url": "https://www.afc.co.uk/en/news",
+        "verified_at": "2026-10-27"
+      },
+      "published_at": null,
+      "scope": "upcoming fixtures",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "sources": [
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "Aberdeen FC news",
+          "published_at": null,
+          "role": "primary",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "afc_news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://www.afc.co.uk/en/news",
+          "verified_at": "2026-10-27"
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "SPFL official club feed",
+          "published_at": null,
+          "role": "fallback",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "spfl",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://spfl.co.uk/clubs/aberdeen/fixtures",
+          "verified_at": "2026-10-27"
+        }
+      ],
+      "stale_reason": null,
+      "status": "active",
+      "surfaces": [
+        "/matchday/",
+        "/matches/",
+        "/fixtures/",
+        "/sources/"
+      ],
+      "update_id": null
+    },
+    {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "title",
@@ -1363,7 +1445,7 @@
         "stale_reason": null,
         "update_id": null,
         "url": "https://www.afc.co.uk/en/news",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-27"
       },
       "published_at": null,
       "scope": "current",
@@ -1383,7 +1465,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         }
       ],
       "stale_reason": null,
@@ -1425,7 +1507,7 @@
         "stale_reason": null,
         "update_id": null,
         "url": "https://www.afc.co.uk/en/news",
-        "verified_at": "2026-10-21"
+        "verified_at": "2026-10-27"
       },
       "published_at": null,
       "scope": "current squad and next opponent",
@@ -1445,7 +1527,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         },
         {
           "dataset_id": null,
@@ -1508,7 +1590,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         }
       ],
       "stale_reason": null,
@@ -1614,7 +1696,7 @@
           "stale_reason": null,
           "update_id": null,
           "url": "https://www.afc.co.uk/en/news",
-          "verified_at": "2026-10-21"
+          "verified_at": "2026-10-27"
         },
         {
           "dataset_id": null,
@@ -1958,10 +2040,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-10-27T17:25:23+00:00",
+  "published_at": "2026-10-27T19:05:13+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
+  "served_by_update_id": "2026-10-27T19:04:54+00:00-1073233",
   "source_snapshots": null,
   "sources": [
     {
@@ -2043,10 +2125,11 @@
       "dataset_state": null,
       "id": "afc_news",
       "lane": "derived_display",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-27",
       "name": "Aberdeen FC news",
       "primary_layers": [
         "availability",
+        "broadcast_listings",
         "news"
       ],
       "published_at": null,
@@ -2064,7 +2147,7 @@
       "dataset_state": null,
       "id": "spfl",
       "lane": "derived_display",
-      "last_verified": "2026-10-21",
+      "last_verified": "2026-10-27",
       "name": "SPFL official club feed",
       "primary_layers": [
         "club_fixtures"
@@ -2138,5 +2221,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "publish-2026-10-27T17:25:23+00:00"
+  "update_id": "2026-10-27T19:04:54+00:00-1073233"
 }

@@ -1,0 +1,72 @@
+# Curated broadcast and streaming ledger.
+#
+# One row per fixture where an official club or SPFL page states coverage.
+# No article body, price, discount code, stream URL or broadcaster-site URL is
+# stored. A missing row is not a claim that the game is not televised; the
+# publish step labels it not_announced or a Saturday 15:00 blackout window.
+#
+# Fields:
+#   fixture identity: fixture_id, season, date, kickoff, competition_id,
+#     home_team_name, away_team_name
+#   region: domestic (UK & Ireland) | international
+#   status: confirmed | not_announced | unknown (domestic);
+#           confirmed | not_announced | unknown (international)
+#   outlets: platform, medium (video|audio), access (live|ppv|replay)
+#   sources: source_id (afc_news|spfl), url, title, verified_at, confidence
+#
+# Both regions are mandatory. Silence is status: unknown, never omitted.
+
+version: 1
+season: "2026-27"
+updated_at: "2026-10-27"
+
+fixtures:
+  - fixture_id: 1556688
+    season: "2026-27"
+    date: "2026-10-28"
+    kickoff: "19:45"
+    competition_id: "sco:premiership"
+    home_team_name: "Aberdeen"
+    away_team_name: "Falkirk"
+    domestic:
+      status: confirmed
+      outlets:
+        - platform: RedTV
+          medium: video
+          access: ppv
+      source_ids: [afc_news]
+    international:
+      status: unknown
+      outlets: []
+      source_ids: [afc_news]
+    sources:
+      - source_id: afc_news
+        url: "https://www.afc.co.uk/en/news/how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv"
+        title: "How to watch | Live coverage of Aberdeen v Falkirk on RedTV"
+        verified_at: "2026-10-27"
+        confidence: confirmed
+
+  - fixture_id: 1556700
+    season: "2026-27"
+    date: "2026-11-07"
+    kickoff: "17:45"
+    competition_id: "sco:premiership"
+    home_team_name: "Aberdeen"
+    away_team_name: "Hibernian"
+    domestic:
+      status: confirmed
+      outlets:
+        - platform: Premier Sports
+          medium: video
+          access: live
+      source_ids: [spfl]
+    international:
+      status: unknown
+      outlets: []
+      source_ids: [spfl]
+    sources:
+      - source_id: spfl
+        url: "https://spfl.co.uk/news/tv-selections-and-fixture-changes"
+        title: "TV selections and fixture changes"
+        verified_at: "2026-10-27"
+        confidence: confirmed

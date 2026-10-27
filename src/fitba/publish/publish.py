@@ -55,6 +55,7 @@ from fitba.normalize.teams import TeamRegistry
 from fitba.normalize.transfer_audit import build_transfer_audit
 from fitba.publish.analysis import build_analysis_payload
 from fitba.publish.availability import build_availability_payload
+from fitba.publish.broadcast import build_broadcast_payload
 from fitba.publish.case import build_case_payload, fallback_case_payload
 from fitba.publish.comparison import build_comparison_crosswalk
 from fitba.publish.epoch import DatasetStamp, current_stamp, set_stamp, stamp_payload
@@ -89,6 +90,8 @@ from fitba.settings import (
     REFERENCE_DIR,
     WEB_DATA_DIR,
     availability_policy,
+    broadcast_policy,
+    broadcast_reference,
     ensure_dirs,
     history_markets,
     load_yaml,
@@ -1867,6 +1870,25 @@ def publish(
             "rows": fixture_index["count"],
             "checksum": fixtures_info["checksum"],
             "season": target_season,
+        }
+    )
+    broadcast_payload = build_broadcast_payload(
+        season=target_season,
+        generated_at=generated_at,
+        scheduled_rows=scheduled_rows,
+        reference=broadcast_reference(),
+        policy=broadcast_policy(),
+    )
+    broadcast_info = _write(temp / "broadcast.json", broadcast_payload)
+    written.append(broadcast_info)
+    marts.append(
+        {
+            "id": "broadcast.sco:aberdeen",
+            "path": "broadcast.json",
+            "rows": len(broadcast_payload["fixtures"]),
+            "checksum": broadcast_info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per scheduled fixture; curated or rule-derived",
         }
     )
     for fixture_id, document in sorted(fixture_payloads.get("documents", {}).items()):

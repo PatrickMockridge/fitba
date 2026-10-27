@@ -150,6 +150,17 @@ For goals against, lower is better. With a 12-team league, the labels run from
 A cross-tier cup opponent is marked `cross_tier`; raw values and the tier gap are
 shown instead of a like-for-like percentile.
 
+## How to watch
+
+The fixture header carries a **How to watch** card. It separates UK & Ireland
+from International and shows a confirmed outlet only when an official AFC or
+SPFL page names the platform, medium and access for this fixture. A Saturday
+15:00 kickoff is labelled as a UK live-video blackout window; other uncurated
+slots are `not_announced`, not “not televised”. International is `unknown`
+unless the club states it. The card shows the source link and checked date and
+never publishes a price, stream URL or article body. See
+[broadcast.md](broadcast.md).
+
 ## Predicted XI
 
 The prediction is a projection from observed lineups, not team news.

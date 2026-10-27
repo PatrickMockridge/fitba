@@ -362,6 +362,7 @@ def _run_guard_semantic(ctx: UpdateContext) -> dict[str, Any]:
         ("check_semantic.py", []),
         ("check_unknowns.py", []),
         ("check_comparison.py", []),
+        ("check_broadcast.py", []),
         ("check_page_budget.py", []),
     ]
     commands = [[sys.executable, str(ROOT / "scripts" / name), *args] for name, args in scripts]

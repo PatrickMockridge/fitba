@@ -102,6 +102,15 @@ third-party embed: fitba does not fetch, store or republish X content; the widge
 may require an X login and can be blocked by privacy settings or ad blockers.
 The page always provides an “Open @aberdeenfc on X” fallback link.
 
+## Broadcast and streaming
+
+The per-fixture AFC “How to watch” article and the SPFL “TV selections and
+fixture changes” page are the official sources for curated broadcast rows.
+Only the outlet, medium, access, region, source link and checked date are
+published. Prices, discount codes, stream URLs and article bodies are not
+copied. Broadcaster websites are not scraped, and an absent listing is not a
+claim that a match is not televised. See [broadcast.md](broadcast.md).
+
 ## Roles: starting-XI grid and career history
 
 Role is not an attribute lookup. API-Football `/fixtures/lineups` supplies the

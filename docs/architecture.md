@@ -130,6 +130,9 @@ Implemented:
   published counts.
 - `scouting/comparison.json` — the reviewed current-squad comparison allowlist;
   identity and cohort metadata only, no copied numbers.
+- `broadcast.json` — one row per scheduled fixture, with curated or rule-derived
+  domestic/international states, source links and checked dates. No price,
+  stream URL or article body.
 - `coverage.json`, `seasons.json`, `manifest.json`.
 
 Implemented:

@@ -1,0 +1,61 @@
+# Broadcast and streaming policy.
+#
+# Facts are curated from official club or SPFL pages. Broadcaster sites are not
+# scraped. A missing announcement is not evidence that a match is not televised;
+# international availability is never inferred.
+
+version: 1
+reviewed: "2026-10-27"
+owner: patrickmockridge
+timezone: Europe/London
+redtv_url: https://redtv.afc.co.uk/
+allowed_hosts:
+  - afc.co.uk
+  - www.afc.co.uk
+  - spfl.co.uk
+  - www.spfl.co.uk
+source_hosts:
+  afc_news:
+    - afc.co.uk
+    - www.afc.co.uk
+  spfl:
+    - spfl.co.uk
+    - www.spfl.co.uk
+allowed_source_ids: [afc_news, spfl]
+require_source_url: true
+source_warn_after_days: 30
+source_max_title_chars: 160
+blackout:
+  weekday: Saturday
+  kickoff: "15:00"
+  scope: uk_live_video
+
+copy:
+  uncurated_uk: >
+    No official UK broadcast information has been curated for this fixture.
+    This does not mean the match is not televised.
+  uncurated_international: >
+    Overseas availability is not stated. Check the club for your region.
+  curated_uk_unannounced: >
+    The official source does not announce a UK outlet for this fixture. This
+    does not mean the match is not televised.
+  curated_uk_unknown: >
+    The official source does not state UK availability for this fixture.
+  blackout_uk: >
+    Saturday 15:00 is inside the UK live-video blackout window. No live UK video
+    outlet is claimed; audio and overseas rights are not inferred.
+  curated_confirmed_afc: Confirmed by the official club source.
+  curated_confirmed_spfl: Confirmed by the official league source.
+  curated_international_unknown: >
+    The official source does not state overseas availability. Check the club for
+    your region.
+  fixture_conflict: >
+    Fixture date or kickoff is in conflict review. Broadcast details are
+    withheld.
+  identity_conflict: >
+    The fixture no longer matches the verified source. Broadcast details are
+    withheld until re-verified.
+  document_note: >
+    Broadcast information is curated from official club and league sources. It
+    is not inferred from kickoff, competition or broadcaster schedules. Absence
+    of an announcement is not evidence that a match is not televised.

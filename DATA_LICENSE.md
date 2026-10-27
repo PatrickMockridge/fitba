@@ -68,6 +68,9 @@ feeds are never committed. They live in gitignored `data/` and `.cache/`.
 - **AFC news listing** — listing metadata only (headline, category, date, link).
   Article bodies and images are not copied. The curated availability ledger may
   cite an official AFC team-news URL; no article text is republished.
+- **Broadcast and streaming** — curated official club/SPFL facts (outlet,
+  medium, access, region, source link, checked date). Prices, discount codes,
+  stream URLs, article bodies and broadcaster schedules are not copied.
 - **X profile timeline** — an official X embedded widget for @aberdeenfc. fitba
   does not ingest, store or republish X posts; the widget is subject to X's
   terms and may require a login. A direct link to X is always provided.

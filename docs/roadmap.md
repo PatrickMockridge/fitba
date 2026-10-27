@@ -93,6 +93,14 @@ serve them. Scouting search is sharded into meta plus four payloads under a page
 budget. The change is documented in [Semantic layer](semantic-layer.md) and
 registered as registry 3.10.0.
 
+### Phase 4o — how to watch (live)
+
+A **How to watch** card on `/matchday/` and Watch labels on `/matches/` and
+`/fixtures/`: curated official club/SPFL broadcast facts for UK & Ireland and
+International, with a Saturday 15:00 UK blackout rule, explicit unknown states
+and no price, stream URL or article-body copying. See
+[broadcast.md](broadcast.md).
+
 ### Phase 4m — evidence navigation and comparison (delivered, except game state)
 
 - **Definitions and glossary:** `/glossary/` over `definitions.json`, with

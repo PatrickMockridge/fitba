@@ -22,12 +22,12 @@ pages:
   - id: matchday
     label: Matchday
     patterns: ["/matchday/"]
-    layers: [club_fixtures, lineups_roles, player_match_stats, availability, league_results_current, league_standings, themes, needs]
+    layers: [club_fixtures, lineups_roles, player_match_stats, availability, broadcast_listings, league_results_current, league_standings, themes, needs]
 
   - id: matches
     label: Match record
     patterns: ["/matches/"]
-    layers: [club_fixtures, league_results_current, league_standings]
+    layers: [club_fixtures, broadcast_listings, league_results_current, league_standings]
 
   - id: match
     label: Match page
@@ -37,7 +37,7 @@ pages:
   - id: fixtures
     label: Results and fixtures
     patterns: ["/fixtures/"]
-    layers: [club_fixtures, league_results_current, league_standings]
+    layers: [club_fixtures, broadcast_listings, league_results_current, league_standings]
 
   - id: analysis
     label: Season overview

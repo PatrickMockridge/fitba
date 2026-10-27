@@ -3371,6 +3371,61 @@ export interface ScheduledFixtureRow {
   source_id: string;
 }
 
+export interface BroadcastOutlet {
+  platform: string;
+  medium: "video" | "audio";
+  access: "live" | "ppv" | "replay";
+}
+
+export interface BroadcastSource {
+  source_id: string;
+  url: string;
+  title: string;
+  verified_at: string;
+  confidence: string;
+}
+
+export interface BroadcastRegion {
+  status: string;
+  basis: string;
+  outlets: BroadcastOutlet[];
+  note: string;
+  source_ids: string[];
+}
+
+export interface BroadcastFixture {
+  fixture_id: string;
+  season: string;
+  date: string;
+  kickoff: string | null;
+  kickoff_tz: string;
+  competition_id: string;
+  competition_name: string | null;
+  home_team_name: string | null;
+  away_team_name: string | null;
+  venue: string | null;
+  fixture_status: string;
+  state: string;
+  domestic: BroadcastRegion;
+  international: BroadcastRegion;
+  sources: BroadcastSource[];
+}
+
+export interface BroadcastDocument {
+  schema_version: string;
+  generated_at: string;
+  season: string;
+  timezone: string;
+  redtv_url: string;
+  fixtures: BroadcastFixture[];
+  sources: Array<{ id: string; name: string; url: string; attribution: string }>;
+  notes: string;
+}
+
+export function getBroadcast(): BroadcastDocument | null {
+  return readJson<BroadcastDocument>("broadcast.json");
+}
+
 export interface FixtureIndex {
   schema_version: string;
   generated_at: string;

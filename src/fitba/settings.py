@@ -242,6 +242,18 @@ def needs_policy() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def broadcast_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "broadcast.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
+@lru_cache(maxsize=1)
+def broadcast_reference() -> dict[str, Any]:
+    path = REFERENCE_DIR / "broadcast.yaml"
+    return load_yaml(path) if path.exists() else {}
+
+
+@lru_cache(maxsize=1)
 def transfers() -> dict[str, Any]:
     return load_yaml(REFERENCE_DIR / "transfers.yaml")
 

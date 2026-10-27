@@ -30,6 +30,7 @@ jobs:
       - run: uv run python scripts/check_transfers.py
       - run: uv run python scripts/check_history.py
       - run: uv run python scripts/check_matchday.py
+      - run: uv run python scripts/check_broadcast.py
       - run: uv run python scripts/check_themes.py
       - run: uv run python scripts/check_xg.py --published
       - run: uv run python scripts/check_provenance.py

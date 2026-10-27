@@ -162,7 +162,8 @@
         "web/components/FormGuide.tsx",
         "web/components/StyleMatchup.tsx",
         "web/components/StrengthComparison.tsx",
-        "web/components/PredictedLineupPanel.tsx"
+        "web/components/PredictedLineupPanel.tsx",
+        "web/components/BroadcastPanel.tsx"
       ],
       "ci_states": [
         "full",
@@ -238,6 +239,10 @@
             {
               "id": "matchday.lookahead",
               "min": 1
+            },
+            {
+              "id": "matchday.watch",
+              "min": 1
             }
           ],
           "columns": {
@@ -268,7 +273,8 @@
               "Competition",
               "Opponent",
               "Venue",
-              "Kickoff"
+              "Kickoff",
+              "Watch"
             ]
           },
           "indicators": {
@@ -1647,6 +1653,7 @@
       "owners": [
         "web/app/matches/page.tsx",
         "web/components/MatchHeader.tsx",
+        "web/components/MatchRecordArchive.tsx",
         "web/lib/data.ts"
       ],
       "ci_states": [
@@ -1690,7 +1697,8 @@
               "Away",
               "Venue",
               "Kickoff",
-              "Status"
+              "Status",
+              "Watch"
             ]
           },
           "links": [

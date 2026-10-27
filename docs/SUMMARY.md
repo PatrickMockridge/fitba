@@ -48,6 +48,7 @@
 
 - [Methodology](methodology.md)
 - [Data update pipeline](update.md)
+- [How to watch](broadcast.md)
 - [Data refresh audit](refresh-audit.md)
 - [Semantic layer](semantic-layer.md)
 - [Unknowns register](unknowns.md)

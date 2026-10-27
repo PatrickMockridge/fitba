@@ -11,7 +11,7 @@
       "wikipedia": 1
     },
     "conflicts": 0,
-    "ingested_at": "2026-10-27T17:12:36+00:00",
+    "ingested_at": "2026-10-27T19:05:00+00:00",
     "known": 1,
     "note": "Preferred-foot resolution. Side is derived from the starting-XI role, not from this resolver. The licensed API does not provide foot; Sportmonks is used when enabled; Wikipedia is the last resort and only explicit statements are accepted. Unknown is a valid state.",
     "rows": 39,
@@ -32,7 +32,7 @@
       "unknown": 27
     },
     "entry_count": 34,
-    "generated_at": "2026-10-27T17:12:36+00:00",
+    "generated_at": "2026-10-27T19:05:00+00:00",
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
     "policy": {
       "allowed_hosts": [
@@ -99,12 +99,12 @@
     ],
     "errors": [],
     "evidence_rows": 705,
-    "generated_at": "2026-10-27T17:12:36+00:00",
+    "generated_at": "2026-10-27T19:05:00+00:00",
     "last_backfill": {
       "budget": null,
       "budget_exhausted": false,
-      "generated_at": "2026-10-27T14:54:58+00:00",
-      "network_requests": 20,
+      "generated_at": "2026-10-27T17:12:36+00:00",
+      "network_requests": 3,
       "pairs_capped": 55,
       "pairs_complete": 59,
       "pairs_error": 0
@@ -136,7 +136,7 @@
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "status": "match"
   },
-  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
+  "dataset_id": "2026-10-27T19:05:13+00:00-0154e2c",
   "dataset_state": "fresh",
   "excluded_players": [
     {
@@ -1611,7 +1611,7 @@
       "totals": null
     }
   ],
-  "generated_at": "2026-10-27T17:25:23+00:00",
+  "generated_at": "2026-10-27T19:05:13+00:00",
   "loan_scope": {
     "official_list": {
       "in": [],
@@ -1716,19 +1716,19 @@
           "season": "2026-27"
         },
         {
-          "club": "Elgin City",
-          "date_effective": "2026-09-03",
-          "player_id": null,
-          "player_key": "api:player:674621",
-          "player_name": "Sam McLean",
-          "season": "2026-27"
-        },
-        {
           "club": "Žilina",
           "date_effective": "2026-09-03",
           "player_id": null,
           "player_key": "api:player:395743",
           "player_name": "K. Bilalovic",
+          "season": "2026-27"
+        },
+        {
+          "club": "Elgin City",
+          "date_effective": "2026-09-03",
+          "player_id": null,
+          "player_key": "api:player:674621",
+          "player_name": "Sam McLean",
           "season": "2026-27"
         },
         {
@@ -26225,12 +26225,12 @@
     "coverage": "available",
     "fixtures_covered": 16,
     "fixtures_total": 16,
-    "ingested_at": "2026-10-27T17:12:36+00:00",
+    "ingested_at": "2026-10-27T19:04:59+00:00",
     "missing_fixtures": [],
     "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
     "scope": "competitive"
   },
-  "published_at": "2026-10-27T17:25:23+00:00",
+  "published_at": "2026-10-27T19:05:13+00:00",
   "role_meta": {
     "bench_complete_sides": 31,
     "bench_incomplete_sides": 1,
@@ -26250,7 +26250,7 @@
       "5-3-2": 3,
       "unknown": 2
     },
-    "ingested_at": "2026-10-27T17:12:36+00:00",
+    "ingested_at": "2026-10-27T19:04:59+00:00",
     "note": "Roles are derived from the starting-XI formation grid. Starts without a grid, unmapped formations and invalid slots are unknown, not inferred. Substitute appearances carry playing time but no role.",
     "players_with_role": 23,
     "players_with_starts": 24,
@@ -26276,24 +26276,24 @@
   },
   "roster_only": [],
   "season": "2026-27",
-  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
+  "served_by_update_id": "2026-10-27T19:04:54+00:00-1073233",
   "source_snapshots": {
-    "api_football": "2026-10-27T17:12:36.169274+00:00",
-    "api_results": "2026-10-27T17:12:32+00:00",
-    "availability": "2026-10-27T17:12:36+00:00",
-    "career": "2026-10-27T17:12:36+00:00",
-    "football_data_uk": "2026-10-27T17:12:31+00:00",
-    "former_players": "2026-10-27T17:12:35+00:00",
-    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "api_football": "2026-10-27T19:04:59.890196+00:00",
+    "api_results": "2026-10-27T19:04:56+00:00",
+    "availability": "2026-10-27T19:05:00+00:00",
+    "career": "2026-10-27T19:05:00+00:00",
+    "football_data_uk": "2026-10-27T19:04:55+00:00",
+    "former_players": "2026-10-27T19:04:59+00:00",
+    "history_backfill": "2026-10-27T19:04:57+00:00",
     "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-27T17:12:44+00:00",
-    "scouting_europe": "2026-10-27T17:12:44+00:00",
-    "scouting_pool": "2026-10-27T17:12:41+00:00",
-    "scouting_roles": "2026-10-27T17:12:42+00:00",
-    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
-    "scouting_standings": "2026-10-27T17:12:44+00:00",
-    "spfl": "2026-10-27T17:12:33+00:00",
-    "xg_enrichment": "2026-10-27T17:12:46+00:00"
+    "scouting_clubs": "2026-10-27T19:05:07+00:00",
+    "scouting_europe": "2026-10-27T19:05:07+00:00",
+    "scouting_pool": "2026-10-27T19:05:04+00:00",
+    "scouting_roles": "2026-10-27T19:05:05+00:00",
+    "scouting_rose_history": "2026-10-27T19:05:07+00:00",
+    "scouting_standings": "2026-10-27T19:05:07+00:00",
+    "spfl": "2026-10-27T19:04:57+00:00",
+    "xg_enrichment": "2026-10-27T19:05:09+00:00"
   },
   "summary": {
     "attributes_conflicts": 0,
@@ -26390,5 +26390,5 @@
     "stats_unavailable": 7,
     "total_players": 34
   },
-  "update_id": "publish-2026-10-27T17:25:23+00:00"
+  "update_id": "2026-10-27T19:04:54+00:00-1073233"
 }

@@ -46,5 +46,7 @@ publication guard in `scripts/check_publication.py`. The YAML contracts will be 
 to Pandera/Pydantic when the player/event layer lands.
 
 
+- `broadcast.schema.json` — **implemented**. Per-fixture broadcast/streaming
+  document; curated official states and rule-derived blackout/unknown rows.
 - `former-players.schema.json` — former-player index document.
 - `former-seasons.schema.json` — former-player per-season detail document.

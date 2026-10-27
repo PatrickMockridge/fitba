@@ -18,6 +18,25 @@ note: >
 append_only: true
 
 entries:
+  - id: page-2026-10-27-how-to-watch
+    date: 2026-10-27
+    kind: page
+    status: published
+    title: How to watch, with region and unknown states
+    summary: >
+      /matchday/ carries a How to watch card and /matches/ and /fixtures/ carry
+      Watch labels. Domestic and international are separate; confirmed outlets
+      require an official club or SPFL source, Saturday 15:00 is labelled as a
+      UK blackout window, and other uncurated slots stay not announced. No
+      price, stream URL or article body is published.
+    pages: ["/matchday/", "/matches/", "/fixtures/", "/sources/"]
+    entities: []
+    metric_ids: []
+    evidence:
+      - {label: "Matchday", url: "/matchday/"}
+      - {label: "How to watch", url: "/matchday/"}
+    fixed_in_dataset: null
+
   - id: metric-3.12.0-mls-scouting
     date: 2026-10-27
     kind: metric

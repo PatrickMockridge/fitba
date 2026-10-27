@@ -1,5 +1,6 @@
-import type { ClubFixture } from "@/lib/data";
+import type { BroadcastFixture, ClubFixture } from "@/lib/data";
 import { formatDate } from "@/lib/data";
+import { watchLabel } from "@/lib/broadcast";
 
 const COMPETITION_LABEL: Record<string, string> = {
   "sco:premiership": "League",
@@ -14,10 +15,12 @@ export function FixtureList({
   fixtures,
   showResult = false,
   empty = "No fixtures scheduled.",
+  watch,
 }: {
   fixtures: ClubFixture[];
   showResult?: boolean;
   empty?: string;
+  watch?: Record<string, BroadcastFixture>;
 }) {
   if (!fixtures.length) return <p className="muted">{empty}</p>;
   return (
@@ -45,6 +48,11 @@ export function FixtureList({
           ) : (
             <span className="match-score muted">{fixture.kickoff ?? "TBC"}</span>
           )}
+          {watch ? (
+            <span className="match-watch">
+              Watch: {watchLabel(watch[String(fixture.match_id)])}
+            </span>
+          ) : null}
         </li>
       ))}
     </ul>

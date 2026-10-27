@@ -2,7 +2,8 @@ import Link from "next/link";
 import { CompetitionStrip } from "@/components/CompetitionStrip";
 import { FixtureList } from "@/components/FixtureList";
 import { PageProvenance } from "@/components/PageProvenance";
-import { formatDate, getAberdeen, getManifest } from "@/lib/data";
+import { formatDate, getAberdeen, getBroadcast, getManifest } from "@/lib/data";
+import { broadcastByFixture } from "@/lib/broadcast";
 
 export const metadata = {
   alternates: { canonical: "/fixtures/" }, title: "Results & fixtures · fitba" };
@@ -10,6 +11,7 @@ export const metadata = {
 export default function FixturesPage() {
   const aberdeen = getAberdeen();
   const manifest = getManifest();
+  const watch = broadcastByFixture(getBroadcast());
   if (!aberdeen) {
     return (
       <section className="empty-state">
@@ -47,7 +49,11 @@ export default function FixturesPage() {
               <h2>Next up</h2>
             </div>
           </div>
-          <FixtureList fixtures={aberdeen.fixtures} empty="No upcoming fixtures." />
+          <FixtureList
+            fixtures={aberdeen.fixtures}
+            empty="No upcoming fixtures."
+            watch={watch}
+          />
         </section>
 
         <section className="card">

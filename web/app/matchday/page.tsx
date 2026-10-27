@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BroadcastPanel } from "@/components/BroadcastPanel";
 import { ContractPage } from "@/components/ContractPage";
 import { FormGuide } from "@/components/FormGuide";
 import { KickoffNotice } from "@/components/KickoffNotice";
@@ -10,11 +11,13 @@ import { CaseClaimCard } from "@/components/CaseClaimCard";
 import { DefinitionTerm } from "@/components/DefinitionTerm";
 import {
   formatDate,
+  getBroadcast,
   getMatchday,
   getCase,
   type ClubFixture,
   type MatchdayDocument,
 } from "@/lib/data";
+import { broadcastByFixture, watchLabel } from "@/lib/broadcast";
 
 export const metadata = {
   alternates: { canonical: "/matchday/" }, title: "Matchday · fitba" };
@@ -58,6 +61,8 @@ function fixtureList(data: MatchdayDocument): ClubFixture[] {
 export default function MatchdayPage() {
   const data = getMatchday();
   const caseData = getCase();
+  const broadcast = getBroadcast();
+  const broadcastMap = broadcastByFixture(broadcast);
   if (!data) {
     return (
       <ContractPage surface="matchday" state="empty">
@@ -163,6 +168,10 @@ export default function MatchdayPage() {
               : `Aberdeen home to ${fixture.away_team_name}`}
         </p>
         <KickoffNotice date={fixture.date} kickoff={fixture.kickoff} />
+        <BroadcastPanel
+          row={broadcastMap[String(fixture.match_id)]}
+          redtvUrl={broadcast?.redtv_url ?? "https://redtv.afc.co.uk/"}
+        />
         {data.state === "stale" ? (
           <p className="stale-banner">
             This snapshot is out of date
@@ -198,7 +207,9 @@ export default function MatchdayPage() {
             <div className="table-wrap">
               <table className="league-table compact">
                 <caption className="fine-print">
-                  Current fixture plus the next five competitive matches.
+                  Current fixture plus the next five competitive matches. Watch is
+                  the domestic (UK &amp; Ireland) status; international availability
+                  is separate.
                 </caption>
                 <thead>
                   <tr>
@@ -207,6 +218,7 @@ export default function MatchdayPage() {
                     <th scope="col">Opponent</th>
                     <th scope="col">Venue</th>
                     <th scope="col">Kickoff</th>
+                    <th scope="col">Watch</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -217,6 +229,7 @@ export default function MatchdayPage() {
                       <td>{row.opponent_name}</td>
                       <td>{row.venue === "N" ? "Neutral" : row.venue}</td>
                       <td>{row.kickoff ?? "TBC"}</td>
+                      <td>{watchLabel(broadcastMap[String(row.match_id)])}</td>
                     </tr>
                   ))}
                 </tbody>

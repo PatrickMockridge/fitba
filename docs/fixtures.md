@@ -19,6 +19,12 @@ fixture index's `scheduled_count` excludes `conflict_review` rows and
 `scheduled_rows_total` keeps the full list, so the two counts cannot be read as
 the same fact.
 
+Upcoming rows carry a **Watch** label on `/matches/` and `/fixtures/`: the
+domestic (UK & Ireland) state from the curated broadcast document. It is
+`RedTV PPV`, a named broadcaster, `UK blackout`, `Not announced` or `Check
+fixture`; international availability is separate and is not inferred. See
+[broadcast.md](broadcast.md).
+
 The scope is 2019-20 to 2026-27: 367 canonical played fixtures at the last
 check, plus the remaining scheduled fixtures from the merged season schedule at the
 2026-10-22 publish, including 16 friendlies. Three provider duplicate records

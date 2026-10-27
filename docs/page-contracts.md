@@ -62,10 +62,15 @@ Must remain visible:
 - Form guide: last five, overall/home/away split, P/W-D-L/Pts/PPG/GF/GA/Shots.
 - Style: lean, evidence, venue split, shot metrics, possession-unknown note.
 - Strength: percentile comparison, table gap, confidence and cross-tier flag.
+- The **How to watch** panel: UK & Ireland and International states, outlet
+  and access where an official source confirms them, the source link and
+  checked date, and a visible unknown/not-announced state. It never shows a
+  price, stream URL or copied article text.
 - Themes strip, a Next six table (current fixture plus the next five
-  competitive matches; Date/Competition/Opponent/Venue/Kickoff), the
-  head-to-head table with Date/Match/Score/Aberdeen, and the coverage/limits
-  card with snapshot counts and source/method links.
+  competitive matches; Date/Competition/Opponent/Venue/Kickoff/Watch, where
+  Watch is the domestic status only), the head-to-head table with
+  Date/Match/Score/Aberdeen, and the coverage/limits card with snapshot counts
+  and source/method links.
 
 May be disclosed: long method notes. The XIs, selection weights, form, style and
 not-considered data are visible.
@@ -139,8 +144,10 @@ Must remain visible:
 - Every played fixture grouped by season, with Date, Competition, Home, Score,
   Away, Result and Depth.
 - The remaining scheduled fixtures for the selected season in an Upcoming table
-  with Date, Competition, Home, Away, Venue, Kickoff and Status. Scheduled rows
-  have no fixture page and are never in the sitemap.
+  with Date, Competition, Home, Away, Venue, Kickoff, Status and Watch. Watch is
+  the domestic (UK & Ireland) state only; a missing listing is not a claim that
+  the match is not televised. Scheduled rows have no fixture page and are never
+  in the sitemap.
 - A season selector bar that defaults to the current season and shows one
   season at a time; every earlier season remains reachable from the bar.
 - The current-season remaining count is a minimum, shown as “N+ to play”:

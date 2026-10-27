@@ -27,8 +27,8 @@ sources:
     lane: derived_display
     ingest_allowed: true
     publication_allowed: true
-    capabilities: [news, history, availability]
-    primary_for: [news, availability]
+    capabilities: [news, history, availability, broadcast]
+    primary_for: [news, availability, broadcast]
     url: https://www.afc.co.uk/en/news
     attribution: Aberdeen FC
     notes: >
@@ -37,7 +37,9 @@ sources:
       The same official source is the preferred citation for staff, honours and
       season-record entries in reference/history/. The availability ledger is
       curated by a human from official team news; article bodies are not parsed.
-    last_verified: 2026-10-21
+      Broadcast rows cite the per-fixture "How to watch" article; no article
+      body, price, stream URL or discount code is copied.
+    last_verified: 2026-10-27
 
   afc_chat:
     name: AFC Chat — The Rumour Mill
@@ -62,7 +64,7 @@ sources:
     lane: derived_display
     ingest_allowed: true
     publication_allowed: true
-    capabilities: [fixtures, results]
+    capabilities: [fixtures, results, broadcast_selections]
     primary_for: [club_fixtures]
     url: https://spfl.co.uk/clubs/aberdeen/fixtures
     attribution: SPFL
@@ -70,8 +72,10 @@ sources:
     notes: >
       Server-rendered club fixture page covering Aberdeen's league fixtures.
       League Cup and Scottish Cup fixtures come from API-Football. One request
-      per run, cached for one hour.
-    last_verified: 2026-10-21
+      per run, cached for one hour. The official "TV selections and fixture
+      changes" page is the broadcaster-selection source for curated broadcast
+      rows; broadcaster sites are not scraped.
+    last_verified: 2026-10-27
 
   pannadata:
     name: pannadata (cached Opta)

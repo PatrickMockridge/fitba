@@ -69,10 +69,10 @@ reworded or reorganised if the evidence and source remain visible.
 | Route | Essential | Conditional | Non-essential |
 |---|---|---|---|
 | `/` | identity line/lede, matchday data, off-pitch counts, squad summary, full standings, unknown/freshness | door explanations, method | layout, theme, headline phrasing |
-| `/matchday/` | fixture, predicted XIs, selection weights, availability, form columns, style, strength percentiles, head-to-head, coverage | long method notes | visual arrangement |
+| `/matchday/` | fixture, how to watch (domestic/international states and sources), predicted XIs, selection weights, availability, form columns, style, strength percentiles, head-to-head, coverage | long method notes | visual arrangement |
 | `/analysis/` | Season overview: next fixtures, official and derived availability, season aims, factual squad-decision lenses, bridges and coverage | method, definitions, long caveats | layout and visual treatment |
 | `/analysis/xg/` | fxG model card, provider-xG gate, aggregates, coverage | model detail, limitations | layout |
-| `/matches/` | played-fixture index, scores, depth and links | grouping | layout |
+| `/matches/` | played-fixture index, scores, depth and links; scheduled fixtures with kickoff and Watch state | grouping | layout |
 | `/matches/<fixture_id>/` | scoreboard (score, goals, assists, penalties, red cards), Aberdeen/opposition split, summary, stats, fxG, timeline, lineups, player stats, form, coverage | summary variants, method | layout |
 | `/recruitment/` | seven families, priority/urgency/category/confidence, slots, counts, market route, roster, player table | caveats/method | layout |
 | `/transfers/` | verification badges, net range, position/fee/loan/source, sell-on table, completeness, coverage | how-to-read, fee method | card styling |

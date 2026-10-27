@@ -1,0 +1,392 @@
+{
+  "$defs": {
+    "BroadcastOutlet": {
+      "additionalProperties": false,
+      "properties": {
+        "platform": {
+          "title": "Platform",
+          "type": "string"
+        },
+        "medium": {
+          "enum": [
+            "video",
+            "audio"
+          ],
+          "title": "Medium",
+          "type": "string"
+        },
+        "access": {
+          "enum": [
+            "live",
+            "ppv",
+            "replay"
+          ],
+          "title": "Access",
+          "type": "string"
+        }
+      },
+      "required": [
+        "platform",
+        "medium",
+        "access"
+      ],
+      "title": "BroadcastOutlet",
+      "type": "object"
+    },
+    "BroadcastSource": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "verified_at": {
+          "title": "Verified At",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "confirmed",
+            "reported",
+            "curated",
+            "unknown"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "url",
+        "title",
+        "verified_at",
+        "confidence"
+      ],
+      "title": "BroadcastSource",
+      "type": "object"
+    },
+    "FixtureBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_id": {
+          "title": "Fixture Id",
+          "type": "string"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "kickoff": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Kickoff"
+        },
+        "kickoff_tz": {
+          "title": "Kickoff Tz",
+          "type": "string"
+        },
+        "competition_id": {
+          "title": "Competition Id",
+          "type": "string"
+        },
+        "competition_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Competition Name"
+        },
+        "home_team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Home Team Name"
+        },
+        "away_team_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Away Team Name"
+        },
+        "venue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Venue"
+        },
+        "fixture_status": {
+          "title": "Fixture Status",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "curated",
+            "derived",
+            "fixture_conflict",
+            "source_conflict"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "domestic": {
+          "$ref": "#/$defs/RegionBlock"
+        },
+        "international": {
+          "$ref": "#/$defs/RegionBlock"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/BroadcastSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "fixture_id",
+        "season",
+        "date",
+        "kickoff",
+        "kickoff_tz",
+        "competition_id",
+        "competition_name",
+        "home_team_name",
+        "away_team_name",
+        "venue",
+        "fixture_status",
+        "state",
+        "domestic",
+        "international"
+      ],
+      "title": "FixtureBlock",
+      "type": "object"
+    },
+    "RegionBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "confirmed",
+            "blackout_window",
+            "not_announced",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "official_source",
+            "rule",
+            "not_curated",
+            "fixture_conflict",
+            "source_conflict"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "outlets": {
+          "items": {
+            "$ref": "#/$defs/BroadcastOutlet"
+          },
+          "title": "Outlets",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "basis",
+        "note"
+      ],
+      "title": "RegionBlock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "dataset_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Id"
+    },
+    "update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Id"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "served_by_update_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Served By Update Id"
+    },
+    "dataset_state": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset State"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "source_snapshots": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Snapshots"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "timezone": {
+      "title": "Timezone",
+      "type": "string"
+    },
+    "redtv_url": {
+      "title": "Redtv Url",
+      "type": "string"
+    },
+    "fixtures": {
+      "items": {
+        "$ref": "#/$defs/FixtureBlock"
+      },
+      "title": "Fixtures",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "season",
+    "timezone",
+    "redtv_url",
+    "fixtures",
+    "sources",
+    "notes"
+  ],
+  "title": "BroadcastDocument",
+  "type": "object"
+}

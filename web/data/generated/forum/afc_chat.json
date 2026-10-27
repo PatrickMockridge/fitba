@@ -6,9 +6,9 @@
     "raw_posts_published": false,
     "topics_sampled": 4
   },
-  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
+  "dataset_id": "2026-10-27T19:05:13+00:00-0154e2c",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-27T17:25:23+00:00",
+  "generated_at": "2026-10-27T19:05:13+00:00",
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
@@ -78,7 +78,7 @@
         "count": 12,
         "players": [
           "A. Goodwin",
-          "A. Gunn",
+          "Angus Fraser James Gunn",
           "Cieran Slicker",
           "Conor William Hazard",
           "Darren Ambrose",
@@ -136,16 +136,16 @@
     },
     "total_signals": 42
   },
-  "published_at": "2026-10-27T17:25:23+00:00",
-  "sampled_at": "2026-10-27T17:12:40+00:00",
+  "published_at": "2026-10-27T19:05:13+00:00",
+  "sampled_at": "2026-10-27T19:05:03+00:00",
   "sentiment": {
     "club": {
-      "count": 30,
-      "mean": 0.105,
+      "count": 31,
+      "mean": 0.101,
       "median": 0.0,
-      "negative_share": 0.1,
-      "neutral_share": 0.6,
-      "positive_share": 0.3
+      "negative_share": 0.097,
+      "neutral_share": 0.613,
+      "positive_share": 0.29
     },
     "forum": {
       "count": 83,
@@ -165,7 +165,7 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
+  "served_by_update_id": "2026-10-27T19:04:54+00:00-1073233",
   "signals": [
     {
       "affiliation": "former_player",
@@ -600,33 +600,6 @@
       "topic_count": 1
     },
     {
-      "affiliation": "external_target",
-      "affiliation_source": "key",
-      "age": 29,
-      "at_rival": false,
-      "credibility": "fan_only",
-      "cross_references": {
-        "club_output": false,
-        "confirmed_transfer": false,
-        "historic_transfer": false,
-        "press_rumour": false
-      },
-      "current_club": "San Jose Earthquakes",
-      "current_league": "Major League Soccer",
-      "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
-      "mentions": 1,
-      "nationality": "Scotland",
-      "player_href": null,
-      "player_key": "api:player:18933",
-      "player_name": "A. Gunn",
-      "position": null,
-      "position_group": "GK",
-      "rival_club": null,
-      "topic_count": 1
-    },
-    {
       "affiliation": "current_squad",
       "affiliation_source": "key",
       "age": 25,
@@ -650,6 +623,33 @@
       "player_name": "A. Palaversa",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 29,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "San Jose Earthquakes",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:18933",
+      "player_name": "Angus Fraser James Gunn",
+      "position": null,
+      "position_group": "GK",
       "rival_club": null,
       "topic_count": 1
     },
@@ -1310,22 +1310,22 @@
     "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
   },
   "source_snapshots": {
-    "api_football": "2026-10-27T17:12:36.169274+00:00",
-    "api_results": "2026-10-27T17:12:32+00:00",
-    "availability": "2026-10-27T17:12:36+00:00",
-    "career": "2026-10-27T17:12:36+00:00",
-    "football_data_uk": "2026-10-27T17:12:31+00:00",
-    "former_players": "2026-10-27T17:12:35+00:00",
-    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "api_football": "2026-10-27T19:04:59.890196+00:00",
+    "api_results": "2026-10-27T19:04:56+00:00",
+    "availability": "2026-10-27T19:05:00+00:00",
+    "career": "2026-10-27T19:05:00+00:00",
+    "football_data_uk": "2026-10-27T19:04:55+00:00",
+    "former_players": "2026-10-27T19:04:59+00:00",
+    "history_backfill": "2026-10-27T19:04:57+00:00",
     "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-27T17:12:44+00:00",
-    "scouting_europe": "2026-10-27T17:12:44+00:00",
-    "scouting_pool": "2026-10-27T17:12:41+00:00",
-    "scouting_roles": "2026-10-27T17:12:42+00:00",
-    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
-    "scouting_standings": "2026-10-27T17:12:44+00:00",
-    "spfl": "2026-10-27T17:12:33+00:00",
-    "xg_enrichment": "2026-10-27T17:12:46+00:00"
+    "scouting_clubs": "2026-10-27T19:05:07+00:00",
+    "scouting_europe": "2026-10-27T19:05:07+00:00",
+    "scouting_pool": "2026-10-27T19:05:04+00:00",
+    "scouting_roles": "2026-10-27T19:05:05+00:00",
+    "scouting_rose_history": "2026-10-27T19:05:07+00:00",
+    "scouting_standings": "2026-10-27T19:05:07+00:00",
+    "spfl": "2026-10-27T19:04:57+00:00",
+    "xg_enrichment": "2026-10-27T19:05:09+00:00"
   },
   "topics": [
     {
@@ -1361,5 +1361,5 @@
       "url": "https://afc-chat.co.uk/forums/index.php?/topic/49303-new-keeper/"
     }
   ],
-  "update_id": "publish-2026-10-27T17:25:23+00:00"
+  "update_id": "2026-10-27T19:04:54+00:00-1073233"
 }

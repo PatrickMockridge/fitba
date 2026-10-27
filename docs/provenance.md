@@ -28,6 +28,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Transfer register | Curated | AFC announcements + Wikipedia + API candidates |
 | Loans | Curated | Loan tags; end/recall/obligation terms unknown |
 | News | AFC official listing | Metadata only |
+| Broadcast and streaming | AFC per-fixture “How to watch” article; SPFL TV selections | Curated outlet/medium/access; no price, stream URL or broadcaster crawl; absence is not a negative claim |
 | Availability | Curated AFC team news | API-Football `/injuries` is optional; current season coverage false |
 | Rumours | Curated | Source-linked; separate from confirmed business |
 | Fan signal | AFC Chat sample | Derived aggregates; no raw posts |

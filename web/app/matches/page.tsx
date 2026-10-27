@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
 import { MatchRecordArchive } from "@/components/MatchRecordArchive";
-import { getFixtureIndex } from "@/lib/data";
+import { getBroadcast, getFixtureIndex } from "@/lib/data";
+import { broadcastByFixture } from "@/lib/broadcast";
 
 export const metadata = {
   alternates: { canonical: "/matches/" },
@@ -73,6 +74,7 @@ export default function MatchesPage() {
         scheduled={scheduledGroups}
         current={currentSeason}
         remainingIsMinimum={Boolean(index.schedule_coverage?.remaining_is_minimum)}
+        watch={broadcastByFixture(getBroadcast())}
       />
     </ContractPage>
   );

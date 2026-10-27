@@ -276,6 +276,20 @@ layers:
     surfaces: [/loans/, /transfers/]
     note: Loan-out tags come from the register; end/recall/obligation terms are unknown.
 
+  - id: broadcast_listings
+    label: Broadcast and streaming listings
+    kind: curated
+    primary: afc_news
+    fallback: [spfl]
+    status: active
+    scope: upcoming fixtures
+    fields: [domestic_status, international_status, platform, medium, access, source_url, verified_at]
+    surfaces: [/matchday/, /matches/, /fixtures/, /sources/]
+    note: >
+      Curated from official club and SPFL pages. Broadcaster schedules are not
+      scraped, no price or stream is published, and an absent listing is not a
+      claim that a match is not televised.
+
   - id: news
     label: AFC news headlines
     kind: provider
