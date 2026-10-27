@@ -16,7 +16,7 @@
 version: 1
 club: sco:aberdeen
 season: 2026-27
-updated_at: 2026-10-23
+updated_at: 2026-10-27
 entries:
   # Verified 2026-10-23 against the official AFC article of 2026-10-08. The
   # manager said Tobers was still a little bit away and would not be in the
@@ -25,21 +25,22 @@ entries:
   - player_id: 68534
     player_key: api:player:68534
     player_name: K. Tobers
-    status: out
+    status: doubtful
     reason_category: injury
-    reason: Knee injury; not yet involved in matchday squads.
+    reason: Returning from a long-term knee injury and a recent virus; may be on the bench.
     expected_return: null
-    effective_from: "2026-10-08"
+    effective_from: "2026-10-27"
     effective_to: null
     source_id: afc_news
-    source_url: https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference
-    source_title: "Stephen Robinson: St Johnstone Press Conference"
-    verified_at: "2026-10-23"
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
     confidence: confirmed
     note: >
-      Official club press conference. Manager: still a little bit away from being
-      considered; needs games; not in the matchday squad for the next two to
-      three weeks. No medical detail beyond the club's own words.
+      Official club press conference. Manager: Tobers had been out for a year and
+      also had the virus; he might have to make the bench because of the
+      centre-back shortage. No confirmed return date, so expected_return stays
+      null.
 
   # Verified 2026-10-23 against the official AFC interview of 2026-10-16. The
   # player reports being fit after returning on 2026-09-02. This is a player
@@ -47,18 +48,111 @@ entries:
   - player_id: 37253
     player_key: api:player:37253
     player_name: M. Knoester
-    status: available
+    status: out
     reason_category: injury
-    reason: Returned from injury; player reports fit.
+    reason: Thigh tendon issue; specialist advice sought and unlikely to be available for the next two games.
     expected_return: null
-    effective_from: "2026-10-16"
+    effective_from: "2026-10-27"
     effective_to: null
     source_id: afc_news
-    source_url: https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview
-    source_title: "Mats Knoester: St Mirren Preview"
-    verified_at: "2026-10-23"
-    confidence: reported
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
     note: >
-      Official club interview. Player: I feel good; I feel good and fit; a good
-      number of games since returning. Not a medical clearance; the match report
-      of 2026-09-02 records the return to the side.
+      Official club press conference and the club's public post of 2026-10-27.
+      Manager: Knoester needs to see a specialist and it is very unlikely he will
+      be available for either game. No timeframe is published.
+
+  - player_id: 61178
+    player_key: api:player:61178
+    player_name: C. Ronan
+    status: out
+    reason_category: injury
+    reason: Medial knee ligament injury; will miss the next match and see a specialist.
+    expected_return: null
+    effective_from: "2026-10-27"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
+    note: >
+      Official club press conference and the club's public post of 2026-10-27.
+      Manager: Ronan will definitely miss the next match with a medial knee
+      ligament injury and will see a specialist. No timeframe is published.
+
+  - player_id: 125695
+    player_key: api:player:125695
+    player_name: L. Mayo
+    status: out
+    reason_category: injury
+    reason: Out for around two months with a foot injury.
+    expected_return: null
+    effective_from: "2026-10-27"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
+    note: >
+      Official club press conference: Mayo is out for a couple of months. The
+      club page gives the layoff, not the bone detail; public reporting describes
+      a foot stress fracture. No return date beyond the two-month guide is
+      published, so expected_return stays null.
+
+  - player_id: 18068
+    player_key: api:player:18068
+    player_name: D. Happe
+    status: suspended
+    reason_category: suspension
+    reason: Suspended after the red card at Kilmarnock; back in training after illness.
+    expected_return: null
+    effective_from: "2026-10-27"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
+    note: >
+      Official club press conference. Manager: Happe is back training after a
+      virus but is suspended. Match fitness is not confirmed.
+
+  - player_id: 379662
+    player_key: api:player:379662
+    player_name: F. Marshall
+    status: doubtful
+    reason_category: illness
+    reason: Back in training after illness; availability to be assessed.
+    expected_return: null
+    effective_from: "2026-10-27"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
+    note: >
+      Official club press conference. Manager: Marshall has just come back into
+      training; availability is assessed, not assumed.
+
+  - player_id: 388510
+    player_key: api:player:388510
+    player_name: T. Yogane
+    status: doubtful
+    reason_category: illness
+    reason: Back in training after illness; availability to be assessed.
+    expected_return: null
+    effective_from: "2026-10-27"
+    effective_to: null
+    source_id: afc_news
+    source_url: https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference
+    source_title: "Stephen Robinson: Falkirk Press Conference"
+    verified_at: "2026-10-27"
+    confidence: confirmed
+    note: >
+      Official club press conference. Manager: Yogane has just come back into
+      training; availability is assessed, not assumed.

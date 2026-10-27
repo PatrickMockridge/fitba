@@ -1416,6 +1416,65 @@
             "scale": null
           }
         }
+      },
+      "usa:mls": {
+        "all": {
+          "median": 6.76,
+          "n": 589,
+          "scale": 0.311
+        },
+        "families": {
+          "attacking_midfield": {
+            "median": 7.1,
+            "n": 21,
+            "scale": 0.326
+          },
+          "central_midfield": {
+            "median": 6.755,
+            "n": 126,
+            "scale": 0.282
+          },
+          "centre_back": {
+            "median": 6.725,
+            "n": 116,
+            "scale": 0.274
+          },
+          "centre_forward": {
+            "median": 6.87,
+            "n": 71,
+            "scale": 0.356
+          },
+          "defensive_midfield": {
+            "median": null,
+            "n": 0,
+            "scale": null
+          },
+          "full_back": {
+            "median": 6.6,
+            "n": 79,
+            "scale": 0.208
+          },
+          "goalkeeper": {
+            "median": 6.94,
+            "n": 37,
+            "scale": 0.178
+          },
+          "wide_forward": {
+            "median": 6.815,
+            "n": 76,
+            "scale": 0.252
+          },
+          "wide_midfield": {
+            "median": 6.71,
+            "n": 21,
+            "scale": 0.489
+          },
+          "wing_back": {
+            "median": 6.68,
+            "n": 23,
+            "scale": 0.311
+          }
+        }
       }
     },
     "min_cohort": 15,
@@ -1425,17 +1484,17 @@
   "current_clubs": {
     "budget": 1000,
     "errors": [],
-    "generated_at": "2026-10-27T12:05:57+00:00",
+    "generated_at": "2026-10-27T17:12:44+00:00",
     "note": "Current club from the provider transfer feed for pool teams. A player without a later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing.",
-    "players": 9771,
-    "requests": 857,
+    "players": 10574,
+    "requests": 5,
     "schema_version": "1.0.0",
     "snapshot_date": "2026-10-27",
-    "teams_fetched": 391,
-    "teams_total": 391,
-    "transfer_players": 51974
+    "teams_fetched": 421,
+    "teams_total": 421,
+    "transfer_players": 54471
   },
-  "dataset_id": "2026-10-27T12:06:31+00:00-c598315",
+  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
   "dataset_state": "fresh",
   "europe": {
     "budget": 2000,
@@ -1481,18 +1540,18 @@
       }
     ],
     "coverage_complete": true,
-    "generated_at": "2026-10-27T12:05:57+00:00",
+    "generated_at": "2026-10-27T17:12:44+00:00",
     "players": 2130,
-    "requests": 757,
+    "requests": 5,
     "schema_version": "1.0.0",
     "season": "2026-27",
     "stopped_on_budget": false
   },
   "former_profiles": {
     "note": "Former Aberdeen players use the standard scouting profile. Their statistical profile is their latest league season, falling back to their last Aberdeen season and labelled. Cup/European provider rows and cross-league percentiles are not published.",
-    "players": 63
+    "players": 61
   },
-  "generated_at": "2026-10-27T12:06:31+00:00",
+  "generated_at": "2026-10-27T17:25:23+00:00",
   "known_gaps": [
     "7 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
     "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",
@@ -2129,30 +2188,49 @@
       "status": "no_player_stats",
       "tier": 1,
       "with_minutes_450": 0
+    },
+    {
+      "country": "USA",
+      "error": null,
+      "fixtures_played": 466,
+      "href": "/scouting/usa-mls/",
+      "id": "usa:mls",
+      "lineups_fetched": 466,
+      "name": "Major League Soccer",
+      "players": 999,
+      "provider_league_id": 253,
+      "rated": 864,
+      "role_coverage": 0.736,
+      "role_players": 735,
+      "searchable": true,
+      "slug": "usa-mls",
+      "status": "ok",
+      "tier": 1,
+      "with_minutes_450": 589
     }
   ],
   "provider": "api_football",
-  "published_at": "2026-10-27T12:06:31+00:00",
+  "published_at": "2026-10-27T17:25:23+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T12:00:33+00:00-4124035",
+  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-27T12:06:27.245531+00:00",
-    "api_results": "2026-10-27T12:00:36+00:00",
-    "availability": "2026-10-27T12:02:11+00:00",
-    "career": "2026-10-27T12:02:11+00:00",
-    "football_data_uk": "2026-10-27T12:00:34+00:00",
-    "former_players": "2026-10-27T12:00:47+00:00",
-    "history_backfill": "2026-10-27T12:00:45+00:00",
-    "matchday_snapshot": "2026-10-26T17:01:41+00:00",
-    "scouting_clubs": "2026-10-27T12:05:57+00:00",
-    "scouting_europe": "2026-10-27T12:05:57+00:00",
-    "scouting_pool": "2026-10-27T12:02:18+00:00",
-    "scouting_roles": "2026-10-27T12:05:40+00:00",
-    "scouting_rose_history": "2026-10-27T12:05:41+00:00",
-    "scouting_standings": "2026-10-27T12:05:57+00:00",
-    "spfl": "2026-10-27T12:00:37+00:00",
-    "xg_enrichment": "2026-10-27T12:06:29+00:00"
+    "api_football": "2026-10-27T17:12:36.169274+00:00",
+    "api_results": "2026-10-27T17:12:32+00:00",
+    "availability": "2026-10-27T17:12:36+00:00",
+    "career": "2026-10-27T17:12:36+00:00",
+    "football_data_uk": "2026-10-27T17:12:31+00:00",
+    "former_players": "2026-10-27T17:12:35+00:00",
+    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
+    "scouting_clubs": "2026-10-27T17:12:44+00:00",
+    "scouting_europe": "2026-10-27T17:12:44+00:00",
+    "scouting_pool": "2026-10-27T17:12:41+00:00",
+    "scouting_roles": "2026-10-27T17:12:42+00:00",
+    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
+    "scouting_standings": "2026-10-27T17:12:44+00:00",
+    "spfl": "2026-10-27T17:12:33+00:00",
+    "xg_enrichment": "2026-10-27T17:12:46+00:00"
   },
   "sources": [
     {
@@ -2171,7 +2249,7 @@
   "team_context": {
     "min_lift": 0,
     "standings": {
-      "generated_at": "2026-10-27T12:05:57+00:00",
+      "generated_at": "2026-10-27T17:12:44+00:00",
       "leagues": [
         {
           "group": "Premier League",
@@ -2436,27 +2514,35 @@
           "played": 13,
           "status": "ok",
           "teams": 12
+        },
+        {
+          "group": "Western Conference",
+          "id": "usa:mls",
+          "name": "Major League Soccer",
+          "played": 32,
+          "status": "ok",
+          "teams": 30
         }
       ],
       "note": "League tables from the licensed provider. The group with the most played rounds is used; a league without a table is unknown, not zero-strength.",
       "season": "2026-27",
       "totals": {
-        "leagues": 33,
-        "requests": 33,
-        "teams": 472,
-        "with_standings": 33
+        "leagues": 34,
+        "requests": 34,
+        "teams": 502,
+        "with_standings": 34
       }
     },
     "underperforming_ppg_percentile_max": 40
   },
   "totals": {
-    "leagues": 33,
+    "leagues": 34,
     "no_player_stats": 7,
-    "players": 11401,
-    "rated": 9648,
-    "role_players": 8476,
-    "searchable": 25,
-    "with_minutes_450": 4466
+    "players": 12400,
+    "rated": 10512,
+    "role_players": 9211,
+    "searchable": 26,
+    "with_minutes_450": 5055
   },
-  "update_id": "2026-10-27T12:00:33+00:00-4124035"
+  "update_id": "publish-2026-10-27T17:25:23+00:00"
 }

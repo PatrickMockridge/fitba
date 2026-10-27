@@ -1450,11 +1450,18 @@ def build_pool_rows(
     team_threshold = float(team_settings.get("underperforming_ppg_percentile_max") or 40)
     team_map: dict[tuple[int, int], dict[str, Any]] = {}
     if team_standings is not None and team_standings.height:
-        teams_by_league: dict[int, list[dict[str, Any]]] = defaultdict(list)
+        # A conference-based league (MLS) is compared within its conference, so
+        # rank, cohort size and PPG percentile describe the same set. Leagues
+        # without groups keep one league-wide cohort.
+        teams_by_group: dict[tuple[int, str], list[dict[str, Any]]] = defaultdict(list)
         for standing in team_standings.to_dicts():
             if standing.get("ppg") is not None:
-                teams_by_league[int(standing.get("provider_league_id") or 0)].append(standing)
-        for provider_league_id, team_cohort in teams_by_league.items():
+                key = (
+                    int(standing.get("provider_league_id") or 0),
+                    str(standing.get("group") or ""),
+                )
+                teams_by_group[key].append(standing)
+        for (provider_league_id, group), team_cohort in teams_by_group.items():
             values = [float(item["ppg"]) for item in team_cohort]
             for standing in team_cohort:
                 percentile = midrank_percentile(float(standing["ppg"]), values)
@@ -1464,6 +1471,7 @@ def build_pool_rows(
                     "team_played": standing.get("played"),
                     "team_ppg": standing.get("ppg"),
                     "team_count": len(team_cohort),
+                    "team_group": group or None,
                     "team_points_percentile": percentile,
                     "team_underperforming": (
                         percentile is not None and percentile <= team_threshold

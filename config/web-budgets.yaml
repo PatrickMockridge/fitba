@@ -16,9 +16,12 @@ pages:
 
 json:
   scouting/search/players-*.json: 700000
-  entities/scouted.json: 700000
+  # The scouted search group is fetched only on an explicit reader action, not
+  # on first paint. The 800 KB ceiling leaves room for the MLS additions without
+  # deleting names; a future breach should shard, not trim.
+  entities/scouted.json: 800000
 
 # The same payloads as served by the static export routes.
 built_json:
-  search/scouted.json: 700000
+  search/scouted.json: 800000
   scouting/search/shards/*: 700000

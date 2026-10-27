@@ -72,9 +72,9 @@ These are not inconsistencies, provided both numbers are labelled:
 - **Loans.** The official list says 5 out; the 2026-27 register says 9; the
   all-time register says 31. The four register-only loanees are retained
   profiles, not squad members.
-- **Availability.** The official list has 34 players (2 known / 32 unknown);
-  the active squad has 29 (2 known / 27 unknown). Analysis uses active;
-  availability and needs use the official universe and name it.
+- **Availability.** The official list has 34 players (7 known / 27 unknown at
+  the last check); the active squad has 29 (7 known / 22 unknown). Analysis uses
+  active; availability and needs use the official universe and name it.
 - **Minutes and output.** The headline player output is all Aberdeen
   competitions. The league comparison is Premiership-only and is labelled
   separately. Loan-club output is shown on the player profile, not in the

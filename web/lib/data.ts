@@ -4060,6 +4060,7 @@ export interface ScoutingPlayer extends ScoutingRates {
   team_played: number | null;
   team_ppg: number | null;
   team_count: number | null;
+  team_group: string | null;
   team_points_percentile: number | null;
   team_underperforming: boolean | null;
   team_lift: number | null;
@@ -4132,6 +4133,7 @@ export interface ScoutingSearchRow {
   tpc: number | null;
   tl: number | null;
   tc: number | null;
+  tg: string | null;
   tu: boolean | null;
   pr: string | null;
   psc: number | null;
@@ -4343,6 +4345,7 @@ export interface ScoutingLeader {
   team_played?: number | null;
   team_ppg?: number | null;
   team_count?: number | null;
+  team_group?: string | null;
   team_points_percentile?: number | null;
   team_underperforming?: boolean | null;
   team_lift?: number | null;

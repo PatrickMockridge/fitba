@@ -132,7 +132,8 @@ hand-edited. `/corrections/` renders it.
 - `/claims/` under 450 KB;
 - `/glossary/` under 500 KB;
 - `/unknowns/` under 300 KB;
-- the scouted entity payload and every scouting shard under 700 KB.
+- the scouted entity payload under 800 KB (it is fetched only on an explicit
+  reader action) and every scouting shard under 700 KB.
 
 A breach is fixed by sharding or lazy loading. Deleting evidence to fit a
 budget is forbidden. `scripts/check_page_budget.py` measures the generated

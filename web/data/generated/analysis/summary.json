@@ -34,13 +34,13 @@
   "availability": {
     "counts": {
       "active": 29,
-      "available": 1,
-      "doubtful": 0,
+      "available": 0,
+      "doubtful": 3,
       "loans_out": 5,
-      "out_official": 1,
+      "out_official": 3,
       "returned": 0,
-      "suspended_official": 0,
-      "unknown": 27
+      "suspended_official": 1,
+      "unknown": 22
     },
     "coverage": {
       "bench": {
@@ -68,11 +68,11 @@
         "conflicts": 0,
         "dataset_id": null,
         "dataset_state": null,
-        "doubtful": 0,
+        "doubtful": 3,
         "entries": 34,
-        "known": 2,
+        "known": 7,
         "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
-        "out": 1,
+        "out": 3,
         "provider_snapshot": {
           "coverage": {
             "fixtures": {
@@ -101,8 +101,8 @@
         "stale": 0,
         "stale_reason": null,
         "status": "partial",
-        "suspended": 0,
-        "unknown": 32,
+        "suspended": 1,
+        "unknown": 27,
         "update_id": null
       },
       "window_fixtures": [
@@ -120,40 +120,96 @@
       {
         "confidence": "confirmed",
         "expected_return": null,
-        "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
-        "player_id": 68534,
-        "player_name": "K. Tobers",
-        "reason": "Knee injury; not yet involved in matchday squads.",
+        "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Ronan will definitely miss the next match with a medial knee ligament injury and will see a specialist. No timeframe is published.\n",
+        "player_id": 61178,
+        "player_name": "C. Ronan",
+        "reason": "Medial knee ligament injury; will miss the next match and see a specialist.",
         "reason_category": "injury",
         "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "status": "out",
-        "verified_at": "2026-10-23"
+        "verified_at": "2026-10-27"
       },
       {
-        "confidence": "reported",
+        "confidence": "confirmed",
         "expected_return": null,
-        "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
-        "player_id": 37253,
-        "player_name": "M. Knoester",
-        "reason": "Returned from injury; player reports fit.",
+        "note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
+        "player_id": 18068,
+        "player_name": "D. Happe",
+        "reason": "Suspended after the red card at Kilmarnock; back in training after illness.",
+        "reason_category": "suspension",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "suspended",
+        "verified_at": "2026-10-27"
+      },
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference. Manager: Marshall has just come back into training; availability is assessed, not assumed.\n",
+        "player_id": 379662,
+        "player_name": "F. Marshall",
+        "reason": "Back in training after illness; availability to be assessed.",
+        "reason_category": "illness",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
+      },
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference. Manager: Tobers had been out for a year and also had the virus; he might have to make the bench because of the centre-back shortage. No confirmed return date, so expected_return stays null.\n",
+        "player_id": 68534,
+        "player_name": "K. Tobers",
+        "reason": "Returning from a long-term knee injury and a recent virus; may be on the bench.",
         "reason_category": "injury",
         "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
-        "status": "available",
-        "verified_at": "2026-10-23"
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
+      },
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
+        "player_id": 125695,
+        "player_name": "L. Mayo",
+        "reason": "Out for around two months with a foot injury.",
+        "reason_category": "injury",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "out",
+        "verified_at": "2026-10-27"
+      },
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
+        "player_id": 37253,
+        "player_name": "M. Knoester",
+        "reason": "Thigh tendon issue; specialist advice sought and unlikely to be available for the next two games.",
+        "reason_category": "injury",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "out",
+        "verified_at": "2026-10-27"
+      },
+      {
+        "confidence": "confirmed",
+        "expected_return": null,
+        "note": "Official club press conference. Manager: Yogane has just come back into training; availability is assessed, not assumed.\n",
+        "player_id": 388510,
+        "player_name": "T. Yogane",
+        "reason": "Back in training after illness; availability to be assessed.",
+        "reason_category": "illness",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
       }
     ],
     "selection": [
-      {
-        "basis": "projection",
-        "confidence": "medium",
-        "note": "Predicted contender; not team news.",
-        "player_id": 321860,
-        "player_name": "J. Milne",
-        "role_label": "Centre back",
-        "score": 0.558
-      },
       {
         "basis": "projection",
         "confidence": "medium",
@@ -167,10 +223,10 @@
         "basis": "projection",
         "confidence": "medium",
         "note": "Predicted contender; not team news.",
-        "player_id": 125695,
-        "player_name": "L. Mayo",
-        "role_label": "Centre back",
-        "score": 0.478
+        "player_id": 379662,
+        "player_name": "F. Marshall",
+        "role_label": "Centre midfielder",
+        "score": 0.461
       }
     ],
     "suspensions": [
@@ -245,8 +301,8 @@
   "coverage": {
     "availability": {
       "active": 29,
-      "known": 2,
-      "unknown": 27
+      "known": 7,
+      "unknown": 22
     },
     "bench": {
       "fixtures": 6,
@@ -283,9 +339,9 @@
       "scheduled": 23
     }
   },
-  "dataset_id": "2026-10-27T12:06:31+00:00-c598315",
+  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-27T12:06:31+00:00",
+  "generated_at": "2026-10-27T17:25:23+00:00",
   "hero": {
     "form": "LWLDW",
     "goal_difference": -1,
@@ -348,27 +404,27 @@
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
-  "published_at": "2026-10-27T12:06:31+00:00",
+  "published_at": "2026-10-27T17:25:23+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T12:00:33+00:00-4124035",
+  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-27T12:06:27.245531+00:00",
-    "api_results": "2026-10-27T12:00:36+00:00",
-    "availability": "2026-10-27T12:02:11+00:00",
-    "career": "2026-10-27T12:02:11+00:00",
-    "football_data_uk": "2026-10-27T12:00:34+00:00",
-    "former_players": "2026-10-27T12:00:47+00:00",
-    "history_backfill": "2026-10-27T12:00:45+00:00",
-    "matchday_snapshot": "2026-10-26T17:01:41+00:00",
-    "scouting_clubs": "2026-10-27T12:05:57+00:00",
-    "scouting_europe": "2026-10-27T12:05:57+00:00",
-    "scouting_pool": "2026-10-27T12:02:18+00:00",
-    "scouting_roles": "2026-10-27T12:05:40+00:00",
-    "scouting_rose_history": "2026-10-27T12:05:41+00:00",
-    "scouting_standings": "2026-10-27T12:05:57+00:00",
-    "spfl": "2026-10-27T12:00:37+00:00",
-    "xg_enrichment": "2026-10-27T12:06:29+00:00"
+    "api_football": "2026-10-27T17:12:36.169274+00:00",
+    "api_results": "2026-10-27T17:12:32+00:00",
+    "availability": "2026-10-27T17:12:36+00:00",
+    "career": "2026-10-27T17:12:36+00:00",
+    "football_data_uk": "2026-10-27T17:12:31+00:00",
+    "former_players": "2026-10-27T17:12:35+00:00",
+    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
+    "scouting_clubs": "2026-10-27T17:12:44+00:00",
+    "scouting_europe": "2026-10-27T17:12:44+00:00",
+    "scouting_pool": "2026-10-27T17:12:41+00:00",
+    "scouting_roles": "2026-10-27T17:12:42+00:00",
+    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
+    "scouting_standings": "2026-10-27T17:12:44+00:00",
+    "spfl": "2026-10-27T17:12:33+00:00",
+    "xg_enrichment": "2026-10-27T17:12:46+00:00"
   },
   "sources": [
     "afc_news",
@@ -908,5 +964,5 @@
     ]
   },
   "state": "full",
-  "update_id": "2026-10-27T12:00:33+00:00-4124035"
+  "update_id": "publish-2026-10-27T17:25:23+00:00"
 }

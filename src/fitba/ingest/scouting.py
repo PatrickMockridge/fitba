@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
+from datetime import UTC, datetime
 from typing import Any
 
 import polars as pl
@@ -172,6 +173,13 @@ def season_year(season: str) -> int:
         return int(str(season).split("-", 1)[0])
     except ValueError:
         return api_football.CURRENT_SEASON
+
+
+def _league_year(league: dict[str, Any], default: int) -> int:
+    """Calendar-year leagues (MLS) use the current year, not the split season."""
+    if (league.get("provider") or {}).get("calendar_year"):
+        return datetime.now(UTC).year
+    return default
 
 
 def _leagues(*, include_disabled: bool = False) -> list[dict[str, Any]]:
@@ -367,12 +375,13 @@ def ingest_pool(
             record["status"] = "no_player_stats"
             coverage.append(record)
             continue
+        provider_year = _league_year(league, year)
         try:
-            raw_rows, pages = _fetch_players(provider_id, year, refresh=refresh)
+            raw_rows, pages = _fetch_players(provider_id, provider_year, refresh=refresh)
             parsed = [
                 row
                 for row in (
-                    _pool_row(item, league, year=year, ingested_at=generated_at)
+                    _pool_row(item, league, year=provider_year, ingested_at=generated_at)
                     for item in raw_rows
                 )
                 if row is not None and row.get("team_id") != 252
@@ -675,8 +684,9 @@ def ingest_roles(
             "error": None,
             "updated_at": generated_at,
         }
+        provider_year = _league_year(league, year)
         try:
-            fixtures = _fixtures(provider_id, year, refresh=refresh)
+            fixtures = _fixtures(provider_id, provider_year, refresh=refresh)
             played = [
                 item
                 for item in fixtures
@@ -698,7 +708,7 @@ def ingest_roles(
                     rows, available, unmapped = _role_rows_for_fixture(
                         fixture,
                         league,
-                        year=year,
+                        year=provider_year,
                         ingested_at=generated_at,
                         config=config,
                         refresh=refresh,

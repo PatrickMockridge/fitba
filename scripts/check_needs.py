@@ -11,6 +11,7 @@ from typing import Any
 from pydantic import ValidationError
 
 from fitba.publish.needs import NeedsDocument, needs_schema
+from fitba.settings import needs_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATED = ROOT / "web" / "data" / "generated"
@@ -102,8 +103,16 @@ def main() -> int:
         shortfall = measured.get("projected_shortfall")
         depth_gap = measured.get("depth_gap")
         availability_risk = measured.get("availability_risk")
+        thresholds = needs_policy().get("thresholds") or {}
+        risk_threshold = float(thresholds.get("availability_risk_cover") or 0.25)
+        depth_threshold = float(thresholds.get("depth_gap_cover") or 0.5)
         if category == "cover" and not (
-            (availability_risk or 0) > 0 and ((shortfall or 0) >= 1 or (depth_gap or 0) >= 0.5)
+            (availability_risk or 0) > 0
+            and (
+                (shortfall or 0) >= 1
+                or (depth_gap or 0) >= depth_threshold
+                or (availability_risk or 0) >= risk_threshold
+            )
         ):
             errors.append(f"{family_name}: cover without a depth/availability trigger")
         if category == "replace":

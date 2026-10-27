@@ -18,6 +18,27 @@ note: >
 append_only: true
 
 entries:
+  - id: metric-3.12.0-mls-scouting
+    date: 2026-10-27
+    kind: metric
+    status: published
+    title: Major League Soccer added to the scouting universe
+    summary: >
+      Registry 3.12.0 adds usa:mls to the scouting pool. MLS uses the current
+      calendar year, and its Western and Eastern conference tables are retained;
+      team rank and PPG percentile are within each conference, while player
+      percentiles remain within the full MLS cohort. No cohort rule or ranking
+      changed; MLS players are compared within MLS only.
+    pages: ["/scouting/", "/scouting/usa-mls/", "/scouting/search/"]
+    entities: []
+    metric_ids: [scouting.pool, scouting.coverage]
+    registry_version: 3.12.0
+    doc_anchor: "3-12-0-2026-10-27"
+    evidence:
+      - {label: "Scouting board", url: "/scouting/"}
+      - {label: "MLS league search", url: "/scouting/usa-mls/"}
+    fixed_in_dataset: null
+
   - id: metric-3.11.0-selection-confidence
     date: 2026-10-27
     kind: metric

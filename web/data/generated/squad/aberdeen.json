@@ -11,7 +11,7 @@
       "wikipedia": 1
     },
     "conflicts": 0,
-    "ingested_at": "2026-10-27T12:01:29+00:00",
+    "ingested_at": "2026-10-27T17:12:36+00:00",
     "known": 1,
     "note": "Preferred-foot resolution. Side is derived from the starting-XI role, not from this resolver. The licensed API does not provide foot; Sportmonks is used when enabled; Wikipedia is the last resort and only explicit statements are accepted. Unknown is a valid state.",
     "rows": 39,
@@ -26,12 +26,13 @@
   "availability_meta": {
     "club_id": "sco:aberdeen",
     "counts": {
-      "available": 1,
-      "out": 1,
-      "unknown": 32
+      "doubtful": 3,
+      "out": 3,
+      "suspended": 1,
+      "unknown": 27
     },
     "entry_count": 34,
-    "generated_at": "2026-10-27T12:02:11+00:00",
+    "generated_at": "2026-10-27T17:12:36+00:00",
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
     "policy": {
       "allowed_hosts": [
@@ -98,17 +99,17 @@
     ],
     "errors": [],
     "evidence_rows": 705,
-    "generated_at": "2026-10-27T12:02:11+00:00",
+    "generated_at": "2026-10-27T17:12:36+00:00",
     "last_backfill": {
       "budget": null,
       "budget_exhausted": false,
-      "generated_at": "2026-10-27T06:17:20+00:00",
+      "generated_at": "2026-10-27T14:54:58+00:00",
       "network_requests": 20,
       "pairs_capped": 55,
       "pairs_complete": 59,
       "pairs_error": 0
     },
-    "network_requests": 115,
+    "network_requests": 3,
     "pairs_budget": 0,
     "pairs_capped": 55,
     "pairs_complete": 59,
@@ -135,7 +136,7 @@
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "status": "match"
   },
-  "dataset_id": "2026-10-27T12:06:31+00:00-c598315",
+  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
   "dataset_state": "fresh",
   "excluded_players": [
     {
@@ -1610,7 +1611,7 @@
       "totals": null
     }
   ],
-  "generated_at": "2026-10-27T12:06:31+00:00",
+  "generated_at": "2026-10-27T17:25:23+00:00",
   "loan_scope": {
     "official_list": {
       "in": [],
@@ -1715,19 +1716,19 @@
           "season": "2026-27"
         },
         {
-          "club": "Žilina",
-          "date_effective": "2026-09-03",
-          "player_id": null,
-          "player_key": "api:player:395743",
-          "player_name": "K. Bilalovic",
-          "season": "2026-27"
-        },
-        {
           "club": "Elgin City",
           "date_effective": "2026-09-03",
           "player_id": null,
           "player_key": "api:player:674621",
           "player_name": "Sam McLean",
+          "season": "2026-27"
+        },
+        {
+          "club": "Žilina",
+          "date_effective": "2026-09-03",
+          "player_id": null,
+          "player_key": "api:player:395743",
+          "player_name": "K. Bilalovic",
           "season": "2026-27"
         },
         {
@@ -4432,12 +4433,12 @@
       "availability": {
         "confidence": "confirmed",
         "conflict": false,
-        "note": "Official club press conference. Manager: still a little bit away from being considered; needs games; not in the matchday squad for the next two to three weeks. No medical detail beyond the club's own words.\n",
+        "note": "Official club press conference. Manager: Tobers had been out for a year and also had the virus; he might have to make the bench because of the centre-back shortage. No confirmed return date, so expected_return stays null.\n",
         "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-st-johnstone-press-conference",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "out",
-        "verified_at": "2026-10-23"
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [],
@@ -4709,14 +4710,14 @@
         }
       },
       "availability": {
-        "confidence": "reported",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "Official club interview. Player: I feel good; I feel good and fit; a good number of games since returning. Not a medical clearance; the match report of 2026-09-02 records the return to the side.\n",
+        "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
         "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/mats-knoester-st-mirren-preview",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "available",
-        "verified_at": "2026-10-23"
+        "status": "out",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -7145,14 +7146,14 @@
         }
       },
       "availability": {
-        "confidence": "unknown",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
+        "note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "unknown",
-        "verified_at": null
+        "status": "out",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -8876,14 +8877,14 @@
         }
       },
       "availability": {
-        "confidence": "unknown",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
+        "note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "unknown",
-        "verified_at": null
+        "status": "suspended",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -14361,14 +14362,14 @@
         }
       },
       "availability": {
-        "confidence": "unknown",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
+        "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Ronan will definitely miss the next match with a medial knee ligament injury and will see a specialist. No timeframe is published.\n",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "unknown",
-        "verified_at": null
+        "status": "out",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -16377,14 +16378,14 @@
         }
       },
       "availability": {
-        "confidence": "unknown",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
+        "note": "Official club press conference. Manager: Marshall has just come back into training; availability is assessed, not assumed.\n",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "unknown",
-        "verified_at": null
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -16977,14 +16978,14 @@
         }
       },
       "availability": {
-        "confidence": "unknown",
+        "confidence": "confirmed",
         "conflict": false,
-        "note": "No verified official team-news entry.",
-        "source_id": "none",
-        "source_url": null,
+        "note": "Official club press conference. Manager: Yogane has just come back into training; availability is assessed, not assumed.\n",
+        "source_id": "afc_news",
+        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
         "stale": false,
-        "status": "unknown",
-        "verified_at": null
+        "status": "doubtful",
+        "verified_at": "2026-10-27"
       },
       "career_role": {
         "broad_groups": [
@@ -26224,12 +26225,12 @@
     "coverage": "available",
     "fixtures_covered": 16,
     "fixtures_total": 16,
-    "ingested_at": "2026-10-27T12:01:29+00:00",
+    "ingested_at": "2026-10-27T17:12:36+00:00",
     "missing_fixtures": [],
     "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
     "scope": "competitive"
   },
-  "published_at": "2026-10-27T12:06:31+00:00",
+  "published_at": "2026-10-27T17:25:23+00:00",
   "role_meta": {
     "bench_complete_sides": 31,
     "bench_incomplete_sides": 1,
@@ -26249,7 +26250,7 @@
       "5-3-2": 3,
       "unknown": 2
     },
-    "ingested_at": "2026-10-27T12:01:29+00:00",
+    "ingested_at": "2026-10-27T17:12:36+00:00",
     "note": "Roles are derived from the starting-XI formation grid. Starts without a grid, unmapped formations and invalid slots are unknown, not inferred. Substitute appearances carry playing time but no role.",
     "players_with_role": 23,
     "players_with_starts": 24,
@@ -26275,24 +26276,24 @@
   },
   "roster_only": [],
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T12:00:33+00:00-4124035",
+  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-27T12:06:27.245531+00:00",
-    "api_results": "2026-10-27T12:00:36+00:00",
-    "availability": "2026-10-27T12:02:11+00:00",
-    "career": "2026-10-27T12:02:11+00:00",
-    "football_data_uk": "2026-10-27T12:00:34+00:00",
-    "former_players": "2026-10-27T12:00:47+00:00",
-    "history_backfill": "2026-10-27T12:00:45+00:00",
-    "matchday_snapshot": "2026-10-26T17:01:41+00:00",
-    "scouting_clubs": "2026-10-27T12:05:57+00:00",
-    "scouting_europe": "2026-10-27T12:05:57+00:00",
-    "scouting_pool": "2026-10-27T12:02:18+00:00",
-    "scouting_roles": "2026-10-27T12:05:40+00:00",
-    "scouting_rose_history": "2026-10-27T12:05:41+00:00",
-    "scouting_standings": "2026-10-27T12:05:57+00:00",
-    "spfl": "2026-10-27T12:00:37+00:00",
-    "xg_enrichment": "2026-10-27T12:06:29+00:00"
+    "api_football": "2026-10-27T17:12:36.169274+00:00",
+    "api_results": "2026-10-27T17:12:32+00:00",
+    "availability": "2026-10-27T17:12:36+00:00",
+    "career": "2026-10-27T17:12:36+00:00",
+    "football_data_uk": "2026-10-27T17:12:31+00:00",
+    "former_players": "2026-10-27T17:12:35+00:00",
+    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
+    "scouting_clubs": "2026-10-27T17:12:44+00:00",
+    "scouting_europe": "2026-10-27T17:12:44+00:00",
+    "scouting_pool": "2026-10-27T17:12:41+00:00",
+    "scouting_roles": "2026-10-27T17:12:42+00:00",
+    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
+    "scouting_standings": "2026-10-27T17:12:44+00:00",
+    "spfl": "2026-10-27T17:12:33+00:00",
+    "xg_enrichment": "2026-10-27T17:12:46+00:00"
   },
   "summary": {
     "attributes_conflicts": 0,
@@ -26389,5 +26390,5 @@
     "stats_unavailable": 7,
     "total_players": 34
   },
-  "update_id": "2026-10-27T12:00:33+00:00-4124035"
+  "update_id": "publish-2026-10-27T17:25:23+00:00"
 }

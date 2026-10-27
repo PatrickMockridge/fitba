@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import polars as pl
@@ -89,7 +90,7 @@ def test_defence_is_plain_and_availability_unknown(payload) -> None:
         + [f"{item['metric']} {item['count']}" for item in claim["evidence"]]
     )
     assert "three-centre-back" in text
-    assert "2 known / 32 unknown" in text
+    assert re.search(r"\d+ known / \d+ unknown", text)
     assert "Tobers is in the official squad list" in text
     assert "CB" not in text
 

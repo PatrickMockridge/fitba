@@ -55,6 +55,55 @@ def test_standings_pick_the_most_played_group() -> None:
     assert rows[1]["ppg"] == 0.0
 
 
+def test_conference_standings_are_merged_when_configured() -> None:
+    raw = [
+        {
+            "league": {
+                "standings": [
+                    [
+                        {
+                            "rank": 1,
+                            "team": {"id": 1, "name": "West One"},
+                            "points": 9,
+                            "goalsDiff": 4,
+                            "group": "Western Conference",
+                            "all": {"played": 3, "goals": {"for": 7, "against": 3}},
+                        }
+                    ],
+                    [
+                        {
+                            "rank": 1,
+                            "team": {"id": 2, "name": "East One"},
+                            "points": 7,
+                            "goalsDiff": 2,
+                            "group": "Eastern Conference",
+                            "all": {"played": 3, "goals": {"for": 5, "against": 3}},
+                        }
+                    ],
+                ]
+            }
+        }
+    ]
+    rows = _rows_for(
+        {
+            "id": "usa:mls",
+            "provider": {
+                "api_football_id": 253,
+                "merge_standings_groups": True,
+            },
+        },
+        "2026",
+        raw,
+        "2026-10-27T00:00:00Z",
+    )
+    assert len(rows) == 2
+    assert {row["team_name"] for row in rows} == {"West One", "East One"}
+    assert {row["group"] for row in rows} == {
+        "Western Conference",
+        "Eastern Conference",
+    }
+
+
 def test_team_context_and_lift_are_joined_to_pool_rows() -> None:
     pool = pl.DataFrame(
         [

@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.11.0
+registry_version: 3.12.0
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -3226,8 +3226,8 @@ metrics:
   - Rose percentiles are within the league and role cohort, not a cross-league
     rank. A missing or insufficient cohort is null, never zero.
   owner: patrickmockridge
-  reviewed: '2026-10-23'
-  version: 6
+  reviewed: '2026-10-27'
+  version: 7
   status: active
 - id: scouting.board
   label: Scouting weakness board
@@ -3536,8 +3536,8 @@ metrics:
   - Current-club coverage comes from the team transfer feed and may miss a later
     move outside a pool team.
   owner: patrickmockridge
-  reviewed: '2026-10-23'
-  version: 4
+  reviewed: '2026-10-27'
+  version: 5
   status: active
 
 - id: scouting.value-model

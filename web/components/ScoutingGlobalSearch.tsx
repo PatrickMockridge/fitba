@@ -44,6 +44,7 @@ type Row = {
   team_rank: number | null;
   team_points: number | null;
   team_count: number | null;
+  team_group: string | null;
   team_points_percentile: number | null;
   team_underperforming: boolean | null;
   team_lift: number | null;
@@ -327,6 +328,7 @@ export function ScoutingGlobalSearch({
         team_rank: row.tr ?? null,
         team_points: row.tpts ?? null,
         team_count: row.tc ?? null,
+        team_group: row.tg ?? null,
         team_points_percentile: row.tpc ?? null,
         team_underperforming: row.tu ?? null,
         team_lift: row.tl ?? null,
@@ -956,6 +958,9 @@ export function ScoutingGlobalSearch({
                     : `${player.team_rank}/${player.team_count}`}
                   {player.team_points !== null ? (
                     <span className="muted"> · {player.team_points} pts</span>
+                  ) : null}
+                  {player.team_group ? (
+                    <span className="muted"> · {player.team_group}</span>
                   ) : null}
                 </td>
                 <td className="num">{value(player.team_lift, 1)}</td>

@@ -23,17 +23,21 @@ coverage and the uncertainty. Every number is registered in
    options. The attacker section splits assist-biased contribution from
    goal-scoring contribution; a separate goal-scoring lens orders forwards by
    goals per 90. The team-context lens compares the player's role-adjusted
-   percentile with the team's points-per-game percentile. These are profiles,
-   not recommendations.
+   percentile with the team's points-per-game percentile. For a conference
+   league (MLS), team rank, cohort size and the PPG percentile are within the
+   conference; the player percentile remains within the full league cohort.
+   These are profiles, not recommendations.
 
 ## Universe
 
 `config/scouting/leagues.yaml` is the universe. It includes the Scottish
 pyramid, England's Championship, League One and the explicitly added **League
-Two**, and the configured European markets. Provider ids and coverage flags are
-recorded per league.
+Two**, the configured European markets, and **Major League Soccer** (USA) from
+the 2026-10-27 sync. Provider ids and coverage flags are recorded per league.
+MLS uses the current calendar year; both conference tables are retained, with
+team rank and PPG percentile within each conference.
 
-At the 2026-10-23 sync, 33 leagues are enabled. Twenty-five return searchable
+At the 2026-10-27 sync, 34 leagues are enabled. Twenty-six return searchable
 player statistics; seven return none and are shown as honest empty pages; one
 (Albania) returns a single unrated row and is labelled partial:
 

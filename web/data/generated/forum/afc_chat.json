@@ -6,34 +6,34 @@
     "raw_posts_published": false,
     "topics_sampled": 4
   },
-  "dataset_id": "2026-10-27T12:06:31+00:00-c598315",
+  "dataset_id": "2026-10-27T17:25:23+00:00-eb7536b",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-27T12:06:31+00:00",
+  "generated_at": "2026-10-27T17:25:23+00:00",
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
       "current_non_official": 1,
       "current_squad": 13,
-      "external_target": 9,
-      "former_player": 12,
+      "external_target": 12,
+      "former_player": 11,
       "loan_out": 5
     },
     "age_mix": {
-      "21-23": 1,
+      "21-23": 2,
       "24-26": 3,
-      "27-29": 2,
+      "27-29": 4,
       "30-plus": 1,
       "under-21": 1
     },
     "excluded_counts": {
       "current_non_official": 1,
       "current_squad": 13,
-      "former_player": 12,
+      "former_player": 11,
       "loan_out": 5
     },
-    "external_sample_size": 9,
+    "external_sample_size": 12,
     "former_player_profile": {
-      "mentions": 26,
+      "mentions": 25,
       "players": [
         "D. Mitov",
         "G. Shinnie",
@@ -43,12 +43,11 @@
         "M. Lazetić",
         "N. Milanovic",
         "P. Kristian Bråtveit",
-        "R. Duncan",
         "Ross Doohan",
         "T. Keskinen",
         "T. Mcintyre"
       ],
-      "sample_size": 12
+      "sample_size": 11
     },
     "lanes": {
       "current_non_official": {
@@ -76,8 +75,10 @@
         ]
       },
       "external_target": {
-        "count": 9,
+        "count": 12,
         "players": [
+          "A. Goodwin",
+          "A. Gunn",
           "Cieran Slicker",
           "Conor William Hazard",
           "Darren Ambrose",
@@ -86,11 +87,12 @@
           "J. Robson",
           "J. Teasdale",
           "Julius Berthel Askou Harvey",
-          "L. Watson"
+          "Louie Shaun Watson",
+          "Miles Gordon Robinson"
         ]
       },
       "former_player": {
-        "count": 12,
+        "count": 11,
         "players": [
           "D. Mitov",
           "G. Shinnie",
@@ -100,7 +102,6 @@
           "M. Lazetić",
           "N. Milanovic",
           "P. Kristian Bråtveit",
-          "R. Duncan",
           "Ross Doohan",
           "T. Keskinen",
           "T. Mcintyre"
@@ -121,28 +122,30 @@
     "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
     "position_mix": {
       "CM": 2,
-      "DEF": 2,
-      "GK": 2,
+      "DEF": 3,
+      "FWD": 1,
+      "GK": 3,
       "MID": 2
     },
-    "sample_size": 9,
+    "sample_size": 12,
     "source_mix": {
       "club_player": 13,
-      "cross_referenced_transfer": 18,
-      "fan_only": 9
+      "cross_referenced_club": 1,
+      "cross_referenced_transfer": 17,
+      "fan_only": 11
     },
-    "total_signals": 40
+    "total_signals": 42
   },
-  "published_at": "2026-10-27T12:06:31+00:00",
-  "sampled_at": "2026-10-27T12:02:16+00:00",
+  "published_at": "2026-10-27T17:25:23+00:00",
+  "sampled_at": "2026-10-27T17:12:40+00:00",
   "sentiment": {
     "club": {
-      "count": 28,
-      "mean": 0.112,
+      "count": 30,
+      "mean": 0.105,
       "median": 0.0,
-      "negative_share": 0.107,
-      "neutral_share": 0.571,
-      "positive_share": 0.321
+      "negative_share": 0.1,
+      "neutral_share": 0.6,
+      "positive_share": 0.3
     },
     "forum": {
       "count": 83,
@@ -162,7 +165,7 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "2026-10-27T12:00:33+00:00-4124035",
+  "served_by_update_id": "publish-2026-10-27T17:25:23+00:00",
   "signals": [
     {
       "affiliation": "former_player",
@@ -190,6 +193,33 @@
       "position_group": "GK",
       "rival_club": null,
       "topic_count": 3
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "cross_referenced_club",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "FC Cincinnati",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 5,
+      "nationality": "USA",
+      "player_href": null,
+      "player_key": "api:player:50879",
+      "player_name": "Miles Gordon Robinson",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
     },
     {
       "affiliation": "former_player",
@@ -539,6 +569,60 @@
       "player_name": "A. Briedl",
       "position": "Midfielder",
       "position_group": "CM",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 21,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Charlotte",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Australia",
+      "player_href": null,
+      "player_key": "api:player:304119",
+      "player_name": "A. Goodwin",
+      "position": null,
+      "position_group": "FWD",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 29,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "San Jose Earthquakes",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:18933",
+      "player_name": "A. Gunn",
+      "position": null,
+      "position_group": "GK",
       "rival_club": null,
       "topic_count": 1
     },
@@ -1022,7 +1106,7 @@
       "nationality": "Republic of Ireland",
       "player_href": null,
       "player_key": "api:player:154806",
-      "player_name": "L. Watson",
+      "player_name": "Louie Shaun Watson",
       "position": null,
       "position_group": "MID",
       "rival_club": null,
@@ -1166,33 +1250,6 @@
     {
       "affiliation": "former_player",
       "affiliation_source": "key",
-      "age": null,
-      "at_rival": false,
-      "credibility": "cross_referenced_transfer",
-      "cross_references": {
-        "club_output": false,
-        "confirmed_transfer": true,
-        "historic_transfer": false,
-        "press_rumour": false
-      },
-      "current_club": "Inverness Caledonian Thistle",
-      "current_league": null,
-      "former_href": "/former-players/#former-291984",
-      "lookup_source": "former_player",
-      "lookup_status": "former_player",
-      "mentions": 1,
-      "nationality": "Scotland",
-      "player_href": null,
-      "player_key": "api:player:291984",
-      "player_name": "R. Duncan",
-      "position": "Midfielder",
-      "position_group": "CM",
-      "rival_club": null,
-      "topic_count": 1
-    },
-    {
-      "affiliation": "former_player",
-      "affiliation_source": "key",
       "age": 22,
       "at_rival": false,
       "credibility": "cross_referenced_transfer",
@@ -1253,22 +1310,22 @@
     "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
   },
   "source_snapshots": {
-    "api_football": "2026-10-27T12:06:27.245531+00:00",
-    "api_results": "2026-10-27T12:00:36+00:00",
-    "availability": "2026-10-27T12:02:11+00:00",
-    "career": "2026-10-27T12:02:11+00:00",
-    "football_data_uk": "2026-10-27T12:00:34+00:00",
-    "former_players": "2026-10-27T12:00:47+00:00",
-    "history_backfill": "2026-10-27T12:00:45+00:00",
-    "matchday_snapshot": "2026-10-26T17:01:41+00:00",
-    "scouting_clubs": "2026-10-27T12:05:57+00:00",
-    "scouting_europe": "2026-10-27T12:05:57+00:00",
-    "scouting_pool": "2026-10-27T12:02:18+00:00",
-    "scouting_roles": "2026-10-27T12:05:40+00:00",
-    "scouting_rose_history": "2026-10-27T12:05:41+00:00",
-    "scouting_standings": "2026-10-27T12:05:57+00:00",
-    "spfl": "2026-10-27T12:00:37+00:00",
-    "xg_enrichment": "2026-10-27T12:06:29+00:00"
+    "api_football": "2026-10-27T17:12:36.169274+00:00",
+    "api_results": "2026-10-27T17:12:32+00:00",
+    "availability": "2026-10-27T17:12:36+00:00",
+    "career": "2026-10-27T17:12:36+00:00",
+    "football_data_uk": "2026-10-27T17:12:31+00:00",
+    "former_players": "2026-10-27T17:12:35+00:00",
+    "history_backfill": "2026-10-27T17:12:34+00:00",
+    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
+    "scouting_clubs": "2026-10-27T17:12:44+00:00",
+    "scouting_europe": "2026-10-27T17:12:44+00:00",
+    "scouting_pool": "2026-10-27T17:12:41+00:00",
+    "scouting_roles": "2026-10-27T17:12:42+00:00",
+    "scouting_rose_history": "2026-10-27T17:12:44+00:00",
+    "scouting_standings": "2026-10-27T17:12:44+00:00",
+    "spfl": "2026-10-27T17:12:33+00:00",
+    "xg_enrichment": "2026-10-27T17:12:46+00:00"
   },
   "topics": [
     {
@@ -1304,5 +1361,5 @@
       "url": "https://afc-chat.co.uk/forums/index.php?/topic/49303-new-keeper/"
     }
   ],
-  "update_id": "2026-10-27T12:00:33+00:00-4124035"
+  "update_id": "publish-2026-10-27T17:25:23+00:00"
 }

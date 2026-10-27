@@ -277,12 +277,16 @@ export function ScoutingProfile({
           <>
             <div className="stat-row four">
               <div className="stat-tile">
-                <span className="stat-label">League position</span>
+                <span className="stat-label">
+                  {player.team_group ? "Conference position" : "League position"}
+                </span>
                 <span className="stat-value">
                   {player.team_rank ?? "—"}
                   <span className="muted">/{player.team_count ?? "—"}</span>
                 </span>
-                <span className="stat-note">points per game table</span>
+                <span className="stat-note">
+                  {player.team_group ?? "points per game table"}
+                </span>
               </div>
               <div className="stat-tile">
                 <span className="stat-label">Team points</span>
@@ -292,7 +296,9 @@ export function ScoutingProfile({
               <div className="stat-tile">
                 <span className="stat-label">Team PPG percentile</span>
                 <span className="stat-value">{pct(player.team_points_percentile)}</span>
-                <span className="stat-note">within the league</span>
+                <span className="stat-note">
+                  {player.team_group ? "within the conference" : "within the league"}
+                </span>
               </div>
               <div className="stat-tile">
                 <span className="stat-label">Team lift</span>

@@ -8,6 +8,37 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.12.0 — 2026-10-27
+
+Scouting coverage expansion: **Major League Soccer (USA)**. Owner-directed.
+No formula, denominator, rounding mode or cohort rule changed. MLS is a
+separate within-league cohort; no cross-league ranking is introduced.
+
+- `config/scouting/leagues.yaml` adds `usa:mls` (provider league `253`,
+  `coverage: match`, player statistics and lineups confirmed by probe). MLS uses
+  the current calendar year (`provider.calendar_year`). Both the Western and
+  Eastern conference tables are retained
+  (`provider.merge_standings_groups`); team rank, cohort size and PPG percentile
+  are within each conference, and the group label is published. Player
+  percentiles remain within the full MLS league cohort.
+- `scouting.pool` v6 → v7 and `scouting.coverage` v4 → v5: coverage now includes
+  the MLS league and its players. The small added `cn`/`cb` search fields carry
+  the already-registered cohort n and basis.
+- Published coverage change:
+
+| Field | Before | After |
+|---|---:|---:|
+| Enabled scouting leagues | 33 | 34 |
+| Searchable leagues | 25 | 26 |
+| Pool players | 11,380 | 12,400 |
+| Rated players | 9,609 | 10,512 |
+| Players at 450+ minutes | 4,352 | 5,055 |
+| Players with a starting-XI role | 8,476 | 9,211 |
+
+- MLS provider coverage: 999 player rows, 864 rated, 589 at 450+ minutes,
+  466 played fixtures with lineups, 30 teams with merged conference standings.
+- Registry version 3.11.0 → 3.12.0.
+
 ## 3.11.0 — 2026-10-27
 
 Selection-confidence semantics. Owner-directed: "unknown confidence" was

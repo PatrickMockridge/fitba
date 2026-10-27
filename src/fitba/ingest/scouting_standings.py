@@ -9,6 +9,7 @@ standings is unknown, not a zero-strength team.
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from typing import Any
 
 import polars as pl
@@ -57,9 +58,15 @@ def _rows_for(
     league: dict[str, Any], season: str, raw: list[dict[str, Any]], ingested_at: str
 ) -> list[dict[str, Any]]:
     provider_league_id = int((league.get("provider") or {}).get("api_football_id") or 0)
+    provider = league.get("provider") or {}
     league_payload = (raw[0].get("league") if raw else {}) or {}
     standings = league_payload.get("standings") or []
-    chosen = _group(standings)
+    # Conference leagues (MLS) need every group so the team-context percentile
+    # covers the whole league. Other leagues keep the current-table group.
+    if provider.get("merge_standings_groups"):
+        chosen = [row for group in standings for row in group]
+    else:
+        chosen = _group(standings)
     out: list[dict[str, Any]] = []
     for row in chosen:
         team = row.get("team") or {}
@@ -102,7 +109,11 @@ def ingest_standings(*, season: str | None = None, refresh: bool = False) -> dic
     coverage: list[dict[str, Any]] = []
     requests = 0
     for league in leagues:
-        provider_id = (league.get("provider") or {}).get("api_football_id")
+        provider = league.get("provider") or {}
+        provider_id = provider.get("api_football_id")
+        league_year = (
+            datetime.now(UTC).year if provider.get("calendar_year") else season_year
+        )
         if provider_id is None:
             coverage.append(
                 {
@@ -115,9 +126,10 @@ def ingest_standings(*, season: str | None = None, refresh: bool = False) -> dic
             )
             continue
         try:
-            raw = api_football.standings(int(provider_id), season_year, force=refresh)
+            raw = api_football.standings(int(provider_id), league_year, force=refresh)
             requests += 1
-            league_rows = _rows_for(league, target, raw, ingested_at)
+            row_season = str(league_year) if provider.get("calendar_year") else target
+            league_rows = _rows_for(league, row_season, raw, ingested_at)
             if not league_rows:
                 coverage.append(
                     {
