@@ -26,6 +26,43 @@ def _row(**overrides) -> dict:
     return row
 
 
+
+def _falkirk_reference() -> dict:
+    return {
+        "version": 1,
+        "season": SEASON,
+        "updated_at": "2026-10-27",
+        "fixtures": [
+            {
+                "fixture_id": "1556688",
+                "season": SEASON,
+                "date": "2026-10-28",
+                "kickoff": "19:45",
+                "competition_id": "sco:premiership",
+                "home_team_name": "Aberdeen",
+                "away_team_name": "Falkirk",
+                "domestic": {
+                    "status": "confirmed",
+                    "outlets": [
+                        {"platform": "RedTV", "medium": "video", "access": "ppv"}
+                    ],
+                    "source_ids": ["afc_news"],
+                },
+                "international": {"status": "unknown", "outlets": [], "source_ids": []},
+                "sources": [
+                    {
+                        "source_id": "afc_news",
+                        "url": "https://www.afc.co.uk/en/news/how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv",
+                        "title": "How to watch | Live coverage of Aberdeen v Falkirk on RedTV",
+                        "verified_at": "2026-10-27",
+                        "confidence": "confirmed",
+                    }
+                ],
+            }
+        ],
+    }
+
+
 def _build(rows: list[dict], reference=None):
     return build_broadcast_payload(
         season=SEASON,
@@ -37,7 +74,7 @@ def _build(rows: list[dict], reference=None):
 
 
 def test_falkirk_is_domestic_redtv_ppv_and_international_unknown() -> None:
-    document = _build([_row()])
+    document = _build([_row()], _falkirk_reference())
     row = document["fixtures"][0]
     assert row["state"] == "curated"
     assert row["domestic"]["status"] == "confirmed"
@@ -91,7 +128,7 @@ def test_conflict_review_withholds_both_regions() -> None:
 
 
 def test_identity_mismatch_withholds_the_curated_claim() -> None:
-    document = _build([_row(kickoff="20:00")])
+    document = _build([_row(kickoff="20:00")], _falkirk_reference())
     row = document["fixtures"][0]
     assert row["state"] == "source_conflict"
     assert row["domestic"]["status"] == "unknown"

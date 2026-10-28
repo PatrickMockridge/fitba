@@ -84,19 +84,19 @@
   "as_of": "2026-10-21",
   "coverage": {
     "history": {
-      "events": 278,
-      "fixtures_total": 20,
-      "fixtures_with_events": 19,
-      "fixtures_with_lineups": 18,
-      "fixtures_with_player_stats": 9,
-      "fixtures_with_team_stats": 11,
-      "lineup_coverage": 0.9,
-      "lineups": 40,
+      "events": 308,
+      "fixtures_total": 22,
+      "fixtures_with_events": 21,
+      "fixtures_with_lineups": 20,
+      "fixtures_with_player_stats": 11,
+      "fixtures_with_team_stats": 2,
+      "lineup_coverage": 0.909,
+      "lineups": 44,
       "note": "Historical lineups, events and statistics are a bounded local backfill; missing data is shown as unavailable.",
-      "player_stats": 360,
-      "rosters": 31,
+      "player_stats": 440,
+      "rosters": 32,
       "status": "partial",
-      "team_stats": 22
+      "team_stats": 4
     },
     "league_record": "available",
     "manager_scope": "league",
@@ -132,7 +132,7 @@
       ]
     }
   ],
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
   "europe": [],
   "expectations": {
@@ -147,7 +147,7 @@
     ],
     "target": "Top six and a clearer identity. This is an analyst-set baseline, not a published club target.\n"
   },
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "headline": "A substantial rebuild under Stephen Robinson, with the league shape still unsettled.",
   "honour_ids": [],
   "interim_read": "The rebuild is the story so far, not a verdict. A large summer turnover, a new manager and an unsettled shape are the context for the early results. The record will publish a final review at the end of the season; until then, the measured record and the coverage notes are the honest output.\n",
@@ -166,18 +166,18 @@
   "managers": [
     {
       "drawn": 2,
-      "end": "2026-10-24",
+      "end": "2026-10-28",
       "first_match": "2026-08-01",
-      "ga": 13,
+      "ga": 14,
       "gf": 12,
       "interim": false,
-      "last_match": "2026-10-24",
-      "lost": 5,
+      "last_match": "2026-10-28",
+      "lost": 6,
       "name": "Stephen Robinson",
       "person_id": "stephen-robinson",
-      "played": 10,
+      "played": 11,
       "points": 11,
-      "ppg": 1.1,
+      "ppg": 1.0,
       "start": "2026-08-01",
       "stint_end": null,
       "stint_id": "stephen-robinson-manager-2026",
@@ -185,7 +185,7 @@
       "won": 3
     }
   ],
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "recruitment": {
     "age_bands": {
       "21-24": 2,
@@ -290,7 +290,7 @@
   "season": "2026-27",
   "selection": {
     "age_coverage": 0.929,
-    "average_starter_age": 27.12,
+    "average_starter_age": 27.24,
     "debut_basis": "covered_history",
     "debutants": [
       {
@@ -369,62 +369,67 @@
         "player_name": "Hicham Mahou"
       }
     ],
-    "fixtures_total": 15,
-    "fixtures_with_lineups": 15,
+    "fixtures_total": 17,
+    "fixtures_with_lineups": 17,
     "formation_mix": [
       {
-        "fixtures": 5,
+        "fixtures": 6,
         "formation": "4-2-3-1",
-        "share": 0.333
+        "share": 0.353
       },
       {
         "fixtures": 3,
         "formation": "5-3-2",
-        "share": 0.2
+        "share": 0.176
       },
       {
         "fixtures": 2,
         "formation": "unknown",
-        "share": 0.133
+        "share": 0.118
       },
       {
         "fixtures": 2,
         "formation": "4-1-3-2",
-        "share": 0.133
+        "share": 0.118
       },
       {
         "fixtures": 1,
         "formation": "4-1-4-1",
-        "share": 0.067
+        "share": 0.059
       },
       {
         "fixtures": 1,
         "formation": "4-3-3",
-        "share": 0.067
+        "share": 0.059
       },
       {
         "fixtures": 1,
         "formation": "3-5-2",
-        "share": 0.067
+        "share": 0.059
+      },
+      {
+        "fixtures": 1,
+        "formation": "4-4-2",
+        "share": 0.059
       }
     ],
     "lineup_coverage": 1.0,
     "minutes_by_age_band": {
       "21-24": {
-        "minutes": 1667,
-        "share": 0.113
+        "minutes": 1912,
+        "share": 0.114
       },
       "25-29": {
-        "minutes": 9851,
-        "share": 0.667
+        "minutes": 11027,
+        "share": 0.658
       },
       "30+": {
-        "minutes": 2245,
-        "share": 0.152
+        "minutes": 2771,
+        "share": 0.165
       },
       "u21": {
-        "minutes": 1011,
-        "share": 0.068
+        "minutes": 1044,
+        "share": 0.062
       }
     },
     "note": "Formation is the kick-off shape. Ages use the season roster or a known birth date; missing ages are excluded, not filled. Top-by-starts is not a claim that those players started together.",
@@ -435,27 +440,43 @@
     "top_by_starts": [
       {
         "age": 29,
-        "minutes": 1221,
+        "minutes": 1401,
         "player_id": 97896,
         "player_name": "K. Nisbet",
         "role_family": "centre_forward",
-        "starts": 15
+        "starts": 17
       },
       {
         "age": 33,
-        "minutes": 1260,
+        "minutes": 1440,
         "player_id": 1141,
         "player_name": "M. Muller",
         "role_family": "goalkeeper",
-        "starts": 14
+        "starts": 16
       },
       {
         "age": 26,
-        "minutes": 1207,
+        "minutes": 1387,
         "player_id": 108465,
         "player_name": "N. Guinness-Walker",
         "role_family": "full_back",
-        "starts": 14
+        "starts": 16
+      },
+      {
+        "age": 26,
+        "minutes": 1085,
+        "player_id": 57248,
+        "player_name": "A. Aremu",
+        "role_family": "central_midfield",
+        "starts": 15
+      },
+      {
+        "age": 29,
+        "minutes": 1139,
+        "player_id": 44921,
+        "player_name": "C. Cadden",
+        "role_family": "full_back",
+        "starts": 13
       },
       {
         "age": 26,
@@ -466,40 +487,32 @@
         "starts": 13
       },
       {
-        "age": 26,
-        "minutes": 983,
-        "player_id": 57248,
-        "player_name": "A. Aremu",
-        "role_family": "central_midfield",
-        "starts": 13
-      },
-      {
-        "age": 29,
-        "minutes": 999,
-        "player_id": 44921,
-        "player_name": "C. Cadden",
-        "role_family": "full_back",
-        "starts": 11
-      },
-      {
         "age": 28,
-        "minutes": 868,
+        "minutes": 958,
         "player_id": 61178,
         "player_name": "C. Ronan",
         "role_family": "attacking_midfield",
-        "starts": 11
+        "starts": 12
       },
       {
         "age": 27,
-        "minutes": 789,
+        "minutes": 855,
         "player_id": 18068,
         "player_name": "D. Happe",
         "role_family": "centre_back",
+        "starts": 10
+      },
+      {
+        "age": 29,
+        "minutes": 750,
+        "player_id": 45010,
+        "player_name": "B. Lyons",
+        "role_family": "central_midfield",
         "starts": 9
       },
       {
         "age": 28,
-        "minutes": 884,
+        "minutes": 933,
         "player_id": 231195,
         "player_name": "T. Olusanya",
         "role_family": null,
@@ -512,20 +525,12 @@
         "player_name": "T. Yogane",
         "role_family": "wide_forward",
         "starts": 8
-      },
-      {
-        "age": 29,
-        "minutes": 570,
-        "player_id": 45010,
-        "player_name": "B. Lyons",
-        "role_family": "central_midfield",
-        "starts": 7
       }
     ],
-    "u21_minutes_share": 0.068,
+    "u21_minutes_share": 0.062,
     "unknown_age_minutes": 0
   },
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -591,8 +596,8 @@
   "stale_reason": null,
   "status": "in_progress",
   "style": {
-    "corners_against_pm": 6.1,
-    "corners_for_pm": 5.9,
+    "corners_against_pm": 5.91,
+    "corners_for_pm": 5.82,
     "coverage": "available",
     "era_average": {
       "corners_against_pm": 5.28,
@@ -612,33 +617,33 @@
       "shots_on_target_for_pm": 3.83,
       "yellow_for_pm": 1.83
     },
-    "fouls_against_pm": 11.5,
-    "fouls_for_pm": 11.8,
-    "goals_against_pm": 1.3,
-    "goals_for_pm": 1.2,
-    "goals_per_shot": 0.093,
-    "goals_per_shot_on_target": 0.364,
-    "matches": 10,
+    "fouls_against_pm": 11.36,
+    "fouls_for_pm": 12.0,
+    "goals_against_pm": 1.27,
+    "goals_for_pm": 1.09,
+    "goals_per_shot": 0.083,
+    "goals_per_shot_on_target": 0.316,
+    "matches": 11,
     "missing_stats": [],
     "note": "Opponent-unadjusted team proxies from league match rows. Not xG and not a tactical model. Possession is provider-reported only.",
     "possession_against_pm": null,
     "possession_for_pm": null,
     "possession_unknown_reason": "provider_statistics_not_backfilled",
-    "red_against_pm": 0.2,
+    "red_against_pm": 0.18,
     "red_for_pm": 0.0,
-    "shot_accuracy": 0.256,
-    "shots_against_pm": 15.0,
-    "shots_for_pm": 12.9,
-    "shots_on_target_against_pm": 5.3,
-    "shots_on_target_for_pm": 3.3,
+    "shot_accuracy": 0.264,
+    "shots_against_pm": 14.82,
+    "shots_for_pm": 13.09,
+    "shots_on_target_against_pm": 5.18,
+    "shots_on_target_for_pm": 3.45,
     "tactical_note": "The rebuild is the context, not an excuse. The measured proxies and shape mix show what the team is doing; the interim read is labelled as a reading.\n",
-    "yellow_against_pm": 1.6,
-    "yellow_for_pm": 2.6
+    "yellow_against_pm": 1.82,
+    "yellow_for_pm": 2.55
   },
   "tactical": {
     "selection_note": "Selection metrics are current-season and coverage-labelled. A young or newly assembled squad can produce volatile minutes; the page shows the distribution rather than a single average.\n",
     "shape_note": "The team has used several shapes and has not settled on one. The matchday sequence is the honest view; a season aggregate would hide the churn.\n",
     "style_note": "The rebuild is the context, not an excuse. The measured proxies and shape mix show what the team is doing; the interim read is labelled as a reading.\n"
   },
-  "update_id": "2026-10-28T06:17:02+00:00-2588244"
+  "update_id": "publish-2026-10-28T22:32:32+00:00"
 }

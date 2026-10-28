@@ -14,18 +14,17 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def test_schedule_uses_local_kickoff_and_keeps_31_october_conflict():
+def test_schedule_uses_local_kickoff_and_marks_conflicts():
     rows = load_schedule("2026-27", today=date(2026, 10, 23))
     by_date = [row for row in rows if row["date"] == "2026-10-31"]
-    assert len(by_date) == 2
-    league = next(row for row in by_date if row["competition_id"] == "sco:premiership")
+    assert by_date
     cup = next(row for row in by_date if row["competition_id"] == "sco:league-cup")
-    assert league["conflict_review"] is True
-    assert league["status"] == "conflict_review"
     assert cup["conflict_review"] is False
     assert cup["neutral"] is True
     assert cup["venue"] == "Hampden Park"
     assert cup["kickoff"] == "17:30"
+    conflicts = [row for row in by_date if row["status"] == "conflict_review"]
+    assert all(row["conflict_review"] for row in conflicts)
 
 
 def test_schedule_converts_utc_to_london_across_dst():

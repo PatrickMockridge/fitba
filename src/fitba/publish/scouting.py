@@ -890,7 +890,18 @@ def _league_summary(
     )
     rated = players.filter(pl.col("rating").is_not_null()).height if players.height else 0
     with_minutes = players.filter(pl.col("minutes") >= 450).height if players.height else 0
-    roles = role_rows.filter(pl.col("league_id") == league_id).height if role_rows.height else 0
+    # Role rows can include players the provider has no season-stat row for; the
+    # coverage numerator is role-known players *in the published pool* so the
+    # ratio cannot exceed one pool player.
+    pool_ids = set(players["player_id"].to_list()) if players.height else set()
+    roles = (
+        role_rows.filter(
+            (pl.col("league_id") == league_id)
+            & pl.col("player_id").is_in(sorted(pool_ids))
+        ).height
+        if role_rows.height and pool_ids
+        else 0
+    )
     status = (meta or {}).get("status") or ("no_player_stats" if provider_id else "unknown")
     if status == "ok" and rated < min_rated:
         status = "partial"

@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "identity": {
     "age": 32,
     "dataset_id": null,
@@ -116,6 +116,16 @@
         "position_stats": [
           {
             "clean_sheets": 0,
+            "competition": "Scottish Premiership",
+            "conceded_on_pitch": 1,
+            "matches": 1,
+            "minutes_on_pitch": 40,
+            "own_goals": 0,
+            "player_id": 20422,
+            "player_key": "api:player:20422"
+          },
+          {
+            "clean_sheets": 0,
             "competition": "Premier Sports Cup",
             "conceded_on_pitch": 0,
             "matches": 1,
@@ -126,7 +136,7 @@
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 17 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -202,7 +212,7 @@
             "key": "conceded",
             "label": "Conceded",
             "note": "on pitch",
-            "value": 0
+            "value": 1
           },
           {
             "key": "clean_sheets",
@@ -250,15 +260,23 @@
               "minutes_started": 0,
               "starts": 0,
               "sub_apps": 1
+            },
+            {
+              "competition": "Scottish Premiership",
+              "minutes": 40,
+              "minutes_as_sub": 40,
+              "minutes_started": 0,
+              "starts": 0,
+              "sub_apps": 1
             }
           ],
           "coverage": "available",
-          "minutes": 32,
-          "minutes_as_sub": 32,
+          "minutes": 72,
+          "minutes_as_sub": 72,
           "minutes_started": 0,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
           "starts": 0,
-          "sub_apps": 1
+          "sub_apps": 2
         }
       },
       "dataset_id": null,
@@ -1296,7 +1314,7 @@
           "league_minutes": 0,
           "league_rating": null,
           "league_rating_percentile": null,
-          "minutes": 32,
+          "minutes": 72,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1332,8 +1350,29 @@
       "warnings": []
     },
     "recent_matches": {
-      "badge": "1 rows",
+      "badge": "2 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-10-28",
+          "fixture_id": "1556688",
+          "goals": 0,
+          "minutes": 40,
+          "opponent": "Falkirk",
+          "published_at": null,
+          "rating": 6.26,
+          "result": "L",
+          "score_against": 1,
+          "score_for": 0,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": "H"
+        },
         {
           "assists": null,
           "competition": "Premier Sports Cup",
@@ -1389,12 +1428,12 @@
     }
   },
   "player_id": 20422,
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "update_id": "publish-2026-10-28T22:32:32+00:00",
   "warnings": []
 }

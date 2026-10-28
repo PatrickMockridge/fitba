@@ -1,83 +1,7 @@
 {
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
   "fixtures": [
-    {
-      "away_team_name": "Falkirk",
-      "competition_id": "sco:premiership",
-      "competition_name": "Scottish Premiership",
-      "date": "2026-10-28",
-      "domestic": {
-        "basis": "official_source",
-        "note": "Confirmed by the official club source.",
-        "outlets": [
-          {
-            "access": "ppv",
-            "medium": "video",
-            "platform": "RedTV"
-          }
-        ],
-        "source_ids": [
-          "afc_news"
-        ],
-        "status": "confirmed"
-      },
-      "fixture_id": "1556688",
-      "fixture_status": "scheduled",
-      "home_team_name": "Aberdeen",
-      "international": {
-        "basis": "official_source",
-        "note": "The official source does not state overseas availability. Check the club for your region.",
-        "outlets": [],
-        "source_ids": [
-          "afc_news"
-        ],
-        "status": "unknown"
-      },
-      "kickoff": "19:45",
-      "kickoff_tz": "Europe/London",
-      "season": "2026-27",
-      "sources": [
-        {
-          "confidence": "confirmed",
-          "source_id": "afc_news",
-          "title": "How to watch | Live coverage of Aberdeen v Falkirk on RedTV",
-          "url": "https://www.afc.co.uk/en/news/how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv",
-          "verified_at": "2026-10-27"
-        }
-      ],
-      "state": "curated",
-      "venue": "Pittodrie Stadium"
-    },
-    {
-      "away_team_name": "Aberdeen",
-      "competition_id": "sco:premiership",
-      "competition_name": "Scottish Premiership",
-      "date": "2026-10-31",
-      "domestic": {
-        "basis": "fixture_conflict",
-        "note": "Fixture date or kickoff is in conflict review. Broadcast details are withheld.",
-        "outlets": [],
-        "source_ids": [],
-        "status": "unknown"
-      },
-      "fixture_id": "1556699",
-      "fixture_status": "conflict_review",
-      "home_team_name": "Rangers",
-      "international": {
-        "basis": "fixture_conflict",
-        "note": "Fixture date or kickoff is in conflict review. Broadcast details are withheld.",
-        "outlets": [],
-        "source_ids": [],
-        "status": "unknown"
-      },
-      "kickoff": "15:00",
-      "kickoff_tz": "Europe/London",
-      "season": "2026-27",
-      "sources": [],
-      "state": "fixture_conflict",
-      "venue": "Ibrox Stadium"
-    },
     {
       "away_team_name": "Aberdeen",
       "competition_id": "sco:league-cup",
@@ -182,6 +106,35 @@
       "sources": [],
       "state": "derived",
       "venue": "Rugby Park"
+    },
+    {
+      "away_team_name": "Aberdeen",
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "date": "2026-11-24",
+      "domestic": {
+        "basis": "not_curated",
+        "note": "No official UK broadcast information has been curated for this fixture. This does not mean the match is not televised.",
+        "outlets": [],
+        "source_ids": [],
+        "status": "not_announced"
+      },
+      "fixture_id": "1647339",
+      "fixture_status": "scheduled",
+      "home_team_name": "Rangers",
+      "international": {
+        "basis": "not_curated",
+        "note": "Overseas availability is not stated. Check the club for your region.",
+        "outlets": [],
+        "source_ids": [],
+        "status": "unknown"
+      },
+      "kickoff": "20:00",
+      "kickoff_tz": "Europe/London",
+      "season": "2026-27",
+      "sources": [],
+      "state": "derived",
+      "venue": "Ibrox Stadium"
     },
     {
       "away_team_name": "Dundee",
@@ -303,13 +256,13 @@
       "away_team_name": "Celtic",
       "competition_id": "sco:premiership",
       "competition_name": "Scottish Premiership",
-      "date": "2026-12-19",
+      "date": "2026-12-20",
       "domestic": {
-        "basis": "rule",
-        "note": "Saturday 15:00 is inside the UK live-video blackout window. No live UK video outlet is claimed; audio and overseas rights are not inferred.",
+        "basis": "not_curated",
+        "note": "No official UK broadcast information has been curated for this fixture. This does not mean the match is not televised.",
         "outlets": [],
         "source_ids": [],
-        "status": "blackout_window"
+        "status": "not_announced"
       },
       "fixture_id": "1556736",
       "fixture_status": "scheduled",
@@ -321,7 +274,7 @@
         "source_ids": [],
         "status": "unknown"
       },
-      "kickoff": "15:00",
+      "kickoff": "12:00",
       "kickoff_tz": "Europe/London",
       "season": "2026-27",
       "sources": [],
@@ -735,13 +688,13 @@
       "venue": "Pittodrie Stadium"
     }
   ],
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "notes": "Broadcast information is curated from official club and league sources. It is not inferred from kickoff, competition or broadcaster schedules. Absence of an announcement is not evidence that a match is not televised.",
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "redtv_url": "https://redtv.afc.co.uk/",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -759,5 +712,5 @@
   ],
   "stale_reason": null,
   "timezone": "Europe/London",
-  "update_id": "2026-10-28T06:17:02+00:00-2588244"
+  "update_id": "publish-2026-10-28T22:32:32+00:00"
 }

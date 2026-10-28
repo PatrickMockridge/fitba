@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.12.0
+registry_version: 3.13.0
 reviewed: '2026-10-24'
 owner: patrickmockridge
 change_policy:
@@ -3500,9 +3500,11 @@ metrics:
   - team_context
   formula: >
     Counts of provider player-season rows, rated rows, rows at 450+ minutes,
-    players with at least one starting-XI role, played fixtures and lineups
-    fetched. Role coverage is role players divided by the league pool. Searchable
-    requires at least 25 rated players.
+    role-known players in the published league pool, played fixtures and lineups
+    fetched. Role coverage is role-known pool players divided by league pool
+    players, so it cannot exceed one; role rows for players without a provider
+    season row are not counted in this ratio. Searchable requires at least 25
+    rated players.
   inputs:
   - published payload
   - data/normalized/scouting/meta.json
@@ -3536,8 +3538,8 @@ metrics:
   - Current-club coverage comes from the team transfer feed and may miss a later
     move outside a pool team.
   owner: patrickmockridge
-  reviewed: '2026-10-27'
-  version: 5
+  reviewed: '2026-10-28'
+  version: 6
   status: active
 
 - id: scouting.value-model

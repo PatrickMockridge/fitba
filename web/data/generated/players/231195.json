@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "identity": {
     "age": 28,
     "dataset_id": null,
@@ -104,9 +104,9 @@
           {
             "clean_sheets": 1,
             "competition": "Scottish Premiership",
-            "conceded_on_pitch": 7,
-            "matches": 9,
-            "minutes_on_pitch": 597,
+            "conceded_on_pitch": 8,
+            "matches": 10,
+            "minutes_on_pitch": 621,
             "own_goals": 0,
             "player_id": 231195,
             "player_key": "api:player:231195"
@@ -123,7 +123,7 @@
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 16 of 16 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 17 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -250,20 +250,20 @@
             },
             {
               "competition": "Scottish Premiership",
-              "minutes": 597,
-              "minutes_as_sub": 113,
+              "minutes": 621,
+              "minutes_as_sub": 137,
               "minutes_started": 484,
               "starts": 6,
-              "sub_apps": 3
+              "sub_apps": 4
             }
           ],
           "coverage": "available",
-          "minutes": 909,
-          "minutes_as_sub": 261,
+          "minutes": 933,
+          "minutes_as_sub": 285,
           "minutes_started": 648,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
           "starts": 8,
-          "sub_apps": 7
+          "sub_apps": 8
         }
       },
       "dataset_id": null,
@@ -1171,7 +1171,7 @@
             }
           ],
           "source": {
-            "fixtures_covered": 14,
+            "fixtures_covered": 15,
             "id": "api_football",
             "method": "starting_xi_grid",
             "starts_with_role": 7
@@ -1239,7 +1239,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 23.5,
+                  "percentile": 20.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1265,7 +1265,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 47.1,
+                  "percentile": 41.2,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1304,7 +1304,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
-                  "percentile": 58.8,
+                  "percentile": 52.9,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1317,7 +1317,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "tackles_p90",
-                  "percentile": 23.5,
+                  "percentile": 17.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1330,7 +1330,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "interceptions_p90",
-                  "percentile": 0.0,
+                  "percentile": 3.1,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1383,7 +1383,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 23.5,
+                  "percentile": 20.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1396,7 +1396,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 47.1,
+                  "percentile": 41.2,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1435,7 +1435,7 @@
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
-                  "percentile": 58.8,
+                  "percentile": 52.9,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1578,8 +1578,8 @@
           "league_label": "Scottish Premiership",
           "league_minutes": 599,
           "league_rating": 6.21,
-          "league_rating_percentile": 5.9,
-          "minutes": 909,
+          "league_rating_percentile": 0.0,
+          "minutes": 933,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1617,6 +1617,27 @@
     "recent_matches": {
       "badge": "10 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-10-28",
+          "fixture_id": "1556688",
+          "goals": 0,
+          "minutes": 24,
+          "opponent": "Falkirk",
+          "published_at": null,
+          "rating": 6.21,
+          "result": "L",
+          "score_against": 1,
+          "score_for": 0,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": "H"
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1805,27 +1826,6 @@
           "stale_reason": null,
           "update_id": null,
           "venue": null
-        },
-        {
-          "assists": 0,
-          "competition": "Scottish Premiership",
-          "dataset_id": null,
-          "dataset_state": null,
-          "date": "2026-08-08",
-          "fixture_id": "1556634",
-          "goals": null,
-          "minutes": 87,
-          "opponent": "Dundee",
-          "published_at": null,
-          "rating": 5.9,
-          "result": "L",
-          "score_against": 2,
-          "score_for": 0,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null,
-          "venue": "A"
         }
       ],
       "dataset_id": null,
@@ -1861,12 +1861,12 @@
     }
   },
   "player_id": 231195,
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "update_id": "publish-2026-10-28T22:32:32+00:00",
   "warnings": []
 }

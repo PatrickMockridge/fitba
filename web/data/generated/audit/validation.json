@@ -8,7 +8,7 @@
     },
     {
       "level": "ok",
-      "message": "233 rows for 2026-27",
+      "message": "239 rows for 2026-27",
       "name": "matches.rows",
       "value": null
     },
@@ -48,9 +48,9 @@
     },
     {
       "level": "ok",
-      "message": "60/228 matches played (partial/curtailed season)",
+      "message": "66/228 matches played (partial/curtailed season)",
       "name": "matches.count.sco:premiership",
-      "value": 60
+      "value": 66
     },
     {
       "level": "ok",
@@ -108,11 +108,11 @@
     },
     {
       "level": "ok",
-      "message": "sum GF 169 != sum GA 169",
+      "message": "sum GF 188 != sum GA 188",
       "name": "table.sco:premiership.goals_balance",
       "value": {
-        "ga": 169,
-        "gf": 169
+        "ga": 188,
+        "gf": 188
       }
     },
     {
@@ -204,9 +204,9 @@
     },
     {
       "level": "ok",
-      "message": "4 official played league fixtures for 2026-27",
+      "message": "5 official played league fixtures for 2026-27",
       "name": "results.official_feed",
-      "value": 4
+      "value": 5
     },
     {
       "level": "ok",
@@ -234,20 +234,20 @@
     },
     {
       "level": "ok",
-      "message": "table played sum 120 -> 60 matches, canonical 60",
+      "message": "table played sum 132 -> 66 matches, canonical 66",
       "name": "results.table.sco:premiership.balance",
       "value": {
-        "canonical": 60,
-        "played_sum": 120
+        "canonical": 66,
+        "played_sum": 132
       }
     },
     {
       "level": "ok",
-      "message": "Aberdeen table played 10, canonical 10",
+      "message": "Aberdeen table played 11, canonical 11",
       "name": "results.table.sco:premiership.aberdeen",
       "value": {
-        "canonical": 10,
-        "table": 10
+        "canonical": 11,
+        "table": 11
       }
     },
     {
@@ -258,9 +258,9 @@
     },
     {
       "level": "ok",
-      "message": "497 JSON files",
+      "message": "498 JSON files",
       "name": "published.files",
-      "value": 497
+      "value": 498
     },
     {
       "level": "ok",
@@ -275,34 +275,34 @@
       "value": []
     }
   ],
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
   "errors": 0,
-  "generated_at": "2026-10-28T06:18:25+00:00",
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-28T06:18:22.632691+00:00",
-    "api_results": "2026-10-28T06:17:04+00:00",
-    "availability": "2026-10-28T06:17:35+00:00",
-    "career": "2026-10-28T06:17:35+00:00",
-    "football_data_uk": "2026-10-28T06:17:03+00:00",
-    "former_players": "2026-10-28T06:17:17+00:00",
-    "history_backfill": "2026-10-28T06:17:15+00:00",
-    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-28T06:18:05+00:00",
-    "scouting_europe": "2026-10-28T06:17:54+00:00",
-    "scouting_pool": "2026-10-28T06:17:40+00:00",
-    "scouting_roles": "2026-10-28T06:17:41+00:00",
-    "scouting_rose_history": "2026-10-28T06:17:54+00:00",
-    "scouting_standings": "2026-10-28T06:17:55+00:00",
-    "spfl": "2026-10-28T06:17:05+00:00",
-    "xg_enrichment": "2026-10-28T06:18:07+00:00"
+    "api_football": "2026-10-28T22:25:52.193362+00:00",
+    "api_results": "2026-10-28T22:16:27+00:00",
+    "availability": "2026-10-28T22:20:47+00:00",
+    "career": "2026-10-28T22:20:47+00:00",
+    "football_data_uk": "2026-10-28T22:16:26+00:00",
+    "former_players": "2026-10-28T22:17:05+00:00",
+    "history_backfill": "2026-10-28T22:16:41+00:00",
+    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
+    "scouting_clubs": "2026-10-28T22:24:50+00:00",
+    "scouting_europe": "2026-10-28T22:24:39+00:00",
+    "scouting_pool": "2026-10-28T22:20:53+00:00",
+    "scouting_roles": "2026-10-28T22:24:08+00:00",
+    "scouting_rose_history": "2026-10-28T22:24:23+00:00",
+    "scouting_standings": "2026-10-28T22:24:40+00:00",
+    "spfl": "2026-10-28T22:16:27+00:00",
+    "xg_enrichment": "2026-10-28T22:25:35+00:00"
   },
   "status": "pass",
   "strict": true,
-  "update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "update_id": "publish-2026-10-28T22:32:32+00:00",
   "warnings": 0
 }

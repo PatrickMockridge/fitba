@@ -2,8 +2,8 @@
   "aims": [
     {
       "basis": "measured",
-      "current": "9th, 11 points after 10",
-      "gap": 2,
+      "current": "9th, 11 points after 11",
+      "gap": 4,
       "id": "league",
       "label": "Top six by the split",
       "note": "Analyst-set baseline, not a published club target. A top-six baseline after ninth place, with a new manager's first full season and a squad rebuilt over the summer.",
@@ -22,8 +22,8 @@
     },
     {
       "basis": "measured",
-      "current": "8 points behind 3rd",
-      "gap": 8,
+      "current": "9 points behind 3rd",
+      "gap": 9,
       "id": "europe",
       "label": "European route",
       "note": "Scotland has four UEFA places; 4th only qualifies if the Scottish Cup winner is already in the top three. Subject to the final access list.",
@@ -45,7 +45,7 @@
     "coverage": {
       "bench": {
         "fixtures": 6,
-        "named_bench_complete": 16
+        "named_bench_complete": 17
       },
       "cards": {
         "sco:league-cup": {
@@ -54,9 +54,9 @@
           "played": 6
         },
         "sco:premiership": {
-          "complete": false,
-          "covered": 9,
-          "played": 10
+          "complete": true,
+          "covered": 11,
+          "played": 11
         },
         "sco:scottish-cup": {
           "complete": true,
@@ -106,12 +106,12 @@
         "update_id": null
       },
       "window_fixtures": [
+        1556688,
         1556682,
         1556676,
         1556670,
         1556665,
-        1556643,
-        1629022
+        1556643
       ]
     },
     "inferred": [],
@@ -214,19 +214,10 @@
         "basis": "projection",
         "confidence": "medium",
         "note": "Predicted contender; not team news.",
-        "player_id": 231195,
-        "player_name": "T. Olusanya",
-        "role_label": "Centre forward",
-        "score": 0.48
-      },
-      {
-        "basis": "projection",
-        "confidence": "medium",
-        "note": "Predicted contender; not team news.",
         "player_id": 379662,
         "player_name": "F. Marshall",
         "role_label": "Centre midfielder",
-        "score": 0.461
+        "score": 0.42
       }
     ],
     "suspensions": [
@@ -238,9 +229,9 @@
         "last_card_date": "2026-09-15",
         "next_fixture": {
           "competition_id": "sco:premiership",
-          "date": "2026-10-28",
-          "fixture_id": 1556688,
-          "opponent_name": "Falkirk"
+          "date": "2026-11-07",
+          "fixture_id": 1556700,
+          "opponent_name": "Hibernian"
         },
         "player_id": 125695,
         "player_name": "L. Mayo",
@@ -249,7 +240,7 @@
         "reds": 0,
         "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
         "rule_verified": false,
-        "status": "review_required",
+        "status": "watch",
         "threshold": 6
       },
       {
@@ -306,7 +297,7 @@
     },
     "bench": {
       "fixtures": 6,
-      "named_bench_complete": 16
+      "named_bench_complete": 17
     },
     "cards": {
       "sco:league-cup": {
@@ -315,9 +306,9 @@
         "played": 6
       },
       "sco:premiership": {
-        "complete": false,
-        "covered": 9,
-        "played": 10
+        "complete": true,
+        "covered": 11,
+        "played": 11
       },
       "sco:scottish-cup": {
         "complete": true,
@@ -333,41 +324,24 @@
     ],
     "qualification": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.",
     "schedule": {
-      "conflicts": 1,
+      "conflicts": 0,
       "overdue": 0,
       "rows": 45,
       "scheduled": 23
     }
   },
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "hero": {
-    "form": "LWLDW",
-    "goal_difference": -1,
+    "form": "LLWLD",
+    "goal_difference": -2,
     "league_name": "Scottish Premiership",
-    "played": 10,
+    "played": 11,
     "points": 11,
     "position": 9
   },
   "next_up": [
-    {
-      "competition_id": "sco:premiership",
-      "competition_name": "Scottish Premiership",
-      "conflict_review": false,
-      "date": "2026-10-28",
-      "fixture_id": 1556688,
-      "kickoff": "19:45",
-      "kickoff_status": "confirmed",
-      "kickoff_tz": "Europe/London",
-      "match_id": "spfl-premiership-2026-10-28-aberdeen-falkirk",
-      "neutral": false,
-      "opponent_name": "Falkirk",
-      "source_id": "spfl",
-      "stage": null,
-      "status": "scheduled",
-      "venue": "H"
-    },
     {
       "competition_id": "sco:league-cup",
       "competition_name": "Premier Sports Cup",
@@ -401,30 +375,47 @@
       "stage": null,
       "status": "scheduled",
       "venue": "H"
+    },
+    {
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "conflict_review": false,
+      "date": "2026-11-21",
+      "fixture_id": 1556710,
+      "kickoff": "15:00",
+      "kickoff_status": "confirmed",
+      "kickoff_tz": "Europe/London",
+      "match_id": "spfl-premiership-2026-11-21-kilmarnock-aberdeen",
+      "neutral": false,
+      "opponent_name": "Kilmarnock",
+      "source_id": "spfl",
+      "stage": null,
+      "status": "scheduled",
+      "venue": "A"
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-28T06:18:22.632691+00:00",
-    "api_results": "2026-10-28T06:17:04+00:00",
-    "availability": "2026-10-28T06:17:35+00:00",
-    "career": "2026-10-28T06:17:35+00:00",
-    "football_data_uk": "2026-10-28T06:17:03+00:00",
-    "former_players": "2026-10-28T06:17:17+00:00",
-    "history_backfill": "2026-10-28T06:17:15+00:00",
-    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-28T06:18:05+00:00",
-    "scouting_europe": "2026-10-28T06:17:54+00:00",
-    "scouting_pool": "2026-10-28T06:17:40+00:00",
-    "scouting_roles": "2026-10-28T06:17:41+00:00",
-    "scouting_rose_history": "2026-10-28T06:17:54+00:00",
-    "scouting_standings": "2026-10-28T06:17:55+00:00",
-    "spfl": "2026-10-28T06:17:05+00:00",
-    "xg_enrichment": "2026-10-28T06:18:07+00:00"
+    "api_football": "2026-10-28T22:25:52.193362+00:00",
+    "api_results": "2026-10-28T22:16:27+00:00",
+    "availability": "2026-10-28T22:20:47+00:00",
+    "career": "2026-10-28T22:20:47+00:00",
+    "football_data_uk": "2026-10-28T22:16:26+00:00",
+    "former_players": "2026-10-28T22:17:05+00:00",
+    "history_backfill": "2026-10-28T22:16:41+00:00",
+    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
+    "scouting_clubs": "2026-10-28T22:24:50+00:00",
+    "scouting_europe": "2026-10-28T22:24:39+00:00",
+    "scouting_pool": "2026-10-28T22:20:53+00:00",
+    "scouting_roles": "2026-10-28T22:24:08+00:00",
+    "scouting_rose_history": "2026-10-28T22:24:23+00:00",
+    "scouting_standings": "2026-10-28T22:24:40+00:00",
+    "spfl": "2026-10-28T22:16:27+00:00",
+    "xg_enrichment": "2026-10-28T22:25:35+00:00"
   },
   "sources": [
     "afc_news",
@@ -444,8 +435,8 @@
     },
     "denominator": {
       "definition": "player league minutes / (team league matches x 90)",
-      "team_matches": 10,
-      "team_minutes": 900
+      "team_matches": 11,
+      "team_minutes": 990
     },
     "lenses": {
       "low_minutes": {
@@ -503,7 +494,7 @@
             "age": 32,
             "cohort_n": 11,
             "minutes": 900,
-            "minutes_share": 1.0,
+            "minutes_share": 0.909,
             "needs_priority": null,
             "player_id": 1141,
             "player_name": "M. Müller",
@@ -516,7 +507,7 @@
             "age": 29,
             "cohort_n": 0,
             "minutes": 882,
-            "minutes_share": 0.98,
+            "minutes_share": 0.891,
             "needs_priority": null,
             "player_id": 44921,
             "player_name": "C. Cadden",
@@ -529,7 +520,7 @@
             "age": 28,
             "cohort_n": 9,
             "minutes": 809,
-            "minutes_share": 0.899,
+            "minutes_share": 0.817,
             "needs_priority": null,
             "player_id": 97896,
             "player_name": "K. Nisbet",
@@ -588,7 +579,7 @@
         "age": 32,
         "cohort_n": 11,
         "minutes": 900,
-        "minutes_share": 1.0,
+        "minutes_share": 0.909,
         "needs_priority": null,
         "player_id": 1141,
         "player_name": "M. Müller",
@@ -666,7 +657,7 @@
         "age": 27,
         "cohort_n": 23,
         "minutes": 483,
-        "minutes_share": 0.537,
+        "minutes_share": 0.488,
         "needs_priority": null,
         "player_id": 37253,
         "player_name": "M. Knoester",
@@ -679,7 +670,7 @@
         "age": 24,
         "cohort_n": 23,
         "minutes": 474,
-        "minutes_share": 0.527,
+        "minutes_share": 0.479,
         "needs_priority": null,
         "player_id": 161806,
         "player_name": "G. Molloy",
@@ -692,7 +683,7 @@
         "age": 22,
         "cohort_n": 23,
         "minutes": 338,
-        "minutes_share": 0.376,
+        "minutes_share": 0.341,
         "needs_priority": null,
         "player_id": 321860,
         "player_name": "J. Milne",
@@ -705,7 +696,7 @@
         "age": 25,
         "cohort_n": 23,
         "minutes": 560,
-        "minutes_share": 0.622,
+        "minutes_share": 0.566,
         "needs_priority": null,
         "player_id": 125695,
         "player_name": "L. Mayo",
@@ -718,7 +709,7 @@
         "age": 26,
         "cohort_n": 21,
         "minutes": 855,
-        "minutes_share": 0.95,
+        "minutes_share": 0.864,
         "needs_priority": null,
         "player_id": 108465,
         "player_name": "N. Guinness-Walker",
@@ -731,7 +722,7 @@
         "age": 27,
         "cohort_n": 23,
         "minutes": 382,
-        "minutes_share": 0.424,
+        "minutes_share": 0.386,
         "needs_priority": null,
         "player_id": 18068,
         "player_name": "D. Happe",
@@ -744,7 +735,7 @@
         "age": 29,
         "cohort_n": 0,
         "minutes": 882,
-        "minutes_share": 0.98,
+        "minutes_share": 0.891,
         "needs_priority": null,
         "player_id": 44921,
         "player_name": "C. Cadden",
@@ -770,7 +761,7 @@
         "age": 28,
         "cohort_n": 20,
         "minutes": 315,
-        "minutes_share": 0.35,
+        "minutes_share": 0.318,
         "needs_priority": null,
         "player_id": 45010,
         "player_name": "B. Lyons",
@@ -796,7 +787,7 @@
         "age": 33,
         "cohort_n": 20,
         "minutes": 534,
-        "minutes_share": 0.593,
+        "minutes_share": 0.539,
         "needs_priority": null,
         "player_id": 18945,
         "player_name": "S. Armstrong",
@@ -822,7 +813,7 @@
         "age": 27,
         "cohort_n": 20,
         "minutes": 536,
-        "minutes_share": 0.596,
+        "minutes_share": 0.541,
         "needs_priority": null,
         "player_id": 61178,
         "player_name": "C. Ronan",
@@ -835,7 +826,7 @@
         "age": 26,
         "cohort_n": 20,
         "minutes": 632,
-        "minutes_share": 0.702,
+        "minutes_share": 0.638,
         "needs_priority": null,
         "player_id": 57248,
         "player_name": "A. Aremu",
@@ -848,7 +839,7 @@
         "age": 19,
         "cohort_n": 20,
         "minutes": 265,
-        "minutes_share": 0.294,
+        "minutes_share": 0.268,
         "needs_priority": null,
         "player_id": 379662,
         "player_name": "F. Marshall",
@@ -861,11 +852,11 @@
         "age": 20,
         "cohort_n": 17,
         "minutes": 284,
-        "minutes_share": 0.316,
+        "minutes_share": 0.287,
         "needs_priority": null,
         "player_id": 388510,
         "player_name": "Tony Yogane",
-        "rating_percentile": 44.1,
+        "rating_percentile": 38.2,
         "role_depth": 3,
         "role_family": "wide_forward",
         "role_label": "Left winger"
@@ -874,7 +865,7 @@
         "age": 23,
         "cohort_n": 9,
         "minutes": 320,
-        "minutes_share": 0.356,
+        "minutes_share": 0.323,
         "needs_priority": null,
         "player_id": 303519,
         "player_name": "A. Mouloua",
@@ -887,7 +878,7 @@
         "age": 25,
         "cohort_n": 3,
         "minutes": 327,
-        "minutes_share": 0.363,
+        "minutes_share": 0.33,
         "needs_priority": null,
         "player_id": 44982,
         "player_name": "L. Smith",
@@ -913,7 +904,7 @@
         "age": 28,
         "cohort_n": 9,
         "minutes": 809,
-        "minutes_share": 0.899,
+        "minutes_share": 0.817,
         "needs_priority": null,
         "player_id": 97896,
         "player_name": "K. Nisbet",
@@ -926,11 +917,11 @@
         "age": 28,
         "cohort_n": 17,
         "minutes": 599,
-        "minutes_share": 0.666,
+        "minutes_share": 0.605,
         "needs_priority": null,
         "player_id": 231195,
         "player_name": "T. Olusanya",
-        "rating_percentile": 5.9,
+        "rating_percentile": 0.0,
         "role_depth": 3,
         "role_family": "wide_forward",
         "role_label": "Right winger"
@@ -964,5 +955,5 @@
     ]
   },
   "state": "full",
-  "update_id": "2026-10-28T06:17:02+00:00-2588244"
+  "update_id": "publish-2026-10-28T22:32:32+00:00"
 }

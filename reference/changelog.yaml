@@ -18,6 +18,26 @@ note: >
 append_only: true
 
 entries:
+  - id: metric-3.13.0-role-coverage
+    date: 2026-10-28
+    kind: metric
+    status: published
+    title: Role coverage counts only players in the published pool
+    summary: >
+      Registry 3.13.0 corrects the scouting.coverage numerator. Role-known
+      players without a provider season-stat row are no longer counted in the
+      ratio, so role coverage cannot exceed one. Player statistics, percentiles
+      and rankings are unchanged.
+    pages: ["/scouting/", "/status/"]
+    entities: []
+    metric_ids: [scouting.coverage]
+    registry_version: 3.13.0
+    doc_anchor: "3-13-0-2026-10-28"
+    evidence:
+      - {label: "Scouting board", url: "/scouting/"}
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null
+
   - id: page-2026-10-27-how-to-watch
     date: 2026-10-27
     kind: page

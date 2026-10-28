@@ -8,6 +8,20 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.13.0 — 2026-10-28
+
+Role-coverage denominator correction. `scouting.coverage` v5 → v6. The
+role-known count now includes only players in the published league pool, so
+role coverage cannot exceed one. Role rows for players without a provider
+season-stat row are still published as roles; they are simply not counted in
+this ratio.
+
+- Expected published change: `role_players` total 9,211 → 8,970. Bulgarian
+  First Professional League 293 → 202 role-known pool players and
+  `role_coverage` 1.291 → 0.890. No player statistic, percentile, ranking or
+  league table changed.
+- Formula text updated for the pool intersection; registry 3.12.0 → 3.13.0.
+
 ## 3.12.0 — 2026-10-27
 
 Scouting coverage expansion: **Major League Soccer (USA)**. Owner-directed.

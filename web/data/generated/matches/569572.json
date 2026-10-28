@@ -8,7 +8,7 @@
     "team_stats": true,
     "xg": true
   },
-  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
+  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
   "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
@@ -140,7 +140,7 @@
       }
     ]
   },
-  "generated_at": "2026-10-28T06:18:25+00:00",
+  "generated_at": "2026-10-28T22:32:32+00:00",
   "lineups": {
     "away": {
       "coach_name": "D. McInnes",
@@ -1352,7 +1352,7 @@
       "yellow_cards": 0
     }
   ],
-  "published_at": "2026-10-28T06:18:25+00:00",
+  "published_at": "2026-10-28T22:32:32+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1376,24 +1376,24 @@
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
   },
-  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
   "source_snapshots": {
-    "api_football": "2026-10-28T06:18:22.632691+00:00",
-    "api_results": "2026-10-28T06:17:04+00:00",
-    "availability": "2026-10-28T06:17:35+00:00",
-    "career": "2026-10-28T06:17:35+00:00",
-    "football_data_uk": "2026-10-28T06:17:03+00:00",
-    "former_players": "2026-10-28T06:17:17+00:00",
-    "history_backfill": "2026-10-28T06:17:15+00:00",
-    "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-28T06:18:05+00:00",
-    "scouting_europe": "2026-10-28T06:17:54+00:00",
-    "scouting_pool": "2026-10-28T06:17:40+00:00",
-    "scouting_roles": "2026-10-28T06:17:41+00:00",
-    "scouting_rose_history": "2026-10-28T06:17:54+00:00",
-    "scouting_standings": "2026-10-28T06:17:55+00:00",
-    "spfl": "2026-10-28T06:17:05+00:00",
-    "xg_enrichment": "2026-10-28T06:18:07+00:00"
+    "api_football": "2026-10-28T22:25:52.193362+00:00",
+    "api_results": "2026-10-28T22:16:27+00:00",
+    "availability": "2026-10-28T22:20:47+00:00",
+    "career": "2026-10-28T22:20:47+00:00",
+    "football_data_uk": "2026-10-28T22:16:26+00:00",
+    "former_players": "2026-10-28T22:17:05+00:00",
+    "history_backfill": "2026-10-28T22:16:41+00:00",
+    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
+    "scouting_clubs": "2026-10-28T22:24:50+00:00",
+    "scouting_europe": "2026-10-28T22:24:39+00:00",
+    "scouting_pool": "2026-10-28T22:20:53+00:00",
+    "scouting_roles": "2026-10-28T22:24:08+00:00",
+    "scouting_rose_history": "2026-10-28T22:24:23+00:00",
+    "scouting_standings": "2026-10-28T22:24:40+00:00",
+    "spfl": "2026-10-28T22:16:27+00:00",
+    "xg_enrichment": "2026-10-28T22:25:35+00:00"
   },
   "sources": [
     {
@@ -1606,7 +1606,7 @@
       },
       {
         "basis": "inferred",
-        "text": "Shot expectation: Motherwell 0.29, Aberdeen 0.66."
+        "text": "Shot expectation: Motherwell 0.29, Aberdeen 0.68."
       }
     ],
     "events_available": true,
@@ -1778,7 +1778,7 @@
       "team_name": "Motherwell"
     }
   ],
-  "update_id": "2026-10-28T06:17:02+00:00-2588244",
+  "update_id": "publish-2026-10-28T22:32:32+00:00",
   "xg": {
     "available": true,
     "away": {
@@ -1786,9 +1786,9 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.659,
+      "goals_minus": -0.678,
       "goals_position": "within",
-      "high": 1.202,
+      "high": 1.195,
       "low": 0.0,
       "penalties": 0,
       "penalties_known": true,
@@ -1805,8 +1805,8 @@
         "shots_on_target": 1,
         "shots_outsidebox": 3
       },
-      "value": 0.659,
-      "xg_per_shot": 0.073
+      "value": 0.678,
+      "xg_per_shot": 0.075
     },
     "evaluation_href": "/analysis/xg/",
     "gate_note": "Leave-one-match-out calibration to 2026-27 provider xG. This is an in-season calibration, not an out-of-season holdout; the model is not a location xG and does not predict results.",
@@ -1819,9 +1819,9 @@
       "goals": 0,
       "goals_high": 1,
       "goals_low": 0,
-      "goals_minus": -0.29,
+      "goals_minus": -0.291,
       "goals_position": "within",
-      "high": 0.833,
+      "high": 0.808,
       "low": 0.0,
       "penalties": 0,
       "penalties_known": true,
@@ -1838,7 +1838,7 @@
         "shots_on_target": 1,
         "shots_outsidebox": 2
       },
-      "value": 0.29,
+      "value": 0.291,
       "xg_per_shot": 0.073
     },
     "model_id": "fxg-3",
