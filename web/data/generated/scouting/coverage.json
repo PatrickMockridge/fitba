@@ -127,9 +127,9 @@
         },
         "families": {
           "attacking_midfield": {
-            "median": 6.96,
-            "n": 6,
-            "scale": 0.17
+            "median": 6.89,
+            "n": 5,
+            "scale": 0.208
           },
           "central_midfield": {
             "median": 6.8,
@@ -162,9 +162,9 @@
             "scale": 0.4
           },
           "wide_forward": {
-            "median": 6.885,
-            "n": 18,
-            "scale": 0.23
+            "median": 6.89,
+            "n": 19,
+            "scale": 0.237
           },
           "wide_midfield": {
             "median": 6.9,
@@ -369,7 +369,7 @@
           },
           "central_midfield": {
             "median": 6.76,
-            "n": 58,
+            "n": 57,
             "scale": 0.297
           },
           "centre_back": {
@@ -383,14 +383,14 @@
             "scale": 0.311
           },
           "defensive_midfield": {
-            "median": 6.98,
-            "n": 5,
-            "scale": 0.193
+            "median": 6.915,
+            "n": 6,
+            "scale": 0.23
           },
           "full_back": {
             "median": 6.63,
-            "n": 26,
-            "scale": 0.185
+            "n": 28,
+            "scale": 0.193
           },
           "goalkeeper": {
             "median": 6.7,
@@ -398,9 +398,9 @@
             "scale": 0.341
           },
           "wide_forward": {
-            "median": 6.86,
-            "n": 15,
-            "scale": 0.237
+            "median": 6.9,
+            "n": 14,
+            "scale": 0.215
           },
           "wide_midfield": {
             "median": 6.59,
@@ -410,7 +410,7 @@
           "wing_back": {
             "median": 6.705,
             "n": 24,
-            "scale": 0.393
+            "scale": 0.423
           }
         }
       },
@@ -1484,17 +1484,17 @@
   "current_clubs": {
     "budget": 1000,
     "errors": [],
-    "generated_at": "2026-10-27T19:05:07+00:00",
+    "generated_at": "2026-10-28T06:18:05+00:00",
     "note": "Current club from the provider transfer feed for pool teams. A player without a later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing.",
     "players": 10574,
-    "requests": 5,
+    "requests": 142,
     "schema_version": "1.0.0",
-    "snapshot_date": "2026-10-27",
+    "snapshot_date": "2026-10-28",
     "teams_fetched": 421,
     "teams_total": 421,
     "transfer_players": 54471
   },
-  "dataset_id": "2026-10-27T19:05:13+00:00-0154e2c",
+  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
   "dataset_state": "fresh",
   "europe": {
     "budget": 2000,
@@ -1540,9 +1540,9 @@
       }
     ],
     "coverage_complete": true,
-    "generated_at": "2026-10-27T19:05:07+00:00",
+    "generated_at": "2026-10-28T06:17:54+00:00",
     "players": 2130,
-    "requests": 5,
+    "requests": 108,
     "schema_version": "1.0.0",
     "season": "2026-27",
     "stopped_on_budget": false
@@ -1551,7 +1551,7 @@
     "note": "Former Aberdeen players use the standard scouting profile. Their statistical profile is their latest league season, falling back to their last Aberdeen season and labelled. Cup/European provider rows and cross-league percentiles are not published.",
     "players": 61
   },
-  "generated_at": "2026-10-27T19:05:13+00:00",
+  "generated_at": "2026-10-28T06:18:25+00:00",
   "known_gaps": [
     "7 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
     "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",
@@ -1660,16 +1660,16 @@
     {
       "country": "England",
       "error": null,
-      "fixtures_played": 138,
+      "fixtures_played": 143,
       "href": "/scouting/eng-league-one/",
       "id": "eng:league-one",
-      "lineups_fetched": 138,
+      "lineups_fetched": 143,
       "name": "EFL League One",
       "players": 638,
       "provider_league_id": 41,
       "rated": 565,
-      "role_coverage": 0.745,
-      "role_players": 475,
+      "role_coverage": 0.755,
+      "role_players": 482,
       "searchable": true,
       "slug": "eng-league-one",
       "status": "ok",
@@ -1679,16 +1679,16 @@
     {
       "country": "England",
       "error": null,
-      "fixtures_played": 150,
+      "fixtures_played": 151,
       "href": "/scouting/eng-league-two/",
       "id": "eng:league-two",
-      "lineups_fetched": 150,
+      "lineups_fetched": 151,
       "name": "EFL League Two",
       "players": 638,
       "provider_league_id": 42,
       "rated": 565,
-      "role_coverage": 0.763,
-      "role_players": 487,
+      "role_coverage": 0.766,
+      "role_players": 489,
       "searchable": true,
       "slug": "eng-league-two",
       "status": "ok",
@@ -1831,16 +1831,16 @@
     {
       "country": "Sweden",
       "error": null,
-      "fixtures_played": 200,
+      "fixtures_played": 201,
       "href": "/scouting/swe-allsvenskan/",
       "id": "swe:allsvenskan",
-      "lineups_fetched": 200,
+      "lineups_fetched": 201,
       "name": "Allsvenskan",
       "players": 525,
       "provider_league_id": 113,
       "rated": 461,
-      "role_coverage": 0.75,
-      "role_players": 394,
+      "role_coverage": 0.752,
+      "role_players": 395,
       "searchable": true,
       "slug": "swe-allsvenskan",
       "status": "ok",
@@ -1907,10 +1907,10 @@
     {
       "country": "Croatia",
       "error": null,
-      "fixtures_played": 53,
+      "fixtures_played": 54,
       "href": "/scouting/cro-hnl/",
       "id": "cro:hnl",
-      "lineups_fetched": 53,
+      "lineups_fetched": 54,
       "name": "Croatian HNL",
       "players": 311,
       "provider_league_id": 210,
@@ -1983,10 +1983,10 @@
     {
       "country": "Bulgaria",
       "error": null,
-      "fixtures_played": 81,
+      "fixtures_played": 83,
       "href": "/scouting/bul-parva-liga/",
       "id": "bul:parva-liga",
-      "lineups_fetched": 81,
+      "lineups_fetched": 83,
       "name": "First Professional League",
       "players": 0,
       "provider_league_id": 172,
@@ -2040,10 +2040,10 @@
     {
       "country": "Slovenia",
       "error": null,
-      "fixtures_played": 59,
+      "fixtures_played": 61,
       "href": "/scouting/svn-prvaliga/",
       "id": "svn:prvaliga",
-      "lineups_fetched": 59,
+      "lineups_fetched": 61,
       "name": "Slovenian PrvaLiga",
       "players": 0,
       "provider_league_id": 373,
@@ -2173,10 +2173,10 @@
     {
       "country": "N. Ireland",
       "error": null,
-      "fixtures_played": 74,
+      "fixtures_played": 75,
       "href": "/scouting/nir-nifl/",
       "id": "nir:nifl",
-      "lineups_fetched": 74,
+      "lineups_fetched": 75,
       "name": "NIFL Premiership",
       "players": 0,
       "provider_league_id": 408,
@@ -2210,27 +2210,27 @@
     }
   ],
   "provider": "api_football",
-  "published_at": "2026-10-27T19:05:13+00:00",
+  "published_at": "2026-10-28T06:18:25+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T19:04:54+00:00-1073233",
+  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
   "source_snapshots": {
-    "api_football": "2026-10-27T19:04:59.890196+00:00",
-    "api_results": "2026-10-27T19:04:56+00:00",
-    "availability": "2026-10-27T19:05:00+00:00",
-    "career": "2026-10-27T19:05:00+00:00",
-    "football_data_uk": "2026-10-27T19:04:55+00:00",
-    "former_players": "2026-10-27T19:04:59+00:00",
-    "history_backfill": "2026-10-27T19:04:57+00:00",
+    "api_football": "2026-10-28T06:18:22.632691+00:00",
+    "api_results": "2026-10-28T06:17:04+00:00",
+    "availability": "2026-10-28T06:17:35+00:00",
+    "career": "2026-10-28T06:17:35+00:00",
+    "football_data_uk": "2026-10-28T06:17:03+00:00",
+    "former_players": "2026-10-28T06:17:17+00:00",
+    "history_backfill": "2026-10-28T06:17:15+00:00",
     "matchday_snapshot": "2026-10-27T14:54:47+00:00",
-    "scouting_clubs": "2026-10-27T19:05:07+00:00",
-    "scouting_europe": "2026-10-27T19:05:07+00:00",
-    "scouting_pool": "2026-10-27T19:05:04+00:00",
-    "scouting_roles": "2026-10-27T19:05:05+00:00",
-    "scouting_rose_history": "2026-10-27T19:05:07+00:00",
-    "scouting_standings": "2026-10-27T19:05:07+00:00",
-    "spfl": "2026-10-27T19:04:57+00:00",
-    "xg_enrichment": "2026-10-27T19:05:09+00:00"
+    "scouting_clubs": "2026-10-28T06:18:05+00:00",
+    "scouting_europe": "2026-10-28T06:17:54+00:00",
+    "scouting_pool": "2026-10-28T06:17:40+00:00",
+    "scouting_roles": "2026-10-28T06:17:41+00:00",
+    "scouting_rose_history": "2026-10-28T06:17:54+00:00",
+    "scouting_standings": "2026-10-28T06:17:55+00:00",
+    "spfl": "2026-10-28T06:17:05+00:00",
+    "xg_enrichment": "2026-10-28T06:18:07+00:00"
   },
   "sources": [
     {
@@ -2249,7 +2249,7 @@
   "team_context": {
     "min_lift": 0,
     "standings": {
-      "generated_at": "2026-10-27T19:05:07+00:00",
+      "generated_at": "2026-10-28T06:17:55+00:00",
       "leagues": [
         {
           "group": "Premier League",
@@ -2367,7 +2367,7 @@
           "group": "Allsvenskan",
           "id": "swe:allsvenskan",
           "name": "Allsvenskan",
-          "played": 25,
+          "played": 26,
           "status": "ok",
           "teams": 16
         },
@@ -2455,7 +2455,7 @@
           "group": "1. SNL",
           "id": "svn:prvaliga",
           "name": "Slovenian PrvaLiga",
-          "played": 12,
+          "played": 13,
           "status": "ok",
           "teams": 10
         },
@@ -2540,9 +2540,9 @@
     "no_player_stats": 7,
     "players": 12400,
     "rated": 10512,
-    "role_players": 9211,
+    "role_players": 9221,
     "searchable": 26,
     "with_minutes_450": 5055
   },
-  "update_id": "2026-10-27T19:04:54+00:00-1073233"
+  "update_id": "2026-10-28T06:17:02+00:00-2588244"
 }

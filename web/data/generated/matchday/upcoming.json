@@ -9,7 +9,7 @@
     "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
     "possession": "unknown",
     "snapshot": {
-      "age_hours": 4.2,
+      "age_hours": 15.4,
       "fixtures": 6,
       "fixtures_with_lineups": 6,
       "generated_at": "2026-10-27T14:54:47+00:00",
@@ -20,7 +20,7 @@
     "state": "fresh",
     "style": "shots_only"
   },
-  "dataset_id": "2026-10-27T19:05:13+00:00-0154e2c",
+  "dataset_id": "2026-10-28T06:18:25+00:00-8b0860d",
   "dataset_state": "fresh",
   "fixture": {
     "away_team_id": "sco:falkirk",
@@ -511,7 +511,7 @@
       "update_id": null
     }
   },
-  "generated_at": "2026-10-27T19:05:13+00:00",
+  "generated_at": "2026-10-28T06:18:25+00:00",
   "head_to_head": [
     {
       "away_goals": 1,
@@ -817,7 +817,7 @@
       "assignment_note": "Greedy slot assignment. Goalkeeper is assigned first; outfield players are never placed in goal.",
       "availability": {
         "applicable": true,
-        "as_of": "2026-10-27T19:05:00+00:00",
+        "as_of": "2026-10-28T06:17:35+00:00",
         "conflicts": 0,
         "doubtful": 3,
         "known": 7,
@@ -967,41 +967,41 @@
           "update_id": null
         },
         {
-          "availability_confidence": "unknown",
+          "availability_confidence": "confirmed",
           "availability_conflict": false,
-          "availability_downgrade": 0,
-          "availability_note": "No verified official team-news entry.",
-          "availability_source": "none",
+          "availability_downgrade": 1,
+          "availability_note": "Official club press conference. Manager: Yogane has just come back into training; availability is assessed, not assumed.\n",
+          "availability_source": "afc_news",
           "availability_source_url": null,
-          "availability_status": "unknown",
+          "availability_status": "doubtful",
           "availability_verified_at": null,
           "available": null,
           "confidence": "low",
           "dataset_id": null,
           "dataset_state": null,
-          "form": 0.039,
+          "form": 0.127,
           "grid": null,
-          "href": "/players/271395/",
+          "href": "/players/388510/",
           "last_seen": null,
-          "minutes": 61,
-          "name": "A. Briedl",
-          "player_id": 271395,
-          "player_key": "api:player:271395",
+          "minutes": 75,
+          "name": "Tony Yogane",
+          "player_id": 388510,
+          "player_key": "api:player:388510",
           "position_group": null,
           "published_at": null,
           "rating_count": 2,
           "rating_coverage": "partial",
           "reason": "Alternative for Right midfielder; 0 starts in the window.",
           "recency_start": null,
-          "recent_rating": 6.9,
-          "recent_rating_score": 0.45,
+          "recent_rating": 6.73,
+          "recent_rating_score": 0.365,
           "role_code": "RM",
           "role_family": null,
           "role_fit": 0.3,
           "role_label": "Right midfielder",
-          "score": 0.086,
+          "score": 0.09,
           "served_by_update_id": null,
-          "shirt_number": 10,
+          "shirt_number": 7,
           "slot": "3:4",
           "source_snapshots": null,
           "stale_reason": null,
@@ -1603,7 +1603,7 @@
         }
       ],
       "unknowns": [
-        "Curated AFC team news as of 2026-10-27T19:05:00+00:00; provider injuries unavailable/empty."
+        "Curated AFC team news as of 2026-10-28T06:17:35+00:00; provider injuries unavailable/empty."
       ],
       "update_id": null
     },
@@ -2333,10 +2333,10 @@
       "update_id": null
     }
   },
-  "published_at": "2026-10-27T19:05:13+00:00",
+  "published_at": "2026-10-28T06:18:25+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-27T19:04:54+00:00-1073233",
+  "served_by_update_id": "2026-10-28T06:17:02+00:00-2588244",
   "served_generated_at": "2026-10-27T14:54:47+00:00",
   "source_snapshots": null,
   "sources": [
@@ -2827,5 +2827,5 @@
       "update_id": null
     }
   },
-  "update_id": "2026-10-27T19:04:54+00:00-1073233"
+  "update_id": "2026-10-28T06:17:02+00:00-2588244"
 }
