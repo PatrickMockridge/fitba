@@ -1,18 +1,18 @@
 {
   "club_id": "sco:aberdeen",
   "coverage": {
-    "as_of": "2026-10-28T22:17:05+00:00",
+    "as_of": "2026-10-29T06:17:13+00:00",
     "backfill": {
       "budget": 180,
       "budget_exhausted": false,
-      "current_season_present": 6,
+      "current_season_present": 33,
       "errors": [],
-      "generated_at": "2026-10-28T22:17:05+00:00",
-      "network_requests": 0,
+      "generated_at": "2026-10-29T06:17:13+00:00",
+      "network_requests": 71,
       "note": "Provider seasons after departure; missing seasons are gaps, not zero. No provider fee-like text is stored or published.",
       "player_seasons_expected": 233,
-      "player_seasons_missing": 86,
-      "player_seasons_present": 147,
+      "player_seasons_missing": 200,
+      "player_seasons_present": 33,
       "players_backfilled": 71,
       "players_error": 0,
       "players_no_api_id": 5,
@@ -22,16 +22,16 @@
       "policy_version": "527b25f94b9b",
       "schema_version": "1.0.0",
       "season": "2026-27",
-      "transfer_histories_present": 71
+      "transfer_histories_present": 0
     },
     "counts": {
       "current_club_known": 76,
       "current_club_unknown": 0,
       "players": 76,
       "with_api_id": 71,
-      "with_post_career_rows": 51,
+      "with_post_career_rows": 33,
       "without_api_id": 5,
-      "without_post_career_rows": 25
+      "without_post_career_rows": 43
     },
     "gaps": [
       {
@@ -117,7 +117,7 @@
       {
         "player_key": "api:player:151754",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:350876",
@@ -125,14 +125,9 @@
         "season": "2025-26"
       },
       {
-        "player_key": "api:player:350876",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
         "player_key": "api:player:109712",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:430027",
@@ -147,12 +142,17 @@
       {
         "player_key": "api:player:152698",
         "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:152698",
+        "reason": "season_unavailable",
         "season": "2026-27"
       },
       {
         "player_key": "api:player:45800",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:562801",
@@ -167,7 +167,7 @@
       {
         "player_key": "api:player:57163",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:37062",
@@ -202,22 +202,22 @@
       {
         "player_key": "api:player:69243",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:36782",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:45150",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:44810",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:553832",
@@ -242,7 +242,22 @@
       {
         "player_key": "api:player:162944",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:162944",
+        "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:19414",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:19414",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:19414",
@@ -267,7 +282,22 @@
       {
         "player_key": "api:player:109564",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:109564",
+        "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:19007",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:19007",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:19007",
@@ -282,7 +312,12 @@
       {
         "player_key": "api:player:19199",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:355074",
+        "reason": "season_unavailable",
+        "season": "2024-25"
       },
       {
         "player_key": "api:player:355074",
@@ -297,22 +332,62 @@
       {
         "player_key": "api:player:15605",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:15605",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:138460",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:138460",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:270357",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:270357",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:15673",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:15673",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:15673",
+        "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:44824",
+        "reason": "season_unavailable",
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:44824",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:44824",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:44824",
@@ -322,12 +397,37 @@
       {
         "player_key": "api:player:19277",
         "reason": "season_unavailable",
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:19277",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:19277",
+        "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:19277",
+        "reason": "season_unavailable",
         "season": "2026-27"
       },
       {
         "player_key": "api:player:44813",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:44813",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:44813",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "curated:player:j-lewis",
@@ -348,6 +448,16 @@
         "player_key": "curated:player:j-lewis",
         "reason": "season_unavailable",
         "season": "2026-27"
+      },
+      {
+        "player_key": "api:player:44901",
+        "reason": "season_unavailable",
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:44901",
+        "reason": "season_unavailable",
+        "season": "2024-25"
       },
       {
         "player_key": "api:player:44901",
@@ -362,181 +472,71 @@
       {
         "player_key": "api:player:1743",
         "reason": "season_unavailable",
-        "season": "2026-27"
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:1743",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:1743",
+        "reason": "season_unavailable",
+        "season": "2025-26"
       },
       {
         "player_key": "api:player:24865",
         "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44805",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:44805",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:49284",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:49284",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44814",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:138456",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:138456",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44804",
-        "reason": "season_unavailable",
-        "season": "2024-25"
-      },
-      {
-        "player_key": "api:player:44804",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:44804",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44941",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:20474",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:135525",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:19908",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:19908",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "curated:player:s-brown",
-        "reason": "season_unavailable",
-        "season": "2021-22"
-      },
-      {
-        "player_key": "curated:player:s-brown",
-        "reason": "season_unavailable",
         "season": "2022-23"
       },
       {
-        "player_key": "curated:player:s-brown",
+        "player_key": "api:player:24865",
         "reason": "season_unavailable",
         "season": "2023-24"
       },
       {
-        "player_key": "curated:player:s-brown",
+        "player_key": "api:player:24865",
         "reason": "season_unavailable",
         "season": "2024-25"
       },
       {
-        "player_key": "curated:player:s-brown",
+        "player_key": "api:player:24865",
         "reason": "season_unavailable",
         "season": "2025-26"
       },
       {
-        "player_key": "curated:player:s-brown",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:19803",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44817",
-        "reason": "season_unavailable",
-        "season": "2025-26"
-      },
-      {
-        "player_key": "api:player:44817",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:2442",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:45049",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44931",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44821",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "api:player:44811",
-        "reason": "season_unavailable",
-        "season": "2026-27"
-      },
-      {
-        "player_key": "curated:player:c-bryson",
-        "reason": "season_unavailable",
-        "season": "2020-21"
-      },
-      {
-        "player_key": "curated:player:c-bryson",
-        "reason": "season_unavailable",
-        "season": "2021-22"
-      },
-      {
-        "player_key": "curated:player:c-bryson",
+        "player_key": "api:player:44805",
         "reason": "season_unavailable",
         "season": "2022-23"
+      },
+      {
+        "player_key": "api:player:44805",
+        "reason": "season_unavailable",
+        "season": "2023-24"
+      },
+      {
+        "player_key": "api:player:44805",
+        "reason": "season_unavailable",
+        "season": "2024-25"
+      },
+      {
+        "player_key": "api:player:44805",
+        "reason": "season_unavailable",
+        "season": "2025-26"
+      },
+      {
+        "player_key": "api:player:44805",
+        "reason": "season_unavailable",
+        "season": "2026-27"
       }
     ],
     "note": "The register covers 2019-20 onward. Post-career league seasons are measured where the provider covers them; missing seasons are gaps, not zero. Cup and European provider rows are excluded from totals because some repeat league totals. Ratings are league-relative.",
     "post_career_source": "api_football",
-    "post_career_updated_at": "2026-10-28T22:17:05+00:00",
+    "post_career_updated_at": "2026-10-29T06:17:13+00:00",
     "register_from": "2019-20",
     "status": "partial"
   },
-  "dataset_id": "2026-10-28T22:32:32+00:00-bec32fc",
+  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
   "dataset_state": "stale",
   "definition": {
     "developed_proxy": {
@@ -573,7 +573,7 @@
     "sell_on_policy": "Compute a receipt only when percentage, basis and a public subsequent fee are all evidenced.",
     "start_season": "2019-20",
     "universe": "Latest published permanent/free departure, excluding current squad, returns and loan-outs",
-    "universe_as_of": "2026-10-28T22:32:32+00:00"
+    "universe_as_of": "2026-10-29T06:20:11+00:00"
   },
   "development_scorecard": {
     "by_exit_season": [
@@ -638,32 +638,32 @@
       "all": {
         "at_rival": 6,
         "free": 44,
-        "in_covered_feed": 51,
+        "in_covered_feed": 33,
         "players": 76,
-        "post_career_minutes": 213035,
-        "top_flight_abroad": 7,
+        "post_career_minutes": 14783,
+        "top_flight_abroad": 5,
         "with_fee": 31,
-        "with_min_post_minutes": 48
+        "with_min_post_minutes": 23
       },
       "developed_here": {
         "at_rival": 0,
         "free": 1,
         "in_covered_feed": 4,
         "players": 6,
-        "post_career_minutes": 2948,
-        "top_flight_abroad": 1,
+        "post_career_minutes": 4019,
+        "top_flight_abroad": 2,
         "with_fee": 5,
         "with_min_post_minutes": 4
       },
       "young": {
         "at_rival": 2,
         "free": 6,
-        "in_covered_feed": 13,
+        "in_covered_feed": 9,
         "players": 15,
-        "post_career_minutes": 56970,
+        "post_career_minutes": 3503,
         "top_flight_abroad": 2,
         "with_fee": 9,
-        "with_min_post_minutes": 12
+        "with_min_post_minutes": 5
       }
     },
     "definitions": {
@@ -682,7 +682,7 @@
       "players_with_appearance": 21
     }
   },
-  "generated_at": "2026-10-28T22:32:32+00:00",
+  "generated_at": "2026-10-29T06:20:11+00:00",
   "name": "Aberdeen",
   "notes": "Former players are not transfer targets. A later career does not prove a sale was right, and a public fee is not the club's internal valuation.",
   "players": [
@@ -1659,19 +1659,19 @@
       "nationality": "Finland",
       "player_id": 195870,
       "player_key": "api:player:195870",
-      "position": "Attacker",
+      "position": "Defender",
       "post_career": {
         "at_rival": false,
         "clubs": [
           {
             "club": "Odense",
-            "minutes": 832
+            "minutes": 918
           }
         ],
         "countries": [
           {
             "country": "Denmark",
-            "minutes": 832
+            "minutes": 918
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -1702,13 +1702,13 @@
         "top_flight": true,
         "top_flight_abroad": true,
         "totals": {
-          "appearances": 11,
-          "assists": 1,
+          "appearances": 12,
+          "assists": 2,
           "goals": 1,
-          "minutes": 832,
+          "minutes": 918,
           "seasons_expected": 1,
           "seasons_with_data": 1,
-          "starts": 9
+          "starts": 10
         }
       },
       "sell_on_clause_id": null,
@@ -1802,13 +1802,13 @@
         "clubs": [
           {
             "club": "IF Elfsborg",
-            "minutes": 1017
+            "minutes": 1107
           }
         ],
         "countries": [
           {
             "country": "Sweden",
-            "minutes": 1017
+            "minutes": 1107
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -1839,13 +1839,13 @@
         "top_flight": true,
         "top_flight_abroad": true,
         "totals": {
-          "appearances": 12,
-          "assists": 3,
+          "appearances": 13,
+          "assists": 4,
           "goals": 0,
-          "minutes": 1017,
+          "minutes": 1107,
           "seasons_expected": 1,
           "seasons_with_data": 1,
-          "starts": 11
+          "starts": 12
         }
       },
       "sell_on_clause_id": null,
@@ -2560,13 +2560,13 @@
         "clubs": [
           {
             "club": "FC Eindhoven",
-            "minutes": 137
+            "minutes": 182
           }
         ],
         "countries": [
           {
             "country": "Netherlands",
-            "minutes": 137
+            "minutes": 182
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -2597,13 +2597,13 @@
         "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 2,
+          "appearances": 3,
           "assists": 1,
-          "goals": 0,
-          "minutes": 137,
+          "goals": 1,
+          "minutes": 182,
           "seasons_expected": 1,
           "seasons_with_data": 1,
-          "starts": 2
+          "starts": 3
         }
       },
       "sell_on_clause_id": null,
@@ -2944,13 +2944,13 @@
         "clubs": [
           {
             "club": "Blackpool",
-            "minutes": 743
+            "minutes": 369
           }
         ],
         "countries": [
           {
             "country": "England",
-            "minutes": 743
+            "minutes": 369
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -2959,7 +2959,7 @@
           "club_id": "1356",
           "club_name": "Blackpool",
           "country": "England",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": false,
           "league": "EFL League One",
@@ -2968,11 +2968,11 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
@@ -2981,13 +2981,13 @@
         "top_flight": false,
         "top_flight_abroad": false,
         "totals": {
-          "appearances": 13,
-          "assists": 2,
-          "goals": 0,
-          "minutes": 743,
+          "appearances": 10,
+          "assists": 1,
+          "goals": 1,
+          "minutes": 369,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 9
+          "starts": 2
         }
       },
       "sell_on_clause_id": null,
@@ -3078,46 +3078,56 @@
       "nationality": "USA",
       "player_id": 350876,
       "player_key": "api:player:350876",
-      "position": "Midfielder",
+      "position": "Defender",
       "post_career": {
         "at_rival": false,
-        "clubs": [],
-        "countries": [],
+        "clubs": [
+          {
+            "club": "St. Louis City",
+            "minutes": 2550
+          }
+        ],
+        "countries": [
+          {
+            "country": "USA",
+            "minutes": 2550
+          }
+        ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:provisional-st-louis-city",
+          "club_id": "20787",
           "club_name": "St. Louis City",
           "country": "USA",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": false,
-          "league": null,
-          "league_tier": null,
+          "league": "Major League Soccer",
+          "league_tier": 1,
           "market": "other",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "register_destination",
-          "status": "unknown"
+          "source": "current_season_stats",
+          "status": "at_club"
         },
-        "first_season": null,
-        "last_season": null,
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
-        "seasons_with_data": 0,
-        "status": "unavailable",
-        "top_flight": null,
-        "top_flight_abroad": null,
+        "seasons_with_data": 1,
+        "status": "partial",
+        "top_flight": true,
+        "top_flight_abroad": true,
         "totals": {
-          "appearances": null,
-          "assists": null,
-          "goals": null,
-          "minutes": null,
+          "appearances": 31,
+          "assists": 0,
+          "goals": 1,
+          "minutes": 2550,
           "seasons_expected": 2,
-          "seasons_with_data": 0,
-          "starts": null
+          "seasons_with_data": 1,
+          "starts": 29
         }
       },
       "sell_on_clause_id": null,
@@ -3211,51 +3221,59 @@
         "at_rival": false,
         "clubs": [
           {
+            "club": "Maccabi Tel Aviv",
+            "minutes": 415
+          },
+          {
             "club": "Radnicki 1923",
-            "minutes": 2367
+            "minutes": 66
           }
         ],
         "countries": [
           {
+            "country": "Israel",
+            "minutes": 415
+          },
+          {
             "country": "Serbia",
-            "minutes": 2367
+            "minutes": 66
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "2644",
-          "club_name": "Radnicki 1923",
-          "country": "Serbia",
-          "coverage": "historical",
+          "club_id": "604",
+          "club_name": "Maccabi Tel Aviv",
+          "country": null,
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": false,
-          "league": "Serbian SuperLiga",
-          "league_tier": 1,
-          "market": "europe",
+          "is_scottish_club": null,
+          "league": "Ligat Ha'al",
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
         "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": true,
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 29,
+          "appearances": 9,
           "assists": 1,
-          "goals": 15,
-          "minutes": 2367,
+          "goals": 2,
+          "minutes": 481,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 28
+          "starts": 8
         }
       },
       "sell_on_clause_id": null,
@@ -3464,53 +3482,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Luton",
-            "minutes": 1236
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 1236
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1359",
+          "club_id": "sco:provisional-luton",
           "club_name": "Luton",
           "country": "England",
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": false,
-          "league": "EFL League One",
-          "league_tier": 3,
+          "league": null,
+          "league_tier": null,
           "market": "england",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
-        "seasons_with_data": 1,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 31,
-          "assists": 2,
-          "goals": 5,
-          "minutes": 1236,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 2,
-          "seasons_with_data": 1,
-          "starts": 10
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -3604,13 +3612,13 @@
         "clubs": [
           {
             "club": "Korona Kielce",
-            "minutes": 1035
+            "minutes": 996
           }
         ],
         "countries": [
           {
             "country": "Poland",
-            "minutes": 1035
+            "minutes": 996
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -3619,7 +3627,7 @@
           "club_id": "346",
           "club_name": "Korona Kielce",
           "country": "Poland",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": false,
           "league": "Ekstraklasa",
@@ -3628,11 +3636,11 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
@@ -3641,10 +3649,10 @@
         "top_flight": true,
         "top_flight_abroad": true,
         "totals": {
-          "appearances": 12,
-          "assists": 1,
+          "appearances": 11,
+          "assists": 0,
           "goals": 0,
-          "minutes": 1035,
+          "minutes": 996,
           "seasons_expected": 2,
           "seasons_with_data": 1,
           "starts": 11
@@ -3858,51 +3866,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Kasımpaşa",
-            "minutes": 1559
+            "club": "Esenler Erokspor",
+            "minutes": 129
           }
         ],
         "countries": [
           {
-            "country": "Turkiye",
-            "minutes": 1559
+            "country": "Turkey",
+            "minutes": 129
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1004",
-          "club_name": "Kasımpaşa",
+          "club_id": "7402",
+          "club_name": "Esenler Erokspor",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "Super Lig",
-          "league_tier": 1,
+          "league": "1. Lig",
+          "league_tier": null,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
         "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 26,
+          "appearances": 2,
           "assists": 0,
-          "goals": 5,
-          "minutes": 1559,
+          "goals": 0,
+          "minutes": 129,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 16
+          "starts": 2
         }
       },
       "sell_on_clause_id": null,
@@ -4361,13 +4369,13 @@
         "clubs": [
           {
             "club": "Hibernian",
-            "minutes": 2399
+            "minutes": 400
           }
         ],
         "countries": [
           {
             "country": "Scotland",
-            "minutes": 2399
+            "minutes": 400
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -4376,7 +4384,7 @@
           "club_id": "sco:hibernian",
           "club_name": "Hibernian",
           "country": "Scotland",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": true,
           "league": "Scottish Premiership",
@@ -4385,11 +4393,11 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
@@ -4398,13 +4406,13 @@
         "top_flight": true,
         "top_flight_abroad": false,
         "totals": {
-          "appearances": 34,
-          "assists": 4,
-          "goals": 8,
-          "minutes": 2399,
+          "appearances": 6,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 400,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 30
+          "starts": 4
         }
       },
       "sell_on_clause_id": null,
@@ -4499,36 +4507,36 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Brisbane Roar",
-            "minutes": 2064
+            "club": "Wellington Phoenix",
+            "minutes": 152
           }
         ],
         "countries": [
           {
             "country": "Australia",
-            "minutes": 2064
+            "minutes": 152
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "947",
-          "club_name": "Brisbane Roar",
-          "country": "Australia",
-          "coverage": "historical",
+          "club_id": "942",
+          "club_name": "Wellington Phoenix",
+          "country": null,
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": false,
+          "is_scottish_club": null,
           "league": "A-League",
           "league_tier": null,
-          "market": "other",
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
@@ -4537,13 +4545,13 @@
         "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 24,
-          "assists": 3,
-          "goals": 1,
-          "minutes": 2064,
+          "appearances": 2,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 152,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 24
+          "starts": 2
         }
       },
       "sell_on_clause_id": null,
@@ -4644,27 +4652,27 @@
           "club_id": "sco:celtic",
           "club_name": "Celtic",
           "country": "Scotland",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": true,
           "is_scottish_club": true,
           "league": "Scottish Premiership",
           "league_tier": 1,
           "market": "scotland",
           "parent_club_name": null,
-          "rival_current": false,
+          "rival_current": true,
           "rival_name": "Celtic",
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
-        "rival_current": false,
+        "first_season": "2026-27",
+        "last_season": "2026-27",
+        "rival_current": true,
         "rival_spells": [
           {
             "club": "Celtic",
             "current": true,
             "from_season": "2025-26",
-            "to_season": "2025-26"
+            "to_season": "2026-27"
           }
         ],
         "seasons_expected": 2,
@@ -4778,13 +4786,13 @@
         "clubs": [
           {
             "club": "Plymouth",
-            "minutes": 573
+            "minutes": 47
           }
         ],
         "countries": [
           {
             "country": "England",
-            "minutes": 573
+            "minutes": 47
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -4793,7 +4801,7 @@
           "club_id": "1357",
           "club_name": "Plymouth",
           "country": "England",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": false,
           "league": "EFL League One",
@@ -4802,11 +4810,11 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 2,
@@ -4815,13 +4823,13 @@
         "top_flight": false,
         "top_flight_abroad": false,
         "totals": {
-          "appearances": 11,
+          "appearances": 3,
           "assists": 0,
           "goals": 0,
-          "minutes": 573,
+          "minutes": 47,
           "seasons_expected": 2,
           "seasons_with_data": 1,
-          "starts": 6
+          "starts": 2
         }
       },
       "sell_on_clause_id": null,
@@ -5146,56 +5154,56 @@
       "nationality": "Cape Verde",
       "player_id": 162944,
       "player_key": "api:player:162944",
-      "position": "Attacker",
+      "position": "Midfielder",
       "post_career": {
         "at_rival": false,
         "clubs": [
           {
-            "club": "Leganes",
-            "minutes": 2591
+            "club": "Atlas",
+            "minutes": 536
           }
         ],
         "countries": [
           {
-            "country": "Spain",
-            "minutes": 2591
+            "country": "Mexico",
+            "minutes": 536
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "537",
-          "club_name": "Leganes",
-          "country": "Spain",
-          "coverage": "historical",
+          "club_id": "2283",
+          "club_name": "Atlas",
+          "country": null,
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": false,
-          "league": "La Liga",
-          "league_tier": 1,
-          "market": "europe",
+          "is_scottish_club": null,
+          "league": "Liga MX",
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": true,
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 47,
-          "assists": 5,
-          "goals": 4,
-          "minutes": 2591,
+          "appearances": 8,
+          "assists": 2,
+          "goals": 2,
+          "minutes": 536,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 28
+          "seasons_with_data": 1,
+          "starts": 7
         }
       },
       "sell_on_clause_id": null,
@@ -5289,57 +5297,43 @@
       "position": "Defender",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Exeter City",
-            "minutes": 1265
-          },
-          {
-            "club": "Barrow",
-            "minutes": 1106
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 2371
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1364",
+          "club_id": "sco:provisional-exeter-city",
           "club_name": "Exeter City",
           "country": "England",
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": false,
-          "league": "EFL League One",
-          "league_tier": 3,
+          "league": null,
+          "league_tier": null,
           "market": "england",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 28,
-          "assists": 1,
-          "goals": 1,
-          "minutes": 2371,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 27
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -5554,21 +5548,13 @@
         "clubs": [
           {
             "club": "Rangers",
-            "minutes": 1332
-          },
-          {
-            "club": "Girona",
-            "minutes": 925
+            "minutes": 34
           }
         ],
         "countries": [
           {
             "country": "Scotland",
-            "minutes": 1332
-          },
-          {
-            "country": "Spain",
-            "minutes": 925
+            "minutes": 34
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -5577,42 +5563,42 @@
           "club_id": "sco:rangers",
           "club_name": "Rangers",
           "country": "Scotland",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": true,
           "is_scottish_club": true,
           "league": "Scottish Premiership",
           "league_tier": 1,
           "market": "scotland",
           "parent_club_name": null,
-          "rival_current": false,
+          "rival_current": true,
           "rival_name": "Rangers",
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
-        "rival_current": false,
+        "first_season": "2026-27",
+        "last_season": "2026-27",
+        "rival_current": true,
         "rival_spells": [
           {
             "club": "Rangers",
             "current": true,
-            "from_season": "2025-26",
-            "to_season": "2025-26"
+            "from_season": "2026-27",
+            "to_season": "2026-27"
           }
         ],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": false,
         "totals": {
-          "appearances": 61,
-          "assists": 2,
-          "goals": 9,
-          "minutes": 2257,
+          "appearances": 4,
+          "assists": 0,
+          "goals": 1,
+          "minutes": 34,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 36
+          "seasons_with_data": 1,
+          "starts": 0
         }
       },
       "sell_on_clause_id": "sell-on-miovski-girona",
@@ -5704,26 +5690,8 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Hibernian",
-            "minutes": 1985
-          },
-          {
-            "club": "Swindon Town",
-            "minutes": 721
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 1985
-          },
-          {
-            "country": "England",
-            "minutes": 721
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -5733,32 +5701,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 56,
-          "assists": 7,
-          "goals": 8,
-          "minutes": 2706,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 33
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -5851,61 +5819,43 @@
       "position": "Goalkeeper",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Notts County",
-            "minutes": 2160
-          },
-          {
-            "club": "Kilmarnock",
-            "minutes": 990
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 2160
-          },
-          {
-            "country": "Scotland",
-            "minutes": 990
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1376",
-          "club_name": "Notts County",
-          "country": null,
-          "coverage": "historical",
+          "club_id": "208",
+          "club_name": "Emmen",
+          "country": "Netherlands",
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": null,
-          "league": "EFL League Two",
-          "league_tier": 4,
-          "market": "unknown",
+          "is_scottish_club": false,
+          "league": "Eerste Divisie",
+          "league_tier": null,
+          "market": "europe",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2025-26",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
         "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": false,
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 35,
-          "assists": 1,
+          "appearances": 0,
+          "assists": 0,
           "goals": 0,
-          "minutes": 3150,
+          "minutes": 0,
           "seasons_expected": 3,
           "seasons_with_data": 1,
-          "starts": 35
+          "starts": 0
         }
       },
       "sell_on_clause_id": null,
@@ -5987,18 +5937,8 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Airdrieonians",
-            "minutes": 499
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 499
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -6008,32 +5948,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Championship",
-          "league_tier": 2,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2024-25",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 1,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 14,
+          "appearances": null,
           "assists": null,
-          "goals": 2,
-          "minutes": 499,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 3,
-          "seasons_with_data": 1,
-          "starts": 5
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -6125,51 +6065,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Ferencvarosi TC",
-            "minutes": 680
+            "club": "Sampdoria",
+            "minutes": 587
           }
         ],
         "countries": [
           {
-            "country": "Hungary",
-            "minutes": 680
+            "country": "Italy",
+            "minutes": 587
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "651",
-          "club_name": "Ferencvarosi TC",
-          "country": "Hungary",
-          "coverage": "historical",
+          "club_id": "498",
+          "club_name": "Sampdoria",
+          "country": null,
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": false,
-          "league": "Nemzeti Bajnoksag I",
-          "league_tier": 1,
-          "market": "europe",
+          "is_scottish_club": null,
+          "league": "Serie B",
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": true,
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 9,
+          "appearances": 8,
           "assists": 1,
-          "goals": 1,
-          "minutes": 680,
+          "goals": 0,
+          "minutes": 587,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 9
+          "seasons_with_data": 1,
+          "starts": 6
         }
       },
       "sell_on_clause_id": null,
@@ -6263,60 +6203,50 @@
       "position": "Midfielder",
       "post_career": {
         "at_rival": true,
-        "clubs": [
-          {
-            "club": "Rangers",
-            "minutes": 3461
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 3461
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:rangers",
-          "club_name": "Rangers",
-          "country": "Scotland",
-          "coverage": "historical",
-          "is_rival": true,
-          "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
-          "market": "scotland",
+          "club_id": "70",
+          "club_name": "Middlesbrough",
+          "country": null,
+          "coverage": "current",
+          "is_rival": false,
+          "is_scottish_club": null,
+          "league": "EFL Championship",
+          "league_tier": 2,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
-          "rival_name": "Rangers",
-          "source": "latest_season",
+          "rival_name": null,
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [
           {
             "club": "Rangers",
-            "current": true,
+            "current": false,
             "from_season": "2024-25",
-            "to_season": "2025-26"
+            "to_season": "2026-27"
           }
         ],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "top_flight": false,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 60,
-          "assists": 2,
+          "appearances": 0,
+          "assists": 0,
           "goals": 0,
-          "minutes": 3461,
+          "minutes": 0,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 42
+          "seasons_with_data": 1,
+          "starts": 0
         }
       },
       "sell_on_clause_id": null,
@@ -6409,13 +6339,13 @@
         "clubs": [
           {
             "club": "St Mirren",
-            "minutes": 6117
+            "minutes": 606
           }
         ],
         "countries": [
           {
             "country": "Scotland",
-            "minutes": 6117
+            "minutes": 606
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -6424,7 +6354,7 @@
           "club_id": "sco:st-mirren",
           "club_name": "St Mirren",
           "country": "Scotland",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": true,
           "league": "Scottish Premiership",
@@ -6433,26 +6363,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2024-25",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 3,
-        "seasons_with_data": 2,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": false,
         "totals": {
-          "appearances": 74,
-          "assists": 1,
-          "goals": 8,
-          "minutes": 6117,
+          "appearances": 7,
+          "assists": 2,
+          "goals": 3,
+          "minutes": 606,
           "seasons_expected": 3,
-          "seasons_with_data": 2,
-          "starts": 74
+          "seasons_with_data": 1,
+          "starts": 7
         }
       },
       "sell_on_clause_id": null,
@@ -6546,51 +6476,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Lecce",
-            "minutes": 8009
+            "club": "Çorum FK",
+            "minutes": 560
           }
         ],
         "countries": [
           {
-            "country": "Italy",
-            "minutes": 8009
+            "country": "Turkiye",
+            "minutes": 560
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "867",
-          "club_name": "Lecce",
+          "club_id": "6343",
+          "club_name": "Çorum FK",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "Serie A",
+          "league": "Super Lig",
           "league_tier": 1,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2023-24",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 4,
-        "seasons_with_data": 3,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 109,
-          "assists": 1,
-          "goals": 3,
-          "minutes": 8009,
+          "appearances": 8,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 560,
           "seasons_expected": 4,
-          "seasons_with_data": 3,
-          "starts": 101
+          "seasons_with_data": 1,
+          "starts": 6
         }
       },
       "sell_on_clause_id": null,
@@ -6676,65 +6606,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Ayr United",
-            "minutes": 2098
-          },
-          {
-            "club": "Salford City",
-            "minutes": 1339
-          },
-          {
-            "club": "Livingston",
-            "minutes": 768
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 2866
-          },
-          {
-            "country": "England",
-            "minutes": 1339
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:ayr-united",
-          "club_name": "Ayr United",
-          "country": "Scotland",
+          "club_id": "sco:provisional-salford-city",
+          "club_name": "Salford City",
+          "country": null,
           "coverage": "historical",
           "is_rival": false,
-          "is_scottish_club": true,
-          "league": "Scottish Championship",
-          "league_tier": 2,
-          "market": "scotland",
+          "is_scottish_club": null,
+          "league": null,
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2023-24",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 4,
-        "seasons_with_data": 3,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 66,
-          "assists": 1,
-          "goals": 7,
-          "minutes": 4205,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 4,
-          "seasons_with_data": 3,
-          "starts": 47
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -6829,18 +6737,8 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Kilmarnock",
-            "minutes": 5107
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 5107
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -6850,32 +6748,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2023-24",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 4,
-        "seasons_with_data": 3,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 81,
-          "assists": 5,
-          "goals": 14,
-          "minutes": 5107,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 4,
-          "seasons_with_data": 3,
-          "starts": 62
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -6963,55 +6861,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Barrow",
-            "minutes": 5744
-          },
-          {
-            "club": "Northampton",
-            "minutes": 3483
+            "club": "Notts County",
+            "minutes": 83
           }
         ],
         "countries": [
           {
             "country": "England",
-            "minutes": 9227
+            "minutes": 83
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1819",
-          "club_name": "Barrow",
+          "club_id": "1376",
+          "club_name": "Notts County",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "EFL League Two",
-          "league_tier": 4,
+          "league": "EFL League One",
+          "league_tier": 3,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2023-24",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 4,
-        "seasons_with_data": 3,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": false,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 120,
-          "assists": 5,
-          "goals": 5,
-          "minutes": 9227,
+          "appearances": 1,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 83,
           "seasons_expected": 4,
-          "seasons_with_data": 3,
-          "starts": 105
+          "seasons_with_data": 1,
+          "starts": 1
         }
       },
       "sell_on_clause_id": null,
@@ -7224,18 +7118,8 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Kilmarnock",
-            "minutes": 3885
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 3885
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -7245,32 +7129,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2023-24",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 4,
-        "seasons_with_data": 2,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 54,
-          "assists": 4,
-          "goals": 7,
-          "minutes": 3885,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 4,
-          "seasons_with_data": 2,
-          "starts": 43
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -7362,54 +7246,61 @@
       "player_key": "api:player:1743",
       "position": "Defender",
       "post_career": {
-        "at_rival": false,
+        "at_rival": true,
         "clubs": [
           {
-            "club": "Bristol City",
-            "minutes": 5688
+            "club": "Rangers",
+            "minutes": 69
           }
         ],
         "countries": [
           {
-            "country": "England",
-            "minutes": 5688
+            "country": "Scotland",
+            "minutes": 69
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "56",
-          "club_name": "Bristol City",
-          "country": null,
-          "coverage": "historical",
-          "is_rival": false,
-          "is_scottish_club": null,
-          "league": "EFL Championship",
-          "league_tier": 2,
-          "market": "unknown",
+          "club_id": "sco:rangers",
+          "club_name": "Rangers",
+          "country": "Scotland",
+          "coverage": "current",
+          "is_rival": true,
+          "is_scottish_club": true,
+          "league": "Scottish Premiership",
+          "league_tier": 1,
+          "market": "scotland",
           "parent_club_name": null,
-          "rival_current": false,
-          "rival_name": null,
-          "source": "latest_season",
+          "rival_current": true,
+          "rival_name": "Rangers",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2023-24",
-        "last_season": "2025-26",
-        "rival_current": false,
-        "rival_spells": [],
+        "first_season": "2026-27",
+        "last_season": "2026-27",
+        "rival_current": true,
+        "rival_spells": [
+          {
+            "club": "Rangers",
+            "current": true,
+            "from_season": "2026-27",
+            "to_season": "2026-27"
+          }
+        ],
         "seasons_expected": 4,
-        "seasons_with_data": 3,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": null,
+        "top_flight": true,
+        "top_flight_abroad": false,
         "totals": {
-          "appearances": 83,
-          "assists": 7,
-          "goals": 8,
-          "minutes": 5688,
+          "appearances": 3,
+          "assists": 1,
+          "goals": 0,
+          "minutes": 69,
           "seasons_expected": 4,
-          "seasons_with_data": 3,
-          "starts": 66
+          "seasons_with_data": 1,
+          "starts": 0
         }
       },
       "sell_on_clause_id": null,
@@ -7501,55 +7392,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "KV Mechelen",
-            "minutes": 2677
-          },
-          {
-            "club": "Standard Liege",
-            "minutes": 2161
+            "club": "Amed",
+            "minutes": 781
           }
         ],
         "countries": [
           {
-            "country": "Belgium",
-            "minutes": 4838
+            "country": "Turkiye",
+            "minutes": 781
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "266",
-          "club_name": "KV Mechelen",
+          "club_id": "3579",
+          "club_name": "Amed",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "Belgian Pro League",
+          "league": "Super Lig",
           "league_tier": 1,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2022-23",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 4,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 61,
+          "appearances": 9,
           "assists": 0,
-          "goals": 3,
-          "minutes": 4838,
+          "goals": 0,
+          "minutes": 781,
           "seasons_expected": 5,
-          "seasons_with_data": 4,
-          "starts": 57
+          "seasons_with_data": 1,
+          "starts": 9
         }
       },
       "sell_on_clause_id": null,
@@ -7634,65 +7521,43 @@
       "position": "Defender",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Livingston",
-            "minutes": 2371
-          },
-          {
-            "club": "Ayr United",
-            "minutes": 774
-          },
-          {
-            "club": "Fleetwood Town",
-            "minutes": 105
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 3145
-          },
-          {
-            "country": "England",
-            "minutes": 105
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:livingston",
-          "club_name": "Livingston",
-          "country": "Scotland",
+          "club_id": "sco:provisional-fleetwood-town",
+          "club_name": "Fleetwood Town",
+          "country": null,
           "coverage": "historical",
           "is_rival": false,
-          "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
-          "market": "scotland",
+          "is_scottish_club": null,
+          "league": null,
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 3,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 42,
-          "assists": 1,
-          "goals": 0,
-          "minutes": 3250,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 3,
-          "starts": 37
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -7784,69 +7649,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Jamshedpur",
-            "minutes": 1304
-          },
-          {
-            "club": "Greenock Morton",
-            "minutes": 320
-          },
-          {
-            "club": "Kidderminster Harriers",
-            "minutes": 317
-          }
-        ],
-        "countries": [
-          {
-            "country": "India",
-            "minutes": 1304
-          },
-          {
-            "country": "Scotland",
-            "minutes": 320
-          },
-          {
-            "country": "England",
-            "minutes": 317
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "3476",
+          "club_id": "sco:provisional-jamshedpur",
           "club_name": "Jamshedpur",
           "country": null,
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "Indian Super League",
+          "league": null,
           "league_tier": null,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 3,
-        "status": "partial",
+        "seasons_with_data": 0,
+        "status": "unavailable",
         "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 30,
+          "appearances": null,
           "assists": null,
-          "goals": 2,
-          "minutes": 1941,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 3,
-          "starts": 22
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -7943,13 +7782,13 @@
         "clubs": [
           {
             "club": "Bologna",
-            "minutes": 7638
+            "minutes": 720
           }
         ],
         "countries": [
           {
             "country": "Italy",
-            "minutes": 7638
+            "minutes": 720
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -7958,7 +7797,7 @@
           "club_id": "500",
           "club_name": "Bologna",
           "country": "Italy",
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": false,
           "league": "Serie A",
@@ -7967,26 +7806,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2022-23",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 4,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": true,
         "totals": {
-          "appearances": 119,
-          "assists": 4,
-          "goals": 15,
-          "minutes": 7638,
+          "appearances": 8,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 720,
           "seasons_expected": 5,
-          "seasons_with_data": 4,
-          "starts": 99
+          "seasons_with_data": 1,
+          "starts": 8
         }
       },
       "sell_on_clause_id": "sell-on-ferguson-bologna",
@@ -8079,57 +7918,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Dumbarton",
-            "minutes": 4581
-          },
-          {
-            "club": "Queen of the South",
-            "minutes": 413
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 4994
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:dumbarton",
-          "club_name": "Dumbarton",
+          "club_id": "sco:queen-of-the-south",
+          "club_name": "Queen of the South",
           "country": "Scotland",
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish League Two",
-          "league_tier": 4,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 3,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 81,
+          "appearances": null,
           "assists": null,
-          "goals": 18,
-          "minutes": 4994,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 3,
-          "starts": 57
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -8223,18 +8048,8 @@
       "position": "Defender",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "St Johnstone",
-            "minutes": 5071
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 5071
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -8244,32 +8059,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2023-24",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 2,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 61,
-          "assists": 1,
-          "goals": 2,
-          "minutes": 5071,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 2,
-          "starts": 57
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -8360,69 +8175,44 @@
       "player_key": "api:player:44941",
       "position": "Defender",
       "post_career": {
-        "at_rival": true,
-        "clubs": [
-          {
-            "club": "Dundee United",
-            "minutes": 5048
-          },
-          {
-            "club": "St Mirren",
-            "minutes": 1856
-          },
-          {
-            "club": "Ross County",
-            "minutes": 90
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 6994
-          }
-        ],
+        "at_rival": false,
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:dundee-united",
-          "club_name": "Dundee United",
+          "club_id": "sco:st-mirren",
+          "club_name": "St Mirren",
           "country": "Scotland",
           "coverage": "historical",
-          "is_rival": true,
+          "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Championship",
-          "league_tier": 2,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
-          "rival_name": "Dundee United",
-          "source": "latest_season",
-          "status": "at_club"
+          "rival_name": null,
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
-        "rival_spells": [
-          {
-            "club": "Dundee United",
-            "current": true,
-            "from_season": "2023-24",
-            "to_season": "2024-25"
-          }
-        ],
+        "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 4,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 88,
-          "assists": 2,
-          "goals": 3,
-          "minutes": 6994,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 4,
-          "starts": 81
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -8516,57 +8306,43 @@
       "position": "Midfielder",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Port Vale",
-            "minutes": 7276
-          },
-          {
-            "club": "Shrewsbury",
-            "minutes": 2020
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 9296
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1351",
+          "club_id": "sco:provisional-port-vale",
           "club_name": "Port Vale",
           "country": null,
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "EFL League One",
-          "league_tier": 3,
+          "league": null,
+          "league_tier": null,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 4,
-        "status": "partial",
-        "top_flight": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 127,
-          "assists": 2,
-          "goals": 4,
-          "minutes": 9296,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 4,
-          "starts": 104
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -8661,71 +8437,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Wigan",
-            "minutes": 302
-          },
-          {
-            "club": "Liverpool U21",
-            "minutes": 219
-          },
-          {
-            "club": "Preston",
-            "minutes": 131
-          },
-          {
-            "club": "Kilmarnock",
-            "minutes": 128
-          },
-          {
-            "club": "Bolton",
-            "minutes": 68
+            "club": "St Mirren",
+            "minutes": 745
           }
         ],
         "countries": [
           {
-            "country": "England",
-            "minutes": 720
-          },
-          {
             "country": "Scotland",
-            "minutes": 128
+            "minutes": 745
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "61",
-          "club_name": "Wigan",
-          "country": null,
-          "coverage": "historical",
+          "club_id": "sco:st-mirren",
+          "club_name": "St Mirren",
+          "country": "Scotland",
+          "coverage": "current",
           "is_rival": false,
-          "is_scottish_club": null,
-          "league": "EFL League One",
-          "league_tier": 3,
-          "market": "unknown",
+          "is_scottish_club": true,
+          "league": "Scottish Premiership",
+          "league_tier": 1,
+          "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2022-23",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 4,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": null,
+        "top_flight": true,
+        "top_flight_abroad": false,
         "totals": {
-          "appearances": 25,
+          "appearances": 9,
           "assists": 0,
           "goals": 1,
-          "minutes": 848,
+          "minutes": 745,
           "seasons_expected": 5,
-          "seasons_with_data": 4,
-          "starts": 10
+          "seasons_with_data": 1,
+          "starts": 9
         }
       },
       "sell_on_clause_id": "sell-on-ramsay-liverpool",
@@ -8821,57 +8577,43 @@
       "position": "Midfielder",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Forest Green",
-            "minutes": 1792
-          },
-          {
-            "club": "Carlisle",
-            "minutes": 1159
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 2951
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1378",
+          "club_id": "sco:provisional-forest-green",
           "club_name": "Forest Green",
           "country": null,
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "EFL League One",
-          "league_tier": 3,
+          "league": null,
+          "league_tier": null,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2022-23",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 5,
-        "seasons_with_data": 3,
-        "status": "partial",
-        "top_flight": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 44,
-          "assists": 2,
-          "goals": 0,
-          "minutes": 2951,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 5,
-          "seasons_with_data": 3,
-          "starts": 37
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -9083,27 +8825,23 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Blackburn",
-            "minutes": 8030
-          },
-          {
-            "club": "Blackburn Rovers U21",
-            "minutes": 90
+            "club": "Derby",
+            "minutes": 717
           }
         ],
         "countries": [
           {
             "country": "England",
-            "minutes": 8120
+            "minutes": 717
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "67",
-          "club_name": "Blackburn",
+          "club_id": "69",
+          "club_name": "Derby",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
           "league": "EFL Championship",
@@ -9112,26 +8850,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2021-22",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 6,
-        "seasons_with_data": 5,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": false,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 138,
-          "assists": 12,
-          "goals": 9,
-          "minutes": 8120,
+          "appearances": 11,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 717,
           "seasons_expected": 6,
-          "seasons_with_data": 5,
-          "starts": 96
+          "seasons_with_data": 1,
+          "starts": 9
         }
       },
       "sell_on_clause_id": null,
@@ -9225,65 +8963,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Glentoran",
-            "minutes": 3001
-          },
-          {
-            "club": "Dundee",
-            "minutes": 979
-          },
-          {
-            "club": "Greenock Morton",
-            "minutes": 733
-          }
-        ],
-        "countries": [
-          {
-            "country": "N. Ireland",
-            "minutes": 3001
-          },
-          {
-            "country": "Scotland",
-            "minutes": 1712
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "5352",
-          "club_name": "Glentoran",
-          "country": null,
+          "club_id": "sco:dundee",
+          "club_name": "Dundee",
+          "country": "Scotland",
           "coverage": "historical",
           "is_rival": false,
-          "is_scottish_club": null,
-          "league": "NIFL Premiership",
-          "league_tier": 1,
-          "market": "unknown",
+          "is_scottish_club": true,
+          "league": null,
+          "league_tier": null,
+          "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2021-22",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 6,
-        "seasons_with_data": 4,
-        "status": "partial",
-        "top_flight": true,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 89,
+          "appearances": null,
           "assists": null,
-          "goals": 16,
-          "minutes": 4713,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 6,
-          "seasons_with_data": 4,
-          "starts": 51
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -9368,27 +9084,27 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Atlanta United FC",
-            "minutes": 4513
+            "club": "Portland Timbers",
+            "minutes": 650
           },
           {
-            "club": "Atlanta United II",
-            "minutes": 416
+            "club": "Atlanta United FC",
+            "minutes": 255
           }
         ],
         "countries": [
           {
             "country": "USA",
-            "minutes": 4929
+            "minutes": 905
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1608",
-          "club_name": "Atlanta United FC",
+          "club_id": "1617",
+          "club_name": "Portland Timbers",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
           "league": "Major League Soccer",
@@ -9397,26 +9113,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2021-22",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 6,
-        "seasons_with_data": 5,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 106,
-          "assists": 2,
-          "goals": 2,
-          "minutes": 4929,
+          "appearances": 15,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 905,
           "seasons_expected": 6,
-          "seasons_with_data": 5,
-          "starts": 71
+          "seasons_with_data": 1,
+          "starts": 9
         }
       },
       "sell_on_clause_id": null,
@@ -9507,72 +9223,50 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": true,
-        "clubs": [
-          {
-            "club": "Rangers",
-            "minutes": 2585
-          },
-          {
-            "club": "Birmingham",
-            "minutes": 450
-          },
-          {
-            "club": "Dundee",
-            "minutes": 287
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 2872
-          },
-          {
-            "country": "England",
-            "minutes": 450
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:rangers",
-          "club_name": "Rangers",
-          "country": "Scotland",
-          "coverage": "historical",
-          "is_rival": true,
-          "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
-          "market": "scotland",
+          "club_id": "54",
+          "club_name": "Birmingham",
+          "country": null,
+          "coverage": "current",
+          "is_rival": false,
+          "is_scottish_club": null,
+          "league": "EFL Championship",
+          "league_tier": 2,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
-          "rival_name": "Rangers",
-          "source": "latest_season",
+          "rival_name": null,
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2020-21",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [
           {
             "club": "Rangers",
-            "current": true,
+            "current": false,
             "from_season": "2020-21",
-            "to_season": "2024-25"
+            "to_season": "2020-21"
           }
         ],
         "seasons_expected": 7,
-        "seasons_with_data": 6,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "top_flight": false,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 103,
-          "assists": 3,
-          "goals": 9,
-          "minutes": 3322,
+          "appearances": 0,
+          "assists": 0,
+          "goals": 0,
+          "minutes": null,
           "seasons_expected": 7,
-          "seasons_with_data": 6,
-          "starts": 35
+          "seasons_with_data": 1,
+          "starts": 0
         }
       },
       "sell_on_clause_id": null,
@@ -9665,77 +9359,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "St Mirren",
-            "minutes": 4742
-          },
-          {
-            "club": "Shrewsbury",
-            "minutes": 1258
-          },
-          {
-            "club": "Dundee",
-            "minutes": 861
-          },
-          {
-            "club": "Ayr United",
-            "minutes": 810
-          },
-          {
-            "club": "Bengaluru",
-            "minutes": 418
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 6413
-          },
-          {
-            "country": "England",
-            "minutes": 1258
-          },
-          {
-            "country": "India",
-            "minutes": 418
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:st-mirren",
-          "club_name": "St Mirren",
-          "country": "Scotland",
+          "club_id": "sco:provisional-shrewsbury",
+          "club_name": "Shrewsbury",
+          "country": null,
           "coverage": "historical",
           "is_rival": false,
-          "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
-          "market": "scotland",
+          "is_scottish_club": null,
+          "league": null,
+          "league_tier": null,
+          "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2020-21",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 7,
-        "seasons_with_data": 6,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 137,
-          "assists": 5,
-          "goals": 21,
-          "minutes": 8089,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 7,
-          "seasons_with_data": 6,
-          "starts": 86
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -9831,41 +9491,13 @@
         "clubs": [
           {
             "club": "Auckland",
-            "minutes": 2263
-          },
-          {
-            "club": "Barnsley",
-            "minutes": 2134
-          },
-          {
-            "club": "Plymouth",
-            "minutes": 1275
-          },
-          {
-            "club": "AFC Wimbledon",
-            "minutes": 1080
-          },
-          {
-            "club": "Stockport County",
-            "minutes": 825
-          },
-          {
-            "club": "Shrewsbury",
-            "minutes": 781
-          },
-          {
-            "club": "Birmingham",
-            "minutes": 262
+            "minutes": 179
           }
         ],
         "countries": [
           {
-            "country": "England",
-            "minutes": 6357
-          },
-          {
             "country": "Australia",
-            "minutes": 2263
+            "minutes": 179
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -9874,7 +9506,7 @@
           "club_id": "24608",
           "club_name": "Auckland",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
           "league": "A-League",
@@ -9883,26 +9515,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2020-21",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 7,
-        "seasons_with_data": 6,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 191,
-          "assists": 13,
-          "goals": 31,
-          "minutes": 8620,
+          "appearances": 2,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 179,
           "seasons_expected": 7,
-          "seasons_with_data": 6,
-          "starts": 113
+          "seasons_with_data": 1,
+          "starts": 2
         }
       },
       "sell_on_clause_id": null,
@@ -9997,75 +9629,51 @@
         "at_rival": false,
         "clubs": [
           {
-            "club": "Nottingham Forest",
-            "minutes": 8395
-          },
-          {
             "club": "Dinamo Zagreb",
-            "minutes": 2639
-          },
-          {
-            "club": "Las Palmas",
-            "minutes": 2467
-          },
-          {
-            "club": "FC Copenhagen",
-            "minutes": 1064
+            "minutes": 405
           }
         ],
         "countries": [
           {
-            "country": "England",
-            "minutes": 8395
-          },
-          {
             "country": "Croatia",
-            "minutes": 2639
-          },
-          {
-            "country": "Spain",
-            "minutes": 2467
-          },
-          {
-            "country": "Denmark",
-            "minutes": 1064
+            "minutes": 405
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "65",
-          "club_name": "Nottingham Forest",
+          "club_id": "620",
+          "club_name": "Dinamo Zagreb",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "EFL Championship",
-          "league_tier": 2,
+          "league": "Croatian HNL",
+          "league_tier": 1,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2020-21",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 7,
-        "seasons_with_data": 6,
+        "seasons_with_data": 1,
         "status": "partial",
-        "top_flight": false,
+        "top_flight": true,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 171,
-          "assists": 6,
-          "goals": 5,
-          "minutes": 14565,
+          "appearances": 5,
+          "assists": 0,
+          "goals": 0,
+          "minutes": 405,
           "seasons_expected": 7,
-          "seasons_with_data": 6,
-          "starts": 168
+          "seasons_with_data": 1,
+          "starts": 4
         }
       },
       "sell_on_clause_id": null,
@@ -10268,29 +9876,13 @@
         "clubs": [
           {
             "club": "St Patrick's Athl.",
-            "minutes": 2700
-          },
-          {
-            "club": "Kilmarnock",
-            "minutes": 2384
-          },
-          {
-            "club": "Oldham",
-            "minutes": 1980
+            "minutes": 360
           }
         ],
         "countries": [
           {
             "country": "Ireland",
-            "minutes": 2700
-          },
-          {
-            "country": "Scotland",
-            "minutes": 2384
-          },
-          {
-            "country": "England",
-            "minutes": 1980
+            "minutes": 360
           }
         ],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
@@ -10299,7 +9891,7 @@
           "club_id": "3843",
           "club_name": "St Patrick's Athl.",
           "country": null,
-          "coverage": "historical",
+          "coverage": "current",
           "is_rival": false,
           "is_scottish_club": null,
           "league": "League of Ireland Premier",
@@ -10308,26 +9900,26 @@
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
+          "source": "current_season_stats",
           "status": "at_club"
         },
-        "first_season": "2020-21",
-        "last_season": "2025-26",
+        "first_season": "2026-27",
+        "last_season": "2026-27",
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 7,
-        "seasons_with_data": 6,
+        "seasons_with_data": 1,
         "status": "partial",
         "top_flight": true,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 79,
+          "appearances": 4,
           "assists": 0,
           "goals": 0,
-          "minutes": 7064,
+          "minutes": 360,
           "seasons_expected": 7,
-          "seasons_with_data": 6,
-          "starts": 78
+          "seasons_with_data": 1,
+          "starts": 4
         }
       },
       "sell_on_clause_id": null,
@@ -10419,61 +10011,43 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "Port Vale",
-            "minutes": 6146
-          },
-          {
-            "club": "Salford City",
-            "minutes": 1808
-          },
-          {
-            "club": "Northampton",
-            "minutes": 132
-          }
-        ],
-        "countries": [
-          {
-            "country": "England",
-            "minutes": 8086
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "1351",
-          "club_name": "Port Vale",
+          "club_id": "sco:provisional-salford-city",
+          "club_name": "Salford City",
           "country": null,
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": null,
-          "league": "EFL League Two",
-          "league_tier": 4,
+          "league": null,
+          "league_tier": null,
           "market": "unknown",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2019-20",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 8,
-        "seasons_with_data": 6,
-        "status": "partial",
-        "top_flight": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
         "top_flight_abroad": null,
         "totals": {
-          "appearances": 134,
-          "assists": 6,
-          "goals": 29,
-          "minutes": 8086,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 8,
-          "seasons_with_data": 6,
-          "starts": 100
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -10671,22 +10245,8 @@
       "position": "Attacker",
       "post_career": {
         "at_rival": false,
-        "clubs": [
-          {
-            "club": "St Johnstone",
-            "minutes": 8124
-          },
-          {
-            "club": "Livingston",
-            "minutes": 4217
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 12341
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
@@ -10696,32 +10256,32 @@
           "coverage": "historical",
           "is_rival": false,
           "is_scottish_club": true,
-          "league": "Scottish Premiership",
-          "league_tier": 1,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
           "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2019-20",
-        "last_season": "2025-26",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [],
         "seasons_expected": 8,
-        "seasons_with_data": 7,
-        "status": "partial",
-        "top_flight": true,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 220,
-          "assists": 16,
-          "goals": 29,
-          "minutes": 12341,
+          "appearances": null,
+          "assists": null,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 8,
-          "seasons_with_data": 7,
-          "starts": 139
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -10803,64 +10363,50 @@
       "position": "Defender",
       "post_career": {
         "at_rival": true,
-        "clubs": [
-          {
-            "club": "Cove Rangers",
-            "minutes": 6180
-          },
-          {
-            "club": "Dundee United",
-            "minutes": 5105
-          }
-        ],
-        "countries": [
-          {
-            "country": "Scotland",
-            "minutes": 11285
-          }
-        ],
+        "clubs": [],
+        "countries": [],
         "coverage_note": "Provider seasons after the departure; missing seasons are gaps, not zero.",
         "current": {
           "as_of": "2026-27",
-          "club_id": "sco:cove-rangers",
-          "club_name": "Cove Rangers",
+          "club_id": "sco:dundee-united",
+          "club_name": "Dundee United",
           "country": "Scotland",
           "coverage": "historical",
-          "is_rival": false,
+          "is_rival": true,
           "is_scottish_club": true,
-          "league": "Scottish League One",
-          "league_tier": 3,
+          "league": null,
+          "league_tier": null,
           "market": "scotland",
           "parent_club_name": null,
           "rival_current": false,
-          "rival_name": null,
-          "source": "latest_season",
-          "status": "at_club"
+          "rival_name": "Dundee United",
+          "source": "register_destination",
+          "status": "unknown"
         },
-        "first_season": "2019-20",
-        "last_season": "2024-25",
+        "first_season": null,
+        "last_season": null,
         "rival_current": false,
         "rival_spells": [
           {
             "club": "Dundee United",
-            "current": false,
+            "current": true,
             "from_season": "2019-20",
-            "to_season": "2021-22"
+            "to_season": "2019-20"
           }
         ],
         "seasons_expected": 8,
-        "seasons_with_data": 6,
-        "status": "partial",
-        "top_flight": false,
-        "top_flight_abroad": false,
+        "seasons_with_data": 0,
+        "status": "unavailable",
+        "top_flight": null,
+        "top_flight_abroad": null,
         "totals": {
-          "appearances": 133,
+          "appearances": null,
           "assists": null,
-          "goals": 7,
-          "minutes": 11285,
+          "goals": null,
+          "minutes": null,
           "seasons_expected": 8,
-          "seasons_with_data": 6,
-          "starts": 128
+          "seasons_with_data": 0,
+          "starts": null
         }
       },
       "sell_on_clause_id": null,
@@ -10985,7 +10531,7 @@
       "transfer_href": "/transfers/#transfer-afc:7b50d988d591564a"
     }
   ],
-  "published_at": "2026-10-28T22:32:32+00:00",
+  "published_at": "2026-10-29T06:20:11+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "sell_on_watch": {
@@ -11108,25 +10654,25 @@
       "unknown": 0
     }
   },
-  "served_by_update_id": "publish-2026-10-28T22:32:32+00:00",
+  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
   "served_generated_at": null,
   "source_snapshots": {
-    "api_football": "2026-10-28T22:25:52.193362+00:00",
-    "api_results": "2026-10-28T22:16:27+00:00",
-    "availability": "2026-10-28T22:20:47+00:00",
-    "career": "2026-10-28T22:20:47+00:00",
-    "football_data_uk": "2026-10-28T22:16:26+00:00",
-    "former_players": "2026-10-28T22:17:05+00:00",
-    "history_backfill": "2026-10-28T22:16:41+00:00",
+    "api_football": "2026-10-29T06:20:08.481045+00:00",
+    "api_results": "2026-10-29T06:17:06+00:00",
+    "availability": "2026-10-29T06:17:41+00:00",
+    "career": "2026-10-29T06:17:41+00:00",
+    "football_data_uk": "2026-10-29T06:17:05+00:00",
+    "former_players": "2026-10-29T06:17:13+00:00",
+    "history_backfill": "2026-10-29T06:17:12+00:00",
     "matchday_snapshot": "2026-10-28T22:16:41+00:00",
-    "scouting_clubs": "2026-10-28T22:24:50+00:00",
-    "scouting_europe": "2026-10-28T22:24:39+00:00",
-    "scouting_pool": "2026-10-28T22:20:53+00:00",
-    "scouting_roles": "2026-10-28T22:24:08+00:00",
-    "scouting_rose_history": "2026-10-28T22:24:23+00:00",
-    "scouting_standings": "2026-10-28T22:24:40+00:00",
-    "spfl": "2026-10-28T22:16:27+00:00",
-    "xg_enrichment": "2026-10-28T22:25:35+00:00"
+    "scouting_clubs": "2026-10-29T06:18:11+00:00",
+    "scouting_europe": "2026-10-29T06:18:00+00:00",
+    "scouting_pool": "2026-10-29T06:17:45+00:00",
+    "scouting_roles": "2026-10-29T06:17:47+00:00",
+    "scouting_rose_history": "2026-10-29T06:18:00+00:00",
+    "scouting_standings": "2026-10-29T06:18:01+00:00",
+    "spfl": "2026-10-29T06:17:07+00:00",
+    "xg_enrichment": "2026-10-29T06:19:52+00:00"
   },
   "sources": [
     {
@@ -11154,64 +10700,57 @@
   "stale_reason": "served_from_previous_publish",
   "state": "partial",
   "summary": {
-    "at_club": 51,
-    "at_rival_now": 0,
+    "at_club": 33,
+    "at_rival_now": 3,
     "by_current_country": {
       "Armenia": 1,
-      "Australia": 2,
+      "Australia": 1,
       "Denmark": 1,
       "England": 5,
       "Germany": 1,
       "Greece": 1,
-      "Hungary": 1,
       "Iceland": 1,
       "Italy": 1,
+      "Netherlands": 1,
       "Northern Ireland": 2,
       "Norway": 1,
       "Poland": 1,
-      "Scotland": 28,
-      "Serbia": 1,
-      "Spain": 1,
+      "Scotland": 26,
       "Sweden": 1,
       "Switzerland": 1,
       "USA": 1,
-      "unknown": 25
+      "unknown": 30
     },
     "by_current_coverage": {
-      "current": 6,
-      "historical": 70
+      "current": 33,
+      "historical": 43
     },
     "by_current_league": {
+      "1. Lig": 1,
       "2. Bundesliga": 1,
       "A-League": 3,
       "Allsvenskan": 1,
-      "Belgian Pro League": 1,
+      "Croatian HNL": 1,
       "Danish Superliga": 1,
       "EFL Championship": 3,
-      "EFL League One": 7,
-      "EFL League Two": 3,
-      "Eerste Divisie": 1,
+      "EFL League One": 3,
+      "Eerste Divisie": 2,
       "Ekstraklasa": 1,
       "Eliteserien": 1,
-      "Indian Super League": 1,
-      "La Liga": 1,
       "League of Ireland Premier": 1,
-      "Major League Soccer": 1,
-      "NIFL Premiership": 1,
-      "Nemzeti Bajnoksag I": 1,
-      "Scottish Championship": 3,
-      "Scottish League One": 1,
-      "Scottish League Two": 1,
-      "Scottish Premiership": 13,
-      "Serbian SuperLiga": 1,
-      "Serie A": 2,
-      "Super Lig": 1,
-      "unknown": 25
+      "Liga MX": 1,
+      "Ligat Ha'al": 1,
+      "Major League Soccer": 2,
+      "Scottish Premiership": 6,
+      "Serie A": 1,
+      "Serie B": 1,
+      "Super Lig": 2,
+      "unknown": 43
     },
     "by_current_status": {
-      "at_club": 51,
+      "at_club": 33,
       "free_agent": 4,
-      "unknown": 21
+      "unknown": 39
     },
     "by_destination": {
       "england": 7,
@@ -11247,12 +10786,12 @@
       "unknown": 1
     },
     "current_club_unknown": 0,
-    "current_unknown": 21,
+    "current_unknown": 39,
     "developed_here": 6,
     "developed_here_with_fee": 5,
     "free_agent": 4,
-    "in_covered_feed": 6,
-    "not_in_covered_feed": 70,
+    "in_covered_feed": 33,
+    "not_in_covered_feed": 43,
     "on_loan": 0,
     "retired": 0,
     "rival_spell": 6,
@@ -11263,9 +10802,9 @@
     "sell_on_implied_low_gbp": null,
     "sell_on_not_computable": 1,
     "sell_on_triggers": 1,
-    "top_flight_abroad": 7,
+    "top_flight_abroad": 5,
     "total": 76,
     "young_exits": 15
   },
-  "update_id": "publish-2026-10-28T22:32:32+00:00"
+  "update_id": "2026-10-29T06:17:02+00:00-2142779"
 }
