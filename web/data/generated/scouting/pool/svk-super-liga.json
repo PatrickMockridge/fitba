@@ -3,15 +3,15 @@
     "fixtures_played": 72,
     "lineups_fetched": 72,
     "note": "Provider season statistics; ratings and percentiles are within this league and role.",
-    "players": 309,
-    "rated": 268,
-    "role_coverage": 0.515,
+    "players": 321,
+    "rated": 284,
+    "role_coverage": 0.495,
     "role_players": 159,
-    "with_minutes_450": 0
+    "with_minutes_450": 11
   },
-  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
+  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-29T06:20:11+00:00",
+  "generated_at": "2026-10-30T06:23:37+00:00",
   "league": {
     "country": "Slovakia",
     "id": "svk:super-liga",
@@ -28,8 +28,2166 @@
     "Role families come from starting-XI grids; leagues without grids use the provider group."
   ],
   "min_minutes": 450,
-  "players": [],
-  "published_at": "2026-10-29T06:20:11+00:00",
+  "players": [
+    {
+      "adjusted_percentile": 58.3,
+      "adjustment_basis": "league_all_roles",
+      "age": 22,
+      "age_multiplier": 1.3,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": 39.9,
+          "coverage": 0.85,
+          "score": 64.0
+        }
+      },
+      "assists_p90": 0.17,
+      "club": "Podbrezová",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 100.0,
+      "dribbles_success_p90": 0.17,
+      "duel_win_pct": 50.0,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Jakub Luka",
+      "goals_assists_p90": 0.17,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.83,
+      "key_passes_p90": 0.33,
+      "minutes": 540,
+      "name": "J. Luka",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 88.0,
+      "passes_completed_p90": 50.89,
+      "player_id": 301677,
+      "position_group": "DEF",
+      "profile": {
+        "adjusted_score": 39.9,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 64.0,
+        "score": 39.9
+      },
+      "rating": 7.08,
+      "rating_percentile": 85.7,
+      "role_family": "centre_back",
+      "role_family_share": 1.0,
+      "role_label": "Centre back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.33
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.33
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 50.89
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 88.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 0.83
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.83
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 50.0
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 0.83
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.83
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 50.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 50.89
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 88.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 540,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 72.8,
+      "shots_p90": 0.33,
+      "stats_club": "Podbrezová",
+      "tackles_p90": 0.83,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -4.2,
+      "team_played": 12,
+      "team_points": 17,
+      "team_points_percentile": 62.5,
+      "team_ppg": 1.417,
+      "team_rank": 5,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 56.0,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 1.0,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance",
+        "profile"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 58.3,
+      "adjustment_basis": "league_all_roles",
+      "age": 22,
+      "age_multiplier": 1.3,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": 12.7,
+          "coverage": 0.85,
+          "score": 29.9
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Skalica",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 60.98,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Patrick Karhan",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.0,
+      "key_passes_p90": null,
+      "minutes": 450,
+      "name": "P. Karhan",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 70.0,
+      "passes_completed_p90": 17.92,
+      "player_id": 312634,
+      "position_group": "DEF",
+      "profile": {
+        "adjusted_score": 12.7,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 29.9,
+        "score": 12.7
+      },
+      "rating": 7.08,
+      "rating_percentile": 85.7,
+      "role_family": "centre_back",
+      "role_family_share": 1.0,
+      "role_label": "Centre back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": null
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 17.92
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 70.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 60.98
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 60.98
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 17.92
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 70.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 66.6,
+      "shots_p90": 0.2,
+      "stats_club": "Skalica",
+      "tackles_p90": 1.8,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": 29.1,
+      "team_played": 12,
+      "team_points": 10,
+      "team_points_percentile": 29.2,
+      "team_ppg": 0.833,
+      "team_rank": 9,
+      "team_underperforming": true,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 51.2,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 1.0,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance",
+        "profile"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 45.8,
+      "adjustment_basis": "league_all_roles",
+      "age": 23,
+      "age_multiplier": 1.3,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": 19.5,
+          "coverage": 0.85,
+          "score": 40.3
+        }
+      },
+      "assists_p90": 0.17,
+      "club": "Podbrezová",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 0.0,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 50.0,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Rene Rantuša Lampreht",
+      "goals_assists_p90": 0.17,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.17,
+      "key_passes_p90": 1.0,
+      "minutes": 540,
+      "name": "R. Lampreht",
+      "nationality": "Slovenia",
+      "pass_completion_pct": 79.0,
+      "passes_completed_p90": 32.65,
+      "player_id": 325040,
+      "position_group": "DEF",
+      "profile": {
+        "adjusted_score": 19.5,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 40.3,
+        "score": 19.5
+      },
+      "rating": 6.88,
+      "rating_percentile": 64.3,
+      "role_family": "centre_back",
+      "role_family_share": 1.0,
+      "role_label": "Centre back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 32.65
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 79.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.5
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 50.0
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.5
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 50.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 32.65
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 79.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 540,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 59.9,
+      "shots_p90": 0.17,
+      "stats_club": "Podbrezová",
+      "tackles_p90": 1.5,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -16.7,
+      "team_played": 12,
+      "team_points": 17,
+      "team_points_percentile": 62.5,
+      "team_ppg": 1.417,
+      "team_rank": 5,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 46.1,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 1.0,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance",
+        "profile"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 39.1,
+      "adjustment_basis": "league_all_roles",
+      "age": 32,
+      "age_multiplier": 1.0,
+      "appearances": 11,
+      "archetypes": {
+        "ball_winning_pivot": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        },
+        "deep_lying_playmaker": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.2,
+      "club": "Skalica",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 50.0,
+      "dribbles_success_p90": 0.8,
+      "duel_win_pct": 52.54,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Adam Morong",
+      "goals_assists_p90": 0.2,
+      "goals_p90": 0.0,
+      "interceptions_p90": 1.0,
+      "key_passes_p90": 0.8,
+      "minutes": 450,
+      "name": "A. Morong",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 73.0,
+      "passes_completed_p90": 16.06,
+      "player_id": 61296,
+      "position_group": "DEF",
+      "profile": null,
+      "rating": 6.74,
+      "rating_percentile": 50.0,
+      "role_family": "central_midfield",
+      "role_family_share": 1.0,
+      "role_label": "Centre midfield",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 16.06
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 73.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 2.6
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 52.54
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 16.06
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 73.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 2.6
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "goals_assists_p90",
+                "percentile": null,
+                "value": 0.2
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 35.0,
+      "shots_p90": 0.2,
+      "stats_club": "Skalica",
+      "tackles_p90": 2.6,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": 9.9,
+      "team_played": 12,
+      "team_points": 10,
+      "team_points_percentile": 29.2,
+      "team_ppg": 0.833,
+      "team_rank": 9,
+      "team_underperforming": true,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 35.0,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 36.4,
+      "adjustment_basis": "league_all_roles",
+      "age": 29,
+      "age_multiplier": 1.0,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Ružomberok",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 16.67,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 54.55,
+      "dribbles_success_p90": 1.2,
+      "duel_win_pct": 61.29,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Dominik Kostka",
+      "goals_assists_p90": 0.2,
+      "goals_p90": 0.2,
+      "interceptions_p90": 1.8,
+      "key_passes_p90": 0.2,
+      "minutes": 450,
+      "name": "D. Kostka",
+      "nationality": "Czechia",
+      "pass_completion_pct": 69.0,
+      "passes_completed_p90": 21.67,
+      "player_id": 270424,
+      "position_group": "DEF",
+      "profile": null,
+      "rating": 6.58,
+      "rating_percentile": 35.7,
+      "role_family": "full_back",
+      "role_family_share": 0.667,
+      "role_label": "Full-back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 1.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 1.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 21.67
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 69.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 3.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 61.29
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 3.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 1.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 61.29
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 21.67
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 69.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 1.2
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 42.1,
+      "shots_p90": 1.2,
+      "stats_club": "Ružomberok",
+      "tackles_p90": 3.8,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": 19.7,
+      "team_played": 12,
+      "team_points": 9,
+      "team_points_percentile": 16.7,
+      "team_ppg": 0.75,
+      "team_rank": 11,
+      "team_underperforming": true,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 42.1,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 12.5,
+      "adjustment_basis": "league_all_roles",
+      "age": 33,
+      "age_multiplier": 1.0,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": 30.6,
+          "coverage": 0.85,
+          "score": 54.2
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Zemplín Michalovce",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 33.33,
+      "dribbles_success_p90": 0.2,
+      "duel_win_pct": 52.17,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Lukáš Pauschek",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.4,
+      "key_passes_p90": 0.8,
+      "minutes": 450,
+      "name": "L. Pauschek",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 82.0,
+      "passes_completed_p90": 34.28,
+      "player_id": 66245,
+      "position_group": "DEF",
+      "profile": {
+        "adjusted_score": 30.6,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 54.2,
+        "score": 30.6
+      },
+      "rating": 6.36,
+      "rating_percentile": 21.4,
+      "role_family": "centre_back",
+      "role_family_share": 1.0,
+      "role_label": "Centre back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 34.28
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 82.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.4
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 52.17
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.4
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 52.17
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 34.28
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 82.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 19.7,
+      "shots_p90": 0.2,
+      "stats_club": "Zemplín Michalovce",
+      "tackles_p90": 0.8,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -29.2,
+      "team_played": 12,
+      "team_points": 14,
+      "team_points_percentile": 41.7,
+      "team_ppg": 1.167,
+      "team_rank": 7,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 19.7,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 1.0,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance",
+        "profile"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 12.5,
+      "adjustment_basis": "league_all_roles",
+      "age": 23,
+      "age_multiplier": 1.3,
+      "appearances": 11,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": 17.3,
+          "coverage": 0.85,
+          "score": 37.1
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Ružomberok",
+      "cohort_basis": "provider_group",
+      "cohort_n": 7,
+      "conceded_p90": 0.0,
+      "conversion_pct": 25.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 25.0,
+      "dribbles_success_p90": 0.2,
+      "duel_win_pct": 43.33,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Alexander Selecký",
+      "goals_assists_p90": 0.2,
+      "goals_p90": 0.2,
+      "interceptions_p90": 0.8,
+      "key_passes_p90": 1.6,
+      "minutes": 450,
+      "name": "A. Selecký",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 69.0,
+      "passes_completed_p90": 12.97,
+      "player_id": 323555,
+      "position_group": "DEF",
+      "profile": {
+        "adjusted_score": 17.3,
+        "id": "build_up_defender",
+        "label": "Build-up defender",
+        "raw_score": 37.1,
+        "score": 17.3
+      },
+      "rating": 6.34,
+      "rating_percentile": 7.1,
+      "role_family": "centre_back",
+      "role_family_share": 0.333,
+      "role_label": "Centre back",
+      "role_status": "mixed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 1.6
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 0.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 12.97
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 69.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 43.33
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 1.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 43.33
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 12.97
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 69.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 34.7,
+      "shots_p90": 0.8,
+      "stats_club": "Ružomberok",
+      "tackles_p90": 1.0,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -4.2,
+      "team_played": 12,
+      "team_points": 9,
+      "team_points_percentile": 16.7,
+      "team_ppg": 0.75,
+      "team_rank": 11,
+      "team_underperforming": true,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 26.7,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 1.0,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance",
+        "profile"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 29.3,
+      "adjustment_basis": "league_all_roles",
+      "age": 20,
+      "age_multiplier": 1.3,
+      "appearances": 12,
+      "archetypes": {
+        "build_up_defender": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Podbrezová",
+      "cohort_basis": "insufficient",
+      "cohort_n": 1,
+      "conceded_p90": 0.0,
+      "conversion_pct": 0.0,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": 42.86,
+      "dribbles_success_p90": 1.18,
+      "duel_win_pct": 41.27,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Ondřej Deml",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.59,
+      "key_passes_p90": 0.98,
+      "minutes": 457,
+      "name": "Ondřej Deml",
+      "nationality": "Czech Republic",
+      "pass_completion_pct": 72.0,
+      "passes_completed_p90": 19.57,
+      "player_id": 386830,
+      "position_group": "MID",
+      "profile": null,
+      "rating": 6.58,
+      "rating_percentile": null,
+      "role_family": "wing_back",
+      "role_family_share": 1.0,
+      "role_label": "Wing-back",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "goals_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "assists_p90",
+                "percentile": null,
+                "value": 0.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "shots_p90",
+                "percentile": null,
+                "value": 1.18
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.98
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 1.18
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 19.57
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 72.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 2.76
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.59
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 41.27
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "tackles_p90",
+                "percentile": null,
+                "value": 2.76
+              },
+              {
+                "cohort_n": 0,
+                "metric": "interceptions_p90",
+                "percentile": null,
+                "value": 0.59
+              },
+              {
+                "cohort_n": 0,
+                "metric": "duel_win_pct",
+                "percentile": null,
+                "value": 41.27
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 19.57
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 72.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "key_passes_p90",
+                "percentile": null,
+                "value": 0.98
+              },
+              {
+                "cohort_n": 0,
+                "metric": "dribbles_success_p90",
+                "percentile": null,
+                "value": 1.18
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 457,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": null,
+      "saves_p90": 0.0,
+      "scouting_priority": 46.5,
+      "shots_p90": 1.18,
+      "stats_club": "Podbrezová",
+      "tackles_p90": 2.76,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -33.2,
+      "team_played": 12,
+      "team_points": 17,
+      "team_points_percentile": 62.5,
+      "team_ppg": 1.417,
+      "team_rank": 5,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 35.8,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 52.8,
+      "adjustment_basis": "league_all_roles",
+      "age": 28,
+      "age_multiplier": 1.0,
+      "appearances": 12,
+      "archetypes": {
+        "goalkeeper_shot_stopper": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Zemplín Michalovce",
+      "cohort_basis": "insufficient",
+      "cohort_n": 3,
+      "conceded_p90": 2.2,
+      "conversion_pct": null,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 0.0,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Adam Jakubech",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.0,
+      "key_passes_p90": null,
+      "minutes": 450,
+      "name": "A. Jakubech",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 67.0,
+      "passes_completed_p90": 20.5,
+      "player_id": 22219,
+      "position_group": "GK",
+      "profile": null,
+      "rating": 6.9,
+      "rating_percentile": null,
+      "role_family": "goalkeeper",
+      "role_family_share": 1.0,
+      "role_label": "Goalkeeper",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 6.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 73.81
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 2.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 20.5
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 67.0
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 6.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 73.81
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 2.2
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 67.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": 73.81,
+      "saves_p90": 6.2,
+      "scouting_priority": 52.7,
+      "shots_p90": null,
+      "stats_club": "Zemplín Michalovce",
+      "tackles_p90": 0.0,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": 11.1,
+      "team_played": 12,
+      "team_points": 14,
+      "team_points_percentile": 41.7,
+      "team_ppg": 1.167,
+      "team_rank": 7,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 52.7,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 14.6,
+      "adjustment_basis": "league_all_roles",
+      "age": 25,
+      "age_multiplier": 1.0,
+      "appearances": 11,
+      "archetypes": {
+        "goalkeeper_shot_stopper": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Ružomberok",
+      "cohort_basis": "insufficient",
+      "cohort_n": 3,
+      "conceded_p90": 2.8,
+      "conversion_pct": null,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 83.33,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Ivan Krajčírik",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.0,
+      "key_passes_p90": null,
+      "minutes": 450,
+      "name": "I. Krajčírik",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 56.0,
+      "passes_completed_p90": 16.35,
+      "player_id": 61189,
+      "position_group": "GK",
+      "profile": null,
+      "rating": 6.32,
+      "rating_percentile": null,
+      "role_family": "goalkeeper",
+      "role_family_share": 1.0,
+      "role_label": "Goalkeeper",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 2.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 50.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 2.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 16.35
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 56.0
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 2.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 50.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 2.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 56.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": 50.0,
+      "saves_p90": 2.8,
+      "scouting_priority": 31.5,
+      "shots_p90": null,
+      "stats_club": "Ružomberok",
+      "tackles_p90": 0.0,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": -2.1,
+      "team_played": 12,
+      "team_points": 9,
+      "team_points_percentile": 16.7,
+      "team_ppg": 0.75,
+      "team_rank": 11,
+      "team_underperforming": true,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 31.5,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    },
+    {
+      "adjusted_percentile": 86.2,
+      "adjustment_basis": "league_all_roles",
+      "age": 27,
+      "age_multiplier": 1.0,
+      "appearances": 12,
+      "archetypes": {
+        "goalkeeper_shot_stopper": {
+          "adjusted_score": null,
+          "coverage": 0.0,
+          "score": null
+        }
+      },
+      "assists_p90": 0.0,
+      "club": "Spartak Trnava",
+      "cohort_basis": "insufficient",
+      "cohort_n": 3,
+      "conceded_p90": 0.8,
+      "conversion_pct": null,
+      "current_club_source": "stats_snapshot",
+      "current_club_status": "stats",
+      "current_league_name": "Slovak Super Liga",
+      "dribble_success_pct": null,
+      "dribbles_success_p90": 0.0,
+      "duel_win_pct": 100.0,
+      "europe_multiplier": 1.0,
+      "european_league_phase_appearances": 0,
+      "european_league_phase_competitions": [],
+      "european_league_phase_minutes": 0,
+      "european_status": "none",
+      "flags": [
+        "low_minutes"
+      ],
+      "full_name": "Martin Vantruba",
+      "goals_assists_p90": 0.0,
+      "goals_p90": 0.0,
+      "interceptions_p90": 0.0,
+      "key_passes_p90": null,
+      "minutes": 450,
+      "name": "M. Vantruba",
+      "nationality": "Slovakia",
+      "pass_completion_pct": 77.0,
+      "passes_completed_p90": 28.8,
+      "player_id": 61428,
+      "position_group": "GK",
+      "profile": null,
+      "rating": 7.42,
+      "rating_percentile": null,
+      "role_family": "goalkeeper",
+      "role_family_share": 1.0,
+      "role_label": "Goalkeeper",
+      "role_status": "observed",
+      "rose": {
+        "basis": "insufficient",
+        "cohort_min_minutes": 450,
+        "cohort_n": 0,
+        "figures": [
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 4.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 83.33
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "passes_completed_p90",
+                "percentile": null,
+                "value": 28.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 77.0
+              }
+            ],
+            "id": "overall",
+            "label": "Overall profile",
+            "status": "unavailable"
+          },
+          {
+            "axes": [
+              {
+                "cohort_n": 0,
+                "metric": "saves_p90",
+                "percentile": null,
+                "value": 4.0
+              },
+              {
+                "cohort_n": 0,
+                "metric": "save_pct",
+                "percentile": null,
+                "value": 83.33
+              },
+              {
+                "cohort_n": 0,
+                "metric": "conceded_p90",
+                "percentile": null,
+                "value": 0.8
+              },
+              {
+                "cohort_n": 0,
+                "metric": "pass_completion_pct",
+                "percentile": null,
+                "value": 77.0
+              }
+            ],
+            "id": "position",
+            "label": "Position profile",
+            "status": "unavailable"
+          }
+        ],
+        "league": "svk:super-liga",
+        "league_label": "Slovak Super Liga",
+        "min_minutes": 450,
+        "minutes": 450,
+        "reason": "cohort_too_small",
+        "status": "unavailable"
+      },
+      "save_pct": 83.33,
+      "saves_p90": 4.0,
+      "scouting_priority": 77.8,
+      "shots_p90": null,
+      "stats_club": "Spartak Trnava",
+      "tackles_p90": 0.0,
+      "team_context_status": "available",
+      "team_count": 12,
+      "team_group": "Super Liga",
+      "team_lift": 11.2,
+      "team_played": 12,
+      "team_points": 22,
+      "team_points_percentile": 75.0,
+      "team_ppg": 1.833,
+      "team_rank": 3,
+      "team_underperforming": false,
+      "transferred_at": null,
+      "value_confidence": "unknown",
+      "value_high_gbp": null,
+      "value_index": 77.8,
+      "value_index_basis": "measured inputs, modelled weights",
+      "value_index_coverage": 0.85,
+      "value_index_drivers": [
+        "age",
+        "minutes",
+        "performance"
+      ],
+      "value_low_gbp": null,
+      "value_method": "awaiting_anchors"
+    }
+  ],
+  "published_at": "2026-10-30T06:23:37+00:00",
   "rose_meta": {
     "catalogue": {
       "assists_p90": {
@@ -134,24 +2292,24 @@
   },
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
   "source_snapshots": {
-    "api_football": "2026-10-29T06:20:08.481045+00:00",
-    "api_results": "2026-10-29T06:17:06+00:00",
-    "availability": "2026-10-29T06:17:41+00:00",
-    "career": "2026-10-29T06:17:41+00:00",
-    "football_data_uk": "2026-10-29T06:17:05+00:00",
-    "former_players": "2026-10-29T06:17:13+00:00",
-    "history_backfill": "2026-10-29T06:17:12+00:00",
-    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
-    "scouting_clubs": "2026-10-29T06:18:11+00:00",
-    "scouting_europe": "2026-10-29T06:18:00+00:00",
-    "scouting_pool": "2026-10-29T06:17:45+00:00",
-    "scouting_roles": "2026-10-29T06:17:47+00:00",
-    "scouting_rose_history": "2026-10-29T06:18:00+00:00",
-    "scouting_standings": "2026-10-29T06:18:01+00:00",
-    "spfl": "2026-10-29T06:17:07+00:00",
-    "xg_enrichment": "2026-10-29T06:19:52+00:00"
+    "api_football": "2026-10-30T06:23:34.875419+00:00",
+    "api_results": "2026-10-30T06:17:04+00:00",
+    "availability": "2026-10-30T06:18:52+00:00",
+    "career": "2026-10-30T06:18:52+00:00",
+    "football_data_uk": "2026-10-30T06:17:03+00:00",
+    "former_players": "2026-10-30T06:17:24+00:00",
+    "history_backfill": "2026-10-30T06:17:18+00:00",
+    "matchday_snapshot": "2026-10-30T06:17:18+00:00",
+    "scouting_clubs": "2026-10-30T06:22:53+00:00",
+    "scouting_europe": "2026-10-30T06:22:42+00:00",
+    "scouting_pool": "2026-10-30T06:18:59+00:00",
+    "scouting_roles": "2026-10-30T06:22:15+00:00",
+    "scouting_rose_history": "2026-10-30T06:22:27+00:00",
+    "scouting_standings": "2026-10-30T06:22:43+00:00",
+    "spfl": "2026-10-30T06:17:05+00:00",
+    "xg_enrichment": "2026-10-30T06:23:20+00:00"
   },
   "sources": [
     {
@@ -161,5 +2319,5 @@
     }
   ],
   "state": "full",
-  "update_id": "2026-10-29T06:17:02+00:00-2142779"
+  "update_id": "2026-10-30T06:17:02+00:00-1579911"
 }

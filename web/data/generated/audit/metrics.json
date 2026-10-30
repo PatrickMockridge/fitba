@@ -4,12 +4,12 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-10-29T06:20:11+00:00",
-  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
+  "audited_at": "2026-10-30T06:23:37+00:00",
+  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
   "dataset_state": "fresh",
-  "dataset_version": "2026-10-29T06:20:11+00:00-10d3f47",
+  "dataset_version": "2026-10-30T06:23:37+00:00-a3e7abe",
   "errors": [],
-  "generated_at": "2026-10-29T06:20:11+00:00",
+  "generated_at": "2026-10-30T06:23:37+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -2009,7 +2009,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 7078 numeric leaves",
+          "message": "2 location(s), 7186 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2030,7 +2030,7 @@
         "/squad/"
       ],
       "errors": [],
-      "fields_checked": 7078,
+      "fields_checked": 7186,
       "home_payload": "squad/aberdeen.json",
       "home_surface": "/squad/",
       "id": "squad.players",
@@ -2040,8 +2040,8 @@
       ],
       "locations": [
         {
-          "nodes": 20963,
-          "numeric_leaves": 6864,
+          "nodes": 21049,
+          "numeric_leaves": 6972,
           "payload": "squad/aberdeen.json",
           "pointer": "/players/**"
         },
@@ -2052,7 +2052,7 @@
           "pointer": "/excluded_players/**"
         }
       ],
-      "numeric_leaves": 7078,
+      "numeric_leaves": 7186,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 2,
@@ -2177,7 +2177,7 @@
           "status": "pass"
         },
         {
-          "message": "39 location(s), 8543 numeric leaves",
+          "message": "39 location(s), 8596 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2198,7 +2198,7 @@
         "/players/"
       ],
       "errors": [],
-      "fields_checked": 8543,
+      "fields_checked": 8596,
       "home_payload": "players/*.json",
       "home_surface": "/players/",
       "id": "player.page",
@@ -2255,7 +2255,7 @@
         },
         {
           "nodes": 1208,
-          "numeric_leaves": 236,
+          "numeric_leaves": 241,
           "payload": "players/18068.json",
           "pointer": "/**"
         },
@@ -2266,8 +2266,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 1245,
-          "numeric_leaves": 261,
+          "nodes": 1252,
+          "numeric_leaves": 269,
           "payload": "players/20422.json",
           "pointer": "/**"
         },
@@ -2321,7 +2321,7 @@
         },
         {
           "nodes": 1178,
-          "numeric_leaves": 235,
+          "numeric_leaves": 237,
           "payload": "players/379662.json",
           "pointer": "/**"
         },
@@ -2339,7 +2339,7 @@
         },
         {
           "nodes": 1329,
-          "numeric_leaves": 282,
+          "numeric_leaves": 292,
           "payload": "players/395743.json",
           "pointer": "/**"
         },
@@ -2422,8 +2422,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 765,
-          "numeric_leaves": 85,
+          "nodes": 799,
+          "numeric_leaves": 113,
           "payload": "players/68534.json",
           "pointer": "/**"
         },
@@ -2446,7 +2446,7 @@
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 8543,
+      "numeric_leaves": 8596,
       "payloads": 39,
       "provenance_only": true,
       "rows_checked": 39,
@@ -2723,7 +2723,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 1309 numeric leaves",
+          "message": "2 location(s), 1329 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2744,7 +2744,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 1312,
+      "fields_checked": 1332,
       "home_payload": "coverage.json",
       "home_surface": "/status/",
       "id": "coverage.surfaces",
@@ -2760,13 +2760,13 @@
           "pointer": "/**"
         },
         {
-          "nodes": 2134,
-          "numeric_leaves": 1204,
+          "nodes": 2180,
+          "numeric_leaves": 1224,
           "payload": "scouting/coverage.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1309,
+      "numeric_leaves": 1329,
       "payloads": 2,
       "provenance_only": false,
       "rows_checked": 3,
@@ -2844,7 +2844,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 85 numeric leaves",
+          "message": "1 location(s), 91 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2866,7 +2866,7 @@
         "/status/"
       ],
       "errors": [],
-      "fields_checked": 95,
+      "fields_checked": 101,
       "home_payload": "former-players/aberdeen.json",
       "home_surface": "/former-players/",
       "id": "former.summary",
@@ -2876,13 +2876,13 @@
       ],
       "locations": [
         {
-          "nodes": 97,
-          "numeric_leaves": 85,
+          "nodes": 103,
+          "numeric_leaves": 91,
           "payload": "former-players/aberdeen.json",
           "pointer": "/summary/**"
         }
       ],
-      "numeric_leaves": 85,
+      "numeric_leaves": 91,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 77,
@@ -2902,7 +2902,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 3664 numeric leaves",
+          "message": "2 location(s), 4134 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2923,7 +2923,7 @@
         "/former-players/"
       ],
       "errors": [],
-      "fields_checked": 3668,
+      "fields_checked": 4138,
       "home_payload": "former-players/aberdeen.json",
       "home_surface": "/former-players/",
       "id": "former.players",
@@ -2934,19 +2934,19 @@
       ],
       "locations": [
         {
-          "nodes": 8926,
-          "numeric_leaves": 1832,
+          "nodes": 9309,
+          "numeric_leaves": 2067,
           "payload": "former-players/aberdeen.json",
           "pointer": "/players"
         },
         {
-          "nodes": 8926,
-          "numeric_leaves": 1832,
+          "nodes": 9309,
+          "numeric_leaves": 2067,
           "payload": "former-players/aberdeen.json",
           "pointer": "/players/**"
         }
       ],
-      "numeric_leaves": 3664,
+      "numeric_leaves": 4134,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 78,
@@ -2966,7 +2966,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 2896 numeric leaves",
+          "message": "2 location(s), 5482 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2987,7 +2987,7 @@
         "/former-players/"
       ],
       "errors": [],
-      "fields_checked": 2899,
+      "fields_checked": 5485,
       "home_payload": "former-players/seasons.json",
       "home_surface": "/former-players/",
       "id": "former.post-seasons",
@@ -2998,19 +2998,19 @@
       ],
       "locations": [
         {
-          "nodes": 5625,
-          "numeric_leaves": 1448,
+          "nodes": 8325,
+          "numeric_leaves": 2741,
           "payload": "former-players/seasons.json",
           "pointer": "/seasons"
         },
         {
-          "nodes": 5625,
-          "numeric_leaves": 1448,
+          "nodes": 8325,
+          "numeric_leaves": 2741,
           "payload": "former-players/seasons.json",
           "pointer": "/seasons/**"
         }
       ],
-      "numeric_leaves": 2896,
+      "numeric_leaves": 5482,
       "payloads": 1,
       "provenance_only": false,
       "rows_checked": 78,
@@ -3185,7 +3185,7 @@
       ],
       "locations": [
         {
-          "nodes": 432,
+          "nodes": 428,
           "numeric_leaves": 20,
           "payload": "former-players/aberdeen.json",
           "pointer": "/coverage/**"
@@ -4249,7 +4249,7 @@
           "status": "pass"
         },
         {
-          "message": "372 location(s), 194158 numeric leaves",
+          "message": "372 location(s), 194160 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -4272,7 +4272,7 @@
         "/analysis/xg/"
       ],
       "errors": [],
-      "fields_checked": 194158,
+      "fields_checked": 194160,
       "home_payload": "matches/*.json",
       "home_surface": "/matches/",
       "id": "matches.document",
@@ -5376,7 +5376,7 @@
         },
         {
           "nodes": 1943,
-          "numeric_leaves": 914,
+          "numeric_leaves": 916,
           "payload": "matches/1556688.json",
           "pointer": "/**"
         },
@@ -6515,7 +6515,7 @@
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 194158,
+      "numeric_leaves": 194160,
       "payloads": 372,
       "provenance_only": true,
       "rows_checked": 372,
@@ -6535,7 +6535,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 298 numeric leaves",
+          "message": "1 location(s), 299 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -6556,7 +6556,7 @@
         "/analysis/"
       ],
       "errors": [],
-      "fields_checked": 298,
+      "fields_checked": 299,
       "home_payload": "analysis/summary.json",
       "home_surface": "/analysis/",
       "id": "analysis.summary",
@@ -6570,12 +6570,12 @@
       "locations": [
         {
           "nodes": 854,
-          "numeric_leaves": 298,
+          "numeric_leaves": 299,
           "payload": "analysis/summary.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 298,
+      "numeric_leaves": 299,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -22739,7 +22739,7 @@
           "status": "pass"
         },
         {
-          "message": "40 location(s), 664403 numeric leaves",
+          "message": "40 location(s), 666994 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -22761,7 +22761,7 @@
         "/scouting/search/"
       ],
       "errors": [],
-      "fields_checked": 664403,
+      "fields_checked": 666994,
       "home_payload": "scouting/pool/sco-premiership.json",
       "home_surface": "/scouting/",
       "id": "scouting.pool",
@@ -22836,14 +22836,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 30560,
-          "numeric_leaves": 15408,
+          "nodes": 30752,
+          "numeric_leaves": 15510,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 12103,
-          "numeric_leaves": 2274,
+          "nodes": 11855,
+          "numeric_leaves": 2328,
           "payload": "scouting/pool/former.json",
           "pointer": "/**"
         },
@@ -22932,14 +22932,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 21053,
-          "numeric_leaves": 10866,
+          "nodes": 23225,
+          "numeric_leaves": 12009,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/**"
         },
         {
-          "nodes": 33193,
-          "numeric_leaves": 17309,
+          "nodes": 34338,
+          "numeric_leaves": 17908,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/**"
         },
@@ -22950,8 +22950,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 140,
-          "numeric_leaves": 11,
+          "nodes": 2017,
+          "numeric_leaves": 800,
           "payload": "scouting/pool/svk-super-liga.json",
           "pointer": "/**"
         },
@@ -22962,8 +22962,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52974,
-          "numeric_leaves": 27692,
+          "nodes": 53351,
+          "numeric_leaves": 27901,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/**"
         },
@@ -22980,8 +22980,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 109298,
-          "numeric_leaves": 57395,
+          "nodes": 107390,
+          "numeric_leaves": 56384,
           "payload": "scouting/pool/usa-mls.json",
           "pointer": "/**"
         },
@@ -22992,31 +22992,31 @@
           "pointer": "/**"
         },
         {
-          "nodes": 65052,
-          "numeric_leaves": 43356,
+          "nodes": 65205,
+          "numeric_leaves": 43447,
           "payload": "scouting/search/players-0.json",
           "pointer": "/**"
         },
         {
-          "nodes": 65018,
-          "numeric_leaves": 43271,
+          "nodes": 65371,
+          "numeric_leaves": 43511,
           "payload": "scouting/search/players-1.json",
           "pointer": "/**"
         },
         {
-          "nodes": 65492,
-          "numeric_leaves": 43543,
+          "nodes": 65798,
+          "numeric_leaves": 43749,
           "payload": "scouting/search/players-2.json",
           "pointer": "/**"
         },
         {
-          "nodes": 66119,
-          "numeric_leaves": 44019,
+          "nodes": 66357,
+          "numeric_leaves": 44188,
           "payload": "scouting/search/players-3.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 664403,
+      "numeric_leaves": 666994,
       "payloads": 40,
       "provenance_only": true,
       "rows_checked": 40,
@@ -23036,7 +23036,7 @@
           "status": "pass"
         },
         {
-          "message": "2 location(s), 703 numeric leaves",
+          "message": "2 location(s), 710 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23057,7 +23057,7 @@
         "/scouting/"
       ],
       "errors": [],
-      "fields_checked": 703,
+      "fields_checked": 710,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.board",
@@ -23070,7 +23070,7 @@
       "locations": [
         {
           "nodes": 1407,
-          "numeric_leaves": 664,
+          "numeric_leaves": 671,
           "payload": "scouting/aberdeen.json",
           "pointer": "/board/**"
         },
@@ -23081,7 +23081,7 @@
           "pointer": "/layer_zero/**"
         }
       ],
-      "numeric_leaves": 703,
+      "numeric_leaves": 710,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 2,
@@ -23135,7 +23135,7 @@
       ],
       "locations": [
         {
-          "nodes": 1322,
+          "nodes": 1323,
           "numeric_leaves": 797,
           "payload": "scouting/aberdeen.json",
           "pointer": "/archetypes/**"
@@ -23167,7 +23167,7 @@
           "status": "pass"
         },
         {
-          "message": "37 location(s), 490047 numeric leaves",
+          "message": "37 location(s), 491932 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23190,7 +23190,7 @@
         "/scouting/player/"
       ],
       "errors": [],
-      "fields_checked": 490047,
+      "fields_checked": 491932,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.team-lens",
@@ -23268,14 +23268,14 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 30421,
-          "numeric_leaves": 15397,
+          "nodes": 30613,
+          "numeric_leaves": 15499,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 11964,
-          "numeric_leaves": 2264,
+          "nodes": 11716,
+          "numeric_leaves": 2318,
           "payload": "scouting/pool/former.json",
           "pointer": "/players/**/team_**"
         },
@@ -23364,14 +23364,14 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 20914,
-          "numeric_leaves": 10855,
+          "nodes": 23086,
+          "numeric_leaves": 11998,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 33054,
-          "numeric_leaves": 17298,
+          "nodes": 34199,
+          "numeric_leaves": 17897,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/players/**/team_**"
         },
@@ -23382,8 +23382,8 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 1,
-          "numeric_leaves": 0,
+          "nodes": 1878,
+          "numeric_leaves": 789,
           "payload": "scouting/pool/svk-super-liga.json",
           "pointer": "/players/**/team_**"
         },
@@ -23394,8 +23394,8 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 52835,
-          "numeric_leaves": 27681,
+          "nodes": 53212,
+          "numeric_leaves": 27890,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/players/**/team_**"
         },
@@ -23412,8 +23412,8 @@
           "pointer": "/players/**/team_**"
         },
         {
-          "nodes": 109159,
-          "numeric_leaves": 57384,
+          "nodes": 107251,
+          "numeric_leaves": 56373,
           "payload": "scouting/pool/usa-mls.json",
           "pointer": "/players/**/team_**"
         },
@@ -23424,7 +23424,7 @@
           "pointer": "/team_context/**"
         }
       ],
-      "numeric_leaves": 490047,
+      "numeric_leaves": 491932,
       "payloads": 37,
       "provenance_only": true,
       "rows_checked": 37,
@@ -23444,7 +23444,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 1383 numeric leaves",
+          "message": "1 location(s), 1389 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23466,7 +23466,7 @@
         "/squad/"
       ],
       "errors": [],
-      "fields_checked": 1383,
+      "fields_checked": 1389,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.squad",
@@ -23478,12 +23478,12 @@
       "locations": [
         {
           "nodes": 2622,
-          "numeric_leaves": 1383,
+          "numeric_leaves": 1389,
           "payload": "scouting/aberdeen.json",
           "pointer": "/squad/**"
         }
       ],
-      "numeric_leaves": 1383,
+      "numeric_leaves": 1389,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -23503,7 +23503,7 @@
           "status": "pass"
         },
         {
-          "message": "3 location(s), 1521 numeric leaves",
+          "message": "3 location(s), 1541 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23524,7 +23524,7 @@
         "/scouting/"
       ],
       "errors": [],
-      "fields_checked": 1521,
+      "fields_checked": 1541,
       "home_payload": "scouting/coverage.json",
       "home_surface": "/scouting/",
       "id": "scouting.coverage",
@@ -23536,8 +23536,8 @@
       ],
       "locations": [
         {
-          "nodes": 2134,
-          "numeric_leaves": 1204,
+          "nodes": 2180,
+          "numeric_leaves": 1224,
           "payload": "scouting/coverage.json",
           "pointer": "/**"
         },
@@ -23554,7 +23554,7 @@
           "pointer": "/coverage/**"
         }
       ],
-      "numeric_leaves": 1521,
+      "numeric_leaves": 1541,
       "payloads": 2,
       "provenance_only": true,
       "rows_checked": 3,
@@ -23640,7 +23640,7 @@
           "status": "pass"
         },
         {
-          "message": "44 location(s), 665252 numeric leaves",
+          "message": "44 location(s), 667843 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -23663,7 +23663,7 @@
         "/scouting/player/"
       ],
       "errors": [],
-      "fields_checked": 665252,
+      "fields_checked": 667843,
       "home_payload": "scouting/aberdeen.json",
       "home_surface": "/scouting/",
       "id": "scouting.priority",
@@ -23736,14 +23736,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 30560,
-          "numeric_leaves": 15408,
+          "nodes": 30752,
+          "numeric_leaves": 15510,
           "payload": "scouting/pool/fin-veikkausliiga.json",
           "pointer": "/**"
         },
         {
-          "nodes": 12103,
-          "numeric_leaves": 2274,
+          "nodes": 11855,
+          "numeric_leaves": 2328,
           "payload": "scouting/pool/former.json",
           "pointer": "/**"
         },
@@ -23832,14 +23832,14 @@
           "pointer": "/**"
         },
         {
-          "nodes": 21053,
-          "numeric_leaves": 10866,
+          "nodes": 23225,
+          "numeric_leaves": 12009,
           "payload": "scouting/pool/sco-premiership.json",
           "pointer": "/**"
         },
         {
-          "nodes": 33193,
-          "numeric_leaves": 17309,
+          "nodes": 34338,
+          "numeric_leaves": 17908,
           "payload": "scouting/pool/srb-super-liga.json",
           "pointer": "/**"
         },
@@ -23850,8 +23850,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 140,
-          "numeric_leaves": 11,
+          "nodes": 2017,
+          "numeric_leaves": 800,
           "payload": "scouting/pool/svk-super-liga.json",
           "pointer": "/**"
         },
@@ -23862,8 +23862,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 52974,
-          "numeric_leaves": 27692,
+          "nodes": 53351,
+          "numeric_leaves": 27901,
           "payload": "scouting/pool/swe-allsvenskan.json",
           "pointer": "/**"
         },
@@ -23880,8 +23880,8 @@
           "pointer": "/**"
         },
         {
-          "nodes": 109298,
-          "numeric_leaves": 57395,
+          "nodes": 107390,
+          "numeric_leaves": 56384,
           "payload": "scouting/pool/usa-mls.json",
           "pointer": "/**"
         },
@@ -23892,26 +23892,26 @@
           "pointer": "/**"
         },
         {
-          "nodes": 65052,
-          "numeric_leaves": 43356,
+          "nodes": 65205,
+          "numeric_leaves": 43447,
           "payload": "scouting/search/players-0.json",
           "pointer": "/**"
         },
         {
-          "nodes": 65018,
-          "numeric_leaves": 43271,
+          "nodes": 65371,
+          "numeric_leaves": 43511,
           "payload": "scouting/search/players-1.json",
           "pointer": "/**"
         },
         {
-          "nodes": 65492,
-          "numeric_leaves": 43543,
+          "nodes": 65798,
+          "numeric_leaves": 43749,
           "payload": "scouting/search/players-2.json",
           "pointer": "/**"
         },
         {
-          "nodes": 66119,
-          "numeric_leaves": 44019,
+          "nodes": 66357,
+          "numeric_leaves": 44188,
           "payload": "scouting/search/players-3.json",
           "pointer": "/**"
         },
@@ -23928,7 +23928,7 @@
           "pointer": "/europe_coverage/**"
         },
         {
-          "nodes": 1322,
+          "nodes": 1323,
           "numeric_leaves": 797,
           "payload": "scouting/aberdeen.json",
           "pointer": "/archetypes/**"
@@ -23940,7 +23940,7 @@
           "pointer": "/europe/**"
         }
       ],
-      "numeric_leaves": 665252,
+      "numeric_leaves": 667843,
       "payloads": 42,
       "provenance_only": true,
       "rows_checked": 44,
@@ -24475,34 +24475,34 @@
       "version": 1
     }
   ],
-  "published_at": "2026-10-29T06:20:11+00:00",
+  "published_at": "2026-10-30T06:23:37+00:00",
   "registry_checksum": "sha256:38b93fc4e16e566ab5ad001660f4a89e1145bc9d2c22c9bcada982d0057d375d",
   "registry_reviewed": "2026-10-24",
   "registry_version": "3.13.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
   "source_snapshots": {
-    "api_football": "2026-10-29T06:20:08.481045+00:00",
-    "api_results": "2026-10-29T06:17:06+00:00",
-    "availability": "2026-10-29T06:17:41+00:00",
-    "career": "2026-10-29T06:17:41+00:00",
-    "football_data_uk": "2026-10-29T06:17:05+00:00",
-    "former_players": "2026-10-29T06:17:13+00:00",
-    "history_backfill": "2026-10-29T06:17:12+00:00",
-    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
-    "scouting_clubs": "2026-10-29T06:18:11+00:00",
-    "scouting_europe": "2026-10-29T06:18:00+00:00",
-    "scouting_pool": "2026-10-29T06:17:45+00:00",
-    "scouting_roles": "2026-10-29T06:17:47+00:00",
-    "scouting_rose_history": "2026-10-29T06:18:00+00:00",
-    "scouting_standings": "2026-10-29T06:18:01+00:00",
-    "spfl": "2026-10-29T06:17:07+00:00",
-    "xg_enrichment": "2026-10-29T06:19:52+00:00"
+    "api_football": "2026-10-30T06:23:34.875419+00:00",
+    "api_results": "2026-10-30T06:17:04+00:00",
+    "availability": "2026-10-30T06:18:52+00:00",
+    "career": "2026-10-30T06:18:52+00:00",
+    "football_data_uk": "2026-10-30T06:17:03+00:00",
+    "former_players": "2026-10-30T06:17:24+00:00",
+    "history_backfill": "2026-10-30T06:17:18+00:00",
+    "matchday_snapshot": "2026-10-30T06:17:18+00:00",
+    "scouting_clubs": "2026-10-30T06:22:53+00:00",
+    "scouting_europe": "2026-10-30T06:22:42+00:00",
+    "scouting_pool": "2026-10-30T06:18:59+00:00",
+    "scouting_roles": "2026-10-30T06:22:15+00:00",
+    "scouting_rose_history": "2026-10-30T06:22:27+00:00",
+    "scouting_standings": "2026-10-30T06:22:43+00:00",
+    "spfl": "2026-10-30T06:17:05+00:00",
+    "xg_enrichment": "2026-10-30T06:23:20+00:00"
   },
   "status": "pass",
   "summary": {
-    "fields_checked": 2076780,
+    "fields_checked": 2087126,
     "metrics_failed": 0,
     "metrics_passed": 83,
     "metrics_total": 83,
@@ -24517,5 +24517,5 @@
       "recompute": 14
     }
   },
-  "update_id": "2026-10-29T06:17:02+00:00-2142779"
+  "update_id": "2026-10-30T06:17:02+00:00-1579911"
 }

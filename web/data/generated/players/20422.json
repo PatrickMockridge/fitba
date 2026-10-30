@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
+  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-29T06:20:11+00:00",
+  "generated_at": "2026-10-30T06:23:37+00:00",
   "identity": {
     "age": 32,
     "dataset_id": null,
@@ -170,29 +170,29 @@
         ],
         "stats": [
           {
-            "appearances": 0,
+            "appearances": 1,
             "assists": 0,
             "blocks": 0,
             "competition": "Premiership",
             "conceded": 0,
             "dribbles_attempts": 0,
             "dribbles_success": 0,
-            "duels_total": 0,
-            "duels_won": 0,
-            "fouls_committed": 0,
+            "duels_total": 3,
+            "duels_won": 1,
+            "fouls_committed": 1,
             "fouls_drawn": 0,
             "goals": 0,
             "interceptions": 0,
-            "minutes": 0,
-            "pass_accuracy": null,
+            "minutes": 40,
+            "pass_accuracy": 63.0,
             "passes_key": 0,
-            "passes_total": 0,
+            "passes_total": 11,
             "penalty_committed": null,
             "penalty_missed": 0,
             "penalty_saved": null,
             "penalty_scored": 0,
             "penalty_won": null,
-            "rating": null,
+            "rating": 3.13,
             "red_cards": 0,
             "saves": 0,
             "scope": "club",
@@ -200,7 +200,7 @@
             "shots_on": 0,
             "shots_total": 0,
             "starts": 0,
-            "tackles": 0,
+            "tackles": 1,
             "team_name": "Aberdeen",
             "yellow_cards": 0
           }
@@ -224,7 +224,7 @@
             "key": "tackles",
             "label": "Tackles",
             "note": "provider",
-            "value": 0
+            "value": 1
           },
           {
             "key": "own_goals",
@@ -880,7 +880,16 @@
           ],
           "unknown_reason": null
         },
-        "club_history": [],
+        "club_history": [
+          {
+            "appearances": 1,
+            "competition": "Premiership",
+            "minutes": 40,
+            "season": 2026,
+            "starts": 0,
+            "team_name": "Aberdeen"
+          }
+        ],
         "display_role": {
           "career_dominant": {
             "code": "RB",
@@ -1303,16 +1312,16 @@
           }
         },
         "summary": {
-          "appearances": 0,
+          "appearances": 1,
           "cohort_basis": null,
           "cohort_n": null,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
-          "league_appearances": 0,
+          "league_appearances": 1,
           "league_label": "Scottish Premiership",
-          "league_minutes": 0,
-          "league_rating": null,
+          "league_minutes": 40,
+          "league_rating": 3.13,
           "league_rating_percentile": null,
           "minutes": 72,
           "minutes_season": "2026-27",
@@ -1321,7 +1330,7 @@
             "Premier Sports Cup"
           ],
           "published_at": null,
-          "rating": null,
+          "rating": 3.13,
           "rating_percentile": null,
           "role_label": "Right back",
           "rose_fallback": true,
@@ -1428,12 +1437,12 @@
     }
   },
   "player_id": 20422,
-  "published_at": "2026-10-29T06:20:11+00:00",
+  "published_at": "2026-10-30T06:23:37+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "update_id": "2026-10-30T06:17:02+00:00-1579911",
   "warnings": []
 }

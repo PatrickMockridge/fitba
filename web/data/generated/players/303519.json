@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
+  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-29T06:20:11+00:00",
+  "generated_at": "2026-10-30T06:23:37+00:00",
   "identity": {
     "age": 23,
     "dataset_id": null,
@@ -157,37 +157,37 @@
         ],
         "stats": [
           {
-            "appearances": 10,
+            "appearances": 11,
             "assists": 0,
             "blocks": 1,
             "competition": "Premiership",
             "conceded": 0,
-            "dribbles_attempts": 4,
-            "dribbles_success": 1,
-            "duels_total": 68,
-            "duels_won": 31,
-            "fouls_committed": 12,
+            "dribbles_attempts": 6,
+            "dribbles_success": 3,
+            "duels_total": 84,
+            "duels_won": 37,
+            "fouls_committed": 13,
             "fouls_drawn": 6,
             "goals": 2,
             "interceptions": 1,
-            "minutes": 320,
+            "minutes": 386,
             "pass_accuracy": 47.0,
-            "passes_key": 4,
-            "passes_total": 76,
+            "passes_key": 5,
+            "passes_total": 94,
             "penalty_committed": null,
             "penalty_missed": 0,
             "penalty_saved": null,
             "penalty_scored": 0,
             "penalty_won": null,
-            "rating": 6.81,
+            "rating": 6.79,
             "red_cards": 0,
             "saves": 0,
             "scope": "club",
             "season": 2026,
-            "shots_on": 4,
-            "shots_total": 7,
-            "starts": 3,
-            "tackles": 13,
+            "shots_on": 5,
+            "shots_total": 9,
+            "starts": 4,
+            "tackles": 14,
             "team_name": "Aberdeen",
             "yellow_cards": 2
           }
@@ -211,13 +211,13 @@
             "key": "shots_total",
             "label": "Shots",
             "note": "provider",
-            "value": 7
+            "value": 9
           },
           {
             "key": "shots_on",
             "label": "On target",
             "note": "provider",
-            "value": 4
+            "value": 5
           }
         ]
       },
@@ -580,11 +580,11 @@
         },
         "club_history": [
           {
-            "appearances": 10,
+            "appearances": 11,
             "competition": "Premiership",
-            "minutes": 320,
+            "minutes": 386,
             "season": 2026,
-            "starts": 3,
+            "starts": 4,
             "team_name": "Aberdeen"
           }
         ],
@@ -707,7 +707,7 @@
         "rose": {
           "basis": "provider_group",
           "cohort_min_minutes": 450,
-          "cohort_n": 19,
+          "cohort_n": 22,
           "cohort_season": "2026-27",
           "dataset_id": null,
           "dataset_state": null,
@@ -718,24 +718,24 @@
             {
               "axes": [
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "goals_p90",
-                  "percentile": 84.2,
+                  "percentile": 63.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.56
+                  "value": 0.47
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 23.7,
+                  "percentile": 22.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -744,59 +744,59 @@
                   "value": 0.0
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "shots_p90",
-                  "percentile": 57.9,
+                  "percentile": 63.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.97
+                  "value": 2.1
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 26.3,
+                  "percentile": 31.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.12
+                  "value": 1.17
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "dribbles_success_p90",
-                  "percentile": 23.7,
+                  "percentile": 59.1,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.28
+                  "value": 0.7
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "passes_completed_p90",
-                  "percentile": 21.1,
+                  "percentile": 31.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 10.05
+                  "value": 10.3
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
@@ -809,7 +809,7 @@
                   "value": 47.0
                 },
                 {
-                  "cohort_n": 18,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "tackles_p90",
@@ -819,33 +819,33 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 3.66
+                  "value": 3.26
                 },
                 {
-                  "cohort_n": 18,
+                  "cohort_n": 21,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "interceptions_p90",
-                  "percentile": 44.4,
+                  "percentile": 38.1,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.28
+                  "value": 0.23
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "duel_win_pct",
-                  "percentile": 63.2,
+                  "percentile": 54.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 45.59
+                  "value": 44.05
                 }
               ],
               "dataset_id": null,
@@ -862,24 +862,24 @@
             {
               "axes": [
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "goals_p90",
-                  "percentile": 84.2,
+                  "percentile": 63.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.56
+                  "value": 0.47
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 23.7,
+                  "percentile": 22.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -888,69 +888,69 @@
                   "value": 0.0
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "shots_p90",
-                  "percentile": 57.9,
+                  "percentile": 63.6,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.97
+                  "value": 2.1
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "conversion_pct",
-                  "percentile": 89.5,
+                  "percentile": 72.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 28.57
+                  "value": 22.22
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "goals_assists_p90",
-                  "percentile": 68.4,
+                  "percentile": 40.9,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.56
+                  "value": 0.47
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 26.3,
+                  "percentile": 31.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.12
+                  "value": 1.17
                 },
                 {
-                  "cohort_n": 19,
+                  "cohort_n": 22,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "duel_win_pct",
-                  "percentile": 63.2,
+                  "percentile": 54.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 45.59
+                  "value": 44.05
                 }
               ],
               "dataset_id": null,
@@ -968,7 +968,7 @@
           "league": "sco:premiership",
           "league_label": "Scottish Premiership",
           "min_minutes": 180,
-          "minutes": 320,
+          "minutes": 386,
           "published_at": null,
           "reason": null,
           "season_used": "2026-27",
@@ -1077,16 +1077,16 @@
           }
         },
         "summary": {
-          "appearances": 10,
+          "appearances": 11,
           "cohort_basis": "role_family",
-          "cohort_n": 9,
+          "cohort_n": 12,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
-          "league_appearances": 10,
+          "league_appearances": 11,
           "league_label": "Scottish Premiership",
-          "league_minutes": 320,
-          "league_rating": 6.81,
+          "league_minutes": 386,
+          "league_rating": 6.79,
           "league_rating_percentile": null,
           "minutes": 465,
           "minutes_season": "2026-27",
@@ -1095,7 +1095,7 @@
             "Premier Sports Cup"
           ],
           "published_at": null,
-          "rating": 6.81,
+          "rating": 6.79,
           "rating_percentile": null,
           "role_label": "Centre forward",
           "rose_fallback": false,
@@ -1113,7 +1113,7 @@
       "dataset_state": null,
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort provider group n=19; percentiles 0-100, higher is better.",
+      "note": "League-only rates; cohort provider group n=22; percentiles 0-100, higher is better.",
       "published_at": null,
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -1370,12 +1370,12 @@
     }
   },
   "player_id": 303519,
-  "published_at": "2026-10-29T06:20:11+00:00",
+  "published_at": "2026-10-30T06:23:37+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "update_id": "2026-10-30T06:17:02+00:00-1579911",
   "warnings": []
 }

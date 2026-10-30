@@ -93,7 +93,7 @@
       "matches": 66,
       "name": "Scottish Premiership",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk+spfl",
+      "results_source": "football_data_uk+spfl",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -104,7 +104,7 @@
       "matches": 59,
       "name": "Scottish Championship",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk",
+      "results_source": "football_data_uk",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -115,7 +115,7 @@
       "matches": 59,
       "name": "Scottish League One",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk",
+      "results_source": "football_data_uk",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -148,7 +148,7 @@
       "ties": 66
     }
   ],
-  "dataset_id": "2026-10-29T06:20:11+00:00-10d3f47",
+  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
   "dataset_state": "fresh",
   "fixtures": {
     "count": 369,
@@ -164,7 +164,7 @@
     "sell_on_computed": 0,
     "state": "partial",
     "with_api_id": 71,
-    "with_post_seasons": 33
+    "with_post_seasons": 52
   },
   "forum": {
     "first_page_only": true,
@@ -174,7 +174,7 @@
     "source": "afc_chat",
     "topics": 4
   },
-  "generated_at": "2026-10-29T06:20:11+00:00",
+  "generated_at": "2026-10-30T06:23:37+00:00",
   "history": {
     "analytics": {
       "managers": "available",
@@ -199,7 +199,7 @@
     },
     "note": "Form and style are league-only and opponent-unadjusted. Predicted XIs are projections from observed lineups, not team news. Possession is not used.",
     "opponent": "Rangers",
-    "snapshot_at": "2026-10-28T22:16:41+00:00",
+    "snapshot_at": "2026-10-30T06:17:18+00:00",
     "state": "fresh"
   },
   "needs": {
@@ -294,7 +294,7 @@
     },
     "note": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such."
   },
-  "published_at": "2026-10-29T06:20:11+00:00",
+  "published_at": "2026-10-30T06:23:37+00:00",
   "rumours": {
     "active": 0,
     "club": "sco:aberdeen",
@@ -302,24 +302,24 @@
     "note": "A curated register of Aberdeen-linked rumours, separate from the confirmed transfer register. Status is a lifecycle label, not a probability. Confidence is editorial and must be justified by the linked sources. Confirmed rows link to the transfer register and are then a historical record, not a second source of truth."
   },
   "season": "2026-27",
-  "served_by_update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
   "source_snapshots": {
-    "api_football": "2026-10-29T06:20:08.481045+00:00",
-    "api_results": "2026-10-29T06:17:06+00:00",
-    "availability": "2026-10-29T06:17:41+00:00",
-    "career": "2026-10-29T06:17:41+00:00",
-    "football_data_uk": "2026-10-29T06:17:05+00:00",
-    "former_players": "2026-10-29T06:17:13+00:00",
-    "history_backfill": "2026-10-29T06:17:12+00:00",
-    "matchday_snapshot": "2026-10-28T22:16:41+00:00",
-    "scouting_clubs": "2026-10-29T06:18:11+00:00",
-    "scouting_europe": "2026-10-29T06:18:00+00:00",
-    "scouting_pool": "2026-10-29T06:17:45+00:00",
-    "scouting_roles": "2026-10-29T06:17:47+00:00",
-    "scouting_rose_history": "2026-10-29T06:18:00+00:00",
-    "scouting_standings": "2026-10-29T06:18:01+00:00",
-    "spfl": "2026-10-29T06:17:07+00:00",
-    "xg_enrichment": "2026-10-29T06:19:52+00:00"
+    "api_football": "2026-10-30T06:23:34.875419+00:00",
+    "api_results": "2026-10-30T06:17:04+00:00",
+    "availability": "2026-10-30T06:18:52+00:00",
+    "career": "2026-10-30T06:18:52+00:00",
+    "football_data_uk": "2026-10-30T06:17:03+00:00",
+    "former_players": "2026-10-30T06:17:24+00:00",
+    "history_backfill": "2026-10-30T06:17:18+00:00",
+    "matchday_snapshot": "2026-10-30T06:17:18+00:00",
+    "scouting_clubs": "2026-10-30T06:22:53+00:00",
+    "scouting_europe": "2026-10-30T06:22:42+00:00",
+    "scouting_pool": "2026-10-30T06:18:59+00:00",
+    "scouting_roles": "2026-10-30T06:22:15+00:00",
+    "scouting_rose_history": "2026-10-30T06:22:27+00:00",
+    "scouting_standings": "2026-10-30T06:22:43+00:00",
+    "spfl": "2026-10-30T06:17:05+00:00",
+    "xg_enrichment": "2026-10-30T06:23:20+00:00"
   },
   "squad": {
     "club": "sco:aberdeen",
@@ -327,7 +327,7 @@
     "loans_out": 5,
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "squad": 29,
-    "stats_unavailable": 7
+    "stats_unavailable": 6
   },
   "transfers": {
     "club": "sco:aberdeen",
@@ -336,7 +336,7 @@
     "curated": 225,
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
   },
-  "update_id": "2026-10-29T06:17:02+00:00-2142779",
+  "update_id": "2026-10-30T06:17:02+00:00-1579911",
   "xg": {
     "evaluation": "pass",
     "matches": 369,
