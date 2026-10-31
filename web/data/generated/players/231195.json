@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
+  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-30T06:23:37+00:00",
+  "generated_at": "2026-10-31T20:12:31+00:00",
   "identity": {
     "age": 28,
     "dataset_id": null,
@@ -122,8 +122,8 @@
             "player_key": "api:player:231195"
           }
         ],
-        "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 17 competitive matches; friendlies are excluded.",
+        "position_stats_coverage": "partial",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
         "provider_columns": [
           {
             "key": "competition",
@@ -236,7 +236,7 @@
       "warnings": []
     },
     "playing_time": {
-      "badge": "available",
+      "badge": "partial",
       "data": {
         "playing_time": {
           "by_competition": [
@@ -257,7 +257,7 @@
               "sub_apps": 4
             }
           ],
-          "coverage": "available",
+          "coverage": "partial",
           "minutes": 933,
           "minutes_as_sub": 285,
           "minutes_started": 648,
@@ -275,10 +275,23 @@
       "served_by_update_id": null,
       "source_snapshots": null,
       "stale_reason": null,
-      "status": "available",
+      "status": "partial",
       "title": "Playing time",
       "update_id": null,
-      "warnings": []
+      "warnings": [
+        {
+          "code": "COVERAGE_PARTIAL",
+          "dataset_id": null,
+          "dataset_state": null,
+          "field": "playing_time",
+          "message": "Some appearances have no lineup or event coverage.",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
+        }
+      ]
     },
     "position": {
       "badge": null,
@@ -1861,12 +1874,25 @@
     }
   },
   "player_id": 231195,
-  "published_at": "2026-10-30T06:23:37+00:00",
+  "published_at": "2026-10-31T20:12:31+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
+  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-30T06:17:02+00:00-1579911",
-  "warnings": []
+  "update_id": "2026-10-31T20:09:39+00:00-1682807",
+  "warnings": [
+    {
+      "code": "COVERAGE_PARTIAL",
+      "dataset_id": null,
+      "dataset_state": null,
+      "field": "playing_time",
+      "message": "Some appearances have no lineup or event coverage.",
+      "published_at": null,
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null
+    }
+  ]
 }

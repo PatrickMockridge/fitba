@@ -39,24 +39,11 @@
       "entry_round": null,
       "id": "sco:league-cup",
       "name": "Premier Sports Cup",
-      "next_fixture": {
-        "competition_id": "sco:league-cup",
-        "competition_name": "Premier Sports Cup",
-        "date": "2026-10-31",
-        "kickoff": "17:30",
-        "match_id": "1639572",
-        "neutral": true,
-        "opponent_id": "sco:rangers",
-        "opponent_name": "Rangers",
-        "source_id": "spfl",
-        "stage": "Semi-final",
-        "status": "scheduled",
-        "venue": "N"
-      },
+      "next_fixture": null,
       "note": null,
       "short_name": "League Cup",
       "source": "https://spfl.co.uk/league/league-cup/format",
-      "stage": "Semi-final",
+      "stage": null,
       "status": "Active",
       "verified_at": "2026-10-21"
     },
@@ -75,23 +62,9 @@
     }
   ],
   "coverage": "match",
-  "dataset_id": "2026-10-30T06:23:37+00:00-a3e7abe",
+  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
   "dataset_state": "fresh",
   "fixtures": [
-    {
-      "competition_id": "sco:league-cup",
-      "competition_name": "Premier Sports Cup",
-      "date": "2026-10-31",
-      "kickoff": "17:30",
-      "match_id": "1639572",
-      "neutral": true,
-      "opponent_id": "sco:rangers",
-      "opponent_name": "Rangers",
-      "source_id": "spfl",
-      "stage": "Semi-final",
-      "status": "scheduled",
-      "venue": "N"
-    },
     {
       "competition_id": "sco:premiership",
       "competition_name": "Scottish Premiership",
@@ -129,7 +102,7 @@
       "neutral": false,
       "opponent_id": "sco:rangers",
       "opponent_name": "Rangers",
-      "source_id": "api_football",
+      "source_id": "spfl",
       "stage": null,
       "status": "scheduled",
       "venue": "A"
@@ -189,16 +162,30 @@
       "stage": null,
       "status": "scheduled",
       "venue": "A"
+    },
+    {
+      "competition_id": "sco:premiership",
+      "competition_name": "Scottish Premiership",
+      "date": "2026-12-20",
+      "kickoff": "12:00",
+      "match_id": "1556736",
+      "neutral": false,
+      "opponent_id": "sco:celtic",
+      "opponent_name": "Celtic",
+      "source_id": "api_football",
+      "stage": null,
+      "status": "scheduled",
+      "venue": "H"
     }
   ],
-  "generated_at": "2026-10-30T06:23:37+00:00",
+  "generated_at": "2026-10-31T20:12:31+00:00",
   "history": [
     {
       "form": "LLWLD",
       "gd": -2,
       "played": 11,
       "points": 11,
-      "position": 9,
+      "position": 10,
       "season": "2026-27"
     },
     {
@@ -309,6 +296,26 @@
   "name": "Aberdeen",
   "news": [
     {
+      "article_id": "late-cup-agony-for-the-dons-at-hampden",
+      "category": "Match Report",
+      "category_slug": "match-report",
+      "player_mentions": [],
+      "published_date": "2026-10-31",
+      "source": "Aberdeen FC",
+      "title": "Late cup agony for the Dons at Hampden",
+      "url": "https://www.afc.co.uk/en/news/late-cup-agony-for-the-dons-at-hampden"
+    },
+    {
+      "article_id": "stephen-robinson-semi-final-press-conference",
+      "category": "News",
+      "category_slug": "news",
+      "player_mentions": [],
+      "published_date": "2026-10-30",
+      "source": "Aberdeen FC",
+      "title": "Stephen Robinson: Semi-final Press Conference",
+      "url": "https://www.afc.co.uk/en/news/stephen-robinson-semi-final-press-conference"
+    },
+    {
       "article_id": "afc-hall-of-fame-dinner-2026",
       "category": "News",
       "category_slug": "news",
@@ -317,6 +324,31 @@
       "source": "Aberdeen FC",
       "title": "AFC Hall of Fame Dinner 2026",
       "url": "https://www.afc.co.uk/en/news/afc-hall-of-fame-dinner-2026"
+    },
+    {
+      "article_id": "match-preview-rangers-aberdeen",
+      "category": "Match Preview",
+      "category_slug": "match-preview",
+      "player_mentions": [],
+      "published_date": "2026-10-30",
+      "source": "Aberdeen FC",
+      "title": "Previewing the Dons semi-final trip to Hampden",
+      "url": "https://www.afc.co.uk/en/news/match-preview-rangers-aberdeen"
+    },
+    {
+      "article_id": "kevin-nisbet-semi-final-preview",
+      "category": "News",
+      "category_slug": "news",
+      "player_mentions": [
+        {
+          "href": "/players/97896/",
+          "name": "Kevin Michael Nisbet"
+        }
+      ],
+      "published_date": "2026-10-30",
+      "source": "Aberdeen FC",
+      "title": "Kevin Nisbet: Semi-final Preview",
+      "url": "https://www.afc.co.uk/en/news/kevin-nisbet-semi-final-preview"
     },
     {
       "article_id": "supporter-information-or-premier-sports-cup-semi-final",
@@ -339,6 +371,16 @@
       "url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-reaction"
     },
     {
+      "article_id": "dons-defeated-at-pittodrie-1",
+      "category": "News",
+      "category_slug": "news",
+      "player_mentions": [],
+      "published_date": "2026-10-28",
+      "source": "Aberdeen FC",
+      "title": "Dons defeated at Pittodrie",
+      "url": "https://www.afc.co.uk/en/news/dons-defeated-at-pittodrie-1"
+    },
+    {
       "article_id": "aberdeen-0-1-falkirk-gallery",
       "category": "Galleries",
       "category_slug": "galleries",
@@ -349,14 +391,14 @@
       "url": "https://www.afc.co.uk/en/news/aberdeen-0-1-falkirk-gallery"
     },
     {
-      "article_id": "dons-defeated-at-pittodrie-1",
+      "article_id": "your-matchday-guide-aberdeen-v-falkirk",
       "category": "News",
       "category_slug": "news",
       "player_mentions": [],
-      "published_date": "2026-10-28",
+      "published_date": "2026-10-27",
       "source": "Aberdeen FC",
-      "title": "Dons defeated at Pittodrie",
-      "url": "https://www.afc.co.uk/en/news/dons-defeated-at-pittodrie-1"
+      "title": "Your Matchday Guide: Aberdeen v Falkirk",
+      "url": "https://www.afc.co.uk/en/news/your-matchday-guide-aberdeen-v-falkirk"
     },
     {
       "article_id": "brad-lyons-falkirk-preview",
@@ -374,16 +416,6 @@
       "url": "https://www.afc.co.uk/en/news/brad-lyons-falkirk-preview"
     },
     {
-      "article_id": "how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [],
-      "published_date": "2026-10-27",
-      "source": "Aberdeen FC",
-      "title": "How to watch | Live coverage of Aberdeen v Falkirk on RedTV",
-      "url": "https://www.afc.co.uk/en/news/how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv"
-    },
-    {
       "article_id": "stephen-robinson-falkirk-press-conference",
       "category": "News",
       "category_slug": "news",
@@ -394,14 +426,24 @@
       "url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference"
     },
     {
-      "article_id": "your-matchday-guide-aberdeen-v-falkirk",
+      "article_id": "how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv",
       "category": "News",
       "category_slug": "news",
       "player_mentions": [],
       "published_date": "2026-10-27",
       "source": "Aberdeen FC",
-      "title": "Your Matchday Guide: Aberdeen v Falkirk",
-      "url": "https://www.afc.co.uk/en/news/your-matchday-guide-aberdeen-v-falkirk"
+      "title": "How to watch | Live coverage of Aberdeen v Falkirk on RedTV",
+      "url": "https://www.afc.co.uk/en/news/how-to-watch-or-live-coverage-of-aberdeen-v-falkirk-on-redtv"
+    },
+    {
+      "article_id": "match-preview-aberdeen-v-falkirk",
+      "category": "News",
+      "category_slug": "news",
+      "player_mentions": [],
+      "published_date": "2026-10-26",
+      "source": "Aberdeen FC",
+      "title": "Match Preview: Aberdeen v Falkirk",
+      "url": "https://www.afc.co.uk/en/news/match-preview-aberdeen-v-falkirk"
     },
     {
       "article_id": "stuart-armstrong-its-a-big-week-coming-up",
@@ -417,16 +459,6 @@
       "source": "Aberdeen FC",
       "title": "Stuart Armstrong: It's a big week coming up",
       "url": "https://www.afc.co.uk/en/news/stuart-armstrong-its-a-big-week-coming-up"
-    },
-    {
-      "article_id": "match-preview-aberdeen-v-falkirk",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [],
-      "published_date": "2026-10-26",
-      "source": "Aberdeen FC",
-      "title": "Match Preview: Aberdeen v Falkirk",
-      "url": "https://www.afc.co.uk/en/news/match-preview-aberdeen-v-falkirk"
     },
     {
       "article_id": "vacancy-or-education-and-communities-officer",
@@ -449,14 +481,14 @@
       "url": "https://www.afc.co.uk/en/news/dons-defeated-in-tannadice-rain"
     },
     {
-      "article_id": "dundee-united-3-2-aberdeen-gallery",
-      "category": "Galleries",
-      "category_slug": "galleries",
+      "article_id": "stephen-robinson-dundee-united-reaction",
+      "category": "News",
+      "category_slug": "news",
       "player_mentions": [],
       "published_date": "2026-10-24",
       "source": "Aberdeen FC",
-      "title": "Dundee United 3-2 Aberdeen: Gallery",
-      "url": "https://www.afc.co.uk/en/news/dundee-united-3-2-aberdeen-gallery"
+      "title": "Stephen Robinson: Dundee United Reaction",
+      "url": "https://www.afc.co.uk/en/news/stephen-robinson-dundee-united-reaction"
     },
     {
       "article_id": "afc-women-vs-the-spartans-match-postponed",
@@ -469,14 +501,24 @@
       "url": "https://www.afc.co.uk/en/news/afc-women-vs-the-spartans-match-postponed"
     },
     {
-      "article_id": "stephen-robinson-dundee-united-reaction",
-      "category": "News",
-      "category_slug": "news",
+      "article_id": "dundee-united-3-2-aberdeen-gallery",
+      "category": "Galleries",
+      "category_slug": "galleries",
       "player_mentions": [],
       "published_date": "2026-10-24",
       "source": "Aberdeen FC",
-      "title": "Stephen Robinson: Dundee United Reaction",
-      "url": "https://www.afc.co.uk/en/news/stephen-robinson-dundee-united-reaction"
+      "title": "Dundee United 3-2 Aberdeen: Gallery",
+      "url": "https://www.afc.co.uk/en/news/dundee-united-3-2-aberdeen-gallery"
+    },
+    {
+      "article_id": "afc-women-fixture-update",
+      "category": "Women's Team",
+      "category_slug": "womens-team",
+      "player_mentions": [],
+      "published_date": "2026-10-23",
+      "source": "Aberdeen FC",
+      "title": "AFC Women Fixture Update",
+      "url": "https://www.afc.co.uk/en/news/afc-women-fixture-update"
     },
     {
       "article_id": "stephen-robinson-dundee-united-press-conference2",
@@ -507,61 +549,6 @@
       "source": "Aberdeen FC",
       "title": "Dundee United (A) Supporter Information",
       "url": "https://www.afc.co.uk/en/news/dundee-united-a-supporter-information-1"
-    },
-    {
-      "article_id": "afc-women-fixture-update",
-      "category": "Women's Team",
-      "category_slug": "womens-team",
-      "player_mentions": [],
-      "published_date": "2026-10-23",
-      "source": "Aberdeen FC",
-      "title": "AFC Women Fixture Update",
-      "url": "https://www.afc.co.uk/en/news/afc-women-fixture-update"
-    },
-    {
-      "article_id": "stuart-armstrong-dundee-united-preview",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [
-        {
-          "href": "/players/18945/",
-          "name": "Stuart Armstrong"
-        }
-      ],
-      "published_date": "2026-10-23",
-      "source": "Aberdeen FC",
-      "title": "Stuart Armstrong: Dundee United Preview",
-      "url": "https://www.afc.co.uk/en/news/stuart-armstrong-dundee-united-preview"
-    },
-    {
-      "article_id": "dundee-united-v-aberdeen-match-preview",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [],
-      "published_date": "2026-10-22",
-      "source": "Aberdeen FC",
-      "title": "Dundee United v Aberdeen: Match Preview",
-      "url": "https://www.afc.co.uk/en/news/dundee-united-v-aberdeen-match-preview"
-    },
-    {
-      "article_id": "gbp1-2-million-community-pitch-project-gets-underway-at-cormack-park",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [],
-      "published_date": "2026-10-22",
-      "source": "Aberdeen FC",
-      "title": "£1.2 Million Community Pitch Project Gets Underway at Cormack Park",
-      "url": "https://www.afc.co.uk/en/news/gbp1-2-million-community-pitch-project-gets-underway-at-cormack-park"
-    },
-    {
-      "article_id": "dons-show-support-for-show-racism-the-red-card",
-      "category": "News",
-      "category_slug": "news",
-      "player_mentions": [],
-      "published_date": "2026-10-22",
-      "source": "Aberdeen FC",
-      "title": "Dons show support for Show Racism the Red Card",
-      "url": "https://www.afc.co.uk/en/news/dons-show-support-for-show-racism-the-red-card"
     }
   ],
   "notes": "League results from football-data.co.uk; league and League Cup fixtures from the SPFL club feed; Scottish Cup calendar from the SFA. Player/event layers pending.",
@@ -575,8 +562,27 @@
     "nickname": "The Dons",
     "stadium": "Pittodrie Stadium"
   },
-  "published_at": "2026-10-30T06:23:37+00:00",
+  "published_at": "2026-10-31T20:12:31+00:00",
   "recent_results": [
+    {
+      "competition_id": "sco:league-cup",
+      "competition_name": "Premier Sports Cup",
+      "date": "2026-10-31",
+      "decided_by": "regulation",
+      "goals_against": 1,
+      "goals_for": 0,
+      "kickoff": null,
+      "match_id": "spfl-league-cup-2026-10-31-rangers-aberdeen",
+      "opponent_id": "sco:rangers",
+      "opponent_name": "Rangers",
+      "outcome": "L",
+      "result": "L",
+      "result_label": "L",
+      "shootout_result": null,
+      "stage": "Semi-final",
+      "status": "played",
+      "venue": "A"
+    },
     {
       "competition_id": "sco:premiership",
       "competition_name": "William Hill Premiership",
@@ -841,7 +847,7 @@
     }
   ],
   "season": "2026-27",
-  "served_by_update_id": "2026-10-30T06:17:02+00:00-1579911",
+  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
   "shapes": {
     "coverage": {
       "fixtures_total": 17,
@@ -855,7 +861,7 @@
     "formations": [
       {
         "cb_count": 2,
-        "cb_rating": 6.81,
+        "cb_rating": 6.84,
         "dm_count": 0,
         "draws": 0,
         "formation": "4-2-3-1",
@@ -1241,7 +1247,7 @@
       },
       {
         "cb_count": 2,
-        "cb_rating": 6.19,
+        "cb_rating": 6.32,
         "competition": "Scottish Premiership",
         "date": "2026-10-28T19:45:00+00:00",
         "dm_count": 0,
@@ -1259,22 +1265,22 @@
     "reported_switches": []
   },
   "source_snapshots": {
-    "api_football": "2026-10-30T06:23:34.875419+00:00",
-    "api_results": "2026-10-30T06:17:04+00:00",
-    "availability": "2026-10-30T06:18:52+00:00",
-    "career": "2026-10-30T06:18:52+00:00",
-    "football_data_uk": "2026-10-30T06:17:03+00:00",
-    "former_players": "2026-10-30T06:17:24+00:00",
-    "history_backfill": "2026-10-30T06:17:18+00:00",
-    "matchday_snapshot": "2026-10-30T06:17:18+00:00",
-    "scouting_clubs": "2026-10-30T06:22:53+00:00",
-    "scouting_europe": "2026-10-30T06:22:42+00:00",
-    "scouting_pool": "2026-10-30T06:18:59+00:00",
-    "scouting_roles": "2026-10-30T06:22:15+00:00",
-    "scouting_rose_history": "2026-10-30T06:22:27+00:00",
-    "scouting_standings": "2026-10-30T06:22:43+00:00",
-    "spfl": "2026-10-30T06:17:05+00:00",
-    "xg_enrichment": "2026-10-30T06:23:20+00:00"
+    "api_football": "2026-10-31T20:12:27.622416+00:00",
+    "api_results": "2026-10-31T20:09:42+00:00",
+    "availability": "2026-10-31T20:10:09+00:00",
+    "career": "2026-10-31T20:10:09+00:00",
+    "football_data_uk": "2026-10-31T20:09:40+00:00",
+    "former_players": "2026-10-31T20:09:44+00:00",
+    "history_backfill": "2026-10-31T20:09:43+00:00",
+    "matchday_snapshot": "2026-10-31T19:58:05+00:00",
+    "scouting_clubs": "2026-10-31T20:10:16+00:00",
+    "scouting_europe": "2026-10-31T20:10:16+00:00",
+    "scouting_pool": "2026-10-31T20:10:13+00:00",
+    "scouting_roles": "2026-10-31T20:10:14+00:00",
+    "scouting_rose_history": "2026-10-31T20:10:16+00:00",
+    "scouting_standings": "2026-10-31T20:10:16+00:00",
+    "spfl": "2026-10-31T20:09:42+00:00",
+    "xg_enrichment": "2026-10-31T20:12:28+00:00"
   },
   "squad_needs": {
     "AM": 0.3,
@@ -1309,8 +1315,8 @@
     "lost": 6,
     "played": 11,
     "points": 11,
-    "position": 9,
+    "position": 10,
     "won": 3
   },
-  "update_id": "2026-10-30T06:17:02+00:00-1579911"
+  "update_id": "2026-10-31T20:09:39+00:00-1682807"
 }
