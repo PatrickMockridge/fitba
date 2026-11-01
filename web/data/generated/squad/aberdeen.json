@@ -11,7 +11,7 @@
       "wikipedia": 1
     },
     "conflicts": 0,
-    "ingested_at": "2026-10-31T20:10:09+00:00",
+    "ingested_at": "2026-11-01T06:17:19+00:00",
     "known": 1,
     "note": "Preferred-foot resolution. Side is derived from the starting-XI role, not from this resolver. The licensed API does not provide foot; Sportmonks is used when enabled; Wikipedia is the last resort and only explicit statements are accepted. Unknown is a valid state.",
     "rows": 39,
@@ -32,7 +32,7 @@
       "unknown": 27
     },
     "entry_count": 34,
-    "generated_at": "2026-10-31T20:10:09+00:00",
+    "generated_at": "2026-11-01T06:17:19+00:00",
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
     "policy": {
       "allowed_hosts": [
@@ -99,17 +99,17 @@
     ],
     "errors": [],
     "evidence_rows": 716,
-    "generated_at": "2026-10-31T20:10:09+00:00",
+    "generated_at": "2026-11-01T06:17:19+00:00",
     "last_backfill": {
       "budget": null,
       "budget_exhausted": false,
-      "generated_at": "2026-10-31T19:59:42+00:00",
-      "network_requests": 134,
+      "generated_at": "2026-10-31T20:10:09+00:00",
+      "network_requests": 71,
       "pairs_capped": 55,
       "pairs_complete": 59,
       "pairs_error": 0
     },
-    "network_requests": 71,
+    "network_requests": 21,
     "pairs_budget": 0,
     "pairs_capped": 55,
     "pairs_complete": 59,
@@ -136,7 +136,7 @@
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "status": "match"
   },
-  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
+  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
   "dataset_state": "fresh",
   "excluded_players": [
     {
@@ -1611,7 +1611,7 @@
       "totals": null
     }
   ],
-  "generated_at": "2026-10-31T20:12:31+00:00",
+  "generated_at": "2026-11-01T06:18:13+00:00",
   "loan_scope": {
     "official_list": {
       "in": [],
@@ -2272,7 +2272,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1440,
         "minutes_as_sub": 0,
         "minutes_started": 1440,
@@ -2304,8 +2304,8 @@
           "player_key": "api:player:1141"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 17,
@@ -3807,7 +3807,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 72,
         "minutes_as_sub": 72,
         "minutes_started": 0,
@@ -3839,8 +3839,8 @@
           "player_key": "api:player:20422"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 1,
@@ -5378,7 +5378,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 573,
         "minutes_as_sub": 44,
         "minutes_started": 529,
@@ -5410,8 +5410,8 @@
           "player_key": "api:player:37253"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 7,
@@ -6215,7 +6215,7 @@
             "sub_apps": 2
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 679,
         "minutes_as_sub": 101,
         "minutes_started": 578,
@@ -6247,8 +6247,8 @@
           "player_key": "api:player:161806"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 10,
@@ -7043,7 +7043,7 @@
             "sub_apps": 4
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 552,
         "minutes_as_sub": 112,
         "minutes_started": 440,
@@ -7075,8 +7075,8 @@
           "player_key": "api:player:321860"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 7,
@@ -7773,7 +7773,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1100,
         "minutes_as_sub": 0,
         "minutes_started": 1100,
@@ -7805,8 +7805,8 @@
           "player_key": "api:player:125695"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 11,
@@ -8786,7 +8786,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1387,
         "minutes_as_sub": 44,
         "minutes_started": 1343,
@@ -8818,8 +8818,8 @@
           "player_key": "api:player:108465"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 5,
         "conceded_on_pitch": 16,
@@ -9408,7 +9408,7 @@
             "sub_apps": 2
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 855,
         "minutes_as_sub": 21,
         "minutes_started": 834,
@@ -9440,8 +9440,8 @@
           "player_key": "api:player:18068"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 6,
@@ -10350,7 +10350,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1139,
         "minutes_as_sub": 0,
         "minutes_started": 1139,
@@ -10382,8 +10382,8 @@
           "player_key": "api:player:44921"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 14,
@@ -11034,7 +11034,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 14,
         "minutes_as_sub": 14,
         "minutes_started": 0,
@@ -11056,8 +11056,8 @@
           "player_key": "api:player:550363"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -11967,7 +11967,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 750,
         "minutes_as_sub": 0,
         "minutes_started": 750,
@@ -11999,8 +11999,8 @@
           "player_key": "api:player:45010"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
         "conceded_on_pitch": 9,
@@ -12195,7 +12195,7 @@
             "revision": "1379713265",
             "tier": 4,
             "url": "https://en.wikipedia.org/w/index.php?title=Alexander_Briedl&oldid=1379713265",
-            "verified_at": "2026-10-31"
+            "verified_at": "2026-11-01"
           },
           "status": "known",
           "unknown_reason": null,
@@ -12614,7 +12614,7 @@
             "sub_apps": 3
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 307,
         "minutes_as_sub": 130,
         "minutes_started": 177,
@@ -12646,8 +12646,8 @@
           "player_key": "api:player:271395"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 6,
@@ -13733,11 +13733,11 @@
         "by_competition": [
           {
             "competition": "Premier Sports Cup",
-            "minutes": 228,
-            "minutes_as_sub": 47,
+            "minutes": 304,
+            "minutes_as_sub": 123,
             "minutes_started": 181,
             "starts": 2,
-            "sub_apps": 2
+            "sub_apps": 3
           },
           {
             "competition": "Scottish Premiership",
@@ -13748,13 +13748,13 @@
             "sub_apps": 6
           }
         ],
-        "coverage": "partial",
-        "minutes": 849,
-        "minutes_as_sub": 232,
+        "coverage": "available",
+        "minutes": 925,
+        "minutes_as_sub": 308,
         "minutes_started": 617,
         "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
         "starts": 7,
-        "sub_apps": 8
+        "sub_apps": 9
       },
       "position": "Midfielder",
       "position_group": "MID",
@@ -13772,21 +13772,21 @@
         {
           "clean_sheets": 1,
           "competition": "Premier Sports Cup",
-          "conceded_on_pitch": 1,
-          "matches": 4,
-          "minutes_on_pitch": 228,
+          "conceded_on_pitch": 2,
+          "matches": 5,
+          "minutes_on_pitch": 304,
           "own_goals": 0,
           "player_id": 18945,
           "player_key": "api:player:18945"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
-        "conceded_on_pitch": 12,
-        "matches": 15,
-        "minutes_on_pitch": 849,
+        "conceded_on_pitch": 13,
+        "matches": 16,
+        "minutes_on_pitch": 925,
         "own_goals": 0
       },
       "provider_flag": false,
@@ -15422,7 +15422,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 958,
         "minutes_as_sub": 75,
         "minutes_started": 883,
@@ -15454,8 +15454,8 @@
           "player_key": "api:player:61178"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 10,
@@ -16354,7 +16354,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1085,
         "minutes_as_sub": 0,
         "minutes_started": 1085,
@@ -16386,8 +16386,8 @@
           "player_key": "api:player:57248"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 4,
         "conceded_on_pitch": 13,
@@ -16978,11 +16978,11 @@
         "by_competition": [
           {
             "competition": "Premier Sports Cup",
-            "minutes": 19,
-            "minutes_as_sub": 19,
+            "minutes": 21,
+            "minutes_as_sub": 21,
             "minutes_started": 0,
             "starts": 0,
-            "sub_apps": 2
+            "sub_apps": 3
           },
           {
             "competition": "Scottish Premiership",
@@ -16993,13 +16993,13 @@
             "sub_apps": 4
           }
         ],
-        "coverage": "partial",
-        "minutes": 317,
-        "minutes_as_sub": 106,
+        "coverage": "available",
+        "minutes": 319,
+        "minutes_as_sub": 108,
         "minutes_started": 211,
         "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
         "starts": 3,
-        "sub_apps": 6
+        "sub_apps": 7
       },
       "position": "Midfielder",
       "position_group": "MID",
@@ -17018,20 +17018,20 @@
           "clean_sheets": 0,
           "competition": "Premier Sports Cup",
           "conceded_on_pitch": 0,
-          "matches": 2,
-          "minutes_on_pitch": 19,
+          "matches": 3,
+          "minutes_on_pitch": 21,
           "own_goals": 0,
           "player_id": 379662,
           "player_key": "api:player:379662"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 3,
-        "matches": 8,
-        "minutes_on_pitch": 317,
+        "matches": 9,
+        "minutes_on_pitch": 319,
         "own_goals": 0
       },
       "provider_flag": false,
@@ -17936,11 +17936,11 @@
         "by_competition": [
           {
             "competition": "Premier Sports Cup",
-            "minutes": 349,
-            "minutes_as_sub": 44,
+            "minutes": 351,
+            "minutes_as_sub": 46,
             "minutes_started": 305,
             "starts": 4,
-            "sub_apps": 1
+            "sub_apps": 2
           },
           {
             "competition": "Scottish Premiership",
@@ -17951,13 +17951,13 @@
             "sub_apps": 2
           }
         ],
-        "coverage": "partial",
-        "minutes": 635,
-        "minutes_as_sub": 119,
+        "coverage": "available",
+        "minutes": 637,
+        "minutes_as_sub": 121,
         "minutes_started": 516,
         "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
         "starts": 8,
-        "sub_apps": 3
+        "sub_apps": 4
       },
       "position": "Midfielder",
       "position_group": "MID",
@@ -17976,20 +17976,20 @@
           "clean_sheets": 2,
           "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
-          "matches": 5,
-          "minutes_on_pitch": 349,
+          "matches": 6,
+          "minutes_on_pitch": 351,
           "own_goals": 0,
           "player_id": 388510,
           "player_key": "api:player:388510"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 2,
         "conceded_on_pitch": 4,
-        "matches": 11,
-        "minutes_on_pitch": 635,
+        "matches": 12,
+        "minutes_on_pitch": 637,
         "own_goals": 0
       },
       "provider_flag": false,
@@ -18571,7 +18571,7 @@
             "sub_apps": 7
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 465,
         "minutes_as_sub": 253,
         "minutes_started": 212,
@@ -18603,8 +18603,8 @@
           "player_key": "api:player:303519"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 7,
@@ -19267,11 +19267,11 @@
         "by_competition": [
           {
             "competition": "Premier Sports Cup",
-            "minutes": 167,
-            "minutes_as_sub": 13,
+            "minutes": 169,
+            "minutes_as_sub": 15,
             "minutes_started": 154,
             "starts": 3,
-            "sub_apps": 1
+            "sub_apps": 2
           },
           {
             "competition": "Scottish Premiership",
@@ -19282,13 +19282,13 @@
             "sub_apps": 5
           }
         ],
-        "coverage": "partial",
-        "minutes": 492,
-        "minutes_as_sub": 200,
+        "coverage": "available",
+        "minutes": 494,
+        "minutes_as_sub": 202,
         "minutes_started": 292,
         "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
         "starts": 5,
-        "sub_apps": 6
+        "sub_apps": 7
       },
       "position": "Midfielder",
       "position_group": "MID",
@@ -19307,20 +19307,20 @@
           "clean_sheets": 0,
           "competition": "Premier Sports Cup",
           "conceded_on_pitch": 2,
-          "matches": 4,
-          "minutes_on_pitch": 167,
+          "matches": 5,
+          "minutes_on_pitch": 169,
           "own_goals": 0,
           "player_id": 44982,
           "player_key": "api:player:44982"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 5,
-        "matches": 11,
-        "minutes_on_pitch": 492,
+        "matches": 12,
+        "minutes_on_pitch": 494,
         "own_goals": 0
       },
       "provider_flag": false,
@@ -19892,7 +19892,7 @@
             "sub_apps": 3
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 69,
         "minutes_as_sub": 69,
         "minutes_started": 0,
@@ -19914,8 +19914,8 @@
           "player_key": "api:player:84126"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 1,
@@ -20722,7 +20722,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 1401,
         "minutes_as_sub": 0,
         "minutes_started": 1401,
@@ -20754,8 +20754,8 @@
           "player_key": "api:player:97896"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 17,
@@ -21779,7 +21779,7 @@
             "sub_apps": 4
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 933,
         "minutes_as_sub": 285,
         "minutes_started": 648,
@@ -21811,8 +21811,8 @@
           "player_key": "api:player:231195"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 3,
         "conceded_on_pitch": 9,
@@ -22702,11 +22702,11 @@
         "by_competition": [
           {
             "competition": "Premier Sports Cup",
-            "minutes": 112,
-            "minutes_as_sub": 0,
+            "minutes": 147,
+            "minutes_as_sub": 35,
             "minutes_started": 112,
             "starts": 2,
-            "sub_apps": 0
+            "sub_apps": 1
           },
           {
             "competition": "Scottish Premiership",
@@ -22717,13 +22717,13 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
-        "minutes": 265,
-        "minutes_as_sub": 44,
+        "coverage": "available",
+        "minutes": 300,
+        "minutes_as_sub": 79,
         "minutes_started": 221,
         "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
         "starts": 4,
-        "sub_apps": 1
+        "sub_apps": 2
       },
       "position": "Attacker",
       "position_group": "FWD",
@@ -22741,21 +22741,21 @@
         {
           "clean_sheets": 1,
           "competition": "Premier Sports Cup",
-          "conceded_on_pitch": 0,
-          "matches": 2,
-          "minutes_on_pitch": 112,
+          "conceded_on_pitch": 1,
+          "matches": 3,
+          "minutes_on_pitch": 147,
           "own_goals": 0,
           "player_id": 267727,
           "player_key": "api:player:267727"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
-        "conceded_on_pitch": 0,
-        "matches": 5,
-        "minutes_on_pitch": 265,
+        "conceded_on_pitch": 1,
+        "matches": 6,
+        "minutes_on_pitch": 300,
         "own_goals": 0
       },
       "provider_flag": false,
@@ -23193,7 +23193,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 19,
         "minutes_as_sub": 19,
         "minutes_started": 0,
@@ -23225,8 +23225,8 @@
           "player_key": "api:player:670299"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -24404,7 +24404,7 @@
             "sub_apps": 0
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 148,
         "minutes_as_sub": 0,
         "minutes_started": 148,
@@ -24426,8 +24426,8 @@
           "player_key": "api:player:340027"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 1,
         "conceded_on_pitch": 0,
@@ -26376,7 +26376,7 @@
             "sub_apps": 1
           }
         ],
-        "coverage": "partial",
+        "coverage": "available",
         "minutes": 9,
         "minutes_as_sub": 9,
         "minutes_started": 0,
@@ -26398,8 +26398,8 @@
           "player_key": "api:player:395743"
         }
       ],
-      "position_stats_coverage": "partial",
-      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+      "position_stats_coverage": "available",
+      "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
       "position_totals": {
         "clean_sheets": 0,
         "conceded_on_pitch": 0,
@@ -26475,28 +26475,22 @@
     }
   ],
   "position_stats_meta": {
-    "coverage": "partial",
-    "fixtures_covered": 17,
+    "coverage": "available",
+    "fixtures_covered": 18,
     "fixtures_total": 18,
-    "ingested_at": "2026-10-31T20:10:09+00:00",
-    "missing_fixtures": [
-      {
-        "competition": "Premier Sports Cup",
-        "date": "2026-10-31T17:30:00+00:00",
-        "fixture_id": 1639572
-      }
-    ],
-    "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+    "ingested_at": "2026-11-01T06:17:19+00:00",
+    "missing_fixtures": [],
+    "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
     "scope": "competitive"
   },
-  "published_at": "2026-10-31T20:12:31+00:00",
+  "published_at": "2026-11-01T06:18:13+00:00",
   "role_meta": {
     "bench_complete_sides": 33,
-    "bench_incomplete_sides": 1,
+    "bench_incomplete_sides": 3,
     "coverage": "partial",
     "fixtures_total": 18,
     "fixtures_with_grid": 15,
-    "fixtures_with_lineups": 17,
+    "fixtures_with_lineups": 18,
     "fixtures_with_players": 11,
     "formation_mismatches": [],
     "formations_seen": {
@@ -26507,9 +26501,9 @@
       "4-3-3": 1,
       "4-4-2": 1,
       "5-3-2": 3,
-      "unknown": 2
+      "unknown": 3
     },
-    "ingested_at": "2026-10-31T20:10:09+00:00",
+    "ingested_at": "2026-11-01T06:17:19+00:00",
     "note": "Roles are derived from the starting-XI formation grid. Starts without a grid, unmapped formations and invalid slots are unknown, not inferred. Substitute appearances carry playing time but no role.",
     "players_with_role": 23,
     "players_with_starts": 24,
@@ -26535,24 +26529,24 @@
   },
   "roster_only": [],
   "season": "2026-27",
-  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
+  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
   "source_snapshots": {
-    "api_football": "2026-10-31T20:12:27.622416+00:00",
-    "api_results": "2026-10-31T20:09:42+00:00",
-    "availability": "2026-10-31T20:10:09+00:00",
-    "career": "2026-10-31T20:10:09+00:00",
-    "football_data_uk": "2026-10-31T20:09:40+00:00",
-    "former_players": "2026-10-31T20:09:44+00:00",
-    "history_backfill": "2026-10-31T20:09:43+00:00",
+    "api_football": "2026-11-01T06:18:10.885224+00:00",
+    "api_results": "2026-11-01T06:17:05+00:00",
+    "availability": "2026-11-01T06:17:19+00:00",
+    "career": "2026-11-01T06:17:19+00:00",
+    "football_data_uk": "2026-11-01T06:17:04+00:00",
+    "former_players": "2026-11-01T06:17:13+00:00",
+    "history_backfill": "2026-11-01T06:17:12+00:00",
     "matchday_snapshot": "2026-10-31T19:58:05+00:00",
-    "scouting_clubs": "2026-10-31T20:10:16+00:00",
-    "scouting_europe": "2026-10-31T20:10:16+00:00",
-    "scouting_pool": "2026-10-31T20:10:13+00:00",
-    "scouting_roles": "2026-10-31T20:10:14+00:00",
-    "scouting_rose_history": "2026-10-31T20:10:16+00:00",
-    "scouting_standings": "2026-10-31T20:10:16+00:00",
-    "spfl": "2026-10-31T20:09:42+00:00",
-    "xg_enrichment": "2026-10-31T20:12:28+00:00"
+    "scouting_clubs": "2026-11-01T06:17:51+00:00",
+    "scouting_europe": "2026-11-01T06:17:40+00:00",
+    "scouting_pool": "2026-11-01T06:17:24+00:00",
+    "scouting_roles": "2026-11-01T06:17:25+00:00",
+    "scouting_rose_history": "2026-11-01T06:17:40+00:00",
+    "scouting_standings": "2026-11-01T06:17:41+00:00",
+    "spfl": "2026-11-01T06:17:06+00:00",
+    "xg_enrichment": "2026-11-01T06:17:53+00:00"
   },
   "summary": {
     "attributes_conflicts": 0,
@@ -26616,7 +26610,7 @@
     "career_roles_unknown": 5,
     "display_overrides": 1,
     "excluded_api": 5,
-    "fixtures_covered": 17,
+    "fixtures_covered": 18,
     "fixtures_total": 18,
     "formations_seen": {
       "3-5-2": 1,
@@ -26626,7 +26620,7 @@
       "4-3-3": 1,
       "4-4-2": 1,
       "5-3-2": 3,
-      "unknown": 2
+      "unknown": 3
     },
     "formations_unmapped": [],
     "loans_in": 0,
@@ -26637,9 +26631,9 @@
     "official_source": "https://www.afc.co.uk/en/teams/mens",
     "official_squad_size": 29,
     "own_goals_total": 0,
-    "playing_time_available": 0,
+    "playing_time_available": 26,
     "playing_time_unavailable": 8,
-    "position_stats_coverage": "partial",
+    "position_stats_coverage": "available",
     "role_coverage": "partial",
     "roles_observed": 5,
     "roles_partial": 16,
@@ -26649,5 +26643,5 @@
     "stats_unavailable": 6,
     "total_players": 34
   },
-  "update_id": "2026-10-31T20:09:39+00:00-1682807"
+  "update_id": "2026-11-01T06:17:02+00:00-3003784"
 }

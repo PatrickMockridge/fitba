@@ -103,14 +103,14 @@
             "scale": 0.311
           },
           "wide_forward": {
-            "median": 7.11,
-            "n": 14,
-            "scale": 0.252
+            "median": 7.09,
+            "n": 15,
+            "scale": 0.208
           },
           "wide_midfield": {
-            "median": 6.78,
-            "n": 3,
-            "scale": 0.133
+            "median": 6.735,
+            "n": 2,
+            "scale": 0.067
           },
           "wing_back": {
             "median": 6.835,
@@ -1189,9 +1189,9 @@
         },
         "families": {
           "attacking_midfield": {
-            "median": 6.985,
-            "n": 4,
-            "scale": 0.304
+            "median": 7.14,
+            "n": 5,
+            "scale": 0.46
           },
           "central_midfield": {
             "median": 6.99,
@@ -1229,9 +1229,9 @@
             "scale": 0.178
           },
           "wide_midfield": {
-            "median": 6.72,
-            "n": 8,
-            "scale": 0.423
+            "median": 6.67,
+            "n": 7,
+            "scale": 0.237
           },
           "wing_back": {
             "median": 6.845,
@@ -1484,18 +1484,18 @@
         },
         "families": {
           "attacking_midfield": {
-            "median": 7.095,
-            "n": 20,
-            "scale": 0.356
+            "median": 7.05,
+            "n": 21,
+            "scale": 0.46
           },
           "central_midfield": {
             "median": 6.76,
-            "n": 131,
-            "scale": 0.282
+            "n": 130,
+            "scale": 0.274
           },
           "centre_back": {
             "median": 6.71,
-            "n": 120,
+            "n": 121,
             "scale": 0.282
           },
           "centre_forward": {
@@ -1509,9 +1509,9 @@
             "scale": null
           },
           "full_back": {
-            "median": 6.61,
+            "median": 6.6,
             "n": 80,
-            "scale": 0.2
+            "scale": 0.193
           },
           "goalkeeper": {
             "median": 6.945,
@@ -1520,18 +1520,18 @@
           },
           "wide_forward": {
             "median": 6.81,
-            "n": 80,
+            "n": 78,
             "scale": 0.252
           },
           "wide_midfield": {
-            "median": 6.72,
-            "n": 20,
-            "scale": 0.482
+            "median": 6.73,
+            "n": 21,
+            "scale": 0.46
           },
           "wing_back": {
-            "median": 6.655,
-            "n": 24,
-            "scale": 0.304
+            "median": 6.67,
+            "n": 25,
+            "scale": 0.311
           }
         }
       }
@@ -1543,17 +1543,17 @@
   "current_clubs": {
     "budget": 1000,
     "errors": [],
-    "generated_at": "2026-10-31T20:10:16+00:00",
+    "generated_at": "2026-11-01T06:17:51+00:00",
     "note": "Current club from the provider transfer feed for pool teams. A player without a later transfer keeps the stats club with source stats_snapshot. A subsequent move that does not involve a pool team may be missing.",
     "players": 10819,
-    "requests": 506,
+    "requests": 107,
     "schema_version": "1.0.0",
-    "snapshot_date": "2026-10-31",
+    "snapshot_date": "2026-11-01",
     "teams_fetched": 433,
     "teams_total": 433,
     "transfer_players": 55806
   },
-  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
+  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
   "dataset_state": "fresh",
   "europe": {
     "budget": 2000,
@@ -1599,7 +1599,7 @@
       }
     ],
     "coverage_complete": true,
-    "generated_at": "2026-10-31T20:10:16+00:00",
+    "generated_at": "2026-11-01T06:17:40+00:00",
     "players": 2130,
     "requests": 73,
     "schema_version": "1.0.0",
@@ -1610,7 +1610,7 @@
     "note": "Former Aberdeen players use the standard scouting profile. Their statistical profile is their latest league season, falling back to their last Aberdeen season and labelled. Cup/European provider rows and cross-league percentiles are not published.",
     "players": 60
   },
-  "generated_at": "2026-10-31T20:12:31+00:00",
+  "generated_at": "2026-11-01T06:18:13+00:00",
   "known_gaps": [
     "6 enabled leagues return no player season statistics (Scottish Championship/League One/League Two and four other leagues); their pages say so instead of zero-filling.",
     "Contracts, wages, fees, release clauses and agent fees are not in the fed data.",
@@ -1757,16 +1757,16 @@
     {
       "country": "Netherlands",
       "error": null,
-      "fixtures_played": 93,
+      "fixtures_played": 95,
       "href": "/scouting/ned-eredivisie/",
       "id": "ned:eredivisie",
-      "lineups_fetched": 93,
+      "lineups_fetched": 95,
       "name": "Eredivisie",
       "players": 533,
       "provider_league_id": 88,
       "rated": 434,
-      "role_coverage": 0.627,
-      "role_players": 334,
+      "role_coverage": 0.63,
+      "role_players": 336,
       "searchable": true,
       "slug": "ned-eredivisie",
       "status": "ok",
@@ -1776,16 +1776,16 @@
     {
       "country": "Belgium",
       "error": null,
-      "fixtures_played": 83,
+      "fixtures_played": 85,
       "href": "/scouting/bel-pro-league/",
       "id": "bel:pro-league",
-      "lineups_fetched": 83,
+      "lineups_fetched": 85,
       "name": "Belgian Pro League",
       "players": 521,
       "provider_league_id": 144,
       "rated": 436,
-      "role_coverage": 0.637,
-      "role_players": 332,
+      "role_coverage": 0.643,
+      "role_players": 335,
       "searchable": true,
       "slug": "bel-pro-league",
       "status": "ok",
@@ -1795,16 +1795,16 @@
     {
       "country": "Portugal",
       "error": null,
-      "fixtures_played": 83,
+      "fixtures_played": 84,
       "href": "/scouting/por-primeira-liga/",
       "id": "por:primeira-liga",
-      "lineups_fetched": 83,
+      "lineups_fetched": 84,
       "name": "Primeira Liga",
       "players": 542,
       "provider_league_id": 94,
       "rated": 442,
-      "role_coverage": 0.644,
-      "role_players": 349,
+      "role_coverage": 0.655,
+      "role_players": 355,
       "searchable": true,
       "slug": "por-primeira-liga",
       "status": "ok",
@@ -1814,16 +1814,16 @@
     {
       "country": "Switzerland",
       "error": null,
-      "fixtures_played": 68,
+      "fixtures_played": 69,
       "href": "/scouting/sui-super-league/",
       "id": "sui:super-league",
-      "lineups_fetched": 68,
+      "lineups_fetched": 69,
       "name": "Swiss Super League",
       "players": 335,
       "provider_league_id": 207,
       "rated": 292,
-      "role_coverage": 0.749,
-      "role_players": 251,
+      "role_coverage": 0.752,
+      "role_players": 252,
       "searchable": true,
       "slug": "sui-super-league",
       "status": "ok",
@@ -1833,16 +1833,16 @@
     {
       "country": "Austria",
       "error": null,
-      "fixtures_played": 62,
+      "fixtures_played": 63,
       "href": "/scouting/aut-bundesliga/",
       "id": "aut:bundesliga",
-      "lineups_fetched": 62,
+      "lineups_fetched": 63,
       "name": "Austrian Bundesliga",
       "players": 333,
       "provider_league_id": 218,
       "rated": 277,
-      "role_coverage": 0.706,
-      "role_players": 235,
+      "role_coverage": 0.709,
+      "role_players": 236,
       "searchable": true,
       "slug": "aut-bundesliga",
       "status": "ok",
@@ -1909,10 +1909,10 @@
     {
       "country": "Poland",
       "error": null,
-      "fixtures_played": 111,
+      "fixtures_played": 112,
       "href": "/scouting/pol-ekstraklasa/",
       "id": "pol:ekstraklasa",
-      "lineups_fetched": 111,
+      "lineups_fetched": 112,
       "name": "Ekstraklasa",
       "players": 535,
       "provider_league_id": 106,
@@ -2137,16 +2137,16 @@
     {
       "country": "Hungary",
       "error": null,
-      "fixtures_played": 67,
+      "fixtures_played": 68,
       "href": "/scouting/hun-nb-i/",
       "id": "hun:nb-i",
-      "lineups_fetched": 67,
+      "lineups_fetched": 68,
       "name": "Nemzeti Bajnoksag I",
       "players": 362,
       "provider_league_id": 271,
       "rated": 307,
-      "role_coverage": 0.688,
-      "role_players": 249,
+      "role_coverage": 0.693,
+      "role_players": 251,
       "searchable": true,
       "slug": "hun-nb-i",
       "status": "ok",
@@ -2251,16 +2251,16 @@
     {
       "country": "USA",
       "error": null,
-      "fixtures_played": 481,
+      "fixtures_played": 489,
       "href": "/scouting/usa-mls/",
       "id": "usa:mls",
-      "lineups_fetched": 481,
+      "lineups_fetched": 489,
       "name": "Major League Soccer",
       "players": 1003,
       "provider_league_id": 253,
       "rated": 867,
-      "role_coverage": 0.745,
-      "role_players": 747,
+      "role_coverage": 0.747,
+      "role_players": 749,
       "searchable": true,
       "slug": "usa-mls",
       "status": "ok",
@@ -2269,27 +2269,27 @@
     }
   ],
   "provider": "api_football",
-  "published_at": "2026-10-31T20:12:31+00:00",
+  "published_at": "2026-11-01T06:18:13+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
+  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
   "source_snapshots": {
-    "api_football": "2026-10-31T20:12:27.622416+00:00",
-    "api_results": "2026-10-31T20:09:42+00:00",
-    "availability": "2026-10-31T20:10:09+00:00",
-    "career": "2026-10-31T20:10:09+00:00",
-    "football_data_uk": "2026-10-31T20:09:40+00:00",
-    "former_players": "2026-10-31T20:09:44+00:00",
-    "history_backfill": "2026-10-31T20:09:43+00:00",
+    "api_football": "2026-11-01T06:18:10.885224+00:00",
+    "api_results": "2026-11-01T06:17:05+00:00",
+    "availability": "2026-11-01T06:17:19+00:00",
+    "career": "2026-11-01T06:17:19+00:00",
+    "football_data_uk": "2026-11-01T06:17:04+00:00",
+    "former_players": "2026-11-01T06:17:13+00:00",
+    "history_backfill": "2026-11-01T06:17:12+00:00",
     "matchday_snapshot": "2026-10-31T19:58:05+00:00",
-    "scouting_clubs": "2026-10-31T20:10:16+00:00",
-    "scouting_europe": "2026-10-31T20:10:16+00:00",
-    "scouting_pool": "2026-10-31T20:10:13+00:00",
-    "scouting_roles": "2026-10-31T20:10:14+00:00",
-    "scouting_rose_history": "2026-10-31T20:10:16+00:00",
-    "scouting_standings": "2026-10-31T20:10:16+00:00",
-    "spfl": "2026-10-31T20:09:42+00:00",
-    "xg_enrichment": "2026-10-31T20:12:28+00:00"
+    "scouting_clubs": "2026-11-01T06:17:51+00:00",
+    "scouting_europe": "2026-11-01T06:17:40+00:00",
+    "scouting_pool": "2026-11-01T06:17:24+00:00",
+    "scouting_roles": "2026-11-01T06:17:25+00:00",
+    "scouting_rose_history": "2026-11-01T06:17:40+00:00",
+    "scouting_standings": "2026-11-01T06:17:41+00:00",
+    "spfl": "2026-11-01T06:17:06+00:00",
+    "xg_enrichment": "2026-11-01T06:17:53+00:00"
   },
   "sources": [
     {
@@ -2308,7 +2308,7 @@
   "team_context": {
     "min_lift": 0,
     "standings": {
-      "generated_at": "2026-10-31T20:10:16+00:00",
+      "generated_at": "2026-11-01T06:17:41+00:00",
       "leagues": [
         {
           "group": "Premier League",
@@ -2450,7 +2450,7 @@
           "group": "Super League",
           "id": "gre:super-league",
           "name": "Super League Greece",
-          "played": 8,
+          "played": 9,
           "status": "ok",
           "teams": 14
         },
@@ -2578,7 +2578,7 @@
           "group": "Western Conference",
           "id": "usa:mls",
           "name": "Major League Soccer",
-          "played": 32,
+          "played": 33,
           "status": "ok",
           "teams": 30
         }
@@ -2599,9 +2599,9 @@
     "no_player_stats": 6,
     "players": 12696,
     "rated": 10796,
-    "role_players": 9061,
+    "role_players": 9078,
     "searchable": 27,
     "with_minutes_450": 5156
   },
-  "update_id": "2026-10-31T20:09:39+00:00-1682807"
+  "update_id": "2026-11-01T06:17:02+00:00-3003784"
 }

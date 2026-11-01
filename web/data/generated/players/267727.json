@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
+  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-31T20:12:31+00:00",
+  "generated_at": "2026-11-01T06:18:13+00:00",
   "identity": {
     "age": 24,
     "dataset_id": null,
@@ -114,16 +114,16 @@
           {
             "clean_sheets": 1,
             "competition": "Premier Sports Cup",
-            "conceded_on_pitch": 0,
-            "matches": 2,
-            "minutes_on_pitch": 112,
+            "conceded_on_pitch": 1,
+            "matches": 3,
+            "minutes_on_pitch": 147,
             "own_goals": 0,
             "player_id": 267727,
             "player_key": "api:player:267727"
           }
         ],
-        "position_stats_coverage": "partial",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+        "position_stats_coverage": "available",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -236,17 +236,17 @@
       "warnings": []
     },
     "playing_time": {
-      "badge": "partial",
+      "badge": "available",
       "data": {
         "playing_time": {
           "by_competition": [
             {
               "competition": "Premier Sports Cup",
-              "minutes": 112,
-              "minutes_as_sub": 0,
+              "minutes": 147,
+              "minutes_as_sub": 35,
               "minutes_started": 112,
               "starts": 2,
-              "sub_apps": 0
+              "sub_apps": 1
             },
             {
               "competition": "Scottish Premiership",
@@ -257,13 +257,13 @@
               "sub_apps": 1
             }
           ],
-          "coverage": "partial",
-          "minutes": 265,
-          "minutes_as_sub": 44,
+          "coverage": "available",
+          "minutes": 300,
+          "minutes_as_sub": 79,
           "minutes_started": 221,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
           "starts": 4,
-          "sub_apps": 1
+          "sub_apps": 2
         }
       },
       "dataset_id": null,
@@ -275,23 +275,10 @@
       "served_by_update_id": null,
       "source_snapshots": null,
       "stale_reason": null,
-      "status": "partial",
+      "status": "available",
       "title": "Playing time",
       "update_id": null,
-      "warnings": [
-        {
-          "code": "COVERAGE_PARTIAL",
-          "dataset_id": null,
-          "dataset_state": null,
-          "field": "playing_time",
-          "message": "Some appearances have no lineup or event coverage.",
-          "published_at": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null
-        }
-      ]
+      "warnings": []
     },
     "position": {
       "badge": null,
@@ -1392,7 +1379,7 @@
           "league_minutes": 153,
           "league_rating": 3.86,
           "league_rating_percentile": null,
-          "minutes": 265,
+          "minutes": 300,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1428,8 +1415,29 @@
       "warnings": []
     },
     "recent_matches": {
-      "badge": "5 rows",
+      "badge": "6 rows",
       "data": [
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-10-31",
+          "fixture_id": "1639572",
+          "goals": null,
+          "minutes": 35,
+          "opponent": "Rangers",
+          "published_at": null,
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": null
+        },
         {
           "assists": null,
           "competition": "Premier Sports Cup",
@@ -1569,25 +1577,12 @@
     }
   },
   "player_id": 267727,
-  "published_at": "2026-10-31T20:12:31+00:00",
+  "published_at": "2026-11-01T06:18:13+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
+  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-31T20:09:39+00:00-1682807",
-  "warnings": [
-    {
-      "code": "COVERAGE_PARTIAL",
-      "dataset_id": null,
-      "dataset_state": null,
-      "field": "playing_time",
-      "message": "Some appearances have no lineup or event coverage.",
-      "published_at": null,
-      "served_by_update_id": null,
-      "source_snapshots": null,
-      "stale_reason": null,
-      "update_id": null
-    }
-  ]
+  "update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "warnings": []
 }

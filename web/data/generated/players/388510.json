@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-10-31T20:12:31+00:00-dfeea2b",
+  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
   "dataset_state": "fresh",
-  "generated_at": "2026-10-31T20:12:31+00:00",
+  "generated_at": "2026-11-01T06:18:13+00:00",
   "identity": {
     "age": 20,
     "dataset_id": null,
@@ -115,15 +115,15 @@
             "clean_sheets": 2,
             "competition": "Premier Sports Cup",
             "conceded_on_pitch": 2,
-            "matches": 5,
-            "minutes_on_pitch": 349,
+            "matches": 6,
+            "minutes_on_pitch": 351,
             "own_goals": 0,
             "player_id": 388510,
             "player_key": "api:player:388510"
           }
         ],
-        "position_stats_coverage": "partial",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 17 of 18 competitive matches; friendlies are excluded. Fixtures without lineups or events are excluded and the coverage is marked partial.",
+        "position_stats_coverage": "available",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -236,17 +236,17 @@
       "warnings": []
     },
     "playing_time": {
-      "badge": "partial",
+      "badge": "available",
       "data": {
         "playing_time": {
           "by_competition": [
             {
               "competition": "Premier Sports Cup",
-              "minutes": 349,
-              "minutes_as_sub": 44,
+              "minutes": 351,
+              "minutes_as_sub": 46,
               "minutes_started": 305,
               "starts": 4,
-              "sub_apps": 1
+              "sub_apps": 2
             },
             {
               "competition": "Scottish Premiership",
@@ -257,13 +257,13 @@
               "sub_apps": 2
             }
           ],
-          "coverage": "partial",
-          "minutes": 635,
-          "minutes_as_sub": 119,
+          "coverage": "available",
+          "minutes": 637,
+          "minutes_as_sub": 121,
           "minutes_started": 516,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
           "starts": 8,
-          "sub_apps": 3
+          "sub_apps": 4
         }
       },
       "dataset_id": null,
@@ -275,23 +275,10 @@
       "served_by_update_id": null,
       "source_snapshots": null,
       "stale_reason": null,
-      "status": "partial",
+      "status": "available",
       "title": "Playing time",
       "update_id": null,
-      "warnings": [
-        {
-          "code": "COVERAGE_PARTIAL",
-          "dataset_id": null,
-          "dataset_state": null,
-          "field": "playing_time",
-          "message": "Some appearances have no lineup or event coverage.",
-          "published_at": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null
-        }
-      ]
+      "warnings": []
     },
     "position": {
       "badge": null,
@@ -1466,7 +1453,7 @@
           "league_minutes": 284,
           "league_rating": 6.68,
           "league_rating_percentile": 36.8,
-          "minutes": 635,
+          "minutes": 637,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1504,6 +1491,27 @@
     "recent_matches": {
       "badge": "10 rows",
       "data": [
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-10-31",
+          "fixture_id": "1639572",
+          "goals": null,
+          "minutes": 2,
+          "opponent": "Rangers",
+          "published_at": null,
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": null
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1692,27 +1700,6 @@
           "stale_reason": null,
           "update_id": null,
           "venue": null
-        },
-        {
-          "assists": null,
-          "competition": "Premier Sports Cup",
-          "dataset_id": null,
-          "dataset_state": null,
-          "date": "2026-07-18",
-          "fixture_id": "1548151",
-          "goals": null,
-          "minutes": 81,
-          "opponent": "Queen's Park",
-          "published_at": null,
-          "rating": null,
-          "result": null,
-          "score_against": null,
-          "score_for": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null,
-          "venue": null
         }
       ],
       "dataset_id": null,
@@ -1748,25 +1735,12 @@
     }
   },
   "player_id": 388510,
-  "published_at": "2026-10-31T20:12:31+00:00",
+  "published_at": "2026-11-01T06:18:13+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-10-31T20:09:39+00:00-1682807",
+  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-10-31T20:09:39+00:00-1682807",
-  "warnings": [
-    {
-      "code": "COVERAGE_PARTIAL",
-      "dataset_id": null,
-      "dataset_state": null,
-      "field": "playing_time",
-      "message": "Some appearances have no lineup or event coverage.",
-      "published_at": null,
-      "served_by_update_id": null,
-      "source_snapshots": null,
-      "stale_reason": null,
-      "update_id": null
-    }
-  ]
+  "update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "warnings": []
 }
