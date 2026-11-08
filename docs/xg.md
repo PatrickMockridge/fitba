@@ -47,6 +47,11 @@ Two separate measures:
 No missing value is shown as zero. Provider xG, shots, penalties and the ranges
 are each `unavailable` when the record cannot support them.
 
+`/analysis/` also carries a labelled within-Premiership **provider-xG rank**
+(football-data.co.uk first, API-Football fallback). It is a league summary of
+provider xG, not fxG. The model table, calibration and match-level fxG ranges
+remain on `/analysis/xg/`; the two measures are never blended.
+
 **Scope and source.** The aggregate table, era and last-10 rows are Scottish
 Premiership only. Cup and European fxG appears on the individual match pages
 and is never added to the league aggregates. Current-season league shots and

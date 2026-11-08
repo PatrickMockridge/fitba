@@ -42,7 +42,7 @@ pages:
   - id: analysis
     label: Season overview
     patterns: ["/analysis/"]
-    layers: [league_results_current, league_standings, player_squads, availability, needs, history]
+    layers: [league_results_current, league_standings, league_team_stats, player_squads, availability, needs, history, xg_model]
 
   - id: analysis-xg
     label: fxG analysis

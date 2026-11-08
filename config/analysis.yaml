@@ -3,11 +3,15 @@
 # These are screening thresholds and display limits, not valuations, targets or
 # predictions. All numbers are published in analysis/summary.json and registered
 # in config/metrics.yaml.
-version: 1
-reviewed: 2026-10-23
+version: 2
+reviewed: 2026-11-08
 next_up: 3
 matchday_lookahead: 6
 selection_watch: 3
+league_rankings:
+  competition_id: sco:premiership
+  min_team_matches: 4
+  require_complete_coverage: true
 squad_decisions:
   peak_age_min: 27
   peak_minutes_min: 450

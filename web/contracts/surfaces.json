@@ -1582,6 +1582,14 @@
               "min": 1
             },
             {
+              "id": "analysis.league-rankings",
+              "min": 1
+            },
+            {
+              "id": "analysis.league-table",
+              "min": 1
+            },
+            {
               "id": "analysis.next-up",
               "min": 1
             },
@@ -1607,6 +1615,25 @@
             }
           ],
           "columns": {
+            "analysis.league-rankings": [
+              "Metric",
+              "Aberdeen",
+              "Rank",
+              "Direction",
+              "League median",
+              "Leader"
+            ],
+            "analysis.league-table": [
+              "#",
+              "Team",
+              "P",
+              "GF/m",
+              "GA/m",
+              "xG/m",
+              "xGA/m",
+              "Poss %",
+              "Pts"
+            ],
             "analysis.next-up": [
               "Date",
               "Competition",

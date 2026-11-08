@@ -1010,6 +1010,103 @@ def _check_epoch_with_root(corpus: dict[str, Any], outcome: CheckOutcome, root) 
             outcome.fail(f"checksum mismatch: {entry.get('path')}")
 
 
+def _check_analysis_league_rankings(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    analysis = _payload(corpus, "analysis/summary.json") or {}
+    block = analysis.get("league_rankings") or {}
+    if not block or block.get("state") == "unavailable":
+        outcome.fail("analysis league rankings are unavailable")
+        return
+    found = _aberdeen_table_row(corpus)
+    if found is None:
+        outcome.fail("no table contains an Aberdeen row")
+        return
+    _, table_row = found
+    hero = analysis.get("hero") or {}
+    for name in ("position", "played", "points"):
+        outcome.fields_checked += 1
+        if hero.get(name) != table_row.get(name):
+            outcome.fail(f"analysis hero {name} != league table")
+    aberdeen = block.get("aberdeen") or {}
+    for name in ("position", "played", "points"):
+        outcome.fields_checked += 1
+        if aberdeen.get(name) != table_row.get(name):
+            outcome.fail(f"league rankings Aberdeen {name} != league table")
+    teams = block.get("teams") or []
+    aberdeen_team = next(
+        (team for team in teams if str(team.get("team_id")) == "sco:aberdeen"), None
+    )
+    if aberdeen_team is None:
+        outcome.fail("league rankings have no Aberdeen team row")
+    else:
+        outcome.fields_checked += 2
+        if aberdeen.get("values") != aberdeen_team.get("values"):
+            outcome.fail("league rankings Aberdeen values != its ranked team row")
+        if aberdeen.get("ranks") != aberdeen_team.get("ranks"):
+            outcome.fail("league rankings Aberdeen ranks != its ranked team row")
+    played = int(table_row.get("played") or 0)
+    values = aberdeen.get("values") or {}
+    if played > 0:
+        expected = {
+            "goals_for_pm": round(int(table_row.get("gf") or 0) / played, 2),
+            "goals_against_pm": round(int(table_row.get("ga") or 0) / played, 2),
+            "gd_pm": round(
+                (int(table_row.get("gf") or 0) - int(table_row.get("ga") or 0)) / played,
+                2,
+            ),
+        }
+        for name, value in expected.items():
+            outcome.fields_checked += 1
+            if values.get(name) != value:
+                outcome.fail(f"league rankings {name} != league table rate")
+    for metric in block.get("metrics") or []:
+        metric_id = str(metric.get("id"))
+        higher = metric.get("direction") == "higher_is_better"
+        metric_values = [(team.get("values") or {}).get(metric_id) for team in teams]
+        if any(value is None for value in metric_values):
+            continue
+        for team in teams:
+            outcome.fields_checked += 1
+            value = (team.get("values") or {}).get(metric_id)
+            rank = 1 + sum(
+                1
+                for other in metric_values
+                if other is not None and (other > value if higher else other < value)
+            )
+            if (team.get("ranks") or {}).get(metric_id) != rank:
+                outcome.fail(f"league rankings {metric_id} rank does not recompute")
+    context = aberdeen.get("context")
+    if context:
+        xg = _payload(corpus, "xg/aberdeen.json") or {}
+        aggregate = next(
+            (
+                item
+                for item in xg.get("aggregates") or []
+                if item.get("scope") == "season"
+                and item.get("season") == block.get("season")
+                and item.get("competition_id") == block.get("competition_id")
+            ),
+            None,
+        )
+        if aggregate is None:
+            outcome.fail("league rankings fxG context has no xG season aggregate")
+        else:
+            for name in ("fxg", "goals", "goals_minus_fxg", "matches"):
+                outcome.fields_checked += 1
+                if context.get(name) != aggregate.get(name):
+                    outcome.fail(f"league rankings fxG context {name} != xG payload")
+    coverage = block.get("coverage") or {}
+    for name in ("provider_xg", "possession"):
+        entry = coverage.get(name) or {}
+        outcome.fields_checked += 2
+        total = int(entry.get("team_rows_total") or 0)
+        covered = int(entry.get("team_rows") or 0)
+        if covered > total:
+            outcome.fail(f"league rankings {name} covered rows exceed total")
+        if bool(entry.get("complete")) != (total > 0 and covered == total):
+            outcome.fail(f"league rankings {name} complete flag is inconsistent")
+    outcome.rows_checked += len(teams)
+
+
 CHECKS = [
     (
         "squad.counts",
@@ -1123,6 +1220,12 @@ CHECKS = [
             "clubs/aberdeen.json",
         ],
         _check_results_form,
+    ),
+    (
+        "analysis.league-rankings",
+        "Published league ranks reconcile with the table and xG payload",
+        ["analysis/summary.json", "tables/*.json", "xg/aberdeen.json"],
+        _check_analysis_league_rankings,
     ),
     (
         "results.club",

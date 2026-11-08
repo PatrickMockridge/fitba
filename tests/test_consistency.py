@@ -71,6 +71,25 @@ def test_table_played_mutation_fails():
     assert "results.table" in failed
 
 
+def test_analysis_league_rank_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    ranking = corpus["analysis/summary.json"]["league_rankings"]
+    ranking["aberdeen"]["ranks"]["xg_for_pm"] += 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "analysis.league-rankings" in failed
+
+
+def test_analysis_league_goal_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    table = corpus["tables/premiership-2026-27.json"]
+    row = next(row for row in table["rows"] if row["team_id"] == "sco:aberdeen")
+    row["gf"] += 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "analysis.league-rankings" in failed
+
+
 def test_matchday_form_mutation_fails():
     corpus = copy.deepcopy(_corpus())
     form = corpus["matchday/upcoming.json"]["form_guide"]["aberdeen"]

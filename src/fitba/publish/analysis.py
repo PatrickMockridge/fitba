@@ -2,8 +2,9 @@
 
 The page is a projection of one document: current position and form, the next
 fixtures, official and derived availability, measured season aims, a factual
-squad-decision view and the category bridges. No claim cards, owner view,
-benchmark or xG tables are emitted here.
+squad-decision view, the category bridges and a labelled within-Premiership
+provider-xG/possession rank. No claim cards, owner view, benchmark, fxG model
+table, calibration table or match-level fxG range is emitted here.
 """
 
 from __future__ import annotations
@@ -15,11 +16,25 @@ from fitba.analytics.availability_rules import (
     card_summary,
     suspension_rows,
 )
+from fitba.analytics.league_stats import build_league_rankings
 from fitba.normalize.schedule import load_schedule
 from fitba.settings import analysis_policy
 from fitba.settings import competitions as competitions_config
 
 ABERDEEN_ID = 252
+
+
+def _league_context(
+    xg_payload: dict[str, Any] | None, season: str, competition_id: str
+) -> dict[str, Any] | None:
+    for aggregate in (xg_payload or {}).get("aggregates") or []:
+        if (
+            aggregate.get("scope") == "season"
+            and aggregate.get("season") == season
+            and aggregate.get("competition_id") == competition_id
+        ):
+            return aggregate
+    return None
 
 
 def _fixture(row: dict[str, Any]) -> dict[str, Any]:
@@ -339,6 +354,8 @@ def build_analysis_payload(
     history_season: dict[str, Any] | None,
     table_rows: list[dict[str, Any]],
     table_row: dict[str, Any],
+    league_features: list[dict[str, Any]] | None = None,
+    xg_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     policy = analysis_policy()
     schedule = load_schedule(season)
@@ -377,10 +394,37 @@ def build_analysis_payload(
     bridges = _bridges()
     competitions = competitions_config().get("competitions") or []
     qualification_note = ""
+    league_policy = policy.get("league_rankings") or {}
+    league_id = str(league_policy.get("competition_id") or "sco:premiership")
+    league_name = "Scottish Premiership"
     for competition in competitions:
-        if competition.get("id") == "sco:premiership":
+        if competition.get("id") == league_id:
+            league_name = str(competition.get("name") or league_name)
             qualification_note = str(competition.get("qualification_note") or "").strip()
             break
+    try:
+        league_rankings = build_league_rankings(
+            table_rows=table_rows,
+            features=league_features,
+            season=season,
+            competition_id=league_id,
+            competition_name=league_name,
+            team_id=str(table_row.get("team_id") or "sco:aberdeen"),
+            generated_at=generated_at,
+            min_team_matches=int(league_policy.get("min_team_matches") or 4),
+            require_complete_coverage=bool(league_policy.get("require_complete_coverage", True)),
+            fxg_context=_league_context(xg_payload, season, league_id),
+        )
+    except Exception:  # noqa: BLE001 - the overview must not fail the publish
+        league_rankings = build_league_rankings(
+            table_rows=[],
+            features=[],
+            season=season,
+            competition_id=league_id,
+            competition_name=league_name,
+            generated_at=generated_at,
+        )
+        league_rankings["reason"] = "league_rankings_build_failed"
     payload = {
         "schema_version": "1.0.0",
         "season": season,
@@ -392,8 +436,9 @@ def build_analysis_payload(
             "points": table_row.get("points"),
             "goal_difference": table_row.get("gd"),
             "form": table_row.get("form"),
-            "league_name": "Scottish Premiership",
+            "league_name": league_name,
         },
+        "league_rankings": league_rankings,
         "next_up": next_up,
         "availability": {
             "counts": {
@@ -457,6 +502,9 @@ def build_analysis_payload(
                 "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
                 "No contract-expiry, free-agent, wage or fee data is held.",
                 "Provider ratings are opaque and league-relative.",
+                "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
+                "Possession is provider-reported and is not used in the matchday style lean.",
+                "League ranks compare Premiership teams only; no cross-league comparison is made.",
             ],
         },
         "sources": ["afc_news", "api_football", "spfl"],

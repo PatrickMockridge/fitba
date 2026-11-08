@@ -7,6 +7,7 @@ allowed to duplicate the arithmetic precisely to catch drift.
 
 from __future__ import annotations
 
+import statistics
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -734,8 +735,191 @@ def verify_former_coverage(corpus: dict[str, Any], _: Any = None) -> Verificatio
     return result
 
 
+def _close(left: Any, right: Any, tolerance: float = 0.011) -> bool:
+    if left is None or right is None:
+        return left is None and right is None
+    try:
+        return abs(float(left) - float(right)) <= tolerance
+    except (TypeError, ValueError):
+        return False
+
+
+def _ranking_ranks(values: list[float | None], higher_is_better: bool) -> list[int | None]:
+    if any(value is None for value in values):
+        return [None for _ in values]
+    ranks: list[int | None] = []
+    for value in values:
+        assert value is not None
+        ranks.append(
+            1
+            + sum(
+                1
+                for other in values
+                if other is not None and (other > value if higher_is_better else other < value)
+            )
+        )
+    return ranks
+
+
+def verify_analysis_league_rankings(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    summary = _payload(corpus, "analysis/summary.json") or {}
+    block = summary.get("league_rankings") or {}
+    if not block:
+        result.fail("analysis/summary.json has no league_rankings block")
+        return result
+    if block.get("state") == "unavailable":
+        result.note(
+            "analysis.league-rankings",
+            True,
+            "rankings unavailable; nothing to recompute",
+        )
+        return result
+
+    table = None
+    for key in sorted(corpus):
+        if not (key.startswith("tables/") and key.endswith(".json")):
+            continue
+        document = _payload(corpus, key) or {}
+        if document.get("competition_id") == block.get("competition_id") and document.get(
+            "season"
+        ) == block.get("season"):
+            table = document
+            break
+    if table is None:
+        result.fail("matching league table payload not found")
+        return result
+    table_rows = {str(row.get("team_id")): row for row in table.get("rows") or []}
+    teams = block.get("teams") or []
+    result.rows_checked += len(teams)
+    result.fields_checked += 8
+    result.note(
+        "league_size",
+        block.get("league_size") == len(teams) == len(table_rows),
+        "league size equals both the team rows and the league table",
+    )
+    table_ids = set(table_rows)
+    team_ids = {str(team.get("team_id")) for team in teams}
+    result.note(
+        "scope",
+        team_ids == table_ids and block.get("scope") == "league_only",
+        "every ranked team is in the league table and the scope is league-only",
+    )
+
+    for team in teams:
+        team_id = str(team.get("team_id"))
+        row = table_rows.get(team_id)
+        if row is None:
+            result.fail(f"{team_id}: no league table row")
+            continue
+        for name in ("position", "played", "points"):
+            if team.get(name) != row.get(name):
+                result.fail(f"{team_id}: {name} does not match the league table")
+        played = int(row.get("played") or 0)
+        if played <= 0:
+            continue
+        expected = {
+            "goals_for_pm": _round(int(row.get("gf") or 0) / played),
+            "goals_against_pm": _round(int(row.get("ga") or 0) / played),
+            "gd_pm": _round((int(row.get("gf") or 0) - int(row.get("ga") or 0)) / played),
+        }
+        for name, value in expected.items():
+            if not _close((team.get("values") or {}).get(name), value):
+                result.fail(f"{team_id}: {name} does not recompute from the league table")
+
+    metrics = {str(metric.get("id")): metric for metric in block.get("metrics") or []}
+    for metric_id, metric in metrics.items():
+        higher = metric.get("direction") == "higher_is_better"
+        values = [(team.get("values") or {}).get(metric_id) for team in teams]
+        recomputed = _ranking_ranks(values, higher)
+        if block.get("state") == "available":
+            for team, rank in zip(teams, recomputed, strict=False):
+                if team.get("ranks", {}).get(metric_id) != rank:
+                    result.fail(f"{metric_id}: rank does not recompute for {team.get('team_id')}")
+        present = [value for value in values if value is not None]
+        league = (block.get("league") or {}).get(metric_id) or {}
+        if present:
+            median = _round(statistics.median(present))
+            mean = _round(statistics.mean(present))
+            leader = max(present) if higher else min(present)
+            if not _close(league.get("median"), median):
+                result.fail(f"{metric_id}: median does not recompute")
+            if not _close(league.get("mean"), mean):
+                result.fail(f"{metric_id}: mean does not recompute")
+            if not _close(league.get("leader_value"), leader):
+                result.fail(f"{metric_id}: leader value does not recompute")
+            expected_leaders = {
+                str(team.get("team_id"))
+                for team in teams
+                if (team.get("values") or {}).get(metric_id) == leader
+            }
+            actual_leaders = {
+                str(entry.get("team_id")) for entry in league.get("leader_teams") or []
+            }
+            if expected_leaders != actual_leaders:
+                result.fail(f"{metric_id}: leader teams do not recompute")
+        result.fields_checked += 5
+
+    aberdeen = block.get("aberdeen") or {}
+    aberdeen_id = str(aberdeen.get("team_id") or "")
+    aberdeen_team = next((team for team in teams if str(team.get("team_id")) == aberdeen_id), None)
+    if aberdeen_team is None:
+        result.fail("Aberdeen row is missing from the ranked teams")
+    else:
+        if aberdeen.get("values") != aberdeen_team.get("values"):
+            result.fail("Aberdeen values do not match its ranked team row")
+        if aberdeen.get("ranks") != aberdeen_team.get("ranks"):
+            result.fail("Aberdeen ranks do not match its ranked team row")
+        context = aberdeen.get("context")
+        if context:
+            xg = _payload(corpus, "xg/aberdeen.json") or {}
+            aggregate = next(
+                (
+                    item
+                    for item in xg.get("aggregates") or []
+                    if item.get("scope") == "season"
+                    and item.get("season") == block.get("season")
+                    and item.get("competition_id") == block.get("competition_id")
+                ),
+                None,
+            )
+            if aggregate is None:
+                result.fail("fxG context has no matching xG season aggregate")
+            else:
+                for name in ("fxg", "goals", "goals_minus_fxg", "matches"):
+                    if not _close(context.get(name), aggregate.get(name)):
+                        result.fail(f"fxG context {name} does not match the xG payload")
+
+    coverage = block.get("coverage") or {}
+    for name in ("provider_xg", "possession"):
+        entry = coverage.get(name) or {}
+        total = int(entry.get("team_rows_total") or 0)
+        covered = int(entry.get("team_rows") or 0)
+        complete = bool(entry.get("complete"))
+        if covered > total:
+            result.fail(f"{name}: covered rows exceed the total")
+        if complete != (total > 0 and covered == total):
+            result.fail(f"{name}: complete flag does not match coverage")
+    table_coverage = coverage.get("table") or {}
+    expected_matches = sum(int(row.get("played") or 0) for row in table_rows.values()) // 2
+    if table_coverage.get("matches") != expected_matches:
+        result.fail("coverage table matches do not equal the league table played sum")
+    result.note(
+        "coverage",
+        True,
+        "provider and possession coverage counts are internally consistent",
+    )
+    result.note(
+        "provenance_only_note",
+        True,
+        "provider xG and possession source totals are not independently re-derived",
+    )
+    return result
+
+
 CHECKS = {
     "fitba.metrics.checks:verify_table_record": verify_table_record,
+    "fitba.metrics.checks:verify_analysis_league_rankings": verify_analysis_league_rankings,
     "fitba.metrics.checks:verify_matchday_form": verify_matchday_form,
     "fitba.metrics.checks:verify_matchday_strength": verify_matchday_strength,
     "fitba.metrics.checks:verify_matchday_coverage": verify_matchday_coverage,

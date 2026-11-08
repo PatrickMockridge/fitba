@@ -55,6 +55,82 @@ def main() -> int:
     data = _load(DATA)
     if data.get("schema_version") != "1.0.0":
         errors.append("analysis summary schema_version is not 1.0.0")
+    rankings = data.get("league_rankings") or {}
+    if not rankings:
+        errors.append("analysis summary is missing league_rankings")
+    else:
+        if rankings.get("scope") != "league_only":
+            errors.append("league_rankings scope must be league_only")
+        if rankings.get("state") not in {"available", "partial", "unavailable"}:
+            errors.append("league_rankings state is invalid")
+        if rankings.get("state") != "unavailable":
+            table_path = (
+                ROOT
+                / "web"
+                / "data"
+                / "generated"
+                / "tables"
+                / f"premiership-{data.get('season')}.json"
+            )
+            table = _load(table_path) if table_path.exists() else {}
+            table_rows = table.get("rows") or []
+            table_ids = {str(row.get("team_id")) for row in table_rows}
+            teams = rankings.get("teams") or []
+            team_ids = {str(team.get("team_id")) for team in teams}
+            if int(rankings.get("league_size") or 0) != len(table_rows):
+                errors.append("league_rankings league_size does not match the league table")
+            if team_ids != table_ids:
+                errors.append("league_rankings teams do not match the league table")
+            aberdeen = rankings.get("aberdeen") or {}
+            table_row = next(
+                (row for row in table_rows if str(row.get("team_id")) == "sco:aberdeen"),
+                {},
+            )
+            for name in ("position", "played", "points"):
+                if aberdeen.get(name) != table_row.get(name):
+                    errors.append(f"league_rankings Aberdeen {name} does not match the table")
+            played = int(table_row.get("played") or 0)
+            if played > 0:
+                expected = {
+                    "goals_for_pm": round(int(table_row.get("gf") or 0) / played, 2),
+                    "goals_against_pm": round(int(table_row.get("ga") or 0) / played, 2),
+                    "gd_pm": round(
+                        (int(table_row.get("gf") or 0) - int(table_row.get("ga") or 0)) / played,
+                        2,
+                    ),
+                }
+                for name, value in expected.items():
+                    if (aberdeen.get("values") or {}).get(name) != value:
+                        errors.append(
+                            f"league_rankings Aberdeen {name} does not match the table rate"
+                        )
+            league_size = int(rankings.get("league_size") or 0)
+            for team in teams:
+                for metric in rankings.get("metrics") or []:
+                    metric_id = str(metric.get("id"))
+                    value = (team.get("values") or {}).get(metric_id)
+                    rank = (team.get("ranks") or {}).get(metric_id)
+                    if (value is None) != (rank is None):
+                        errors.append(
+                            f"league_rankings {team.get('team_id')}: {metric_id} "
+                            "value/rank null state differs"
+                        )
+                    if rank is not None and not 1 <= int(rank) <= league_size:
+                        errors.append(
+                            f"league_rankings {team.get('team_id')}: {metric_id} "
+                            "rank is out of bounds"
+                        )
+            coverage = rankings.get("coverage") or {}
+            for name in ("provider_xg", "possession"):
+                entry = coverage.get(name) or {}
+                total = int(entry.get("team_rows_total") or 0)
+                covered = int(entry.get("team_rows") or 0)
+                if covered > total:
+                    errors.append(f"league_rankings {name} covered rows exceed total")
+                if bool(entry.get("complete")) != (total > 0 and covered == total):
+                    errors.append(f"league_rankings {name} complete flag is inconsistent")
+            if "not fitba fxG" not in str(rankings.get("note") or ""):
+                errors.append("league_rankings must distinguish provider xG from fxG")
     next_up = data.get("next_up") or []
     if not 0 <= len(next_up) <= 3:
         errors.append("next_up must contain at most three rows")
@@ -104,6 +180,9 @@ def main() -> int:
         html = OUT.read_text(encoding="utf-8")
         if len(re.findall(r"<h1[ >]", html)) != 1:
             errors.append("analysis page must have exactly one H1")
+        for phrase in ("Where Aberdeen rank", "The Premiership, ranked"):
+            if phrase not in html:
+                errors.append(f"analysis page is missing the league rankings heading {phrase!r}")
         lowered = html.casefold()
         for phrase in ("case.claim", "owner view", "chairman frame", "how the record compares"):
             if phrase in lowered:
@@ -118,7 +197,9 @@ def main() -> int:
         return 1
     print(
         f"Analysis check passed ({len(next_up)} next fixtures, "
-        f"{int(counts.get('active') or 0)} active availability rows)"
+        f"{int(counts.get('active') or 0)} active availability rows, "
+        f"{int(rankings.get('league_size') or 0)} league teams, "
+        f"{int(rankings.get('matches') or 0)} matches)"
     )
     return 0
 

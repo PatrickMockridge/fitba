@@ -1,12 +1,20 @@
 import Link from "next/link";
 import { ContractPage } from "@/components/ContractPage";
-import { formatDate, formatDecimal, formatInteger, formatPercentValue } from "@/lib/format";
+import { TableFrame } from "@/components/TableFrame";
+import {
+  formatDate,
+  formatDecimal,
+  formatInteger,
+  formatPercentValue,
+  formatSigned,
+} from "@/lib/format";
 import { getAnalysisSummary } from "@/lib/data";
 import type {
   AnalysisAim,
   AnalysisFixture,
   AnalysisInference,
   AnalysisLens,
+  AnalysisLeagueRankings,
   AnalysisOfficial,
   AnalysisSelection,
   AnalysisSuspension,
@@ -16,7 +24,7 @@ export const metadata = {
   alternates: { canonical: "/analysis/" },
   title: "Season overview · fitba",
   description:
-    "Aberdeen's season at a glance: next fixtures, availability, aims, squad decisions and the route to the evidence.",
+    "Aberdeen's season at a glance: league rankings for xG, possession and goals, next fixtures, availability, aims, squad decisions and the route to the evidence.",
 };
 
 function ordinal(value: number | null | undefined): string {
@@ -287,6 +295,260 @@ function LensTable({ lens }: { lens: AnalysisLens }) {
   );
 }
 
+function rankingReason(reason: string | null): string {
+  switch (reason) {
+    case "below_min_team_matches":
+      return "Not enough matches have been played to rank the league.";
+    case "provider_coverage_incomplete":
+      return "Provider xG coverage is incomplete, so ranks are withheld; values that are present are shown.";
+    case "possession_coverage_incomplete":
+      return "Possession coverage is incomplete, so ranks are withheld; values that are present are shown.";
+    case "league_table_incomplete":
+      return "The league table is incomplete, so ranks are withheld.";
+    case "league_table_unavailable":
+      return "No Premiership league table is available in this build.";
+    case "league_rankings_build_failed":
+      return "League rankings could not be built in this publish.";
+    default:
+      return "";
+  }
+}
+
+function metricValue(metricId: string, value: number | null | undefined): string {
+  if (value === null || value === undefined) return "—";
+  if (metricId === "possession_pct") return formatPercentValue(value, 2);
+  if (metricId === "gd_pm") return formatSigned(value, 2);
+  return formatDecimal(value, 2);
+}
+
+function LeagueRankingsSections({ rankings }: { rankings: AnalysisLeagueRankings }) {
+  const aberdeen = rankings.aberdeen;
+  const available = rankings.state === "available";
+  const badge = available
+    ? `Within-Premiership ranks · ${formatInteger(rankings.league_size)} teams`
+    : rankings.state === "partial"
+      ? "Partial coverage"
+      : "Unavailable";
+  const coverage = rankings.coverage ?? {};
+  const provider = coverage.provider_xg ?? {};
+  const possession = coverage.possession ?? {};
+  const providerCovered = Number(provider.team_rows ?? 0);
+  const providerTotal = Number(provider.team_rows_total ?? 0);
+  const possessionCovered = Number(possession.team_rows ?? 0);
+  const possessionTotal = Number(possession.team_rows_total ?? 0);
+  const context = aberdeen?.context;
+  const summaryRows = rankings.metrics;
+  const teamRows = rankings.teams;
+
+  return (
+    <>
+      <section className="section" data-contract="analysis.league-rankings">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">
+              Season so far · {rankings.competition_name ?? "Scottish Premiership"}
+            </p>
+            <h2>Where Aberdeen rank</h2>
+          </div>
+          <span className="badge badge-neutral">{badge}</span>
+        </div>
+        <p className="fine-print">
+          {rankings.scope_label}. Rank is 1 plus the number of teams with a better
+          published value; ties share the better rank. A missing value is unknown,
+          not zero.
+        </p>
+        {!available && rankingReason(rankings.reason) ? (
+          <p className="fine-print" data-contract-indicator="unknown">
+            {rankingReason(rankings.reason)}
+          </p>
+        ) : null}
+        <TableFrame label="Aberdeen's within-Premiership ranks with league median and leader">
+          <table className="league-table compact">
+            <caption className="fine-print">
+              Provider xG is football-data.co.uk with API-Football fallback (
+              {formatInteger(providerCovered)}/{formatInteger(providerTotal)} team
+              rows). Possession is provider-reported ({formatInteger(possessionCovered)}/
+              {formatInteger(possessionTotal)} team rows) and is not used in the
+              matchday style lean. Scope: {rankings.scope_label.toLowerCase()};
+              per-match rates. As of {formatDate(rankings.as_of)}.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col" className="num">
+                  Aberdeen
+                </th>
+                <th scope="col" className="num">
+                  Rank
+                </th>
+                <th scope="col">Direction</th>
+                <th scope="col" className="num">
+                  League median
+                </th>
+                <th scope="col">Leader</th>
+              </tr>
+            </thead>
+            <tbody>
+              {summaryRows.length === 0 ? (
+                <tr>
+                  <td>Unavailable</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td>—</td>
+                  <td className="num">—</td>
+                  <td>—</td>
+                </tr>
+              ) : (
+                summaryRows.map((metric) => {
+                  const value = aberdeen?.values?.[metric.id];
+                  const rank = aberdeen?.ranks?.[metric.id];
+                  const league = rankings.league?.[metric.id];
+                  const leaderNames = (league?.leader_teams ?? [])
+                    .map((team) => team.team_name)
+                    .join(", ");
+                  return (
+                    <tr key={metric.id}>
+                      <td>
+                        {metric.label}{" "}
+                        <span className="muted">({metric.source_label})</span>
+                      </td>
+                      <td className="num">{metricValue(metric.id, value)}</td>
+                      <td className="num">
+                        {rank === null || rank === undefined
+                          ? "—"
+                          : `${ordinal(rank)} of ${formatInteger(rankings.league_size)}`}
+                      </td>
+                      <td>{metric.direction_label}</td>
+                      <td className="num">
+                        {metricValue(metric.id, league?.median)}
+                      </td>
+                      <td>
+                        {leaderNames
+                          ? `${leaderNames} ${metricValue(metric.id, league?.leader_value)}`
+                          : "—"}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </TableFrame>
+        {context ? (
+          <p className="fine-print">
+            Aberdeen&apos;s fitba fxG is {formatDecimal(context.fxg, 2)} over{" "}
+            {formatInteger(context.matches ?? 0)} league matches ({formatInteger(context.goals)}{" "}
+            goals, {formatSigned(context.goals_minus_fxg ?? 0, 2)} goals minus fxG). It is a
+            local model shown for context, not part of the provider-xG rank.{" "}
+            <Link className="text-link" href="/analysis/xg/">
+              fxG model →
+            </Link>
+          </p>
+        ) : null}
+        <p className="fine-print">
+          Provider xG is one provider&apos;s model, not fitba fxG; the two are never
+          blended. Possession is provider-reported and is not used in the matchday
+          style lean.
+        </p>
+      </section>
+
+      <section className="section" data-contract="analysis.league-table">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">The league, ranked</p>
+            <h2>The Premiership, ranked</h2>
+          </div>
+          <span className="badge badge-neutral">
+            {formatInteger(rankings.league_size)} teams · {formatInteger(rankings.matches)}{" "}
+            matches
+          </span>
+        </div>
+        <TableFrame label="Scottish Premiership table with per-match goals, xG, xGA, possession and points">
+          <table className="league-table compact">
+            <caption className="fine-print">
+              Per-match rates within the {rankings.competition_name} only. Provider xG
+              is football-data.co.uk with API-Football fallback; possession is
+              provider-reported. P = played, Pts = league points. A missing value is
+              unknown, not zero. As of {formatDate(rankings.as_of)}.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" className="num">
+                  #
+                </th>
+                <th scope="col">Team</th>
+                <th scope="col" className="num">
+                  P
+                </th>
+                <th scope="col" className="num">
+                  GF/m
+                </th>
+                <th scope="col" className="num">
+                  GA/m
+                </th>
+                <th scope="col" className="num">
+                  xG/m
+                </th>
+                <th scope="col" className="num">
+                  xGA/m
+                </th>
+                <th scope="col" className="num">
+                  Poss %
+                </th>
+                <th scope="col" className="num">
+                  Pts
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {teamRows.length === 0 ? (
+                <tr>
+                  <td className="num">—</td>
+                  <td>No league table published</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                  <td className="num">—</td>
+                </tr>
+              ) : (
+                teamRows.map((team) => {
+                  const isAberdeen = team.team_id === "sco:aberdeen";
+                  return (
+                    <tr key={team.team_id} className={isAberdeen ? "is-highlight" : undefined}>
+                      <td className="num">{team.position ?? "—"}</td>
+                      <td>{team.team_name}</td>
+                      <td className="num">{formatInteger(team.played)}</td>
+                      <td className="num">{metricValue("goals_for_pm", team.values.goals_for_pm)}</td>
+                      <td className="num">
+                        {metricValue("goals_against_pm", team.values.goals_against_pm)}
+                      </td>
+                      <td className="num">{metricValue("xg_for_pm", team.values.xg_for_pm)}</td>
+                      <td className="num">
+                        {metricValue("xg_against_pm", team.values.xg_against_pm)}
+                      </td>
+                      <td className="num">
+                        {metricValue("possession_pct", team.values.possession_pct)}
+                      </td>
+                      <td className="num">
+                        {team.points === null || team.points === undefined
+                          ? "—"
+                          : formatInteger(team.points)}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </TableFrame>
+      </section>
+    </>
+  );
+}
+
 export default function AnalysisPage() {
   const data = getAnalysisSummary();
   if (!data) {
@@ -322,6 +584,10 @@ export default function AnalysisPage() {
           <Link className="text-link" href="/claims/">Claims and evidence →</Link>
         </p>
       </section>
+
+      {data.league_rankings ? (
+        <LeagueRankingsSections rankings={data.league_rankings} />
+      ) : null}
 
       <section className="section" data-contract="analysis.next-up">
         <div className="section-head">

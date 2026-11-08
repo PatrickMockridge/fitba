@@ -42,14 +42,18 @@ layers:
     label: League team match stats
     kind: provider
     primary: football_data_uk
-    fallback: []
+    fallback: [api_football]
     status: active
     scope: 2013-14 to current
-    fields: [shots, shots_on_target, corners, fouls, cards]
-    surfaces: [/sources/, /themes/, /scotland/]
+    fields: [shots, shots_on_target, corners, fouls, cards, xg, possession]
+    surfaces: [/sources/, /themes/, /scotland/, /analysis/]
     note: >
-      Shots, corners, fouls and cards for the style/theme proxies. API-Football
-      team statistics are not available for every SPFL tier.
+      Shots, corners, fouls and cards for the style/theme proxies. For 2026-27
+      the API-Football feed supplies possession and expected_goals for every
+      finished Premiership team row; /analysis/ prints the current coverage
+      count beside a labelled provider possession average and a within-league
+      provider-xG rank. Provider xG is not fitba fxG. Team statistics are not
+      available for every SPFL tier.
 
   - id: league_standings
     label: League tables
@@ -59,7 +63,7 @@ layers:
     status: active
     scope: current and historical seasons
     fields: [points, goal_difference, position, form]
-    surfaces: [/scotland/]
+    surfaces: [/scotland/, /analysis/]
     note: Computed from league results with split and deduction rules.
 
   - id: cup_fixtures
@@ -422,11 +426,12 @@ layers:
     status: experimental
     scope: current-season league matches with shot-zone inputs
     fields: [fxg, fxg_range, evaluation]
-    surfaces: [/analysis/xg/, /matches/, /sources/, /methodology/]
+    surfaces: [/analysis/xg/, /analysis/, /matches/, /sources/, /methodology/]
     note: >
       The fxG model is derived from licensed shot and match features. It is
       descriptive; the provider-xG evaluation gate is failing, so it is not a
-      confidence verdict or tracking data.
+      confidence verdict or tracking data. /analysis/ shows Aberdeen's fxG as
+      labelled context beside, not inside, the provider-xG league rank.
 
   - id: odds
     label: Betting odds

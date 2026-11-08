@@ -3280,6 +3280,66 @@ export interface AnalysisLens {
   rows: AnalysisLensRow[];
 }
 
+export interface AnalysisLeagueRankingMetric {
+  id: string;
+  label: string;
+  source: string;
+  source_label: string;
+  value_type: string;
+  direction: "higher_is_better" | "lower_is_better";
+  direction_label: string;
+  decimals: number;
+}
+
+export interface AnalysisLeagueRankingContext {
+  fxg: number;
+  goals: number;
+  goals_minus_fxg: number | null;
+  matches: number | null;
+  ranked: false;
+  label: string;
+  note: string;
+}
+
+export interface AnalysisLeagueRankingTeam {
+  team_id: string;
+  team_name: string;
+  position: number | null;
+  played: number;
+  points: number | null;
+  values: Record<string, number | null>;
+  ranks: Record<string, number | null>;
+  context?: AnalysisLeagueRankingContext | null;
+}
+
+export interface AnalysisLeagueRankingLeague {
+  median: number | null;
+  mean: number | null;
+  ranked_teams: number;
+  leader_value: number | null;
+  leader_teams: Array<{ team_id: string; team_name: string }>;
+}
+
+export interface AnalysisLeagueRankings {
+  state: string;
+  reason: string | null;
+  competition_id: string;
+  competition_name: string;
+  season: string;
+  scope: string;
+  scope_label: string;
+  as_of: string;
+  league_size: number;
+  matches: number;
+  team_rows: number;
+  coverage: Record<string, Record<string, unknown>>;
+  metrics: AnalysisLeagueRankingMetric[];
+  aberdeen: AnalysisLeagueRankingTeam | null;
+  league: Record<string, AnalysisLeagueRankingLeague>;
+  teams: AnalysisLeagueRankingTeam[];
+  note: string;
+}
+
 export interface AnalysisSummary {
   schema_version: string;
   season: string;
@@ -3294,6 +3354,7 @@ export interface AnalysisSummary {
     form?: string | null;
     league_name?: string | null;
   };
+  league_rankings?: AnalysisLeagueRankings | null;
   next_up: AnalysisFixture[];
   availability: {
     counts: Record<string, number>;

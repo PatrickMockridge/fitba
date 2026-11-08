@@ -311,13 +311,17 @@ sources:
       European league-phase player flag uses per-fixture player data; the season
       /players endpoint has no round dimension. Current clubs come from the
       team transfer feed; a later move outside a pool team may be missing.
-      Provider xG is partial: expected_goals appears in some Premiership
-      statistics responses, not as a historical location feed. Roles are
-      derived from the starting-XI formation grid in the
-      lineups; the feed does not report a formation after a substitution, so
-      mid-game switches need a sourced context note. Team statistics and
-      possession are not dependable at scale; the matchday style lean uses shot
-      proxies only and never possession. Current-season Scottish injuries
+      Provider xG is expected_goals; for the 2026-27 Premiership it covers
+      every finished team row, and /analysis/ publishes a labelled
+      within-league provider-xG rank with the current coverage count. It is not
+      fitba fxG and the two are never blended. Possession is provider-reported
+      and covers the same finished team rows; /analysis/ publishes a labelled
+      season average, while the matchday style lean continues to use shot
+      proxies only and never possession. A missing or partial row is shown as
+      unknown, never zero.
+      Roles are derived from the starting-XI formation grid in the lineups; the
+      feed does not report a formation after a substitution, so mid-game
+      switches need a sourced context note. Current-season Scottish injuries
       coverage is false, so /injuries is not used as a team-news feed. Team
       match stats are not available for every SPFL tier, which is why league
       results and stats remain on Football-Data.co.uk until the strict

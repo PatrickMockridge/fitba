@@ -160,10 +160,11 @@ Implemented:
   predicted XIs with contenders, the matchup read and coverage. Opponent
   lineups come from the bounded `data/normalized/matchday/` snapshot; league
   facts join from the tables and club payload at build time.
-- `analysis/summary.json` — Season overview: current table/form, next three
-  fixtures, official and derived availability, season aims, factual
-  squad-decision lenses and bridges. Built from local payloads and the merged
-  season schedule.
+- `analysis/summary.json` — Season overview: current table/form, within-Premiership
+  provider-xG/possession rankings, next three fixtures, official and derived
+  availability, season aims, factual squad-decision lenses and bridges. The
+  rankings join the current table to the provider team-match features; provider
+  xG is not fitba fxG. Built from local payloads and the merged season schedule.
 - `themes/aberdeen.json` — the retained case archive used by the compact
   matchday evidence strip; it is not rendered on `/analysis/`.
 - `fixtures/index.json` — played rows with score, depth and link plus a

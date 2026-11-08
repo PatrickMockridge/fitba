@@ -1,6 +1,6 @@
 schema_version: 1
-registry_version: 3.13.0
-reviewed: '2026-10-24'
+registry_version: 3.14.0
+reviewed: '2026-11-08'
 owner: patrickmockridge
 change_policy:
   owner_approval_required: true
@@ -2689,7 +2689,8 @@ metrics:
 - id: analysis.summary
   label: Season overview
   description: Current position and form, next fixtures, official and derived availability,
-    measured aims, squad-decision lenses and the category bridges.
+    measured aims, squad-decision lenses, the category bridges and the within-Premiership
+    provider-xG/possession rankings.
   value_type: object
   fields:
   - position
@@ -2697,6 +2698,7 @@ metrics:
   - points
   - goal_difference
   - form
+  - league_rankings
   - next_up
   - counts
   - official
@@ -2709,16 +2711,19 @@ metrics:
   formula: >
     A projection of the current table row, the merged season schedule, the AFC
     availability ledger, sourced card rules, named-squad membership, matchday
-    contenders, the season expectations and factual squad-decision lenses. No
-    value, fee, wage, contract expiry or medical diagnosis is derived. Counts
-    sum to the active universe (official list minus loanees out); the five
-    official loan-outs are separate. Aims are analyst-set targets with a measured
-    current value and status; they are not club targets.
+    contenders, the season expectations, factual squad-decision lenses and the
+    within-Premiership provider-xG/possession rankings. No value, fee, wage,
+    contract expiry or medical diagnosis is derived. Counts sum to the active
+    universe (official list minus loanees out); the five official loan-outs are
+    separate. Aims are analyst-set targets with a measured current value and
+    status; they are not club targets. League rankings join the current table to
+    team-match provider features on team_id and rank each team on per-match rates.
   inputs:
   - published payload
   - data/normalized/matches/player_squads.parquet
   - data/normalized/matches/events.parquet
   - data/normalized/history/season=*/fixtures.parquet
+  - data/normalized/xg/team_match_features.parquet
   - availability/aberdeen.json
   - scouting/aberdeen.json
   - needs/aberdeen.json
@@ -2738,7 +2743,9 @@ metrics:
   confidence_rule: >
     Official availability is ledger-only; derived availability is labelled
     inferred or projected and capped at medium; unknown is never zero. A card
-    rule that is not verified publishes watch/review_required, not a ban.
+    rule that is not verified publishes watch/review_required, not a ban. League
+    rankings require complete provider coverage for every table team; a missing
+    value is null, never zero.
   home_payload: analysis/summary.json
   payload_paths:
   - analysis/summary.json#/**
@@ -2753,9 +2760,95 @@ metrics:
   - Suspension rules are watch/review-only until the current SFA protocol is sourced.
   - No contract-expiry, free-agent, wage, fee or release-clause data is held.
   - Market/value language is not used; squad decisions are measured lenses only.
+  - League rankings are within the Premiership only; provider xG is not fitba fxG.
   owner: patrickmockridge
-  reviewed: '2026-10-24'
-  version: 2
+  reviewed: '2026-11-08'
+  version: 3
+  status: active
+- id: analysis.league-rankings
+  label: League rankings
+  description: Aberdeen's within-Premiership ranks for provider xG, possession,
+    goals scored, goals conceded and goal difference, with league median and leader
+    context.
+  value_type: object
+  fields:
+  - position
+  - played
+  - points
+  - xg_for_pm
+  - xg_against_pm
+  - possession_pct
+  - goals_for_pm
+  - goals_against_pm
+  - gd_pm
+  - values
+  - ranks
+  - median
+  - mean
+  - leader_value
+  - leader_teams
+  - league_size
+  - ranked_teams
+  - team_rows
+  formula: >
+    Per-team values join the current-season league table to API-Football team-match
+    features on team_id. The provider xG value is football-data.co.uk's HxG/AxG with
+    API-Football expected_goals as the fallback, matching the published match and xG
+    payloads. xg_for_pm = sum(the team's provider xG)/played; xg_against_pm = sum(the
+    opponent's provider xG in the same match)/played; possession_pct = mean(provider
+    possession over the team's rows); goals_for_pm = gf/played; goals_against_pm =
+    ga/played; gd_pm = (gf-ga)/played. rank = 1 + count of teams with a better
+    published value (higher is better for xG for, possession, goals for and goal
+    difference; lower is better for xG against and goals against); ties share the
+    better rank. median and mean are over the ranked team values. leader_value is
+    the best value and leader_teams lists every team at that value. No cross-league
+    comparison is made.
+  inputs:
+  - published payload
+  - tables/premiership-<season>.json
+  - data/normalized/xg/team_match_features.parquet
+  unit: mixed
+  aggregation: per_team
+  denominator: played
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: computed
+  coverage_tier: match
+  confidence_rule: >
+    Provider xG and possession require a non-null API-Football value for every
+    played team match and every table team. If coverage is incomplete, the team
+    value and rank are null and the block state is partial; a missing value is
+    unknown, never zero. Ranks are descriptive and within the Premiership only.
+    Provider xG is one provider's model and is never blended with fitba fxG.
+    Possession is provider-reported and is not used in the matchday style lean.
+  home_payload: analysis/summary.json
+  payload_paths:
+  - analysis/summary.json#/league_rankings/**
+  home_surface: /analysis/
+  displayed_surfaces:
+  - /analysis/
+  verification: recompute
+  verification_checks:
+  - id: ranks
+    description: Rank equals 1 + count of better published values; ties share the better rank.
+    payload: analysis/summary.json#/league_rankings/teams
+  - id: table
+    description: Position, played, goals and goal difference match the Premiership table.
+    payload: tables/*.json#/rows
+  implementation: fitba.metrics.checks:verify_analysis_league_rankings
+  source_paths: []
+  limitations:
+  - Ranks are within the Scottish Premiership only; no cross-league or cross-tier comparison is made.
+  - Provider xG is football-data.co.uk with API-Football fallback, not fitba fxG; the two are shown separately and never averaged.
+  - Possession is provider-reported and can sum to 99 or 101 on a single match; the season average is descriptive.
+  - A missing value or incomplete coverage is published as unknown, never zero.
+  - Provider xG and possession source totals are not independently re-derived from a published payload; the verification recomputes ranks, rates, medians and table-derived values.
+  owner: patrickmockridge
+  reviewed: '2026-11-08'
+  version: 1
   status: active
 - id: fixtures.index
   label: Fixture index

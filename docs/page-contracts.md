@@ -84,6 +84,13 @@ Must remain visible:
 
 - The hero: position, played, points, goal difference and last-five form, with
   one freshness/source line. No opinion thesis and no duplicate fixture row.
+- League rankings: the six metric rows with Metric, Aberdeen, Rank, Direction,
+  League median and Leader, plus the full Premiership table with #, Team, P,
+  GF/m, GA/m, xG/m, xGA/m, Poss % and Pts. The scope, provider-xG source,
+  possession source, coverage count, as-of date, tie rule and unknown state
+  stay visible. Provider xG is not fitba fxG; the two are never blended.
+  Possession is provider-reported and is not used in the matchday style lean.
+  No cross-league comparison is made.
 - Next up: the next three competitive, non-conflict fixtures with Date,
   Competition, Opponent, Venue, Kickoff and Status, plus links to the six-game
   matchday lookahead and the full `/matches/` schedule.
@@ -106,11 +113,14 @@ loan-outs are separate. Counts must sum to that universe. “Available” means 
 verified ledger entry, not fit; inferred absence is “not in the last two
 matchday squads — reason not published”, never injury.
 
-Forbidden: owner view, chairman frame, thesis, claim cards, benchmark, xG
-tables (they stay on `/analysis/xg/`), a medical diagnosis from selection
-patterns, a ban from an unverified rule, a global suspension state, a value or
-transfer recommendation, a fee/wage/contract-expiry claim, “will leave”,
-“sell-high”, a question heading, or hiding unknown/coverage states.
+Forbidden: owner view, chairman frame, thesis, claim cards, benchmark, a full
+fxG model table, calibration table, match-level fxG ranges or a provider-vs-fxG
+comparison (those stay on `/analysis/xg/`); a labelled within-Premiership
+summary rank of provider xG and provider-reported possession is permitted here.
+Also forbidden: a medical diagnosis from selection patterns, a ban from an
+unverified rule, a global suspension state, a value or transfer recommendation,
+a fee/wage/contract-expiry claim, “will leave”, “sell-high”, a question heading,
+or hiding unknown/coverage states.
 
 ### `/analysis/xg/` — fxG model
 

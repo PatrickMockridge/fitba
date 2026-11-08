@@ -8,6 +8,40 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.14.0 — 2026-11-08
+
+League rankings on the season overview. `analysis.summary` v2 → v3 and new
+`analysis.league-rankings` v1. **No existing published value, formula,
+denominator, rounding mode or source precedence changed.** The new block joins
+the current Premiership table to the already-ingested provider team-match
+features on `team_id`.
+
+- `analysis.summary` v2 → v3 adds the `league_rankings` block: the current
+  position and form, availability, aims, squad lenses and bridges are unchanged.
+- New `analysis.league-rankings` v1: per-team per-match rates and
+  within-Premiership ranks for provider xG for, provider xG against, possession,
+  goals scored, goals conceded and goal difference. Provider xG uses the
+  published precedence (football-data.co.uk HxG/AxG, API-Football
+  `expected_goals` fallback). Possession is API-Football's provider-reported
+  value, published as a labelled league-overview average and still excluded from
+  the matchday style lean. Aberdeen's local fxG is shown as labelled context
+  only and is not part of the provider-xG rank.
+- Ranking scope is the Scottish Premiership only. Ties share the better rank;
+  a missing value is unknown, never zero. No cross-league comparison is
+  introduced.
+- Expected published values (12 teams, 75 matches, 150/150 provider rows):
+
+| Field | Aberdeen | Rank | League median | Leader |
+|---|---:|---:|---:|---|
+| `xg_for_pm` | 1.23 | 10 | 1.44 | Celtic 2.66 |
+| `xg_against_pm` | 1.55 | 5 | 1.60 | Celtic 1.00 |
+| `possession_pct` | 46.67 | 8 | 49.26 | Celtic 60.69 |
+| `goals_for_pm` | 1.00 | 10 | 1.36 | Hearts 2.17 |
+| `goals_against_pm` | 1.50 | 7 | 1.46 | Rangers 0.75 |
+| `gd_pm` | -0.50 | 10 | -0.09 | Celtic 1.38 |
+
+Registry version 3.13.0 → 3.14.0.
+
 ## 3.13.0 — 2026-10-28
 
 Role-coverage denominator correction. `scouting.coverage` v5 → v6. The

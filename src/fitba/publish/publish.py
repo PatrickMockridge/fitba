@@ -41,6 +41,7 @@ from fitba.ingest.runner import load_matches
 from fitba.ingest.squad import load_squad_players
 from fitba.ingest.transfer_audit import load_candidates, load_prior_squads
 from fitba.ingest.transfers import published_transfers, withheld_transfers
+from fitba.ingest.xg_enrichment import load_enrichment
 from fitba.metrics.audit import (
     build_audit,
     build_registry_payload,
@@ -1910,6 +1911,13 @@ def publish(
     club_id = str(aberdeen_config()["club_id"])
     table_row = next((row for row in table_rows if row.get("team_id") == club_id), {})
     try:
+        league_frame = load_enrichment(target_season)
+        if league_frame.height and "competition_id" in league_frame.columns:
+            league_frame = league_frame.filter(pl.col("competition_id") == "sco:premiership")
+        league_features = league_frame.to_dicts() if league_frame.height else []
+    except Exception:  # noqa: BLE001 - the overview must not fail the publish
+        league_features = []
+    try:
         analysis_payload = build_analysis_payload(
             season=target_season,
             generated_at=generated_at,
@@ -1921,6 +1929,8 @@ def publish(
             history_season=(history_payloads.get("seasons") or {}).get(target_season) or {},
             table_rows=table_rows,
             table_row=table_row,
+            league_features=league_features,
+            xg_payload=xg_payload,
         )
     except Exception as error:  # noqa: BLE001 - the summary must not fail the publish
         analysis_payload = {
@@ -1930,6 +1940,25 @@ def publish(
             "state": "unavailable",
             "stale_reason": f"analysis_build_failed:{type(error).__name__}",
             "hero": {},
+            "league_rankings": {
+                "state": "unavailable",
+                "reason": "analysis_build_failed",
+                "competition_id": "sco:premiership",
+                "competition_name": "Scottish Premiership",
+                "season": target_season,
+                "scope": "league_only",
+                "scope_label": "Within the Scottish Premiership only",
+                "as_of": generated_at,
+                "league_size": 0,
+                "matches": 0,
+                "team_rows": 0,
+                "coverage": {},
+                "metrics": [],
+                "aberdeen": None,
+                "league": {},
+                "teams": [],
+                "note": "League rankings are unavailable in this build.",
+            },
             "next_up": [],
             "availability": {
                 "counts": {},
