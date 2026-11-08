@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
+  "dataset_id": "2026-11-08T19:48:23+00:00-32d674f5",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-11-08T09:46:53+00:00",
+  "generated_at": "2026-11-08T19:48:23+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -138,7 +138,7 @@
           "name": "football-data.co.uk",
           "published_at": null,
           "role": "primary",
-          "rows": 276,
+          "rows": 278,
           "served_by_update_id": null,
           "source_id": "football_data_uk",
           "source_snapshots": null,
@@ -233,19 +233,23 @@
     {
       "dataset_id": null,
       "dataset_state": null,
-      "fallback": [],
+      "fallback": [
+        "api_football"
+      ],
       "fields": [
         "shots",
         "shots_on_target",
         "corners",
         "fouls",
-        "cards"
+        "cards",
+        "xg",
+        "possession"
       ],
       "gate": null,
       "id": "league_team_stats",
       "kind": "provider",
       "label": "League team match stats",
-      "note": "Shots, corners, fouls and cards for the style/theme proxies. API-Football team statistics are not available for every SPFL tier.",
+      "note": "Shots, corners, fouls and cards for the style/theme proxies. For 2026-27 the API-Football feed supplies possession and expected_goals for every finished Premiership team row; /analysis/ prints the current coverage count beside a labelled provider possession average and a within-league provider-xG rank. Provider xG is not fitba fxG. Team statistics are not available for every SPFL tier.",
       "primary": "football_data_uk",
       "primary_source": {
         "attribution": "Football-Data.co.uk",
@@ -281,6 +285,21 @@
           "update_id": null,
           "url": "https://www.football-data.co.uk/mmz4281",
           "verified_at": "2026-10-21"
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "API-Football",
+          "published_at": null,
+          "role": "fallback",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "api_football",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://www.api-football.com",
+          "verified_at": "2026-10-23"
         }
       ],
       "stale_reason": null,
@@ -288,7 +307,8 @@
       "surfaces": [
         "/sources/",
         "/themes/",
-        "/scotland/"
+        "/scotland/",
+        "/analysis/"
       ],
       "update_id": null
     },
@@ -317,7 +337,8 @@
       "stale_reason": null,
       "status": "active",
       "surfaces": [
-        "/scotland/"
+        "/scotland/",
+        "/analysis/"
       ],
       "update_id": null
     },
@@ -1952,7 +1973,7 @@
       "id": "xg_model",
       "kind": "derived",
       "label": "fitba expected goals",
-      "note": "The fxG model is derived from licensed shot and match features. It is descriptive; the provider-xG evaluation gate is failing, so it is not a confidence verdict or tracking data.",
+      "note": "The fxG model is derived from licensed shot and match features. It is descriptive; the provider-xG evaluation gate is failing, so it is not a confidence verdict or tracking data. /analysis/ shows Aberdeen's fxG as labelled context beside, not inside, the provider-xG league rank.",
       "primary": "computed",
       "primary_source": null,
       "published_at": null,
@@ -1995,6 +2016,7 @@
       "status": "experimental",
       "surfaces": [
         "/analysis/xg/",
+        "/analysis/",
         "/matches/",
         "/sources/",
         "/methodology/"
@@ -2040,10 +2062,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-11-08T09:46:53+00:00",
+  "published_at": "2026-11-08T19:48:23+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
+  "served_by_update_id": "publish-2026-11-08T19:48:23+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -2060,7 +2082,7 @@
         "league_team_stats"
       ],
       "published_at": null,
-      "rows": 10156,
+      "rows": 10158,
       "rows_basis": "primary contributions only",
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -2221,5 +2243,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "2026-11-08T09:44:17+00:00-141884"
+  "update_id": "publish-2026-11-08T19:48:23+00:00"
 }

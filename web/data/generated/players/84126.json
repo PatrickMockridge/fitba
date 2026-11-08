@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
+  "dataset_id": "2026-11-08T19:48:23+00:00-32d674f5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-08T09:46:53+00:00",
+  "generated_at": "2026-11-08T19:48:23+00:00",
   "identity": {
     "age": 26,
     "dataset_id": null,
@@ -147,37 +147,37 @@
         ],
         "stats": [
           {
-            "appearances": 3,
+            "appearances": 4,
             "assists": 0,
-            "blocks": 0,
+            "blocks": 2,
             "competition": "Premiership",
             "conceded": 0,
-            "dribbles_attempts": 2,
-            "dribbles_success": 1,
-            "duels_total": 12,
-            "duels_won": 6,
-            "fouls_committed": 2,
-            "fouls_drawn": 0,
+            "dribbles_attempts": 6,
+            "dribbles_success": 3,
+            "duels_total": 29,
+            "duels_won": 14,
+            "fouls_committed": 5,
+            "fouls_drawn": 1,
             "goals": 0,
-            "interceptions": 0,
-            "minutes": 69,
-            "pass_accuracy": 73.0,
+            "interceptions": 1,
+            "minutes": 159,
+            "pass_accuracy": 74.0,
             "passes_key": 1,
-            "passes_total": 38,
+            "passes_total": 66,
             "penalty_committed": null,
             "penalty_missed": 0,
             "penalty_saved": null,
             "penalty_scored": 0,
             "penalty_won": null,
-            "rating": 6.34,
+            "rating": 6.3,
             "red_cards": 0,
             "saves": 0,
             "scope": "club",
             "season": 2026,
-            "shots_on": 1,
-            "shots_total": 3,
-            "starts": 0,
-            "tackles": 5,
+            "shots_on": 2,
+            "shots_total": 6,
+            "starts": 1,
+            "tackles": 9,
             "team_name": "Aberdeen",
             "yellow_cards": 0
           }
@@ -201,13 +201,13 @@
             "key": "shots_total",
             "label": "Shots",
             "note": "provider",
-            "value": 3
+            "value": 6
           },
           {
             "key": "dribbles_success",
             "label": "Dribbles won",
             "note": "provider",
-            "value": 1
+            "value": 3
           }
         ]
       },
@@ -613,11 +613,11 @@
         },
         "club_history": [
           {
-            "appearances": 3,
+            "appearances": 4,
             "competition": "Premiership",
-            "minutes": 69,
+            "minutes": 159,
             "season": 2026,
-            "starts": 0,
+            "starts": 1,
             "team_name": "Aberdeen"
           }
         ],
@@ -787,7 +787,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 3.91
+                  "value": 3.4
                 },
                 {
                   "cohort_n": 0,
@@ -800,7 +800,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.3
+                  "value": 0.57
                 },
                 {
                   "cohort_n": 0,
@@ -813,7 +813,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.3
+                  "value": 1.7
                 },
                 {
                   "cohort_n": 0,
@@ -826,7 +826,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 36.18
+                  "value": 27.65
                 },
                 {
                   "cohort_n": 0,
@@ -839,7 +839,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 73.0
+                  "value": 74.0
                 },
                 {
                   "cohort_n": 0,
@@ -852,7 +852,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 6.52
+                  "value": 5.09
                 },
                 {
                   "cohort_n": 0,
@@ -865,7 +865,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 0.0
+                  "value": 0.57
                 },
                 {
                   "cohort_n": 0,
@@ -878,7 +878,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 50.0
+                  "value": 48.28
                 }
               ],
               "dataset_id": null,
@@ -931,7 +931,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.3
+                  "value": 0.57
                 },
                 {
                   "cohort_n": 0,
@@ -944,7 +944,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 1.3
+                  "value": 1.7
                 },
                 {
                   "cohort_n": 0,
@@ -970,7 +970,7 @@
                   "source_snapshots": null,
                   "stale_reason": null,
                   "update_id": null,
-                  "value": 73.0
+                  "value": 74.0
                 }
               ],
               "dataset_id": null,
@@ -988,7 +988,7 @@
           "league": "sco:premiership",
           "league_label": "Scottish Premiership",
           "min_minutes": 180,
-          "minutes": 69,
+          "minutes": 159,
           "published_at": null,
           "reason": "below_min_minutes",
           "season_used": "2026-27",
@@ -1097,23 +1097,23 @@
           }
         },
         "summary": {
-          "appearances": 3,
+          "appearances": 4,
           "cohort_basis": null,
           "cohort_n": null,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
-          "league_appearances": 3,
+          "league_appearances": 4,
           "league_label": "Scottish Premiership",
-          "league_minutes": 69,
-          "league_rating": 6.34,
+          "league_minutes": 159,
+          "league_rating": 6.3,
           "league_rating_percentile": null,
           "minutes": 159,
           "minutes_season": "2026-27",
           "output_coverage": "available",
           "output_missing_competitions": [],
           "published_at": null,
-          "rating": 6.34,
+          "rating": 6.3,
           "rating_percentile": null,
           "role_label": "Right winger",
           "rose_fallback": false,
@@ -1262,12 +1262,12 @@
     }
   },
   "player_id": 84126,
-  "published_at": "2026-11-08T09:46:53+00:00",
+  "published_at": "2026-11-08T19:48:23+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
+  "served_by_update_id": "publish-2026-11-08T19:48:23+00:00",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-08T09:44:17+00:00-141884",
+  "update_id": "publish-2026-11-08T19:48:23+00:00",
   "warnings": []
 }

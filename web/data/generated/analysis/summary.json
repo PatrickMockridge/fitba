@@ -22,8 +22,8 @@
     },
     {
       "basis": "measured",
-      "current": "9 points behind 3rd",
-      "gap": 9,
+      "current": "10 points behind 3rd",
+      "gap": 10,
       "id": "europe",
       "label": "European route",
       "note": "Scotland has four UEFA places; 4th only qualifies if the Scottish Cup winner is already in the top three. Subject to the final access list.",
@@ -305,7 +305,10 @@
       "No medical diagnosis is inferred from selection patterns.",
       "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
       "No contract-expiry, free-agent, wage or fee data is held.",
-      "Provider ratings are opaque and league-relative."
+      "Provider ratings are opaque and league-relative.",
+      "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
+      "Possession is provider-reported and is not used in the matchday style lean.",
+      "League ranks compare Premiership teams only; no cross-league comparison is made."
     ],
     "qualification": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.",
     "schedule": {
@@ -315,9 +318,9 @@
       "scheduled": 21
     }
   },
-  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
+  "dataset_id": "2026-11-08T19:48:23+00:00-32d674f5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-08T09:46:53+00:00",
+  "generated_at": "2026-11-08T19:48:23+00:00",
   "hero": {
     "form": "LLLWL",
     "goal_difference": -6,
@@ -325,6 +328,499 @@
     "played": 12,
     "points": 11,
     "position": 11
+  },
+  "league_rankings": {
+    "aberdeen": {
+      "context": {
+        "fxg": 15.43,
+        "goals": 12,
+        "goals_minus_fxg": -3.43,
+        "label": "fitba fxG (local model, not ranked)",
+        "matches": 12,
+        "note": "fitba fxG is a local model and is not part of the provider-xG league rank.",
+        "ranked": false
+      },
+      "played": 12,
+      "points": 11,
+      "position": 11,
+      "ranks": {
+        "gd_pm": 10,
+        "goals_against_pm": 7,
+        "goals_for_pm": 10,
+        "possession_pct": 8,
+        "xg_against_pm": 5,
+        "xg_for_pm": 10
+      },
+      "team_id": "sco:aberdeen",
+      "team_name": "Aberdeen",
+      "values": {
+        "gd_pm": -0.5,
+        "goals_against_pm": 1.5,
+        "goals_for_pm": 1.0,
+        "possession_pct": 46.67,
+        "xg_against_pm": 1.55,
+        "xg_for_pm": 1.23
+      }
+    },
+    "as_of": "2026-11-08T19:48:23+00:00",
+    "competition_id": "sco:premiership",
+    "competition_name": "Scottish Premiership",
+    "coverage": {
+      "possession": {
+        "complete": true,
+        "label": "Provider-reported possession",
+        "note": "Possession can sum to 99 or 101 on a single match; the season average is descriptive.",
+        "source": "api_football",
+        "team_rows": 150,
+        "team_rows_total": 150
+      },
+      "provider_xg": {
+        "api_fallback_rows": 12,
+        "complete": true,
+        "fdco_rows": 138,
+        "label": "Provider xG (football-data.co.uk; API-Football fallback)",
+        "source": "football_data_uk+api_football",
+        "team_rows": 150,
+        "team_rows_total": 150
+      },
+      "table": {
+        "complete": true,
+        "matches": 75,
+        "teams": 12
+      }
+    },
+    "league": {
+      "gd_pm": {
+        "leader_teams": [
+          {
+            "team_id": "sco:celtic",
+            "team_name": "Celtic"
+          }
+        ],
+        "leader_value": 1.38,
+        "mean": 0.0,
+        "median": -0.09,
+        "ranked_teams": 12
+      },
+      "goals_against_pm": {
+        "leader_teams": [
+          {
+            "team_id": "sco:rangers",
+            "team_name": "Rangers"
+          }
+        ],
+        "leader_value": 0.75,
+        "mean": 1.43,
+        "median": 1.46,
+        "ranked_teams": 12
+      },
+      "goals_for_pm": {
+        "leader_teams": [
+          {
+            "team_id": "sco:heart-of-midlothian",
+            "team_name": "Heart of Midlothian"
+          }
+        ],
+        "leader_value": 2.17,
+        "mean": 1.43,
+        "median": 1.36,
+        "ranked_teams": 12
+      },
+      "possession_pct": {
+        "leader_teams": [
+          {
+            "team_id": "sco:celtic",
+            "team_name": "Celtic"
+          }
+        ],
+        "leader_value": 60.69,
+        "mean": 49.99,
+        "median": 49.26,
+        "ranked_teams": 12
+      },
+      "xg_against_pm": {
+        "leader_teams": [
+          {
+            "team_id": "sco:celtic",
+            "team_name": "Celtic"
+          }
+        ],
+        "leader_value": 1.0,
+        "mean": 1.58,
+        "median": 1.6,
+        "ranked_teams": 12
+      },
+      "xg_for_pm": {
+        "leader_teams": [
+          {
+            "team_id": "sco:celtic",
+            "team_name": "Celtic"
+          }
+        ],
+        "leader_value": 2.66,
+        "mean": 1.58,
+        "median": 1.44,
+        "ranked_teams": 12
+      }
+    },
+    "league_size": 12,
+    "matches": 75,
+    "metrics": [
+      {
+        "decimals": 2,
+        "direction": "higher_is_better",
+        "direction_label": "Higher is better",
+        "id": "xg_for_pm",
+        "label": "xG for / match",
+        "source": "provider_xg",
+        "source_label": "Provider xG",
+        "value_type": "xg"
+      },
+      {
+        "decimals": 2,
+        "direction": "lower_is_better",
+        "direction_label": "Lower is better",
+        "id": "xg_against_pm",
+        "label": "xG against / match",
+        "source": "provider_xg",
+        "source_label": "Provider xG",
+        "value_type": "xg"
+      },
+      {
+        "decimals": 2,
+        "direction": "higher_is_better",
+        "direction_label": "Higher is better",
+        "id": "possession_pct",
+        "label": "Possession",
+        "source": "api_football",
+        "source_label": "API-Football",
+        "value_type": "percent"
+      },
+      {
+        "decimals": 2,
+        "direction": "higher_is_better",
+        "direction_label": "Higher is better",
+        "id": "goals_for_pm",
+        "label": "Goals scored / match",
+        "source": "league_table",
+        "source_label": "League table",
+        "value_type": "goals"
+      },
+      {
+        "decimals": 2,
+        "direction": "lower_is_better",
+        "direction_label": "Lower is better",
+        "id": "goals_against_pm",
+        "label": "Goals conceded / match",
+        "source": "league_table",
+        "source_label": "League table",
+        "value_type": "goals"
+      },
+      {
+        "decimals": 2,
+        "direction": "higher_is_better",
+        "direction_label": "Higher is better",
+        "id": "gd_pm",
+        "label": "Goal difference / match",
+        "source": "league_table",
+        "source_label": "League table",
+        "value_type": "goals"
+      }
+    ],
+    "note": "Ranks are within the Scottish Premiership only. Provider xG is one provider's model, not fitba fxG; the two are never blended. Possession is provider-reported and is not used in the matchday style lean.",
+    "reason": null,
+    "scope": "league_only",
+    "scope_label": "Within the Scottish Premiership only",
+    "season": "2026-27",
+    "state": "available",
+    "team_rows": 150,
+    "teams": [
+      {
+        "played": 13,
+        "points": 31,
+        "position": 1,
+        "ranks": {
+          "gd_pm": 1,
+          "goals_against_pm": 2,
+          "goals_for_pm": 2,
+          "possession_pct": 1,
+          "xg_against_pm": 1,
+          "xg_for_pm": 1
+        },
+        "team_id": "sco:celtic",
+        "team_name": "Celtic",
+        "values": {
+          "gd_pm": 1.38,
+          "goals_against_pm": 0.77,
+          "goals_for_pm": 2.15,
+          "possession_pct": 60.69,
+          "xg_against_pm": 1.0,
+          "xg_for_pm": 2.66
+        }
+      },
+      {
+        "played": 12,
+        "points": 27,
+        "position": 2,
+        "ranks": {
+          "gd_pm": 2,
+          "goals_against_pm": 1,
+          "goals_for_pm": 3,
+          "possession_pct": 2,
+          "xg_against_pm": 2,
+          "xg_for_pm": 2
+        },
+        "team_id": "sco:rangers",
+        "team_name": "Rangers",
+        "values": {
+          "gd_pm": 1.0,
+          "goals_against_pm": 0.75,
+          "goals_for_pm": 1.75,
+          "possession_pct": 55.0,
+          "xg_against_pm": 1.11,
+          "xg_for_pm": 2.3
+        }
+      },
+      {
+        "played": 13,
+        "points": 21,
+        "position": 3,
+        "ranks": {
+          "gd_pm": 3,
+          "goals_against_pm": 3,
+          "goals_for_pm": 4,
+          "possession_pct": 9,
+          "xg_against_pm": 9,
+          "xg_for_pm": 12
+        },
+        "team_id": "sco:falkirk",
+        "team_name": "Falkirk",
+        "values": {
+          "gd_pm": 0.46,
+          "goals_against_pm": 1.08,
+          "goals_for_pm": 1.54,
+          "possession_pct": 46.23,
+          "xg_against_pm": 1.74,
+          "xg_for_pm": 1.2
+        }
+      },
+      {
+        "played": 12,
+        "points": 20,
+        "position": 4,
+        "ranks": {
+          "gd_pm": 4,
+          "goals_against_pm": 11,
+          "goals_for_pm": 1,
+          "possession_pct": 4,
+          "xg_against_pm": 7,
+          "xg_for_pm": 3
+        },
+        "team_id": "sco:heart-of-midlothian",
+        "team_name": "Heart of Midlothian",
+        "values": {
+          "gd_pm": 0.33,
+          "goals_against_pm": 1.83,
+          "goals_for_pm": 2.17,
+          "possession_pct": 53.33,
+          "xg_against_pm": 1.65,
+          "xg_for_pm": 1.76
+        }
+      },
+      {
+        "played": 12,
+        "points": 17,
+        "position": 5,
+        "ranks": {
+          "gd_pm": 5,
+          "goals_against_pm": 4,
+          "goals_for_pm": 5,
+          "possession_pct": 12,
+          "xg_against_pm": 7,
+          "xg_for_pm": 7
+        },
+        "team_id": "sco:dundee",
+        "team_name": "Dundee",
+        "values": {
+          "gd_pm": 0.25,
+          "goals_against_pm": 1.25,
+          "goals_for_pm": 1.5,
+          "possession_pct": 41.5,
+          "xg_against_pm": 1.65,
+          "xg_for_pm": 1.38
+        }
+      },
+      {
+        "played": 12,
+        "points": 17,
+        "position": 6,
+        "ranks": {
+          "gd_pm": 6,
+          "goals_against_pm": 5,
+          "goals_for_pm": 6,
+          "possession_pct": 7,
+          "xg_against_pm": 4,
+          "xg_for_pm": 6
+        },
+        "team_id": "sco:dundee-united",
+        "team_name": "Dundee United",
+        "values": {
+          "gd_pm": 0.0,
+          "goals_against_pm": 1.42,
+          "goals_for_pm": 1.42,
+          "possession_pct": 48.75,
+          "xg_against_pm": 1.45,
+          "xg_for_pm": 1.49
+        }
+      },
+      {
+        "played": 13,
+        "points": 17,
+        "position": 7,
+        "ranks": {
+          "gd_pm": 8,
+          "goals_against_pm": 8,
+          "goals_for_pm": 7,
+          "possession_pct": 10,
+          "xg_against_pm": 10,
+          "xg_for_pm": 11
+        },
+        "team_id": "sco:st-johnstone",
+        "team_name": "St Johnstone",
+        "values": {
+          "gd_pm": -0.23,
+          "goals_against_pm": 1.54,
+          "goals_for_pm": 1.31,
+          "possession_pct": 45.85,
+          "xg_against_pm": 1.77,
+          "xg_for_pm": 1.22
+        }
+      },
+      {
+        "played": 13,
+        "points": 14,
+        "position": 8,
+        "ranks": {
+          "gd_pm": 11,
+          "goals_against_pm": 10,
+          "goals_for_pm": 12,
+          "possession_pct": 6,
+          "xg_against_pm": 11,
+          "xg_for_pm": 9
+        },
+        "team_id": "sco:st-mirren",
+        "team_name": "St Mirren",
+        "values": {
+          "gd_pm": -0.77,
+          "goals_against_pm": 1.69,
+          "goals_for_pm": 0.92,
+          "possession_pct": 49.77,
+          "xg_against_pm": 1.94,
+          "xg_for_pm": 1.25
+        }
+      },
+      {
+        "played": 13,
+        "points": 13,
+        "position": 9,
+        "ranks": {
+          "gd_pm": 9,
+          "goals_against_pm": 9,
+          "goals_for_pm": 9,
+          "possession_pct": 3,
+          "xg_against_pm": 5,
+          "xg_for_pm": 5
+        },
+        "team_id": "sco:motherwell",
+        "team_name": "Motherwell",
+        "values": {
+          "gd_pm": -0.46,
+          "goals_against_pm": 1.62,
+          "goals_for_pm": 1.15,
+          "possession_pct": 54.69,
+          "xg_against_pm": 1.55,
+          "xg_for_pm": 1.53
+        }
+      },
+      {
+        "played": 12,
+        "points": 11,
+        "position": 10,
+        "ranks": {
+          "gd_pm": 7,
+          "goals_against_pm": 5,
+          "goals_for_pm": 8,
+          "possession_pct": 5,
+          "xg_against_pm": 3,
+          "xg_for_pm": 4
+        },
+        "team_id": "sco:hibernian",
+        "team_name": "Hibernian",
+        "values": {
+          "gd_pm": -0.17,
+          "goals_against_pm": 1.42,
+          "goals_for_pm": 1.25,
+          "possession_pct": 52.42,
+          "xg_against_pm": 1.43,
+          "xg_for_pm": 1.61
+        }
+      },
+      {
+        "context": {
+          "fxg": 15.43,
+          "goals": 12,
+          "goals_minus_fxg": -3.43,
+          "label": "fitba fxG (local model, not ranked)",
+          "matches": 12,
+          "note": "fitba fxG is a local model and is not part of the provider-xG league rank.",
+          "ranked": false
+        },
+        "played": 12,
+        "points": 11,
+        "position": 11,
+        "ranks": {
+          "gd_pm": 10,
+          "goals_against_pm": 7,
+          "goals_for_pm": 10,
+          "possession_pct": 8,
+          "xg_against_pm": 5,
+          "xg_for_pm": 10
+        },
+        "team_id": "sco:aberdeen",
+        "team_name": "Aberdeen",
+        "values": {
+          "gd_pm": -0.5,
+          "goals_against_pm": 1.5,
+          "goals_for_pm": 1.0,
+          "possession_pct": 46.67,
+          "xg_against_pm": 1.55,
+          "xg_for_pm": 1.23
+        }
+      },
+      {
+        "played": 13,
+        "points": 9,
+        "position": 12,
+        "ranks": {
+          "gd_pm": 12,
+          "goals_against_pm": 12,
+          "goals_for_pm": 10,
+          "possession_pct": 11,
+          "xg_against_pm": 12,
+          "xg_for_pm": 8
+        },
+        "team_id": "sco:kilmarnock",
+        "team_name": "Kilmarnock",
+        "values": {
+          "gd_pm": -1.23,
+          "goals_against_pm": 2.23,
+          "goals_for_pm": 1.0,
+          "possession_pct": 45.0,
+          "xg_against_pm": 2.08,
+          "xg_for_pm": 1.35
+        }
+      }
+    ]
   },
   "next_up": [
     {
@@ -380,27 +876,27 @@
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
-  "published_at": "2026-11-08T09:46:53+00:00",
+  "published_at": "2026-11-08T19:48:23+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
+  "served_by_update_id": "publish-2026-11-08T19:48:23+00:00",
   "source_snapshots": {
-    "api_football": "2026-11-08T09:46:50.203821+00:00",
-    "api_results": "2026-11-08T09:44:19+00:00",
-    "availability": "2026-11-08T09:44:43+00:00",
-    "career": "2026-11-08T09:44:43+00:00",
-    "football_data_uk": "2026-11-08T09:44:18+00:00",
-    "former_players": "2026-11-08T09:44:22+00:00",
-    "history_backfill": "2026-11-08T09:44:20+00:00",
+    "api_football": "2026-11-08T19:30:51.767254+00:00",
+    "api_results": "2026-11-08T19:28:34+00:00",
+    "availability": "2026-11-08T19:29:33+00:00",
+    "career": "2026-11-08T19:29:33+00:00",
+    "football_data_uk": "2026-11-08T19:28:33+00:00",
+    "former_players": "2026-11-08T19:29:11+00:00",
+    "history_backfill": "2026-11-08T19:29:09+00:00",
     "matchday_snapshot": "2026-11-08T09:23:12+00:00",
-    "scouting_clubs": "2026-11-08T09:44:50+00:00",
-    "scouting_europe": "2026-11-08T09:44:50+00:00",
-    "scouting_pool": "2026-11-08T09:44:47+00:00",
-    "scouting_roles": "2026-11-08T09:44:48+00:00",
-    "scouting_rose_history": "2026-11-08T09:44:49+00:00",
-    "scouting_standings": "2026-11-08T09:44:50+00:00",
-    "spfl": "2026-11-08T09:44:20+00:00",
-    "xg_enrichment": "2026-11-08T09:46:50+00:00"
+    "scouting_clubs": "2026-11-08T19:30:29+00:00",
+    "scouting_europe": "2026-11-08T19:30:18+00:00",
+    "scouting_pool": "2026-11-08T19:29:38+00:00",
+    "scouting_roles": "2026-11-08T19:29:39+00:00",
+    "scouting_rose_history": "2026-11-08T19:30:18+00:00",
+    "scouting_standings": "2026-11-08T19:30:19+00:00",
+    "spfl": "2026-11-08T19:28:35+00:00",
+    "xg_enrichment": "2026-11-08T19:30:32+00:00"
   },
   "sources": [
     "afc_news",
@@ -416,7 +912,7 @@
       "active_players": 29,
       "loans_out": 5,
       "with_percentile": 14,
-      "without_stats": 11
+      "without_stats": 10
     },
     "denominator": {
       "definition": "player league minutes / (team league matches x 90)",
@@ -471,22 +967,35 @@
         ]
       },
       "peak_age_minutes": {
-        "count": 7,
+        "count": 9,
         "definition": "age 27+ and 450+ league minutes",
         "label": "Peak-age minutes",
         "rows": [
           {
             "age": 32,
             "cohort_n": 11,
-            "minutes": 990,
-            "minutes_share": 0.917,
+            "minutes": 1080,
+            "minutes_share": 1.0,
             "needs_priority": null,
             "player_id": 1141,
             "player_name": "M. Müller",
-            "rating_percentile": 72.7,
+            "rating_percentile": 45.5,
             "role_depth": 1,
             "role_family": "goalkeeper",
             "role_label": "Goalkeeper"
+          },
+          {
+            "age": 28,
+            "cohort_n": 12,
+            "minutes": 960,
+            "minutes_share": 0.889,
+            "needs_priority": null,
+            "player_id": 97896,
+            "player_name": "K. Nisbet",
+            "rating_percentile": null,
+            "role_depth": 3,
+            "role_family": "centre_forward",
+            "role_label": "Centre forward"
           },
           {
             "age": 29,
@@ -500,19 +1009,6 @@
             "role_depth": 2,
             "role_family": "wing_back",
             "role_label": "Right wing-back"
-          },
-          {
-            "age": 28,
-            "cohort_n": 14,
-            "minutes": 899,
-            "minutes_share": 0.832,
-            "needs_priority": null,
-            "player_id": 97896,
-            "player_name": "K. Nisbet",
-            "rating_percentile": null,
-            "role_depth": 3,
-            "role_family": "centre_forward",
-            "role_label": "Centre forward"
           }
         ]
       }
@@ -563,12 +1059,12 @@
       {
         "age": 32,
         "cohort_n": 11,
-        "minutes": 990,
-        "minutes_share": 0.917,
+        "minutes": 1080,
+        "minutes_share": 1.0,
         "needs_priority": null,
         "player_id": 1141,
         "player_name": "M. Müller",
-        "rating_percentile": 72.7,
+        "rating_percentile": 45.5,
         "role_depth": 1,
         "role_family": "goalkeeper",
         "role_label": "Goalkeeper"
@@ -659,7 +1155,7 @@
         "needs_priority": null,
         "player_id": 161806,
         "player_name": "G. Molloy",
-        "rating_percentile": 51.8,
+        "rating_percentile": 3.6,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -667,12 +1163,12 @@
       {
         "age": 22,
         "cohort_n": 28,
-        "minutes": 363,
-        "minutes_share": 0.336,
+        "minutes": 453,
+        "minutes_share": 0.419,
         "needs_priority": null,
         "player_id": 321860,
         "player_name": "J. Milne",
-        "rating_percentile": 17.9,
+        "rating_percentile": 14.3,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -693,12 +1189,12 @@
       {
         "age": 26,
         "cohort_n": 22,
-        "minutes": 945,
-        "minutes_share": 0.875,
+        "minutes": 1035,
+        "minutes_share": 0.958,
         "needs_priority": null,
         "player_id": 108465,
         "player_name": "N. Guinness-Walker",
-        "rating_percentile": 79.5,
+        "rating_percentile": 63.6,
         "role_depth": 3,
         "role_family": "full_back",
         "role_label": "Left back"
@@ -706,12 +1202,12 @@
       {
         "age": 27,
         "cohort_n": 28,
-        "minutes": 448,
-        "minutes_share": 0.415,
+        "minutes": 538,
+        "minutes_share": 0.498,
         "needs_priority": null,
         "player_id": 18068,
         "player_name": "D. Happe",
-        "rating_percentile": 58.9,
+        "rating_percentile": 33.9,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -745,12 +1241,12 @@
       {
         "age": 28,
         "cohort_n": 24,
-        "minutes": 405,
-        "minutes_share": 0.375,
+        "minutes": 495,
+        "minutes_share": 0.458,
         "needs_priority": null,
         "player_id": 45010,
         "player_name": "B. Lyons",
-        "rating_percentile": 75.0,
+        "rating_percentile": 50.0,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -771,12 +1267,12 @@
       {
         "age": 33,
         "cohort_n": 24,
-        "minutes": 624,
-        "minutes_share": 0.578,
+        "minutes": 646,
+        "minutes_share": 0.598,
         "needs_priority": null,
         "player_id": 18945,
         "player_name": "S. Armstrong",
-        "rating_percentile": 58.3,
+        "rating_percentile": 50.0,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -797,12 +1293,12 @@
       {
         "age": 27,
         "cohort_n": 24,
-        "minutes": 536,
-        "minutes_share": 0.496,
+        "minutes": 597,
+        "minutes_share": 0.553,
         "needs_priority": null,
         "player_id": 61178,
         "player_name": "C. Ronan",
-        "rating_percentile": 87.5,
+        "rating_percentile": 68.8,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -810,12 +1306,12 @@
       {
         "age": 26,
         "cohort_n": 24,
-        "minutes": 689,
-        "minutes_share": 0.638,
+        "minutes": 757,
+        "minutes_share": 0.701,
         "needs_priority": null,
         "player_id": 57248,
         "player_name": "A. Aremu",
-        "rating_percentile": 45.8,
+        "rating_percentile": 33.3,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -828,27 +1324,27 @@
         "needs_priority": null,
         "player_id": 379662,
         "player_name": "F. Marshall",
-        "rating_percentile": 29.2,
+        "rating_percentile": 0.0,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
       },
       {
         "age": 20,
-        "cohort_n": 19,
-        "minutes": 284,
-        "minutes_share": 0.263,
+        "cohort_n": 20,
+        "minutes": 345,
+        "minutes_share": 0.319,
         "needs_priority": null,
         "player_id": 388510,
         "player_name": "Tony Yogane",
-        "rating_percentile": 42.1,
+        "rating_percentile": 15.0,
         "role_depth": 3,
         "role_family": "wide_forward",
         "role_label": "Left winger"
       },
       {
         "age": 23,
-        "cohort_n": 14,
+        "cohort_n": 12,
         "minutes": 386,
         "minutes_share": 0.357,
         "needs_priority": null,
@@ -887,9 +1383,9 @@
       },
       {
         "age": 28,
-        "cohort_n": 14,
-        "minutes": 899,
-        "minutes_share": 0.832,
+        "cohort_n": 12,
+        "minutes": 960,
+        "minutes_share": 0.889,
         "needs_priority": null,
         "player_id": 97896,
         "player_name": "K. Nisbet",
@@ -900,22 +1396,22 @@
       },
       {
         "age": 28,
-        "cohort_n": 19,
-        "minutes": 623,
-        "minutes_share": 0.577,
+        "cohort_n": 20,
+        "minutes": 652,
+        "minutes_share": 0.604,
         "needs_priority": null,
         "player_id": 231195,
         "player_name": "T. Olusanya",
-        "rating_percentile": 5.3,
+        "rating_percentile": 5.0,
         "role_depth": 3,
         "role_family": "wide_forward",
         "role_label": "Right winger"
       },
       {
         "age": 24,
-        "cohort_n": null,
-        "minutes": 0,
-        "minutes_share": 0.0,
+        "cohort_n": 12,
+        "minutes": 182,
+        "minutes_share": 0.169,
         "needs_priority": null,
         "player_id": 267727,
         "player_name": "M. Ntelo",
@@ -940,5 +1436,5 @@
     ]
   },
   "state": "full",
-  "update_id": "2026-11-08T09:44:17+00:00-141884"
+  "update_id": "publish-2026-11-08T19:48:23+00:00"
 }

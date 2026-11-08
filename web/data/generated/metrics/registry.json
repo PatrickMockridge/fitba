@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:f2ab822050a2bc8d4eb3f2b2a8c08d85c0f2a5258872c4be66044c80ee754f06",
-  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
+  "checksum": "sha256:a9973bad2055c4f691029973bee1af829860aedbdeb4eb6f9f2ad194772726e8",
+  "dataset_id": "2026-11-08T19:48:23+00:00-32d674f5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-08T09:46:53+00:00",
+  "generated_at": "2026-11-08T19:48:23+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -3456,10 +3456,10 @@
     {
       "aggregation": "document",
       "basis": "mixed",
-      "confidence_rule": "Official availability is ledger-only; derived availability is labelled inferred or projected and capped at medium; unknown is never zero. A card rule that is not verified publishes watch/review_required, not a ban.\n",
+      "confidence_rule": "Official availability is ledger-only; derived availability is labelled inferred or projected and capped at medium; unknown is never zero. A card rule that is not verified publishes watch/review_required, not a ban. League rankings require complete provider coverage for every table team; a missing value is null, never zero.\n",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Current position and form, next fixtures, official and derived availability, measured aims, squad-decision lenses and the category bridges.",
+      "description": "Current position and form, next fixtures, official and derived availability, measured aims, squad-decision lenses, the category bridges and the within-Premiership provider-xG/possession rankings.",
       "displayed_surfaces": [
         "/analysis/"
       ],
@@ -3469,6 +3469,7 @@
         "points",
         "goal_difference",
         "form",
+        "league_rankings",
         "next_up",
         "counts",
         "official",
@@ -3479,7 +3480,7 @@
         "squad_decisions",
         "coverage"
       ],
-      "formula": "A projection of the current table row, the merged season schedule, the AFC availability ledger, sourced card rules, named-squad membership, matchday contenders, the season expectations and factual squad-decision lenses. No value, fee, wage, contract expiry or medical diagnosis is derived. Counts sum to the active universe (official list minus loanees out); the five official loan-outs are separate. Aims are analyst-set targets with a measured current value and status; they are not club targets.\n",
+      "formula": "A projection of the current table row, the merged season schedule, the AFC availability ledger, sourced card rules, named-squad membership, matchday contenders, the season expectations, factual squad-decision lenses and the within-Premiership provider-xG/possession rankings. No value, fee, wage, contract expiry or medical diagnosis is derived. Counts sum to the active universe (official list minus loanees out); the five official loan-outs are separate. Aims are analyst-set targets with a measured current value and status; they are not club targets. League rankings join the current table to team-match provider features on team_id and rank each team on per-match rates.\n",
       "home_payload": "analysis/summary.json",
       "home_surface": "/analysis/",
       "id": "analysis.summary",
@@ -3489,6 +3490,7 @@
         "data/normalized/matches/player_squads.parquet",
         "data/normalized/matches/events.parquet",
         "data/normalized/history/season=*/fixtures.parquet",
+        "data/normalized/xg/team_match_features.parquet",
         "availability/aberdeen.json",
         "scouting/aberdeen.json",
         "needs/aberdeen.json",
@@ -3501,13 +3503,14 @@
         "Inferred absence is not a medical diagnosis; cause is not published.",
         "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
         "No contract-expiry, free-agent, wage, fee or release-clause data is held.",
-        "Market/value language is not used; squad decisions are measured lenses only."
+        "Market/value language is not used; squad decisions are measured lenses only.",
+        "League rankings are within the Premiership only; provider xG is not fitba fxG."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "analysis/summary.json#/**"
       ],
-      "reviewed": "2026-10-24",
+      "reviewed": "2026-11-08",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -3523,7 +3526,88 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
+    },
+    {
+      "aggregation": "per_team",
+      "basis": "mixed",
+      "confidence_rule": "Provider xG and possession require a non-null API-Football value for every played team match and every table team. If coverage is incomplete, the team value and rank are null and the block state is partial; a missing value is unknown, never zero. Ranks are descriptive and within the Premiership only. Provider xG is one provider's model and is never blended with fitba fxG. Possession is provider-reported and is not used in the matchday style lean.\n",
+      "coverage_tier": "match",
+      "denominator": "played",
+      "description": "Aberdeen's within-Premiership ranks for provider xG, possession, goals scored, goals conceded and goal difference, with league median and leader context.",
+      "displayed_surfaces": [
+        "/analysis/"
+      ],
+      "fields": [
+        "position",
+        "played",
+        "points",
+        "xg_for_pm",
+        "xg_against_pm",
+        "possession_pct",
+        "goals_for_pm",
+        "goals_against_pm",
+        "gd_pm",
+        "values",
+        "ranks",
+        "median",
+        "mean",
+        "leader_value",
+        "leader_teams",
+        "league_size",
+        "ranked_teams",
+        "team_rows"
+      ],
+      "formula": "Per-team values join the current-season league table to API-Football team-match features on team_id. The provider xG value is football-data.co.uk's HxG/AxG with API-Football expected_goals as the fallback, matching the published match and xG payloads. xg_for_pm = sum(the team's provider xG)/played; xg_against_pm = sum(the opponent's provider xG in the same match)/played; possession_pct = mean(provider possession over the team's rows); goals_for_pm = gf/played; goals_against_pm = ga/played; gd_pm = (gf-ga)/played. rank = 1 + count of teams with a better published value (higher is better for xG for, possession, goals for and goal difference; lower is better for xG against and goals against); ties share the better rank. median and mean are over the ranked team values. leader_value is the best value and leader_teams lists every team at that value. No cross-league comparison is made.\n",
+      "home_payload": "analysis/summary.json",
+      "home_surface": "/analysis/",
+      "id": "analysis.league-rankings",
+      "implementation": "fitba.metrics.checks:verify_analysis_league_rankings",
+      "inputs": [
+        "published payload",
+        "tables/premiership-<season>.json",
+        "data/normalized/xg/team_match_features.parquet"
+      ],
+      "label": "League rankings",
+      "limitations": [
+        "Ranks are within the Scottish Premiership only; no cross-league or cross-tier comparison is made.",
+        "Provider xG is football-data.co.uk with API-Football fallback, not fitba fxG; the two are shown separately and never averaged.",
+        "Possession is provider-reported and can sum to 99 or 101 on a single match; the season average is descriptive.",
+        "A missing value or incomplete coverage is published as unknown, never zero.",
+        "Provider xG and possession source totals are not independently re-derived from a published payload; the verification recomputes ranks, rates, medians and table-derived values."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "analysis/summary.json#/league_rankings/**"
+      ],
+      "reviewed": "2026-11-08",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "computed",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [
+        {
+          "description": "Rank equals 1 + count of better published values; ties share the better rank.",
+          "id": "ranks",
+          "payload": "analysis/summary.json#/league_rankings/teams"
+        },
+        {
+          "description": "Position, played, goals and goal difference match the Premiership table.",
+          "id": "table",
+          "payload": "tables/*.json#/rows"
+        }
+      ],
+      "version": 1
     },
     {
       "aggregation": "document",
@@ -5840,28 +5924,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-08T09:46:53+00:00",
-  "registry_version": "3.13.0",
-  "reviewed": "2026-10-24",
+  "published_at": "2026-11-08T19:48:23+00:00",
+  "registry_version": "3.14.0",
+  "reviewed": "2026-11-08",
   "schema_version": 1,
-  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
+  "served_by_update_id": "publish-2026-11-08T19:48:23+00:00",
   "source_snapshots": {
-    "api_football": "2026-11-08T09:46:50.203821+00:00",
-    "api_results": "2026-11-08T09:44:19+00:00",
-    "availability": "2026-11-08T09:44:43+00:00",
-    "career": "2026-11-08T09:44:43+00:00",
-    "football_data_uk": "2026-11-08T09:44:18+00:00",
-    "former_players": "2026-11-08T09:44:22+00:00",
-    "history_backfill": "2026-11-08T09:44:20+00:00",
+    "api_football": "2026-11-08T19:30:51.767254+00:00",
+    "api_results": "2026-11-08T19:28:34+00:00",
+    "availability": "2026-11-08T19:29:33+00:00",
+    "career": "2026-11-08T19:29:33+00:00",
+    "football_data_uk": "2026-11-08T19:28:33+00:00",
+    "former_players": "2026-11-08T19:29:11+00:00",
+    "history_backfill": "2026-11-08T19:29:09+00:00",
     "matchday_snapshot": "2026-11-08T09:23:12+00:00",
-    "scouting_clubs": "2026-11-08T09:44:50+00:00",
-    "scouting_europe": "2026-11-08T09:44:50+00:00",
-    "scouting_pool": "2026-11-08T09:44:47+00:00",
-    "scouting_roles": "2026-11-08T09:44:48+00:00",
-    "scouting_rose_history": "2026-11-08T09:44:49+00:00",
-    "scouting_standings": "2026-11-08T09:44:50+00:00",
-    "spfl": "2026-11-08T09:44:20+00:00",
-    "xg_enrichment": "2026-11-08T09:46:50+00:00"
+    "scouting_clubs": "2026-11-08T19:30:29+00:00",
+    "scouting_europe": "2026-11-08T19:30:18+00:00",
+    "scouting_pool": "2026-11-08T19:29:38+00:00",
+    "scouting_roles": "2026-11-08T19:29:39+00:00",
+    "scouting_rose_history": "2026-11-08T19:30:18+00:00",
+    "scouting_standings": "2026-11-08T19:30:19+00:00",
+    "spfl": "2026-11-08T19:28:35+00:00",
+    "xg_enrichment": "2026-11-08T19:30:32+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -5890,5 +5974,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-11-08T09:44:17+00:00-141884"
+  "update_id": "publish-2026-11-08T19:48:23+00:00"
 }

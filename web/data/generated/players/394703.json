@@ -1,17 +1,17 @@
 {
-  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
+  "dataset_id": "2026-11-08T19:48:23+00:00-32d674f5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-08T09:46:53+00:00",
+  "generated_at": "2026-11-08T19:48:23+00:00",
   "identity": {
     "age": 19,
     "dataset_id": null,
     "dataset_state": null,
-    "full_name": "M. Frame",
+    "full_name": "Mitchel Frame",
     "href": "/players/394703/",
     "injured": false,
     "loan": null,
     "name": "M. Frame",
-    "nationality": null,
+    "nationality": "Scotland",
     "number": 3,
     "player_id": 394703,
     "preferred_foot": {
@@ -88,7 +88,7 @@
       "warnings": []
     },
     "performance": {
-      "badge": "unavailable",
+      "badge": "available",
       "data": {
         "detail_columns": [
           {
@@ -147,9 +147,45 @@
             "label": "Rating"
           }
         ],
-        "stats": [],
-        "stats_coverage": "unavailable",
-        "stats_note": "No 2026-27 player statistics in the licensed feed.",
+        "stats": [
+          {
+            "appearances": 0,
+            "assists": 0,
+            "blocks": 0,
+            "competition": "Premiership",
+            "conceded": 0,
+            "dribbles_attempts": 0,
+            "dribbles_success": 0,
+            "duels_total": 0,
+            "duels_won": 0,
+            "fouls_committed": 0,
+            "fouls_drawn": 0,
+            "goals": 0,
+            "interceptions": 0,
+            "minutes": 0,
+            "pass_accuracy": null,
+            "passes_key": 0,
+            "passes_total": 0,
+            "penalty_committed": null,
+            "penalty_missed": null,
+            "penalty_saved": null,
+            "penalty_scored": 0,
+            "penalty_won": null,
+            "rating": null,
+            "red_cards": 0,
+            "saves": 0,
+            "scope": "club",
+            "season": 2026,
+            "shots_on": 0,
+            "shots_total": 0,
+            "starts": 0,
+            "tackles": 0,
+            "team_name": "Aberdeen",
+            "yellow_cards": 0
+          }
+        ],
+        "stats_coverage": "available",
+        "stats_note": "Current-season statistics from the licensed feed.",
         "tiles": [
           {
             "key": "conceded",
@@ -167,7 +203,7 @@
             "key": "tackles",
             "label": "Tackles",
             "note": "provider",
-            "value": null
+            "value": 0
           },
           {
             "key": "own_goals",
@@ -181,12 +217,12 @@
       "dataset_state": null,
       "eyebrow": "Performance",
       "id": "performance",
-      "note": "No 2026-27 player statistics in the licensed feed.",
+      "note": "Current-season statistics from the licensed feed.",
       "published_at": null,
       "served_by_update_id": null,
       "source_snapshots": null,
       "stale_reason": null,
-      "status": "unavailable",
+      "status": "available",
       "title": "Performance",
       "update_id": null,
       "warnings": []
@@ -1037,20 +1073,20 @@
           }
         },
         "summary": {
-          "appearances": null,
+          "appearances": 0,
           "cohort_basis": null,
           "cohort_n": null,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
-          "league_appearances": null,
+          "league_appearances": 0,
           "league_label": "Scottish Premiership",
-          "league_minutes": null,
+          "league_minutes": 0,
           "league_rating": null,
           "league_rating_percentile": null,
           "minutes": 0,
           "minutes_season": "2026-27",
-          "output_coverage": "unavailable",
+          "output_coverage": "available",
           "output_missing_competitions": [],
           "published_at": null,
           "rating": null,
@@ -1117,12 +1153,12 @@
     }
   },
   "player_id": 394703,
-  "published_at": "2026-11-08T09:46:53+00:00",
+  "published_at": "2026-11-08T19:48:23+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
+  "served_by_update_id": "publish-2026-11-08T19:48:23+00:00",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-08T09:44:17+00:00-141884",
+  "update_id": "publish-2026-11-08T19:48:23+00:00",
   "warnings": []
 }
