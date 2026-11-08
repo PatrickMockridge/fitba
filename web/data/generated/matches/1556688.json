@@ -8,7 +8,7 @@
     "team_stats": true,
     "xg": true
   },
-  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
+  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
   "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
@@ -45,7 +45,17 @@
     "venue_name": "Pittodrie Stadium"
   },
   "form": {
-    "after": [],
+    "after": [
+      {
+        "date": "2026-11-07",
+        "fixture_id": 1556700,
+        "goals_against": 4,
+        "goals_for": 0,
+        "href": "/matches/1556700/",
+        "opponent_name": "Hibernian",
+        "venue": "H"
+      }
+    ],
     "before": [
       {
         "date": "2026-09-15",
@@ -94,7 +104,7 @@
       }
     ]
   },
-  "generated_at": "2026-11-01T06:18:13+00:00",
+  "generated_at": "2026-11-08T09:46:53+00:00",
   "lineups": {
     "away": {
       "coach_name": "J. McGlynn",
@@ -523,7 +533,7 @@
         "key": "shots",
         "label": "Shots",
         "opponent": 13,
-        "source": "api_football",
+        "source": "football_data_uk",
         "unit": ""
       },
       {
@@ -531,15 +541,7 @@
         "key": "shots_on_target",
         "label": "Shots on target",
         "opponent": 4,
-        "source": "api_football",
-        "unit": ""
-      },
-      {
-        "aberdeen": 13,
-        "key": "shots_insidebox",
-        "label": "Shots inside box",
-        "opponent": 11,
-        "source": "api_football",
+        "source": "football_data_uk",
         "unit": ""
       }
     ]
@@ -1346,7 +1348,7 @@
       "yellow_cards": 0
     }
   ],
-  "published_at": "2026-11-01T06:18:13+00:00",
+  "published_at": "2026-11-08T09:46:53+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1385,24 +1387,24 @@
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
   },
-  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
   "source_snapshots": {
-    "api_football": "2026-11-01T06:18:10.885224+00:00",
-    "api_results": "2026-11-01T06:17:05+00:00",
-    "availability": "2026-11-01T06:17:19+00:00",
-    "career": "2026-11-01T06:17:19+00:00",
-    "football_data_uk": "2026-11-01T06:17:04+00:00",
-    "former_players": "2026-11-01T06:17:13+00:00",
-    "history_backfill": "2026-11-01T06:17:12+00:00",
-    "matchday_snapshot": "2026-10-31T19:58:05+00:00",
-    "scouting_clubs": "2026-11-01T06:17:51+00:00",
-    "scouting_europe": "2026-11-01T06:17:40+00:00",
-    "scouting_pool": "2026-11-01T06:17:24+00:00",
-    "scouting_roles": "2026-11-01T06:17:25+00:00",
-    "scouting_rose_history": "2026-11-01T06:17:40+00:00",
-    "scouting_standings": "2026-11-01T06:17:41+00:00",
-    "spfl": "2026-11-01T06:17:06+00:00",
-    "xg_enrichment": "2026-11-01T06:17:53+00:00"
+    "api_football": "2026-11-08T09:46:50.203821+00:00",
+    "api_results": "2026-11-08T09:44:19+00:00",
+    "availability": "2026-11-08T09:44:43+00:00",
+    "career": "2026-11-08T09:44:43+00:00",
+    "football_data_uk": "2026-11-08T09:44:18+00:00",
+    "former_players": "2026-11-08T09:44:22+00:00",
+    "history_backfill": "2026-11-08T09:44:20+00:00",
+    "matchday_snapshot": "2026-11-08T09:23:12+00:00",
+    "scouting_clubs": "2026-11-08T09:44:50+00:00",
+    "scouting_europe": "2026-11-08T09:44:50+00:00",
+    "scouting_pool": "2026-11-08T09:44:47+00:00",
+    "scouting_roles": "2026-11-08T09:44:48+00:00",
+    "scouting_rose_history": "2026-11-08T09:44:49+00:00",
+    "scouting_standings": "2026-11-08T09:44:50+00:00",
+    "spfl": "2026-11-08T09:44:20+00:00",
+    "xg_enrichment": "2026-11-08T09:46:50+00:00"
   },
   "sources": [
     {
@@ -1421,62 +1423,36 @@
   "stats": {
     "away": {
       "corners": 4,
-      "expected_goals": 1.08,
+      "expected_goals": 1.06,
       "fouls": 10,
-      "offsides": 0,
-      "pass_accuracy": 350,
-      "passes": 466,
-      "possession": 55.0,
       "red_cards": 0,
-      "saves": 4,
       "shots": 13,
-      "shots_blocked": 5,
-      "shots_insidebox": 11,
-      "shots_off": 4,
       "shots_on_target": 4,
-      "shots_outsidebox": 2,
       "xg": 1.06,
       "yellow_cards": 4
     },
     "coverage": {
-      "possession": "available",
+      "possession": "unavailable",
       "shots": "available"
     },
     "home": {
       "corners": 5,
-      "expected_goals": 1.72,
+      "expected_goals": 1.67,
       "fouls": 14,
-      "offsides": 4,
-      "pass_accuracy": 269,
-      "passes": 380,
-      "possession": 45.0,
       "red_cards": 0,
-      "saves": 3,
       "shots": 15,
-      "shots_blocked": 7,
-      "shots_insidebox": 13,
-      "shots_off": 3,
       "shots_on_target": 5,
-      "shots_outsidebox": 2,
       "xg": 1.67,
       "yellow_cards": 2
     },
     "rows": [
-      {
-        "away": 55.0,
-        "basis": "measured",
-        "home": 45.0,
-        "key": "possession",
-        "label": "Possession",
-        "source": "api_football"
-      },
       {
         "away": 13,
         "basis": "measured",
         "home": 15,
         "key": "shots",
         "label": "Shots",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
         "away": 4,
@@ -1484,55 +1460,7 @@
         "home": 5,
         "key": "shots_on_target",
         "label": "Shots on target",
-        "source": "api_football"
-      },
-      {
-        "away": 4,
-        "basis": "measured",
-        "home": 3,
-        "key": "shots_off",
-        "label": "Shots off target",
-        "source": "api_football"
-      },
-      {
-        "away": 5,
-        "basis": "measured",
-        "home": 7,
-        "key": "shots_blocked",
-        "label": "Blocked shots",
-        "source": "api_football"
-      },
-      {
-        "away": 11,
-        "basis": "measured",
-        "home": 13,
-        "key": "shots_insidebox",
-        "label": "Shots inside box",
-        "source": "api_football"
-      },
-      {
-        "away": 2,
-        "basis": "measured",
-        "home": 2,
-        "key": "shots_outsidebox",
-        "label": "Shots outside box",
-        "source": "api_football"
-      },
-      {
-        "away": 466,
-        "basis": "measured",
-        "home": 380,
-        "key": "passes",
-        "label": "Passes",
-        "source": "api_football"
-      },
-      {
-        "away": 350,
-        "basis": "measured",
-        "home": 269,
-        "key": "pass_accuracy",
-        "label": "Passes accurate",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
         "away": 4,
@@ -1540,7 +1468,7 @@
         "home": 5,
         "key": "corners",
         "label": "Corners",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
         "away": 10,
@@ -1548,15 +1476,7 @@
         "home": 14,
         "key": "fouls",
         "label": "Fouls",
-        "source": "api_football"
-      },
-      {
-        "away": 0,
-        "basis": "measured",
-        "home": 4,
-        "key": "offsides",
-        "label": "Offsides",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
         "away": 4,
@@ -1564,7 +1484,7 @@
         "home": 2,
         "key": "yellow_cards",
         "label": "Yellow cards",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
         "away": 0,
@@ -1572,23 +1492,15 @@
         "home": 0,
         "key": "red_cards",
         "label": "Red cards",
-        "source": "api_football"
+        "source": "football_data_uk"
       },
       {
-        "away": 4,
+        "away": 1.06,
         "basis": "measured",
-        "home": 3,
-        "key": "saves",
-        "label": "Saves",
-        "source": "api_football"
-      },
-      {
-        "away": 1.08,
-        "basis": "measured",
-        "home": 1.72,
+        "home": 1.67,
         "key": "expected_goals",
         "label": "Provider xG",
-        "source": "api_football"
+        "source": "football_data_uk"
       }
     ]
   },
@@ -1606,10 +1518,6 @@
       {
         "basis": "measured",
         "text": "Shots on target: Aberdeen 5, Falkirk 4."
-      },
-      {
-        "basis": "measured",
-        "text": "Possession: Aberdeen 45.0%, Falkirk 55.0%."
       },
       {
         "basis": "measured",
@@ -2060,7 +1968,7 @@
       "team_name": "Falkirk"
     }
   ],
-  "update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "update_id": "2026-11-08T09:44:17+00:00-141884",
   "xg": {
     "available": true,
     "away": {
@@ -2068,10 +1976,10 @@
       "goals": 1,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": -0.477,
+      "goals_minus": -0.48,
       "goals_position": "within",
-      "high": 2.003,
-      "low": 0.791,
+      "high": 2.015,
+      "low": 0.798,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2087,7 +1995,7 @@
         "shots_on_target": 4,
         "shots_outsidebox": 2
       },
-      "value": 1.477,
+      "value": 1.48,
       "xg_per_shot": 0.114
     },
     "evaluation_href": "/analysis/xg/",
@@ -2101,10 +2009,10 @@
       "goals": 0,
       "goals_high": 3,
       "goals_low": 0,
-      "goals_minus": -1.771,
+      "goals_minus": -1.774,
       "goals_position": "within",
-      "high": 2.296,
-      "low": 1.085,
+      "high": 2.309,
+      "low": 1.092,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
@@ -2120,7 +2028,7 @@
         "shots_on_target": 5,
         "shots_outsidebox": 2
       },
-      "value": 1.771,
+      "value": 1.774,
       "xg_per_shot": 0.118
     },
     "model_id": "fxg-3",

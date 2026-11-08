@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
+  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-01T06:18:13+00:00",
+  "generated_at": "2026-11-08T09:46:53+00:00",
   "identity": {
     "age": 26,
     "dataset_id": null,
@@ -104,16 +104,16 @@
           {
             "clean_sheets": 0,
             "competition": "Scottish Premiership",
-            "conceded_on_pitch": 1,
-            "matches": 3,
-            "minutes_on_pitch": 69,
+            "conceded_on_pitch": 5,
+            "matches": 4,
+            "minutes_on_pitch": 159,
             "own_goals": 0,
             "player_id": 84126,
             "player_key": "api:player:84126"
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 19 of 19 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -232,19 +232,19 @@
           "by_competition": [
             {
               "competition": "Scottish Premiership",
-              "minutes": 69,
+              "minutes": 159,
               "minutes_as_sub": 69,
-              "minutes_started": 0,
-              "starts": 0,
+              "minutes_started": 90,
+              "starts": 1,
               "sub_apps": 3
             }
           ],
           "coverage": "available",
-          "minutes": 69,
+          "minutes": 159,
           "minutes_as_sub": 69,
-          "minutes_started": 0,
+          "minutes_started": 90,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
-          "starts": 0,
+          "starts": 1,
           "sub_apps": 3
         }
       },
@@ -269,7 +269,7 @@
           "broad_groups": [
             "attacker"
           ],
-          "coverage": "1/1",
+          "coverage": "2/2",
           "dominant": {
             "code": "RW",
             "family": "wide_forward",
@@ -278,8 +278,8 @@
             "provisional": true,
             "share": 1.0,
             "side": "right",
-            "starts": 1,
-            "weighted_starts": 1.0
+            "starts": 2,
+            "weighted_starts": 2.0
           },
           "eligibility": [
             {
@@ -291,9 +291,9 @@
               "share": 1.0,
               "side": "right",
               "slot": "AM_R",
-              "starts": 1,
+              "starts": 2,
               "tier": "primary",
-              "weighted_starts": 1.0
+              "weighted_starts": 2.0
             }
           ],
           "family_shares": [
@@ -301,12 +301,24 @@
               "family": "wide_forward",
               "label": "Wide forward",
               "share": 1.0,
-              "starts": 1,
-              "weighted_starts": 1.0
+              "starts": 2,
+              "weighted_starts": 2.0
             }
           ],
           "fm_label": "AM R",
           "history": [
+            {
+              "competition": "Scottish Premiership",
+              "role_code": "RW",
+              "role_family": "wide_forward",
+              "role_label": "Right winger",
+              "scope": "aberdeen",
+              "season": "2026-27",
+              "share": 1.0,
+              "starts": 1,
+              "team_id": 252,
+              "team_name": "Aberdeen"
+            },
             {
               "competition": "Super League",
               "role_code": "RW",
@@ -345,8 +357,8 @@
             "share": 1.0,
             "side": "right",
             "slot": "AM_R",
-            "starts": 1,
-            "weighted_starts": 1.0
+            "starts": 2,
+            "weighted_starts": 2.0
           },
           "role_shares": [
             {
@@ -354,19 +366,58 @@
               "family": "wide_forward",
               "label": "Right winger",
               "share": 1.0,
-              "starts": 1,
-              "weighted_starts": 1.0
+              "starts": 2,
+              "weighted_starts": 2.0
             }
           ],
           "scopes": [
             {
+              "label": "Aberdeen",
+              "scope": "aberdeen",
+              "share": 0.5,
+              "starts": 1
+            },
+            {
               "label": "Previous club",
               "scope": "previous_club",
-              "share": 1.0,
+              "share": 0.5,
               "starts": 1
             }
           ],
           "seasons": [
+            {
+              "families": [
+                {
+                  "family": "wide_forward",
+                  "label": "Wide forward",
+                  "share": 1.0,
+                  "starts": 1
+                }
+              ],
+              "scopes": [
+                {
+                  "scope": "aberdeen",
+                  "share": 1.0,
+                  "starts": 1
+                }
+              ],
+              "season": "2026-27",
+              "season_year": 2026,
+              "slots": [
+                {
+                  "fm": "AM R",
+                  "groups": [
+                    "attacker"
+                  ],
+                  "label": "Right winger",
+                  "share": 1.0,
+                  "side": "right",
+                  "slot": "AM_R",
+                  "starts": 1
+                }
+              ],
+              "starts_with_role": 1
+            },
             {
               "families": [
                 {
@@ -401,7 +452,7 @@
               "starts_with_role": 1
             }
           ],
-          "seasons_with_role": 1,
+          "seasons_with_role": 2,
           "secondary": [],
           "secondary_slots": [],
           "sides": [
@@ -541,13 +592,13 @@
               "share": 1.0,
               "side": "right",
               "slot": "AM_R",
-              "starts": 1,
+              "starts": 2,
               "tier": "primary",
-              "weighted_starts": 1.0
+              "weighted_starts": 2.0
             }
           ],
-          "starts_total": 1,
-          "starts_with_role": 1,
+          "starts_total": 2,
+          "starts_with_role": 2,
           "status": "low_evidence",
           "stretch_slots": [],
           "top_families": [
@@ -555,7 +606,7 @@
               "family": "wide_forward",
               "label": "Wide forward",
               "share": 1.0,
-              "starts": 1
+              "starts": 2
             }
           ],
           "unknown_reason": null
@@ -579,19 +630,19 @@
             "provisional": true,
             "share": 1.0,
             "side": "right",
-            "starts": 1,
-            "weighted_starts": 1.0
+            "starts": 2,
+            "weighted_starts": 2.0
           },
           "code": "RW",
           "conditions": {
             "career_family": "wide_forward",
-            "career_family_share": 0.0,
-            "career_seasons": 1,
-            "career_starts": 1,
+            "career_family_share": 1.0,
+            "career_seasons": 2,
+            "career_starts": 2,
             "career_status": "low_evidence",
-            "current_family": null,
-            "current_share": 0.0,
-            "current_starts": 0,
+            "current_family": "wide_forward",
+            "current_share": 1.0,
+            "current_starts": 1,
             "different_family": false,
             "different_group": false,
             "enabled": true,
@@ -600,30 +651,71 @@
           "family": "wide_forward",
           "family_label": "Wide forward",
           "label": "Right winger",
-          "reason": "Career evidence is provisional but is the only role evidence.",
+          "reason": "Career evidence is not strong enough to override the established Aberdeen role.",
           "share": 1.0,
           "side": "right",
-          "source": "career_low_evidence",
+          "source": "current_season",
           "starts": 1
         },
         "history_status": "partial",
         "role": {
-          "broad_groups": [],
-          "code": null,
-          "coverage": "0/0",
-          "family": null,
-          "fm_label": "",
-          "primary": null,
-          "primary_slot": null,
-          "roles": [],
-          "side": null,
-          "sides": [],
-          "slots": [],
-          "source": null,
-          "starts_total": 0,
-          "starts_with_role": 0,
-          "status": "unknown",
-          "unknown_reason": "no_starting_xi_role"
+          "broad_groups": [
+            "attacker"
+          ],
+          "code": "RW",
+          "coverage": "1/1",
+          "family": "wide_forward",
+          "fm_label": "AM R",
+          "primary": "Right winger",
+          "primary_slot": {
+            "fm": "AM R",
+            "groups": [
+              "attacker"
+            ],
+            "label": "Right winger",
+            "share": 1.0,
+            "side": "right",
+            "slot": "AM_R",
+            "starts": 1,
+            "tier": "primary"
+          },
+          "roles": [
+            {
+              "code": "RW",
+              "family": "wide_forward",
+              "label": "Right winger",
+              "minutes": 90,
+              "starts": 1
+            }
+          ],
+          "side": "right",
+          "sides": [
+            "right"
+          ],
+          "slots": [
+            {
+              "fm": "AM R",
+              "groups": [
+                "attacker"
+              ],
+              "label": "Right winger",
+              "share": 1.0,
+              "side": "right",
+              "slot": "AM_R",
+              "starts": 1,
+              "tier": "primary"
+            }
+          ],
+          "source": {
+            "fixtures_covered": 16,
+            "id": "api_football",
+            "method": "starting_xi_grid",
+            "starts_with_role": 1
+          },
+          "starts_total": 1,
+          "starts_with_role": 1,
+          "status": "observed",
+          "unknown_reason": null
         },
         "tactical_notes": []
       },
@@ -636,7 +728,7 @@
       "served_by_update_id": null,
       "source_snapshots": null,
       "stale_reason": null,
-      "status": "partial",
+      "status": "available",
       "title": "How this position was inferred",
       "update_id": null,
       "warnings": []
@@ -1016,7 +1108,7 @@
           "league_minutes": 69,
           "league_rating": 6.34,
           "league_rating_percentile": null,
-          "minutes": 69,
+          "minutes": 159,
           "minutes_season": "2026-27",
           "output_coverage": "available",
           "output_missing_competitions": [],
@@ -1050,8 +1142,29 @@
       "warnings": []
     },
     "recent_matches": {
-      "badge": "3 rows",
+      "badge": "4 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-11-07",
+          "fixture_id": "1556700",
+          "goals": 0,
+          "minutes": 90,
+          "opponent": "Hibernian",
+          "published_at": null,
+          "rating": 6.16,
+          "result": "L",
+          "score_against": 4,
+          "score_for": 0,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": "H"
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1149,12 +1262,12 @@
     }
   },
   "player_id": 84126,
-  "published_at": "2026-11-01T06:18:13+00:00",
+  "published_at": "2026-11-08T09:46:53+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "update_id": "2026-11-08T09:44:17+00:00-141884",
   "warnings": []
 }

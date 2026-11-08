@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-11-01T06:18:13+00:00-d5bfa59",
+  "dataset_id": "2026-11-08T09:46:53+00:00-8aeed87",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-01T06:18:13+00:00",
+  "generated_at": "2026-11-08T09:46:53+00:00",
   "identity": {
     "age": 27,
     "dataset_id": null,
@@ -113,9 +113,9 @@
           {
             "clean_sheets": 1,
             "competition": "Scottish Premiership",
-            "conceded_on_pitch": 7,
-            "matches": 8,
-            "minutes_on_pitch": 536,
+            "conceded_on_pitch": 8,
+            "matches": 9,
+            "minutes_on_pitch": 597,
             "own_goals": 0,
             "player_id": 61178,
             "player_key": "api:player:61178"
@@ -123,16 +123,16 @@
           {
             "clean_sheets": 2,
             "competition": "Premier Sports Cup",
-            "conceded_on_pitch": 3,
-            "matches": 6,
-            "minutes_on_pitch": 422,
+            "conceded_on_pitch": 4,
+            "matches": 7,
+            "minutes_on_pitch": 510,
             "own_goals": 0,
             "player_id": 61178,
             "player_key": "api:player:61178"
           }
         ],
         "position_stats_coverage": "available",
-        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 18 of 18 competitive matches; friendlies are excluded.",
+        "position_stats_note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 19 of 19 competitive matches; friendlies are excluded.",
         "provider_columns": [
           {
             "key": "competition",
@@ -251,27 +251,27 @@
           "by_competition": [
             {
               "competition": "Premier Sports Cup",
-              "minutes": 422,
+              "minutes": 510,
               "minutes_as_sub": 31,
-              "minutes_started": 391,
-              "starts": 5,
+              "minutes_started": 479,
+              "starts": 6,
               "sub_apps": 1
             },
             {
               "competition": "Scottish Premiership",
-              "minutes": 536,
+              "minutes": 597,
               "minutes_as_sub": 44,
-              "minutes_started": 492,
-              "starts": 7,
+              "minutes_started": 553,
+              "starts": 8,
               "sub_apps": 1
             }
           ],
           "coverage": "available",
-          "minutes": 958,
+          "minutes": 1107,
           "minutes_as_sub": 75,
-          "minutes_started": 883,
+          "minutes_started": 1032,
           "note": "Starts, substitute appearances and on-pitch minutes are reconstructed from fixture lineups and substitution events.",
-          "starts": 12,
+          "starts": 14,
           "sub_apps": 2
         }
       },
@@ -296,17 +296,17 @@
           "broad_groups": [
             "midfielder"
           ],
-          "coverage": "29/30",
+          "coverage": "30/32",
           "dominant": {
             "code": "CM",
             "family": "central_midfield",
             "family_label": "Centre midfield",
             "label": "Centre midfielder",
             "provisional": false,
-            "share": 0.8276,
+            "share": 0.8333,
             "side": "central",
-            "starts": 24,
-            "weighted_starts": 24.0
+            "starts": 25,
+            "weighted_starts": 25.0
           },
           "eligibility": [
             {
@@ -315,7 +315,7 @@
                 "midfielder"
               ],
               "label": "Defensive midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "centre",
               "slot": "DM_C",
               "starts": 1,
@@ -328,12 +328,12 @@
                 "midfielder"
               ],
               "label": "Centre midfielder",
-              "share": 0.8276,
+              "share": 0.8333,
               "side": "centre",
               "slot": "M_C",
-              "starts": 24,
+              "starts": 25,
               "tier": "primary",
-              "weighted_starts": 24.0
+              "weighted_starts": 25.0
             },
             {
               "fm": "AM C",
@@ -341,7 +341,7 @@
                 "midfielder"
               ],
               "label": "Attacking midfielder",
-              "share": 0.1034,
+              "share": 0.1,
               "side": "centre",
               "slot": "AM_C",
               "starts": 3,
@@ -354,7 +354,7 @@
                 "midfielder"
               ],
               "label": "Left midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "left",
               "slot": "M_L",
               "starts": 1,
@@ -366,28 +366,28 @@
             {
               "family": "defensive_midfield",
               "label": "Defensive midfield",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "weighted_starts": 1.0
             },
             {
               "family": "central_midfield",
               "label": "Centre midfield",
-              "share": 0.8276,
-              "starts": 24,
-              "weighted_starts": 24.0
+              "share": 0.8333,
+              "starts": 25,
+              "weighted_starts": 25.0
             },
             {
               "family": "attacking_midfield",
               "label": "Attacking midfield",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 3,
               "weighted_starts": 3.0
             },
             {
               "family": "wide_midfield",
               "label": "Wide midfield",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "weighted_starts": 1.0
             }
@@ -401,7 +401,7 @@
               "role_label": "Left midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -413,7 +413,7 @@
               "role_label": "Attacking midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 2,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -425,7 +425,7 @@
               "role_label": "Attacking midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 1,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -437,8 +437,8 @@
               "role_label": "Centre midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.8276,
-              "starts": 4,
+              "share": 0.8333,
+              "starts": 5,
               "team_id": 252,
               "team_name": "Aberdeen"
             },
@@ -449,7 +449,7 @@
               "role_label": "Centre midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.8276,
+              "share": 0.8333,
               "starts": 2,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -461,7 +461,7 @@
               "role_label": "Defensive midfielder",
               "scope": "aberdeen",
               "season": "2026-27",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "team_id": 252,
               "team_name": "Aberdeen"
@@ -473,7 +473,7 @@
               "role_label": "Centre midfielder",
               "scope": "previous_club",
               "season": "2025-26",
-              "share": 0.8276,
+              "share": 0.8333,
               "starts": 6,
               "team_id": 1610,
               "team_name": "Colorado Rapids"
@@ -485,7 +485,7 @@
               "role_label": "Centre midfielder",
               "scope": "previous_club",
               "season": "2024-25",
-              "share": 0.8276,
+              "share": 0.8333,
               "starts": 6,
               "team_id": 1610,
               "team_name": "Colorado Rapids"
@@ -497,7 +497,7 @@
               "role_label": "Centre midfielder",
               "scope": "previous_club",
               "season": "2024-25",
-              "share": 0.8276,
+              "share": 0.8333,
               "starts": 6,
               "team_id": 1610,
               "team_name": "Colorado Rapids"
@@ -525,18 +525,18 @@
             ],
             "label": "Centre midfielder",
             "role_label": "Centre midfielder",
-            "share": 0.8276,
+            "share": 0.8333,
             "side": "centre",
             "slot": "M_C",
-            "starts": 24,
-            "weighted_starts": 24.0
+            "starts": 25,
+            "weighted_starts": 25.0
           },
           "role_shares": [
             {
               "code": "DM",
               "family": "defensive_midfield",
               "label": "Defensive midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "weighted_starts": 1.0
             },
@@ -544,15 +544,15 @@
               "code": "CM",
               "family": "central_midfield",
               "label": "Centre midfielder",
-              "share": 0.8276,
-              "starts": 24,
-              "weighted_starts": 24.0
+              "share": 0.8333,
+              "starts": 25,
+              "weighted_starts": 25.0
             },
             {
               "code": "AM",
               "family": "attacking_midfield",
               "label": "Attacking midfielder",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 3,
               "weighted_starts": 3.0
             },
@@ -560,7 +560,7 @@
               "code": "LM",
               "family": "wide_midfield",
               "label": "Left midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1,
               "weighted_starts": 1.0
             }
@@ -569,13 +569,13 @@
             {
               "label": "Aberdeen",
               "scope": "aberdeen",
-              "share": 0.3793,
-              "starts": 11
+              "share": 0.4,
+              "starts": 12
             },
             {
               "label": "Previous club",
               "scope": "previous_club",
-              "share": 0.6207,
+              "share": 0.6,
               "starts": 18
             }
           ],
@@ -585,25 +585,25 @@
                 {
                   "family": "defensive_midfield",
                   "label": "Defensive midfield",
-                  "share": 0.0909,
+                  "share": 0.0833,
                   "starts": 1
                 },
                 {
                   "family": "central_midfield",
                   "label": "Centre midfield",
-                  "share": 0.5455,
-                  "starts": 6
+                  "share": 0.5833,
+                  "starts": 7
                 },
                 {
                   "family": "attacking_midfield",
                   "label": "Attacking midfield",
-                  "share": 0.2727,
+                  "share": 0.25,
                   "starts": 3
                 },
                 {
                   "family": "wide_midfield",
                   "label": "Wide midfield",
-                  "share": 0.0909,
+                  "share": 0.0833,
                   "starts": 1
                 }
               ],
@@ -611,7 +611,7 @@
                 {
                   "scope": "aberdeen",
                   "share": 1.0,
-                  "starts": 11
+                  "starts": 12
                 }
               ],
               "season": "2026-27",
@@ -623,7 +623,7 @@
                     "midfielder"
                   ],
                   "label": "Defensive midfielder",
-                  "share": 0.0909,
+                  "share": 0.0833,
                   "side": "centre",
                   "slot": "DM_C",
                   "starts": 1
@@ -634,10 +634,10 @@
                     "midfielder"
                   ],
                   "label": "Centre midfielder",
-                  "share": 0.5455,
+                  "share": 0.5833,
                   "side": "centre",
                   "slot": "M_C",
-                  "starts": 6
+                  "starts": 7
                 },
                 {
                   "fm": "AM C",
@@ -645,7 +645,7 @@
                     "midfielder"
                   ],
                   "label": "Attacking midfielder",
-                  "share": 0.2727,
+                  "share": 0.25,
                   "side": "centre",
                   "slot": "AM_C",
                   "starts": 3
@@ -656,13 +656,13 @@
                     "midfielder"
                   ],
                   "label": "Left midfielder",
-                  "share": 0.0909,
+                  "share": 0.0833,
                   "side": "left",
                   "slot": "M_L",
                   "starts": 1
                 }
               ],
-              "starts_with_role": 11
+              "starts_with_role": 12
             },
             {
               "families": [
@@ -736,7 +736,7 @@
             {
               "family": "attacking_midfield",
               "label": "Attacking midfield",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 3,
               "weighted_starts": 3.0
             }
@@ -877,7 +877,7 @@
                 "midfielder"
               ],
               "label": "Defensive midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "centre",
               "slot": "DM_C",
               "starts": 1,
@@ -890,12 +890,12 @@
                 "midfielder"
               ],
               "label": "Centre midfielder",
-              "share": 0.8276,
+              "share": 0.8333,
               "side": "centre",
               "slot": "M_C",
-              "starts": 24,
+              "starts": 25,
               "tier": "primary",
-              "weighted_starts": 24.0
+              "weighted_starts": 25.0
             },
             {
               "fm": "AM C",
@@ -903,7 +903,7 @@
                 "midfielder"
               ],
               "label": "Attacking midfielder",
-              "share": 0.1034,
+              "share": 0.1,
               "side": "centre",
               "slot": "AM_C",
               "starts": 3,
@@ -916,7 +916,7 @@
                 "midfielder"
               ],
               "label": "Left midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "left",
               "slot": "M_L",
               "starts": 1,
@@ -924,8 +924,8 @@
               "weighted_starts": 1.0
             }
           ],
-          "starts_total": 30,
-          "starts_with_role": 29,
+          "starts_total": 32,
+          "starts_with_role": 30,
           "status": "observed",
           "stretch_slots": [
             {
@@ -934,7 +934,7 @@
                 "midfielder"
               ],
               "label": "Defensive midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "centre",
               "slot": "DM_C",
               "starts": 1,
@@ -947,7 +947,7 @@
                 "midfielder"
               ],
               "label": "Attacking midfielder",
-              "share": 0.1034,
+              "share": 0.1,
               "side": "centre",
               "slot": "AM_C",
               "starts": 3,
@@ -960,7 +960,7 @@
                 "midfielder"
               ],
               "label": "Left midfielder",
-              "share": 0.0345,
+              "share": 0.0333,
               "side": "left",
               "slot": "M_L",
               "starts": 1,
@@ -972,25 +972,25 @@
             {
               "family": "central_midfield",
               "label": "Centre midfield",
-              "share": 0.8276,
-              "starts": 24
+              "share": 0.8333,
+              "starts": 25
             },
             {
               "family": "attacking_midfield",
               "label": "Attacking midfield",
-              "share": 0.1034,
+              "share": 0.1,
               "starts": 3
             },
             {
               "family": "defensive_midfield",
               "label": "Defensive midfield",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1
             },
             {
               "family": "wide_midfield",
               "label": "Wide midfield",
-              "share": 0.0345,
+              "share": 0.0333,
               "starts": 1
             }
           ],
@@ -1021,21 +1021,21 @@
             "family_label": "Centre midfield",
             "label": "Centre midfielder",
             "provisional": false,
-            "share": 0.8276,
+            "share": 0.8333,
             "side": "centre",
-            "starts": 24,
-            "weighted_starts": 24.0
+            "starts": 25,
+            "weighted_starts": 25.0
           },
           "code": "CM",
           "conditions": {
             "career_family": "central_midfield",
-            "career_family_share": 0.8276,
+            "career_family_share": 0.8333,
             "career_seasons": 3,
-            "career_starts": 29,
+            "career_starts": 30,
             "career_status": "observed",
             "current_family": "central_midfield",
-            "current_share": 0.5455,
-            "current_starts": 11,
+            "current_share": 0.5833,
+            "current_starts": 12,
             "different_family": false,
             "different_group": false,
             "enabled": true,
@@ -1045,10 +1045,10 @@
           "family_label": "Centre midfield",
           "label": "Centre midfielder",
           "reason": "Career position is the dominant role across the recent seasons.",
-          "share": 0.8276,
+          "share": 0.8333,
           "side": "centre",
           "source": "career",
-          "starts": 24
+          "starts": 25
         },
         "history_status": "observed",
         "role": {
@@ -1056,7 +1056,7 @@
             "midfielder"
           ],
           "code": "CM",
-          "coverage": "11/12",
+          "coverage": "12/14",
           "family": "central_midfield",
           "fm_label": "M/AM C (stretch: DM C · M L)",
           "primary": "Centre midfielder",
@@ -1066,10 +1066,10 @@
               "midfielder"
             ],
             "label": "Centre midfielder",
-            "share": 0.5455,
+            "share": 0.5833,
             "side": "centre",
             "slot": "M_C",
-            "starts": 6,
+            "starts": 7,
             "tier": "primary"
           },
           "roles": [
@@ -1077,8 +1077,8 @@
               "code": "CM",
               "family": "central_midfield",
               "label": "Centre midfielder",
-              "minutes": 430,
-              "starts": 6
+              "minutes": 491,
+              "starts": 7
             },
             {
               "code": "AM",
@@ -1114,7 +1114,7 @@
                 "midfielder"
               ],
               "label": "Defensive midfielder",
-              "share": 0.0909,
+              "share": 0.0833,
               "side": "centre",
               "slot": "DM_C",
               "starts": 1,
@@ -1126,10 +1126,10 @@
                 "midfielder"
               ],
               "label": "Centre midfielder",
-              "share": 0.5455,
+              "share": 0.5833,
               "side": "centre",
               "slot": "M_C",
-              "starts": 6,
+              "starts": 7,
               "tier": "primary"
             },
             {
@@ -1138,7 +1138,7 @@
                 "midfielder"
               ],
               "label": "Attacking midfielder",
-              "share": 0.2727,
+              "share": 0.25,
               "side": "centre",
               "slot": "AM_C",
               "starts": 3,
@@ -1150,7 +1150,7 @@
                 "midfielder"
               ],
               "label": "Left midfielder",
-              "share": 0.0909,
+              "share": 0.0833,
               "side": "left",
               "slot": "M_L",
               "starts": 1,
@@ -1158,13 +1158,13 @@
             }
           ],
           "source": {
-            "fixtures_covered": 15,
+            "fixtures_covered": 16,
             "id": "api_football",
             "method": "starting_xi_grid",
-            "starts_with_role": 11
+            "starts_with_role": 12
           },
-          "starts_total": 12,
-          "starts_with_role": 11,
+          "starts_total": 14,
+          "starts_with_role": 12,
           "status": "partial",
           "unknown_reason": null
         },
@@ -1191,7 +1191,7 @@
         "rose": {
           "basis": "role_family",
           "cohort_min_minutes": 450,
-          "cohort_n": 23,
+          "cohort_n": 24,
           "cohort_season": "2026-27",
           "dataset_id": null,
           "dataset_state": null,
@@ -1202,11 +1202,11 @@
             {
               "axes": [
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "goals_p90",
-                  "percentile": 93.5,
+                  "percentile": 93.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1215,11 +1215,11 @@
                   "value": 0.34
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 95.7,
+                  "percentile": 95.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1228,11 +1228,11 @@
                   "value": 0.34
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "shots_p90",
-                  "percentile": 60.9,
+                  "percentile": 58.3,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1241,11 +1241,11 @@
                   "value": 1.01
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 91.3,
+                  "percentile": 91.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1254,11 +1254,11 @@
                   "value": 1.85
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "dribbles_success_p90",
-                  "percentile": 47.8,
+                  "percentile": 47.9,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1267,11 +1267,11 @@
                   "value": 0.5
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "passes_completed_p90",
-                  "percentile": 34.8,
+                  "percentile": 37.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1280,11 +1280,11 @@
                   "value": 37.4
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
-                  "percentile": 26.1,
+                  "percentile": 25.0,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1293,11 +1293,11 @@
                   "value": 81.0
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "tackles_p90",
-                  "percentile": 13.0,
+                  "percentile": 12.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1306,11 +1306,11 @@
                   "value": 1.18
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "interceptions_p90",
-                  "percentile": 4.3,
+                  "percentile": 6.2,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1319,7 +1319,7 @@
                   "value": 0.17
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "duel_win_pct",
@@ -1346,11 +1346,11 @@
             {
               "axes": [
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "passes_completed_p90",
-                  "percentile": 34.8,
+                  "percentile": 37.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1359,11 +1359,11 @@
                   "value": 37.4
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
-                  "percentile": 26.1,
+                  "percentile": 25.0,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1372,11 +1372,11 @@
                   "value": 81.0
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "key_passes_p90",
-                  "percentile": 91.3,
+                  "percentile": 91.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1385,11 +1385,11 @@
                   "value": 1.85
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "assists_p90",
-                  "percentile": 95.7,
+                  "percentile": 95.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1398,11 +1398,11 @@
                   "value": 0.34
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "tackles_p90",
-                  "percentile": 13.0,
+                  "percentile": 12.5,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1411,11 +1411,11 @@
                   "value": 1.18
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "interceptions_p90",
-                  "percentile": 4.3,
+                  "percentile": 6.2,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1424,11 +1424,11 @@
                   "value": 0.17
                 },
                 {
-                  "cohort_n": 23,
+                  "cohort_n": 24,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "goals_assists_p90",
-                  "percentile": 95.7,
+                  "percentile": 95.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -1563,7 +1563,7 @@
         "summary": {
           "appearances": 8,
           "cohort_basis": "role_family",
-          "cohort_n": 23,
+          "cohort_n": 24,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
@@ -1571,8 +1571,8 @@
           "league_label": "Scottish Premiership",
           "league_minutes": 536,
           "league_rating": 7.08,
-          "league_rating_percentile": 78.3,
-          "minutes": 958,
+          "league_rating_percentile": 87.5,
+          "minutes": 1107,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
           "output_missing_competitions": [
@@ -1597,7 +1597,7 @@
       "dataset_state": null,
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort role family n=23; percentiles 0-100, higher is better.",
+      "note": "League-only rates; cohort role family n=24; percentiles 0-100, higher is better.",
       "published_at": null,
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -1610,6 +1610,48 @@
     "recent_matches": {
       "badge": "10 rows",
       "data": [
+        {
+          "assists": 0,
+          "competition": "Scottish Premiership",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-11-07",
+          "fixture_id": "1556700",
+          "goals": 0,
+          "minutes": 61,
+          "opponent": "Hibernian",
+          "published_at": null,
+          "rating": 6.49,
+          "result": "L",
+          "score_against": 4,
+          "score_for": 0,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": "H"
+        },
+        {
+          "assists": null,
+          "competition": "Premier Sports Cup",
+          "dataset_id": null,
+          "dataset_state": null,
+          "date": "2026-10-31",
+          "fixture_id": "1639572",
+          "goals": null,
+          "minutes": 88,
+          "opponent": "Rangers",
+          "published_at": null,
+          "rating": null,
+          "result": null,
+          "score_against": null,
+          "score_for": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "venue": null
+        },
         {
           "assists": 0,
           "competition": "Scottish Premiership",
@@ -1777,48 +1819,6 @@
           "stale_reason": null,
           "update_id": null,
           "venue": "H"
-        },
-        {
-          "assists": null,
-          "competition": "Premier Sports Cup",
-          "dataset_id": null,
-          "dataset_state": null,
-          "date": "2026-08-15",
-          "fixture_id": "1603956",
-          "goals": null,
-          "minutes": 66,
-          "opponent": "Dundee",
-          "published_at": null,
-          "rating": null,
-          "result": null,
-          "score_against": null,
-          "score_for": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null,
-          "venue": null
-        },
-        {
-          "assists": 0,
-          "competition": "Scottish Premiership",
-          "dataset_id": null,
-          "dataset_state": null,
-          "date": "2026-08-01",
-          "fixture_id": "1556630",
-          "goals": null,
-          "minutes": 73,
-          "opponent": "Heart of Midlothian",
-          "published_at": null,
-          "rating": 6.9,
-          "result": "W",
-          "score_against": 1,
-          "score_for": 2,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null,
-          "venue": "H"
         }
       ],
       "dataset_id": null,
@@ -1903,12 +1903,12 @@
     }
   },
   "player_id": 61178,
-  "published_at": "2026-11-01T06:18:13+00:00",
+  "published_at": "2026-11-08T09:46:53+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "served_by_update_id": "2026-11-08T09:44:17+00:00-141884",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-01T06:17:02+00:00-3003784",
+  "update_id": "2026-11-08T09:44:17+00:00-141884",
   "warnings": []
 }

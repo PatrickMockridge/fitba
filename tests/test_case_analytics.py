@@ -80,7 +80,7 @@ def test_team_now_uses_plain_record(payload) -> None:
     text = " ".join(item["count"] for item in claim["evidence"])
     assert re.search(r"\d+ wins, \d+ draws and \d+ defeats", text)
     assert re.search(r"\d+ competitive fixtures", text)
-    assert "2 unknown" in text
+    assert "3 unknown" in text
 
 
 def test_defence_is_plain_and_availability_unknown(payload) -> None:
