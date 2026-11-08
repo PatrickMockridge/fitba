@@ -117,7 +117,8 @@ Implemented:
 - `entities/index.json` — the core canonical entity index: pages, clubs, current
   and former players, fixtures, seasons, staff and claims, with aliases,
   external ids, one href and a source-layer list.
-- `entities/scouted.json` — the compact scouted-only player index, disjoint from
+- `entities/scouted.json` — the manifest for the compact scouted-only player
+  index; the entities are sharded into `entities/scouted-*.json`, disjoint from
   the core entities and lazy-loaded by `/search/`.
 - `page-meta.json` — surface-id keyed route patterns, provenance layers, metric
   ids, dataset epoch and registry version. References only; no copied value.
@@ -189,7 +190,7 @@ Implemented:
   and aggregate sentiment; no raw posts or usernames.
 - `squad/aberdeen.json` — roster, loan tags, per-competition stats, totals,
   coverage states and player hrefs.
-- Scouting search is sharded: `scouting/search/meta.json` plus four
+- Scouting search is sharded: `scouting/search/meta.json` plus six
   `scouting/search/players-*.json` payloads. The retired `search-index.json` is
   not generated; the core index is `entities/index.json`.
 

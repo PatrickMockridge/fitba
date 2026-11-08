@@ -16,7 +16,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCOUTING = ROOT / "web" / "data" / "generated" / "scouting"
 SEARCH = SCOUTING / "search"
-SEARCH_SHARDS = 4
+SEARCH_SHARDS = 6
 HUB = SCOUTING / "aberdeen.json"
 POOL = SCOUTING / "pool"
 

@@ -1,7 +1,11 @@
 import { ContractPage } from "@/components/ContractPage";
 import { SiteSearch } from "@/components/SiteSearch";
 import { assetPath } from "@/lib/asset-path";
-import { getEntityIndex, type ReaderEntity } from "@/lib/data";
+import {
+  getEntityIndex,
+  getScoutedEntityShardCount,
+  type ReaderEntity,
+} from "@/lib/data";
 
 export const metadata = {
   alternates: { canonical: "/search/" },
@@ -59,7 +63,10 @@ export default function SearchPage() {
       <section className="section" data-contract="search.board">
         <SiteSearch
           entities={entities}
-          scoutedPath={assetPath("/search/scouted.json")}
+          scoutedPaths={Array.from(
+            { length: getScoutedEntityShardCount() },
+            (_, shard) => assetPath(`/search/scouted/${shard}`),
+          )}
         />
       </section>
     </ContractPage>

@@ -36,6 +36,24 @@ def _load(path: Path) -> Any:
         return None
 
 
+def _load_scouted(data: Path) -> tuple[dict[str, Any] | None, list[str]]:
+    """Merge the scouted manifest and its shards into one entity document."""
+    meta = _load(data / "entities" / "scouted.json")
+    if meta is None:
+        return None, []
+    errors: list[str] = []
+    entities = list(meta.get("entities") or [])
+    shards = int(meta.get("shards") or 0)
+    for index in range(shards):
+        relative = f"entities/scouted-{index}.json"
+        document = _load(data / relative)
+        if document is None:
+            errors.append(f"missing or invalid {relative}")
+            continue
+        entities.extend(document.get("entities") or [])
+    return {**meta, "entities": entities}, errors
+
+
 def _href_parts(href: str) -> tuple[str, str | None]:
     base, _, fragment = href.partition("#")
     return base, fragment or None
@@ -70,9 +88,7 @@ def _check_entities(
         if not entity_id.startswith(f"{kind}:"):
             errors.append(f"{name}: {entity_id}: id does not match type {kind}")
         href = entity.get("href")
-        if entity.get("indexable") and (
-            not isinstance(href, str) or not href.startswith("/")
-        ):
+        if entity.get("indexable") and (not isinstance(href, str) or not href.startswith("/")):
             errors.append(f"{name}: {entity_id}: indexable without an internal href")
         if href is not None and (not isinstance(href, str) or not href.startswith("/")):
             errors.append(f"{name}: {entity_id}: href is not internal")
@@ -288,7 +304,9 @@ def check_data(data: Path) -> list[str]:
     if errors:
         return errors
     index = documents["entities/index.json"]
-    scouted = documents["entities/scouted.json"]
+    scouted, scouted_errors = _load_scouted(data)
+    errors.extend(scouted_errors)
+    scouted = scouted or documents["entities/scouted.json"]
     core_ids = _check_entities(index, name="entities/index.json", errors=errors)
     _check_entities(
         scouted,
@@ -340,7 +358,8 @@ def _built_page(out: Path, href: str, base_path: str) -> Path | None:
 def check_pages(data: Path, out: Path, base_path: str = "") -> list[str]:
     errors = check_data(data)
     index = _load(data / "entities/index.json") or {}
-    scouted = _load(data / "entities/scouted.json") or {}
+    scouted, _ = _load_scouted(data)
+    scouted = scouted or {}
     for name, document in (("core", index), ("scouted", scouted)):
         for entity in document.get("entities") or []:
             href = entity.get("href")
@@ -393,19 +412,14 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     errors = (
-        check_pages(args.data, args.out, args.base_path)
-        if args.pages
-        else check_data(args.data)
+        check_pages(args.data, args.out, args.base_path) if args.pages else check_data(args.data)
     )
     if args.json:
         print(json.dumps({"status": "pass" if not errors else "fail", "errors": errors}, indent=2))
     else:
         for error in errors[:100]:
             print(f"error: {error}")
-        print(
-            f"{'PASS' if not errors else 'FAIL'} semantic check: "
-            f"{len(errors)} error(s)"
-        )
+        print(f"{'PASS' if not errors else 'FAIL'} semantic check: {len(errors)} error(s)")
     return 0 if not errors else 1
 
 

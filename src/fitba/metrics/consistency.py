@@ -697,9 +697,7 @@ def _check_results_club(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
         outcome.rows_checked += 1
         for name in ("date", "opponent_name", "venue", "gf", "ga", "result"):
             outcome.fields_checked += 1
-            actual_name = (
-                "goals_for" if name == "gf" else "goals_against" if name == "ga" else name
-            )
+            actual_name = "goals_for" if name == "gf" else "goals_against" if name == "ga" else name
             if actual.get(actual_name) != expected[name]:
                 outcome.fail(
                     f"clubs/aberdeen.json results {name} {actual.get(actual_name)!r} "
@@ -814,11 +812,15 @@ def _entity_id(entity: dict[str, Any]) -> str:
 
 def _entity_documents(corpus: dict[str, Any]) -> list[tuple[str, list[dict[str, Any]]]]:
     index = _payload(corpus, "entities/index.json") or {}
-    scouted = _payload(corpus, "entities/scouted.json") or {}
-    return [
-        ("entities/index.json", list(index.get("entities") or [])),
-        ("entities/scouted.json", list(scouted.get("entities") or [])),
-    ]
+    documents = [("entities/index.json", list(index.get("entities") or []))]
+    meta = _payload(corpus, "entities/scouted.json") or {}
+    if meta.get("entities"):
+        documents.append(("entities/scouted.json", list(meta["entities"])))
+    for path in sorted(corpus):
+        if path.startswith("entities/scouted-") and path.endswith(".json"):
+            document = corpus.get(path) or {}
+            documents.append((path, list(document.get("entities") or [])))
+    return documents
 
 
 def _check_semantic_entities(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
@@ -844,9 +846,7 @@ def _check_semantic_entities(corpus: dict[str, Any], outcome: CheckOutcome) -> N
             if not entity_id.startswith(f"{kind}:"):
                 outcome.fail(f"{name}: {entity_id}: id does not match type {kind}")
             href = entity.get("href")
-            if entity.get("indexable") and not (
-                isinstance(href, str) and href.startswith("/")
-            ):
+            if entity.get("indexable") and not (isinstance(href, str) and href.startswith("/")):
                 outcome.fail(f"{name}: {entity_id}: indexable without an internal href")
             for alias in entity.get("aliases") or []:
                 key = str(alias).casefold().strip()
@@ -865,7 +865,7 @@ def _check_semantic_entities(corpus: dict[str, Any], outcome: CheckOutcome) -> N
     scouted_ids = {
         _entity_id(entity)
         for name, entities in _entity_documents(corpus)
-        if name == "entities/scouted.json"
+        if name != "entities/index.json"
         for entity in entities
     }
     overlap = core_ids & scouted_ids
@@ -965,9 +965,7 @@ def _check_rules_epoch(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
         else:
             outcome.fields_checked += 1
             if payload.get("dataset_id") != dataset_id:
-                outcome.fail(
-                    f"{path}: dataset_id {payload.get('dataset_id')!r} != {dataset_id!r}"
-                )
+                outcome.fail(f"{path}: dataset_id {payload.get('dataset_id')!r} != {dataset_id!r}")
         served = payload.get("served_by_update_id")
         if served:
             outcome.fields_checked += 1
@@ -983,11 +981,7 @@ def _check_rules_epoch(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
 
 def _check_rules_manifest(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     manifest = _payload(corpus, "manifest.json") or {}
-    listed = {
-        str(entry.get("path"))
-        for entry in manifest.get("files") or []
-        if entry.get("path")
-    }
+    listed = {str(entry.get("path")) for entry in manifest.get("files") or [] if entry.get("path")}
     for path in sorted(corpus):
         if path == "manifest.json":
             continue
@@ -1152,6 +1146,7 @@ CHECKS = [
         [
             "entities/index.json",
             "entities/scouted.json",
+            "entities/scouted-*.json",
         ],
         _check_semantic_entities,
     ),
@@ -1164,7 +1159,12 @@ CHECKS = [
     (
         "semantic.claims",
         "Claim entities resolve to the case payload and the claims surface",
-        ["entities/index.json", "entities/scouted.json", "themes/aberdeen.json"],
+        [
+            "entities/index.json",
+            "entities/scouted.json",
+            "entities/scouted-*.json",
+            "themes/aberdeen.json",
+        ],
         _check_semantic_claims,
     ),
     (
@@ -1188,9 +1188,7 @@ CHECKS = [
 ]
 
 
-def run_consistency(
-    corpus: dict[str, Any], *, root: Any = None
-) -> list[CheckResult]:
+def run_consistency(corpus: dict[str, Any], *, root: Any = None) -> list[CheckResult]:
     results = [
         _check(check_id, description, corpus, payloads, function)
         for check_id, description, payloads, function in CHECKS

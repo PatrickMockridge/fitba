@@ -16,7 +16,7 @@ read from the registry or an existing published payload.
 |---|---|---|
 | Source | the ingest adapters and TTLs in `docs/update.md` | caches under `.cache/`, normalized frames |
 | Normalize | `normalize/results.py`, `analytics/*`, `normalize/entities.py` | one canonical fact and one canonical entity id |
-| Publish | `publish/semantic.py` | `entities/index.json`, `entities/scouted.json`, `page-meta.json`, `definitions.json`, `changelog.json` |
+| Publish | `publish/semantic.py` | `entities/index.json`, `entities/scouted.json` (manifest) plus its shards, `page-meta.json`, `definitions.json`, `changelog.json` |
 | Serve | `web/lib/data.ts` and the page components | `/search/`, `/claims/`, `/corrections/`, page provenance and citations |
 
 The semantic bundle is built after `seasons.json` and before the result audit in
@@ -65,14 +65,16 @@ drawer or card.
 ### Core and scouted groups
 
 `entities/index.json` is the core index: pages, clubs, current and former
-players, fixtures, seasons, staff and claims. `entities/scouted.json` is a
-compact projection of scouted-only players (`i`, `n`, `a`, `h`, `l`, `rf`). The
-two groups are disjoint by `entity_id`; a scouted row that duplicates a core
-player is removed from the scouted group, not merged into the core index.
+players, fixtures, seasons, staff and claims. `entities/scouted.json` is the
+small manifest for the scouted-only players; the compact projections (`i`, `n`,
+`a`, `h`, `l`, `rf`) live in `entities/scouted-*.json`. The two groups are
+disjoint by `entity_id`; a scouted row that duplicates a core player is removed
+from the scouted group, not merged into the core index.
 
-`/search/` ships the core index and lazy-loads the scouted group only when the
-reader asks for it. `/scouting/search/` paints metadata and the first 100 rows,
-then loads the four shards on interaction.
+`/search/` ships the core index and lazy-loads the sharded scouted group only
+when the reader asks for it. `/scouting/search/` paints metadata and the first
+100 rows, then loads the six shards on interaction. Payloads are sharded rather
+than trimmed when the pool outgrows a browser budget.
 
 ## Page metadata
 

@@ -102,10 +102,10 @@ def test_a_missing_built_page_is_an_error(tmp_path: Path, monkeypatch) -> None:
 
 
 def test_the_real_budgets_name_the_lazy_scouting_payloads() -> None:
-    config = yaml.safe_load(
-        (ROOT / "config" / "web-budgets.yaml").read_text(encoding="utf-8")
-    )
+    config = yaml.safe_load((ROOT / "config" / "web-budgets.yaml").read_text(encoding="utf-8"))
     assert "entities/scouted.json" in config["json"]
+    assert "entities/scouted-*.json" in config["json"]
     assert "scouting/search/players-*.json" in config["json"]
+    assert "search/scouted/*" in config["built_json"]
     assert "/search/" in config["pages"]
     assert "/scouting/search/" in config["pages"]

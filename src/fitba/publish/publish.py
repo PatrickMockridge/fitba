@@ -135,6 +135,10 @@ from fitba.validate.checks import (
 
 SCHEMA_VERSION = "1.1.0"
 
+# Browser payloads are sharded, not trimmed, when the pool outgrows a budget.
+SCOUTING_SEARCH_SHARDS = 6
+SCOUTED_ENTITY_SHARDS = 2
+
 
 @dataclass(slots=True)
 class PublishReport:
@@ -1415,9 +1419,7 @@ def publish(
             "season": target_season,
         }
     )
-    former_seasons_info = _write(
-        temp / "former-players" / "seasons.json", former_seasons
-    )
+    former_seasons_info = _write(temp / "former-players" / "seasons.json", former_seasons)
     written.append(former_seasons_info)
     marts.append(
         {
@@ -1679,14 +1681,12 @@ def publish(
         written.append(pool_info)
     search_document = scouting_bundle["search"]
     search_meta = {key: value for key, value in search_document.items() if key != "players"}
-    search_meta_info = _write_compact(
-        temp / "scouting" / "search" / "meta.json", search_meta
-    )
+    search_meta_info = _write_compact(temp / "scouting" / "search" / "meta.json", search_meta)
     written.append(search_meta_info)
-    shards: list[list[dict[str, Any]]] = [[] for _ in range(4)]
+    shards: list[list[dict[str, Any]]] = [[] for _ in range(SCOUTING_SEARCH_SHARDS)]
     for row in search_document.get("players") or []:
         try:
-            shard = int(row.get("i") or 0) % 4
+            shard = int(row.get("i") or 0) % SCOUTING_SEARCH_SHARDS
         except (TypeError, ValueError):
             shard = 0
         shards[shard].append(row)
@@ -1971,9 +1971,7 @@ def publish(
         rumour_rows, target_season, player_index, generated_at=generated_at
     )
     profile_data = profile_payload(rumour_rows, player_index, generated_at=generated_at)
-    forum_data = forum_payload(
-        player_index, generated_at=generated_at, former_players=former_index
-    )
+    forum_data = forum_payload(player_index, generated_at=generated_at, former_players=former_index)
     for relative, payload, mart_id, rows in (
         ("rumours/aberdeen.json", rumours_data, "rumours.sco:aberdeen", len(rumour_rows)),
         ("rumours/profile.json", profile_data, "rumours.profile", profile_data["sample_size"]),
@@ -2354,7 +2352,6 @@ def publish(
     )
     semantic_documents = (
         ("entities/index.json", semantic.entities, "entities"),
-        ("entities/scouted.json", semantic.scouted, "entities.scouted"),
         ("page-meta.json", semantic.page_meta, "page-meta"),
         ("definitions.json", semantic.definitions, "definitions"),
         ("changelog.json", semantic.changelog, "changelog"),
@@ -2370,6 +2367,52 @@ def publish(
                 "checksum": info["checksum"],
                 "season": target_season,
                 "row_basis": "one row per semantic record",
+            }
+        )
+
+    # The scouted index is lazy-loaded by /search/; keep each browser payload
+    # under its budget by sharding it, with only the small manifest at
+    # entities/scouted.json.
+    scouted_document = semantic.scouted
+    scouted_entities = list(scouted_document.get("entities") or [])
+    scouted_meta = {
+        **{key: value for key, value in scouted_document.items() if key != "entities"},
+        "shards": SCOUTED_ENTITY_SHARDS,
+        "count": len(scouted_entities),
+        "entities": [],
+    }
+    info = _write_compact(temp / "entities" / "scouted.json", scouted_meta)
+    written.append(info)
+    marts.append(
+        {
+            "id": "entities.scouted",
+            "path": "entities/scouted.json",
+            "rows": len(scouted_entities) or 1,
+            "checksum": info["checksum"],
+            "season": target_season,
+            "row_basis": "one row per scouted entity across the shard manifest",
+        }
+    )
+    for index in range(SCOUTED_ENTITY_SHARDS):
+        rows = scouted_entities[index::SCOUTED_ENTITY_SHARDS]
+        relative = f"entities/scouted-{index}.json"
+        document = {
+            **scouted_meta,
+            "shard": index,
+            "count": len(rows),
+            "total": len(scouted_entities),
+            "entities": rows,
+        }
+        info = _write_compact(temp / relative, document)
+        written.append(info)
+        marts.append(
+            {
+                "id": f"entities.scouted.{index}",
+                "path": relative,
+                "rows": len(rows) or 1,
+                "checksum": info["checksum"],
+                "season": target_season,
+                "row_basis": "one row per sharded scouted entity",
             }
         )
 
@@ -2493,14 +2536,10 @@ def publish(
         "dataset_version": dataset_version,
         "generated_at": generated_at,
         "update": {"id": effective_update_id},
-        "files": [
-            {"path": path} for path in pre_corpus if path != "manifest.json"
-        ],
+        "files": [{"path": path} for path in pre_corpus if path != "manifest.json"],
     }
     consistency_results = run_consistency(pre_corpus)
-    consistency_failures = [
-        result for result in consistency_results if result.status != "pass"
-    ]
+    consistency_failures = [result for result in consistency_results if result.status != "pass"]
     consistency_payload = {
         "schema_version": "1.0.0",
         "generated_at": generated_at,
@@ -2535,9 +2574,7 @@ def publish(
     )
     if consistency_failures:
         messages = [
-            f"{result.id}: {error}"
-            for result in consistency_failures
-            for error in result.errors
+            f"{result.id}: {error}" for result in consistency_failures for error in result.errors
         ]
         raise RuntimeError("cross-surface consistency failed: " + "; ".join(messages[:5]))
 
@@ -2559,9 +2596,7 @@ def publish(
         }
     )
     freshness_block = {
-        "dataset_stale_after_hours": int(
-            (matchday_config() or {}).get("stale_after_hours") or 48
-        ),
+        "dataset_stale_after_hours": int((matchday_config() or {}).get("stale_after_hours") or 48),
         "availability_stale_after_days": int(
             (availability_policy() or {}).get("max_age_days") or 21
         ),

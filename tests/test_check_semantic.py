@@ -231,9 +231,7 @@ def test_an_inline_term_must_resolve_to_a_definition(tmp_path: Path) -> None:
     out = tmp_path / "out"
     page = out / "index.html"
     page.parent.mkdir(parents=True, exist_ok=True)
-    page.write_text(
-        '<span data-definition-term="def.nope">term</span>', encoding="utf-8"
-    )
+    page.write_text('<span data-definition-term="def.nope">term</span>', encoding="utf-8")
     errors = CHECK.check_pages(data, out)
     assert any("unknown definition term def.nope" in error for error in errors)
 
@@ -243,3 +241,23 @@ def test_changelog_requires_an_append_only_log(tmp_path: Path) -> None:
     _write(data / "changelog.json", {"append_only": False, "entries": []})
     errors = CHECK.check_data(data)
     assert any("append_only must be true" in error for error in errors)
+
+
+def test_scouted_shards_are_merged_and_missing_shards_are_reported(tmp_path: Path) -> None:
+    data = _data(tmp_path, index_entities=[_page("page:home", "/")])
+    _write(
+        data / "entities" / "scouted.json",
+        {"schema_version": "1.0.0", "state": "available", "shards": 2, "entities": []},
+    )
+    _write(
+        data / "entities" / "scouted-0.json",
+        {"entities": [_page("player:api:player:1", "/scouting/player/1/", "player")]},
+    )
+    errors = CHECK.check_data(data)
+    assert any("missing or invalid entities/scouted-1.json" in error for error in errors)
+
+    _write(
+        data / "entities" / "scouted-1.json",
+        {"entities": [_page("player:api:player:2", "/scouting/player/2/", "player")]},
+    )
+    assert CHECK.check_data(data) == []

@@ -64,10 +64,10 @@ function match(result: SearchResult, query: string, aliases: string[]): boolean 
 
 export function SiteSearch({
   entities,
-  scoutedPath,
+  scoutedPaths,
 }: {
   entities: ReaderEntity[];
-  scoutedPath: string;
+  scoutedPaths: string[];
 }) {
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState("all");
@@ -100,17 +100,20 @@ export function SiteSearch({
   useEffect(() => {
     if (!includeScouted || scoutedState !== "idle") return;
     setScoutedState("loading");
-    fetch(scoutedPath)
-      .then((response) => {
-        if (!response.ok) throw new Error(`scouted index ${response.status}`);
-        return response.json() as Promise<{ entities?: ScoutedEntity[] }>;
-      })
-      .then((payload) => {
-        setScouted(payload.entities ?? []);
+    Promise.all(
+      scoutedPaths.map((path) =>
+        fetch(path).then((response) => {
+          if (!response.ok) throw new Error(`scouted index ${response.status}`);
+          return response.json() as Promise<{ entities?: ScoutedEntity[] }>;
+        }),
+      ),
+    )
+      .then((payloads) => {
+        setScouted(payloads.flatMap((payload) => payload.entities ?? []));
         setScoutedState("ready");
       })
       .catch(() => setScoutedState("error"));
-  }, [includeScouted, scoutedPath, scoutedState]);
+  }, [includeScouted, scoutedPaths, scoutedState]);
 
   const core = useMemo(
     () => entities.filter((entity) => entity.indexable && entity.href).map(fromEntity),

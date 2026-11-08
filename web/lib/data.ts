@@ -2902,6 +2902,10 @@ export interface ScoutedEntityDocument {
   schema_version: string;
   state: string;
   entities: ScoutedEntity[];
+  shards?: number;
+  count?: number;
+  shard?: number;
+  total?: number;
   dataset_id?: string;
   update_id?: string;
   generated_at?: string;
@@ -3028,6 +3032,20 @@ export function getEntityIndex(): EntityIndexDocument | null {
 
 export function getScoutedEntityIndex(): ScoutedEntityDocument | null {
   return readJson<ScoutedEntityDocument>("entities", "scouted.json");
+}
+
+export const SCOUTED_ENTITY_SHARDS = 2;
+
+export function getScoutedEntityShardCount(): number {
+  return getScoutedEntityIndex()?.shards ?? SCOUTED_ENTITY_SHARDS;
+}
+
+export function getScoutedEntityShard(index: number): ScoutedEntity[] {
+  const document = readJson<ScoutedEntityDocument>(
+    "entities",
+    `scouted-${index}.json`,
+  );
+  return document?.entities ?? [];
 }
 
 export function getPageMeta(): PageMetaDocument | null {
@@ -4637,7 +4655,7 @@ export function getScoutingCoverage(): ScoutingCoverageDocument | null {
   return readJson<ScoutingCoverageDocument>("scouting", "coverage.json");
 }
 
-export const SCOUTING_SEARCH_SHARDS = 4;
+export const SCOUTING_SEARCH_SHARDS = 6;
 
 export type ScoutingSearchMeta = Omit<ScoutingSearchDocument, "players">;
 

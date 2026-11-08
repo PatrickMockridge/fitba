@@ -89,7 +89,7 @@ phase:
 Source to serve, in order: the source adapters and TTLs are unchanged; the
 canonical entity namespace lands in `normalize/entities.py`; the semantic bundle
 publishes five documents; `/search/`, `/claims/` and an expanded `/corrections/`
-serve them. Scouting search is sharded into meta plus four payloads under a page
+serve them. Scouting search is sharded into meta plus six payloads under a page
 budget. The change is documented in [Semantic layer](semantic-layer.md) and
 registered as registry 3.10.0.
 
