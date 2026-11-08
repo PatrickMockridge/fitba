@@ -19,9 +19,9 @@ def _row(player_id: int, name: str, *, minutes: int = 600) -> dict:
 def test_aberdeen_is_excluded_from_its_own_cohort() -> None:
     rows = [_row(1, "Aberdeen Player"), _row(2, "League Player")]
     index = CohortIndex(rows, {}, exclude_player_ids={1})
-    names = [row["name"] for row in index.players(
-        "sco:premiership", "centre_back", min_minutes=450
-    )]
+    names = [
+        row["name"] for row in index.players("sco:premiership", "centre_back", min_minutes=450)
+    ]
     assert names == ["League Player"]
     assert len(index.values("sco:premiership", "centre_back", "goals_p90", min_minutes=450)) == 1
 
@@ -29,9 +29,9 @@ def test_aberdeen_is_excluded_from_its_own_cohort() -> None:
 def test_without_an_exclusion_the_cohort_keeps_every_row() -> None:
     rows = [_row(1, "Aberdeen Player"), _row(2, "League Player")]
     index = CohortIndex(rows, {})
-    names = [row["name"] for row in index.players(
-        "sco:premiership", "centre_back", min_minutes=450
-    )]
+    names = [
+        row["name"] for row in index.players("sco:premiership", "centre_back", min_minutes=450)
+    ]
     assert names == ["Aberdeen Player", "League Player"]
 
 

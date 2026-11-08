@@ -49,8 +49,7 @@ def match_result(
         "result": result,
         "outcome": "W" if won else "L",
         "result_label": (
-            f"{result} ({'won' if won else 'lost'} "
-            f"{penalties_for}-{penalties_against} pens)"
+            f"{result} ({'won' if won else 'lost'} {penalties_for}-{penalties_against} pens)"
         ),
         "shootout_result": "won" if won else "lost",
         "decided_by": "penalties",

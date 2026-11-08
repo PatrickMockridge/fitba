@@ -597,9 +597,7 @@ def xg(
 @app.command()
 def xg_enrich(
     season: Annotated[str, typer.Option(help="Season like 2026-27")] = "2026-27",
-    max_requests: Annotated[
-        int, typer.Option(help="Maximum live API requests for this run")
-    ] = 120,
+    max_requests: Annotated[int, typer.Option(help="Maximum live API requests for this run")] = 120,
     refresh: Annotated[bool, typer.Option("--refresh", help="Refresh the fixture list")] = False,
 ) -> None:
     """Fetch league-wide shot-zone and penalty inputs for the fxG calibration."""
@@ -706,8 +704,7 @@ def former_players_backfill(
     )
     if result.errors:
         console.print(
-            f"[red]former-player backfill finished with errors[/red]: "
-            f"{result.errors[:3]}"
+            f"[red]former-player backfill finished with errors[/red]: {result.errors[:3]}"
         )
     console.print(
         f"former players: {result.status} · {result.rows} players · "
@@ -765,11 +762,8 @@ def former_players_status() -> None:
         f"budget_exhausted={meta.get('budget_exhausted')}"
     )
     console.print(
-        f"  local players {load_former_players().height}, "
-        f"seasons {load_post_seasons().height}"
+        f"  local players {load_former_players().height}, seasons {load_post_seasons().height}"
     )
-
-
 
 
 @career_app.command("backfill")
@@ -1102,9 +1096,7 @@ def scouting_status_command() -> None:
 
 @app.command()
 def update(
-    mode: Annotated[
-        str, typer.Option(help="daily, matchday or ci")
-    ] = "daily",
+    mode: Annotated[str, typer.Option(help="daily, matchday or ci")] = "daily",
     force_results: Annotated[
         bool,
         typer.Option("--force-results", help="Bypass the results/fixtures caches"),
@@ -1147,8 +1139,7 @@ def update(
         console.print_json(data=state)
     else:
         console.print(
-            f"update {state.get('status')} · mode {state.get('mode')} · "
-            f"{state.get('update_id')}"
+            f"update {state.get('status')} · mode {state.get('mode')} · {state.get('update_id')}"
         )
         for step in state.get("steps") or []:
             suffix = f" · {step.get('error')}" if step.get("error") else ""

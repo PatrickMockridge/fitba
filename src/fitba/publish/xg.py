@@ -103,20 +103,21 @@ def _league_rows(
             team_id = str(row.get(f"{side}_team_id"))
             home_id = str(row.get("home_team_id"))
             away_id = str(row.get("away_team_id"))
-            history = _find_history_features(
-                history_features,
-                match_date=str(row.get("date") or ""),
-                home_id=home_id,
-                away_id=away_id,
-                team_id=team_id,
-            ) or {}
+            history = (
+                _find_history_features(
+                    history_features,
+                    match_date=str(row.get("date") or ""),
+                    home_id=home_id,
+                    away_id=away_id,
+                    team_id=team_id,
+                )
+                or {}
+            )
             features = dict(history)
             features.update(
                 {
                     key: value
-                    for key, value in enrichment.get(
-                        (str(row["match_id"]), team_id), {}
-                    ).items()
+                    for key, value in enrichment.get((str(row["match_id"]), team_id), {}).items()
                     if value is not None
                 }
             )
@@ -186,9 +187,7 @@ def _history_rows() -> list[dict[str, Any]]:
         events = load_events(season)
         teams = TeamRegistry()
         penalty_counts = (
-            derive_penalty_counts_from_rows(events.to_dicts(), teams)
-            if events.height
-            else {}
+            derive_penalty_counts_from_rows(events.to_dicts(), teams) if events.height else {}
         )
         for row in stats.to_dicts():
             fixture = fixture_by_id.get(int(row["fixture_id"]))
@@ -221,9 +220,7 @@ def _history_rows() -> list[dict[str, Any]]:
                     "missed": 0,
                     "status": "measured_zero",
                 }
-            features = derive_open_play_features(
-                row, penalties, goals_for=goals_for
-            )
+            features = derive_open_play_features(row, penalties, goals_for=goals_for)
             provider = _float(row.get("expected_goals"))
             open_provider = (
                 max(0.0, provider - 0.76 * features["penalty_attempts"])
@@ -267,9 +264,7 @@ def _history_feature_map() -> dict[tuple[str, str, str, str], dict[str, Any]]:
             continue
         events = load_events(season)
         penalty_counts = (
-            derive_penalty_counts_from_rows(events.to_dicts(), teams)
-            if events.height
-            else {}
+            derive_penalty_counts_from_rows(events.to_dicts(), teams) if events.height else {}
         )
         fixture_by_id = {int(row["fixture_id"]): row for row in fixtures.to_dicts()}
         for row in stats.to_dicts():
@@ -297,9 +292,7 @@ def _history_feature_map() -> dict[tuple[str, str, str, str], dict[str, Any]]:
                     "missed": 0,
                     "status": "measured_zero",
                 }
-            features = derive_open_play_features(
-                row, penalties, goals_for=goals_for
-            )
+            features = derive_open_play_features(row, penalties, goals_for=goals_for)
             provider = _float(row.get("expected_goals"))
             if provider is not None:
                 features["provider_xg_api"] = provider
@@ -350,9 +343,7 @@ def _transfer_rows() -> list[dict[str, Any]]:
     teams = TeamRegistry()
     fixture_by_id = {int(row["fixture_id"]): row for row in fixtures.to_dicts()}
     penalty_counts = (
-        derive_penalty_counts_from_rows(events.to_dicts(), teams)
-        if events.height
-        else {}
+        derive_penalty_counts_from_rows(events.to_dicts(), teams) if events.height else {}
     )
     rows: list[dict[str, Any]] = []
     for row in stats.to_dicts():
@@ -368,9 +359,7 @@ def _transfer_rows() -> list[dict[str, Any]]:
         home_id = _num(fixture.get("home_team_id"))
         is_home = team_id == home_id
         goals_for = _num(fixture.get("home_goals" if is_home else "away_goals"))
-        opponent_name = str(
-            fixture.get("away_team_name" if is_home else "home_team_name") or ""
-        )
+        opponent_name = str(fixture.get("away_team_name" if is_home else "home_team_name") or "")
         penalties = penalty_counts.get((fixture_id, canonical))
         if events.height and penalties is None:
             penalties = {
@@ -396,8 +385,7 @@ def _transfer_rows() -> list[dict[str, Any]]:
                 "competition_id": "sco:premiership",
                 "team_id": canonical,
                 "team_name": team_name,
-                "opponent_id": teams.resolve(opponent_name)
-                or f"other:{opponent_name.casefold()}",
+                "opponent_id": teams.resolve(opponent_name) or f"other:{opponent_name.casefold()}",
                 "opponent_name": opponent_name,
                 "goals_for": goals_for,
                 **features,
@@ -487,14 +475,10 @@ def _match_rows(
                 "goals_minus_fxg_for": for_pred["goals_minus"] if for_pred else None,
                 "goals_position_for": for_pred["goals_position"] if for_pred else None,
                 "goals_minus_fxg_for_low": (
-                    round(for_pred["goals_low"] - for_pred["fxg"], 3)
-                    if for_pred
-                    else None
+                    round(for_pred["goals_low"] - for_pred["fxg"], 3) if for_pred else None
                 ),
                 "goals_minus_fxg_for_high": (
-                    round(for_pred["goals_high"] - for_pred["fxg"], 3)
-                    if for_pred
-                    else None
+                    round(for_pred["goals_high"] - for_pred["fxg"], 3) if for_pred else None
                 ),
                 "fxg_per_shot_for": for_pred["xg_per_shot"] if for_pred else None,
                 "penalty_xg_for": for_pred["penalty_component"] if for_pred else None,
@@ -503,9 +487,7 @@ def _match_rows(
                     (for_row or {}).get("shots_on_target") if for_row else None
                 ),
                 "shots_off_for": (for_row or {}).get("shots_off") if for_row else None,
-                "shots_blocked_for": (
-                    (for_row or {}).get("shots_blocked") if for_row else None
-                ),
+                "shots_blocked_for": ((for_row or {}).get("shots_blocked") if for_row else None),
                 "shots_insidebox_for": (
                     (for_row or {}).get("shots_insidebox") if for_row else None
                 ),
@@ -513,9 +495,7 @@ def _match_rows(
                     (for_row or {}).get("shots_outsidebox") if for_row else None
                 ),
                 "penalties_for": (for_row or {}).get("penalty_attempts") if for_row else None,
-                "penalty_goals_for": (
-                    (for_row or {}).get("penalty_goals") if for_row else None
-                ),
+                "penalty_goals_for": ((for_row or {}).get("penalty_goals") if for_row else None),
                 "basis_for": for_pred.get("basis") if for_pred else None,
                 "fxg_against": against_pred["fxg"] if against_pred else None,
                 "fxg_against_low": against_pred["low"] if against_pred else None,
@@ -537,9 +517,7 @@ def _match_rows(
                     else None
                 ),
                 "fxg_per_shot_against": against_pred["xg_per_shot"] if against_pred else None,
-                "penalty_xg_against": (
-                    against_pred["penalty_component"] if against_pred else None
-                ),
+                "penalty_xg_against": (against_pred["penalty_component"] if against_pred else None),
                 "shots_against": (against_row or {}).get("shots") if against_row else None,
                 "shots_on_target_against": (
                     (against_row or {}).get("shots_on_target") if against_row else None
@@ -564,9 +542,7 @@ def _match_rows(
                 ),
                 "basis_against": against_pred.get("basis") if against_pred else None,
                 "interval_basis": for_pred.get("interval_basis") if for_pred else None,
-                "goals_range_basis": (
-                    for_pred.get("goals_range_basis") if for_pred else None
-                ),
+                "goals_range_basis": (for_pred.get("goals_range_basis") if for_pred else None),
                 "fxg_diff": (
                     round(for_pred["fxg"] - against_pred["fxg"], 3)
                     if for_pred and against_pred

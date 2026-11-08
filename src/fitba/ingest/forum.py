@@ -289,11 +289,7 @@ class Gazetteer:
 
         existing = self.by_full.get(entry.norm)
         if existing is not None:
-            if (
-                existing.player_key
-                and entry.player_key
-                and existing.player_key != entry.player_key
-            ):
+            if existing.player_key and entry.player_key and existing.player_key != entry.player_key:
                 # A full name shared by two identities must not be guessed.
                 self.ambiguous_full.add(entry.norm)
                 return

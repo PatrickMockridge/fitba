@@ -175,9 +175,7 @@ def test_fixture_ratings_propagates_the_opponent_values():
     assert ratings[20] == float(away_rating)
 
 
-def test_refresh_stores_opponent_ratings_without_asserting_a_value(
-    tmp_path, monkeypatch
-):
+def test_refresh_stores_opponent_ratings_without_asserting_a_value(tmp_path, monkeypatch):
     fixtures = [_api_fixture(1001, 1)]
     _patch_api(monkeypatch, fixtures=fixtures)
 

@@ -56,9 +56,7 @@ def _row_sort(row: dict[str, Any]) -> tuple[date, date, str]:
     return effective, announced, str(row.get("transfer_id") or "")
 
 
-def _has_later_return(
-    key: str, departure: dict[str, Any], transfers: list[dict[str, Any]]
-) -> bool:
+def _has_later_return(key: str, departure: dict[str, Any], transfers: list[dict[str, Any]]) -> bool:
     """A genuine return after the exit makes the player current, not former.
 
     ``loan_return`` rows are ignored here: they record the end of an earlier
@@ -230,8 +228,7 @@ def aberdeen_record(
     stats_by_fixture = {
         int(row["fixture_id"]): row
         for row in match_stats
-        if str(row.get("player_key") or "") == player_key
-        and row.get("fixture_id") is not None
+        if str(row.get("player_key") or "") == player_key and row.get("fixture_id") is not None
     }
     by_season: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
@@ -242,8 +239,7 @@ def aberdeen_record(
         stat_rows = [
             stats_by_fixture[int(row["fixture_id"])]
             for row in season_rows
-            if row.get("fixture_id") is not None
-            and int(row["fixture_id"]) in stats_by_fixture
+            if row.get("fixture_id") is not None and int(row["fixture_id"]) in stats_by_fixture
         ]
         seasons.append(
             {
@@ -272,11 +268,7 @@ def aberdeen_record(
         return sum(int(value) for value in values) if values else None
 
     first = min(
-        (
-            row
-            for row in rows
-            if bool(row.get("started")) or int(row.get("minutes") or 0) > 0
-        ),
+        (row for row in rows if bool(row.get("started")) or int(row.get("minutes") or 0) > 0),
         key=lambda row: str(row.get("date") or ""),
         default=None,
     )
@@ -301,14 +293,12 @@ def aberdeen_record(
     ) >= int(development.get("min_starts") or 10):
         developed = "yes"
         developed_basis = (
-            f"First covered appearance at {first_age}; "
-            f"{int(total('starts') or 0)} Aberdeen starts."
+            f"First covered appearance at {first_age}; {int(total('starts') or 0)} Aberdeen starts."
         )
     else:
         developed = "no"
         developed_basis = (
-            f"First covered appearance at {first_age}; "
-            f"{int(total('starts') or 0)} Aberdeen starts."
+            f"First covered appearance at {first_age}; {int(total('starts') or 0)} Aberdeen starts."
         )
 
     final_season = last_playing_season(departure)
@@ -330,8 +320,7 @@ def aberdeen_record(
             [
                 stats_by_fixture[int(row["fixture_id"])]
                 for row in rows
-                if row.get("fixture_id") is not None
-                and int(row["fixture_id"]) in stats_by_fixture
+                if row.get("fixture_id") is not None and int(row["fixture_id"]) in stats_by_fixture
             ]
         ),
         "rating_note": "Provider rating; league-relative and not a verdict.",
@@ -426,9 +415,7 @@ def club_context(
     }
 
 
-def _current_from_rows(
-    rows: list[dict[str, Any]], *, current_season: str
-) -> dict[str, Any] | None:
+def _current_from_rows(rows: list[dict[str, Any]], *, current_season: str) -> dict[str, Any] | None:
     current = [row for row in rows if str(row.get("season") or "") == current_season]
     if not current:
         return None
@@ -572,9 +559,7 @@ def post_career_record(
         and str(row.get("team_name") or "") != "Aberdeen"
         and str(row.get("scope") or "league") == "league"
     ]
-    expected = (
-        seasons_between(departure_season, current_season) if departure_season else []
-    )
+    expected = seasons_between(departure_season, current_season) if departure_season else []
     present = sorted({str(row.get("season") or "") for row in rows if row.get("season")})
     if not rows:
         status = "unavailable"
@@ -604,10 +589,7 @@ def post_career_record(
         event
         for event in events
         if str(event.get("player_key") or "") == player_key
-        and (
-            departure_date is None
-            or (transfer_date(event) or date.min) > departure_date
-        )
+        and (departure_date is None or (transfer_date(event) or date.min) > departure_date)
     ]
     current = _current_from_rows(rows, current_season=current_season)
     if current is None:
@@ -646,9 +628,7 @@ def post_career_record(
         teams=teams,
         markets=markets,
         rival_ids=tuple(
-            str(item.get("club_id"))
-            for item in (config.get("rivals") or [])
-            if item.get("club_id")
+            str(item.get("club_id")) for item in (config.get("rivals") or []) if item.get("club_id")
         )
         or RIVAL_IDS,
     )
@@ -665,9 +645,7 @@ def post_career_record(
         teams=teams,
         markets=markets,
         rival_ids=tuple(
-            str(item.get("club_id"))
-            for item in (config.get("rivals") or [])
-            if item.get("club_id")
+            str(item.get("club_id")) for item in (config.get("rivals") or []) if item.get("club_id")
         )
         or RIVAL_IDS,
     )
@@ -711,9 +689,7 @@ def post_career_record(
             and current.get("country")
             and str(current.get("country")).casefold() != "scotland"
             else (
-                False
-                if current.get("league_tier") is not None and current.get("country")
-                else None
+                False if current.get("league_tier") is not None and current.get("country") else None
             )
         ),
         "at_rival": bool(rival_spells),
@@ -740,8 +716,7 @@ def vs_aberdeen_record(
     stats = {
         int(row["fixture_id"]): row
         for row in match_stats
-        if str(row.get("player_key") or "") == player_key
-        and row.get("fixture_id") is not None
+        if str(row.get("player_key") or "") == player_key and row.get("fixture_id") is not None
     }
     stat_rows = [
         stats[int(row["fixture_id"])]
@@ -796,9 +771,7 @@ def sell_on_watch(
     rows_by_id = {str(row.get("transfer_id")): row for row in transfer_rows}
     sell_on_policy = config.get("sell_on") or {}
     fx = sell_on_policy.get("fx_to_gbp") or {"GBP": 1.0}
-    allowed_basis = set(
-        sell_on_policy.get("allowed_basis") or ["gross_fee", "profit"]
-    )
+    allowed_basis = set(sell_on_policy.get("allowed_basis") or ["gross_fee", "profit"])
     require_percentage = bool(sell_on_policy.get("require_percentage", True))
     require_public_fee = bool(sell_on_policy.get("require_public_fee", True))
     watch: list[dict[str, Any]] = []
@@ -811,9 +784,7 @@ def sell_on_watch(
         buyer = str(clause.get("buyer_club_name") or "")
         event = subsequent_permanent_transfer(events, after=sale_date, from_club_name=buyer)
         event_kind = (
-            str(event.get("kind") or parse_transfer_type(event.get("type")))
-            if event
-            else None
+            str(event.get("kind") or parse_transfer_type(event.get("type"))) if event else None
         )
         event_out: dict[str, Any] | None = None
         if event:
@@ -848,9 +819,10 @@ def sell_on_watch(
                 else None
             )
             event_out["source_urls"] = anchor.get("source_urls") or []
-            if anchor.get("fee_status") in {"disclosed", "reported"} and anchor.get(
-                "fee_amount"
-            ) is not None:
+            if (
+                anchor.get("fee_status") in {"disclosed", "reported"}
+                and anchor.get("fee_amount") is not None
+            ):
                 event_status = "detected_priced"
         receipt_status = "not_triggered"
         missing_inputs: list[str] = []
@@ -896,9 +868,7 @@ def sell_on_watch(
                     value = fee_gbp * float(pct or 0.0) / 100.0
                 else:
                     value = (
-                        max(0.0, fee_gbp - float(original_fee or 0.0))
-                        * float(pct or 0.0)
-                        / 100.0
+                        max(0.0, fee_gbp - float(original_fee or 0.0)) * float(pct or 0.0) / 100.0
                     )
                 value = round(value, -3)
                 receipt = {
@@ -976,9 +946,7 @@ def sell_on_watch(
     }
 
 
-def development_summary(
-    players: list[dict[str, Any]], *, config: dict[str, Any]
-) -> dict[str, Any]:
+def development_summary(players: list[dict[str, Any]], *, config: dict[str, Any]) -> dict[str, Any]:
     development = config.get("development") or {}
     scorecard_config = config.get("scorecard") or {}
     young_max = int(development.get("young_exit_age_max") or 23)
@@ -1012,24 +980,15 @@ def development_summary(
             "in_covered_feed": sum(
                 1
                 for row in rows
-                if ((row.get("post_career") or {}).get("totals") or {}).get(
-                    "seasons_with_data"
-                )
+                if ((row.get("post_career") or {}).get("totals") or {}).get("seasons_with_data")
             ),
             "with_min_post_minutes": sum(
                 1
                 for row in rows
-                if int(
-                    ((row.get("post_career") or {}).get("totals") or {}).get(
-                        "minutes"
-                    )
-                    or 0
-                )
+                if int(((row.get("post_career") or {}).get("totals") or {}).get("minutes") or 0)
                 >= min_post_minutes
                 and int(
-                    ((row.get("post_career") or {}).get("totals") or {}).get(
-                        "seasons_with_data"
-                    )
+                    ((row.get("post_career") or {}).get("totals") or {}).get("seasons_with_data")
                     or 0
                 )
                 >= min_post_seasons
@@ -1043,9 +1002,7 @@ def development_summary(
         if row.get("age_at_exit") is not None and row["age_at_exit"] <= young_max
     ]
     developed = [
-        row
-        for row in players
-        if (row.get("aberdeen") or {}).get("developed_here") == "yes"
+        row for row in players if (row.get("aberdeen") or {}).get("developed_here") == "yes"
     ]
     by_season: dict[str, dict[str, Any]] = defaultdict(
         lambda: {"players": 0, "young_exits": 0, "developed_here": 0, "with_fee": 0}

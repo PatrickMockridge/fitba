@@ -60,10 +60,10 @@ def test_universe_excludes_current_loans_returns_and_merges_identity():
             window="winter",
             to_club="Aberdeen",
         ),
-        _transfer(tid="e", key="curated:player:example", name="D. McGeouch",
-                  date_effective="2022-05-31"),
-        _transfer(tid="f", key="api:player:5", name="D. McGeouch",
-                  date_effective="2022-11-21"),
+        _transfer(
+            tid="e", key="curated:player:example", name="D. McGeouch", date_effective="2022-05-31"
+        ),
+        _transfer(tid="f", key="api:player:5", name="D. McGeouch", date_effective="2022-11-21"),
     ]
     squad = {
         "players": [
@@ -90,15 +90,36 @@ def test_last_playing_season_respects_window():
 
 def test_aberdeen_record_counts_bench_separately_and_keeps_proxy_unknown():
     appearances = [
-        {"player_key": "api:player:1", "team_name": "Aberdeen", "competition": "Premiership",
-         "season": "2021-22", "fixture_id": 1, "started": True, "minutes": 90,
-         "date": "2022-01-01"},
-        {"player_key": "api:player:1", "team_name": "Aberdeen", "competition": "Premiership",
-         "season": "2021-22", "fixture_id": 2, "started": False, "minutes": 0,
-         "date": "2022-01-08"},
-        {"player_key": "api:player:1", "team_name": "Aberdeen", "competition": "Premiership",
-         "season": "2021-22", "fixture_id": 3, "started": False, "minutes": 30,
-         "date": "2022-01-15"},
+        {
+            "player_key": "api:player:1",
+            "team_name": "Aberdeen",
+            "competition": "Premiership",
+            "season": "2021-22",
+            "fixture_id": 1,
+            "started": True,
+            "minutes": 90,
+            "date": "2022-01-01",
+        },
+        {
+            "player_key": "api:player:1",
+            "team_name": "Aberdeen",
+            "competition": "Premiership",
+            "season": "2021-22",
+            "fixture_id": 2,
+            "started": False,
+            "minutes": 0,
+            "date": "2022-01-08",
+        },
+        {
+            "player_key": "api:player:1",
+            "team_name": "Aberdeen",
+            "competition": "Premiership",
+            "season": "2021-22",
+            "fixture_id": 3,
+            "started": False,
+            "minutes": 30,
+            "date": "2022-01-15",
+        },
     ]
     stats = [
         {"player_key": "api:player:1", "fixture_id": 1, "goals": 1, "assists": 0, "rating": 7.0},
@@ -124,25 +145,64 @@ def test_aberdeen_record_counts_bench_separately_and_keeps_proxy_unknown():
 
 def test_post_career_uses_league_rows_only_and_labels_current():
     seasons = [
-        {"player_key": "api:player:1", "season": "2024-25", "season_year": 2024,
-         "team_name": "Example FC", "competition": "League", "country": "England",
-         "league_tier": 2, "scope": "league", "appearances": 20, "starts": 18,
-         "minutes": 1600, "goals": 4, "assists": 2, "rating": 7.0},
-        {"player_key": "api:player:1", "season": "2024-25", "season_year": 2024,
-         "team_name": "Example FC", "competition": "Cup", "country": "England",
-         "league_tier": None, "scope": "cup", "appearances": 2, "starts": 2,
-         "minutes": 180, "goals": 9, "assists": 9, "rating": 9.0},
-        {"player_key": "api:player:1", "season": "2025-26", "season_year": 2025,
-         "team_name": "Example FC", "competition": "League", "country": "England",
-         "league_tier": 2, "scope": "league", "appearances": 10, "starts": 8,
-         "minutes": 700, "goals": 2, "assists": 1, "rating": 6.8},
+        {
+            "player_key": "api:player:1",
+            "season": "2024-25",
+            "season_year": 2024,
+            "team_name": "Example FC",
+            "competition": "League",
+            "country": "England",
+            "league_tier": 2,
+            "scope": "league",
+            "appearances": 20,
+            "starts": 18,
+            "minutes": 1600,
+            "goals": 4,
+            "assists": 2,
+            "rating": 7.0,
+        },
+        {
+            "player_key": "api:player:1",
+            "season": "2024-25",
+            "season_year": 2024,
+            "team_name": "Example FC",
+            "competition": "Cup",
+            "country": "England",
+            "league_tier": None,
+            "scope": "cup",
+            "appearances": 2,
+            "starts": 2,
+            "minutes": 180,
+            "goals": 9,
+            "assists": 9,
+            "rating": 9.0,
+        },
+        {
+            "player_key": "api:player:1",
+            "season": "2025-26",
+            "season_year": 2025,
+            "team_name": "Example FC",
+            "competition": "League",
+            "country": "England",
+            "league_tier": 2,
+            "scope": "league",
+            "appearances": 10,
+            "starts": 8,
+            "minutes": 700,
+            "goals": 2,
+            "assists": 1,
+            "rating": 6.8,
+        },
     ]
     record = post_career_record(
         seasons,
         [],
         player_key="api:player:1",
-        departure={"season": "2024-25", "date_effective": "2024-07-01",
-                   "to_club_name": "Example FC"},
+        departure={
+            "season": "2024-25",
+            "date_effective": "2024-07-01",
+            "to_club_name": "Example FC",
+        },
         birth_date=None,
         config={},
         current_season="2025-26",
@@ -171,15 +231,26 @@ def test_sell_on_receipt_requires_all_inputs_and_computes_gross_fee():
     }
     events = {
         "api:player:1": [
-            {"date": "2024-07-01", "type": "Transfer", "kind": "permanent",
-             "teams": {"out": {"name": "Buyer FC"}, "in": {"name": "Next FC"}}}
+            {
+                "date": "2024-07-01",
+                "type": "Transfer",
+                "kind": "permanent",
+                "teams": {"out": {"name": "Buyer FC"}, "in": {"name": "Next FC"}},
+            }
         ]
     }
     fees = [
-        {"event_id": "e1", "clause_id": "sell-on-example", "player_key": "api:player:1",
-         "subsequent_transfer_date": "2024-07-01", "to_club_name": "Next FC",
-         "fee_status": "disclosed", "fee_amount": 1000000, "fee_currency": "GBP",
-         "source_urls": ["https://en.wikipedia.org/wiki/Example"]}
+        {
+            "event_id": "e1",
+            "clause_id": "sell-on-example",
+            "player_key": "api:player:1",
+            "subsequent_transfer_date": "2024-07-01",
+            "to_club_name": "Next FC",
+            "fee_status": "disclosed",
+            "fee_amount": 1000000,
+            "fee_currency": "GBP",
+            "source_urls": ["https://en.wikipedia.org/wiki/Example"],
+        }
     ]
     watch = sell_on_watch(
         [clause],
@@ -194,7 +265,10 @@ def test_sell_on_receipt_requires_all_inputs_and_computes_gross_fee():
     assert watch["summary"]["computed"] == 1
 
     missing = sell_on_watch(
-        [{**clause, "sell_on_pct": None}], [], events, fees,
+        [{**clause, "sell_on_pct": None}],
+        [],
+        events,
+        fees,
         config={"sell_on": {"fx_to_gbp": {"GBP": 1.0}}},
     )
     assert missing["clauses"][0]["receipt"]["status"] == "missing_inputs"
@@ -203,22 +277,46 @@ def test_sell_on_receipt_requires_all_inputs_and_computes_gross_fee():
 
 def test_vs_aberdeen_and_development_summary():
     appearances = [
-        {"player_key": "api:player:1", "opponent": "Aberdeen", "team_name": "Example FC",
-         "date": "2024-10-01", "started": True, "minutes": 90, "fixture_id": 10},
-        {"player_key": "api:player:1", "opponent": "Other", "team_name": "Example FC",
-         "date": "2024-10-08", "started": True, "minutes": 90, "fixture_id": 11},
+        {
+            "player_key": "api:player:1",
+            "opponent": "Aberdeen",
+            "team_name": "Example FC",
+            "date": "2024-10-01",
+            "started": True,
+            "minutes": 90,
+            "fixture_id": 10,
+        },
+        {
+            "player_key": "api:player:1",
+            "opponent": "Other",
+            "team_name": "Example FC",
+            "date": "2024-10-08",
+            "started": True,
+            "minutes": 90,
+            "fixture_id": 11,
+        },
     ]
     stats = [{"player_key": "api:player:1", "fixture_id": 10, "goals": 1, "assists": 0}]
     vs = vs_aberdeen_record(appearances, stats, player_key="api:player:1", after="2024-07-01")
     assert vs["appearances"] == 1
     assert vs["goals"] == 1
     players = [
-        {"age_at_exit": 22, "departure": {"fee_status": "disclosed", "season": "2024-25"},
-         "aberdeen": {"developed_here": "yes"},
-         "post_career": {"totals": {"minutes": 1000, "seasons_with_data": 1},
-                         "top_flight_abroad": True, "at_rival": False}},
-        {"age_at_exit": 29, "departure": {"fee_status": "free", "season": "2024-25"},
-         "aberdeen": {"developed_here": "no"}, "post_career": {"totals": {"minutes": 0}}},
+        {
+            "age_at_exit": 22,
+            "departure": {"fee_status": "disclosed", "season": "2024-25"},
+            "aberdeen": {"developed_here": "yes"},
+            "post_career": {
+                "totals": {"minutes": 1000, "seasons_with_data": 1},
+                "top_flight_abroad": True,
+                "at_rival": False,
+            },
+        },
+        {
+            "age_at_exit": 29,
+            "departure": {"fee_status": "free", "season": "2024-25"},
+            "aberdeen": {"developed_here": "no"},
+            "post_career": {"totals": {"minutes": 0}},
+        },
     ]
     summary = development_summary(players, config={"development": {"young_exit_age_max": 23}})
     assert summary["cohorts"]["all"]["players"] == 2

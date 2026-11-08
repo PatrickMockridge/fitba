@@ -56,9 +56,7 @@ def _payload_is_registered(payload: str, metric: Any) -> bool:
     return False
 
 
-def _surfaces(
-    ids: list[str], pages_config: dict[str, Any]
-) -> list[dict[str, str]]:
+def _surfaces(ids: list[str], pages_config: dict[str, Any]) -> list[dict[str, str]]:
     pages = {str(row.get("id")): row for row in pages_config.get("pages") or []}
     output: list[dict[str, str]] = []
     for page_id in ids:

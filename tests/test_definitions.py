@@ -37,9 +37,7 @@ def test_every_definition_id_is_unique() -> None:
 def test_every_definition_alias_is_unique() -> None:
     document = _document()
     aliases = [
-        str(alias).casefold()
-        for row in document["entries"]
-        for alias in row.get("aliases") or []
+        str(alias).casefold() for row in document["entries"] for alias in row.get("aliases") or []
     ]
     duplicates = [item for item, count in Counter(aliases).items() if count > 1]
     assert duplicates == []

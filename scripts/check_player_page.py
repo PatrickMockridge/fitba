@@ -66,9 +66,7 @@ def check_pages() -> list[str]:
     expected_pages = len(squad.get("players", [])) + len(squad.get("excluded_players") or [])
     if len(pages) != expected_pages:
         errors.append("rendered player pages do not match the squad plus retained profiles")
-    excluded_ids = {
-        int(player["player_id"]) for player in (squad.get("excluded_players") or [])
-    }
+    excluded_ids = {int(player["player_id"]) for player in (squad.get("excluded_players") or [])}
     for page in pages:
         html = page.read_text(encoding="utf-8")
         player_id = int(page.parent.name)
@@ -92,10 +90,7 @@ def check_pages() -> list[str]:
                     errors.append(f"{player_id}: current squad profile missing {phrase!r}")
         if player_id in excluded_ids and 'data-contract="player-profile.excluded"' not in html:
             errors.append(f"{player_id}: retained profile has no excluded marker")
-        if (
-            player_id not in excluded_ids
-            and 'data-contract="player-profile.excluded"' in html
-        ):
+        if player_id not in excluded_ids and 'data-contract="player-profile.excluded"' in html:
             errors.append(f"{player_id}: official profile is marked excluded")
     return errors
 
@@ -203,11 +198,9 @@ def main() -> int:
             warning.code for warning in document.warnings
         }:
             errors.append(f"{pid}: retained profile has no EXCLUDED_FROM_SQUAD warning")
-        if (
-            document.out_of_squad
-            and int(document.panels["profile"].data.get("summary", {}).get("minutes") or 0)
-            >= int(rose.get("min_minutes") or 180)
-        ):
+        if document.out_of_squad and int(
+            document.panels["profile"].data.get("summary", {}).get("minutes") or 0
+        ) >= int(rose.get("min_minutes") or 180):
             errors.append(f"{pid}: excluded profile has current squad minutes")
 
         availability = document.panels["availability"].data or {}

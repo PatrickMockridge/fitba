@@ -50,9 +50,10 @@ def test_open_play_features_remove_penalties_and_keep_partition() -> None:
     assert features["open_play_shots"] == 10
     assert features["open_play_sot"] == 2
     assert features["open_play_insidebox"] == 6
-    assert features["open_play_sot"] + features["open_play_off"] + features[
-        "open_play_blocked"
-    ] == features["open_play_shots"]
+    assert (
+        features["open_play_sot"] + features["open_play_off"] + features["open_play_blocked"]
+        == features["open_play_shots"]
+    )
 
 
 def test_open_play_features_handle_missing_stats() -> None:

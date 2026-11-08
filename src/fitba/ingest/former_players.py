@@ -161,7 +161,6 @@ def competition_scope(name: Any) -> str:
     return "league"
 
 
-
 def _paths() -> dict[str, Path]:
     return {
         "dir": FORMER_DIR,
@@ -232,8 +231,8 @@ def _season_from_year(year: int) -> str:
 def _league_map() -> dict[int, dict[str, Any]]:
     mapping: dict[int, dict[str, Any]] = {}
     for league_id, entry in (
-        ((former_config().get("post_career") or {}).get("league_tiers") or {}).items()
-    ):
+        (former_config().get("post_career") or {}).get("league_tiers") or {}
+    ).items():
         try:
             mapping[int(league_id)] = {
                 "name": None,
@@ -242,7 +241,7 @@ def _league_map() -> dict[int, dict[str, Any]]:
             }
         except (TypeError, ValueError):
             continue
-    for row in (scouting_leagues().get("pool") or []):
+    for row in scouting_leagues().get("pool") or []:
         provider = row.get("provider") or {}
         league_id = provider.get("api_football_id")
         if league_id is None:
@@ -319,9 +318,7 @@ def _parse_seasons(
         if parsed is None:
             continue
         parsed["scope"] = competition_scope(parsed.get("competition"))
-        league_id = (
-            int(str(league.get("id"))) if league.get("id") is not None else None
-        )
+        league_id = int(str(league.get("id"))) if league.get("id") is not None else None
         meta = league_map.get(league_id or 0, {})
         rows.append(
             {
@@ -515,7 +512,7 @@ def ingest_former_players(
                     if player.get("nationality"):
                         profile["nationality"] = player.get("nationality")
                     for entry in statistics:
-                        position = ((entry.get("games") or {}).get("position"))
+                        position = (entry.get("games") or {}).get("position")
                         if position:
                             profile["position"] = position
                             break
@@ -685,11 +682,7 @@ def ingest_former_players(
         if row.get("stage") == "transfers" and row.get("status") in {"complete", "no_data"}
     }
     current_present = len(
-        {
-            player_id
-            for player_id, season in profile_seasons
-            if season == target_season
-        }
+        {player_id for player_id, season in profile_seasons if season == target_season}
     )
     meta = {
         "schema_version": "1.0.0",

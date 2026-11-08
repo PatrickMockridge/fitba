@@ -45,7 +45,6 @@ RATE_FIELDS = [
 ]
 
 
-
 def per90(value: Any, minutes: Any) -> float | None:
     if value is None or minutes is None:
         return None
@@ -579,8 +578,7 @@ def _history_position_group(player_id: int, season: str) -> str | None:
     year = _history_season_year(season)
     if year is not None and ROSE_HISTORY_PATH.exists():
         frame = pl.read_parquet(ROSE_HISTORY_PATH).filter(
-            (pl.col("player_id") == int(player_id))
-            & (pl.col("season") == year)
+            (pl.col("player_id") == int(player_id)) & (pl.col("season") == year)
         )
         if frame.height:
             group = frame.row(0, named=True).get("position_group")
@@ -656,14 +654,10 @@ def history_player_totals(player_id: int, season: str) -> dict[str, Any]:
             if passes is not None and accuracy is not None:
                 total_passes += float(passes)
                 weighted_accuracy += float(passes) * float(accuracy)
-    totals["pass_accuracy"] = (
-        round(weighted_accuracy / total_passes, 2) if total_passes else None
-    )
+    totals["pass_accuracy"] = round(weighted_accuracy / total_passes, 2) if total_passes else None
     ratings = frame["rating"].drop_nulls() if "rating" in frame.columns else []
     totals["rating"] = (
-        round(fmean([float(value) for value in ratings]), 2)
-        if len(ratings)
-        else None
+        round(fmean([float(value) for value in ratings]), 2) if len(ratings) else None
     )
     totals["source"] = "aberdeen_fixtures"
     return totals
@@ -1188,8 +1182,7 @@ def build_squad_roses(
             if not current.get("fallback") and current.get("status") == "unavailable":
                 current["fallback_reason"] = "no_prior_premiership_season"
                 current["fallback_note"] = (
-                    f"No prior Premiership season met the {player_min}-minute "
-                    "profile threshold."
+                    f"No prior Premiership season met the {player_min}-minute profile threshold."
                 )
         out[int(player["player_id"])] = current
     return out

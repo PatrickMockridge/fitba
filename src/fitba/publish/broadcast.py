@@ -135,9 +135,7 @@ def _host(url: str) -> str:
     return urlparse(url).hostname or ""
 
 
-def _validate_sources(
-    row: CuratedFixture, policy: dict[str, Any]
-) -> list[BroadcastSource]:
+def _validate_sources(row: CuratedFixture, policy: dict[str, Any]) -> list[BroadcastSource]:
     allowed_ids = set(policy.get("allowed_source_ids") or [])
     allowed_hosts = set(policy.get("allowed_hosts") or [])
     source_hosts = policy.get("source_hosts") or {}
@@ -148,9 +146,7 @@ def _validate_sources(
         if not source.url.startswith("https://"):
             raise ValueError(f"broadcast {row.fixture_id}: source URL must be HTTPS")
         host = _host(source.url)
-        if host not in allowed_hosts or host not in set(
-            source_hosts.get(source.source_id) or []
-        ):
+        if host not in allowed_hosts or host not in set(source_hosts.get(source.source_id) or []):
             raise ValueError(
                 f"broadcast {row.fixture_id}: host {host!r} is not allowed for {source.source_id}"
             )
@@ -225,9 +221,7 @@ def _is_saturday_blackout(row: dict[str, Any], timezone: str) -> bool:
     if not value or not kickoff:
         return False
     try:
-        local = datetime.fromisoformat(f"{value}T{kickoff}:00").replace(
-            tzinfo=ZoneInfo(timezone)
-        )
+        local = datetime.fromisoformat(f"{value}T{kickoff}:00").replace(tzinfo=ZoneInfo(timezone))
     except ValueError:
         return False
     return local.weekday() == 5 and local.time().strftime("%H:%M") == "15:00"
@@ -283,9 +277,7 @@ def build_broadcast_payload(
         elif match is not None:
             source_rows = _validate_sources(match, rules)
             confirmed_sources = {
-                source.source_id
-                for source in source_rows
-                if source.confidence == "confirmed"
+                source.source_id for source in source_rows if source.confidence == "confirmed"
             }
             for region in (match.domestic, match.international):
                 if region.status == "confirmed" and not (
@@ -294,9 +286,7 @@ def build_broadcast_payload(
                     raise ValueError(
                         f"broadcast {fixture_id}: confirmed region needs a confirmed source"
                     )
-            domestic = _region_from_curated(
-                match.domestic, policy=rules, international=False
-            )
+            domestic = _region_from_curated(match.domestic, policy=rules, international=False)
             international = _region_from_curated(
                 match.international, policy=rules, international=True
             )

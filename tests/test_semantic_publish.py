@@ -67,9 +67,7 @@ CASE = {"claims": [{"id": "team-now", "title": "The team now"}]}
 TABLES = {"sco:premiership": pl.DataFrame([{"team_id": "sco:181", "team_name": "Aberdeen"}])}
 
 PAGES = {
-    "pages": [
-        {"id": "scotland", "patterns": ["/scotland/"], "layers": ["league_standings"]}
-    ],
+    "pages": [{"id": "scotland", "patterns": ["/scotland/"], "layers": ["league_standings"]}],
     "static_pages": [{"id": "home", "name": "Home", "path": "/"}],
 }
 
@@ -113,9 +111,7 @@ def test_former_href_kind_distinguishes_profile_from_register() -> None:
     rows = _by_id(entities["entities"])
     assert rows["player:api:player:2"]["href_kind"] == "profile"
     assert rows["player:curated:player:no-id"]["href_kind"] == "register"
-    assert rows["player:curated:player:no-id"]["routes"]["former"].startswith(
-        "/former-players/#"
-    )
+    assert rows["player:curated:player:no-id"]["routes"]["former"].startswith("/former-players/#")
 
 
 def test_scouted_group_is_disjoint_from_core_and_compact() -> None:
@@ -244,17 +240,13 @@ def test_related_rejects_unknown_and_self_reference() -> None:
         build_definitions(
             registry=registry,
             registry_checksum="sha256:0",
-            definitions_config={
-                "terms": [{"id": "basis", "term": "Basis", "related": ["nope"]}]
-            },
+            definitions_config={"terms": [{"id": "basis", "term": "Basis", "related": ["nope"]}]},
         )
     with pytest.raises(ValueError, match="related points at itself"):
         build_definitions(
             registry=registry,
             registry_checksum="sha256:0",
-            definitions_config={
-                "terms": [{"id": "basis", "term": "Basis", "related": ["basis"]}]
-            },
+            definitions_config={"terms": [{"id": "basis", "term": "Basis", "related": ["basis"]}]},
         )
 
 
@@ -264,9 +256,7 @@ def test_a_curated_definition_may_not_name_an_unknown_metric() -> None:
         build_definitions(
             registry=registry,
             registry_checksum="sha256:0",
-            definitions_config={
-                "terms": [{"id": "bad", "term": "Bad", "metric_ids": ["made.up"]}]
-            },
+            definitions_config={"terms": [{"id": "bad", "term": "Bad", "metric_ids": ["made.up"]}]},
         )
 
 

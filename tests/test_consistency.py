@@ -45,9 +45,7 @@ def test_player_minutes_mutation_fails():
 def test_xg_aggregate_mutation_fails():
     corpus = copy.deepcopy(_corpus())
     aggregate = next(
-        row
-        for row in corpus["xg/aberdeen.json"]["aggregates"]
-        if row.get("scope") == "season"
+        row for row in corpus["xg/aberdeen.json"]["aggregates"] if row.get("scope") == "season"
     )
     aggregate["shots"] = int(aggregate["shots"] or 0) + 1
     results = run_consistency(corpus)
@@ -94,9 +92,7 @@ def test_club_result_mutation_fails():
 def test_coverage_matches_mutation_fails():
     corpus = copy.deepcopy(_corpus())
     row = next(
-        row
-        for row in corpus["coverage.json"]["competitions"]
-        if row["id"] == "sco:premiership"
+        row for row in corpus["coverage.json"]["competitions"] if row["id"] == "sco:premiership"
     )
     row["matches"] += 1
     results = run_consistency(corpus)

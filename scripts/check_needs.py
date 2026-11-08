@@ -122,12 +122,11 @@ def main() -> int:
             ):
                 errors.append(f"{family_name}: replace without active outgoing evidence")
             for item in evidence:
-                if item.get("type") == "active_outgoing_rumour" and item.get(
-                    "affiliation"
-                ) not in {None, "current_squad"}:
-                    errors.append(
-                        f"{family_name}: replace evidence is not a current-squad player"
-                    )
+                if item.get("type") == "active_outgoing_rumour" and item.get("affiliation") not in {
+                    None,
+                    "current_squad",
+                }:
+                    errors.append(f"{family_name}: replace evidence is not a current-squad player")
         if category == "unknown" and measured.get("status") != "unavailable":
             errors.append(f"{family_name}: unknown category with measured depth")
         route = family.get("market_route") or {}
@@ -169,7 +168,7 @@ def main() -> int:
         if "needs" not in (manifest.get("coverage") or {}):
             errors.append("manifest coverage missing needs")
     if SEARCH.exists():
-        search = (_load(SEARCH).get("entities") or [])
+        search = _load(SEARCH).get("entities") or []
         if not any(entry.get("href") == "/recruitment/#squad-needs" for entry in search):
             errors.append("search index missing the squad-needs anchor")
         if not any(entry.get("href") == "/scouting/#priority-profiles" for entry in search):

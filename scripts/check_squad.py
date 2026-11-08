@@ -78,9 +78,7 @@ def _href_set(squad: dict[str, Any]) -> set[str]:
 
 def _former_href_set(payload: dict[str, Any] | None) -> set[str]:
     return {
-        str(player["href"])
-        for player in (payload or {}).get("players", [])
-        if player.get("href")
+        str(player["href"]) for player in (payload or {}).get("players", []) if player.get("href")
     }
 
 
@@ -448,9 +446,9 @@ def main() -> int:
         1 for player in players if player.get("roster_status") in {"official", "official_loan"}
     ):
         errors.append("roster_meta official_players does not match player rows")
-    if int(roster_meta.get("matched") or 0) + int(
-        roster_meta.get("ambiguous") or 0
-    ) != int(roster_meta.get("official_players") or 0):
+    if int(roster_meta.get("matched") or 0) + int(roster_meta.get("ambiguous") or 0) != int(
+        roster_meta.get("official_players") or 0
+    ):
         errors.append("roster_meta matched + ambiguous does not equal official_players")
     if roster_meta.get("official_only") != sum(
         1 for player in players if player.get("official_only")

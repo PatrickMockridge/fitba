@@ -96,9 +96,7 @@ class AffiliationIndex:
             return
         self._name_to_key[normalized] = key
 
-    def affiliation_for(
-        self, player_key: Any, player_name: Any = None
-    ) -> tuple[str, str]:
+    def affiliation_for(self, player_key: Any, player_name: Any = None) -> tuple[str, str]:
         """Return ``(affiliation, source)``.
 
         Source is ``key``, ``name_match`` or ``none``.

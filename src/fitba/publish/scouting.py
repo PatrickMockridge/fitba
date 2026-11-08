@@ -896,8 +896,7 @@ def _league_summary(
     pool_ids = set(players["player_id"].to_list()) if players.height else set()
     roles = (
         role_rows.filter(
-            (pl.col("league_id") == league_id)
-            & pl.col("player_id").is_in(sorted(pool_ids))
+            (pl.col("league_id") == league_id) & pl.col("player_id").is_in(sorted(pool_ids))
         ).height
         if role_rows.height and pool_ids
         else 0
@@ -1084,9 +1083,7 @@ def build_scouting_bundle(
         *(squad_data.get("excluded_players") or []),
     ]
     squad_ids = {
-        int(player["player_id"])
-        for player in squad_players
-        if player.get("player_id") is not None
+        int(player["player_id"]) for player in squad_players if player.get("player_id") is not None
     }
     index = CohortIndex(all_rows, model, exclude_player_ids=squad_ids)
     board = build_board(

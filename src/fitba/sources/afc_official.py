@@ -61,8 +61,7 @@ def _card_player(card: Any, section: str, *, official_order: int) -> dict[str, A
         return None
     position_node = card.find(
         "span",
-        class_=lambda value: "position" in str(value or "")
-        and "profileCard" in str(value or ""),
+        class_=lambda value: "position" in str(value or "") and "profileCard" in str(value or ""),
     )
     number_node = card.find("span", class_=lambda value: "squadNumber" in str(value or ""))
     number_text = _clean(number_node.get_text()) if number_node else ""
@@ -96,9 +95,7 @@ def parse_html(html: str) -> list[dict[str, Any]]:
             continue
         if current_section is None or current_section == "Staff":
             continue
-        player = _card_player(
-            element, current_section, official_order=len(players)
-        )
+        player = _card_player(element, current_section, official_order=len(players))
         if player is None or player["href"] in seen:
             continue
         seen.add(player["href"])

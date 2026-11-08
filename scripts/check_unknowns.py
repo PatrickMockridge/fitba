@@ -114,13 +114,8 @@ def check() -> list[str]:
                     str(metric.get("home_payload") or ""),
                     *[str(item) for item in metric.get("payload_paths") or []],
                 ]
-                if not any(
-                    path == payload or path.startswith(f"{payload}#")
-                    for path in paths
-                ):
-                    errors.append(
-                        f"{class_id}: {payload} is not registered to {metric_id}"
-                    )
+                if not any(path == payload or path.startswith(f"{payload}#") for path in paths):
+                    errors.append(f"{class_id}: {payload} is not registered to {metric_id}")
             try:
                 value = _resolve_pointer(_load(DATA / payload), str(count.get("pointer") or ""))
             except (KeyError, IndexError, ValueError, TypeError) as error:
@@ -143,10 +138,7 @@ def main() -> int:
     errors = check()
     for error in errors:
         print(f"error: {error}")
-    print(
-        f"{'PASS' if not errors else 'FAIL'} unknowns check: "
-        f"{len(errors)} error(s)"
-    )
+    print(f"{'PASS' if not errors else 'FAIL'} unknowns check: {len(errors)} error(s)")
     return 0 if not errors else 1
 
 

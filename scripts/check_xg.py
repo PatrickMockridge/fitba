@@ -84,13 +84,15 @@ def main() -> int:
             errors.append(f"{label}: model range looks like summed intervals")
         if goals_low is None or goals_high is None or goals_low > goals_high:
             errors.append(f"{label}: invalid goals range")
-        if row.get("goals_minus_low") is not None and abs(
-            float(row["goals_minus_low"]) - (float(goals_low) - float(fxg))
-        ) > 0.01:
+        if (
+            row.get("goals_minus_low") is not None
+            and abs(float(row["goals_minus_low"]) - (float(goals_low) - float(fxg))) > 0.01
+        ):
             errors.append(f"{label}: goals-minus lower bound does not equal goals_low - fxG")
-        if row.get("goals_minus_high") is not None and abs(
-            float(row["goals_minus_high"]) - (float(goals_high) - float(fxg))
-        ) > 0.01:
+        if (
+            row.get("goals_minus_high") is not None
+            and abs(float(row["goals_minus_high"]) - (float(goals_high) - float(fxg))) > 0.01
+        ):
             errors.append(f"{label}: goals-minus upper bound does not equal goals_high - fxG")
         if (
             row.get("shots")

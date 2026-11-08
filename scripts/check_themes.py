@@ -185,7 +185,7 @@ def main() -> int:
         warnings.append("manifest.json is missing; mart checks skipped")
 
     if search_path.exists():
-        entries = (_load(search_path).get("entities") or [])
+        entries = _load(search_path).get("entities") or []
         if not any(
             isinstance(entry, dict) and entry.get("href") == "/analysis/" for entry in entries
         ):

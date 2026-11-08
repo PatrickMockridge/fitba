@@ -172,9 +172,9 @@ def ingest_api_results(
             path
         )
         combined = NORMALIZED_DIR / "api_results" / "league_results.parquet"
-        frame.select(
-            [column for column in MATCH_COLUMNS if column in frame.columns]
-        ).write_parquet(combined)
+        frame.select([column for column in MATCH_COLUMNS if column in frame.columns]).write_parquet(
+            combined
+        )
     meta = {
         "season": season,
         "generated_at": utc_now_iso(),

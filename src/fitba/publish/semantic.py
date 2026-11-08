@@ -405,14 +405,10 @@ def build_entities(
     scouted = _scouted_entities(
         scouting_bundle,
         excluded_keys={
-            str(entity.entity_id).split(":", 1)[1]
-            for entity in core
-            if entity.type == "player"
+            str(entity.entity_id).split(":", 1)[1] for entity in core if entity.type == "player"
         },
     )
-    scouted = [
-        entity for entity in scouted if entity.entity_id not in core_keys
-    ]
+    scouted = [entity for entity in scouted if entity.entity_id not in core_keys]
     core_dicts = [entity.to_dict() for entity in core]
     scouted_dicts = [entity.to_dict() for entity in scouted]
     _aliases(core_dicts)

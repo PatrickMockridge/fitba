@@ -245,8 +245,7 @@ def _solve_linear(matrix: list[list[float]], rhs: list[float]) -> list[float]:
             factor = work[row][column]
             if factor:
                 work[row] = [
-                    work[row][index] - factor * work[column][index]
-                    for index in range(size + 1)
+                    work[row][index] - factor * work[column][index] for index in range(size + 1)
                 ]
     return [work[row][size] for row in range(size)]
 
@@ -267,9 +266,7 @@ def _feature_value(row: dict[str, Any], feature: str) -> float | None:
         return None
 
 
-def _candidate_features(
-    row: dict[str, Any], specification: str
-) -> tuple[float, ...] | None:
+def _candidate_features(row: dict[str, Any], specification: str) -> tuple[float, ...] | None:
     spec = CANDIDATES.get(specification)
     if spec is None:
         return None
@@ -286,9 +283,7 @@ def _candidate_features(
     return tuple(values)
 
 
-def _candidate_target(
-    row: dict[str, Any], specification: str, penalty_xg: float
-) -> float | None:
+def _candidate_target(row: dict[str, Any], specification: str, penalty_xg: float) -> float | None:
     spec = CANDIDATES[specification]
     if spec["target"] == "provider":
         value = row.get("provider_xg")
@@ -347,16 +342,10 @@ def _fit_candidate(
         if not active:
             return None
         matrix = [
-            [
-                sum(sample[i] * sample[j] for sample, _target in samples)
-                for j in active
-            ]
+            [sum(sample[i] * sample[j] for sample, _target in samples) for j in active]
             for i in active
         ]
-        rhs = [
-            sum(sample[i] * target for sample, target in samples)
-            for i in active
-        ]
+        rhs = [sum(sample[i] * target for sample, target in samples) for i in active]
         try:
             solution = _solve_linear(matrix, rhs)
         except ValueError:
@@ -372,9 +361,7 @@ def _fit_candidate(
         full[index] = value
     if any(not math.isfinite(value) for value in full):
         return None
-    if spec["target"] == "open" and not spec["intercept"] and any(
-        value > 1.0 for value in full
-    ):
+    if spec["target"] == "open" and not spec["intercept"] and any(value > 1.0 for value in full):
         return None
     return tuple(full)
 
@@ -410,19 +397,16 @@ def _candidate_metrics(
             "passed": False,
         }
     bias = sum(
-        prediction - actual
-        for prediction, actual in zip(predictions, actuals, strict=False)
+        prediction - actual for prediction, actual in zip(predictions, actuals, strict=False)
     ) / len(predictions)
     mae = sum(
-        abs(prediction - actual)
-        for prediction, actual in zip(predictions, actuals, strict=False)
+        abs(prediction - actual) for prediction, actual in zip(predictions, actuals, strict=False)
     ) / len(predictions)
     slope = _ols_slope(predictions, actuals)
     mean_actual = sum(actuals) / len(actuals)
     ss_total = sum((actual - mean_actual) ** 2 for actual in actuals)
     ss_residual = sum(
-        (actual - prediction) ** 2
-        for prediction, actual in zip(predictions, actuals, strict=False)
+        (actual - prediction) ** 2 for prediction, actual in zip(predictions, actuals, strict=False)
     )
     r2 = 1.0 - (ss_residual / ss_total) if ss_total else None
     max_bias = float(evaluation.get("max_abs_bias") or 0.15)
@@ -508,10 +492,7 @@ def _select_candidate(
             "parameters": len(spec["features"]) + (1 if spec["intercept"] else 0),
             **metrics,
         }
-        if (
-            specification in {"Z", "D"}
-            and zone_coverage < min_zone_coverage
-        ):
+        if specification in {"Z", "D"} and zone_coverage < min_zone_coverage:
             candidate["passed"] = False
             candidate["reason"] = "zone_coverage_below_floor"
         candidates[specification] = candidate
@@ -537,9 +518,7 @@ def _select_candidate(
             selected, best = specification, metrics
     baseline = candidates.get("E")
     open_candidates = [
-        (specification, metrics)
-        for specification, metrics in eligible
-        if specification != "E"
+        (specification, metrics) for specification, metrics in eligible if specification != "E"
     ]
     if (
         baseline
@@ -585,17 +564,11 @@ def _bootstrap_coefficients(
             sample.extend(groups[keys[rng.randrange(len(keys))]])
         coefficients = _fit_candidate(sample, specification, penalty_xg)
         if coefficients is not None:
-            output.append(
-                _candidate_coefficient_dict(coefficients, specification)
-            )
+            output.append(_candidate_coefficient_dict(coefficients, specification))
     return tuple(output)
 
 
-
-
-def _coefficient_tuple(
-    coefficients: dict[str, float], specification: str
-) -> tuple[float, ...]:
+def _coefficient_tuple(coefficients: dict[str, float], specification: str) -> tuple[float, ...]:
     spec = CANDIDATES[specification]
     values: list[float] = []
     if spec["intercept"]:
@@ -640,8 +613,7 @@ def _loocv_predictions(
             predictions.append(prediction)
             actuals.append(float(actual))
     residuals = [
-        prediction - actual
-        for prediction, actual in zip(predictions, actuals, strict=False)
+        prediction - actual for prediction, actual in zip(predictions, actuals, strict=False)
     ]
     return predictions, actuals, residuals, len(groups)
 
@@ -1034,8 +1006,7 @@ def fit_fxg(rows: Iterable[dict[str, Any]], config: dict[str, Any]) -> FxGModel:
     min_matches = int(calibration_config.get("min_matches") or 45)
     penalty_xg = float(penalty_config.get("xg") or 0.76)
     penalty_source = str(
-        penalty_config.get("source")
-        or "fixed historical penalty conversion prior; see docs/xg.md"
+        penalty_config.get("source") or "fixed historical penalty conversion prior; see docs/xg.md"
     )
     bootstrap_draws = int(interval_config.get("bootstrap_draws") or 2000)
 
@@ -1132,9 +1103,7 @@ def fit_fxg(rows: Iterable[dict[str, Any]], config: dict[str, Any]) -> FxGModel:
                     )
                     model = replace(
                         model,
-                        coefficients=_candidate_coefficient_dict(
-                            final_coefficients, selected
-                        ),
+                        coefficients=_candidate_coefficient_dict(final_coefficients, selected),
                         specification=selected,
                         features=CANDIDATES[selected]["features"],
                         fallback_coefficients=(
@@ -1252,9 +1221,7 @@ def predict_fxg(model: FxGModel, row: dict[str, Any]) -> dict[str, Any]:
         sot = int(row["shots_on_target"])
         rate, source = model.rate_for(str(row["competition_id"]), str(row["season"]))
         mu = sot * rate.mean
-        sd = math.sqrt(
-            max(0.0, sot * rate.mean * (1 - rate.mean)) + model.overdispersion * mu
-        )
+        sd = math.sqrt(max(0.0, sot * rate.mean * (1 - rate.mean)) + model.overdispersion * mu)
         low = min(sot * rate.low_p, max(0.0, mu - model.z * sd))
         high = max(sot * rate.high_p, mu + model.z * sd)
         open_xg = mu
@@ -1282,15 +1249,9 @@ def predict_fxg(model: FxGModel, row: dict[str, Any]) -> dict[str, Any]:
     )
     if shots_int == 0:
         goals_low = goals_high = 0
-    goals_minus = (
-        round(float(goals_int) - mu, 3) if goals_int is not None else None
-    )
+    goals_minus = round(float(goals_int) - mu, 3) if goals_int is not None else None
     position = _goal_position(goals_int, goals_low, goals_high)
-    per_shot = (
-        round(mu / shots_int, 3)
-        if shots_int is not None and shots_int > 0
-        else None
-    )
+    per_shot = round(mu / shots_int, 3) if shots_int is not None and shots_int > 0 else None
     penalty_component = (
         round(model.penalty_xg * penalty_count, 3)
         if specification != "E" and penalties_known
@@ -1316,14 +1277,8 @@ def predict_fxg(model: FxGModel, row: dict[str, Any]) -> dict[str, Any]:
         "interval_basis": interval_basis,
         "goals_range_basis": model.goals_range_method,
         "model_id": model.model_id,
-        **(
-            {"rate": round(rate.mean, 4), "rate_source": source}
-            if basis == "conversion"
-            else {}
-        ),
+        **({"rate": round(rate.mean, 4), "rate_source": source} if basis == "conversion" else {}),
     }
-
-
 
 
 def aggregate_fxg(model: FxGModel, rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
@@ -1387,15 +1342,11 @@ def aggregate_fxg(model: FxGModel, rows: Iterable[dict[str, Any]]) -> dict[str, 
             values = _coefficient_tuple(coefficients, model.specification)
             total = 0.0
             for row, prediction in zip(valid_rows, predictions, strict=False):
-                value = _linear_prediction(
-                    values, model.specification, row, model.penalty_xg
-                )
+                value = _linear_prediction(values, model.specification, row, model.penalty_xg)
                 if value is None:
                     value = float(prediction["fxg"])
                 if model.residual_pool:
-                    value += model.residual_pool[
-                        rng.randrange(len(model.residual_pool))
-                    ]
+                    value += model.residual_pool[rng.randrange(len(model.residual_pool))]
                 total += max(0.0, value)
             sums.append(total)
         low = max(0.0, _quantile(sums, (1 - model.interval_level) / 2))
@@ -1444,8 +1395,6 @@ def aggregate_fxg(model: FxGModel, rows: Iterable[dict[str, Any]]) -> dict[str, 
         "goals_range_method": model.goals_range_method,
         "goals_dispersion": model.goals_dispersion,
     }
-
-
 
 
 def evaluate_transfer(
@@ -1725,9 +1674,7 @@ def model_to_dict(model: FxGModel, evaluation: dict[str, Any] | None = None) -> 
         "specification": model.specification,
         "features": list(model.features),
         "coefficients": (
-            {key: round(value, 6) for key, value in coefficients.items()}
-            if coefficients
-            else None
+            {key: round(value, 6) for key, value in coefficients.items()} if coefficients else None
         ),
         "fallback_coefficients": (
             {key: round(value, 6) for key, value in model.fallback_coefficients.items()}

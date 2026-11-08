@@ -238,10 +238,7 @@ def ensure_match_columns(frame: pl.DataFrame) -> pl.DataFrame:
         pl.coalesce(pl.col("result_source"), pl.col("source_id")).alias("result_source"),
         pl.when(pl.col("stats_source").is_not_null())
         .then(pl.col("stats_source"))
-        .when(
-            (pl.col("source_id") == "football_data_uk")
-            & pl.col("home_shots").is_not_null()
-        )
+        .when((pl.col("source_id") == "football_data_uk") & pl.col("home_shots").is_not_null())
         .then(pl.lit("football_data_uk"))
         .otherwise(pl.lit(None))
         .alias("stats_source"),
@@ -377,9 +374,13 @@ def overlay_club_results(
     if club.height == 0:
         report.error = "club fixture feed empty"
         return frame
-    allowed_seasons = {str(item) for item in seasons} if seasons else set(
-        frame["season"].unique().to_list()
-    ) if frame.height and "season" in frame.columns else set()
+    allowed_seasons = (
+        {str(item) for item in seasons}
+        if seasons
+        else set(frame["season"].unique().to_list())
+        if frame.height and "season" in frame.columns
+        else set()
+    )
     official = official_played_rows(club, seasons=allowed_seasons or None)
     report.official_fixtures = official.height
     if not official.height:
@@ -478,8 +479,8 @@ def overlay_league_results(
     report = report or OverlayReport()
     if frame.height == 0 or "season" not in frame.columns:
         return frame
-    allowed = {str(item) for item in seasons} if seasons else set(
-        frame["season"].unique().to_list()
+    allowed = (
+        {str(item) for item in seasons} if seasons else set(frame["season"].unique().to_list())
     )
     rows = frame.to_dicts()
     by_key = {canonical_key(row): index for index, row in enumerate(rows)}

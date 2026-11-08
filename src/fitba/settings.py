@@ -286,6 +286,7 @@ def sell_on_clauses() -> dict[str, Any]:
         return {"clauses": []}
     return load_yaml(path)
 
+
 @lru_cache(maxsize=1)
 def former_players() -> dict[str, Any]:
     path = CONFIG_DIR / "former_players.yaml"

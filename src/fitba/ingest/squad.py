@@ -341,19 +341,14 @@ def _search_official_player(
         return None
     surname = tokens[-1]
     candidates: list[int] = []
-    for result in api_football.players_search(
-        surname, team_id=parent_team_id, force=force
-    ):
+    for result in api_football.players_search(surname, team_id=parent_team_id, force=force):
         player = result.get("player") or {}
         player_id = _int(player.get("id"))
         if player_id is None:
             continue
         statistics = result.get("statistics") or []
         if statistics:
-            teams = {
-                _int((entry.get("team") or {}).get("id"))
-                for entry in statistics
-            }
+            teams = {_int((entry.get("team") or {}).get("id")) for entry in statistics}
             if parent_team_id not in teams:
                 continue
         if player_id not in candidates:
@@ -386,9 +381,7 @@ def _apply_official(
     row["official_position"] = official.get("position")
     row["official_number"] = official.get("number")
     row["official_only"] = official_only
-    row["identity_source"] = (
-        "afc_official" if official_only else "afc_official+api_football"
-    )
+    row["identity_source"] = "afc_official" if official_only else "afc_official+api_football"
     if official.get("number") is not None:
         row["number"] = official.get("number")
     if on_loan:
@@ -524,9 +517,7 @@ def ingest_squad(*, force: bool = False) -> IngestResult:
                 player_id, details = resolved
                 player_key = f"api:player:{player_id}"
                 if any(str(row["player_key"]) == player_key for row in players):
-                    existing = next(
-                        row for row in players if str(row["player_key"]) == player_key
-                    )
+                    existing = next(row for row in players if str(row["player_key"]) == player_key)
                     _apply_official(
                         existing,
                         entry,
@@ -588,9 +579,7 @@ def ingest_squad(*, force: bool = False) -> IngestResult:
             "ambiguous": len(roster_only),
             "staff_excluded": None,
             "loan_section": sum(
-                1
-                for entry in official.get("players") or []
-                if entry.get("section") == "On loan"
+                1 for entry in official.get("players") or [] if entry.get("section") == "On loan"
             ),
             "roster_only": roster_only,
             "note": official.get("note"),
@@ -600,9 +589,7 @@ def ingest_squad(*, force: bool = False) -> IngestResult:
             key=lambda row: (
                 0 if row.get("squad_member") else 1,
                 STATUS_ORDER.get(str(row["status"]), 9),
-                int(row["official_order"])
-                if row.get("official_order") is not None
-                else 10**6,
+                int(row["official_order"]) if row.get("official_order") is not None else 10**6,
                 POSITION_ORDER.get(str(row["position_group"]), 9),
                 str(row["name"]),
             )

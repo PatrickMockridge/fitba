@@ -79,10 +79,7 @@ def check() -> list[str]:
     policy = yaml.safe_load(POLICY.read_text(encoding="utf-8")) or {}
     reference = yaml.safe_load(REFERENCE.read_text(encoding="utf-8")) or {}
     fixtures = _load(FIXTURES)
-    scheduled = {
-        str(row.get("fixture_id") or ""): row
-        for row in fixtures.get("scheduled") or []
-    }
+    scheduled = {str(row.get("fixture_id") or ""): row for row in fixtures.get("scheduled") or []}
     played = {str(row.get("fixture_id") or "") for row in fixtures.get("fixtures") or []}
     fixture_rows = document.get("fixtures") or []
     rows = {str(row.get("fixture_id")): row for row in fixture_rows}
@@ -92,8 +89,7 @@ def check() -> list[str]:
         missing = sorted(set(scheduled) - set(rows))[:5]
         extra = sorted(set(rows) - set(scheduled))[:5]
         errors.append(
-            "broadcast rows do not match scheduled fixtures; "
-            f"missing={missing} extra={extra}"
+            f"broadcast rows do not match scheduled fixtures; missing={missing} extra={extra}"
         )
 
     copy_values = {_copy(value) for value in (policy.get("copy") or {}).values()}
@@ -138,8 +134,7 @@ def check() -> list[str]:
             if domestic.get("outlets"):
                 errors.append(f"{fixture_id}: blackout with an outlet")
         if row.get("state") in {"fixture_conflict", "source_conflict"} and (
-            domestic.get("status") != "unknown"
-            or international.get("status") != "unknown"
+            domestic.get("status") != "unknown" or international.get("status") != "unknown"
         ):
             errors.append(f"{fixture_id}: conflict state must withhold both regions")
         sources = row.get("sources") or []

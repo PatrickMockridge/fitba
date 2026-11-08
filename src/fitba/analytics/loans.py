@@ -30,9 +30,7 @@ def _register_ref(row: dict[str, Any]) -> dict[str, Any]:
         "player_key": row.get("player_key"),
         "player_name": row.get("player_name"),
         "club": (
-            row.get("to_club_name")
-            if row.get("direction") == "out"
-            else row.get("from_club_name")
+            row.get("to_club_name") if row.get("direction") == "out" else row.get("from_club_name")
         ),
         "date_effective": row.get("date_effective"),
         "season": row.get("season"),

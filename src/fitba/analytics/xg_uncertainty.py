@@ -27,10 +27,7 @@ def binomial_pmf(n: int, p: float) -> list[float]:
         return [1.0] + [0.0] * n
     if p >= 1.0:
         return [0.0] * n + [1.0]
-    return [
-        math.comb(n, k) * (p**k) * ((1.0 - p) ** (n - k))
-        for k in range(n + 1)
-    ]
+    return [math.comb(n, k) * (p**k) * ((1.0 - p) ** (n - k)) for k in range(n + 1)]
 
 
 def beta_binomial_pmf(n: int, p: float, dispersion: float) -> list[float]:
@@ -53,10 +50,7 @@ def beta_binomial_pmf(n: int, p: float, dispersion: float) -> list[float]:
     alpha = max(1e-9, p * concentration)
     beta = max(1e-9, (1.0 - p) * concentration)
     log_norm = (
-        math.lgamma(n + 1)
-        - math.lgamma(alpha + beta)
-        + math.lgamma(alpha)
-        + math.lgamma(beta)
+        math.lgamma(n + 1) - math.lgamma(alpha + beta) + math.lgamma(alpha) + math.lgamma(beta)
     )
     log_norm -= math.lgamma(n + alpha + beta)
     values = [

@@ -111,10 +111,7 @@ def main() -> int:
     errors = check()
     for error in errors:
         print(f"error: {error}")
-    print(
-        f"{'PASS' if not errors else 'FAIL'} comparison check: "
-        f"{len(errors)} error(s)"
-    )
+    print(f"{'PASS' if not errors else 'FAIL'} comparison check: {len(errors)} error(s)")
     return 0 if not errors else 1
 
 

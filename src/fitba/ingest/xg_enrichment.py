@@ -379,9 +379,7 @@ def enrich_premiership(
     teams = TeamRegistry()
     fdco_rows = _football_data_rows(season)
     start_requests = api_football.network_requests()
-    fixtures = api_football.fixtures(
-        league_id, season_year, ttl_hours=6, force=refresh
-    )
+    fixtures = api_football.fixtures(league_id, season_year, ttl_hours=6, force=refresh)
     finished = [
         item
         for item in fixtures
@@ -432,8 +430,7 @@ def enrich_premiership(
             continue
 
         stats_by_team = {
-            row["team_id"]: row
-            for row in parse_team_stats(stats_payload, fixture_id=fixture_id)
+            row["team_id"]: row for row in parse_team_stats(stats_payload, fixture_id=fixture_id)
         }
         penalty_by_team = derive_penalty_counts(events_payload, teams)
         fixture_teams = item.get("teams") or {}
@@ -458,9 +455,7 @@ def enrich_premiership(
                 missing_stats.append(fixture_id)
             goals_for = _int(goals.get(side))
             goals_against = _int(goals.get("away" if home else "home"))
-            features = derive_open_play_features(
-                stats, penalties, goals_for=goals_for
-            )
+            features = derive_open_play_features(stats, penalties, goals_for=goals_for)
             provider = fdco.get("home_xg" if home else "away_xg")
             open_provider = (
                 max(0.0, provider - PENALTY_XG * features["penalty_attempts"])
@@ -478,9 +473,7 @@ def enrich_premiership(
                     "api_team_id": api_team_id,
                     "team_name": team_name,
                     "opponent_id": fdco["away_team_id" if home else "home_team_id"],
-                    "opponent_name": fdco[
-                        "away_team_name" if home else "home_team_name"
-                    ],
+                    "opponent_name": fdco["away_team_name" if home else "home_team_name"],
                     "venue": "H" if home else "A",
                     "goals_for": goals_for,
                     "goals_against": goals_against,
@@ -527,9 +520,7 @@ def enrich_premiership(
         "penalties_available": sum(
             1 for row in rows if row["penalty_status"] in {"available", "measured_zero"}
         ),
-        "provider_xg_fdco": sum(
-            1 for row in rows if row["provider_xg_fdco"] is not None
-        ),
+        "provider_xg_fdco": sum(1 for row in rows if row["provider_xg_fdco"] is not None),
         "missing_stats_fixtures": sorted(set(missing_stats)),
         "missing_events_fixtures": sorted(set(missing_events)),
         "unmatched_fixtures": unmatched,
@@ -557,10 +548,7 @@ def enrichment_by_match_team(
     frame = load_enrichment(season)
     if not frame.height:
         return {}
-    return {
-        (str(row["match_id"]), str(row["team_id"])): row
-        for row in frame.to_dicts()
-    }
+    return {(str(row["match_id"]), str(row["team_id"])): row for row in frame.to_dicts()}
 
 
 __all__ = [

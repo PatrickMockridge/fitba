@@ -314,8 +314,7 @@ def validate_results(
             row = by_key.get(canonical_key(item))
             if row is None:
                 api_missing.append(
-                    f"{item.get('date')} {item.get('home_team_id')} v "
-                    f"{item.get('away_team_id')}"
+                    f"{item.get('date')} {item.get('home_team_id')} v {item.get('away_team_id')}"
                 )
                 continue
             if row.get("home_goals") is None or row.get("away_goals") is None:

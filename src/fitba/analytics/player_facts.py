@@ -136,14 +136,9 @@ def missing_output_competitions(player: dict[str, Any]) -> list[str]:
         if row.get("competition")
     }
     provider_keys = {
-        _canonical_competition(row.get("competition"))
-        for row in stat_rows(player, scope="club")
+        _canonical_competition(row.get("competition")) for row in stat_rows(player, scope="club")
     }
-    return sorted(
-        name
-        for name in event_names
-        if _canonical_competition(name) not in provider_keys
-    )
+    return sorted(name for name in event_names if _canonical_competition(name) not in provider_keys)
 
 
 def playing_time(player: dict[str, Any]) -> dict[str, Any]:

@@ -64,7 +64,6 @@ class FormerPlayer(BaseModel):
 
 
 class FormerPlayersDocument(EpochModel):
-
     schema_version: str
     club_id: str
     name: str
@@ -83,7 +82,6 @@ class FormerPlayersDocument(EpochModel):
 
 
 class FormerSeasonsDocument(EpochModel):
-
     schema_version: str
     generated_at: str
     season: str

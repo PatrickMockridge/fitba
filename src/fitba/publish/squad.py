@@ -450,9 +450,7 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
     players.sort(
         key=lambda player: (
             STATUS_ORDER.get(str(player["status"]), 9),
-            int(player["official_order"])
-            if player.get("official_order") is not None
-            else 10**6,
+            int(player["official_order"]) if player.get("official_order") is not None else 10**6,
             str(player["name"]),
         )
     )

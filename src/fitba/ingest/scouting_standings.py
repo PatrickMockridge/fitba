@@ -111,9 +111,7 @@ def ingest_standings(*, season: str | None = None, refresh: bool = False) -> dic
     for league in leagues:
         provider = league.get("provider") or {}
         provider_id = provider.get("api_football_id")
-        league_year = (
-            datetime.now(UTC).year if provider.get("calendar_year") else season_year
-        )
+        league_year = datetime.now(UTC).year if provider.get("calendar_year") else season_year
         if provider_id is None:
             coverage.append(
                 {

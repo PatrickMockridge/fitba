@@ -215,20 +215,13 @@ def check_freshness(root: Path, *, strict: bool = False) -> dict[str, Any]:
     dataset_id = str(manifest.get("dataset_version") or "")
     update_block = manifest.get("update") or {}
     update_id = str(
-        update_block.get("id")
-        or (manifest.get("freshness") or {}).get("update_id")
-        or ""
+        update_block.get("id") or (manifest.get("freshness") or {}).get("update_id") or ""
     )
     manifest_time = _parse_time(manifest.get("generated_at"))
     listed = {
-        str(entry.get("path")): entry
-        for entry in manifest.get("files") or []
-        if entry.get("path")
+        str(entry.get("path")): entry for entry in manifest.get("files") or [] if entry.get("path")
     }
-    actual_files = {
-        str(path.relative_to(root)): path
-        for path in root.rglob("*.json")
-    }
+    actual_files = {str(path.relative_to(root)): path for path in root.rglob("*.json")}
     for path, entry in listed.items():
         if path not in actual_files:
             errors.append(f"manifest lists a missing file: {path}")

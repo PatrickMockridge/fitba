@@ -14,9 +14,7 @@ def _squad() -> dict:
 
 
 def test_affiliation_precedence_and_name_match():
-    index = AffiliationIndex.from_payloads(
-        squad=_squad(), former_keys={"api:player:4"}
-    )
+    index = AffiliationIndex.from_payloads(squad=_squad(), former_keys={"api:player:4"})
     assert index.affiliation_for("api:player:1") == ("current_squad", "key")
     assert index.affiliation_for("api:player:2") == ("loan_out", "key")
     assert index.affiliation_for("api:player:3") == ("current_non_official", "key")
@@ -29,9 +27,7 @@ def test_affiliation_precedence_and_name_match():
 def test_former_affiliation_wins_over_lingering_excluded_profile():
     squad = _squad()
     squad["excluded_players"].append({"player_key": "api:player:5", "name": "Former Five"})
-    index = AffiliationIndex.from_payloads(
-        squad=squad, former_keys={"api:player:5"}
-    )
+    index = AffiliationIndex.from_payloads(squad=squad, former_keys={"api:player:5"})
     assert index.affiliation_for("api:player:5") == ("former_player", "key")
 
 

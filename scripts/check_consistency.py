@@ -53,10 +53,7 @@ def main() -> int:
             )
             for error in result.errors:
                 print(f"  - {error}")
-        print(
-            f"Consistency check: {len(results) - len(failures)} passed, "
-            f"{len(failures)} failed"
-        )
+        print(f"Consistency check: {len(results) - len(failures)} passed, {len(failures)} failed")
     return 1 if failures else 0
 
 

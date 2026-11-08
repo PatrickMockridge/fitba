@@ -26,7 +26,6 @@ def _row(**overrides) -> dict:
     return row
 
 
-
 def _falkirk_reference() -> dict:
     return {
         "version": 1,
@@ -43,9 +42,7 @@ def _falkirk_reference() -> dict:
                 "away_team_name": "Falkirk",
                 "domestic": {
                     "status": "confirmed",
-                    "outlets": [
-                        {"platform": "RedTV", "medium": "video", "access": "ppv"}
-                    ],
+                    "outlets": [{"platform": "RedTV", "medium": "video", "access": "ppv"}],
                     "source_ids": ["afc_news"],
                 },
                 "international": {"status": "unknown", "outlets": [], "source_ids": []},
@@ -78,9 +75,7 @@ def test_falkirk_is_domestic_redtv_ppv_and_international_unknown() -> None:
     row = document["fixtures"][0]
     assert row["state"] == "curated"
     assert row["domestic"]["status"] == "confirmed"
-    assert row["domestic"]["outlets"] == [
-        {"platform": "RedTV", "medium": "video", "access": "ppv"}
-    ]
+    assert row["domestic"]["outlets"] == [{"platform": "RedTV", "medium": "video", "access": "ppv"}]
     assert row["international"]["status"] == "unknown"
     assert row["sources"][0]["source_id"] == "afc_news"
     assert "£" not in str(document)
@@ -151,9 +146,7 @@ def test_a_disallowed_source_host_is_rejected() -> None:
                 "away_team_name": "Falkirk",
                 "domestic": {
                     "status": "confirmed",
-                    "outlets": [
-                        {"platform": "RedTV", "medium": "video", "access": "ppv"}
-                    ],
+                    "outlets": [{"platform": "RedTV", "medium": "video", "access": "ppv"}],
                     "source_ids": ["afc_news"],
                 },
                 "international": {"status": "unknown", "outlets": [], "source_ids": []},

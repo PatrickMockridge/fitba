@@ -105,9 +105,7 @@ def test_api_lookup_records_not_found(monkeypatch):
 
 def test_signal_carries_lookup_metadata():
     gazetteer = forum.Gazetteer()
-    gazetteer.add(
-        _entry("Ben Doak", "api:player:10", club="Bournemouth")
-    )
+    gazetteer.add(_entry("Ben Doak", "api:player:10", club="Bournemouth"))
     posts = pl.DataFrame(
         {
             "post_key": ["p1"],

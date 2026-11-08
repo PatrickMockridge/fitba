@@ -127,9 +127,7 @@ def main() -> int:
             errors.append(f"former {key} present seasons do not match rows")
 
     watch = index.get("sell_on_watch") or {}
-    transfer_clauses = {
-        str(row.get("clause_id")) for row in transfers.get("sell_on_clauses") or []
-    }
+    transfer_clauses = {str(row.get("clause_id")) for row in transfers.get("sell_on_clauses") or []}
     clauses = watch.get("clauses") or []
     if {str(row.get("clause_id")) for row in clauses} != transfer_clauses:
         errors.append("sell-on clauses do not match the transfer register")
@@ -137,9 +135,7 @@ def main() -> int:
     computed = 0
     for clause in clauses:
         if str(clause.get("player_key")) not in player_keys:
-            errors.append(
-                f"sell-on {clause.get('clause_id')} has no former-player row"
-            )
+            errors.append(f"sell-on {clause.get('clause_id')} has no former-player row")
         receipt = clause.get("receipt") or {}
         if receipt.get("status") == "computed":
             computed += 1
