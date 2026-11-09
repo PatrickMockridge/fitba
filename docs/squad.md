@@ -315,6 +315,7 @@ board's family and verified-availability ledger by `player_id`, so every
 official squad player appears once, including loanees out and players with no
 observed role. Within a family, rows are ordered by measured all-competition
 minutes; a board-only ledger row shows `—` minutes rather than zero. Availability
-is the verified ledger state; unknown is not fit. The chart has no average
+is the verified ledger state; no adverse team news is available by default, not
+a verified fit claim. The chart has no average
 rating, percentile, first-choice status or quality score, and makes no
 drop-off claim.

@@ -2,7 +2,8 @@
 #
 # Injuries and suspensions are a special case of team news, not a normal
 # statistic. The curated ledger is primary; the provider /injuries snapshot is
-# optional and currently not populated for Scottish 2026. Unknown stays unknown.
+# optional and currently not populated for Scottish 2026. No adverse entry means
+# available by default; the internal state is unknown and is not a verified fit.
 
 version: 1
 policy:

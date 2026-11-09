@@ -538,9 +538,10 @@ export default function DesignSpecimenPage() {
               <DsFormStrip form={aberdeenRow?.form ?? ""} />
 
               <div className="ds-unknown">
-                <strong>Unknown stays unknown.</strong> No verified public
-                team-news entry means availability is unknown, not fit or
-                injured. The same rule applies to fees, wages and possession.
+                <strong>No adverse news means available by default.</strong> A
+                player without an adverse public team-news entry is available
+                for selection, not a verified fit claim. Fees, wages and
+                possession stay unknown until sourced.
               </div>
             </div>
           </section>

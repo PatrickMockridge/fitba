@@ -16,9 +16,9 @@ export function ScoutingLayerZeroTable({ items }: { items: ScoutingLayerZero[] }
     return (
       <div className="empty-state" data-contract-indicator="unknown">
         <p>
-          No verified official AFC team-news entry is published for this build. Availability
-          is unknown, not fit. A source is added only when the official club page names the
-          player and the entry can be dated.
+          No verified official AFC team-news entry is published for this build. Players are
+          available by default, not a verified fit claim. A source is added only when the
+          official club page names the player and the entry can be dated.
         </p>
       </div>
     );

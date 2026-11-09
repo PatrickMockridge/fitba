@@ -8,6 +8,23 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.15.1 — 2026-11-09
+
+Availability display semantics. `analysis.summary` v4 → v5 and
+`availability.ledger` v4 → v5. **No formula, denominator, count or stored
+status changed.** The internal `unknown` state remains in the payload for audit.
+
+- No adverse team news now reads as **available by default** for selection and
+  display. `unknown` is no longer rendered as a status on squad, matchday,
+  player, recruitment or scouting surfaces. Explicit `out`/`suspended`/
+  `doubtful`/`returned`/verified `available` entries and review evidence still
+  render.
+- A contradicted claim falls back to available by default; the recorded claim,
+  source, date and evidence remain in the review block. This is still not a
+  verified fit claim.
+- The availability and analysis confidence rules/limitations now say this
+  explicitly. Registry 3.15.0 → 3.15.1.
+
 ## 3.15.0 — 2026-11-09
 
 Availability reconciliation. `analysis.summary` v3 → v4 and `availability.ledger`

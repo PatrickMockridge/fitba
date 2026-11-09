@@ -182,7 +182,8 @@ The matchday dashboard is described in [matchday.md](matchday.md). In summary:
   rating coverage is shown, not zero-filled.
 - **Availability** comes from a curated official AFC team-news ledger; the
   provider `/injuries` snapshot is optional and currently not populated for
-  Scottish 2026. Unknown stays unknown. The opponent has no availability feed
+  Scottish 2026. No adverse team news means available by default; it is not a
+  verified fit claim. The opponent has no availability feed
   unless a curated record exists. The page says "predicted, not team news" and
   never claims a confirmed XI.
 - **Refresh** is daily, bounded to the next opponent and cache-first. A failed

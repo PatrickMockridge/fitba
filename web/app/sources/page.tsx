@@ -234,8 +234,9 @@ export default function SourcesPage() {
               : ""}
           </p>
           <p className="fine-print" data-contract-indicator="unknown">
-            A provider injury flag is not team news. Unknown stays unknown; no
-            injury status is inferred from the provider boolean.
+            A provider injury flag is not team news. No adverse entry means
+            available by default; no injury status is inferred from the provider
+            boolean.
           </p>
         </section>
       </div>

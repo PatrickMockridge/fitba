@@ -414,7 +414,8 @@ def refresh_availability(
         "policy": _policy(),
         "note": (
             "Curated official AFC team news is primary. Provider injuries are "
-            "optional and are not team news. Unknown stays unknown."
+            "optional and are not team news. No adverse entry means available "
+            "by default; the internal state is unknown, not a verified fit."
         ),
     }
     META_PATH.write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n", encoding="utf-8")

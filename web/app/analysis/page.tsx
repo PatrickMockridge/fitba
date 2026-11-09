@@ -93,7 +93,8 @@ function OfficialTable({ rows }: { rows: AnalysisOfficial[] }) {
     <div className="table-wrap">
       <table className="league-table compact">
         <caption className="fine-print">
-          Official AFC team news only. Available means a verified ledger entry, not fit.
+          Official AFC team news only. Reported available means a verified ledger entry;
+          no adverse team news means available by default, not a medical clearance.
         </caption>
         <thead>
           <tr>
@@ -179,9 +180,9 @@ function ReviewTable({ review }: { review: AnalysisAvailabilityReview }) {
     <div className="table-wrap">
       <table className="league-table compact">
         <caption className="fine-print">
-          Contradicted or aging team-news claims. A contradicted claim is unknown, not
-          fit; an aging claim keeps its recorded status with a review flag. The
-          recorded claim, source and evidence stay visible.{" "}
+          Contradicted or aging team-news claims. A contradicted claim is available by
+          default, not a verified fit claim; an aging claim keeps its recorded status
+          with a review flag. The recorded claim, source and evidence stay visible.{" "}
           {ledger.ledger_updated_at
             ? `Ledger updated ${formatDate(String(ledger.ledger_updated_at))}`
             : null}
@@ -220,7 +221,7 @@ function ReviewTable({ review }: { review: AnalysisAvailabilityReview }) {
                     {row.player_name ?? row.player_id}
                   </Link>
                 </td>
-                <td>{row.status}</td>
+                <td>{row.status === "unknown" ? "Available (default)" : row.status}</td>
                 <td>{row.original_status ?? "—"}</td>
                 <td>{row.verified_at ? formatDate(row.verified_at) : "—"}</td>
                 <td>
@@ -718,7 +719,7 @@ export default function AnalysisPage() {
           {hero.goal_difference ?? "—"}.
         </p>
         <p className="fine-print">
-          Evidence, coverage and unknown states are shown beside each block.{" "}
+          Evidence, coverage and confidence are shown beside each block.{" "}
           <Link className="text-link" href="/methodology/">Method →</Link>{" "}
           <Link className="text-link" href="/sources/">Sources →</Link>{" "}
           <Link className="text-link" href="/claims/">Claims and evidence →</Link>
@@ -752,8 +753,9 @@ export default function AnalysisPage() {
             <h2>Who is out, who is a doubt, who is next in line</h2>
           </div>
           <span className="badge badge-neutral">
-            {counts.out_official ?? 0} out · {counts.available ?? 0} reported available ·{" "}
-            {counts.unknown ?? 0} no verified news
+            {counts.out_official ?? 0} out · {counts.doubtful ?? 0} doubtful ·{" "}
+            {counts.available ?? 0} reported available · {counts.unknown ?? 0} available by
+            default
           </span>
         </div>
         <div className="stat-row four">
@@ -765,12 +767,12 @@ export default function AnalysisPage() {
           <div className="stat-tile">
             <span className="stat-label">Reported available</span>
             <span className="stat-value">{formatInteger(counts.available ?? 0)}</span>
-            <span className="stat-note">not a medical clearance</span>
+            <span className="stat-note">verified ledger entry</span>
           </div>
           <div className="stat-tile">
-            <span className="stat-label">No verified news</span>
+            <span className="stat-label">Available by default</span>
             <span className="stat-value">{formatInteger(counts.unknown ?? 0)}</span>
-            <span className="stat-note">not “fit”</span>
+            <span className="stat-note">no adverse team news</span>
           </div>
           <div className="stat-tile">
             <span className="stat-label">Loans out</span>
@@ -779,9 +781,10 @@ export default function AnalysisPage() {
           </div>
         </div>
         <p className="fine-print">
-          “Available” means a verified ledger entry, not fit. The active analysis universe is{" "}
-          {formatInteger(counts.active ?? 0)}: current squad plus ledger-only Tobers. Full roster:{" "}
-          <Link className="text-link" href="/squad/">Squad →</Link>
+          No adverse team news means available by default, not a medical clearance.
+          Reported available means a verified ledger entry. The active analysis universe
+          is {formatInteger(counts.active ?? 0)}: current squad plus ledger-only Tobers.
+          Full roster: <Link className="text-link" href="/squad/">Squad →</Link>
         </p>
         <h3>Official team news</h3>
         <OfficialTable rows={data.availability.official} />
@@ -877,13 +880,14 @@ export default function AnalysisPage() {
         <div className="table-wrap">
           <table className="league-table compact">
             <caption className="fine-print">
-              Coverage and unknowns. A missing value is a gap, not zero.
+              Coverage and gaps. A missing value is a gap, not zero; no adverse team news
+              is available by default.
             </caption>
             <thead>
               <tr>
                 <th scope="col">Data</th>
                 <th scope="col">Covered</th>
-                <th scope="col">Unknown or gap</th>
+                <th scope="col">Gap or default</th>
                 <th scope="col">Limit</th>
               </tr>
             </thead>
@@ -891,7 +895,9 @@ export default function AnalysisPage() {
               <tr>
                 <td>Availability ledger</td>
                 <td>{formatInteger(data.coverage.availability.known)}</td>
-                <td>{formatInteger(data.coverage.availability.unknown)}</td>
+                <td>
+                  {formatInteger(data.coverage.availability.unknown)} available by default
+                </td>
                 <td>active universe {formatInteger(data.coverage.availability.active)}</td>
               </tr>
               <tr>

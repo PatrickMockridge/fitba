@@ -99,7 +99,8 @@ export default function ScoutingPage() {
         <p>
           Injured and returning players are considered before the market. A verified first-
           choice absentee changes the reading of a weak family from a replacement to cover.
-          Availability is never inferred from minutes, and an unverified name stays unknown.
+          Availability is never inferred from minutes; a name without adverse team
+          news is available by default, not a verified fit claim.
         </p>
         <ScoutingLayerZeroTable items={scouting.layer_zero} />
         <p className="fine-print" data-contract-indicator="availability">

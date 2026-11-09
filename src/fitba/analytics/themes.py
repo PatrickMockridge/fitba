@@ -980,7 +980,8 @@ def cover_question(
             "Minutes are not proof of trust; the data cannot distinguish "
             "selection from availability.",
             "Availability comes from the curated official team-news ledger; "
-            "provider injury flags are not team news. Unknown stays unknown.",
+            "provider injury flags are not team news; no adverse entry means "
+            "available by default.",
             "Named bench rows are Premiership-only.",
         ],
         "method": (

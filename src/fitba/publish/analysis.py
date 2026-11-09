@@ -567,8 +567,8 @@ def build_analysis_payload(
                 "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
                 "Possession is provider-reported and is not used in the matchday style lean.",
                 "League ranks compare Premiership teams only; no cross-league comparison is made.",
-                "A contradicted team-news claim is unknown, not fit; its evidence "
-                "stays in the review block.",
+                "A contradicted team-news claim is available by default, not a "
+                "verified fit; its evidence stays in the review block.",
                 "A ledger older than the latest official news is flagged for review.",
             ],
         },

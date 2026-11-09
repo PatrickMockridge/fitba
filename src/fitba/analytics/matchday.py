@@ -1451,7 +1451,8 @@ def predict_lineup(
         )
     else:
         availability_note = (
-            "No verified team-news entries; availability is unknown, not assumed fit."
+            "No adverse team-news entries; players are available by default, "
+            "not a medical clearance."
         )
     rating_coverage = Counter(
         str(player.get("rating_coverage") or "unavailable") for player in scored["players"]

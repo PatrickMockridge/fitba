@@ -323,10 +323,18 @@ function KeyFacts({ page }: { page: PlayerPageDocument }) {
 
 function AvailabilityView({ data }: { data: AvailabilityPanelData }) {
   const availability = data.availability;
+  const defaultAvailable = availability.status === "unknown";
+  const reviewNote = availability.review_required
+    ? (availability.review_reason?.replaceAll("_", " ") ?? "needs review")
+    : null;
   return (
     <div>
       <div className="stat-row four">
-        <StatTile label="Status" value={availability.status} note={availability.confidence} />
+        <StatTile
+          label="Status"
+          value={defaultAvailable ? "Available (default)" : availability.status}
+          note={reviewNote ?? (defaultAvailable ? "no adverse team news" : availability.confidence)}
+        />
         <StatTile label="Reason" value={availability.reason ?? "—"} note={availability.reason_category ?? ""} />
         <StatTile
           label="Expected return"
@@ -362,7 +370,9 @@ function AvailabilityView({ data }: { data: AvailabilityPanelData }) {
         </p>
       ) : null}
       <p className="fine-print">
-        {availability.note ?? "No verified official team-news entry."}
+        {defaultAvailable && !availability.review_required
+          ? "No adverse team news. Available by default; not a medical clearance."
+          : availability.note ?? "No verified official team-news entry."}
         {availability.source_url ? (
           <>
             {" "}

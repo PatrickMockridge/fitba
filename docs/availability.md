@@ -14,8 +14,9 @@ from the provider `injured` boolean.
   coverage says injuries are covered for the season.
 - **Not team news:** the provider `injured` boolean on a player profile. It has
   no type, reason, date or expected return.
-- **Unknown:** no verified public entry. It is never converted to “fit” or
-  “available”.
+- **Default:** no adverse public entry. The player is available by default for
+  selection; the internal audit state stays `unknown`, but it is not displayed
+  as a status and is not a verified fit claim.
 
 At the last check API-Football reports `injuries=false` for Scottish 2026, so
 the provider snapshot is `unavailable`. The app says so; it does not advertise
@@ -88,10 +89,11 @@ Every sweep runs the curated ledger through `fitba.analytics.availability_reconc
   comes from the ledger’s `competition_id` or the player’s most recent red card.
 - `available`/`returned`/`unknown`: no participation reconciliation.
 
-A contradiction sets the published status to `unknown`, preserves
-`original_status`, the reason, source and `verified_at`, and records the fixture
-date, squad status and minutes in `contradicted_by`. The claim is not deleted;
-it moves to the review block. Unknown is not fit.
+A contradiction sets the internal published state to `unknown` (available by
+default for selection), preserves `original_status`, the reason, source and
+`verified_at`, and records the fixture date, squad status and minutes in
+`contradicted_by`. The claim is not deleted; it moves to the review block.
+Available by default is not a verified fit claim.
 
 ## Review bands
 
@@ -131,9 +133,10 @@ status.
 - `out` and `suspended` players are excluded.
 - `doubtful` players remain selectable with a confidence downgrade.
 - `returned` players are selectable with a small availability weight.
-- `unknown` players remain selectable. If the ledger is entirely unavailable,
-  selection confidence is not blanket-downgraded; the page says availability is
-  unknown, not assumed fit.
+- `unknown` players remain selectable: no adverse team news means available by
+  default. If the ledger is entirely unavailable, selection confidence is not
+  blanket-downgraded; the page says available by default, not a medical
+  clearance.
 - A player with no verified availability cannot retain high confidence when a
   partial ledger exists.
 - The lineup block publishes availability counts (`known`, `unknown`, `out`,
@@ -168,7 +171,8 @@ The `/analysis/` availability block separates three evidence tiers:
    medical clearance.
 2. **Derived selection signals** — competition-scoped suspension watch and
    inferred absence. These are not official team news.
-3. **No verified news** — a count, never a fit list.
+3. **Available by default** — players without adverse team news; a count,
+   never a fit list.
 
 Suspension rules live in `config/suspensions.yaml` with `verified` flags. Until
 the current SFA protocol is sourced and signed off, a row is `watch` or

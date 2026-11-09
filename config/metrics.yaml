@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.15.0
+registry_version: 3.15.1
 reviewed: '2026-11-09'
 owner: patrickmockridge
 change_policy:
@@ -2193,8 +2193,9 @@ metrics:
   confidence_rule: >
     The ledger is curated team news. A contradiction against a named squad or a
     served suspension withdraws the current status but preserves the original
-    claim, source and verification date. Aging is a review warning; a missing
-    value is unknown, never fit.
+    claim, source and verification date. Aging is a review warning. A missing or
+    contradicted value is the internal unknown state, which means available by
+    default for selection, never a verified fit.
   home_payload: availability/aberdeen.json
   payload_paths:
   - availability/aberdeen.json#/**
@@ -2211,7 +2212,7 @@ metrics:
   - A served suspension cancels a stale suspended claim but does not verify the underlying disciplinary rule.
   owner: patrickmockridge
   reviewed: '2026-11-09'
-  version: 4
+  version: 5
   status: active
 - id: case.document
   label: The case document
@@ -2769,8 +2770,9 @@ metrics:
     Official availability is ledger-only; derived availability is labelled
     inferred or projected and capped at medium; unknown is never zero. A card
     rule that is not verified publishes watch/review_required, not a ban. A
-    claim contradicted by a named squad or a served suspension is unknown and
-    stays visible in the review block; the original claim is not deleted. League
+    claim contradicted by a named squad or a served suspension falls back to
+    available by default and stays visible in the review block; the original
+    claim is not deleted. League
     rankings require complete provider coverage for every table team; a missing
     value is null, never zero.
   home_payload: analysis/summary.json
@@ -2788,11 +2790,11 @@ metrics:
   - No contract-expiry, free-agent, wage, fee or release-clause data is held.
   - Market/value language is not used; squad decisions are measured lenses only.
   - League rankings are within the Premiership only; provider xG is not fitba fxG.
-  - A contradicted team-news claim is unknown, not fit; its original source and evidence remain in the review block.
+  - A contradicted team-news claim is available by default, not a verified fit; its original source and evidence remain in the review block.
   - Availability reconciliation is participation-based, not medical evidence.
   owner: patrickmockridge
   reviewed: '2026-11-09'
-  version: 4
+  version: 5
   status: active
 - id: analysis.league-rankings
   label: League rankings

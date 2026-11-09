@@ -106,7 +106,8 @@ club budget has no public ceiling. Wages are not public.
 - No “must sign”, “should sign” or “data says sign” language.
 - Current-squad players may appear only as depth evidence; outgoing names may
   appear only with an active public rumour.
-- Unknown availability stays unknown; it is not assumed fit.
+- No adverse team news means available by default; it is not a verified fit
+  claim. Only verified entries count as known availability.
 - The model can say “strengthen”; it cannot decide the club's risk appetite.
 
 

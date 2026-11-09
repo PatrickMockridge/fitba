@@ -95,7 +95,7 @@ export function PredictedLineupPanel({
           Confidence measures the selection evidence only: starts, minutes, role
           fit, form and the observed formation.{" "}
           {block.availability?.applicable
-            ? "Unknown team news is shown as a separate availability state and does not lower this estimate."
+            ? "No adverse team news means a player is available by default; this does not lower the selection estimate."
             : "Opponent availability is not modelled."}
         </p>
       </div>
@@ -138,7 +138,7 @@ export function PredictedLineupPanel({
             block.availability.known == null ||
             block.availability.unknown == null
               ? "Not modelled for opponents"
-              : `${block.availability.known} known · ${block.availability.unknown} unknown`}
+              : `${block.availability.known} verified · ${block.availability.unknown} by default`}
             {block.availability.as_of ? ` · as of ${block.availability.as_of}` : ""}
           </span>
         </div>

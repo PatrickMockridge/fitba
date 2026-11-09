@@ -95,7 +95,7 @@ Must remain visible:
   Competition, Opponent, Venue, Kickoff and Status, plus links to the six-game
   matchday lookahead and the full `/matches/` schedule.
 - Availability and selection: counts (known unavailable, reported available,
-  no verified news, loans out); official AFC team news with source and
+  available by default, loans out); official AFC team news with source and
   verification date; a **Team news needing review** table with Player,
   Published status, Recorded status, Verified, Source, Evidence and Review
   reason; competition-scoped derived suspension watch (served and resolved rows

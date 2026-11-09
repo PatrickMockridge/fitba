@@ -299,8 +299,9 @@ def build_availability_payload(
             },
             note=(
                 "Curated official AFC team news is primary. Provider injuries "
-                "are optional and are not team news. Unknown stays unknown. "
-                "Contradicted claims are shown in the review block."
+                "are optional and are not team news. No adverse entry means "
+                "available by default, not a verified fit. Contradicted claims "
+                "are shown in the review block."
             ),
         ),
         universes=universes,

@@ -75,14 +75,17 @@ function FamilyCard({ family }: { family: NeedsFamily }) {
           <strong>{pct(measured.top_share)}</strong>
         </span>
         <span>
-          <span className="stat-label">Availability risk</span>
+          <span className="stat-label" data-contract-indicator="availability">
+            Availability risk
+          </span>
           <strong>{pct(measured.availability_risk)}</strong>
         </span>
       </div>
       {measured.availability_risk == null ? (
         <p className="fine-print">
-          Availability risk is unknown: {String(measured.availability_known ?? 0)} known /{" "}
-          {String(measured.availability_unknown ?? "—")} unknown projected players.
+          Availability risk is unavailable: {String(measured.availability_known ?? 0)}{" "}
+          verified / {String(measured.availability_unknown ?? "—")} without adverse team
+          news.
         </p>
       ) : null}
 
@@ -242,14 +245,16 @@ export function NeedsBoard({ data }: { data: NeedsDocument }) {
           <span className="stat-note">evidence-only</span>
         </div>
         <div className="stat-tile">
-          <span className="stat-label">Availability known</span>
+          <span className="stat-label" data-contract-indicator="availability">
+            Availability known
+          </span>
           <span className="stat-value">
             {data.summary.availability_known ?? 0}/
             {(data.summary.availability_known ?? 0) +
               (data.summary.availability_unknown ?? 0)}
           </span>
           <span className="stat-note" data-contract-indicator="unknown">
-            unknown stays unknown
+            available by default unless team news says otherwise
           </span>
         </div>
       </div>
@@ -257,10 +262,11 @@ export function NeedsBoard({ data }: { data: NeedsDocument }) {
         Role profiles and market routes only. No specific targets, fees or wages.
         The measured depth/availability drives the category; the curated prior is
         shown separately. Availability is a special case of team news. With{" "}
-        {data.summary.availability_known ?? 0} known and{" "}
-        {data.summary.availability_unknown ?? 0} unknown entries, injury cover
-        cannot be classified for players without a verified public team-news
-        record; context-only names are not published and do not change the model.
+        {data.summary.availability_known ?? 0} verified entries and{" "}
+        {data.summary.availability_unknown ?? 0} players without adverse team news,
+        players default to available for selection; injury cover is classified only
+        from verified entries. Context-only names are not published and do not
+        change the model.
       </p>
       <div className="needs-grid">
         {data.families.map((family) => (
