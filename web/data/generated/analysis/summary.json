@@ -75,7 +75,7 @@
         "entries": 34,
         "known": 3,
         "needs_review": 7,
-        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown. Contradicted claims are shown in the review block.",
+        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. No adverse entry means available by default, not a verified fit. Contradicted claims are shown in the review block.",
         "out": 2,
         "provider_snapshot": {
           "coverage": {
@@ -540,7 +540,7 @@
       "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
       "Possession is provider-reported and is not used in the matchday style lean.",
       "League ranks compare Premiership teams only; no cross-league comparison is made.",
-      "A contradicted team-news claim is unknown, not fit; its evidence stays in the review block.",
+      "A contradicted team-news claim is available by default, not a verified fit; its evidence stays in the review block.",
       "A ledger older than the latest official news is flagged for review."
     ],
     "qualification": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.",
@@ -551,9 +551,9 @@
       "scheduled": 21
     }
   },
-  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
+  "dataset_id": "2026-11-09T18:56:58+00:00-6c001fae",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T18:14:08+00:00",
+  "generated_at": "2026-11-09T18:56:58+00:00",
   "hero": {
     "form": "LLLWL",
     "goal_difference": -6,
@@ -595,7 +595,7 @@
         "xg_for_pm": 1.23
       }
     },
-    "as_of": "2026-11-09T18:14:08+00:00",
+    "as_of": "2026-11-09T18:56:58+00:00",
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "coverage": {
@@ -1109,10 +1109,10 @@
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
-  "published_at": "2026-11-09T18:14:08+00:00",
+  "published_at": "2026-11-09T18:56:58+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
+  "served_by_update_id": "publish-2026-11-09T18:56:58+00:00",
   "source_snapshots": {
     "api_football": "2026-11-09T18:14:05.498659+00:00",
     "api_results": "2026-11-09T18:07:58+00:00",
@@ -1669,5 +1669,5 @@
     ]
   },
   "state": "full",
-  "update_id": "2026-11-09T18:07:56+00:00-961210"
+  "update_id": "publish-2026-11-09T18:56:58+00:00"
 }

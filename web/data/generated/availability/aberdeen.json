@@ -10,7 +10,7 @@
     "entries": 34,
     "known": 3,
     "needs_review": 7,
-    "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown. Contradicted claims are shown in the review block.",
+    "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. No adverse entry means available by default, not a verified fit. Contradicted claims are shown in the review block.",
     "out": 2,
     "provider_snapshot": {
       "coverage": {
@@ -44,7 +44,7 @@
     "unknown": 31,
     "update_id": null
   },
-  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
+  "dataset_id": "2026-11-09T18:56:58+00:00-6c001fae",
   "dataset_state": "stale",
   "entries": [
     {
@@ -1455,10 +1455,10 @@
       "verified_at": "2026-10-27"
     }
   ],
-  "generated_at": "2026-11-09T18:14:08+00:00",
+  "generated_at": "2026-11-09T18:56:58+00:00",
   "notes": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Contradicted claims become unknown and stay visible in the review block. Context-only names without an official public source are held in a private verification queue and are not published.",
   "policy_version": "1.0.0",
-  "published_at": "2026-11-09T18:14:08+00:00",
+  "published_at": "2026-11-09T18:56:58+00:00",
   "review": {
     "aging": 3,
     "contradicted": 4,
@@ -1496,7 +1496,7 @@
   },
   "schema_version": "1.1.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
+  "served_by_update_id": "publish-2026-11-09T18:56:58+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -1556,5 +1556,5 @@
       "unknown": 31
     }
   },
-  "update_id": "2026-11-09T18:07:56+00:00-961210"
+  "update_id": "publish-2026-11-09T18:56:58+00:00"
 }
