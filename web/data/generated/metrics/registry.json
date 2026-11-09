@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:a9973bad2055c4f691029973bee1af829860aedbdeb4eb6f9f2ad194772726e8",
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "checksum": "sha256:16acb09da447e91e11c22d14906fbf6d263b288716e2a2b1314f34a075bf4dee",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2794,31 +2794,45 @@
     {
       "aggregation": "family",
       "basis": "curated",
-      "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
+      "confidence_rule": "The ledger is curated team news. A contradiction against a named squad or a served suspension withdraws the current status but preserves the original claim, source and verification date. Aging is a review warning; a missing value is unknown, never fit.\n",
       "coverage_tier": "curated",
       "denominator": null,
-      "description": "Availability ledger coverage and entries.",
+      "description": "Availability ledger coverage, entries and the review/suspension-service reconciliation.",
       "displayed_surfaces": [
-        "/status/"
+        "/status/",
+        "/analysis/"
       ],
-      "fields": [],
-      "formula": "Entries require a player key, status, source id and verified_at; known/unknown counts are over the current squad; a provider injury boolean is not team news.",
+      "fields": [
+        "status_age_days",
+        "needs_review",
+        "contradicted",
+        "aging",
+        "suspension_served",
+        "served_count",
+        "ban_matches"
+      ],
+      "formula": "Entries require a player key, status, source id and verified_at; known/unknown counts are over the current squad; a provider injury boolean is not team news. A known claim is reconciled against named matchday squads: an out player named after the claim, a doubtful player who starts or is used, or a suspension whose ban is served becomes unknown with review_required. status_age_days is the calendar age of verified_at; fresh_until and stale_after are verified_at plus fresh_days and max_age_days. The review counts sum the per-entry flags.\n",
       "home_payload": "availability/aberdeen.json",
       "home_surface": "/status/",
       "id": "availability.ledger",
       "implementation": null,
       "inputs": [
-        "published payload"
+        "published payload",
+        "data/normalized/matches/player_squads.parquet",
+        "data/normalized/history/season=*/events.parquet",
+        "data/normalized/news/afc.parquet"
       ],
       "label": "Availability",
       "limitations": [
-        "Curated team news; provenance checked, not recomputed."
+        "Curated team news; provenance checked, not recomputed.",
+        "Participation reconciliation uses named squads and appearances, not medical evidence.",
+        "A served suspension cancels a stale suspended claim but does not verify the underlying disciplinary rule."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "availability/aberdeen.json#/**"
       ],
-      "reviewed": "2026-10-24",
+      "reviewed": "2026-11-09",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -2834,7 +2848,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 3
+      "version": 4
     },
     {
       "aggregation": "family",
@@ -3456,10 +3470,10 @@
     {
       "aggregation": "document",
       "basis": "mixed",
-      "confidence_rule": "Official availability is ledger-only; derived availability is labelled inferred or projected and capped at medium; unknown is never zero. A card rule that is not verified publishes watch/review_required, not a ban. League rankings require complete provider coverage for every table team; a missing value is null, never zero.\n",
+      "confidence_rule": "Official availability is ledger-only; derived availability is labelled inferred or projected and capped at medium; unknown is never zero. A card rule that is not verified publishes watch/review_required, not a ban. A claim contradicted by a named squad or a served suspension is unknown and stays visible in the review block; the original claim is not deleted. League rankings require complete provider coverage for every table team; a missing value is null, never zero.\n",
       "coverage_tier": "derived",
       "denominator": null,
-      "description": "Current position and form, next fixtures, official and derived availability, measured aims, squad-decision lenses, the category bridges and the within-Premiership provider-xG/possession rankings.",
+      "description": "Current position and form, next fixtures, official and derived availability with a review block, measured aims, squad-decision lenses, the category bridges and the within-Premiership provider-xG/possession rankings.",
       "displayed_surfaces": [
         "/analysis/"
       ],
@@ -3473,6 +3487,7 @@
         "next_up",
         "counts",
         "official",
+        "review",
         "suspensions",
         "inferred",
         "selection",
@@ -3504,13 +3519,15 @@
         "Suspension rules are watch/review-only until the current SFA protocol is sourced.",
         "No contract-expiry, free-agent, wage, fee or release-clause data is held.",
         "Market/value language is not used; squad decisions are measured lenses only.",
-        "League rankings are within the Premiership only; provider xG is not fitba fxG."
+        "League rankings are within the Premiership only; provider xG is not fitba fxG.",
+        "A contradicted team-news claim is unknown, not fit; its original source and evidence remain in the review block.",
+        "Availability reconciliation is participation-based, not medical evidence."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "analysis/summary.json#/**"
       ],
-      "reviewed": "2026-11-08",
+      "reviewed": "2026-11-09",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -3526,7 +3543,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 3
+      "version": 4
     },
     {
       "aggregation": "per_team",
@@ -5924,28 +5941,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-09T06:19:03+00:00",
-  "registry_version": "3.14.0",
-  "reviewed": "2026-11-08",
+  "published_at": "2026-11-09T18:14:08+00:00",
+  "registry_version": "3.15.0",
+  "reviewed": "2026-11-09",
   "schema_version": 1,
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": {
-    "api_football": "2026-11-09T06:19:00.556145+00:00",
-    "api_results": "2026-11-09T06:17:07+00:00",
-    "availability": "2026-11-09T06:18:12+00:00",
-    "career": "2026-11-09T06:18:12+00:00",
-    "football_data_uk": "2026-11-09T06:17:06+00:00",
-    "former_players": "2026-11-09T06:17:21+00:00",
-    "history_backfill": "2026-11-09T06:17:15+00:00",
+    "api_football": "2026-11-09T18:14:05.498659+00:00",
+    "api_results": "2026-11-09T18:07:58+00:00",
+    "availability": "2026-11-09T18:08:51+00:00",
+    "career": "2026-11-09T18:08:51+00:00",
+    "football_data_uk": "2026-11-09T18:07:57+00:00",
+    "former_players": "2026-11-09T18:08:11+00:00",
+    "history_backfill": "2026-11-09T18:08:10+00:00",
     "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T06:18:41+00:00",
-    "scouting_europe": "2026-11-09T06:18:30+00:00",
-    "scouting_pool": "2026-11-09T06:18:16+00:00",
-    "scouting_roles": "2026-11-09T06:18:17+00:00",
-    "scouting_rose_history": "2026-11-09T06:18:30+00:00",
-    "scouting_standings": "2026-11-09T06:18:31+00:00",
-    "spfl": "2026-11-09T06:17:08+00:00",
-    "xg_enrichment": "2026-11-09T06:18:43+00:00"
+    "scouting_clubs": "2026-11-09T18:13:20+00:00",
+    "scouting_europe": "2026-11-09T18:13:09+00:00",
+    "scouting_pool": "2026-11-09T18:08:58+00:00",
+    "scouting_roles": "2026-11-09T18:12:44+00:00",
+    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
+    "scouting_standings": "2026-11-09T18:13:10+00:00",
+    "spfl": "2026-11-09T18:07:59+00:00",
+    "xg_enrichment": "2026-11-09T18:13:46+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -5974,5 +5991,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-11-09T06:17:02+00:00-3205006"
+  "update_id": "2026-11-09T18:07:56+00:00-961210"
 }

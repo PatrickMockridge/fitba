@@ -8,7 +8,7 @@
     "team_stats": true,
     "xg": true
   },
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
   "depth": "full",
   "fixture": {
@@ -94,7 +94,7 @@
       }
     ]
   },
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "lineups": {
     "away": {
       "coach_name": "M. Reedijk",
@@ -1313,7 +1313,7 @@
       "yellow_cards": 0
     }
   ],
-  "published_at": "2026-11-09T06:19:03+00:00",
+  "published_at": "2026-11-09T18:14:08+00:00",
   "schema_version": "1.2.0",
   "scoreboard": {
     "away": {
@@ -1394,24 +1394,24 @@
     "note": "Goals and red cards are from the event feed; the final score is authoritative.",
     "shootout": null
   },
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": {
-    "api_football": "2026-11-09T06:19:00.556145+00:00",
-    "api_results": "2026-11-09T06:17:07+00:00",
-    "availability": "2026-11-09T06:18:12+00:00",
-    "career": "2026-11-09T06:18:12+00:00",
-    "football_data_uk": "2026-11-09T06:17:06+00:00",
-    "former_players": "2026-11-09T06:17:21+00:00",
-    "history_backfill": "2026-11-09T06:17:15+00:00",
+    "api_football": "2026-11-09T18:14:05.498659+00:00",
+    "api_results": "2026-11-09T18:07:58+00:00",
+    "availability": "2026-11-09T18:08:51+00:00",
+    "career": "2026-11-09T18:08:51+00:00",
+    "football_data_uk": "2026-11-09T18:07:57+00:00",
+    "former_players": "2026-11-09T18:08:11+00:00",
+    "history_backfill": "2026-11-09T18:08:10+00:00",
     "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T06:18:41+00:00",
-    "scouting_europe": "2026-11-09T06:18:30+00:00",
-    "scouting_pool": "2026-11-09T06:18:16+00:00",
-    "scouting_roles": "2026-11-09T06:18:17+00:00",
-    "scouting_rose_history": "2026-11-09T06:18:30+00:00",
-    "scouting_standings": "2026-11-09T06:18:31+00:00",
-    "spfl": "2026-11-09T06:17:08+00:00",
-    "xg_enrichment": "2026-11-09T06:18:43+00:00"
+    "scouting_clubs": "2026-11-09T18:13:20+00:00",
+    "scouting_europe": "2026-11-09T18:13:09+00:00",
+    "scouting_pool": "2026-11-09T18:08:58+00:00",
+    "scouting_roles": "2026-11-09T18:12:44+00:00",
+    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
+    "scouting_standings": "2026-11-09T18:13:10+00:00",
+    "spfl": "2026-11-09T18:07:59+00:00",
+    "xg_enrichment": "2026-11-09T18:13:46+00:00"
   },
   "sources": [
     {
@@ -1444,7 +1444,7 @@
       "shots_off": 5,
       "shots_on_target": 6,
       "shots_outsidebox": 7,
-      "xg": null,
+      "xg": 2.41,
       "yellow_cards": 1
     },
     "coverage": {
@@ -1467,7 +1467,7 @@
       "shots_off": 6,
       "shots_on_target": 2,
       "shots_outsidebox": 7,
-      "xg": null,
+      "xg": 0.96,
       "yellow_cards": 1
     },
     "rows": [
@@ -1634,7 +1634,7 @@
       },
       {
         "basis": "measured",
-        "text": "Provider xG: Aberdeen 0.99, Hibernian 2.43."
+        "text": "Provider xG: Aberdeen 0.96, Hibernian 2.41."
       }
     ],
     "events_available": true,
@@ -2031,7 +2031,7 @@
       "team_name": "Hibernian"
     }
   ],
-  "update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "update_id": "2026-11-09T18:07:56+00:00-961210",
   "xg": {
     "available": true,
     "away": {
@@ -2039,15 +2039,15 @@
       "goals": 4,
       "goals_high": 4,
       "goals_low": 0,
-      "goals_minus": 2.028,
+      "goals_minus": 2.033,
       "goals_position": "within",
-      "high": 2.512,
-      "low": 1.286,
+      "high": 2.503,
+      "low": 1.281,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
-      "provider": 2.43,
-      "provider_source": "api_football",
+      "provider": 2.41,
+      "provider_source": "football_data_uk",
       "shot_profile": {
         "penalties": 0,
         "penalty_goals": 0,
@@ -2058,7 +2058,7 @@
         "shots_on_target": 6,
         "shots_outsidebox": 7
       },
-      "value": 1.972,
+      "value": 1.967,
       "xg_per_shot": 0.094
     },
     "evaluation_href": "/analysis/xg/",
@@ -2072,15 +2072,15 @@
       "goals": 0,
       "goals_high": 2,
       "goals_low": 0,
-      "goals_minus": -0.989,
+      "goals_minus": -0.985,
       "goals_position": "within",
-      "high": 1.528,
-      "low": 0.302,
+      "high": 1.521,
+      "low": 0.299,
       "penalties": 0,
       "penalties_known": true,
       "penalty_xg": 0.0,
-      "provider": 0.99,
-      "provider_source": "api_football",
+      "provider": 0.96,
+      "provider_source": "football_data_uk",
       "shot_profile": {
         "penalties": 0,
         "penalty_goals": 0,
@@ -2091,7 +2091,7 @@
         "shots_on_target": 2,
         "shots_outsidebox": 7
       },
-      "value": 0.989,
+      "value": 0.985,
       "xg_per_shot": 0.066
     },
     "model_id": "fxg-3",

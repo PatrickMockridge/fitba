@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "identity": {
     "age": 32,
     "dataset_id": null,
@@ -54,21 +54,30 @@
       "data": {
         "availability": {
           "confidence": "unknown",
+          "contradicted_by": null,
           "dataset_id": null,
           "dataset_state": null,
           "expected_return": null,
+          "fresh_until": null,
           "in_squad": true,
           "note": "No verified official team-news entry.",
+          "original_status": "unknown",
           "published_at": null,
           "reason": null,
           "reason_category": "unknown",
+          "review_reason": null,
+          "review_required": false,
+          "review_severity": null,
           "served_by_update_id": null,
           "source_id": "none",
           "source_snapshots": null,
           "source_title": null,
           "source_url": null,
+          "stale_after": null,
           "stale_reason": null,
           "status": "unknown",
+          "status_age_days": null,
+          "suspension": null,
           "update_id": null,
           "verified_at": null
         }
@@ -767,7 +776,7 @@
         "rose": {
           "basis": "role_family",
           "cohort_min_minutes": 450,
-          "cohort_n": 11,
+          "cohort_n": 12,
           "cohort_season": "2026-27",
           "dataset_id": null,
           "dataset_state": null,
@@ -778,11 +787,11 @@
             {
               "axes": [
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "saves_p90",
-                  "percentile": 68.2,
+                  "percentile": 70.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -791,11 +800,11 @@
                   "value": 3.67
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "save_pct",
-                  "percentile": 54.5,
+                  "percentile": 58.3,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -804,11 +813,11 @@
                   "value": 81.48
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "conceded_p90",
-                  "percentile": 63.6,
+                  "percentile": 66.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -817,11 +826,11 @@
                   "value": 0.83
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "passes_completed_p90",
-                  "percentile": 9.1,
+                  "percentile": 8.3,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -830,7 +839,7 @@
                   "value": 18.23
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
@@ -857,11 +866,11 @@
             {
               "axes": [
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "saves_p90",
-                  "percentile": 68.2,
+                  "percentile": 70.8,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -870,11 +879,11 @@
                   "value": 3.67
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "save_pct",
-                  "percentile": 54.5,
+                  "percentile": 58.3,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -883,11 +892,11 @@
                   "value": 81.48
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "conceded_p90",
-                  "percentile": 63.6,
+                  "percentile": 66.7,
                   "published_at": null,
                   "served_by_update_id": null,
                   "source_snapshots": null,
@@ -896,7 +905,7 @@
                   "value": 0.83
                 },
                 {
-                  "cohort_n": 11,
+                  "cohort_n": 12,
                   "dataset_id": null,
                   "dataset_state": null,
                   "metric": "pass_completion_pct",
@@ -1035,7 +1044,7 @@
         "summary": {
           "appearances": 12,
           "cohort_basis": "role_family",
-          "cohort_n": 11,
+          "cohort_n": 12,
           "dataset_id": null,
           "dataset_state": null,
           "league": "sco:premiership",
@@ -1043,7 +1052,7 @@
           "league_label": "Scottish Premiership",
           "league_minutes": 1080,
           "league_rating": 7.1,
-          "league_rating_percentile": 45.5,
+          "league_rating_percentile": 58.3,
           "minutes": 1620,
           "minutes_season": "2026-27",
           "output_coverage": "partial",
@@ -1069,7 +1078,7 @@
       "dataset_state": null,
       "eyebrow": "Profile",
       "id": "profile",
-      "note": "League-only rates; cohort role family n=11; percentiles 0-100, higher is better.",
+      "note": "League-only rates; cohort role family n=12; percentiles 0-100, higher is better.",
       "published_at": null,
       "served_by_update_id": null,
       "source_snapshots": null,
@@ -1326,12 +1335,12 @@
     }
   },
   "player_id": 1141,
-  "published_at": "2026-11-09T06:19:03+00:00",
+  "published_at": "2026-11-09T18:14:08+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "update_id": "2026-11-09T18:07:56+00:00-961210",
   "warnings": []
 }

@@ -3,13 +3,15 @@
     "club": "sco:aberdeen",
     "coverage": {
       "conflicts": 0,
+      "contradicted": 4,
       "dataset_id": null,
       "dataset_state": null,
-      "doubtful": 3,
+      "doubtful": 1,
       "entries": 34,
-      "known": 7,
-      "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
-      "out": 3,
+      "known": 3,
+      "needs_review": 7,
+      "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown. Contradicted claims are shown in the review block.",
+      "out": 2,
       "provider_snapshot": {
         "coverage": {
           "fixtures": {
@@ -38,40 +40,40 @@
       "stale": 0,
       "stale_reason": null,
       "status": "partial",
-      "suspended": 1,
-      "unknown": 27,
+      "suspended": 0,
+      "unknown": 31,
       "update_id": null
     },
-    "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Context-only names without an official public source are held in a private verification queue and are not published.",
+    "note": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Contradicted claims become unknown and stay visible in the review block. Context-only names without an official public source are held in a private verification queue and are not published.",
     "state": "partial",
     "universes": {
       "active_squad": {
         "counts": {
           "available": 0,
-          "doubtful": 3,
-          "out": 3,
+          "doubtful": 1,
+          "out": 2,
           "returned": 0,
-          "suspended": 1,
-          "unknown": 22
+          "suspended": 0,
+          "unknown": 26
         },
-        "known": 7,
+        "known": 3,
         "players": 29,
         "universe": "active_squad",
-        "unknown": 22
+        "unknown": 26
       },
       "official_list": {
         "counts": {
           "available": 0,
-          "doubtful": 3,
-          "out": 3,
+          "doubtful": 1,
+          "out": 2,
           "returned": 0,
-          "suspended": 1,
-          "unknown": 27
+          "suspended": 0,
+          "unknown": 31
         },
-        "known": 7,
+        "known": 3,
         "players": 34,
         "universe": "official_list",
-        "unknown": 27
+        "unknown": 31
       }
     }
   },
@@ -93,7 +95,7 @@
       "matches": 75,
       "name": "Scottish Premiership",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk+spfl",
+      "results_source": "football_data_uk+spfl",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -104,7 +106,7 @@
       "matches": 69,
       "name": "Scottish Championship",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk",
+      "results_source": "football_data_uk",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -115,7 +117,7 @@
       "matches": 69,
       "name": "Scottish League One",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk",
+      "results_source": "football_data_uk",
       "team_stats_source": "football_data_uk"
     },
     {
@@ -126,7 +128,7 @@
       "matches": 65,
       "name": "Scottish League Two",
       "player_stats": 0,
-      "results_source": "api_football+football_data_uk",
+      "results_source": "football_data_uk",
       "team_stats_source": "football_data_uk"
     }
   ],
@@ -148,7 +150,7 @@
       "ties": 70
     }
   ],
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
   "fixtures": {
     "count": 371,
@@ -164,7 +166,7 @@
     "sell_on_computed": 0,
     "state": "partial",
     "with_api_id": 71,
-    "with_post_seasons": 51
+    "with_post_seasons": 33
   },
   "forum": {
     "first_page_only": true,
@@ -174,7 +176,7 @@
     "source": "afc_chat",
     "topics": 4
   },
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "history": {
     "analytics": {
       "managers": "available",
@@ -206,38 +208,38 @@
     "club": "sco:aberdeen",
     "coverage": {
       "availability": {
-        "known": 7,
-        "unknown": 27
+        "known": 3,
+        "unknown": 31
       },
       "availability_universe": "official_list",
       "availability_universes": {
         "active_squad": {
           "counts": {
             "available": 0,
-            "doubtful": 3,
-            "out": 3,
+            "doubtful": 1,
+            "out": 2,
             "returned": 0,
-            "suspended": 1,
-            "unknown": 22
+            "suspended": 0,
+            "unknown": 26
           },
-          "known": 7,
+          "known": 3,
           "players": 29,
           "universe": "active_squad",
-          "unknown": 22
+          "unknown": 26
         },
         "official_list": {
           "counts": {
             "available": 0,
-            "doubtful": 3,
-            "out": 3,
+            "doubtful": 1,
+            "out": 2,
             "returned": 0,
-            "suspended": 1,
-            "unknown": 27
+            "suspended": 0,
+            "unknown": 31
           },
-          "known": 7,
+          "known": 3,
           "players": 34,
           "universe": "official_list",
-          "unknown": 27
+          "unknown": 31
         }
       },
       "basis": "measured + curated prior",
@@ -250,17 +252,17 @@
     "note": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
     "state": "fresh",
     "summary": {
-      "availability_known": 7,
+      "availability_known": 3,
       "availability_universe": "official_list",
-      "availability_unknown": 27,
+      "availability_unknown": 31,
       "counts": {
-        "cover": 2,
-        "none": 1,
+        "cover": 1,
+        "none": 2,
         "strengthen": 4
       },
       "families": 7,
       "note": "Role profiles and market routes only. No targets, fees or wages.",
-      "top_priority": "CB"
+      "top_priority": "AM/WM"
     }
   },
   "provenance": {
@@ -294,7 +296,7 @@
     },
     "note": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such."
   },
-  "published_at": "2026-11-09T06:19:03+00:00",
+  "published_at": "2026-11-09T18:14:08+00:00",
   "rumours": {
     "active": 0,
     "club": "sco:aberdeen",
@@ -302,24 +304,24 @@
     "note": "A curated register of Aberdeen-linked rumours, separate from the confirmed transfer register. Status is a lifecycle label, not a probability. Confidence is editorial and must be justified by the linked sources. Confirmed rows link to the transfer register and are then a historical record, not a second source of truth."
   },
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": {
-    "api_football": "2026-11-09T06:19:00.556145+00:00",
-    "api_results": "2026-11-09T06:17:07+00:00",
-    "availability": "2026-11-09T06:18:12+00:00",
-    "career": "2026-11-09T06:18:12+00:00",
-    "football_data_uk": "2026-11-09T06:17:06+00:00",
-    "former_players": "2026-11-09T06:17:21+00:00",
-    "history_backfill": "2026-11-09T06:17:15+00:00",
+    "api_football": "2026-11-09T18:14:05.498659+00:00",
+    "api_results": "2026-11-09T18:07:58+00:00",
+    "availability": "2026-11-09T18:08:51+00:00",
+    "career": "2026-11-09T18:08:51+00:00",
+    "football_data_uk": "2026-11-09T18:07:57+00:00",
+    "former_players": "2026-11-09T18:08:11+00:00",
+    "history_backfill": "2026-11-09T18:08:10+00:00",
     "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T06:18:41+00:00",
-    "scouting_europe": "2026-11-09T06:18:30+00:00",
-    "scouting_pool": "2026-11-09T06:18:16+00:00",
-    "scouting_roles": "2026-11-09T06:18:17+00:00",
-    "scouting_rose_history": "2026-11-09T06:18:30+00:00",
-    "scouting_standings": "2026-11-09T06:18:31+00:00",
-    "spfl": "2026-11-09T06:17:08+00:00",
-    "xg_enrichment": "2026-11-09T06:18:43+00:00"
+    "scouting_clubs": "2026-11-09T18:13:20+00:00",
+    "scouting_europe": "2026-11-09T18:13:09+00:00",
+    "scouting_pool": "2026-11-09T18:08:58+00:00",
+    "scouting_roles": "2026-11-09T18:12:44+00:00",
+    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
+    "scouting_standings": "2026-11-09T18:13:10+00:00",
+    "spfl": "2026-11-09T18:07:59+00:00",
+    "xg_enrichment": "2026-11-09T18:13:46+00:00"
   },
   "squad": {
     "club": "sco:aberdeen",
@@ -336,7 +338,7 @@
     "curated": 225,
     "note": "Confirmed business only. The recent four windows are audited against a seniority review; earlier windows are curated partial. Rows are curated from the licensed API-Football candidate feed and Wikipedia season tables; an official AFC announcement is linked where found. Fees are not in the feed. Disclosed/reported fees are kept as anchors; undisclosed permanent moves carry an inferred range, not a claimed amount. Free transfers count as zero fee; loan fees are excluded. Loan end, recall and obligation terms are unknown unless confirmed."
   },
-  "update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "update_id": "2026-11-09T18:07:56+00:00-961210",
   "xg": {
     "evaluation": "pass",
     "matches": 371,

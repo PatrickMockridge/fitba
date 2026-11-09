@@ -1,7 +1,7 @@
 {
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "identity": {
     "age": 25,
     "dataset_id": null,
@@ -54,21 +54,30 @@
       "data": {
         "availability": {
           "confidence": "confirmed",
+          "contradicted_by": null,
           "dataset_id": null,
           "dataset_state": null,
           "expected_return": null,
+          "fresh_until": "2026-11-03",
           "in_squad": true,
           "note": "Official club press conference. Manager: Tobers had been out for a year and also had the virus; he might have to make the bench because of the centre-back shortage. No confirmed return date, so expected_return stays null.\n",
+          "original_status": "doubtful",
           "published_at": null,
           "reason": "Returning from a long-term knee injury and a recent virus; may be on the bench.",
           "reason_category": "injury",
+          "review_reason": "status_older_than_7_days",
+          "review_required": true,
+          "review_severity": "aging",
           "served_by_update_id": null,
           "source_id": "afc_news",
           "source_snapshots": null,
           "source_title": "Stephen Robinson: Falkirk Press Conference",
           "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
           "stale_reason": null,
           "status": "doubtful",
+          "status_age_days": 13,
+          "suspension": null,
           "update_id": null,
           "verified_at": "2026-10-27"
         }
@@ -878,13 +887,13 @@
     }
   },
   "player_id": 68534,
-  "published_at": "2026-11-09T06:19:03+00:00",
+  "published_at": "2026-11-09T18:14:08+00:00",
   "schema_version": "1.2.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": null,
   "stale_reason": null,
-  "update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "update_id": "2026-11-09T18:07:56+00:00-961210",
   "warnings": [
     {
       "code": "POSITION_UNKNOWN",

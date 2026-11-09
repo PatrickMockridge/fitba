@@ -35,12 +35,14 @@
     "counts": {
       "active": 29,
       "available": 0,
-      "doubtful": 3,
+      "contradicted": 4,
+      "doubtful": 1,
       "loans_out": 5,
-      "out_official": 3,
+      "needs_review": 7,
+      "out_official": 2,
       "returned": 0,
-      "suspended_official": 1,
-      "unknown": 22
+      "suspended_official": 0,
+      "unknown": 26
     },
     "coverage": {
       "bench": {
@@ -66,13 +68,15 @@
       },
       "ledger": {
         "conflicts": 0,
+        "contradicted": 4,
         "dataset_id": null,
         "dataset_state": null,
-        "doubtful": 3,
+        "doubtful": 1,
         "entries": 34,
-        "known": 7,
-        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
-        "out": 3,
+        "known": 3,
+        "needs_review": 7,
+        "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown. Contradicted claims are shown in the review block.",
+        "out": 2,
         "provider_snapshot": {
           "coverage": {
             "fixtures": {
@@ -101,8 +105,8 @@
         "stale": 0,
         "stale_reason": null,
         "status": "partial",
-        "suspended": 1,
-        "unknown": 27,
+        "suspended": 0,
+        "unknown": 31,
         "update_id": null
       },
       "window_fixtures": [
@@ -115,103 +119,321 @@
       ]
     },
     "inferred": [],
-    "note": "Available means a verified ledger entry, not fit. Inferred rows are cause-not-published, not diagnosis.",
+    "note": "Available means a verified ledger entry, not fit. Inferred rows are cause-not-published, not diagnosis. Contradicted claims are unknown and stay visible in the review block.",
     "official": [
       {
         "confidence": "confirmed",
         "expected_return": null,
-        "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Ronan will definitely miss the next match with a medial knee ligament injury and will see a specialist. No timeframe is published.\n",
-        "player_id": 61178,
-        "player_name": "C. Ronan",
-        "reason": "Medial knee ligament injury; will miss the next match and see a specialist.",
-        "reason_category": "injury",
-        "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-        "status": "out",
-        "verified_at": "2026-10-27"
-      },
-      {
-        "confidence": "confirmed",
-        "expected_return": null,
-        "note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
-        "player_id": 18068,
-        "player_name": "D. Happe",
-        "reason": "Suspended after the red card at Kilmarnock; back in training after illness.",
-        "reason_category": "suspension",
-        "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-        "status": "suspended",
-        "verified_at": "2026-10-27"
-      },
-      {
-        "confidence": "confirmed",
-        "expected_return": null,
-        "note": "Official club press conference. Manager: Marshall has just come back into training; availability is assessed, not assumed.\n",
-        "player_id": 379662,
-        "player_name": "F. Marshall",
-        "reason": "Back in training after illness; availability to be assessed.",
-        "reason_category": "illness",
-        "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-        "status": "doubtful",
-        "verified_at": "2026-10-27"
-      },
-      {
-        "confidence": "confirmed",
-        "expected_return": null,
+        "fresh_until": "2026-11-03",
         "note": "Official club press conference. Manager: Tobers had been out for a year and also had the virus; he might have to make the bench because of the centre-back shortage. No confirmed return date, so expected_return stays null.\n",
+        "original_status": "doubtful",
         "player_id": 68534,
         "player_name": "K. Tobers",
         "reason": "Returning from a long-term knee injury and a recent virus; may be on the bench.",
         "reason_category": "injury",
+        "review_reason": "status_older_than_7_days",
+        "review_required": true,
+        "review_severity": "aging",
         "source_id": "afc_news",
         "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "stale_after": "2026-11-17",
         "status": "doubtful",
+        "status_age_days": 13,
         "verified_at": "2026-10-27"
       },
       {
         "confidence": "confirmed",
         "expected_return": null,
+        "fresh_until": "2026-11-03",
         "note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
+        "original_status": "out",
         "player_id": 125695,
         "player_name": "L. Mayo",
         "reason": "Out for around two months with a foot injury.",
         "reason_category": "injury",
+        "review_reason": "status_older_than_7_days",
+        "review_required": true,
+        "review_severity": "aging",
         "source_id": "afc_news",
         "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "stale_after": "2026-11-17",
         "status": "out",
+        "status_age_days": 13,
         "verified_at": "2026-10-27"
       },
       {
         "confidence": "confirmed",
         "expected_return": null,
+        "fresh_until": "2026-11-03",
         "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
+        "original_status": "out",
         "player_id": 37253,
         "player_name": "M. Knoester",
         "reason": "Thigh tendon issue; specialist advice sought and unlikely to be available for the next two games.",
         "reason_category": "injury",
+        "review_reason": "status_older_than_7_days",
+        "review_required": true,
+        "review_severity": "aging",
         "source_id": "afc_news",
         "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+        "stale_after": "2026-11-17",
         "status": "out",
-        "verified_at": "2026-10-27"
-      },
-      {
-        "confidence": "confirmed",
-        "expected_return": null,
-        "note": "Official club press conference. Manager: Yogane has just come back into training; availability is assessed, not assumed.\n",
-        "player_id": 388510,
-        "player_name": "T. Yogane",
-        "reason": "Back in training after illness; availability to be assessed.",
-        "reason_category": "illness",
-        "source_id": "afc_news",
-        "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-        "status": "doubtful",
+        "status_age_days": 13,
         "verified_at": "2026-10-27"
       }
     ],
+    "review": {
+      "aging": 3,
+      "contradicted": 4,
+      "count": 7,
+      "ledger": {
+        "days_since_latest_news": 1,
+        "days_since_ledger_update": 13,
+        "latest_news_date": "2026-11-08",
+        "latest_news_title": "Dons lose out in seven goal thriller in Edinburgh",
+        "latest_news_url": "https://www.afc.co.uk/en/news/match-report-or-hibernian-women-v-aberdeen-women",
+        "ledger_max_verified_at": "2026-10-27",
+        "ledger_updated_at": "2026-10-27",
+        "reason": "ledger_older_than_latest_news",
+        "status": "review"
+      },
+      "rows": [
+        {
+          "confidence": "confirmed",
+          "contradicted_by": {
+            "competition_id": "sco:league-cup",
+            "dataset_id": null,
+            "dataset_state": null,
+            "date": "2026-10-31",
+            "fixture_id": 1639572,
+            "minutes": 88,
+            "opponent_name": "Rangers",
+            "published_at": null,
+            "served_by_update_id": null,
+            "source_snapshots": null,
+            "squad_status": "starter",
+            "stale_reason": null,
+            "started": true,
+            "update_id": null
+          },
+          "fresh_until": "2026-11-03",
+          "original_status": "out",
+          "player_id": 61178,
+          "player_name": "C. Ronan",
+          "reason": "Medial knee ligament injury; will miss the next match and see a specialist.",
+          "reason_category": "injury",
+          "review_reason": "appeared_after_status",
+          "review_reasons": [
+            "appeared_after_status"
+          ],
+          "review_severity": "contradicted",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "unknown",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": null,
+          "fresh_until": "2026-11-03",
+          "original_status": "suspended",
+          "player_id": 18068,
+          "player_name": "D. Happe",
+          "reason": "Suspended after the red card at Kilmarnock; back in training after illness.",
+          "reason_category": "suspension",
+          "review_reason": "suspension_served",
+          "review_reasons": [
+            "suspension_served"
+          ],
+          "review_severity": "contradicted",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "unknown",
+          "status_age_days": 13,
+          "suspension": {
+            "appearance_date": null,
+            "appearance_fixture_id": null,
+            "appearance_squad_status": null,
+            "ban_matches": 1,
+            "card_date": "2026-09-12",
+            "card_fixture_id": 1629022,
+            "competition_id": "sco:league-cup",
+            "dataset_id": null,
+            "dataset_state": null,
+            "published_at": null,
+            "red_type": "second_yellow",
+            "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
+            "rule_verified": false,
+            "served_by_update_id": null,
+            "served_count": 1,
+            "served_date": "2026-10-31",
+            "served_fixture_id": 1639572,
+            "source_snapshots": null,
+            "stale_reason": null,
+            "state": "served",
+            "update_id": null
+          },
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": {
+            "competition_id": "sco:premiership",
+            "dataset_id": null,
+            "dataset_state": null,
+            "date": "2026-10-28",
+            "fixture_id": 1556688,
+            "minutes": 33,
+            "opponent_name": "Falkirk",
+            "published_at": null,
+            "served_by_update_id": null,
+            "source_snapshots": null,
+            "squad_status": "sub_used",
+            "stale_reason": null,
+            "started": false,
+            "update_id": null
+          },
+          "fresh_until": "2026-11-03",
+          "original_status": "doubtful",
+          "player_id": 379662,
+          "player_name": "F. Marshall",
+          "reason": "Back in training after illness; availability to be assessed.",
+          "reason_category": "illness",
+          "review_reason": "doubt_resolved_by_appearance",
+          "review_reasons": [
+            "doubt_resolved_by_appearance"
+          ],
+          "review_severity": "contradicted",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "unknown",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": {
+            "competition_id": "sco:league-cup",
+            "dataset_id": null,
+            "dataset_state": null,
+            "date": "2026-10-31",
+            "fixture_id": 1639572,
+            "minutes": 2,
+            "opponent_name": "Rangers",
+            "published_at": null,
+            "served_by_update_id": null,
+            "source_snapshots": null,
+            "squad_status": "sub_used",
+            "stale_reason": null,
+            "started": false,
+            "update_id": null
+          },
+          "fresh_until": "2026-11-03",
+          "original_status": "doubtful",
+          "player_id": 388510,
+          "player_name": "T. Yogane",
+          "reason": "Back in training after illness; availability to be assessed.",
+          "reason_category": "illness",
+          "review_reason": "doubt_resolved_by_appearance",
+          "review_reasons": [
+            "doubt_resolved_by_appearance"
+          ],
+          "review_severity": "contradicted",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "unknown",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": null,
+          "fresh_until": "2026-11-03",
+          "original_status": "doubtful",
+          "player_id": 68534,
+          "player_name": "K. Tobers",
+          "reason": "Returning from a long-term knee injury and a recent virus; may be on the bench.",
+          "reason_category": "injury",
+          "review_reason": "status_older_than_7_days",
+          "review_reasons": [
+            "status_older_than_7_days"
+          ],
+          "review_severity": "aging",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "doubtful",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": null,
+          "fresh_until": "2026-11-03",
+          "original_status": "out",
+          "player_id": 125695,
+          "player_name": "L. Mayo",
+          "reason": "Out for around two months with a foot injury.",
+          "reason_category": "injury",
+          "review_reason": "status_older_than_7_days",
+          "review_reasons": [
+            "status_older_than_7_days"
+          ],
+          "review_severity": "aging",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "out",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        },
+        {
+          "confidence": "confirmed",
+          "contradicted_by": null,
+          "fresh_until": "2026-11-03",
+          "original_status": "out",
+          "player_id": 37253,
+          "player_name": "M. Knoester",
+          "reason": "Thigh tendon issue; specialist advice sought and unlikely to be available for the next two games.",
+          "reason_category": "injury",
+          "review_reason": "status_older_than_7_days",
+          "review_reasons": [
+            "status_older_than_7_days"
+          ],
+          "review_severity": "aging",
+          "source_id": "afc_news",
+          "source_title": "Stephen Robinson: Falkirk Press Conference",
+          "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
+          "stale_after": "2026-11-17",
+          "status": "out",
+          "status_age_days": 13,
+          "suspension": null,
+          "verified_at": "2026-10-27"
+        }
+      ],
+      "status": "contradicted",
+      "suspension_served": 1
+    },
     "selection": [],
     "suspensions": [
       {
+        "ban_matches": null,
         "cautions": 5,
         "competition_id": "sco:premiership",
         "competition_name": "Scottish Premiership",
@@ -230,10 +452,15 @@
         "reds": 0,
         "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
         "rule_verified": false,
+        "served_count": null,
+        "served_date": null,
+        "served_fixture_id": null,
         "status": "watch",
+        "suspension_state": null,
         "threshold": 6
       },
       {
+        "ban_matches": 1,
         "cautions": 2,
         "competition_id": "sco:league-cup",
         "competition_name": "Premier Sports Cup",
@@ -247,7 +474,11 @@
         "reds": 1,
         "rule_source": "https://www.scottishfa.co.uk/media/8189/sfa_jpp-2021-22_digital.pdf",
         "rule_verified": false,
-        "status": "review_required",
+        "served_count": 1,
+        "served_date": "2026-10-31",
+        "served_fixture_id": 1639572,
+        "status": "served",
+        "suspension_state": "served",
         "threshold": null
       }
     ]
@@ -277,8 +508,8 @@
   "coverage": {
     "availability": {
       "active": 29,
-      "known": 7,
-      "unknown": 22
+      "known": 3,
+      "unknown": 26
     },
     "bench": {
       "fixtures": 6,
@@ -308,7 +539,9 @@
       "Provider ratings are opaque and league-relative.",
       "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
       "Possession is provider-reported and is not used in the matchday style lean.",
-      "League ranks compare Premiership teams only; no cross-league comparison is made."
+      "League ranks compare Premiership teams only; no cross-league comparison is made.",
+      "A contradicted team-news claim is unknown, not fit; its evidence stays in the review block.",
+      "A ledger older than the latest official news is flagged for review."
     ],
     "qualification": "Scotland has four UEFA places for 2027/28: the champions enter the Champions League second qualifying round, the Scottish Cup winner enters the Europa League first qualifying round, and 2nd and 3rd enter the Conference League second qualifying round. 4th only qualifies if the Scottish Cup winner is already in the top three. The League Cup carries no European place. Subject to the final UEFA access list and cup outcomes.",
     "schedule": {
@@ -318,9 +551,9 @@
       "scheduled": 21
     }
   },
-  "dataset_id": "2026-11-09T06:19:03+00:00-6130bf46",
+  "dataset_id": "2026-11-09T18:14:08+00:00-f04ada84",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T06:19:03+00:00",
+  "generated_at": "2026-11-09T18:14:08+00:00",
   "hero": {
     "form": "LLLWL",
     "goal_difference": -6,
@@ -332,9 +565,9 @@
   "league_rankings": {
     "aberdeen": {
       "context": {
-        "fxg": 15.43,
+        "fxg": 15.4,
         "goals": 12,
-        "goals_minus_fxg": -3.43,
+        "goals_minus_fxg": -3.4,
         "label": "fitba fxG (local model, not ranked)",
         "matches": 12,
         "note": "fitba fxG is a local model and is not part of the provider-xG league rank.",
@@ -348,7 +581,7 @@
         "goals_against_pm": 7,
         "goals_for_pm": 10,
         "possession_pct": 8,
-        "xg_against_pm": 5,
+        "xg_against_pm": 6,
         "xg_for_pm": 10
       },
       "team_id": "sco:aberdeen",
@@ -362,7 +595,7 @@
         "xg_for_pm": 1.23
       }
     },
-    "as_of": "2026-11-09T06:19:03+00:00",
+    "as_of": "2026-11-09T18:14:08+00:00",
     "competition_id": "sco:premiership",
     "competition_name": "Scottish Premiership",
     "coverage": {
@@ -375,9 +608,9 @@
         "team_rows_total": 150
       },
       "provider_xg": {
-        "api_fallback_rows": 12,
+        "api_fallback_rows": 0,
         "complete": true,
-        "fdco_rows": 138,
+        "fdco_rows": 150,
         "label": "Provider xG (football-data.co.uk; API-Football fallback)",
         "source": "football_data_uk+api_football",
         "team_rows": 150,
@@ -445,9 +678,9 @@
             "team_name": "Celtic"
           }
         ],
-        "leader_value": 1.0,
-        "mean": 1.58,
-        "median": 1.6,
+        "leader_value": 0.99,
+        "mean": 1.57,
+        "median": 1.59,
         "ranked_teams": 12
       },
       "xg_for_pm": {
@@ -459,7 +692,7 @@
         ],
         "leader_value": 2.66,
         "mean": 1.58,
-        "median": 1.44,
+        "median": 1.43,
         "ranked_teams": 12
       }
     },
@@ -554,7 +787,7 @@
           "goals_against_pm": 0.77,
           "goals_for_pm": 2.15,
           "possession_pct": 60.69,
-          "xg_against_pm": 1.0,
+          "xg_against_pm": 0.99,
           "xg_for_pm": 2.66
         }
       },
@@ -600,7 +833,7 @@
           "goals_against_pm": 1.08,
           "goals_for_pm": 1.54,
           "possession_pct": 46.23,
-          "xg_against_pm": 1.74,
+          "xg_against_pm": 1.73,
           "xg_for_pm": 1.2
         }
       },
@@ -623,8 +856,8 @@
           "goals_against_pm": 1.83,
           "goals_for_pm": 2.17,
           "possession_pct": 53.33,
-          "xg_against_pm": 1.65,
-          "xg_for_pm": 1.76
+          "xg_against_pm": 1.64,
+          "xg_for_pm": 1.75
         }
       },
       {
@@ -646,8 +879,8 @@
           "goals_against_pm": 1.25,
           "goals_for_pm": 1.5,
           "possession_pct": 41.5,
-          "xg_against_pm": 1.65,
-          "xg_for_pm": 1.38
+          "xg_against_pm": 1.64,
+          "xg_for_pm": 1.37
         }
       },
       {
@@ -693,7 +926,7 @@
           "goals_for_pm": 1.31,
           "possession_pct": 45.85,
           "xg_against_pm": 1.77,
-          "xg_for_pm": 1.22
+          "xg_for_pm": 1.21
         }
       },
       {
@@ -715,8 +948,8 @@
           "goals_against_pm": 1.69,
           "goals_for_pm": 0.92,
           "possession_pct": 49.77,
-          "xg_against_pm": 1.94,
-          "xg_for_pm": 1.25
+          "xg_against_pm": 1.93,
+          "xg_for_pm": 1.24
         }
       },
       {
@@ -738,7 +971,7 @@
           "goals_against_pm": 1.62,
           "goals_for_pm": 1.15,
           "possession_pct": 54.69,
-          "xg_against_pm": 1.55,
+          "xg_against_pm": 1.54,
           "xg_for_pm": 1.53
         }
       },
@@ -767,9 +1000,9 @@
       },
       {
         "context": {
-          "fxg": 15.43,
+          "fxg": 15.4,
           "goals": 12,
-          "goals_minus_fxg": -3.43,
+          "goals_minus_fxg": -3.4,
           "label": "fitba fxG (local model, not ranked)",
           "matches": 12,
           "note": "fitba fxG is a local model and is not part of the provider-xG league rank.",
@@ -783,7 +1016,7 @@
           "goals_against_pm": 7,
           "goals_for_pm": 10,
           "possession_pct": 8,
-          "xg_against_pm": 5,
+          "xg_against_pm": 6,
           "xg_for_pm": 10
         },
         "team_id": "sco:aberdeen",
@@ -876,27 +1109,27 @@
     }
   ],
   "notes": "Season overview. Evidence, coverage and unknowns are shown beside each block.",
-  "published_at": "2026-11-09T06:19:03+00:00",
+  "published_at": "2026-11-09T18:14:08+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-09T06:17:02+00:00-3205006",
+  "served_by_update_id": "2026-11-09T18:07:56+00:00-961210",
   "source_snapshots": {
-    "api_football": "2026-11-09T06:19:00.556145+00:00",
-    "api_results": "2026-11-09T06:17:07+00:00",
-    "availability": "2026-11-09T06:18:12+00:00",
-    "career": "2026-11-09T06:18:12+00:00",
-    "football_data_uk": "2026-11-09T06:17:06+00:00",
-    "former_players": "2026-11-09T06:17:21+00:00",
-    "history_backfill": "2026-11-09T06:17:15+00:00",
+    "api_football": "2026-11-09T18:14:05.498659+00:00",
+    "api_results": "2026-11-09T18:07:58+00:00",
+    "availability": "2026-11-09T18:08:51+00:00",
+    "career": "2026-11-09T18:08:51+00:00",
+    "football_data_uk": "2026-11-09T18:07:57+00:00",
+    "former_players": "2026-11-09T18:08:11+00:00",
+    "history_backfill": "2026-11-09T18:08:10+00:00",
     "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T06:18:41+00:00",
-    "scouting_europe": "2026-11-09T06:18:30+00:00",
-    "scouting_pool": "2026-11-09T06:18:16+00:00",
-    "scouting_roles": "2026-11-09T06:18:17+00:00",
-    "scouting_rose_history": "2026-11-09T06:18:30+00:00",
-    "scouting_standings": "2026-11-09T06:18:31+00:00",
-    "spfl": "2026-11-09T06:17:08+00:00",
-    "xg_enrichment": "2026-11-09T06:18:43+00:00"
+    "scouting_clubs": "2026-11-09T18:13:20+00:00",
+    "scouting_europe": "2026-11-09T18:13:09+00:00",
+    "scouting_pool": "2026-11-09T18:08:58+00:00",
+    "scouting_roles": "2026-11-09T18:12:44+00:00",
+    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
+    "scouting_standings": "2026-11-09T18:13:10+00:00",
+    "spfl": "2026-11-09T18:07:59+00:00",
+    "xg_enrichment": "2026-11-09T18:13:46+00:00"
   },
   "sources": [
     "afc_news",
@@ -973,20 +1206,20 @@
         "rows": [
           {
             "age": 32,
-            "cohort_n": 11,
+            "cohort_n": 12,
             "minutes": 1080,
             "minutes_share": 1.0,
             "needs_priority": null,
             "player_id": 1141,
             "player_name": "M. Müller",
-            "rating_percentile": 45.5,
+            "rating_percentile": 58.3,
             "role_depth": 1,
             "role_family": "goalkeeper",
             "role_label": "Goalkeeper"
           },
           {
             "age": 28,
-            "cohort_n": 12,
+            "cohort_n": 13,
             "minutes": 960,
             "minutes_share": 0.889,
             "needs_priority": null,
@@ -1058,13 +1291,13 @@
     "rows": [
       {
         "age": 32,
-        "cohort_n": 11,
+        "cohort_n": 12,
         "minutes": 1080,
         "minutes_share": 1.0,
         "needs_priority": null,
         "player_id": 1141,
         "player_name": "M. Müller",
-        "rating_percentile": 45.5,
+        "rating_percentile": 58.3,
         "role_depth": 1,
         "role_family": "goalkeeper",
         "role_label": "Goalkeeper"
@@ -1136,52 +1369,52 @@
       },
       {
         "age": 27,
-        "cohort_n": 28,
+        "cohort_n": 29,
         "minutes": 483,
         "minutes_share": 0.447,
         "needs_priority": null,
         "player_id": 37253,
         "player_name": "M. Knoester",
-        "rating_percentile": 76.8,
+        "rating_percentile": 79.3,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
       },
       {
         "age": 24,
-        "cohort_n": 28,
+        "cohort_n": 29,
         "minutes": 564,
         "minutes_share": 0.522,
         "needs_priority": null,
         "player_id": 161806,
         "player_name": "G. Molloy",
-        "rating_percentile": 3.6,
+        "rating_percentile": 3.4,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
       },
       {
         "age": 22,
-        "cohort_n": 28,
+        "cohort_n": 29,
         "minutes": 453,
         "minutes_share": 0.419,
         "needs_priority": null,
         "player_id": 321860,
         "player_name": "J. Milne",
-        "rating_percentile": 14.3,
+        "rating_percentile": 13.8,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
       },
       {
         "age": 25,
-        "cohort_n": 28,
+        "cohort_n": 29,
         "minutes": 559,
         "minutes_share": 0.518,
         "needs_priority": null,
         "player_id": 125695,
         "player_name": "L. Mayo",
-        "rating_percentile": 58.9,
+        "rating_percentile": 60.3,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -1194,20 +1427,20 @@
         "needs_priority": null,
         "player_id": 108465,
         "player_name": "N. Guinness-Walker",
-        "rating_percentile": 63.6,
+        "rating_percentile": 65.9,
         "role_depth": 3,
         "role_family": "full_back",
         "role_label": "Left back"
       },
       {
         "age": 27,
-        "cohort_n": 28,
+        "cohort_n": 29,
         "minutes": 538,
         "minutes_share": 0.498,
         "needs_priority": null,
         "player_id": 18068,
         "player_name": "D. Happe",
-        "rating_percentile": 33.9,
+        "rating_percentile": 36.2,
         "role_depth": 5,
         "role_family": "centre_back",
         "role_label": "Centre back"
@@ -1246,7 +1479,7 @@
         "needs_priority": null,
         "player_id": 45010,
         "player_name": "B. Lyons",
-        "rating_percentile": 50.0,
+        "rating_percentile": 54.2,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -1272,7 +1505,7 @@
         "needs_priority": null,
         "player_id": 18945,
         "player_name": "S. Armstrong",
-        "rating_percentile": 50.0,
+        "rating_percentile": 58.3,
         "role_depth": 7,
         "role_family": "central_midfield",
         "role_label": "Centre midfielder"
@@ -1344,7 +1577,7 @@
       },
       {
         "age": 23,
-        "cohort_n": 12,
+        "cohort_n": 13,
         "minutes": 386,
         "minutes_share": 0.357,
         "needs_priority": null,
@@ -1383,7 +1616,7 @@
       },
       {
         "age": 28,
-        "cohort_n": 12,
+        "cohort_n": 13,
         "minutes": 960,
         "minutes_share": 0.889,
         "needs_priority": null,
@@ -1402,14 +1635,14 @@
         "needs_priority": null,
         "player_id": 231195,
         "player_name": "T. Olusanya",
-        "rating_percentile": 5.0,
+        "rating_percentile": 10.0,
         "role_depth": 3,
         "role_family": "wide_forward",
         "role_label": "Right winger"
       },
       {
         "age": 24,
-        "cohort_n": 12,
+        "cohort_n": 13,
         "minutes": 182,
         "minutes_share": 0.169,
         "needs_priority": null,
@@ -1436,5 +1669,5 @@
     ]
   },
   "state": "full",
-  "update_id": "2026-11-09T06:17:02+00:00-3205006"
+  "update_id": "2026-11-09T18:07:56+00:00-961210"
 }
