@@ -190,7 +190,10 @@ def _run_ingest_availability(ctx: UpdateContext) -> dict[str, Any]:
     meta = refresh_availability(squad_data=squad_payload(ctx.season), force=False)
     if meta.get("errors"):
         raise RuntimeError(f"availability refresh errors: {meta['errors'][:3]}")
-    return {"rows": int((meta.get("counts") or {}).get("entries") or 0)}
+    return {
+        "rows": int(meta.get("entry_count") or 0),
+        "artifacts": [str(meta.get("snapshot_path") or "")],
+    }
 
 
 def _run_ingest_career(ctx: UpdateContext) -> dict[str, Any]:

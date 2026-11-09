@@ -1,6 +1,6 @@
 # Injuries and availability
 
-**Status:** live. Last reviewed 2026-10-22.
+**Status:** live. Last reviewed 2026-11-09.
 
 Injuries and suspensions are a **special case of team news**, not a normal
 statistic. They are time-sensitive, often uncertain, and easy to present as
@@ -21,14 +21,13 @@ At the last check API-Football reports `injuries=false` for Scottish 2026, so
 the provider snapshot is `unavailable`. The app says so; it does not advertise
 a feed that returns nothing.
 
-At 2026-10-27 the curated ledger has seven verified entries, all from the
-official AFC Falkirk press conference: Mats Knoester (out, thigh tendon),
-Connor Ronan (out, medial knee ligament), Lewis Mayo (out for around two
-months, foot injury), Dan Happe (suspended), Kristers Tobers (doubtful,
-returning from a long-term knee injury and a virus), Findlay Marshall and Tony
-Yogane (doubtful, back in training after illness). No return date is invented
-where the club gives no timeframe. The scouting layer reads them through the
-same resolved availability payload; it does not keep a second ledger.
+The ledger is curated, so a dated claim can age or be overtaken by the match
+record. Every sweep reconciles each claim against named matchday squads and
+card-derived suspension service; the live `/analysis/` review block is the
+authoritative list of claims that need a curator, not a hard-coded snapshot in
+this document. No return date is invented where the club gives no timeframe.
+The scouting layer reads the same resolved availability payload; it does not
+keep a second ledger.
 
 The published payload carries two universes. The **official list** covers all 34
 players including loanees out (7 known / 27 unknown at the last check). The
@@ -74,6 +73,58 @@ Rules:
   `reference/availability.candidates.yaml` (private, not published) until a
   curator verifies an official source. They do not affect the predicted XI or
   needs.
+
+## Reconciliation
+
+Every sweep runs the curated ledger through `fitba.analytics.availability_reconcile`:
+
+- `out`: a player named in a later competitive squad is a contradiction. A
+  start or used substitute is always hard; an unused substitute is hard only
+  when the bench is complete.
+- `doubtful`: a start or used substitute withdraws the current doubt; an unused
+  substitute is consistent with doubt.
+- `suspended`: only a same-competition appearance contradicts a ban. A league
+  appearance does not contradict a League Cup-only ban. The competition scope
+  comes from the ledger’s `competition_id` or the player’s most recent red card.
+- `available`/`returned`/`unknown`: no participation reconciliation.
+
+A contradiction sets the published status to `unknown`, preserves
+`original_status`, the reason, source and `verified_at`, and records the fixture
+date, squad status and minutes in `contradicted_by`. The claim is not deleted;
+it moves to the review block. Unknown is not fit.
+
+## Review bands
+
+- `fresh_days: 7` — a known claim older than this is `review_severity="aging"`.
+  The status stays visible, with a review badge.
+- `max_age_days: 21` — a known claim older than this becomes `unknown` and
+  `stale=true`.
+- A missing value is null or unknown, never zero.
+
+## Suspension served
+
+`config/suspensions.yaml` supplies the red-card category length and
+`same_competition`. A second yellow is a one-match ban. The sweep scans played
+same-competition fixtures after the card:
+
+- a named squad during the ban window → `not_applied`;
+- each absent match with a complete bench counts toward service;
+- enough absent matches → `served`, with `served_fixture_id` and `served_date`;
+- no remaining fixture → `resolved: no_remaining_fixture`.
+
+A served or resolved ban is not a current suspension. The underlying rule is
+still `verified: false` until the current SFA protocol is sourced, so the UI
+says “derived from card events; rule not verified”.
+
+## Ledger versus latest official news
+
+The sweep compares the ledger’s `updated_at`/latest `verified_at` with the
+latest AFC news date. If the ledger is older, the document is marked
+`dataset_state="stale"` with `ledger_older_than_latest_news` and the
+`/analysis/` review block shows both dates. This is a visible review warning,
+not a publish blocker; a manual curation backlog must not stop the daily sweep.
+The guard fails only if a contradicted claim is still published as a current
+status.
 
 ## Predicted XI
 

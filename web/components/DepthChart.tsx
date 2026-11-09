@@ -14,7 +14,12 @@ type DepthRow = {
   role: string;
   minutes: number | null;
   availability: string | null;
+  availabilityOriginalStatus: string | null;
   availabilityNote: string | null;
+  availabilityReviewRequired: boolean;
+  availabilityReviewReason: string | null;
+  availabilityContradictedBy: Record<string, unknown> | null;
+  availabilitySuspension: Record<string, unknown> | null;
   status: string;
   ledgerOnly: boolean;
 };
@@ -72,7 +77,12 @@ export function DepthChart({
       role: playerRole(player),
       minutes: playerMinutes(player),
       availability: player.availability?.status ?? "unknown",
+      availabilityOriginalStatus: player.availability?.original_status ?? null,
       availabilityNote: player.availability?.note ?? null,
+      availabilityReviewRequired: Boolean(player.availability?.review_required),
+      availabilityReviewReason: player.availability?.review_reason ?? null,
+      availabilityContradictedBy: player.availability?.contradicted_by ?? null,
+      availabilitySuspension: player.availability?.suspension ?? null,
       status: statusLabel(player),
       ledgerOnly: false,
     };
@@ -89,7 +99,12 @@ export function DepthChart({
       role: entry.role_label ?? "Role unknown",
       minutes: entry.minutes ?? null,
       availability: entry.status || "unknown",
+      availabilityOriginalStatus: entry.original_status ?? null,
       availabilityNote: entry.note ?? null,
+      availabilityReviewRequired: Boolean(entry.review_required),
+      availabilityReviewReason: entry.review_reason ?? null,
+      availabilityContradictedBy: entry.contradicted_by ?? null,
+      availabilitySuspension: entry.suspension ?? null,
       status: "Ledger only",
       ledgerOnly: true,
     });
@@ -160,6 +175,11 @@ export function DepthChart({
                     <AvailabilityBadge
                       status={row.availability}
                       note={row.availabilityNote}
+                      originalStatus={row.availabilityOriginalStatus}
+                      reviewRequired={row.availabilityReviewRequired}
+                      reviewReason={row.availabilityReviewReason}
+                      contradictedBy={row.availabilityContradictedBy}
+                      suspension={row.availabilitySuspension}
                       compact
                     />
                   </td>

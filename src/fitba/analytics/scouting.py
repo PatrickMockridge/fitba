@@ -828,12 +828,19 @@ def _availability_payload(player: dict[str, Any]) -> dict[str, Any]:
     availability = player.get("availability") or {}
     return {
         "status": availability.get("status") or "unknown",
+        "original_status": availability.get("original_status"),
         "confidence": availability.get("confidence") or "unknown",
         "source_id": availability.get("source_id"),
         "source_url": availability.get("source_url"),
         "verified_at": availability.get("verified_at"),
         "note": availability.get("note"),
         "stale": bool(availability.get("stale")),
+        "review_required": bool(availability.get("review_required")),
+        "review_reason": availability.get("review_reason"),
+        "review_severity": availability.get("review_severity"),
+        "contradicted_by": availability.get("contradicted_by"),
+        "suspension": availability.get("suspension"),
+        "status_age_days": availability.get("status_age_days"),
     }
 
 
@@ -923,12 +930,19 @@ def build_board(
             "rates": {},
             "availability": {
                 "status": status,
+                "original_status": entry.get("original_status"),
                 "confidence": entry.get("confidence") or "unknown",
                 "source_id": entry.get("source_id"),
                 "source_url": entry.get("source_url"),
                 "verified_at": entry.get("verified_at"),
                 "note": entry.get("note"),
                 "stale": bool(entry.get("stale")),
+                "review_required": bool(entry.get("review_required")),
+                "review_reason": entry.get("review_reason"),
+                "review_severity": entry.get("review_severity"),
+                "contradicted_by": entry.get("contradicted_by"),
+                "suspension": entry.get("suspension"),
+                "status_age_days": entry.get("status_age_days"),
             },
             "prior": prior,
             "prior_history": history,
@@ -971,7 +985,12 @@ def build_board(
                 status = "above"
             else:
                 status = "at"
-        layer0 = [player for player in all_players if player["availability"]["status"] != "unknown"]
+        layer0 = [
+            player
+            for player in all_players
+            if player["availability"]["status"] != "unknown"
+            or player["availability"].get("review_required")
+        ]
         layer0.sort(
             key=lambda item: (
                 {"out": 0, "doubtful": 1, "suspended": 2, "returned": 3, "available": 4}.get(

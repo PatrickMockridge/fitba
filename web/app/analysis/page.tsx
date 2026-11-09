@@ -11,11 +11,13 @@ import {
 import { getAnalysisSummary } from "@/lib/data";
 import type {
   AnalysisAim,
+  AnalysisAvailabilityReview,
   AnalysisFixture,
   AnalysisInference,
   AnalysisLens,
   AnalysisLeagueRankings,
   AnalysisOfficial,
+  AnalysisReviewRow,
   AnalysisSelection,
   AnalysisSuspension,
 } from "@/lib/data";
@@ -99,6 +101,7 @@ function OfficialTable({ rows }: { rows: AnalysisOfficial[] }) {
             <th scope="col">Status</th>
             <th scope="col">Reason</th>
             <th scope="col">Confidence</th>
+            <th scope="col">Verified</th>
             <th scope="col">Source</th>
           </tr>
         </thead>
@@ -108,9 +111,18 @@ function OfficialTable({ rows }: { rows: AnalysisOfficial[] }) {
               <td>
                 <Link href={`/players/${row.player_id}/`}>{row.player_name ?? row.player_id}</Link>
               </td>
-              <td>{row.status}</td>
+              <td>
+                {row.status}
+                {row.review_required ? (
+                  <span className="badge badge-warn" title={row.review_reason ?? "Needs review"}>
+                    {" "}
+                    review
+                  </span>
+                ) : null}
+              </td>
               <td>{row.reason ?? "—"}</td>
               <td>{row.confidence ?? "unknown"}</td>
+              <td>{row.verified_at ? formatDate(row.verified_at) : "—"}</td>
               <td>
                 {row.source_url ? (
                   <a href={row.source_url} target="_blank" rel="noreferrer">
@@ -119,10 +131,112 @@ function OfficialTable({ rows }: { rows: AnalysisOfficial[] }) {
                 ) : (
                   "—"
                 )}
-                {row.verified_at ? <span className="muted"> · {formatDate(row.verified_at)}</span> : null}
               </td>
             </tr>
           ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function reviewEvidence(row: AnalysisReviewRow): string {
+  const contradiction = row.contradicted_by;
+  if (contradiction) {
+    const parts = [
+      contradiction.squad_status
+        ? String(contradiction.squad_status).replaceAll("_", " ")
+        : null,
+      contradiction.date ? formatDate(String(contradiction.date)) : null,
+      contradiction.minutes !== undefined && contradiction.minutes !== null
+        ? `${contradiction.minutes} min`
+        : null,
+      contradiction.opponent_name ? `v ${contradiction.opponent_name}` : null,
+    ].filter(Boolean);
+    if (parts.length) return parts.join(" · ");
+  }
+  const suspension = row.suspension;
+  if (suspension) {
+    if (suspension.state === "served") {
+      const date = suspension.served_date ? formatDate(String(suspension.served_date)) : null;
+      const matches = suspension.ban_matches
+        ? `${suspension.ban_matches} match${Number(suspension.ban_matches) === 1 ? "" : "es"}`
+        : null;
+      return ["served", date, matches].filter(Boolean).join(" · ");
+    }
+    if (suspension.state === "not_applied") return "Not applied";
+    if (suspension.state) return String(suspension.state).replaceAll("_", " ");
+  }
+  if (row.status_age_days !== null && row.status_age_days !== undefined) {
+    return `${formatInteger(row.status_age_days)} days old`;
+  }
+  return "—";
+}
+
+function ReviewTable({ review }: { review: AnalysisAvailabilityReview }) {
+  const ledger = review.ledger ?? {};
+  return (
+    <div className="table-wrap">
+      <table className="league-table compact">
+        <caption className="fine-print">
+          Contradicted or aging team-news claims. A contradicted claim is unknown, not
+          fit; an aging claim keeps its recorded status with a review flag. The
+          recorded claim, source and evidence stay visible.{" "}
+          {ledger.ledger_updated_at
+            ? `Ledger updated ${formatDate(String(ledger.ledger_updated_at))}`
+            : null}
+          {ledger.latest_news_date
+            ? ` · latest AFC news ${formatDate(String(ledger.latest_news_date))}`
+            : null}
+          .
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Published status</th>
+            <th scope="col">Recorded status</th>
+            <th scope="col">Verified</th>
+            <th scope="col">Source</th>
+            <th scope="col">Evidence</th>
+            <th scope="col">Review reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          {review.rows.length === 0 ? (
+            <tr>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+          ) : (
+            review.rows.map((row) => (
+              <tr key={row.player_id}>
+                <td>
+                  <Link href={`/players/${row.player_id}/`}>
+                    {row.player_name ?? row.player_id}
+                  </Link>
+                </td>
+                <td>{row.status}</td>
+                <td>{row.original_status ?? "—"}</td>
+                <td>{row.verified_at ? formatDate(row.verified_at) : "—"}</td>
+                <td>
+                  {row.source_url ? (
+                    <a href={row.source_url} target="_blank" rel="noreferrer">
+                      {row.source_id ?? "source"}
+                    </a>
+                  ) : (
+                    "—"
+                  )}
+                </td>
+                <td>{reviewEvidence(row)}</td>
+                <td>{row.review_reason?.replaceAll("_", " ") ?? "—"}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
@@ -142,7 +256,24 @@ function SuspensionRows({ rows }: { rows: AnalysisSuspension[] }) {
               ? `${row.reds} red${row.red_type ? ` (${row.red_type.replaceAll("_", " ")})` : ""}`
               : `${row.cautions}/${row.threshold ?? "?"} cautions`}
           </span>{" "}
-          <span className="badge badge-warn">{row.status.replaceAll("_", " ")}</span>
+          <span
+            className={
+              row.status === "served" || row.status === "resolved"
+                ? "badge badge-ok"
+                : "badge badge-warn"
+            }
+          >
+            {row.status.replaceAll("_", " ")}
+          </span>
+          {row.status === "served" && row.served_date ? (
+            <span className="muted">
+              {" "}
+              · served {formatDate(row.served_date)}
+              {row.ban_matches
+                ? ` · ${row.ban_matches} match${row.ban_matches === 1 ? "" : "es"}`
+                : ""}
+            </span>
+          ) : null}
           {row.next_fixture ? (
             <span className="muted">
               {" "}
@@ -566,6 +697,15 @@ export default function AnalysisPage() {
   }
   const hero = data.hero;
   const counts = data.availability.counts;
+  const review = data.availability.review ?? {
+    status: "ok",
+    count: 0,
+    contradicted: 0,
+    aging: 0,
+    suspension_served: 0,
+    ledger: {},
+    rows: [],
+  };
   const lenses = Object.values(data.squad_decisions.lenses ?? {});
   return (
     <ContractPage surface="analysis">
@@ -645,6 +785,16 @@ export default function AnalysisPage() {
         </p>
         <h3>Official team news</h3>
         <OfficialTable rows={data.availability.official} />
+        <div data-contract="analysis.availability.review">
+          <h3>Team news needing review</h3>
+          <p className="fine-print">
+            {formatInteger(review.count)} claims need review:{" "}
+            {formatInteger(review.contradicted)} contradicted and{" "}
+            {formatInteger(review.aging)} aging; {formatInteger(review.suspension_served)}{" "}
+            suspension served.
+          </p>
+          <ReviewTable review={review} />
+        </div>
         <h3>Derived selection signals</h3>
         <p className="fine-print">
           Competition-scoped and labelled. Projected or review states are not official team news.

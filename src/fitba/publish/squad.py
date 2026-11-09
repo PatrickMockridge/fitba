@@ -372,6 +372,7 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                 "availability": (
                     {
                         "status": availability_by_player[player_id].get("status"),
+                        "original_status": availability_by_player[player_id].get("original_status"),
                         "confidence": availability_by_player[player_id].get("confidence"),
                         "source_id": availability_by_player[player_id].get("source_id"),
                         "source_url": availability_by_player[player_id].get("source_url"),
@@ -379,6 +380,16 @@ def squad_payload(season: str, generated_at: str | None = None) -> dict[str, Any
                         "note": availability_by_player[player_id].get("note"),
                         "stale": bool(availability_by_player[player_id].get("stale")),
                         "conflict": bool(availability_by_player[player_id].get("conflict")),
+                        "review_required": bool(
+                            availability_by_player[player_id].get("review_required")
+                        ),
+                        "review_reason": availability_by_player[player_id].get("review_reason"),
+                        "review_severity": availability_by_player[player_id].get("review_severity"),
+                        "contradicted_by": availability_by_player[player_id].get("contradicted_by"),
+                        "suspension": availability_by_player[player_id].get("suspension"),
+                        "status_age_days": availability_by_player[player_id].get("status_age_days"),
+                        "fresh_until": availability_by_player[player_id].get("fresh_until"),
+                        "stale_after": availability_by_player[player_id].get("stale_after"),
                     }
                     if player_id in availability_by_player
                     else {"status": "unknown", "confidence": "unknown"}

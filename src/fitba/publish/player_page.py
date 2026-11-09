@@ -144,6 +144,7 @@ class ProfileSummary(StrictModel):
 
 class AvailabilityBlock(StrictModel):
     status: str
+    original_status: str | None = None
     reason: str | None
     reason_category: str | None
     expected_return: str | None
@@ -154,6 +155,14 @@ class AvailabilityBlock(StrictModel):
     verified_at: str | None
     note: str | None
     in_squad: bool | None
+    review_required: bool = False
+    review_reason: str | None = None
+    review_severity: str | None = None
+    contradicted_by: dict[str, Any] | None = None
+    suspension: dict[str, Any] | None = None
+    status_age_days: int | None = None
+    fresh_until: str | None = None
+    stale_after: str | None = None
 
 
 class RecentMatch(StrictModel):
@@ -718,6 +727,7 @@ def build_player_page(
     availability_block = (
         AvailabilityBlock(
             status=str(availability.get("status") or "unknown"),
+            original_status=availability.get("original_status"),
             reason=availability.get("reason"),
             reason_category=availability.get("reason_category"),
             expected_return=availability.get("expected_return"),
@@ -728,6 +738,14 @@ def build_player_page(
             verified_at=availability.get("verified_at"),
             note=availability.get("note"),
             in_squad=availability.get("in_squad"),
+            review_required=bool(availability.get("review_required")),
+            review_reason=availability.get("review_reason"),
+            review_severity=availability.get("review_severity"),
+            contradicted_by=availability.get("contradicted_by"),
+            suspension=availability.get("suspension"),
+            status_age_days=availability.get("status_age_days"),
+            fresh_until=availability.get("fresh_until"),
+            stale_after=availability.get("stale_after"),
         )
         if availability is not None
         else None

@@ -7,6 +7,11 @@
           "title": "Conflicts",
           "type": "integer"
         },
+        "contradicted": {
+          "default": 0,
+          "title": "Contradicted",
+          "type": "integer"
+        },
         "dataset_id": {
           "anyOf": [
             {
@@ -41,6 +46,11 @@
         },
         "known": {
           "title": "Known",
+          "type": "integer"
+        },
+        "needs_review": {
+          "default": 0,
+          "title": "Needs Review",
           "type": "integer"
         },
         "note": {
@@ -158,6 +168,18 @@
     "AvailabilityEntry": {
       "additionalProperties": false,
       "properties": {
+        "competition_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Id"
+        },
         "confidence": {
           "default": "unknown",
           "title": "Confidence",
@@ -167,6 +189,17 @@
           "default": false,
           "title": "Conflict",
           "type": "boolean"
+        },
+        "contradicted_by": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ContradictedBy"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "dataset_id": {
           "anyOf": [
@@ -228,6 +261,18 @@
           "default": null,
           "title": "Expected Return"
         },
+        "fresh_until": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fresh Until"
+        },
         "in_squad": {
           "default": true,
           "title": "In Squad",
@@ -244,6 +289,26 @@
           ],
           "default": null,
           "title": "Note"
+        },
+        "original_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "out",
+                "doubtful",
+                "suspended",
+                "returned",
+                "available",
+                "unknown"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Original Status"
         },
         "player_id": {
           "anyOf": [
@@ -322,6 +387,42 @@
           "title": "Reason Category",
           "type": "string"
         },
+        "review_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Reason"
+        },
+        "review_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Reasons",
+          "type": "array"
+        },
+        "review_required": {
+          "default": false,
+          "title": "Review Required",
+          "type": "boolean"
+        },
+        "review_severity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Severity"
+        },
         "served_by_update_id": {
           "anyOf": [
             {
@@ -381,6 +482,18 @@
           "title": "Stale",
           "type": "boolean"
         },
+        "stale_after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale After"
+        },
         "stale_reason": {
           "anyOf": [
             {
@@ -405,6 +518,29 @@
           ],
           "title": "Status",
           "type": "string"
+        },
+        "status_age_days": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status Age Days"
+        },
+        "suspension": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SuspensionState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "update_id": {
           "anyOf": [
@@ -432,6 +568,135 @@
         }
       },
       "title": "AvailabilityEntry",
+      "type": "object"
+    },
+    "AvailabilityReview": {
+      "additionalProperties": false,
+      "properties": {
+        "aging": {
+          "default": 0,
+          "title": "Aging",
+          "type": "integer"
+        },
+        "contradicted": {
+          "default": 0,
+          "title": "Contradicted",
+          "type": "integer"
+        },
+        "count": {
+          "default": 0,
+          "title": "Count",
+          "type": "integer"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "ledger": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Ledger",
+          "type": "object"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "reconciliation": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Reconciliation",
+          "type": "object"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "status": {
+          "default": "ok",
+          "title": "Status",
+          "type": "string"
+        },
+        "suspension_served": {
+          "default": 0,
+          "title": "Suspension Served",
+          "type": "integer"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        }
+      },
+      "title": "AvailabilityReview",
       "type": "object"
     },
     "AvailabilitySource": {
@@ -549,6 +814,435 @@
       ],
       "title": "AvailabilitySource",
       "type": "object"
+    },
+    "ContradictedBy": {
+      "additionalProperties": false,
+      "properties": {
+        "competition_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Id"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "fixture_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fixture Id"
+        },
+        "minutes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minutes"
+        },
+        "opponent_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opponent Name"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "squad_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Squad Status"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "started": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        }
+      },
+      "title": "ContradictedBy",
+      "type": "object"
+    },
+    "SuspensionState": {
+      "additionalProperties": false,
+      "properties": {
+        "appearance_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Appearance Date"
+        },
+        "appearance_fixture_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Appearance Fixture Id"
+        },
+        "appearance_squad_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Appearance Squad Status"
+        },
+        "ban_matches": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ban Matches"
+        },
+        "card_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Card Date"
+        },
+        "card_fixture_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Card Fixture Id"
+        },
+        "competition_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Competition Id"
+        },
+        "dataset_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset Id"
+        },
+        "dataset_state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dataset State"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "red_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Red Type"
+        },
+        "rule_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Source"
+        },
+        "rule_verified": {
+          "default": false,
+          "title": "Rule Verified",
+          "type": "boolean"
+        },
+        "served_by_update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served By Update Id"
+        },
+        "served_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served Count"
+        },
+        "served_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served Date"
+        },
+        "served_fixture_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Served Fixture Id"
+        },
+        "source_snapshots": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Snapshots"
+        },
+        "stale_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stale Reason"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        },
+        "update_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Update Id"
+        }
+      },
+      "title": "SuspensionState",
+      "type": "object"
     }
   },
   "additionalProperties": false,
@@ -627,8 +1321,11 @@
       "default": null,
       "title": "Published At"
     },
+    "review": {
+      "$ref": "#/$defs/AvailabilityReview"
+    },
     "schema_version": {
-      "default": "1.0.0",
+      "default": "1.1.0",
       "title": "Schema Version",
       "type": "string"
     },

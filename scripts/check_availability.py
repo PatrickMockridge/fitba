@@ -34,6 +34,19 @@ def _allowed_url(url: str | None) -> bool:
     return any(host == item or host.endswith("." + item) for item in ALLOWED_HOSTS)
 
 
+def _contains_player(node: Any, player_id: Any) -> bool:
+    if player_id is None:
+        return False
+    wanted = str(player_id)
+    if isinstance(node, dict):
+        if str(node.get("player_id")) == wanted:
+            return True
+        return any(_contains_player(value, player_id) for value in node.values())
+    if isinstance(node, list):
+        return any(_contains_player(value, player_id) for value in node)
+    return False
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -90,6 +103,89 @@ def main() -> int:
             errors.append(f"{entry.get('player_name')}: stale entry is not unknown")
         if entry.get("conflict") and status in {"out", "suspended"}:
             warnings.append(f"{entry.get('player_name')}: conflict with an out/suspended status")
+
+    review = document.get("review") or {}
+    contradicted = sum(1 for entry in entries if entry.get("review_severity") == "contradicted")
+    aging = sum(1 for entry in entries if entry.get("review_severity") == "aging")
+    needs_review = sum(1 for entry in entries if entry.get("review_required"))
+    if int(coverage.get("needs_review") or 0) != needs_review:
+        errors.append("coverage needs_review does not equal the entry flags")
+    if int(coverage.get("contradicted") or 0) != contradicted:
+        errors.append("coverage contradicted does not equal the entry flags")
+    if int(review.get("count") or 0) != needs_review:
+        errors.append("review count does not equal the entry flags")
+    if int(review.get("contradicted") or 0) != contradicted:
+        errors.append("review contradicted count does not equal the entry flags")
+    if int(review.get("aging") or 0) != aging:
+        errors.append("review aging count does not equal the entry flags")
+    for entry in entries:
+        name = entry.get("player_name")
+        if entry.get("review_severity") == "contradicted" and entry.get("status") in {
+            "out",
+            "suspended",
+            "doubtful",
+        }:
+            errors.append(f"{name}: contradicted claim is still a current status")
+        if entry.get("review_required"):
+            if not entry.get("review_reason") or not entry.get("review_severity"):
+                errors.append(f"{name}: review flag without reason or severity")
+            if not entry.get("original_status"):
+                errors.append(f"{name}: review flag without the original status")
+            if not entry.get("source_url") or not entry.get("verified_at"):
+                errors.append(f"{name}: review flag without source or verification date")
+        contradiction = entry.get("contradicted_by") or {}
+        if contradiction:
+            verified = str(entry.get("verified_at") or "")[:10]
+            seen = str(contradiction.get("date") or "")[:10]
+            if verified and seen and seen <= verified:
+                errors.append(f"{name}: contradiction evidence is not after verified_at")
+            fixture_id = contradiction.get("fixture_id")
+            if fixture_id is not None:
+                match_path = GENERATED / "matches" / f"{fixture_id}.json"
+                if match_path.exists():
+                    document_match = _load(match_path)
+                    if not _contains_player(document_match, entry.get("player_id")):
+                        errors.append(
+                            f"{name}: contradiction fixture {fixture_id} does not list the player"
+                        )
+                else:
+                    warnings.append(f"{name}: contradiction match page {fixture_id} is missing")
+        suspension = entry.get("suspension") or {}
+        if suspension.get("state") == "served" and (
+            not suspension.get("served_fixture_id") or not suspension.get("served_date")
+        ):
+            errors.append(f"{name}: served suspension without served fixture evidence")
+        if suspension.get("state") in {"active", "not_applied"} and not suspension.get(
+            "ban_matches"
+        ):
+            errors.append(f"{name}: {suspension.get('state')} suspension without a ban length")
+        if entry.get("review_severity") == "aging":
+            warnings.append(f"{name}: team-news claim is aging and needs review")
+
+    ledger = review.get("ledger") or {}
+    ledger_updated = str(ledger.get("ledger_updated_at") or "")[:10]
+    latest_news = str(ledger.get("latest_news_date") or "")[:10]
+    if ledger_updated and latest_news and latest_news > ledger_updated:
+        if ledger.get("status") != "review":
+            errors.append("ledger is older than the latest AFC news but is not flagged for review")
+        else:
+            warnings.append(f"ledger updated {ledger_updated} · latest AFC news {latest_news}")
+
+    fixtures_path = GENERATED / "fixtures" / "index.json"
+    evidence_latest = str(
+        ((review.get("reconciliation") or {}).get("evidence") or {}).get("latest_fixture_date")
+        or ""
+    )[:10]
+    if fixtures_path.exists():
+        fixtures = _load(fixtures_path)
+        played_dates = [
+            str(row.get("date") or "")[:10]
+            for row in fixtures.get("fixtures") or []
+            if row.get("result") and row.get("date")
+        ]
+        latest_played = max(played_dates) if played_dates else ""
+        if latest_played and (not evidence_latest or latest_played > evidence_latest):
+            warnings.append("reconciliation evidence is older than the latest published fixture")
 
     if MATCHDAY.exists():
         matchday = _load(MATCHDAY)

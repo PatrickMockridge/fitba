@@ -52,6 +52,7 @@ PINNED_MARKERS = {
         "analysis.league-table",
         "analysis.next-up",
         "analysis.availability",
+        "analysis.availability.review",
         "analysis.aims",
         "analysis.squad-decisions",
         "analysis.bridges",
@@ -255,6 +256,15 @@ PINNED_COLUMNS = {
         "Kickoff",
         "Status",
         "Watch",
+    ],
+    "analysis.availability.review": [
+        "Player",
+        "Published status",
+        "Recorded status",
+        "Verified",
+        "Source",
+        "Evidence",
+        "Review reason",
     ],
     "analysis.league-rankings": [
         "Metric",

@@ -53,8 +53,15 @@ class NeedsPlayer(StrictModel):
     sub_apps: int | None = None
     category: str | None = None
     availability_status: str | None = None
+    availability_original_status: str | None = None
     availability_note: str | None = None
     availability_conflict: bool | None = None
+    availability_review_required: bool = False
+    availability_review_reason: str | None = None
+    availability_review_severity: str | None = None
+    availability_contradicted_by: dict[str, Any] | None = None
+    availability_suspension: dict[str, Any] | None = None
+    availability_status_age_days: int | None = None
     arrival: str | None = None
     arrival_kind: str | None = None
     note: str | None = None

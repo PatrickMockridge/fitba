@@ -176,6 +176,11 @@ export function PredictedLineupPanel({
               <AvailabilityBadge
                 status={player.availability_status}
                 note={player.availability_note}
+                originalStatus={player.availability_original_status}
+                reviewRequired={player.availability_review_required ?? false}
+                reviewReason={player.availability_review_reason}
+                contradictedBy={player.availability_contradicted_by}
+                suspension={player.availability_suspension}
                 compact
               />
               <ConfidenceBadge confidence={player.confidence} compact />

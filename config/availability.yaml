@@ -20,6 +20,12 @@ policy:
   allowed_hosts:
     - afc.co.uk
     - www.afc.co.uk
+reconciliation:
+  enabled: true
+  statuses: [out, suspended, doubtful]
+  require_complete_bench: true
+  suspend_scope_from_cards: true
+  ledger_news_review: true
 
 provider:
   source: api_football

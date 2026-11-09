@@ -275,7 +275,8 @@ def availability(
             console.print("availability: no snapshot; run `uv run fitba availability --refresh`")
             return
         console.print(
-            f"availability: {meta.get('counts', {})} · "
+            f"availability: {meta.get('entry_count', 0)} entries · "
+            f"{meta.get('counts', {})} · review {meta.get('review', {})} · "
             f"provider {((meta.get('provider') or {}).get('status'))} "
             f"({((meta.get('provider') or {}).get('reason'))})"
         )
@@ -285,7 +286,8 @@ def availability(
         force=force,
     )
     console.print(
-        f"availability: {meta.get('counts', {})} · "
+        f"availability: {meta.get('entry_count', 0)} entries · "
+        f"{meta.get('counts', {})} · review {meta.get('review', {})} · "
         f"provider {((meta.get('provider') or {}).get('status'))} "
         f"({((meta.get('provider') or {}).get('reason'))})"
     )

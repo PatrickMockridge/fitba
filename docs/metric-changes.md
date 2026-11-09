@@ -8,6 +8,42 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.15.0 — 2026-11-09
+
+Availability reconciliation. `analysis.summary` v3 → v4 and `availability.ledger`
+v3 → v4. **No existing formula, denominator, source or rounding mode changed.**
+The review adds participation and suspension-service evidence to the published
+availability layer.
+
+- `availability.ledger` v3 → v4 adds `original_status`, `review_required`,
+  `review_reason`/`review_reasons`, `review_severity`, `contradicted_by`,
+  `status_age_days`, `fresh_until`, `stale_after`, `suspension` and the
+  document `review` block. A claim contradicted by a named squad or a served
+  suspension becomes `unknown`; the original claim, source and verification
+  date are preserved.
+- `analysis.summary` v3 → v4 adds `availability.review` and the counts
+  `needs_review`/`contradicted`. Official team news publishes only current
+  statuses; contradicted and aging claims move to the review block.
+- The sweep now reports the real availability entry count (34) and reconciles
+  every known claim. Suspension rows may be `served`, `not_applied` or
+  `resolved`; a served red no longer appears as a current ban.
+- Expected published change (2026-11-09):
+
+| Field | Before | After |
+|---|---:|---:|
+| Known availability entries | 7 | 3 |
+| Active `unknown` | 22 | 26 |
+| Official `out` | 3 | 2 |
+| Official `suspended` | 1 | 0 |
+| Official `doubtful` | 3 | 1 |
+| `needs_review` | absent | 7 |
+| `contradicted` | absent | 4 |
+| Happe suspension | `review_required` | `served` (2026-10-31) |
+
+Ronan, Happe, Yogane and Marshall become `unknown` with review evidence;
+Knoester and Mayo stay `out` and Tobers stays `doubtful`, all flagged aging.
+Registry version 3.14.0 → 3.15.0.
+
 ## 3.14.0 — 2026-11-08
 
 League rankings on the season overview. `analysis.summary` v2 → v3 and new

@@ -212,8 +212,15 @@ def _squad_players(
                 "minutes": int(playing.get("minutes") or 0),
                 "sub_apps": int(playing.get("sub_apps") or 0),
                 "availability_status": status,
+                "availability_original_status": availability_row.get("original_status"),
                 "availability_note": availability_row.get("note"),
                 "availability_conflict": bool(availability_row.get("conflict")),
+                "availability_review_required": bool(availability_row.get("review_required")),
+                "availability_review_reason": availability_row.get("review_reason"),
+                "availability_review_severity": availability_row.get("review_severity"),
+                "availability_contradicted_by": availability_row.get("contradicted_by"),
+                "availability_suspension": availability_row.get("suspension"),
+                "availability_status_age_days": availability_row.get("status_age_days"),
                 "status": player.get("status"),
             }
         )

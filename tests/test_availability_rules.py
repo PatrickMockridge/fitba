@@ -1,7 +1,6 @@
 import pytest
 
 from fitba.analytics.availability_rules import card_summary, suspension_rows
-from fitba.normalize.schedule import load_schedule
 from fitba.settings import NORMALIZED_DIR
 
 pytestmark = pytest.mark.skipif(
@@ -22,24 +21,16 @@ def test_second_yellow_is_recovered_and_scoped_to_the_cup():
     suspensions = suspension_rows("2026-27", cards)
     happe = next(item for item in suspensions if item["player_id"] == 18068)
     assert happe["competition_id"] == "sco:league-cup"
-    assert happe["status"] == "review_required"
-    # The next fixture is the earliest scheduled cup tie after the card, not
-    # the next league match. It is None once the cup run has no fixture left;
-    # do not pin the assertion to a date that the data will overtake.
-    upcoming = [
-        row
-        for row in load_schedule("2026-27")
-        if row.get("competition_id") == "sco:league-cup"
-        and row.get("status") == "scheduled"
-        and not row.get("conflict_review")
-        and str(row.get("date") or "") > str(happe["last_card_date"])
-    ]
-    expected = min(upcoming, key=lambda row: str(row.get("date") or "")) if upcoming else None
-    if expected is None:
-        assert happe["next_fixture"] is None
-    else:
-        assert happe["next_fixture"]["fixture_id"] == expected["fixture_id"]
-        assert happe["next_fixture"]["date"] == expected["date"]
+    # The second yellow is a one-match, same-competition ban. Happe was absent
+    # from the 2026-10-31 League Cup semi-final, so the ban is served; it was
+    # never a league suspension.
+    assert happe["status"] == "served"
+    assert happe["suspension_state"] == "served"
+    assert happe["served_fixture_id"] == 1639572
+    assert happe["served_date"] == "2026-10-31"
+    assert happe["ban_matches"] == 1
+    assert happe["rule_verified"] is False
+    assert happe["next_fixture"] is None
     mayo = next(item for item in suspensions if item["player_id"] == 125695)
     assert mayo["status"] in {"watch", "review_required", "projected"}
     assert mayo["threshold"] == 6

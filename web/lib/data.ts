@@ -1330,6 +1330,7 @@ export interface SquadPlayer {
   provider_flag?: boolean;
   availability?: {
     status?: string;
+    original_status?: string | null;
     confidence?: string;
     source_id?: string;
     source_url?: string | null;
@@ -1337,6 +1338,14 @@ export interface SquadPlayer {
     note?: string | null;
     stale?: boolean;
     conflict?: boolean;
+    review_required?: boolean;
+    review_reason?: string | null;
+    review_severity?: string | null;
+    contradicted_by?: Record<string, unknown> | null;
+    suspension?: Record<string, unknown> | null;
+    status_age_days?: number | null;
+    fresh_until?: string | null;
+    stale_after?: string | null;
   };
   status: "squad" | "loan_out" | "loan_in" | string;
   loan: {
@@ -2098,12 +2107,19 @@ export interface LineupPlayer {
   unavailable_reason?: string | null;
   status?: string | null;
   availability_status?: string | null;
+  availability_original_status?: string | null;
   availability_confidence?: string | null;
   availability_source?: string | null;
   availability_source_url?: string | null;
   availability_verified_at?: string | null;
   availability_note?: string | null;
   availability_conflict?: boolean | null;
+  availability_review_required?: boolean | null;
+  availability_review_reason?: string | null;
+  availability_review_severity?: string | null;
+  availability_contradicted_by?: Record<string, unknown> | null;
+  availability_suspension?: Record<string, unknown> | null;
+  availability_status_age_days?: number | null;
   availability_downgrade?: number | null;
 }
 
@@ -2322,6 +2338,17 @@ export interface AvailabilityEntry {
   conflict?: boolean;
   in_squad?: boolean;
   note?: string | null;
+  original_status?: string | null;
+  competition_id?: string | null;
+  review_required?: boolean;
+  review_reason?: string | null;
+  review_reasons?: string[];
+  review_severity?: string | null;
+  contradicted_by?: Record<string, unknown> | null;
+  suspension?: Record<string, unknown> | null;
+  status_age_days?: number | null;
+  fresh_until?: string | null;
+  stale_after?: string | null;
 }
 
 export interface AvailabilityDocument {
@@ -2343,8 +2370,19 @@ export interface AvailabilityDocument {
     returned: number;
     stale: number;
     conflicts: number;
+    needs_review?: number;
+    contradicted?: number;
     provider_snapshot: Record<string, unknown>;
     note: string;
+  };
+  review?: {
+    status: string;
+    count: number;
+    contradicted: number;
+    aging: number;
+    suspension_served: number;
+    reconciliation: Record<string, unknown>;
+    ledger: Record<string, unknown>;
   };
   entries: AvailabilityEntry[];
   sources: MatchdaySource[];
@@ -2360,8 +2398,15 @@ export interface NeedsPlayer {
   sub_apps?: number | null;
   category?: string | null;
   availability_status?: string | null;
+  availability_original_status?: string | null;
   availability_note?: string | null;
   availability_conflict?: boolean | null;
+  availability_review_required?: boolean;
+  availability_review_reason?: string | null;
+  availability_review_severity?: string | null;
+  availability_contradicted_by?: Record<string, unknown> | null;
+  availability_suspension?: Record<string, unknown> | null;
+  availability_status_age_days?: number | null;
   arrival?: string | null;
   arrival_kind?: string | null;
   note?: string | null;
@@ -3193,6 +3238,7 @@ export interface AnalysisOfficial {
   player_id: number;
   player_name: string | null;
   status: string;
+  original_status?: string | null;
   reason: string | null;
   reason_category: string | null;
   expected_return: string | null;
@@ -3201,6 +3247,44 @@ export interface AnalysisOfficial {
   source_url: string | null;
   verified_at: string | null;
   note: string | null;
+  review_required?: boolean;
+  review_reason?: string | null;
+  review_severity?: string | null;
+  status_age_days?: number | null;
+  fresh_until?: string | null;
+  stale_after?: string | null;
+}
+
+export interface AnalysisReviewRow {
+  player_id: number;
+  player_name: string | null;
+  status: string;
+  original_status: string | null;
+  reason: string | null;
+  reason_category: string | null;
+  confidence: string | null;
+  source_id: string | null;
+  source_url: string | null;
+  source_title?: string | null;
+  verified_at: string | null;
+  review_reason: string | null;
+  review_reasons: string[];
+  review_severity: string | null;
+  contradicted_by: Record<string, unknown> | null;
+  suspension: Record<string, unknown> | null;
+  status_age_days: number | null;
+  fresh_until: string | null;
+  stale_after: string | null;
+}
+
+export interface AnalysisAvailabilityReview {
+  status: string;
+  count: number;
+  contradicted: number;
+  aging: number;
+  suspension_served: number;
+  ledger: Record<string, unknown>;
+  rows: AnalysisReviewRow[];
 }
 
 export interface AnalysisSuspension {
@@ -3217,6 +3301,11 @@ export interface AnalysisSuspension {
   rule_verified: boolean;
   rule_source: string | null;
   last_card_date: string | null;
+  ban_matches?: number | null;
+  served_fixture_id?: number | null;
+  served_date?: string | null;
+  served_count?: number | null;
+  suspension_state?: string | null;
   next_fixture: {
     fixture_id: number | string | null;
     date: string;
@@ -3359,6 +3448,7 @@ export interface AnalysisSummary {
   availability: {
     counts: Record<string, number>;
     official: AnalysisOfficial[];
+    review: AnalysisAvailabilityReview;
     suspensions: AnalysisSuspension[];
     inferred: AnalysisInference[];
     selection: AnalysisSelection[];
@@ -4362,12 +4452,19 @@ export interface ScoutingPrior {
 
 export interface ScoutingAvailability {
   status: string;
+  original_status?: string | null;
   confidence: string;
   source_id: string | null;
   source_url: string | null;
   verified_at: string | null;
   note: string | null;
   stale: boolean;
+  review_required?: boolean;
+  review_reason?: string | null;
+  review_severity?: string | null;
+  contradicted_by?: Record<string, unknown> | null;
+  suspension?: Record<string, unknown> | null;
+  status_age_days?: number | null;
 }
 
 export interface ScoutingBoardPlayer {
@@ -4427,11 +4524,18 @@ export interface ScoutingLayerZero {
   minutes: number;
   rating: number | null;
   status: string;
+  original_status?: string | null;
   confidence: string;
   source_id: string | null;
   source_url: string | null;
   verified_at: string | null;
   note: string | null;
+  review_required?: boolean;
+  review_reason?: string | null;
+  review_severity?: string | null;
+  contradicted_by?: Record<string, unknown> | null;
+  suspension?: Record<string, unknown> | null;
+  status_age_days?: number | null;
   prior: ScoutingPrior | null;
   first_choice: boolean;
 }

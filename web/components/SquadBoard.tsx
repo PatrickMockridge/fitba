@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AvailabilityBadge } from "@/components/AvailabilityBadge";
 import { CardMark } from "@/components/CardMark";
 import { PlayerLink } from "@/components/PlayerLink";
 import { RoleInferenceDialog } from "@/components/RoleInference";
@@ -273,11 +274,18 @@ export function SquadBoard({ players }: { players: SquadPlayer[] }) {
                   <td>
                     <PlayerLink name={player.full_name || player.name} href={player.href} />
                     {player.availability?.status &&
-                    player.availability.status !== "unknown" ? (
-                      <span className="badge badge-warn">
-                        {" "}
-                        {player.availability.status}
-                      </span>
+                    (player.availability.status !== "unknown" ||
+                      player.availability.review_required) ? (
+                      <AvailabilityBadge
+                        status={player.availability.status}
+                        note={player.availability.note}
+                        originalStatus={player.availability.original_status}
+                        reviewRequired={player.availability.review_required ?? false}
+                        reviewReason={player.availability.review_reason}
+                        contradictedBy={player.availability.contradicted_by}
+                        suspension={player.availability.suspension}
+                        compact
+                      />
                     ) : null}
                   </td>
                   <td className="num">{player.number ?? "—"}</td>

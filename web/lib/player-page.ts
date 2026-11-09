@@ -165,6 +165,7 @@ export interface ProfilePanelData {
 
 export interface AvailabilityBlock {
   status: string;
+  original_status?: string | null;
   reason: string | null;
   reason_category: string | null;
   expected_return: string | null;
@@ -175,6 +176,14 @@ export interface AvailabilityBlock {
   verified_at: string | null;
   note: string | null;
   in_squad: boolean | null;
+  review_required?: boolean;
+  review_reason?: string | null;
+  review_severity?: string | null;
+  contradicted_by?: Record<string, unknown> | null;
+  suspension?: Record<string, unknown> | null;
+  status_age_days?: number | null;
+  fresh_until?: string | null;
+  stale_after?: string | null;
 }
 
 export interface AvailabilityPanelData {

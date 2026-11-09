@@ -38,9 +38,12 @@ calibration and match-level ranges stay on `/analysis/xg/`.
 3. **Next up** — the next three competitive fixtures with date, competition,
    opponent, venue (H/A/Neutral), local kickoff and status. Links to the
    six-game matchday lookahead and the full `/matches/` schedule.
-4. **Availability and selection** — counts, official AFC team news, derived
-   selection signals and a capped selection watch. “Available” means a verified
-   ledger entry, not fit.
+4. **Availability and selection** — counts, official AFC team news, a
+   **Team news needing review** block, derived selection signals and a capped
+   selection watch. “Available” means a verified ledger entry, not fit.
+   Contradicted claims are `unknown`, with the original claim, source,
+   verification date and match evidence in the review block. Served suspensions
+   are labelled `served`, not current.
 5. **Season aims** — at most three analyst-set aims with target, current value
    and status. The top-six split, the League Cup semi-final and the European
    route are separate; the block says the targets are not published club

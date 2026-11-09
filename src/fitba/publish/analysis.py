@@ -114,8 +114,54 @@ def _official(active_ids: set[int], ledger: list[dict[str, Any]]) -> list[dict[s
                 "source_url": entry.get("source_url"),
                 "verified_at": entry.get("verified_at"),
                 "note": entry.get("note"),
+                "review_required": bool(entry.get("review_required")),
+                "review_reason": entry.get("review_reason"),
+                "review_severity": entry.get("review_severity"),
+                "original_status": entry.get("original_status"),
+                "status_age_days": entry.get("status_age_days"),
+                "fresh_until": entry.get("fresh_until"),
+                "stale_after": entry.get("stale_after"),
             }
         )
+    return rows
+
+
+def _review(active_ids: set[int], ledger: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for entry in ledger:
+        player_id = int(entry.get("player_id") or 0)
+        if player_id not in active_ids or not entry.get("review_required"):
+            continue
+        rows.append(
+            {
+                "player_id": player_id,
+                "player_name": entry.get("player_name"),
+                "status": entry.get("status"),
+                "original_status": entry.get("original_status"),
+                "reason": entry.get("reason"),
+                "reason_category": entry.get("reason_category"),
+                "confidence": entry.get("confidence"),
+                "source_id": entry.get("source_id"),
+                "source_url": entry.get("source_url"),
+                "source_title": entry.get("source_title"),
+                "verified_at": entry.get("verified_at"),
+                "review_reason": entry.get("review_reason"),
+                "review_reasons": entry.get("review_reasons") or [],
+                "review_severity": entry.get("review_severity"),
+                "contradicted_by": entry.get("contradicted_by"),
+                "suspension": entry.get("suspension"),
+                "status_age_days": entry.get("status_age_days"),
+                "fresh_until": entry.get("fresh_until"),
+                "stale_after": entry.get("stale_after"),
+            }
+        )
+    severity_rank = {"contradicted": 0, "aging": 1}
+    rows.sort(
+        key=lambda row: (
+            severity_rank.get(str(row.get("review_severity") or ""), 2),
+            str(row.get("player_name") or ""),
+        )
+    )
     return rows
 
 
@@ -365,6 +411,8 @@ def build_analysis_payload(
     active_players, ledger = _active_players(squad_data, availability)
     active_ids = set(active_players)
     official = _official(active_ids, ledger)
+    review = _review(active_ids, ledger)
+    review_summary = availability.get("review") or {}
     names = {
         int(player["player_id"]): player.get("name")
         for player in squad_data.get("players") or []
@@ -452,8 +500,21 @@ def build_analysis_payload(
                 "returned": sum(1 for entry in official if entry["status"] == "returned"),
                 "unknown": unknown_count,
                 "loans_out": loans_out,
+                "needs_review": len(review),
+                "contradicted": sum(
+                    1 for row in review if row.get("review_severity") == "contradicted"
+                ),
             },
             "official": official,
+            "review": {
+                "status": review_summary.get("status") or ("review" if review else "ok"),
+                "count": len(review),
+                "contradicted": review_summary.get("contradicted") or 0,
+                "aging": review_summary.get("aging") or 0,
+                "suspension_served": review_summary.get("suspension_served") or 0,
+                "ledger": review_summary.get("ledger") or {},
+                "rows": review,
+            },
             "suspensions": suspensions,
             "inferred": absence["inferred"],
             "selection": absence["selection"],
@@ -465,7 +526,8 @@ def build_analysis_payload(
             },
             "note": (
                 "Available means a verified ledger entry, not fit. Inferred rows are "
-                "cause-not-published, not diagnosis."
+                "cause-not-published, not diagnosis. Contradicted claims are unknown "
+                "and stay visible in the review block."
             ),
         },
         "aims": _aims(
@@ -505,6 +567,9 @@ def build_analysis_payload(
                 "Provider xG is one provider's model, not fitba fxG; the two are never blended.",
                 "Possession is provider-reported and is not used in the matchday style lean.",
                 "League ranks compare Premiership teams only; no cross-league comparison is made.",
+                "A contradicted team-news claim is unknown, not fit; its evidence "
+                "stays in the review block.",
+                "A ledger older than the latest official news is flagged for review.",
             ],
         },
         "sources": ["afc_news", "api_football", "spfl"],

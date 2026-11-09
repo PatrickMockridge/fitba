@@ -341,6 +341,26 @@ function AvailabilityView({ data }: { data: AvailabilityPanelData }) {
           note={availability.source_id ?? "no source"}
         />
       </div>
+      {availability.review_required ? (
+        <p className="fine-print" data-contract-indicator="unknown">
+          Needs review: the recorded status ({availability.original_status ?? "unknown"}) is
+          not current.{" "}
+          {availability.contradicted_by
+            ? `Evidence: ${String(availability.contradicted_by.squad_status ?? "appeared")} on ${
+                availability.contradicted_by.date
+                  ? formatDate(String(availability.contradicted_by.date))
+                  : "an unrecorded date"
+              }.`
+            : null}{" "}
+          {availability.suspension?.state === "served"
+            ? `Suspension served${
+                availability.suspension.served_date
+                  ? ` on ${formatDate(String(availability.suspension.served_date))}`
+                  : ""
+              }.`
+            : null}
+        </p>
+      ) : null}
       <p className="fine-print">
         {availability.note ?? "No verified official team-news entry."}
         {availability.source_url ? (

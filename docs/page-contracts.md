@@ -96,9 +96,12 @@ Must remain visible:
   matchday lookahead and the full `/matches/` schedule.
 - Availability and selection: counts (known unavailable, reported available,
   no verified news, loans out); official AFC team news with source and
-  verification date; competition-scoped derived suspension watch; inferred
-  absence rows with basis and the exact two fixture dates; a capped selection
-  watch. Full roster stays on `/squad/`.
+  verification date; a **Team news needing review** table with Player,
+  Published status, Recorded status, Verified, Source, Evidence and Review
+  reason; competition-scoped derived suspension watch (served and resolved rows
+  are labelled); inferred absence rows with basis and the exact two fixture
+  dates; a capped selection watch. A contradicted claim must not appear as a
+  current status. Full roster stays on `/squad/`.
 - Season aims: at most three aims with Aim, Target, Current and Status, and the
   visible label “Analyst-set baseline, not a published club target”.
 - Squad decisions: measured age, minutes, role and percentile lenses with the

@@ -11,6 +11,10 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any
 
+from fitba.analytics.availability_reconcile import (
+    load_reconciliation_evidence,
+    suspension_state,
+)
 from fitba.ingest.match_data import load_player_squads
 from fitba.ingest.match_extras import load_events
 from fitba.normalize.schedule import load_schedule
@@ -75,6 +79,7 @@ def card_summary(season: str) -> dict[str, Any]:
             "cautions": 0,
             "reds": 0,
             "red_type": None,
+            "red_fixtures": [],
             "last_date": None,
             "last_fixture_id": None,
         }
@@ -85,8 +90,18 @@ def card_summary(season: str) -> dict[str, Any]:
         yellows = entry["yellows"]
         reds = entry["reds"]
         if reds:
+            red_type = "second_yellow" if len(yellows) >= 2 else "straight_red"
             row["reds"] += len(reds)
-            row["red_type"] = "second_yellow" if len(yellows) >= 2 else "straight_red"
+            row["red_type"] = red_type
+            for _ in reds:
+                row["red_fixtures"].append(
+                    {
+                        "fixture_id": _fixture_id,
+                        "date": entry["date"],
+                        "competition_id": competition,
+                        "red_type": red_type,
+                    }
+                )
             if len(yellows) >= 2:
                 row["cautions"] += 1
             else:
@@ -131,7 +146,18 @@ def suspension_rows(
     as_of: str | None = None,
 ) -> list[dict[str, Any]]:
     schedule = load_schedule(season)
-    config = suspension_config().get("competitions") or {}
+    full_config = suspension_config()
+    config = full_config.get("competitions") or {}
+    try:
+        evidence = load_reconciliation_evidence(season)
+    except Exception:  # noqa: BLE001 - a broken feed is a review state
+        evidence = {
+            "status": "unavailable",
+            "participation": [],
+            "red_cards": [],
+            "schedule": [],
+            "coverage": {},
+        }
     rows: list[dict[str, Any]] = []
     for key, value in (cards.get("players") or {}).items():
         player_id, competition = key.split(":", 1)
@@ -143,8 +169,21 @@ def suspension_rows(
         status = "none"
         threshold = None
         reason = None
+        suspension: dict[str, Any] | None = None
         if reds:
-            status = "review_required"
+            entry = {
+                "player_id": int(player_id),
+                "status": "suspended",
+                "competition_id": competition,
+                "verified_at": value.get("last_date"),
+            }
+            suspension = suspension_state(entry, evidence, full_config)
+            state = str(suspension.get("state") or "")
+            status = {
+                "served": "served",
+                "not_applied": "not_applied",
+                "no_remaining_fixture": "resolved",
+            }.get(state, "review_required")
             reason = "red_card"
         elif thresholds:
             for item in thresholds:
@@ -163,7 +202,11 @@ def suspension_rows(
             continue
         if not coverage.get("complete") and status in {"projected", "watch"}:
             status = "review_required"
-        next_fixture = _next_fixture(schedule, competition, value.get("last_date"))
+        if reds and (suspension or {}).get("state") != "active":
+            next_fixture = None
+        else:
+            next_fixture = _next_fixture(schedule, competition, value.get("last_date"))
+        red_config = full_config.get("red_cards") or {}
         rows.append(
             {
                 "player_id": int(player_id),
@@ -175,10 +218,17 @@ def suspension_rows(
                 "red_type": value.get("red_type"),
                 "reason": reason,
                 "status": status,
-                "rule_verified": bool(rule.get("verified")),
-                "rule_source": rule.get("source_url"),
+                "rule_verified": (
+                    bool(red_config.get("verified")) if reds else bool(rule.get("verified"))
+                ),
+                "rule_source": (red_config.get("source_url") if reds else rule.get("source_url")),
                 "effective_days": rule.get("effective_days"),
                 "last_card_date": value.get("last_date"),
+                "ban_matches": (suspension or {}).get("ban_matches"),
+                "served_fixture_id": (suspension or {}).get("served_fixture_id"),
+                "served_date": (suspension or {}).get("served_date"),
+                "served_count": (suspension or {}).get("served_count"),
+                "suspension_state": (suspension or {}).get("state"),
                 "next_fixture": (
                     {
                         "fixture_id": next_fixture.get("fixture_id"),

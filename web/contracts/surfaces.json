@@ -1598,6 +1598,10 @@
               "min": 1
             },
             {
+              "id": "analysis.availability.review",
+              "min": 1
+            },
+            {
               "id": "analysis.aims",
               "min": 1
             },
@@ -1615,6 +1619,15 @@
             }
           ],
           "columns": {
+            "analysis.availability.review": [
+              "Player",
+              "Published status",
+              "Recorded status",
+              "Verified",
+              "Source",
+              "Evidence",
+              "Review reason"
+            ],
             "analysis.league-rankings": [
               "Metric",
               "Aberdeen",

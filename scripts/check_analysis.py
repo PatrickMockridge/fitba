@@ -160,6 +160,49 @@ def main() -> int:
             and not row.get("rule_source")
         ):
             errors.append("projected suspension missing rule source")
+        if row.get("status") == "served" and (
+            not row.get("served_fixture_id") or not row.get("served_date")
+        ):
+            errors.append("served suspension missing served fixture evidence")
+        if row.get("status") not in {
+            "watch",
+            "projected",
+            "review_required",
+            "served",
+            "not_applied",
+            "resolved",
+        }:
+            errors.append(f"invalid suspension status {row.get('status')!r}")
+    review = availability.get("review") or {}
+    review_rows = review.get("rows") or []
+    if not review:
+        errors.append("availability is missing the review block")
+    else:
+        contradicted = sum(1 for row in review_rows if row.get("review_severity") == "contradicted")
+        aging = sum(1 for row in review_rows if row.get("review_severity") == "aging")
+        if int(review.get("count") or 0) != len(review_rows):
+            errors.append("availability review count does not equal its rows")
+        if int(review.get("contradicted") or 0) != contradicted:
+            errors.append("availability review contradicted count does not equal its rows")
+        if int(review.get("aging") or 0) != aging:
+            errors.append("availability review aging count does not equal its rows")
+        if contradicted + aging != len(review_rows):
+            errors.append("availability review rows are not classified as contradicted or aging")
+        for row in availability.get("official") or []:
+            if row.get("review_severity") == "contradicted":
+                errors.append("official team news contains a contradicted claim")
+        for row in review_rows:
+            if row.get("review_severity") != "contradicted":
+                continue
+            if not row.get("original_status"):
+                errors.append("contradicted review row missing the original status")
+            suspension = row.get("suspension") or {}
+            if not row.get("contradicted_by") and suspension.get("state") not in {
+                "served",
+                "not_applied",
+                "no_remaining_fixture",
+            }:
+                errors.append("contradicted review row missing match or suspension evidence")
     aims = data.get("aims") or []
     if len(aims) > 3:
         errors.append("aims must contain at most three rows")
@@ -183,6 +226,8 @@ def main() -> int:
         for phrase in ("Where Aberdeen rank", "The Premiership, ranked"):
             if phrase not in html:
                 errors.append(f"analysis page is missing the league rankings heading {phrase!r}")
+        if "Team news needing review" not in html:
+            errors.append("analysis page is missing the team-news review heading")
         lowered = html.casefold()
         for phrase in ("case.claim", "owner view", "chairman frame", "how the record compares"):
             if phrase in lowered:

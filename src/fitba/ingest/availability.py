@@ -16,6 +16,11 @@ from urllib.parse import urlparse
 
 import polars as pl
 
+from fitba.analytics.availability_reconcile import (
+    ledger_review,
+    load_reconciliation_evidence,
+    reconcile_entries,
+)
 from fitba.settings import (
     NORMALIZED_DIR,
     availability_ledger,
@@ -24,6 +29,9 @@ from fitba.settings import (
 )
 from fitba.settings import (
     aberdeen as aberdeen_config,
+)
+from fitba.settings import (
+    suspensions as suspension_config,
 )
 from fitba.sources import api_football
 from fitba.util.dates import current_season, utc_now_iso
@@ -56,6 +64,17 @@ ENTRY_COLUMNS = [
     "in_squad",
     "note",
     "updated_at",
+    "competition_id",
+    "original_status",
+    "review_required",
+    "review_reason",
+    "review_reasons",
+    "review_severity",
+    "contradicted_by",
+    "status_age_days",
+    "fresh_until",
+    "stale_after",
+    "suspension",
 ]
 
 
@@ -64,7 +83,10 @@ def _rows() -> list[dict[str, Any]]:
 
 
 def _policy() -> dict[str, Any]:
-    return (availability_policy() or {}).get("policy") or {}
+    payload = availability_policy() or {}
+    policy = dict(payload.get("policy") or {})
+    policy.update(payload.get("reconciliation") or {})
+    return policy
 
 
 def _host_allowed(url: str | None, allowed: list[str]) -> bool:
@@ -158,6 +180,8 @@ def _merge(
     *,
     squad_data: dict[str, Any] | None,
     provider: dict[str, Any],
+    evidence: dict[str, Any] | None = None,
+    today: date | None = None,
 ) -> list[dict[str, Any]]:
     policy = _policy()
     max_age = int(policy.get("max_age_days") or 21)
@@ -180,6 +204,7 @@ def _merge(
         status = str(raw.get("status") or "unknown")
         if status not in STATUSES:
             status = "unknown"
+        original_status = status
         source_url = raw.get("source_url")
         source_id = str(raw.get("source_id") or "")
         verified_at = raw.get("verified_at")
@@ -189,7 +214,18 @@ def _merge(
         )
         if invalid_source:
             status = "unknown"
-        if stale and status in {"out", "doubtful", "suspended", "returned", "available"}:
+        if (
+            evidence is None
+            and stale
+            and status
+            in {
+                "out",
+                "doubtful",
+                "suspended",
+                "returned",
+                "available",
+            }
+        ):
             status = "unknown"
         player = squad.get(int(player_id), {})
         entries[int(player_id)] = {
@@ -213,6 +249,8 @@ def _merge(
             "in_squad": int(player_id) in squad,
             "note": raw.get("note"),
             "updated_at": updated_at,
+            "competition_id": raw.get("competition_id"),
+            "original_status": original_status,
         }
     for row in provider.get("rows") or []:
         player_id = row.get("player_id")
@@ -275,7 +313,22 @@ def _merge(
                 "updated_at": updated_at,
             },
         )
-    return sorted(entries.values(), key=lambda row: (row["player_name"] or "", row["player_id"]))
+    rows = sorted(entries.values(), key=lambda row: (row["player_name"] or "", row["player_id"]))
+    if evidence is not None:
+        reconcile_policy = {**policy, "suspensions": suspension_config()}
+        rows, _summary = reconcile_entries(rows, evidence, reconcile_policy, today or date.today())
+    else:
+        for row in rows:
+            row.setdefault("review_required", False)
+            row.setdefault("review_reason", None)
+            row.setdefault("review_reasons", [])
+            row.setdefault("review_severity", None)
+            row.setdefault("contradicted_by", None)
+            row.setdefault("suspension", None)
+            row.setdefault("status_age_days", None)
+            row.setdefault("fresh_until", None)
+            row.setdefault("stale_after", None)
+    return rows
 
 
 def refresh_availability(
@@ -287,7 +340,47 @@ def refresh_availability(
     ensure_dirs()
     AVAILABILITY_DIR.mkdir(parents=True, exist_ok=True)
     provider = _provider_snapshot(force=force)
-    entries = _merge(squad_data=squad_data, provider=provider)
+    try:
+        evidence = load_reconciliation_evidence(SEASON_LABEL)
+    except Exception as error:  # noqa: BLE001 - reconciliation failure is a review state
+        evidence = {
+            "status": "unavailable",
+            "errors": [f"{type(error).__name__}: {error}"],
+            "participation": [],
+            "red_cards": [],
+            "schedule": [],
+            "coverage": {},
+        }
+    entries = _merge(squad_data=squad_data, provider=provider, evidence=evidence)
+    contradicted = sum(1 for entry in entries if entry.get("review_severity") == "contradicted")
+    aging = sum(1 for entry in entries if entry.get("review_severity") == "aging")
+    served = sum(1 for entry in entries if (entry.get("suspension") or {}).get("state") == "served")
+    review = {
+        "status": (
+            "unavailable"
+            if evidence.get("status") != "ok"
+            else "contradicted"
+            if contradicted
+            else "review"
+            if aging
+            else "ok"
+        ),
+        "count": sum(1 for entry in entries if entry.get("review_required")),
+        "contradicted": contradicted,
+        "aging": aging,
+        "suspension_served": served,
+    }
+    ledger = availability_ledger() or {}
+    ledger_entries = ledger.get("entries") or []
+    max_verified = max(
+        (str(entry.get("verified_at") or "") for entry in ledger_entries), default=None
+    )
+    ledger_info = ledger_review(
+        ledger.get("updated_at"),
+        max_verified,
+        evidence.get("latest_news"),
+        _policy(),
+    )
     frame = pl.DataFrame(entries, infer_schema_length=None)
     for column in ENTRY_COLUMNS:
         if column not in frame.columns:
@@ -302,7 +395,16 @@ def refresh_availability(
         "season": SEASON_LABEL,
         "club_id": "sco:aberdeen",
         "entry_count": len(entries),
+        "snapshot_path": str(SNAPSHOT_PATH),
         "counts": counts,
+        "review": review,
+        "reconciliation": {
+            "status": "ok" if evidence.get("status") == "ok" else "unavailable",
+            "errors": evidence.get("errors") or [],
+            "evidence": evidence.get("coverage") or {},
+        },
+        "ledger": ledger_info,
+        "latest_news": evidence.get("latest_news"),
         "provider": {
             "status": provider.get("status"),
             "reason": provider.get("reason"),

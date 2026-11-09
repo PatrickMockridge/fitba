@@ -416,6 +416,19 @@
           "default": null,
           "title": "Availability Conflict"
         },
+        "availability_contradicted_by": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Contradicted By"
+        },
         "availability_note": {
           "anyOf": [
             {
@@ -428,6 +441,47 @@
           "default": null,
           "title": "Availability Note"
         },
+        "availability_original_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Original Status"
+        },
+        "availability_review_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Review Reason"
+        },
+        "availability_review_required": {
+          "default": false,
+          "title": "Availability Review Required",
+          "type": "boolean"
+        },
+        "availability_review_severity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Review Severity"
+        },
         "availability_status": {
           "anyOf": [
             {
@@ -439,6 +493,31 @@
           ],
           "default": null,
           "title": "Availability Status"
+        },
+        "availability_status_age_days": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Status Age Days"
+        },
+        "availability_suspension": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Availability Suspension"
         },
         "category": {
           "anyOf": [

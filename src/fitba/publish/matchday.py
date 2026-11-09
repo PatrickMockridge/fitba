@@ -239,12 +239,19 @@ class LineupPlayer(StrictModel):
     unavailable_reason: str | None = None
     status: str | None = None
     availability_status: str | None = None
+    availability_original_status: str | None = None
     availability_confidence: str | None = None
     availability_source: str | None = None
     availability_source_url: str | None = None
     availability_verified_at: str | None = None
     availability_note: str | None = None
     availability_conflict: bool | None = None
+    availability_review_required: bool | None = None
+    availability_review_reason: str | None = None
+    availability_review_severity: str | None = None
+    availability_contradicted_by: dict[str, Any] | None = None
+    availability_suspension: dict[str, Any] | None = None
+    availability_status_age_days: int | None = None
     availability_downgrade: int | None = None
 
 
@@ -507,12 +514,19 @@ def _pick_player(player: dict[str, Any]) -> LineupPlayer:
         unavailable_reason=player.get("unavailable_reason"),
         status=player.get("status"),
         availability_status=player.get("availability_status"),
+        availability_original_status=player.get("availability_original_status"),
         availability_confidence=player.get("availability_confidence"),
         availability_source=player.get("availability_source"),
         availability_source_url=player.get("availability_source_url"),
         availability_verified_at=player.get("availability_verified_at"),
         availability_note=player.get("availability_note"),
         availability_conflict=player.get("availability_conflict"),
+        availability_review_required=player.get("availability_review_required"),
+        availability_review_reason=player.get("availability_review_reason"),
+        availability_review_severity=player.get("availability_review_severity"),
+        availability_contradicted_by=player.get("availability_contradicted_by"),
+        availability_suspension=player.get("availability_suspension"),
+        availability_status_age_days=player.get("availability_status_age_days"),
         availability_downgrade=player.get("availability_downgrade"),
     )
 

@@ -153,6 +153,31 @@ def test_state_file_is_written_atomically(tmp_path, monkeypatch):
     assert saved["steps"][0]["status"] == "ok"
 
 
+def test_ingest_availability_reports_the_real_entry_count(monkeypatch: pytest.MonkeyPatch):
+    import fitba.ingest.availability as availability
+    import fitba.publish.squad as squad
+
+    monkeypatch.setattr(squad, "squad_payload", lambda season: {"players": []})
+    monkeypatch.setattr(
+        availability,
+        "refresh_availability",
+        lambda **_: {
+            "entry_count": 34,
+            "counts": {"unknown": 34},
+            "snapshot_path": "/tmp/availability.parquet",
+        },
+    )
+    ctx = update.UpdateContext(
+        mode="daily",
+        season="2026-27",
+        force_results=False,
+        update_id="test",
+    )
+    result = update._run_ingest_availability(ctx)
+    assert result["rows"] == 34
+    assert result["artifacts"] == ["/tmp/availability.parquet"]
+
+
 def test_update_honours_only_and_skip(monkeypatch: pytest.MonkeyPatch):
     report = update.run_update(
         mode="daily",

@@ -27,7 +27,11 @@ function readingClass(reading: string): string {
 function availabilitySummary(family: ScoutingBoard["families"][number]): string {
   if (!family.layer0.length) return "No verified availability entry";
   return family.layer0
-    .map((player) => `${player.name} ${player.availability.status}`)
+    .map((player) =>
+      player.availability.review_required
+        ? `${player.name} needs review (${player.availability.original_status ?? player.availability.status})`
+        : `${player.name} ${player.availability.status}`,
+    )
     .join(" · ");
 }
 

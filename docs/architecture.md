@@ -180,7 +180,9 @@ Implemented:
   and source contributions. Built from `config/provenance.yaml`.
 - `availability/aberdeen.json` — curated team-news ledger and optional provider
   snapshot; out/doubtful/suspended/returned/unknown states with source and
-  `verified_at`.
+  `verified_at`. Each sweep reconciles known claims against named squads and
+  card-derived suspension service; contradicted claims become unknown with an
+  original claim and evidence in the review block.
 - `needs/aberdeen.json` — seven role-family needs with cover/replace/strengthen
   categories, measured depth, market routes and roster caveats. No targets.
 - `rumours/aberdeen.json` — curated rumours, status/confidence/source counts and

@@ -1,24 +1,6 @@
+import { AvailabilityBadge } from "@/components/AvailabilityBadge";
 import type { ScoutingLayerZero } from "@/lib/data";
 import { formatDate, formatDecimal, formatInteger } from "@/lib/format";
-
-const STATUS_LABEL: Record<string, string> = {
-  out: "Out",
-  doubtful: "Doubtful",
-  suspended: "Suspended",
-  returned: "Returned",
-  available: "Available",
-  unknown: "Unknown",
-};
-
-function statusBadge(status: string) {
-  const modifier =
-    status === "out" || status === "suspended"
-      ? "badge-warn"
-      : status === "available" || status === "returned"
-        ? "badge-ok"
-        : "badge-neutral";
-  return <span className={`badge ${modifier}`}>{STATUS_LABEL[status] ?? status}</span>;
-}
 
 function sourceLabel(url: string | null): string {
   if (!url) return "No public source";
@@ -66,7 +48,16 @@ export function ScoutingLayerZeroTable({ items }: { items: ScoutingLayerZero[] }
               <td className="strong">{item.name}</td>
               <td>{item.role_label ?? item.family_label}</td>
               <td>
-                {statusBadge(item.status)}
+                <AvailabilityBadge
+                  status={item.status}
+                  note={item.note}
+                  originalStatus={item.original_status}
+                  reviewRequired={item.review_required ?? false}
+                  reviewReason={item.review_reason}
+                  contradictedBy={item.contradicted_by}
+                  suspension={item.suspension}
+                  compact
+                />
                 {item.first_choice ? (
                   <span className="badge badge-neutral"> first-choice evidence</span>
                 ) : null}
