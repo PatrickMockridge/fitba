@@ -6,9 +6,9 @@
     "raw_posts_published": false,
     "topics_sampled": 4
   },
-  "dataset_id": "2026-11-09T18:56:58+00:00-6c001fae",
+  "dataset_id": "2026-11-10T06:20:57+00:00-f70ac1e5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-09T18:56:58+00:00",
+  "generated_at": "2026-11-10T06:20:57+00:00",
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
@@ -76,15 +76,15 @@
       "external_target": {
         "count": 12,
         "players": [
-          "A. Gunn",
-          "Archie Stuart Wayne Goodwin",
+          "A. Goodwin",
+          "Angus Fraser James Gunn",
           "Cieran Slicker",
           "Conor Hazard",
           "Darren Ambrose",
-          "E. Just",
+          "Elijah Henry Just",
           "Harvey Elliot",
-          "J. Robson",
           "J. Teasdale",
+          "Jamie Robson",
           "Julius Berthel Askou Harvey",
           "Louie Shaun Watson",
           "M. Robinson"
@@ -135,8 +135,8 @@
     },
     "total_signals": 41
   },
-  "published_at": "2026-11-09T18:56:58+00:00",
-  "sampled_at": "2026-11-09T18:08:57+00:00",
+  "published_at": "2026-11-10T06:20:57+00:00",
+  "sampled_at": "2026-11-10T06:18:30+00:00",
   "sentiment": {
     "club": {
       "count": 59,
@@ -164,7 +164,7 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "publish-2026-11-09T18:56:58+00:00",
+  "served_by_update_id": "2026-11-10T06:17:02+00:00-2264320",
   "signals": [
     {
       "affiliation": "former_player",
@@ -376,7 +376,7 @@
       "nationality": "New Zealand",
       "player_href": null,
       "player_key": "api:player:94333",
-      "player_name": "E. Just",
+      "player_name": "Elijah Henry Just",
       "position": null,
       "position_group": "MID",
       "rival_club": null,
@@ -547,7 +547,7 @@
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 29,
+      "age": 21,
       "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
@@ -556,18 +556,18 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "San Jose Earthquakes",
+      "current_club": "Charlotte",
       "current_league": "Major League Soccer",
       "former_href": null,
       "lookup_source": "scouted_player",
       "lookup_status": "scouted_player",
       "mentions": 1,
-      "nationality": "Scotland",
+      "nationality": "Australia",
       "player_href": null,
-      "player_key": "api:player:18933",
-      "player_name": "A. Gunn",
+      "player_key": "api:player:304119",
+      "player_name": "A. Goodwin",
       "position": null,
-      "position_group": "GK",
+      "position_group": "FWD",
       "rival_club": null,
       "topic_count": 1
     },
@@ -601,7 +601,7 @@
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 21,
+      "age": 29,
       "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
@@ -610,18 +610,18 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "Charlotte",
+      "current_club": "San Jose Earthquakes",
       "current_league": "Major League Soccer",
       "former_href": null,
       "lookup_source": "scouted_player",
       "lookup_status": "scouted_player",
       "mentions": 1,
-      "nationality": "Australia",
+      "nationality": "Scotland",
       "player_href": null,
-      "player_key": "api:player:304119",
-      "player_name": "Archie Stuart Wayne Goodwin",
+      "player_key": "api:player:18933",
+      "player_name": "Angus Fraser James Gunn",
       "position": null,
-      "position_group": "FWD",
+      "position_group": "GK",
       "rival_club": null,
       "topic_count": 1
     },
@@ -817,33 +817,6 @@
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 28,
-      "at_rival": false,
-      "credibility": "fan_only",
-      "cross_references": {
-        "club_output": false,
-        "confirmed_transfer": false,
-        "historic_transfer": false,
-        "press_rumour": false
-      },
-      "current_club": "Oldham",
-      "current_league": "EFL League Two",
-      "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
-      "mentions": 1,
-      "nationality": "Scotland",
-      "player_href": null,
-      "player_key": "api:player:45095",
-      "player_name": "J. Robson",
-      "position": null,
-      "position_group": "DEF",
-      "rival_club": null,
-      "topic_count": 1
-    },
-    {
-      "affiliation": "external_target",
-      "affiliation_source": "key",
       "age": null,
       "at_rival": false,
       "credibility": "cross_referenced_transfer",
@@ -865,6 +838,33 @@
       "player_name": "J. Teasdale",
       "position": null,
       "position_group": null,
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Oldham",
+      "current_league": "EFL League Two",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:45095",
+      "player_name": "Jamie Robson",
+      "position": null,
+      "position_group": "DEF",
       "rival_club": null,
       "topic_count": 1
     },
@@ -1282,22 +1282,22 @@
     "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/"
   },
   "source_snapshots": {
-    "api_football": "2026-11-09T18:14:05.498659+00:00",
-    "api_results": "2026-11-09T18:07:58+00:00",
-    "availability": "2026-11-09T18:08:51+00:00",
-    "career": "2026-11-09T18:08:51+00:00",
-    "football_data_uk": "2026-11-09T18:07:57+00:00",
-    "former_players": "2026-11-09T18:08:11+00:00",
-    "history_backfill": "2026-11-09T18:08:10+00:00",
-    "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T18:13:20+00:00",
-    "scouting_europe": "2026-11-09T18:13:09+00:00",
-    "scouting_pool": "2026-11-09T18:08:58+00:00",
-    "scouting_roles": "2026-11-09T18:12:44+00:00",
-    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
-    "scouting_standings": "2026-11-09T18:13:10+00:00",
-    "spfl": "2026-11-09T18:07:59+00:00",
-    "xg_enrichment": "2026-11-09T18:13:46+00:00"
+    "api_football": "2026-11-10T06:20:55.478631+00:00",
+    "api_results": "2026-11-10T06:17:05+00:00",
+    "availability": "2026-11-10T06:18:26+00:00",
+    "career": "2026-11-10T06:18:26+00:00",
+    "football_data_uk": "2026-11-10T06:17:04+00:00",
+    "former_players": "2026-11-10T06:17:24+00:00",
+    "history_backfill": "2026-11-10T06:17:18+00:00",
+    "matchday_snapshot": "2026-11-10T06:17:18+00:00",
+    "scouting_clubs": "2026-11-10T06:18:53+00:00",
+    "scouting_europe": "2026-11-10T06:18:42+00:00",
+    "scouting_pool": "2026-11-10T06:18:31+00:00",
+    "scouting_roles": "2026-11-10T06:18:32+00:00",
+    "scouting_rose_history": "2026-11-10T06:18:42+00:00",
+    "scouting_standings": "2026-11-10T06:18:43+00:00",
+    "spfl": "2026-11-10T06:17:06+00:00",
+    "xg_enrichment": "2026-11-10T06:20:38+00:00"
   },
   "topics": [
     {
@@ -1333,5 +1333,5 @@
       "url": "https://afc-chat.co.uk/forums/index.php?/topic/49303-new-keeper/"
     }
   ],
-  "update_id": "publish-2026-11-09T18:56:58+00:00"
+  "update_id": "2026-11-10T06:17:02+00:00-2264320"
 }

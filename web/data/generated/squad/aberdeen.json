@@ -11,7 +11,7 @@
       "wikipedia": 1
     },
     "conflicts": 0,
-    "ingested_at": "2026-11-09T18:08:51+00:00",
+    "ingested_at": "2026-11-10T06:17:43+00:00",
     "known": 1,
     "note": "Preferred-foot resolution. Side is derived from the starting-XI role, not from this resolver. The licensed API does not provide foot; Sportmonks is used when enabled; Wikipedia is the last resort and only explicit statements are accepted. Unknown is a valid state.",
     "rows": 39,
@@ -31,24 +31,24 @@
       "unknown": 31
     },
     "entry_count": 34,
-    "generated_at": "2026-11-09T18:08:51+00:00",
+    "generated_at": "2026-11-10T06:18:26+00:00",
     "latest_news": {
-      "date": "2026-11-08",
-      "title": "Dons lose out in seven goal thriller in Edinburgh",
-      "url": "https://www.afc.co.uk/en/news/match-report-or-hibernian-women-v-aberdeen-women"
+      "date": "2026-11-09",
+      "title": "Stephen Robinson Departs",
+      "url": "https://www.afc.co.uk/en/news/stephen-robinson-departs"
     },
     "ledger": {
       "days_since_latest_news": 1,
-      "days_since_ledger_update": 13,
-      "latest_news_date": "2026-11-08",
-      "latest_news_title": "Dons lose out in seven goal thriller in Edinburgh",
-      "latest_news_url": "https://www.afc.co.uk/en/news/match-report-or-hibernian-women-v-aberdeen-women",
+      "days_since_ledger_update": 14,
+      "latest_news_date": "2026-11-09",
+      "latest_news_title": "Stephen Robinson Departs",
+      "latest_news_url": "https://www.afc.co.uk/en/news/stephen-robinson-departs",
       "ledger_max_verified_at": "2026-10-27",
       "ledger_updated_at": "2026-10-27",
       "reason": "ledger_older_than_latest_news",
       "status": "review"
     },
-    "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. Unknown stays unknown.",
+    "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. No adverse entry means available by default; the internal state is unknown, not a verified fit.",
     "policy": {
       "allowed_hosts": [
         "afc.co.uk",
@@ -141,17 +141,17 @@
     ],
     "errors": [],
     "evidence_rows": 738,
-    "generated_at": "2026-11-09T18:08:51+00:00",
+    "generated_at": "2026-11-10T06:18:26+00:00",
     "last_backfill": {
       "budget": null,
       "budget_exhausted": false,
-      "generated_at": "2026-11-09T06:18:12+00:00",
-      "network_requests": 23,
+      "generated_at": "2026-11-09T18:08:51+00:00",
+      "network_requests": 132,
       "pairs_capped": 55,
       "pairs_complete": 59,
       "pairs_error": 0
     },
-    "network_requests": 132,
+    "network_requests": 62,
     "pairs_budget": 0,
     "pairs_capped": 55,
     "pairs_complete": 59,
@@ -178,7 +178,7 @@
     "note": "Current-season squad and per-competition statistics from API-Football. Roles come from the starting-XI formation grid; starts, substitute appearances and on-pitch minutes are reconstructed from lineups and substitution events. The official AFC men's team page is the canonical roster inclusion, section, order and loan-section source; API-Football supplies statistics and identity. API rows not on the official list are not squad players and are excluded from these counts; they are retained only for the player index and existing links. Missing data is labelled unavailable or partial and is never filled with zeroes. Player photographs are not published.",
     "status": "match"
   },
-  "dataset_id": "2026-11-09T18:56:58+00:00-6c001fae",
+  "dataset_id": "2026-11-10T06:20:57+00:00-f70ac1e5",
   "dataset_state": "fresh",
   "excluded_players": [
     {
@@ -1653,7 +1653,7 @@
       "totals": null
     }
   ],
-  "generated_at": "2026-11-09T18:56:58+00:00",
+  "generated_at": "2026-11-10T06:20:57+00:00",
   "loan_scope": {
     "official_list": {
       "in": [],
@@ -4730,7 +4730,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "doubtful",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -5108,7 +5108,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "out",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -7571,7 +7571,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "out",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -9320,7 +9320,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "unknown",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": {
           "ban_matches": 1,
           "card_date": "2026-09-12",
@@ -12692,7 +12692,7 @@
             "revision": "1383176082",
             "tier": 4,
             "url": "https://en.wikipedia.org/w/index.php?title=Alexander_Briedl&oldid=1383176082",
-            "verified_at": "2026-11-09"
+            "verified_at": "2026-11-10"
           },
           "status": "known",
           "unknown_reason": null,
@@ -15112,7 +15112,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "unknown",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -17154,7 +17154,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "unknown",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -17771,7 +17771,7 @@
         "stale": false,
         "stale_after": "2026-11-17",
         "status": "unknown",
-        "status_age_days": 13,
+        "status_age_days": 14,
         "suspension": null,
         "verified_at": "2026-10-27"
       },
@@ -27262,12 +27262,12 @@
     "coverage": "available",
     "fixtures_covered": 19,
     "fixtures_total": 19,
-    "ingested_at": "2026-11-09T18:08:51+00:00",
+    "ingested_at": "2026-11-10T06:17:42+00:00",
     "missing_fixtures": [],
     "note": "On-pitch goals conceded, clean sheets (60+ minutes, zero conceded while on the pitch) and own goals are computed from fixture lineups and events for 19 of 19 competitive matches; friendlies are excluded.",
     "scope": "competitive"
   },
-  "published_at": "2026-11-09T18:56:58+00:00",
+  "published_at": "2026-11-10T06:20:57+00:00",
   "role_meta": {
     "bench_complete_sides": 37,
     "bench_incomplete_sides": 1,
@@ -27287,7 +27287,7 @@
       "5-3-2": 3,
       "unknown": 3
     },
-    "ingested_at": "2026-11-09T18:08:51+00:00",
+    "ingested_at": "2026-11-10T06:17:42+00:00",
     "note": "Roles are derived from the starting-XI formation grid. Starts without a grid, unmapped formations and invalid slots are unknown, not inferred. Substitute appearances carry playing time but no role.",
     "players_with_role": 25,
     "players_with_starts": 27,
@@ -27300,7 +27300,7 @@
   "roster_meta": {
     "ambiguous": 0,
     "excluded_api": 5,
-    "fetched_at": "2026-11-09T18:08:44+00:00",
+    "fetched_at": "2026-11-10T06:17:36+00:00",
     "loan_section": 5,
     "matched": 34,
     "note": null,
@@ -27313,24 +27313,24 @@
   },
   "roster_only": [],
   "season": "2026-27",
-  "served_by_update_id": "publish-2026-11-09T18:56:58+00:00",
+  "served_by_update_id": "2026-11-10T06:17:02+00:00-2264320",
   "source_snapshots": {
-    "api_football": "2026-11-09T18:14:05.498659+00:00",
-    "api_results": "2026-11-09T18:07:58+00:00",
-    "availability": "2026-11-09T18:08:51+00:00",
-    "career": "2026-11-09T18:08:51+00:00",
-    "football_data_uk": "2026-11-09T18:07:57+00:00",
-    "former_players": "2026-11-09T18:08:11+00:00",
-    "history_backfill": "2026-11-09T18:08:10+00:00",
-    "matchday_snapshot": "2026-11-09T06:17:15+00:00",
-    "scouting_clubs": "2026-11-09T18:13:20+00:00",
-    "scouting_europe": "2026-11-09T18:13:09+00:00",
-    "scouting_pool": "2026-11-09T18:08:58+00:00",
-    "scouting_roles": "2026-11-09T18:12:44+00:00",
-    "scouting_rose_history": "2026-11-09T18:12:54+00:00",
-    "scouting_standings": "2026-11-09T18:13:10+00:00",
-    "spfl": "2026-11-09T18:07:59+00:00",
-    "xg_enrichment": "2026-11-09T18:13:46+00:00"
+    "api_football": "2026-11-10T06:20:55.478631+00:00",
+    "api_results": "2026-11-10T06:17:05+00:00",
+    "availability": "2026-11-10T06:18:26+00:00",
+    "career": "2026-11-10T06:18:26+00:00",
+    "football_data_uk": "2026-11-10T06:17:04+00:00",
+    "former_players": "2026-11-10T06:17:24+00:00",
+    "history_backfill": "2026-11-10T06:17:18+00:00",
+    "matchday_snapshot": "2026-11-10T06:17:18+00:00",
+    "scouting_clubs": "2026-11-10T06:18:53+00:00",
+    "scouting_europe": "2026-11-10T06:18:42+00:00",
+    "scouting_pool": "2026-11-10T06:18:31+00:00",
+    "scouting_roles": "2026-11-10T06:18:32+00:00",
+    "scouting_rose_history": "2026-11-10T06:18:42+00:00",
+    "scouting_standings": "2026-11-10T06:18:43+00:00",
+    "spfl": "2026-11-10T06:17:06+00:00",
+    "xg_enrichment": "2026-11-10T06:20:38+00:00"
   },
   "summary": {
     "attributes_conflicts": 0,
@@ -27409,7 +27409,7 @@
     "formations_unmapped": [],
     "loans_in": 0,
     "loans_out": 5,
-    "official_fetched_at": "2026-11-09T18:08:44+00:00",
+    "official_fetched_at": "2026-11-10T06:17:36+00:00",
     "official_only": 0,
     "official_players": 34,
     "official_source": "https://www.afc.co.uk/en/teams/mens",
@@ -27427,5 +27427,5 @@
     "stats_unavailable": 5,
     "total_players": 34
   },
-  "update_id": "publish-2026-11-09T18:56:58+00:00"
+  "update_id": "2026-11-10T06:17:02+00:00-2264320"
 }
