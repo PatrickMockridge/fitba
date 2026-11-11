@@ -2025,6 +2025,7 @@
         "web/components/RumourBoard.tsx",
         "web/components/RumourCard.tsx",
         "web/components/ForumSignalPanel.tsx",
+        "web/components/ManagerMarketPanel.tsx",
         "web/components/FormerPlayerMentions.tsx"
       ],
       "ci_states": [
@@ -2035,6 +2036,10 @@
           "markers": [
             {
               "id": "rumours.hero",
+              "min": 1
+            },
+            {
+              "id": "rumours.manager-market",
               "min": 1
             },
             {
@@ -2058,10 +2063,20 @@
               "min": 1
             },
             {
+              "id": "rumours.donstalk-signals",
+              "min": 1
+            },
+            {
               "id": "rumours.coverage",
               "min": 1
             }
           ],
+          "copy": {
+            "rumours.manager-market": [
+              "Not betting advice",
+              "No affiliate or advertising relationship"
+            ]
+          },
           "indicators": {
             "unknown": 1,
             "confidence": 1,

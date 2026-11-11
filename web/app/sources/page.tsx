@@ -279,7 +279,9 @@ export default function SourcesPage() {
           <h2>No raw redistribution</h2>
           <p>
             No full event feed, no source-shaped table, no raw market-value feed,
-            no unlicensed tracking data and no betting odds. A source can be
+            no unlicensed tracking data and no betting odds outside the sourced
+            next-manager snapshot; no gambling advertising or affiliate links. A
+            source can be
             disabled and the site rebuilt from the remainder.
           </p>
         </section>

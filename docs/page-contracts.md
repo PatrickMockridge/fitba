@@ -241,13 +241,19 @@ Must remain visible:
 - The statement that former players are not transfer targets and that a return
   link is separate.
 - The target-profile sample size, basis and excluded counts.
-- The fan-signal table with affiliation and cross-reference labels.
+- The fan-signal table with affiliation and cross-reference labels, and a
+  separate DonsTalk panel with its board/thread page coverage.
+- The gated next-manager market panel: the visible “Not betting advice” line,
+  the vacancy/closed state, the source and observation date when open, and the
+  candidate table with fractional odds, raw implied prices and DonsTalk
+  mentions. When closed, no odds are shown.
 
 May be disclosed: method notes, sentiment caveats and sampled-topic prose.
 
 Forbidden: current or former players inside the target profile; a former player
 shown as an ordinary target; raw forum posts, usernames or quotes; a mention
-treated as a transfer link.
+treated as a transfer link; odds outside the gated next-manager market; an
+affiliate or sign-up link.
 
 ### `/transfers/` — transfers and loans
 
@@ -544,7 +550,9 @@ Must remain visible:
   the published season records, with a reset and a matching-season table. It
   navigates published rows only and does not rank or add a superlative.
 - The current staff and the manager records table: Manager, Dates, Pld, W-D-L,
-  GF, GA, Pts, PPG, with interim spells and pre-era stints labelled.
+  GF, GA, Pts, PPG, with interim spells and pre-era stints labelled. An interim
+  manager with no league match is shown with Pld 0 and an Interim badge, and a
+  visible “No permanent manager” note when the post is vacant.
 - The baseline table, labelled as a chosen comparison window rather than a
   neutral norm.
 - The honours cabinet, the read block, and the coverage-by-season table.

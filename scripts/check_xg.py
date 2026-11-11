@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from fitba.publish.xg import build_xg_payload
+from fitba.settings import CONFIG_DIR, load_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -176,9 +177,17 @@ def main() -> int:
             ]
             if season == "2025-26" and not context:
                 errors.append("no full-season context row for 2025-26")
-        robinson = [row for row in splits if row.get("person_id") == "stephen-robinson"]
-        if not robinson:
-            errors.append("no Robinson manager split")
+        comparison_person_id = str(
+            ((load_yaml(CONFIG_DIR / "xg.yaml") or {}).get("provider_estimate") or {}).get(
+                "comparison_person_id"
+            )
+            or "stephen-robinson"
+        )
+        comparison = [
+            row for row in splits if row.get("person_id") == comparison_person_id
+        ]
+        if not comparison:
+            errors.append(f"no manager split for {comparison_person_id}")
 
     for error in errors:
         print(f"error: {error}")

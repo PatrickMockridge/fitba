@@ -88,7 +88,7 @@ it or says it cannot yet be tested.
 4. **The attack.** Goals for and against, where the goals come from, the last
    five versus the season, and the set-play/error gap.
 5. **The managers.** Thelin's start and collapse, the Scottish Cup, Leven, and
-   Robinson's first 18 league matches. "Steadying" as a reading, not a fact.
+   Robinson's 21 league matches. "Steadying" as a reading, not a fact.
 6. **The squad.** The 2026-27 rebuild: arrivals, exits, age, U21 minutes, the
    Morris sale and what replaced him.
 7. **The chairman's record.** Seven seasons, the league range, the cup, Europe,
@@ -184,18 +184,18 @@ available together.
 
 ### 4. The managers
 
-- **Claim:** Thelin's side had a high ceiling and a low floor; Robinson has
-  steadied it, but 18 league matches is not a verdict.
+- **Claim:** Thelin's side had a high ceiling and a low floor; Robinson's spell
+  steadied the points rate, but 21 league matches and a November 2026 dismissal are not a settled sample.
 - **Count:** Thelin 58 league matches, 1.34 points per game; seven straight
   league wins, a 14-match winless run, and the 2024-25 Scottish Cup; Leven 9
-  matches, 0.44; Robinson 18 matches, 1.22, in two nine-match spells of 3W 2D
-  4L.
+  matches, 0.44; Robinson 21 matches, 1.05, in spells of 9 and 12 league matches.
 - **Status:** **Mixed.** The aggregate records are supported. "Steadying" and
-  "lower variance" are readings, not established: 18 matches, two squads, and
+  "lower variance" are readings, not established: 21 matches, two squads, a November 2026 dismissal, and
   no pre-declared variance measure.
 - **What the record shows:** the phase table and the run lengths, league only.
-- **What better data would do:** a full season under Robinson, opponent strength
-  and a pre-declared variance measure would test "steadier"; a sourced
+- **What better data would do:** a permanent appointment and a full season under
+  the next manager, opponent strength and a pre-declared variance measure would
+  test "steadier"; a sourced
   comparator is required before the word "record" is used.
 - **What would change the view:** a full season, or a sustained points and
   goals-against trend.

@@ -30,7 +30,12 @@ basis and links to the evidence that could overturn it.
 ## What fitba is not
 
 - Not a club mouthpiece, and not an insider account.
-- Not a hot-take blog, a transfer-gossip feed or a betting product.
+- Not a hot-take blog, a transfer-gossip feed or a betting product. The only
+  odds exception is the gated next-manager market at `/rumours/`: while Aberdeen
+  have no permanent manager, a single named public bookmaker-odds snapshot may
+  be published as sourced intelligence. It is not advice, a recommendation or a
+  promotion, carries no affiliate or sign-up link, and closes when a permanent
+  manager is appointed.
 - Not a simplified explainer for an imagined casual reader.
 - Not a doom merchant: the record includes the cup, the two Conference League
   campaigns and the sales.
@@ -130,7 +135,8 @@ It does not become the heading.
 - The same framework applies to Aberdeen, opponents and scouted players.
 - Never invent fees, wages, valuations or internal knowledge.
 - Source links, coverage labels, confidence and unknown states stay visible.
-- No unlicensed raw data, no betting odds, no raw forum posts.
+- No unlicensed raw data, no raw forum posts. Betting odds are published only
+  under the gated next-manager exception in product-strategy.md.
 - Distinguish measured, inferred, curated and unknown. A modelled estimate is
   labelled as one.
 - Corrections and last-reviewed dates are part of the product.

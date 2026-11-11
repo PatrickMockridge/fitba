@@ -63,6 +63,7 @@ from fitba.publish.epoch import DatasetStamp, current_stamp, set_stamp, stamp_pa
 from fitba.publish.fixture import build_fixture_payloads
 from fitba.publish.former_players import build_former_bundle
 from fitba.publish.history import build_history_payloads
+from fitba.publish.manager_market import manager_market_payload
 from fitba.publish.matchday import (
     build_matchday_payload,
     fallback_matchday_payload,
@@ -2001,6 +2002,13 @@ def publish(
     )
     profile_data = profile_payload(rumour_rows, player_index, generated_at=generated_at)
     forum_data = forum_payload(player_index, generated_at=generated_at, former_players=former_index)
+    donstalk_data = forum_payload(
+        player_index,
+        generated_at=generated_at,
+        former_players=former_index,
+        source_id="donstalk",
+    )
+    manager_market_data = manager_market_payload(season=target_season, generated_at=generated_at)
     for relative, payload, mart_id, rows in (
         ("rumours/aberdeen.json", rumours_data, "rumours.sco:aberdeen", len(rumour_rows)),
         ("rumours/profile.json", profile_data, "rumours.profile", profile_data["sample_size"]),
@@ -2009,6 +2017,18 @@ def publish(
             forum_data,
             "forum.afc_chat",
             forum_data["coverage"]["posts_sampled"],
+        ),
+        (
+            "forum/donstalk.json",
+            donstalk_data,
+            "forum.donstalk",
+            donstalk_data["coverage"]["posts_sampled"],
+        ),
+        (
+            "rumours/manager-market.json",
+            manager_market_data,
+            "rumours.manager-market",
+            len(manager_market_data.get("candidates") or []),
         ),
     ):
         info = _write(temp / relative, payload)
@@ -2110,7 +2130,18 @@ def publish(
             "news": {"afc_news": len(club_payload.get("news", []))},
             "availability": {"afc_news": availability_official},
             "rumours": {"afc_news": rumour_official},
-            "forum_signal": {"afc_chat": int(forum_data["coverage"]["posts_sampled"])},
+            "forum_signal": {
+                "afc_chat": int(forum_data["coverage"]["posts_sampled"]),
+                "donstalk": int(donstalk_data["coverage"]["posts_sampled"]),
+            },
+            "odds": {
+                "manager_market": int(
+                    (manager_market_data.get("market") or {})
+                    .get("coverage", {})
+                    .get("priced_count")
+                    or 0
+                )
+            },
             "history": {
                 "afc_news": history_source_counts["afc_news"],
                 "wikipedia": history_source_counts["wikipedia"],
@@ -2260,6 +2291,31 @@ def publish(
             "first_page_only": True,
             "raw_posts_published": False,
             "note": forum_data["coverage"]["note"],
+        },
+        "donstalk": {
+            "source": "donstalk",
+            "topics": donstalk_data["coverage"]["topics_sampled"],
+            "posts": donstalk_data["coverage"]["posts_sampled"],
+            "thread_page": donstalk_data["coverage"].get("thread_page"),
+            "thread_page_count": donstalk_data["coverage"].get("thread_page_count"),
+            "latest_page_only": True,
+            "raw_posts_published": False,
+            "note": donstalk_data["coverage"]["note"],
+        },
+        "manager_market": {
+            "state": (manager_market_data.get("market") or {}).get("state"),
+            "bookmaker": (manager_market_data.get("market") or {}).get("bookmaker"),
+            "observed_at": (manager_market_data.get("market") or {}).get("observed_at"),
+            "priced_candidates": (
+                (manager_market_data.get("market") or {}).get("coverage") or {}
+            ).get("priced_count"),
+            "mentioned_candidates": (
+                (manager_market_data.get("market") or {}).get("coverage") or {}
+            ).get("mentioned_count"),
+            "stale": ((manager_market_data.get("market") or {}).get("freshness") or {}).get(
+                "stale"
+            ),
+            "note": ((manager_market_data.get("market") or {}).get("coverage") or {}).get("note"),
         },
         "history": {
             "club": "sco:aberdeen",

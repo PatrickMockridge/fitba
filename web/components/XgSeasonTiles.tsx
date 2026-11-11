@@ -104,12 +104,12 @@ export function XgSeasonTiles({
         <span className="badge badge-neutral">League only</span>
       </div>
       <SeasonGroup
-        title={`Stephen Robinson · ${current?.season ?? "current"} · ${current?.matches ?? 0} league matches`}
+        title={`${current?.manager ?? "Manager"} · ${current?.season ?? "current"} · ${current?.matches ?? 0} league matches`}
         row={current}
         estimate={estimate}
       />
       <SeasonGroup
-        title={`Stephen Robinson · ${previousSeason} · ${previous?.matches ?? 0} league matches`}
+        title={`${previous?.manager ?? "Manager"} · ${previousSeason} · ${previous?.matches ?? 0} league matches`}
         row={previous}
         estimate={estimate}
       />

@@ -3,14 +3,24 @@ import { BucketBars } from "@/components/BucketBars";
 import { ContractPage } from "@/components/ContractPage";
 import { FormerPlayerMentions } from "@/components/FormerPlayerMentions";
 import { ForumSignalPanel } from "@/components/ForumSignalPanel";
+import { ManagerMarketPanel } from "@/components/ManagerMarketPanel";
 import { PlayerLink } from "@/components/PlayerLink";
 import { RumourBoard } from "@/components/RumourBoard";
 import {
+  getDonstalkSignal,
   getForumSignal,
+  getManagerMarket,
   getRumourProfile,
   getRumours,
   getTransfers,
 } from "@/lib/data";
+import type { ForumSignalFile } from "@/lib/data";
+
+function threadPageLabel(data: ForumSignalFile | null): string {
+  const page = data?.coverage.thread_page;
+  const count = data?.coverage.thread_page_count;
+  return page ? `DonsTalk page ${page}/${count ?? "?"}` : "DonsTalk board + latest thread";
+}
 
 export const metadata = {
   alternates: { canonical: "/rumours/" }, title: "Rumour mill · fitba" };
@@ -19,6 +29,8 @@ export default function RumoursPage() {
   const rumours = getRumours();
   const profile = getRumourProfile();
   const forum = getForumSignal();
+  const donstalk = getDonstalkSignal();
+  const managerMarket = getManagerMarket();
   const transfers = getTransfers();
 
   if (!rumours) {
@@ -49,9 +61,13 @@ export default function RumoursPage() {
         <div className="hero-actions">
           <span className="badge badge-warn">Not the confirmed register</span>
           <span className="badge badge-neutral">{rumours.summary.total} curated links</span>
-          <span className="badge badge-neutral">{forum?.signals.length ?? 0} fan signals</span>
+          <span className="badge badge-neutral">{forum?.signals.length ?? 0} AFC Chat signals</span>
+          <span className="badge badge-neutral">{donstalk?.signals.length ?? 0} DonsTalk signals</span>
+          <span className="badge badge-neutral">{threadPageLabel(donstalk)}</span>
         </div>
       </section>
+
+      <ManagerMarketPanel data={managerMarket} />
 
       <section className="card">
         <p className="eyebrow">Legend</p>
@@ -125,7 +141,8 @@ export default function RumoursPage() {
           only when the move is in the transfer register, and then it links to that
           row. Status is a lifecycle label, not a probability. Confidence is
           editorial and must be explained by the linked sources. No fabricated
-          quotes, no player abuse, no betting framing.
+          quotes, no player abuse, no betting framing for player rumours. The gated
+          next-manager market is the only odds exception.
         </p>
         <p className="fine-print">
           {rumours.coverage.note} {rumours.notes}
@@ -248,6 +265,17 @@ export default function RumoursPage() {
 
       <section className="section" data-contract="rumours.forum-signals">
         <ForumSignalPanel data={forum} limit={16} />
+      </section>
+
+      <section className="section" data-contract="rumours.donstalk-signals">
+        <ForumSignalPanel
+          data={donstalk}
+          limit={16}
+          eyebrow="Fan signal · DonsTalk"
+          title="What DonsTalk is talking about"
+          intro="The AFC board first page plus the latest page of the public Next manager thread. Player and manager names are extracted separately; a mention is not a transfer link or a probability, and no raw posts, usernames or quotes are published."
+          emptyHint="Run uv run fitba forum --source donstalk and republish to sample the AFC board and the latest Next manager page."
+        />
       </section>
 
       <section className="section">

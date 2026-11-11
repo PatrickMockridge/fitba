@@ -323,6 +323,30 @@ def test_reference_history_passes_and_catches_a_bad_honour():
     assert any("required id" in error for error in errors)
 
 
+def test_manager_change_records_one_current_interim():
+    staff = history_staff()
+    people = {person["person_id"]: person for person in staff["people"]}
+    robinson = people["stephen-robinson"]["stints"][0]
+    assert robinson["end"] == "2026-11-09"
+    assert robinson["reason_out"] == "dismissed"
+    duff = next(
+        stint
+        for stint in people["stuart-duff"]["stints"]
+        if stint["stint_id"] == "stuart-duff-interim-2026"
+    )
+    assert duff["role_group"] == "manager"
+    assert duff["interim"] is True
+    assert duff["end"] is None
+    current = [
+        stint
+        for person in staff["people"]
+        for stint in person["stints"]
+        if stint.get("role_group") == "manager" and not stint.get("end")
+    ]
+    assert len(current) == 1
+    assert current[0]["interim"] is True
+
+
 def test_blocked_source_hosts_are_rejected():
     _, hosts = no_publication_tokens()
     assert is_blocked_url("https://www.bbc.co.uk/sport/123", hosts)

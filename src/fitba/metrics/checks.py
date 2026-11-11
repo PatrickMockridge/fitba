@@ -7,8 +7,10 @@ allowed to duplicate the arithmetic precisely to catch drift.
 
 from __future__ import annotations
 
+import re
 import statistics
 from dataclasses import dataclass, field
+from datetime import datetime
 from typing import Any
 
 
@@ -917,7 +919,101 @@ def verify_analysis_league_rankings(corpus: dict[str, Any], _: Any = None) -> Ve
     return result
 
 
+def _fractional_decimal(value: Any) -> float | None:
+    match = re.fullmatch(r"\s*(\d+)\s*/\s*(\d+)\s*", str(value or ""))
+    if match is None:
+        return None
+    denominator = int(match.group(2))
+    if denominator == 0:
+        return None
+    return int(match.group(1)) / denominator + 1.0
+
+
+def verify_manager_market(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    payload = _payload(corpus, "rumours/manager-market.json") or {}
+    market = payload.get("market") or {}
+    if not market:
+        result.fail("manager market payload missing")
+        return result
+    history = _payload(corpus, "history/aberdeen.json") or {}
+    current = [
+        {**stint, "name": person.get("name")}
+        for person in history.get("staff") or []
+        for stint in person.get("stints") or []
+        if stint.get("role_group") == "manager" and not stint.get("end")
+    ]
+    gate = market.get("gate") or {}
+    expected_open = len(current) == 1 and bool(current[0].get("interim"))
+    if bool(gate.get("is_open")) != expected_open:
+        result.fail("manager market gate does not match the published staff register")
+    if market.get("state") != ("open" if expected_open else "closed") and len(current) == 1:
+        result.fail("manager market state does not match the vacancy gate")
+    if market.get("state") in {"closed", "unavailable"}:
+        if payload.get("candidates"):
+            result.fail("closed market publishes candidates")
+        result.note("manager_market.closed", True, "market is closed; no odds published")
+        return result
+    if expected_open and not gate.get("interim_manager"):
+        result.fail("open market has no interim manager")
+    if not market.get("source_urls"):
+        result.fail("open market has no source URL")
+    if not market.get("observed_at"):
+        result.fail("open market has no observation time")
+    for url in market.get("source_urls") or []:
+        lowered = str(url).casefold()
+        if any(token in lowered for token in ("affiliate", "utm_", "clickid", "gclid", "promo")):
+            result.fail("manager market source URL contains an affiliate/tracking token")
+    coverage = market.get("coverage") or {}
+    candidates = payload.get("candidates") or []
+    priced = [row for row in candidates if row.get("odds")]
+    mentioned = [row for row in candidates if row.get("mentions")]
+    if int(coverage.get("candidate_count") or 0) != len(candidates):
+        result.fail("manager market candidate count mismatch")
+    if int(coverage.get("priced_count") or 0) != len(priced):
+        result.fail("manager market priced count mismatch")
+    if int(coverage.get("mentioned_count") or 0) != len(mentioned):
+        result.fail("manager market mentioned count mismatch")
+    implied_total = 0.0
+    for row in candidates:
+        result.rows_checked += 1
+        odds = row.get("odds")
+        if not odds:
+            continue
+        decimal = _fractional_decimal(odds.get("fractional"))
+        if decimal is None or abs(float(odds.get("decimal") or 0) - decimal) > 0.01:
+            result.fail(f"{row.get('name')}: decimal odds do not recompute")
+            continue
+        implied = round(1 / decimal, 4)
+        if abs(float(odds.get("implied_probability") or 0) - implied) > 0.001:
+            result.fail(f"{row.get('name')}: implied probability does not recompute")
+        implied_total += implied
+    if bool(coverage.get("field_complete")):
+        overround = round(implied_total - 1, 4)
+        published_overround = coverage.get("overround")
+        if published_overround is None or abs(float(published_overround) - overround) > 0.001:
+            result.fail("manager market overround does not recompute")
+    observed = str(market.get("observed_at") or "")
+    generated = str(payload.get("generated_at") or "")
+    try:
+        age = (
+            datetime.fromisoformat(generated.replace("Z", "+00:00"))
+            - datetime.fromisoformat(observed.replace("Z", "+00:00"))
+        ).total_seconds() / 3600
+    except ValueError:
+        age = None
+    if age is not None and age > 168 and any(row.get("odds") for row in candidates):
+        result.fail("manager market publishes odds older than 168 hours")
+    result.note(
+        "manager.market",
+        True,
+        f"{len(priced)} priced, {len(mentioned)} mentioned; gate open",
+    )
+    return result
+
+
 CHECKS = {
+    "fitba.metrics.checks:verify_manager_market": verify_manager_market,
     "fitba.metrics.checks:verify_table_record": verify_table_record,
     "fitba.metrics.checks:verify_analysis_league_rankings": verify_analysis_league_rankings,
     "fitba.metrics.checks:verify_matchday_form": verify_matchday_form,

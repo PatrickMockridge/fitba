@@ -191,6 +191,12 @@ Implemented:
   curated links, weighted by confidence and recency.
 - `forum/afc_chat.json` — sampled topics, name signals, cross-reference labels
   and aggregate sentiment; no raw posts or usernames.
+- `forum/donstalk.json` — the AFC board first page plus the latest page of the
+  public Next manager thread: player and manager-candidate mentions, sentiment
+  and coverage; no raw posts or usernames.
+- `rumours/manager-market.json` — the gated next-manager market: a single public
+  bookmaker-odds snapshot, raw implied prices and DonsTalk mentions. Published
+  only while the staff register has an interim manager and no permanent manager.
 - `squad/aberdeen.json` — roster, loan tags, per-competition stats, totals,
   coverage states and player hrefs.
 - Scouting search is sharded: `scouting/search/meta.json` plus six

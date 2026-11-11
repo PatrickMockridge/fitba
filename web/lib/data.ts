@@ -880,6 +880,10 @@ export interface ForumTopic {
   published_at: string | null;
   latest_post: string | null;
   sampled_posts: number;
+  thread_page?: number | null;
+  thread_page_count?: number | null;
+  latest_page_only?: boolean;
+  board_topic?: boolean;
   player_mentions?: PlayerMention[];
 }
 
@@ -925,10 +929,22 @@ export interface ForumSignalFile {
     topics_sampled: number;
     posts_sampled: number;
     first_page_only: boolean;
+    single_page_only?: boolean;
+    latest_page_only?: boolean;
+    thread_page?: number | null;
+    thread_page_count?: number | null;
     raw_posts_published: boolean;
     note: string;
   };
   topics: ForumTopic[];
+  manager_mentions?: Array<{
+    candidate_id: string;
+    candidate_name: string;
+    mentions: number;
+    topic_count: number;
+    first_seen: string | null;
+    last_seen: string | null;
+  }>;
   signals: ForumSignal[];
   profile: {
     sample_size: number;
@@ -2591,6 +2607,25 @@ export interface Manifest {
       raw_posts_published: boolean;
       note: string;
     };
+    donstalk?: {
+      source: string;
+      topics: number;
+      posts: number;
+      thread_page: number | null;
+      thread_page_count: number | null;
+      latest_page_only: boolean;
+      raw_posts_published: boolean;
+      note: string;
+    };
+    manager_market?: {
+      state: string;
+      bookmaker: string | null;
+      observed_at: string | null;
+      priced_candidates: number | null;
+      mentioned_candidates: number | null;
+      stale: boolean | null;
+      note: string | null;
+    };
     history?: {
       club: string;
       seasons: number;
@@ -3210,6 +3245,79 @@ export function getRumourProfile(): RumourProfile | null {
 
 export function getForumSignal(): ForumSignalFile | null {
   return readJson<ForumSignalFile>("forum", "afc_chat.json");
+}
+
+export function getDonstalkSignal(): ForumSignalFile | null {
+  return readJson<ForumSignalFile>("forum", "donstalk.json");
+}
+
+export interface ManagerMarketOdds {
+  fractional: string;
+  decimal: number;
+  implied_probability: number;
+}
+
+export interface ManagerMarketMentions {
+  count: number;
+  topic_count: number;
+  sources: Array<{ id: string; count: number }>;
+  first_seen: string | null;
+  last_seen: string | null;
+}
+
+export interface ManagerMarketCandidate {
+  candidate_id: string;
+  name: string;
+  current_role: string | null;
+  current_club: string | null;
+  status: string;
+  odds: ManagerMarketOdds | null;
+  mentions: ManagerMarketMentions | null;
+  sources: Array<{ id: string; url: string | null; observed_at: string | null }>;
+}
+
+export interface ManagerMarketFile {
+  schema_version: string;
+  generated_at: string;
+  season: string;
+  club_id: string;
+  market: {
+    id: string;
+    label: string;
+    state: "open" | "closed" | "unavailable";
+    gate: {
+      is_open: boolean;
+      state: string;
+      permanent_manager: string | null;
+      permanent_manager_start?: string | null;
+      interim_manager: string | null;
+      interim_since: string | null;
+      vacancy_started: string | null;
+      checked_at: string | null;
+      reason?: string | null;
+    };
+    observed_at: string | null;
+    bookmaker: string | null;
+    publisher: string | null;
+    source_urls: string[];
+    freshness: { age_hours: number | null; stale: boolean; max_age_hours: number };
+    coverage: {
+      status: string;
+      candidate_count: number;
+      priced_count: number;
+      mentioned_count: number;
+      field_complete: boolean;
+      overround: number | null;
+      note: string;
+    };
+  };
+  candidates: ManagerMarketCandidate[];
+  disclaimer: string;
+  notes: string;
+}
+
+export function getManagerMarket(): ManagerMarketFile | null {
+  return readJson<ManagerMarketFile>("rumours", "manager-market.json");
 }
 
 export function getCase(): CaseDocument | null {

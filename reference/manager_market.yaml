@@ -1,0 +1,116 @@
+# Next Aberdeen manager market — a single public odds snapshot.
+#
+# Published only while the staff register shows an interim manager and no
+# permanent manager. This is intelligence, not betting advice or promotion. The
+# snapshot is curated by hand from one public article; there is no automated
+# bookmaker scrape, no cross-bookmaker average and no affiliate link.
+#
+# Fields:
+#   candidate_id, name, aliases, current_role, current_club, odds_fractional
+# Fractional odds are the published price; decimal and raw implied probability
+# are computed at publish time. A null price means the candidate is mentioned
+# in the forum but not priced in this snapshot.
+
+version: 1
+reviewed: '2026-11-11'
+market:
+  id: next-manager
+  label: Next Aberdeen manager
+snapshot:
+  source_id: gambling_com
+  provider: Gambling.com
+  publisher: The Herald via Yahoo Sports
+  observed_at: '2026-11-10T07:38:00Z'
+  verified_at: '2026-11-11'
+  source_url: https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html
+  field_complete: false
+  notes: >
+    Gambling.com's next-manager list as reported by The Herald via Yahoo Sports
+    on 10 November 2026. The field is partial; raw implied prices do not sum to
+    100% and no overround is published. Prices move; observe the timestamp.
+
+candidates:
+  - candidate_id: tony-docherty
+    name: Tony Docherty
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "4/1"
+  - candidate_id: peter-leven
+    name: Peter Leven
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "5/1"
+  - candidate_id: eirik-horneland
+    name: Eirik Horneland
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "6/1"
+  - candidate_id: neil-lennon
+    name: Neil Lennon
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "7/1"
+  - candidate_id: sandro-schwarz
+    name: Sandro Schwarz
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "8/1"
+  - candidate_id: jens-berthel-askou
+    name: Jens Berthel Askou
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "10/1"
+  - candidate_id: markus-gisdol
+    name: Markus Gisdol
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "12/1"
+  - candidate_id: barry-robson
+    name: Barry Robson
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "14/1"
+  - candidate_id: alex-neil
+    name: Alex Neil
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "16/1"
+  - candidate_id: craig-bellamy
+    name: Craig Bellamy
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: "33/1"
+  - candidate_id: michael-wimmer
+    name: Michael Wimmer
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: null
+  - candidate_id: karel-geraerts
+    name: Karel Geraerts
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: null
+  - candidate_id: steve-clarke
+    name: Steve Clarke
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: null
+  - candidate_id: john-hughes
+    name: John Hughes
+    aliases: []
+    current_role: null
+    current_club: null
+    odds_fractional: null

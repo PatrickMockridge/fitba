@@ -8,6 +8,28 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.16.0 — 2026-11-11
+
+Manager vacancy, DonsTalk and the gated next-manager market. `case.claim.managers`
+v3 → v4; new `forum.donstalk` v1 and `manager.market` v1.
+
+- `case.claim.managers` v3 → v4: Robinson's record is 21 league matches at 1.05
+  points per game, ending in dismissal on 9 November 2026. The manager-change
+  evidence row and the interim spell are separate from the permanent sample.
+  No result, table or historical manager record changed.
+- `forum.donstalk` v1: AFC board first page plus the **latest page** of the
+  public Next manager thread (page 1 is from 2022 and is never used), with
+  player mentions, manager-candidate mentions and rule-based sentiment. No raw
+  posts, usernames or quotes.
+- `manager.market` v1: a single public bookmaker-odds snapshot, published only
+  while the staff register has an interim manager and no permanent manager.
+  Decimal = fractional numerator/denominator + 1; raw implied = 1/decimal;
+  overround only when the field is complete. No cross-bookmaker average, no
+  normalisation, no affiliate or sign-up link.
+- Policy: the betting rule now has the narrow next-manager exception; see
+  [identity.md](identity.md) and [product-strategy.md](product-strategy.md).
+- Registry version 3.15.1 → 3.16.0.
+
 ## 3.15.1 — 2026-11-09
 
 Availability display semantics. `analysis.summary` v4 → v5 and

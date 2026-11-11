@@ -14,7 +14,10 @@ develop, sell high, reinvest in young players — and that the model can produce
 both a Scottish Cup and volatile league form. The history layer makes that
 argument inspectable season by season.
 
-It is not a defence of the model or a verdict on any manager or player. It puts
+A manager change is a stint boundary. When the current manager is interim and
+no permanent manager is in post, the page says so visibly; an interim with no
+league match is shown with Pld 0 and an Interim badge. It is not a defence of
+the model or a verdict on any manager or player. It puts
 the measured record, the curated public facts and a clearly labelled assessment
 side by side.
 

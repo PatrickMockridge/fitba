@@ -459,15 +459,19 @@ def squad(
 
 @app.command()
 def forum(
-    limit: Annotated[int, typer.Option(help="Maximum topics to sample")] = 8,
-    days: Annotated[int, typer.Option(help="Only topics published in this window")] = 365,
+    limit: Annotated[int, typer.Option(help="Maximum AFC Chat topics to sample")] = 8,
+    days: Annotated[int, typer.Option(help="Only AFC Chat topics in this window")] = 365,
     enrich: Annotated[
         bool, typer.Option(help="Validate candidate names against Scottish league squads")
     ] = True,
     force: Annotated[bool, typer.Option(help="Ignore the HTML cache")] = False,
+    source: Annotated[str, typer.Option(help="afc_chat, donstalk or both")] = "both",
 ) -> None:
-    """Sample AFC Chat Rumour Mill first pages for fan signal (reference use)."""
-    result = ingest_forum(limit=limit, days=days, enrich=enrich, force=force)
+    """Sample AFC Chat and DonsTalk for fan signal (reference use)."""
+    if source not in {"afc_chat", "donstalk", "both"}:
+        raise typer.BadParameter("source must be afc_chat, donstalk or both")
+    sources = ("afc_chat", "donstalk") if source == "both" else (source,)
+    result = ingest_forum(limit=limit, days=days, enrich=enrich, force=force, sources=sources)
     if result.status != "ok":
         console.print(f"[red]forum failed[/red]: {result.errors}")
         raise typer.Exit(code=1)

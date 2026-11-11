@@ -70,3 +70,12 @@ Aberdeen team sheets place him on the left (left back / left wing-back), with
 Devlin or Lobban on the right of the same line. The history should show the
 observed left-side starts and the tactical note should record right back as his
 natural side. Do not overwrite the grid with the trade position.
+
+## 2026-11-09 — Managerial change
+
+The club parted company with Head Coach Stephen Robinson, Assistant Head Coach
+Brian Kerr and First Team Coach Stephen Craigan after a Board meeting. Stuart
+Duff took interim charge of first-team training; no permanent replacement had
+been named. Tactical notes written under the previous manager remain dated
+historical context, not claims about Duff or the next permanent head coach.
+Source: https://www.afc.co.uk/en/news/stephen-robinson-departs

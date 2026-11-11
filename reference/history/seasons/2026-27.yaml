@@ -1,37 +1,42 @@
-# 2026-27: the Robinson rebuild, in progress.
+# 2026-27: the Robinson rebuild, then a November managerial change.
 season: 2026-27
 status: in_progress
-headline: A substantial rebuild under Stephen Robinson, with the league shape still unsettled.
-as_of: '2026-10-21'
-reviewed_at: '2026-10-21'
-manager_stint_ids: [stephen-robinson-manager-2026]
+headline: >
+  A rebuild under Stephen Robinson, then a November managerial change, with the
+  league shape still unsettled.
+as_of: '2026-11-11'
+reviewed_at: '2026-11-11'
+manager_stint_ids: [stephen-robinson-manager-2026, stuart-duff-interim-2026]
 
 expectations:
   baseline: >
-    A top-six baseline after ninth place, with a new manager's first full season
-    and a squad rebuilt over the summer.
+    A top-six baseline after ninth place, from a season that began under
+    Stephen Robinson and changed manager in November.
   target: >
     Top six and a clearer identity. This is an analyst-set baseline, not a
     published club target.
   context: >
     Stephen Robinson was appointed on 12 March 2026 and began his first full
-    season after a large summer turnover. Aberdeen are not in European
-    competition. The League Cup semi-final against Rangers is scheduled for
-    31 October 2026.
-  source_ids: [wikipedia]
+    season after a large summer turnover. The League Cup semi-final at Hampden
+    was lost 1-0 to Rangers on 31 October 2026. The club parted company with
+    Robinson, Brian Kerr and Stephen Craigan on 9 November 2026; Stuart Duff
+    took interim charge of first-team training and no permanent replacement had
+    been named.
+  source_ids: [wikipedia, afc_news]
   source_urls:
     - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+    - https://www.afc.co.uk/en/news/stephen-robinson-departs
 
 league_context: >
   The season is in progress. The league position and form are shown as of the
   review date, not as a final outcome. The record does not publish a season
-  verdict in October.
+  verdict during the campaign.
 
 cup_runs:
   - competition_id: sco:league-cup
     exit_round: Semi-final
-    outcome: pending
-    note: Scheduled against Rangers at Hampden Park on 31 October 2026.
+    outcome: eliminated
+    note: Lost 1-0 to Rangers at Hampden Park on 31 October 2026.
     source_ids: [wikipedia]
     source_urls:
       - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
@@ -73,9 +78,11 @@ review: null
 
 interim_read: >
   The rebuild is the story so far, not a verdict. A large summer turnover, a
-  new manager and an unsettled shape are the context for the early results.
-  The record will publish a final review at the end of the season; until then,
-  the measured record and the coverage notes are the honest output.
+  new manager and an unsettled shape are the context for the early results. The
+  November 2026 managerial change is part of that context: Stuart Duff's
+  caretaker spell is not a permanent manager's sample. The record will publish
+  a final review at the end of the season; until then, the measured record and
+  the coverage notes are the honest output.
 
 coverage_declared:
   transfers: audited
@@ -85,8 +92,9 @@ coverage_declared:
 
 known_gaps:
   - The season is in progress; there is no final review.
-  - The League Cup semi-final is scheduled, not played.
+  - No permanent manager has been appointed; the interim spell is ongoing.
   - No European competition this season.
 
 source_urls:
   - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
+  - https://www.afc.co.uk/en/news/stephen-robinson-departs

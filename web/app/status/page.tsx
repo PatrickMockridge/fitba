@@ -439,7 +439,7 @@ export default function StatusPage() {
           ) : null}
           {manifest.coverage.forum ? (
             <p>
-              {manifest.coverage.forum.topics} forum topics and{" "}
+              {manifest.coverage.forum.topics} AFC Chat topics and{" "}
               {manifest.coverage.forum.posts} first-page posts sampled ·{" "}
               {manifest.coverage.forum.raw_posts_published
                 ? "raw posts published"
@@ -447,8 +447,31 @@ export default function StatusPage() {
               .
             </p>
           ) : null}
+          {manifest.coverage.donstalk ? (
+            <p>
+              {manifest.coverage.donstalk.topics} DonsTalk topics and{" "}
+              {manifest.coverage.donstalk.posts} latest-thread posts sampled
+              {manifest.coverage.donstalk.thread_page
+                ? ` · page ${manifest.coverage.donstalk.thread_page}/${manifest.coverage.donstalk.thread_page_count ?? "?"}`
+                : ""}{" "}
+              · no raw posts published.
+            </p>
+          ) : null}
+          {manifest.coverage.manager_market ? (
+            <p>
+              Next-manager market: {manifest.coverage.manager_market.state}
+              {manifest.coverage.manager_market.bookmaker
+                ? ` · ${manifest.coverage.manager_market.bookmaker}`
+                : ""}
+              {manifest.coverage.manager_market.priced_candidates !== null
+                ? ` · ${manifest.coverage.manager_market.priced_candidates} priced`
+                : ""}
+              . Not betting advice.
+            </p>
+          ) : null}
           <p className="fine-print">
-            {manifest.coverage.rumours?.note} {manifest.coverage.forum?.note}
+            {manifest.coverage.rumours?.note} {manifest.coverage.forum?.note}{" "}
+            {manifest.coverage.donstalk?.note}
           </p>
         </section>
       ) : null}

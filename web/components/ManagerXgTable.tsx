@@ -47,7 +47,7 @@ export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
       <div className="section-head">
         <div>
           <p className="eyebrow">Manager comparison</p>
-          <h2>Robinson&apos;s league spells compared</h2>
+          <h2>Manager league spells compared</h2>
         </div>
         <span className="badge badge-neutral">League only</span>
       </div>
@@ -124,8 +124,8 @@ export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
         </table>
       </div>
       <p className="fine-print">
-        Nine matches per Robinson league spell; the comparison is descriptive, not
-        a causal verdict. The full 2025-26 row is context, not a fourth spell.
+        Each row is one manager stint; the comparison is descriptive, not a causal
+        verdict. The full 2025-26 row is context, not a fourth spell.
       </p>
     </section>
   );

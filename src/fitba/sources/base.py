@@ -26,6 +26,7 @@ class Capability(StrEnum):
     PLAYER_ATTRIBUTES = "player_attributes"
     PLAYER_ROLES = "player_roles"
     INJURIES = "injuries"
+    ODDS = "odds"
 
 
 class Lane(StrEnum):

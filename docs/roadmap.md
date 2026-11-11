@@ -280,7 +280,8 @@ need new payloads or registered metrics before they can be published.
 
 ## Non-goals for this roadmap
 
-- Betting odds or gambling advertising.
+- Betting odds or gambling advertising, except the gated next-manager
+  intelligence exception defined in product-strategy.md.
 - A raw data dump or an API for third parties.
 - Full tracking before a licensed contract.
 - Player ratings as verdicts or blame narratives.

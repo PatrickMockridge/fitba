@@ -36,7 +36,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Valuation | Curated anchors + model | Ranges and confidence |
 | Season overview | Derived | Local match/squad/history data |
 | Needs | Derived | Case evidence + availability + squad/transfers |
-| Odds | Not published | No betting content |
+| Odds | Curated next-manager snapshot, gated | Published only while Aberdeen have no permanent manager; intelligence only, not advice or advertising |
 
 ## League migration gate
 

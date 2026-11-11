@@ -612,6 +612,10 @@ def _mart_rows(mart_id: str, payload: Any) -> int | None:
             return len(payload.get("checks") or [])
     if mart_id == "forum.afc_chat":
         return int((payload.get("coverage") or {}).get("posts_sampled") or 0)
+    if mart_id == "forum.donstalk":
+        return int((payload.get("coverage") or {}).get("posts_sampled") or 0)
+    if mart_id == "rumours.manager-market":
+        return len(payload.get("candidates") or [])
     if mart_id == "matchday.upcoming":
         return 1
     if mart_id == "rumours.profile":

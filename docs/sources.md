@@ -168,6 +168,33 @@ sampled text is stored in the gitignored normalized store and is not part of the
 committed JSON. The page states the sample size, that it is first pages only and
 that a mention is not a transfer link. See [rumours.md](rumours.md).
 
+## Fan signal: DonsTalk
+
+| Item | Detail |
+|---|---|
+| Source | `https://www.donstalk.co.uk/forum/7-aberdeen-football-club/` |
+| Topic | `https://www.donstalk.co.uk/topic/9479-next-manager/` |
+| Terms signal | robots.txt allows standard forum/topic URLs, no crawl-delay; guidelines do not address scraping/reuse |
+| Access | AFC board first page plus the **latest page** of the public Next manager thread; no search or member pages; rate-limited |
+| Use | name mentions, manager-candidate mentions and rule-based sentiment |
+| Publication | derived aggregates and topic titles/links only; **no raw posts, usernames or quotes** |
+
+The Next manager thread's page 1 is from 2022; the adapter discovers the page
+count and samples the latest page, failing closed if pagination cannot be read.
+The thread page and page count are published beside the sample. Coverage is a
+sample, not the whole forum or fanbase.
+
+## Next-manager odds exception
+
+The only betting-odds source is a manually curated single-publication snapshot
+for the next-manager market. It is published only while the staff register has an
+interim manager and no permanent manager, with the bookmaker/list, source URL,
+observation time and raw implied prices. There is no automated bookmaker scrape,
+no cross-bookmaker average, no affiliate or sign-up link and no gambling
+advertising. The section closes automatically when a permanent manager is
+appointed. See [rumours.md](rumours.md) and
+[product-strategy.md](product-strategy.md).
+
 ## Cup data details
 
 - **League Cup:** API-Football fixtures supply the 80 group matches, group

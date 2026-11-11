@@ -34,7 +34,10 @@
 #   engagement       reserved; always null until the engagement project ships
 #
 # Rules:
-#   - no fabricated quotes, no player abuse, no betting/odds framing;
+#   - no fabricated quotes, no player abuse, no betting/odds framing for player
+#     rumours. The gated next-manager market is the only odds exception; it is
+#     published separately from this player register and closes when a
+#     permanent manager is appointed;
 #   - confidence is not a probability and must be explained by the sources;
 #   - a confirmed row is a historical record, not a second source of truth;
 #   - engagement stays null in this phase (see config/engagement.yaml).

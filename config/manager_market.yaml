@@ -1,0 +1,25 @@
+# Next-manager market policy.
+#
+# The only betting-odds exception in fitba: a single curated public snapshot is
+# published while the staff register has an interim manager and no permanent
+# manager. It is intelligence, not advice, a recommendation or a promotion. There
+# are no affiliate links, sign-up links, gambling advertising or calls to action.
+
+version: 1
+reviewed: '2026-11-11'
+gate:
+  require_no_permanent_manager: true
+  require_interim_manager: true
+freshness:
+  stale_after_hours: 48
+  withhold_after_hours: 168
+policy:
+  label: Next Aberdeen manager
+  source_mode: curated_public_snapshot
+  no_affiliate_links: true
+  no_gambling_advertising: true
+  disclaimer: >
+    Not betting advice. Odds are a bookmaker's prices, not probabilities, a
+    recommendation or a promotion. fitba has no affiliate or advertising
+    relationship. Published as intelligence only while Aberdeen have no permanent
+    manager; removed when a permanent manager is appointed.

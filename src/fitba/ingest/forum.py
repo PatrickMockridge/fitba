@@ -1,4 +1,4 @@
-"""Derive fan signal from AFC Chat's Rumour Mill first pages.
+"""Derive fan signal from AFC Chat first pages and DonsTalk's latest thread page.
 
 Raw post text stays in the gitignored normalized store and is never published.
 The published layer contains topic metadata, player mention counts,
@@ -25,6 +25,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 from fitba.analytics.affiliation import AffiliationIndex
 from fitba.analytics.former_players import former_player_rows
+from fitba.analytics.manager_market import extract_manager_mentions
 from fitba.ingest.cache import cache_path
 from fitba.ingest.news import load_news
 from fitba.ingest.scouting import PLAYER_SEASON_PATH
@@ -36,12 +37,15 @@ from fitba.settings import (
     ensure_dirs,
 )
 from fitba.settings import (
+    manager_market as manager_market_config,
+)
+from fitba.settings import (
     players as players_config,
 )
 from fitba.settings import (
     rumours as rumours_config,
 )
-from fitba.sources import afc_chat, api_football
+from fitba.sources import afc_chat, api_football, donstalk
 from fitba.sources.base import IngestResult
 from fitba.util.dates import current_season, utc_now_iso
 
@@ -94,6 +98,25 @@ SIGNAL_COLUMNS = [
     "cross_press",
     "cross_club",
     "ingested_at",
+]
+
+MANAGER_MENTION_COLUMNS = [
+    "candidate_id",
+    "candidate_name",
+    "mentions",
+    "topic_count",
+    "first_seen",
+    "last_seen",
+    "ingested_at",
+]
+
+DONSTALK_TOPIC_COLUMNS = [
+    *TOPIC_COLUMNS,
+    "thread_page",
+    "thread_page_count",
+    "latest_page_only",
+    "single_page_only",
+    "board_topic",
 ]
 
 CAP_SEQ_RE = re.compile(r"\b([A-Z][a-zA-Z'\u2019\-]+(?:\s+[A-Z][a-zA-Z'\u2019\-]+){0,3})\b")
@@ -746,7 +769,12 @@ def capitalised_bigrams(text: str) -> list[str]:
     return found
 
 
-def extract_mentions(text: str, gazetteer: Gazetteer) -> list[GazetteerEntry]:
+def extract_mentions(
+    text: str,
+    gazetteer: Gazetteer,
+    *,
+    exclude_names: set[str] | None = None,
+) -> list[GazetteerEntry]:
     """Extract gazetteer players from a post.
 
     Full names match anywhere. A surname-only mention is accepted when the
@@ -766,7 +794,8 @@ def extract_mentions(text: str, gazetteer: Gazetteer) -> list[GazetteerEntry]:
                 phrase = " ".join(tokens[start : start + size])
                 entry = gazetteer.match_full(phrase)
                 if entry is not None:
-                    mentions.setdefault(entry.norm, entry)
+                    if not exclude_names or entry.name not in exclude_names:
+                        mentions.setdefault(entry.norm, entry)
                     matched_span = (match.start(), match.end())
                     break
             if matched_span:
@@ -786,6 +815,8 @@ def extract_mentions(text: str, gazetteer: Gazetteer) -> list[GazetteerEntry]:
                 continue
             entry = gazetteer.match_surname(token)
             if entry is None:
+                continue
+            if exclude_names and entry.name in exclude_names:
                 continue
             sentence_start = match.start() == 0 or text[match.start() - 1] in ".!?\"'"
             if sentence_start and index == 0 and len(tokens) == 1:
@@ -884,13 +915,14 @@ def build_signals(
     rumours: list[dict[str, Any]],
     news_titles: list[str],
     affiliations: AffiliationIndex | None = None,
+    exclude_names: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     signals: dict[str, dict[str, Any]] = {}
     for row in posts.to_dicts():
         text = str(row.get("text") or "")
         if not text:
             continue
-        for entry in extract_mentions(text, gazetteer):
+        for entry in extract_mentions(text, gazetteer, exclude_names=exclude_names):
             signal_key = entry.player_key or entry.norm
             signal = signals.setdefault(
                 signal_key,
@@ -1080,29 +1112,107 @@ def _topic_frame(topics: list[dict[str, Any]], now: str) -> pl.DataFrame:
     return pl.DataFrame(rows).select(TOPIC_COLUMNS)
 
 
+def _donstalk_topic_frame(topics: list[dict[str, Any]], now: str) -> pl.DataFrame:
+    rows = []
+    for topic in topics:
+        row = {column: topic.get(column) for column in TOPIC_COLUMNS}
+        row.update(
+            {
+                "thread_page": topic.get("thread_page"),
+                "thread_page_count": topic.get("thread_page_count"),
+                "latest_page_only": bool(topic.get("latest_page_only")),
+                "single_page_only": bool(topic.get("single_page_only")),
+                "board_topic": not bool(topic.get("thread_page")),
+                "ingested_at": now,
+            }
+        )
+        rows.append(row)
+    if not rows:
+        return pl.DataFrame({column: [] for column in DONSTALK_TOPIC_COLUMNS})
+    return pl.DataFrame(rows).select(DONSTALK_TOPIC_COLUMNS)
+
+
+def _manager_mentions_frame(
+    post_rows: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    now: str,
+) -> pl.DataFrame:
+    names = {
+        str(candidate.get("candidate_id") or candidate.get("id") or ""): str(
+            candidate.get("name") or ""
+        )
+        for candidate in candidates
+    }
+    aggregate: dict[str, dict[str, Any]] = {}
+    for row in post_rows:
+        text = str(row.get("text") or "")
+        if not text:
+            continue
+        for candidate_id, count in extract_manager_mentions(text, candidates).items():
+            entry = aggregate.setdefault(
+                candidate_id,
+                {"mentions": 0, "topics": set(), "dates": []},
+            )
+            entry["mentions"] += count
+            entry["topics"].add(str(row.get("topic_id") or ""))
+            if row.get("posted_at"):
+                entry["dates"].append(str(row["posted_at"]))
+    rows = [
+        {
+            "candidate_id": candidate_id,
+            "candidate_name": names.get(candidate_id, candidate_id),
+            "mentions": entry["mentions"],
+            "topic_count": len(entry["topics"]),
+            "first_seen": min(entry["dates"]) if entry["dates"] else None,
+            "last_seen": max(entry["dates"]) if entry["dates"] else None,
+            "ingested_at": now,
+        }
+        for candidate_id, entry in aggregate.items()
+    ]
+    rows.sort(key=lambda row: (-int(row["mentions"]), str(row["candidate_name"])))
+    if not rows:
+        return pl.DataFrame({column: [] for column in MANAGER_MENTION_COLUMNS})
+    return pl.DataFrame(rows).select(MANAGER_MENTION_COLUMNS)
+
+
 def ingest_forum(
     *,
     limit: int = 8,
     days: int = 365,
     enrich: bool = True,
     force: bool = False,
+    sources: tuple[str, ...] = ("afc_chat", "donstalk"),
 ) -> IngestResult:
     ensure_dirs()
-    try:
-        topics, posts = afc_chat.sample_topics(limit=limit, days=days, force=force)
-        now = utc_now_iso()
-        post_rows: list[dict[str, Any]] = []
-        candidate_bigrams: dict[str, int] = {}
+    now = utc_now_iso()
+    sampled: dict[str, tuple[list[dict[str, Any]], list[dict[str, Any]]]] = {}
+    errors: list[str] = []
+    if "afc_chat" in sources:
+        try:
+            sampled["afc_chat"] = afc_chat.sample_topics(limit=limit, days=days, force=force)
+        except Exception as exc:  # noqa: BLE001 - reported per source
+            errors.append(f"afc_chat: {exc}")
+    if "donstalk" in sources:
+        try:
+            sampled["donstalk"] = donstalk.sample(force=force)
+        except Exception as exc:  # noqa: BLE001 - reported per source
+            errors.append(f"donstalk: {exc}")
+    if not sampled:
+        return IngestResult(source="forum", status="error", errors=errors)
+
+    candidate_bigrams: dict[str, int] = {}
+    post_rows_by_source: dict[str, list[dict[str, Any]]] = {}
+    for source, (_topics, posts) in sampled.items():
+        key_fn = afc_chat.post_key if source == "afc_chat" else donstalk.post_key
+        rows: list[dict[str, Any]] = []
         for post in posts:
             text = str(post.get("text") or "")
             if not text:
                 continue
             scores = score_text(text)
-            post_rows.append(
+            rows.append(
                 {
-                    "post_key": afc_chat.post_key(
-                        str(post.get("topic_id")), str(post.get("comment_id"))
-                    ),
+                    "post_key": key_fn(str(post.get("topic_id")), str(post.get("comment_id"))),
                     "topic_id": str(post.get("topic_id")),
                     "posted_at": post.get("posted_at"),
                     "text": text,
@@ -1113,35 +1223,47 @@ def ingest_forum(
             )
             for phrase in capitalised_bigrams(text):
                 candidate_bigrams[phrase] = candidate_bigrams.get(phrase, 0) + 1
+        post_rows_by_source[source] = rows
 
-        repeated = [
-            phrase
-            for phrase, count in candidate_bigrams.items()
-            if count >= 1 and plausible_name(phrase)
-        ]
-        gazetteer = build_gazetteer(enrich=enrich, candidates=repeated)
+    repeated = [
+        phrase
+        for phrase, count in candidate_bigrams.items()
+        if count >= 1 and plausible_name(phrase)
+    ]
+    gazetteer = build_gazetteer(enrich=enrich, candidates=repeated)
 
+    from fitba.publish.squad import squad_payload
+
+    transfers = published_transfers()
+    squad = squad_payload(current_season())
+    former = former_player_rows(transfers, squad)
+    affiliations = AffiliationIndex.from_payloads(
+        squad=squad,
+        former_keys={str(row["player_key"]) for row in former},
+    )
+    candidates = list(manager_market_config().get("candidates") or [])
+    manager_names = {
+        str(candidate.get("name") or "") for candidate in candidates if candidate.get("name")
+    }
+
+    output_dir = NORMALIZED_DIR / "forum"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    details: dict[str, Any] = {}
+    total_rows = 0
+    for source, post_rows in post_rows_by_source.items():
         posts_frame = (
             pl.DataFrame(post_rows).select(POST_COLUMNS)
             if post_rows
             else pl.DataFrame({column: [] for column in POST_COLUMNS})
         )
-        topics_frame = _topic_frame(topics, now)
-
-        output_dir = NORMALIZED_DIR / "forum"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        posts_frame.write_parquet(output_dir / "afc_chat_posts.parquet")
-        topics_frame.write_parquet(output_dir / "afc_chat_topics.parquet")
-
-        from fitba.publish.squad import squad_payload
-
-        transfers = published_transfers()
-        squad = squad_payload(current_season())
-        former = former_player_rows(transfers, squad)
-        affiliations = AffiliationIndex.from_payloads(
-            squad=squad,
-            former_keys={str(row["player_key"]) for row in former},
+        topics, _posts = sampled[source]
+        topics_frame = (
+            _topic_frame(topics, now)
+            if source == "afc_chat"
+            else _donstalk_topic_frame(topics, now)
         )
+        posts_frame.write_parquet(output_dir / f"{source}_posts.parquet")
+        topics_frame.write_parquet(output_dir / f"{source}_topics.parquet")
         signals = build_signals(
             posts_frame,
             gazetteer,
@@ -1149,30 +1271,38 @@ def ingest_forum(
             rumours=list(rumours_config().get("rumours", [])),
             news_titles=[str(row["title"]) for row in load_news(limit=50).to_dicts()],
             affiliations=affiliations,
+            exclude_names=manager_names if source == "donstalk" else None,
         )
-        signal_frame(signals, now).write_parquet(output_dir / "afc_chat_signals.parquet")
+        signal_frame(signals, now).write_parquet(output_dir / f"{source}_signals.parquet")
+        total_rows += posts_frame.height
+        details[source] = {
+            "topics_sampled": len(topics),
+            "posts_sampled": posts_frame.height,
+            "signals": len(signals),
+            "sentiment": summarize_sentiment([float(row["compound"]) for row in post_rows]),
+        }
+        if source == "donstalk":
+            mentions = _manager_mentions_frame(post_rows, candidates, now)
+            mentions.write_parquet(output_dir / "donstalk_manager_mentions.parquet")
+            details[source]["manager_mentions"] = mentions.height
 
-        return IngestResult(
-            source="afc_chat",
-            status="ok",
-            rows=posts_frame.height,
-            path=str(output_dir / "afc_chat_posts.parquet"),
-            details={
-                "topics_sampled": len(topics),
-                "posts_sampled": posts_frame.height,
-                "gazetteer_size": len(gazetteer.by_full),
-                "signals": len(signals),
-                "name_checks": len(repeated),
-                "former_identities": gazetteer.meta.get("former_identities", 0),
-                "scouted_identities": gazetteer.meta.get("scouted_identities", 0),
-                "lookup_matches": gazetteer.meta.get(LOOKUP_API, 0),
-                "lookup_not_found": gazetteer.meta.get(LOOKUP_NOT_FOUND, 0),
-                "lookup_ambiguous": gazetteer.meta.get(LOOKUP_AMBIGUOUS, 0),
-                "sentiment": summarize_sentiment([float(row["compound"]) for row in post_rows]),
-            },
-        )
-    except Exception as exc:  # noqa: BLE001 - reported by the CLI
-        return IngestResult(source="afc_chat", status="error", errors=[str(exc)])
+    return IngestResult(
+        source="forum",
+        status="ok" if not errors else "error",
+        rows=total_rows,
+        path=str(output_dir / "donstalk_posts.parquet"),
+        errors=errors or None,
+        details={
+            "sources": details,
+            "gazetteer_size": len(gazetteer.by_full),
+            "name_checks": len(repeated),
+            "former_identities": gazetteer.meta.get("former_identities", 0),
+            "scouted_identities": gazetteer.meta.get("scouted_identities", 0),
+            "lookup_matches": gazetteer.meta.get(LOOKUP_API, 0),
+            "lookup_not_found": gazetteer.meta.get(LOOKUP_NOT_FOUND, 0),
+            "lookup_ambiguous": gazetteer.meta.get(LOOKUP_AMBIGUOUS, 0),
+        },
+    )
 
 
 def load_forum_topics() -> pl.DataFrame:
@@ -1196,6 +1326,34 @@ def load_forum_signals() -> pl.DataFrame:
     return pl.read_parquet(path)
 
 
+def load_donstalk_topics() -> pl.DataFrame:
+    path = NORMALIZED_DIR / "forum" / "donstalk_topics.parquet"
+    if not path.exists():
+        return pl.DataFrame({column: [] for column in DONSTALK_TOPIC_COLUMNS})
+    return pl.read_parquet(path)
+
+
+def load_donstalk_posts() -> pl.DataFrame:
+    path = NORMALIZED_DIR / "forum" / "donstalk_posts.parquet"
+    if not path.exists():
+        return pl.DataFrame({column: [] for column in POST_COLUMNS})
+    return pl.read_parquet(path)
+
+
+def load_donstalk_signals() -> pl.DataFrame:
+    path = NORMALIZED_DIR / "forum" / "donstalk_signals.parquet"
+    if not path.exists():
+        return pl.DataFrame({column: [] for column in SIGNAL_COLUMNS})
+    return pl.read_parquet(path)
+
+
+def load_donstalk_manager_mentions() -> pl.DataFrame:
+    path = NORMALIZED_DIR / "forum" / "donstalk_manager_mentions.parquet"
+    if not path.exists():
+        return pl.DataFrame({column: [] for column in MANAGER_MENTION_COLUMNS})
+    return pl.read_parquet(path)
+
+
 __all__ = [
     "Gazetteer",
     "GazetteerEntry",
@@ -1205,6 +1363,10 @@ __all__ = [
     "capitalised_bigrams",
     "extract_mentions",
     "ingest_forum",
+    "load_donstalk_manager_mentions",
+    "load_donstalk_posts",
+    "load_donstalk_signals",
+    "load_donstalk_topics",
     "load_forum_posts",
     "load_forum_topics",
     "score_text",

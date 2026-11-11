@@ -326,6 +326,22 @@ def rumours() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def manager_market() -> dict[str, Any]:
+    path = REFERENCE_DIR / "manager_market.yaml"
+    if not path.exists():
+        return {"candidates": [], "market": {}, "snapshot": {}}
+    return load_yaml(path)
+
+
+@lru_cache(maxsize=1)
+def manager_market_policy() -> dict[str, Any]:
+    path = CONFIG_DIR / "manager_market.yaml"
+    if not path.exists():
+        return {"gate": {}, "freshness": {}, "policy": {}}
+    return load_yaml(path)
+
+
+@lru_cache(maxsize=1)
 def engagement() -> dict[str, Any]:
     return load_yaml(CONFIG_DIR / "engagement.yaml")
 

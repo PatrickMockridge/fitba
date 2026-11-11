@@ -52,7 +52,12 @@ requires at least one `source_url`. The guard rejects rows without URLs, invalid
 statuses, a confirmed row without a transfer link, and a non-confirmed row with
 one.
 
-No fabricated quotes, no player abuse, no betting/odds framing.
+No fabricated quotes, no player abuse, and no betting/odds framing for player
+rumours. The one exception is the gated next-manager market: while Aberdeen have
+no permanent manager, `/rumours/` may publish a single named public
+bookmaker-odds snapshot as intelligence, with source and observation time. It is
+not advice, a recommendation or a promotion, has no affiliate or sign-up link,
+and closes when a permanent manager is appointed.
 
 ## Fan signal: what is ingested
 
@@ -71,6 +76,13 @@ as a reference signal only:
 
 This is a sample of recent topics, not the whole forum, the whole thread or the
 fanbase. The page states the sample size.
+
+**DonsTalk** (`https://www.donstalk.co.uk/forum/7-aberdeen-football-club/`) is a
+second, separately labelled sample: the AFC board first page for topic titles and
+links, plus the **latest page** of the public Next manager thread for derived
+name mentions. The thread's page 1 is from 2022 and is never used. No search,
+member pages, raw post bodies, usernames or quotes are published. Manager
+candidates are matched by full name only; the sampling frames are not merged.
 
 ## Name extraction
 
@@ -205,13 +217,32 @@ cite at least one rumour id as evidence and must be human-written, data-cited an
 clearly labelled as an opinion. The payload drops an opinion with no surviving
 evidence. Opinions are not club guidance.
 
+## Next-manager market
+
+The only betting-odds exception. It is open only when the curated staff register
+has exactly one current manager and that manager is interim; a permanent
+appointment closes it automatically.
+
+- One named public bookmaker-odds snapshot is curated by hand, with the
+  publication, source URL, observation time and raw fractional/decimal prices.
+- Raw implied probability is `1 / decimal`; it is not an appointment
+  probability. No overround is published unless the field is complete.
+- No cross-bookmaker average, no normalisation, no affiliate or sign-up link and
+  no gambling advertising or call to action.
+- Stale after 48 hours; prices are withheld after 168 hours, with mention-only
+  candidates remaining.
+- The panel always says “Not betting advice” and closes to a no-odds state when
+  a permanent manager is appointed.
+
 ## Publication and guards
 
 - `scripts/check_rumours.py` blocks raw post text, usernames, quotes and
   engagement counts from the web payload.
 - It verifies that confirmed rumours link a real transfer, that non-confirmed
   rows do not, that every row is sourced and that `engagement` stays null.
-- It verifies the small-cohort flag and the first-page/raw-post coverage flags.
+- It verifies the small-cohort flag, DonsTalk latest-page/raw-post coverage and
+  the manager-market gate, odds arithmetic, source, disclaimer and no-affiliate
+  rule.
 - The confirmed transfer guard (`scripts/check_transfers.py`) remains separate.
 
 ## Engagement — separate project

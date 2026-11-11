@@ -334,12 +334,15 @@ layers:
     label: Fan signal
     kind: derived
     primary: afc_chat
-    fallback: []
+    fallback: [donstalk]
     status: active
-    scope: sampled first pages
-    fields: [mentions, cross_references, sentiment]
+    scope: sampled first pages and the latest Next-manager thread page
+    fields: [mentions, manager_mentions, cross_references, sentiment]
     surfaces: [/rumours/]
-    note: Sampled, rule-based, no raw posts or usernames.
+    note: >
+      Sampled, rule-based, no raw posts or usernames. AFC Chat first pages and
+      DonsTalk's AFC board first page plus the latest page of the public Next
+      manager thread; the DonsTalk thread's page 1 is from 2022 and is not used.
 
   - id: history
     label: Cormack-era historical record
@@ -434,15 +437,20 @@ layers:
       labelled context beside, not inside, the provider-xG league rank.
 
   - id: odds
-    label: Betting odds
-    kind: none
-    primary: none
+    label: Next-manager market odds
+    kind: curated
+    primary: manager_market
     fallback: []
-    status: not_published
-    scope: n/a
-    fields: []
-    surfaces: []
-    note: Not ingested or published.
+    status: gated
+    scope: next-manager market only while Aberdeen have no permanent manager
+    fields: [bookmaker, fractional_odds, decimal_odds, implied_probability, observed_at, source_url]
+    surfaces: [/rumours/]
+    note: >
+      Gated exception to the no-betting rule: one curated public bookmaker-odds
+      snapshot is published as intelligence only while the club has an interim
+      manager and no permanent manager. No betting advice, promotion, affiliate
+      link, sign-up link or gambling advertising. Removed automatically when a
+      permanent manager is appointed.
 
 excluded:
   - id: bbc_sport

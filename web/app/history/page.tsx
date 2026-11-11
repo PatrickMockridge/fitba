@@ -135,6 +135,12 @@ export default function HistoryPage() {
         String(a.start).localeCompare(String(b.start))
       );
     });
+  const currentPermanentManager = currentStaff.find(
+    (stint) => stint.role_group === "manager" && !stint.interim,
+  );
+  const currentInterimManager = currentStaff.find(
+    (stint) => stint.role_group === "manager" && stint.interim,
+  );
   const auditedFrom = history.coverage.transfer_coverage.audited_from;
 
   return (
@@ -180,7 +186,7 @@ export default function HistoryPage() {
         <StatTile
           label="People in charge"
           value={history.scorecard.manager_count}
-          note={`including interim spells · ${managerStints.length} stints`}
+          note={`${history.scorecard.manager_count} with a league match · ${managerStints.length} stints incl. interim`}
         />
         <StatTile
           label="Estimated net"
@@ -331,6 +337,17 @@ export default function HistoryPage() {
               <h2>Managers, backroom and board</h2>
             </div>
           </div>
+          {!currentPermanentManager && currentInterimManager ? (
+            <p className="fine-print" data-contract-indicator="unknown">
+              <span className="badge badge-warn">No permanent manager</span>{" "}
+              {currentInterimManager.name} is interim
+              {currentInterimManager.start
+                ? ` since ${formatDate(currentInterimManager.start)}`
+                : ""}
+              . The manager count counts people with at least one league match;
+              the current staff list includes the interim.
+            </p>
+          ) : null}
           <ul className="plain-list current-staff">
             {currentStaff.map((stint) => (
               <li key={stint.stint_id}>

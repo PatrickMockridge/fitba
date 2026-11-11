@@ -210,7 +210,10 @@ export default function AboutPage() {
         <ul className="plain-list">
           <li>Player ratings presented as verdicts, or &ldquo;data says sign him&rdquo; certainty.</li>
           <li>Blame narratives without role, sample and context.</li>
-          <li>Raw scraped data, unlicensed Opta/Sofascore feeds or betting odds.</li>
+          <li>
+            Raw scraped data, unlicensed Opta/Sofascore feeds, or betting odds
+            outside the gated next-manager intelligence exception.
+          </li>
           <li>Invented wages, fees or internal valuations.</li>
           <li>Unmoderated forum posts or unsourced links presented as fact.</li>
           <li>Fake community vote counts before the engagement project exists.</li>

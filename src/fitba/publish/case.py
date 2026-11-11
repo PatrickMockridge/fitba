@@ -250,6 +250,7 @@ def _manager_evidence(
     thelin = by_name.get("Jimmy Thelin") or {}
     leven = by_name.get("Peter Leven") or {}
     robinson = by_name.get("Stephen Robinson") or {}
+    duff = by_name.get("Stuart Duff") or {}
     thelin_rows = []
     if thelin:
         start = str(thelin.get("first_match") or "")
@@ -300,19 +301,38 @@ def _manager_evidence(
                 f"{robinson.get('played', 0)} matches, {_fmt(robinson.get('ppg'))} points per game"
             ),
             sample="League only",
-            period="March 2026 to date",
+            period="March 2026 to November 2026",
             status="mixed",
             source=_source_name("football_data_uk"),
             note=(
-                "Two nine-match spells of three wins, two draws and four defeats; "
-                "the sample is small."
+                f"{robinson.get('won', 0)} wins, {robinson.get('drawn', 0)} draws and "
+                f"{robinson.get('lost', 0)} defeats; the sample is small."
+            ),
+        ),
+        ClaimEvidence(
+            metric="Manager change",
+            count=(
+                "Robinson dismissed 9 November 2026; "
+                f"Stuart Duff interim, {duff.get('played', 0)} league matches"
+            ),
+            sample="League only",
+            period="November 2026",
+            status="supported",
+            source=_source_name("afc_news"),
+            note=(
+                "The dismissal is a club statement; the interim record is separate "
+                "from a permanent manager's sample."
             ),
         ),
     ]
-    count = (
-        f"{thelin.get('played', 0)} + {leven.get('played', 0)} + "
-        f"{robinson.get('played', 0)} league matches"
-    )
+    parts = [
+        f"{thelin.get('played', 0)}",
+        f"{leven.get('played', 0)}",
+        f"{robinson.get('played', 0)}",
+    ]
+    if int(duff.get("played") or 0):
+        parts.append(f"{duff.get('played', 0)}")
+    count = " + ".join(parts) + " league matches"
     return evidence, count
 
 
@@ -977,12 +997,17 @@ def _curated_notes() -> list[dict[str, Any]]:
 
 def _manager_claim(all_matches: pl.DataFrame, history_index: dict[str, Any]) -> dict[str, Any]:
     evidence, count = _manager_evidence(all_matches, history_index, "")
+    robinson = next(
+        (item for item in evidence if item.metric == "Robinson league record"), None
+    )
+    played = str(robinson.count).split(" ", 1)[0] if robinson else "0"
     return {
         "count": count,
         "status": "mixed",
         "status_reason": (
             "The manager records are measured. 'Steadying' and 'lower variance' "
-            "are readings: 18 matches, two squads and no agreed measure of consistency."
+            f"are readings: {played} matches, two squads, a November 2026 "
+            "dismissal and no agreed measure of consistency."
         ),
         "evidence": evidence,
     }

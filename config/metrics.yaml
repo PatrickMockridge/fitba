@@ -1,6 +1,6 @@
 schema_version: 1
-registry_version: 3.15.1
-reviewed: '2026-11-09'
+registry_version: 3.16.0
+reviewed: '2026-11-11'
 owner: patrickmockridge
 change_policy:
   owner_approval_required: true
@@ -1642,6 +1642,110 @@ metrics:
   reviewed: '2026-10-22'
   version: 3
   status: active
+- id: forum.donstalk
+  label: DonsTalk signal
+  description: DonsTalk fan-signal coverage, sentiment and manager-candidate mentions.
+  value_type: object
+  fields:
+  - mentions
+  - manager_mentions
+  - sentiment
+  formula: >
+    Mention counts from the AFC board first page and the latest page of the
+    public Next manager thread. Manager candidates match by full name only, never
+    surname only. Page 1 of the thread is from 2022 and is not used. No raw post
+    bodies, usernames or quotes are published.
+  inputs:
+  - published payload
+  unit: mixed
+  aggregation: family
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: mixed
+  source_layer: forum_signal
+  coverage_tier: curated
+  confidence_rule: >
+    A descriptive sample, not the whole forum or fanbase. A mention is not a
+    transfer link or a probability. Full-name matching avoids surname ambiguity.
+  home_payload: forum/donstalk.json
+  payload_paths:
+  - forum/donstalk.json#/**
+  home_surface: /rumours/
+  displayed_surfaces:
+  - /rumours/
+  verification: provenance_only
+  implementation: null
+  source_paths: []
+  limitations:
+  - Reference fan signal; provenance checked, not recomputed.
+  - Sample is the AFC board first page plus one latest thread page, not the whole forum.
+  - The Next manager thread's page 1 is from 2022 and is never used.
+  owner: patrickmockridge
+  reviewed: '2026-11-11'
+  version: 1
+  status: active
+- id: manager.market
+  label: Next-manager market
+  description: Gated single-snapshot bookmaker odds for the next Aberdeen manager.
+  value_type: object
+  fields:
+  - fractional
+  - decimal
+  - implied_probability
+  - overround
+  - candidate_count
+  - priced_count
+  - mentioned_count
+  - age_hours
+  formula: >
+    decimal = fractional numerator / denominator + 1. implied_probability =
+    1 / decimal. overround = sum(implied_probability) - 1 only when the field is
+    complete. No normalisation, averaging or cross-bookmaker consensus is
+    published. The market is open only when the staff register has exactly one
+    current manager and that manager is interim; it closes automatically when a
+    permanent manager is appointed.
+  inputs:
+  - published payload
+  - reference/manager_market.yaml
+  - reference/history/staff.yaml
+  - data/normalized/forum/donstalk_manager_mentions.parquet
+  unit: mixed
+  aggregation: per_candidate
+  denominator: null
+  rounding:
+    method: half_even
+    decimals: 2
+    display: '0.00'
+  basis: measured
+  source_layer: odds
+  coverage_tier: value_only
+  confidence_rule: >
+    A single public publisher's bookmaker list, not a consensus. Prices move;
+    the snapshot is stale after 48 hours and withheld after 168 hours. Raw
+    implied prices are not probabilities. This is intelligence, not betting
+    advice, a recommendation or a promotion; no affiliate or sign-up link.
+  home_payload: rumours/manager-market.json
+  payload_paths:
+  - rumours/manager-market.json#/**
+  home_surface: /rumours/
+  displayed_surfaces:
+  - /rumours/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_manager_market
+  source_paths:
+  - reference/manager_market.yaml
+  limitations:
+  - Single snapshot, not a cross-bookmaker average.
+  - Raw implied prices are not appointment probabilities.
+  - Closed automatically when a permanent manager is appointed.
+  - The source is a public publisher list; bookmaker terms are not an API licence.
+  owner: patrickmockridge
+  reviewed: '2026-11-11'
+  version: 1
+  status: active
 - id: provenance.layers
   label: Provenance layers
   description: Layer/source row counts and truth table.
@@ -2541,7 +2645,9 @@ metrics:
   - winning_run
   - winless_run
   formula: played/ppg by manager stint; winning_run/winless_run = longest league run;
-    cup outcome from the honours register; interim spells are separate.
+    cup outcome from the honours register; interim spells are separate. The
+    November 2026 manager change is recorded as a separate evidence row; the
+    interim spell is not merged into the permanent manager's sample.
   inputs:
   - published payload
   unit: mixed
@@ -2566,10 +2672,11 @@ metrics:
   implementation: null
   source_paths: []
   limitations:
-  - 18 Robinson matches; no pre-declared variance measure.
+  - 21 Robinson matches; no pre-declared variance measure.
+  - The interim manager has no league match at this publish; the vacancy is not a permanent sample.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 3
+  reviewed: '2026-11-11'
+  version: 4
   status: active
 - id: case.claim.squad
   label: The squad

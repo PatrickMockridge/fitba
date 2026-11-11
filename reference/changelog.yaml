@@ -18,6 +18,32 @@ note: >
 append_only: true
 
 entries:
+  - id: manager-change-2026-11-11
+    date: 2026-11-11
+    kind: page
+    status: published
+    title: Stephen Robinson departs; Stuart Duff interim; DonsTalk and the gated next-manager market
+    summary: >
+      Aberdeen parted company with Stephen Robinson, Brian Kerr and Stephen
+      Craigan on 9 November 2026. Stuart Duff took interim charge of first-team
+      training and no permanent manager was named. The Cormack era timeline,
+      current staff, manager records and 2026-27 season copy now show the
+      change. DonsTalk is sampled as a second fan-signal source (AFC board first
+      page plus the latest page of the Next manager thread). The next-manager
+      market is published under the gated betting-odds exception while the post
+      is vacant; it is intelligence, not betting advice or promotion.
+    pages: ["/history/", "/history/2026-27/", "/rumours/", "/news/", "/status/"]
+    entities: []
+    metric_ids: [case.claim.managers, forum.donstalk, manager.market]
+    registry_version: 3.16.0
+    doc_anchor: "3-16-0-2026-11-11"
+    evidence:
+      - {label: "Club statement", url: "https://www.afc.co.uk/en/news/stephen-robinson-departs"}
+      - {label: "Cormack era", url: "/history/"}
+      - {label: "Rumour mill", url: "/rumours/"}
+      - {label: "Metrics and audit", url: "/metrics/"}
+    fixed_in_dataset: null
+
   - id: metric-3.13.0-role-coverage
     date: 2026-10-28
     kind: metric

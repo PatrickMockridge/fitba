@@ -358,15 +358,40 @@ people:
         role_group: manager
         start: '2026-03-12'
         start_precision: day
-        end: null
-        end_precision: null
+        end: '2026-11-09'
+        end_precision: day
         interim: false
-        reason_out: null
+        reason_out: dismissed
         source_ids: [afc_news]
         source_urls:
           - https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach
-        verified_at: '2026-10-21'
-        notes: Joined from St Mirren on a contract until summer 2029.
+          - https://www.afc.co.uk/en/news/stephen-robinson-departs
+        verified_at: '2026-11-11'
+        notes: >
+          Joined from St Mirren on a contract until summer 2029. Parted company
+          with the club after a Board meeting on 9 November 2026, along with
+          Brian Kerr and Stephen Craigan.
+
+  - person_id: stuart-duff
+    name: Stuart Duff
+    stints:
+      - stint_id: stuart-duff-interim-2026
+        role: Interim manager
+        role_group: manager
+        start: '2026-11-09'
+        start_precision: day
+        end: null
+        end_precision: null
+        interim: true
+        reason_out: null
+        source_ids: [afc_news]
+        source_urls:
+          - https://www.afc.co.uk/en/news/stephen-robinson-departs
+        verified_at: '2026-11-11'
+        notes: >
+          Took interim charge of first-team training after the Board's decision.
+          No permanent replacement had been named; the recruitment process was
+          ongoing.
 
   - person_id: brian-kerr
     name: Brian Kerr
@@ -376,15 +401,16 @@ people:
         role_group: assistant_manager
         start: '2026-03-12'
         start_precision: day
-        end: null
-        end_precision: null
+        end: '2026-11-09'
+        end_precision: day
         interim: false
-        reason_out: null
+        reason_out: dismissed
         source_ids: [afc_news]
         source_urls:
           - https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach
-        verified_at: '2026-10-21'
-        notes: Joined with Stephen Robinson from St Mirren.
+          - https://www.afc.co.uk/en/news/stephen-robinson-departs
+        verified_at: '2026-11-11'
+        notes: Joined with Stephen Robinson from St Mirren; departed with him on 9 November 2026.
 
   - person_id: stephen-craigan
     name: Stephen Craigan
@@ -394,15 +420,18 @@ people:
         role_group: first_team_coach
         start: '2026-06'
         start_precision: month
-        end: null
-        end_precision: null
+        end: '2026-11-09'
+        end_precision: day
         interim: false
-        reason_out: null
-        source_ids: [wikipedia]
+        reason_out: dismissed
+        source_ids: [afc_news]
         source_urls:
           - https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season
-        verified_at: '2026-10-21'
-        notes: Joined the coaching staff in pre-season 2026 with a youth-transition remit.
+          - https://www.afc.co.uk/en/news/stephen-robinson-departs
+        verified_at: '2026-11-11'
+        notes: >
+          Joined the coaching staff in pre-season 2026 with a youth-transition
+          remit; departed with Robinson on 9 November 2026.
 
   - person_id: alan-burrows
     name: Alan Burrows

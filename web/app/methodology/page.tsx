@@ -403,7 +403,11 @@ export default function MethodologyPage() {
           <li>No raw forum post bodies, usernames or quotes.</li>
           <li>No raw market-value feeds; only bands and our derived scores.</li>
           <li>No club crests or player photographs without a licence.</li>
-          <li>No odds in the public app.</li>
+          <li>
+            No odds in the public app, except the sourced next-manager market
+            snapshot while Aberdeen have no permanent manager; it is intelligence,
+            not advice or promotion.
+          </li>
           <li>No affiliation with Aberdeen FC, the SPFL or any provider.</li>
         </ul>
         <p className="fine-print">

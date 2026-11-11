@@ -145,21 +145,26 @@ export function ForumSignalPanel({
   limit = 12,
   showSentiment = true,
   showTopics = true,
+  eyebrow = "Fan signal · reference use",
+  title = "What the Rumour Mill is talking about",
+  intro = "Names are extracted with a player gazetteer, then labelled by whether the same name also appears in the press rumour register, the club's output or confirmed business. A mention is not a transfer link, and a cross-reference is not a probability.",
+  emptyHint = "Run uv run fitba forum and republish to sample the AFC Chat Rumour Mill first pages.",
 }: {
   data: ForumSignalFile | null;
   limit?: number;
   showSentiment?: boolean;
   showTopics?: boolean;
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  emptyHint?: string;
 }) {
   if (!data) {
     return (
       <div className="card">
-        <p className="eyebrow">Fan signal</p>
+        <p className="eyebrow">{eyebrow}</p>
         <h2>Not ingested yet</h2>
-        <p className="muted">
-          Run <code>uv run fitba forum</code> and republish to sample the AFC Chat
-          Rumour Mill first pages.
-        </p>
+        <p className="muted">{emptyHint}</p>
       </div>
     );
   }
@@ -180,22 +185,26 @@ export function ForumSignalPanel({
     <div className="forum-panel">
       <div className="section-head">
         <div>
-          <p className="eyebrow">Fan signal · reference use</p>
-          <h2>What the Rumour Mill is talking about</h2>
+          <p className="eyebrow">{eyebrow}</p>
+          <h2>{title}</h2>
         </div>
         <div className="hero-actions">
           <span className="badge badge-neutral">{data.coverage.topics_sampled} topics</span>
           <span className="badge badge-neutral">{data.coverage.posts_sampled} posts</span>
-          <span className="badge badge-warn">first pages only</span>
+          <span className="badge badge-warn">
+            {data.coverage.first_page_only
+              ? "first pages only"
+              : `latest page ${data.coverage.thread_page ?? "?"}/${data.coverage.thread_page_count ?? "?"}`}
+          </span>
+          {data.manager_mentions?.length ? (
+            <span className="badge badge-neutral">
+              {data.manager_mentions.length} manager names
+            </span>
+          ) : null}
         </div>
       </div>
 
-      <p className="lede">
-        Names are extracted with a player gazetteer, then labelled by whether the
-        same name also appears in the press rumour register, the club&apos;s output
-        or confirmed business. A mention is not a transfer link, and a
-        cross-reference is not a probability.
-      </p>
+      <p className="lede">{intro}</p>
 
       <div className="board-controls">
         <label>

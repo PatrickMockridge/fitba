@@ -1,8 +1,9 @@
 """Build the published rumour, opinion and fan-signal payloads.
 
 The rumour register is curated in ``reference/rumours.yaml``. The fan signal is
-derived from sampled AFC Chat first pages. Neither is the confirmed transfer
-register; the two never merge.
+derived from sampled AFC Chat first pages and DonsTalk's AFC board/latest
+Next-manager thread page. Neither is the confirmed transfer register; the two
+never merge.
 """
 
 from __future__ import annotations
@@ -18,6 +19,10 @@ from fitba.analytics.affiliation import (
 )
 from fitba.ingest.forum import (
     build_profile,
+    load_donstalk_manager_mentions,
+    load_donstalk_posts,
+    load_donstalk_signals,
+    load_donstalk_topics,
     load_forum_posts,
     load_forum_signals,
     load_forum_topics,
@@ -259,7 +264,10 @@ def rumours_payload(
                 "are then a historical record, not a second source of truth."
             ),
         },
-        "notes": "No fabricated quotes, no player abuse, no betting framing.",
+        "notes": (
+            "No fabricated quotes, no player abuse, no betting framing for player "
+            "rumours; the gated next-manager market is the only odds exception."
+        ),
     }
 
 
@@ -441,8 +449,18 @@ def profile_payload(
     }
 
 
-def _forum_sentiment() -> dict[str, Any]:
-    posts = load_forum_posts()
+def _source_frames(source_id: str):
+    if source_id == "donstalk":
+        return (
+            load_donstalk_topics(),
+            load_donstalk_posts(),
+            load_donstalk_signals(),
+        )
+    return load_forum_topics(), load_forum_posts(), load_forum_signals()
+
+
+def _forum_sentiment(source_id: str = "afc_chat") -> dict[str, Any]:
+    _topics, posts, _signals = _source_frames(source_id)
     forum_values = [float(value) for value in posts["compound"].to_list()] if posts.height else []
     press_claims = [
         str(row.get("claim"))
@@ -470,11 +488,10 @@ def forum_payload(
     player_index: PlayerLinkIndex,
     generated_at: str | None = None,
     former_players: dict[str, Any] | None = None,
+    source_id: str = "afc_chat",
 ) -> dict[str, Any]:
-    topics = load_forum_topics()
-    signals = load_forum_signals()
-    posts = load_forum_posts()
-    source = source_registry()["sources"].get("afc_chat", {})
+    topics, posts, signals = _source_frames(source_id)
+    source = source_registry()["sources"].get(source_id, {})
     signal_rows = signals.to_dicts() if signals.height else []
     topic_rows = topics.to_dicts() if topics.height else []
     generated = None
@@ -485,28 +502,45 @@ def forum_payload(
         for player in (former_players or {}).get("players", [])
         if player.get("player_key")
     }
+    thread = next(
+        (row for row in topic_rows if row.get("thread_page") is not None),
+        {},
+    )
+    is_donstalk = source_id == "donstalk"
+    coverage = {
+        "topics_sampled": len(topic_rows),
+        "posts_sampled": posts.height,
+        "first_page_only": not is_donstalk,
+        "single_page_only": True,
+        "latest_page_only": bool(thread.get("latest_page_only")) if is_donstalk else False,
+        "thread_page": thread.get("thread_page") if is_donstalk else None,
+        "thread_page_count": thread.get("thread_page_count") if is_donstalk else None,
+        "raw_posts_published": False,
+        "note": (
+            "AFC board first page plus the latest page of the public Next manager "
+            "thread. This is not the whole thread, the whole forum or the fanbase. "
+            "No raw post bodies, usernames or quotes are published."
+            if is_donstalk
+            else (
+                "Sampled first pages of recent Rumour Mill topics. This is not "
+                "the whole thread, the whole forum or the fanbase. No raw post "
+                "bodies, usernames or quotes are published, and the text is not "
+                "used for AI training."
+            )
+        ),
+    }
+    manager_mentions = load_donstalk_manager_mentions().to_dicts() if is_donstalk else []
     return {
         "source": {
-            "id": "afc_chat",
-            "name": source.get("name", "AFC Chat — The Rumour Mill"),
+            "id": source_id,
+            "name": source.get("name", source_id),
             "url": source.get("url"),
             "rss": source.get("rss"),
             "content_signal": source.get("content_signal"),
         },
         "generated_at": generated_at or utc_now_iso(),
         "sampled_at": generated,
-        "coverage": {
-            "topics_sampled": len(topic_rows),
-            "posts_sampled": posts.height,
-            "first_page_only": True,
-            "raw_posts_published": False,
-            "note": (
-                "Sampled first pages of recent Rumour Mill topics. This is not "
-                "the whole thread, the whole forum or the fanbase. No raw post "
-                "bodies, usernames or quotes are published, and the text is not "
-                "used for AI training."
-            ),
-        },
+        "coverage": coverage,
         "topics": [
             {
                 "title": row.get("title"),
@@ -514,10 +548,15 @@ def forum_payload(
                 "published_at": row.get("published_at"),
                 "latest_post": row.get("latest_post"),
                 "sampled_posts": row.get("sampled_posts"),
+                "thread_page": row.get("thread_page"),
+                "thread_page_count": row.get("thread_page_count"),
+                "latest_page_only": bool(row.get("latest_page_only")),
+                "board_topic": bool(row.get("board_topic")),
                 "player_mentions": player_index.mentions(row.get("title")),
             }
             for row in topic_rows
         ],
+        "manager_mentions": manager_mentions,
         "signals": [
             {
                 "player_name": row.get("player_name"),
@@ -576,7 +615,7 @@ def forum_payload(
             for row in signal_rows
         ],
         "profile": build_profile(signal_rows),
-        "sentiment": _forum_sentiment(),
+        "sentiment": _forum_sentiment(source_id),
         "notes": (
             "A mention count is not a transfer link. Affiliation separates current "
             "squad, current non-official, former players and external targets; the "

@@ -212,6 +212,14 @@ usernames or quotes in the public payload.
 
 - We are independent and non-commercial. No betting advertising, no paid club
   influence, no player abuse.
+- **Gated next-manager odds exception.** fitba does not publish betting odds or
+  gambling advertising. One exception applies: while the curated staff register
+  contains an interim manager and no permanent manager, `/rumours/` may publish a
+  single named public bookmaker-odds snapshot for the next-manager market, with
+  source, observation time and raw implied prices. It is intelligence, not
+  betting advice, a recommendation, a probability or a promotion. It carries no
+  affiliate or sign-up link, and closes automatically when a permanent manager is
+  appointed.
 - We distinguish measured, inferred, curated and unknown. A modelled estimate is
   labelled as one.
 - We do not claim to know the club's internal models or private conversations.
@@ -225,7 +233,7 @@ usernames or quotes in the public payload.
 - Player ratings presented as verdicts, or "data says sign him" certainty.
 - Blame narratives that single out a player without role, sample and context.
 - Raw scraped data in the public repo, unlicensed Opta/Sofascore feeds or
-  betting odds.
+  betting odds outside the gated next-manager intelligence exception above.
 - Invented wages, fees or internal valuations.
 - A question in place of a declarative heading, or contracted data hidden
   because it was judged too much for an imagined average reader.

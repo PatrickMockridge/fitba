@@ -59,6 +59,41 @@ sources:
       Coverage is a sample, not the whole forum or fanbase.
     last_verified: 2026-10-21
 
+  donstalk:
+    name: DonsTalk — Aberdeen Football Club forum
+    lane: derived_display
+    ingest_allowed: true
+    publication_allowed: true
+    capabilities: [fan_signal, sentiment]
+    url: https://www.donstalk.co.uk/forum/7-aberdeen-football-club/
+    attribution: DonsTalk forum contributors
+    content_signal: "robots=allow forum/topic; use=reference; no raw posts/usernames/quotes"
+    notes: >
+      Reference use only. robots.txt allows standard forum and topic URLs with
+      no crawl-delay. The AFC board first page is sampled for topic titles and
+      links; the latest page of the public Next manager thread is sampled for
+      derived name mentions and rule-based sentiment. Page 1 of the Next
+      manager thread is from 2022 and is never used as the current sample. No
+      search, member pages, raw post bodies, usernames or quotes are published.
+      Coverage is a sample, not the whole forum or fanbase.
+    last_verified: 2026-11-11
+
+  manager_market:
+    name: Next-manager market snapshot
+    lane: derived_display
+    ingest_allowed: false
+    publication_allowed: true
+    capabilities: [odds]
+    url: https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html
+    attribution: Gambling.com via The Herald/Yahoo Sports
+    content_signal: "manual snapshot; no automated scrape; no affiliate links"
+    notes: >
+      Curated single-publication bookmaker-odds snapshot for the next-manager
+      market. Published only while the staff register shows an interim manager
+      and no permanent manager. Intelligence only: no betting advice,
+      promotion, affiliate link, sign-up link or gambling advertising.
+    last_verified: 2026-11-11
+
   spfl:
     name: SPFL official club feed
     lane: derived_display
