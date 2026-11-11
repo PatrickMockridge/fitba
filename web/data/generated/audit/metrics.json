@@ -4,12 +4,12 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-11-11T12:42:22+00:00",
-  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
+  "audited_at": "2026-11-11T14:09:04+00:00",
+  "dataset_id": "2026-11-11T14:09:04+00:00-767fcf31",
   "dataset_state": "fresh",
-  "dataset_version": "2026-11-11T12:42:22+00:00-15779169",
+  "dataset_version": "2026-11-11T14:09:04+00:00-767fcf31",
   "errors": [],
-  "generated_at": "2026-11-11T12:42:22+00:00",
+  "generated_at": "2026-11-11T14:09:04+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -1590,7 +1590,7 @@
       ],
       "locations": [
         {
-          "nodes": 91,
+          "nodes": 92,
           "numeric_leaves": 0,
           "payload": "history/aberdeen.json",
           "pointer": "/seasons/**"
@@ -1787,7 +1787,7 @@
           "status": "pass"
         },
         {
-          "message": "8 location(s), 1748 numeric leaves",
+          "message": "8 location(s), 1755 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1808,7 +1808,7 @@
         "/history/"
       ],
       "errors": [],
-      "fields_checked": 1748,
+      "fields_checked": 1755,
       "home_payload": "history/seasons/*.json",
       "home_surface": "/history/",
       "id": "history.season-document",
@@ -1860,13 +1860,13 @@
           "pointer": "/**"
         },
         {
-          "nodes": 602,
-          "numeric_leaves": 208,
+          "nodes": 621,
+          "numeric_leaves": 215,
           "payload": "history/seasons/2026-27.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1748,
+      "numeric_leaves": 1755,
       "payloads": 8,
       "provenance_only": true,
       "rows_checked": 8,
@@ -3577,7 +3577,7 @@
       ],
       "locations": [
         {
-          "nodes": 141,
+          "nodes": 143,
           "numeric_leaves": 35,
           "payload": "manifest.json",
           "pointer": "/freshness/**"
@@ -24797,13 +24797,13 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-11T12:42:22+00:00",
+  "published_at": "2026-11-11T14:09:04+00:00",
   "registry_checksum": "sha256:3d664ef8800279ed1d37e406d208d2bf53d0f2394bec83bc96877dda938f064e",
   "registry_reviewed": "2026-11-11",
   "registry_version": "3.16.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
+  "served_by_update_id": "publish-2026-11-11T14:09:04+00:00",
   "source_snapshots": {
     "api_football": "2026-11-11T12:42:19.685088+00:00",
     "api_results": "2026-11-11T12:39:32+00:00",
@@ -24824,7 +24824,7 @@
   },
   "status": "pass",
   "summary": {
-    "fields_checked": 2338411,
+    "fields_checked": 2338418,
     "metrics_failed": 0,
     "metrics_passed": 86,
     "metrics_total": 86,
@@ -24839,5 +24839,5 @@
       "recompute": 16
     }
   },
-  "update_id": "2026-11-11T12:39:30+00:00-1984078"
+  "update_id": "publish-2026-11-11T14:09:04+00:00"
 }
