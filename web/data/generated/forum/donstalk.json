@@ -1,0 +1,762 @@
+{
+  "coverage": {
+    "first_page_only": false,
+    "latest_page_only": true,
+    "note": "AFC board first page plus the latest page of the public Next manager thread. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published.",
+    "posts_sampled": 18,
+    "raw_posts_published": false,
+    "single_page_only": true,
+    "thread_page": 86,
+    "thread_page_count": 86,
+    "topics_sampled": 25
+  },
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
+  "dataset_state": "fresh",
+  "generated_at": "2026-11-11T12:42:22+00:00",
+  "manager_mentions": [
+    {
+      "candidate_id": "michael-wimmer",
+      "candidate_name": "Michael Wimmer",
+      "first_seen": "2026-11-10T17:21:48Z",
+      "ingested_at": "2026-11-11T12:39:47+00:00",
+      "last_seen": "2026-11-11T10:08:50Z",
+      "mentions": 2,
+      "topic_count": 1
+    },
+    {
+      "candidate_id": "steve-clarke",
+      "candidate_name": "Steve Clarke",
+      "first_seen": "2026-11-11T06:52:36Z",
+      "ingested_at": "2026-11-11T12:39:47+00:00",
+      "last_seen": "2026-11-11T12:20:22Z",
+      "mentions": 2,
+      "topic_count": 1
+    },
+    {
+      "candidate_id": "john-hughes",
+      "candidate_name": "John Hughes",
+      "first_seen": "2026-11-11T12:01:43Z",
+      "ingested_at": "2026-11-11T12:39:47+00:00",
+      "last_seen": "2026-11-11T12:01:43Z",
+      "mentions": 1,
+      "topic_count": 1
+    },
+    {
+      "candidate_id": "karel-geraerts",
+      "candidate_name": "Karel Geraerts",
+      "first_seen": "2026-11-10T17:21:48Z",
+      "ingested_at": "2026-11-11T12:39:47+00:00",
+      "last_seen": "2026-11-10T17:21:48Z",
+      "mentions": 1,
+      "topic_count": 1
+    },
+    {
+      "candidate_id": "neil-lennon",
+      "candidate_name": "Neil Lennon",
+      "first_seen": "2026-11-11T06:52:36Z",
+      "ingested_at": "2026-11-11T12:39:47+00:00",
+      "last_seen": "2026-11-11T06:52:36Z",
+      "mentions": 1,
+      "topic_count": 1
+    }
+  ],
+  "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
+  "profile": {
+    "affiliation_mix": {
+      "current_squad": 2,
+      "external_target": 7,
+      "former_player": 1
+    },
+    "age_mix": {
+      "21-23": 1,
+      "24-26": 1,
+      "27-29": 1,
+      "30-plus": 3,
+      "under-21": 1
+    },
+    "excluded_counts": {
+      "current_squad": 2,
+      "former_player": 1
+    },
+    "external_sample_size": 7,
+    "former_player_profile": {
+      "mentions": 1,
+      "players": [
+        "T. Stephen"
+      ],
+      "sample_size": 1
+    },
+    "lanes": {
+      "current_squad": {
+        "count": 2,
+        "players": [
+          "B. Lyons",
+          "C. Cadden"
+        ]
+      },
+      "external_target": {
+        "count": 7,
+        "players": [
+          "D. Neil",
+          "J. Berthel Askou",
+          "Julián Javier Delmás Germán",
+          "Kevin Wimmer",
+          "L. Graham",
+          "Miles Gordon Robinson",
+          "Samuel Luke Johnstone"
+        ]
+      },
+      "former_player": {
+        "count": 1,
+        "players": [
+          "T. Stephen"
+        ]
+      }
+    },
+    "low_confidence": false,
+    "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
+    "position_mix": {
+      "DEF": 5,
+      "GK": 1,
+      "MID": 1
+    },
+    "sample_size": 7,
+    "source_mix": {
+      "club_player": 2,
+      "cross_referenced_club": 1,
+      "cross_referenced_transfer": 1,
+      "fan_only": 6
+    },
+    "total_signals": 10
+  },
+  "published_at": "2026-11-11T12:42:22+00:00",
+  "sampled_at": "2026-11-11T12:39:47+00:00",
+  "sentiment": {
+    "club": {
+      "count": 60,
+      "mean": 0.036,
+      "median": 0.0,
+      "negative_share": 0.133,
+      "neutral_share": 0.65,
+      "positive_share": 0.217
+    },
+    "forum": {
+      "count": 18,
+      "mean": 0.243,
+      "median": 0.309,
+      "negative_share": 0.222,
+      "neutral_share": 0.167,
+      "positive_share": 0.611
+    },
+    "note": "Rule-based VADER sentiment on sampled forum posts, curated press rumour claims and official AFC news titles. Descriptive and noisy; not a measure of truth, credibility or fanbase opinion.",
+    "press": {
+      "count": 0,
+      "mean": null,
+      "median": null,
+      "negative_share": null,
+      "neutral_share": null,
+      "positive_share": null
+    }
+  },
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
+  "signals": [
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "cross_referenced_club",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "FC Cincinnati",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 4,
+      "nationality": "USA",
+      "player_href": null,
+      "player_key": "api:player:50879",
+      "player_name": "Miles Gordon Robinson",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "club_player",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": true,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "aberdeen_squad",
+      "lookup_status": "local",
+      "mentions": 2,
+      "nationality": null,
+      "player_href": "/players/45010/",
+      "player_key": "api:player:45010",
+      "player_name": "B. Lyons",
+      "position": "Midfielder",
+      "position_group": "CM",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 33,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Slovan Bratislava",
+      "current_league": "Slovak Super Liga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 2,
+      "nationality": "Austria",
+      "player_href": null,
+      "player_key": "api:player:25374",
+      "player_name": "Kevin Wimmer",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
+      "age": 29,
+      "at_rival": false,
+      "credibility": "club_player",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": true,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "aberdeen_squad",
+      "lookup_status": "local",
+      "mentions": 1,
+      "nationality": null,
+      "player_href": "/players/44921/",
+      "player_key": "api:player:44921",
+      "player_name": "C. Cadden",
+      "position": "Defender",
+      "position_group": "FB",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 24,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Rangers",
+      "current_league": "Scottish Premiership",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "England",
+      "player_href": null,
+      "player_key": "api:player:19910",
+      "player_name": "D. Neil",
+      "position": null,
+      "position_group": "MID",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 19,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Odense",
+      "current_league": "Danish Superliga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Denmark",
+      "player_href": null,
+      "player_key": "api:player:412886",
+      "player_name": "J. Berthel Askou",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 30,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "IMT Novi Beograd",
+      "current_league": "Serbian SuperLiga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Spain",
+      "player_href": null,
+      "player_key": "api:player:47048",
+      "player_name": "Julián Javier Delmás Germán",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 21,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Stoke City",
+      "current_league": "EFL Championship",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:326968",
+      "player_name": "L. Graham",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 32,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Celtic",
+      "current_league": "Scottish Premiership",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "England",
+      "player_href": null,
+      "player_key": "api:player:19143",
+      "player_name": "Samuel Luke Johnstone",
+      "position": null,
+      "position_group": "GK",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
+      "age": null,
+      "at_rival": false,
+      "credibility": "cross_referenced_transfer",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": true,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Cove Rangers",
+      "current_league": null,
+      "former_href": "/former-players/#former-583968",
+      "lookup_source": "former_player",
+      "lookup_status": "former_player",
+      "mentions": 1,
+      "nationality": null,
+      "player_href": null,
+      "player_key": "api:player:583968",
+      "player_name": "T. Stephen",
+      "position": null,
+      "position_group": null,
+      "rival_club": null,
+      "topic_count": 1
+    }
+  ],
+  "source": {
+    "content_signal": "robots=allow forum/topic; use=reference; no raw posts/usernames/quotes",
+    "id": "donstalk",
+    "name": "DonsTalk — Aberdeen Football Club forum",
+    "rss": null,
+    "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
+  },
+  "source_snapshots": {
+    "api_football": "2026-11-11T12:42:19.685088+00:00",
+    "api_results": "2026-11-11T12:39:32+00:00",
+    "availability": "2026-11-11T12:39:47+00:00",
+    "career": "2026-11-11T12:39:47+00:00",
+    "football_data_uk": "2026-11-11T12:39:31+00:00",
+    "former_players": "2026-11-11T12:39:40+00:00",
+    "history_backfill": "2026-11-11T12:39:39+00:00",
+    "matchday_snapshot": "2026-11-11T06:17:18+00:00",
+    "scouting_clubs": "2026-11-11T12:40:15+00:00",
+    "scouting_europe": "2026-11-11T12:40:04+00:00",
+    "scouting_pool": "2026-11-11T12:39:53+00:00",
+    "scouting_roles": "2026-11-11T12:39:54+00:00",
+    "scouting_rose_history": "2026-11-11T12:40:04+00:00",
+    "scouting_standings": "2026-11-11T12:40:05+00:00",
+    "spfl": "2026-11-11T12:39:33+00:00",
+    "xg_enrichment": "2026-11-11T12:42:00+00:00"
+  },
+  "topics": [
+    {
+      "board_topic": false,
+      "latest_page_only": true,
+      "latest_post": "2026-11-11T12:20:22Z",
+      "player_mentions": [],
+      "published_at": "2026-11-11T12:20:22Z",
+      "sampled_posts": 19,
+      "thread_page": 86,
+      "thread_page_count": 86,
+      "title": "Next manager",
+      "url": "https://www.donstalk.co.uk/topic/9479-next-manager/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-09-01T16:04:47Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "January 2027 Transfer Window",
+      "url": "https://www.donstalk.co.uk/topic/10901-january-2027-transfer-window/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2025-11-14T07:25:40Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "The All New Unworthy Of It's Own Thread AFC General STUFF Thread",
+      "url": "https://www.donstalk.co.uk/topic/10757-the-all-new-unworthy-of-its-own-thread-afc-general-stuff-thread/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-07-20T01:24:07Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Goal scorers 26/27",
+      "url": "https://www.donstalk.co.uk/topic/10879-goal-scorers-2627/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-03-12T10:51:35Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Stephen Robinson",
+      "url": "https://www.donstalk.co.uk/topic/10817-stephen-robinson/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2012-01-31T08:44:15Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "On this day",
+      "url": "https://www.donstalk.co.uk/topic/3927-on-this-day/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-31T19:47:33Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen v Hibernian",
+      "url": "https://www.donstalk.co.uk/topic/10923-aberdeen-v-hibernian/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2019-01-30T23:25:03Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen Women",
+      "url": "https://www.donstalk.co.uk/topic/9025-aberdeen-women/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-11-07T16:14:08Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "RIP Billy Little",
+      "url": "https://www.donstalk.co.uk/topic/10926-rip-billy-little/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2025-10-27T13:53:36Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Sporting Director",
+      "url": "https://www.donstalk.co.uk/topic/10744-sporting-director/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-08-22T18:14:35Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen v Rangers",
+      "url": "https://www.donstalk.co.uk/topic/10899-aberdeen-v-rangers/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-11-06T21:28:18Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Dons ECWC 1983 Programmes",
+      "url": "https://www.donstalk.co.uk/topic/10925-dons-ecwc-1983-programmes/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2024-04-29T19:30:41Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Dons youth",
+      "url": "https://www.donstalk.co.uk/topic/10478-dons-youth/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-24T21:43:22Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen v Falkirk",
+      "url": "https://www.donstalk.co.uk/topic/10919-aberdeen-v-falkirk/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2025-11-29T19:06:37Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "AFC limericks",
+      "url": "https://www.donstalk.co.uk/topic/10766-afc-limericks/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-29T08:34:15Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Life Under Cormack",
+      "url": "https://www.donstalk.co.uk/topic/10921-life-under-cormack/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-09-13T15:58:57Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "League Cup semi: Rangers v Aberdeen",
+      "url": "https://www.donstalk.co.uk/topic/10907-league-cup-semi-rangers-v-aberdeen/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2024-04-16T12:03:44Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Jimmy Thelin",
+      "url": "https://www.donstalk.co.uk/topic/10500-jimmy-thelin/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-27T12:21:59Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Building an Aberdeen-Centric Football Data App: Free to Use, Independent, Feedback Welcome",
+      "url": "https://www.donstalk.co.uk/topic/10920-building-an-aberdeen-centric-football-data-app-free-to-use-independent-feedback-welcome/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-18T07:31:50Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Dundee United v Aberdeen",
+      "url": "https://www.donstalk.co.uk/topic/10917-dundee-united-v-aberdeen/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-06-18T11:10:56Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "2026-27 Fixtures",
+      "url": "https://www.donstalk.co.uk/topic/10865-2026-27-fixtures/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-11T18:15:45Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen v St Mirren",
+      "url": "https://www.donstalk.co.uk/topic/10916-aberdeen-v-st-mirren/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-10-04T10:44:43Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Aberdeen v St Johnstone",
+      "url": "https://www.donstalk.co.uk/topic/10915-aberdeen-v-st-johnstone/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-04-06T08:34:38Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Premiership Survival Thread",
+      "url": "https://www.donstalk.co.uk/topic/10831-premiership-survival-thread/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-05-20T20:58:39Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Premier Sports Cup 2026/27",
+      "url": "https://www.donstalk.co.uk/topic/10850-premier-sports-cup-202627/"
+    }
+  ],
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
+}

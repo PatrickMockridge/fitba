@@ -459,9 +459,9 @@
       "update_id": null
     },
     {
-      "better_data": "A full season under Robinson, opponent strength and a pre-declared variance measure.",
-      "change_mind": "A full season, or a sustained points and goals-against trend.",
-      "claim": "Thelin's side had a high ceiling and a low floor; Robinson has steadied it, but 18 league matches is not enough to settle it.",
+      "better_data": "A permanent appointment, a full season under the next manager, opponent strength and a pre-declared variance measure.",
+      "change_mind": "A sustained points and goals-against trend under a permanent manager.",
+      "claim": "Thelin's side had a high ceiling and a low floor; Robinson's spell steadied the points rate, but 21 league matches and a November 2026 dismissal are not a settled sample.",
       "count": "58 + 9 + 21 league matches",
       "dataset_id": null,
       "dataset_state": null,
@@ -536,8 +536,8 @@
           "dataset_id": null,
           "dataset_state": null,
           "metric": "Robinson league record",
-          "note": "Two nine-match spells of three wins, two draws and four defeats; the sample is small.",
-          "period": "March 2026 to date",
+          "note": "6 wins, 4 draws and 11 defeats; the sample is small.",
+          "period": "March 2026 to November 2026",
           "published_at": null,
           "sample": "League only",
           "served_by_update_id": null,
@@ -545,6 +545,22 @@
           "source_snapshots": null,
           "stale_reason": null,
           "status": "mixed",
+          "update_id": null
+        },
+        {
+          "count": "Robinson dismissed 9 November 2026; Stuart Duff interim, 0 league matches",
+          "dataset_id": null,
+          "dataset_state": null,
+          "metric": "Manager change",
+          "note": "The dismissal is a club statement; the interim record is separate from a permanent manager's sample.",
+          "period": "November 2026",
+          "published_at": null,
+          "sample": "League only",
+          "served_by_update_id": null,
+          "source": "Aberdeen FC news",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "status": "supported",
           "update_id": null
         }
       ],
@@ -590,7 +606,7 @@
       "source_snapshots": null,
       "stale_reason": null,
       "status": "mixed",
-      "status_reason": "The manager records are measured. 'Steadying' and 'lower variance' are readings: 18 matches, two squads and no agreed measure of consistency.",
+      "status_reason": "The manager records are measured. 'Steadying' and 'lower variance' are readings: 21 matches, two squads, a November 2026 dismissal and no agreed measure of consistency.",
       "title": "The managers",
       "update_id": null
     },
@@ -890,9 +906,9 @@
     "status": "fresh",
     "update_id": null
   },
-  "dataset_id": "2026-11-11T06:23:33+00:00-eccd2140",
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-11T06:23:33+00:00",
+  "generated_at": "2026-11-11T12:42:22+00:00",
   "notes": "The site owner's view is attributed opinion. Statuses are the record's answer: supported, mixed, not supported or can't test yet.",
   "owner_view": {
     "attribution": "Patrick Mockridge",
@@ -903,14 +919,14 @@
     "served_by_update_id": null,
     "source_snapshots": null,
     "stale_reason": null,
-    "text": "I think the club is trying to lower its variance and become harder to beat: a high press, a direct and counter-attacking game, balls over the top for Olusanya, and three physical centre-backs at set plays. The cost has been unforced errors, cheap penalties and getting the players to gel. Thelin's side had a fast start, a long winless run, the Scottish Cup and then a recycled squad; Morris was sold and we lost a main goal threat; injuries and opponents adapting followed. Robinson steadied it. The question is whether the model is now producing a more resilient team, or just a different set of trade-offs.",
+    "text": "I think the club is trying to lower its variance and become harder to beat: a high press, a direct and counter-attacking game, balls over the top for Olusanya, and three physical centre-backs at set plays. The cost has been unforced errors, cheap penalties and getting the players to gel. Thelin's side had a fast start, a long winless run, the Scottish Cup and then a recycled squad; Morris was sold and we lost a main goal threat; injuries and opponents adapting followed. Robinson steadied the points rate for a while, but his spell ended in November 2026 after 21 league matches. The question is whether the model is now producing a more resilient team, or just a different set of trade-offs.",
     "update_id": null
   },
-  "published_at": "2026-11-11T06:23:33+00:00",
+  "published_at": "2026-11-11T12:42:22+00:00",
   "schema_version": "3.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-11T06:17:02+00:00-963638",
-  "served_generated_at": "2026-11-11T06:23:33+00:00",
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
+  "served_generated_at": "2026-11-11T12:42:22+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -970,5 +986,5 @@
   "state": "fresh",
   "thesis": "The team on the pitch is the visible edge of a seven-year trading model. The question is what that model buys, what it costs, and what the record can prove.",
   "title": "Data analysis",
-  "update_id": "2026-11-11T06:17:02+00:00-963638"
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
 }

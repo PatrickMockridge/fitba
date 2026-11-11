@@ -81,7 +81,7 @@
     ],
     "note": "Curated debuts are explicit club/academy records. Measured new players are first appearances in the covered history, not career debuts."
   },
-  "as_of": "2026-10-21",
+  "as_of": "2026-11-11",
   "coverage": {
     "history": {
       "events": 337,
@@ -109,8 +109,8 @@
       "competition_id": "sco:league-cup",
       "competition_name": "League Cup",
       "exit_round": "Semi-final",
-      "note": "Scheduled against Rangers at Hampden Park on 31 October 2026.",
-      "outcome": "pending",
+      "note": "Lost 1-0 to Rangers at Hampden Park on 31 October 2026.",
+      "outcome": "eliminated",
       "source_ids": [
         "wikipedia"
       ],
@@ -132,25 +132,27 @@
       ]
     }
   ],
-  "dataset_id": "2026-11-11T06:23:33+00:00-eccd2140",
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
   "dataset_state": "fresh",
   "europe": [],
   "expectations": {
-    "baseline": "A top-six baseline after ninth place, with a new manager's first full season and a squad rebuilt over the summer.\n",
-    "context": "Stephen Robinson was appointed on 12 March 2026 and began his first full season after a large summer turnover. Aberdeen are not in European competition. The League Cup semi-final against Rangers is scheduled for 31 October 2026.\n",
+    "baseline": "A top-six baseline after ninth place, from a season that began under Stephen Robinson and changed manager in November.\n",
+    "context": "Stephen Robinson was appointed on 12 March 2026 and began his first full season after a large summer turnover. The League Cup semi-final at Hampden was lost 1-0 to Rangers on 31 October 2026. The club parted company with Robinson, Brian Kerr and Stephen Craigan on 9 November 2026; Stuart Duff took interim charge of first-team training and no permanent replacement had been named.\n",
     "label": "curated",
     "source_ids": [
-      "wikipedia"
+      "wikipedia",
+      "afc_news"
     ],
     "source_urls": [
-      "https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season"
+      "https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season",
+      "https://www.afc.co.uk/en/news/stephen-robinson-departs"
     ],
     "target": "Top six and a clearer identity. This is an analyst-set baseline, not a published club target.\n"
   },
-  "generated_at": "2026-11-11T06:23:33+00:00",
-  "headline": "A substantial rebuild under Stephen Robinson, with the league shape still unsettled.",
+  "generated_at": "2026-11-11T12:42:22+00:00",
+  "headline": "A rebuild under Stephen Robinson, then a November managerial change, with the league shape still unsettled.\n",
   "honour_ids": [],
-  "interim_read": "The rebuild is the story so far, not a verdict. A large summer turnover, a new manager and an unsettled shape are the context for the early results. The record will publish a final review at the end of the season; until then, the measured record and the coverage notes are the honest output.\n",
+  "interim_read": "The rebuild is the story so far, not a verdict. A large summer turnover, a new manager and an unsettled shape are the context for the early results. The November 2026 managerial change is part of that context: Stuart Duff's caretaker spell is not a permanent manager's sample. The record will publish a final review at the end of the season; until then, the measured record and the coverage notes are the honest output.\n",
   "key_transfers": {
     "arrivals": [
       "afc:93c4edd60f6cd1dd",
@@ -179,13 +181,13 @@
       "points": 11,
       "ppg": 0.92,
       "start": "2026-08-01",
-      "stint_end": null,
+      "stint_end": "2026-11-09",
       "stint_id": "stephen-robinson-manager-2026",
       "stint_start": "2026-03-12",
       "won": 3
     }
   ],
-  "published_at": "2026-11-11T06:23:33+00:00",
+  "published_at": "2026-11-11T12:42:22+00:00",
   "recruitment": {
     "age_bands": {
       "21-24": 2,
@@ -285,7 +287,7 @@
     }
   },
   "review": null,
-  "reviewed_at": "2026-10-21",
+  "reviewed_at": "2026-11-11",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "selection": {
@@ -530,12 +532,17 @@
     "u21_minutes_share": 0.056,
     "unknown_age_minutes": 0
   },
-  "served_by_update_id": "2026-11-11T06:17:02+00:00-963638",
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
   "source_snapshots": null,
   "sources": [
     {
       "id": "wikipedia",
       "url": "https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "afc_news",
+      "url": "https://www.afc.co.uk/en/news/stephen-robinson-departs",
       "verified_at": "2026-10-21"
     },
     {
@@ -546,6 +553,11 @@
     {
       "id": "afc_news",
       "url": "https://www.afc.co.uk/en/news/aberdeen-football-club-appoint-adrian-bevington-as-chief-executive",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "afc_news",
+      "url": "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
       "verified_at": "2026-10-21"
     }
   ],
@@ -591,6 +603,65 @@
         "https://www.afc.co.uk/en/news/aberdeen-football-club-appoint-adrian-bevington-as-chief-executive"
       ],
       "stint_id": "adrian-bevington-ceo-2026"
+    },
+    {
+      "change": "out",
+      "date": "2026-11-09",
+      "interim": false,
+      "name": "Brian Kerr",
+      "person_id": "brian-kerr",
+      "reason_out": "dismissed",
+      "role": "Assistant manager",
+      "role_group": "assistant_manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+      ],
+      "stint_id": "brian-kerr-assistant-2026"
+    },
+    {
+      "change": "out",
+      "date": "2026-11-09",
+      "interim": false,
+      "name": "Stephen Craigan",
+      "person_id": "stephen-craigan",
+      "reason_out": "dismissed",
+      "role": "First-team coach",
+      "role_group": "first_team_coach",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season",
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+      ],
+      "stint_id": "stephen-craigan-coach-2026"
+    },
+    {
+      "change": "out",
+      "date": "2026-11-09",
+      "interim": false,
+      "name": "Stephen Robinson",
+      "person_id": "stephen-robinson",
+      "reason_out": "dismissed",
+      "role": "Manager",
+      "role_group": "manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+      ],
+      "stint_id": "stephen-robinson-manager-2026"
+    },
+    {
+      "change": "in",
+      "date": "2026-11-09",
+      "interim": true,
+      "name": "Stuart Duff",
+      "person_id": "stuart-duff",
+      "reason_out": null,
+      "role": "Interim manager",
+      "role_group": "manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+      ],
+      "stint_id": "stuart-duff-interim-2026"
     }
   ],
   "stale_reason": null,
@@ -645,5 +716,5 @@
     "shape_note": "The team has used several shapes and has not settled on one. The matchday sequence is the honest view; a season aggregate would hide the churn.\n",
     "style_note": "The rebuild is the context, not an excuse. The measured proxies and shape mix show what the team is doing; the interim read is labelled as a reading.\n"
   },
-  "update_id": "2026-11-11T06:17:02+00:00-963638"
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
 }

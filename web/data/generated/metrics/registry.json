@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:3c09de69e3950a6e0aa48f731c826db3cee399ecda08071dd4db2433db0c53df",
-  "dataset_id": "2026-11-11T06:23:33+00:00-eccd2140",
+  "checksum": "sha256:3d664ef8800279ed1d37e406d208d2bf53d0f2394bec83bc96877dda938f064e",
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-11T06:23:33+00:00",
+  "generated_at": "2026-11-11T12:42:22+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -2034,6 +2034,119 @@
     {
       "aggregation": "family",
       "basis": "mixed",
+      "confidence_rule": "A descriptive sample, not the whole forum or fanbase. A mention is not a transfer link or a probability. Full-name matching avoids surname ambiguity.\n",
+      "coverage_tier": "curated",
+      "denominator": null,
+      "description": "DonsTalk fan-signal coverage, sentiment and manager-candidate mentions.",
+      "displayed_surfaces": [
+        "/rumours/"
+      ],
+      "fields": [
+        "mentions",
+        "manager_mentions",
+        "sentiment"
+      ],
+      "formula": "Mention counts from the AFC board first page and the latest page of the public Next manager thread. Manager candidates match by full name only, never surname only. Page 1 of the thread is from 2022 and is not used. No raw post bodies, usernames or quotes are published.\n",
+      "home_payload": "forum/donstalk.json",
+      "home_surface": "/rumours/",
+      "id": "forum.donstalk",
+      "implementation": null,
+      "inputs": [
+        "published payload"
+      ],
+      "label": "DonsTalk signal",
+      "limitations": [
+        "Reference fan signal; provenance checked, not recomputed.",
+        "Sample is the AFC board first page plus one latest thread page, not the whole forum.",
+        "The Next manager thread's page 1 is from 2022 and is never used."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "forum/donstalk.json#/**"
+      ],
+      "reviewed": "2026-11-11",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "forum_signal",
+      "source_paths": [],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "provenance_only",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "per_candidate",
+      "basis": "measured",
+      "confidence_rule": "A single public publisher's bookmaker list, not a consensus. Prices move; the snapshot is stale after 48 hours and withheld after 168 hours. Raw implied prices are not probabilities. This is intelligence, not betting advice, a recommendation or a promotion; no affiliate or sign-up link.\n",
+      "coverage_tier": "value_only",
+      "denominator": null,
+      "description": "Gated single-snapshot bookmaker odds for the next Aberdeen manager.",
+      "displayed_surfaces": [
+        "/rumours/"
+      ],
+      "fields": [
+        "fractional",
+        "decimal",
+        "implied_probability",
+        "overround",
+        "candidate_count",
+        "priced_count",
+        "mentioned_count",
+        "age_hours"
+      ],
+      "formula": "decimal = fractional numerator / denominator + 1. implied_probability = 1 / decimal. overround = sum(implied_probability) - 1 only when the field is complete. No normalisation, averaging or cross-bookmaker consensus is published. The market is open only when the staff register has exactly one current manager and that manager is interim; it closes automatically when a permanent manager is appointed.\n",
+      "home_payload": "rumours/manager-market.json",
+      "home_surface": "/rumours/",
+      "id": "manager.market",
+      "implementation": "fitba.metrics.checks:verify_manager_market",
+      "inputs": [
+        "published payload",
+        "reference/manager_market.yaml",
+        "reference/history/staff.yaml",
+        "data/normalized/forum/donstalk_manager_mentions.parquet"
+      ],
+      "label": "Next-manager market",
+      "limitations": [
+        "Single snapshot, not a cross-bookmaker average.",
+        "Raw implied prices are not appointment probabilities.",
+        "Closed automatically when a permanent manager is appointed.",
+        "The source is a public publisher list; bookmaker terms are not an API licence."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "rumours/manager-market.json#/**"
+      ],
+      "reviewed": "2026-11-11",
+      "rounding": {
+        "decimals": 2,
+        "display": "0.00",
+        "method": "half_even",
+        "scale": 1.0,
+        "step": null,
+        "suffix": null
+      },
+      "source_layer": "odds",
+      "source_paths": [
+        "reference/manager_market.yaml"
+      ],
+      "status": "active",
+      "unit": "mixed",
+      "value_type": "object",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
+    },
+    {
+      "aggregation": "family",
+      "basis": "mixed",
       "confidence_rule": "Declared by the source metric; see docs/methodology.md.",
       "coverage_tier": "derived",
       "denominator": null,
@@ -3269,7 +3382,7 @@
         "winning_run",
         "winless_run"
       ],
-      "formula": "played/ppg by manager stint; winning_run/winless_run = longest league run; cup outcome from the honours register; interim spells are separate.",
+      "formula": "played/ppg by manager stint; winning_run/winless_run = longest league run; cup outcome from the honours register; interim spells are separate. The November 2026 manager change is recorded as a separate evidence row; the interim spell is not merged into the permanent manager's sample.",
       "home_payload": "themes/aberdeen.json",
       "home_surface": "/claims/",
       "id": "case.claim.managers",
@@ -3279,13 +3392,14 @@
       ],
       "label": "The managers",
       "limitations": [
-        "18 Robinson matches; no pre-declared variance measure."
+        "21 Robinson matches; no pre-declared variance measure.",
+        "The interim manager has no league match at this publish; the vacancy is not a permanent sample."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
         "themes/aberdeen.json#/claims/*[id=managers]/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -3301,7 +3415,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 3
+      "version": 4
     },
     {
       "aggregation": "family",
@@ -5941,28 +6055,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-11T06:23:33+00:00",
-  "registry_version": "3.15.1",
-  "reviewed": "2026-11-09",
+  "published_at": "2026-11-11T12:42:22+00:00",
+  "registry_version": "3.16.0",
+  "reviewed": "2026-11-11",
   "schema_version": 1,
-  "served_by_update_id": "2026-11-11T06:17:02+00:00-963638",
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
   "source_snapshots": {
-    "api_football": "2026-11-11T06:23:31.249610+00:00",
-    "api_results": "2026-11-11T06:17:05+00:00",
-    "availability": "2026-11-11T06:18:47+00:00",
-    "career": "2026-11-11T06:18:47+00:00",
-    "football_data_uk": "2026-11-11T06:17:04+00:00",
-    "former_players": "2026-11-11T06:17:24+00:00",
-    "history_backfill": "2026-11-11T06:17:18+00:00",
+    "api_football": "2026-11-11T12:42:19.685088+00:00",
+    "api_results": "2026-11-11T12:39:32+00:00",
+    "availability": "2026-11-11T12:39:47+00:00",
+    "career": "2026-11-11T12:39:47+00:00",
+    "football_data_uk": "2026-11-11T12:39:31+00:00",
+    "former_players": "2026-11-11T12:39:40+00:00",
+    "history_backfill": "2026-11-11T12:39:39+00:00",
     "matchday_snapshot": "2026-11-11T06:17:18+00:00",
-    "scouting_clubs": "2026-11-11T06:22:47+00:00",
-    "scouting_europe": "2026-11-11T06:22:36+00:00",
-    "scouting_pool": "2026-11-11T06:18:53+00:00",
-    "scouting_roles": "2026-11-11T06:22:11+00:00",
-    "scouting_rose_history": "2026-11-11T06:22:21+00:00",
-    "scouting_standings": "2026-11-11T06:22:37+00:00",
-    "spfl": "2026-11-11T06:17:06+00:00",
-    "xg_enrichment": "2026-11-11T06:23:14+00:00"
+    "scouting_clubs": "2026-11-11T12:40:15+00:00",
+    "scouting_europe": "2026-11-11T12:40:04+00:00",
+    "scouting_pool": "2026-11-11T12:39:53+00:00",
+    "scouting_roles": "2026-11-11T12:39:54+00:00",
+    "scouting_rose_history": "2026-11-11T12:40:04+00:00",
+    "scouting_standings": "2026-11-11T12:40:05+00:00",
+    "spfl": "2026-11-11T12:39:33+00:00",
+    "xg_enrichment": "2026-11-11T12:42:00+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -5991,5 +6105,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-11-11T06:17:02+00:00-963638"
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
 }

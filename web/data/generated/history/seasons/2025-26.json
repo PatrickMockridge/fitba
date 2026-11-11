@@ -157,7 +157,7 @@
       ]
     }
   ],
-  "dataset_id": "2026-11-11T06:23:33+00:00-eccd2140",
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
   "dataset_state": "fresh",
   "europe": [
     {
@@ -189,17 +189,19 @@
   ],
   "expectations": {
     "baseline": "A top-four baseline after the Scottish Cup win, with a first European league phase in the modern era and a squad expected to defend the cup.\n",
-    "context": "Jimmy Thelin was dismissed on 4 January 2026. Peter Leven took interim charge, assisted by Craig Hinchliffe, and Stephen Robinson was appointed on 12 March 2026 after a 67-day search. The club finished ninth with 40 points.\n",
+    "context": "Jimmy Thelin was dismissed on 4 January 2026. Peter Leven took interim charge, assisted by Craig Hinchliffe, and Stephen Robinson was appointed on 12 March 2026 after a 67-day search. The club finished ninth with 40 points. Robinson was dismissed on 9 November 2026 after 21 league matches; Stuart Duff took interim charge of first-team training.\n",
     "label": "curated",
     "source_ids": [
-      "wikipedia"
+      "wikipedia",
+      "afc_news"
     ],
     "source_urls": [
-      "https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season"
+      "https://en.wikipedia.org/wiki/2025%E2%80%9326_Aberdeen_F.C._season",
+      "https://www.afc.co.uk/en/news/stephen-robinson-departs"
     ],
     "target": "Top four, European progress and a cup defence. This is an analyst-set baseline, not a published club target.\n"
   },
-  "generated_at": "2026-11-11T06:23:33+00:00",
+  "generated_at": "2026-11-11T12:42:22+00:00",
   "headline": "A European league phase and a cup defence, followed by a relegation worry and a managerial reset.",
   "honour_ids": [],
   "interim_read": null,
@@ -270,13 +272,13 @@
       "points": 11,
       "ppg": 1.22,
       "start": "2026-03-14",
-      "stint_end": null,
+      "stint_end": "2026-11-09",
       "stint_id": "stephen-robinson-manager-2026",
       "stint_start": "2026-03-12",
       "won": 3
     }
   ],
-  "published_at": "2026-11-11T06:23:33+00:00",
+  "published_at": "2026-11-11T12:42:22+00:00",
   "recruitment": {
     "age_bands": {
       "21-24": 5,
@@ -377,13 +379,13 @@
   },
   "review": {
     "label": "curated_editorial",
-    "look_ahead": "Stephen Robinson's first full season would begin with a substantial squad rebuild, no European football and a League Cup semi-final against Rangers.\n",
-    "read": "The 2025-26 season is the strongest argument for reading the record as a trade-off rather than a verdict. The club was in Europe, defended a trophy and still fell into a relegation worry. The reset to Stephen Robinson is the response; the 2026-27 season is the test of whether it changes the pattern.\n",
+    "look_ahead": "Stephen Robinson's first full season began with a substantial squad rebuild, no European football and a League Cup semi-final against Rangers. It ended in dismissal on 9 November 2026 after 21 league matches; Stuart Duff took interim charge and no permanent replacement had been named.\n",
+    "read": "The 2025-26 season is the strongest argument for reading the record as a trade-off rather than a verdict. The club was in Europe, defended a trophy and still fell into a relegation worry. The reset to Stephen Robinson was the response; his spell ended on 9 November 2026 after 21 league matches, with Stuart Duff taking interim charge.\n",
     "trade_off": "European league-phase football is a reward for the previous season and a cost in the next: travel, squad depth and league points. The season shows both sides, and the managerial change shows the cost of waiting too long to act.\n",
     "what_did_not": "The league fell to ninth and the club was winless away from home in the 2025-26 league season (January to May 2026). The cup defence ended in a 3-0 quarter-final defeat at Dunfermline. The European league phase produced heavy defeats and a 35th-place finish.\n",
     "what_worked": "The club reached a European league phase and defended the Scottish Cup into the quarter-finals. The managerial search ended with a permanent appointment before the end of the season, giving the next campaign a settled start.\n"
   },
-  "reviewed_at": "2026-10-21",
+  "reviewed_at": "2026-11-11",
   "schema_version": "1.0.0",
   "season": "2025-26",
   "selection": {
@@ -668,7 +670,7 @@
     "u21_minutes_share": 0.082,
     "unknown_age_minutes": 0
   },
-  "served_by_update_id": "2026-11-11T06:17:02+00:00-963638",
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
   "source_snapshots": null,
   "sources": [
     {
@@ -689,6 +691,11 @@
     {
       "id": "afc_news",
       "url": "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "afc_news",
+      "url": "https://www.afc.co.uk/en/news/stephen-robinson-departs",
       "verified_at": "2026-10-21"
     }
   ],
@@ -770,11 +777,12 @@
       "interim": false,
       "name": "Brian Kerr",
       "person_id": "brian-kerr",
-      "reason_out": null,
+      "reason_out": "dismissed",
       "role": "Assistant manager",
       "role_group": "assistant_manager",
       "source_urls": [
-        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach"
+        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
       ],
       "stint_id": "brian-kerr-assistant-2026"
     },
@@ -812,11 +820,12 @@
       "interim": false,
       "name": "Stephen Robinson",
       "person_id": "stephen-robinson",
-      "reason_out": null,
+      "reason_out": "dismissed",
       "role": "Manager",
       "role_group": "manager",
       "source_urls": [
-        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach"
+        "https://www.afc.co.uk/en/news/dons-appoint-robinson-as-head-coach",
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
       ],
       "stint_id": "stephen-robinson-manager-2026"
     }
@@ -873,5 +882,5 @@
     "shape_note": "The season spans Thelin, Leven and Robinson. The manager split keeps the three segments separate; the shape panel shows the matchday sequence and does not average across the reset.\n",
     "style_note": "European football and a relegation fight in the same season are the trade-off in its sharpest form. The measured proxies show what happened; the reading does not use the European campaign to excuse the league form.\n"
   },
-  "update_id": "2026-11-11T06:17:02+00:00-963638"
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
 }

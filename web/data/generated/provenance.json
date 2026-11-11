@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-11-11T06:23:33+00:00-eccd2140",
+  "dataset_id": "2026-11-11T12:42:22+00:00-15779169",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-11-11T06:23:33+00:00",
+  "generated_at": "2026-11-11T12:42:22+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -1625,9 +1625,12 @@
     {
       "dataset_id": null,
       "dataset_state": null,
-      "fallback": [],
+      "fallback": [
+        "donstalk"
+      ],
       "fields": [
         "mentions",
+        "manager_mentions",
         "cross_references",
         "sentiment"
       ],
@@ -1635,7 +1638,7 @@
       "id": "forum_signal",
       "kind": "derived",
       "label": "Fan signal",
-      "note": "Sampled, rule-based, no raw posts or usernames.",
+      "note": "Sampled, rule-based, no raw posts or usernames. AFC Chat first pages and DonsTalk's AFC board first page plus the latest page of the public Next manager thread; the DonsTalk thread's page 1 is from 2022 and is not used.",
       "primary": "afc_chat",
       "primary_source": {
         "attribution": "AFC Chat forum contributors",
@@ -1653,7 +1656,7 @@
         "verified_at": "2026-10-21"
       },
       "published_at": null,
-      "scope": "sampled first pages",
+      "scope": "sampled first pages and the latest Next-manager thread page",
       "served_by_update_id": null,
       "source_snapshots": null,
       "sources": [
@@ -1671,6 +1674,21 @@
           "update_id": null,
           "url": "https://afc-chat.co.uk/forums/index.php?/forum/20-the-rumour-mill/",
           "verified_at": "2026-10-21"
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "DonsTalk — Aberdeen Football Club forum",
+          "published_at": null,
+          "role": "fallback",
+          "rows": 18,
+          "served_by_update_id": null,
+          "source_id": "donstalk",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/",
+          "verified_at": "2026-11-11"
         }
       ],
       "stale_reason": null,
@@ -1710,7 +1728,7 @@
           "name": "Aberdeen FC news",
           "published_at": null,
           "role": "corroboration",
-          "rows": 7,
+          "rows": 8,
           "served_by_update_id": null,
           "source_id": "afc_news",
           "source_snapshots": null,
@@ -2027,22 +2045,61 @@
       "dataset_id": null,
       "dataset_state": null,
       "fallback": [],
-      "fields": [],
+      "fields": [
+        "bookmaker",
+        "fractional_odds",
+        "decimal_odds",
+        "implied_probability",
+        "observed_at",
+        "source_url"
+      ],
       "gate": null,
       "id": "odds",
-      "kind": "none",
-      "label": "Betting odds",
-      "note": "Not ingested or published.",
-      "primary": "none",
-      "primary_source": null,
+      "kind": "curated",
+      "label": "Next-manager market odds",
+      "note": "Gated exception to the no-betting rule: one curated public bookmaker-odds snapshot is published as intelligence only while the club has an interim manager and no permanent manager. No betting advice, promotion, affiliate link, sign-up link or gambling advertising. Removed automatically when a permanent manager is appointed.",
+      "primary": "manager_market",
+      "primary_source": {
+        "attribution": "Gambling.com via The Herald/Yahoo Sports",
+        "dataset_id": null,
+        "dataset_state": null,
+        "id": "manager_market",
+        "lane": "derived_display",
+        "name": "Next-manager market snapshot",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
+        "url": "https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html",
+        "verified_at": "2026-11-11"
+      },
       "published_at": null,
-      "scope": "n/a",
+      "scope": "next-manager market only while Aberdeen have no permanent manager",
       "served_by_update_id": null,
       "source_snapshots": null,
-      "sources": [],
+      "sources": [
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "Next-manager market snapshot",
+          "published_at": null,
+          "role": "primary",
+          "rows": 10,
+          "served_by_update_id": null,
+          "source_id": "manager_market",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html",
+          "verified_at": "2026-11-11"
+        }
+      ],
       "stale_reason": null,
-      "status": "not_published",
-      "surfaces": [],
+      "status": "gated",
+      "surfaces": [
+        "/rumours/"
+      ],
       "update_id": null
     }
   ],
@@ -2062,10 +2119,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-11-11T06:23:33+00:00",
+  "published_at": "2026-11-11T12:42:22+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-11T06:17:02+00:00-963638",
+  "served_by_update_id": "2026-11-11T12:39:30+00:00-1984078",
   "source_snapshots": null,
   "sources": [
     {
@@ -2184,6 +2241,26 @@
       "url": "https://spfl.co.uk/clubs/aberdeen/fixtures"
     },
     {
+      "attribution": "Gambling.com via The Herald/Yahoo Sports",
+      "dataset_id": null,
+      "dataset_state": null,
+      "id": "manager_market",
+      "lane": "derived_display",
+      "last_verified": "2026-11-11",
+      "name": "Next-manager market snapshot",
+      "primary_layers": [
+        "odds"
+      ],
+      "published_at": null,
+      "rows": 10,
+      "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
+      "url": "https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html"
+    },
+    {
       "attribution": "Wikipedia contributors",
       "dataset_id": null,
       "dataset_state": null,
@@ -2222,6 +2299,24 @@
       "url": "https://docs.sportmonks.com/v3/"
     },
     {
+      "attribution": "DonsTalk forum contributors",
+      "dataset_id": null,
+      "dataset_state": null,
+      "id": "donstalk",
+      "lane": "derived_display",
+      "last_verified": "2026-11-11",
+      "name": "DonsTalk — Aberdeen Football Club forum",
+      "primary_layers": [],
+      "published_at": null,
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
+      "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
+    },
+    {
       "attribution": "Aberdeen FC",
       "dataset_id": null,
       "dataset_state": null,
@@ -2243,5 +2338,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "2026-11-11T06:17:02+00:00-963638"
+  "update_id": "2026-11-11T12:39:30+00:00-1984078"
 }
