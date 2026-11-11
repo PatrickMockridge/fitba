@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:3d664ef8800279ed1d37e406d208d2bf53d0f2394bec83bc96877dda938f064e",
-  "dataset_id": "2026-11-11T14:09:04+00:00-767fcf31",
+  "checksum": "sha256:d64b8373f136fadfc2548edad49826b63d0c3323807160d70c197df39559b02b",
+  "dataset_id": "2026-11-11T15:20:44+00:00-9cdd42f5",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-11T14:09:04+00:00",
+  "generated_at": "2026-11-11T15:20:44+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -1276,7 +1276,8 @@
       "denominator": null,
       "description": "Era aggregates: seasons, managers, honours and positions.",
       "displayed_surfaces": [
-        "/history/"
+        "/history/",
+        "/manager/"
       ],
       "fields": [
         "seasons",
@@ -1303,7 +1304,7 @@
       "payload_paths": [
         "history/aberdeen.json#/scorecard/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -1319,7 +1320,7 @@
       "value_type": "object",
       "verification": "cross_surface",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -1374,7 +1375,8 @@
       "denominator": null,
       "description": "Manager/staff stints and records.",
       "displayed_surfaces": [
-        "/history/"
+        "/history/",
+        "/manager/"
       ],
       "fields": [],
       "formula": "One row per manager or staff stint; played, points, gf and ga are league matches only; interim spells are separate.",
@@ -1393,7 +1395,7 @@
       "payload_paths": [
         "history/aberdeen.json#/staff/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -1409,7 +1411,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -1528,7 +1530,8 @@
       "denominator": null,
       "description": "Per-season history documents.",
       "displayed_surfaces": [
-        "/history/"
+        "/history/",
+        "/manager/"
       ],
       "fields": [],
       "formula": "Document envelope: one per season with review, style, selection, staff, transfers and honours; measured facts and the labelled assessment are kept separate.",
@@ -1547,7 +1550,7 @@
       "payload_paths": [
         "history/seasons/*.json#/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -1563,7 +1566,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -2867,7 +2870,8 @@
       "denominator": null,
       "description": "Aberdeen club summary, history and news rows.",
       "displayed_surfaces": [
-        "/"
+        "/",
+        "/manager/"
       ],
       "fields": [],
       "formula": "Club summary joins league table, recent results, upcoming fixtures and news metadata by club id; no commercial or attendance series is invented.",
@@ -2886,7 +2890,7 @@
       "payload_paths": [
         "clubs/aberdeen.json#/**"
       ],
-      "reviewed": "2026-10-22",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -2902,7 +2906,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 2
+      "version": 3
     },
     {
       "aggregation": "family",
@@ -3589,7 +3593,8 @@
       "denominator": null,
       "description": "Current position and form, next fixtures, official and derived availability with a review block, measured aims, squad-decision lenses, the category bridges and the within-Premiership provider-xG/possession rankings.",
       "displayed_surfaces": [
-        "/analysis/"
+        "/analysis/",
+        "/manager/"
       ],
       "fields": [
         "position",
@@ -3641,7 +3646,7 @@
       "payload_paths": [
         "analysis/summary.json#/**"
       ],
-      "reviewed": "2026-11-09",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 2,
         "display": "0.00",
@@ -3657,7 +3662,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 5
+      "version": 6
     },
     {
       "aggregation": "per_team",
@@ -3801,7 +3806,8 @@
       "description": "Team-match expected goals from open-play shot zones, shots on target, blocked shots and penalties; a model range, a goals range, provider-xG calibration, transfer check, provider-style estimate, manager splits, aggregates and coverage.",
       "displayed_surfaces": [
         "/analysis/xg/",
-        "/matches/"
+        "/matches/",
+        "/manager/"
       ],
       "fields": [
         "model",
@@ -3833,7 +3839,7 @@
       "payload_paths": [
         "xg/aberdeen.json#/**"
       ],
-      "reviewed": "2026-10-24",
+      "reviewed": "2026-11-11",
       "rounding": {
         "decimals": 3,
         "display": "0.000",
@@ -3849,7 +3855,7 @@
       "value_type": "object",
       "verification": "provenance_only",
       "verification_checks": [],
-      "version": 7
+      "version": 8
     },
     {
       "aggregation": "per_match_and_aggregate",
@@ -6055,28 +6061,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-11T14:09:04+00:00",
-  "registry_version": "3.16.0",
+  "published_at": "2026-11-11T15:20:44+00:00",
+  "registry_version": "3.17.0",
   "reviewed": "2026-11-11",
   "schema_version": 1,
-  "served_by_update_id": "publish-2026-11-11T14:09:04+00:00",
+  "served_by_update_id": "2026-11-11T15:20:22+00:00-2569138",
   "source_snapshots": {
-    "api_football": "2026-11-11T12:42:19.685088+00:00",
-    "api_results": "2026-11-11T12:39:32+00:00",
-    "availability": "2026-11-11T12:39:47+00:00",
-    "career": "2026-11-11T12:39:47+00:00",
-    "football_data_uk": "2026-11-11T12:39:31+00:00",
-    "former_players": "2026-11-11T12:39:40+00:00",
-    "history_backfill": "2026-11-11T12:39:39+00:00",
+    "api_football": "2026-11-11T15:20:27.841889+00:00",
+    "api_results": "2026-11-11T15:20:24+00:00",
+    "availability": "2026-11-11T15:20:28+00:00",
+    "career": "2026-11-11T15:20:28+00:00",
+    "football_data_uk": "2026-11-11T15:20:23+00:00",
+    "former_players": "2026-11-11T15:20:27+00:00",
+    "history_backfill": "2026-11-11T15:20:25+00:00",
     "matchday_snapshot": "2026-11-11T06:17:18+00:00",
-    "scouting_clubs": "2026-11-11T12:40:15+00:00",
-    "scouting_europe": "2026-11-11T12:40:04+00:00",
-    "scouting_pool": "2026-11-11T12:39:53+00:00",
-    "scouting_roles": "2026-11-11T12:39:54+00:00",
-    "scouting_rose_history": "2026-11-11T12:40:04+00:00",
-    "scouting_standings": "2026-11-11T12:40:05+00:00",
-    "spfl": "2026-11-11T12:39:33+00:00",
-    "xg_enrichment": "2026-11-11T12:42:00+00:00"
+    "scouting_clubs": "2026-11-11T15:20:38+00:00",
+    "scouting_europe": "2026-11-11T15:20:38+00:00",
+    "scouting_pool": "2026-11-11T15:20:34+00:00",
+    "scouting_roles": "2026-11-11T15:20:36+00:00",
+    "scouting_rose_history": "2026-11-11T15:20:38+00:00",
+    "scouting_standings": "2026-11-11T15:20:38+00:00",
+    "spfl": "2026-11-11T15:20:25+00:00",
+    "xg_enrichment": "2026-11-11T15:20:41+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -6105,5 +6111,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "publish-2026-11-11T14:09:04+00:00"
+  "update_id": "2026-11-11T15:20:22+00:00-2569138"
 }
