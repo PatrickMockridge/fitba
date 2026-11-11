@@ -997,9 +997,7 @@ def _curated_notes() -> list[dict[str, Any]]:
 
 def _manager_claim(all_matches: pl.DataFrame, history_index: dict[str, Any]) -> dict[str, Any]:
     evidence, count = _manager_evidence(all_matches, history_index, "")
-    robinson = next(
-        (item for item in evidence if item.metric == "Robinson league record"), None
-    )
+    robinson = next((item for item in evidence if item.metric == "Robinson league record"), None)
     played = str(robinson.count).split(" ", 1)[0] if robinson else "0"
     return {
         "count": count,

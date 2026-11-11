@@ -183,9 +183,7 @@ def main() -> int:
             )
             or "stephen-robinson"
         )
-        comparison = [
-            row for row in splits if row.get("person_id") == comparison_person_id
-        ]
+        comparison = [row for row in splits if row.get("person_id") == comparison_person_id]
         if not comparison:
             errors.append(f"no manager split for {comparison_person_id}")
 
