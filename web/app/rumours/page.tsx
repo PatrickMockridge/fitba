@@ -68,6 +68,11 @@ export default function RumoursPage() {
       </section>
 
       <ManagerMarketPanel data={managerMarket} />
+      <p className="fine-print">
+        The current manager situation, season expectations and the measured
+        record are consolidated on the{" "}
+        <Link href="/manager/">manager record</Link>.
+      </p>
 
       <section className="card">
         <p className="eyebrow">Legend</p>

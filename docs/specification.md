@@ -72,6 +72,7 @@ reworded or reorganised if the evidence and source remain visible.
 | `/matchday/` | fixture, how to watch (domestic/international states and sources), predicted XIs, selection weights, availability, form columns, style, strength percentiles, head-to-head, coverage | long method notes | visual arrangement |
 | `/analysis/` | Season overview: next fixtures, official and derived availability, season aims, factual squad-decision lenses, bridges and coverage | method, definitions, long caveats | layout and visual treatment |
 | `/analysis/xg/` | fxG model card, provider-xG gate, aggregates, coverage | model detail, limitations | layout |
+| `/manager/` | current manager state, analyst-set expectations and aims, measured record and within-season segment, manager xG context, Cormack-era churn, manager news and rumour links, coverage | method notes, long coverage | layout |
 | `/matches/` | played-fixture index, scores, depth and links; scheduled fixtures with kickoff and Watch state | grouping | layout |
 | `/matches/<fixture_id>/` | scoreboard (score, goals, assists, penalties, red cards), Aberdeen/opposition split, summary, stats, fxG, timeline, lineups, player stats, form, coverage | summary variants, method | layout |
 | `/recruitment/` | seven families, priority/urgency/category/confidence, slots, counts, market route, roster, player table | caveats/method | layout |

@@ -26,6 +26,7 @@ full documentation index is [docs/README.md](docs/README.md).
 | [Product strategy](docs/product-strategy.md) | Product scope, content pillars, roadmap and delivery staging. |
 | [Matchday dashboard](docs/matchday.md) | The next fixture, both predicted XIs, form, style and data states. |
 | [Season overview](docs/analysis.md) | Next fixtures, availability, season aims, squad decisions and the route to the evidence. |
+| [Manager record](docs/manager.md) | Current manager state, expectations, measured record, Cormack-era churn and rumour links. |
 | [Results and fixtures](docs/fixtures.md) | Played and remaining Cormack-era fixtures, with one page per played fixture and the deterministic read. |
 | [fxG](docs/xg.md) | The experimental team-match expected-goals model, two ranges, penalties and provider-xG gate. |
 | [Match scoreboard](docs/match-scoreboard.md) | The top-level score, goal and red-card widget and the Aberdeen/opposition split. |

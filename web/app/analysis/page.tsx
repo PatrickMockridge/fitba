@@ -817,6 +817,9 @@ export default function AnalysisPage() {
           <span className="badge badge-neutral">Analyst-set, not a club target</span>
         </div>
         <AimsTable rows={data.aims} />
+        <p className="back-link">
+          <Link href="/manager/">The manager record →</Link>
+        </p>
       </section>
 
       <section className="section" data-contract="analysis.squad-decisions">

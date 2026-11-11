@@ -428,6 +428,9 @@ export default function HistoryPage() {
           between stints is not assigned to the nearest manager. Cup and
           European results are curated exit rounds on the season pages.
         </p>
+        <p className="back-link">
+          <Link href="/manager/">The manager record →</Link>
+        </p>
       </section>
 
       <section className="section" data-contract="history.honours">

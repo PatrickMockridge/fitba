@@ -8,17 +8,17 @@ function shortDate(value: string | null | undefined) {
 export function ManagerRecordTable({
   records,
   empty = "No manager records are available.",
+  caption = "Manager league records with interim spells kept separate.",
 }: {
   records: HistoryManagerRecord[];
   empty?: string;
+  caption?: string;
 }) {
   if (!records.length) return <p className="muted">{empty}</p>;
   return (
     <div className="table-wrap">
       <table className="league-table compact">
-        <caption className="fine-print">
-          Manager league records with interim spells kept separate.
-        </caption>
+        <caption className="fine-print">{caption}</caption>
         <thead>
           <tr>
             <th scope="col">Manager</th>

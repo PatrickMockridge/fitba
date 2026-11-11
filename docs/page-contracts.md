@@ -566,6 +566,38 @@ estimated-net confidence or known/modelled split; presenting the baseline as
 neutral; leaving heavy defeats or the European finishing position only in
 prose; deleting position or points.
 
+### `/manager/` — the manager record
+
+Must remain visible:
+
+- The current manager state: permanent, interim or vacancy, with the interim
+  name and start date, the league position, the next fixture and the last
+  permanent manager's full-stint record.
+- The analyst-set season expectations, labelled **Analyst-set, not a published
+  club target**, with sources.
+- The season aims table: Aim, Target, Current, Status, Gap, with unknown kept
+  distinct from zero.
+- The measured manager record: Manager, Dates, Pld, W-D-L, GF, GA, Pts, PPG,
+  with interim spells separate, the “League only” scope, the measured-context
+  note and the zero-sample note.
+- The 2026-27 within-season segment, clearly captioned as a different scope from
+  the full stint.
+- The fxG manager split when published, or a visible unknown state.
+- The Cormack-era churn table: Manager, Dates, Reason, Pld, W-D-L, GF, GA, Pts,
+  PPG, with interim and pre-era badges and the manager-count rule.
+- Manager news links, the link to `/rumours/` and the DonsTalk Next manager
+  thread, and the “Not betting advice” line.
+- The coverage notes and the source and method links.
+
+May be disclosed: the long coverage notes and the full fxG table. The record
+tables and the churn table stay visible.
+
+Forbidden: publishing a manager rating, a per-manager target, tenure days or an
+interim count that is not registered; a pressure verdict (“under pressure”,
+“must go”, “should be sacked”); duplicating the odds table or the gated market
+panel; copying article bodies; zero-filling an unknown; presenting the
+analyst-set expectations as a club target.
+
 ### `/sources/` — provenance and licences
 
 Must remain visible:

@@ -29,6 +29,7 @@ jobs:
       - run: uv run python scripts/check_names.py
       - run: uv run python scripts/check_transfers.py
       - run: uv run python scripts/check_history.py
+      - run: uv run python scripts/check_manager.py
       - run: uv run python scripts/check_matchday.py
       - run: uv run python scripts/check_broadcast.py
       - run: uv run python scripts/check_themes.py
@@ -66,5 +67,6 @@ jobs:
           python-version: "3.12"
       - run: cd .. && uv sync --frozen
       - run: cd .. && uv run python scripts/check_web_contract.py --ci
+      - run: cd .. && uv run python scripts/check_manager.py --pages
       - run: cd .. && uv run python scripts/check_fixture_pages.py
       - run: cd .. && uv run python scripts/check_player_page.py --pages

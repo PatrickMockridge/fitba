@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/matchday/", label: "Matchday" },
   { href: "/matches/", label: "Matches" },
   { href: "/analysis/", label: "Season overview" },
+  { href: "/manager/", label: "Manager" },
   { href: "/squad/", label: "Squad" },
   { href: "/former-players/", label: "Former players" },
   { href: "/scouting/", label: "Scouting" },

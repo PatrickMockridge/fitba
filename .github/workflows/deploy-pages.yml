@@ -48,6 +48,7 @@ jobs:
       - run: cd .. && uv run python scripts/check_metrics.py --strict --published-only
       - run: cd .. && uv run python scripts/check_xg.py --published
       - run: cd .. && uv run python scripts/check_web_contract.py --ci --base-path /fitba
+      - run: cd .. && uv run python scripts/check_manager.py --pages --base-path /fitba
       - run: cd .. && uv run python scripts/check_fixture_pages.py --base-path /fitba
       - run: cd .. && uv run python scripts/check_scouting.py --pages
       - run: cd .. && uv run python scripts/check_player_page.py --pages

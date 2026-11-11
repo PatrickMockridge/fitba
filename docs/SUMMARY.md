@@ -27,6 +27,7 @@
 - [Match scoreboard](match-scoreboard.md)
 - [Competition formats](competition-formats.md)
 - [The Cormack era](history.md)
+- [Manager record](manager.md)
 
 # Squad and recruitment
 

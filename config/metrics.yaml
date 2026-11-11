@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.16.0
+registry_version: 3.17.0
 reviewed: '2026-11-11'
 owner: patrickmockridge
 change_policy:
@@ -1060,14 +1060,15 @@ metrics:
   home_surface: /history/
   displayed_surfaces:
   - /history/
+  - /manager/
   verification: cross_surface
   implementation: fitba.metrics.checks:verify_history_scorecard
   source_paths: []
   limitations:
   - Registered family; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-11-11'
+  version: 3
   status: active
 - id: history.season
   label: History seasons
@@ -1130,14 +1131,15 @@ metrics:
   home_surface: /history/
   displayed_surfaces:
   - /history/
+  - /manager/
   verification: provenance_only
   implementation: null
   source_paths: []
   limitations:
   - Curated staff stints; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-11-11'
+  version: 3
   status: active
 - id: history.baseline
   label: History baseline
@@ -1246,14 +1248,15 @@ metrics:
   home_surface: /history/
   displayed_surfaces:
   - /history/
+  - /manager/
   verification: provenance_only
   implementation: null
   source_paths: []
   limitations:
   - Curated season documents; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-11-11'
+  version: 3
   status: active
 - id: squad.summary
   label: Squad summary
@@ -2249,14 +2252,15 @@ metrics:
   home_surface: /
   displayed_surfaces:
   - /
+  - /manager/
   verification: provenance_only
   implementation: null
   source_paths: []
   limitations:
   - Club summary payload; provenance checked, not recomputed.
   owner: patrickmockridge
-  reviewed: '2026-10-22'
-  version: 2
+  reviewed: '2026-11-11'
+  version: 3
   status: active
 - id: availability.ledger
   label: Availability
@@ -2888,6 +2892,7 @@ metrics:
   home_surface: /analysis/
   displayed_surfaces:
   - /analysis/
+  - /manager/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -2900,8 +2905,8 @@ metrics:
   - A contradicted team-news claim is available by default, not a verified fit; its original source and evidence remain in the review block.
   - Availability reconciliation is participation-based, not medical evidence.
   owner: patrickmockridge
-  reviewed: '2026-11-09'
-  version: 5
+  reviewed: '2026-11-11'
+  version: 6
   status: active
 - id: analysis.league-rankings
   label: League rankings
@@ -3083,6 +3088,7 @@ metrics:
   displayed_surfaces:
   - /analysis/xg/
   - /matches/
+  - /manager/
   verification: provenance_only
   implementation: null
   source_paths: []
@@ -3101,8 +3107,8 @@ metrics:
   - The provider-style estimate is a separate calibration for rows without
     provider xG, not provider xG itself.
   owner: patrickmockridge
-  reviewed: '2026-10-24'
-  version: 7
+  reviewed: '2026-11-11'
+  version: 8
   status: active
 - id: xg.per-shot
   label: xG per shot

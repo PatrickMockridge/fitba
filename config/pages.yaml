@@ -114,6 +114,11 @@ pages:
     patterns: ["/history/", "/history/{season}/"]
     layers: [history, league_results_history, transfer_register, themes]
 
+  - id: manager
+    label: Manager record
+    patterns: ["/manager/"]
+    layers: [history, league_results_current, league_standings, xg_model, news]
+
   - id: scotland
     label: Scottish pyramid
     patterns: ["/scotland/", "/scotland/{tier}/"]
@@ -207,6 +212,7 @@ static_pages:
   - {id: former-players, name: Former players, path: /former-players/}
   - {id: rumours, name: Rumours and fan signal, path: /rumours/}
   - {id: history, name: The Cormack era, path: /history/}
+  - {id: manager, name: Manager record, path: /manager/}
   - {id: scotland, name: Scottish pyramid, path: /scotland/}
   - {id: competitions, name: Competitions, path: /competitions/}
   - {id: news, name: News and fan signal, path: /news/}

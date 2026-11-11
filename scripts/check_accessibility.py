@@ -13,6 +13,7 @@ REQUIRED_PAGES = [
     "index.html",
     "matches/index.html",
     "analysis/index.html",
+    "manager/index.html",
     "squad/index.html",
     "former-players/index.html",
     "search/index.html",

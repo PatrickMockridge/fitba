@@ -8,6 +8,27 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.17.0 — 2026-11-11
+
+Dedicated `/manager/` surface. `history.scorecard` v2 → v3, `history.staff`
+v2 → v3, `history.season-document` v2 → v3, `analysis.summary` v5 → v6,
+`xg.document` v7 → v8 and `clubs.aberdeen` v2 → v3.
+
+- **No formula, denominator, input, aggregation, rounding mode, source,
+  coverage tier or stored value changed.** The only registry change is the
+  addition of `/manager/` to `displayed_surfaces` for the metrics whose values
+  the page projects: the manager count and staff stints, the current season
+  document (expectations and manager segments), the season overview (position,
+  aims and next fixture), the fxG manager splits and the club news rows.
+- The page adds no manager rating, no per-manager target and no verdict. It
+  links to the gated next-manager market on `/rumours/` rather than displaying
+  its numbers, so `manager.market` and `forum.donstalk` are not registered as
+  displayed on `/manager/`.
+- Audit impact: existing checks and values are unchanged; the new
+  `manager.records` consistency check reconciles the current manager state,
+  season manager rows, aims and the market gate.
+- Registry version 3.16.0 → 3.17.0.
+
 ## 3.16.0 — 2026-11-11
 
 Manager vacancy, DonsTalk and the gated next-manager market. `case.claim.managers`

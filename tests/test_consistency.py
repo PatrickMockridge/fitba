@@ -119,6 +119,25 @@ def test_coverage_matches_mutation_fails():
     assert "results.coverage" in failed
 
 
+def test_manager_gate_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    gate = corpus["rumours/manager-market.json"]["market"]["gate"]
+    gate["is_open"] = not gate["is_open"]
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "manager.records" in failed
+
+
+def test_manager_segment_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    season = corpus["analysis/summary.json"]["season"]
+    manager = corpus[f"history/seasons/{season}.json"]["managers"][0]
+    manager["played"] = int(manager["played"]) + 1
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "manager.records" in failed
+
+
 def test_epoch_mismatch_fails():
     corpus = copy.deepcopy(_corpus())
     corpus["squad/aberdeen.json"]["dataset_id"] = "not-the-current-dataset"

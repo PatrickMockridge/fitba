@@ -138,6 +138,12 @@ The site is organised around the question a fan actually arrives with:
   squad-decision lenses, then links to matchday, matches, squad, scouting and
   the xG deep page. It names no targets and makes no medical, contract or fee
   claim.
+- **Manager record** (`/manager/`) — the consolidation of the current manager
+  situation: permanent, interim or vacancy; the analyst-set season expectations
+  and aims; the measured record at full-stint and within-season scope; the fxG
+  manager split; the full Cormack-era churn; and links to manager news, the
+  rumour mill and the DonsTalk thread. It is a projection of published payloads:
+  no manager rating, per-manager target or pressure verdict.
 
 The rumour mill is a distinct product lane, not a feed of links:
 

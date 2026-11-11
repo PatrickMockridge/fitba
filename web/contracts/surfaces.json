@@ -758,6 +758,157 @@
       }
     },
     {
+      "id": "manager",
+      "path": "/manager/",
+      "owners": [
+        "web/app/manager/page.tsx",
+        "web/components/ManagerRecordTable.tsx",
+        "web/components/ManagerXgTable.tsx"
+      ],
+      "ci_states": [
+        "full",
+        "empty"
+      ],
+      "states": {
+        "full": {
+          "markers": [
+            {
+              "id": "manager.hero",
+              "min": 1
+            },
+            {
+              "id": "manager.situation",
+              "min": 1
+            },
+            {
+              "id": "manager.expectations",
+              "min": 1
+            },
+            {
+              "id": "manager.aims",
+              "min": 1
+            },
+            {
+              "id": "manager.record",
+              "min": 1
+            },
+            {
+              "id": "manager.season-record",
+              "min": 1
+            },
+            {
+              "id": "manager.xg",
+              "min": 1
+            },
+            {
+              "id": "manager.churn",
+              "min": 1
+            },
+            {
+              "id": "manager.news",
+              "min": 1
+            },
+            {
+              "id": "manager.rumours",
+              "min": 1
+            },
+            {
+              "id": "manager.coverage",
+              "min": 1
+            }
+          ],
+          "columns": {
+            "manager.aims": [
+              "Aim",
+              "Target",
+              "Current",
+              "Status",
+              "Gap"
+            ],
+            "manager.record": [
+              "Manager",
+              "Dates",
+              "Pld",
+              "W-D-L",
+              "GF",
+              "GA",
+              "Pts",
+              "PPG"
+            ],
+            "manager.season-record": [
+              "Manager",
+              "Dates",
+              "Pld",
+              "W-D-L",
+              "GF",
+              "GA",
+              "Pts",
+              "PPG"
+            ],
+            "manager.churn": [
+              "Manager",
+              "Dates",
+              "Reason",
+              "Pld",
+              "W-D-L",
+              "GF",
+              "GA",
+              "Pts",
+              "PPG"
+            ]
+          },
+          "indicators": {
+            "basis": 1,
+            "confidence": 1,
+            "unknown": 1,
+            "source": 1,
+            "freshness": 1
+          },
+          "links": [
+            "/history/",
+            "/analysis/",
+            "/analysis/xg/",
+            "/rumours/",
+            "/news/",
+            "/claims/",
+            "/methodology/",
+            "/sources/"
+          ],
+          "headings": {
+            "forbid_question": [
+              "h1",
+              "h2",
+              "h3"
+            ],
+            "h1": "The manager record"
+          },
+          "copy": {
+            "manager.expectations": [
+              "Analyst-set, not a published club target"
+            ],
+            "manager.record": [
+              "League only"
+            ],
+            "manager.rumours": [
+              "Not betting advice"
+            ]
+          },
+          "metadata": {
+            "title_contains": "manager",
+            "description_contains": "Aberdeen"
+          }
+        },
+        "empty": {
+          "markers": [
+            {
+              "id": "manager.empty",
+              "min": 1
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "squad",
       "path": "/squad/",
       "owners": [

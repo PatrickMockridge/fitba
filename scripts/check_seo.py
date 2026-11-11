@@ -50,6 +50,7 @@ def main() -> int:
             "/matchday/",
             "/matches/",
             "/analysis/",
+            "/manager/",
             "/former-players/",
             "/corrections/",
             "/search/",

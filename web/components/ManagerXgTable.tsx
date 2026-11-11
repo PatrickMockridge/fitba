@@ -40,7 +40,13 @@ function providerAgainst(row: XgManagerSplit) {
   return "—";
 }
 
-export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
+export function ManagerXgTable({
+  rows,
+  compact = false,
+}: {
+  rows: XgManagerSplit[];
+  compact?: boolean;
+}) {
   if (!rows.length) return null;
   return (
     <section className="card" data-contract="xg.managers">
@@ -54,15 +60,15 @@ export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
       <div className="table-wrap">
         <table className="league-table compact">
           <caption className="fine-print">
-            League only. Managers are attributed by match date. Provider xG is
-            actual where supplied and a calibrated estimate otherwise; the two are
-            never summed.
+            {compact
+              ? "League only. Managers are attributed by match date; the split is descriptive, not a causal verdict."
+              : "League only. Managers are attributed by match date. Provider xG is actual where supplied and a calibrated estimate otherwise; the two are never summed."}
           </caption>
           <thead>
             <tr>
               <th scope="col">Manager</th>
               <th scope="col">Stint</th>
-              <th scope="col">Season</th>
+              {compact ? null : <th scope="col">Season</th>}
               <th scope="col" className="num">
                 Matches
               </th>
@@ -78,19 +84,23 @@ export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
               <th scope="col" className="num">
                 Goals against
               </th>
-              <th scope="col" className="num">
-                Goals − fxG for
-              </th>
-              <th scope="col" className="num">
-                Goals − fxG against
-              </th>
-              <th scope="col" className="num">
-                Provider xG for
-              </th>
-              <th scope="col" className="num">
-                Provider xG against
-              </th>
-              <th scope="col">Provider basis</th>
+              {compact ? null : (
+                <>
+                  <th scope="col" className="num">
+                    Goals − fxG for
+                  </th>
+                  <th scope="col" className="num">
+                    Goals − fxG against
+                  </th>
+                  <th scope="col" className="num">
+                    Provider xG for
+                  </th>
+                  <th scope="col" className="num">
+                    Provider xG against
+                  </th>
+                  <th scope="col">Provider basis</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -107,25 +117,30 @@ export function ManagerXgTable({ rows }: { rows: XgManagerSplit[] }) {
               >
                 <td className="strong">{row.manager}</td>
                 <td>{stint(row)}</td>
-                <td>{row.season}</td>
+                {compact ? null : <td>{row.season}</td>}
                 <td className="num">{row.matches}</td>
                 <td className="num">{dec(row.fxg_for)}</td>
                 <td className="num">{dec(row.fxg_against)}</td>
                 <td className="num">{row.goals_for}</td>
                 <td className="num">{row.goals_against}</td>
-                <td className="num">{signed(row.goals_minus_fxg_for)}</td>
-                <td className="num">{signed(row.goals_minus_fxg_against)}</td>
-                <td className="num">{providerFor(row)}</td>
-                <td className="num">{providerAgainst(row)}</td>
-                <td>{providerBasis(row)}</td>
+                {compact ? null : (
+                  <>
+                    <td className="num">{signed(row.goals_minus_fxg_for)}</td>
+                    <td className="num">{signed(row.goals_minus_fxg_against)}</td>
+                    <td className="num">{providerFor(row)}</td>
+                    <td className="num">{providerAgainst(row)}</td>
+                    <td>{providerBasis(row)}</td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <p className="fine-print">
-        Each row is one manager stint; the comparison is descriptive, not a causal
-        verdict. The full 2025-26 row is context, not a fourth spell.
+        {compact
+          ? "Each row is one manager stint; the comparison is descriptive, not a causal verdict."
+          : "Each row is one manager stint; the comparison is descriptive, not a causal verdict. The full 2025-26 row is context, not a fourth spell."}
       </p>
     </section>
   );

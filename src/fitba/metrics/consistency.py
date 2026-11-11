@@ -979,6 +979,121 @@ def _check_rules_epoch(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
             outcome.fail(f"{path}: generated_at is later than the manifest")
 
 
+def _manager_stints(corpus: dict[str, Any]) -> list[dict[str, Any]]:
+    history = _payload(corpus, "history/aberdeen.json") or {}
+    return [
+        {**stint, "name": person.get("name")}
+        for person in history.get("staff") or []
+        for stint in person.get("stints") or []
+        if stint.get("role_group") == "manager"
+    ]
+
+
+def _norm_text(value: Any) -> str:
+    return " ".join(str(value or "").split()).casefold()
+
+
+def _check_manager_records(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    history = _payload(corpus, "history/aberdeen.json") or {}
+    stints = _manager_stints(corpus)
+    current = [stint for stint in stints if not stint.get("end")]
+    permanent = [stint for stint in current if not stint.get("interim")]
+    interim = [stint for stint in current if stint.get("interim")]
+    outcome.rows_checked += len(stints)
+    outcome.fields_checked += 3
+    if len(permanent) > 1:
+        outcome.fail(f"{len(permanent)} current permanent managers in the staff register")
+    if len(interim) > 1:
+        outcome.fail(f"{len(interim)} current interim managers in the staff register")
+    if not permanent and not interim:
+        outcome.fail("no permanent manager and no interim manager are recorded")
+
+    register = {
+        (person.get("person_id"), stint.get("stint_id"))
+        for person in history.get("staff") or []
+        for stint in person.get("stints") or []
+        if stint.get("role_group") == "manager"
+    }
+    season_paths = sorted(
+        path for path in corpus if path.startswith("history/seasons/") and path.endswith(".json")
+    )
+    for path in season_paths:
+        season_doc = corpus.get(path) or {}
+        managers = season_doc.get("managers") or []
+        for row in managers:
+            outcome.rows_checked += 1
+            outcome.fields_checked += 6
+            key = (row.get("person_id"), row.get("stint_id"))
+            if key not in register:
+                outcome.fail(
+                    f"{path}: manager {row.get('name')!r} does not resolve to a "
+                    "published manager stint"
+                )
+            played = int(row.get("played") or 0)
+            won = int(row.get("won") or 0)
+            drawn = int(row.get("drawn") or 0)
+            lost = int(row.get("lost") or 0)
+            points = int(row.get("points") or 0)
+            if played != won + drawn + lost:
+                outcome.fail(
+                    f"{path}: {row.get('name')!r} played {played} != W+D+L {won + drawn + lost}"
+                )
+            if points != 3 * won + drawn:
+                outcome.fail(
+                    f"{path}: {row.get('name')!r} points {points} != 3W+D {3 * won + drawn}"
+                )
+            ppg = row.get("ppg")
+            if played == 0:
+                if ppg is not None:
+                    outcome.fail(f"{path}: {row.get('name')!r} has a PPG on a zero-match sample")
+            elif ppg is None or abs(float(ppg) - round(points / played, 2)) > 0.0051:
+                outcome.fail(
+                    f"{path}: {row.get('name')!r} PPG {ppg!r} does not equal "
+                    f"points / played ({round(points / played, 2)})"
+                )
+
+    analysis = _payload(corpus, "analysis/summary.json") or {}
+    season = str(analysis.get("season") or "")
+    season_doc = _payload(corpus, f"history/seasons/{season}.json") or {}
+    expectations = season_doc.get("expectations") or {}
+    baseline = _norm_text(expectations.get("baseline"))
+    league_aim = next(
+        (aim for aim in analysis.get("aims") or [] if str(aim.get("id")) == "league"),
+        None,
+    )
+    outcome.fields_checked += 3
+    if league_aim is None:
+        outcome.fail("analysis.summary has no league aim")
+    else:
+        note = _norm_text(league_aim.get("note"))
+        if "analyst-set" not in note:
+            outcome.fail("analysis league aim is not labelled analyst-set")
+        if baseline and baseline not in note:
+            outcome.fail("analysis league aim does not carry the season expectations baseline")
+
+    market_doc = _payload(corpus, "rumours/manager-market.json")
+    if isinstance(market_doc, dict):
+        market = market_doc.get("market") or {}
+        gate = market.get("gate") or {}
+        expected_open = len(current) == 1 and bool(current[0].get("interim"))
+        outcome.fields_checked += 3
+        if bool(gate.get("is_open")) != expected_open:
+            outcome.fail("manager market gate does not match the published staff register")
+        if expected_open:
+            if gate.get("interim_manager") != current[0].get("name"):
+                outcome.fail(
+                    f"manager market interim manager {gate.get('interim_manager')!r} "
+                    f"!= staff register {current[0].get('name')!r}"
+                )
+            if str(gate.get("interim_since") or "")[:10] != str(current[0].get("start") or "")[:10]:
+                outcome.fail("manager market interim start does not match the staff register")
+        elif permanent and gate.get("permanent_manager") != permanent[0].get("name"):
+            outcome.fail(
+                f"manager market permanent manager {gate.get('permanent_manager')!r} "
+                f"!= staff register {permanent[0].get('name')!r}"
+            )
+
+
 def _check_rules_manifest(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     manifest = _payload(corpus, "manifest.json") or {}
     listed = {str(entry.get("path")) for entry in manifest.get("files") or [] if entry.get("path")}
@@ -1236,6 +1351,17 @@ CHECKS = [
             "history/seasons/*.json",
         ],
         _check_results_club,
+    ),
+    (
+        "manager.records",
+        "Current manager state, season manager rows, aims and the market gate agree",
+        [
+            "history/aberdeen.json",
+            "history/seasons/*.json",
+            "analysis/summary.json",
+            "rumours/manager-market.json",
+        ],
+        _check_manager_records,
     ),
     (
         "results.coverage",
