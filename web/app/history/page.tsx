@@ -40,7 +40,7 @@ function personNames(
 }
 
 function seasonStatusLabel(status: HistorySeasonRef["status"]) {
-  return status === "in_progress" ? "In progress" : "Completed";
+  return status === "in_progress" ? "Season in progress" : "Completed";
 }
 
 export default function HistoryPage() {
@@ -582,7 +582,11 @@ export default function HistoryPage() {
                         : "Unavailable"}
                     </td>
                     <td>Measured proxies</td>
-                    <td>{season.review_status === "complete" ? "Complete" : "In progress"}</td>
+                    <td>
+                      {season.review_status === "complete"
+                        ? "Complete"
+                        : "Season in progress"}
+                    </td>
                   </tr>
                 );
               })}

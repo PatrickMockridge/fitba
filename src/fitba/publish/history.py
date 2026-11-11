@@ -439,6 +439,44 @@ def build_history_payloads(
     stints = flatten_stints(history_staff().get("people", []) or [])
     manager_records = manager_stint_records(club_rows, stints)
     splits = manager_splits_by_season(club_rows, stints, seasons)
+    # A manager who has taken charge but not yet managed a league match still
+    # belongs to the season's manager list. The season YAML is the authoritative
+    # list; add a zero-match row for any stint that has no split yet.
+    stints_by_id = {str(stint.get("stint_id")): stint for stint in stints if stint.get("stint_id")}
+    for doc in season_docs:
+        current = str(doc.get("season"))
+        existing = {str(record.get("stint_id")) for record in splits.get(current, [])}
+        for stint_id in doc.get("manager_stint_ids") or []:
+            if str(stint_id) in existing:
+                continue
+            stint = stints_by_id.get(str(stint_id))
+            if stint is None:
+                continue
+            splits.setdefault(current, []).append(
+                {
+                    "played": 0,
+                    "won": 0,
+                    "drawn": 0,
+                    "lost": 0,
+                    "gf": 0,
+                    "ga": 0,
+                    "points": 0,
+                    "ppg": None,
+                    "first_match": None,
+                    "last_match": None,
+                    "stint_id": stint.get("stint_id"),
+                    "person_id": stint.get("person_id"),
+                    "name": stint.get("name"),
+                    "interim": bool(stint.get("interim")),
+                    "start": stint.get("start"),
+                    "end": stint.get("end"),
+                    "stint_start": stint.get("start"),
+                    "stint_end": stint.get("end"),
+                }
+            )
+        splits.get(current, []).sort(
+            key=lambda item: str(item.get("start") or item.get("stint_start") or "")
+        )
     completed = [str(doc.get("season")) for doc in season_docs if doc.get("status") == "completed"]
     style_profiles = {
         current: style_profile(

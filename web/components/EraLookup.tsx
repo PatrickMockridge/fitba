@@ -218,7 +218,9 @@ export function EraLookup({
                     <Link href={season.href}>{season.season}</Link>
                   </td>
                   <td>
-                    {season.status === "in_progress" ? "In progress" : "Completed"}
+                    {season.status === "in_progress"
+                      ? "Season in progress"
+                      : "Completed"}
                   </td>
                   <td>{season.competition_name ?? "—"}</td>
                   <td>

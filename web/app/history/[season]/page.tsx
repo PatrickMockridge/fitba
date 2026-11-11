@@ -117,7 +117,8 @@ export default async function HistorySeasonPage({
     <>
       <section className="page-head">
         <p className="eyebrow">
-          The record · {doc.status === "in_progress" ? "In progress" : "Completed season"}
+          The record ·{" "}
+          {doc.status === "in_progress" ? "Season in progress" : "Completed season"}
         </p>
         <h1>{doc.season}</h1>
         <p className="lede">{doc.headline}</p>
