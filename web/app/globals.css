@@ -1239,7 +1239,11 @@ a.card:hover {
 /* The club-accounts table keeps its columns legible and scrolls horizontally
    on narrow screens rather than squeezing the currency values. */
 .finance-table {
-  min-width: 860px;
+  min-width: 1020px;
+}
+
+.finance-table caption {
+  text-align: left;
 }
 
 .finance-table th:first-child,

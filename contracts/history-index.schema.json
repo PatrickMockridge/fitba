@@ -51,6 +51,18 @@
           "default": null,
           "title": "Net Debt"
         },
+        "net_registration_investment": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Net Registration Investment"
+        },
         "player_sale_profit": {
           "anyOf": [
             {

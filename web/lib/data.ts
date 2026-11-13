@@ -1726,6 +1726,7 @@ export interface HistoryFinanceRow {
   revenue: number | null;
   staff_costs: number | null;
   player_sale_profit: number | null;
+  net_registration_investment: number | null;
   pre_tax_result: number | null;
   net_debt: number | null;
 }

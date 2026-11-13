@@ -1,5 +1,5 @@
 schema_version: 1
-registry_version: 3.18.0
+registry_version: 3.19.0
 reviewed: '2026-11-13'
 owner: patrickmockridge
 change_policy:
@@ -1230,14 +1230,19 @@ metrics:
   - revenue
   - staff_costs
   - player_sale_profit
+  - net_registration_investment
   - pre_tax_result
   - net_debt
   formula: >
     Five headline rows quoted as published by PSRwatch from Aberdeen Football
-    Club Limited's filed group accounts. Revenue, staff costs, profit on player
-    disposals and pre-tax result are £m to one decimal; net debt is £m to two
-    decimals. FY is the year ended 30 June. Verification re-checks row shape,
-    the FY/year sequence and published precision; it does not re-derive the
+    Club Limited's filed group accounts. Revenue, staff costs and pre-tax result
+    are £m to one decimal; profit on player disposals, net registration
+    investment and net debt are £m to two decimals. FY is the year ended 30
+    June. Net registration investment = change in player-registration cost less
+    profit on player disposals; it is an accounting measure, not cash transfer
+    spend, and is unknown for FY2021 because the FY2020 opening cost is not in
+    the source table. Verification re-checks row shape, the FY/year sequence,
+    the investment formula and published precision; it does not re-derive the
     accounts.
   inputs:
   - published payload
@@ -1256,8 +1261,12 @@ metrics:
       display: '0.0'
     player_sale_profit:
       method: half_even
-      decimals: 1
-      display: '0.0'
+      decimals: 2
+      display: '0.00'
+    net_registration_investment:
+      method: half_even
+      decimals: 2
+      display: '0.00'
     pre_tax_result:
       method: half_even
       decimals: 1
@@ -1291,9 +1300,11 @@ metrics:
     zero-filled.
   - fitba has not independently audited the filed accounts.
   - Staff costs are the filed aggregate, not individual wages or a budget.
+  - Net registration investment is an accounting measure, not cash transfer spend;
+    FY2021 is unknown without the FY2020 opening registration cost.
   owner: patrickmockridge
   reviewed: '2026-11-13'
-  version: 1
+  version: 2
   status: active
 - id: history.season-document
   label: History season documents

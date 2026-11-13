@@ -25,6 +25,17 @@ def test_builder_publishes_five_rows_without_verification_inputs() -> None:
     assert validate_finances(payload) == []
 
 
+def test_net_registration_investment_is_accounting_basis() -> None:
+    payload = build_finances_payload()
+    values = [row["net_registration_investment"] for row in payload["rows"]]
+    assert values == [None, -1.06, -7.03, 0.59, -2.54]
+
+    document = deepcopy(history_finances())
+    document["rows"][1]["net_registration_investment"] = 4.0
+    errors = validate_finances(document, reference=True)
+    assert any("net_registration_investment does not reconcile" in error for error in errors)
+
+
 def test_missing_years_are_absent_and_listed() -> None:
     payload = build_finances_payload()
     seasons = {row["season"] for row in payload["rows"]}

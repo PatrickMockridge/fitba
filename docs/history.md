@@ -134,9 +134,15 @@ FY2021–FY2025, quoted with attribution from
 - pre-tax result;
 - net debt.
 
-FY is the year ended 30 June. FY2021 maps to 2020-21 and FY2025 to 2024-25. The
-first four lines are £m to one decimal; net debt is £m to two. Negative net debt
-means net cash. Staff costs are the filed aggregate, not individual wages, a
+It also derives **net registration investment**: the change in player-registration
+cost less profit on disposals. This is an accounting measure, not cash transfer
+spend or the transfer-register net. It is shown for FY2022–FY2025; FY2021 is
+unknown because the FY2020 opening registration cost is not in the source table.
+
+FY is the year ended 30 June. FY2021 maps to 2020-21 and FY2025 to 2024-25.
+Revenue, staff costs and pre-tax result are £m to one decimal; profit on player
+disposals, net registration investment and net debt are £m to two. Negative net
+debt means net cash. Staff costs are the filed aggregate, not individual wages, a
 wage structure or a budget.
 
 The underlying record is the Companies House filing history for Aberdeen

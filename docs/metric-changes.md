@@ -8,6 +8,25 @@ aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
 
+## 3.19.0 — 2026-11-13
+
+Club-account net registration investment. `history.finances` v1 → v2.
+
+- Adds `net_registration_investment` per financial year, an accounting measure
+  equal to the change in player-registration cost less profit on disposals. It
+  is not cash transfer spend or a transfer-register net, and FY2021 is null
+  because the FY2020 opening registration cost is not in the source table.
+- `player_sale_profit` is now published to two decimals, matching the source's
+  registration note, rather than one: FY2021 3.0 → 2.98, FY2022 1.0 → 0.96,
+  FY2023 7.5 → 7.45, FY2024 1.3 → 1.30, FY2025 5.3 → 5.27. No underlying fact
+  changed; this is a precision change only.
+- FY2022–FY2025 net registration investment: -1.06, -7.03, +0.59 and -2.54 £m
+  respectively. The values are derived from the reference registration cost and
+  profit lines and verified against them.
+- The `history.finances` verifier and consistency check now cover the new field;
+  the page table adds the column and keeps FY2021 as unknown, not zero.
+- Registry version 3.18.0 → 3.19.0.
+
 ## 3.18.0 — 2026-11-13
 
 Club accounts on `/history/`. New `history.finances` v1.

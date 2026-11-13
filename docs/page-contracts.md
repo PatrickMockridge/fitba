@@ -556,8 +556,10 @@ Must remain visible:
 - The baseline table, labelled as a chosen comparison window rather than a
   neutral norm.
 - The club-accounts table: Season (FY), Revenue, Staff costs, Profit on player
-  disposals, Pre-tax result and Net debt, with the “as filed”, PSRwatch and
-  Companies House attribution and the FY2020/FY2026 unknown-years note.
+  disposals, Net registration investment, Pre-tax result and Net debt, with the
+  “as filed”, PSRwatch and Companies House attribution, the accounting-basis
+  note and the FY2020/FY2026 unknown-years note. FY2021 net registration
+  investment stays unknown.
 - The honours cabinet, the read block, and the coverage-by-season table.
 - The page's source and method links.
 
@@ -570,7 +572,8 @@ neutral; leaving heavy defeats or the European finishing position only in
 prose; deleting position or points; presenting the club accounts as fitba's
 audit, a wage structure, a budget or a boardroom account; zero-filling FY2020 or
 FY2026; removing the PSRwatch/Companies House attribution; bulk-republishing the
-source table.
+source table; presenting net registration investment as cash transfer spend or
+net transfer spend.
 
 ### `/manager/` — the manager record
 

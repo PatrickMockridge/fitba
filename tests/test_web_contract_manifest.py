@@ -324,6 +324,7 @@ PINNED_COLUMNS = {
         "Revenue",
         "Staff costs",
         "Profit on player disposals",
+        "Net registration investment",
         "Pre-tax result",
         "Net debt",
     ],

@@ -329,10 +329,7 @@ export default function HistoryPage() {
             <div className="table-wrap">
               <table className="league-table compact finance-table">
                 <caption className="fine-print">
-                  Headline group-account figures, £m. FY = year ended 30 June.
-                  As filed and not restated; staff costs are the filed
-                  aggregate, not individual wages or a budget. Negative net debt
-                  means net cash.
+                  Headline group-account figures, £m.
                 </caption>
                 <thead>
                   <tr>
@@ -345,6 +342,9 @@ export default function HistoryPage() {
                     </th>
                     <th scope="col" className="num">
                       Profit on player disposals
+                    </th>
+                    <th scope="col" className="num">
+                      Net registration investment
                     </th>
                     <th scope="col" className="num">
                       Pre-tax result
@@ -368,7 +368,13 @@ export default function HistoryPage() {
                         {formatGbpMillions(row.staff_costs, 1)}
                       </td>
                       <td className="num">
-                        {formatGbpMillions(row.player_sale_profit, 1)}
+                        {formatGbpMillions(row.player_sale_profit, 2)}
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(
+                          row.net_registration_investment,
+                          2,
+                        )}
                       </td>
                       <td className="num">
                         {formatGbpMillions(row.pre_tax_result, 1)}
@@ -381,6 +387,13 @@ export default function HistoryPage() {
                 </tbody>
               </table>
             </div>
+            <p className="fine-print">
+              As filed and not restated; staff costs are the filed aggregate,
+              not individual wages or a budget. Negative net debt means net
+              cash. Net registration investment is an accounting measure — the
+              change in registration cost less profit on disposals — not cash
+              transfer spend; FY2021 is unknown without the FY2020 opening cost.
+            </p>
             <p className="fine-print" data-contract-indicator="source">
               Selected figures are quoted with attribution from{" "}
               <a

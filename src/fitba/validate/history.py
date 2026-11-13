@@ -63,13 +63,15 @@ FINANCE_FIELDS = (
     "revenue",
     "staff_costs",
     "player_sale_profit",
+    "net_registration_investment",
     "pre_tax_result",
     "net_debt",
 )
 FINANCE_DECIMALS = {
     "revenue": 1,
     "staff_costs": 1,
-    "player_sale_profit": 1,
+    "player_sale_profit": 2,
+    "net_registration_investment": 2,
     "pre_tax_result": 1,
     "net_debt": 2,
 }
@@ -92,6 +94,7 @@ def validate_finances(document: dict[str, Any], *, reference: bool = False) -> l
         errors.append(
             f"finances: rows must be 2020-21 through 2024-25 in order (found {seasons!r})"
         )
+    previous_cost: float | None = None
     for row in rows:
         if not isinstance(row, dict):
             errors.append("finances: row must be an object")
@@ -129,6 +132,32 @@ def validate_finances(document: dict[str, Any], *, reference: bool = False) -> l
             value = row.get(field)
             if isinstance(value, (int, float)) and not isinstance(value, bool) and value <= 0:
                 errors.append(f"finances {season}: {field} must be positive")
+        investment = row.get("net_registration_investment")
+        if not reference:
+            if season == FINANCE_SEASONS[0] and investment is not None:
+                errors.append(
+                    f"finances {season}: net_registration_investment must be unknown "
+                    "without the FY2020 opening cost"
+                )
+            elif season != FINANCE_SEASONS[0] and investment is None:
+                errors.append(f"finances {season}: net_registration_investment is missing")
+        if reference:
+            cost = row.get("registration_cost")
+            if (
+                not isinstance(cost, (int, float))
+                or isinstance(cost, bool)
+                or not math.isfinite(float(cost))
+            ):
+                errors.append(f"finances {season}: registration_cost is missing")
+            else:
+                profit = row.get("player_sale_profit")
+                if previous_cost is not None and isinstance(profit, (int, float)):
+                    expected = round(float(cost) - previous_cost - float(profit), 2)
+                    if abs(float(investment or 0.0) - expected) > 0.005:
+                        errors.append(
+                            f"finances {season}: net_registration_investment does not reconcile"
+                        )
+                previous_cost = float(cost)
         if reference:
             net = row.get("net_debt")
             borrowings = row.get("total_borrowings")

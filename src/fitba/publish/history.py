@@ -96,6 +96,7 @@ class FinanceRow(BaseModel):
     revenue: float | None = None
     staff_costs: float | None = None
     player_sale_profit: float | None = None
+    net_registration_investment: float | None = None
     pre_tax_result: float | None = None
     net_debt: float | None = None
 
@@ -473,23 +474,22 @@ def _europe_rows(season_docs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-FINANCE_ROW_FIELDS = (
-    "season",
-    "fy",
-    "year_ended",
-    "revenue",
-    "staff_costs",
-    "player_sale_profit",
-    "pre_tax_result",
-    "net_debt",
-)
-
-
 def build_finances_payload() -> dict[str, Any]:
     document = history_finances() or {}
     rows = [
-        FinanceRow(**{field: row.get(field) for field in FINANCE_ROW_FIELDS})
+        FinanceRow(
+            season=str(row.get("season") or ""),
+            fy=str(row.get("fy") or ""),
+            year_ended=str(row.get("year_ended") or ""),
+            revenue=row.get("revenue"),
+            staff_costs=row.get("staff_costs"),
+            player_sale_profit=row.get("player_sale_profit"),
+            net_registration_investment=row.get("net_registration_investment"),
+            pre_tax_result=row.get("pre_tax_result"),
+            net_debt=row.get("net_debt"),
+        )
         for row in document.get("rows") or []
+        if isinstance(row, dict)
     ]
     rows.sort(key=lambda row: row.season)
     source = document.get("source") or {}
