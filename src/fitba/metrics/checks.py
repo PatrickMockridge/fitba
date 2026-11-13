@@ -13,6 +13,9 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
+from fitba.settings import history_finances
+from fitba.validate.history import FINANCE_DECIMALS, FINANCE_FIELDS, FINANCE_SEASONS
+
 
 @dataclass
 class VerificationResult:
@@ -362,6 +365,78 @@ def verify_history_coverage(corpus: dict[str, Any], _: Any = None) -> Verificati
     if coverage.get("seasons_curated") is not None and coverage["seasons_curated"] > len(seasons):
         result.fail("history coverage curated seasons exceed seasons list")
     result.note("history.coverage", result.status == "pass", "history coverage checked")
+    return result
+
+
+def verify_history_finances(corpus: dict[str, Any], _: Any = None) -> VerificationResult:
+    result = VerificationResult()
+    data = _payload(corpus, "history/aberdeen.json")
+    if not data:
+        result.fail("history payload missing")
+        return result
+    finances = data.get("finances") or {}
+    rows = finances.get("rows") or []
+    source = finances.get("source") or {}
+    result.rows_checked = len(rows)
+    result.fields_checked = len(rows) * len(FINANCE_FIELDS)
+    expected_reference = (history_finances() or {}).get("rows") or []
+    reference = {str(row.get("season")): row for row in expected_reference if isinstance(row, dict)}
+    if [row.get("season") for row in rows] != FINANCE_SEASONS:
+        result.fail("history finances season sequence mismatch")
+    if source.get("id") != "psrwatch" or not source.get("retrieved_at"):
+        result.fail("history finances source block is incomplete")
+    for row in rows:
+        season = str(row.get("season") or "")
+        expected_row = reference.get(season)
+        if expected_row is None:
+            result.fail(f"history finances {season}: no reference row")
+            continue
+        try:
+            end_year = int(season[:4]) + 1
+        except ValueError:
+            result.fail(f"history finances {season}: unparseable season")
+            continue
+        if row.get("fy") != f"FY{end_year}":
+            result.fail(f"history finances {season}: fy mismatch")
+        if row.get("year_ended") != f"{end_year}-06-30":
+            result.fail(f"history finances {season}: year_ended mismatch")
+        for name in FINANCE_FIELDS:
+            value = row.get(name)
+            expected = expected_row.get(name)
+            decimals = FINANCE_DECIMALS[name]
+            if value is None and expected is None:
+                continue
+            if (
+                value is None
+                or expected is None
+                or isinstance(value, bool)
+                or not isinstance(value, (int, float))
+            ):
+                result.fail(f"history finances {season}: {name} missing or not numeric")
+                continue
+            if abs(float(value) - round(float(expected), decimals)) > 1e-9:
+                result.fail(f"history finances {season}: {name} does not match reference")
+        net = expected_row.get("net_debt")
+        borrowings = expected_row.get("total_borrowings")
+        cash = expected_row.get("cash")
+        if (
+            isinstance(net, (int, float))
+            and not isinstance(net, bool)
+            and isinstance(borrowings, (int, float))
+            and not isinstance(borrowings, bool)
+            and isinstance(cash, (int, float))
+            and not isinstance(cash, bool)
+            and abs(float(net) - (float(borrowings) - float(cash))) > 0.02
+        ):
+            result.fail(f"history finances {season}: net debt does not reconcile")
+    missing = set((finances.get("coverage") or {}).get("missing_seasons") or [])
+    if missing != {"2019-20", "2025-26"}:
+        result.fail("history finances missing-year coverage is incomplete")
+    result.note(
+        "history.finances",
+        result.status == "pass",
+        f"{len(rows)} finance rows checked for sequence, precision and source values",
+    )
     return result
 
 
@@ -1026,6 +1101,7 @@ CHECKS = {
     "fitba.metrics.checks:verify_history_scorecard": verify_history_scorecard,
     "fitba.metrics.checks:verify_history_baseline": verify_history_baseline,
     "fitba.metrics.checks:verify_history_coverage": verify_history_coverage,
+    "fitba.metrics.checks:verify_history_finances": verify_history_finances,
     "fitba.metrics.checks:verify_squad_summary": verify_squad_summary,
     "fitba.metrics.checks:verify_loan_scope": verify_loan_scope,
     "fitba.metrics.checks:verify_former_summary": verify_former_summary,

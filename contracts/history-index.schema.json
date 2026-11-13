@@ -1,4 +1,189 @@
 {
+  "$defs": {
+    "FinanceCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "first_season": {
+          "title": "First Season",
+          "type": "string"
+        },
+        "last_season": {
+          "title": "Last Season",
+          "type": "string"
+        },
+        "missing_seasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Seasons",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "first_season",
+        "last_season",
+        "missing_seasons",
+        "note"
+      ],
+      "title": "FinanceCoverage",
+      "type": "object"
+    },
+    "FinanceRow": {
+      "additionalProperties": false,
+      "properties": {
+        "fy": {
+          "title": "Fy",
+          "type": "string"
+        },
+        "net_debt": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Net Debt"
+        },
+        "player_sale_profit": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Player Sale Profit"
+        },
+        "pre_tax_result": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pre Tax Result"
+        },
+        "revenue": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revenue"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "staff_costs": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Staff Costs"
+        },
+        "year_ended": {
+          "title": "Year Ended",
+          "type": "string"
+        }
+      },
+      "required": [
+        "season",
+        "fy",
+        "year_ended"
+      ],
+      "title": "FinanceRow",
+      "type": "object"
+    },
+    "FinanceSource": {
+      "additionalProperties": false,
+      "properties": {
+        "accounts": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Accounts",
+          "type": "object"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "url",
+        "retrieved_at",
+        "accounts"
+      ],
+      "title": "FinanceSource",
+      "type": "object"
+    },
+    "HistoryFinances": {
+      "additionalProperties": false,
+      "properties": {
+        "coverage": {
+          "$ref": "#/$defs/FinanceCoverage"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/FinanceRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/FinanceSource"
+        }
+      },
+      "required": [
+        "rows",
+        "source",
+        "coverage",
+        "note"
+      ],
+      "title": "HistoryFinances",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "properties": {
     "baseline": {
@@ -48,6 +233,9 @@
       },
       "title": "Europe",
       "type": "array"
+    },
+    "finances": {
+      "$ref": "#/$defs/HistoryFinances"
     },
     "generated_at": {
       "title": "Generated At",
@@ -179,6 +367,7 @@
     "staff",
     "honours",
     "seasons",
+    "finances",
     "sources",
     "notes"
   ],

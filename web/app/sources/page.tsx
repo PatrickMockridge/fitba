@@ -169,7 +169,10 @@ export default function SourcesPage() {
         <p className="fine-print" data-contract-indicator="source">
           A row count belongs to the source only where it is the primary
           contributor. Curated transfer rows are not counted as API-Football
-          rows; a gated source can appear with zero rows.
+          rows; a gated source can appear with zero rows. A{" "}
+          <code>citation</code> source permits attributed quotation of
+          individual figures only; it is never bulk-ingested or republished as a
+          table.
         </p>
       </section>
 

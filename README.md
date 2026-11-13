@@ -95,7 +95,10 @@ Markdown remains the source of truth.
   2019-20, tracking managers and backroom changes, honours, recruitment, style,
   selection and a labelled assessment. The measured record is separated from the
   reading; league facts join from the club payload, and the transfer, honour and
-  staff registers remain the single source of truth.
+  staff registers remain the single source of truth. It also quotes five
+  headline lines from the filed club group accounts for FY2021–FY2025 with
+  PSRwatch attribution and a Companies House link; the figures are not fitba's
+  audit, a wage structure or a budget.
 - **Aberdeen news**: official afc.co.uk headlines, categories and links, plus
   the embedded @aberdeenfc X timeline for high-frequency posts. X content is
   embedded, not ingested or stored.

@@ -555,6 +555,9 @@ Must remain visible:
   visible “No permanent manager” note when the post is vacant.
 - The baseline table, labelled as a chosen comparison window rather than a
   neutral norm.
+- The club-accounts table: Season (FY), Revenue, Staff costs, Profit on player
+  disposals, Pre-tax result and Net debt, with the “as filed”, PSRwatch and
+  Companies House attribution and the FY2020/FY2026 unknown-years note.
 - The honours cabinet, the read block, and the coverage-by-season table.
 - The page's source and method links.
 
@@ -564,7 +567,10 @@ records and league tables stay visible.
 Forbidden: collapsing Europe to an unqualified "Europe"; removing the
 estimated-net confidence or known/modelled split; presenting the baseline as
 neutral; leaving heavy defeats or the European finishing position only in
-prose; deleting position or points.
+prose; deleting position or points; presenting the club accounts as fitba's
+audit, a wage structure, a budget or a boardroom account; zero-filling FY2020 or
+FY2026; removing the PSRwatch/Companies House attribution; bulk-republishing the
+source table.
 
 ### `/manager/` — the manager record
 

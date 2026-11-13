@@ -71,6 +71,17 @@ export function formatGbp(value: number): string {
   return `£${Math.round(value / 1000)}k`;
 }
 
+export function formatGbpMillions(
+  value: number | null | undefined,
+  digits = 1,
+): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) {
+    return "—";
+  }
+  const sign = value < 0 ? "−" : "";
+  return `${sign}£${Math.abs(value).toFixed(digits)}m`;
+}
+
 export function formatGbpBand(
   low: number | null | undefined,
   high: number | null | undefined,

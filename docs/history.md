@@ -60,9 +60,11 @@ Every panel follows the site-wide taxonomy:
 - **Assessment:** "The read" — an argument based on the public record, not a
   measurement and not the club's internal view.
 
-Numeric league facts are not stored in the history payload. The web joins
-`clubs/aberdeen.json` `history` by season. Manager career records live on the
-index staff stints; season documents hold only the season segment. The manager
+Numeric league facts are not stored in the history payload; the one exception is
+the quoted club-accounts block, which is curated external data rather than a
+league fact. The web joins `clubs/aberdeen.json` `history` by season. Manager
+career records live on the index staff stints; season documents hold only the
+season segment. The manager
 records are computed from the same canonical result frame as the league table,
 so their played/won/drawn/lost/GF/GA/points totals and latest match date must
 equal the table row.
@@ -84,6 +86,7 @@ labelled separately.
 | Manager career record | the staff stint |
 | Season manager segment | `history/seasons/<season>.json` |
 | Style/selection/recruitment aggregates | the season document |
+| Club-account headline lines | `reference/history/finances.yaml` → `history/aberdeen.json` `finances` |
 | Season narrative and "The read" | the season document |
 
 The index `seasons[]` rows contain references and navigation metadata only. A
@@ -97,6 +100,7 @@ reference/history/era.yaml             era definition and strategic pillars
 reference/history/staff.yaml           people and stints
 reference/history/honours.yaml         full major honours
 reference/history/markets.yaml         source-market map for recruitment
+reference/history/finances.yaml        quoted club-account headline lines
 reference/history/seasons/<season>.yaml
 ```
 
@@ -117,6 +121,29 @@ review and the sources. League numbers are computed.
 - Records are **league-only** by default. Historical cup data is incomplete;
   mixing a full league with a partial cup sample would mislead. Cup and European
   outcomes are curated exit rounds.
+
+## Club accounts
+
+The page publishes five headline lines from the filed group accounts for
+FY2021–FY2025, quoted with attribution from
+[PSRwatch's Aberdeen financials](https://psrwatch.com/club/sco-aberdeen/financials):
+
+- revenue;
+- staff costs;
+- profit on player disposals;
+- pre-tax result;
+- net debt.
+
+FY is the year ended 30 June. FY2021 maps to 2020-21 and FY2025 to 2024-25. The
+first four lines are £m to one decimal; net debt is £m to two. Negative net debt
+means net cash. Staff costs are the filed aggregate, not individual wages, a
+wage structure or a budget.
+
+The underlying record is the Companies House filing history for Aberdeen
+Football Club Limited (SC005364). fitba does not fetch, bulk-ingest or
+republish the PSRwatch table and has not independently audited the accounts.
+FY2020 (2019-20) and FY2026 (2025-26) are not in the source table; they are
+unknown, never zero, and no row is interpolated.
 
 ## Style and selection
 
@@ -191,6 +218,7 @@ Known gaps:
   as a cup run on that season page.
 - 2019-20 began before Cormack and was curtailed; the review labels both.
 - Manager records are league-only.
+- Club accounts cover FY2021–FY2025 only; FY2020 and FY2026 are unknown.
 - Pre-2024-25 transfer windows are curated partial.
 - The 2025-26 European league-phase finish (35th of 36) is a curated season
   record, not a provider-measured table and not a season verdict.
@@ -203,6 +231,10 @@ Known gaps:
   European runs, and season records where no AFC page states the fact.
 - **API-Football:** fixtures, lineups, events, rosters and transfers.
 - **football-data.co.uk:** league results and match-stat proxies.
+- **PSRwatch:** the citation-lane compilation of the filed club accounts; only
+  the five quoted headline lines are published.
+- **Companies House:** the underlying filing history for Aberdeen Football Club
+  Limited (SC005364), linked as the primary record and not re-keyed.
 
 BBC, Transfermarkt and other `no_publication` sources may be read manually as a
 finding aid, but are never fetched automatically, cited or republished. The

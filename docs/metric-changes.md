@@ -1,12 +1,37 @@
 # Metric change log
 
 **Status:** append-only record of metric-definition and parameter changes.
-**Owner:** patrickmockridge. **Last reviewed:** 2026-10-27.
+**Owner:** patrickmockridge. **Last reviewed:** 2026-11-13.
 
 A semantic metric change is any change to an id, formula, input, denominator,
 aggregation, rounding, basis, source layer, coverage tier, confidence rule,
 parameter value or verification mode. Each change records owner approval, the
 affected surfaces, the expected value impact and the audit impact.
+
+## 3.18.0 — 2026-11-13
+
+Club accounts on `/history/`. New `history.finances` v1.
+
+- Adds five headline filed group-account lines for FY2021–FY2025: revenue,
+  staff costs, profit on player disposals, pre-tax result and net debt. Values
+  are £m, with the first four to one decimal and net debt to two. FY is the year
+  ended 30 June; FY2021 maps to 2020-21 and FY2025 to 2024-25.
+- The figures are quoted with attribution from PSRwatch's compilation of the
+  filed group accounts for Aberdeen Football Club Limited (Companies House
+  SC005364). fitba does not fetch, bulk-ingest or republish the source table and
+  has not independently audited the accounts. Staff costs are the filed
+  aggregate, not individual wages or a budget.
+- FY2020 (2019-20) and FY2026 (2025-26) are not in the source table; they are
+  unknown, never zero. No row is interpolated.
+- New source layer `club_accounts`; new sources `psrwatch` (citation lane) and
+  `companies_house` (open lane), both not automatically ingested.
+- **No existing metric, formula, denominator, input, aggregation, rounding mode,
+  source, coverage tier or stored value changed.**
+- Audit impact: the new `history.finances` verifier checks the five-season
+  sequence, FY/year mapping, per-field precision, missing-year coverage and the
+  quoted values; the `history.finances` consistency check reconciles the rows
+  with the history season and source lists.
+- Registry version 3.17.0 → 3.18.0.
 
 ## 3.17.0 — 2026-11-11
 

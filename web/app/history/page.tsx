@@ -12,6 +12,7 @@ import {
   getManifest,
   type HistorySeasonRef,
 } from "@/lib/data";
+import { formatGbpMillions } from "@/lib/format";
 
 export const metadata = {
   alternates: { canonical: "/history/" }, title: "The Cormack era · fitba" };
@@ -313,6 +314,107 @@ export default function HistoryPage() {
           The league row is the measured record. Manager names and honours are
           curated; the season page holds the within-season detail.
         </p>
+      </section>
+
+      <section className="section" data-contract="history.finances">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">The money</p>
+            <h2>Club accounts</h2>
+          </div>
+          <span className="badge badge-neutral">Filed group accounts · £m</span>
+        </div>
+        {history.finances?.rows.length ? (
+          <>
+            <div className="table-wrap">
+              <table className="league-table compact finance-table">
+                <caption className="fine-print">
+                  Headline group-account figures, £m. FY = year ended 30 June.
+                  As filed and not restated; staff costs are the filed
+                  aggregate, not individual wages or a budget. Negative net debt
+                  means net cash.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Season (FY)</th>
+                    <th scope="col" className="num">
+                      Revenue
+                    </th>
+                    <th scope="col" className="num">
+                      Staff costs
+                    </th>
+                    <th scope="col" className="num">
+                      Profit on player disposals
+                    </th>
+                    <th scope="col" className="num">
+                      Pre-tax result
+                    </th>
+                    <th scope="col" className="num">
+                      Net debt
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {history.finances.rows.map((row) => (
+                    <tr key={row.season}>
+                      <td className="strong">
+                        {row.season}
+                        <span className="fine-print"> · {row.fy}</span>
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(row.revenue, 1)}
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(row.staff_costs, 1)}
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(row.player_sale_profit, 1)}
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(row.pre_tax_result, 1)}
+                      </td>
+                      <td className="num">
+                        {formatGbpMillions(row.net_debt, 2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="fine-print" data-contract-indicator="source">
+              Selected figures are quoted with attribution from{" "}
+              <a
+                href={history.finances.source.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                PSRwatch&apos;s Aberdeen financials
+              </a>
+              , a compilation of Aberdeen&apos;s filed group accounts; the source
+              page cites the filings. Underlying accounts:{" "}
+              <a
+                href={history.finances.source.accounts.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Companies House{" "}
+                {history.finances.source.accounts.company_number}
+              </a>
+              . Not independently audited by fitba. Retrieved{" "}
+              {formatDate(history.finances.source.retrieved_at)}.
+            </p>
+            <p className="fine-print">
+              Coverage: FY2021–FY2025 only. FY2020 (2019-20) and FY2026
+              (2025-26) are not in the source table; they are unknown, not zero.
+            </p>
+          </>
+        ) : (
+          <p className="fine-print" data-contract-indicator="unknown">
+            No club-account snapshot is published. Run{" "}
+            <code>uv run fitba publish</code> to build the history payload; the
+            missing years are unknown, not zero.
+          </p>
+        )}
       </section>
 
       <EraLookup

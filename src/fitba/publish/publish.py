@@ -2146,6 +2146,11 @@ def publish(
                 "afc_news": history_source_counts["afc_news"],
                 "wikipedia": history_source_counts["wikipedia"],
             },
+            "club_accounts": {
+                "psrwatch": len(
+                    (history_payloads["index"].get("finances") or {}).get("rows") or []
+                ),
+            },
             "valuation": {"wikipedia": valuation_anchors},
             "needs": {},
         },

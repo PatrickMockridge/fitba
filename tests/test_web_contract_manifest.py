@@ -116,6 +116,7 @@ PINNED_MARKERS = {
         "history.scorecard",
         "history.thesis",
         "history.season-table",
+        "history.finances",
         "history.lookup",
         "history.people",
         "history.baseline",
@@ -317,6 +318,14 @@ PINNED_COLUMNS = {
         "Pts",
         "Honours",
         "Review",
+    ],
+    "history.finances": [
+        "Season (FY)",
+        "Revenue",
+        "Staff costs",
+        "Profit on player disposals",
+        "Pre-tax result",
+        "Net debt",
     ],
     "history.baseline": ["Season", "Pos", "Pts"],
     "xg.managers": [

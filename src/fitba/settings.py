@@ -165,6 +165,12 @@ def history_seasons() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def history_finances() -> dict[str, Any]:
+    path = REFERENCE_DIR / "history" / "finances.yaml"
+    return load_yaml(path) if path.exists() else {"rows": []}
+
+
+@lru_cache(maxsize=1)
 def source_ids() -> dict[str, Any]:
     return load_yaml(REFERENCE_DIR / "source_ids.yaml")
 

@@ -81,7 +81,7 @@ reworded or reorganised if the evidence and source remain visible.
 | `/squad/` | summary, roster columns, role mix, coverage | role dialog, method | styling |
 | `/former-players/` | register table, links to standard scouting profiles, rival badge, sell-on watch, development scorecard, coverage | method, long source notes | layout |
 | `/rumours/` | affiliation counts, curated register, target profile, former lane, forum signals, coverage | sentiment caveats | layout |
-| `/history/` | scorecard, thesis, season table, managers, baseline, honours, read, coverage | full staff timeline, method | layout |
+| `/history/` | scorecard, thesis, season table, club accounts, managers, baseline, honours, read, coverage | full staff timeline, method | layout |
 | `/sources/` | layer table, source registry, migration, availability, excluded, derived/no-raw | attribution notes | styling |
 | `/methodology/` | source table, all method sections, indicators | long method detail | styling |
 | `/metrics/` | all definitions, formulas, parameters, basis/source/coverage/verification/status, audit summary | implementation notes | layout |

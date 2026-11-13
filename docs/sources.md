@@ -294,6 +294,12 @@ The Cormack-era record ([history.md](history.md)) uses:
 - **API-Football** — historical fixtures, lineups, events, rosters and the
   transfer candidate history.
 - **football-data.co.uk** — league results and match-stat proxies.
+- **PSRwatch** — citation-lane compilation of the filed group accounts for
+  Aberdeen Football Club Limited. Only the five quoted headline lines per
+  financial year are published; the page is never fetched, bulk-ingested or
+  republished.
+- **Companies House** — the underlying filing history for company SC005364,
+  linked as the primary record and not re-keyed.
 
 The lineup/roster backfill is bounded, cached and manual. The daily publish reads
 local parquet only. BBC, Transfermarkt and other `no_publication` sources may be
@@ -345,9 +351,11 @@ allowed source before it is published, and the third-party page is never cited.
 ## Publication lanes
 
 `open` — raw or derived may be published. `derived_display` — only our derived
-metrics/visuals; never raw or source-shaped rows. `no_publication` — may be read
-manually as a finding aid, but never ingested automatically, cited or
-republished. The public profile publishes `open` + `derived_display`; the
+metrics/visuals; never raw or source-shaped rows. `citation` — individual figures
+may be quoted with attribution to the source page; never a bulk extract, dataset
+copy or table republication. `no_publication` — may be read manually as a finding
+aid, but never ingested automatically, cited or republished. The public profile
+publishes `open`, `derived_display` and the limited `citation` exception; the
 publication guard rejects a `no_publication` source id or URL in committed JSON.
 
 ## Scouting team context

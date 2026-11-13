@@ -65,7 +65,9 @@ the analysis tier sees it without being handed a conclusion.
 ## The Aberdeen context: a trading club
 
 This section records the project owner's framing of Aberdeen's recent strategy.
-It is context, not an audited financial or boardroom account.
+It is context, not an audited financial or boardroom account. The `/history/`
+club-accounts table quotes five headline lines from the filed group accounts
+with PSRwatch attribution; it is not fitba's audit, a wage structure or a budget.
 
 Aberdeen have operated as a **trading club**: buy low, develop, sell high, and
 reinvest in young players and the squad. The model has had commercial success,

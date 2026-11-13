@@ -993,6 +993,33 @@ def _norm_text(value: Any) -> str:
     return " ".join(str(value or "").split()).casefold()
 
 
+def _check_history_finances(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
+    history = _payload(corpus, "history/aberdeen.json") or {}
+    finances = history.get("finances") or {}
+    rows = finances.get("rows") or []
+    seasons = {
+        str(season.get("season")) for season in history.get("seasons") or [] if season.get("season")
+    }
+    expected = ["2020-21", "2021-22", "2022-23", "2023-24", "2024-25"]
+    outcome.rows_checked += len(rows)
+    outcome.fields_checked += 3
+    if [row.get("season") for row in rows] != expected:
+        outcome.fail("history finances rows are not the five expected seasons in order")
+    for season in expected:
+        if season not in seasons:
+            outcome.fail(f"history finances season {season} is not in the history index")
+    missing = set((finances.get("coverage") or {}).get("missing_seasons") or [])
+    if missing != {"2019-20", "2025-26"}:
+        outcome.fail("history finances missing-season coverage is incomplete")
+    published_urls = {
+        str(source.get("url")) for source in history.get("sources") or [] if source.get("url")
+    }
+    source = finances.get("source") or {}
+    for url in (source.get("url"), (source.get("accounts") or {}).get("url")):
+        if not url or str(url) not in published_urls:
+            outcome.fail(f"history finances source {url!r} is not in the index sources")
+
+
 def _check_manager_records(corpus: dict[str, Any], outcome: CheckOutcome) -> None:
     history = _payload(corpus, "history/aberdeen.json") or {}
     stints = _manager_stints(corpus)
@@ -1351,6 +1378,12 @@ CHECKS = [
             "history/seasons/*.json",
         ],
         _check_results_club,
+    ),
+    (
+        "history.finances",
+        "Club-account rows agree with the history season list and cited sources",
+        ["history/aberdeen.json"],
+        _check_history_finances,
     ),
     (
         "manager.records",

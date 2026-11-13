@@ -1236,6 +1236,17 @@ a.card:hover {
   padding: 0.4rem 0.45rem;
 }
 
+/* The club-accounts table keeps its columns legible and scrolls horizontally
+   on narrow screens rather than squeezing the currency values. */
+.finance-table {
+  min-width: 860px;
+}
+
+.finance-table th:first-child,
+.finance-table td:first-child {
+  white-space: nowrap;
+}
+
 .deduction {
   margin-left: 0.4rem;
   font-size: 0.7rem;

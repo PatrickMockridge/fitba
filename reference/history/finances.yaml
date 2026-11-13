@@ -1,0 +1,74 @@
+version: 1
+reviewed: '2026-11-13'
+owner: patrickmockridge
+unit: '£m'
+note: >
+  Five headline lines from the club's filed group accounts, quoted with
+  attribution from PSRwatch's compilation. FY = year ended 30 June.
+source:
+  id: psrwatch
+  name: PSRwatch
+  url: https://psrwatch.com/club/sco-aberdeen/financials
+  retrieved_at: '2026-11-13'
+  accounts:
+    company_name: Aberdeen Football Club Limited
+    company_number: SC005364
+    url: https://find-and-update.company-information.service.gov.uk/company/SC005364/filing-history
+rows:
+  - season: '2020-21'
+    fy: FY2021
+    year_ended: '2021-06-30'
+    revenue: 11.1
+    staff_costs: 9.4
+    player_sale_profit: 3.0
+    pre_tax_result: -2.3
+    total_borrowings: 5.37
+    cash: 4.07
+    net_debt: 1.29
+  - season: '2021-22'
+    fy: FY2022
+    year_ended: '2022-06-30'
+    revenue: 13.9
+    staff_costs: 10.2
+    player_sale_profit: 1.0
+    pre_tax_result: -2.2
+    total_borrowings: 4.54
+    cash: 0.83
+    net_debt: 3.71
+  - season: '2022-23'
+    fy: FY2023
+    year_ended: '2023-06-30'
+    revenue: 15.8
+    staff_costs: 11.9
+    player_sale_profit: 7.5
+    pre_tax_result: 1.1
+    total_borrowings: 6.20
+    cash: 2.72
+    net_debt: 3.48
+  - season: '2023-24'
+    fy: FY2024
+    year_ended: '2024-06-30'
+    revenue: 23.6
+    staff_costs: 12.7
+    player_sale_profit: 1.3
+    pre_tax_result: -0.9
+    total_borrowings: 5.28
+    cash: 2.44
+    net_debt: 2.84
+  - season: '2024-25'
+    fy: FY2025
+    year_ended: '2025-06-30'
+    revenue: 21.7
+    staff_costs: 15.1
+    player_sale_profit: 5.3
+    pre_tax_result: -2.1
+    total_borrowings: 6.73
+    cash: 8.82
+    net_debt: -2.09
+coverage:
+  first_season: '2020-21'
+  last_season: '2024-25'
+  missing_seasons: ['2019-20', '2025-26']
+  note: >
+    FY2020 (2019-20) and FY2026 (2025-26) are not in the source table. They are
+    unknown, not zero. fitba has not independently audited the filed accounts.

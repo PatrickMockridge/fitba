@@ -1719,6 +1719,39 @@ export interface HistoryBackfill {
   note: string;
 }
 
+export interface HistoryFinanceRow {
+  season: string;
+  fy: string;
+  year_ended: string;
+  revenue: number | null;
+  staff_costs: number | null;
+  player_sale_profit: number | null;
+  pre_tax_result: number | null;
+  net_debt: number | null;
+}
+
+export interface HistoryFinances {
+  rows: HistoryFinanceRow[];
+  source: {
+    id: string;
+    name: string;
+    url: string;
+    retrieved_at: string;
+    accounts: {
+      company_name: string;
+      company_number: string;
+      url: string;
+    };
+  };
+  coverage: {
+    first_season: string;
+    last_season: string;
+    missing_seasons: string[];
+    note: string;
+  };
+  note: string;
+}
+
 export interface HistoryIndex {
   schema_version: string;
   era: HistoryEra;
@@ -1773,6 +1806,7 @@ export interface HistoryIndex {
     seasons?: Array<Record<string, unknown>>;
     note?: string;
   };
+  finances?: HistoryFinances | null;
   staff: HistoryPerson[];
   honours: HistoryHonour[];
   seasons: HistorySeasonRef[];

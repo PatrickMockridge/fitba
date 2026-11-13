@@ -14,6 +14,7 @@ from typing import Any
 from fitba.publish.history import history_index_schema, history_season_schema
 from fitba.settings import (
     history_era,
+    history_finances,
     history_honours,
     history_policy,
     history_seasons,
@@ -68,6 +69,7 @@ def main() -> int:
         honours=history_honours(),
         seasons=history_seasons(),
         transfer_rows=transfers.get("transfers") or [],
+        finances=history_finances(),
     )
     errors.extend(reference_errors)
     warnings.extend(reference_warnings)
@@ -113,7 +115,8 @@ def main() -> int:
     print(
         "History publication check passed "
         f"({len(season_docs)} seasons, {len(index.get('staff', []))} people, "
-        f"{len(index.get('honours', []))} honours)"
+        f"{len(index.get('honours', []))} honours, "
+        f"{len((index.get('finances') or {}).get('rows') or [])} finance rows)"
     )
     return 0
 

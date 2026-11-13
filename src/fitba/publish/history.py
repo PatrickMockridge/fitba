@@ -47,6 +47,7 @@ from fitba.settings import (
 )
 from fitba.settings import (
     history_era,
+    history_finances,
     history_honours,
     history_markets,
     history_policy,
@@ -86,6 +87,47 @@ class StrictModel(BaseModel):
     source_snapshots: dict[str, Any] | None = None
 
 
+class FinanceRow(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    season: str
+    fy: str
+    year_ended: str
+    revenue: float | None = None
+    staff_costs: float | None = None
+    player_sale_profit: float | None = None
+    pre_tax_result: float | None = None
+    net_debt: float | None = None
+
+
+class FinanceSource(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    name: str
+    url: str
+    retrieved_at: str
+    accounts: dict[str, str]
+
+
+class FinanceCoverage(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    first_season: str
+    last_season: str
+    missing_seasons: list[str]
+    note: str
+
+
+class HistoryFinances(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    rows: list[FinanceRow]
+    source: FinanceSource
+    coverage: FinanceCoverage
+    note: str
+
+
 class HistoryIndexDocument(StrictModel):
     schema_version: str = SCHEMA_VERSION
     era: dict[str, Any]
@@ -98,6 +140,7 @@ class HistoryIndexDocument(StrictModel):
     seasons: list[dict[str, Any]]
     heavy_defeats: list[dict[str, Any]] = []
     europe: list[dict[str, Any]] = []
+    finances: HistoryFinances
     sources: list[dict[str, Any]]
     notes: str
 
@@ -135,7 +178,12 @@ def history_season_schema() -> dict[str, Any]:
     return HistorySeasonDocument.model_json_schema()
 
 
-def _source_list(urls: list[str], *, verified_at: str = "2026-10-21") -> list[dict[str, Any]]:
+def _source_list(
+    urls: list[str],
+    *,
+    verified_at: str = "2026-10-21",
+    verified_at_by_id: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     seen = set()
     output = []
     for url in urls:
@@ -146,9 +194,19 @@ def _source_list(urls: list[str], *, verified_at: str = "2026-10-21") -> list[di
             source_id = "wikipedia"
         elif "afc.co.uk" in url:
             source_id = "afc_news"
+        elif "psrwatch.com" in url:
+            source_id = "psrwatch"
+        elif "company-information.service.gov.uk" in url:
+            source_id = "companies_house"
         else:
             source_id = "unknown"
-        output.append({"id": source_id, "url": url, "verified_at": verified_at})
+        output.append(
+            {
+                "id": source_id,
+                "url": url,
+                "verified_at": (verified_at_by_id or {}).get(source_id, verified_at),
+            }
+        )
     return output
 
 
@@ -415,6 +473,52 @@ def _europe_rows(season_docs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
+FINANCE_ROW_FIELDS = (
+    "season",
+    "fy",
+    "year_ended",
+    "revenue",
+    "staff_costs",
+    "player_sale_profit",
+    "pre_tax_result",
+    "net_debt",
+)
+
+
+def build_finances_payload() -> dict[str, Any]:
+    document = history_finances() or {}
+    rows = [
+        FinanceRow(**{field: row.get(field) for field in FINANCE_ROW_FIELDS})
+        for row in document.get("rows") or []
+    ]
+    rows.sort(key=lambda row: row.season)
+    source = document.get("source") or {}
+    accounts = source.get("accounts") or {}
+    coverage = document.get("coverage") or {}
+    payload = HistoryFinances(
+        rows=rows,
+        source=FinanceSource(
+            id=str(source.get("id") or ""),
+            name=str(source.get("name") or ""),
+            url=str(source.get("url") or ""),
+            retrieved_at=str(source.get("retrieved_at") or ""),
+            accounts={
+                "company_name": str(accounts.get("company_name") or ""),
+                "company_number": str(accounts.get("company_number") or ""),
+                "url": str(accounts.get("url") or ""),
+            },
+        ),
+        coverage=FinanceCoverage(
+            first_season=str(coverage.get("first_season") or ""),
+            last_season=str(coverage.get("last_season") or ""),
+            missing_seasons=list(coverage.get("missing_seasons") or []),
+            note=str(coverage.get("note") or ""),
+        ),
+        note=str(document.get("note") or ""),
+    )
+    return payload.model_dump()
+
+
 def build_history_payloads(
     *,
     generated_at: str,
@@ -547,6 +651,10 @@ def build_history_payloads(
     heavy_defeats = _heavy_defeats(history_data, seasons)
     europe_rows = _europe_rows(season_docs)
 
+    finances = build_finances_payload()
+    finance_source = finances["source"]
+    finance_date = str(finance_source.get("retrieved_at") or "")
+
     source_urls: list[str] = []
     source_urls.extend(era_doc.get("source_urls") or [])
     for person in staff:
@@ -556,7 +664,22 @@ def build_history_payloads(
         source_urls.extend(honour.get("source_urls") or [])
     for doc in season_docs:
         source_urls.extend(doc.get("source_urls") or [])
-    sources = _source_list(source_urls)
+    finance_urls = [
+        str(url)
+        for url in (
+            finance_source.get("url"),
+            (finance_source.get("accounts") or {}).get("url"),
+        )
+        if url
+    ]
+    source_urls.extend(finance_urls)
+    sources = _source_list(
+        source_urls,
+        verified_at_by_id={
+            "psrwatch": finance_date,
+            "companies_house": finance_date,
+        },
+    )
 
     selected_backfill = {current: history_coverage(current) for current in seasons}
     index = HistoryIndexDocument(
@@ -636,6 +759,7 @@ def build_history_payloads(
         ],
         heavy_defeats=heavy_defeats,
         europe=europe_rows,
+        finances=HistoryFinances.model_validate(finances),
         sources=sources,
         notes=(
             "The Cormack era begins on 16 December 2019. 2019-20 is a transition "
@@ -763,6 +887,7 @@ def build_history_payloads(
 __all__ = [
     "HistoryIndexDocument",
     "HistorySeasonDocument",
+    "build_finances_payload",
     "build_history_payloads",
     "history_index_schema",
     "history_season_schema",

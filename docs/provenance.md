@@ -33,6 +33,7 @@ cannot drift into a single flattering “API-Football is primary” claim.
 | Rumours | Curated | Source-linked; separate from confirmed business |
 | Fan signal | AFC Chat sample | Derived aggregates; no raw posts |
 | History | Mixed | API-Football backfill, Football-Data style, AFC/Wikipedia curation |
+| Club accounts | PSRwatch compilation (citation lane) | Companies House SC005364 is the underlying filing; five quoted headline lines, no bulk ingestion, not independently audited |
 | Valuation | Curated anchors + model | Ranges and confidence |
 | Season overview | Derived | Local match/squad/history data |
 | Needs | Derived | Case evidence + availability + squad/transfers |

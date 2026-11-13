@@ -27,11 +27,15 @@ class Capability(StrEnum):
     PLAYER_ROLES = "player_roles"
     INJURIES = "injuries"
     ODDS = "odds"
+    FINANCES = "finances"
 
 
 class Lane(StrEnum):
     OPEN = "open"
     DERIVED_DISPLAY = "derived_display"
+    # Individual figures may be quoted with attribution; no bulk ingestion or
+    # table republication.
+    CITATION = "citation"
     # Reading a public page is fair use; this lane means the source may not be
     # ingested automatically or republished.
     NO_PUBLICATION = "no_publication"

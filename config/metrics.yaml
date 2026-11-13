@@ -1,6 +1,6 @@
 schema_version: 1
-registry_version: 3.17.0
-reviewed: '2026-11-11'
+registry_version: 3.18.0
+reviewed: '2026-11-13'
 owner: patrickmockridge
 change_policy:
   owner_approval_required: true
@@ -1221,6 +1221,79 @@ metrics:
   owner: patrickmockridge
   reviewed: '2026-10-22'
   version: 2
+  status: active
+- id: history.finances
+  label: Club accounts
+  description: Headline filed group-account figures for Aberdeen, FY2021-FY2025.
+  value_type: table
+  fields:
+  - revenue
+  - staff_costs
+  - player_sale_profit
+  - pre_tax_result
+  - net_debt
+  formula: >
+    Five headline rows quoted as published by PSRwatch from Aberdeen Football
+    Club Limited's filed group accounts. Revenue, staff costs, profit on player
+    disposals and pre-tax result are £m to one decimal; net debt is £m to two
+    decimals. FY is the year ended 30 June. Verification re-checks row shape,
+    the FY/year sequence and published precision; it does not re-derive the
+    accounts.
+  inputs:
+  - published payload
+  - reference/history/finances.yaml
+  unit: '£m'
+  aggregation: per_season
+  denominator: null
+  rounding:
+    revenue:
+      method: half_even
+      decimals: 1
+      display: '0.0'
+    staff_costs:
+      method: half_even
+      decimals: 1
+      display: '0.0'
+    player_sale_profit:
+      method: half_even
+      decimals: 1
+      display: '0.0'
+    pre_tax_result:
+      method: half_even
+      decimals: 1
+      display: '0.0'
+    net_debt:
+      method: half_even
+      decimals: 2
+      display: '0.00'
+  basis: curated
+  source_layer: club_accounts
+  coverage_tier: value_only
+  confidence_rule: >
+    Quoted figures are as published in the filed group accounts (Companies
+    House SC005364) and compiled by PSRwatch; fitba has not independently
+    audited them. Missing years are unknown, never zero.
+  home_payload: history/aberdeen.json
+  payload_paths:
+  - history/aberdeen.json#/finances/rows/**
+  home_surface: /history/
+  displayed_surfaces:
+  - /history/
+  verification: recompute
+  implementation: fitba.metrics.checks:verify_history_finances
+  source_paths:
+  - reference/history/finances.yaml
+  limitations:
+  - PSRwatch permits attributed quotation of individual figures, not bulk ingestion
+    or table republication; fitba publishes this five-row excerpt and links to the
+    source page.
+  - FY2020 (2019-20) and FY2026 (2025-26) are not in the source table; they are not
+    zero-filled.
+  - fitba has not independently audited the filed accounts.
+  - Staff costs are the filed aggregate, not individual wages or a budget.
+  owner: patrickmockridge
+  reviewed: '2026-11-13'
+  version: 1
   status: active
 - id: history.season-document
   label: History season documents

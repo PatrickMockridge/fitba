@@ -1,6 +1,8 @@
 # Source registry. `lane` controls what may be published:
 #   open            - raw or derived data may be published
 #   derived_display - only our derived metrics/visuals may be published; never raw
+#   citation        - individual figures may be quoted with attribution; never a
+#                     bulk extract, dataset copy or table republication
 #   no_publication  - may be read manually, but never ingested or published
 # `ingest_allowed` is separate from `publication_allowed` on purpose.
 sources:
@@ -40,6 +42,40 @@ sources:
       Broadcast rows cite the per-fixture "How to watch" article; no article
       body, price, stream URL or discount code is copied.
     last_verified: 2026-10-27
+
+  psrwatch:
+    name: PSRwatch
+    lane: citation
+    ingest_allowed: false
+    publication_allowed: true
+    required: false
+    capabilities: [finances]
+    url: https://psrwatch.com/club/sco-aberdeen/financials
+    attribution: PSRwatch
+    quotation_policy: >
+      Individual figures may be quoted with attribution to the page they came
+      from. No bulk download, automated collection, dataset redistribution or
+      table republication.
+    notes: >
+      Secondary compilation used only for the five headline club-account rows
+      on /history/. Underlying filings: Aberdeen Football Club Limited,
+      Companies House SC005364. No page is fetched automatically; a person
+      records the figures and the retrieved date.
+    last_verified: 2026-11-13
+
+  companies_house:
+    name: Companies House
+    lane: open
+    ingest_allowed: false
+    publication_allowed: true
+    required: false
+    capabilities: [finances]
+    url: https://find-and-update.company-information.service.gov.uk/company/SC005364/filing-history
+    attribution: Companies House
+    notes: >
+      Statutory filings behind the club-account rows. fitba links to the filing
+      history and does not re-key the accounts or bulk-download filings.
+    last_verified: 2026-11-13
 
   afc_chat:
     name: AFC Chat — The Rumour Mill

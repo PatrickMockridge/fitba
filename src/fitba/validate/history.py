@@ -7,9 +7,11 @@ warnings, not failures.
 
 from __future__ import annotations
 
+import math
 from datetime import date
 from typing import Any
 
+from fitba.settings import source_registry
 from fitba.util.dates import season_bounds, seasons_between, validate_season
 from fitba.validate.source_policy import is_blocked_url, no_publication_tokens
 
@@ -56,6 +58,132 @@ CUP_COMPETITIONS = {
     "uefa:cup-winners-cup",
     "uefa:super-cup",
 }
+FINANCE_SEASONS = ["2020-21", "2021-22", "2022-23", "2023-24", "2024-25"]
+FINANCE_FIELDS = (
+    "revenue",
+    "staff_costs",
+    "player_sale_profit",
+    "pre_tax_result",
+    "net_debt",
+)
+FINANCE_DECIMALS = {
+    "revenue": 1,
+    "staff_costs": 1,
+    "player_sale_profit": 1,
+    "pre_tax_result": 1,
+    "net_debt": 2,
+}
+
+
+def validate_finances(document: dict[str, Any], *, reference: bool = False) -> list[str]:
+    """Validate the quoted club-accounts block, reference or published."""
+    errors: list[str] = []
+    finances = document or {}
+    rows = finances.get("rows") or []
+    source = finances.get("source") or {}
+    coverage = finances.get("coverage") or {}
+    blocked_ids, blocked_hosts = no_publication_tokens()
+    registry = (source_registry() or {}).get("sources") or {}
+
+    if not isinstance(rows, list):
+        return ["finances: rows must be a list"]
+    seasons = [row.get("season") if isinstance(row, dict) else None for row in rows]
+    if seasons != FINANCE_SEASONS:
+        errors.append(
+            f"finances: rows must be 2020-21 through 2024-25 in order (found {seasons!r})"
+        )
+    for row in rows:
+        if not isinstance(row, dict):
+            errors.append("finances: row must be an object")
+            continue
+        season = str(row.get("season") or "")
+        try:
+            end_year = int(season[:4]) + 1
+        except ValueError:
+            errors.append(f"finances {season}: unparseable season")
+            continue
+        expected_fy = f"FY{end_year}"
+        if row.get("fy") != expected_fy:
+            errors.append(f"finances {season}: fy {row.get('fy')!r} != {expected_fy}")
+        expected_end = f"{end_year}-06-30"
+        if row.get("year_ended") != expected_end:
+            errors.append(
+                f"finances {season}: year_ended {row.get('year_ended')!r} != {expected_end}"
+            )
+        if not reference and any(field in row for field in ("total_borrowings", "cash")):
+            errors.append(f"finances {season}: verification inputs must not be published")
+        for field in FINANCE_FIELDS:
+            value = row.get(field)
+            if value is None:
+                continue
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                errors.append(f"finances {season}: {field} is not numeric")
+                continue
+            if not math.isfinite(float(value)):
+                errors.append(f"finances {season}: {field} is not finite")
+                continue
+            decimals = FINANCE_DECIMALS[field]
+            if abs(float(value) - round(float(value), decimals)) > 1e-9:
+                errors.append(f"finances {season}: {field} exceeds {decimals}dp")
+        for field in ("revenue", "staff_costs"):
+            value = row.get(field)
+            if isinstance(value, (int, float)) and not isinstance(value, bool) and value <= 0:
+                errors.append(f"finances {season}: {field} must be positive")
+        if reference:
+            net = row.get("net_debt")
+            borrowings = row.get("total_borrowings")
+            cash = row.get("cash")
+            if (
+                isinstance(net, (int, float))
+                and not isinstance(net, bool)
+                and isinstance(borrowings, (int, float))
+                and not isinstance(borrowings, bool)
+                and isinstance(cash, (int, float))
+                and not isinstance(cash, bool)
+            ):
+                if abs(float(net) - (float(borrowings) - float(cash))) > 0.02:
+                    errors.append(f"finances {season}: net_debt does not reconcile")
+            else:
+                errors.append(f"finances {season}: net-debt reconciliation inputs missing")
+
+    if source.get("id") != "psrwatch":
+        errors.append("finances: source id must be psrwatch")
+    psrwatch = registry.get("psrwatch") or {}
+    companies_house = registry.get("companies_house") or {}
+    if source.get("url") != psrwatch.get("url"):
+        errors.append("finances: PSRwatch URL does not match the source registry")
+    accounts = source.get("accounts") or {}
+    if accounts.get("url") != companies_house.get("url"):
+        errors.append("finances: Companies House URL does not match the source registry")
+    if accounts.get("company_number") != "SC005364":
+        errors.append("finances: company number must be SC005364")
+    if psrwatch.get("lane") != "citation":
+        errors.append("finances: psrwatch must use the citation lane")
+    if psrwatch.get("ingest_allowed") is not False:
+        errors.append("finances: psrwatch must not be ingested automatically")
+    if companies_house.get("lane") == "no_publication":
+        errors.append("finances: companies_house cannot be a no_publication source")
+    if companies_house.get("ingest_allowed") is not False:
+        errors.append("finances: companies_house must not be ingested automatically")
+    if not source.get("retrieved_at"):
+        errors.append("finances: source retrieved_at is missing")
+    for url in (source.get("url"), accounts.get("url")):
+        if not url or is_blocked_url(str(url), blocked_hosts):
+            errors.append(f"finances: blocked or missing source URL {url!r}")
+
+    if coverage.get("first_season") != FINANCE_SEASONS[0]:
+        errors.append("finances: coverage.first_season mismatch")
+    if coverage.get("last_season") != FINANCE_SEASONS[-1]:
+        errors.append("finances: coverage.last_season mismatch")
+    if set(coverage.get("missing_seasons") or []) != {"2019-20", "2025-26"}:
+        errors.append("finances: missing seasons must be 2019-20 and 2025-26")
+    if not coverage.get("note"):
+        errors.append("finances: coverage note is missing")
+    if not finances.get("note"):
+        errors.append("finances: note is missing")
+    if blocked_ids & {"psrwatch", "companies_house"}:
+        errors.append("finances: source id is blocked")
+    return errors
 
 
 def _date(value: Any) -> date | None:
@@ -154,10 +282,14 @@ def validate_reference(
     honours: dict[str, Any],
     seasons: dict[str, Any],
     transfer_rows: list[dict[str, Any]],
+    finances: dict[str, Any] | None = None,
 ) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     warnings: list[str] = []
     blocked_ids, blocked_hosts = no_publication_tokens()
+
+    if finances is not None:
+        errors.extend(validate_finances(finances, reference=True))
 
     era_doc = era.get("era") or {}
     for field in ("id", "label", "start", "chairman_person_id", "first_season"):
@@ -419,6 +551,21 @@ def validate_published(
             and (doc.get("coverage") or {}).get("league_record") == "unavailable"
         ):
             warnings.append(f"season {season}: league record unavailable")
+    finances = index.get("finances")
+    if not isinstance(finances, dict):
+        errors.append("history index: finances block is missing")
+    else:
+        errors.extend(validate_finances(finances))
+        published_urls = {
+            str(source.get("url")) for source in index.get("sources") or [] if source.get("url")
+        }
+        finance_source = finances.get("source") or {}
+        for url in (
+            finance_source.get("url"),
+            (finance_source.get("accounts") or {}).get("url"),
+        ):
+            if url and str(url) not in published_urls:
+                errors.append(f"history index: finance source URL {url!r} is not cited")
     for source in index.get("sources") or []:
         if is_blocked_url(str(source.get("url") or ""), blocked_hosts):
             errors.append(f"history index: blocked source {source.get('url')!r}")
@@ -448,4 +595,4 @@ def validate_published(
     return errors, warnings
 
 
-__all__ = ["validate_published", "validate_reference"]
+__all__ = ["validate_finances", "validate_published", "validate_reference"]

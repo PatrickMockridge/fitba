@@ -138,6 +138,14 @@ def test_manager_segment_mutation_fails():
     assert "manager.records" in failed
 
 
+def test_history_finance_year_mutation_fails():
+    corpus = copy.deepcopy(_corpus())
+    corpus["history/aberdeen.json"]["finances"]["rows"][0]["season"] = "2019-20"
+    results = run_consistency(corpus)
+    failed = {result.id for result in results if result.status != "pass"}
+    assert "history.finances" in failed
+
+
 def test_epoch_mismatch_fails():
     corpus = copy.deepcopy(_corpus())
     corpus["squad/aberdeen.json"]["dataset_id"] = "not-the-current-dataset"

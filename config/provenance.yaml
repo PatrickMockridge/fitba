@@ -357,6 +357,21 @@ layers:
       Mixed sources: API-Football backfill, football-data style proxies, AFC
       official and Wikipedia curation. The season documents label their basis.
 
+  - id: club_accounts
+    label: Filed club group accounts
+    kind: source
+    primary: psrwatch
+    fallback: [companies_house]
+    status: active
+    scope: FY2021-FY2025 (years ended 30 June); five headline lines only
+    fields: [revenue, staff_costs, player_sale_profit, pre_tax_result, net_debt]
+    surfaces: [/history/, /sources/, /methodology/]
+    note: >
+      Selected figures are quoted with attribution from PSRwatch's compilation
+      of Aberdeen Football Club Limited's filed group accounts. The underlying
+      record is Companies House SC005364; the source page cites the filings.
+      fitba does not fetch, extract or republish the source table.
+
   - id: valuation
     label: Inferred transfer values
     kind: derived
