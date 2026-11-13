@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:d64b8373f136fadfc2548edad49826b63d0c3323807160d70c197df39559b02b",
-  "dataset_id": "2026-11-13T06:23:35+00:00-57ce23c3",
+  "checksum": "sha256:578daa1d212dcfc01bb9a5ec1d016655675be78f96f013bdb29e7235258bd012",
+  "dataset_id": "2026-11-13T09:20:56+00:00-064d8944",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-13T06:23:35+00:00",
+  "generated_at": "2026-11-13T09:20:56+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -1521,6 +1521,97 @@
       "verification": "cross_surface",
       "verification_checks": [],
       "version": 2
+    },
+    {
+      "aggregation": "per_season",
+      "basis": "curated",
+      "confidence_rule": "Quoted figures are as published in the filed group accounts (Companies House SC005364) and compiled by PSRwatch; fitba has not independently audited them. Missing years are unknown, never zero.\n",
+      "coverage_tier": "value_only",
+      "denominator": null,
+      "description": "Headline filed group-account figures for Aberdeen, FY2021-FY2025.",
+      "displayed_surfaces": [
+        "/history/"
+      ],
+      "fields": [
+        "revenue",
+        "staff_costs",
+        "player_sale_profit",
+        "pre_tax_result",
+        "net_debt"
+      ],
+      "formula": "Five headline rows quoted as published by PSRwatch from Aberdeen Football Club Limited's filed group accounts. Revenue, staff costs, profit on player disposals and pre-tax result are £m to one decimal; net debt is £m to two decimals. FY is the year ended 30 June. Verification re-checks row shape, the FY/year sequence and published precision; it does not re-derive the accounts.\n",
+      "home_payload": "history/aberdeen.json",
+      "home_surface": "/history/",
+      "id": "history.finances",
+      "implementation": "fitba.metrics.checks:verify_history_finances",
+      "inputs": [
+        "published payload",
+        "reference/history/finances.yaml"
+      ],
+      "label": "Club accounts",
+      "limitations": [
+        "PSRwatch permits attributed quotation of individual figures, not bulk ingestion or table republication; fitba publishes this five-row excerpt and links to the source page.",
+        "FY2020 (2019-20) and FY2026 (2025-26) are not in the source table; they are not zero-filled.",
+        "fitba has not independently audited the filed accounts.",
+        "Staff costs are the filed aggregate, not individual wages or a budget."
+      ],
+      "owner": "patrickmockridge",
+      "payload_paths": [
+        "history/aberdeen.json#/finances/rows/**"
+      ],
+      "reviewed": "2026-11-13",
+      "rounding": {
+        "net_debt": {
+          "decimals": 2,
+          "display": "0.00",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "player_sale_profit": {
+          "decimals": 1,
+          "display": "0.0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "pre_tax_result": {
+          "decimals": 1,
+          "display": "0.0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "revenue": {
+          "decimals": 1,
+          "display": "0.0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
+        "staff_costs": {
+          "decimals": 1,
+          "display": "0.0",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        }
+      },
+      "source_layer": "club_accounts",
+      "source_paths": [
+        "reference/history/finances.yaml"
+      ],
+      "status": "active",
+      "unit": "£m",
+      "value_type": "table",
+      "verification": "recompute",
+      "verification_checks": [],
+      "version": 1
     },
     {
       "aggregation": "family",
@@ -6061,28 +6152,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-13T06:23:35+00:00",
-  "registry_version": "3.17.0",
-  "reviewed": "2026-11-11",
+  "published_at": "2026-11-13T09:20:56+00:00",
+  "registry_version": "3.18.0",
+  "reviewed": "2026-11-13",
   "schema_version": 1,
-  "served_by_update_id": "2026-11-13T06:17:02+00:00-2957771",
+  "served_by_update_id": "2026-11-13T09:15:57+00:00-3322563",
   "source_snapshots": {
-    "api_football": "2026-11-13T06:23:33.132695+00:00",
-    "api_results": "2026-11-13T06:17:04+00:00",
-    "availability": "2026-11-13T06:18:46+00:00",
-    "career": "2026-11-13T06:18:46+00:00",
-    "football_data_uk": "2026-11-13T06:17:03+00:00",
-    "former_players": "2026-11-13T06:17:23+00:00",
-    "history_backfill": "2026-11-13T06:17:17+00:00",
+    "api_football": "2026-11-13T09:20:53.087489+00:00",
+    "api_results": "2026-11-13T09:16:00+00:00",
+    "availability": "2026-11-13T09:18:56+00:00",
+    "career": "2026-11-13T09:18:56+00:00",
+    "football_data_uk": "2026-11-13T09:15:59+00:00",
+    "former_players": "2026-11-13T09:16:22+00:00",
+    "history_backfill": "2026-11-13T09:16:04+00:00",
     "matchday_snapshot": "2026-11-13T06:17:17+00:00",
-    "scouting_clubs": "2026-11-13T06:22:52+00:00",
-    "scouting_europe": "2026-11-13T06:22:41+00:00",
-    "scouting_pool": "2026-11-13T06:18:58+00:00",
-    "scouting_roles": "2026-11-13T06:22:16+00:00",
-    "scouting_rose_history": "2026-11-13T06:22:26+00:00",
-    "scouting_standings": "2026-11-13T06:22:42+00:00",
-    "spfl": "2026-11-13T06:17:05+00:00",
-    "xg_enrichment": "2026-11-13T06:23:16+00:00"
+    "scouting_clubs": "2026-11-13T09:19:05+00:00",
+    "scouting_europe": "2026-11-13T09:19:05+00:00",
+    "scouting_pool": "2026-11-13T09:19:02+00:00",
+    "scouting_roles": "2026-11-13T09:19:03+00:00",
+    "scouting_rose_history": "2026-11-13T09:19:05+00:00",
+    "scouting_standings": "2026-11-13T09:19:05+00:00",
+    "spfl": "2026-11-13T09:16:00+00:00",
+    "xg_enrichment": "2026-11-13T09:20:53+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -6111,5 +6202,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-11-13T06:17:02+00:00-2957771"
+  "update_id": "2026-11-13T09:15:57+00:00-3322563"
 }

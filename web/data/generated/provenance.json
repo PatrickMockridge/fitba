@@ -11,7 +11,7 @@
     "status": "partial",
     "update_id": null
   },
-  "dataset_id": "2026-11-13T06:23:35+00:00-57ce23c3",
+  "dataset_id": "2026-11-13T09:20:56+00:00-064d8944",
   "dataset_state": "fresh",
   "excluded": [
     {
@@ -81,7 +81,7 @@
       "update_id": null
     }
   ],
-  "generated_at": "2026-11-13T06:23:35+00:00",
+  "generated_at": "2026-11-13T09:20:56+00:00",
   "layers": [
     {
       "dataset_id": null,
@@ -1763,6 +1763,85 @@
     {
       "dataset_id": null,
       "dataset_state": null,
+      "fallback": [
+        "companies_house"
+      ],
+      "fields": [
+        "revenue",
+        "staff_costs",
+        "player_sale_profit",
+        "pre_tax_result",
+        "net_debt"
+      ],
+      "gate": null,
+      "id": "club_accounts",
+      "kind": "source",
+      "label": "Filed club group accounts",
+      "note": "Selected figures are quoted with attribution from PSRwatch's compilation of Aberdeen Football Club Limited's filed group accounts. The underlying record is Companies House SC005364; the source page cites the filings. fitba does not fetch, extract or republish the source table.",
+      "primary": "psrwatch",
+      "primary_source": {
+        "attribution": "PSRwatch",
+        "dataset_id": null,
+        "dataset_state": null,
+        "id": "psrwatch",
+        "lane": "citation",
+        "name": "PSRwatch",
+        "published_at": null,
+        "served_by_update_id": null,
+        "source_snapshots": null,
+        "stale_reason": null,
+        "update_id": null,
+        "url": "https://psrwatch.com/club/sco-aberdeen/financials",
+        "verified_at": "2026-11-13"
+      },
+      "published_at": null,
+      "scope": "FY2021-FY2025 (years ended 30 June); five headline lines only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "sources": [
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "PSRwatch",
+          "published_at": null,
+          "role": "primary",
+          "rows": 5,
+          "served_by_update_id": null,
+          "source_id": "psrwatch",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://psrwatch.com/club/sco-aberdeen/financials",
+          "verified_at": "2026-11-13"
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "name": "Companies House",
+          "published_at": null,
+          "role": "fallback",
+          "rows": null,
+          "served_by_update_id": null,
+          "source_id": "companies_house",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null,
+          "url": "https://find-and-update.company-information.service.gov.uk/company/SC005364/filing-history",
+          "verified_at": "2026-11-13"
+        }
+      ],
+      "stale_reason": null,
+      "status": "active",
+      "surfaces": [
+        "/history/",
+        "/sources/",
+        "/methodology/"
+      ],
+      "update_id": null
+    },
+    {
+      "dataset_id": null,
+      "dataset_state": null,
       "fallback": [],
       "fields": [
         "fee_range",
@@ -2119,10 +2198,10 @@
     "update_id": null
   },
   "notes": "A source is listed as primary only for the layers it actually supplies. Row counts are primary contributions only; curated and derived layers are labelled as such.",
-  "published_at": "2026-11-13T06:23:35+00:00",
+  "published_at": "2026-11-13T09:20:56+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-13T06:17:02+00:00-2957771",
+  "served_by_update_id": "2026-11-13T09:15:57+00:00-3322563",
   "source_snapshots": null,
   "sources": [
     {
@@ -2261,6 +2340,26 @@
       "url": "https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html"
     },
     {
+      "attribution": "PSRwatch",
+      "dataset_id": null,
+      "dataset_state": null,
+      "id": "psrwatch",
+      "lane": "citation",
+      "last_verified": "2026-11-13",
+      "name": "PSRwatch",
+      "primary_layers": [
+        "club_accounts"
+      ],
+      "published_at": null,
+      "rows": 5,
+      "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
+      "url": "https://psrwatch.com/club/sco-aberdeen/financials"
+    },
+    {
       "attribution": "Wikipedia contributors",
       "dataset_id": null,
       "dataset_state": null,
@@ -2317,6 +2416,24 @@
       "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
     },
     {
+      "attribution": "Companies House",
+      "dataset_id": null,
+      "dataset_state": null,
+      "id": "companies_house",
+      "lane": "open",
+      "last_verified": "2026-11-13",
+      "name": "Companies House",
+      "primary_layers": [],
+      "published_at": null,
+      "rows": 0,
+      "rows_basis": "primary contributions only",
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
+      "url": "https://find-and-update.company-information.service.gov.uk/company/SC005364/filing-history"
+    },
+    {
       "attribution": "Aberdeen FC",
       "dataset_id": null,
       "dataset_state": null,
@@ -2338,5 +2455,5 @@
     }
   ],
   "stale_reason": null,
-  "update_id": "2026-11-13T06:17:02+00:00-2957771"
+  "update_id": "2026-11-13T09:15:57+00:00-3322563"
 }
