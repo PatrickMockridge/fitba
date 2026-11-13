@@ -3,84 +3,95 @@
     "first_page_only": false,
     "latest_page_only": true,
     "note": "AFC board first page plus the latest page of the public Next manager thread. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published.",
-    "posts_sampled": 14,
+    "posts_sampled": 8,
     "raw_posts_published": false,
     "single_page_only": true,
-    "thread_page": 87,
-    "thread_page_count": 87,
+    "thread_page": 88,
+    "thread_page_count": 88,
     "topics_sampled": 25
   },
-  "dataset_id": "2026-11-12T06:18:33+00:00-fc10c34a",
+  "dataset_id": "2026-11-13T06:23:35+00:00-57ce23c3",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-12T06:18:33+00:00",
+  "generated_at": "2026-11-13T06:23:35+00:00",
   "manager_mentions": [
     {
-      "candidate_id": "neil-lennon",
-      "candidate_name": "Neil Lennon",
-      "first_seen": "2026-11-11T21:41:08Z",
-      "ingested_at": "2026-11-12T06:17:41+00:00",
-      "last_seen": "2026-11-11T21:41:08Z",
-      "mentions": 1,
+      "candidate_id": "steve-clarke",
+      "candidate_name": "Steve Clarke",
+      "first_seen": "2026-11-12T18:51:02Z",
+      "ingested_at": "2026-11-13T06:18:46+00:00",
+      "last_seen": "2026-11-12T18:51:02Z",
+      "mentions": 2,
       "topic_count": 1
     }
   ],
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
-      "external_target": 3
+      "current_squad": 1,
+      "external_target": 4
     },
     "age_mix": {
-      "24-26": 2,
-      "27-29": 1
+      "27-29": 1,
+      "30-plus": 3
     },
-    "excluded_counts": {},
-    "external_sample_size": 3,
+    "excluded_counts": {
+      "current_squad": 1
+    },
+    "external_sample_size": 4,
     "former_player_profile": {
       "mentions": 0,
       "players": [],
       "sample_size": 0
     },
     "lanes": {
-      "external_target": {
-        "count": 3,
+      "current_squad": {
+        "count": 1,
         "players": [
-          "Daniel Neil",
-          "E. Just",
-          "M. Robinson"
+          "D. Happe"
+        ]
+      },
+      "external_target": {
+        "count": 4,
+        "players": [
+          "Grant Hanley",
+          "John Carver",
+          "Steven Naismith",
+          "Thanks Lutz"
         ]
       }
     },
     "low_confidence": true,
     "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
     "position_mix": {
-      "DEF": 1,
-      "MID": 2
+      "CM": 1,
+      "FB": 2,
+      "ST": 1
     },
-    "sample_size": 3,
+    "sample_size": 4,
     "source_mix": {
-      "cross_referenced_club": 1,
-      "fan_only": 2
+      "club_player": 1,
+      "fan_only": 4
     },
-    "total_signals": 3
+    "total_signals": 5
   },
-  "published_at": "2026-11-12T06:18:33+00:00",
-  "sampled_at": "2026-11-12T06:17:41+00:00",
+  "published_at": "2026-11-13T06:23:35+00:00",
+  "sampled_at": "2026-11-13T06:18:46+00:00",
   "sentiment": {
     "club": {
-      "count": 62,
-      "mean": 0.035,
+      "count": 65,
+      "mean": 0.047,
       "median": 0.0,
-      "negative_share": 0.129,
-      "neutral_share": 0.661,
-      "positive_share": 0.21
+      "negative_share": 0.123,
+      "neutral_share": 0.646,
+      "positive_share": 0.231
     },
     "forum": {
-      "count": 14,
-      "mean": 0.336,
-      "median": 0.295,
-      "negative_share": 0.071,
-      "neutral_share": 0.286,
-      "positive_share": 0.643
+      "count": 8,
+      "mean": 0.288,
+      "median": 0.467,
+      "negative_share": 0.125,
+      "neutral_share": 0.125,
+      "positive_share": 0.75
     },
     "note": "Rule-based VADER sentiment on sampled forum posts, curated press rumour claims and official AFC news titles. Descriptive and noisy; not a measure of truth, credibility or fanbase opinion.",
     "press": {
@@ -92,12 +103,12 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "2026-11-12T06:17:01+00:00-11842",
+  "served_by_update_id": "2026-11-13T06:17:02+00:00-2957771",
   "signals": [
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 24,
+      "age": 40,
       "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
@@ -106,25 +117,52 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "Rangers",
-      "current_league": "Scottish Premiership",
+      "current_club": "Heart OF Midlothian",
+      "current_league": null,
       "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
-      "mentions": 1,
-      "nationality": "England",
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
+      "mentions": 2,
+      "nationality": "Scotland",
       "player_href": null,
-      "player_key": "api:player:19910",
-      "player_name": "Daniel Neil",
-      "position": null,
-      "position_group": "MID",
+      "player_key": "api:player:44881",
+      "player_name": "Steven Naismith",
+      "position": "Attacker",
+      "position_group": "ST",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "current_squad",
+      "affiliation_source": "key",
+      "age": 27,
+      "at_rival": false,
+      "credibility": "club_player",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": true,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "aberdeen_squad",
+      "lookup_status": "local",
+      "mentions": 1,
+      "nationality": null,
+      "player_href": "/players/18068/",
+      "player_key": "api:player:18068",
+      "player_name": "D. Happe",
+      "position": "Defender",
+      "position_group": "FB",
       "rival_club": null,
       "topic_count": 1
     },
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 25,
+      "age": 34,
       "at_rival": false,
       "credibility": "fan_only",
       "cross_references": {
@@ -133,45 +171,72 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "Swansea",
-      "current_league": "EFL Championship",
+      "current_club": "Hibernian",
+      "current_league": null,
       "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
       "mentions": 1,
-      "nationality": "New Zealand",
+      "nationality": "Scotland",
       "player_href": null,
-      "player_key": "api:player:94333",
-      "player_name": "E. Just",
-      "position": null,
-      "position_group": "MID",
+      "player_key": "api:player:19066",
+      "player_name": "Grant Hanley",
+      "position": "Defender",
+      "position_group": "FB",
       "rival_club": null,
       "topic_count": 1
     },
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 28,
+      "age": 55,
       "at_rival": false,
-      "credibility": "cross_referenced_club",
+      "credibility": "fan_only",
       "cross_references": {
-        "club_output": true,
+        "club_output": false,
         "confirmed_transfer": false,
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "FC Cincinnati",
-      "current_league": "Major League Soccer",
+      "current_club": null,
+      "current_league": null,
       "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
       "mentions": 1,
       "nationality": "USA",
       "player_href": null,
-      "player_key": "api:player:50879",
-      "player_name": "M. Robinson",
-      "position": null,
-      "position_group": "DEF",
+      "player_key": "api:player:240588",
+      "player_name": "John Carver",
+      "position": "Defender",
+      "position_group": "FB",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 27,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
+      "mentions": 1,
+      "nationality": "Germany",
+      "player_href": null,
+      "player_key": "api:player:178842",
+      "player_name": "Thanks Lutz",
+      "position": "Midfielder",
+      "position_group": "CM",
       "rival_club": null,
       "topic_count": 1
     }
@@ -184,47 +249,35 @@
     "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
   },
   "source_snapshots": {
-    "api_football": "2026-11-12T06:18:30.912959+00:00",
-    "api_results": "2026-11-12T06:17:04+00:00",
-    "availability": "2026-11-12T06:17:41+00:00",
-    "career": "2026-11-12T06:17:41+00:00",
-    "football_data_uk": "2026-11-12T06:17:03+00:00",
-    "former_players": "2026-11-12T06:17:23+00:00",
-    "history_backfill": "2026-11-12T06:17:17+00:00",
-    "matchday_snapshot": "2026-11-12T06:17:17+00:00",
-    "scouting_clubs": "2026-11-12T06:18:12+00:00",
-    "scouting_europe": "2026-11-12T06:18:01+00:00",
-    "scouting_pool": "2026-11-12T06:17:50+00:00",
-    "scouting_roles": "2026-11-12T06:17:51+00:00",
-    "scouting_rose_history": "2026-11-12T06:18:01+00:00",
-    "scouting_standings": "2026-11-12T06:18:01+00:00",
-    "spfl": "2026-11-12T06:17:04+00:00",
-    "xg_enrichment": "2026-11-12T06:18:14+00:00"
+    "api_football": "2026-11-13T06:23:33.132695+00:00",
+    "api_results": "2026-11-13T06:17:04+00:00",
+    "availability": "2026-11-13T06:18:46+00:00",
+    "career": "2026-11-13T06:18:46+00:00",
+    "football_data_uk": "2026-11-13T06:17:03+00:00",
+    "former_players": "2026-11-13T06:17:23+00:00",
+    "history_backfill": "2026-11-13T06:17:17+00:00",
+    "matchday_snapshot": "2026-11-13T06:17:17+00:00",
+    "scouting_clubs": "2026-11-13T06:22:52+00:00",
+    "scouting_europe": "2026-11-13T06:22:41+00:00",
+    "scouting_pool": "2026-11-13T06:18:58+00:00",
+    "scouting_roles": "2026-11-13T06:22:16+00:00",
+    "scouting_rose_history": "2026-11-13T06:22:26+00:00",
+    "scouting_standings": "2026-11-13T06:22:42+00:00",
+    "spfl": "2026-11-13T06:17:05+00:00",
+    "xg_enrichment": "2026-11-13T06:23:16+00:00"
   },
   "topics": [
     {
       "board_topic": false,
       "latest_page_only": true,
-      "latest_post": "2026-11-12T00:57:22Z",
+      "latest_post": "2026-11-13T05:04:31Z",
       "player_mentions": [],
-      "published_at": "2026-11-12T00:57:22Z",
-      "sampled_posts": 14,
-      "thread_page": 87,
-      "thread_page_count": 87,
+      "published_at": "2026-11-13T05:04:31Z",
+      "sampled_posts": 8,
+      "thread_page": 88,
+      "thread_page_count": 88,
       "title": "Next manager",
       "url": "https://www.donstalk.co.uk/topic/9479-next-manager/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
-      "latest_post": "2026-09-01T16:04:47Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "January 2027 Transfer Window",
-      "url": "https://www.donstalk.co.uk/topic/10901-january-2027-transfer-window/"
     },
     {
       "board_topic": true,
@@ -237,6 +290,18 @@
       "thread_page_count": null,
       "title": "The All New Unworthy Of It's Own Thread AFC General STUFF Thread",
       "url": "https://www.donstalk.co.uk/topic/10757-the-all-new-unworthy-of-its-own-thread-afc-general-stuff-thread/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-09-01T16:04:47Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "January 2027 Transfer Window",
+      "url": "https://www.donstalk.co.uk/topic/10901-january-2027-transfer-window/"
     },
     {
       "board_topic": true,
@@ -503,5 +568,5 @@
       "url": "https://www.donstalk.co.uk/topic/10831-premiership-survival-thread/"
     }
   ],
-  "update_id": "2026-11-12T06:17:01+00:00-11842"
+  "update_id": "2026-11-13T06:17:02+00:00-2957771"
 }

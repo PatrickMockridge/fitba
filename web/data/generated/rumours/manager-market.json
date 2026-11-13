@@ -64,18 +64,7 @@
       "candidate_id": "neil-lennon",
       "current_club": null,
       "current_role": null,
-      "mentions": {
-        "count": 1,
-        "first_seen": "2026-11-11T21:41:08Z",
-        "last_seen": "2026-11-11T21:41:08Z",
-        "sources": [
-          {
-            "count": 1,
-            "id": "donstalk"
-          }
-        ],
-        "topic_count": 1
-      },
+      "mentions": null,
       "name": "Neil Lennon",
       "odds": {
         "decimal": 8.0,
@@ -89,7 +78,7 @@
           "url": "https://uk.sports.yahoo.com/news/next-aberdeen-manager-odds-frontunners-073851550.html"
         }
       ],
-      "status": "priced_and_mentioned"
+      "status": "priced"
     },
     {
       "candidate_id": "sandro-schwarz",
@@ -210,17 +199,38 @@
         }
       ],
       "status": "priced"
+    },
+    {
+      "candidate_id": "steve-clarke",
+      "current_club": null,
+      "current_role": null,
+      "mentions": {
+        "count": 2,
+        "first_seen": "2026-11-12T18:51:02Z",
+        "last_seen": "2026-11-12T18:51:02Z",
+        "sources": [
+          {
+            "count": 2,
+            "id": "donstalk"
+          }
+        ],
+        "topic_count": 1
+      },
+      "name": "Steve Clarke",
+      "odds": null,
+      "sources": [],
+      "status": "mentioned"
     }
   ],
   "club_id": "sco:aberdeen",
-  "dataset_id": "2026-11-12T06:18:33+00:00-fc10c34a",
+  "dataset_id": "2026-11-13T06:23:35+00:00-57ce23c3",
   "dataset_state": "fresh",
   "disclaimer": "Not betting advice. Odds are a bookmaker's prices, not probabilities, a recommendation or a promotion. fitba has no affiliate or advertising relationship. Published as intelligence only while Aberdeen have no permanent manager; removed when a permanent manager is appointed.",
-  "generated_at": "2026-11-12T06:18:33+00:00",
+  "generated_at": "2026-11-13T06:23:35+00:00",
   "market": {
     "bookmaker": "Gambling.com bookmaker list",
     "coverage": {
-      "candidate_count": 10,
+      "candidate_count": 11,
       "field_complete": false,
       "mentioned_count": 1,
       "note": "Single public bookmaker-odds snapshot; raw implied prices are not a probability and do not sum to 100% unless the field is complete.",
@@ -229,12 +239,12 @@
       "status": "available"
     },
     "freshness": {
-      "age_hours": 46.7,
+      "age_hours": 70.8,
       "max_age_hours": 48,
-      "stale": false
+      "stale": true
     },
     "gate": {
-      "checked_at": "2026-11-12T06:18:33+00:00",
+      "checked_at": "2026-11-13T06:23:35+00:00",
       "interim_manager": "Stuart Duff",
       "interim_since": "2026-11-09",
       "is_open": true,
@@ -254,27 +264,27 @@
     "state": "open"
   },
   "notes": "Published only while Aberdeen have no permanent manager; removed when a permanent manager is appointed. Not betting advice, a recommendation or a promotion. No affiliate or advertising relationship.",
-  "published_at": "2026-11-12T06:18:33+00:00",
+  "published_at": "2026-11-13T06:23:35+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-12T06:17:01+00:00-11842",
+  "served_by_update_id": "2026-11-13T06:17:02+00:00-2957771",
   "source_snapshots": {
-    "api_football": "2026-11-12T06:18:30.912959+00:00",
-    "api_results": "2026-11-12T06:17:04+00:00",
-    "availability": "2026-11-12T06:17:41+00:00",
-    "career": "2026-11-12T06:17:41+00:00",
-    "football_data_uk": "2026-11-12T06:17:03+00:00",
-    "former_players": "2026-11-12T06:17:23+00:00",
-    "history_backfill": "2026-11-12T06:17:17+00:00",
-    "matchday_snapshot": "2026-11-12T06:17:17+00:00",
-    "scouting_clubs": "2026-11-12T06:18:12+00:00",
-    "scouting_europe": "2026-11-12T06:18:01+00:00",
-    "scouting_pool": "2026-11-12T06:17:50+00:00",
-    "scouting_roles": "2026-11-12T06:17:51+00:00",
-    "scouting_rose_history": "2026-11-12T06:18:01+00:00",
-    "scouting_standings": "2026-11-12T06:18:01+00:00",
-    "spfl": "2026-11-12T06:17:04+00:00",
-    "xg_enrichment": "2026-11-12T06:18:14+00:00"
+    "api_football": "2026-11-13T06:23:33.132695+00:00",
+    "api_results": "2026-11-13T06:17:04+00:00",
+    "availability": "2026-11-13T06:18:46+00:00",
+    "career": "2026-11-13T06:18:46+00:00",
+    "football_data_uk": "2026-11-13T06:17:03+00:00",
+    "former_players": "2026-11-13T06:17:23+00:00",
+    "history_backfill": "2026-11-13T06:17:17+00:00",
+    "matchday_snapshot": "2026-11-13T06:17:17+00:00",
+    "scouting_clubs": "2026-11-13T06:22:52+00:00",
+    "scouting_europe": "2026-11-13T06:22:41+00:00",
+    "scouting_pool": "2026-11-13T06:18:58+00:00",
+    "scouting_roles": "2026-11-13T06:22:16+00:00",
+    "scouting_rose_history": "2026-11-13T06:22:26+00:00",
+    "scouting_standings": "2026-11-13T06:22:42+00:00",
+    "spfl": "2026-11-13T06:17:05+00:00",
+    "xg_enrichment": "2026-11-13T06:23:16+00:00"
   },
-  "update_id": "2026-11-12T06:17:01+00:00-11842"
+  "update_id": "2026-11-13T06:17:02+00:00-2957771"
 }
