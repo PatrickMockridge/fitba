@@ -4,10 +4,10 @@
     "owner_approval_required": true,
     "version_scheme": "semver"
   },
-  "checksum": "sha256:578daa1d212dcfc01bb9a5ec1d016655675be78f96f013bdb29e7235258bd012",
-  "dataset_id": "2026-11-13T09:20:56+00:00-064d8944",
+  "checksum": "sha256:d5397f3c94cf7dbf20058421054a7b37b6d2b0a9cbbb39863c71a77b5ef38ba4",
+  "dataset_id": "2026-11-13T10:53:42+00:00-04db4faa",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-13T09:20:56+00:00",
+  "generated_at": "2026-11-13T10:53:42+00:00",
   "metrics": [
     {
       "aggregation": "per_team",
@@ -1536,10 +1536,11 @@
         "revenue",
         "staff_costs",
         "player_sale_profit",
+        "net_registration_investment",
         "pre_tax_result",
         "net_debt"
       ],
-      "formula": "Five headline rows quoted as published by PSRwatch from Aberdeen Football Club Limited's filed group accounts. Revenue, staff costs, profit on player disposals and pre-tax result are £m to one decimal; net debt is £m to two decimals. FY is the year ended 30 June. Verification re-checks row shape, the FY/year sequence and published precision; it does not re-derive the accounts.\n",
+      "formula": "Five headline rows quoted as published by PSRwatch from Aberdeen Football Club Limited's filed group accounts. Revenue, staff costs and pre-tax result are £m to one decimal; profit on player disposals, net registration investment and net debt are £m to two decimals. FY is the year ended 30 June. Net registration investment = change in player-registration cost less profit on player disposals; it is an accounting measure, not cash transfer spend, and is unknown for FY2021 because the FY2020 opening cost is not in the source table. Verification re-checks row shape, the FY/year sequence, the investment formula and published precision; it does not re-derive the accounts.\n",
       "home_payload": "history/aberdeen.json",
       "home_surface": "/history/",
       "id": "history.finances",
@@ -1553,7 +1554,8 @@
         "PSRwatch permits attributed quotation of individual figures, not bulk ingestion or table republication; fitba publishes this five-row excerpt and links to the source page.",
         "FY2020 (2019-20) and FY2026 (2025-26) are not in the source table; they are not zero-filled.",
         "fitba has not independently audited the filed accounts.",
-        "Staff costs are the filed aggregate, not individual wages or a budget."
+        "Staff costs are the filed aggregate, not individual wages or a budget.",
+        "Net registration investment is an accounting measure, not cash transfer spend; FY2021 is unknown without the FY2020 opening registration cost."
       ],
       "owner": "patrickmockridge",
       "payload_paths": [
@@ -1569,9 +1571,17 @@
           "step": null,
           "suffix": null
         },
+        "net_registration_investment": {
+          "decimals": 2,
+          "display": "0.00",
+          "method": "half_even",
+          "scale": 1.0,
+          "step": null,
+          "suffix": null
+        },
         "player_sale_profit": {
-          "decimals": 1,
-          "display": "0.0",
+          "decimals": 2,
+          "display": "0.00",
           "method": "half_even",
           "scale": 1.0,
           "step": null,
@@ -1611,7 +1621,7 @@
       "value_type": "table",
       "verification": "recompute",
       "verification_checks": [],
-      "version": 1
+      "version": 2
     },
     {
       "aggregation": "family",
@@ -6152,28 +6162,28 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-13T09:20:56+00:00",
-  "registry_version": "3.18.0",
+  "published_at": "2026-11-13T10:53:42+00:00",
+  "registry_version": "3.19.0",
   "reviewed": "2026-11-13",
   "schema_version": 1,
-  "served_by_update_id": "2026-11-13T09:15:57+00:00-3322563",
+  "served_by_update_id": "publish-2026-11-13T10:53:42+00:00",
   "source_snapshots": {
-    "api_football": "2026-11-13T09:20:53.087489+00:00",
-    "api_results": "2026-11-13T09:16:00+00:00",
-    "availability": "2026-11-13T09:18:56+00:00",
-    "career": "2026-11-13T09:18:56+00:00",
-    "football_data_uk": "2026-11-13T09:15:59+00:00",
-    "former_players": "2026-11-13T09:16:22+00:00",
-    "history_backfill": "2026-11-13T09:16:04+00:00",
+    "api_football": "2026-11-13T10:52:29.540031+00:00",
+    "api_results": "2026-11-13T10:52:26+00:00",
+    "availability": "2026-11-13T10:52:29+00:00",
+    "career": "2026-11-13T10:52:29+00:00",
+    "football_data_uk": "2026-11-13T10:52:25+00:00",
+    "former_players": "2026-11-13T10:52:28+00:00",
+    "history_backfill": "2026-11-13T10:52:27+00:00",
     "matchday_snapshot": "2026-11-13T06:17:17+00:00",
-    "scouting_clubs": "2026-11-13T09:19:05+00:00",
-    "scouting_europe": "2026-11-13T09:19:05+00:00",
-    "scouting_pool": "2026-11-13T09:19:02+00:00",
-    "scouting_roles": "2026-11-13T09:19:03+00:00",
-    "scouting_rose_history": "2026-11-13T09:19:05+00:00",
-    "scouting_standings": "2026-11-13T09:19:05+00:00",
-    "spfl": "2026-11-13T09:16:00+00:00",
-    "xg_enrichment": "2026-11-13T09:20:53+00:00"
+    "scouting_clubs": "2026-11-13T10:52:38+00:00",
+    "scouting_europe": "2026-11-13T10:52:38+00:00",
+    "scouting_pool": "2026-11-13T10:52:35+00:00",
+    "scouting_roles": "2026-11-13T10:52:36+00:00",
+    "scouting_rose_history": "2026-11-13T10:52:38+00:00",
+    "scouting_standings": "2026-11-13T10:52:38+00:00",
+    "spfl": "2026-11-13T10:52:27+00:00",
+    "xg_enrichment": "2026-11-13T10:52:40+00:00"
   },
   "structural_number_patterns": [
     "**/player_id",
@@ -6202,5 +6212,5 @@
     "**/shootout_home",
     "**/shootout_away"
   ],
-  "update_id": "2026-11-13T09:15:57+00:00-3322563"
+  "update_id": "publish-2026-11-13T10:53:42+00:00"
 }
