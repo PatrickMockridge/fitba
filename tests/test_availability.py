@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import date
+
 from fitba.ingest import availability as ingest
 from fitba.publish.availability import build_availability_payload
 
@@ -22,7 +24,7 @@ def _entry(**overrides):
         "reason": "Injured",
         "source_id": "afc_news",
         "source_url": "https://www.afc.co.uk/news/team-news",
-        "verified_at": "2026-10-21",
+        "verified_at": date.today().isoformat(),
         "confidence": "confirmed",
         "note": "Official team news.",
     }
