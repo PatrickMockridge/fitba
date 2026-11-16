@@ -3,28 +3,28 @@
     "first_page_only": false,
     "latest_page_only": true,
     "note": "AFC board first page plus the latest page of the public Next manager thread. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published.",
-    "posts_sampled": 18,
+    "posts_sampled": 25,
     "raw_posts_published": false,
     "single_page_only": true,
-    "thread_page": 89,
-    "thread_page_count": 89,
+    "thread_page": 90,
+    "thread_page_count": 90,
     "topics_sampled": 25
   },
-  "dataset_id": "2026-11-15T06:23:37+00:00-ed22e188",
+  "dataset_id": "2026-11-16T06:18:16+00:00-b5f061a9",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-15T06:23:37+00:00",
+  "generated_at": "2026-11-16T06:18:16+00:00",
   "manager_mentions": [],
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
-      "external_target": 3
+      "external_target": 2
     },
     "age_mix": {
-      "21-23": 1,
-      "24-26": 2
+      "24-26": 1,
+      "27-29": 1
     },
     "excluded_counts": {},
-    "external_sample_size": 3,
+    "external_sample_size": 2,
     "former_player_profile": {
       "mentions": 0,
       "players": [],
@@ -32,11 +32,10 @@
     },
     "lanes": {
       "external_target": {
-        "count": 3,
+        "count": 2,
         "players": [
-          "B. House",
-          "Christian",
-          "F. Potter"
+          "J. Diamond",
+          "M. Robinson"
         ]
       }
     },
@@ -44,33 +43,33 @@
     "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
     "position_mix": {
       "DEF": 1,
-      "FWD": 1,
       "MID": 1
     },
-    "sample_size": 3,
+    "sample_size": 2,
     "source_mix": {
-      "fan_only": 3
+      "cross_referenced_club": 1,
+      "fan_only": 1
     },
-    "total_signals": 3
+    "total_signals": 2
   },
-  "published_at": "2026-11-15T06:23:37+00:00",
-  "sampled_at": "2026-11-15T06:18:47+00:00",
+  "published_at": "2026-11-16T06:18:16+00:00",
+  "sampled_at": "2026-11-16T06:17:24+00:00",
   "sentiment": {
     "club": {
-      "count": 66,
-      "mean": 0.052,
+      "count": 68,
+      "mean": 0.062,
       "median": 0.0,
-      "negative_share": 0.121,
-      "neutral_share": 0.636,
-      "positive_share": 0.242
+      "negative_share": 0.118,
+      "neutral_share": 0.632,
+      "positive_share": 0.25
     },
     "forum": {
-      "count": 18,
-      "mean": 0.218,
-      "median": 0.0,
-      "negative_share": 0.167,
-      "neutral_share": 0.389,
-      "positive_share": 0.444
+      "count": 25,
+      "mean": 0.168,
+      "median": 0.226,
+      "negative_share": 0.24,
+      "neutral_share": 0.16,
+      "positive_share": 0.6
     },
     "note": "Rule-based VADER sentiment on sampled forum posts, curated press rumour claims and official AFC news titles. Descriptive and noisy; not a measure of truth, credibility or fanbase opinion.",
     "press": {
@@ -82,35 +81,8 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "2026-11-15T06:17:02+00:00-1791701",
+  "served_by_update_id": "2026-11-16T06:17:02+00:00-1328762",
   "signals": [
-    {
-      "affiliation": "external_target",
-      "affiliation_source": "key",
-      "age": 26,
-      "at_rival": false,
-      "credibility": "fan_only",
-      "cross_references": {
-        "club_output": false,
-        "confirmed_transfer": false,
-        "historic_transfer": false,
-        "press_rumour": false
-      },
-      "current_club": "Lincoln",
-      "current_league": "EFL Championship",
-      "former_href": null,
-      "lookup_source": "scouted_player",
-      "lookup_status": "scouted_player",
-      "mentions": 1,
-      "nationality": "Scotland",
-      "player_href": null,
-      "player_key": "api:player:17730",
-      "player_name": "B. House",
-      "position": null,
-      "position_group": "FWD",
-      "rival_club": null,
-      "topic_count": 1
-    },
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
@@ -123,16 +95,16 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "FC Krasnodar",
-      "current_league": "Russian Premier League",
+      "current_club": "Stockport County",
+      "current_league": "EFL League One",
       "former_href": null,
       "lookup_source": "scouted_player",
       "lookup_status": "scouted_player",
       "mentions": 1,
-      "nationality": "Brazil",
+      "nationality": "England",
       "player_href": null,
-      "player_key": "api:player:67204",
-      "player_name": "Christian",
+      "player_key": "api:player:87773",
+      "player_name": "J. Diamond",
       "position": null,
       "position_group": "MID",
       "rival_club": null,
@@ -141,25 +113,25 @@
     {
       "affiliation": "external_target",
       "affiliation_source": "key",
-      "age": 21,
+      "age": 28,
       "at_rival": false,
-      "credibility": "fan_only",
+      "credibility": "cross_referenced_club",
       "cross_references": {
-        "club_output": false,
+        "club_output": true,
         "confirmed_transfer": false,
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "Fleetwood Town",
-      "current_league": "EFL League Two",
+      "current_club": "FC Cincinnati",
+      "current_league": "Major League Soccer",
       "former_href": null,
       "lookup_source": "scouted_player",
       "lookup_status": "scouted_player",
       "mentions": 1,
-      "nationality": "England",
+      "nationality": "USA",
       "player_href": null,
-      "player_key": "api:player:400349",
-      "player_name": "F. Potter",
+      "player_key": "api:player:50879",
+      "player_name": "M. Robinson",
       "position": null,
       "position_group": "DEF",
       "rival_club": null,
@@ -174,33 +146,33 @@
     "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
   },
   "source_snapshots": {
-    "api_football": "2026-11-15T06:23:34.637794+00:00",
-    "api_results": "2026-11-15T06:17:05+00:00",
-    "availability": "2026-11-15T06:18:47+00:00",
-    "career": "2026-11-15T06:18:47+00:00",
-    "football_data_uk": "2026-11-15T06:17:04+00:00",
-    "former_players": "2026-11-15T06:17:24+00:00",
-    "history_backfill": "2026-11-15T06:17:18+00:00",
-    "matchday_snapshot": "2026-11-15T06:17:18+00:00",
-    "scouting_clubs": "2026-11-15T06:22:58+00:00",
-    "scouting_europe": "2026-11-15T06:22:47+00:00",
-    "scouting_pool": "2026-11-15T06:18:59+00:00",
-    "scouting_roles": "2026-11-15T06:22:17+00:00",
-    "scouting_rose_history": "2026-11-15T06:22:32+00:00",
-    "scouting_standings": "2026-11-15T06:22:48+00:00",
-    "spfl": "2026-11-15T06:17:06+00:00",
-    "xg_enrichment": "2026-11-15T06:23:17+00:00"
+    "api_football": "2026-11-16T06:18:13.748678+00:00",
+    "api_results": "2026-11-16T06:17:04+00:00",
+    "availability": "2026-11-16T06:17:24+00:00",
+    "career": "2026-11-16T06:17:24+00:00",
+    "football_data_uk": "2026-11-16T06:17:03+00:00",
+    "former_players": "2026-11-16T06:17:17+00:00",
+    "history_backfill": "2026-11-16T06:17:11+00:00",
+    "matchday_snapshot": "2026-11-16T06:17:11+00:00",
+    "scouting_clubs": "2026-11-16T06:17:54+00:00",
+    "scouting_europe": "2026-11-16T06:17:43+00:00",
+    "scouting_pool": "2026-11-16T06:17:32+00:00",
+    "scouting_roles": "2026-11-16T06:17:34+00:00",
+    "scouting_rose_history": "2026-11-16T06:17:43+00:00",
+    "scouting_standings": "2026-11-16T06:17:44+00:00",
+    "spfl": "2026-11-16T06:17:05+00:00",
+    "xg_enrichment": "2026-11-16T06:17:56+00:00"
   },
   "topics": [
     {
       "board_topic": false,
       "latest_page_only": true,
-      "latest_post": "2026-11-15T02:34:53Z",
+      "latest_post": "2026-11-16T01:23:52Z",
       "player_mentions": [],
-      "published_at": "2026-11-15T02:34:53Z",
-      "sampled_posts": 18,
-      "thread_page": 89,
-      "thread_page_count": 89,
+      "published_at": "2026-11-16T01:23:52Z",
+      "sampled_posts": 25,
+      "thread_page": 90,
+      "thread_page_count": 90,
       "title": "Next manager",
       "url": "https://www.donstalk.co.uk/topic/9479-next-manager/"
     },
@@ -243,26 +215,26 @@
     {
       "board_topic": true,
       "latest_page_only": false,
-      "latest_post": "2018-01-14T19:05:47Z",
+      "latest_post": "2026-11-15T18:46:54Z",
       "player_mentions": [],
       "published_at": null,
       "sampled_posts": 0,
       "thread_page": null,
       "thread_page_count": null,
-      "title": "Where Are They Now???????????",
-      "url": "https://www.donstalk.co.uk/topic/8383-where-are-they-now/"
+      "title": "Mario Frick",
+      "url": "https://www.donstalk.co.uk/topic/10929-mario-frick/"
     },
     {
       "board_topic": true,
       "latest_page_only": false,
-      "latest_post": "2026-11-11T15:27:37Z",
+      "latest_post": "2025-11-29T19:06:37Z",
       "player_mentions": [],
       "published_at": null,
       "sampled_posts": 0,
       "thread_page": null,
       "thread_page_count": null,
-      "title": "The Davie Cormack Grand Plan: Do You Trust the Plan?",
-      "url": "https://www.donstalk.co.uk/topic/10928-the-davie-cormack-grand-plan-do-you-trust-the-plan/"
+      "title": "AFC limericks",
+      "url": "https://www.donstalk.co.uk/topic/10766-afc-limericks/"
     },
     {
       "board_topic": true,
@@ -287,6 +259,30 @@
       "thread_page_count": null,
       "title": "Stephen Robinson",
       "url": "https://www.donstalk.co.uk/topic/10817-stephen-robinson/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2018-01-14T19:05:47Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Where Are They Now???????????",
+      "url": "https://www.donstalk.co.uk/topic/8383-where-are-they-now/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-11-11T15:27:37Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "The Davie Cormack Grand Plan: Do You Trust the Plan?",
+      "url": "https://www.donstalk.co.uk/topic/10928-the-davie-cormack-grand-plan-do-you-trust-the-plan/"
     },
     {
       "board_topic": true,
@@ -387,18 +383,6 @@
     {
       "board_topic": true,
       "latest_page_only": false,
-      "latest_post": "2025-11-29T19:06:37Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "AFC limericks",
-      "url": "https://www.donstalk.co.uk/topic/10766-afc-limericks/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
       "latest_post": "2026-10-29T08:34:15Z",
       "player_mentions": [],
       "published_at": null,
@@ -479,19 +463,7 @@
       "thread_page_count": null,
       "title": "Aberdeen v St Mirren",
       "url": "https://www.donstalk.co.uk/topic/10916-aberdeen-v-st-mirren/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
-      "latest_post": "2026-10-04T10:44:43Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "Aberdeen v St Johnstone",
-      "url": "https://www.donstalk.co.uk/topic/10915-aberdeen-v-st-johnstone/"
     }
   ],
-  "update_id": "2026-11-15T06:17:02+00:00-1791701"
+  "update_id": "2026-11-16T06:17:02+00:00-1328762"
 }

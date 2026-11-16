@@ -4,12 +4,12 @@
     "expires": null,
     "status": "none"
   },
-  "audited_at": "2026-11-15T06:23:37+00:00",
-  "dataset_id": "2026-11-15T06:23:37+00:00-ed22e188",
+  "audited_at": "2026-11-16T06:18:16+00:00",
+  "dataset_id": "2026-11-16T06:18:16+00:00-b5f061a9",
   "dataset_state": "fresh",
-  "dataset_version": "2026-11-15T06:23:37+00:00-ed22e188",
+  "dataset_version": "2026-11-16T06:18:16+00:00-b5f061a9",
   "errors": [],
-  "generated_at": "2026-11-15T06:23:37+00:00",
+  "generated_at": "2026-11-16T06:18:16+00:00",
   "metrics": [
     {
       "basis": "measured",
@@ -1591,7 +1591,7 @@
       ],
       "locations": [
         {
-          "nodes": 92,
+          "nodes": 93,
           "numeric_leaves": 0,
           "payload": "history/aberdeen.json",
           "pointer": "/seasons/**"
@@ -1617,7 +1617,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 125 numeric leaves",
+          "message": "1 location(s), 133 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1639,7 +1639,7 @@
         "/manager/"
       ],
       "errors": [],
-      "fields_checked": 125,
+      "fields_checked": 133,
       "home_payload": "history/aberdeen.json",
       "home_surface": "/history/",
       "id": "history.staff",
@@ -1649,13 +1649,13 @@
       ],
       "locations": [
         {
-          "nodes": 876,
-          "numeric_leaves": 125,
+          "nodes": 939,
+          "numeric_leaves": 133,
           "payload": "history/aberdeen.json",
           "pointer": "/staff/**"
         }
       ],
-      "numeric_leaves": 125,
+      "numeric_leaves": 133,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -1850,7 +1850,7 @@
           "status": "pass"
         },
         {
-          "message": "8 location(s), 1755 numeric leaves",
+          "message": "8 location(s), 1762 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -1872,7 +1872,7 @@
         "/manager/"
       ],
       "errors": [],
-      "fields_checked": 1755,
+      "fields_checked": 1762,
       "home_payload": "history/seasons/*.json",
       "home_surface": "/history/",
       "id": "history.season-document",
@@ -1924,13 +1924,13 @@
           "pointer": "/**"
         },
         {
-          "nodes": 621,
-          "numeric_leaves": 215,
+          "nodes": 683,
+          "numeric_leaves": 222,
           "payload": "history/seasons/2026-27.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 1755,
+      "numeric_leaves": 1762,
       "payloads": 8,
       "provenance_only": true,
       "rows_checked": 8,
@@ -2712,7 +2712,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 66 numeric leaves",
+          "message": "1 location(s), 63 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2733,7 +2733,7 @@
         "/rumours/"
       ],
       "errors": [],
-      "fields_checked": 66,
+      "fields_checked": 63,
       "home_payload": "forum/donstalk.json",
       "home_surface": "/rumours/",
       "id": "forum.donstalk",
@@ -2745,13 +2745,13 @@
       ],
       "locations": [
         {
-          "nodes": 447,
-          "numeric_leaves": 66,
+          "nodes": 421,
+          "numeric_leaves": 63,
           "payload": "forum/donstalk.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 66,
+      "numeric_leaves": 63,
       "payloads": 1,
       "provenance_only": true,
       "rows_checked": 1,
@@ -2771,7 +2771,7 @@
           "status": "pass"
         },
         {
-          "message": "1 location(s), 25 numeric leaves",
+          "message": "1 location(s), 4 numeric leaves",
           "name": "locations",
           "status": "pass"
         },
@@ -2781,8 +2781,8 @@
           "status": "pass"
         },
         {
-          "message": "10 priced, 0 mentioned; gate open",
-          "name": "manager.market",
+          "message": "market is closed; no odds published",
+          "name": "manager_market.closed",
           "status": "pass"
         }
       ],
@@ -2792,7 +2792,7 @@
         "/rumours/"
       ],
       "errors": [],
-      "fields_checked": 25,
+      "fields_checked": 4,
       "home_payload": "rumours/manager-market.json",
       "home_surface": "/rumours/",
       "id": "manager.market",
@@ -2805,16 +2805,16 @@
       ],
       "locations": [
         {
-          "nodes": 221,
-          "numeric_leaves": 25,
+          "nodes": 60,
+          "numeric_leaves": 4,
           "payload": "rumours/manager-market.json",
           "pointer": "/**"
         }
       ],
-      "numeric_leaves": 25,
+      "numeric_leaves": 4,
       "payloads": 1,
       "provenance_only": false,
-      "rows_checked": 11,
+      "rows_checked": 1,
       "source_checksums": {},
       "source_layer": "odds",
       "status": "pass",
@@ -24864,34 +24864,34 @@
       "version": 1
     }
   ],
-  "published_at": "2026-11-15T06:23:37+00:00",
+  "published_at": "2026-11-16T06:18:16+00:00",
   "registry_checksum": "sha256:d5397f3c94cf7dbf20058421054a7b37b6d2b0a9cbbb39863c71a77b5ef38ba4",
   "registry_reviewed": "2026-11-13",
   "registry_version": "3.19.0",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-15T06:17:02+00:00-1791701",
+  "served_by_update_id": "2026-11-16T06:17:02+00:00-1328762",
   "source_snapshots": {
-    "api_football": "2026-11-15T06:23:34.637794+00:00",
-    "api_results": "2026-11-15T06:17:05+00:00",
-    "availability": "2026-11-15T06:18:47+00:00",
-    "career": "2026-11-15T06:18:47+00:00",
-    "football_data_uk": "2026-11-15T06:17:04+00:00",
-    "former_players": "2026-11-15T06:17:24+00:00",
-    "history_backfill": "2026-11-15T06:17:18+00:00",
-    "matchday_snapshot": "2026-11-15T06:17:18+00:00",
-    "scouting_clubs": "2026-11-15T06:22:58+00:00",
-    "scouting_europe": "2026-11-15T06:22:47+00:00",
-    "scouting_pool": "2026-11-15T06:18:59+00:00",
-    "scouting_roles": "2026-11-15T06:22:17+00:00",
-    "scouting_rose_history": "2026-11-15T06:22:32+00:00",
-    "scouting_standings": "2026-11-15T06:22:48+00:00",
-    "spfl": "2026-11-15T06:17:06+00:00",
-    "xg_enrichment": "2026-11-15T06:23:17+00:00"
+    "api_football": "2026-11-16T06:18:13.748678+00:00",
+    "api_results": "2026-11-16T06:17:04+00:00",
+    "availability": "2026-11-16T06:17:24+00:00",
+    "career": "2026-11-16T06:17:24+00:00",
+    "football_data_uk": "2026-11-16T06:17:03+00:00",
+    "former_players": "2026-11-16T06:17:17+00:00",
+    "history_backfill": "2026-11-16T06:17:11+00:00",
+    "matchday_snapshot": "2026-11-16T06:17:11+00:00",
+    "scouting_clubs": "2026-11-16T06:17:54+00:00",
+    "scouting_europe": "2026-11-16T06:17:43+00:00",
+    "scouting_pool": "2026-11-16T06:17:32+00:00",
+    "scouting_roles": "2026-11-16T06:17:34+00:00",
+    "scouting_rose_history": "2026-11-16T06:17:43+00:00",
+    "scouting_standings": "2026-11-16T06:17:44+00:00",
+    "spfl": "2026-11-16T06:17:05+00:00",
+    "xg_enrichment": "2026-11-16T06:17:56+00:00"
   },
   "status": "pass",
   "summary": {
-    "fields_checked": 2335523,
+    "fields_checked": 2335514,
     "metrics_failed": 0,
     "metrics_passed": 87,
     "metrics_total": 87,
@@ -24899,12 +24899,12 @@
     "parameters_passed": 26,
     "parameters_total": 26,
     "provenance_only": 61,
-    "rows_checked": 4112,
+    "rows_checked": 4102,
     "verification_modes": {
       "cross_surface": 9,
       "provenance_only": 61,
       "recompute": 17
     }
   },
-  "update_id": "2026-11-15T06:17:02+00:00-1791701"
+  "update_id": "2026-11-16T06:17:02+00:00-1328762"
 }

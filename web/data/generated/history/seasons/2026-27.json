@@ -81,7 +81,7 @@
     ],
     "note": "Curated debuts are explicit club/academy records. Measured new players are first appearances in the covered history, not career debuts."
   },
-  "as_of": "2026-11-11",
+  "as_of": "2026-11-15",
   "coverage": {
     "history": {
       "events": 337,
@@ -132,12 +132,12 @@
       ]
     }
   ],
-  "dataset_id": "2026-11-15T06:23:37+00:00-ed22e188",
+  "dataset_id": "2026-11-16T06:18:16+00:00-b5f061a9",
   "dataset_state": "fresh",
   "europe": [],
   "expectations": {
     "baseline": "A top-six baseline after ninth place, from a season that began under Stephen Robinson and changed manager in November.\n",
-    "context": "Stephen Robinson was appointed on 12 March 2026 and began his first full season after a large summer turnover. The League Cup semi-final at Hampden was lost 1-0 to Rangers on 31 October 2026. The club parted company with Robinson, Brian Kerr and Stephen Craigan on 9 November 2026; Stuart Duff took interim charge of first-team training and no permanent replacement had been named.\n",
+    "context": "Stephen Robinson was appointed on 12 March 2026 and began his first full season after a large summer turnover. The League Cup semi-final at Hampden was lost 1-0 to Rangers on 31 October 2026. The club parted company with Robinson, Brian Kerr and Stephen Craigan on 9 November 2026; Stuart Duff took interim charge of first-team training. Mario Frick was appointed head coach on 15 November 2026, subject to UK visa formalities, with Roman Matter as assistant.\n",
     "label": "curated",
     "source_ids": [
       "wikipedia",
@@ -145,11 +145,12 @@
     ],
     "source_urls": [
       "https://en.wikipedia.org/wiki/2026%E2%80%9327_Aberdeen_F.C._season",
-      "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+      "https://www.afc.co.uk/en/news/stephen-robinson-departs",
+      "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach"
     ],
     "target": "Top six and a clearer identity. This is an analyst-set baseline, not a published club target.\n"
   },
-  "generated_at": "2026-11-15T06:23:37+00:00",
+  "generated_at": "2026-11-16T06:18:16+00:00",
   "headline": "A rebuild under Stephen Robinson, then a November managerial change, with the league shape still unsettled.\n",
   "honour_ids": [],
   "interim_read": "The rebuild is the story so far, not a verdict. A large summer turnover, a new manager and an unsettled shape are the context for the early results. The November 2026 managerial change is part of that context: Stuart Duff's caretaker spell is not a permanent manager's sample. The record will publish a final review at the end of the season; until then, the measured record and the coverage notes are the honest output.\n",
@@ -188,7 +189,7 @@
     },
     {
       "drawn": 0,
-      "end": null,
+      "end": "2026-11-14",
       "first_match": null,
       "ga": 0,
       "gf": 0,
@@ -201,13 +202,33 @@
       "points": 0,
       "ppg": null,
       "start": "2026-11-09",
-      "stint_end": null,
+      "stint_end": "2026-11-14",
       "stint_id": "stuart-duff-interim-2026",
       "stint_start": "2026-11-09",
       "won": 0
+    },
+    {
+      "drawn": 0,
+      "end": null,
+      "first_match": null,
+      "ga": 0,
+      "gf": 0,
+      "interim": false,
+      "last_match": null,
+      "lost": 0,
+      "name": "Mario Frick",
+      "person_id": "mario-frick",
+      "played": 0,
+      "points": 0,
+      "ppg": null,
+      "start": "2026-11-15",
+      "stint_end": null,
+      "stint_id": "mario-frick-manager-2026",
+      "stint_start": "2026-11-15",
+      "won": 0
     }
   ],
-  "published_at": "2026-11-15T06:23:37+00:00",
+  "published_at": "2026-11-16T06:18:16+00:00",
   "recruitment": {
     "age_bands": {
       "21-24": 2,
@@ -307,7 +328,7 @@
     }
   },
   "review": null,
-  "reviewed_at": "2026-11-11",
+  "reviewed_at": "2026-11-15",
   "schema_version": "1.0.0",
   "season": "2026-27",
   "selection": {
@@ -552,7 +573,7 @@
     "u21_minutes_share": 0.056,
     "unknown_age_minutes": 0
   },
-  "served_by_update_id": "2026-11-15T06:17:02+00:00-1791701",
+  "served_by_update_id": "2026-11-16T06:17:02+00:00-1328762",
   "source_snapshots": null,
   "sources": [
     {
@@ -563,6 +584,11 @@
     {
       "id": "afc_news",
       "url": "https://www.afc.co.uk/en/news/stephen-robinson-departs",
+      "verified_at": "2026-10-21"
+    },
+    {
+      "id": "afc_news",
+      "url": "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach",
       "verified_at": "2026-10-21"
     },
     {
@@ -675,13 +701,57 @@
       "interim": true,
       "name": "Stuart Duff",
       "person_id": "stuart-duff",
-      "reason_out": null,
+      "reason_out": "interim_end",
       "role": "Interim manager",
       "role_group": "manager",
       "source_urls": [
-        "https://www.afc.co.uk/en/news/stephen-robinson-departs"
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs",
+        "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach"
       ],
       "stint_id": "stuart-duff-interim-2026"
+    },
+    {
+      "change": "out",
+      "date": "2026-11-14",
+      "interim": true,
+      "name": "Stuart Duff",
+      "person_id": "stuart-duff",
+      "reason_out": "interim_end",
+      "role": "Interim manager",
+      "role_group": "manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/stephen-robinson-departs",
+        "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach"
+      ],
+      "stint_id": "stuart-duff-interim-2026"
+    },
+    {
+      "change": "in",
+      "date": "2026-11-15",
+      "interim": false,
+      "name": "Mario Frick",
+      "person_id": "mario-frick",
+      "reason_out": null,
+      "role": "Head coach",
+      "role_group": "manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach"
+      ],
+      "stint_id": "mario-frick-manager-2026"
+    },
+    {
+      "change": "in",
+      "date": "2026-11-15",
+      "interim": false,
+      "name": "Roman Matter",
+      "person_id": "roman-matter",
+      "reason_out": null,
+      "role": "Assistant coach",
+      "role_group": "assistant_manager",
+      "source_urls": [
+        "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach"
+      ],
+      "stint_id": "roman-matter-assistant-2026"
     }
   ],
   "stale_reason": null,
@@ -736,5 +806,5 @@
     "shape_note": "The team has used several shapes and has not settled on one. The matchday sequence is the honest view; a season aggregate would hide the churn.\n",
     "style_note": "The rebuild is the context, not an excuse. The measured proxies and shape mix show what the team is doing; the interim read is labelled as a reading.\n"
   },
-  "update_id": "2026-11-15T06:17:02+00:00-1791701"
+  "update_id": "2026-11-16T06:17:02+00:00-1328762"
 }
