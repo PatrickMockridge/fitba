@@ -12,7 +12,7 @@
       "age_hours": 0.1,
       "fixtures": 6,
       "fixtures_with_lineups": 6,
-      "generated_at": "2026-11-17T06:17:17+00:00",
+      "generated_at": "2026-11-18T06:17:18+00:00",
       "opponent_api_id": 250,
       "resolution": "source_ids",
       "state": "fresh"
@@ -20,7 +20,7 @@
     "state": "fresh",
     "style": "shots_only"
   },
-  "dataset_id": "2026-11-17T06:23:37+00:00-0d26ebd3",
+  "dataset_id": "2026-11-18T06:20:42+00:00-c3b1e88e",
   "dataset_state": "fresh",
   "fixture": {
     "away_team_id": "sco:aberdeen",
@@ -511,7 +511,7 @@
       "update_id": null
     }
   },
-  "generated_at": "2026-11-17T06:23:37+00:00",
+  "generated_at": "2026-11-18T06:20:42+00:00",
   "head_to_head": [
     {
       "away_goals": 0,
@@ -817,20 +817,20 @@
       "assignment_note": "Greedy slot assignment. Goalkeeper is assigned first; outfield players are never placed in goal.",
       "availability": {
         "applicable": true,
-        "as_of": "2026-11-17T06:18:46+00:00",
+        "as_of": "2026-11-18T06:18:04+00:00",
         "conflicts": 0,
-        "doubtful": 1,
-        "known": 3,
+        "doubtful": 0,
+        "known": 0,
         "note": "Curated team-news availability. A provider injury boolean is not team news.",
-        "out": 2,
+        "out": 0,
         "returned": 0,
         "source_ids": [
           "afc_news",
           "api_football"
         ],
-        "state": "partial",
+        "state": "unavailable",
         "suspended": 0,
-        "unknown": 31
+        "unknown": 34
       },
       "basis": "local_lineups",
       "contenders": [
@@ -940,7 +940,7 @@
           "availability_confidence": "confirmed",
           "availability_conflict": false,
           "availability_contradicted_by": null,
-          "availability_downgrade": 0,
+          "availability_downgrade": 1,
           "availability_note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
           "availability_original_status": "suspended",
           "availability_review_reason": "suspension_served",
@@ -980,6 +980,57 @@
           "served_by_update_id": null,
           "shirt_number": 26,
           "slot": "2:2",
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 2,
+          "status": null,
+          "unavailable_reason": null,
+          "update_id": null
+        },
+        {
+          "availability_confidence": "confirmed",
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_downgrade": 1,
+          "availability_note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
+          "availability_original_status": "out",
+          "availability_review_reason": "status_older_than_max_age",
+          "availability_review_required": true,
+          "availability_review_severity": null,
+          "availability_source": "afc_news",
+          "availability_source_url": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "availability_verified_at": null,
+          "available": null,
+          "confidence": "low",
+          "dataset_id": null,
+          "dataset_state": null,
+          "form": 0.1,
+          "grid": null,
+          "href": "/players/37253/",
+          "last_seen": null,
+          "minutes": 180,
+          "name": "M. Knoester",
+          "player_id": 37253,
+          "player_key": "api:player:37253",
+          "position_group": null,
+          "published_at": null,
+          "rating_count": 2,
+          "rating_coverage": "partial",
+          "reason": "Alternative for Centre back; 2 starts in the window.",
+          "recency_start": null,
+          "recent_rating": 7.1,
+          "recent_rating_score": 0.55,
+          "role_code": "CB",
+          "role_family": null,
+          "role_fit": 1.0,
+          "role_label": "Centre back",
+          "score": 0.385,
+          "served_by_update_id": null,
+          "shirt_number": 5,
+          "slot": "2:3",
           "source_snapshots": null,
           "stale_reason": null,
           "starts": 2,
@@ -1042,7 +1093,7 @@
           "availability_confidence": "confirmed",
           "availability_conflict": false,
           "availability_contradicted_by": null,
-          "availability_downgrade": 0,
+          "availability_downgrade": 1,
           "availability_note": "Official club press conference. Manager: Yogane has just come back into training; availability is assessed, not assumed.\n",
           "availability_original_status": "doubtful",
           "availability_review_reason": "doubt_resolved_by_appearance",
@@ -1429,7 +1480,7 @@
             "started": true,
             "update_id": null
           },
-          "availability_downgrade": 0,
+          "availability_downgrade": 1,
           "availability_note": "Official club press conference and the club's public post of 2026-10-27. Manager: Ronan will definitely miss the next match with a medial knee ligament injury and will see a specialist. No timeframe is published.\n",
           "availability_original_status": "out",
           "availability_review_reason": "appeared_after_status",
@@ -1438,7 +1489,7 @@
           "availability_source": "afc_news",
           "availability_source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
           "availability_status": "unknown",
-          "availability_status_age_days": 21,
+          "availability_status_age_days": 22,
           "availability_suspension": null,
           "availability_verified_at": "2026-10-27",
           "available": null,
@@ -1707,20 +1758,9 @@
       "status": "partial",
       "team_confidence": "low",
       "team_id": 252,
-      "unavailable": [
-        {
-          "name": "M. Knoester",
-          "player_id": 37253,
-          "reason": "availability_out"
-        },
-        {
-          "name": "L. Mayo",
-          "player_id": 125695,
-          "reason": "availability_out"
-        }
-      ],
+      "unavailable": [],
       "unknowns": [
-        "Curated AFC team news as of 2026-11-17T06:18:46+00:00; provider injuries unavailable/empty."
+        "No adverse team-news entries; players are available by default, not a medical clearance."
       ],
       "update_id": null
     },
@@ -2606,11 +2646,11 @@
       "update_id": null
     }
   },
-  "published_at": "2026-11-17T06:23:37+00:00",
+  "published_at": "2026-11-18T06:20:42+00:00",
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-17T06:17:02+00:00-907605",
-  "served_generated_at": "2026-11-17T06:17:17+00:00",
+  "served_by_update_id": "2026-11-18T06:17:02+00:00-34923",
+  "served_generated_at": "2026-11-18T06:17:18+00:00",
   "source_snapshots": null,
   "sources": [
     {
@@ -3102,5 +3142,5 @@
       "update_id": null
     }
   },
-  "update_id": "2026-11-17T06:17:02+00:00-907605"
+  "update_id": "2026-11-18T06:17:02+00:00-34923"
 }

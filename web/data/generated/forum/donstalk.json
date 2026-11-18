@@ -3,73 +3,119 @@
     "first_page_only": false,
     "latest_page_only": true,
     "note": "AFC board first page plus the latest page of the public Next manager thread. This is not the whole thread, the whole forum or the fanbase. No raw post bodies, usernames or quotes are published.",
-    "posts_sampled": 25,
+    "posts_sampled": 1,
     "raw_posts_published": false,
     "single_page_only": true,
-    "thread_page": 90,
-    "thread_page_count": 90,
+    "thread_page": 91,
+    "thread_page_count": 91,
     "topics_sampled": 25
   },
-  "dataset_id": "2026-11-17T06:23:37+00:00-0d26ebd3",
+  "dataset_id": "2026-11-18T06:20:42+00:00-c3b1e88e",
   "dataset_state": "fresh",
-  "generated_at": "2026-11-17T06:23:37+00:00",
-  "manager_mentions": [],
+  "generated_at": "2026-11-18T06:20:42+00:00",
+  "manager_mentions": [
+    {
+      "candidate_id": "barry-robson",
+      "candidate_name": "Barry Robson",
+      "first_seen": "2026-11-17T10:17:10Z",
+      "ingested_at": "2026-11-18T06:18:05+00:00",
+      "last_seen": "2026-11-17T10:17:10Z",
+      "mentions": 1,
+      "topic_count": 1
+    },
+    {
+      "candidate_id": "steve-clarke",
+      "candidate_name": "Steve Clarke",
+      "first_seen": "2026-11-17T10:17:10Z",
+      "ingested_at": "2026-11-18T06:18:05+00:00",
+      "last_seen": "2026-11-17T10:17:10Z",
+      "mentions": 1,
+      "topic_count": 1
+    }
+  ],
   "notes": "A mention count is not a transfer link. Affiliation separates current squad, current non-official, former players and external targets; the position and age mixes count external names only. A cross-reference label records source coverage, not a probability.",
   "profile": {
     "affiliation_mix": {
-      "external_target": 2
+      "external_target": 12,
+      "former_player": 1
     },
     "age_mix": {
-      "24-26": 1,
-      "27-29": 1
+      "21-23": 1,
+      "24-26": 3,
+      "27-29": 3,
+      "30-plus": 4,
+      "under-21": 1
     },
-    "excluded_counts": {},
-    "external_sample_size": 2,
+    "excluded_counts": {
+      "former_player": 1
+    },
+    "external_sample_size": 12,
     "former_player_profile": {
-      "mentions": 0,
-      "players": [],
-      "sample_size": 0
+      "mentions": 1,
+      "players": [
+        "T. Stephen"
+      ],
+      "sample_size": 1
     },
     "lanes": {
       "external_target": {
-        "count": 2,
+        "count": 12,
         "players": [
-          "Jack Tyler Diamond",
-          "M. Robinson"
+          "Abubakr Barry",
+          "Archie Stuart Wayne Goodwin",
+          "Beni",
+          "Cengiz Ünder",
+          "Christian",
+          "Gary Caldwell",
+          "Jamie Robson",
+          "Julián Javier Delmás Germán",
+          "Mario Frick",
+          "Miles Gordon Robinson",
+          "Nicky Hayen",
+          "William"
+        ]
+      },
+      "former_player": {
+        "count": 1,
+        "players": [
+          "T. Stephen"
         ]
       }
     },
-    "low_confidence": true,
+    "low_confidence": false,
     "note": "The position and age mixes count external names only, not current squad or former players. This is still a descriptive profile of sampled first pages, not the club's recruitment list.",
     "position_mix": {
-      "DEF": 1,
-      "MID": 1
+      "DEF": 3,
+      "FB": 3,
+      "FWD": 2,
+      "MID": 4
     },
-    "sample_size": 2,
+    "sample_size": 12,
     "source_mix": {
-      "cross_referenced_club": 1,
-      "fan_only": 1
+      "cross_referenced_club": 2,
+      "cross_referenced_transfer": 1,
+      "fan_only": 10
     },
-    "total_signals": 2
+    "total_signals": 13
   },
-  "published_at": "2026-11-17T06:23:37+00:00",
-  "sampled_at": "2026-11-17T06:18:46+00:00",
+  "published_at": "2026-11-18T06:20:42+00:00",
+  "sampled_at": "2026-11-18T06:18:05+00:00",
   "sentiment": {
     "club": {
-      "count": 70,
-      "mean": 0.065,
+      "count": 71,
+      "mean": 0.075,
       "median": 0.0,
-      "negative_share": 0.114,
-      "neutral_share": 0.629,
-      "positive_share": 0.257
+      "negative_share": 0.113,
+      "neutral_share": 0.62,
+      "positive_share": 0.268
     },
     "forum": {
-      "count": 25,
-      "mean": 0.168,
-      "median": 0.226,
-      "negative_share": 0.24,
-      "neutral_share": 0.16,
-      "positive_share": 0.6
+      "count": 1,
+      "mean": 0.999,
+      "median": 0.999,
+      "negative_share": 0.0,
+      "neutral_share": 0.0,
+      "positive_share": 1.0
     },
     "note": "Rule-based VADER sentiment on sampled forum posts, curated press rumour claims and official AFC news titles. Descriptive and noisy; not a measure of truth, credibility or fanbase opinion.",
     "press": {
@@ -81,7 +127,7 @@
       "positive_share": null
     }
   },
-  "served_by_update_id": "2026-11-17T06:17:02+00:00-907605",
+  "served_by_update_id": "2026-11-18T06:17:02+00:00-34923",
   "signals": [
     {
       "affiliation": "external_target",
@@ -95,18 +141,234 @@
         "historic_transfer": false,
         "press_rumour": false
       },
-      "current_club": "Stockport County",
-      "current_league": "EFL League One",
+      "current_club": "Red Bull Salzburg",
+      "current_league": "Austrian Bundesliga",
       "former_href": null,
       "lookup_source": "scouted_player",
       "lookup_status": "scouted_player",
       "mentions": 1,
-      "nationality": "England",
+      "nationality": "Gambia",
       "player_href": null,
-      "player_key": "api:player:87773",
-      "player_name": "Jack Tyler Diamond",
+      "player_key": "api:player:136154",
+      "player_name": "Abubakr Barry",
       "position": null,
       "position_group": "MID",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 21,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Charlotte",
+      "current_league": "Major League Soccer",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Australia",
+      "player_href": null,
+      "player_key": "api:player:304119",
+      "player_name": "Archie Stuart Wayne Goodwin",
+      "position": null,
+      "position_group": "FWD",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 24,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Vitória SC",
+      "current_league": "Primeira Liga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Angola",
+      "player_href": null,
+      "player_key": "api:player:237192",
+      "player_name": "Beni",
+      "position": null,
+      "position_group": "MID",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Çorum FK",
+      "current_league": "Super Lig",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Türkiye",
+      "player_href": null,
+      "player_key": "api:player:785",
+      "player_name": "Cengiz Ünder",
+      "position": null,
+      "position_group": "MID",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 25,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "FC Krasnodar",
+      "current_league": "Russian Premier League",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Brazil",
+      "player_href": null,
+      "player_key": "api:player:67204",
+      "player_name": "Christian",
+      "position": null,
+      "position_group": "MID",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 44,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:114805",
+      "player_name": "Gary Caldwell",
+      "position": "Defender",
+      "position_group": "FB",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 28,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Oldham",
+      "current_league": "EFL League Two",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Scotland",
+      "player_href": null,
+      "player_key": "api:player:45095",
+      "player_name": "Jamie Robson",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 30,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "IMT Novi Beograd",
+      "current_league": "Serbian SuperLiga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Spain",
+      "player_href": null,
+      "player_key": "api:player:47048",
+      "player_name": "Julián Javier Delmás Germán",
+      "position": null,
+      "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 52,
+      "at_rival": false,
+      "credibility": "cross_referenced_club",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
+      "mentions": 1,
+      "nationality": "Liechtenstein",
+      "player_href": null,
+      "player_key": "api:player:283179",
+      "player_name": "Mario Frick",
+      "position": "Defender",
+      "position_group": "FB",
       "rival_club": null,
       "topic_count": 1
     },
@@ -131,9 +393,90 @@
       "nationality": "USA",
       "player_href": null,
       "player_key": "api:player:50879",
-      "player_name": "M. Robinson",
+      "player_name": "Miles Gordon Robinson",
       "position": null,
       "position_group": "DEF",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 46,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": null,
+      "current_league": null,
+      "former_href": null,
+      "lookup_source": "api_lookup",
+      "lookup_status": "api_match",
+      "mentions": 1,
+      "nationality": "Belgium",
+      "player_href": null,
+      "player_key": "api:player:114275",
+      "player_name": "Nicky Hayen",
+      "position": "Defender",
+      "position_group": "FB",
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "former_player",
+      "affiliation_source": "key",
+      "age": null,
+      "at_rival": false,
+      "credibility": "cross_referenced_transfer",
+      "cross_references": {
+        "club_output": true,
+        "confirmed_transfer": true,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "Cove Rangers",
+      "current_league": null,
+      "former_href": "/former-players/#former-583968",
+      "lookup_source": "former_player",
+      "lookup_status": "former_player",
+      "mentions": 1,
+      "nationality": null,
+      "player_href": null,
+      "player_key": "api:player:583968",
+      "player_name": "T. Stephen",
+      "position": null,
+      "position_group": null,
+      "rival_club": null,
+      "topic_count": 1
+    },
+    {
+      "affiliation": "external_target",
+      "affiliation_source": "key",
+      "age": 20,
+      "at_rival": false,
+      "credibility": "fan_only",
+      "cross_references": {
+        "club_output": false,
+        "confirmed_transfer": false,
+        "historic_transfer": false,
+        "press_rumour": false
+      },
+      "current_club": "FC Porto",
+      "current_league": "Primeira Liga",
+      "former_href": null,
+      "lookup_source": "scouted_player",
+      "lookup_status": "scouted_player",
+      "mentions": 1,
+      "nationality": "Brazil",
+      "player_href": null,
+      "player_key": "api:player:449243",
+      "player_name": "William",
+      "position": null,
+      "position_group": "FWD",
       "rival_club": null,
       "topic_count": 1
     }
@@ -146,33 +489,33 @@
     "url": "https://www.donstalk.co.uk/forum/7-aberdeen-football-club/"
   },
   "source_snapshots": {
-    "api_football": "2026-11-17T06:23:34.154231+00:00",
-    "api_results": "2026-11-17T06:17:04+00:00",
-    "availability": "2026-11-17T06:18:46+00:00",
-    "career": "2026-11-17T06:18:46+00:00",
-    "football_data_uk": "2026-11-17T06:17:03+00:00",
-    "former_players": "2026-11-17T06:17:23+00:00",
-    "history_backfill": "2026-11-17T06:17:17+00:00",
-    "matchday_snapshot": "2026-11-17T06:17:17+00:00",
-    "scouting_clubs": "2026-11-17T06:22:51+00:00",
-    "scouting_europe": "2026-11-17T06:22:40+00:00",
-    "scouting_pool": "2026-11-17T06:18:56+00:00",
-    "scouting_roles": "2026-11-17T06:22:15+00:00",
-    "scouting_rose_history": "2026-11-17T06:22:25+00:00",
-    "scouting_standings": "2026-11-17T06:22:41+00:00",
-    "spfl": "2026-11-17T06:17:05+00:00",
-    "xg_enrichment": "2026-11-17T06:23:17+00:00"
+    "api_football": "2026-11-18T06:20:39.820386+00:00",
+    "api_results": "2026-11-18T06:17:05+00:00",
+    "availability": "2026-11-18T06:18:04+00:00",
+    "career": "2026-11-18T06:18:04+00:00",
+    "football_data_uk": "2026-11-18T06:17:04+00:00",
+    "former_players": "2026-11-18T06:17:24+00:00",
+    "history_backfill": "2026-11-18T06:17:18+00:00",
+    "matchday_snapshot": "2026-11-18T06:17:18+00:00",
+    "scouting_clubs": "2026-11-18T06:18:37+00:00",
+    "scouting_europe": "2026-11-18T06:18:26+00:00",
+    "scouting_pool": "2026-11-18T06:18:15+00:00",
+    "scouting_roles": "2026-11-18T06:18:16+00:00",
+    "scouting_rose_history": "2026-11-18T06:18:26+00:00",
+    "scouting_standings": "2026-11-18T06:18:27+00:00",
+    "spfl": "2026-11-18T06:17:06+00:00",
+    "xg_enrichment": "2026-11-18T06:20:22+00:00"
   },
   "topics": [
     {
       "board_topic": false,
       "latest_page_only": true,
-      "latest_post": "2026-11-16T01:23:52Z",
+      "latest_post": "2026-11-17T10:17:10Z",
       "player_mentions": [],
-      "published_at": "2026-11-16T01:23:52Z",
-      "sampled_posts": 25,
-      "thread_page": 90,
-      "thread_page_count": 90,
+      "published_at": "2026-11-17T10:17:10Z",
+      "sampled_posts": 1,
+      "thread_page": 91,
+      "thread_page_count": 91,
       "title": "Next manager",
       "url": "https://www.donstalk.co.uk/topic/9479-next-manager/"
     },
@@ -215,42 +558,6 @@
     {
       "board_topic": true,
       "latest_page_only": false,
-      "latest_post": "2018-01-14T19:05:47Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "Where Are They Now???????????",
-      "url": "https://www.donstalk.co.uk/topic/8383-where-are-they-now/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
-      "latest_post": "2025-11-29T19:06:37Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "AFC limericks",
-      "url": "https://www.donstalk.co.uk/topic/10766-afc-limericks/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
-      "latest_post": "2026-11-16T18:43:55Z",
-      "player_mentions": [],
-      "published_at": null,
-      "sampled_posts": 0,
-      "thread_page": null,
-      "thread_page_count": null,
-      "title": "Kilmarnock V Aberdeen",
-      "url": "https://www.donstalk.co.uk/topic/10930-kilmarnock-v-aberdeen/"
-    },
-    {
-      "board_topic": true,
-      "latest_page_only": false,
       "latest_post": "2026-11-15T18:46:54Z",
       "player_mentions": [],
       "published_at": null,
@@ -271,6 +578,42 @@
       "thread_page_count": null,
       "title": "On this day",
       "url": "https://www.donstalk.co.uk/topic/3927-on-this-day/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2026-11-16T18:43:55Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Kilmarnock V Aberdeen",
+      "url": "https://www.donstalk.co.uk/topic/10930-kilmarnock-v-aberdeen/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2018-01-14T19:05:47Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "Where Are They Now???????????",
+      "url": "https://www.donstalk.co.uk/topic/8383-where-are-they-now/"
+    },
+    {
+      "board_topic": true,
+      "latest_page_only": false,
+      "latest_post": "2025-11-29T19:06:37Z",
+      "player_mentions": [],
+      "published_at": null,
+      "sampled_posts": 0,
+      "thread_page": null,
+      "thread_page_count": null,
+      "title": "AFC limericks",
+      "url": "https://www.donstalk.co.uk/topic/10766-afc-limericks/"
     },
     {
       "board_topic": true,
@@ -465,5 +808,5 @@
       "url": "https://www.donstalk.co.uk/topic/10865-2026-27-fixtures/"
     }
   ],
-  "update_id": "2026-11-17T06:17:02+00:00-907605"
+  "update_id": "2026-11-18T06:17:02+00:00-34923"
 }

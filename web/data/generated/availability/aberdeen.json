@@ -1,17 +1,17 @@
 {
-  "as_of": "2026-11-17T06:18:46+00:00",
+  "as_of": "2026-11-18T06:18:04+00:00",
   "club_id": "sco:aberdeen",
   "coverage": {
     "conflicts": 0,
     "contradicted": 4,
     "dataset_id": null,
     "dataset_state": null,
-    "doubtful": 1,
+    "doubtful": 0,
     "entries": 34,
-    "known": 3,
+    "known": 0,
     "needs_review": 7,
     "note": "Curated official AFC team news is primary. Provider injuries are optional and are not team news. No adverse entry means available by default, not a verified fit. Contradicted claims are shown in the review block.",
-    "out": 2,
+    "out": 0,
     "provider_snapshot": {
       "coverage": {
         "fixtures": {
@@ -37,14 +37,14 @@
     "returned": 0,
     "served_by_update_id": null,
     "source_snapshots": null,
-    "stale": 0,
+    "stale": 7,
     "stale_reason": null,
-    "status": "partial",
+    "status": "unavailable",
     "suspended": 0,
-    "unknown": 31,
+    "unknown": 34,
     "update_id": null
   },
-  "dataset_id": "2026-11-17T06:23:37+00:00-0d26ebd3",
+  "dataset_id": "2026-11-18T06:20:42+00:00-c3b1e88e",
   "dataset_state": "stale",
   "entries": [
     {
@@ -406,11 +406,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
       "status": "unknown",
-      "status_age_days": 21,
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
@@ -447,11 +447,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
       "status": "unknown",
-      "status_age_days": 21,
+      "status_age_days": 22,
       "suspension": {
         "appearance_date": null,
         "appearance_fixture_id": null,
@@ -642,11 +642,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
       "status": "unknown",
-      "status_age_days": 21,
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
@@ -867,9 +867,9 @@
       "published_at": null,
       "reason": "Returning from a long-term knee injury and a recent virus; may be on the bench.",
       "reason_category": "injury",
-      "review_reason": "status_older_than_7_days",
+      "review_reason": "status_older_than_max_age",
       "review_reasons": [
-        "status_older_than_7_days"
+        "status_older_than_max_age"
       ],
       "review_required": true,
       "review_severity": "aging",
@@ -878,11 +878,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
-      "status": "doubtful",
-      "status_age_days": 21,
+      "status": "unknown",
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
@@ -947,9 +947,9 @@
       "published_at": null,
       "reason": "Out for around two months with a foot injury.",
       "reason_category": "injury",
-      "review_reason": "status_older_than_7_days",
+      "review_reason": "status_older_than_max_age",
       "review_reasons": [
-        "status_older_than_7_days"
+        "status_older_than_max_age"
       ],
       "review_required": true,
       "review_severity": "aging",
@@ -958,11 +958,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
-      "status": "out",
-      "status_age_days": 21,
+      "status": "unknown",
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
@@ -1066,9 +1066,9 @@
       "published_at": null,
       "reason": "Thigh tendon issue; specialist advice sought and unlikely to be available for the next two games.",
       "reason_category": "injury",
-      "review_reason": "status_older_than_7_days",
+      "review_reason": "status_older_than_max_age",
       "review_reasons": [
-        "status_older_than_7_days"
+        "status_older_than_max_age"
       ],
       "review_required": true,
       "review_severity": "aging",
@@ -1077,11 +1077,11 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
-      "status": "out",
-      "status_age_days": 21,
+      "status": "unknown",
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
@@ -1445,20 +1445,20 @@
       "source_snapshots": null,
       "source_title": "Stephen Robinson: Falkirk Press Conference",
       "source_url": "https://www.afc.co.uk/en/news/stephen-robinson-falkirk-press-conference",
-      "stale": false,
+      "stale": true,
       "stale_after": "2026-11-17",
       "stale_reason": null,
       "status": "unknown",
-      "status_age_days": 21,
+      "status_age_days": 22,
       "suspension": null,
       "update_id": null,
       "verified_at": "2026-10-27"
     }
   ],
-  "generated_at": "2026-11-17T06:23:37+00:00",
+  "generated_at": "2026-11-18T06:20:42+00:00",
   "notes": "Availability is a special case of team news. Only a verified curated entry changes the predicted XI; a provider signal alone does not. Contradicted claims become unknown and stay visible in the review block. Context-only names without an official public source are held in a private verification queue and are not published.",
   "policy_version": "1.0.0",
-  "published_at": "2026-11-17T06:23:37+00:00",
+  "published_at": "2026-11-18T06:20:42+00:00",
   "review": {
     "aging": 3,
     "contradicted": 4,
@@ -1467,10 +1467,10 @@
     "dataset_state": null,
     "ledger": {
       "days_since_latest_news": 2,
-      "days_since_ledger_update": 21,
-      "latest_news_date": "2026-11-15",
-      "latest_news_title": "Mario Frick Appointed Head Coach",
-      "latest_news_url": "https://www.afc.co.uk/en/news/mario-frick-appointed-head-coach",
+      "days_since_ledger_update": 22,
+      "latest_news_date": "2026-11-16",
+      "latest_news_title": "In tribute | Hugh Little",
+      "latest_news_url": "https://www.afc.co.uk/en/news/in-tribute-or-hugh-little",
       "ledger_max_verified_at": "2026-10-27",
       "ledger_updated_at": "2026-10-27",
       "reason": "ledger_older_than_latest_news",
@@ -1496,7 +1496,7 @@
   },
   "schema_version": "1.1.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-17T06:17:02+00:00-907605",
+  "served_by_update_id": "2026-11-18T06:17:02+00:00-34923",
   "source_snapshots": null,
   "sources": [
     {
@@ -1525,36 +1525,36 @@
     }
   ],
   "stale_reason": "ledger_older_than_latest_news",
-  "state": "partial",
+  "state": "unavailable",
   "universes": {
     "active_squad": {
       "counts": {
         "available": 0,
-        "doubtful": 1,
-        "out": 2,
+        "doubtful": 0,
+        "out": 0,
         "returned": 0,
         "suspended": 0,
-        "unknown": 26
+        "unknown": 29
       },
-      "known": 3,
+      "known": 0,
       "players": 29,
       "universe": "active_squad",
-      "unknown": 26
+      "unknown": 29
     },
     "official_list": {
       "counts": {
         "available": 0,
-        "doubtful": 1,
-        "out": 2,
+        "doubtful": 0,
+        "out": 0,
         "returned": 0,
         "suspended": 0,
-        "unknown": 31
+        "unknown": 34
       },
-      "known": 3,
+      "known": 0,
       "players": 34,
       "universe": "official_list",
-      "unknown": 31
+      "unknown": 34
     }
   },
-  "update_id": "2026-11-17T06:17:02+00:00-907605"
+  "update_id": "2026-11-18T06:17:02+00:00-34923"
 }

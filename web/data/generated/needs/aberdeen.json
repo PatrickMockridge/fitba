@@ -2,38 +2,38 @@
   "club_id": "sco:aberdeen",
   "coverage": {
     "availability": {
-      "known": 3,
-      "unknown": 31
+      "known": 0,
+      "unknown": 34
     },
     "availability_universe": "official_list",
     "availability_universes": {
       "active_squad": {
         "counts": {
           "available": 0,
-          "doubtful": 1,
-          "out": 2,
+          "doubtful": 0,
+          "out": 0,
           "returned": 0,
           "suspended": 0,
-          "unknown": 26
+          "unknown": 29
         },
-        "known": 3,
+        "known": 0,
         "players": 29,
         "universe": "active_squad",
-        "unknown": 26
+        "unknown": 29
       },
       "official_list": {
         "counts": {
           "available": 0,
-          "doubtful": 1,
-          "out": 2,
+          "doubtful": 0,
+          "out": 0,
           "returned": 0,
           "suspended": 0,
-          "unknown": 31
+          "unknown": 34
         },
-        "known": 3,
+        "known": 0,
         "players": 34,
         "universe": "official_list",
-        "unknown": 31
+        "unknown": 34
       }
     },
     "basis": "measured + curated prior",
@@ -43,7 +43,7 @@
     "transfers": "available",
     "valuation": "inferred"
   },
-  "dataset_id": "2026-11-17T06:23:37+00:00-0d26ebd3",
+  "dataset_id": "2026-11-18T06:20:42+00:00-c3b1e88e",
   "dataset_state": "fresh",
   "families": [
     {
@@ -229,317 +229,6 @@
       "stale_reason": null,
       "update_id": null,
       "urgency": "critical"
-    },
-    {
-      "availability": [
-        {
-          "name": "M. Knoester",
-          "note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
-          "player_id": 37253,
-          "status": "out"
-        },
-        {
-          "name": "L. Mayo",
-          "note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
-          "player_id": 125695,
-          "status": "out"
-        }
-      ],
-      "basis": "measured",
-      "category": "cover",
-      "caveats": [
-        "Minutes are not proof of trust; availability is curated.",
-        "No contract, bid, wage or fee claim is made."
-      ],
-      "confidence": "low",
-      "curated_prior": 0.8,
-      "dataset_id": null,
-      "dataset_state": null,
-      "drivers": [
-        "depth_gap",
-        "availability_risk"
-      ],
-      "evidence": [
-        {
-          "basis": "measured",
-          "label": "Expected slots",
-          "note": "formation-weighted",
-          "value": 2.25
-        },
-        {
-          "basis": "measured",
-          "label": "Ready bodies",
-          "note": "starts >= 2 or minutes >= 180",
-          "value": 5
-        },
-        {
-          "basis": "measured",
-          "label": "Top share",
-          "note": "share of family minutes",
-          "value": 0.27
-        },
-        {
-          "basis": "curated",
-          "label": "Curated prior",
-          "note": "analyst intent, not measured evidence",
-          "value": 0.8
-        }
-      ],
-      "expected_slots": 2.25,
-      "family": "CB",
-      "label": "Centre-backs",
-      "links": [
-        {
-          "dataset_id": null,
-          "dataset_state": null,
-          "href": "/squad/",
-          "label": "Squad",
-          "published_at": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null
-        },
-        {
-          "dataset_id": null,
-          "dataset_state": null,
-          "href": "/scouting/#priority-cb",
-          "label": "Scouting profile",
-          "published_at": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null
-        },
-        {
-          "dataset_id": null,
-          "dataset_state": null,
-          "href": "/themes/",
-          "label": "Themes",
-          "published_at": null,
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "update_id": null
-        }
-      ],
-      "market_route": {
-        "alternatives": [
-          "free_agent"
-        ],
-        "budget_status": "ceiling_unset",
-        "fee_expectation": "unknown",
-        "horizon": "now",
-        "note": "Role-profile recommendation, not a target or a fee claim.",
-        "primary": "loan",
-        "wage_status": "not_public"
-      },
-      "measured": {
-        "age_risk": 0.0,
-        "availability_known": 1,
-        "availability_risk": 1.0,
-        "availability_unknown": 1,
-        "available_players": 3,
-        "concentration": 0.27,
-        "depth_gap": 0.5,
-        "fringe": 0,
-        "players": 5,
-        "projected_shortfall": 1,
-        "quality_gap": 0.0,
-        "ready_count": 5,
-        "rotation": 0,
-        "starters": 5,
-        "status": "available",
-        "top_share": 0.27,
-        "total_minutes": 4119,
-        "trusted_count": 5
-      },
-      "measured_score": 42.7,
-      "outgoing_risk": {
-        "evidence": [],
-        "level": "unknown",
-        "note": "No contract or bid claim is made."
-      },
-      "players": [
-        {
-          "arrival": null,
-          "arrival_kind": null,
-          "availability_conflict": false,
-          "availability_contradicted_by": null,
-          "availability_note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
-          "availability_original_status": null,
-          "availability_review_reason": null,
-          "availability_review_required": false,
-          "availability_review_severity": null,
-          "availability_status": "out",
-          "availability_status_age_days": null,
-          "availability_suspension": null,
-          "category": "unavailable",
-          "dataset_id": null,
-          "dataset_state": null,
-          "minutes": 573,
-          "name": "M. Knoester",
-          "note": null,
-          "player_id": 37253,
-          "published_at": null,
-          "role_family": "CB",
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "starts": 6,
-          "sub_apps": 1,
-          "update_id": null
-        },
-        {
-          "arrival": null,
-          "arrival_kind": null,
-          "availability_conflict": false,
-          "availability_contradicted_by": null,
-          "availability_note": "No verified official team-news entry.",
-          "availability_original_status": null,
-          "availability_review_reason": null,
-          "availability_review_required": false,
-          "availability_review_severity": null,
-          "availability_status": "unknown",
-          "availability_status_age_days": null,
-          "availability_suspension": null,
-          "category": "starter",
-          "dataset_id": null,
-          "dataset_state": null,
-          "minutes": 769,
-          "name": "G. Molloy",
-          "note": null,
-          "player_id": 161806,
-          "published_at": null,
-          "role_family": "CB",
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "starts": 8,
-          "sub_apps": 5,
-          "update_id": null
-        },
-        {
-          "arrival": null,
-          "arrival_kind": null,
-          "availability_conflict": false,
-          "availability_contradicted_by": null,
-          "availability_note": "No verified official team-news entry.",
-          "availability_original_status": null,
-          "availability_review_reason": null,
-          "availability_review_required": false,
-          "availability_review_severity": null,
-          "availability_status": "unknown",
-          "availability_status_age_days": null,
-          "availability_suspension": null,
-          "category": "starter",
-          "dataset_id": null,
-          "dataset_state": null,
-          "minutes": 732,
-          "name": "J. Milne",
-          "note": null,
-          "player_id": 321860,
-          "published_at": null,
-          "role_family": "CB",
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "starts": 7,
-          "sub_apps": 5,
-          "update_id": null
-        },
-        {
-          "arrival": "2026-06-30",
-          "arrival_kind": "free",
-          "availability_conflict": false,
-          "availability_contradicted_by": null,
-          "availability_note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
-          "availability_original_status": null,
-          "availability_review_reason": null,
-          "availability_review_required": false,
-          "availability_review_severity": null,
-          "availability_status": "out",
-          "availability_status_age_days": null,
-          "availability_suspension": null,
-          "category": "unavailable",
-          "dataset_id": null,
-          "dataset_state": null,
-          "minutes": 1100,
-          "name": "L. Mayo",
-          "note": null,
-          "player_id": 125695,
-          "published_at": null,
-          "role_family": "CB",
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "starts": 13,
-          "sub_apps": 0,
-          "update_id": null
-        },
-        {
-          "arrival": "2026-06-30",
-          "arrival_kind": "free",
-          "availability_conflict": false,
-          "availability_contradicted_by": null,
-          "availability_note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
-          "availability_original_status": null,
-          "availability_review_reason": null,
-          "availability_review_required": false,
-          "availability_review_severity": null,
-          "availability_status": "unknown",
-          "availability_status_age_days": null,
-          "availability_suspension": null,
-          "category": "starter",
-          "dataset_id": null,
-          "dataset_state": null,
-          "minutes": 945,
-          "name": "D. Happe",
-          "note": null,
-          "player_id": 18068,
-          "published_at": null,
-          "role_family": "CB",
-          "served_by_update_id": null,
-          "source_snapshots": null,
-          "stale_reason": null,
-          "starts": 11,
-          "sub_apps": 2,
-          "update_id": null
-        }
-      ],
-      "priority": 2,
-      "published_at": null,
-      "replace_status": "unknown",
-      "role_profile": {
-        "age_band": [
-          19,
-          28
-        ],
-        "coverage_floor": "event",
-        "key_traits": [
-          "aerial_win_pct",
-          "duel_win_pct",
-          "progressive_passes_p90",
-          "clearances_p90"
-        ],
-        "label": "Centre-backs",
-        "min_effective_minutes": 900
-      },
-      "roster_space": {
-        "current": 5,
-        "max_squad": 5,
-        "note": "A signing in this family needs an outgoing first.",
-        "outgoing_first": true,
-        "status": "requires_outgoing"
-      },
-      "scouting_groups": [
-        "CB"
-      ],
-      "served_by_update_id": null,
-      "source_snapshots": null,
-      "stale_reason": null,
-      "update_id": null,
-      "urgency": "high"
     },
     {
       "availability": [],
@@ -747,7 +436,7 @@
           "update_id": null
         }
       ],
-      "priority": 3,
+      "priority": 2,
       "published_at": null,
       "replace_status": "unknown",
       "role_profile": {
@@ -986,7 +675,7 @@
           "update_id": null
         }
       ],
-      "priority": 4,
+      "priority": 3,
       "published_at": null,
       "replace_status": "unknown",
       "role_profile": {
@@ -1283,7 +972,7 @@
           "update_id": null
         }
       ],
-      "priority": 5,
+      "priority": 4,
       "published_at": null,
       "replace_status": "unknown",
       "role_profile": {
@@ -1316,6 +1005,301 @@
       "stale_reason": null,
       "update_id": null,
       "urgency": "medium"
+    },
+    {
+      "availability": [],
+      "basis": "measured",
+      "category": "none",
+      "caveats": [
+        "Minutes are not proof of trust; availability is curated.",
+        "No contract, bid, wage or fee claim is made."
+      ],
+      "confidence": "low",
+      "curated_prior": 0.8,
+      "dataset_id": null,
+      "dataset_state": null,
+      "drivers": [
+        "stable"
+      ],
+      "evidence": [
+        {
+          "basis": "measured",
+          "label": "Expected slots",
+          "note": "formation-weighted",
+          "value": 2.25
+        },
+        {
+          "basis": "measured",
+          "label": "Ready bodies",
+          "note": "starts >= 2 or minutes >= 180",
+          "value": 5
+        },
+        {
+          "basis": "measured",
+          "label": "Top share",
+          "note": "share of family minutes",
+          "value": 0.27
+        },
+        {
+          "basis": "curated",
+          "label": "Curated prior",
+          "note": "analyst intent, not measured evidence",
+          "value": 0.8
+        }
+      ],
+      "expected_slots": 2.25,
+      "family": "CB",
+      "label": "Centre-backs",
+      "links": [
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "href": "/squad/",
+          "label": "Squad",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "href": "/scouting/#priority-cb",
+          "label": "Scouting profile",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
+        },
+        {
+          "dataset_id": null,
+          "dataset_state": null,
+          "href": "/themes/",
+          "label": "Themes",
+          "published_at": null,
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "update_id": null
+        }
+      ],
+      "market_route": {
+        "alternatives": [],
+        "budget_status": "ceiling_unset",
+        "fee_expectation": "unknown",
+        "horizon": null,
+        "note": "Role-profile recommendation, not a target or a fee claim.",
+        "primary": "none",
+        "wage_status": "not_public"
+      },
+      "measured": {
+        "age_risk": 0.0,
+        "availability_known": 0,
+        "availability_risk": null,
+        "availability_unknown": 2,
+        "available_players": 5,
+        "concentration": 0.27,
+        "depth_gap": 0.0,
+        "fringe": 0,
+        "players": 5,
+        "projected_shortfall": 0,
+        "quality_gap": 0.0,
+        "ready_count": 5,
+        "rotation": 0,
+        "starters": 5,
+        "status": "available",
+        "top_share": 0.27,
+        "total_minutes": 4119,
+        "trusted_count": 5
+      },
+      "measured_score": 3.6,
+      "outgoing_risk": {
+        "evidence": [],
+        "level": "unknown",
+        "note": "No contract or bid claim is made."
+      },
+      "players": [
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_note": "Official club press conference and the club's public post of 2026-10-27. Manager: Knoester needs to see a specialist and it is very unlikely he will be available for either game. No timeframe is published.\n",
+          "availability_original_status": null,
+          "availability_review_reason": null,
+          "availability_review_required": false,
+          "availability_review_severity": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "category": "starter",
+          "dataset_id": null,
+          "dataset_state": null,
+          "minutes": 573,
+          "name": "M. Knoester",
+          "note": null,
+          "player_id": 37253,
+          "published_at": null,
+          "role_family": "CB",
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 6,
+          "sub_apps": 1,
+          "update_id": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_note": "No verified official team-news entry.",
+          "availability_original_status": null,
+          "availability_review_reason": null,
+          "availability_review_required": false,
+          "availability_review_severity": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "category": "starter",
+          "dataset_id": null,
+          "dataset_state": null,
+          "minutes": 769,
+          "name": "G. Molloy",
+          "note": null,
+          "player_id": 161806,
+          "published_at": null,
+          "role_family": "CB",
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 8,
+          "sub_apps": 5,
+          "update_id": null
+        },
+        {
+          "arrival": null,
+          "arrival_kind": null,
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_note": "No verified official team-news entry.",
+          "availability_original_status": null,
+          "availability_review_reason": null,
+          "availability_review_required": false,
+          "availability_review_severity": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "category": "starter",
+          "dataset_id": null,
+          "dataset_state": null,
+          "minutes": 732,
+          "name": "J. Milne",
+          "note": null,
+          "player_id": 321860,
+          "published_at": null,
+          "role_family": "CB",
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 7,
+          "sub_apps": 5,
+          "update_id": null
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_note": "Official club press conference: Mayo is out for a couple of months. The club page gives the layoff, not the bone detail; public reporting describes a foot stress fracture. No return date beyond the two-month guide is published, so expected_return stays null.\n",
+          "availability_original_status": null,
+          "availability_review_reason": null,
+          "availability_review_required": false,
+          "availability_review_severity": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "category": "starter",
+          "dataset_id": null,
+          "dataset_state": null,
+          "minutes": 1100,
+          "name": "L. Mayo",
+          "note": null,
+          "player_id": 125695,
+          "published_at": null,
+          "role_family": "CB",
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 13,
+          "sub_apps": 0,
+          "update_id": null
+        },
+        {
+          "arrival": "2026-06-30",
+          "arrival_kind": "free",
+          "availability_conflict": false,
+          "availability_contradicted_by": null,
+          "availability_note": "Official club press conference. Manager: Happe is back training after a virus but is suspended. Match fitness is not confirmed.\n",
+          "availability_original_status": null,
+          "availability_review_reason": null,
+          "availability_review_required": false,
+          "availability_review_severity": null,
+          "availability_status": "unknown",
+          "availability_status_age_days": null,
+          "availability_suspension": null,
+          "category": "starter",
+          "dataset_id": null,
+          "dataset_state": null,
+          "minutes": 945,
+          "name": "D. Happe",
+          "note": null,
+          "player_id": 18068,
+          "published_at": null,
+          "role_family": "CB",
+          "served_by_update_id": null,
+          "source_snapshots": null,
+          "stale_reason": null,
+          "starts": 11,
+          "sub_apps": 2,
+          "update_id": null
+        }
+      ],
+      "priority": 5,
+      "published_at": null,
+      "replace_status": "unknown",
+      "role_profile": {
+        "age_band": [
+          19,
+          28
+        ],
+        "coverage_floor": "event",
+        "key_traits": [
+          "aerial_win_pct",
+          "duel_win_pct",
+          "progressive_passes_p90",
+          "clearances_p90"
+        ],
+        "label": "Centre-backs",
+        "min_effective_minutes": 900
+      },
+      "roster_space": {
+        "current": 5,
+        "max_squad": 5,
+        "note": "A signing in this family needs an outgoing first.",
+        "outgoing_first": true,
+        "status": "requires_outgoing"
+      },
+      "scouting_groups": [
+        "CB"
+      ],
+      "served_by_update_id": null,
+      "source_snapshots": null,
+      "stale_reason": null,
+      "update_id": null,
+      "urgency": "none"
     },
     {
       "availability": [],
@@ -1925,9 +1909,9 @@
       "urgency": "none"
     }
   ],
-  "generated_at": "2026-11-17T06:23:37+00:00",
+  "generated_at": "2026-11-18T06:20:42+00:00",
   "notes": "Needs are role profiles, not transfer targets. The curated prior is shown separately and is not blended into a verdict.",
-  "published_at": "2026-11-17T06:23:37+00:00",
+  "published_at": "2026-11-18T06:20:42+00:00",
   "roster_space": {
     "net_add_allowed": null,
     "note": "The public registration limit is not known. The CB outgoing-first rule is analyst policy, not a league rule. A signing in a family at or above max_squad needs an outgoing before it is net-positive.\n",
@@ -1939,7 +1923,7 @@
   },
   "schema_version": "1.0.0",
   "season": "2026-27",
-  "served_by_update_id": "2026-11-17T06:17:02+00:00-907605",
+  "served_by_update_id": "2026-11-18T06:17:02+00:00-34923",
   "source_snapshots": null,
   "sources": [
     {
@@ -1985,17 +1969,16 @@
   "stale_reason": null,
   "state": "fresh",
   "summary": {
-    "availability_known": 3,
+    "availability_known": 0,
     "availability_universe": "official_list",
-    "availability_unknown": 31,
+    "availability_unknown": 34,
     "counts": {
-      "cover": 1,
-      "none": 2,
+      "none": 3,
       "strengthen": 4
     },
     "families": 7,
     "note": "Role profiles and market routes only. No targets, fees or wages.",
     "top_priority": "AM/WM"
   },
-  "update_id": "2026-11-17T06:17:02+00:00-907605"
+  "update_id": "2026-11-18T06:17:02+00:00-34923"
 }
